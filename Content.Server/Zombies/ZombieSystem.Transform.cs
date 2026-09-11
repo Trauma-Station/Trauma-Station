@@ -26,6 +26,7 @@ using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction.Components;
+using Content.Shared.Metabolism;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Pulling.Components;
@@ -79,6 +80,7 @@ public sealed partial class ZombieSystem
     [Dependency] private NPCSystem _npc = default!;
     [Dependency] private TagSystem _tag = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private BodySystem _body = default!;
 
     private static readonly ProtoId<TagPrototype> InvalidForGlobalSpawnSpellTag = "InvalidForGlobalSpawnSpell";
     private static readonly ProtoId<TagPrototype> CannotSuicideTag = "CannotSuicide";
@@ -153,6 +155,13 @@ public sealed partial class ZombieSystem
         RemComp<ComplexInteractionComponent>(target);
         RemComp<SentienceTargetComponent>(target);
 
+        // remove the metabolizer from all the body's organs. they're an undead.
+        var metabolizerOrgans = _body.EnumerateOrgans<MetabolizerComponent>(target);
+        foreach(var organ in metabolizerOrgans)
+        {
+            RemComp<MetabolizerComponent>(organ);
+        }
+
         //funny voice
         var accentType = "zombie";
         if (TryComp<ZombieAccentOverrideComponent>(target, out var accent))
@@ -198,7 +207,11 @@ public sealed partial class ZombieSystem
         }
 
         if (TryComp<BloodstreamComponent>(target, out var stream) && stream.BloodReferenceSolution is { } reagents)
+        {
             zombiecomp.BeforeZombifiedBloodReagents = reagents.Clone();
+            // Store the blood refresh amount for cloning later.
+            zombiecomp.BeforeZombifiedBloodRefresh = stream.BloodRefreshAmount;
+        }
 
         if (_visualBody.TryGatherMarkingsData(target, null, out var profiles, out _, out var markings))
         {
@@ -245,7 +258,7 @@ public sealed partial class ZombieSystem
 
             // humanoid zombies get to pry open doors and shit
             var pryComp = EnsureComp<PryingComponent>(target);
-            pryComp.SpeedModifier = 0.75f;
+            pryComp.SpeedModifier = 3.75f; // Trauma - was 0.75f
             pryComp.PryPowered = true;
             pryComp.Force = true;
 
@@ -262,6 +275,9 @@ public sealed partial class ZombieSystem
         _bloodstream.SetBloodLossThreshold(target, 0f);
         //Give them zombie blood
         _bloodstream.ChangeBloodReagents(target, zombiecomp.NewBloodReagents);
+        //Stop their blood from automatically regenerating
+        _bloodstream.ChangeBloodRefreshAmount(target, 0f);
+        _bloodstream.ChangeBloodIncreaseEnabled(target, false);
 
         //Should prevent instances of zombies using comms for information they shouldnt be able to have.
         _inventory.TryUnequip(target, "ears", true, true);

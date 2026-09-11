@@ -6,6 +6,7 @@ using Content.Server.Fax;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
 using Content.Shared.DeviceNetwork;
+using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.Fax.Components;
 using Content.Shared.Lube;
 using Robust.Shared.Audio.Systems;
@@ -17,18 +18,22 @@ namespace Content.Goobstation.Server.Fax;
 public sealed partial class FaxSlipSystem : EntitySystem
 {
     [Dependency] private DeviceNetworkSystem _deviceNetwork = default!;
-    [Dependency] private IRobustRandom _gambling = default!;
+    [Dependency] private FaxSystem _fax = default!;
+    [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
 
     [SubscribeLocalEvent]
     private void OnGettingFaxedSent(Entity<FaxSlipComponent> ent, ref GettingFaxedSentEvent args)
     {
-        var chance = HasComp<LubedComponent>(ent) && ent.Comp.LubedChance != null ? ent.Comp.LubedChance.Value : ent.Comp.SlipChance;
-        var shouldSlip = _gambling.Prob(chance);
+        var chance = ent.Comp.LubedChance is { } lubedChance && HasComp<LubedComponent>(ent)
+            ? lubedChance
+            : ent.Comp.SlipChance;
+        var shouldSlip = _random.Prob(chance);
 
         // FaxSystem wasn't really intended to do this so this copypastes logic from Send()
-        // justifiable since other listeners to GettingFaxedSentEvent() might want to do different logic
         if (!shouldSlip)
             return;
 
@@ -36,39 +41,25 @@ public sealed partial class FaxSlipSystem : EntitySystem
         args.Handled = true;
 
         // FaxSystem should probably be changed to handle this by itself
-        if (args.Fax.Comp.SendTimeoutRemaining > 0)
+        var fax = args.Fax.Comp;
+        if (fax.SendTimeoutRemaining > 0 ||
+            fax.PaperSlot.Item is not { } sent ||
+            fax.DestinationFaxAddress is not { } dest ||
+            !fax.KnownFaxes.TryGetValue(dest, out var faxName))
             return;
 
-        var sendEntity = args.Fax.Comp.PaperSlot.Item;
-        if (sendEntity == null)
-            return;
-
-        if (args.Fax.Comp.DestinationFaxAddress == null)
-            return;
-
-        if (!args.Fax.Comp.KnownFaxes.TryGetValue(args.Fax.Comp.DestinationFaxAddress, out var faxName))
-            return;
-
-        var payload = new NetworkPayload()
-        {
-            { DeviceNetworkConstants.Command, FaxConstants.FaxSendEntityCommand },
-            { FaxConstants.FaxEntitySentData, args.Fax.Comp.PaperSlot.Item },
-            { FaxConstants.FaxWorkCrossGridData, ent.Comp.CrossGrid }
-        };
-
-        _deviceNetwork.QueuePacket(args.Fax, args.Fax.Comp.DestinationFaxAddress, payload);
+        var payload = new FaxEntityPayload(sent);
+        _deviceNetwork.SendPacket(args.Fax.Owner, fax.DestinationFaxAddress, ref payload);
 
         var actor = args.Actor;
         if (actor.IsValid())
             _adminLogger.Add(LogType.Action,
                 LogImpact.Low,
-                $"{ToPrettyString(actor):actor} " +
-                $"sent entity {ToPrettyString(sendEntity)} from \"{args.Fax.Comp.FaxName}\" {ToPrettyString(args.Fax):tool} " +
-                $"to \"{faxName}\" ({args.Fax.Comp.DestinationFaxAddress}) ");
+                $"{actor:actor} sent entity {sent} from '{fax.FaxName}' {fax:fax} to '{faxName}' ({fax.DestinationFaxAddress})");
 
-        args.Fax.Comp.SendTimeoutRemaining += args.Fax.Comp.SendTimeout;
+        fax.SendTimeoutRemaining += fax.SendTimeout;
 
-        _audio.PlayPvs(args.Fax.Comp.SendSound, args.Fax);
+        _audio.PlayPvs(fax.SendSound, args.Fax);
     }
 
     [SubscribeLocalEvent]
@@ -80,4 +71,18 @@ public sealed partial class FaxSlipSystem : EntitySystem
         if (ent.Comp.LubedChance != null && HasComp<FaxMachineComponent>(args.Container.Owner))
             args.Cancel(); // too slippery to fax...
     }
+
+    [SubscribeLocalEvent]
+    private void OnSendEntity(Entity<FaxMachineComponent> ent, ref DeviceNetworkPacketEvent<FaxEntityPayload> args)
+    {
+        var item = args.Data.Item;
+        var coords = Transform(ent).Coordinates;
+        var xform = Transform(item);
+        _transform.SetCoordinates((item, xform, MetaData(item)), coords);
+        _container.AttachParentToContainerOrGrid((item, xform));
+        _fax.Receive(ent, null, args.SenderAddress);
+    }
 }
+
+[DataRecord]
+public partial record struct FaxEntityPayload(EntityUid Item) : INetworkPayload;

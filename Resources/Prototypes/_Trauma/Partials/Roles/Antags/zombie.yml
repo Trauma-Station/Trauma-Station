@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antag
+  id: InitialInfected
+  dontShowInCredits: true
+
+- type: antag
+  id: Zombie
+  creditImage: /Textures/_Trauma/EndCredits/Antags/zombies.png

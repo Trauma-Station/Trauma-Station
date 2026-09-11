@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Timing.Components;
+// </Trauma>
 using System.Linq;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.EntitySystems;
@@ -8,7 +11,6 @@ using Content.Shared.Item.ItemToggle;
 using Content.Shared.Localizations;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
-using Content.Shared.Timing;
 using Content.Shared.Tools.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Audio.Systems;
@@ -35,7 +37,6 @@ public abstract partial class SharedToolSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transformSystem = default!;
     [Dependency] private TileSystem _tiles = default!;
     [Dependency] private TurfSystem _turfs = default!;
-    [Dependency] private UseDelaySystem _delay = default!; // Goobstation
 
     public const string CutQuality = "Cutting";
     public const string PulseQuality = "Pulsing";

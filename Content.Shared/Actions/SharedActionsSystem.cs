@@ -377,13 +377,23 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
         var target = GetEntity(netTarget);
 
+        // Already checked in validation, but GetWorldPosition causes errors if the entity doesn't exist.
+        if (TerminatingOrDeleted(target))
+        {
+            args.Invalid = true;
+            return;
+        }
+
         var targetWorldPos = _transform.GetWorldPosition(target);
 
         if (ent.Comp.RotateOnUse)
             _rotateToFace.TryFaceCoordinates(user, targetWorldPos);
 
         if (!ValidateEntityTarget(user, target, ent))
+        {
+            args.Invalid = true;
             return;
+        }
 
         _adminLogger.Add(LogType.Action,
             $"{ToPrettyString(user):user} is performing the {Name(ent):action} action (provided by {ToPrettyString(args.Provider):provider}) targeted at {ToPrettyString(target):target}.");
@@ -398,10 +408,10 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
         if (args.Input.EntityCoordinatesTarget is not { } netTarget)
         {
-            // <Trauma> - check fallback instead of setting it to false immediately
+            // <Trauma> - not necessarily invalid, check heretic shit
             var evCheck = new CheckWorldInstantActionEvent(user, provider);
             RaiseLocalEvent(ent, ref evCheck);
-            args.Invalid |= !evCheck.Fallback;
+            args.Invalid |= !evCheck.Handled;
             // </Trauma>
             return;
         }
@@ -413,9 +423,10 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
         if (!ValidateWorldTarget(user, target, ent))
         {
-            // <Trauma>
+            // <Trauma> - not necessarily invalid, check heretic shit
             var evCheck = new CheckWorldInstantActionEvent(user, provider);
             RaiseLocalEvent(ent, ref evCheck);
+            args.Invalid |= !evCheck.Handled;
             // </Trauma>
             return;
         }
@@ -426,9 +437,11 @@ public abstract partial class SharedActionsSystem : EntitySystem
             !TryComp<EntityTargetActionComponent>(ent, out var entTarget) ||
             !ValidateEntityTarget(user, targetEntity.Value, (ent, entTarget))))
         {
+            // <Trauma> - not necessarily invalid, check heretic shit
             var evCheck = new CheckWorldInstantActionEvent(user, provider);
             RaiseLocalEvent(ent, ref evCheck);
-            args.Invalid |= !evCheck.Fallback; // Goob edit
+            args.Invalid |= !evCheck.Handled;
+            // </Trauma>
             return;
         }
 

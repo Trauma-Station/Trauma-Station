@@ -1,0 +1,90 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: CrateGeneric
+  components:
+  - type: Tag
+    tags:
+    - Crate
+
+- type: entity
+  id: CrateBaseSecure
+  components:
+  - type: LockSignalControl
+  - type: DeviceLinkSink
+    ports:
+    - Lock
+    - Unlock
+    - Toggle
+
+- type: entity
+  id: CrateWeaponSecure
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: Damageable
+    damageModifierSet: StrongCrates
+  - type: Injurable
+    damageContainer: StructuralInorganic
+
+# Lockboxes
+
+- type: entity
+  id: CrateBaseLockBox
+  components:
+  - type: AntiRottingContainer # needed for plant bounties and it costs money so
+
+- type: entity
+  id: CrateLockBoxEngineering
+  components:
+  - type: AntiTamper
+    broadcastChannel: Engineering
+
+- type: entity
+  id: CrateLockBoxMedical
+  components:
+  - type: AntiTamper
+    broadcastChannel: Medical
+
+- type: entity
+  id: CrateLockBoxScience
+  components:
+  - type: AntiTamper
+    broadcastChannel: Science
+
+- type: entity
+  id: CrateLockBoxSecurity
+  components:
+  - type: AntiTamper
+    broadcastChannel: Security
+
+- type: entity
+  id: CrateLockBoxService
+  components:
+  - type: AntiTamper
+    broadcastChannel: Service
+
+# Other
+
+- type: entity
+  id: CrateCoffin
+  components:
+  - type: VampireLair
+  - type: EffectsOnContainer
+    inserted:
+    - !type:ModifyStatusEffect
+      effectProto: VampireCoffinStatusEffect
+      time: null
+    removed:
+    - !type:ModifyStatusEffect
+      effectProto: VampireCoffinStatusEffect
+      time: null
+      type: Remove

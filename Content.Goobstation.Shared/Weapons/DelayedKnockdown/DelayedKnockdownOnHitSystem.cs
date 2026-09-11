@@ -7,7 +7,8 @@ using Content.Shared.Damage.Events;
 using Content.Shared.Inventory;
 using Content.Shared.Standing;
 using Content.Shared.Stunnable;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Weapons.DelayedKnockdown;
