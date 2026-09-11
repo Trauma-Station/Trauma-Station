@@ -9,7 +9,7 @@
   components:
   - type: Currency
     price:
-      Spesos: 0.01
+      Shekels: 0.01
   - type: Tag
     tags:
     - Small
@@ -37,12 +37,12 @@
     layerFunction: Threshold
   - type: StackLayerThreshold
     thresholds: [2, 3, 4, 5]
-  - type: Projectile
-    deleteOnCollide: false
-    onlyCollideWhenShot: false
-    damage:
-      types:
-        Piercing: 5
+  # - type: Projectile
+  #   deleteOnCollide: false
+  #   onlyCollideWhenShot: false
+  #   damage:
+  #     types:
+  #       Piercing: 5
   - type: Sprite
     sprite: _Trauma/Objects/Economy/coin_01.rsi
     state: coin

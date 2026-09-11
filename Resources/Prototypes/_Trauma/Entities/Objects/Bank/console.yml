@@ -30,4 +30,4 @@
   description: A direct connection to the bank itself.
   components:
   - type: Bank
-    currency: Spesos
+    currency: Shekels

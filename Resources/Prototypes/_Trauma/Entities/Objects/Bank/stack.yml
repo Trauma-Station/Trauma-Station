@@ -5,81 +5,95 @@
   name: farthing
   icon: { sprite: _Trauma/Objects/Economy/coin_01.rsi, state: coin }
   spawn: SpaceCoin_01
+  maxCount: 5
 
 - type: stack
   id: CoinCredit_02
   name: halfpenny
   icon: { sprite: _Trauma/Objects/Economy/coin_02.rsi, state: coin }
   spawn: SpaceCoin_02
+  maxCount: 5
 
 - type: stack
   id: CoinCredit_04
   name: penny
   icon: { sprite: _Trauma/Objects/Economy/coin_04.rsi, state: coin }
   spawn: SpaceCoin_04
+  maxCount: 5
 
 - type: stack
   id: CoinCredit_12
   name: threepenny bit
   icon: { sprite: _Trauma/Objects/Economy/coin_12.rsi, state: coin }
   spawn: SpaceCoin_12
+  maxCount: 5
 
 - type: stack
   id: CoinCredit_16
   name: groat
   icon: { sprite: _Trauma/Objects/Economy/coin_16.rsi, state: coin }
   spawn: SpaceCoin_16
+  maxCount: 5
 
 - type: stack
   id: CoinCredit_24
   name: tanner
   icon: { sprite: _Trauma/Objects/Economy/coin_24.rsi, state: coin }
   spawn: SpaceCoin_24
+  maxCount: 5
 
 - type: stack
   id: CoinCredit_48
   name: shilling
   icon: { sprite: _Trauma/Objects/Economy/coin_48.rsi, state: coin }
   spawn: SpaceCoin_48
+  maxCount: 5
 
 - type: stack
   id: CoinCredit_96
   name: florin
   icon: { sprite: _Trauma/Objects/Economy/coin_96.rsi, state: coin }
   spawn: SpaceCoin_96
+  maxCount: 5
 
 - type: stack
   id: CoinCredit_120
   name: half crown
   icon: { sprite: _Trauma/Objects/Economy/coin_120.rsi, state: coin }
   spawn: SpaceCoin_120
+  maxCount: 5
 
 - type: stack
   id: CoinCredit_240
   name: full crown
   icon: { sprite: _Trauma/Objects/Economy/coin_240.rsi, state: coin }
   spawn: SpaceCoin_240
+  maxCount: 5
 
 - type: stack
   id: CoinCredit_480
   name: half pence
   icon: { sprite: _Trauma/Objects/Economy/coin_480.rsi, state: coin }
   spawn: SpaceCoin_480
+  maxCount: 5
 
 - type: stack
   id: CoinCredit_960
   name: full pence
   icon: { sprite: _Trauma/Objects/Economy/coin_960.rsi, state: coin }
   spawn: SpaceCoin_960
+  maxCount: 5
 
 - type: stack
   id: CoinCredit_1920
   name: sovereign
   icon: { sprite: _Trauma/Objects/Economy/coin_1920.rsi, state: coin }
   spawn: SpaceCoin_1920
+  maxCount: 5
 
 - type: stack
   id: CoinCredit_1936
   name: guinea
   icon: { sprite: _Trauma/Objects/Economy/coin_1936.rsi, state: coin }
   spawn: SpaceCoin_1936
+  maxCount: 5
