@@ -68,11 +68,11 @@ def get_most_recent_workflow(
     sess: requests.Session, github_repository: str, github_run: str
 ) -> Any:
     workflow_run = get_current_run(sess, github_repository, github_run)
-    past_runs = get_past_runs(sess, workflow_run)
-    for run in past_runs:
-        return run
-
-    raise RuntimeError("Could not find a previous successful workflow run")
+    # <Trauma> - sort it to fix dogshit github api change
+    past_runs = list(get_past_runs(sess, workflow_run))
+    past_runs.sort(key=lambda r: r["created_at"], reverse=True)
+    return past_runs[0]
+    # </Trauma>
 
 
 def get_current_run(

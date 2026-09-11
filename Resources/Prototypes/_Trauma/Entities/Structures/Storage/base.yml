@@ -19,8 +19,6 @@
   - type: WiresPanel
     openingTool: Prying
   - type: WiresVisuals
-  - type: Electrified
-    requirePower: false
   - type: UserInterface
     interfaces:
       enum.WiresUiKey.Key:
