@@ -263,8 +263,11 @@ public sealed partial class ZombieSystem
         //Give them zombie blood
         _bloodstream.ChangeBloodReagents(target, zombiecomp.NewBloodReagents);
 
+
         //This is specifically here to combat insuls, because frying zombies on grilles is funny as shit.
+        /* Trauma
         _inventory.TryUnequip(target, "gloves", true, true);
+        */
         //Should prevent instances of zombies using comms for information they shouldnt be able to have.
         _inventory.TryUnequip(target, "ears", true, true);
 
