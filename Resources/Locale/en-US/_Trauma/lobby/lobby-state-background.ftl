@@ -5,6 +5,7 @@ lobby-state-background-the-mansus = The Mansus
 lobby-state-background-the-revolution = The Revolution
 lobby-state-background-the-syndicate = The Syndicate
 lobby-state-background-the-mugshot = The Mugshot
+lobby-state-background-jack-hill = The Solider J. Hill
 
 # Artists
 asardonicsailor = asardonicsailor
