@@ -11,6 +11,16 @@
     jumpsuit: ClothingUniformJumpskirtPrisoner
 
 - type: loadout
+  id: OrangeShoes
+  equipment:
+    shoes: ClothingShoesColorOrange
+
+- type: loadout
+  id: OrangeWintercoat
+  equipment:
+    outerClothing: ClothingOuterWinterColorOrange
+
+- type: loadout
   id: DClassElectropack
   equipment:
     back: ClothingBackpackElectropack
@@ -102,3 +112,26 @@
     proto: DClassMasterGrey
   equipment:
     neck: ClothingNeckMantle
+
+# Plasmaman
+- type: loadout
+  id: DClassEnvirosuit
+  equipment:
+    jumpsuit: ClothingUniformEnvirosuitPrisoner
+  effects:
+  - &SLE_Plasmaman !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman
+
+- type: loadout
+  id: DClassEnvirohelm
+  equipment:
+    head: ClothingHeadEnvirohelmPrisoner
+  effects:
+  - *SLE_Plasmaman
+- type: loadout
+  id: BlackEnvirogloves
+  equipment:
+    gloves: ClothingHandsGlovesEnviroglovesBlack
+  effects:
+  - *SLE_Plasmaman
