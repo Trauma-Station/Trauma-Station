@@ -12,6 +12,7 @@ public sealed partial class JobListingsMenu : FancyWindow
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IEntityManager _entity = default!;
+    private SpriteSystem _sprite = default!;
 
     private TimeSpan? _refreshTimerBarTime;
 
@@ -25,6 +26,7 @@ public sealed partial class JobListingsMenu : FancyWindow
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
         RefreshButton.OnPressed += _ => OnRefresh?.Invoke();
+        _sprite = _entity.System<SpriteSystem>();
     }
 
     public void ClearJobListings()
@@ -35,14 +37,14 @@ public sealed partial class JobListingsMenu : FancyWindow
 
     public void AddAvailableSideJob(SideJobInfo info)
     {
-        var control = CreateControl(info);
+        var control = CreateControl();
         control.UpdateAsAvailable(info);
         AvailableJobListingsContainer.AddChild(control);
     }
 
     public void AddAcceptedSideJob(SideJobInfo info)
     {
-        var control = CreateControl(info);
+        var control = CreateControl();
         control.UpdateAsAccepted(info);
         AcceptedJobListingsContainer.AddChild(control);
     }
@@ -108,9 +110,9 @@ public sealed partial class JobListingsMenu : FancyWindow
         return $"{Math.Floor(time.TotalMinutes):0}m {time.Seconds}s";
     }
 
-    private SideJobControl CreateControl(SideJobInfo info)
+    private SideJobControl CreateControl()
     {
-        var control = new SideJobControl(_entity, _timing);
+        var control = new SideJobControl(_timing, _sprite);
         control.OnAccepted += job => OnAccepted?.Invoke(job);
         control.OnClaimed += job => OnClaimed?.Invoke(job);
         control.OnCancelled += job => OnCancelled?.Invoke(job);

@@ -9,7 +9,6 @@ namespace Content.Trauma.Client.JobListings;
 [GenerateTypedNameReferences]
 public sealed partial class SideJobControl : Control
 {
-    private IEntityManager _entity = default!;
     private IGameTiming _timing = default!;
     private SpriteSystem _sprite;
 
@@ -23,13 +22,13 @@ public sealed partial class SideJobControl : Control
     public Action<NetEntity>? OnCancelled;
     public Action<NetEntity>? OnClaimed;
 
-    public SideJobControl(IEntityManager entity, IGameTiming timing)
+    public SideJobControl(IGameTiming timing, SpriteSystem sprite)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-        _entity = entity;
+
         _timing = timing;
-        _sprite = _entity.System<SpriteSystem>();
+        _sprite = sprite;
 
         AcceptButton.OnPressed += _ =>
         {
