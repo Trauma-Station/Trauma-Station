@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Server.Mind.Toolshed;
+using Content.Shared.Emag.Systems;
+using Content.Shared.Mind;
 using Content.Trauma.Shared.JobListings;
 
 namespace Content.Trauma.Server.JobListings;
@@ -12,11 +15,18 @@ public sealed partial class ServerJobListingsSystem
     [SubscribeLocalEvent]
     private void OnFetch(Entity<BasicSideJobGeneratorComponent> ent, ref GenerateSideJobsEvent args)
     {
-        foreach (var id in ent.Comp.Protos)
+        var existingSideJobs = GetExistingSideJobs(ent);
+        OnFetch(ent.Comp.Protos, args.SideJobs, args.Mind, args.EffectiveLevel, existingSideJobs);
+        OnFetch(ent.Comp.PriorityProtos, args.PrioritySideJobs, args.Mind, args.EffectiveLevel, existingSideJobs);
+    }
+
+    private void OnFetch(List<EntProtoId<SideJobComponent>> protos, List<EntityUid> output, Entity<MindComponent> mind, int effectiveLevel, List<EntityUid> existingSideJobs)
+    {
+        foreach (var id in protos)
         {
             // check for duplicates (any pre-existing side job with matching prototype id)
             var duplicates = false;
-            foreach (var otherSideJob in GetExistingSideJobs(ent))
+            foreach (var otherSideJob in existingSideJobs)
             {
                 var proto = Prototype(otherSideJob);
                 if (proto is not null && proto.ID == id)
@@ -31,11 +41,10 @@ public sealed partial class ServerJobListingsSystem
 
             // spawn and initialise
             var sideJob = Spawn(id);
-            if (!InitializeSideJob(sideJob, args.Mind, args.EffectiveLevel))
+            if (!InitializeSideJob(sideJob, mind, effectiveLevel))
                 continue;
 
-            // put in priority as per the component's doc comment
-            args.PrioritySideJobs.Add(sideJob);
+            output.Add(sideJob);
         }
     }
 

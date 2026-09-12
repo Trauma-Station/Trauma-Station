@@ -5,9 +5,14 @@
   components:
   - type: BasicSideJobGenerator
     protos:
-    - KillSideJob
     - KillHeadSideJob
     - BattlecruiserSideJob
+    # this side job gets special priority
+    # the major side jobs are 1 kill + 7 steal side jobs
+    # this would make kill very rare
+    # so we give it priority so it actually shows up
+    priorityProtos:
+    - KillSideJob
   - type: BugSideJobGenerator
     proto: BugAreaSideJob
     areas:
