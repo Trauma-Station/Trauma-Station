@@ -1,0 +1,28 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseAction
+  id: ActionBindApprentice
+  name: Bind Apprentice
+  description: Binds a target to your service as a demonologist's apprentice, stripping their old garb and forcing demonologist robes on.
+  components:
+  - type: Action
+    raiseOnUser: true
+    useDelay: 2700 # 45 minutes
+    itemIconStyle: BigAction
+    sound: !type:SoundPathSpecifier
+      path: /Audio/_Trauma/Demonologist/demonologist.ogg # TODO: Change, no longer needed, briefing done
+  - type: Sprite # TODO: Placeholder
+    sprite: _Trauma/Objects/Enchanting/book.rsi
+    layers:
+    - state: icon
+  - type: TargetAction
+    interactOnMiss: false
+  - type: EntityTargetAction
+    whitelist:
+      requireAll: true
+      components:
+      - HumanoidProfile
+      - Inventory
+    canTargetSelf: false
+    event: !type:BindApprenticeSpellEvent

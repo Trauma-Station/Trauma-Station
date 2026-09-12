@@ -6,7 +6,7 @@ using Content.Shared.Store;
 namespace Content.Trauma.Server.Store.Conditions;
 
 /// <summary>
-/// Stroe condition that requires a holiday be active.
+/// Store condition that requires a holiday be active.
 /// </summary>
 public sealed partial class StoreHolidayCondition : ListingCondition
 {

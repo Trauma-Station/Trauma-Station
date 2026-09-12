@@ -104,6 +104,11 @@
     Caustic: 0.5
     Cold: 0.8
 
+- type: damageModifierSet
+  id: Demon
+  coefficients:
+    Holy: 2.0
+
 # Chickens
 
 - type: damageModifierSet

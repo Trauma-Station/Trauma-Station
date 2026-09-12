@@ -102,13 +102,14 @@
     - BasicSilicon
     - Borg
     - CentralCommand
-    - Revolutionary
-    - Xenomorph
-    - StationAi
+    - Demonologist
     - NuclearOperative
+    - Revolutionary
+    - StationAi
     - SyndicateAgent
     - Wizard
     - Xenoborg
+    - Xenomorph
     # </Trauma>
     privilegedIdSlot:
       name: id-card-console-privileged-id

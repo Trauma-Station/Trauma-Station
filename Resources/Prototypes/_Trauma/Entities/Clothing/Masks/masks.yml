@@ -74,3 +74,22 @@
         Slash: 0.8
         Piercing: 0.9
         Heat: 0.9
+
+- type: entity
+  parent: [ ClothingMaskBase, BaseMajorContraband ]
+  id: ClothingMaskDemonologist
+  name: demonologist mask
+  description: #TODO
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Mask/demonologist_mask.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Mask/demonologist_mask.rsi
+  - type: Tag
+    tags:
+    - WhitelistChameleon
+    - IPCMaskWearable
+  - type: FlashImmunity
+  - type: EyeProtection
+  - type: BreathMask
+  - type: IdentityBlocker
