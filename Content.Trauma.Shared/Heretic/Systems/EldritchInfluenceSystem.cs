@@ -150,12 +150,10 @@ public sealed partial class EldritchInfluenceSystem : EntitySystem
             RemCompDeferred<HereticEyeOverlayComponent>(args.User);
 
         if (args.Cancelled || args.Target == null ||
-            !_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind) ||
-            // TODO: move heretic mind to the mind role
-            !TryComp(mind, out StoreComponent? store) || !TryComp(mind, out MindComponent? mindComp))
+            !_heretic.TryGetHereticComponent(args.User, out var heretic, out var mind))
             return;
 
-        _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp),
+        _heretic.UpdateMindKnowledge((mind, heretic),
             args.User,
             HasComp<EldritchInfluenceDrainerComponent>(args.Used)
                 ? SharedHereticSystem.OneKnowledgeOneSidePoint

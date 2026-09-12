@@ -17,7 +17,6 @@ using Content.Shared.Actions.Events;
 using Content.Shared.Chat;
 using Content.Shared.Eye;
 using Content.Shared.FixedPoint;
-using Content.Shared.GameTicking;
 using Content.Shared.Humanoid;
 using Content.Shared.Jaunt;
 using Content.Shared.Mind;
@@ -69,9 +68,6 @@ public sealed partial class HereticSystem : SharedHereticSystem
     [Dependency] private EntityQuery<ChangeUseDelayOnAscensionComponent> _changeUseDelayQuery = default!;
     [Dependency] private EntityQuery<HumanoidProfileComponent> _humanoidQuery = default!;
     [Dependency] private EntityQuery<HereticSacrificeTargetComponent> _targetQuery = default!;
-
-    private float _timer;
-    private const float PassivePointCooldown = 20f * 60f;
 
     private const int HereticVisFlags = (int) VisibilityFlags.EldritchInfluence;
 
@@ -256,32 +252,7 @@ public sealed partial class HereticSystem : SharedHereticSystem
         _eye.SetVisibilityMask(ev.Heretic, mask, eye);
     }
 
-    [SubscribeLocalEvent]
-    private void OnRestart(RoundRestartCleanupEvent ev)
-    {
-        _timer = 0f;
-    }
-
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-
-        _timer += frameTime;
-
-        if (_timer < PassivePointCooldown)
-            return;
-
-        _timer = 0f;
-
-        var query = EntityQueryEnumerator<HereticComponent, StoreComponent, MindComponent>();
-        while (query.MoveNext(out var uid, out var heretic, out var store, out var mind))
-        {
-            // passive point gain every 20 minutes
-            UpdateMindKnowledge((uid, heretic, store, mind), null, OneKnowledgePoint);
-        }
-    }
-
-    public override void UpdateMindKnowledge(Entity<HereticComponent, StoreComponent, MindComponent> ent,
+    public override void UpdateMindKnowledge(Entity<HereticComponent?, MindComponent?> ent,
         EntityUid? user,
         Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2> knowledge,
         bool showText = true,
@@ -289,16 +260,23 @@ public sealed partial class HereticSystem : SharedHereticSystem
     {
         base.UpdateMindKnowledge(ent, user, knowledge, showText, playSound);
 
-        var (mindId, heretic, store, mind) = ent;
+        var (mindId, heretic, mind) = ent;
+
+        if (!Resolve(mindId, ref heretic, ref mind))
+            return;
+
         var uid = user ?? mind.OwnedEntity;
 
-        _store.TryAddCurrency(knowledge, mindId, store);
-        _store.UpdateUserInterface(uid, mindId, store);
+        if (GetHereticStore(ent) is not { } store)
+            return;
+
+        _store.TryAddCurrency(knowledge, store, store);
+        _store.UpdateUserInterface(uid, store, store);
 
         if (_mind.TryGetObjectiveComp<HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
             objective.Researched += knowledge.Values.Sum().Float();
 
-        UpdateObjectiveProgress((ent, ent.Comp1, ent.Comp3));
+        UpdateObjectiveProgress((mindId, heretic, mind));
 
         if (!showText && !playSound)
             return;
@@ -641,7 +619,10 @@ public sealed partial class HereticSystem : SharedHereticSystem
         if (!ent.Comp.SideKnowledgeDrafts.TryGetValue(cat, out var amount))
             return;
 
-        var listings = _store.GetAvailableListings(args.User, ent, Comp<StoreComponent>(ent));
+        if (GetHereticStore(ent) is not { } store)
+            return;
+
+        var listings = _store.GetAvailableListings(args.User, store, store);
         foreach (var listing in listings)
         {
             if (listing == args.Data ||
@@ -655,21 +636,25 @@ public sealed partial class HereticSystem : SharedHereticSystem
         var newAmount = Math.Max(amount - 1, 0);
         ent.Comp.SideKnowledgeDrafts[cat] = newAmount;
         if (newAmount > 0)
-            UpdateHereticCostModifiers(ent.AsNullable(), cat, args.Data);
+            UpdateHereticCostModifiers(ent.AsNullable(), store, cat, args.Data);
     }
 
     public override void UpdateHereticCostModifiers(Entity<HereticComponent?> ent,
+        Entity<StoreComponent>? store = null,
         ProtoId<StoreCategoryPrototype>? category = null,
         ListingDataWithCostModifiers? except = null)
     {
-        base.UpdateHereticCostModifiers(ent, category, except);
+        base.UpdateHereticCostModifiers(ent, store, category, except);
 
         if (!Resolve(ent, ref ent.Comp))
             return;
 
-        var store = CompOrNull<StoreComponent>(ent) ?? _rule.InitializeStore(ent);
+        store ??= GetHereticStore(ent);
 
-        var allListings = _store.GetAvailableListings(ent, ent, store).ToList();
+        if (store == null)
+            return;
+
+        var allListings = _store.GetAvailableListings(ent, store.Value, store.Value).ToList();
 
         if (except is { } e)
             allListings.Remove(e);
