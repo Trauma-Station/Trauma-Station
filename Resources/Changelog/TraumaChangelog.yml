@@ -14420,3 +14420,10 @@ Entries:
   id: 1573
   time: '2026-09-11T16:24:49.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4552
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed Cosmic Cultists being unable to progress if at low pop
+  id: 1574
+  time: '2026-09-12T07:02:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4555
