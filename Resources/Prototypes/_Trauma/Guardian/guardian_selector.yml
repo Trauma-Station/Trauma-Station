@@ -1,0 +1,59 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseItem, BaseSetSelector, BaseSyndicateContraband ]
+  id: GuardianFigurine
+  name: holoparasite figurine
+  description: A small glowing hologram of a holoparasite. Use it to choose which guardian you want to bind to yourself.
+  components:
+  - type: Sprite
+    sprite: Objects/Misc/guardian_info.rsi # God, let it be legal
+    state: guardian_info
+  - type: SetSelector
+    possibleSets:
+    - GuardianStandardSet
+    - GuardianAssassinSet
+    - GuardianLightningSet
+#    - GuardianExplosiveSet
+    maxSelectedSets: 1
+    spawnedStoragePrototype: BoxGuardianHoloparasite
+    spawnedStorageContainer: storagebase
+    approveSound:
+      collection: storageRustle
+
+# The box spawned after the type has been chosen. Filled by the SetSelector.
+- type: entity
+  parent: [ BoxCardboard, BaseSyndicateContraband ]
+  id: BoxGuardianHoloparasite
+  name: guardian box
+  description: A box containing a holoparasite injector, a cap and the figurine used to pick it.
+  components:
+  - type: Sprite
+    layers:
+    - state: box
+    - state: holo
+
+# Injector variants, one per guardian type.
+- type: entity
+  parent: HoloparasiteInjector
+  id: HoloparasiteInjectorStandard
+  name: standard holoparasite injector
+  components:
+  - type: GuardianCreator
+    guardianProto: MobHoloparasiteGuardianStandard
+
+- type: entity
+  parent: HoloparasiteInjector
+  id: HoloparasiteInjectorAssassin
+  name: assassin holoparasite injector
+  components:
+  - type: GuardianCreator
+    guardianProto: MobHoloparasiteGuardianAssassin
+
+- type: entity
+  parent: HoloparasiteInjector
+  id: HoloparasiteInjectorLightning
+  name: lightning holoparasite injector
+  components:
+  - type: GuardianCreator
+    guardianProto: MobHoloparasiteGuardianLightning
