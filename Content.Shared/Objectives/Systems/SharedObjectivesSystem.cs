@@ -1,8 +1,8 @@
 using System.Diagnostics.CodeAnalysis;
-using Robust.Shared.Prototypes;
-using Robust.Shared.Utility;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 
 namespace Content.Shared.Objectives.Systems;
 

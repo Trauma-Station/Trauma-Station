@@ -45,7 +45,7 @@ public sealed partial class SideJobComponent : Component
     /// If this side job can be repeated. Theft objectives can't be repeated while murder objectives can be.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool Repeatable = false;
+    public bool Repeatable;
 
     /// <summary>
     /// Objective progress is handled server-side.

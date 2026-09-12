@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace Content.Trauma.Server.JobListings;
 
-public sealed partial class JobListingsSystem : SharedJobListingsSystem
+public sealed partial class ServerJobListingsSystem : JobListingsSystem
 {
     [Dependency] private PvsOverrideSystem _pvsOverride = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
@@ -29,9 +29,6 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
             return false;
 
         if (!MindQuery.TryComp(mind, out var mindComp))
-            return false;
-        var actor = mindComp.OwnedEntity;
-        if (actor is null)
             return false;
 
         var possibleJobs = jobBoard.Comp.SideJobOffers.ShallowClone();
@@ -147,18 +144,14 @@ public sealed partial class JobListingsSystem : SharedJobListingsSystem
     public override void Refresh(Entity<JobListingsComponent> jobBoard)
     {
         base.Refresh(jobBoard);
-        // make copy so you dont mutate while iterating
-        var copy = jobBoard.Comp.AvailableSideJobs.ContainedEntities.ToList();
-        foreach (var sideJob in copy)
-        {
-            Del(sideJob);
-        }
+        Container.CleanContainer(jobBoard.Comp.AcceptedSideJobs);
         FillSideJobs(jobBoard);
     }
 
     /// <summary>
-    /// Helper method to add a PVS override for the job board and sidejobs.
-    /// They are nullspace entities on the server and would not normally be replicated to the client but this method makes it so.
+    /// Helper method to add a PVS override for the job board.
+    /// The job board / uplink store is a nullspace entity which would not normally be replicated.
+    /// It is supposed to be shared between uplinks and persist if any of them are destroyed so it can't be put in an uplink's container.
     /// </summary>
     private void PVSOverrideEntity(Entity<MindComponent> mind, EntityUid entity)
     {

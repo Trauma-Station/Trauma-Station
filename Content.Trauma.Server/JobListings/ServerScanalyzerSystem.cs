@@ -7,7 +7,7 @@ using Content.Trauma.Shared.JobListings;
 
 namespace Content.Trauma.Server.JobListings;
 
-public sealed partial class ScanalyzerSystem : SharedScanalyzerSystem
+public sealed partial class ServerScanalyzerSystem : ScanalyzerSystem
 {
     [SubscribeLocalEvent(after: [typeof(StealConditionSystem)])]
     private void OnGetProgress(Entity<StealConditionRequireScanComponent> ent, ref ObjectiveGetProgressEvent args)

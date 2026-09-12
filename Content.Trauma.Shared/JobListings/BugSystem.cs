@@ -18,7 +18,7 @@ public sealed partial class BugSystem : EntitySystem
 {
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private SharedMindSystem _mind = default!;
-    [Dependency] private SharedJobListingsSystem _jobs = default!;
+    [Dependency] private JobListingsSystem _jobs = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private SharedObjectivesSystem _objectives = default!;
 
@@ -55,7 +55,7 @@ public sealed partial class BugSystem : EntitySystem
     {
         if (ent.Comp.TargetArea is not { } area)
         {
-            Log.Warning("Bug's TargetArea is not set.");
+            Log.Error($"Bug's {ent.Owner} TargetArea is not set.");
             return;
         }
 
@@ -95,7 +95,7 @@ public sealed partial class BugSystem : EntitySystem
 
         if (ent.Comp.TargetArea is not { } area)
         {
-            Log.Warning("Bug's TargetArea is not set.");
+            Log.Error($"Bug {ent.Owner}'s TargetArea is not set.");
             return;
         }
 

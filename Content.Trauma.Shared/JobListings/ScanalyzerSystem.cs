@@ -16,13 +16,13 @@ namespace Content.Trauma.Shared.JobListings;
 /// System facilitating scanning grand theft items to complete progtot objectives.
 /// The list of scanned grand theft items is stored on the traitor's mind via the <see cref="ScanalyzerMindArchiveComponent"/>
 /// </summary>
-public abstract partial class SharedScanalyzerSystem : EntitySystem
+public abstract partial class ScanalyzerSystem : EntitySystem
 {
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
     [Dependency] private SharedMindSystem _mind = default!;
-    [Dependency] private SharedJobListingsSystem _jobs = default!;
+    [Dependency] private JobListingsSystem _jobs = default!;
     [Dependency] private TriggerSystem _trigger = default!;
 
     /// <summary>
@@ -86,11 +86,7 @@ public abstract partial class SharedScanalyzerSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnInteractUsing(Entity<StealTargetComponent> ent, ref InteractUsingEvent args)
     {
-        if (args.Handled)
-            return;
-        if (!TryComp<ScanalyzerComponent>(args.Used, out var scanalyzer))
-            return;
-        if (!CanScan((args.Used, scanalyzer), ent))
+        if (args.Handled || !TryComp<ScanalyzerComponent>(args.Used, out var scanalyzer) || !CanScan((args.Used, scanalyzer), ent))
             return;
         if (HasComp<ScanalyzerRequiresPowerComponent>(ent.Owner) && !_power.IsPowered(ent.Owner))
             return;

@@ -1,9 +1,10 @@
+using Content.Shared.Mind;
+using Content.Shared.Objectives;
+using Content.Shared.Objectives.Prototypes;
+using Content.Shared.Objectives.Systems;
 using Robust.Shared.Utility;
 using Robust.Shared.Prototypes;
 using Robust.Shared.GameStates;
-using Content.Shared.Mind;
-using Content.Shared.Objectives.Prototypes;
-using Content.Shared.Objectives.Systems;
 
 namespace Content.Shared.Objectives.Components;
 
@@ -12,9 +13,8 @@ namespace Content.Shared.Objectives.Components;
 /// </summary>
 [RegisterComponent, Access(typeof(SharedObjectivesSystem))]
 [EntityCategory("Objectives")]
-// <Trauma> - make it actually networked
+// Trauma - make it actually networked
 [NetworkedComponent, AutoGenerateComponentState(fieldDeltas: true)]
-// </Trauma>
 public sealed partial class ObjectiveComponent : Component
 {
     /// <summary>

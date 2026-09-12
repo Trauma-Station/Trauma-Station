@@ -11,7 +11,7 @@ namespace Content.Trauma.Shared.JobListings;
 public abstract partial class JobListingsImplantSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
-    [Dependency] private SharedJobListingsSystem _jobs = default!;
+    [Dependency] private JobListingsSystem _jobs = default!;
 
     [SubscribeLocalEvent]
     private void OnImplantImplanted(Entity<JobListingsImplantComponent> ent, ref ImplantImplantedEvent args)

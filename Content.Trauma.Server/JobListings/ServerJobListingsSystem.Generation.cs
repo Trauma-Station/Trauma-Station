@@ -10,7 +10,7 @@ namespace Content.Trauma.Server.JobListings;
 /// <summary>
 /// System that manages the generation of sidejobs by subscribing to the <see cref=SideJobCreatedEvent/>.
 /// </summary>
-public sealed partial class JobListingsSystem
+public sealed partial class ServerJobListingsSystem
 {
     [SubscribeLocalEvent]
     private void OnCreatedWithReward(Entity<GenerateSideJobRewardComponent> ent, ref SideJobCreatedEvent args)

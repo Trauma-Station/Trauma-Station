@@ -1,21 +1,21 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
-using Robust.Shared.Timing;
-using Robust.Shared.Containers;
 using Content.Shared.Mind;
 using Content.Shared.PDA;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Objectives.Systems;
 using Content.Shared.Hands.EntitySystems;
 using Content.Trauma.Common.JobListings;
+using Robust.Shared.Timing;
+using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.JobListings;
 
 /// <summary>
 /// System that manages the side-jobs for progressive traitor.
 /// </summary>
-public abstract partial class SharedJobListingsSystem : EntitySystem
+public abstract partial class JobListingsSystem : EntitySystem
 {
     [Dependency] protected SharedObjectivesSystem Objectives = default!;
     [Dependency] protected IGameTiming Timing = default!;
@@ -109,15 +109,9 @@ public abstract partial class SharedJobListingsSystem : EntitySystem
         info = null;
 
         var mind = jobBoard.Comp.Mind;
-        if (mind is null)
+        if (mind is null || !ObjectiveQuery.TryComp(sideJob, out var objectiveComp) || !SideJobQuery.TryComp(sideJob, out var sideJobComp))
             return false;
-        if (!ObjectiveQuery.TryComp(sideJob, out var objectiveComp))
-            return false;
-        if (!SideJobQuery.TryComp(sideJob, out var sideJobComp))
-            return false;
-        if (sideJobComp.Reward is null || sideJobComp.RewardName is null)
-            return false;
-        if (objectiveComp.Icon is null)
+        if (sideJobComp.Reward is null || sideJobComp.RewardName is null || objectiveComp.Icon is null)
             return false;
 
         // don't use SharedObjectiveSystem.GetInfo because it will error on the client since progress is not predicted

@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.EntityTable;
 using Content.Shared.Store;
 
 namespace Content.Trauma.Server.JobListings;
 
 /// <summary>
-/// Generates a reward for a side job by pulling a prototype from a table.
+/// Generates a reward for a side job.
 /// </summary>
 [RegisterComponent]
 public sealed partial class GenerateSideJobRewardComponent : Component
