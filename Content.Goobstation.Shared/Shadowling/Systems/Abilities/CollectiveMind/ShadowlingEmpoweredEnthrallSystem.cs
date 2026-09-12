@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Mindshield;
 using Content.Goobstation.Shared.Shadowling.Components.Abilities.CollectiveMind;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
@@ -14,6 +15,7 @@ namespace Content.Goobstation.Shared.Shadowling.Systems.Abilities.CollectiveMind
 /// </summary>
 public sealed partial class ShadowlingEmpoweredEnthrallSystem : EntitySystem
 {
+    [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedShadowlingSystem _shadowling = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -56,6 +58,12 @@ public sealed partial class ShadowlingEmpoweredEnthrallSystem : EntitySystem
 
         if (!_shadowling.CanEnthrall(uid, target))
             return;
+
+        if (_mindShield.IsShielded(target))
+        {
+            _popup.PopupEntity(Loc.GetString("shadowling-enthrall-mindshield"), uid, uid, PopupType.SmallCaution);
+            return;
+        }
 
         _popup.PopupEntity(Loc.GetString("shadowling-target-being-thralled"), target, target, PopupType.SmallCaution);
 
