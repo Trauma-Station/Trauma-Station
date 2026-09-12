@@ -271,6 +271,9 @@ public abstract partial class SharedDevilContractSystem : EntitySystem
 
             var clauseKey = match.Groups["clause"].Value.Trim().ToLowerInvariant().Replace(" ", "");
 
+            if (contract.Comp.ClauseBlacklist.Contains(clauseKey))
+                continue;
+
             if (!ProtoMan.TryIndex(clauseKey, out DevilClausePrototype? clauseProto)
                 || !contract.Comp.CurrentClauses.Add(clauseProto))
                 continue;

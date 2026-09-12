@@ -354,6 +354,13 @@
         Blunt: 10
     altDisarm: false
     canWideSwing: true
+  - type: AnomalousEntity
+    researchPerSecond: 100
+    contained: false
+    researchOnBehaviour: 100000
+    idGear: SoapHomemadeBanana
+  - type: AerHorse
+  - type: AerMobActive
 
 - type: entity
   parent: [ SimpleMobBase, MobCombat, BaseSlicingRefinable]
