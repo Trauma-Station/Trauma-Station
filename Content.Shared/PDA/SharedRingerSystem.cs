@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.JobListings;
+// </Trauma>
 using Content.Shared.Mind;
 using Content.Shared.PDA.Ringer;
 using Content.Shared.Popups;
@@ -139,6 +142,7 @@ public abstract partial class SharedRingerSystem : EntitySystem
 
         ent.Comp.Unlocked = false;
         UI.CloseUi(ent.Owner, StoreUiKey.Key);
+        UI.CloseUi(ent.Owner, JobListingsUiKey.Key); // Trauma
     }
 
     /// <summary>

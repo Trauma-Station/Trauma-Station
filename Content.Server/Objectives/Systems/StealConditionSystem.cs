@@ -11,6 +11,8 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Stacks;
+using Robust.Shared.Prototypes;
+using Content.Shared.Objectives;
 
 namespace Content.Server.Objectives.Systems;
 
@@ -35,6 +37,16 @@ public sealed partial class StealConditionSystem : EntitySystem
         SubscribeLocalEvent<StealConditionComponent, ObjectiveAfterAssignEvent>(OnAfterAssign);
         SubscribeLocalEvent<StealConditionComponent, ObjectiveGetProgressEvent>(OnGetProgress);
     }
+
+    // <Trauma> - had to add this because component is access-locked to this system.
+    /// <summary>
+    /// Set a steal objective's steal group.
+    /// </summary>
+    public void SetStealGroup(Entity<StealConditionComponent> condition, ProtoId<StealTargetGroupPrototype> groupId)
+    {
+        condition.Comp.StealGroup = groupId;
+    }
+    // </Trauma>
 
     /// start checks of target acceptability, and generation of start values.
     private void OnAssigned(Entity<StealConditionComponent> condition, ref ObjectiveAssignedEvent args)
@@ -72,7 +84,15 @@ public sealed partial class StealConditionSystem : EntitySystem
     //Set the visual, name, icon for the objective.
     private void OnAfterAssign(Entity<StealConditionComponent> condition, ref ObjectiveAfterAssignEvent args)
     {
-        var group = ProtoMan.Index(condition.Comp.StealGroup);
+        // <Trauma> - Made StealGroup nullable
+        if (condition.Comp.StealGroup is not { } groupId)
+        {
+            Log.Error($"Steal Objective {condition}'s StealGroup field was null.");
+            return;
+        }
+
+        var group = ProtoMan.Index(groupId);
+        // </Trauma>
         string localizedName = Loc.GetString(group.Name);
 
         var title = condition.Comp.OwnerText == null

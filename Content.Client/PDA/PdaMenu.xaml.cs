@@ -211,6 +211,7 @@ namespace Content.Client.PDA
             EjectPaiButton.IsActive = state.HasPai;
             ActivateMusicButton.Visible = state.CanPlayMusic;
             ShowUplinkButton.Visible = state.HasUplink;
+            ShowJobListingsButton.Visible = state.HasUplink; // Trauma
             LockUplinkButton.Visible = state.HasUplink;
         }
 
