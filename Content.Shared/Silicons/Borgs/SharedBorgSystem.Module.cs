@@ -51,6 +51,9 @@ public abstract partial class SharedBorgSystem
 
     private void OnWhitelistExamine(Entity<BorgModuleWhitelistComponent> ent, ref ExaminedEvent args)
     {
+        if (ent.Comp.WhitelistInfo is null)
+            return;
+
         using (args.PushGroup(nameof(BorgModuleComponent), 1))
         {
             args.PushMarkup(Loc.GetString(ent.Comp.WhitelistInfo));
@@ -88,7 +91,7 @@ public abstract partial class SharedBorgSystem
 
     private void OnModuleGotRemoved(Entity<BorgModuleComponent> module, ref EntGotRemovedFromContainerMessage args)
     {
-        if (_timing.ApplyingState)
+        if (_timing.ApplyingState || TerminatingOrDeleted(module)) // Trauma - don't remove items from the container if it's being deleted
             return; // The changes are already networked with the same game state
 
         var chassis = args.Container.Owner;

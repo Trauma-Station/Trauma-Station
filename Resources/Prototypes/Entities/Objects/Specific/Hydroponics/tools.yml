@@ -7,7 +7,6 @@
   - type: Tag
     tags:
     - Hoe
-    - BotanyHoe
   - type: Sprite
     sprite: Objects/Tools/Hydroponics/hoe.rsi
     state: icon
@@ -25,6 +24,7 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 100
+  - type: BotanyHoe
 
 - type: entity
   name: plant clippers
@@ -42,11 +42,10 @@
       path: /Audio/_Shitmed/Medical/Surgery/retractor1.ogg
     endSound:
       path: /Audio/_Shitmed/Medical/Surgery/retractor2.ogg
-  # </Trauma>
   - type: Tag
     tags:
-    - HydroponicsToolClippers # Trauma
-    - PlantSampleTaker
+    - HydroponicsToolClippers # for plantbot construction
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Tools/Hydroponics/clippers.rsi
     state: icon
@@ -61,6 +60,7 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 100
+  - type: BotanySampleTaker
   - type: Tool
     qualities:
     - Shearing
@@ -94,7 +94,6 @@
       types:
         Slash: 10
   - type: Item
-    size: Normal
     # <Trauma>
     shape:
     - 0,0,1,0
@@ -102,6 +101,7 @@
     storedOffset: -5,-5
     storedRotation: -45
     # </Trauma>
+    size: Normal
   - type: Clothing
     sprite: Objects/Tools/Hydroponics/scythe.rsi
     slots:
@@ -120,6 +120,8 @@
   description: A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood.
   components:
   # <Trauma>
+  - type: WeaponClass
+    class: Tool
   - type: Sharp
   - type: BoneSaw
     speed: 0.35
@@ -127,7 +129,7 @@
     startSound:
       path: /Audio/_Shitmed/Medical/Surgery/saw.ogg
   - type: CosmicTransmutable
-    transmuteTo: ScytheCosmicCult
+    transmuteTo: ScytheCosmicCult # erm
   # </Trauma>
   - type: Tool
     qualities:

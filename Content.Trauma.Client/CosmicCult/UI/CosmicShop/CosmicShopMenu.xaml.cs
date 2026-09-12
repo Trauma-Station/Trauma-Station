@@ -1,92 +1,154 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Client.UserInterface.Controls;
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Trauma.Shared.CosmicCult.Prototypes;
+using Robust.Client.Player;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Trauma.Client.CosmicCult.UI.CosmicShop;
 
 [GenerateTypedNameReferences]
 public sealed partial class CosmicShopMenu : FancyWindow
 {
+    [Dependency] private IEntityManager _ent = default!;
+    [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IPrototypeManager _proto = default!;
-    [Dependency] private IGameTiming _timing = default!;
+    private SpriteSystem _sprite = default!;
+    private EntityQuery<CosmicCultComponent> _cultistQuery = default!;
 
-    // All influence prototypes
-    private readonly IEnumerable<InfluencePrototype> _influencePrototypes;
     public Action<ProtoId<InfluencePrototype>>? OnGainButtonPressed;
     public Action? OnLevelUpConfirmed;
     public Action? OnRespecConfirmed;
-    private InfluencePrototype? _selectedInfluence = null;
-    private TimeSpan? _timer;
-    private TimeSpan _respecLockTime = TimeSpan.FromSeconds(0.8);
-    private TimeSpan _respecResetTime = TimeSpan.FromSeconds(4);
+
+    private CosmicCultComponent? _comp;
+    private List<InfluenceButtonContainer> _influenceButtons = new();
+    private InfluenceUIBox _selectedInfo;
+    private int _progressPercent = -1;
+    private int _respecs = -1;
+    private int _influenceCount;
 
     public CosmicShopMenu()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        _influencePrototypes = _proto.EnumeratePrototypes<InfluencePrototype>();
+        _sprite = _ent.System<SpriteSystem>();
+        _cultistQuery = _ent.GetEntityQuery<CosmicCultComponent>();
+
+        _selectedInfo = new InfluenceUIBox(_sprite);
+        _selectedInfo.Visible = false;
+        _selectedInfo.OnGainButtonPressed += () =>
+        {
+            OnGainButtonPressed?.Invoke(_selectedInfo.Proto!.ID);
+        };
+        InfluenceDetails.AddChild(_selectedInfo);
+        SetupInfluences();
+
         LevelUpConfirm.OnPressed += _ => OnLevelUpConfirmed?.Invoke();
-        RespecButton.OnPressed += _ => RespecButtonPressed();
+        RespecButton.OnPressed += _ => OnRespecConfirmed?.Invoke();
 
         CultProgressBar.BackgroundStyleBoxOverride = new StyleBoxFlat { BackgroundColor = new Color(15, 17, 30) };
         CultProgressBar.ForegroundStyleBoxOverride = new StyleBoxFlat { BackgroundColor = new Color(91, 62, 124) };
+
+        Update();
     }
 
-    public void UpdateState(CosmicCultComponent state)
+    private void Update()
     {
-        UpdateBar(state);
-        UpdateEntropy(state);
-        UpdateInfluences(state);
-        UpdateLevelupConfirmation(state);
-        if (_selectedInfluence is { } influence) OpenInfluenceDetails(influence, state);
+        if (_cultistQuery.TryComp(_player.LocalEntity, out _comp))
+            UpdateState(_comp);
+    }
+
+    public void UpdateState(CosmicCultComponent comp)
+    {
+        UpdateBar(comp);
+        UpdateEntropy(comp);
+        UpdateInfluences(comp);
+        UpdateLevelupConfirmation(comp);
+
+        _selectedInfo?.Update(comp);
+    }
+
+    private void SetupInfluences()
+    {
+        foreach (var proto in _proto.EnumeratePrototypes<InfluencePrototype>())
+        {
+            var button = new InfluenceButtonContainer(_sprite, proto);
+            button.OnDetailButtonPressed += () => SelectInfluence(proto);
+            _influenceButtons.Add(button);
+        }
+
+        Control[] containers = [Level0, Level1, Level2, Level3];
+        foreach (var box in _influenceButtons.OrderBy(box => box.Proto.Cost))
+        {
+            containers[box.Proto.Tier].AddChild(box);
+        }
     }
 
     /// <summary>
     ///     Updates the progress bar
     /// </summary>
-    private void UpdateBar(CosmicCultComponent state)
+    private void UpdateBar(CosmicCultComponent comp)
     {
-        var percentComplete = 100f * ((float) (state.TotalEntropy - state.EntropyRequirementOffset) / state.EntropyForNextLevel);
+        var percentComplete = 100f * ((float) (comp.TotalEntropy - comp.EntropyRequirementOffset) / comp.EntropyForNextLevel);
 
         percentComplete = Math.Min(percentComplete, 100f);
 
-        if (state.EntropyLocked) percentComplete = 100f;
+        if (comp.EntropyLocked)
+            percentComplete = 100f;
 
         CultProgressBar.Value = percentComplete;
 
-        ProgressBarPercentage.Text = Loc.GetString("cosmic-shop-interface-progress-bar", ("percentage", percentComplete.ToString("0")));
+        var percent = (int) percentComplete;
+        if (_progressPercent == percent)
+            return;
+
+        _progressPercent = percent;
+        ProgressBarPercentage.Text = Loc.GetString("cosmic-shop-interface-progress-bar", ("percentage", percent));
     }
 
     /// <summary>
     ///     Updates the entropy fields
     /// </summary>
-    private void UpdateEntropy(CosmicCultComponent state)
+    private void UpdateEntropy(CosmicCultComponent comp)
     {
-        var entropyToNextStage = Math.Max(state.EntropyForNextLevel - (state.TotalEntropy - state.EntropyRequirementOffset), 0);
+        var entropyToNextStage = Math.Max(comp.EntropyForNextLevel - (comp.TotalEntropy - comp.EntropyRequirementOffset), 0);
 
-        if (state.EntropyLocked) entropyToNextStage = 0;
+        if (comp.EntropyLocked)
+            entropyToNextStage = 0;
 
-        AvailableEntropy.Text = Loc.GetString("cosmic-shop-interface-entropy-value", ("infused", state.EntropyBudget));
+        // TODO: make these more reactive
+        AvailableEntropy.Text = Loc.GetString("cosmic-shop-interface-entropy-value", ("infused", comp.EntropyBudget));
         EntropyUntilNextStage.Text = Loc.GetString("cosmic-shop-interface-entropy-value", ("infused", entropyToNextStage));
-        CultisttUntilNextCultStage.Text = state.CultistsForNextLevel.ToString();
+        CultistsUntilNextCultStage.Text = comp.CultistsForNextLevel.ToString();
 
-        if (state.RespecsAvailable <= 0 || state.OwnedInfluences.Count <= 0)
+        var respecDirty = false;
+        if (_respecs != comp.RespecsAvailable)
         {
-            RespecText.Text = Loc.GetString(state.RespecsAvailable <= 0 ? "cosmic-shop-interface-respec-no-rift" : "cosmic-shop-interface-respec-no-influence");
-            RespecButton.Disabled = true;
+            _respecs = comp.RespecsAvailable;
+            respecDirty = true;
+        }
+        if (_influenceCount != comp.OwnedInfluences.Count)
+        {
+            _influenceCount = comp.OwnedInfluences.Count;
+            respecDirty = true;
+        }
+
+        if (!respecDirty)
+            return;
+
+        RespecButton.Disabled = comp.RespecsAvailable <= 0 || comp.OwnedInfluences.Count <= 0;
+        if (RespecButton.Disabled)
+        {
+            RespecText.Text = Loc.GetString(comp.RespecsAvailable <= 0 ? "cosmic-shop-interface-respec-no-rift" : "cosmic-shop-interface-respec-no-influence");
             RespecButton.Modulate = Color.Gray;
         }
         else
         {
-            if (_timer != null) return;
-            RespecText.SetMessage(Loc.GetString("cosmic-shop-interface-respec-amount", ("count", state.RespecsAvailable)));
-            RespecButton.Disabled = false;
+            RespecText.Text = Loc.GetString("cosmic-shop-interface-respec-amount", ("count", comp.RespecsAvailable));
             RespecButton.Modulate = Color.White;
         }
     }
@@ -94,43 +156,35 @@ public sealed partial class CosmicShopMenu : FancyWindow
     /// <summary>
     ///    Update all the influence thingies
     /// </summary>
-    private void UpdateInfluences(CosmicCultComponent state)
+    private void UpdateInfluences(CosmicCultComponent comp)
     {
-        var influenceButtons = new List<InfluenceButtonContainer>();
-        foreach (var influenceProto in _influencePrototypes)
+        foreach (var box in _influenceButtons)
         {
-            var uiBoxState = GetUIBoxStateForInfluence(influenceProto, state);
-            var influenceButton = new InfluenceButtonContainer(influenceProto, uiBoxState);
-            influenceButton.OnDetailButtonPressed += () => OpenInfluenceDetails(influenceProto, state);
-            influenceButtons.Add(influenceButton);
+            box.Update(comp);
         }
-
-        Control[] containers = [Level0, Level1, Level2, Level3];
-        foreach (var container in containers)
-            container.RemoveAllChildren();
-        foreach (var box in influenceButtons.OrderBy(box => box.Proto.Cost))
-            containers[box.Proto.Tier].AddChild(box);
     }
 
-    private void UpdateLevelupConfirmation(CosmicCultComponent state)
+    private void UpdateLevelupConfirmation(CosmicCultComponent comp)
     {
-        LevelUpConfirmation.Visible = state.LevelUpAwaitingConfirmation;
-        if (!state.LevelUpAwaitingConfirmation) return;
+        LevelUpConfirmation.Visible = comp.LevelUpAwaitingConfirmation;
+        if (!comp.LevelUpAwaitingConfirmation)
+            return;
+
         var msg = new FormattedMessage();
         msg.AddMarkupOrThrow(Loc.GetString("cosmic-shop-interface-consequences"));
         msg.PushNewline();
-        msg.AddMarkupOrThrow(Loc.GetString("cosmic-shop-interface-consequence-level" + (state.CurrentLevel + 1).ToString()));
+        msg.AddMarkupOrThrow(Loc.GetString("cosmic-shop-interface-consequence-level" + (comp.CurrentLevel + 1).ToString()));
         // It's hardcoded to check if next tier is tier 2, because tier 2 no longer has any effects, and I'm too lazy to make a generic check for that
-        // This will be discarded in rework part 2 anyway.
-        if ( state.CultistsForNextLevel <= 1 && state.CurrentLevel == state.CultTier && state.CultTier != 1) // Tierup on normal conditions
+        // This will be discarded in rework part 2 anyway. (lol)
+        if (comp.CultistsForNextLevel <= 1 && comp.CurrentLevel == comp.CultTier && comp.CultTier != 1) // Tierup on normal conditions
         {
             msg.PushNewline();
-            msg.AddMarkupOrThrow(Loc.GetString("cosmic-shop-interface-consequence-tier" + (state.CultTier + 1).ToString()));
+            msg.AddMarkupOrThrow(Loc.GetString("cosmic-shop-interface-consequence-tier" + (comp.CultTier + 1).ToString()));
         }
-        if (state.CurrentLevel > state.CultTier && state.CultTier != 1) // Speedrun tierup
+        if (comp.CurrentLevel > comp.CultTier && comp.CultTier != 1) // Speedrun tierup
         {
             msg.PushNewline();
-            msg.AddMarkupOrThrow(Loc.GetString("cosmic-shop-interface-consequence-tier" + (state.CurrentLevel).ToString()));
+            msg.AddMarkupOrThrow(Loc.GetString("cosmic-shop-interface-consequence-tier" + (comp.CurrentLevel).ToString()));
         }
         ConsequenceLabel.SetMessage(msg, Color.FromHex("#4CA7AD"));
     }
@@ -138,71 +192,17 @@ public sealed partial class CosmicShopMenu : FancyWindow
     /// <summary>
     ///    Show all the details of the selected influence
     /// </summary>
-    private void OpenInfluenceDetails(InfluencePrototype influenceProto, CosmicCultComponent state)
+    private void SelectInfluence(InfluencePrototype proto)
     {
-        _selectedInfluence = influenceProto;
-        InfluenceInfoContainer.RemoveAllChildren();
-        var uiBoxState = GetUIBoxStateForInfluence(influenceProto, state);
-        var influenceBox = new InfluenceUIBox(influenceProto, uiBoxState);
-        InfluenceInfoContainer.AddChild(influenceBox);
-        influenceBox.OnGainButtonPressed += () => OnGainButtonPressed?.Invoke(influenceProto.ID);
-    }
-
-    private InfluenceUIBox.InfluenceUIBoxState GetUIBoxStateForInfluence(InfluencePrototype influence, CosmicCultComponent state)
-    {
-
-        var unlocked = state.UnlockedInfluences.Contains(influence.ID);
-        var owned = state.OwnedInfluences.Contains(influence);
-
-        //more verbose than it needs to be, but it reads nicer
-        if (owned)
-            return InfluenceUIBox.InfluenceUIBoxState.Owned;
-
-        //TODO: dependency check when skill trees are real
-
-        //if it's unlocked, do we have enough entropy to buy it?
-        if (unlocked)
-            return influence.Cost > state.EntropyBudget
-                ? InfluenceUIBox.InfluenceUIBoxState.UnlockedAndNotEnoughEntropy
-                : InfluenceUIBox.InfluenceUIBoxState.UnlockedAndEnoughEntropy;
-
-        return InfluenceUIBox.InfluenceUIBoxState.Locked;
-    }
-
-    private void RespecButtonPressed()
-    {
-        if (_timer == null)
-        {
-            _timer = _timing.CurTime;
-            RespecButton.Modulate = Color.Red;
-            RespecButton.Text = Loc.GetString("cosmic-shop-interface-respec-confirmation");
-            RespecButton.Disabled = true; // Prevent accidental double-clicking for .5 seconds
-        }
-        else
-        {
-            _timer = null;
-            OnRespecConfirmed?.Invoke();
-            RespecButton.Disabled = true; // Lock the button until next state arrives
-            RespecButton.Modulate = Color.Gray;
-            RespecButton.Text = Loc.GetString("cosmic-shop-interface-respec-button");
-        }
+        _selectedInfo.Visible = true;
+        _selectedInfo.SetProto(proto);
+        if (_comp is { } comp)
+            _selectedInfo.Update(comp);
     }
 
     protected override void FrameUpdate(FrameEventArgs args)
     {
-        if (!VisibleInTree || _timer is not { } timer)
-        {
-            return;
-        }
-        if (timer + _respecLockTime <= _timing.CurTime)
-        {
-            RespecButton.Disabled = false;
-        }
-        if (timer + _respecResetTime <= _timing.CurTime)
-        {
-            RespecButton.Modulate = Color.White;
-            RespecButton.Text = Loc.GetString("cosmic-shop-interface-respec-button");
-            _timer = null;
-        }
+        if (VisibleInTree)
+            Update();
     }
 }

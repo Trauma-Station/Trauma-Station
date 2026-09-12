@@ -17,12 +17,6 @@ public sealed class SurgeryCVars : CVars
         CVarDef.Create("surgery.can_operate_on_self", true, CVar.SERVER | CVar.REPLICATED);
 
     /// <summary>
-    /// The name is self-explanatory
-    /// </summary>
-    public static readonly CVarDef<float> MaxWoundSeverity =
-        CVarDef.Create("wounding.max_wound_severity", 200f, CVar.SERVER | CVar.REPLICATED);
-
-    /// <summary>
     /// The same as above
     /// </summary>
     public static readonly CVarDef<float> WoundScarChance =

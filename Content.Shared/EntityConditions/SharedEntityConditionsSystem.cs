@@ -146,13 +146,13 @@ public abstract partial class EntityCondition
 /// </summary>
 /// <param name="Condition">The Condition we're checking</param>
 [ByRefEvent]
-[DataRecord]
+//[DataRecord] // Trauma - yml has no reason to store these
 public partial record struct EntityConditionEvent<T>(T Condition, EntityUid? SourceEnt) where T : EntityConditionBase<T>
 {
     /// <summary>
     /// The result of our check, defaults to false if nothing handles it.
     /// </summary>
-    [DataField]
+    //[DataField] // Trauma
     public bool Result;
 
     /// <summary>

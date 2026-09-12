@@ -33,16 +33,6 @@ public sealed partial class CosmicMonumentSystem : EntitySystem
     private HashSet<Entity<MonumentSpawnMarkComponent>> _nearbyMarks = [];
     private HashSet<Entity<FixturesComponent>> _blocking = [];
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicCultComponent, EventCosmicPlaceMonument>(OnCosmicPlaceMonument);
-        SubscribeLocalEvent<MonumentSpawnMarkComponent, InteractHandEvent>(OnActivate);
-        SubscribeLocalEvent<MonumentOnDespawnComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<EmergencyShuttleDockedEvent>(OnEvacDocked);
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -60,17 +50,19 @@ public sealed partial class CosmicMonumentSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnStartup(Entity<MonumentOnDespawnComponent> ent, ref ComponentStartup args)
     {
         ent.Comp.SpawnTimer = _timing.CurTime + ent.Comp.SpawnTime;
     }
 
-    private void OnCosmicPlaceMonument(Entity<CosmicCultComponent> ent, ref EventCosmicPlaceMonument args)
+    [SubscribeLocalEvent]
+    private void OnCosmicPlaceMonument(Entity<CosmicCultComponent> ent, ref CosmicPlaceMonumentEvent args)
     {
-        if (!TryComp<MonumentPlacementActionComponent>(args.Action, out var monuPlacement)
-        || !TryComp<CosmicCultComponent>(args.Performer, out var cultComp)
-        || _cultRule.AssociatedGamerule(ent) is not { } cult
-        || args.Handled)
+        if (!TryComp<MonumentPlacementActionComponent>(args.Action, out var monuPlacement) ||
+            !TryComp<CosmicCultComponent>(args.Performer, out var cultComp) ||
+            _cultRule.AssociatedGamerule(ent) is not { } rule ||
+            args.Handled)
             return;
 
         args.Handled = true;
@@ -97,7 +89,7 @@ public sealed partial class CosmicMonumentSystem : EntitySystem
         monuPlacement.MarkUid = newMark;
         _cultRule.TransferCultAssociation(ent, newMark);
         EnsureComp<MonumentSpawnMarkComponent>(newMark, out var markComp);
-        markComp.ApprovalsRequired = (int) Math.Ceiling(cult.Comp.TotalCult / 2f);
+        markComp.ApprovalsRequired = (int) Math.Ceiling(rule.Comp.TotalCult / 2f);
 
         ToggleMarkApproval((newMark, markComp), (args.Performer, cultComp)); // Automatically approve your own mark
     }
@@ -150,6 +142,7 @@ public sealed partial class CosmicMonumentSystem : EntitySystem
             QueueDel(mark);
     }
 
+    [SubscribeLocalEvent]
     private void OnActivate(Entity<MonumentSpawnMarkComponent> ent, ref InteractHandEvent args)
     {
         if (!TryComp<CosmicCultComponent>(args.User, out var cultComp)) return;
@@ -159,6 +152,7 @@ public sealed partial class CosmicMonumentSystem : EntitySystem
     /// <summary>
     /// Makes it impossible to place or activate a monument if evac docks to the station. Unless the monument is already active, in which case the evac shouldn't come anyway.
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnEvacDocked(ref EmergencyShuttleDockedEvent args)
     {
         var query = EntityQueryEnumerator<MonumentComponent>(); // Remove any existing monuments

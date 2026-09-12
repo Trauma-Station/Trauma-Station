@@ -77,7 +77,7 @@
         icon:
           sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
           state: icon
-      - tag: Bible
+      - component: Bible
         name: construction-graph-tag-bible
         icon:
           sprite: Objects/Specific/Chapel/bible.rsi

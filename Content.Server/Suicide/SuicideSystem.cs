@@ -1,6 +1,4 @@
 // <Trauma>
-using Content.Goobstation.Shared.Possession;
-using Content.Trauma.Common.Silicon;
 using Content.Trauma.Common.Xenomorphs;
 // </Trauma>
 using Content.Server.Ghost;
@@ -26,7 +24,6 @@ namespace Content.Server.Suicide;
 public sealed partial class SuicideSystem : SharedSuicideSystem
 {
     // <Trauma>
-    [Dependency] private CommonSiliconSystem _silicon = default!;
     [Dependency] private CommonXenomorphSystem _xeno = default!;
     // </Trauma>
     [Dependency] private EntityLookupSystem _entityLookupSystem = default!;
@@ -57,8 +54,7 @@ public sealed partial class SuicideSystem : SharedSuicideSystem
     public bool Suicide(EntityUid victim)
     {
         // Can't suicide if we're already dead
-        if (!TryComp<MobStateComponent>(victim, out var mobState) || _mobState.IsDead(victim, mobState)
-            || HasComp<PossessedComponent>(victim)) // Goob - TODO: make this an event handler
+        if (!TryComp<MobStateComponent>(victim, out var mobState) || _mobState.IsDead(victim, mobState))
             return false;
 
         _adminLogger.Add(LogType.Mind, $"{ToPrettyString(victim):player} is attempting to suicide");
@@ -179,10 +175,7 @@ public sealed partial class SuicideSystem : SharedSuicideSystem
             return;
         }
 
-        // <Trauma> - use slash for mobs and shock for clanker
-        args.DamageType ??= _silicon.IsSilicon(victim)
-            ? "Shock" : "Slash";
-        // </Trauma>
+        args.DamageType ??= "Slash";
         ApplyLethalDamage(victim, args.DamageType);
         args.Handled = true;
     }

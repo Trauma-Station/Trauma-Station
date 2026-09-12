@@ -102,14 +102,14 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 
         if (component.CurrentBounties.Count == 0)
         {
-            RefreshBounties(uid, component, now, component.FirstRefreshTime);
+            RefreshBounties(uid, component, now);
             return;
         }
 
         if (component.NextRefresh > now)
             return;
 
-        RefreshBounties(uid, component, now, component.RefreshTime);
+        RefreshBounties(uid, component, now);
     }
 
     protected override void Started(EntityUid uid,
@@ -138,7 +138,8 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 
         foreach (var listing in store.LastAvailableListings)
         {
-            if (!listing.OriginalCost.TryGetValue(tc, out var cost) || listing.ProductEntity == null)
+            if (!listing.OriginalCost.TryGetValue(tc, out var cost) || cost > comp.MaxCost ||
+                listing.ProductEntity == null)
                 continue;
 
             var difficulty = SpyBountyDifficulty.Easy;
@@ -160,7 +161,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
         }
     }
 
-    private void RefreshBounties(EntityUid uid, SpyRuleComponent rule, TimeSpan curTime, TimeSpan refreshTime)
+    private void RefreshBounties(EntityUid uid, SpyRuleComponent rule, TimeSpan curTime)
     {
         foreach (var bounty in rule.CurrentBounties)
         {
@@ -179,7 +180,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 
         rule.CachedRewards.Clear();
         rule.CurrentBounties.Clear();
-        rule.NextRefresh = curTime + refreshTime;
+        rule.NextRefresh = curTime + rule.RefreshTime;
 
         if (rule.BountyPool is not { } pool || pool.Count < rule.NumBounties)
             GenerateBountyPool(rule);

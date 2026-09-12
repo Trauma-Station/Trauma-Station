@@ -7,6 +7,7 @@ using Content.Medical.Common.Targeting;
 
 namespace Content.Trauma.Server.CosmicCult.EntitySystems;
 
+// TODO: convert to a status effect...
 /// <summary>
 /// Makes the person with this component take damage over time.
 /// Used for status effect.
@@ -16,12 +17,7 @@ public sealed partial class CosmicEntropyDegenSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private DamageableSystem _damageable = default!;
 
-    public override void Initialize()
-    {
-        SubscribeLocalEvent<CosmicDegenComponent, ComponentStartup>(OnStartup);
-    }
-
-
+    [SubscribeLocalEvent]
     private void OnStartup(EntityUid uid, CosmicDegenComponent comp, ref ComponentStartup args)
     {
         comp.CheckTimer = _timing.CurTime + comp.CheckWait;

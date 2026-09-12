@@ -39,7 +39,6 @@
       speechVerb: Robotic
       speechSounds: Borg
     - type: Silicon
-      entityType: Player
       batteryPowered: false
       chargeThresholdMid: null
       chargeThresholdLow: null
@@ -119,10 +118,11 @@
     - type: Dna
     - type: Absorbable
     - type: Mutatable
+    - type: CanHostGuardian
     - type: Fingerprint
     - type: Perishable
-    - type: Hunger
-    - type: Thirst
+    - type: Satiation
+      satiations: {}
     - type: FootprintOwner
     - type: ItemSlots # No infinite batteries.
 
@@ -145,8 +145,6 @@
     clonedItemWhitelist:
       components:
       - Clothing
-    removedComponents:
-    - type: CanHostGuardian
     userBlacklist:
       components:
       - Zombie

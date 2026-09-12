@@ -214,8 +214,6 @@
     actions:
     - ActionGravityJump
   - type: ItemActionGrant
-    actions:
-    - ActionGravityJump
     activeIfWorn: true
     restrictedSlots:
     - FEET

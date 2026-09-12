@@ -162,7 +162,7 @@ public sealed partial class EventHereticNightwatcherRebirth : InstantActionEvent
     {
         DamageDict =
         {
-            { "Heat", 20 },
+            { "Heat", 30 },
         },
     };
 
@@ -292,8 +292,6 @@ public sealed partial class HereticBladePassiveRiposteEvent : HereticKnowledgeEv
 
 // lock
 public sealed partial class EventHereticShapeshift : InstantActionEvent;
-
-public sealed partial class HereticXRayVisionEvent : HereticKnowledgeEvent;
 
 public sealed partial class HereticAscensionLockEvent : HereticKnowledgeEvent;
 
@@ -506,12 +504,10 @@ public sealed partial class EventHereticRealignment : InstantActionEvent
 public abstract partial class InstantWorldTargetActionEvent : WorldTargetActionEvent;
 
 [Serializable, NetSerializable]
-public sealed class LaserBeamEndpointPositionEvent(NetEntity uid, MapCoordinates coords, bool shouldFire)
+public sealed class LaserBeamEndpointPositionEvent(NetCoordinates coords, bool shouldFire)
     : EntityEventArgs
 {
-    public NetEntity Uid = uid;
-
-    public MapCoordinates Coordinates = coords;
+    public NetCoordinates Coordinates = coords;
 
     public bool ShouldFire = shouldFire;
 }
@@ -525,4 +521,7 @@ public partial class HereticKnowledgeEvent : EntityEventArgs
 
     [DataField]
     public ComponentRegistry AddedComponents = new();
+
+    [DataField]
+    public List<EntProtoId> StatusEffects = new();
 }

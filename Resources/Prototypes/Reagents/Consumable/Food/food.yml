@@ -8,9 +8,12 @@
   flavor: nutriment
   color: "#24591F"
   metabolisms:
-    Metabolites:
+    Digestion:
+      metabolismRate: 1
       effects:
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
+        factor: 3
   plantMetabolism:
   - !type:PlantAdjustNutrition
     amount: 1.5
@@ -27,8 +30,12 @@
   flavor: vitamin
   color: "#D3D3D3"
   metabolisms:
-    Metabolites: #This makes it not compete with medicines, a large bonus for something that can heal
+    Digestion: #This makes it not compete with medicines, a large bonus for something that can heal
       effects:
+      # <Trauma>
+      - !type:ModifyBloodLevel # Moved here from nutriment.
+        amount: 0.25
+      # </Trauma>
       - !type:EvenHealthChange
         probability: 1 # Trauma - was 0.5
         damage:
@@ -36,10 +43,9 @@
           Burn: -0.7 # Trauma - was -0.5
       # Helps you stop bleeding to an extent.
       - !type:ModifyBleed
-        amount: -0.35 # Trauma - was 0.25.
-      - !type:ModifyBloodLevel # Trauma - Moved here from nutriment.
-        amount: 0.25
-      - !type:SatiateHunger #Numbers are balanced with this in mind + it helps limit how much healing you can get from food
+        amount: -0.35 # Trauma - was -0.25
+      - !type:Satiate #Numbers are balanced with this in mind + it helps limit how much healing you can get from food
+        satiationType: Hunger
   # Lets plants benefit too
   plantMetabolism:
   - !type:PlantAdjustNutrition
@@ -57,15 +63,16 @@
   flavor: protein
   color: "#FFFFE5"
   metabolisms:
-    Metabolites:
+    Digestion:
       effects:
       - !type:EvenHealthChange
         probability: 0.1 # Trauma - was 0.5
         damage:
           Brute: -0.8 # Trauma - was -0.4
       - !type:ModifyBloodLevel
-        amount: 2 # Goob
-      - !type:SatiateHunger
+        amount: 2 # Trauma - was 1
+      - !type:Satiate
+        satiationType: Hunger
   pricePerUnit: 3
 
 - type: reagent
@@ -78,9 +85,10 @@
   color: white
   meltingPoint: 146.0
   metabolisms:
-    Metabolites:
+    Digestion:
       effects:
-      - !type:SatiateHunger
+      - !type:Satiate
+        satiationType: Hunger
         conditions:
         - !type:ReagentCondition #Only satiates when eaten with nutriment
           reagent: Nutriment

@@ -114,7 +114,7 @@
     sound: /Audio/_DV/CosmicCult/ability_nova_impact.ogg
     whitelist:
       components:
-      - MobState
+      - HumanoidProfile
     damage:
       types:
         Asphyxiation: 18

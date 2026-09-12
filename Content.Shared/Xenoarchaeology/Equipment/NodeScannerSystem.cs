@@ -1,5 +1,5 @@
 using Content.Shared.Interaction;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Verbs;
 using Content.Shared.Xenoarchaeology.Artifact.Components;
 using Content.Shared.Xenoarchaeology.Equipment.Components;
@@ -34,6 +34,13 @@ public sealed partial class NodeScannerSystem : EntitySystem
             connected.NextUpdate = _timing.CurTime + connected.LinkUpdateInterval;
 
             var attachedArtifact = connected.AttachedTo;
+            // <Trauma>
+            if (TerminatingOrDeleted(attachedArtifact))
+            {
+                RemCompDeferred(uid, connected);
+                continue;
+            }
+            // </Trauma>
             var artifactCoordinates = Transform(attachedArtifact).Coordinates;
             if (!_transform.InRange(artifactCoordinates, transform.Coordinates, scanner.MaxLinkedRange))
             {
@@ -80,8 +87,7 @@ public sealed partial class NodeScannerSystem : EntitySystem
         EntityUid actor
     )
     {
-        if (TryComp(device, out UseDelayComponent? useDelay)
-            && !_useDelay.TryResetDelay((device, useDelay), true))
+        if (!_useDelay.TryResetDelay(device.Owner, true))
             return;
 
         var connected = EnsureComp<NodeScannerConnectedComponent>(device);

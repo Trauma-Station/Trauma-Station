@@ -14,13 +14,6 @@ public sealed partial class CosmicStrideSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicCultComponent, EventCosmicStride>(OnCosmicImposition);
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -35,7 +28,8 @@ public sealed partial class CosmicStrideSystem : EntitySystem
         }
     }
 
-    private void OnCosmicImposition(Entity<CosmicCultComponent> uid, ref EventCosmicStride args)
+    [SubscribeLocalEvent]
+    private void OnCosmicImposition(Entity<CosmicCultComponent> uid, ref CosmicStrideEvent args)
     {
         EnsureComp<InfluenceStrideComponent>(uid, out var comp);
         comp.Expiry = _timing.CurTime + uid.Comp.CosmicStrideDuration;

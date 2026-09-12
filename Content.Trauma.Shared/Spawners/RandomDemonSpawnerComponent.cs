@@ -21,4 +21,10 @@ public sealed partial class RandomDemonSpawnerComponent : Component
     /// </summary>
     [DataField(required: true)]
     public List<EntProtoId> Demons = new();
+
+    /// <summary>
+    /// When constructed, set to true if it fails to roll <see cref="HostileChance"/>.
+    /// </summary>
+    [DataField]
+    public bool Familiar;
 }

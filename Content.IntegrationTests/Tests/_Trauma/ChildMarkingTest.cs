@@ -5,7 +5,6 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// <summary>
 /// Make sure child markings exist for markings that have them defined
 /// </summary>
-[TestFixture]
 public sealed class ChildMarkingTest : GameTest
 {
     [Test]

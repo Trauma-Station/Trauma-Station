@@ -4,8 +4,8 @@ meta:
   engineVersion: 286.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/05/2026 17:28:25
-  entityCount: 23240
+  time: 08/20/2026 17:21:05
+  entityCount: 23242
 maps:
 - 1
 grids:
@@ -11421,7 +11421,7 @@ entities:
       pos: -1.5,18.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -26367.033
+      secondsUntilStateChange: -26437.957
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -11918,7 +11918,7 @@ entities:
       pos: 40.5,11.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -30112.857
+      secondsUntilStateChange: -30183.781
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -11955,7 +11955,7 @@ entities:
       pos: 41.5,8.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -26961.398
+      secondsUntilStateChange: -27032.322
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -65250,7 +65250,7 @@ entities:
       pos: 12.5,-12.5
     - type: Door
       state: Closing
-      secondsUntilStateChange: -25329.365
+      secondsUntilStateChange: -25400.29
     - type: Firelock
       emergencyCloseCooldown: 1795.33154
   - uid: 10392
@@ -102429,6 +102429,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -37.5,55.5
+  - uid: 23241
+    components:
+    - type: Transform
+      parent: 2
+      pos: -18.5,-21.5
 - proto: MaintenanceFluffSpawner
   entities:
   - uid: 15805
@@ -120778,6 +120783,14 @@ entities:
     - type: Transform
       parent: 2
       pos: -16.5,-16.5
+- proto: StationAiFixerComputer
+  entities:
+  - uid: 23242
+    components:
+    - type: Transform
+      parent: 2
+      rot: 1.5707963267948966 rad
+      pos: 25.5,14.5
 - proto: StationAiUploadComputer
   entities:
   - uid: 18815

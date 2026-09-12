@@ -45,6 +45,8 @@ public sealed partial class ComplexJointVisualsData(
 
     public bool CollisionIgnoreTarget = true;
 
+    public bool CollisionIgnoreParent;
+
     public bool ReturnOnFirstHit;
 
     public CollisionGroup CollisionMask = CollisionGroup.Opaque;

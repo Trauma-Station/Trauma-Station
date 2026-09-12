@@ -1,5 +1,5 @@
 using Content.Server.Power.Components;
-using Content.Goobstation.Shared.Communications;
+using Content.Goobstation.Common.Communications;
 using Robust.Shared.Map;
 using System.Linq;
 

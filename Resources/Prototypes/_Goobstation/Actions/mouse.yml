@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BaseAction
+  parent: ActionAnimalLayEgg
   id: MouseMultiply
   name: Multiply
   description: Uses hunger to multiply.
@@ -14,8 +14,6 @@
     useDelay: 1
     sound: !type:SoundPathSpecifier
       path: /Audio/Effects/pop.ogg
-  - type: InstantAction
-    event: !type:EggLayInstantActionEvent
 
 # not exclusive to mice but they're the most common ones that would end up in this situation :)
 - type: entity

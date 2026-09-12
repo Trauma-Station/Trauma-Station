@@ -23,7 +23,6 @@ public sealed partial class CircuitEditorSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CircuitEditorComponent, BeforeActivatableUIOpenEvent>(OnUIOpen);
         SubscribeLocalEvent<CircuitEditorComponent, EntInsertedIntoContainerMessage>(OnCircuitChanged);
         SubscribeLocalEvent<CircuitEditorComponent, EntRemovedFromContainerMessage>(OnCircuitChanged);
         Subs.BuiEvents<CircuitEditorComponent>(CircuitEditorUiKey.Key, subs =>
@@ -38,6 +37,7 @@ public sealed partial class CircuitEditorSystem : EntitySystem
         });
     }
 
+    [SubscribeLocalEvent]
     private void OnUIOpen(Entity<CircuitEditorComponent> ent, ref BeforeActivatableUIOpenEvent args)
     {
         UpdateUI(ent);

@@ -3,10 +3,11 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Goobstation.Shared.Silicon.Bots;
-using Content.Server.Botany.Components;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN.PrimitiveTasks;
 using Content.Server.NPC.Pathfinding;
+using Content.Shared.Botany.Components;
+using Content.Shared.Botany.Systems;
 using Content.Shared.Emag.Components;
 using Content.Shared.Interaction;
 
@@ -17,7 +18,9 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
     [Dependency] private IEntityManager _ent = default!;
     private EntityLookupSystem _lookup = default!;
     private PathfindingSystem _pathfinding = default!;
+    private PlantHolderSystem _holder = default!;
     private EntityQuery<EmaggedComponent> _emaggedQuery = default!;
+    private EntityQuery<PlantHolderComponent> _holderQuery = default!;
 
     /// <summary>
     /// Determines how close the bot needs to be to service a tray
@@ -27,16 +30,13 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
     /// <summary>
     /// Target entity to service
     /// </summary>
-    [DataField(required: true)]
-    public string TargetKey = string.Empty;
+    public const string TargetKey = "PlantTarget";
 
     /// <summary>
     /// Target entitycoordinates to move to.
     /// </summary>
     [DataField(required: true)]
     public string TargetMoveKey = string.Empty;
-
-    private HashSet<Entity<PlantHolderComponent>> _targets = new();
 
     public override void Initialize(IEntitySystemManager sysManager)
     {
@@ -46,6 +46,28 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
         _pathfinding = sysManager.GetEntitySystem<PathfindingSystem>();
 
         _emaggedQuery = _ent.GetEntityQuery<EmaggedComponent>();
+        _holderQuery = _ent.GetEntityQuery<PlantHolderComponent>();
+    }
+
+    private bool ShouldServiceTray(Entity<PlantTrayComponent> tray)
+    {
+        // fixing small problems in the tray
+        if (tray.Comp.WaterLevel <= PlantbotServiceOperator.RequiredWaterLevelToService ||
+            tray.Comp.WeedLevel >= PlantbotServiceOperator.RequiredWeedsAmountToWeed)
+            return true;
+
+        // harvesting the plant
+        return tray.Comp.PlantEntity is { } plant &&
+            _holderQuery.TryComp(plant, out var holder) &&
+            holder.ReadyForHarvest;
+    }
+
+    private bool ShouldKillTray(Entity<PlantTrayComponent> tray)
+    {
+        if (tray.Comp.PlantEntity is not { } plant || _holder.IsDead(plant))
+            return false;
+
+        return tray.Comp.WaterLevel > 0f;
     }
 
     public override async Task<(bool Valid, Dictionary<string, object>? Effects)> Plan(NPCBlackboard blackboard,
@@ -56,11 +78,10 @@ public sealed partial class PickNearbyServicableHydroponicsTrayOperator : HTNOpe
         var emagged = _emaggedQuery.HasComp(owner);
 
         var coords = _ent.GetComponent<TransformComponent>(owner).Coordinates;
-        _targets.Clear();
-        _lookup.GetEntitiesInRange(coords, Range, _targets);
-        foreach (var target in _targets)
+        var targets = _lookup.GetEntitiesInRange<PlantTrayComponent>(coords, Range, LookupFlags.Dynamic | LookupFlags.Static);
+        foreach (var target in targets)
         {
-            if (target.Comp is { WaterLevel: >= PlantbotServiceOperator.RequiredWaterLevelToService, WeedLevel: <= PlantbotServiceOperator.RequiredWeedsAmountToWeed, Harvest: false } && (!emagged || target.Comp.Dead || target.Comp.WaterLevel <= 0f))
+            if (!(emagged ? ShouldKillTray(target) : ShouldServiceTray(target)))
                 continue;
 
             //Needed to make sure it doesn't sometimes stop right outside it's interaction range

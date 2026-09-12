@@ -2,7 +2,6 @@
 
 - type: constructionGraph
   id: Friedeggs
-  start: start
   graph:
   - node: start
     edges:
@@ -31,7 +30,6 @@
 
 - type: constructionGraph
   id: EggToast
-  start: start
   graph:
 
   - node: start

@@ -19,7 +19,6 @@ using Content.Shared.Body;
 using Content.Shared.CombatMode;
 using Content.Shared.Coordinates;
 using Content.Shared.EntityEffects;
-using Content.Shared.Examine;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Gibbing;
 using Content.Shared.Hands;
@@ -91,15 +90,6 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
     [Dependency] private SharedEntityEffectsSystem _effect = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        UpdatesAfter.Add(typeof(HolyFlammableSystem));
-        SubscribeLocalEvent<GhoulComponent, MapInitEvent>(OnGhoulInit, after: [typeof(InitialBodySystem)]);
-        SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnRisenMapInit, after: [typeof(InitialBodySystem)]);
-    }
-
     [SubscribeLocalEvent]
     private void OnBeforeBeamDamaged(Entity<HereticMinionComponent> ent, ref BeforeContinuousBeamDamagedEvent args)
     {
@@ -145,6 +135,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         RefreshShatteredHands(ent);
     }
 
+    [SubscribeLocalEvent(after: [typeof(InitialBodySystem)])]
     private void OnRisenMapInit(Entity<ShatteredRisenComponent> ent, ref MapInitEvent args)
     {
         RefreshShatteredHands(ent);
@@ -221,12 +212,6 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
 
         args.Append(start);
         args.Append(Loc.GetString("heretic-ghoul-briefing-end"));
-    }
-
-    [SubscribeLocalEvent]
-    private void OnWeaponExamine(Entity<GhoulWeaponComponent> ent, ref ExaminedEvent args)
-    {
-        args.PushMarkup(Loc.GetString(ent.Comp.ExamineMessage));
     }
 
     public void SetBoundHeretic(Entity<HereticMinionComponent?, HTNComponent?> ent,
@@ -470,6 +455,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         _antag.SendBriefing(ent, brief, Color.MediumPurple, sound);
     }
 
+    [SubscribeLocalEvent(after: [typeof(InitialBodySystem)])]
     private void OnGhoulInit(Entity<GhoulComponent> ent, ref MapInitEvent args)
     {
         GhoulifyEntity(ent);
@@ -491,15 +477,6 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
     private void OnTakeGhostRole(Entity<HereticMinionComponent> ent, ref TakeGhostRoleEvent args)
     {
         SendBriefing(ent.AsNullable());
-    }
-
-    [SubscribeLocalEvent]
-    private void OnExamine(Entity<GhoulComponent> ent, ref ExaminedEvent args)
-    {
-        if (ent.Comp.ExamineMessage == null)
-            return;
-
-        args.PushMarkup(Loc.GetString(ent.Comp.ExamineMessage));
     }
 
     private void GiveGhoulWeapon(Entity<GhoulComponent> ent)

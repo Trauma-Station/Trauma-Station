@@ -5,7 +5,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Stacks;
 using Content.Shared.Store.Components;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
@@ -311,20 +311,17 @@ public abstract partial class SharedHereticRitualSystem
             RaiseLocalEvent(mind, ref ev2);
         }
 
-        var dict = new Dictionary<string, FixedPoint2>()
+        _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp), null, new()
         {
             { SharedHereticSystem.Currency, knowledgeGain },
             { SharedHereticSystem.SideCurrency, sideknowledgeGain },
-        };
-
-        _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp), null, dict);
+        });
 
         heretic.SacrificeTracker++;
         if (heretic.MaxSacrificeInfluenceSpawn < heretic.SacrificeTracker)
             return;
 
-        var influenceEv = new SpawnHereticInfluenceEvent();
-        RaiseLocalEvent(ref influenceEv);
+        SpawnHereticInfluence();
     }
 
     private void OnLookup(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<LookupRitualEffect> args)

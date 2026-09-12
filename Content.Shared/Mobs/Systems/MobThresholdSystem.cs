@@ -25,7 +25,6 @@ public sealed partial class MobThresholdSystem : EntitySystem
         SubscribeLocalEvent<MobThresholdsComponent, ComponentShutdown>(MobThresholdShutdown);
         SubscribeLocalEvent<MobThresholdsComponent, ComponentStartup>(MobThresholdStartup);
         SubscribeLocalEvent<MobThresholdsComponent, DamageChangedEvent>(OnDamaged);
-        SubscribeLocalEvent<MobThresholdsComponent, UpdateMobStateEvent>(OnUpdateMobState);
         SubscribeLocalEvent<MobThresholdsComponent, MobStateChangedEvent>(OnThresholdsMobState);
     }
 
@@ -38,7 +37,6 @@ public sealed partial class MobThresholdSystem : EntitySystem
         }
         args.State = new MobThresholdsComponentState(thresholds,
             component.TriggersAlerts,
-            component.CurrentThresholdState,
             component.StateAlertDict,
             component.ShowOverlays,
             component.AllowRevives);
@@ -50,7 +48,6 @@ public sealed partial class MobThresholdSystem : EntitySystem
             return;
         component.Thresholds = new SortedDictionary<FixedPoint2, MobState>(state.UnsortedThresholds);
         component.TriggersAlerts = state.TriggersAlerts;
-        component.CurrentThresholdState = state.CurrentThresholdState;
         component.AllowRevives = state.AllowRevives;
     }
 
@@ -265,6 +262,7 @@ public sealed partial class MobThresholdSystem : EntitySystem
             !TryComp<MobThresholdsComponent>(target2, out var threshold2))
             return false;
 
+        /* <Trauma> - use helper methods and more sane damage calculation
         if (!TryGetThresholdForState(target1, MobState.Dead, out var ent1DeadThreshold, threshold1))
             ent1DeadThreshold = 0;
 
@@ -272,6 +270,12 @@ public sealed partial class MobThresholdSystem : EntitySystem
             ent2DeadThreshold = 0;
 
         damage = (_damageable.GetAllDamage((target1, oldDamage)) / ent1DeadThreshold.Value) * ent2DeadThreshold.Value;
+        */
+        var ent1DeadThreshold = GetLowestThreshold((target1, threshold1));
+        var ent2DeadThreshold = GetLowestThreshold((target2, threshold2));
+
+        damage = _damageable.GetAllDamage((target1, oldDamage)) * ent2DeadThreshold / ent1DeadThreshold;
+        // </Trauma>
         return true;
     }
 
@@ -356,19 +360,11 @@ public sealed partial class MobThresholdSystem : EntitySystem
         MobThresholdsComponent? thresholds = null,
         EntityUid? origin = null)
     {
-        if (!Resolve(target, ref mobState, ref thresholds) ||
-            mobState.CurrentState == newState)
-        {
+        if (!Resolve(target, ref mobState, ref thresholds) || mobState.CurrentState == newState)
             return;
-        }
 
         if (mobState.CurrentState != MobState.Dead || thresholds.AllowRevives)
-        {
-            thresholds.CurrentThresholdState = newState;
-            Dirty(target, thresholds);
-        }
-
-        _mobStateSystem.UpdateMobState(target, mobState, origin);
+            _mobStateSystem.ChangeMobState(target, newState, mobState, origin);
     }
 
     private void UpdateAlerts(EntityUid target, MobState currentMobState, MobThresholdsComponent? threshold = null,
@@ -447,18 +443,6 @@ public sealed partial class MobThresholdSystem : EntitySystem
     {
         if (component.TriggersAlerts)
             _alerts.ClearAlertCategory(target, component.HealthAlertCategory);
-    }
-
-    private void OnUpdateMobState(EntityUid target, MobThresholdsComponent component, ref UpdateMobStateEvent args)
-    {
-        if (!component.AllowRevives && component.CurrentThresholdState == MobState.Dead)
-        {
-            args.State = MobState.Dead;
-        }
-        else if (component.CurrentThresholdState != MobState.Invalid)
-        {
-            args.State = component.CurrentThresholdState;
-        }
     }
 
     private void UpdateAllEffects(Entity<MobThresholdsComponent, MobStateComponent?, DamageableComponent?> ent, MobState currentState)

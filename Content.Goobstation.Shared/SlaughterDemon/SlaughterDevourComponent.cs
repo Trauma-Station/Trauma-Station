@@ -2,6 +2,7 @@
 
 using Content.Shared.Damage;
 using Content.Shared.FixedPoint;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Containers;
 
@@ -17,7 +18,7 @@ public sealed partial class SlaughterDevourComponent : Component
     /// Devouring doafter
     /// </summary>
     [DataField(required: true)]
-    public float DoAfterDelay;
+    public TimeSpan DoAfterDelay;
 
     /// <summary>
     /// Base damage done to the demon after devouring osmeone, scaled by the healing amount.
@@ -58,4 +59,13 @@ public sealed partial class SlaughterDevourComponent : Component
     /// </summary>
     [DataField]
     public Container? Container;
+
+    /// <summary>
+    /// Whitelist to apply <see cref="ToHealNonCrew"/> if the eaten entity passes this.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist RobotWhitelist = new()
+    {
+        Components = ["BorgChassis", "Silicon"]
+    };
 }

@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Trauma.Common.Silicon;
+using Content.Shared.Whitelist;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 // </Trauma>
@@ -22,7 +22,7 @@ namespace Content.Shared.Bed;
 public sealed partial class BedSystem : EntitySystem
 {
     // <Trauma>
-    [Dependency] private CommonSiliconSystem _silicon = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
     // </Trauma>
     [Dependency] private ActionContainerSystem _actConts = default!;
     [Dependency] private DamageableSystem _damageableSystem = default!;
@@ -59,6 +59,10 @@ public sealed partial class BedSystem : EntitySystem
 
     private void OnStrapped(Entity<HealOnBuckleComponent> bed, ref StrappedEvent args)
     {
+        // <Trauma>
+        if (_whitelist.IsWhitelistPass(bed.Comp.Blacklist, args.Buckle))
+            return;
+        // </Trauma>
         EnsureComp<HealOnBuckleHealingComponent>(bed);
         bed.Comp.NextHealTime = _timing.CurTime + TimeSpan.FromSeconds(bed.Comp.HealTime);
         _actionsSystem.AddAction(args.Buckle, ref bed.Comp.SleepAction, SleepingSystem.SleepActionId, bed);
@@ -157,8 +161,7 @@ public sealed partial class BedSystem : EntitySystem
 
             foreach (var healedEntity in strapComponent.BuckledEntities)
             {
-                if (_mobStateSystem.IsDead(healedEntity)
-                    || _silicon.IsSilicon(healedEntity)) // Trauma
+                if (_mobStateSystem.IsDead(healedEntity))
                     continue;
 
                 var damage = bedComponent.Damage;
@@ -167,7 +170,7 @@ public sealed partial class BedSystem : EntitySystem
                     damage *= bedComponent.SleepMultiplier;
 
                 _damageableSystem.TryChangeDamage(healedEntity, damage, true, origin: uid,
-                    targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll); // Shitmed Change
+                    targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll); // Trauma
             }
         }
     }

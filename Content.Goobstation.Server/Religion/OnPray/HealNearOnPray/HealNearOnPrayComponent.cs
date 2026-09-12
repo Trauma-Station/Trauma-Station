@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 
 namespace Content.Goobstation.Server.OnPray.HealNearOnPray;
@@ -13,6 +14,16 @@ public sealed partial class HealNearOnPrayComponent : Component
 
     [DataField]
     public DamageSpecifier Damage = new();
+
+    /// <summary>
+    /// Blacklist for mobs that can't be healed.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist HealBlacklist = new()
+    {
+        // no clankers
+        Components = ["Silicon", "BorgChassis", "Drone", "PAI"]
+    };
 
     /// <summary>
     /// Which sound to play on heal.

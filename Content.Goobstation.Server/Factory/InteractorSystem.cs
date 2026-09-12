@@ -2,7 +2,8 @@
 
 using Content.Goobstation.Shared.Factory;
 using Content.Server.Construction.Components;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 
 namespace Content.Goobstation.Server.Factory;
 
@@ -50,11 +51,13 @@ public sealed partial class InteractorSystem : SharedInteractorSystem
 
         // construction supercode queues it instead of starting a doafter now, assume that queuing means it has started
         var newCount = construction?.InteractionQueue?.Count ?? 0;
-        if (newCount > originalCount
-            || HasDoAfter(ent))
+        var doing = HasDoAfter(ent);
+        Machine.Started(ent.Owner);
+        if (newCount > originalCount || doing)
         {
-            Machine.Started(ent.Owner);
             UpdateAppearance(ent, InteractorState.Active);
+            if (doing) // for steps with doafter they just get queued
+                Machine.Completed(ent.Owner);
         }
         else
         {

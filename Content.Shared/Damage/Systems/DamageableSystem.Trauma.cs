@@ -2,8 +2,11 @@
 
 using Content.Medical.Common.Body;
 using Content.Shared.Body;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
+using System.Text;
 
 namespace Content.Shared.Damage.Systems;
 
@@ -19,6 +22,8 @@ public sealed partial class DamageableSystem
 
     private static readonly ProtoId<DamageGroupPrototype>[] _vitalOnlyDamageGroups = { "Airloss", "Toxin", "Genetic", "Metaphysical" };
     private readonly List<ProtoId<DamageTypePrototype>> _vitalOnlyDamageTypes = new();
+
+    private StringBuilder _sb = new();
 
     private void CacheVitalPrototypes()
     {
@@ -46,4 +51,44 @@ public sealed partial class DamageableSystem
         }
         return vitalDamage;
     }
+
+    /// <summary>
+    /// Return the amount of a single damage type on a non-mob entity.
+    /// Do not call this for mobs.
+    /// </summary>
+    public FixedPoint2 GetDamageAmount(Entity<DamageableComponent?> ent, [ForbidLiteral] ProtoId<DamageTypePrototype> id)
+    {
+        if (!_damageableQuery.Resolve(ent, ref ent.Comp) ||
+            !ent.Comp.Damage.DamageDict.TryGetValue(id, out var amount))
+            return FixedPoint2.Zero;
+
+        return amount;
+    }
+
+    /// <summary>
+    /// Get a pretty string of a damage specifier.
+    /// </summary>
+    public string ToPrettyString(DamageSpecifier damage)
+    {
+        _sb.Clear();
+        _sb.Append("T ");
+        _sb.Append(damage.GetTotal());
+
+        _sb.Append(" { ");
+        foreach (var (type, amount) in damage.DamageDict)
+        {
+            _sb.Append(type.Id);
+            _sb.Append('/');
+            _sb.Append(amount);
+            _sb.Append(' ');
+        }
+        _sb.Append("}");
+        return _sb.ToString();
+    }
+
+    /// <summary>
+    /// Get a pretty string of an entity's <see cref="GetAllDamage"/>.
+    /// </summary>
+    public string DumpDamage(Entity<DamageableComponent?> ent)
+        => ToPrettyString(GetAllDamage(ent));
 }

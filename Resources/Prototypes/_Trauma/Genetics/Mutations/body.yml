@@ -136,14 +136,9 @@
   components:
   - type: Mutation
     instability: -40
-  - type: ComponentMutation
-    added:
-    - type: Clumsy
-      gunShootFailDamage:
-        types: # literally just copied semi random values a chud picked
-          Blunt: 5
-          Piercing: 4
-          Heat: 3
+  - type: StatusEffectsMutation
+    statusEffects:
+    - StatusEffectClumsyMutation
 
 - type: entity
   parent: [ BaseFreeMutation, BaseTriggerMutation ]

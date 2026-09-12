@@ -1,100 +1,107 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: spyBounty
-  id: ComputerMassMedia
+  abstract: true
+  id: EasyBountyBase
   difficulty: Easy
+
+- type: spyBounty
+  parent: EasyBountyBase
+  id: ComputerMassMedia
   jobBlacklist: [Reporter]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [ComputerMassMedia]
     queryComp: NewsWriter
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: ComputerSolarControl
-  difficulty: Easy
   departmentBlacklist: [Engineering]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [ComputerSolarControl]
     queryComp: SolarControlConsole
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: ComputerRadar
-  difficulty: Easy
   departmentBlacklist: [Cargo]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [ComputerRadar]
     queryComp: RadarConsole
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: VendingMachineCondiments
-  difficulty: Easy
   departmentBlacklist: [Service]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [VendingMachineCondiments]
     queryComp: VendingMachine
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: BoozeDispenser
-  difficulty: Easy
   jobBlacklist: [Bartender]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: BoozeDispenser
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: VendingMachineChefvend
-  difficulty: Easy
   jobBlacklist: [Chef]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [VendingMachineChefvend]
     queryComp: VendingMachine
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: VendingMachineDinnerware
-  difficulty: Easy
   jobBlacklist: [Chef]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [VendingMachineDinnerware]
     queryComp: VendingMachine
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: VendingMachineTheater
-  difficulty: Easy
   jobBlacklist: [Clown, Mime]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [VendingMachineTheater]
     queryComp: VendingMachine
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: VendingMachineVendomat
-  difficulty: Easy
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [VendingMachineVendomat]
     queryComp: VendingMachine
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: VendingMachineYouTool
-  difficulty: Easy
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [VendingMachineYouTool]
     queryComp: VendingMachine
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: VendingMachineGames
-  difficulty: Easy
   jobBlacklist: [Librarian]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [VendingMachineGames]
     queryComp: VendingMachine
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: VendingMachineHappyHonk
-  difficulty: Easy
+  jobBlacklist: [Chef]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [VendingMachineHappyHonk]
     queryComp: VendingMachine
+    areas: [AreaKitchen]
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: KitchenDeepFryer
-  difficulty: Easy
   jobBlacklist: [Chef]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [KitchenDeepFryer]
@@ -102,8 +109,8 @@
     areas: [AreaKitchen]
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: KitchenMicrowave
-  difficulty: Easy
   jobBlacklist: [Chef]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [KitchenMicrowave]
@@ -111,168 +118,192 @@
     areas: [AreaKitchen]
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: BorgCharger
-  difficulty: Easy
   departmentBlacklist: [Science]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [BorgCharger]
     queryComp: Charger
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: XenoArtifact
-  difficulty: Easy
   departmentBlacklist: [Science]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: XenoArtifact
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: FreezerHeater
-  difficulty: Easy
   departmentBlacklist: [Engineering]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: FreezerHeater
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: AnimalNamedCat
-  difficulty: Easy
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: AnimalNamedCat
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: AnimalMcGriff
-  difficulty: Easy
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: AnimalMcGriff
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: AnimalWalter
-  difficulty: Easy
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: AnimalWalter
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: AnimalMorty
-  difficulty: Easy
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: AnimalMorty
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: AnimalTropico
-  difficulty: Easy
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: AnimalTropico
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: HeadCloak
-  difficulty: Easy
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: HeadCloak
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: HeadBedsheet
-  difficulty: Easy
   departmentBlacklist: [Command]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: HeadBedsheet
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: Stamp
-  difficulty: Easy
   departmentBlacklist: [Command]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: Stamp
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: DoorRemote
-  difficulty: Easy
   departmentBlacklist: [Command]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: DoorRemote
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: AmePartFlatpack
-  difficulty: Easy
   departmentBlacklist: [Engineering]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: AmePartFlatpack
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: Bible
-  difficulty: Easy
   jobBlacklist: [Chaplain]
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: Bible
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: ClothingNeckGoldmedal
-  difficulty: Easy
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: ClothingNeckGoldmedal
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: ClothingNeckClownmedal
-  difficulty: Easy
   selector: !type:SpyStealTargetBountySelectorEvent
     stealTarget: ClothingNeckClownmedal
 
 - type: spyBounty
-  id: Stunbaton
-  difficulty: Easy
-  selector: !type:SpyPrototypeBountySelectorEvent
-    protos: [Stunbaton]
-
-- type: spyBounty
-  id: WeaponLaserSidearm
-  difficulty: Easy
-  selector: !type:SpyPrototypeBountySelectorEvent
-    protos: [WeaponLaserSidearm]
-
-- type: spyBounty
+  parent: EasyBountyBase
   id: ClothingHandsGlovesColorYellow
-  difficulty: Easy
   departmentBlacklist: [Engineering]
   selector: !type:SpyPrototypeBountySelectorEvent
     protos: [ClothingHandsGlovesColorYellow]
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: ClothingEyesGlassesMeson
-  difficulty: Easy
   departmentBlacklist: [Engineering]
   selector: !type:SpyPrototypeBountySelectorEvent
     protos: [ClothingEyesGlassesMeson]
 
 - type: spyBounty
-  id: ClothingEyesGlassesSecurity
-  difficulty: Easy
-  selector: !type:SpyPrototypeBountySelectorEvent
-    protos: [ClothingEyesGlassesSecurity]
-
-- type: spyBounty
+  parent: EasyBountyBase
   id: MachineAPE
-  difficulty: Easy
   departmentBlacklist: [Science]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [MachineAPE]
     queryComp: Emitter
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: AnomalyScanner
-  difficulty: Easy
   departmentBlacklist: [Science]
   selector: !type:SpyPrototypeBountySelectorEvent
     protos: [AnomalyScanner]
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: ClothingEyesGlassesThermal
-  difficulty: Easy
   departmentBlacklist: [Engineering]
   selector: !type:SpyPrototypeBountySelectorEvent
     protos: [ClothingEyesGlassesThermal]
 
 - type: spyBounty
+  parent: EasyBountyBase
   id: VendingMachineNutri
-  difficulty: Easy
   jobBlacklist: [Botanist]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [VendingMachineNutri]
     queryComp: VendingMachine
+
+- type: spyBounty
+  parent: EasyBountyBase
+  id: ClothingMaskGasExplorer
+  jobBlacklist: [SalvageSpecialist, Quartermaster]
+  selector: !type:SpyPrototypeBountySelectorEvent
+    protos: [ClothingMaskGasExplorer]
+
+- type: spyBounty
+  parent: EasyBountyBase
+  id: ClothingMaskGasAtmos
+  jobBlacklist: [AtmosphericTechnician, ChiefEngineer]
+  selector: !type:SpyPrototypeBountySelectorEvent
+    protos: [ClothingMaskGasAtmos]
+
+- type: spyBounty
+  parent: EasyBountyBase
+  id: ClothingHandsGlovesAtmosInsulated
+  jobBlacklist: [AtmosphericTechnician, ChiefEngineer]
+  selector: !type:SpyPrototypeBountySelectorEvent
+    protos: [ClothingHandsGlovesAtmosInsulated]
+
+- type: spyBounty
+  parent: EasyBountyBase
+  id: FlashlightSeclite
+  jobBlacklist: [SalvageSpecialist]
+  selector: !type:SpyPrototypeBountySelectorEvent
+    protos: [FlashlightSeclite]
+
+- type: spyBounty
+  parent: EasyBountyBase
+  id: ClothingShoesBootsWork
+  departmentBlacklist: [Engineering, Cargo]
+  selector: !type:SpyPrototypeBountySelectorEvent
+    protos: [ClothingShoesBootsWork]
+
+- type: spyBounty
+  parent: EasyBountyBase
+  id: CaneBladeLibrarian
+  jobBlacklist: [Librarian]
+  selector: !type:SpyStealTargetBountySelectorEvent
+    stealTarget: CaneBladeLibrarian

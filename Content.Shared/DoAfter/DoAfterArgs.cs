@@ -40,13 +40,6 @@ public sealed partial class DoAfterArgs
 
     public NetEntity? NetUsed;
 
-    // Goobstation - Show doAfter progress bar to another entity
-    [NonSerialized]
-    [DataField]
-    public EntityUid? ShowTo;
-
-    public NetEntity? NetShowTo;
-
     /// <summary>
     /// Whether the progress bar for this DoAfter should be hidden from other players.
     /// </summary>
@@ -54,18 +47,10 @@ public sealed partial class DoAfterArgs
     public bool Hidden;
 
     /// <summary>
-    /// Goobstation
-    /// Whether the delay multiplier event should be raised
+    ///     String that will be added to the examine window of the entity.
     /// </summary>
     [DataField]
-    public bool MultiplyDelay = true;
-
-    /// <summary>
-    /// Goobstation
-    /// If not null, progress bar will use this color.
-    /// </summary>
-    [DataField]
-    public Color? ColorOverride;
+    public string? ExamineText;
 
     #region Event options
     /// <summary>
@@ -110,6 +95,12 @@ public sealed partial class DoAfterArgs
     /// </summary>
     [DataField]
     public bool NeedFreeHand;
+
+    /// <summary>
+    /// Whether or not this do after requires you to have any empty hand,
+    /// </summary>
+    [DataField]
+    public bool NeedAnyFreeHand;
 
     /// <summary>
     ///     Whether we need to keep our active hand as is (i.e. can't change hand or change item). This also covers
@@ -279,10 +270,12 @@ public sealed partial class DoAfterArgs
         Target = other.Target;
         Used = other.Used;
         Hidden = other.Hidden;
+        ExamineText = other.ExamineText;
         EventTarget = other.EventTarget;
         Broadcast = other.Broadcast;
         NeedHand = other.NeedHand;
         NeedFreeHand = other.NeedFreeHand;
+        NeedAnyFreeHand = other.NeedAnyFreeHand;
         BreakOnHandChange = other.BreakOnHandChange;
         BreakOnDropItem = other.BreakOnDropItem;
         BreakOnMove = other.BreakOnMove;

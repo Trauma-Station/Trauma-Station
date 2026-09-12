@@ -314,3 +314,10 @@
   components:
   - type: LanguageKnowledge
     languageId: Miltech
+
+- type: entity
+  parent: BaseLanguageKnowledgeAntag
+  id: LanguageZombish
+  components:
+  - type: LanguageKnowledge
+    languageId: Zombish

@@ -48,6 +48,7 @@ public sealed partial class HealthChangeEntityEffectSystem : EntityEffectSystem<
                 damageSpec,
                 args.Effect.IgnoreResistances,
                 interruptsDoAfters: false,
+                origin: args.User, // Trauma - without this the user's targeting is never used
                 targetPart: args.Effect.UseTargeting ? args.Effect.TargetPart : null,
                 ignoreBlockers: args.Effect.IgnoreBlockers,
                 splitDamage: args.Effect.SplitDamage,

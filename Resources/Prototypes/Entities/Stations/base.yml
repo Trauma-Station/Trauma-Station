@@ -118,9 +118,6 @@
           minCount: 10 # Trauma, was 12 make 32 when grid bug fixed
           maxCount: 10 # Trauma. was 16 make 64 when grid bug fixed
           addComponents:
-          - type: Gravity
-            enabled: true
-            inherent: true
           - type: IFF
             flags: HideLabel
             color: "#88b0d1"

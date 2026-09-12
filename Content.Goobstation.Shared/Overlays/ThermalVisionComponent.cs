@@ -23,6 +23,9 @@ public sealed partial class ThermalVisionComponent : SwitchableVisionOverlayComp
 
     [DataField]
     public bool WhitelistCheckMind;
+
+    [DataField]
+    public bool WorksInHands;
 }
 
 public sealed partial class ToggleThermalVisionEvent : InstantActionEvent;

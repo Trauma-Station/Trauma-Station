@@ -1,19 +1,28 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.GameObjects;
-using Robust.Shared.ViewVariables;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Common.Weapons.DelayedKnockdown;
 
-[RegisterComponent]
+// TODO: make this a status effect entity
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class DelayedKnockdownComponent : Component
 {
-    [ViewVariables(VVAccess.ReadWrite)]
-    public float Time = float.MaxValue;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField, AutoNetworkedField]
+    public TimeSpan Started;
 
-    [ViewVariables(VVAccess.ReadWrite)]
-    public float KnockdownTime = 0f;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField, AutoNetworkedField]
+    public TimeSpan NextKnockdown;
 
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
+    public TimeSpan Delay = TimeSpan.MaxValue;
+
+    [DataField]
+    public TimeSpan KnockdownTime;
+
+    [DataField]
     public bool Refresh = true;
 }

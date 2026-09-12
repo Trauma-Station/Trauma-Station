@@ -28,12 +28,6 @@ public sealed partial class CircuitComponent : Component
     public List<object> Inputs = new();
 
     /// <summary>
-    /// The last outputs of the circuit.
-    /// </summary>
-    [DataField(serverOnly: true)]
-    public List<object> LastOutputs = new();
-
-    /// <summary>
     /// List of circuit output index for each input.
     /// Built dynamically from gates.
     /// </summary>
@@ -130,8 +124,6 @@ public sealed partial class CircuitComponent : Component
             Inputs.Add(False.Instance);
         while (LinkedInputs.Count < count)
             LinkedInputs.Add(new());
-        while (LastOutputs.Count < count)
-            LastOutputs.Add(False.Instance);
         while (Data.OutputIndices.Count < count)
             Data.OutputIndices.Add(CircuitIndex.Invalid);
     }

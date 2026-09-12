@@ -6,11 +6,10 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.CombatMode;
 using Content.Shared.Examine;
-using Content.Shared.Eye.Blinding.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Projectiles;
-using Content.Shared.StatusEffectNew;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Systems;
@@ -29,7 +28,6 @@ public sealed partial class EntropicPlumeSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
-    [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private SharedGunSystem _gun = default!;
     [Dependency] private SharedMeleeWeaponSystem _weapon = default!;
@@ -42,11 +40,10 @@ public sealed partial class EntropicPlumeSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<EntropicPlumeComponent, StartCollideEvent>(OnStartCollide);
-
         UpdatesOutsidePrediction = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnStartCollide(Entity<EntropicPlumeComponent> ent, ref StartCollideEvent args)
     {
         if (ent.Comp.AffectedEntities.Contains(args.OtherEntity))
@@ -56,14 +53,11 @@ public sealed partial class EntropicPlumeSystem : EntitySystem
             return;
 
         var ev = new BeforeCastTouchSpellEvent(args.OtherEntity, false);
-        RaiseLocalEvent(args.OtherEntity, ev, true);
+        RaiseLocalEvent(args.OtherEntity, ref ev, true);
         if (ev.Cancelled)
             return;
 
         ent.Comp.AffectedEntities.Add(args.OtherEntity);
-
-        var blindTime = TimeSpan.FromSeconds(ent.Comp.Duration);
-        _status.TryUpdateStatusEffectDuration(args.OtherEntity, BlindnessSystem.BlindingStatusEffect, blindTime);
 
         var affected = EnsureComp<EntropicPlumeAffectedComponent>(args.OtherEntity);
         affected.ExcludedEntity = CompOrNull<ProjectileComponent>(ent)?.Shooter ?? EntityUid.Invalid;
@@ -85,10 +79,10 @@ public sealed partial class EntropicPlumeSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var rand = new System.Random((int) _timing.CurTick.Value);
         var query = EntityQueryEnumerator<EntropicPlumeAffectedComponent, MobStateComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var affected, out var mobState, out var xform))
         {
+            var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(uid));
             Amok();
 
             if (_net.IsClient)

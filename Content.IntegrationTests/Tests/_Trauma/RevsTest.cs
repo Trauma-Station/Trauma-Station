@@ -22,7 +22,7 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// <summary>
 /// Makes sure revolutionary conversion works.
 /// </summary>
-[TestFixture]
+[Category("GameRuleTests")]
 public sealed class RevsTest : InteractionTest
 {
     public static readonly EntProtoId Urist = "MobHuman";
@@ -84,9 +84,9 @@ public sealed class RevsTest : InteractionTest
     [Test]
     public async Task HeadrevHasRadio()
     {
-        Assert.That(!SEntMan.HasComponent<ImplantedComponent>(SPlayer), "Urist shouldnt be implanted");
+        Assert.That(!SHasComp<ImplantedComponent>(SPlayer), "Urist shouldnt be implanted");
         await MakePlayerHeadRev();
-        Assert.That(SEntMan.HasComponent<ImplantedComponent>(SPlayer), "Headrev should have gotten a radio implant");
+        Assert.That(SHasComp<ImplantedComponent>(SPlayer), "Headrev should have gotten a radio implant");
         var radio = SComp<ActiveRadioComponent>(SPlayer);
         Assert.That(radio.Channels.Contains(HeadRevRadio), "Radio implant did not add the headrev channel");
     }
@@ -97,10 +97,11 @@ public sealed class RevsTest : InteractionTest
     [Test]
     public async Task HeadrevBreaksMindshield()
     {
+        var implant = EntityUid.Invalid;
         await MakePlayerHeadRev();
         await Server.WaitPost(() =>
         {
-            _implant.AddImplant(SPlayer, MindShieldImplant);
+            implant = _implant.AddImplant(SPlayer, MindShieldImplant)!.Value;
         });
         Assert.That(!SComp<HeadRevolutionaryComponent>(SPlayer).ConvertAbilityEnabled, "Mind shield didn't disable conversion");
         Assert.That(STryComp<MindShieldStatusComponent>(SPlayer, out var shield), "Mind shield didn't get broken");
@@ -110,6 +111,12 @@ public sealed class RevsTest : InteractionTest
         await AddTargetMind();
         await AssertConvert("Mindshielded headrevs must not be able to convert players");
         await DelTarget();
+
+        await Server.WaitPost(() =>
+        {
+            _implant.ForceRemove(SPlayer, implant);
+        });
+        Assert.That(SComp<HeadRevolutionaryComponent>(SPlayer).ConvertAbilityEnabled, "Removing mind shield didn't re-enable conversion");
     }
 
     private async Task AssertConvert(string reason, bool works = false)
@@ -159,7 +166,7 @@ public sealed class RevsTest : InteractionTest
         await Server.WaitPost(() =>
         {
             _antag.ForceMakeAntag<RevolutionaryRuleComponent>(ServerSession, DefaultRevsRule);
-            Assert.That(SEntMan.HasComponent<HeadRevolutionaryComponent>(SPlayer), "Making test player a headrev failed");
+            Assert.That(SHasComp<HeadRevolutionaryComponent>(SPlayer), "Making test player a headrev failed");
             Assert.That(SComp<MindContainerComponent>(SPlayer).HasMind, "Test's player must have a mind");
         });
     }

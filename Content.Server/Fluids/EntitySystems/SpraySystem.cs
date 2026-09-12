@@ -15,7 +15,6 @@ using Content.Shared.CCVar;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Fluids;
 using Content.Shared.Interaction;
-using Content.Shared.Timing;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Configuration;
@@ -23,6 +22,7 @@ using Robust.Shared.Physics.Components;
 using System.Numerics;
 using Content.Shared.Fluids.EntitySystems;
 using Content.Shared.Fluids.Components;
+using Content.Shared.Timing.Systems;
 using Robust.Server.Containers;
 using Robust.Shared.Audio;
 using Robust.Shared.Map;
@@ -217,8 +217,7 @@ public sealed partial class SpraySystem : SharedSpraySystem
 
                 _audio.PlayPvs(entity.Comp.SpraySound, entity, entity.Comp.SpraySound.Params.WithVariation(0.125f));
 
-                if (TryComp<UseDelayComponent>(entity, out var useDelay))
-                    _useDelay.TryResetDelay((entity.Owner, useDelay));
+                _useDelay.TryResetDelay(entity.Owner);
 
                 return;
             }
@@ -288,7 +287,7 @@ public sealed partial class SpraySystem : SharedSpraySystem
                 {
                     // push back the grid the player is standing on
                     var userTransform = Transform(thingGettingPushed);
-                    if (userTransform.GridUid == userTransform.ParentUid)
+                    if (userTransform.GridUid == userTransform.ParentUid && userTransform.ParentUid != userTransform.MapUid) // Trauma - check map too
                     {
                         // apply both linear and angular momentum depending on the player position
                         // multiply by a cvar because grid mass is currently extremely small compared to all other masses
@@ -309,6 +308,6 @@ public sealed partial class SpraySystem : SharedSpraySystem
         audioParams = audioParams.WithVariation(0.125f);
         _audio.PlayPvs(entity.Comp.SpraySound, entity, audioParams);
 
-        _useDelay.TryResetDelay(entity);
+        _useDelay.TryResetDelay(entity.Owner);
     }
 }

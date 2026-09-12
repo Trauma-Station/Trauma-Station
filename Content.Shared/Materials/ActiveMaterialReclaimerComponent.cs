@@ -8,14 +8,16 @@ namespace Content.Shared.Materials;
 /// Tracker component for the process of reclaiming entities
 /// <seealso cref="MaterialReclaimerComponent"/>
 /// </summary>
-[RegisterComponent, NetworkedComponent, Access(typeof(SharedMaterialReclaimerSystem)), AutoGenerateComponentPause]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentPause] // Trauma - removed Access
 public sealed partial class ActiveMaterialReclaimerComponent : Component
 {
+    /* Trauma - reworked to not store mobs in a container...
     /// <summary>
     /// Container used to store the item currently being reclaimed
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite)]
     public Container ReclaimingContainer = default!;
+    */
 
     /// <summary>
     /// When the reclaiming process ends.

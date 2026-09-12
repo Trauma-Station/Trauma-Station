@@ -42,22 +42,15 @@ public sealed partial class AutomatedItemSlot : AutomationSlot
     }
 
     public override bool Insert(EntityUid item)
-    {
-        return base.Insert(item) &&
+        => base.Insert(item) &&
             _slots.TryInsert(Owner, Slot, item, user: null);
-    }
 
     public override bool CanInsert(EntityUid item)
-    {
-        return base.CanInsert(item) &&
-            _slots.CanInsert(Owner, usedUid: item, user: null, Slot);
-    }
+        => base.CanInsert(item) &&
+            _slots.CanInsert(Owner, Slot, item, user: null);
 
     public override EntityUid? GetItem(EntityUid? filter)
-    {
-        if (Slot.Item is not {} item || _filter.IsBlocked(filter, item))
-            return null;
-
-        return item;
-    }
+        => Slot.Item is not {} item || _filter.IsBlocked(filter, item)
+            ? null
+            : item;
 }

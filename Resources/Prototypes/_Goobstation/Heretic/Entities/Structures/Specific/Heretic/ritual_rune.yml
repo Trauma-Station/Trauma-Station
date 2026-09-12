@@ -54,6 +54,26 @@
   - type: EnchantingTable
   - type: AtmosExposed
   - type: TemperatureTracker
+  # Heal holy damage and recharge mansus grasp quickly when standing on rune
+  - type: EntityEffectContacts
+    id: heretic_rune
+    conditions:
+    - !type:WhitelistCondition
+      whitelist:
+        components:
+        - WeakToHoly
+    effects:
+    - !type:HealthChange
+      splitDamage: SplitEnsureAll
+      damage:
+        types:
+          Holy: -4
+    - !type:ReduceActionsCooldown
+      maxPercentReduction: 1
+      maxReduction: 4
+      actionWhitelist:
+        tags:
+        - MansusGraspAction
 
 - type: entity
   id: HereticRuneRitualDrawAnimation

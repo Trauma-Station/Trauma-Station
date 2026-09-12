@@ -134,6 +134,7 @@
         variation: 0.250
         volume: -2
   # </Trauma>
+  - type: ItemToggleExaminableStatus
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_sword.rsi
     layers:
@@ -158,6 +159,7 @@
   - type: Tool
     examinable: false # stealth item..?
   # </Trauma>
+  - type: ItemToggleExaminableStatus
   - type: ItemToggle
     soundActivate:
       path: /Audio/Weapons/ebladeon.ogg
@@ -354,6 +356,7 @@
         variation: 0.250
         volume: -2
   # </Trauma>
+  - type: ItemToggleExaminableStatus
   - type: ItemToggleMeleeWeapon
     activatedDamage:
         types:
@@ -396,6 +399,7 @@
         variation: 0.250
         volume: -2
   # </Trauma>
+  - type: ItemToggleExaminableStatus
   - type: ItemToggle
     predictable: false # Goobstation - wielded weapons sound prediction is broken
     onUse: false # wielding events control it instead

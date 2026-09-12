@@ -33,6 +33,8 @@
     containers:
       entity_storage: !type:AllSelector
         children:
+        - id: SynthMeatSeeds # Trauma - Ranching medicinal plant
+          amount: 3
         - id: AloeSeeds
           amount: 3
         - id: AmbrosiaVulgarisSeeds

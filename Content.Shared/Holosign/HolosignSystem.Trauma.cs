@@ -8,7 +8,7 @@ using Content.Shared.Physics;
 using Content.Shared.Tag;
 using Content.Trauma.Common.Heretic;
 using Robust.Shared.Map;
-using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Holosign;
@@ -23,11 +23,11 @@ public sealed partial class HolosignSystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private TagSystem _tag = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
-    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
     public static readonly ProtoId<TagPrototype> HolosignTag = "Holosign";
 
-    private HashSet<Entity<PhysicsComponent>> _blockers = new();
+    private HashSet<Entity<FixturesComponent>> _blockers = new();
 
     private const int BlockMask = (int) (
         CollisionGroup.Impassable |
@@ -48,10 +48,10 @@ public sealed partial class HolosignSystem
         {
             foreach (var uid in _map.GetAnchoredEntities((grid, gridComp), mapCoords))
             {
-                if (!_physicsQuery.TryComp(uid, out var physics))
+                if (!_fixturesQuery.TryComp(uid, out var fixtures))
                     continue;
 
-                _blockers.Add((uid, physics));
+                _blockers.Add((uid, fixtures));
             }
         }
         else
@@ -64,8 +64,11 @@ public sealed partial class HolosignSystem
             if (_tag.HasTag(entity, HolosignTag))
                 return null; // no stacking holosigns
 
-            if ((entity.Comp.CollisionLayer & BlockMask) != 0) // overlapping with something that blocks the field
-                return null;
+            foreach (var fixture in entity.Comp.Fixtures.Values)
+            {
+                if (fixture.Hard && (fixture.CollisionLayer & BlockMask) != 0) // overlapping with something that blocks the field
+                    return null;
+            }
         }
 
         EntityUid? user = TryComp(ent, out LimitedChargesComponent? charges) ? null : args.User; // Don't show popups if it has limited charges (user is null = no popup)

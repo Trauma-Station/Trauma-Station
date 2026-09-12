@@ -10,8 +10,6 @@ namespace Content.Trauma.Client.Audio;
 
 public sealed partial class CopyrightedAudioSystem : EntitySystem
 {
-// entire thing is disabled on debug because its evil and debug asserts immediately without engine update
-#if !DEBUG
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private EntityQuery<AudioComponent> _query = default!;
@@ -26,9 +24,6 @@ public sealed partial class CopyrightedAudioSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CopyrightedAudioComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<CopyrightedAudioComponent, ComponentShutdown>(OnShutdown);
-        //_cfg.OnValueChanged(TraumaCVars.StreamerMode, x => { StreamerMode = x; UpdateSounds(); }, true);
         Subs.CVar(_cfg, TraumaCVars.StreamerMode, x => { StreamerMode = x; UpdateSounds(); }, true);
     }
 
@@ -40,11 +35,13 @@ public sealed partial class CopyrightedAudioSystem : EntitySystem
         UpdateSounds();
     }
 
+    [SubscribeLocalEvent]
     private void OnStartup(Entity<CopyrightedAudioComponent> ent, ref ComponentStartup args)
     {
         SetMuted(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<CopyrightedAudioComponent> ent, ref ComponentShutdown args)
     {
         if (!TerminatingOrDeleted(ent))
@@ -72,8 +69,9 @@ public sealed partial class CopyrightedAudioSystem : EntitySystem
 
         // prevent server state trolling it (jukebox mostly)
         // TODO: uncomment and remove DEBUG check if engine pr goidamerged
-        //EntityManager.SetComponentNetSync(uid, audio, !muted);
+#if DEBUG
+        EntityManager.SetComponentNetSync(uid, audio, !muted);
+#endif
         audio.NetSyncEnabled = !muted;
     }
-#endif
 }

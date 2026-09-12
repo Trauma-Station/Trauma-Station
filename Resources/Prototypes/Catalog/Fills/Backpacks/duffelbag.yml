@@ -131,8 +131,8 @@
 - type: entity
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncher
-  name: China-Lake bundle
-  description: "An old China-Lake grenade launcher bundled with 13 rounds of various destruction capability."
+  name: China Lake bundle
+  description: "An old China Lake grenade launcher bundled with 11 rounds of various destruction capability."
   components:
   - type: EntityTableContainerFill
     containers:
@@ -140,10 +140,10 @@
         children:
         - id: WeaponLauncherChinaLake
         - id: GrenadeBlast
-          amount: 4
+          amount: 3
         - id: GrenadeFrag
-          amount: 4
-        - id: GrenadeSlug # Goob - you only get two of these, and cannot make more.
+          amount: 5
+        - id: GrenadeSlug # Trauma - you only get two of these, and cannot make more.
           amount: 2
 
 - type: entity
@@ -369,9 +369,8 @@
         - id: SyringeRomerol
         - id: WeaponRevolverPython
         - id: MagazineBoxMagnumIncendiary
-        - id: PillAmbuzolPlus
-        - id: PillAmbuzol
-          amount: 3
+        - id: PillCanisterAmbuzol
+          amount: 5
 
 - type: entity
   parent: ClothingBackpackDuffelSyndicateMedicalBundle

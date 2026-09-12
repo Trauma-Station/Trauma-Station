@@ -264,6 +264,9 @@ namespace Content.Client.Construction.UI
 
             foreach (var entry in guide.Entries)
             {
+                if (entry.Empty())
+                    continue;
+
                 var text = entry.Arguments != null
                     ? Loc.GetString(entry.Localization, entry.Arguments)
                     : Loc.GetString(entry.Localization);

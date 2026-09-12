@@ -253,8 +253,8 @@
   sprite: /Textures/_Goobstation/Heretic/Tiles/plating_rust.png
   baseTurf: Plating
   isSubfloor: true
-  deconstructTools: [ Prying ] # This used to be welding but it was annoying to weld plating instead of rust accidentally and space the area
-  deconstructTimeMultiplier: 5
+  deconstructTools: [ Prying, Brushing ]
+  deconstructTimeMultiplier: 3
   footstepSounds:
     collection: FootstepPlating
   friction: 1.5

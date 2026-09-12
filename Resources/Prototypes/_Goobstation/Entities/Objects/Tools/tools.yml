@@ -8,10 +8,10 @@
   description: Wzzzzz....
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Tools/sonic_screwdriver.rsi
+    sprite: &sonic_sprite _Goobstation/Objects/Tools/sonic_screwdriver.rsi
     state: icon
   - type: Item
-    sprite: _Goobstation/Objects/Tools/sonic_screwdriver.rsi
+    sprite: *sonic_sprite
     size: Small
   - type: Tag
     tags:
@@ -33,45 +33,40 @@
   - type: MultipleTool
     statusShowBehavior: true
     entries:
-      - behavior: Screwing
-        sprite:
-          sprite: _Goobstation/Objects/Tools/sonic_screwdriver.rsi
-          state: screw
-        useSound:
-          path: /Audio/Items/drill_use.ogg
-        changeSound:
-          path: /Audio/Effects/Arcade/newgame.ogg
-      - behavior: Prying
-        sprite:
-          sprite: _Goobstation/Objects/Tools/sonic_screwdriver.rsi
-          state: cutter
-        useSound:
-          path: /Audio/Items/jaws_pry.ogg
-        changeSound:
-          path: /Audio/Effects/Arcade/newgame.ogg
-      - behavior: Anchoring
-        sprite:
-          sprite: _Goobstation/Objects/Tools/sonic_screwdriver.rsi
-          state: wrench
-        useSound:
-          path: /Audio/Items/ratchet.ogg
-        changeSound:
-          path: /Audio/Effects/Arcade/newgame.ogg
-      - behavior: Cutting
-        sprite:
-          sprite: _Goobstation/Objects/Tools/sonic_screwdriver.rsi
-          state: crowbar
-        useSound:
-          path: /Audio/Items/jaws_cut.ogg
-        changeSound:
-          path: /Audio/Effects/Arcade/newgame.ogg
-      - behavior: Pulsing
-        sprite:
-          sprite: _Goobstation/Objects/Tools/sonic_screwdriver.rsi
-          state: icon
-        changeSound:
-          path: /Audio/Effects/Arcade/newgame.ogg
-
+    - behavior: [ Screwing ]
+      sprite:
+        sprite: *sonic_sprite
+        state: screw
+      useSound:
+        path: /Audio/Items/drill_use.ogg
+      changeSound: &sonic_sound
+        path: /Audio/Effects/Arcade/newgame.ogg
+    - behavior: [ Prying ]
+      sprite:
+        sprite: *sonic_sprite
+        state: cutter
+      useSound:
+        path: /Audio/Items/jaws_pry.ogg
+      changeSound: *sonic_sound
+    - behavior: [ Anchoring ]
+      sprite:
+        sprite: *sonic_sprite
+        state: wrench
+      useSound:
+        path: /Audio/Items/ratchet.ogg
+      changeSound: *sonic_sound
+    - behavior: [ Cutting ]
+      sprite:
+        sprite: *sonic_sprite
+        state: crowbar
+      useSound:
+        path: /Audio/Items/jaws_cut.ogg
+      changeSound: *sonic_sound
+    - behavior: [ Pulsing ]
+      sprite:
+        sprite: *sonic_sprite
+        state: icon
+      changeSound: *sonic_sound
 
 - type: entity
   name: futuristic RCD

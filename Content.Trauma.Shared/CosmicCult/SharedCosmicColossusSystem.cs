@@ -64,18 +64,6 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
     private HashSet<Entity<MobStateComponent>> _mobs = [];
     private HashSet<Entity<PhysicsComponent>> _targets = [];
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<CosmicColossusComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<CosmicColossusComponent, EventCosmicColossusSunder>(OnColossusSunder);
-        SubscribeLocalEvent<CosmicColossusComponent, EventCosmicColossusHibernate>(OnColossusHibernate);
-        SubscribeLocalEvent<CosmicColossusComponent, CosmicHibernationDoAfter>(OnHibernateDoAfter);
-        SubscribeLocalEvent<CosmicColossusComponent, EventCosmicColossusEffigy>(OnColossusEffigy);
-        SubscribeLocalEvent<CosmicColossusComponent, EventCosmicColossusIngress>(OnColossusIngress);
-        SubscribeLocalEvent<CosmicColossusComponent, EventCosmicColossusIngressDoAfter>(OnColossusIngressDoAfter);
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -146,6 +134,7 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnMobStateChanged(Entity<CosmicColossusComponent> ent, ref MobStateChangedEvent args)
     {
         if (args.NewMobState != MobState.Dead)
@@ -169,7 +158,8 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
             _mind.TransferTo(mindEnt, Exists(ent.Comp.ImprisonedEntity) ? ent.Comp.ImprisonedEntity : PredictedSpawnAtPosition(ent.Comp.Mindsink, Transform(ent).Coordinates));
     }
 
-    private void OnColossusSunder(Entity<CosmicColossusComponent> ent, ref EventCosmicColossusSunder args)
+    [SubscribeLocalEvent]
+    private void OnColossusSunder(Entity<CosmicColossusComponent> ent, ref CosmicColossusSunderEvent args)
     {
         args.Handled = true;
 
@@ -185,7 +175,8 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
         PredictedSpawnAtPosition(comp.Attack1Vfx, args.Target);
     }
 
-    private void OnColossusHibernate(Entity<CosmicColossusComponent> ent, ref EventCosmicColossusHibernate args)
+    [SubscribeLocalEvent]
+    private void OnColossusHibernate(Entity<CosmicColossusComponent> ent, ref CosmicColossusHibernateEvent args)
     {
         if (ent.Comp.Attacking || ent.Comp.Hibernating || !_transform.AnchorEntity(ent))
             return;
@@ -201,7 +192,7 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
             Transform(ent).Coordinates,
             PopupType.LargeCaution);
 
-        var doAfterArgs = new DoAfterArgs(EntityManager, ent, comp.HibernationWait, new CosmicHibernationDoAfter(), ent)
+        var doAfterArgs = new DoAfterArgs(EntityManager, ent, comp.HibernationWait, new CosmicHibernationDoAfterEvent(), ent)
         {
             NeedHand = false,
             BreakOnWeightlessMove = false,
@@ -214,7 +205,8 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
         _doAfter.TryStartDoAfter(doAfterArgs);
     }
 
-    private void OnHibernateDoAfter(Entity<CosmicColossusComponent> ent, ref CosmicHibernationDoAfter args)
+    [SubscribeLocalEvent]
+    private void OnHibernateDoAfter(Entity<CosmicColossusComponent> ent, ref CosmicHibernationDoAfterEvent args)
     {
         _appearance.SetData(ent, ColossusVisuals.Status, ColossusStatus.Alive);
         _appearance.SetData(ent, ColossusVisuals.Hibernation, ColossusAction.Stopped);
@@ -231,7 +223,8 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
         _damage.ChangeDamage((ent, damageable), damage, true);
     }
 
-    protected virtual void OnColossusEffigy(Entity<CosmicColossusComponent> ent, ref EventCosmicColossusEffigy args)
+    [SubscribeLocalEvent]
+    protected virtual void OnColossusEffigy(Entity<CosmicColossusComponent> ent, ref CosmicColossusEffigyEvent args)
     {
         if (!VerifyPlacement(ent, out var pos) || !TryComp<ActionsComponent>(ent, out var actions))
             return;
@@ -294,14 +287,15 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
         return true;
     }
 
-    private void OnColossusIngress(Entity<CosmicColossusComponent> ent, ref EventCosmicColossusIngress args)
+    [SubscribeLocalEvent]
+    private void OnColossusIngress(Entity<CosmicColossusComponent> ent, ref CosmicColossusIngressEvent args)
     {
         if (TryComp<DoorBoltComponent>(args.Target, out var doorBolt) && doorBolt.BoltsDown)
         {
             _popup.PopupEntity(Loc.GetString("cosmicability-ingress-bolted"), ent, ent);
             return;
         }
-        var doargs = new DoAfterArgs(EntityManager, ent, ent.Comp.IngressDoAfter, new EventCosmicColossusIngressDoAfter(), ent, args.Target)
+        var doargs = new DoAfterArgs(EntityManager, ent, ent.Comp.IngressDoAfter, new CosmicColossusIngressDoAfterEvent(), ent, args.Target)
         {
             DistanceThreshold = 2f,
             Hidden = false,
@@ -312,7 +306,8 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
         _doAfter.TryStartDoAfter(doargs);
     }
 
-    private void OnColossusIngressDoAfter(Entity<CosmicColossusComponent> ent, ref EventCosmicColossusIngressDoAfter args)
+    [SubscribeLocalEvent]
+    private void OnColossusIngressDoAfter(Entity<CosmicColossusComponent> ent, ref CosmicColossusIngressDoAfterEvent args)
     {
         if (args.Args.Target is not { } target)
             return;

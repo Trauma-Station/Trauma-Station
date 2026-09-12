@@ -1,71 +1,83 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+- type: entity
+  parent: FloorTileItemBase
+  id: FloorTileItemCosmicCorruption
+  name: malign tile
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Objects/tile.rsi
+    state: tile
+  - type: FloorTile
+    outputs:
+    - FloorCosmicCorruption
+  - type: Stack
+    stackType: FloorTileCosmicCorruption
+
+- type: stack
+  parent: BaseTileStack
+  id: FloorTileCosmicCorruption
+  name: stack-malign-tile
+  spawn: FloorTileItemCosmicCorruption
+
 - type: tile
+  abstract: true
+  id: FloorCosmicBase
+  name: tiles-cosmiccult-floor-malign
+  baseTurf: Plating
+  isSubfloor: false
+  deconstructTools: [ Prying ]
+  footstepSounds:
+    collection: FootstepCosmic
+  itemDrop: FloorTileItemCosmicCorruption
+  heatCapacity: 10000
+  edgeSpritePriority: 1
+  edgeSprites:
+    SouthEast: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    NorthEast: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    NorthWest: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    SouthWest: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_single.png
+    South: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    East: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    North: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+    West: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_edge_double.png
+
+- type: tile
+  parent: FloorCosmicBase
   id: FloorCosmicGlyph
   name: tiles-cosmiccult-floor-glyph
   sprite: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_glyph.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepCosmic
-  heatCapacity: 10000
 
 - type: tile
+  parent: FloorCosmicBase
   id: FloorCosmicSmooth
   name: tiles-cosmiccult-floor-smooth
   sprite: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_smooth.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepCosmic
-  heatCapacity: 10000
 
 - type: tile
+  parent: FloorCosmicBase
   id: FloorCosmicHalf
   name: tiles-cosmiccult-floor-half
   sprite: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_half.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepCosmic
-  heatCapacity: 10000
 
 - type: tile
+  parent: FloorCosmicBase
   id: FloorCosmicSplit
   name: tiles-cosmiccult-floor-split
   sprite: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_split.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepCosmic
-  heatCapacity: 10000
 
 - type: tile
+  parent: FloorCosmicBase
   id: FloorCosmicNotched
   name: tiles-cosmiccult-floor-notched
   sprite: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_notched.png
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepCosmic
-  heatCapacity: 10000
 
 - type: tile
+  parent: FloorCosmicBase
   id: FloorCosmicCorruption
   name: tiles-cosmiccult-floor-malign
   sprite: /Textures/_DV/CosmicCult/Tileset/cosmicfloor/tile_malign.png
   variants: 4
-  baseTurf: Plating
-  isSubfloor: false
-  deconstructTools: [ Prying ]
-  footstepSounds:
-    collection: FootstepCosmic
-  heatCapacity: 10000
 
 - type: tile
   id: FloorCosmicVoid
@@ -121,13 +133,13 @@
   - type: SyncSprite
   - type: Clickable
   - type: Sprite
-    sprite: /Textures/_DV/CosmicCult/Tileset/cosmicdecay.rsi
+    sprite: _DV/CosmicCult/Tileset/cosmicdecay.rsi
     drawdepth: BelowFloor
     layers:
       - state: decay
         shader: unshaded
   - type: Icon
-    sprite: /Textures/_DV/CosmicCult/Tileset/cosmicdecay.rsi
+    sprite: _DV/CosmicCult/Tileset/cosmicdecay.rsi
     state: full
   - type: IconSmooth
     key: decay
@@ -155,9 +167,9 @@
     anchored: true
   - type: SyncSprite
   - type: Sprite
-    sprite: /Textures/_DV/CosmicCult/Tileset/cosmicdecayalt.rsi
+    sprite: _DV/CosmicCult/Tileset/cosmicdecayalt.rsi
   - type: Icon
-    sprite: /Textures/_DV/CosmicCult/Tileset/cosmicdecayalt.rsi
+    sprite: _DV/CosmicCult/Tileset/cosmicdecayalt.rsi
     state: full
   - type: IconSmooth
     key: floor

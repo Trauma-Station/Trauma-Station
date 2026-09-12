@@ -7,24 +7,24 @@ namespace Content.Trauma.Shared.CosmicCult;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class CosmicCultActionComponent : Component;
 
-public sealed partial class EventCosmicSiphon : EntityTargetActionEvent;
-public sealed partial class EventCosmicBlank : EntityTargetActionEvent;
-public sealed partial class EventCosmicPlaceMonument : InstantActionEvent;
-public sealed partial class EventCosmicReturn : InstantActionEvent;
-public sealed partial class EventCosmicLapse : EntityTargetActionEvent;
-public sealed partial class EventCosmicGlare : InstantActionEvent;
-public sealed partial class EventCosmicIngress : EntityTargetActionEvent;
-public sealed partial class EventCosmicImposition : InstantActionEvent;
-public sealed partial class EventCosmicNova : WorldTargetActionEvent;
-public sealed partial class EventCosmicFragmentation : EntityTargetActionEvent;
-public sealed partial class EventCosmicShop : InstantActionEvent;
-public sealed partial class EventCosmicConversion : EntityTargetActionEvent;
-public sealed partial class EventCosmicDamageTransfer : EntityTargetActionEvent;
-public sealed partial class EventCosmicTransmutation : InstantActionEvent;
-public sealed partial class EventCosmicStride : InstantActionEvent;
+public sealed partial class CosmicSiphonEvent : EntityTargetActionEvent;
+public sealed partial class CosmicBlankEvent : EntityTargetActionEvent;
+public sealed partial class CosmicPlaceMonumentEvent : InstantActionEvent;
+public sealed partial class CosmicReturnEvent : InstantActionEvent;
+public sealed partial class CosmicLapseEvent : EntityTargetActionEvent;
+public sealed partial class CosmicGlareEvent : InstantActionEvent;
+public sealed partial class CosmicIngressEvent : EntityTargetActionEvent;
+public sealed partial class CosmicImpositionEvent : InstantActionEvent;
+public sealed partial class CosmicNovaEvent : WorldTargetActionEvent;
+public sealed partial class CosmicFragmentationEvent : EntityTargetActionEvent;
+public sealed partial class CosmicShopEvent : InstantActionEvent;
+public sealed partial class CosmicConversionEvent : EntityTargetActionEvent;
+public sealed partial class CosmicDamageTransferEvent : EntityTargetActionEvent;
+public sealed partial class CosmicTransmutationEvent : InstantActionEvent;
+public sealed partial class CosmicStrideEvent : InstantActionEvent;
 
 // COLOSSUS ACTIONS
-public sealed partial class EventCosmicColossusSunder : WorldTargetActionEvent;
-public sealed partial class EventCosmicColossusIngress : EntityTargetActionEvent;
-public sealed partial class EventCosmicColossusHibernate : InstantActionEvent;
-public sealed partial class EventCosmicColossusEffigy : InstantActionEvent;
+public sealed partial class CosmicColossusSunderEvent : WorldTargetActionEvent;
+public sealed partial class CosmicColossusIngressEvent : EntityTargetActionEvent;
+public sealed partial class CosmicColossusHibernateEvent : InstantActionEvent;
+public sealed partial class CosmicColossusEffigyEvent : InstantActionEvent;

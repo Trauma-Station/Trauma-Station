@@ -20,14 +20,8 @@ public sealed partial class CosmicGlareSystem : EntitySystem
 
     private HashSet<Entity<MobStateComponent>> _mobs = [];
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicCultComponent, EventCosmicGlare>(OnCosmicGlare);
-    }
-
-    private void OnCosmicGlare(Entity<CosmicCultComponent> ent, ref EventCosmicGlare args)
+    [SubscribeLocalEvent]
+    private void OnCosmicGlare(Entity<CosmicCultComponent> ent, ref CosmicGlareEvent args)
     {
         _audio.PlayPredicted(ent.Comp.GlareSFX, ent, ent);
         if (_net.IsServer) // Predicted spawn looks bad with animations
@@ -39,11 +33,13 @@ public sealed partial class CosmicGlareSystem : EntitySystem
         _lookup.GetEntitiesInRange(Transform(ent).Coordinates, ent.Comp.CosmicGlareRange, _mobs);
         _mobs.RemoveWhere(target =>
         {
-            if (_cult.EntityIsCultist(target)) return true;
+            if (_cult.EntityIsCultist(target))
+                return true;
 
             var evt = new CosmicAbilityAttemptEvent(target, true);
             RaiseLocalEvent(ref evt);
-            if (evt.Cancelled) return true;
+            if (evt.Cancelled)
+                return true;
 
             return !_interact.InRangeUnobstructed(
                 (ent.Owner, Transform(ent)),
@@ -53,6 +49,8 @@ public sealed partial class CosmicGlareSystem : EntitySystem
         });
 
         foreach (var target in _mobs)
-            _flash.Flash(target, ent, args.Action, ent.Comp.CosmicGlareDuration, ent.Comp.CosmicGlarePenalty, stunDuration: (ent.Comp.CosmicGlareStun == TimeSpan.FromSeconds(0) ? null : ent.Comp.CosmicGlareStun));
+        {
+            _flash.Flash(target, ent, args.Action, ent.Comp.CosmicGlareDuration, ent.Comp.CosmicGlarePenalty, stunDuration: ent.Comp.CosmicGlareStun);
+        }
     }
 }

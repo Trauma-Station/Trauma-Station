@@ -7,7 +7,7 @@
   description: Not to be confused with the drink.
   components:
   - type: Seed
-    seedId: Lemonade
+    plantId: LemonadePlants
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/lemonade.rsi
 
@@ -17,7 +17,7 @@
   name: packet of coca seeds
   components:
   - type: Seed
-    seedId: CocaPlant
+    plantId: CocaPlants
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/coca_plant.rsi
 
@@ -27,7 +27,7 @@
   name: packet of coconut seeds
   components:
   - type: Seed
-    seedId: CoconutPlant
+    plantId: CoconutPlants
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/coconut.rsi
 
@@ -38,18 +38,18 @@
   suffix: bomb
   id: CherryBombSeeds
   components:
-    - type: Seed
-      seedId: CherryBomb
-    - type: Sprite
-      sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi # doesnt need to look special
+  - type: Seed
+    plantId: CherryBombPlants
+  - type: Sprite
+    sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi # doesnt need to look special
 
 - type: entity
   parent: AppleSeeds
-  id: deliciousAppleSeeds
+  id: DeliciousAppleSeeds
   name: packet of delicious apple seeds
   components:
   - type: Seed
-    seedId: deliciousApple
+    plantId: DeliciousApplePlants
 
 - type: entity
   parent: AppleSeeds
@@ -59,7 +59,7 @@
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/meth_apple.rsi
   - type: Seed
-    seedId: MethApple
+    plantId: MethApplePlants
 
 - type: entity
   parent: SeedBase
@@ -67,7 +67,7 @@
   name: packet of clear corn seeds
   components:
   - type: Seed
-    seedId: ClearCorn
+    plantId: ClearCornPlants
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/clear_corn.rsi
 
@@ -77,17 +77,17 @@
   name: packet of peanut seeds
   components:
   - type: Seed
-    seedId: Peanut
+    plantId: PeanutPlants
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/peanut.rsi
 
 - type: entity
   parent: SeedBase
   id: MagicMushroomSeeds
-  name: packet of magic mushroom seeds
+  name: packet of magic mushroom spores
   components:
   - type: Seed
-    seedId: MagicMushrooms
+    plantId: MagicMushroomsPlants
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/magicmushrooms.rsi
 
@@ -97,7 +97,7 @@
   name: packet of synth meat seeds
   components:
   - type: Seed
-    seedId: SynthMeat
+    plantId: SynthMeatPlants
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/synthmeat.rsi
 
@@ -107,16 +107,16 @@
   name: packet of balloon melon seeds
   components:
   - type: Seed
-    seedId: BalloonWatermelon
+    plantId: BalloonWatermelonPlants
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/balloon_mellon.rsi
 
 - type: entity
   parent: SeedBase
-  name: packet of steel wheat seeds
   id: SteelWheatSeeds
+  name: packet of steel wheat seeds
   components:
   - type: Seed
-    seedId: SteelWheat
+    plantId: SteelWheatPlants
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/steel_wheat.rsi

@@ -4,8 +4,8 @@ meta:
   engineVersion: 286.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/05/2026 17:01:03
-  entityCount: 23745
+  time: 08/20/2026 16:36:22
+  entityCount: 23751
 maps:
 - 1
 grids:
@@ -19418,7 +19418,7 @@ entities:
       pos: -25.5,-25.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -30014.318
+      secondsUntilStateChange: -30330.99
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -66347,12 +66347,6 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: 18.5,-24.5
-  - uid: 9494
-    components:
-    - type: Transform
-      parent: 2
-      rot: -1.5707963267948966 rad
-      pos: 32.5,-34.5
   - uid: 9495
     components:
     - type: Transform
@@ -110003,11 +109997,6 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: -57.5,-31.5
-  - uid: 15892
-    components:
-    - type: Transform
-      parent: 2
-      pos: -39.5,-22.5
   - uid: 15893
     components:
     - type: Transform
@@ -110352,6 +110341,47 @@ entities:
     - type: Transform
       parent: 2
       pos: -34.5,-1.5
+  - uid: 19055
+    components:
+    - type: Transform
+      parent: 2
+      rot: 1.5707963267948966 rad
+      pos: -10.5,-65.5
+  - uid: 23746
+    components:
+    - type: Transform
+      parent: 2
+      rot: 1.5707963267948966 rad
+      pos: 8.5,-58.5
+  - uid: 23747
+    components:
+    - type: Transform
+      parent: 2
+      rot: 3.141592653589793 rad
+      pos: 9.5,-76.5
+  - uid: 23748
+    components:
+    - type: Transform
+      parent: 2
+      rot: 3.141592653589793 rad
+      pos: 12.5,-34.5
+  - uid: 23749
+    components:
+    - type: Transform
+      parent: 2
+      pos: 14.5,-20.5
+  - uid: 23750
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: 53.5,-15.5
+  - uid: 23751
+    components:
+    - type: Transform
+      parent: 2
+      rot: 3.141592653589793 rad
+      pos: 51.5,-23.5
 - proto: IntercomElectronics
   entities:
   - uid: 15950
@@ -112878,6 +112908,11 @@ entities:
       pos: 9.5,24.5
 - proto: MachineMaterialSilo
   entities:
+  - uid: 15892
+    components:
+    - type: Transform
+      parent: 2
+      pos: -39.5,-22.5
   - uid: 16225
     components:
     - type: Transform
@@ -126551,13 +126586,11 @@ entities:
     components:
     - type: Transform
       parent: 2
-      rot: 1.5707963267948966 rad
       pos: -27.5,-6.5
   - uid: 18661
     components:
     - type: Transform
       parent: 2
-      rot: 3.141592653589793 rad
       pos: 54.5,-19.5
   - uid: 18662
     components:
@@ -126648,25 +126681,21 @@ entities:
     components:
     - type: Transform
       parent: 2
-      rot: -1.5707963267948966 rad
       pos: -35.5,-74.5
   - uid: 18680
     components:
     - type: Transform
       parent: 2
-      rot: -1.5707963267948966 rad
       pos: -31.5,-81.5
   - uid: 18681
     components:
     - type: Transform
       parent: 2
-      rot: -1.5707963267948966 rad
       pos: -35.5,-59.5
   - uid: 18682
     components:
     - type: Transform
       parent: 2
-      rot: -1.5707963267948966 rad
       pos: -31.5,-49.5
   - uid: 18683
     components:
@@ -129057,11 +129086,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -32.5,-35.5
-  - uid: 19055
-    components:
-    - type: Transform
-      parent: 2
-      pos: -39.5,-22.5
   - uid: 19056
     components:
     - type: Transform
@@ -131851,6 +131875,14 @@ entities:
     - type: Transform
       parent: 2
       pos: -39.5,-29.5
+- proto: StationAiFixerComputer
+  entities:
+  - uid: 9494
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: 32.5,-34.5
 - proto: StationAiUploadComputer
   entities:
   - uid: 19537

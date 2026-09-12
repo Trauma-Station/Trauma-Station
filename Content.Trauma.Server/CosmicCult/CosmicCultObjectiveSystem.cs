@@ -20,18 +20,7 @@ public sealed partial class CosmicCultObjectiveSystem : EntitySystem
     [Dependency] private SharedRoleSystem _roles = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicEffigyConditionComponent, RequirementCheckEvent>(OnEffigyRequirementCheck);
-        SubscribeLocalEvent<CosmicEffigyConditionComponent, ObjectiveAfterAssignEvent>(OnEffigyAfterAssign);
-
-        SubscribeLocalEvent<CosmicEntropyConditionComponent, ObjectiveGetProgressEvent>(OnGetEntropyProgress);
-        SubscribeLocalEvent<CosmicTierConditionComponent, ObjectiveGetProgressEvent>(OnGetTierProgress);
-        SubscribeLocalEvent<CosmicVictoryConditionComponent, ObjectiveGetProgressEvent>(OnGetVictoryProgress);
-    }
-
+    [SubscribeLocalEvent]
     private void OnEffigyRequirementCheck(EntityUid uid, CosmicEffigyConditionComponent comp, ref RequirementCheckEvent args)
     {
         if (args.Cancelled || !_roles.MindHasRole<CosmicColossusRoleComponent>(args.MindId) || args.Mind.OwnedEntity is not { } mob)
@@ -59,6 +48,7 @@ public sealed partial class CosmicCultObjectiveSystem : EntitySystem
         comp.EffigyTarget = _random.Pick(warps);
     }
 
+    [SubscribeLocalEvent]
     private void OnEffigyAfterAssign(EntityUid uid, CosmicEffigyConditionComponent comp, ref ObjectiveAfterAssignEvent args)
     {
         string description;
@@ -74,12 +64,15 @@ public sealed partial class CosmicCultObjectiveSystem : EntitySystem
         _metaData.SetEntityDescription(uid, description, args.Meta);
     }
 
+    [SubscribeLocalEvent]
     private void OnGetEntropyProgress(Entity<CosmicEntropyConditionComponent> ent, ref ObjectiveGetProgressEvent args) =>
         args.Progress = Progress(ent.Comp.Siphoned, _number.GetTarget(ent.Owner));
 
+    [SubscribeLocalEvent]
     private void OnGetTierProgress(Entity<CosmicTierConditionComponent> ent, ref ObjectiveGetProgressEvent args) =>
         args.Progress = Progress(ent.Comp.Tier, _number.GetTarget(ent.Owner));
 
+    [SubscribeLocalEvent]
     private void OnGetVictoryProgress(Entity<CosmicVictoryConditionComponent> ent, ref ObjectiveGetProgressEvent args) =>
         args.Progress = ent.Comp.Victory ? 1f : 0f;
 

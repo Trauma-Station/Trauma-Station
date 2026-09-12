@@ -6,3 +6,38 @@
   sprite:
     sprite: Structures/smalldispensers.rsi
     state: soda
+
+- type: stealTargetGroup
+  id: SwatGasMask
+  name: steal-target-groups-swat-gas-mask
+  sprite:
+    sprite: Clothing/Mask/swat.rsi
+    state: icon
+
+- type: stealTargetGroup
+  id: GorillaGloves
+  name: steal-target-groups-gorilla-gloves
+  sprite:
+    sprite: _Trauma/Clothing/Hands/Gloves/guerrilla.rsi
+    state: icon
+
+- type: stealTargetGroup
+  id: CaneBladeLibrarian
+  name: steal-target-groups-cane-blade-librarian
+  sprite:
+    sprite: Objects/Weapons/Melee/cane_blade.rsi
+    state: icon
+
+- type: stealTargetGroup
+  id: CaneBladeNanotrasen
+  name: steal-target-groups-cane-blade-nanotrasen
+  sprite:
+    sprite: Objects/Weapons/Melee/cane_blade.rsi
+    state: icon
+
+- type: stealTargetGroup
+  id: SecurityKatana
+  name: steal-target-groups-security-katana
+  sprite:
+    sprite: _Trauma/Objects/Weapons/Melee/sec_katana.rsi
+    state: icon

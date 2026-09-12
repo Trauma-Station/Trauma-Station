@@ -21,6 +21,7 @@
     temperature: 290
     specificHeat: 500
     heatCapacity: 2500
+    thermalConductivity: 5 # what the fuck is it meant to use for thickness it's not skin...
   - type: InternalTemperature
     conductance: 1000 # TODO: get this from the metal
   - type: DamageOnHolding

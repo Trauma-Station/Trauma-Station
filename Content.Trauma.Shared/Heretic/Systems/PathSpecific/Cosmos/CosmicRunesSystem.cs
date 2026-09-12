@@ -7,7 +7,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Teleportation;
@@ -64,7 +65,7 @@ public sealed partial class CosmicRunesSystem : EntitySystem
             _useDelay.IsDelayed((args.Used, useDelay)))
             return;
 
-        _useDelay.TryResetDelay(args.Used, false, useDelay);
+        _useDelay.TryResetDelay((args.Used, useDelay), false);
         _audio.PlayPredicted(bible.HealSoundPath, Transform(ent).Coordinates, args.User);
         _fadeDespawn.FadeDespawnEntity(ent, TimeSpan.Zero, TimeSpan.FromSeconds(1));
         args.Handled = true;

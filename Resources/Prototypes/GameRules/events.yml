@@ -168,6 +168,10 @@
     duration: 1
     minimumPlayers: 15
   - type: BreakerFlipRule
+    blacklist:
+      components:
+        - ProtectedGrid
+
 
 - type: entity
   id: BureaucraticError
@@ -213,13 +217,11 @@
   parent: BaseAntagGhostRoleRule
   id: DragonSpawn
   components:
-  - type: GhostroleAlert # Trauma
   - type: StationEvent
-    weight: 1 # Trauma - Was 3
-    earliestStart: 50 # Trauma, was 30
-    #recorruenceDelay: 20 # Goobstation - no longer needed
-    maxOccurrences: 1 # Goobstation
-    minimumPlayers: 50
+    weight: 6.5
+    earliestStart: 40
+    reoccurrenceDelay: 20
+    minimumPlayers: 20
     duration: null
     occursDuringRoundEnd: false
   - type: SpaceSpawnRule
@@ -243,19 +245,12 @@
   parent: BaseAntagGhostRoleRule
   id: NinjaSpawn
   components:
-  # <Trauma>
-  - type: GhostroleAlert
-  - type: AntagPlayerEffects
-    effects:
-    - !type:NestedEffect
-      proto: ChangelingSkills
-  # </Trauma>
   - type: StationEvent
-    weight: 1 # Trauma - was 6
+    weight: 6
     duration: null
     occursDuringRoundEnd: false
     earliestStart: 30
-    maxOccurrences: 1 # Trauma - replaces delay
+    reoccurrenceDelay: 20
     minimumPlayers: 30
   - type: SpaceSpawnRule
   - type: AntagGhostCharacterRule # Trauma - use ghost character instead of AntagLoadProfileRule
@@ -280,7 +275,7 @@
   id: ParadoxCloneSpawn
   components:
   - type: StationEvent
-    weight: 4 # Trauma - Was 5
+    weight: 5
     duration: null
     occursDuringRoundEnd: false
     earliestStart: 20
@@ -381,8 +376,8 @@
       path: /Audio/Announcements/power_off.ogg
       params:
         volume: -4
-    duration: 60
-    maxDuration: 120
+    duration: 50
+    maxDuration: 100
   - type: PowerGridCheckRule
 
 - type: entity
@@ -398,7 +393,7 @@
     duration: 120
     maxDuration: 240
   - type: SolarFlareRule
-    onlyJamHeadsets: true
+    #onlyJamHeadsets: true # Trauma - POV: intercoms and clankers somehow bypass the radio blackout
     affectedChannels:
     - Common
     extraChannels:
@@ -516,9 +511,9 @@
   parent: BaseGameRule
   components:
   - type: StationEvent
-    earliestStart: 60 # Goobstation - was 90 (impossible on goob)
+    earliestStart: 45
     minimumPlayers: 40
-    weight: 1 # Zombies was happening basically every single survival round, so now it's super rare
+    weight: 1
     duration: 1
     occursDuringRoundEnd: false
   - type: ZombieRule

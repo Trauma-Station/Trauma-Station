@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Trauma.Shared.CosmicCult.Prototypes;
 
 namespace Content.Trauma.Client.CosmicCult.UI.CosmicShop;
@@ -7,35 +8,55 @@ namespace Content.Trauma.Client.CosmicCult.UI.CosmicShop;
 [GenerateTypedNameReferences]
 public sealed partial class InfluenceUIBox : BoxContainer
 {
-    [Dependency] private IEntityManager _entityManager = default!;
-
-    private readonly SpriteSystem _sprite;
-
     public Action? OnGainButtonPressed;
 
-    public enum InfluenceUIBoxState : byte
-    {
-        UnlockedAndEnoughEntropy = 0,
-        UnlockedAndNotEnoughEntropy = 1,
-        Owned = 2,
-        Locked = 3,
-    }
+    private SpriteSystem _sprite;
+    private InfluenceUIBoxState? _state;
+    public InfluencePrototype? Proto;
 
-    public readonly InfluenceUIBoxState State;
-    public readonly InfluencePrototype Proto;
-
-    public InfluenceUIBox(InfluencePrototype influenceProto, InfluenceUIBoxState state)
+    public InfluenceUIBox(SpriteSystem sprite)
     {
         RobustXamlLoader.Load(this);
-        IoCManager.InjectDependencies(this);
-        _sprite = _entityManager.System<SpriteSystem>();
 
-        InfluenceIcon.Texture = _sprite.Frame0(influenceProto.Icon);
-        NameLabel.SetMessage(Loc.GetString(influenceProto.Name), Color.FromHex("#4CA7AD"));
+        _sprite = sprite;
 
-        State = state;
-        Proto = influenceProto;
+        GainButton.OnPressed += _ => OnGainButtonPressed?.Invoke();
+    }
 
+    public void SetProto(InfluencePrototype proto)
+    {
+        Proto = proto;
+
+        InfluenceIcon.Texture = _sprite.Frame0(proto.Icon);
+        NameLabel.SetMessage(Loc.GetString(proto.Name), Color.FromHex("#4CA7AD"));
+
+        var type = proto.Passive ? "passive" : "active";
+        Type.Text = Loc.GetString($"influence-type-{type}");
+        Cost.Text = proto.Cost.ToString();
+        Description.SetMessage(Loc.GetString(proto.Description));
+        if (proto.EmpoweredDescription is { } desc)
+        {
+            UpgradeDescription.SetMessage(Loc.GetString(desc), Color.FromHex("#4CA7AD"));
+            UpgradeDescription.Visible = true;
+        }
+        else
+        {
+            UpgradeDescription.Visible = false;
+        }
+
+        _state = null;
+    }
+
+    public void Update(CosmicCultComponent comp)
+    {
+        if (Proto is not { } proto)
+            return;
+
+        var state = GetState(proto, comp);
+        if (state == _state)
+            return;
+
+        _state = state;
         switch (state)
         {
             case InfluenceUIBoxState.Owned:
@@ -43,7 +64,7 @@ public sealed partial class InfluenceUIBox : BoxContainer
 
                 GainButton.Disabled = true;
                 GainButton.Modulate = Color.Green;
-                GainButton.Label.Text = Loc.GetString("cosmic-shop-interface-influences-purchased");
+                GainButton.Text = Loc.GetString("cosmic-shop-interface-influences-purchased");
                 GainButton.ToolTip = Loc.GetString("cosmic-shop-interface-influences-owned-tooltip");
 
                 break;
@@ -52,6 +73,9 @@ public sealed partial class InfluenceUIBox : BoxContainer
                 Status.Text = Loc.GetString("cosmic-shop-interface-influences-unlocked");
 
                 GainButton.Disabled = false;
+                GainButton.Modulate = Color.White;
+                GainButton.Text = Loc.GetString("cosmic-shop-interface-influences-button-gain");
+                GainButton.ToolTip = null;
 
                 break;
 
@@ -60,7 +84,8 @@ public sealed partial class InfluenceUIBox : BoxContainer
 
                 GainButton.Disabled = false;
                 GainButton.Modulate = Color.Gray;
-                GainButton.ToolTip = Loc.GetString("cosmic-shop-interface-influences-unlocked-not-enough-entropy-tooltip", ("entropy", influenceProto.Cost));
+                GainButton.Text = Loc.GetString("cosmic-shop-interface-influences-locked");
+                GainButton.ToolTip = Loc.GetString("cosmic-shop-interface-influences-unlocked-not-enough-entropy-tooltip", ("entropy", proto.Cost));
                 break;
 
             case InfluenceUIBoxState.Locked:
@@ -69,21 +94,38 @@ public sealed partial class InfluenceUIBox : BoxContainer
 
                 GainButton.Disabled = true;
                 GainButton.Modulate = Color.Gray;
-                GainButton.Label.Text = Loc.GetString("cosmic-shop-interface-influences-locked");
+                GainButton.Text = Loc.GetString("cosmic-shop-interface-influences-locked");
                 GainButton.ToolTip = Loc.GetString("cosmic-shop-interface-influences-locked-tooltip");
 
                 break;
         }
-
-        Type.Text = Loc.GetString(influenceProto.Passive ? "influence-type-passive" : "influence-type-active");
-        Cost.Text = influenceProto.Cost.ToString();
-        Description.SetMessage(Loc.GetString(influenceProto.Description));
-        if (influenceProto.EmpoweredDescription is { } desc)
-        {
-            UpgradeDescription.SetMessage(Loc.GetString(desc), Color.FromHex("#4CA7AD"));
-            UpgradeDescription.Visible = true;
-        }
-
-        GainButton.OnPressed += _ => OnGainButtonPressed?.Invoke();
     }
+
+    public static InfluenceUIBoxState GetState(InfluencePrototype proto, CosmicCultComponent comp)
+    {
+        var unlocked = comp.UnlockedInfluences.Contains(proto.ID);
+        var owned = comp.OwnedInfluences.Contains(proto.ID);
+
+        // more verbose than it needs to be, but it reads nicer
+        if (owned)
+            return InfluenceUIBoxState.Owned;
+
+        // TODO: dependency check when skill trees are real
+
+        // if it's unlocked, do we have enough entropy to buy it?
+        if (unlocked)
+            return proto.Cost > comp.EntropyBudget
+                ? InfluenceUIBoxState.UnlockedAndNotEnoughEntropy
+                : InfluenceUIBoxState.UnlockedAndEnoughEntropy;
+
+        return InfluenceUIBoxState.Locked;
+    }
+}
+
+public enum InfluenceUIBoxState : byte
+{
+    UnlockedAndEnoughEntropy = 0,
+    UnlockedAndNotEnoughEntropy = 1,
+    Owned = 2,
+    Locked = 3,
 }

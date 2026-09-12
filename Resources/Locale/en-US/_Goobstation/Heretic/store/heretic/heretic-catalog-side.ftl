@@ -59,15 +59,6 @@ knowledge-path-side-t1-realignment-desc =
     During this process, you will rapidly regenerate stamina and quickly recover from stuns, however, you will be unable to attack.
     Doesn't require focus to cast.
 
-knowledge-path-side-t1-envy-name = Rite of Stolen Faces
-knowledge-path-side-t1-envy-desc =
-    One day, a thief grew tired of stealing gold, so he began stealing something far more valuable: identities.
-
-    Transmute a knife, a heart and a mask of a clown or a mime to create Envy's Knife.
-    Envy's Knife changes your appearance and name to whoever you stabbed with it.
-    You can revert back to your identity at will.
-    Ascension reveals your true identity and prevents you from using the knife.
-
 knowledge-path-side-t1-mask-name = Mask of Madness
 knowledge-path-side-t1-mask-desc =
     Fear pierces you to your core, every instinct screams to tear your gaze away, but it is too late...
@@ -84,7 +75,7 @@ knowledge-path-side-t1-coin-name = Eldritch Coin
 knowledge-path-side-t1-coin-desc =
     The Mansus is a place of all sorts of sins. But greed held a special role.
 
-    Allows you to transmute a bar of silver and gold to create an Eldritch Coin.
+    Allows you to transmute a bar of silver or gold to create an Eldritch Coin.
     The coin will open or close nearby doors when landing on heads and toggle their bolts when landing on tails.
 
 knowledge-path-side-t1-ice-spear-name = Mysteries of Creation
@@ -95,16 +86,17 @@ knowledge-path-side-t1-ice-spear-desc =
     upon hit, but more importantly, it shatters upon throwing, dealing a significant amount of damage and temporarily freezing the target into an ice cube.
     Spear can be freely recalled in your hand unless it is destroyed.
 
-## T2
-knowledge-path-side-t2-curio-name = Unfatomable Curio
-knowledge-path-side-t2-curio-desc =
-    The Mansus holds many curiosities, some are not meant for the mortal eye.
+knowledge-path-side-t1-curio-name = Unfatomable Curio
+knowledge-path-side-t1-curio-desc =
+    Along the way, on this long journey, I encounter all sorts of wonders.
+    My passion for collecting is insatiable, and I would not let a single thing slip by.
+    After all, my own ascension may depend on it.
 
     Allows you to transmute 3 rods, lungs, and utility belt into an Unfathomable Curio -
-    a belt that has a lot of storage space. Whilst worn it will veil you,
+    a belt that has a lot of storage space, and also functions as a focus. Whilst worn it will veil you,
     blocking one blow of incoming damage, at the cost of the veil. The veil will recharge itself out of combat.
-    Additionally, when veil is active, you gan an aura that massively slows down projectiles passing by.
 
+## T2
 knowledge-path-side-t2-rustwalker-name = Rusted Ritual
 knowledge-path-side-t2-rustwalker-desc =
     I combined my knowledge of creation with my desire for corruption. The Marshal knew my name, and the Rusted Hills echoed out.
@@ -188,8 +180,16 @@ knowledge-path-side-t2-rifle-desc =
     These shots function as normal, albeit weak high-caliber munitions when fired.
     You can aim the rifle at distant foes by right-clicking them in Combat Mode,
     causing the shot to mark your victim with your grasp, teleport you directly to them and deal double damage.
+    Allows you to see people through walls when wielded.
 
     You can transmute 3 ballistic ammo casings (used or unused) of any caliber, including shotgun shells to create extra ammunition for the Lionhunter Rifle.
+
+knowledge-path-side-t2-rustgrenade-name = Rust Sower Grenade
+knowledge-path-side-t2-rustgrenade-desc =
+    The choked vines of the Rusted Hills are burdened with such overripe fruits. It undoes the markers of progress, leaving a clean slate to work into new shapes.
+
+    Transmute a modular grenade casing, a rag and two pieces of trash to create the cursed grenade filled with Eldritch Rust.
+    Upon detonation, it releases a huge cloud that blinds organics, rusts affected turfs and obliterates silicons and mechs.
 
 ## T3
 knowledge-path-side-t3-grasp-name = Mind Grasp

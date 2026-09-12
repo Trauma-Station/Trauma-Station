@@ -257,7 +257,7 @@ namespace Content.Server.Voting.Managers
                 }
                 _adminLogger.Add(LogType.Vote, LogImpact.Medium, $"Preset vote finished: {picked}");
                 var ticker = _entityManager.EntitySysManager.GetEntitySystem<GameTicker>();
-                ticker.SetGamePreset(picked);
+                ticker.SetGamePreset(picked, resetDelay: 1); // Trauma - add reset delay
             };
         }
 

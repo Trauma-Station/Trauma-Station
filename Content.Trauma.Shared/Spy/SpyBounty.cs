@@ -4,6 +4,7 @@ using Content.Shared.Body;
 using Content.Shared.Objectives;
 using Content.Shared.Roles;
 using Content.Shared.Store;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
 namespace Content.Trauma.Shared.Spy;
 
@@ -72,10 +73,16 @@ public enum SpyBountyDifficulty : byte
 /// Defines a bounty for spy to steal
 /// </summary>
 [Prototype]
-public sealed partial class SpyBountyPrototype : IPrototype
+public sealed partial class SpyBountyPrototype : IPrototype, IInheritingPrototype
 {
     [IdDataField]
     public string ID { get; private set; } = default!;
+
+    [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<SpyBountyPrototype>))]
+    public string[]? Parents { get; private set; }
+
+    [NeverPushInheritance, AbstractDataField]
+    public bool Abstract { get; private set; }
 
     [DataField(required: true)]
     public SpyBountyDifficulty Difficulty;

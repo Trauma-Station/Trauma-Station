@@ -14,7 +14,7 @@ public sealed partial class EntropicPlumeComponent : Component
     [DataField]
     public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2> Reagents = new()
     {
-        { "Mold", 5f },
+        { "EldritchRust", 5f },
     };
 
     [DataField]

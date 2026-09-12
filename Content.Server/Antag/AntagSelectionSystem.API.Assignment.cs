@@ -396,7 +396,10 @@ public sealed partial class AntagSelectionSystem
     {
         if (proto.SpawnerPrototype is not { } spawnerPrototype)
         {
-            Debug.Assert(!assert, $"Tried to spawn a ghost role for {proto.ID}, but it had no prototype!");
+            // <Trauma> - replaced with a log so it shows on release too
+            if (assert)
+                Log.Error($"Tried to spawn a ghost role for {ToPrettyString(gameRule)}:{proto.ID}, but it had no SpawnerPrototype!");
+            // </Trauma>
             return;
         }
 

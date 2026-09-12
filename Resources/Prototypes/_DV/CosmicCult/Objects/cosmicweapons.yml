@@ -2,7 +2,7 @@
 
 - type: entity
   name: entropic blade
-  parent: [BaseSword, BaseCosmicContraband] # Trauma - Contraband marker (YES WE ARE MAKING A NEW ONE)
+  parent: [BaseSword, BaseCosmicContraband]
   id: SwordCosmicCult
   description: An eerie greatsword wrought of indescribable material, forcibly extruded down into reality. Your instincts tell you that it does not belong here.
   components:
@@ -163,6 +163,8 @@
   id: ScytheCosmicCult
   description: An preternatural scythe, wrought of indescribable material. Even just looking at it makes you feel cold.
   components:
+  - type: WeaponClass
+    class: Tool
   - type: Sharp
   - type: CosmicEquipment
   - type: Sprite

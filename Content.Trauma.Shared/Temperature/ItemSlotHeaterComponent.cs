@@ -16,10 +16,10 @@ public sealed partial class ItemSlotHeaterComponent : Component
     public string Slot;
 
     /// <summary>
-    /// The heat to apply to the entity in Kelvin per <see cref="Update"/> period.
+    /// The thermal energy to apply to the entity in Joules per <see cref="Update"/> period.
     /// </summary>
-    [DataField]
-    public float Temp = 100f;
+    [DataField(required: true)]
+    public float HeatChange;
 
     /// <summary>
     /// The max temperature the item can have.

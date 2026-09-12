@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Damage;
+using Content.Shared.Whitelist;
+using Content.Shared.Tag;
 using Robust.Shared.Audio;
 
 namespace Content.Goobstation.Shared.Shadowling.Components.Abilities.CollectiveMind;
@@ -24,16 +26,36 @@ public sealed partial class ShadowlingSonicScreechComponent : Component
     public float Range = 5f;
 
     /// <summary>
-    /// The amount of time silicons get stunned for (IPCs currently)
+    /// The amount of time silicons get stunned for, according to <see cref="SiliconWhitelist"/>.
     /// </summary>
     [DataField]
     public TimeSpan SiliconStunTime = TimeSpan.FromSeconds(5);
+
+    [DataField]
+    public EntityWhitelist SiliconWhitelist = new()
+    {
+        Components = ["Silicon", "BorgChassis", "Drone"]
+    };
+
+    /// <summary>
+    /// Blacklist for mobs that can't be affected by the screech.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist Blacklist = new()
+    {
+        Components =
+        [
+            "Deaf", // cant hear the screech
+            "Thrall",
+            "Shadowling"
+        ]
+    };
 
     /// <summary>
     /// The tag that indicates that the obstacle hit by the ability is a window.
     /// </summary>
     [DataField]
-    public string WindowTag = "Window";
+    public ProtoId<TagPrototype> WindowTag = "Window";
 
     /// <summary>
     /// How much damage the window structures take from this ability.

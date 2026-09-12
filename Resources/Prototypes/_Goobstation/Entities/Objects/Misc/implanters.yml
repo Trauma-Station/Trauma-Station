@@ -168,14 +168,6 @@
     implant: StypticStimulatorImplant
 
 - type: entity
-  parent: BaseImplantOnlyImplanterSyndi
-  id: ClumsyImplanter
-  suffix: Clumsy
-  components:
-  - type: Implanter
-    implant: ClumsyImplant
-
-- type: entity
   id: BinaryImplanter
   suffix: Binary Decoder
   parent: BaseImplantOnlyImplanterSyndi

@@ -43,6 +43,7 @@ public sealed partial class RanchingFoodSystem : EntitySystem
         }
     }
 
+    // TODO: make this a satiation thing
     public void AddHappiness(Entity<HappinessComponent> ent, int amount)
     {
         if (!TryComp<InternalResourcesComponent>(ent, out var internalResources))

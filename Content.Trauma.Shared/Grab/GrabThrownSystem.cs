@@ -24,19 +24,12 @@ public sealed partial class GrabThrownSystem : CommonGrabThrownSystem
 
     public const float MinMass = 30f;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<GrabThrownComponent, StartCollideEvent>(HandleCollide);
-        SubscribeLocalEvent<GrabThrownComponent, StopThrowEvent>(OnStopThrow);
-    }
-
     public override bool IsGrabThrown(EntityUid thrown)
     {
         return HasComp<GrabThrownComponent>(thrown);
     }
 
+    [SubscribeLocalEvent]
     private void HandleCollide(Entity<GrabThrownComponent> ent, ref StartCollideEvent args)
     {
         if (_netMan.IsClient) // To avoid effect spam
@@ -77,12 +70,13 @@ public sealed partial class GrabThrownSystem : CommonGrabThrownSystem
         _color.RaiseEffect(Color.Red, new List<EntityUid>() { ent }, Filter.Pvs(ent, entityManager: EntityManager));
     }
 
-    private void OnStopThrow(EntityUid uid, GrabThrownComponent comp, StopThrowEvent args)
+    [SubscribeLocalEvent]
+    private void OnStopThrow(Entity<GrabThrownComponent> ent, ref StopThrowEvent args)
     {
-        if (comp.DamageOnCollide != null)
-            _damageable.TryChangeDamage(uid, comp.DamageOnCollide);
+        if (ent.Comp.DamageOnCollide is { } damage)
+            _damageable.TryChangeDamage(ent.Owner, damage);
 
-        RemCompDeferred(uid, comp);
+        RemCompDeferred(ent, ent.Comp);
     }
 
     public override void Throw(
@@ -91,13 +85,16 @@ public sealed partial class GrabThrownSystem : CommonGrabThrownSystem
         Vector2 vector,
         float grabThrownSpeed,
         DamageSpecifier? damage = null,
-        bool drop = true)
+        bool drop = true,
+        bool knockdown = true)
     {
         var comp = EnsureComp<GrabThrownComponent>(uid);
         comp.IgnoreEntity.Add(thrower);
         comp.DamageOnCollide = damage;
 
-        _stun.TryCrawling(uid, drop: drop);
+        if (knockdown)
+            _stun.TryCrawling(uid, drop: drop);
+
         _throwing.TryThrow(uid, vector, grabThrownSpeed, animated: false);
     }
 }

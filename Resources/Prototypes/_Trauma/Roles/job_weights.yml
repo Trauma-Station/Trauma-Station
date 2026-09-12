@@ -1,0 +1,28 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: jobWeight
+  id: Default
+  weights:
+    Quartermaster: 10
+    Captain: 25
+    HeadOfPersonnel: 20
+    NanotrasenRepresentative: 20
+    ChiefEngineer: 15
+    ChiefMedicalOfficer: 10
+    StationAi: 10
+    ResearchDirector: 10
+    HeadOfSecurity: 15
+    Warden: 5
+  # These can be drafted from players if they have the job at least set to low
+  required:
+    Captain: 1
+    StationEngineer: 3
+    MedicalDoctor: 2
+    HeadOfSecurity: 1
+    SecurityOfficer: 3
+    SalvageSpecialist: 2
+
+- type: jobWeight
+  id: Reach
+  required:
+    Captain: 1

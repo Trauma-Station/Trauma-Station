@@ -81,6 +81,12 @@
       department: Service
       time: 5h
       inverted: true
+    #Assistant made into a learner role, D-Class the new assistant role
+    Passenger:
+    - !type:DepartmentTimeRequirement
+      department: Civilian
+      time: 8h
+      inverted: true # Out into the cold with you
     # Service
     Chef: # Anti-raider ops
     - !type:DepartmentTimeRequirement
@@ -148,6 +154,15 @@
     - !type:DepartmentTimeRequirement
       department: Command
       time: 5h
+    InitialInfected:
+    - !type:OverallPlaytimeRequirement
+      time: 1h
+    - &biological_requirement
+      !type:SpeciesRequirement
+      inverted: true
+      species:
+      - IPC
+      - Plasmaman
     Nukeops:
     - !type:OverallPlaytimeRequirement
       time: 5h
@@ -175,6 +190,7 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 2h
+    - *biological_requirement
     Wizard:
     - !type:OverallPlaytimeRequirement
       time: 5h
@@ -186,3 +202,5 @@
     - !type:RoleTimeRequirement
       role: JobBorg
       time: 5h
+    Zombie:
+    - *biological_requirement

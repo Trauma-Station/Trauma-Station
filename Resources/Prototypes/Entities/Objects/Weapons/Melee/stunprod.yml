@@ -1,28 +1,17 @@
 - type: entity
   name: stun prod
-  parent: [BaseItem, BaseMinorContraband, BracingDurabilityWeak] # Trauma - durability
+  parent: [BaseItem, BaseMinorContraband]
   id: Stunprod
   description: A stun prod for illegal incapacitation.
   components:
-  # <Trauma>
-  - type: DelayedKnockdownOnHit
-    useDelay: stunbaton
-  - type: UseDelayBlockMelee
-    delays:
-    - stunbaton
-  - type: Tag
-    tags:
-    - Trash
-  - type: PhysicalComposition
-    materialComposition:
-      Steel: 50
-      Plastic: 25
-  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/stunprod.rsi
     layers:
     - state: stunprod_off
       map: [ "enum.ToggleableVisuals.Layer" ]
+  - type: ItemToggleExaminableStatus
+  - type: ItemToggleRequiresCharge
+    requiredCharge: 120
   - type: ItemToggle
     soundActivate:
       collection: sparks
@@ -36,42 +25,39 @@
       path: /Audio/Machines/button.ogg
       params:
         variation: 0.250
+  - type: ItemTogglePrefix
+    prefixOn: on
+    prefixOff: off
   - type: ItemToggleMeleeWeapon
     activatedDamage:
       types:
         Shock: 5
-  - type: Stunbaton
-    energyPerUse: 120
   - type: MeleeWeapon
+    attackRate: 1.3
     wideAnimationRotation: -135
     damage:
       types:
         Blunt: 9
-    angle: 0 # Trauma - was 60, git gud
+    angle: 60
     animation: WeaponArcThrust
+  - type: MeleeBatteryHitsLeft
+  - type: StaminaDamageOnHitRequiresToggle
+  - type: StaminaDamageOnHitRequiresCharge
+    requiredCharge: 100
   - type: StaminaDamageOnHit
-    lightAttackDamageMultiplier: 4 # Trauma
-    damage: 15 # Trauma - was 35, more overtime damage instead
-    overtime: 40
+    damage: 23
     sound: /Audio/Weapons/egloves.ogg
-  #- type: StaminaDamageOnCollide # Trauma - throwing batongs being guaranteed stun is dogshit
-  #  damage: 35
-  #  sound: /Audio/Weapons/egloves.ogg
+  - type: StaminaDamageOnCollide
+    damage: 23
+    sound: /Audio/Weapons/egloves.ogg
   - type: LandAtCursor # it deals stamina damage when thrown
   - type: Battery
-    maxCharge: 360
-    startingCharge: 360
+    maxCharge: 700
+    startingCharge: 700
   - type: UseDelay
-    delays: # Goobstation
-      stunbaton:
-        length: 2.5
   - type: Item
     heldPrefix: off
-    # <Trauma>
-    shape:
-    - 0,0,2,0
-    storedRotation: 45
-    # </Trauma>
+    size: Normal
   - type: Clothing
     sprite: Objects/Weapons/Melee/stunprod.rsi
     quickEquip: false
@@ -91,3 +77,6 @@
   - type: Construction
     graph: makeshiftstunprod
     node: msstunprod
+  - type: Tag
+    tags:
+    - Stunbaton

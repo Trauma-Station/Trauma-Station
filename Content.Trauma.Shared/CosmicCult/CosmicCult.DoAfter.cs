@@ -5,16 +5,16 @@ using Content.Shared.DoAfter;
 namespace Content.Trauma.Shared.CosmicCult;
 
 [Serializable, NetSerializable]
-public sealed partial class EventCosmicSiphonDoAfter : SimpleDoAfterEvent;
+public sealed partial class CosmicSiphonDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
-public sealed partial class EventCosmicBlankDoAfter : SimpleDoAfterEvent;
+public sealed partial class CosmicBlankDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
-public sealed partial class EventAbsorbRiftDoAfter : SimpleDoAfterEvent;
+public sealed partial class AbsorbRiftDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
-public sealed partial class EventPurgeRiftDoAfter : SimpleDoAfterEvent;
+public sealed partial class PurgeRiftDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
 public sealed partial class StartFinaleDoAfterEvent : SimpleDoAfterEvent;
@@ -23,13 +23,13 @@ public sealed partial class StartFinaleDoAfterEvent : SimpleDoAfterEvent;
 public sealed partial class CancelFinaleDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
-public sealed partial class EventCosmicColossusIngressDoAfter : SimpleDoAfterEvent;
+public sealed partial class CosmicColossusIngressDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
-public sealed partial class CosmicChantryDoAfter : SimpleDoAfterEvent;
+public sealed partial class CosmicChantryDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
-public sealed partial class CosmicHibernationDoAfter : SimpleDoAfterEvent;
+public sealed partial class CosmicHibernationDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
-public sealed partial class CosmicConversionDoAfter : SimpleDoAfterEvent;
+public sealed partial class CosmicConversionDoAfterEvent : SimpleDoAfterEvent;

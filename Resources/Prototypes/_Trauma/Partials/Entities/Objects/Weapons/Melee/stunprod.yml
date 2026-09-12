@@ -1,0 +1,34 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent:
+  - BracingDurabilityWeak
+  id: Stunprod
+  components:
+  - type: DelayedKnockdownOnHit
+    useDelay: stunbaton
+  - type: UseDelayBlockMelee
+    delays:
+    - stunbaton
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 50
+      Plastic: 25
+  - type: MeleeWeapon
+    angle: 0 # git gud
+  - type: StaminaDamageOnHit
+    lightAttackDamageMultiplier: 4
+    damage: 15 # more overtime damage instead
+    overtime: 40
+  - !Remove type: StaminaDamageOnCollide
+  - type: UseDelay
+    delays:
+      stunbaton:
+        length: 2.5
+  - type: Item
+    shape: !Clear
+    - 0,0,2,0
+    storedRotation: 45
+  - type: Tag
+    tags:
+    - Trash
