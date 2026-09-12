@@ -7,3 +7,108 @@
   components:
   - type: LoadMapRule
     gridPath: /Maps/_Goobstation/Shuttles/retort_cburn.yml
+
+- type: entity
+  abstract: true
+  parent: BaseUnknownShuttleRule
+  id: BaseErtShuttleRule
+  components:
+  - type: StationEvent
+    startAudio:
+      path: /Audio/Announcements/attention.ogg
+    duration: 1
+    maxOccurrences: 1
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/retort.yml
+  - type: ConditionalSpawnRule
+
+- type: entity
+  parent: BaseErtShuttleRule
+  id: SpawnCBURN
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-cburn-enroute
+  - type: ConditionalSpawnRule
+    key: cburn
+
+- type: entity
+  parent: BaseErtShuttleRule
+  id: SpawnERTSecurity
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-emergencyresponseteam-security-enroute
+  - type: ConditionalSpawnRule
+    key: ertsec
+
+- type: entity
+  parent: SpawnERTSecurity
+  id: SpawnERTSecurityDelayed
+  components:
+  - type: StationEvent
+    # Can't make announcement delayed
+    startAnnouncement: null
+    startAudio: null
+  - type: GameRule
+    delay:
+      min: 15
+      max: 20
+  - type: RoundEndRule
+  - type: AlertLevelInterceptionRule
+    alertLevel: Gamma
+    overrideAlert: true
+    locked: true
+
+- type: entity
+  parent: BaseErtShuttleRule
+  id: SpawnHECU
+  components:
+  - type: StationEvent
+    startAudio: null # whatever
+  - type: ConditionalSpawnRule
+    key: hecu
+
+- type: entity
+  parent: SpawnHECU
+  id: SpawnHECURoundEnd
+  components:
+  - type: RoundEndRule
+  - type: AlertLevelInterceptionRule
+    alertLevel: Gamma
+    overrideAlert: true
+    locked: true
+
+- type: entity
+  parent: BaseErtShuttleRule
+  id: SpawnERTMedical
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-emergencyresponseteam-medical-enroute
+  - type: ConditionalSpawnRule
+    key: ertmed
+
+- type: entity
+  parent: BaseErtShuttleRule
+  id: SpawnERTEngineering
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-emergencyresponseteam-engineering-enroute
+  - type: ConditionalSpawnRule
+    key: ertengi
+
+- type: entity
+  parent: BaseErtShuttleRule
+  id: SpawnERTJanitorial
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-emergencyresponseteam-generic-enroute
+  - type: ConditionalSpawnRule
+    key: ertjani
+
+- type: entity
+  parent: BaseErtShuttleRule
+  id: SpawnERTChaplain
+  components:
+  - type: StationEvent
+    startAnnouncement: station-event-emergencyresponseteam-chaplain-enroute
+  - type: ConditionalSpawnRule
+    key: ertchap

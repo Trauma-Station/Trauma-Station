@@ -1,0 +1,28 @@
+- type: job
+  id: CBURN
+  access:
+  - NanotrasenRepresentative
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipERT
+
+- type: startingGear
+  id: CBURNGear
+  equipment:
+    neck: ExecutiveIDCard
+    eyes: ClothingEyesGlassesMedSec
+    shoes: ClothingShoesBootsMagERT
+    pocket1: InfectionScannerCburn
+    pocket2: WeaponShotgunSawn
+    belt: ClothingBeltSecurityFilled
+  storage:
+    back:
+    - !Remove WeaponShotgunDoubleBarreled
+    - !Remove PillAmbuzolPlus
+    - !Remove PillAmbuzol
+    - BoxLethalshot
+    - AmbuzolPlusMedipen
+    - AmbuzolMedipen
+    - AmbuzolMedipen
+    - MedkitCombatFilled

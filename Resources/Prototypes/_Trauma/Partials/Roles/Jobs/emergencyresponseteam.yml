@@ -1,0 +1,221 @@
+# Leader
+- type: job
+  id: ERTLeader
+  access:
+  - NanotrasenRepresentative
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipERT
+
+- type: startingGear
+  id: ERTLeaderGear
+  equipment:
+    outerClothing: ClothingOuterArmourDurathread
+
+- type: startingGear
+  id: ERTLeaderGearEVA
+  equipment:
+    neck: ExecutiveIDCard
+    pocket2: WeaponLaserSidearm
+  storage:
+    back:
+    - !Remove PhoneInstrument
+
+- type: startingGear
+  id: ERTLeaderGearArmed
+  equipment:
+    pocket2: !Remove # No disabler
+
+# Chaplain
+- type: job
+  id: ERTChaplain
+  access:
+  - NanotrasenRepresentative
+  special:
+  - !type:AddComponentSpecial
+    components:
+    - type: CurseImmune
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipERT
+
+- type: startingGear
+  id: ERTChaplainGear
+  equipment:
+    neck: ExecutiveIDCard
+    outerClothing: ChaplainHoodie
+    pocket2: ArmamentsBeacon
+
+- type: startingGear
+  id: ERTChaplainGearEVA
+  equipment:
+    neck: ExecutiveIDCard
+  storage:
+    belt:
+    - !Remove Bible
+    - !Remove WeaponPistolMk58
+    - !Remove MagazinePistol
+    - ChaplainUndeterminedBible
+    - Nullrod
+    - WeaponLaserSidearm
+
+# Engineer
+- type: job
+  id: ERTEngineer
+  access:
+  - NanotrasenRepresentative
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipERT
+
+- type: startingGear
+  id: ERTEngineerGear
+  equipment:
+    outerClothing: ClothingOuterArmourDurathread
+
+- type: startingGear
+  id: ERTEngineerGearEVA
+  equipment:
+    neck: ExecutiveIDCard
+  storage:
+    belt:
+    - !Remove WeaponPistolMk58
+    - !Remove MagazinePistol
+    - WeaponLaserSidearm
+
+# Security
+- type: job
+  id: ERTSecurity
+  access:
+  - NanotrasenRepresentative
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipERT
+
+- type: startingGear
+  id: ERTSecurityGear
+  equipment:
+    outerClothing: ClothingOuterArmourDurathread
+
+- type: startingGear
+  id: ERTSecurityGearEVA
+  equipment:
+    neck: ExecutiveIDCard
+  storage:
+    belt:
+    - !Remove WeaponPistolMk58
+    - !Remove MagazinePistol
+    - WeaponLaserSidearm
+
+- type: startingGear
+  id: ERTSecurityGearArmedRifle
+  equipment:
+    neck: ExecutiveIDCard
+    pocket2: WeaponLaserSidearm
+  inhand:
+  - !Remove WeaponLaserCannon
+  - !Remove PortableRecharger
+
+- type: startingGear
+  id: ERTSecurityGearArmedGrenade
+  equipment:
+    pocket2: !Remove # No disabler
+  storage:
+    belt:
+    - !Remove WeaponPistolMk58
+    - !Remove MagazinePistol
+    - WeaponLaserSidearm
+
+- type: startingGear
+  id: ERTSecurityGearArmedVanguard
+  equipment:
+    pocket2: !Remove # No disabler
+  storage:
+    back:
+    - !Remove WeaponPistolMk58
+    - !Remove MagazinePistol
+    - WeaponLaserSidearm
+
+- type: startingGear
+  id: ERTSecurityGearArmedShotgun
+  equipment:
+    pocket2: !Remove # No disabler
+  storage:
+    back:
+    - !Remove WeaponPistolMk58
+    - !Remove MagazinePistol
+    - WeaponLaserSidearm
+
+# Medical
+- type: job
+  id: ERTMedical
+  access:
+  - NanotrasenRepresentative
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipERT
+
+- type: startingGear
+  id: ERTMedicalGear
+  equipment:
+    outerClothing: ClothingOuterArmourDurathread
+
+- type: startingGear
+  id: ERTMedicalGearEVA
+  equipment:
+    neck: ExecutiveIDCard
+    belt: ClothingBeltSecurityWebbingFilledMedical
+    eyes: ClothingEyesGlassesMedSec
+  storage:
+    back: !Clear
+    - ClothingEyesGlassesChemical
+    - ChemistryBottleOmnizine
+    - MedkitAdvancedFilled
+    - CentCommHypo
+    - JugOxandrolone
+    - JugSalicylicAcid
+    - ParamedHypo
+    - CartridgeAtropine
+    - CartridgeAtropine
+    belt: !Remove
+
+- type: startingGear
+  id: ERTMedicalGearArmed
+  equipment:
+    suitstorage: WeaponLaserCannon
+    pocket2: WeaponLaserSidearm
+  storage:
+    # Parented from ERTMedicalGearEVA
+    back: !Remove
+    belt: !Remove
+
+# Janitor
+- type: job
+  id: ERTJanitor
+  access:
+  - NanotrasenRepresentative
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipERT
+
+- type: startingGear
+  id: ERTJanitorGear
+  equipment:
+    outerClothing: ClothingOuterArmourDurathread
+
+- type: startingGear
+  id: ERTJanitorGearEVA
+  equipment:
+    neck: ExecutiveIDCard
+  storage:
+    belt:
+    - !Remove WireBrush
+    - !Remove WeaponPistolMk58
+    - !Remove MagazinePistol
+    - WireBrushElectrical
+    - WeaponLaserSidearm

@@ -1,0 +1,229 @@
+- type: entityEffect
+  id: SpawnERTLeaderEVA
+  effects:
+  - !type:SpawnRandomHumanoid
+    settings: ERTLeaderEVA
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnERTSecurityEVA
+  effects:
+  - !type:SpawnRandomHumanoid
+    settings: ERTSecurityEVA
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnERTMedicalEVA
+  effects:
+  - !type:SpawnRandomHumanoid
+    settings: ERTMedicalEVA
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnERTJanitorEVA
+  effects:
+  - !type:SpawnRandomHumanoid
+    settings: ERTJanitorEVA
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnERTEngineerEVA
+  effects:
+  - !type:SpawnRandomHumanoid
+    settings: ERTEngineerEVA
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnERTChaplainEVA
+  effects:
+  - !type:SpawnRandomHumanoid
+    settings: ERTChaplainEVA
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnCBURNAgent
+  effects:
+  - !type:SpawnRandomHumanoid
+    settings: CBURNAgent
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnHecuSoldier
+  effects:
+  - !type:SpawnRandomHumanoid
+    settings: HecuSoldier
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnVendingMachineSec
+  effects:
+  - !type:SpawnAnchored
+    entity: VendingMachineSec
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnVendingMachineEngivend
+  effects:
+  - !type:SpawnAnchored
+    entity: VendingMachineEngivend
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnCrematorium
+  effects:
+  - !type:SpawnAnchored
+    entity: Crematorium
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnCrateChemistrySupplies
+  effects:
+  - !type:SpawnEntity
+    entity: CrateChemistrySupplies
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnCrateJanitorialCleanerGrenades
+  effects:
+  - !type:SpawnEntity
+    entity: CrateJanitorialCleanerGrenades
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnCrateJanitorialReplacementLights
+  effects:
+  - !type:SpawnEntity
+    entity: CrateJanitorialReplacementLights
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnCrateJanitorialMousetraps
+  effects:
+  - !type:SpawnEntity
+    entity: CrateJanitorialMousetraps
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnCratePlantBGoneSpray
+  effects:
+  - !type:SpawnEntity
+    entity: CratePlantBGoneSpray
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnEnergyChemDispenser
+  effects:
+  - !type:SpawnAnchored
+    entity: EnergyChemDispenser
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnChemMaster
+  effects:
+  - !type:SpawnAnchored
+    entity: ChemMaster
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnGrinderSupplies
+  effects:
+  - !type:SpawnAnchored
+    entity: TableReinforced
+  - !type:SpawnAnchored
+    entity: KitchenReagentGrinderBeakerLarge
+  - !type:SpawnEntity
+    entity: SheetPlasma
+  - !type:SpawnEntity
+    entity: SheetUranium
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnCrateHolySuppliesAdvanced
+  effects:
+  - !type:SpawnEntity
+    entity: CrateHolySuppliesAdvanced
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnAltarSpawner
+  effects:
+  - !type:SpawnAnchored
+    entity: AltarSpawner
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnCrateEngineeringAMEControl
+  effects:
+  - !type:SpawnEntity
+    entity: CrateEngineeringAMEControl
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnCrateEngineeringAMEShielding
+  effects:
+  - !type:SpawnEntity
+    entity: CrateEngineeringAMEShielding
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnCrateEngineeringAMEJar
+  effects:
+  - !type:SpawnEntity
+    entity: CrateEngineeringAMEJar
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnGunSafeLaserRandom
+  effects:
+  - !type:SpawnEntity
+    entity: GunSafeLaserRandom
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnGunSafeBallisticRandom
+  effects:
+  - !type:SpawnEntity
+    entity: GunSafeBallisticRandom
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnGunSafeTruncheon
+  effects:
+  - !type:SpawnEntity
+    entity: GunSafeTruncheon
+  - !type:Delete
+    queued: true
+
+- type: entityEffect
+  id: SpawnGunSafeCburnSpear
+  effects:
+  - !type:SpawnEntity
+    entity: GunSafeCburnSpear
+  - !type:Delete
+    queued: true

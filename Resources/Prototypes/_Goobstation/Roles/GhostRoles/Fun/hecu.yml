@@ -15,28 +15,36 @@
   - CentralCommand
   - NanotrasenRepresentative
   special:
-  - !type:AddComponentSpecial
-    components:
-    - type: KnowledgeGrant
-      skills:
-        MeleeKnowledge: 50
-        ShootingKnowledge: 50
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipERT
+  - !type:AddImplantSpecial
+    implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
 
 - type: startingGear
   id: HECUOperativeGear
   equipment:
     jumpsuit: ClothingUniformHecu
-    back: ClothingBackpackMercFilledHECU
+    back: ClothingBackpackMerc
     mask: ClothingMaskGasExplorer
     eyes: ClothingEyesGlassesMedSec
     ears: ClothingHeadsetAltCentCom
     gloves: ClothingHandsGlovesCombat
-    outerClothing: ClothingOuterVestWeb
+    outerClothing: ClothingOuterVestWebDurathread
     shoes: ClothingShoesBootsCombatFilled
     head: ClothingHeadHelmetMerc
     id: HecuPDA
     belt: ClothingBeltMercWebbing
-    pocket1: MagazinePistolSubMachineGun
-    pocket2: MagazinePistolSubMachineGun
-  inhand:
-  - WeaponSubMachineGunDrozd
+    pocket2: FlashlightSeclite
+  storage:
+    back:
+    - CrowbarRed
+    - BoxZiptie
+    - MedkitCombatFilled
+    - Flash
+    belt:
+    - WeaponPistolMk58
+    - MagazinePistol
+    - MagazinePistol
+    - MagazinePistol
+    - MagazinePistol

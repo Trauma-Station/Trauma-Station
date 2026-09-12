@@ -1,0 +1,25 @@
+- type: job
+  id: CentralCommandOfficial
+  supervisors: job-supervisors-centcom
+  requirements:
+  - !type:AgeRequirement
+    requiredAge: 21
+  access:
+  - NanotrasenRepresentative
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipERT
+
+- type: startingGear
+  id: CentcommGear
+  equipment:
+    eyes: ClothingEyesGlassesCentCommNoThermal
+    gloves: ClothingHandsGlovesHeavyGoldenTrim
+    back: ClothingBackpackSatchelLeather
+    belt: ClothingBeltHolsterFilledCentComm
+    pocket2: !Remove # Removed CC pen - its in pda
+  storage:
+    back:
+    - HandheldFaxOfficial
+    - CrowbarRed
