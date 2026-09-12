@@ -28,6 +28,7 @@ public sealed partial class GameRuleSpawnerSystem : EntitySystem
             }
 
             _effects.TryApplyEffect(uid, effect, predicted: false);
+            QueueDel(uid);
         }
     }
 }
