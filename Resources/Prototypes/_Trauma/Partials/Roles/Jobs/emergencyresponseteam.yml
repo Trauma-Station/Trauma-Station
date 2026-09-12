@@ -1,4 +1,5 @@
-# Leader
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: job
   id: ERTLeader
   access:
