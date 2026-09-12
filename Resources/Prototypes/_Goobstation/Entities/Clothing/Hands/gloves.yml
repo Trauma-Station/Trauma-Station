@@ -137,13 +137,6 @@
             variation: 0.125
 
 - type: entity
-  parent: ClothingHandsGlovesDeathsquad
-  id: ClothingHandsGlovesDeathsquadUnremovable
-  suffix: Unremovable
-  components:
-  - type: Unremoveable
-
-- type: entity
   parent: [ClothingHandsGlovesColorYellow, BaseEngineeringContraband]
   id: ClothingHandsGlovesAtmosInsulated
   name: insulated atmos gloves
