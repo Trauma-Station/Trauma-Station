@@ -41,7 +41,7 @@
     damage:
       types:
         Ballistic: 3 # Trauma, was 10
-        Structural: 5 # Trauma, was 15
+        Structural: 6
 
 - type: entity
   parent: PelletShotgun

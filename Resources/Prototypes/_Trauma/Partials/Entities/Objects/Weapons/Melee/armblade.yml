@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: ArmBlade
+  name: arm blade
+  description: A grotesque blade made out of bone and flesh that cleaves through people as a hot knife through butter.
+  components:
+  - type: UseDelay # for instant prying
+    delay: 1
+  - type: Scalpel
+    speed: 0.3
+  - type: BoneSaw
+    speed: 0.75
+  - type: SurgeryTool
+    startSound:
+      path: /Audio/_Shitmed/Medical/Surgery/saw.ogg
+  - type: MeleeWeapon
+    attackRate: 0.75
+    damage:
+      types: !Clear
+        Slash: 25
+        Piercing: 15
