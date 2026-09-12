@@ -102,15 +102,13 @@ public abstract partial class JobListingsSystem : EntitySystem
     /// A helper method to get important info about a side job.
     /// Called by the Ui to display side job information.
     /// </summary>
-    public bool GetInfo(EntityUid sideJob, Entity<JobListingsComponent> jobBoard, [NotNullWhen(true)] out SideJobInfo? info)
+    public SideJobInfo? GetInfo(EntityUid sideJob, Entity<JobListingsComponent> jobBoard)
     {
-        info = null;
-
         var mind = jobBoard.Comp.Mind;
         if (mind is null || !ObjectiveQuery.TryComp(sideJob, out var objectiveComp) || !SideJobQuery.TryComp(sideJob, out var sideJobComp))
-            return false;
+            return null;
         if (sideJobComp.Reward is null || sideJobComp.RewardName is null || objectiveComp.Icon is null)
-            return false;
+            return null;
 
         // don't use SharedObjectiveSystem.GetInfo because it will error on the client since progress is not predicted
         var meta = MetaData(sideJob);
@@ -118,8 +116,45 @@ public abstract partial class JobListingsSystem : EntitySystem
         var description = meta.EntityDescription;
         var icon = objectiveComp.Icon;
         var rewardName = sideJobComp.RewardName;
-        info = new SideJobInfo(GetNetEntity(sideJob), sideJobComp.CachedProgress, title, description, icon, rewardName, sideJobComp.ReputationGain);
-        return true;
+        return new SideJobInfo(sideJob, sideJobComp.CachedProgress, title, description, icon, rewardName, sideJobComp.ReputationGain);
+    }
+
+    /// <summary>
+    /// A helper method for the Ui to easily fetch the cached progress of a side job.
+    /// </summary>
+    public float GetCachedProgress(EntityUid sideJob)
+    {
+        if (!SideJobQuery.TryComp(sideJob, out var sideJobComp))
+            return 0f;
+        return sideJobComp.CachedProgress;
+    }
+
+    /// <summary>
+    /// Get a list of SideJobInfo-s for all available side jobs.
+    /// </summary>
+    public List<SideJobInfo> GetAvailableSideJobsInfos(Entity<JobListingsComponent> jobBoard)
+    {
+        List<SideJobInfo> results = new();
+        foreach (var sideJob in jobBoard.Comp.AvailableSideJobs.ContainedEntities)
+        {
+            if (GetInfo(sideJob, jobBoard) is { } info)
+                results.Add(info);
+        }
+        return results;
+    }
+
+    /// <summary>
+    /// Get a list of SideJobInfo-s for all accepted side jobs.
+    /// </summary>
+    public List<SideJobInfo> GetAcceptedSideJobsInfos(Entity<JobListingsComponent> jobBoard)
+    {
+        List<SideJobInfo> results = new();
+        foreach (var sideJob in jobBoard.Comp.AcceptedSideJobs.ContainedEntities)
+        {
+            if (GetInfo(sideJob, jobBoard) is { } info)
+                results.Add(info);
+        }
+        return results;
     }
 
     /// <summary>
@@ -152,43 +187,12 @@ public abstract partial class JobListingsSystem : EntitySystem
     /// <summary>
     /// Updates the job listings ui.
     /// </summary>
-    public void UpdateUi(EntityUid owner, EntityUid actor, bool loading = false)
+    public void UpdateUi(EntityUid owner, EntityUid actor)
     {
-        if (!GetJobBoard(owner, out var jobBoard))
+        if (GetJobBoard(owner) is not { } jobBoard)
             return;
 
-        UpdateAllSideJobs(jobBoard.Value);
-
-        var availableSideJobInfos = new List<SideJobInfo>();
-        foreach (var sideJob in jobBoard.Value.Comp.AvailableSideJobs.ContainedEntities)
-        {
-            if (GetInfo(sideJob, jobBoard.Value, out var info))
-                availableSideJobInfos.Add(info.Value);
-        }
-
-        if (loading)
-            availableSideJobInfos.Clear();
-
-        var acceptedSideJobsInfos = new List<SideJobInfo>();
-        foreach (var sideJob in jobBoard.Value.Comp.AcceptedSideJobs.ContainedEntities)
-        {
-            if (GetInfo(sideJob, jobBoard.Value, out var info))
-                acceptedSideJobsInfos.Add(info.Value);
-        }
-
-        var state = new JobListingsBUIState(
-            availableSideJobInfos,
-            acceptedSideJobsInfos,
-            jobBoard.Value.Comp.Reputation,
-            GetReputationLevel(jobBoard.Value),
-            jobBoard.Value.Comp.BonusRefresh,
-            jobBoard.Value.Comp.RefreshTime,
-            jobBoard.Value.Comp.RefreshWaitDuration,
-            jobBoard.Value.Comp.MaximumAcceptedSideJobs,
-            loading
-        );
-
-        Ui.SetUiState(owner, JobListingsUiKey.Key, state);
+        UpdateAllSideJobs(jobBoard);
     }
 
     /// <summary>
@@ -221,18 +225,15 @@ public abstract partial class JobListingsSystem : EntitySystem
     /// <summary>
     /// Find a job board from an entity that has a <see cref="RemoteJobListingsComponent"/>.
     /// </summary>
-    public bool GetJobBoard(EntityUid owner, [NotNullWhen(true)] out Entity<JobListingsComponent>? jobBoard)
+    public Entity<JobListingsComponent>? GetJobBoard(EntityUid owner)
     {
-        jobBoard = null;
-
         if (!_remoteJobListingsQuery.TryComp(owner, out var remoteComp))
-            return false;
+            return null;
         var jobListings = remoteComp.JobListings;
         if (!JobListingsQuery.TryComp(jobListings, out var jobListingsComp))
-            return false;
+            return null;
 
-        jobBoard = (jobListings, jobListingsComp);
-        return true;
+        return (jobListings, jobListingsComp);
     }
 
     /// <summary>
@@ -344,39 +345,39 @@ public abstract partial class JobListingsSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsAcceptJobMessage msg)
     {
-        if (!GetJobBoard(owner.Owner, out var jobBoard))
+        if (GetJobBoard(owner.Owner) is not { } jobBoard)
             return;
-        AcceptSideJob(jobBoard.Value, msg.Actor, GetEntity(msg.Job));
+        AcceptSideJob(jobBoard, msg.Actor, GetEntity(msg.Job));
         UpdateUi(owner.Owner, msg.Actor);
     }
 
     [SubscribeLocalEvent]
     private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsClaimJobMessage msg)
     {
-        if (!GetJobBoard(owner.Owner, out var jobBoard))
+        if (GetJobBoard(owner.Owner) is not { } jobBoard)
             return;
-        ClaimSideJob(jobBoard.Value, msg.Actor, GetEntity(msg.Job));
+        ClaimSideJob(jobBoard, msg.Actor, GetEntity(msg.Job));
         UpdateUi(owner.Owner, msg.Actor);
     }
 
     [SubscribeLocalEvent]
     private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsCancelJobMessage msg)
     {
-        if (!GetJobBoard(owner.Owner, out var jobBoard))
+        if (GetJobBoard(owner.Owner) is not { } jobBoard)
             return;
-        CancelSideJob(jobBoard.Value, GetEntity(msg.Job));
+        CancelSideJob(jobBoard, GetEntity(msg.Job));
         UpdateUi(owner.Owner, msg.Actor);
     }
 
     [SubscribeLocalEvent]
     private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsRefreshMessage msg)
     {
-        if (!GetJobBoard(owner.Owner, out var jobBoard))
+        if (GetJobBoard(owner.Owner) is not { } jobBoard)
             return;
-        if (!CanRefresh(jobBoard.Value))
+        if (!CanRefresh(jobBoard))
             return;
-        Refresh(jobBoard.Value);
-        UpdateUi(owner.Owner, msg.Actor, loading: _net.IsClient);
+        Refresh(jobBoard);
+        UpdateUi(owner.Owner, msg.Actor);
     }
 }
 

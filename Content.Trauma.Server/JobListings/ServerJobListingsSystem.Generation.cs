@@ -40,7 +40,7 @@ public sealed partial class ServerJobListingsSystem
             }
 
             sideJobComp.Reward = reward;
-            sideJobComp.RewardName = name;
+            sideJobComp.RewardName = Loc.GetString(name);
         }
 
         DirtyFields(ent, sideJobComp, null, [nameof(SideJobComponent.Reward), nameof(SideJobComponent.RewardName)]);

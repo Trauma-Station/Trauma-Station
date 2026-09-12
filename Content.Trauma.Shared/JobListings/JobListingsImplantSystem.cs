@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.JobListings;
 /// <summary>
 /// System that allows the uplink implant to open the job board.
 /// </summary>
-public abstract partial class JobListingsImplantSystem : EntitySystem
+public sealed partial class JobListingsImplantSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private JobListingsSystem _jobs = default!;
@@ -16,7 +16,7 @@ public abstract partial class JobListingsImplantSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnImplantImplanted(Entity<JobListingsImplantComponent> ent, ref ImplantImplantedEvent args)
     {
-        ent.Comp.StoredAction = _actions.AddAction(args.Implanted, ent.Comp.Action, ent.Owner);
+        ent.Comp.StoredAction = _actions.AddAction(args.Implanted, ent.Comp.Action, ent);
         Dirty(ent);
     }
 

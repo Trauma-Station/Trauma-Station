@@ -9,8 +9,9 @@ namespace Content.Trauma.Client.JobListings;
 [GenerateTypedNameReferences]
 public sealed partial class SideJobControl : Control
 {
+    private IEntityManager _entity = default!;
     private IGameTiming _timing = default!;
-    private SpriteSystem _sprite;
+    private SpriteSystem _sprite = default!;
 
     private NetEntity? _sideJob;
     private bool _cancelAlreadyPressed = false;
@@ -22,11 +23,12 @@ public sealed partial class SideJobControl : Control
     public Action<NetEntity>? OnCancelled;
     public Action<NetEntity>? OnClaimed;
 
-    public SideJobControl(IGameTiming timing, SpriteSystem sprite)
+    public SideJobControl(IEntityManager entity, IGameTiming timing, SpriteSystem sprite)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
+        _entity = entity;
         _timing = timing;
         _sprite = sprite;
 
@@ -103,6 +105,6 @@ public sealed partial class SideJobControl : Control
         ClaimButton.Disabled = !canClaim;
         ProgressBar.Value = info.Progress;
         ProgressLabel.Text = Loc.GetString("job-listings-ui-progress", ("progress", info.Progress.ToString("P0")));
-        _sideJob = info.Entity;
+        _sideJob = _entity.GetNetEntity(info.Entity);
     }
 }
