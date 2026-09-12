@@ -15,7 +15,7 @@ public sealed partial class JobListingsBUI : BoundUserInterface
     {
         _menu = this.CreateWindow<JobListingsMenu>();
         _menu.OnAccepted += job => SendPredictedMessage(new JobListingsAcceptJobMessage(job));
-        _menu.OnClaimed += job => SendPredictedMessage(new JobListingsCancelJobMessage(job));
+        _menu.OnClaimed += job => SendPredictedMessage(new JobListingsClaimJobMessage(job));
         _menu.OnCancelled += job => SendPredictedMessage(new JobListingsCancelJobMessage(job));
         _menu.OnRefresh += () => SendPredictedMessage(new JobListingsRefreshMessage());
         _menu.SetOwner(Owner);

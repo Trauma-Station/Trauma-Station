@@ -125,7 +125,7 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
     public override void Refresh(Entity<JobListingsComponent> jobBoard)
     {
         base.Refresh(jobBoard);
-        Container.CleanContainer(jobBoard.Comp.AcceptedSideJobs);
+        Container.CleanContainer(jobBoard.Comp.AvailableSideJobs);
         FillSideJobs(jobBoard);
     }
 
