@@ -10,7 +10,6 @@ using Content.Server.Roles;
 using Content.Shared.Mind;
 using Content.Shared.Roles;
 using Content.Shared.Station.Components;
-using Content.Shared.Store;
 using Content.Trauma.Server.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
@@ -56,10 +55,12 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
     {
         base.ActiveTick(uid, component, gameRule, frameTime);
 
-        if (_timing.CurTime < component.NextPassivePointUpdate)
+        var now = _timing.CurTime;
+
+        if (now < component.NextPassivePointUpdate)
             return;
 
-        component.NextPassivePointUpdate = _timing.CurTime + component.PassivePointCooldown;
+        component.NextPassivePointUpdate = now + component.PassivePointCooldown;
 
         foreach (var mind in component.Minds)
         {
