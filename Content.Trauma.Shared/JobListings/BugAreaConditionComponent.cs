@@ -13,8 +13,8 @@ public sealed partial class BugAreaConditionComponent : Component
     /// <summary>
     /// The area to bug.
     /// </summary>
-    [DataField(required: true)]
-    public EntProtoId<AreaComponent> TargetArea;
+    [DataField]
+    public EntProtoId<AreaComponent>? TargetArea;
 
     /// <summary>
     /// The name the objective with this component will have.

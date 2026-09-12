@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Content.Shared.Mind;
 using Content.Shared.PDA;
 using Content.Shared.Objectives.Components;
@@ -61,7 +62,7 @@ public abstract partial class JobListingsSystem : EntitySystem
     /// </summary>
     public void CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
     {
-        PredictedQueueDel(sideJob);
+        PredictedDel(sideJob);
     }
 
     /// <summary>
@@ -87,17 +88,14 @@ public abstract partial class JobListingsSystem : EntitySystem
 
         if (!sideJobComp.Repeatable)
         {
-            var availableSideJobProto = Prototype(sideJob);
-            if (availableSideJobProto is not null)
-                jobBoard.Comp.CompletedObjectives.Add(availableSideJobProto.ID);
+            var ev = new SideJobClaimedEvent(sideJob);
+            RaiseLocalEvent(jobBoard, ref ev);
         }
 
         GainReputation(jobBoard, sideJobComp.ReputationGain);
         jobBoard.Comp.JobsCompleted += 1;
         DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.JobsCompleted));
-        // set reparent to false to stop error spam
-        Container.Remove(sideJob, jobBoard.Comp.AcceptedSideJobs, reparent: false);
-        PredictedQueueDel(sideJob);
+        PredictedDel(sideJob);
     }
 
     /// <summary>
@@ -238,6 +236,20 @@ public abstract partial class JobListingsSystem : EntitySystem
     }
 
     /// <summary>
+    /// Get a list of all side jobs this job board currently has in existence.
+    /// </summary>
+    public List<EntityUid> GetExistingSideJobs(EntityUid jobBoard)
+    {
+        var result = new List<EntityUid>();
+        if (!TryComp<JobListingsComponent>(jobBoard, out var jobBoardComp))
+            return result;
+
+        result.AddRange(jobBoardComp.AvailableSideJobs.ContainedEntities);
+        result.AddRange(jobBoardComp.AcceptedSideJobs.ContainedEntities);
+        return result;
+    }
+
+    /// <summary>
     /// Setup the Ui key for the job board Ui.
     /// </summary>
     public void InitUi(Entity<JobListingsComponent> jobBoard, EntityUid host)
@@ -369,6 +381,12 @@ public abstract partial class JobListingsSystem : EntitySystem
 }
 
 /// <summary>
+/// Raised on the job board to retrieve a list of potential side jobs (that are spawned in null space).
+/// </summary>
+[ByRefEvent]
+public record struct GenerateSideJobsEvent(int EffectiveLevel, Entity<MindComponent> Mind, List<EntityUid> SideJobs);
+
+/// <summary>
 /// Raised on a side job when it is created.
 /// </summary>
 [ByRefEvent]
@@ -379,3 +397,9 @@ public record struct SideJobCreatedEvent(int EffectiveLevel, bool Cancelled = fa
 /// </summary>
 [ByRefEvent]
 public record struct SideJobToolSpawned(EntityUid Objective);
+
+/// <summary>
+/// Raised on the job board when a non-repeatable side job is completed and its reward claimed, so the same job is not generated again.
+/// </summary>
+[ByRefEvent]
+public record struct SideJobClaimedEvent(EntityUid SideJob);

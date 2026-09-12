@@ -20,19 +20,6 @@ public sealed partial class JobListingsComponent : Component
     public int MaximumSideJobs;
 
     /// <summary>
-    /// List of prototypes of the objectives offered for side jobs.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public List<EntProtoId> SideJobOffers = new();
-
-    /// <summary>
-    /// List of prototypes of the objectives offered for side jobs, except this one is always pooled from first.
-    /// For the kill objectives because otherwise they would get picked super rarely because there is 1 kill objective and 10 different steal objectives.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public List<EntProtoId> PrioritySideJobOffers = new();
-
-    /// <summary>
     /// The ID of the AvailableSideJobs container.
     /// </summary>
     [ViewVariables]
@@ -78,7 +65,7 @@ public sealed partial class JobListingsComponent : Component
     /// The reputation of the traitor who owns the job board.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int Reputation = 0;
+    public int Reputation;
 
     /// <summary>
     /// Reputation required to reach each level.
@@ -92,7 +79,7 @@ public sealed partial class JobListingsComponent : Component
     /// Tracked for the end of round summary.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public int JobsCompleted = 0;
+    public int JobsCompleted;
 
     /// <summary>
     /// A list of <see cref="RemoteJobListingsComponent"/> that are targeting this entity.
@@ -100,13 +87,6 @@ public sealed partial class JobListingsComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> Remotes = new();
-
-    /// <summary>
-    /// Non-repeating objectives that have already been completed.
-    /// You will only be asked to steal the CE's magboots once, for example.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public HashSet<EntProtoId> CompletedObjectives = new();
 
     /// <summary>
     /// If the job board has a bonus refresh available from leveling up.

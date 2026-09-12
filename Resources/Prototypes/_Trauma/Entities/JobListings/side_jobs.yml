@@ -42,9 +42,8 @@
 
 # minor - bug area
 - type: entity
-  abstract: true
   parent: BaseMinorSideJob
-  id: BaseBugAreaSideJob
+  id: BugAreaSideJob
   components:
   - type: BugAreaCondition
     objectiveName: bug-objective-name
@@ -52,49 +51,6 @@
     iconEntity: SyndicateBug
   - type: SideJob
     tool: SyndicateBug
-
-- type: entity
-  parent: BaseBugAreaSideJob
-  id: BugAreaSideJobCmo
-  components:
-  - type: BugAreaCondition
-    targetArea: AreaOfficeCmo
-
-- type: entity
-  parent: BaseBugAreaSideJob
-  id: BugAreaSideJobCE
-  components:
-  - type: BugAreaCondition
-    targetArea: AreaOfficeCE
-
-- type: entity
-  parent: BaseBugAreaSideJob
-  id: BugAreaSideJobHop
-  components:
-  - type: BugAreaCondition
-    targetArea: AreaOfficeHop
-
-- type: entity
-  parent: BaseBugAreaSideJob
-  id: BugAreaSideJobHos
-  components:
-  - type: BugAreaCondition
-    targetArea: AreaOfficeHos
-
-- type: entity
-  parent: BaseBugAreaSideJob
-  id: BugAreaSideJobRd
-  components:
-  - type: BugAreaCondition
-    targetArea: AreaOfficeRd
-
-- type: entity
-  parent: BaseBugAreaSideJob
-  id: BugAreaSideJobQm
-  components:
-  - type: BugAreaCondition
-    targetArea: AreaOfficeQm
-
 
 # major
 - type: entity
@@ -125,45 +81,17 @@
 
 # major - grant theft
 - type: entity
-  abstract: true
   parent: BaseMajorSideJob
-  id: BaseStealSideJob
+  id: StealSideJob
   components:
   - type: StealCondition
     objectiveNoOwnerText: side-job-steal-title-no-owner
     objectiveText: side-job-steal-title
     descriptionText: side-job-steal-description
+    descriptionMultiplyText: side-job-steal-description-multiple
   - type: StealConditionRequireScan
   - type: SideJob
     tool: SyndicateScanalyzer
-
-- type: entity
-  parent: [ BaseStealSideJob, CMOHyposprayStealObjective ]
-  id: CMOHyposprayStealSideJob
-
-- type: entity
-  parent: [ BaseStealSideJob, RDHardsuitStealObjective ]
-  id: RDHardsuitStealSideJob
-
-- type: entity
-  parent: [ BaseStealSideJob, HandTeleporterStealObjective]
-  id: HandTeleporterStealSideJob
-
-- type: entity
-  parent: [ BaseStealSideJob, MagbootsStealObjective]
-  id: MagbootsStealSideJob
-
-- type: entity
-  parent: [ BaseStealSideJob, ClipboardStealObjective]
-  id: ClipboardStealSideJob
-
-- type: entity
-  parent: [ BaseStealSideJob, CaptainJetpackStealObjective ]
-  id: CaptainJetpackStealSideJob
-
-- type: entity
-  parent: [ BaseStealSideJob, CaptainGunStealObjective ]
-  id: CaptainGunStealSideJob
 
 # major - kill
 - type: entity

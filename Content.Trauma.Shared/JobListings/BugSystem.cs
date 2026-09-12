@@ -55,7 +55,7 @@ public sealed partial class BugSystem : EntitySystem
     {
         if (ent.Comp.TargetArea is not { } area)
         {
-            Log.Error($"Bug's {ent.Owner} TargetArea is not set.");
+            Log.Error($"Bug {ent.Owner}'s TargetArea is not set.");
             return;
         }
 
@@ -71,7 +71,13 @@ public sealed partial class BugSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnAssigned(Entity<BugAreaConditionComponent> ent, ref ObjectiveAssignedEvent args)
     {
-        var name = ProtoMan.Index(ent.Comp.TargetArea).Name;
+        if (ent.Comp.TargetArea is not { } area)
+        {
+            Log.Error($"BugObjective {ent.Owner}'s TargetArea is not set.");
+            return;
+        }
+
+        var name = ProtoMan.Index(area).Name;
         _metaData.SetEntityName(ent.Owner, Loc.GetString(ent.Comp.ObjectiveName, ("area", name)));
         _metaData.SetEntityDescription(ent.Owner, Loc.GetString(ent.Comp.ObjectiveDescription, ("area", name)));
         _objectives.SetIcon(ent.Owner, new SpriteSpecifier.EntityPrototype(ent.Comp.IconEntity));
@@ -80,8 +86,14 @@ public sealed partial class BugSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnGetObjectiveProgress(Entity<BugAreaConditionComponent> ent, ref ObjectiveGetProgressEvent args)
     {
+        if (ent.Comp.TargetArea is not { } area)
+        {
+            Log.Error($"BugObjective {ent.Owner}'s TargetArea is not set.");
+            return;
+        }
+
         args.Progress = 0f;
-        if (IsAreaBugged((args.MindId, args.Mind), ent.Comp.TargetArea))
+        if (IsAreaBugged((args.MindId, args.Mind), area))
             args.Progress = 1f;
     }
 

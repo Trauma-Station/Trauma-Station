@@ -31,76 +31,53 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
         if (!MindQuery.TryComp(mind, out var mindComp))
             return false;
 
-        var possibleJobs = jobBoard.Comp.SideJobOffers.ShallowClone();
-        var possiblePriorityJobs = jobBoard.Comp.PrioritySideJobOffers.ShallowClone();
+        var ev = new GenerateSideJobsEvent(effectiveLevel, (mind, mindComp), new());
+        RaiseLocalEvent(jobBoard, ref ev);
+        if (ev.SideJobs.Count == 0)
+            return false;
 
-        while (possiblePriorityJobs.Count > 0 || possibleJobs.Count > 0)
+        var sideJob = _random.PickAndTake(ev.SideJobs);
+        Container.Insert(sideJob, jobBoard.Comp.AvailableSideJobs);
+
+        foreach (var otherSideJob in ev.SideJobs)
         {
-            var shouldChoosePriority = possiblePriorityJobs.Count > 0;
-            var job = _random.PickAndTake(shouldChoosePriority ? possiblePriorityJobs : possibleJobs);
-
-            if (!CanAddSideJob(jobBoard, job))
-                continue;
-
-            // spawn the objective in directly, ignoring RequirementCheckEvent
-            // (otherwise it would do things like cancel steal sidejobs for DAGD traitors or kill sidejobs for social traitors)
-            var sideJob = Spawn(job);
-            if (!ObjectiveQuery.TryComp(sideJob, out var objectiveComp))
-            {
-                Del(sideJob);
-                continue;
-            }
-
-            // raise events to initialise the objectives
-            var ev1 = new ObjectiveAssignedEvent(mind, mindComp);
-            RaiseLocalEvent(sideJob, ref ev1);
-            if (ev1.Cancelled)
-            {
-                Del(sideJob);
-                continue;
-            }
-
-            var ev3 = new SideJobCreatedEvent(effectiveLevel);
-            RaiseLocalEvent(sideJob, ref ev3);
-
-            // if initialising failed then abort
-            if (ev3.Cancelled || !SideJobQuery.TryComp(sideJob, out var sideJobComp) || sideJobComp.Reward is null)
-            {
-                Del(sideJob);
-                continue;
-            }
-
-            var ev2 = new ObjectiveAfterAssignEvent(mind, mindComp, objectiveComp, MetaData(sideJob));
-            RaiseLocalEvent(sideJob, ref ev2);
-
-            Container.Insert(sideJob, jobBoard.Comp.AvailableSideJobs);
-            return true;
+            Del(otherSideJob);
         }
 
-        return false;
+        return true;
     }
 
     /// <summary>
-    /// Determines if the job board already has the current side job as either available, accepted or completed.
-    /// Used to avoid adding the same objective twice.
+    /// Raise all the neccessary events to initialise the side job.
     /// </summary>
-    public bool CanAddSideJob(Entity<JobListingsComponent> jobBoard, EntProtoId sideJobProtoId)
+    /// <returns>Returns false if initialisation failed and the side job was deleted.</returns>
+    public bool InitializeSideJob(EntityUid sideJob, Entity<MindComponent> mind, int effectiveLevel)
     {
-        if (jobBoard.Comp.CompletedObjectives.Contains(sideJobProtoId))
+        if (!ObjectiveQuery.TryComp(sideJob, out var objectiveComp))
+        {
+            Del(sideJob);
             return false;
+        }
 
-        foreach (var sideJob in jobBoard.Comp.AvailableSideJobs.ContainedEntities)
+        var ev1 = new ObjectiveAssignedEvent(mind, mind.Comp);
+        RaiseLocalEvent(sideJob, ref ev1);
+        if (ev1.Cancelled)
         {
-            var availableSideJobProto = Prototype(sideJob);
-            if (availableSideJobProto is not null && availableSideJobProto.ID == sideJobProtoId)
-                return false;
+            Del(sideJob);
+            return false;
         }
-        foreach (var sideJob in jobBoard.Comp.AcceptedSideJobs.ContainedEntities)
+
+        var ev3 = new SideJobCreatedEvent(effectiveLevel);
+        RaiseLocalEvent(sideJob, ref ev3);
+
+        if (ev3.Cancelled || !SideJobQuery.TryComp(sideJob, out var sideJobComp) || sideJobComp.Reward is null)
         {
-            var acceptedSideJobProto = Prototype(sideJob);
-            if (acceptedSideJobProto is not null && acceptedSideJobProto.ID == sideJobProtoId)
-                return false;
+            Del(sideJob);
+            return false;
         }
+
+        var ev2 = new ObjectiveAfterAssignEvent(mind, mind.Comp, objectiveComp, MetaData(sideJob));
+        RaiseLocalEvent(sideJob, ref ev2);
 
         return true;
     }

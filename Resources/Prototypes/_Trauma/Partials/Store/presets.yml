@@ -1,33 +1,34 @@
 - type: entity
   id: StorePresetRemoteUplink
   components:
+  - type: BasicSideJobGenerator
+    protos:
+    - KillSideJob
+    - KillHeadSideJob
+    - BattlecruiserSideJob
+  - type: BugSideJobGenerator
+    proto: BugAreaSideJob
+    areas:
+    - AreaOfficeCmo
+    - AreaOfficeCE
+    - AreaOfficeHop
+    - AreaOfficeHos
+    - AreaOfficeRd
+    - AreaOfficeQm
+  - type: StealSideJobGenerator
+    proto: StealSideJob
+    targets:
+    - Hypospray
+    - ClothingOuterHardsuitRd
+    - HandTeleporter
+    - ClothingShoesBootsMagAdv
+    - BoxFolderQmClipboard
+    - JetpackCaptainFilled
+    - WeaponAntiqueLaser
   - type: JobListings
     maximumSideJobs: 4
     maximumAcceptedSideJobs: 2
     sideJobsPerLevel: 2
-    prioritySideJobOffers: # priority exists so kill is actually picked when it is outnumbered 7 to 1 by steal objectives
-    # major - kill
-    - KillSideJob
-    sideJobOffers:
-    # minor - bug
-    - BugAreaSideJobCmo
-    - BugAreaSideJobCE
-    - BugAreaSideJobHop
-    - BugAreaSideJobHos
-    - BugAreaSideJobRd
-    - BugAreaSideJobQm
-    # major - steal
-    - CMOHyposprayStealSideJob
-    - RDHardsuitStealSideJob
-    - HandTeleporterStealSideJob
-    - MagbootsStealSideJob
-    - ClipboardStealSideJob
-    - CaptainJetpackStealSideJob
-    - CaptainGunStealSideJob
-    # extreme - kill head (no need to put this in priority because it is only extreme sidejob)
-    - KillHeadSideJob
-    # final - battlecruiser
-    - BattlecruiserSideJob
     reputationLevels: # minor mission gives 100, major mission gives 200, extreme mission gives 500 and final mission gives 10000
     - 100 # 1 minor
     - 500 # 1 minor + 2 majors
