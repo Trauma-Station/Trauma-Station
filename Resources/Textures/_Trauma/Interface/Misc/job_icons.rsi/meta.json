@@ -27,6 +27,15 @@
         },
         {
             "name": "Advisor"
+        },
+        {
+            "name": "SyndicateCommander"
+        },
+        {
+            "name": "SyndicateCorpsman"
+        },
+        {
+            "name": "SyndicateOperative"
         }
     ]
 }
