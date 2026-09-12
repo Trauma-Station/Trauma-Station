@@ -13,7 +13,7 @@ using Content.Shared.Database;
 using Content.Shared.FixedPoint;
 using Content.Shared.Projectiles;
 using Content.Shared.Weapons.Ranged.Systems;
-using Content.Trauma.Common.Bulletholes;
+using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Common.Teleportation;
 using Content.Trauma.Shared.Executions;
 using Robust.Shared.Physics;

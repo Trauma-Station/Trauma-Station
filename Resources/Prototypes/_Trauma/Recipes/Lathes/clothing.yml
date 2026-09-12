@@ -10,3 +10,14 @@
     Plastic: 300
     Silver: 100
     Plasma: 100
+
+- type: latheRecipe
+  id: ClothingOuterArmorReactiveUnfinished
+  result: ClothingOuterArmorReactiveUnfinished
+  completetime: 5
+  materials:
+    Steel: 1000
+    Plastic: 300
+    Glass: 100
+    Plasma: 500
+    Gold: 500

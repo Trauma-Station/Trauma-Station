@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Common.Bulletholes;
+using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Shared.Weapons.Ranged;
 using Content.Trauma.Shared.Weapons.Ranged.Ammo;
 using Robust.Shared.Random;
