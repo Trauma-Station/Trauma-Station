@@ -105,38 +105,6 @@
   - SmokeGrenade
   - SmokeGrenade
 
-# ERT
-
-- type: selectableSet
-  id: ERTBallisticsSet
-  name: selectable-set-ert-ballistic-name
-  description: selectable-set-ert-ballistic-description
-  sprite:
-    sprite: _Goobstation/Objects/Weapons/Guns/Rifles/annie.rsi
-    state: base
-  content:
-    - WeaponRifleAnnie
-    - MagazineLightRifle
-    - MagazineLightRifle
-    - MagazineLightRifle
-    - WeaponPistolN1984
-    - MagazineMagnum
-    - MagazineMagnum
-
-- type: selectableSet
-  id: ERTPulseSet
-  name: selectable-set-ert-pulse-name
-  description: selectable-set-ert-pulse-description
-  sprite:
-    sprite: Objects/Weapons/Guns/Battery/pulse_carbine.rsi
-    state: icon
-  content:
-    - WeaponPulseCarbineAdvanced
-    - WeaponEnergyRevolver
-    - EnergySpeedloaderPulse
-    - EnergySpeedloaderPulse
-    - EnergySpeedloaderDisabler
-
 ## voidsuit selectors
 
 # paramedic
