@@ -34,7 +34,8 @@ public sealed partial class ServerJobListingsSystem
             if (!InitializeSideJob(sideJob, args.Mind, args.EffectiveLevel))
                 continue;
 
-            args.SideJobs.Add(sideJob);
+            // put in priority as per the component's doc comment
+            args.PrioritySideJobs.Add(sideJob);
         }
     }
 

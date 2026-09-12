@@ -31,14 +31,18 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
         if (!MindQuery.TryComp(mind, out var mindComp))
             return false;
 
-        var ev = new GenerateSideJobsEvent(effectiveLevel, (mind, mindComp), new());
+        var ev = new GenerateSideJobsEvent(effectiveLevel, (mind, mindComp), new(), new());
         RaiseLocalEvent(jobBoard, ref ev);
-        if (ev.SideJobs.Count == 0)
+        if (ev.PrioritySideJobs.Count == 0 && ev.SideJobs.Count == 0)
             return false;
 
-        var sideJob = _random.PickAndTake(ev.SideJobs);
+        var sideJob = _random.PickAndTake(ev.PrioritySideJobs.Count >= 1 ? ev.PrioritySideJobs : ev.SideJobs);
         Container.Insert(sideJob, jobBoard.Comp.AvailableSideJobs);
 
+        foreach (var otherSideJob in ev.PrioritySideJobs)
+        {
+            Del(otherSideJob);
+        }
         foreach (var otherSideJob in ev.SideJobs)
         {
             Del(otherSideJob);

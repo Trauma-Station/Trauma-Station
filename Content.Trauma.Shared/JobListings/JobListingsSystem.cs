@@ -384,7 +384,7 @@ public abstract partial class JobListingsSystem : EntitySystem
 /// Raised on the job board to retrieve a list of potential side jobs (that are spawned in null space).
 /// </summary>
 [ByRefEvent]
-public record struct GenerateSideJobsEvent(int EffectiveLevel, Entity<MindComponent> Mind, List<EntityUid> SideJobs);
+public record struct GenerateSideJobsEvent(int EffectiveLevel, Entity<MindComponent> Mind, List<EntityUid> SideJobs, List<EntityUid> PrioritySideJobs);
 
 /// <summary>
 /// Raised on a side job when it is created.
