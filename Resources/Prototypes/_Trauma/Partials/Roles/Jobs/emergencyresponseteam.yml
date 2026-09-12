@@ -45,7 +45,7 @@
   id: ERTChaplainGear
   equipment:
     neck: ExecutiveIDCard
-    outerClothing: ChaplainHoodie
+    outerClothing: ClothingOuterHoodieChaplain
     pocket2: ArmamentsBeacon
 
 - type: startingGear
