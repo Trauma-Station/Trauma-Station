@@ -11,20 +11,23 @@ using Content.Shared.Mind;
 using Content.Shared.Roles;
 using Content.Shared.Station.Components;
 using Content.Shared.Store;
-using Content.Shared.Store.Components;
 using Content.Trauma.Server.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Server.Objectives.Components;
-using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Roles;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
+using Content.Shared.GameTicking.Components;
+using Robust.Shared.Timing;
+using Content.Trauma.Shared.Heretic.Systems;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
 public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleComponent>
 {
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SharedHereticSystem _heretic = default!;
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private SharedRoleSystem _role = default!;
@@ -41,6 +44,28 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
     public static EntProtoId MindRole = "MindRoleHeretic";
 
     public static EntProtoId RealityShift = "EldritchInfluence";
+
+    protected override void Started(EntityUid uid, HereticRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
+    {
+        base.Started(uid, component, gameRule, args);
+
+        component.NextPassivePointUpdate = _timing.CurTime + component.PassivePointCooldown;
+    }
+
+    protected override void ActiveTick(EntityUid uid, HereticRuleComponent component, GameRuleComponent gameRule, float frameTime)
+    {
+        base.ActiveTick(uid, component, gameRule, frameTime);
+
+        if (_timing.CurTime < component.NextPassivePointUpdate)
+            return;
+
+        component.NextPassivePointUpdate = _timing.CurTime + component.PassivePointCooldown;
+
+        foreach (var mind in component.Minds)
+        {
+            _heretic.UpdateMindKnowledge(mind, null, SharedHereticSystem.OneKnowledgePoint);
+        }
+    }
 
     [SubscribeLocalEvent]
     private void OnGetBriefing(Entity<HereticRoleComponent> ent, ref GetBriefingEvent args)
@@ -94,32 +119,14 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
             _antag.SendBriefing(target, Loc.GetString("heretic-role-greeting"), Color.Red, BriefingSound);
         }
 
-        // add store
-        InitializeStore(mindId);
-
-        // heretic after store because it requires store on startup
+        // heretic after role because it requires store on startup
         EnsureComp<HereticComponent>(mindId);
 
         rule.Minds.Add(mindId);
 
-        _ui.SetUi(mindId, StoreUiKey.Key, new InterfaceData("StoreBoundUserInterface", -1));
         _ui.SetUi(mindId, HereticLivingHeartKey.Key, new InterfaceData("LivingHeartMenuBoundUserInterface", -1));
 
         return true;
-    }
-
-    public StoreComponent InitializeStore(EntityUid mindId)
-    {
-        var store = EnsureComp<StoreComponent>(mindId);
-        foreach (var category in HereticRuleComponent.StoreCategories)
-        {
-            store.Categories.Add(category);
-        }
-
-        store.CurrencyWhitelist.Add(SharedHereticSystem.Currency);
-        store.CurrencyWhitelist.Add(SharedHereticSystem.SideCurrency);
-        store.Balance[SharedHereticSystem.SideCurrency] = 1; // 1 free side point
-        return store;
     }
 
     [SubscribeLocalEvent]
@@ -136,8 +143,10 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
             var name = _objective.GetTitle((mindId, mind), Name(mind.OwnedEntity ?? mindId));
             if (_mind.TryGetObjectiveComp<HereticKnowledgeConditionComponent>(mindId, out var objective, mind))
             {
-                if (objective.Researched > mostKnowledge)
-                    mostKnowledge = objective.Researched;
+                if (objective.Researched <= mostKnowledge)
+                    continue;
+
+                mostKnowledge = objective.Researched;
                 mostKnowledgeName = name;
             }
 

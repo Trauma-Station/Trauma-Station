@@ -4,7 +4,6 @@ using Content.Shared.Atmos.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Ash;
 using Content.Trauma.Shared.Heretic.Events;
-using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Ash;
 
 namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
 
