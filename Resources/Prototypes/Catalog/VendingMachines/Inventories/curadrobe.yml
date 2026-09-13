@@ -15,8 +15,9 @@
     ClothingShoesBootsLaceup: 2
     ClothingHeadsetService: 2
   contrabandInventory:
-    EmptyScroll: 2
+    ScrollFullRandom: 3
     ToyFigurineLibrarian: 1
   emaggedInventory: # Goobstation
+    EmptyScroll: 1
     SyndicatePersonalAI: 1
     SyndicateWhistle: 1 # Trauma
