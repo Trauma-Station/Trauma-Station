@@ -9,10 +9,10 @@
   - type: UseDelay
     delay: 0
   - type: Sprite
-    sprite: _Trauma/Objects/Revs/toolkit.rsi
+    sprite: &ReferenceToolkit _Trauma/Objects/Revs/toolkit.rsi
     state: toolkit-wrenching
   - type: Item
-    sprite: _Trauma/Objects/Revs/toolkit.rsi
+    sprite: *ReferenceToolkit
     size: Normal
   - type: Prying
     enabled: false
@@ -27,7 +27,7 @@
     entries:
     - behavior: [ Anchoring ]
       sprite:
-        sprite: _Trauma/Objects/Revs/toolkit.rsi
+        sprite: *ReferenceToolkit
         state: toolkit-wrenching
       useSound:
         path: /Audio/Items/ratchet.ogg
@@ -35,35 +35,35 @@
         path: /Audio/Items/change_drill.ogg
     - behavior: [ Cutting ]
       sprite:
-        sprite: _Trauma/Objects/Revs/toolkit.rsi
+        sprite: *ReferenceToolkit
         state: toolkit-cutting
       useSound:
         path: /Audio/Items/wirecutter.ogg
       changeSound: *ChangeMode
     - behavior: [ Screwing ]
       sprite:
-        sprite: _Trauma/Objects/Revs/toolkit.rsi
+        sprite: *ReferenceToolkit
         state: toolkit-screwing
       useSound:
         path: /Audio/Items/screwdriver.ogg
       changeSound: *ChangeMode
     - behavior: [ Prying ]
       sprite:
-        sprite: _Trauma/Objects/Revs/toolkit.rsi
+        sprite: *ReferenceToolkit
         state: toolkit-prying
       useSound:
         path: /Audio/Items/crowbar.ogg
       changeSound: *ChangeMode
     - behavior: [ Hammering ]
       sprite:
-        sprite: _Trauma/Objects/Revs/toolkit.rsi
+        sprite: *ReferenceToolkit
         state: toolkit-hammering
       useSound:
         path: /Audio/Items/trayhit2.ogg
       changeSound: *ChangeMode
     - behavior: [ Slicing ]
       sprite:
-        sprite: _Trauma/Objects/Revs/toolkit.rsi
+        sprite: *ReferenceToolkit
         state: toolkit-cutting
       useSound:
         path: /Audio/Items/Culinary/chop.ogg
