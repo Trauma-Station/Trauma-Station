@@ -48,6 +48,10 @@
     ClothingBackpackMessengerSalvage: 2
     ClothingHeadsetMining: 4
     ClothingOuterWinterMiner: 2
+  contrabandInventory:
+    FoodBoxDonkpocketCarp: 1
+    ClothingUniformJumpsuitMilitarySalvageSpecialist: 1
+    SalvageExpeditionsComputerCircuitboard: 0 # It is actually impossible to get this wihout changing variables and it only exists to taunt salvs
   emaggedInventory:
     PKAUpgradeDamage: 1
     MiningDrillDiamond: 1

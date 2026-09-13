@@ -15,6 +15,7 @@
     ClothingShoesBootsLaceup: 2
     ClothingHeadsetService: 2
   contrabandInventory:
+    EmptyScroll: 2
     ToyFigurineLibrarian: 1
   emaggedInventory: # Goobstation
     SyndicatePersonalAI: 1

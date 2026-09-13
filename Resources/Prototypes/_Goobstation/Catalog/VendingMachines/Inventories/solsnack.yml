@@ -13,6 +13,8 @@
     FoodSnackMarsFrouka: 3
     FoodSnackVenusianhotcakes: 3
     FoodSnackOortrocks: 3
+  contrabandInventory:
+    ClothingHeadHelmetCosmonaut: 1
   emaggedInventory:
     DrinkNukieCan: 2
     VialYellow: 2
