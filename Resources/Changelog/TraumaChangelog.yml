@@ -14481,3 +14481,12 @@ Entries:
   id: 1580
   time: '2026-09-13T14:52:18.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4573
+- author: luminargh
+  changes:
+  - type: Add
+    message: >-
+      Added new song "Assimilation" that plays when the blob sets off the delta
+      alarm
+  id: 1581
+  time: '2026-09-13T14:59:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4553
