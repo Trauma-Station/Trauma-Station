@@ -14454,3 +14454,14 @@ Entries:
   id: 1577
   time: '2026-09-13T12:01:55.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4559
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed not being able to do bleeding related surgeries like reattaching
+      torn limbs.
+  - type: Tweak
+    message: Surgery steps now explain why you can't do them when hovered.
+  id: 1578
+  time: '2026-09-13T13:30:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4571
