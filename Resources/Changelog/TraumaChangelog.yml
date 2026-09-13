@@ -14537,3 +14537,45 @@ Entries:
   id: 1586
   time: '2026-09-13T18:34:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4280
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added a new tool in the microelectronics assembler for revolutionaries to
+      use called the revolutionary toolkit
+  - type: Add
+    message: Added .45 magnum to the bullet press
+  - type: Tweak
+    message: >-
+      Made the liberator able to fire .45 magnum instead of .35 as well as
+      reduced the firerate to 1.5
+  - type: Tweak
+    message: >-
+      Increased the damage on combat torch to 8 heat 2 piercing, Still does fire
+      stacks on hit
+  - type: Tweak
+    message: >-
+      Reduced the price for revolutionary chest plates down to 7.5 steel as well
+      as increased their general brute resistance, They however are more
+      vulnerable to heat now and have 15% slowdown
+  - type: Tweak
+    message: >-
+      Reflective Web Vest now has 30% pierce resistance and has delayed stun
+      baton knowdown
+  - type: Tweak
+    message: >-
+      Removed the welding required for making any makeshift turret, hammer or
+      for making revolutionary helmets
+  - type: Tweak
+    message: Simplified the steps for making hammers and makeshift turrets
+  - type: Tweak
+    message: >-
+      Reduced the price for revolutionary masks down to 2 plastic as well as
+      reduced the price for revolutionary helmets down to 3 plasteel
+  - type: Tweak
+    message: >-
+      Armor plates now cost 3 steel and IFF Cards now only cost 0.25 gold
+      instead of 1.5
+  id: 1587
+  time: '2026-09-13T21:24:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4566
