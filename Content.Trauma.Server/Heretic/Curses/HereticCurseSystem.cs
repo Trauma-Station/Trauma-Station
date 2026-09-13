@@ -117,7 +117,7 @@ public sealed partial class HereticCurseSystem : SharedHereticCurseSystem
 
         if (look.FirstOrNull() is not { } rune)
         {
-            _popup.PopupEntity(Loc.GetString("feast-of-owls-eui-far-away"), args.Actor, args.Actor);
+            _popup.PopupEntity(Loc.GetString("heretic-curse-provider-far-away"), args.Actor, args.Actor);
             CloseUi(ent);
             return;
         }
