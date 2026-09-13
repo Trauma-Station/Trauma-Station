@@ -11,49 +11,39 @@
   - AllAccess
   access:
   - CentralCommand
-  # Goobstation
-  - NanotrasenRepresentative
-  # <Trauma>
   special:
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipDeathSquad
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
-  - !type:AddComponentSpecial
-    components:
-    - type: DeathSquadMember
-  # </Trauma>
+    implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
 
-  # Goobstation Start - I basically re-did all of deathsquads stuff so. - Sol
 - type: startingGear
   id: DeathSquadGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitDeathSquad
     back: ClothingBackpackDeathSquad
     mask: ClothingMaskGasDeathSquad
-    eyes: ClothingEyesGlassesDeathsquad # Goobstation
-    neck: ExecutiveIDCard # Executive Access!
-    ears: ClothingHeadsetDeathsquad # Goobstation
-    gloves: ClothingHandsGlovesDeathsquadUnremovable # Rip and TEAR
+    eyes: ClothingEyesHudSecurity
+    ears: ClothingHeadsetAltCentCom
+    gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitDeathsquad
-    shoes: ClothingShoesBootsMagDeathsquad # These boots are cooler.
-    id: DeathsquadPDA # New PDA!
-    pocket1: PhoronSabre # Goobstation
-    pocket2: WeaponRevolverMateba # Goobstation
-    belt: ClothingBeltDeathsquadWebbingFilled # Centcomm Doesn't use syndicate tech.
+    shoes: ClothingShoesBootsMagAdv
+    id: DeathsquadPDA
+    pocket1: EnergySword
+    pocket2: EnergyShield
+    belt: ClothingBeltMilitaryWebbingMedFilled
   storage:
     back:
-    - SpeedLoaderMatebaAP # Goobstation - 7 rounds
-    - SpeedLoaderMatebaAP # Goobstation - 7 rounds
-    # - BoxFlashbang - WAY too big
-    - ToolDebug # Spanish Army Knife - TODO Replace
+    - WeaponPulsePistol
+    - WeaponRevolverMatebaAP
+    - SpeedLoaderMagnumAP
+    - SpeedLoaderMagnumAP
+    - BoxFlashbang
+    - ToolDebug # spanish army knife
     - WelderExperimental
-    - BlueShieldShieldEvilFilled # Goobstation
-    - DeterrentCaseFilled
+    - Hypospray
+    - DeathAcidifierImplanter # crew will try to steal their amazing hardsuits
+    - FreedomImplanter
   inhand:
   - WeaponPulseRifle
-    # Goobstation End
 
 - type: chameleonOutfit
   id: DeathSquadChameleonOutfit

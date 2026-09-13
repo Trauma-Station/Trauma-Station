@@ -89,7 +89,7 @@ public abstract partial class SharedGunSystem
         }
         // </Trauma>
 
-        TakeCharge(ent, args.FireCostMultiplier * shots); // Trauma - use FireCostMultiplier
+        TakeCharge(ent, ent.Comp.FireCost * args.FireCostMultiplier * shots); // Trauma - use FireCostMultiplier
     }
 
     private void OnBatteryAmmoCount(Entity<BatteryAmmoProviderComponent> ent, ref GetAmmoCountEvent args)

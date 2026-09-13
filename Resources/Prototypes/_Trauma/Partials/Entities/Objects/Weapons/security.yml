@@ -2,7 +2,7 @@
 
 - type: entity
   id: Stunbaton
-  name: A stun baton for incapacitating people with. Actively harming with this is considered bad tone.
+  description: A stun baton for incapacitating people with. Actively harming with this is considered bad tone.
   components:
   - type: WeaponClass
     class: NonLethal
