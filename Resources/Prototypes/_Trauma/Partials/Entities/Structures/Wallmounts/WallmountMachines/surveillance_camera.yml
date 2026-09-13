@@ -4,6 +4,8 @@
   abstract: true
   id: SurveillanceCameraBase
   components:
+  - type: Sprite
+    offset: 0, 0
   - type: ContainerFill
     containers:
       board: [ CameraElectronics ]
