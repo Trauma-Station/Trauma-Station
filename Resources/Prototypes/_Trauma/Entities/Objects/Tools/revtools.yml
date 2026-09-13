@@ -1,0 +1,73 @@
+﻿- type: entity
+  name: revolutionary toolkit
+  parent: [ BaseItem, BaseRevMajorContraband ]
+  id: RevToolkit
+  description: An aspiring revolutionary's toolkit contains almost any tool you will need for furthering the revolution.
+  components:
+  - type: UseDelay
+    delay: 0
+  - type: Sprite
+    sprite: _Trauma/Objects/Revs/toolkit.rsi
+    state: toolkit-wrenching
+  - type: Item
+    sprite: _Trauma/Objects/Revs/toolkit.rsi
+    size: Normal
+  - type: Prying
+    enabled: false
+  - type: Tool
+    qualities:
+    - Screwing
+    speedModifier: 1.2
+    useSound: /Audio/Items/screwdriver.ogg
+  - type: ToolTileCompatible
+  - type: MultipleTool
+    statusShowBehavior: true
+    entries:
+    - behavior: [ Anchoring ]
+      sprite:
+        sprite: _Trauma/Objects/Revs/toolkit.rsi
+        state: toolkit-wrenching
+      useSound:
+        path: /Audio/Items/ratchet.ogg
+      changeSound:
+        path: /Audio/Items/change_drill.ogg
+    - behavior: [ Cutting ]
+      sprite:
+        sprite: _Trauma/Objects/Revs/toolkit.rsi
+        state: toolkit-cutting
+      useSound:
+        path: /Audio/Items/wirecutter.ogg
+      changeSound:
+        path: /Audio/Items/change_drill.ogg
+    - behavior: [ Screwing ]
+      sprite:
+        sprite: _Trauma/Objects/Revs/toolkit.rsi
+        state: toolkit-screwing
+      useSound:
+        path: /Audio/Items/screwdriver.ogg
+      changeSound:
+        path: /Audio/Items/change_drill.ogg
+    - behavior: [ Prying ]
+      sprite:
+        sprite: _Trauma/Objects/Revs/toolkit.rsi
+        state: toolkit-prying
+      useSound:
+        path: /Audio/Items/crowbar.ogg
+      changeSound:
+        path: /Audio/Items/change_drill.ogg
+    - behavior: [ Hammering ]
+      sprite:
+        sprite: _Trauma/Objects/Revs/toolkit.rsi
+        state: toolkit-hammering
+      useSound:
+        path: /Audio/Items/trayhit2.ogg
+      changeSound:
+        path: /Audio/Items/change_drill.ogg
+    - behavior: [ Slicing ]
+      sprite:
+        sprite: _Trauma/Objects/Revs/toolkit.rsi
+        state: toolkit-cutting
+      useSound:
+        path: /Audio/Items/Culinary/chop.ogg
+      changeSound:
+        path: /Audio/Items/change_drill.ogg

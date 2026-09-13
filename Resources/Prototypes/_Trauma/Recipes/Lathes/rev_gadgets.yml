@@ -105,3 +105,13 @@
     Glass: 250
     Gold: 750
     Uranium: 1000
+
+- type: latheRecipe
+  id: RevToolkit
+  parent: BaseRevGadget
+  result: RevToolkit
+  materials:
+    Steel: 1000
+    Plastic: 400
+    Gold: 200
+    Silver: 200
