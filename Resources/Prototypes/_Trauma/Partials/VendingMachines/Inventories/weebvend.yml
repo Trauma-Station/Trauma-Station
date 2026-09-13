@@ -1,17 +1,4 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-- type: vendingMachineInventory
-  id: WeebVendInventory
-  startingInventory:
-    FoodSnackRedalertnuts: 3
-    FoodSnackRicecake: 3
-    FoodSnackPokeysticks: 3
-    FoodSnackChocobanana: 3
-    FoodSnackDango: 3
   contrabandInventory:
     ThrowingStar: 6
-  emaggedInventory:
-    ClothingHeadHatTacticalMaidHeadband: 1
-    ClothingUniformJumpskirtTacticalMaid: 1
-    ClothingHandsTacticalMaidGloves: 1
-    Katana: 1
