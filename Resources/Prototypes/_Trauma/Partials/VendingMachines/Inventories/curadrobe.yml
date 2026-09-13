@@ -1,26 +1,6 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
-- type: vendingMachineInventory
-  id: CuraDrobeInventory
-  startingInventory:
-    BooksBag: 2
-    BriefcaseBrown: 2
-    HandLabeler: 2
-    Cane: 3
-    ClothingEyesGlasses: 2
-    ClothingEyesGlassesJamjar: 2
-    ClothingNeckScarfStripedGreen: 2
-    ClothingUniformJumpsuitCurator: 3
-    ClothingUniformJumpskirtCurator: 3
-    ClothingUniformJumpsuitLibrarian: 3
-    ClothingUniformJumpskirtLibrarian: 3
-    ClothingShoesBootsLaceup: 2
-    ClothingHeadsetService: 2
   contrabandInventory:
     MysteryLighterBox: 2
     ScrollFullRandom: 3
     ToyFigurineLibrarian: 1
   emaggedInventory:
     UplinkLighterBox: 1
-    SyndicatePersonalAI: 1
-    SyndicateWhistle: 1
