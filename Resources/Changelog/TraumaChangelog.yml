@@ -14445,3 +14445,12 @@ Entries:
   id: 1576
   time: '2026-09-13T11:56:08.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4570
+- author: Aviu
+  changes:
+  - type: Fix
+    message: >-
+      Fix non-humanoid ghouls counting towards ghoul limit after dying and
+      deconverting.
+  id: 1577
+  time: '2026-09-13T12:01:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4559
