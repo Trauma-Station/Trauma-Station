@@ -14505,3 +14505,12 @@ Entries:
   id: 1582
   time: '2026-09-13T15:01:39.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4500
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to harvest towercap trees in any way.
+  - type: Fix
+    message: Fixed power drills, omnitools etc being janky.
+  id: 1583
+  time: '2026-09-13T15:04:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4574
