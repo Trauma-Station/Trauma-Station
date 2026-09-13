@@ -1,20 +1,2 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
-- type: vendingMachineInventory
-  id: SolsnackInventory
-  startingInventory:
-    FoodSnackLunacakeWrapped: 3
-    FoodSnackMochicakeWrapped: 3
-    FoodSnackMooncakeWrapped: 3
-    FoodSnackTidegobs: 3
-    FoodSnackSaturnos: 3
-    FoodSnackJoveGello: 3
-    FoodSnackPlutoniumrods: 3
-    FoodSnackMarsFrouka: 3
-    FoodSnackVenusianhotcakes: 3
-    FoodSnackOortrocks: 3
-  contrabandInventory:
+ contrabandInventory:
     ClothingOuterHardsuitPirateEVA: 1
-  emaggedInventory:
-    DrinkNukieCan: 2
-    VialYellow: 2
