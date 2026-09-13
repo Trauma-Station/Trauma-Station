@@ -14530,3 +14530,10 @@ Entries:
   id: 1585
   time: '2026-09-13T18:19:37.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4577
+- author: yglop
+  changes:
+  - type: Add
+    message: Reactive armor
+  id: 1586
+  time: '2026-09-13T18:34:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4280
