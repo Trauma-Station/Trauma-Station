@@ -306,3 +306,4 @@
     defaultChannel: Blobmind
     channels:
     - Blobmind
+    canUseInCrit: true
