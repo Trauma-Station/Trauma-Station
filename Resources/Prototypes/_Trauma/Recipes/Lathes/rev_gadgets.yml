@@ -107,8 +107,8 @@
     Uranium: 1000
 
 - type: latheRecipe
-  id: RevToolkit
   parent: BaseRevGadget
+  id: RevToolkit
   result: RevToolkit
   materials:
     Steel: 1000

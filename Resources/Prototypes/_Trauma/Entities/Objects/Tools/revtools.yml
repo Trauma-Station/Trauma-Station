@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: revolutionary toolkit
   parent: [ BaseItem, BaseRevMajorContraband ]
   id: RevToolkit
+  name: revolutionary toolkit
   description: An aspiring revolutionary's toolkit contains almost any tool you will need for furthering the revolution.
   components:
   - type: UseDelay
@@ -31,7 +31,7 @@
         state: toolkit-wrenching
       useSound:
         path: /Audio/Items/ratchet.ogg
-      changeSound:
+      changeSound: &ChangeMode
         path: /Audio/Items/change_drill.ogg
     - behavior: [ Cutting ]
       sprite:
@@ -39,37 +39,32 @@
         state: toolkit-cutting
       useSound:
         path: /Audio/Items/wirecutter.ogg
-      changeSound:
-        path: /Audio/Items/change_drill.ogg
+      changeSound: *ChangeMode
     - behavior: [ Screwing ]
       sprite:
         sprite: _Trauma/Objects/Revs/toolkit.rsi
         state: toolkit-screwing
       useSound:
         path: /Audio/Items/screwdriver.ogg
-      changeSound:
-        path: /Audio/Items/change_drill.ogg
+      changeSound: *ChangeMode
     - behavior: [ Prying ]
       sprite:
         sprite: _Trauma/Objects/Revs/toolkit.rsi
         state: toolkit-prying
       useSound:
         path: /Audio/Items/crowbar.ogg
-      changeSound:
-        path: /Audio/Items/change_drill.ogg
+      changeSound: *ChangeMode
     - behavior: [ Hammering ]
       sprite:
         sprite: _Trauma/Objects/Revs/toolkit.rsi
         state: toolkit-hammering
       useSound:
         path: /Audio/Items/trayhit2.ogg
-      changeSound:
-        path: /Audio/Items/change_drill.ogg
+      changeSound: *ChangeMode
     - behavior: [ Slicing ]
       sprite:
         sprite: _Trauma/Objects/Revs/toolkit.rsi
         state: toolkit-cutting
       useSound:
         path: /Audio/Items/Culinary/chop.ogg
-      changeSound:
-        path: /Audio/Items/change_drill.ogg
+      changeSound: *ChangeMode
