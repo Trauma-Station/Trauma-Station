@@ -1,4 +1,6 @@
-  contrabandInventory:
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+contrabandInventory:
     MysteryLighterBox: 2
     ScrollFullRandom: 3
   emaggedInventory:
