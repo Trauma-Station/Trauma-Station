@@ -14514,3 +14514,12 @@ Entries:
   id: 1583
   time: '2026-09-13T15:04:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4574
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed energy chem UI not updating when a reaction keeps the original
+      volume.
+  id: 1584
+  time: '2026-09-13T15:32:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4575
