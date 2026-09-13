@@ -753,9 +753,6 @@
       effects:
       - !type:GhoulifyEffect
         health: 100
-      - !type:AddComponents
-        components:
-        - type: HereticBladeUserBonusDamage
       - !type:ModifyStatusEffect
         effectProto: StatusEffectMutedGhoul
         time: null

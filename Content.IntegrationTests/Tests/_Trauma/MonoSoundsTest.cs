@@ -14,14 +14,11 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// </summary>
 public sealed class MonoSoundsTests : GameTest
 {
-    private static string[] _vinyls = GameDataScrounger.EntitiesWithComponent("Vinyl");
-
     [Test]
     public async Task AllPositionalSoundsMono()
     {
         // NFI why i have to do this but sure, loading resources completely fails without it
         IoCManager.InitThread(Client.InstanceDependencyCollection, true);
-        var proto = CProtoMan;
         var cache = Client.ResolveDependency<IResourceCache>();
         var failed = new List<string>();
         void AssertMono(ResPath path)
@@ -36,20 +33,21 @@ public sealed class MonoSoundsTests : GameTest
                 failed.Add($"Found stereo positional sound file at {path}, convert it to mono");
         }
 
-        foreach (var jukebox in proto.EnumeratePrototypes<JukeboxPrototype>())
+        foreach (var jukebox in CProtoMan.EnumeratePrototypes<JukeboxPrototype>())
         {
             AssertMono(jukebox.Path.Path);
         }
 
         var vinylName = CEntMan.ComponentFactory.CompName<VinylComponent>();
-        foreach (var id in _vinyls)
+        foreach (var proto in CProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
-            var ent = proto.Index(id);
-            ent.TryComp<VinylComponent>(vinylName, out var vinyl); // scrounger shouldnt return it if it's missing
-            if (vinyl?.Song is SoundPathSpecifier sound)
+            if (!proto.TryComp<VinylComponent>(vinylName, out var vinyl))
+                continue;
+
+            if (vinyl.Song is SoundPathSpecifier sound)
                 AssertMono(sound.Path);
             else
-                failed.Add($"Non-path specifier {vinyl?.Song} for vinyl {id} is not supported by this test!");
+                failed.Add($"Non-path specifier {vinyl.Song} for vinyl {proto.ID} is not supported by this test!");
         }
 
         if (failed.Count > 0)

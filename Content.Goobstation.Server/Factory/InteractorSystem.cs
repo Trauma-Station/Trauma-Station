@@ -2,7 +2,8 @@
 
 using Content.Goobstation.Shared.Factory;
 using Content.Server.Construction.Components;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 
 namespace Content.Goobstation.Server.Factory;
 

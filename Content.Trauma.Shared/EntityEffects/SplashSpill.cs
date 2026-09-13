@@ -27,10 +27,11 @@ public sealed partial class SplashSpillEffectSystem : EntityEffectSystem<Transfo
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<SplashSpill> args)
     {
+        var e = args.Effect;
         _puddle.TrySplashSpillAt(ent, ent.Comp.Coordinates,
-            args.Effect.Solution,
+            e.Solution.Clone(),
             out _,
-            args.Effect.Sound,
+            e.Sound,
             args.User);
     }
 }

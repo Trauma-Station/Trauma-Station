@@ -128,3 +128,34 @@
     whitelist:
       tags:
       - NukeOpsUplink
+
+- type: listing
+  id: UplinkViscerators
+  name: uplink-viscerators-delivery-grenade-name
+  description: uplink-viscerators-delivery-grenade-desc
+  productEntity: GrenadeViscerators
+  cost:
+    Telecrystal: 15
+  categories:
+  - UplinkExplosives
+  restockTime: 5m
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+
+- type: listing
+  id: UplinkBoxVisceratorsNukeops
+  name: uplink-viscerators-delivery-grenade-box-name
+  description: uplink-viscerators-delivery-grenade-box-desc
+  productEntity: BoxGrenadeViscerators
+  cost:
+    Telecrystal: 40
+  categories:
+  - UplinkExplosives
+  conditions:
+  - !type:StoreWhitelistCondition
+    whitelist:
+      tags:
+      - NukeOpsUplink

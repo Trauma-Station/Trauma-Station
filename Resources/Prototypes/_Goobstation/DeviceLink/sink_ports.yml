@@ -88,8 +88,8 @@
 
 - type: sinkPort
   id: AutoStart
-  name: signal-port-name-machine-autostart
-  description: signal-port-description-machine-autostart
+  name: signal-port-name-machine-repeating
+  description: signal-port-description-machine-repeating
 
 # Interactor
 

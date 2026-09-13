@@ -14142,3 +14142,391 @@ Entries:
   id: 1543
   time: '2026-09-04T09:43:45.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4440
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to use heretic blades for surgery.
+  id: 1544
+  time: '2026-09-05T07:44:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4455
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Buffed blob electromagnetic web EMP to actually take away more than 2%
+      charge.
+  - type: Fix
+    message: Fixed blob tiles not having strong/reflective upgrades.
+  - type: Fix
+    message: >-
+      Fixed mobs outside of vision being invisible if you became something
+      without a vision cone e.g. blob.
+  - type: Fix
+    message: Fixed blob node prediction being janky.
+  id: 1545
+  time: '2026-09-05T10:47:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4456
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: All speech voices now have similar volume.
+  id: 1546
+  time: '2026-09-05T12:20:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4457
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed AI turrets not shooting monkies.
+  - type: Tweak
+    message: Most animals no longer attack insurgents. Shiva is still evil.
+  id: 1547
+  time: '2026-09-05T12:54:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4459
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed being able to doxx invisible things by hovering them with your
+      mouse, except for dwarves diona and vox.
+  id: 1548
+  time: '2026-09-05T13:11:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4460
+- author: yglop
+  changes:
+  - type: Add
+    message: Viscerator grenades in uplink
+  id: 1549
+  time: '2026-09-06T09:29:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4415
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Blob now gets notified if its core is under attack.
+  - type: Tweak
+    message: Blob can now attack an extra half tile away.
+  - type: Fix
+    message: >-
+      Fixed pressurized blob chemicals breaking after 1 attack/death and not
+      doing any structural damage.
+  - type: Tweak
+    message: Buffed cryogenic poison blob chemical injection.
+  id: 1550
+  time: '2026-09-06T14:14:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4476
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Interactors now have a tool lock mode that prevents its tool being picked
+      up or dropped.
+  - type: Tweak
+    message: >-
+      Interactor/constructor's auto start port is now called repeating to be
+      less confusing.
+  id: 1551
+  time: '2026-09-06T14:37:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4477
+- author: luminargh
+  changes:
+  - type: Add
+    message: New lobby music, "Race to Evac"
+  id: 1552
+  time: '2026-09-06T22:05:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4480
+- author: Bon-Man
+  changes:
+  - type: Tweak
+    message: Lowered the damage of exosuit drills
+  id: 1553
+  time: '2026-09-07T05:58:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4485
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed book banning.
+  id: 1554
+  time: '2026-09-07T07:45:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4490
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: Medical borgs can now pick up and hold body bags
+  id: 1555
+  time: '2026-09-07T07:54:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4432
+- author: jshoe2
+  changes:
+  - type: Remove
+    message: Rude buster upgrade from necropolis chest drops
+  - type: Tweak
+    message: Lowered crafting skill requirements on crusher upgrades
+  id: 1556
+  time: '2026-09-07T12:02:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4491
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: The draft is over.
+  id: 1557
+  time: '2026-09-07T12:17:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4492
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed lemoons creating plants when harvested and not being able to mutate
+      into lemonades.
+  id: 1558
+  time: '2026-09-07T12:30:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4493
+- author: paige404
+  changes:
+  - type: Fix
+    message: (S)laughterdemons have remembered how to speak.
+  id: 1559
+  time: '2026-09-08T06:21:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4512
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Double-bladed energy sword now only has 8 total reflects instead of 16
+  - type: Tweak
+    message: >-
+      Double-bladed energy sword now only gives +10% speed for landing a light
+      attack on someone
+  - type: Tweak
+    message: >-
+      Double-bladed energy sword now does 13 slash, 13 heat which is 30 damage
+      total if you include the skill chip
+  - type: Tweak
+    message: >-
+      Double-bladed energy sword now only has 2x limb severity multiplier for
+      heat and slash damage
+  id: 1560
+  time: '2026-09-08T07:29:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4509
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Surgery sepsis damage is now limited to 90 poison per part.
+  id: 1561
+  time: '2026-09-08T07:38:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4514
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed flesh stalkers instantly healing on shapeshift.
+  - type: Remove
+    message: Removed voiceless dead damage bonus and bleeding steel effect on blades.
+  - type: Tweak
+    message: Ash jaunt is 1 second longer (so same as before).
+  - type: Fix
+    message: Fix flesh path being able to make more ghouls than intended.
+  id: 1562
+  time: '2026-09-08T10:10:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4474
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Added back CQC's Leg Sweep move.
+  - type: Tweak
+    message: >-
+      Most martial arts moves are more in depth with sounds, throwing,
+      requirements, etc.n
+  - type: Remove
+    message: Removed Capoeira's kickup move, everyone can do it anyway.
+  - type: Remove
+    message: >-
+      Removed slop level requirements for some martial art moves, they always do
+      the same thing now.
+  - type: Tweak
+    message: Most martial art books/scrolls now give you master level in the skill.
+  id: 1563
+  time: '2026-09-08T11:57:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4518
+- author: luminargh
+  changes:
+  - type: Add
+    message: Zombies now speak Zombish
+  id: 1564
+  time: '2026-09-08T17:07:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4507
+- author: Evoluxionary
+  changes:
+  - type: Add
+    message: Added CSIJ larps- i mean biosuit.
+  id: 1565
+  time: '2026-09-09T10:51:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4273
+- author: freycyik
+  changes:
+  - type: Tweak
+    message: Made zombies prying doors 5x faster
+  id: 1566
+  time: '2026-09-10T06:03:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4525
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Remove zzzz-the's pAI
+  id: 1567
+  time: '2026-09-10T09:09:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4531
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed bleach being safe to drink, real life parity.
+  id: 1568
+  time: '2026-09-10T09:21:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4533
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Nerfed exploding pen to not full nugget you anymore.
+  id: 1569
+  time: '2026-09-10T09:37:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4534
+- author: rivermyth
+  changes:
+  - type: Add
+    message: Added tampering alert to electronic lockers and lockboxes.
+  - type: Add
+    message: Added wire panel to lockers and electronic crates.
+  - type: Add
+    message: Added Lock/Unlock/Toggle signals to lockers and electronic crates.
+  id: 1570
+  time: '2026-09-10T10:47:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4364
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Drones interactions are now predicted.
+  - type: Fix
+    message: Fixed drones being able to carry people lmao
+  id: 1571
+  time: '2026-09-10T12:00:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4521
+- author: Bon-Man
+  changes:
+  - type: Fix
+    message: Fixed all lockers and crates being electrified
+  id: 1572
+  time: '2026-09-11T06:57:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4548
+- author: luminargh
+  changes:
+  - type: Tweak
+    message: Zombies don't drop their gloves anymore, good luck!
+  id: 1573
+  time: '2026-09-11T16:24:49.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4552
+- author: TechnicFighter
+  changes:
+  - type: Fix
+    message: Fixed Cosmic Cultists being unable to progress if at low pop
+  id: 1574
+  time: '2026-09-12T07:02:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4555
+- author: Aviu
+  changes:
+  - type: Add
+    message: ERT/DS/HECU gear revamped.
+  - type: Add
+    message: Revs win spawns HECU instead of ERT.
+  - type: Fix
+    message: ERT and similar roles correctly spawn with skillchips now.
+  id: 1575
+  time: '2026-09-12T07:47:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4557
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed cameras sprite being inside walls
+  id: 1576
+  time: '2026-09-13T11:56:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4570
+- author: Aviu
+  changes:
+  - type: Fix
+    message: >-
+      Fix non-humanoid ghouls counting towards ghoul limit after dying and
+      deconverting.
+  id: 1577
+  time: '2026-09-13T12:01:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4559
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed not being able to do bleeding related surgeries like reattaching
+      torn limbs.
+  - type: Tweak
+    message: Surgery steps now explain why you can't do them when hovered.
+  id: 1578
+  time: '2026-09-13T13:30:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4571
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed spirit candles disintegrating the skull when broken.
+  id: 1579
+  time: '2026-09-13T13:34:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4572
+- author: WrenTheBun
+  changes:
+  - type: Tweak
+    message: >-
+      Updated Heretic Guidebook page. Reality shifts are no longer described as
+      Eldritch Influences.
+  id: 1580
+  time: '2026-09-13T14:52:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4573
+- author: luminargh
+  changes:
+  - type: Add
+    message: >-
+      Added new song "Assimilation" that plays when the blob sets off the delta
+      alarm
+  id: 1581
+  time: '2026-09-13T14:59:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4553
+- author: Endothermix
+  changes:
+  - type: Remove
+    message: Sling shadow walk removed.
+  - type: Tweak
+    message: Sling enthrall now has a 1 minute cooldown.
+  - type: Tweak
+    message: >-
+      Sling base enthrall time is now longer then glare, use cuffs to secure
+      conversions.
+  - type: Tweak
+    message: Sling empowered enthrall can no longer effect mindshielded people.
+  id: 1582
+  time: '2026-09-13T15:01:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4500
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to harvest towercap trees in any way.
+  - type: Fix
+    message: Fixed power drills, omnitools etc being janky.
+  id: 1583
+  time: '2026-09-13T15:04:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4574
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed energy chem UI not updating when a reaction keeps the original
+      volume.
+  id: 1584
+  time: '2026-09-13T15:32:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4575
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Blob core can now hear and use blobmind.
+  id: 1585
+  time: '2026-09-13T18:19:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4577

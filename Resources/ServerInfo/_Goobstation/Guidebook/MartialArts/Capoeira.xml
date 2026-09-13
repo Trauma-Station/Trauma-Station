@@ -77,13 +77,4 @@
   and increases their attack speed. Only works on standing opponents.
   Cannot be performed if the user is moving too slow.
 
-  ### Kick Up
-
-  <Box>
-    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
-    <TextureEmbed Sprite="_Goobstation/Interface/Misc/intents.rsi" State="disarm"/>
-  </Box>
-
-  Needs to be targeted at the user themselves. Can be performed while prone. Removes knock down status effect and forces the user to stand up instantly.
-
 </Document>

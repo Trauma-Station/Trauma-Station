@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: WeaponEnergyCrossbowBase
+  components:
+  - type: WeaponClass
+    class: Pistol
+  - type: MeleeWeapon
+    resetOnHandSelected: false
+    damage:
+      types:
+        Blunt: 12
+    angle: 0
+    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
+    soundHit:
+      collection: MetalThud
+  - type: Gun
+    resetOnHandSelected: false

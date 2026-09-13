@@ -10,7 +10,6 @@
   - type: ShadowlingEnthrall
   - type: ShadowlingVeil
   - type: ShadowlingRapidRehatch
-  - type: ShadowlingShadowWalk
   - type: ShadowlingIcyVeins
   - type: ShadowlingCollectiveMind
     availableAbilities:
@@ -77,7 +76,6 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: LesserShadowling
-  - type: ShadowlingShadowWalk
   - type: ShadowlingGlare
     maxGlareStunTime: 4
     muteTime: 2

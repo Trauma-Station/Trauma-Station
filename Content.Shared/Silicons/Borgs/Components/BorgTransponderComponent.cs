@@ -7,7 +7,7 @@ namespace Content.Shared.Silicons.Borgs.Components;
 /// Periodically broadcasts borg data to robotics consoles.
 /// When not emagged, handles disabling and destroying commands as expected.
 /// </summary>
-[RegisterComponent, Access(typeof(SharedBorgSystem))]
+[RegisterComponent] // Trauma - removed Access
 public sealed partial class BorgTransponderComponent : Component
 {
     /// <summary>

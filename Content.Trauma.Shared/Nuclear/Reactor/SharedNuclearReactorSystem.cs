@@ -7,8 +7,8 @@ using Content.Shared.Construction.Components;
 using Content.Shared.Database;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
-using Content.Shared.DeviceNetwork;
 using Content.Shared.Popups;
+using Content.Trauma.Common.DeviceLinking;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Collections;
@@ -35,9 +35,6 @@ public abstract partial class SharedNuclearReactorSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<NuclearReactorComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<NuclearReactorComponent, SignalReceivedEvent>(OnSignalReceived);
-        SubscribeLocalEvent<NuclearReactorComponent, UnanchorAttemptEvent>(OnUnanchorAttempt);
         Subs.BuiEvents<NuclearReactorComponent>(NuclearReactorUiKey.Key, subs =>
         {
             subs.Event<ReactorSwapPartMessage>(OnSwapPart);
@@ -46,6 +43,7 @@ public abstract partial class SharedNuclearReactorSystem : EntitySystem
         });
     }
 
+    [SubscribeLocalEvent]
     private void OnInit(Entity<NuclearReactorComponent> ent, ref ComponentInit args)
     {
         _device.EnsureSinkPorts(ent.Owner, ent.Comp.ControlRodInsertionPort);
@@ -129,18 +127,17 @@ public abstract partial class SharedNuclearReactorSystem : EntitySystem
         UpdateUI(ent);
     }
 
-    private void OnSignalReceived(Entity<NuclearReactorComponent> ent, ref SignalReceivedEvent args)
+    [SubscribeLocalEvent]
+    private void OnSignalReceived(Entity<NuclearReactorComponent> ent, ref SignalReceivedEvent<LogicIntPayload> args)
     {
         if (args.Port != ent.Comp.ControlRodInsertionPort)
             return; // wrong port
 
-        int percent = 0;
-        if (args.Data?.TryGetValue("logic_int", out percent) != true)
-            return; // non circuit signal dont care
-
-        SetTargetInsertion(ent, (float) percent * 0.01f);
+        var percent = (float) args.Data.Value;
+        SetTargetInsertion(ent, percent * 0.01f);
     }
 
+    [SubscribeLocalEvent]
     private void OnUnanchorAttempt(EntityUid uid, NuclearReactorComponent comp, ref UnanchorAttemptEvent args)
     {
         var user = args.User;
@@ -293,9 +290,8 @@ public abstract partial class SharedNuclearReactorSystem : EntitySystem
         ent.Comp.AvgInsertion = value;
         DirtyField(ent, ent.Comp, nameof(NuclearReactorComponent.AvgInsertion));
 
-        var payload = new NetworkPayload();
-        payload["logic_int"] = percent;
-        _device.InvokePort(ent.Owner, ent.Comp.ControlRodsAvgPort, payload);
+        var payload = new LogicIntPayload(percent);
+        _device.InvokePort(ent.Owner, ent.Comp.ControlRodsAvgPort, ref payload);
     }
 
     public void SetTemperature(Entity<NuclearReactorComponent> ent, float temp)
@@ -311,9 +307,8 @@ public abstract partial class SharedNuclearReactorSystem : EntitySystem
             return;
 
         ent.Comp.LastSentTemp = floored;
-        var payload = new NetworkPayload();
-        payload["logic_int"] = floored;
-        _device.InvokePort(ent, ent.Comp.CasingTempPort, payload);
+        var payload = new LogicIntPayload(floored);
+        _device.InvokePort(ent.Owner, ent.Comp.CasingTempPort, ref payload);
     }
 
     public void SetThermalPower(Entity<NuclearReactorComponent> ent, int power)
@@ -324,9 +319,8 @@ public abstract partial class SharedNuclearReactorSystem : EntitySystem
         ent.Comp.ThermalPower = power;
         DirtyField(ent, ent.Comp, nameof(NuclearReactorComponent.ThermalPower));
 
-        var payload = new NetworkPayload();
-        payload["logic_int"] = power;
-        _device.InvokePort(ent, ent.Comp.ThermalPowerPort, payload);
+        var payload = new LogicIntPayload(power);
+        _device.InvokePort(ent.Owner, ent.Comp.ThermalPowerPort, ref payload);
     }
 
     public void SetSmoking(Entity<NuclearReactorComponent> ent, bool smoking)

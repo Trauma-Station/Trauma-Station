@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Medical.Common.Targeting;
 using Content.Server.Atmos.Components;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Lightning;
-using Content.Trauma.Shared.Wizard.Spellblade;
-using Content.Medical.Common.Targeting;
 using Content.Shared.Atmos.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Electrocution;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Shared.Wizard.Spellblade;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 

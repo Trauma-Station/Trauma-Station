@@ -32,7 +32,7 @@
       tags: [ Crab ]
   plantMetabolism:
   - !type:PlantMutateChemicals
-    randomPickBotanyReagent: CrabonFillSolution
+    randomChemTables: [ CrabonFillSolution ]
   metabolisms:
     Bloodstream:
       effects:

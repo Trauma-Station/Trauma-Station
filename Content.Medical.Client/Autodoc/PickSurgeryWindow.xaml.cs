@@ -13,7 +13,7 @@ public sealed partial class PickSurgeryWindow : FancyWindow
 {
     [Dependency] private IEntityManager _entMan = default!;
     [Dependency] private IPrototypeManager _proto = default!;
-    private readonly SharedSurgerySystem _surgery;
+    private readonly SurgerySystem _surgery;
 
     public event Action<IAutodocStep>? OnAddStep;
 
@@ -26,7 +26,7 @@ public sealed partial class PickSurgeryWindow : FancyWindow
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        _surgery = _entMan.System<SharedSurgerySystem>();
+        _surgery = _entMan.System<SurgerySystem>();
 
         OnAddStep += _ => Close();
 

@@ -4,6 +4,7 @@ using Content.Medical.Common.Body;
 using Content.Shared.Body;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using System.Text;
 
@@ -49,6 +50,19 @@ public sealed partial class DamageableSystem
                 vitalDamage.DamageDict[type] = amount;
         }
         return vitalDamage;
+    }
+
+    /// <summary>
+    /// Return the amount of a single damage type on a non-mob entity.
+    /// Do not call this for mobs.
+    /// </summary>
+    public FixedPoint2 GetDamageAmount(Entity<DamageableComponent?> ent, [ForbidLiteral] ProtoId<DamageTypePrototype> id)
+    {
+        if (!_damageableQuery.Resolve(ent, ref ent.Comp) ||
+            !ent.Comp.Damage.DamageDict.TryGetValue(id, out var amount))
+            return FixedPoint2.Zero;
+
+        return amount;
     }
 
     /// <summary>

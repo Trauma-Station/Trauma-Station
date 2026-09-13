@@ -37,7 +37,6 @@
     speed: 7
     dropItems: false
     knockdown: false
-  levelRequired: 10
 
 - type: combo
   id: CircleKick
@@ -71,7 +70,6 @@
     effectProto: CircleKickSlowdownStatusEffect
     type: Update
     time: 2
-  levelRequired: 10
 
 - type: combo
   id: SweepKick
@@ -108,7 +106,6 @@
     drop: true
   - !type:TakeStaminaDamage
     amount: 10
-  levelRequired: 10
 
 - type: combo
   id: SpinKick
@@ -153,21 +150,3 @@
   - !type:TakeStaminaDamage
     amount: 15
   - !type:StopPull
-  levelRequired: 10
-
-- type: combo
-  id: KickUp
-  attacks:
-  - Disarm
-  - Disarm
-  conditions:
-  - !type:IsUser
-  userEffects:
-  - !type:RemoveComponents
-    components:
-    - type: KnockedDown
-  - !type:SetStanding
-    standing: true
-    force: true
-  giveExperience: false
-  levelRequired: 10

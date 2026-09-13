@@ -10,18 +10,7 @@ public sealed partial class StartableMachineSystem : EntitySystem
 {
     [Dependency] private SharedDeviceLinkSystem _device = default!;
     [Dependency] private SharedPowerReceiverSystem _power = default!;
-
-    private EntityQuery<StartableMachineComponent> _query;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _query = GetEntityQuery<StartableMachineComponent>();
-
-        SubscribeLocalEvent<StartableMachineComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<StartableMachineComponent, SignalReceivedEvent>(OnSignalReceived);
-    }
+    [Dependency] private EntityQuery<StartableMachineComponent> _query = default!;
 
     public override void Update(float frameTime)
     {
@@ -36,12 +25,14 @@ public sealed partial class StartableMachineSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnInit(Entity<StartableMachineComponent> ent, ref ComponentInit args)
     {
         _device.EnsureSinkPorts(ent, ent.Comp.StartPort, ent.Comp.AutoStartPort);
         _device.EnsureSourcePorts(ent, ent.Comp.StartedPort, ent.Comp.CompletedPort, ent.Comp.FailedPort);
     }
 
+    [SubscribeLocalEvent]
     private void OnSignalReceived(Entity<StartableMachineComponent> ent, ref SignalReceivedEvent args)
     {
         if (args.Port == ent.Comp.StartPort)
@@ -50,13 +41,23 @@ public sealed partial class StartableMachineSystem : EntitySystem
         }
         else if (args.Port == ent.Comp.AutoStartPort)
         {
-            var state = SignalState.Momentary;
-            args.Data?.TryGetValue<SignalState>("logic_state", out state);
-            ent.Comp.AutoStart = state switch
+            ent.Comp.AutoStart = !ent.Comp.AutoStart;
+        }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnSignalReceived(Entity<StartableMachineComponent> ent, ref SignalReceivedEvent<LogicStatePayload> args)
+    {
+        if (args.Port == ent.Comp.StartPort && args.Data.State != SignalState.Low)
+        {
+            TryStart((ent, ent.Comp));
+        }
+        else if (args.Port == ent.Comp.AutoStartPort)
+        {
+            ent.Comp.AutoStart = args.Data.State switch
             {
                 SignalState.Momentary => !ent.Comp.AutoStart,
                 SignalState.High => true,
-                SignalState.Low => false,
                 _ => false
             };
         }
@@ -93,7 +94,7 @@ public sealed partial class StartableMachineSystem : EntitySystem
     /// <summary>
     /// Invokes a port if the machine is powered.
     /// </summary>
-    public void InvokeIfPowered(EntityUid uid, string port)
+    public void InvokeIfPowered(EntityUid uid, [ForbidLiteral] string port)
     {
         if (_power.IsPowered(uid))
             _device.InvokePort(uid, port);

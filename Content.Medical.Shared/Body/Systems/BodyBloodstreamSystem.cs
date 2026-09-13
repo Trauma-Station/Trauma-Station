@@ -315,8 +315,11 @@ public sealed partial class BodyBloodstreamSystem : EntitySystem
             }
             total += totalPartBleeds;
 
-            part.Comp.Bleeds = totalPartBleeds;
-            // not dirtied because jesus christ that would spam packets
+            if (part.Comp.Bleeds != totalPartBleeds)
+            {
+                part.Comp.Bleeds = totalPartBleeds;
+                DirtyField(part, part.Comp, nameof(WoundableComponent.Bleeds));
+            }
         }
 
         var blood = Comp<BloodstreamComponent>(ent);

@@ -113,6 +113,7 @@
     - AltInteract
     - UseInHand
     - HarmMode
+    - ToolLocked
   - type: DeviceLinkSource
     ports:
     - Started

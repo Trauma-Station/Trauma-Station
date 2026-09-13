@@ -9,14 +9,9 @@ public sealed partial class SpriteVisibilitySystem : CommonSpriteVisibilitySyste
 {
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
+    [Dependency] private EntityQuery<SpriteVisibilityComponent> _query = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<SpriteVisibilityComponent, ComponentStartup>(OnStartup);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStartup(Entity<SpriteVisibilityComponent> ent, ref ComponentStartup args)
     {
         if (!_spriteQuery.TryComp(ent, out var comp) || comp.Color.A >= 1f)
@@ -38,17 +33,22 @@ public sealed partial class SpriteVisibilitySystem : CommonSpriteVisibilitySyste
 
     private void AddVisibilityModifier(Entity<SpriteComponent> ent, string key, float modifier)
     {
+        modifier = MathF.Max(modifier, 0f);
+
         var comp = EnsureComp<SpriteVisibilityComponent>(ent);
-        comp.VisibilityModifiers[key] = MathF.Max(modifier, 0f);
+        if (comp.VisibilityModifiers.TryGetValue(key, out var old) && old == modifier)
+            return;
+
+        comp.VisibilityModifiers[key] = modifier;
         ReCalculateSpriteVisibility((ent, ent.Comp, comp));
     }
 
     private void RemoveVisibilityModifier(Entity<SpriteComponent?, SpriteVisibilityComponent?> ent, string key)
     {
-        if (!Resolve(ent, ref ent.Comp1))
+        if (!_spriteQuery.Resolve(ent, ref ent.Comp1))
             return;
 
-        if (!Resolve(ent, ref ent.Comp2, false))
+        if (!_query.Resolve(ent, ref ent.Comp2, false))
         {
             SetSpriteVisibility(ent!, 1f);
             return;
@@ -88,4 +88,7 @@ public sealed partial class SpriteVisibilitySystem : CommonSpriteVisibilitySyste
         var visibility = ent.Comp2.VisibilityModifiers.Values.Aggregate(1f, (x, y) => x * y);
         SetSpriteVisibility(ent, visibility);
     }
+
+    public float GetModifier(SpriteVisibilityComponent comp)
+        => comp.VisibilityModifiers.Values.Aggregate(1f, (x, y) => x * y);
 }

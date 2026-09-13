@@ -11,6 +11,7 @@
   - !type:HasStatusEffectCondition
     inverted: true
     effectProto: StatusEffectMuted # can't spam it on the same person immediately, note this ignores the mute trait
+    failMessage: martial-arts-fail-target-muted
   opponentEffects:
   - !type:ModifyStatusEffect
     effectProto: NinjutsuTakedownStatusEffect
@@ -18,7 +19,6 @@
   - !type:ModifyStatusEffect
     effectProto: StatusEffectMuted
     time: 10
-  levelRequired: 50
 
 - type: combo
   id: BiteTheDust
@@ -36,7 +36,6 @@
     damage:
       types:
         Slash: 10
-  levelRequired: 10
 
 - type: combo
   id: DirtyKill
@@ -54,4 +53,3 @@
     damage:
       types:
         Slash: 20
-  levelRequired: 10
