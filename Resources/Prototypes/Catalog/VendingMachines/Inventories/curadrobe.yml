@@ -14,11 +14,6 @@
     ClothingUniformJumpskirtLibrarian: 3
     ClothingShoesBootsLaceup: 2
     ClothingHeadsetService: 2
-  contrabandInventory:
-    MysteryLighterBox: 2
-    ScrollFullRandom: 3
-    ToyFigurineLibrarian: 1
   emaggedInventory: # Goobstation
-    UplinkLighterBox: 1
     SyndicatePersonalAI: 1
     SyndicateWhistle: 1 # Trauma
