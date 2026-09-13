@@ -14427,3 +14427,14 @@ Entries:
   id: 1574
   time: '2026-09-12T07:02:08.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4555
+- author: Aviu
+  changes:
+  - type: Add
+    message: ERT/DS/HECU gear revamped.
+  - type: Add
+    message: Revs win spawns HECU instead of ERT.
+  - type: Fix
+    message: ERT and similar roles correctly spawn with skillchips now.
+  id: 1575
+  time: '2026-09-12T07:47:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4557
