@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.DeviceLinking;
-using Content.Shared.DeviceNetwork;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Radio;
+using Content.Trauma.Common.DeviceLinking;
 
 namespace Content.Trauma.Shared.Radio;
 
@@ -18,11 +18,8 @@ public sealed partial class SignalRadioReceiverSystem : EntitySystem
         if (ent.Owner == args.RadioSource || !_power.IsPowered(ent.Owner))
             return;
 
-        var data = new NetworkPayload()
-        {
-            // language is ignored unlucky
-            ["logic_string"] = args.OriginalChatMsg.Message
-        };
-        _device.InvokePort(ent.Owner, ent.Comp.Port, data);
+        // language is ignored unlucky
+        var payload = new LogicStringPayload(args.OriginalChatMsg.Message);
+        _device.InvokePort(ent.Owner, ent.Comp.Port, ref payload);
     }
 }

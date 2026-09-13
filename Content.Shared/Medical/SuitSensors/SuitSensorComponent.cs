@@ -1,4 +1,3 @@
-using Content.Shared.Medical.SuitSensor;
 using Robust.Shared.GameStates;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
@@ -13,13 +12,6 @@ namespace Content.Shared.Medical.SuitSensors;
 [AutoGenerateComponentState, AutoGenerateComponentPause]
 public sealed partial class SuitSensorComponent : Component
 {
-    // GoobStation - Start
-    /// <summary>
-    ///     Is this suit sensor for commands, BSO use only
-    /// </summary>
-    [DataField]
-    public bool CommandTracker = false;
-    // GoobStation - End
     /// <summary>
     ///     Choose a random sensor mode when item is spawned.
     /// </summary>

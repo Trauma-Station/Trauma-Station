@@ -9,7 +9,8 @@ using Content.Shared.Hands;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Systems;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Wizard.Projectile;
@@ -66,7 +67,7 @@ public sealed partial class CrackedLanternSystem : EntitySystem
         if (args.User == target || !_mob.IsAlive(target))
             return;
 
-        if (!_delay.TryResetDelay(ent, true))
+        if (!_delay.TryResetDelay(ent.Owner, true))
             return;
 
         var coords = CalculateCoordinates(target);

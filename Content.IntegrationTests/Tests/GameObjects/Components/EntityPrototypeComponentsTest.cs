@@ -72,7 +72,11 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
                         {
                             componentsValidated++;
 
-                            var componentType = component.GetNode("type").AsString();
+                            // <Trauma> - use TryGetNode for partials !Remove
+                            if (!component.TryGetNode("type", out var typeNode))
+                                continue;
+                            // </Trauma>
+                            var componentType = typeNode.AsString();
                             var clientAvailability = cComponentFactory.GetComponentAvailability(componentType);
                             var serverAvailability = sComponentFactory.GetComponentAvailability(componentType);
 

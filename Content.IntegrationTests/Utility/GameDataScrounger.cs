@@ -127,9 +127,18 @@ public static partial class GameDataScrounger
             }
             else
             {
-                Scrounge();
-
-                return _entitiesWithComponentIndex[componentId].ToArray();
+                // <Trauma> - catch exceptions so they dont just get dropped
+                try
+                {
+                    Scrounge();
+                    return _entitiesWithComponentIndex[componentId].ToArray();
+                }
+                catch (Exception e)
+                {
+                    Logger.ErrorS("scrounger", $"Caught error while scrounging prototypes: {e}");
+                    return [];
+                }
+                // </Trauma>
             }
         }
     }
@@ -221,6 +230,11 @@ public static partial class GameDataScrounger
                 var entryMapping = (YamlMappingNode)entry;
 
                 var id = entryMapping[IdNode];
+
+                // TODO: Add handling for prototype variants
+                if (id is YamlMappingNode)
+                    continue;
+
                 var type = entryMapping[TypeNode];
                 var @abstract = ignored;
                 if (entryMapping.TryGetNode("abstract", out YamlScalarNode? abstractNode))
@@ -269,7 +283,11 @@ public static partial class GameDataScrounger
                 var entity = new EntityMetadata()
                 {
                     Abstract = @abstract,
-                    Components = components?.Children.Select(x => x["type"].ToString()).ToHashSet() ?? new(),
+                    // <Trauma> - check if type exists first
+                    Components = components?.Children
+                        .Where(x => x is YamlMappingNode map && map.Children.ContainsKey("type"))
+                        .Select(x => x["type"].ToString()).ToHashSet() ?? new(),
+                    // </Trauma>
                     Parents = parents,
                     Id = id.AsString(),
                 };
@@ -320,7 +338,10 @@ public static partial class GameDataScrounger
 
         foreach (var parent in entity.Parents)
         {
-            var parentMeta = _entitiesMetaIndex![parent];
+            // <Trauma> - skip generated prototypes instead of throwing and breaking the whole thing
+            if (!_entitiesMetaIndex!.TryGetValue(parent, out var parentMeta))
+                continue;
+            // </Trauma>
             VisitEntity(parentMeta, visitedEntities);
 
             entity.Components.UnionWith(parentMeta.Components);

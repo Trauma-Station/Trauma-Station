@@ -15,8 +15,8 @@ public sealed class SurveillanceCameraMonitorUiState(NetEntity? activeCamera,
     //HashSet<ProtoId<DeviceFrequencyPrototype>> subnets,
     string activeAddress,
     //ProtoId<DeviceFrequencyPrototype>? activeSubnet,
-    Dictionary<string, (string, (NetEntity, NetCoordinates))> cameras, // added entity and coords
-    Dictionary<string, (string, (NetEntity, NetCoordinates))> mobileCameras
+    Dictionary<string, (string, NetEntity, NetCoordinates)> cameras, // added entity and coords
+    Dictionary<string, (string, NetEntity, NetCoordinates)> mobileCameras
     // </Trauma>
 ) : BoundUserInterfaceState
 {
@@ -38,8 +38,8 @@ public sealed class SurveillanceCameraMonitorUiState(NetEntity? activeCamera,
     */
 
     // Known cameras, by address and name.
-    public Dictionary<string, (string, (NetEntity, NetCoordinates))> Cameras { get; } = cameras; // Trauma - added entity and coords
-    public Dictionary<string, (string, (NetEntity, NetCoordinates))> MobileCameras { get; } = mobileCameras; // Trauma
+    public Dictionary<string, (string, NetEntity, NetCoordinates)> Cameras { get; } = cameras; // Trauma - added entity and coords
+    public Dictionary<string, (string, NetEntity, NetCoordinates)> MobileCameras { get; } = mobileCameras; // Trauma
 }
 
 [Serializable, NetSerializable]

@@ -1,44 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: BulletMic
-  name: MIC bolt
-  parent: BaseBullet
-  categories: [ HideSpawnMenu ]
-  description: Not too bad, but you still don't want to get hit by it.
-  components:
-  - type: Sprite
-    noRot: false
-    sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/cbbolt.rsi
-    layers:
-    - state: cbbolt
-  - type: Projectile
-    damage:
-      types:
-        Shock: 10
-  - type: StaminaDamageOnCollide
-    damage: 30
-  - type: KnockdownOnCollide
-    dropItems: true
-  - type: BlurOnCollide
-  - type: TimedDespawn
-    lifetime: 0.4
-  - type: Ammo
-    muzzleFlash: null
-  - type: Reflective
-    reflective:
-    - Energy
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.05,-0.05,0.05,0.05"
-        hard: false
-        mask:
-        - Opaque
-
-- type: entity
   id: BulletPlasmaCutter
   name: cutter bolt
   parent: BaseBullet

@@ -83,6 +83,11 @@
     damageModifierSet: Metallic
   - type: Injurable
     damageContainer: Inorganic
+  - type: Electrified
+    onHandInteract: false
+    onInteractUsing: false
+    onBump: false
+    usesApcPower: true
   - type: Repairable
     fuelCost: 10
     doAfterDelay: 5

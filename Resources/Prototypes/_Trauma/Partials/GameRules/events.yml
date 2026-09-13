@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: DragonSpawn
+  components:
+  - type: GhostroleAlert
+  - type: StationEvent
+    weight: 3
+    earliestStart: 30
+    maxOccurrences: 1
+    minimumPlayers: 50
+
+- type: entity
+  id: NinjaSpawn
+  components:
+  - type: GhostroleAlert
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: ChangelingSkills # W lazy
+  - type: StationEvent
+    weight: 1
+    maxOccurrences: 1
+
+- type: entity
+  id: ParadoxCloneSpawn
+  components:
+  - type: StationEvent
+    weight: 4

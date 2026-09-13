@@ -88,8 +88,8 @@ public sealed partial class SurveillanceCameraMonitorWindow : FancyWindow // Tra
         string activeAddress,
         // <Trauma>
         // removed activeSubnet
-        Dictionary<string, (string, (NetEntity, NetCoordinates))> cameras, // added entity and corods
-        Dictionary<string, (string, (NetEntity, NetCoordinates))> mobileCameras,
+        Dictionary<string, (string, NetEntity, NetCoordinates)> cameras, // added entity and corods
+        Dictionary<string, (string, NetEntity, NetCoordinates)> mobileCameras,
         EntityUid monitor,
         EntityCoordinates? monitorCoords)
         // </Trauma>
@@ -100,13 +100,13 @@ public sealed partial class SurveillanceCameraMonitorWindow : FancyWindow // Tra
         _reverseCameras.Clear();
         _resolveCameraName.Clear();
         NavMap.TrackedEntities.Clear();
-        foreach (var (camera, (name, (ent, coordinates))) in cameras)
+        foreach (var (camera, (name, ent, coordinates)) in cameras)
         {
             _reverseCameras[ent] = camera;
             _resolveCameraName[camera] = name;
             AddTrackedEntityToNavMap(ent, coordinates, camera.Equals(_currentAddress) ? true : false, false);
         }
-        foreach (var (camera, (name, (ent, coordinates))) in mobileCameras)
+        foreach (var (camera, (name, ent, coordinates)) in mobileCameras)
         {
             _reverseCameras[ent] = camera;
             _resolveCameraName[camera] = name;
@@ -169,4 +169,45 @@ public sealed partial class SurveillanceCameraMonitorWindow : FancyWindow // Tra
                             ("address", _currentAddress));
         // Goobstation end
     }
+
+    /* Trauma - no longer used
+    private int AddSubnet(ProtoId<DeviceFrequencyPrototype> subnet)
+    {
+        var name = subnet;
+        if (_prototypeManager.TryIndex(subnet, out var frequency)
+            && frequency.Name != null)
+        {
+            name = Loc.GetString(frequency.Name);
+        }
+
+        SubnetSelector.AddItem(name);
+        SubnetSelector.SetItemMetadata(SubnetSelector.ItemCount - 1, subnet);
+
+        return SubnetSelector.ItemCount - 1;
+    }
+
+    private void OnSubnetListSelect(ItemList.ItemListSelectedEventArgs args)
+    {
+        CameraSelected!((string)SubnetList[args.ItemIndex].Metadata!, null);
+    }
+
+    public void SetMap(EntityUid mapUid)
+    {
+        CameraMap.MapUid = _mapUid = mapUid;
+    }
+
+    private void OnCameraMapSelected(NetEntity netEntity)
+    {
+        if (_mapUid is null || !_entityManager.TryGetComponent<SurveillanceCameraMapComponent>(_mapUid.Value, out var mapComp))
+            return;
+
+        if (!mapComp.Cameras.TryGetValue(netEntity, out var marker) || !marker.Active)
+            return;
+
+        if (!string.IsNullOrEmpty(marker.Address))
+            CameraSelected?.Invoke(marker.Address, marker.Subnet);
+        else
+            _entityNetManager.SendSystemNetworkMessage(new RequestCameraMarkerUpdateMessage(netEntity));
+    }
+    */
 }

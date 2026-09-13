@@ -91,7 +91,7 @@ public abstract partial class SharedBorgSystem
 
     private void OnModuleGotRemoved(Entity<BorgModuleComponent> module, ref EntGotRemovedFromContainerMessage args)
     {
-        if (_timing.ApplyingState)
+        if (_timing.ApplyingState || TerminatingOrDeleted(module)) // Trauma - don't remove items from the container if it's being deleted
             return; // The changes are already networked with the same game state
 
         var chassis = args.Container.Owner;

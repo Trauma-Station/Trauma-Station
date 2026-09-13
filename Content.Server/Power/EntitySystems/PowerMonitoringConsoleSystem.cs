@@ -832,6 +832,10 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
     private void UpdateCollectionChildMetaData(EntityUid child, EntityUid master)
     {
+        // <Trauma> - shitfix deletion throwing when detaching, 1k line system for otherwise unused network system with no testing WWWW
+        if (TerminatingOrDeleted(child))
+            return;
+        // </Trauma>
         var netEntity = GetNetEntity(child);
         var xform = Transform(child);
 

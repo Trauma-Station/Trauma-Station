@@ -1,16 +1,89 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: GasFilterBase
-  id: GasFilterInline
+  abstract: true
+  parent: GasTrinaryBase
+  id: BaseGasFilterInline
   name: inline gas filter
   description: Filters gases from a pipenet without splitting it in two.
+  placement:
+    mode: AlignAtmosPipeLayers
   components:
+  - type: VentCrawlerTube
+    containerId: VentCrawlerTube
+  - type: VentCrawlerJunction
+    degrees:
+    - 0
+    - -90
+    - 180
+  - type: ContainerContainer
+    containers:
+      VentCrawlerTube: !type:Container
+  - type: SubFloorHide
+    visibleLayers:
+    - enum.SubfloorLayers.FirstLayer
   - type: Sprite
     sprite: _Goobstation/Structures/Piping/inlinegasfilter.rsi
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.FilterVisuals.Enabled:
+        enabled:
+          True: { state: gasFilterOn }
+          False: { state: gasFilter }
+  - type: PipeColorVisuals
+  - type: ActivatableUI
+    key: enum.GasFilterUiKey.Key
+  - type: ActivatableUIRequiresAnchor
+  - type: UserInterface
+    interfaces:
+      enum.GasFilterUiKey.Key:
+        type: GasFilterBoundUserInterface
   - type: GasFilter
+    enabled: false
+    transferRate: 1000
+    maxTransferRate: 1000
     inlet: pipe
     outlet: pipe
+  - type: Construction
+    node: inline_filter
+  - type: AmbientSound
+    enabled: false
+    volume: -9
+    range: 5
+    sound:
+      path: /Audio/Ambience/Objects/gas_hiss.ogg
+  - type: AtmosMonitoringConsoleDevice
+    navMapBlip: GasFlowRegulator
+  - type: GuideHelp
+    guides:
+    - MixingAndFiltering
+
+- type: entity
+  parent: BaseGasFilterInline
+  id: !type:CreateVariants
+    values: [ GasFilterInline, GasFilterInlineAlt1, GasFilterInlineAlt2 ]
+  name: inline gas filter
+  description: Filters gases from a pipenet without splitting it in two.
+  categories: !type:CreateVariants
+    sequences: [ [ ], [ HideSpawnMenu ], [ HideSpawnMenu ] ]
+  components:
+  - type: Sprite
+    layers:
+    - sprite: !type:CreateVariants
+        values: [ Structures/Piping/Atmospherics/pipe.rsi, Structures/Piping/Atmospherics/pipe_alt1.rsi, Structures/Piping/Atmospherics/pipe_alt2.rsi ]
+      state: pipeTrinaryConnectors
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+    - state: gasFilter
+      map: [ "enum.SubfloorLayers.FirstLayer", "enabled" ]
+  - type: AtmosPipeLayers
+    pipeLayer: !type:CreateVariants
+      values: [ 0, 1, 2 ]
+  - type: Flippable
+    mirrorEntity: GasFilterInlineFlipped
+  - type: Construction
+    graph: !type:CreateVariants
+      values: [ GasTrinary, GasTrinaryAlt1, GasTrinaryAlt2 ]
   - type: NodeContainer
     nodes:
       pipe:
@@ -21,5 +94,37 @@
         !type:PipeNode
         nodeGroupID: Pipe
         pipeDirection: West
+
+- type: entity
+  parent: BaseGasFilterInline
+  id: !type:CreateVariants
+    values: [ GasFilterInlineFlipped, GasFilterInlineFlippedAlt1, GasFilterInlineFlippedAlt2 ]
+  categories: !type:CreateVariants
+    sequences: [ [ ], [ HideSpawnMenu ], [ HideSpawnMenu ] ]
+  components:
+  - type: Sprite
+    layers:
+    - sprite: !type:CreateVariants
+        values: [ Structures/Piping/Atmospherics/pipe.rsi, Structures/Piping/Atmospherics/pipe_alt1.rsi, Structures/Piping/Atmospherics/pipe_alt2.rsi ]
+      state: pipeTrinaryConnectors
+      map: [ "enum.PipeVisualLayers.Pipe" ]
+    - state: gasFilter
+      map: [ "enum.SubfloorLayers.FirstLayer", "enabled" ]
+  - type: AtmosPipeLayers
+    pipeLayer: !type:CreateVariants
+      values: [ 0, 1, 2 ]
+  - type: Flippable
+    mirrorEntity: GasFilterInlineFlipped
   - type: Construction
-    node: inline_filter
+    graph: !type:CreateVariants
+      values: [ GasTrinary, GasTrinaryAlt1, GasTrinaryAlt2 ]
+  - type: NodeContainer
+    nodes:
+      pipe:
+        !type:PipeNode
+        nodeGroupID: Pipe
+        pipeDirection: Longitudinal
+      filter:
+        !type:PipeNode
+        nodeGroupID: Pipe
+        pipeDirection: East
