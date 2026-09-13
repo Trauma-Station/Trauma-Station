@@ -332,7 +332,10 @@ public sealed partial class HereticSystem : SharedHereticSystem
         }
 
         RaiseLocalEvent(ent, new EventHereticRerollTargets());
-        UpdateHereticCostModifiers(ent.AsNullable());
+        // Check for mind comp to prevent test fail
+        // Otherwise, heretic depends on entity having mind comp too
+        if (HasComp<MindComponent>(ent))
+            UpdateHereticCostModifiers(ent.AsNullable());
     }
 
     [SubscribeLocalEvent]

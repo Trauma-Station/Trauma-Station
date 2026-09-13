@@ -421,9 +421,8 @@ public abstract partial class SharedHereticSystem : EntitySystem
 
     public Entity<StoreComponent>? GetHereticStore(EntityUid mind)
     {
-        StoreComponent? store = null;
-
-        if (!_role.MindHasRole<HereticRoleComponent>(mind, out var role) || !Resolve(role.Value, ref store))
+        if (!_role.MindHasRole<HereticRoleComponent>(mind, out var role) ||
+            !TryComp(role.Value, out StoreComponent? store))
             return null;
 
         return (role.Value, store);
