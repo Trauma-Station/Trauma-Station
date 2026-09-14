@@ -346,7 +346,7 @@
     - type: MobThresholds
       thresholds:
         0: Alive
-        45: Dead
+        90: Dead
     - type: Stamina
       baseCritThreshold: 150
     - type: DamageStateVisuals
@@ -389,14 +389,14 @@
       animation: WeaponArcBite
       damage:
         types:
-          Piercing: 5 # Trauma - Was 6
-          Poison: 2 # Trauma - Was 4
+          Piercing: 6 # Trauma - Was 6
+          Poison: 4 # Trauma - Was 4
     - type: SolutionManager
       solutions:
       - SolutionVenomCobraSpace
     - type: MeleeChemicalInjector
       solution: melee
-      transferAmount: 2 # Trauma - Was 6
+      transferAmount: 4 # Trauma - Was 6
     - type: ReplacementAccent
       accent: xeno
     - type: InteractionPopup
