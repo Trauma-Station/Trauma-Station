@@ -7,7 +7,7 @@
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
     channels:
-    - Binary
+    #  - Binary # Goobstation - replaced with collective mind
     - Common
     - Command
     - Engineering
@@ -18,7 +18,7 @@
     - Supply
   - type: ActiveRadio
     channels:
-    - Binary
+    #  - Binary # Goobstation - replaced with collective mind
     - Common
     - Command
     - Engineering
@@ -425,11 +425,6 @@
   parent: PositronicBrain
   categories: [ HideSpawnMenu, DoNotMap ]
   components:
-  # <Trauma>
-  - type: IonStormTarget # AI can be ion stormed
-  - type: SpeechSynthesis
-    voice: Borg
-  # </Trauma>
   - type: Sprite
     # Once it's in a core it's pretty much an abstract entity at that point.
     visible: false
@@ -579,9 +574,6 @@
       borg_brain:
         - PositronicBrain
       borg_module:
-        # <Trauma>
-        - BorgModuleStickyGrenadeLauncher
-        # </Trauma>
         - BorgModuleL6C
         - BorgModuleDoubleEsword
   - type: ItemSlots
@@ -615,13 +607,8 @@
       borg_brain:
         - PositronicBrain
       borg_module:
-        # <Trauma>
-        - BorgModuleRCD
-        - BorgModuleSyndicateJammer
-        - BorgModuleSyndicateDoorControl
-        # </Trauma>
         - BorgModuleSyndicateWeapon
-        - BorgModuleAdvancedTool # Trauma - was BorgModuleTool
+        - BorgModuleTool
         - BorgModuleOperative
   - type: ItemSlots
     slots:
