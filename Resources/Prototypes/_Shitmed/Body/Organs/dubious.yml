@@ -20,6 +20,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousHealth
   suffix: Healing
+  description: Suspicious alien gland, replaces the heart. This one radiates a peaceful glow.
   components:
   - type: Sprite
     layers:
@@ -33,16 +34,16 @@
       - Critical # for mobs that dont have softcrit
       damage:
         types:
-          Blunt: -0.05
-          Slash: -0.05
-          Ballistic: -0.05
-          Piercing: -0.05
-          Heat: -0.04
-          Cold: -0.04
-          Shock: -0.04
+          Blunt: -0.15
+          Slash: -0.15
+          Ballistic: -0.15
+          Piercing: -0.15
+          Heat: -0.12
+          Cold: -0.12
+          Shock: -0.12
           Caustic: -0.04
-          Asphyxiation: -0.07
-          Bloodloss: -0.07
+          Asphyxiation: -0.10
+          Bloodloss: -0.10
           Poison: -0.07
           Radiation: -0.07
           Cellular: -0.14
@@ -51,6 +52,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousAA
   suffix: All Access
+  description: Suspicious alien gland, replaces the heart. It seems like this one is constantly sparking.
   components:
   - type: Sprite
     layers:
@@ -66,6 +68,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousShock
   suffix: Shocking
+  description: Suspicious alien gland, replaces the heart. It seems volatile.
   components:
   - type: Sprite
     layers:
@@ -74,17 +77,18 @@
     onAdd:
     - type: Insulated
     - type: LightningArcShooter
-      arcDepth: 1
-      maxLightningArc: 3
-      shootMinInterval: 90
-      shootMaxInterval: 300
-      shootRange: 5
+      arcDepth: 2
+      maxLightningArc: 6
+      shootMinInterval: 180
+      shootMaxInterval: 240
+      shootRange: 7
       lightningPrototype: Lightning
 
 - type: entity
   parent: OrganDubiousBase
   id: OrganDubiousInvisible
   suffix: Invisible
+  description: Suspicious alien gland, replaces the heart. It seems to perfectly blend into the environment.
   components:
   - type: Sprite
     layers:
@@ -102,6 +106,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousGoliath
   suffix: Goliath
+  description: Suspicious alien gland, replaces the heart. It’s made up of countless writhing tendrils.
   components:
   - type: Sprite
     layers:
@@ -114,6 +119,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousSpaceAdaptation
   suffix: Space
+  description: Suspicious alien gland, replaces the heart. It doesn’t seem to beat.
   components:
   - type: Sprite
     layers:
@@ -129,6 +135,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousArtifact
   suffix: Artifact
+  description: Suspicious alien gland, replaces the heart. It seems to constantly be shifting.
   components:
   - type: Sprite
     layers:
@@ -144,6 +151,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousScrambleDna
   suffix: DNA Scrambler
+  description: Suspicious alien gland, replaces the heart. This one looks as if it’s constantly changing.
   components:
   - type: Sprite
     layers:
@@ -155,6 +163,7 @@
 - type: entity
   parent: OrganDubiousBase
   id: OrganDubiousScrambleLocation
+  description: Suspicious alien gland, replaces the heart. This one seems unstable.
   suffix: Teleport
   components:
   - type: Sprite
@@ -168,6 +177,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousSpiderEggs
   suffix: Spiders
+  description: Suspicious alien gland, replaces the heart. This one seems to be spewing eggs.
   components:
   - type: Sprite
     layers:
@@ -183,6 +193,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousSlimeEggs
   suffix: Slimes
+  description: Suspicious alien gland, replaces the heart. This one seems to have something sloshing around inside.
   components:
   - type: Sprite
     layers:
@@ -198,6 +209,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousEMP
   suffix: EMP
+  description: Suspicious alien gland, replaces the heart. This one looks shockingly normal.
   components:
   - type: Sprite
     layers:
@@ -211,6 +223,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousGravityWell
   suffix: Gravity
+  description: Suspicious alien gland, replaces the heart. This one seems to be ignoring the laws of nature.
   components:
   - type: Sprite
     layers:
@@ -224,6 +237,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousFlash
   suffix: Flash
+  description: Suspicious alien gland, replaces the heart. This one appears bio-luminescent.
   components:
   - type: Sprite
     layers:
@@ -237,19 +251,23 @@
   parent: OrganDubiousBase
   id: OrganDubiousSmoke
   suffix: Smoke
+  description: Suspicious alien gland, replaces the heart. This one seems to have smoke seeping out.
   components:
   - type: Sprite
     layers:
     - state: emp
   - type: RandomOrganEffects
+    minActivationTime: 20
+    maxActivationTime: 120
     effects:
     - !type:SpawnAttached
-      entity: AdminInstantEffectSmoke10
+      entity: AdminInstantEffectSmoke30
 
 - type: entity
   parent: OrganDubiousBase
   id: OrganDubiousGas
   suffix: Gases
+  description: Suspicious alien gland, replaces the heart. This one seems to have some sort of gas leaking out.
   components:
   - type: Sprite
     layers:
@@ -262,6 +280,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousSteptriggerImmune
   suffix: Noslip
+  description: Suspicious alien gland, replaces the heart this one seems to not even be touching the environment.
   components:
   - type: Sprite
     layers:
@@ -285,6 +304,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousVentcrawler
   suffix: Ventcrawl
+  description: Suspicious alien gland, replaces the heart this one seems to expand and contract.
   components:
   - type: Sprite
     layers:
@@ -298,6 +318,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousRepairable
   suffix: Repairable
+  description: Suspicious alien gland, replaces the heart this one seems to be infused with a metallic structure.
   components:
   - type: Sprite
     layers:
