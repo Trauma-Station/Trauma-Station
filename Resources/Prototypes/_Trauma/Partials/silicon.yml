@@ -1,6 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
-
-# Derelict Medical borg
 - type: entity
   id: PlayerMedicalBorgDerelict
   components:
@@ -18,5 +17,3 @@
     containers:
       borg_module:
           - BorgModulePKA
-
-
