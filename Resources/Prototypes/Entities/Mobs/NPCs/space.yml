@@ -396,7 +396,7 @@
       - SolutionVenomCobraSpace
     - type: MeleeChemicalInjector
       solution: melee
-      transferAmount: 4
+      transferAmount: 6
     - type: ReplacementAccent
       accent: xeno
     - type: InteractionPopup
