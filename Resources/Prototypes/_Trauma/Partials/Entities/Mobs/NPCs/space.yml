@@ -1,0 +1,8 @@
+﻿
+- type: entity
+  id: MobCobraSpaceVent
+  components:
+  - type: MobThresholds
+    thresholds: !Clear
+      0: Alive
+      90: Dead
