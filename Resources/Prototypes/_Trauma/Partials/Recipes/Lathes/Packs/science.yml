@@ -1,0 +1,52 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+## Static
+
+- type: latheRecipePack
+  id: ScienceBoardsStatic
+  recipes:
+  # Moved to SharedBoardsStatic
+  - !Remove ProtolatheMachineCircuitboard
+  - !Remove AutolatheMachineCircuitboard
+  - !Remove CircuitImprinterMachineCircuitboard
+
+## Dynamic
+
+- type: latheRecipePack
+  id: ScienceEquipment
+  recipes:
+  # removed here but still in Equipment
+  - !Remove SignallerAdvanced
+
+- type: latheRecipePack
+  id: ScienceClothing
+  recipes:
+  - !Remove ClothingShoesBootsSpeed # completely fucks combat balance
+  - ClothingBackpackMessengerHolding
+
+- type: latheRecipePack
+  id: ScienceWeapons
+  recipes:
+  - !Remove WeaponProtoKineticAccelerator # Moved to MiningWeapons
+
+- type: latheRecipePack
+  id: ScienceExplosives
+  recipes:
+  # moved to roundstart autolathe
+  - !Remove TimerTrigger
+  - !Remove SignalTrigger
+  - !Remove VoiceTrigger
+
+- type: latheRecipePack
+  id: ScienceBoards
+  recipes:
+  # moved to SharedBoards
+  - !Remove TurboItemRechargerCircuitboard
+  - !Remove FlatpackerMachineCircuitboard
+  - !Remove PowerCageRechargerCircuitboard
+  # replaced by upgrade kits
+  - !Remove AutolatheHyperConvectionMachineCircuitboard
+  - !Remove ProtolatheHyperConvectionMachineCircuitboard
+  - !Remove CircuitImprinterHyperConvectionMachineCircuitboard
+  # moved to ServiceBoards
+  - !Remove SheetifierMachineCircuitboard

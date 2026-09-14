@@ -4,7 +4,6 @@ using Content.Goobstation.Common.Religion;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Medical.Shared.Traumas;
-using Content.Medical.Shared.Wounds;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.Body;
@@ -31,6 +30,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Systems;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
+using Content.Shared.Store;
 using Content.Shared.Stunnable;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
@@ -67,6 +67,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] protected ExamineSystemShared Examine = default!;
     [Dependency] protected SharedPopupSystem Popup = default!;
 
+    [Dependency] private SharedStoreSystem _store = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private ThrowingSystem _throw = default!;
@@ -112,6 +113,19 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
         SubscribeBlade();
 
         CacheDamageTypes();
+    }
+
+    [SubscribeLocalEvent]
+    private void OnStore(EventHereticOpenStore args)
+    {
+        if (!TryUseAbility(args))
+            return;
+
+        if (!Heretic.TryGetHereticComponent(args.Performer, out _, out var ent) ||
+            Heretic.GetHereticStore(ent) is not { } store)
+            return;
+
+        _store.ToggleUi(args.Performer, store, store);
     }
 
     [SubscribeLocalEvent]
@@ -162,7 +176,7 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnActionAttempt(Entity<HereticActionComponent> ent, ref ActionAttemptEvent args)
     {
-        if (StatusNew.HasEffectComp<BlockHereticActionsStatusEffectComponent>( args.User))
+        if (StatusNew.HasEffectComp<BlockHereticActionsStatusEffectComponent>(args.User))
             args.Cancelled = true;
     }
 

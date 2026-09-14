@@ -34,3 +34,9 @@ easy_mode = false # woodchipper is actually dangerous
 
 [ic]
 ssd_sleep = false # chuddy and doesnt account for NPCs
+
+[infolinks]
+bug_report = "https://github.com/Trauma-Station/Trauma-Station/issues/created_by/choose"
+discord    = "https://discord.traumastation.com"
+github     = "https://github.com/Trauma-Station/Trauma-Station"
+wiki       = "https://wiki.traumastation.com"

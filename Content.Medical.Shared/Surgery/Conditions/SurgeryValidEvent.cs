@@ -8,4 +8,4 @@ namespace Content.Medical.Shared.Surgery.Conditions;
 ///     Raised on the entity that is receiving surgery.
 /// </summary>
 [ByRefEvent]
-public record struct SurgeryValidEvent(EntityUid Body, EntityUid Part, bool Cancelled = false, BodyPartType PartType = default, BodyPartSymmetry? Symmetry = null);
+public record struct SurgeryValidEvent(EntityUid Body, EntityUid Part, EntityUid User, bool Cancelled = false, string? Reason = null);

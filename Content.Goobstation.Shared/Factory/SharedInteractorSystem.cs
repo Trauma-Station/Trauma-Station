@@ -149,16 +149,25 @@ public abstract partial class SharedInteractorSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnSignalReceived(Entity<InteractorComponent> ent, ref SignalReceivedEvent args)
     {
-        var state = SignalState.Momentary;
-        args.Data?.TryGetValue<SignalState>("logic_state", out state);
+        HandleSignal(ent, args.Port, SignalState.Momentary);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnSignalReceived(Entity<InteractorComponent> ent, ref SignalReceivedEvent<LogicStatePayload> args)
+    {
+        HandleSignal(ent, args.Port, args.Data.State);
+    }
+
+    private void HandleSignal(Entity<InteractorComponent> ent, string port, SignalState state)
+    {
         bool current;
-        if (args.Port == ent.Comp.AltInteractPort)
+        if (port == ent.Comp.AltInteractPort)
             current = ent.Comp.AltInteract;
-        else if (args.Port == ent.Comp.UseInHandPort)
+        else if (port == ent.Comp.UseInHandPort)
             current = ent.Comp.UseInHand;
-        else if (args.Port == ent.Comp.HarmModePort)
+        else if (port == ent.Comp.HarmModePort)
             current = ent.Comp.HarmMode;
-        else if (args.Port == ent.Comp.LockedPort)
+        else if (port == ent.Comp.LockedPort)
             current = ent.Comp.Locked;
         else
             return;
@@ -167,17 +176,16 @@ public abstract partial class SharedInteractorSystem : EntitySystem
         {
             SignalState.Momentary => !current,
             SignalState.High => true,
-            SignalState.Low => false,
             _ => false
         };
 
-        if (args.Port == ent.Comp.AltInteractPort)
+        if (port == ent.Comp.AltInteractPort)
             SetAltInteract(ent, value);
-        else if (args.Port == ent.Comp.UseInHandPort)
+        else if (port == ent.Comp.UseInHandPort)
             SetUseInHand(ent, value);
-        else if (args.Port == ent.Comp.HarmModePort)
+        else if (port == ent.Comp.HarmModePort)
             SetHarmMode(ent, value);
-        else if (args.Port == ent.Comp.LockedPort)
+        else if (port == ent.Comp.LockedPort)
             SetLocked(ent, value);
     }
 

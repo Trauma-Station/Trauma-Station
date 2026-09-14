@@ -4,6 +4,7 @@ using Content.Server.DeviceLinking.Systems;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.DeviceNetwork;
+using Content.Trauma.Common.DeviceLinking;
 using Content.Trauma.Shared.Circuits;
 
 namespace Content.Trauma.Server.Circuits;
@@ -79,20 +80,47 @@ public sealed partial class CircuitSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnSignalReceived(Entity<CircuitHousingComponent> ent, ref SignalReceivedEvent args)
     {
+        // legacy signals with no data are assumed to be a pulse
+        TrySetInput(ent, args.Port, Pulse.Instance);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnSignalStateReceived(Entity<CircuitHousingComponent> ent, ref SignalReceivedEvent<LogicStatePayload> args)
+    {
+        TrySetInput(ent, args.Port, args.Data.State switch
+        {
+            SignalState.Momentary => Pulse.Instance,
+            SignalState.High => True.Instance,
+            _ => False.Instance
+        });
+    }
+
+    [SubscribeLocalEvent]
+    private void OnSignalIntReceived(Entity<CircuitHousingComponent> ent, ref SignalReceivedEvent<LogicIntPayload> args)
+    {
+        TrySetInput(ent, args.Port, new Integer(args.Data.Value));
+    }
+
+    [SubscribeLocalEvent]
+    private void OnSignalStringReceived(Entity<CircuitHousingComponent> ent, ref SignalReceivedEvent<LogicStringPayload> args)
+    {
+        TrySetInput(ent, args.Port, args.Data.Value);
+    }
+
+    private void TrySetInput(Entity<CircuitHousingComponent> ent, string port, object value)
+    {
         if (!ent.Comp.Powered ||
             ent.Comp.Circuit is not { } circuit ||
-            !args.Port.StartsWith("Circuit") || // ignore non circuit ports
+            !port.StartsWith("Circuit") || // ignore non circuit ports
             !_query.TryComp(circuit, out var comp))
             return;
 
         // holy goida
-        var c = args.Port.Substring(7);
+        var c = port.Substring(7);
         if (!int.TryParse(c, out var i))
             return; // ignore non circuit ports, they end with a number
 
         i--; // the ids start with 1, convert to 0-based index
-        // legacy signals with no data are assumed to be a pulse
-        var value = args.Data is { } data ? ParseValue(data) : Pulse.Instance;
         if (comp.Inputs[i].Equals(value))
             return; // no change
 
@@ -155,25 +183,6 @@ public sealed partial class CircuitSystem : EntitySystem
         }
     }
 
-    private object ParseValue(NetworkPayload data)
-    {
-        if (data.TryGetValue<SignalState>(DeviceNetworkConstants.LogicState, out var state))
-            return state switch
-            {
-                SignalState.Momentary => Pulse.Instance,
-                SignalState.High => True.Instance,
-                _ => False.Instance
-            };
-
-        if (data.TryGetValue<int>("logic_int", out var n))
-            return new Integer(n);
-
-        if (data.TryGetValue<string>("logic_string", out var s))
-            return s;
-
-        return Pulse.Instance; // non-logic signals are assumed to be a pulse
-    }
-
     private void ValueChanged(CircuitComponent comp, CircuitIndex idx, object value)
     {
         if (!comp.Data.ValidIndex(idx))
@@ -193,28 +202,31 @@ public sealed partial class CircuitSystem : EntitySystem
         var port = $"Circuit{i + 1}";
 
         // send new output signal to linked machines
-        var payload = new NetworkPayload();
         switch (value)
         {
             case True t:
-                payload[DeviceNetworkConstants.LogicState] = SignalState.High;
+                var truePayload = new LogicStatePayload { State = SignalState.High };
+                _device.InvokePort(housing.Value, port, ref truePayload);
                 break;
             case False f:
-                payload[DeviceNetworkConstants.LogicState] = SignalState.Low;
+                var falsePayload = new LogicStatePayload { State = SignalState.Low };
+                _device.InvokePort(housing.Value, port, ref falsePayload);
                 break;
             case Pulse p:
-                payload[DeviceNetworkConstants.LogicState] = SignalState.Momentary;
+                var pulsePayload = new LogicStatePayload { State = SignalState.Momentary };
+                _device.InvokePort(housing.Value, port, ref pulsePayload);
                 break;
             case Integer n:
-                payload["logic_int"] = n.Value;
+                var intPayload = new LogicIntPayload(n.Value);
+                _device.InvokePort(housing.Value, port, ref intPayload);
                 break;
             case string s:
-                payload["logic_string"] = s;
+                var stringPayload = new LogicStringPayload(s);
+                _device.InvokePort(housing.Value, port, ref stringPayload);
                 break;
             default:
                 Log.Error($"Tried to send unknown output {value} to port {port} of {ToPrettyString(housing)}!");
                 return;
         }
-        _device.InvokePort(housing.Value, port, payload);
     }
 }

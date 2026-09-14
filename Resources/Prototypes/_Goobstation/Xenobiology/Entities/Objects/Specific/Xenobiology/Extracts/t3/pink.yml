@@ -21,6 +21,7 @@
         compName: PlantHolder # TODO: may need to change this if botany ecs ever gets merged
         range: 5
         effect: !type:PlantAdjustMutationLevel
+          mutationTable: RandomPlantMutations
     - reagents: [ Plasma ]
       methods: [ Touch, Injection ]
       effects:

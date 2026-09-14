@@ -1,18 +1,7 @@
 ## Random humanoids
-## All role time requirements are from goobstation.
 
 - type: randomHumanoidSettings
   id: EventHumanoid
-  # <Trauma>
-  speciesBlacklist:
-  - Monkey
-  - Kobold
-  - Abductor
-  - IPC # Your EMP (when you're nukie, DS or ninja) can easily kill you. TODO: Make EMPImmune component for these roles?
-  - Diona # Lack of legs makes it weaker than other species in combat
-  - Plasmaman # Do i need to fucking say it?
-  - Decapoid
-  # </Trauma>
   components:
     - type: RandomHumanoidAppearance
       randomizeName: false
@@ -42,7 +31,7 @@
 
 - type: entity
   id: RandomHumanoidSpawnerDeathSquad
-  name: Death Squad Operative
+  name: Death Squad Agent
   suffix: ERTRole, Death Squad
   components:
     - type: Sprite
@@ -58,11 +47,8 @@
 
 - type: randomHumanoidSettings
   id: DeathSquad
-  parent: CentcommHumanoid # Goobstation
+  parent: EventHumanoidCentcomm
   components:
-    - type: AutoImplant
-      implants: [ FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm] # Goobstation
-    - type: DeathSquadMember # Goobstation
     - type: GhostRole
       name: ghost-role-information-Death-Squad-name
       description: ghost-role-information-Death-Squad-description
@@ -97,7 +83,7 @@
 
 - type: randomHumanoidSettings
   id: ERTLeader
-  parent: CentcommHumanoid # Goobstation
+  parent: EventHumanoidCentcomm
   components:
     - type: GhostRole
       name: ghost-role-information-ert-leader-name
@@ -109,8 +95,6 @@
     - type: Loadout
       prototypes: [ ERTLeaderGear ]
       roleLoadout: [ RoleSurvivalMilitaryDouble ]
-    - type: AutoImplant # Goob
-      implants: [ FreedomImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
     - type: RandomMetadata
       nameSegments:
       - NamesMilitaryLast
@@ -183,7 +167,7 @@
       - NamesMilitaryLast
       nameFormat: name-format-ert-specialist
     - type: Loadout
-      prototypes: [ ERTChaplainGear, ERTChaplainGearTank ] # Trauma - added ERTChaplainGearTank
+      prototypes: [ ERTChaplainGear ]
       roleLoadout: [ RoleSurvivalMilitaryDouble ]
 
 - type: entity
@@ -362,8 +346,6 @@
     - type: Loadout
       prototypes: [ ERTSecurityGear ]
       roleLoadout: [ RoleSurvivalMilitaryDouble ]
-    - type: AutoImplant # Goob
-      implants: [ FreedomImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant ]
 
 - type: entity
   id: RandomHumanoidSpawnerERTSecurityEVA
@@ -391,8 +373,6 @@
     - type: Loadout
       prototypes: [ ERTSecurityGearEVA ]
       roleLoadout: [ RoleSurvivalMilitaryDouble ]
-    - type: AutoImplant # Goob
-      implants: [ FreedomImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant ]
 
 - type: entity
   id: RandomHumanoidSpawnerERTSecurityArmedRifle
@@ -510,8 +490,6 @@
     - type: Loadout
       prototypes: [ ERTMedicalGear ]
       roleLoadout: [ RoleSurvivalMilitaryDouble ]
-    - type: AutoImplant # Goob
-      implants: [ FreedomImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant ]
 
 - type: entity
   id: RandomHumanoidSpawnerERTMedicalEVA
@@ -531,8 +509,6 @@
     - type: Loadout
       prototypes: [ ERTMedicalGearEVA ]
       roleLoadout: [ RoleSurvivalMilitaryDouble ]
-    - type: AutoImplant # Goob
-      implants: [ FreedomImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant ]
 
 - type: entity
   parent: RandomHumanoidSpawnerERTMedicalEVA
@@ -569,10 +545,8 @@
 
 - type: randomHumanoidSettings
   id: CBURNAgent
-  parent: CentcommHumanoid
+  parent: EventHumanoidCentcomm
   components:
-    - type: AutoImplant
-      implants: [ FreedomImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant ] # Goobstation
     - type: Loadout
       prototypes: [CBURNGear]
       roleLoadout: [ RoleSurvivalEVA ]
@@ -605,8 +579,6 @@
   id: CentcomOfficial
   parent: EventHumanoidCentcomm
   components:
-    - type: AutoImplant
-      implants: [ FreedomImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant ] # Goobstation
     - type: GhostRole
       name: ghost-role-information-centcom-official-name
       description: ghost-role-information-centcom-official-description
@@ -636,7 +608,6 @@
       settings: SyndicateAgent
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid # Goobstation
   id: SyndicateAgent
   components:
     - type: RandomHumanoidAppearance
@@ -656,7 +627,6 @@
       settings: NukeOp
 
 - type: randomHumanoidSettings
-  parent: EventHumanoid # Goobstation
   id: NukeOp
   components:
     - type: RandomHumanoidAppearance
