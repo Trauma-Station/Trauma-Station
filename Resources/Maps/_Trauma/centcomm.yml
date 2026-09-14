@@ -3825,18 +3825,6 @@ entities:
     - type: Transform
       parent: 1
       pos: -10.6244135,4.5721507
-- proto: AmnestizineHypospray
-  entities:
-  - uid: 143
-    components:
-    - type: Transform
-      parent: 1
-      pos: 15.890628,-2.4907317
-  - uid: 144
-    components:
-    - type: Transform
-      parent: 1
-      pos: 16.281254,-2.4594817
 - proto: APCBasic
   entities:
   - uid: 145
@@ -5121,13 +5109,6 @@ entities:
     - type: Transform
       parent: 1
       pos: 20.5,16.5
-- proto: BoxAmnestizineCartridge
-  entities:
-  - uid: 374
-    components:
-    - type: Transform
-      parent: 1
-      pos: 15.328128,-2.3813567
 - proto: BoxFolderBlack
   entities:
   - uid: 375
