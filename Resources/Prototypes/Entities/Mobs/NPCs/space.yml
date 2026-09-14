@@ -389,14 +389,14 @@
       animation: WeaponArcBite
       damage:
         types:
-          Piercing: 6 # Trauma - Was 6
-          Poison: 4 # Trauma - Was 4
+          Piercing: 6
+          Poison: 4
     - type: SolutionManager
       solutions:
       - SolutionVenomCobraSpace
     - type: MeleeChemicalInjector
       solution: melee
-      transferAmount: 4 # Trauma - Was 6
+      transferAmount: 4
     - type: ReplacementAccent
       accent: xeno
     - type: InteractionPopup
