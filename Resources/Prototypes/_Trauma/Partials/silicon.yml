@@ -64,8 +64,6 @@
   components:
   - type: ContainerFill
     containers:
-      borg_brain:
-        - PositronicBrain
       borg_module:
         - BorgModuleRCD
         - BorgModuleSyndicateJammer
