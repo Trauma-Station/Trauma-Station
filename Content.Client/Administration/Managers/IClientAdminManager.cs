@@ -7,6 +7,10 @@ namespace Content.Client.Administration.Managers
     /// </summary>
     public interface IClientAdminManager
     {
+        // <Trauma>
+        bool IsAnyCommand(string cmdName);
+        // </Trauma>
+
         /// <summary>
         ///     Fired when the admin status of the local player changes, such as losing admin privileges.
         /// </summary>
