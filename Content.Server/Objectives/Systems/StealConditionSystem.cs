@@ -1,3 +1,7 @@
+// <Trauma>
+using Robust.Shared.Prototypes;
+using Content.Shared.Objectives;
+// </Trauma>
 using Content.Server.Objectives.Components;
 using Content.Shared.CartridgeLoader;
 using Content.Shared.Interaction;
@@ -11,8 +15,6 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Stacks;
-using Robust.Shared.Prototypes;
-using Content.Shared.Objectives;
 
 namespace Content.Server.Objectives.Systems;
 
