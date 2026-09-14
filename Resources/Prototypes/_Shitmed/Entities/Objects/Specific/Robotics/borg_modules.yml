@@ -12,7 +12,15 @@
   - type: ItemBorgModule
     hands:
     - item: HandheldHealthAnalyzer
-    - item: OmnimedTool
+    - item: Scalpel
+    - item: SawElectric
+    - item: Drill
+    - item: Retractor
+    - item: Hemostat
+    - item: Cautery
+    - item: MedicalStitches
+    - item: BoneGel
+    #- item: Bonesetter # unused currently
     - hand:
         emptyRepresentative: OrganHumanBrain
         emptyLabel: borg-slot-organ-empty
