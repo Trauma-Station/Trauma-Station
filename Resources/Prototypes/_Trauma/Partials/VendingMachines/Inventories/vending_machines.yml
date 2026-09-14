@@ -37,22 +37,8 @@
 
 - type: vendingMachineInventory
   id: MiningDrobeInventory
-  startingInventory:
-    ClothingUniformJumpsuitSalvageSpecialist: 3
-    ClothingUniformJumpsuitShaftMiner: 3
-    ClothingShoesBootsSalvage: 3
-    ClothingHandsGlovesColorBlack: 3
-    ClothingBackpackSalvage: 2
-    ClothingBackpackSatchelSalvage: 2
-    ClothingBackpackDuffelSalvage: 2
-    ClothingBackpackMessengerSalvage: 2
-    ClothingHeadsetMining: 4
-    ClothingOuterWinterMiner: 2
   contrabandInventory:
     FoodBoxDonkpocketCarp: 1
     ClothingUniformJumpsuitMilitarySalvageSpecialist: 1
     SalvageExpeditionsComputerCircuitboard: 0 # It is actually impossible to get this wihout changing variables and it only exists to taunt salvs
     UndeterminedWeaponSalvageSpecialist: 1 # This goes normally unused for some reason. Maybe because it is just the current weapon selector without crushers
-  emaggedInventory:
-    PKAUpgradeDamage: 1
-    MiningDrillDiamond: 1
