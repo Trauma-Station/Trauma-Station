@@ -280,7 +280,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousSteptriggerImmune
   suffix: Noslip
-  description: Suspicious alien gland, replaces the heart this one seems to not even be touching the environment.
+  description: Suspicious alien gland, replaces the heart. This one seems to not even be touching the environment.
   components:
   - type: Sprite
     layers:
@@ -304,7 +304,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousVentcrawler
   suffix: Ventcrawl
-  description: Suspicious alien gland, replaces the heart this one seems to expand and contract.
+  description: Suspicious alien gland, replaces the heart. This one seems to expand and contract.
   components:
   - type: Sprite
     layers:
@@ -318,7 +318,7 @@
   parent: OrganDubiousBase
   id: OrganDubiousRepairable
   suffix: Repairable
-  description: Suspicious alien gland, replaces the heart this one seems to be infused with a metallic structure.
+  description: Suspicious alien gland, replaces the heart. This one seems to be infused with a metallic structure.
   components:
   - type: Sprite
     layers:
