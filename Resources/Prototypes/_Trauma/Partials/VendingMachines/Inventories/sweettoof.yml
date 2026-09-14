@@ -1,4 +1,17 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
+- type: vendingMachineInventory
+  id: SweetToofInventory
+  startingInventory:
+    FoodSnackLollypopWrappedMystery: 12
+    FoodSnackLollypopWrappedMysteryNeutral: 6
+    FoodSnackLollypopWrapped: 6
+    FoodSnackLollypopWrappedWeh: 4
+    FoodSnackChocolate: 6
+    FoodSnackLunacakeWrapped: 4
+    FoodSnackChocobanana: 4
   contrabandInventory:
     FoodSnackLollypopWrappedCarpEvil: 1
+  emaggedInventory:
+    FoodSnackLollypopWrappedLexorin: 4
+    FoodSnackLollypopWrappedMysteryEvil: 10
+    FoodSnackLollypopWrappedTirizene: 2
+    FoodSnackLollypopWrappedCyanide: 2
