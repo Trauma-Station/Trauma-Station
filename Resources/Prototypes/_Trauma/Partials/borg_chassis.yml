@@ -128,7 +128,7 @@
 # Derelict Generic borg
 - type: entity
   id: BorgChassisDerelict
-  addComponents:
+  components:
   - type: ModifyKnowledgeGrant
     skills:
       FabricationKnowledge: 50 # not good at much else
@@ -162,6 +162,7 @@
 - type: entity
   id: MiningBorgChassisDerelict
   components:
+    - type: NoWieldNeeded
     - type: ModifyKnowledgeGrant
       skills:
         KnowledgeWeaponsShortBlade: 30

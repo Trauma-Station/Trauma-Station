@@ -1,0 +1,22 @@
+
+
+# Derelict Medical borg
+- type: entity
+  id: PlayerMedicalBorgDerelict
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module: # no lollypop module because it only has 7 slots
+          - BorgModuleSurgery
+          - BorgModuleLollypop
+
+# Derelict Salvage borg
+- type: entity
+  id: PlayerMiningBorgDerelict
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+          - BorgModulePKA
+
+

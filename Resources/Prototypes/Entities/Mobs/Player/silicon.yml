@@ -4,24 +4,10 @@
   description: Components added / removed from an entity that gets inserted into an AI core.
   categories: [ HideSpawnMenu ]
   components:
-  # <Trauma>
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
-  - type: ShowHealthIcons
-  - type: ShowHealthBars
-    damageContainers:
-    - Silicon
-    - SiliconRadiation
-  - type: ContentEye
-    maxZoom: 1.44,1.44
-  - type: CrossContainerInteraction # the brain is inside a container of the core, it would prevent all AI interactions
-  # </Trauma>
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
     channels:
-    # - Binary # Goobstation - replaced with collective mind
+    - Binary
     - Common
     - Command
     - Engineering
@@ -32,7 +18,7 @@
     - Supply
   - type: ActiveRadio
     channels:
-    # - Binary # Goobstation - replaced with collective mind
+    - Binary
     - Common
     - Command
     - Engineering
@@ -49,7 +35,6 @@
     actions:
     - ActionJumpToCore
     - ActionAIViewLaws
-    - ActionOpenCameraWarpMenu # Goobstation-Ai-Camera-Jumping
   - type: UserInterface
     interfaces:
       enum.RadarConsoleUiKey.Key:
@@ -62,8 +47,6 @@
         type: SiliconLawBoundUserInterface
       enum.CommunicationsConsoleUiKey.Key:
         type: CommunicationsConsoleBoundUserInterface
-      enum.CamWarpUiKey.Key: # Goobstation-Ai-Camera-Jumping
-        type: AiCameraWarpBoundUserInterface
   - type: IntrinsicUI
     uis:
       enum.RadarConsoleUiKey.Key:
