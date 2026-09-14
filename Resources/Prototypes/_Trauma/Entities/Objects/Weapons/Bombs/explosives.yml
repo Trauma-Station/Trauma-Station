@@ -1,0 +1,26 @@
+- type: entity # pretty much useless if not equipped in mask slot
+  parent: CigarGold
+  id: CigarGoldSyndicate
+  components:
+  - type: ExplosiveCigar
+    triggerAtRemaining: 5
+    maskSlotHeadDamage:
+      types:
+        Blunt: 250
+        Slash: 50
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 1
+    intensitySlope: 5
+    totalIntensity: 5
+    canCreateVacuum: false
+
+- type: entity
+  parent: CigarGoldCase
+  id: CigarGoldSyndicateCase
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: CigarGoldSyndicate
+        amount: 8
