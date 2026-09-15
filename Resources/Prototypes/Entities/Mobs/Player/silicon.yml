@@ -7,7 +7,7 @@
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
     channels:
-    #  - Binary # Goobstation - replaced with collective mind
+    # - Binary # Goobstation - replaced with collective mind
     - Common
     - Command
     - Engineering
@@ -18,7 +18,7 @@
     - Supply
   - type: ActiveRadio
     channels:
-    #  - Binary # Goobstation - replaced with collective mind
+    # - Binary # Goobstation - replaced with collective mind
     - Common
     - Command
     - Engineering
@@ -83,7 +83,7 @@
   - type: IntrinsicRadioReceiver
   #- type: IntrinsicRadioTransmitter
   #  channels:
-  #  - Binary # Goobstation - replaced with collective mind
+  # - Binary # Goobstation - replaced with collective mind
   - type: ActiveRadio
     channels:
     # - Binary # Goobstation - replaced with collective mind

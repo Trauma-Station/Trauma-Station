@@ -3,9 +3,6 @@
 - type: entity
   id: AiHeld
   components:
-  - type: IntrinsicRadioTransmitter
-    channels:
-    !Remove - Binary
   - type: CollectiveMind
     defaultChannel: Binary
     channels:
