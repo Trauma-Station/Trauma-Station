@@ -1,9 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-
 - type: entity
   id: AiHeld
   components:
+  - type: IntrinsicRadioTransmitter
+    channels:
+    !Remove - Binary
   - type: CollectiveMind
     defaultChannel: Binary
     channels:
@@ -18,16 +20,15 @@
   - type: CrossContainerInteraction # the brain is inside a container of the core, it would prevent all AI interactions
   - type: ActionGrant
     actions:
-    - ActionOpenCameraWarpMenu # Goobstation-Ai-Camera-Jumping
+    - ActionOpenCameraWarpMenu
   - type: UserInterface
     interfaces:
-      enum.CamWarpUiKey.Key: # Goobstation-Ai-Camera-Jumping
+      enum.CamWarpUiKey.Key:
         type: AiCameraWarpBoundUserInterface
 
 - type: entity
   id: AiHeldIntellicard
   components:
-  # <Trauma>
   - type: CollectiveMind
     defaultChannel: Binary
     channels:
@@ -41,6 +42,8 @@
   - type: IonStormTarget # AI can be ion stormed
   - type: SpeechSynthesis
     voice: Borg
+  - type: SiliconLawProvider
+    laws: NTDefault
 
 # Hologram projection that the AI's eye tracks.
 - type: entity
@@ -57,7 +60,7 @@
   - type: ContainerFill
     containers:
       borg_module:
-        - BorgModuleStickyGrenadeLauncher
+      - BorgModuleStickyGrenadeLauncher
 
 - type: entity
   id: PlayerBorgSyndicateSaboteurBattery
@@ -65,11 +68,11 @@
   - type: ContainerFill
     containers:
       borg_module:
-        - BorgModuleRCD
-        - BorgModuleSyndicateJammer
-        - BorgModuleSyndicateDoorControl
-        - !Remove BorgModuleTool
-        - BorgModuleAdvancedTool
+      - BorgModuleRCD
+      - BorgModuleSyndicateJammer
+      - BorgModuleSyndicateDoorControl
+      - !Remove BorgModuleTool
+      - BorgModuleAdvancedTool
 
 - type: entity
   id: PlayerMedicalBorgDerelict
@@ -77,8 +80,8 @@
   - type: ContainerFill
     containers:
       borg_module:
-          - BorgModuleSurgery
-          - BorgModuleLollypop
+      - BorgModuleSurgery
+      - BorgModuleLollypop
 
 # Derelict Salvage borg
 - type: entity
@@ -87,4 +90,4 @@
   - type: ContainerFill
     containers:
       borg_module:
-          - BorgModulePKA
+      - BorgModulePKA
