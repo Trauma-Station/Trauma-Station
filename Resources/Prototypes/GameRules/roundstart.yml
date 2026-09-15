@@ -51,6 +51,8 @@
       prob: 0.1
     - id: SubChangeling
       prob: 0.05 # extinct predator species...
+    - id: SubDemonologist
+      prob: 0.1
     # </Trauma>
 
 - type: entity
@@ -107,6 +109,8 @@
       prob: 0.2
     - id: SubChangeling
       prob: 0.05
+    - id: SubDemonologist
+      prob: 0.5 # Temporary
     # </Trauma>
 
 - type: entity

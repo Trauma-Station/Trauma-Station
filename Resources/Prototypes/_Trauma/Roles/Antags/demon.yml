@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antag
+  id: Demon
+  name: ghost-role-information-demon-name
+  objective: ghost-role-information-demon-desc
+  antagonist: true
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 2h

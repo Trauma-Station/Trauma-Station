@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseAction
+  id: ActionDemonicAnnouncement
+  name: Demonic Announcement
+  description: Open a communications channel to broadcast a message across the station.
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    itemIconStyle: BigAction
+    sound: !type:SoundPathSpecifier
+      path: /Audio/_Trauma/Demonologist/demonologist.ogg
+  - type: Sprite
+    sprite: _Trauma/Actions/demonologist.rsi
+    layers:
+    - state: bloodboil # TODO: placeholder
+  - type: InstantAction
+    event: !type:ToggleIntrinsicUIEvent
+      key: enum.DemonicAnnouncementUiKey.Key
