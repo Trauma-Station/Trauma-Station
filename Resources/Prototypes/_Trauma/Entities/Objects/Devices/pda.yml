@@ -144,9 +144,20 @@
   parent: BasePDA
   id: DClassPDA
   name: D-Class PDA
-  description: A hardened criminal's PDA.
+  description: Holding this generally revokes what few rights you would otherwise have.
   components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/pda.rsi
+    state: pda-dclass
+  - type: Icon
+    sprite: _Trauma/Objects/Devices/pda.rsi
+    state: pda-dclass
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType: !type:String
+        pda-dclass
   - type: Pda
     id: DClassIDCard
   - type: PdaBorderColor
-    borderColor: "#f57e00"
+    borderColor: "#eb7732"
+    accentVColor: "#2e2e2e"
