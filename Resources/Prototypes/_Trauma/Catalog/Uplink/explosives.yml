@@ -130,6 +130,17 @@
       - NukeOpsUplink
 
 - type: listing
+  id: UplinkCigarGoldSyndicateCase
+  name: uplink-cigar-gold-syndicate-name
+  description: uplink-cigar-gold-syndicate-desc
+  productEntity: CigarGoldSyndicateCase
+  icon: { sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cases/case.rsi, state: open }
+  cost:
+    Telecrystal: 20
+  categories:
+  - UplinkExplosives
+
+- type: listing
   id: UplinkClusterGrenade
   name: uplink-cluster-grenade-name
   description: uplink-cluster-grenade-desc
@@ -144,17 +155,6 @@
     blacklist:
       tags:
       - NukeOpsUplink
-
-- type: listing
-  id: UplinkCigarGoldSyndicateCase
-  name: uplink-cigar-gold-syndicate-name
-  description: uplink-cigar-gold-syndicate-desc
-  productEntity: CigarGoldSyndicateCase
-  icon: { sprite: _Trauma/Objects/Consumable/Smokeables/Cigarettes/Cases/case.rsi, state: open }
-  cost:
-    Telecrystal: 25
-  categories:
-  - UplinkExplosives
 
 - type: listing
   id: UplinkBoxVisceratorsNukeops
