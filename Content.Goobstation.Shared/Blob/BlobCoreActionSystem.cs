@@ -210,15 +210,4 @@ public sealed partial class BlobCoreActionSystem : EntitySystem
         OnInteract(ent, ref ev); // proxy?
         args.Handled = ev.Handled;
     }
-
-    [SubscribeLocalEvent]
-    private void OnInteractController(Entity<BlobObserverControllerComponent> ent, ref AfterInteractEvent args)
-    {
-        if (!TryComp<BlobObserverComponent>(ent.Comp.Blob, out var blob))
-            return;
-
-        var ev = new AfterInteractEvent(args.User, EntityUid.Invalid, args.Target, args.ClickLocation, true);
-        OnInteract((ent.Comp.Blob, blob), ref ev); // proxy?
-        args.Handled = ev.Handled;
-    }
 }
