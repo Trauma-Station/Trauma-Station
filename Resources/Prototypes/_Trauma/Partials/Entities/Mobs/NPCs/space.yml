@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: MobCobraSpace
+  components:
+  - type: MobThresholds
+    thresholds: !Clear
+      0: Alive
+      90: Dead
