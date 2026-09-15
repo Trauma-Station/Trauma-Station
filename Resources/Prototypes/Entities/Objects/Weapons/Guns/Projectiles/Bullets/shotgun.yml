@@ -29,7 +29,7 @@
       types:
         Blunt: 10
   - type: StaminaDamageOnCollide
-    damage: 60 # Goob edit
+    damage: 27 # 4 hits to stun
 
 - type: entity
   parent: BaseBulletKinetic # Trauma
