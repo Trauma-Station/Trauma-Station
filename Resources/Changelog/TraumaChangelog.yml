@@ -14579,3 +14579,38 @@ Entries:
   id: 1587
   time: '2026-09-13T21:24:23.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4566
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Wailing Horse now deals slash damage.
+  id: 1588
+  time: '2026-09-14T16:35:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4590
+- author: Nothing98512
+  changes:
+  - type: Remove
+    message: Base medborg surgery module omnitool
+  id: 1589
+  time: '2026-09-15T06:16:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4593
+- author: Nothing98512
+  changes:
+  - type: Tweak
+    message: Space Cobras are no longer coughing babies.
+  id: 1590
+  time: '2026-09-15T15:23:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4592
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed observing etc requiring confirmation.
+  id: 1591
+  time: '2026-09-15T19:43:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4604
+- author: idkmaybe69
+  changes:
+  - type: Tweak
+    message: Certain vendors that didn't have contra from hacking now have some
+  id: 1592
+  time: '2026-09-15T19:48:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4569
