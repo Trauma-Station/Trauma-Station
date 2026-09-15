@@ -20,7 +20,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousHealth
   suffix: Healing
-  description: Suspicious alien gland, replaces the heart. This one radiates a peaceful glow.
   components:
   - type: Sprite
     layers:
@@ -52,7 +51,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousAA
   suffix: All Access
-  description: Suspicious alien gland, replaces the heart. It seems like this one is constantly sparking.
   components:
   - type: Sprite
     layers:
@@ -68,7 +66,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousShock
   suffix: Shocking
-  description: Suspicious alien gland, replaces the heart. It seems volatile.
   components:
   - type: Sprite
     layers:
@@ -88,7 +85,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousInvisible
   suffix: Invisible
-  description: Suspicious alien gland, replaces the heart. It seems to perfectly blend into the environment.
   components:
   - type: Sprite
     layers:
@@ -106,7 +102,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousGoliath
   suffix: Goliath
-  description: Suspicious alien gland, replaces the heart. It’s made up of countless writhing tendrils.
   components:
   - type: Sprite
     layers:
@@ -119,7 +114,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousSpaceAdaptation
   suffix: Space
-  description: Suspicious alien gland, replaces the heart. It doesn’t seem to beat.
   components:
   - type: Sprite
     layers:
@@ -135,7 +129,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousArtifact
   suffix: Artifact
-  description: Suspicious alien gland, replaces the heart. It seems to constantly be shifting.
   components:
   - type: Sprite
     layers:
@@ -151,7 +144,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousScrambleDna
   suffix: DNA Scrambler
-  description: Suspicious alien gland, replaces the heart. This one looks as if it’s constantly changing.
   components:
   - type: Sprite
     layers:
@@ -163,7 +155,6 @@
 - type: entity
   parent: OrganDubiousBase
   id: OrganDubiousScrambleLocation
-  description: Suspicious alien gland, replaces the heart. This one seems unstable.
   suffix: Teleport
   components:
   - type: Sprite
@@ -177,7 +168,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousSpiderEggs
   suffix: Spiders
-  description: Suspicious alien gland, replaces the heart. This one seems to be spewing eggs.
   components:
   - type: Sprite
     layers:
@@ -193,7 +183,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousSlimeEggs
   suffix: Slimes
-  description: Suspicious alien gland, replaces the heart. This one seems to have something sloshing around inside.
   components:
   - type: Sprite
     layers:
@@ -209,7 +198,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousEMP
   suffix: EMP
-  description: Suspicious alien gland, replaces the heart. This one looks shockingly normal.
   components:
   - type: Sprite
     layers:
@@ -223,7 +211,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousGravityWell
   suffix: Gravity
-  description: Suspicious alien gland, replaces the heart. This one seems to be ignoring the laws of nature.
   components:
   - type: Sprite
     layers:
@@ -237,7 +224,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousFlash
   suffix: Flash
-  description: Suspicious alien gland, replaces the heart. This one appears bio-luminescent.
   components:
   - type: Sprite
     layers:
@@ -251,7 +237,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousSmoke
   suffix: Smoke
-  description: Suspicious alien gland, replaces the heart. This one seems to have smoke seeping out.
   components:
   - type: Sprite
     layers:
@@ -267,7 +252,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousGas
   suffix: Gases
-  description: Suspicious alien gland, replaces the heart. This one seems to have some sort of gas leaking out.
   components:
   - type: Sprite
     layers:
@@ -280,7 +264,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousSteptriggerImmune
   suffix: Noslip
-  description: Suspicious alien gland, replaces the heart. This one seems to not even be touching the environment.
   components:
   - type: Sprite
     layers:
@@ -304,7 +287,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousVentcrawler
   suffix: Ventcrawl
-  description: Suspicious alien gland, replaces the heart. This one seems to expand and contract.
   components:
   - type: Sprite
     layers:
@@ -318,7 +300,6 @@
   parent: OrganDubiousBase
   id: OrganDubiousRepairable
   suffix: Repairable
-  description: Suspicious alien gland, replaces the heart. This one seems to be infused with a metallic structure.
   components:
   - type: Sprite
     layers:
