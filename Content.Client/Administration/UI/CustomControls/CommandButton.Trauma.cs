@@ -8,7 +8,7 @@ public partial class CommandButton
     private void UpdateConfirmTime()
     {
         ResetTime = Dangerous
-            ? TimeSpan.FromSeconds(2);
+            ? TimeSpan.FromSeconds(2)
             : TimeSpan.Zero;
     }
 }
