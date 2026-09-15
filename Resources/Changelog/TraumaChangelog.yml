@@ -14593,3 +14593,10 @@ Entries:
   id: 1589
   time: '2026-09-15T06:16:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4593
+- author: Nothing98512
+  changes:
+  - type: Tweak
+    message: Space Cobras are no longer coughing babies.
+  id: 1590
+  time: '2026-09-15T15:23:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4592
