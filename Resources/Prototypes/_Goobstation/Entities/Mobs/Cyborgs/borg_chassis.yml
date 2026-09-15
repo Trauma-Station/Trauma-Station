@@ -7,6 +7,11 @@
   description: A lean, mean killing machine with access to a variety of deadly modules. This one is in a state of great disrepair.
   components:
   # <Trauma>
+  - type: ModifyKnowledgeGrant
+    skills:
+      MeleeKnowledge: 51
+      ShootingKnowledge: 50
+      WeaponsKnowledge: 51
   - type: Speech
     speechSounds: SyndieBorg
   - type: Vocal
