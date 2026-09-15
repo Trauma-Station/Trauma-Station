@@ -7,4 +7,3 @@
     ClothingUniformJumpsuitMilitarySalvageSpecialist: 1
     SalvageExpeditionsComputerCircuitboard: 0 # It is actually impossible to get this wihout changing variables and it only exists to taunt salvs
     UndeterminedWeaponSalvageSpecialist: 1 # This goes normally unused for some reason. Maybe because it is just the current weapon selector without crushers
-
