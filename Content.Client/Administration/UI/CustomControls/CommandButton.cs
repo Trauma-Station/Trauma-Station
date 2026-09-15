@@ -12,12 +12,11 @@ namespace Content.Client.Administration.UI.CustomControls
     [Virtual]
     public partial class CommandButton : ConfirmButton, IDocumentTag // Trauma - made partial, extend ConfirmButton instead of Button
     {
-        private string? _command; // Trauma - made this private so the public version can update the confirm time
+        public string? Command { get; set; }
 
         public CommandButton()
         {
             // <Trauma>
-            IoCManager.InjectDependencies(this);
             UpdateConfirmTime();
             // </Trauma>
             OnPressed += Execute;
