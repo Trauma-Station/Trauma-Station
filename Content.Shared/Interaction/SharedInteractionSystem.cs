@@ -494,6 +494,13 @@ namespace Content.Shared.Interaction
                 ? !checkAccess || InRangeUnobstructed(user, coordinates)
                 : !checkAccess || InRangeUnobstructed(user, target.Value); // permits interactions with wall mounted entities
 
+            // <Trauma>
+            var attemptEv = new UserInteractAttemptEvent(user, target, coordinates, inRangeUnobstructed);
+            RaiseLocalEvent(user, ref attemptEv);
+            if (attemptEv.Handled)
+                return;
+            // </Trauma>
+
             // empty-hand interactions
             // combat mode hand interactions will always be true here -- since
             // they check this earlier before returning in
