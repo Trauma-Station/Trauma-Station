@@ -14586,3 +14586,10 @@ Entries:
   id: 1588
   time: '2026-09-14T16:35:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4590
+- author: Nothing98512
+  changes:
+  - type: Remove
+    message: Base medborg surgery module omnitool
+  id: 1589
+  time: '2026-09-15T06:16:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4593
