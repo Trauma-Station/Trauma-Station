@@ -33,7 +33,7 @@
   - type: FactionClothing
     faction: Insurgent
 
-- type: entity
+- type: entity # pretty much useless if not equipped in neck slot
   parent: [ ClothingNeckUnbutcherableBase, BaseSyndicateContraband ]
   id: ClothingNeckBombCollar
   name: bomb collar
@@ -48,13 +48,28 @@
     stripDelay: 10
     equipDelay: 5
   - type: SelfUnremovableClothing
+  - type: TriggerOnUse
+  - type: TimerTrigger
+    delay: 5
+    initialBeepDelay: 0
+    beepInterval: 1
+    beepSound:
+      path: /Audio/Effects/beep1.ogg
+      params:
+        volume: 5
   - type: ExplodeOnTrigger
+    keysIn:
+    - timer
   - type: Explosive
-    explosionType: Minibomb
-    maxIntensity: 50
-    intensitySlope: 20
-    totalIntensity: 100
+    explosionType: Default
+    maxIntensity: 2
+    intensitySlope: 5
+    totalIntensity: 5
     canCreateVacuum: false
+  - type: ExplosiveBombCollar
+    neckSlotHeadDamage:
+      types:
+        Blunt: 800
   - type: TriggerOnSignal
   - type: DeviceLinkSink
     ports:
@@ -72,6 +87,8 @@
     sprite: _Trauma/Clothing/Neck/slayer_coat.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Neck/slayer_coat.rsi
+    stripDelay: 10
+    equipDelay: 5
   - type: SelfUnremovableClothing
   - type: FactionClothing
     faction: Syndicate
