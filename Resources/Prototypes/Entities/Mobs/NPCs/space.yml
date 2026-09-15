@@ -404,7 +404,7 @@
       interactSuccessString: petting-success-snake
       interactFailureString: petting-failure-generic
     - type: PointLight
-      radius: 1.2
+      radius: 1.1
       energy: 2.7
       color: "#4faffb"
     - type: Stealth
