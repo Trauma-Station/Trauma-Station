@@ -26,3 +26,37 @@
           amount: 1
         - id: MobCrabTiny
           amount: 6
+
+- type: entity
+  parent: CrateGenericSteel
+  id: CratePlantBGoneSpray
+  name: bulk Plant-B-Gone spray crate
+  description: From Monstano. "Unwanted Weeds, Meet Your Celestial Roundup!"
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: PlantBGoneSpray
+        amount: 20
+
+- type: entity
+  parent: CratePlastic
+  id: CrateHolySuppliesAdvanced
+  name: advanced holy supplies crate
+  description: Contains holy supplies for religious needs
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: JugHolyWater
+          amount: 2
+        - id: BoxCandle
+          amount: 2
+        - id: BoxCandleSmall
+          amount: 2
+        - id: Urn
+          amount: 2
+        - id: SpiritCandle
+        - id: FoodShakerSalt
+          amount: 4

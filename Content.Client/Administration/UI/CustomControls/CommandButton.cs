@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Client.UserInterface.Controls;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Client.Guidebook.Richtext;
 using Robust.Client.Console;
@@ -7,12 +10,16 @@ using Robust.Client.UserInterface.Controls;
 namespace Content.Client.Administration.UI.CustomControls
 {
     [Virtual]
-    public class CommandButton : Button, IDocumentTag
+    public partial class CommandButton : ConfirmButton, IDocumentTag // Trauma - made partial, extend ConfirmButton instead of Button
     {
-        public string? Command { get; set; }
+        private string? _command; // Trauma - made this private so the public version can update the confirm time
 
         public CommandButton()
         {
+            // <Trauma>
+            IoCManager.InjectDependencies(this);
+            UpdateConfirmTime();
+            // </Trauma>
             OnPressed += Execute;
         }
 

@@ -148,7 +148,6 @@
 - type: entity
   parent: BaseAnomalyCore
   id: AnomalyCoreBluespace
-  name: bluespace anomaly core # Goobstation - anomaly core names
   suffix: Bluespace
   components:
   - type: Sprite
@@ -162,7 +161,6 @@
 - type: entity
   parent: BaseAnomalyCore
   id: AnomalyCoreElectricity
-  name: electricity anomaly core # Goobstation - anomaly core names
   suffix: Electricity
   components:
   - type: Sprite
@@ -173,9 +171,6 @@
     color: "#ffffaa"
     castShadows: false
   - type: Electrified
-  - type: Enchanter # Goobstation
-    enchants:
-    - EnchantInsulated
 
 - type: entity
   parent: BaseAnomalyCore
