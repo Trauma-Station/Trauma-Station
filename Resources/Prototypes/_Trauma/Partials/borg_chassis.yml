@@ -4,6 +4,9 @@
   id: BorgChassisSelectable
   components:
   - type: BorgSwitchableSubtype
+  - type: BorgSwitchableType
+    inherentRadioChannels:
+    - !Remove Binary
 
 - type: entity
   id: BorgChassisGeneric

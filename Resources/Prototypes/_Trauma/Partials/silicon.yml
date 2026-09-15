@@ -5,7 +5,10 @@
   components:
   - type: IntrinsicRadioTransmitter
     channels:
-    !Remove - Binary
+    - !Remove Binary
+  - type: ActiveRadio
+    channels:
+    - !Remove Binary
   - type: CollectiveMind
     defaultChannel: Binary
     channels:
@@ -34,6 +37,10 @@
     channels:
     - Binary
     canUseInCrit: true
+  - !Remove IntrinsicRadioTransmitter
+  - type: ActiveRadio
+    channels:
+    - !Remove Binary
 
 # The actual brain inside the core
 - type: entity
@@ -54,6 +61,7 @@
     baseWalkSpeed: 28
   - type: AiEye
 
+# Syndicate Assault borg
 - type: entity
   id: PlayerBorgSyndicateAssaultBattery
   components:
@@ -62,6 +70,7 @@
       borg_module:
       - BorgModuleStickyGrenadeLauncher
 
+# Syndicate Saboteur borg
 - type: entity
   id: PlayerBorgSyndicateSaboteurBattery
   components:
@@ -74,6 +83,7 @@
       - !Remove BorgModuleTool
       - BorgModuleAdvancedTool
 
+# Derelict Medical borg
 - type: entity
   id: PlayerMedicalBorgDerelict
   components:

@@ -7,7 +7,7 @@
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
     channels:
-    #  - Binary # Goobstation - replaced with collective mind
+    - Binary
     - Common
     - Command
     - Engineering
@@ -18,7 +18,7 @@
     - Supply
   - type: ActiveRadio
     channels:
-    #  - Binary # Goobstation - replaced with collective mind
+    - Binary
     - Common
     - Command
     - Engineering
@@ -81,12 +81,12 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: IntrinsicRadioReceiver
-  #- type: IntrinsicRadioTransmitter
-  #  channels:
-  #  - Binary # Goobstation - replaced with collective mind
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Binary
   - type: ActiveRadio
     channels:
-    # - Binary # Goobstation - replaced with collective mind
+    - Binary
     - Common
   - type: ActionGrant
     actions:
