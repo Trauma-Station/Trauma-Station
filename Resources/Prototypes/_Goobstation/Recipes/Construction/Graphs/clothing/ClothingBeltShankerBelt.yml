@@ -1,0 +1,21 @@
+﻿# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: constructionGraph
+  id: ClothingBeltShankerBelt
+  graph:
+  - node: start
+    edges:
+    - to: Shanker
+      steps:
+      - material: Cloth
+        amount: 5
+        doAfter: 2
+      - material: Cable
+        amount: 5
+        doAfter: 2
+      - material: Steel
+        amount: 2
+        doAfter: 2
+  - node: Shanker
+    entity: ClothingBeltShankerBelt
+
