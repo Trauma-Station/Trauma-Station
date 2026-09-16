@@ -194,7 +194,7 @@
       - !type:NestedSelector
         tableId: FishingScrapLootTable
         weight: 2
- 
+
 
 # Items from Lava
 - type: entityTable
