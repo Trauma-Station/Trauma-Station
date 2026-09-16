@@ -21,7 +21,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Nuclear.Turbine;
 
-public abstract partial class SharedTurbineSystem : EntitySystem
+public abstract partial class TurbineSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] protected SharedAudioSystem Audio = default!;

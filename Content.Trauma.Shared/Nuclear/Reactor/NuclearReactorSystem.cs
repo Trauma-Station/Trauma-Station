@@ -16,16 +16,16 @@ using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Nuclear.Reactor;
 
-public abstract partial class SharedNuclearReactorSystem : EntitySystem
+public abstract partial class NuclearReactorSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] protected ISharedAdminLogManager AdminLog = default!;
     [Dependency] private ItemSlotsSystem _slots = default!;
+    [Dependency] private NuclearMachineSystem _machine = default!;
     [Dependency] protected SharedAppearanceSystem Appearance = default!;
     [Dependency] protected SharedAudioSystem Audio = default!;
     [Dependency] protected SharedContainerSystem Container = default!;
     [Dependency] private SharedDeviceLinkSystem _device = default!;
-    [Dependency] private SharedNuclearMachineSystem _machine = default!;
     [Dependency] protected SharedPopupSystem Popup = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] protected EntityQuery<NuclearPropertiesComponent> PropsQuery = default!;

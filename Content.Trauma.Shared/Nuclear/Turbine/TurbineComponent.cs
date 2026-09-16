@@ -151,7 +151,7 @@ public sealed partial class TurbineComponent : Component
     /// Adjustment for power generation
     /// </summary>
     [DataField]
-    public float PowerMultiplier = 1;
+    public float PowerMultiplier = 0.88f;
 
     [DataField]
     public EntityUid? AlarmAudioOvertemp;

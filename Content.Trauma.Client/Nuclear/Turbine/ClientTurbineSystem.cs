@@ -7,7 +7,7 @@ using Robust.Client.Animations;
 
 namespace Content.Trauma.Client.Nuclear.Reactor;
 
-public sealed partial class TurbineSystem : SharedTurbineSystem
+public sealed partial class ClientTurbineSystem : TurbineSystem
 {
     [Dependency] private AnimationPlayerSystem _animationPlayer = default!;
     [Dependency] private SpriteSystem _sprite = default!;
