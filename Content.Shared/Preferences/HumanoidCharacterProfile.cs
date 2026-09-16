@@ -49,7 +49,7 @@ namespace Content.Shared.Preferences
         private Dictionary<ProtoId<JobPrototype>, JobPriority> _jobPriorities = new()
         {
             {
-                SharedGameTicker.FallbackOverflowJob, JobPriority.High
+                GameTicker.FallbackOverflowJob, JobPriority.High
             }
         };
 

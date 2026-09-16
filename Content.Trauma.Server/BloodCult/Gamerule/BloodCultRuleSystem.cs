@@ -2,18 +2,17 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Server.Antag;
-using Content.Server.Antag.Components;
 using Content.Server.Chat.Managers;
-using Content.Server.GameTicking;
-using Content.Server.GameTicking.Rules;
 using Content.Server.RoundEnd;
 using Content.Server.StationEvents.Components;
 using Content.Shared.Actions;
 using Content.Shared.Antag;
+using Content.Shared.Antag.Components;
 using Content.Shared.Chat;
 using Content.Shared.Cuffs.Components;
+using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.GameTicking.Rules;
 using Content.Shared.Gibbing;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
@@ -62,15 +61,11 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
 
     // TODO: make a thing so if target cryos it picks a new one
 
-    protected override void Started(
-        EntityUid uid,
-        BloodCultRuleComponent comp,
-        GameRuleComponent rule,
-        GameRuleStartedEvent args
-    )
+    protected override void Started(Entity<BloodCultRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
     {
-        base.Started(uid, comp, rule, args);
+        base.Started(ent, ref args);
 
+        var comp = ent.Comp1;
         comp.OfferingTarget = PickTarget();
         while (comp.RitualAreas.Count < comp.AreaCount)
         {
@@ -79,19 +74,15 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
             if (!comp.RitualAreas.Contains(area))
                 comp.RitualAreas.Add(area);
         }
-        DirtyField(uid, comp, nameof(BloodCultRuleComponent.RitualAreas));
+        DirtyField(ent, comp, nameof(BloodCultRuleComponent.RitualAreas));
     }
 
-    protected override void AppendRoundEndText(
-        EntityUid uid,
-        BloodCultRuleComponent component,
-        GameRuleComponent gameRule,
-        ref RoundEndTextAppendEvent args
-    )
+    protected override void AppendRoundEndText(Entity<BloodCultRuleComponent> ent, ref RoundEndTextAppendEvent args)
     {
-        base.AppendRoundEndText(uid, component, gameRule, ref args);
+        base.AppendRoundEndText(ent, ref args);
 
-        var winText = Loc.GetString($"blood-cult-condition-{component.WinCondition.ToString().ToLower()}");
+        var (uid, comp) = ent;
+        var winText = Loc.GetString($"blood-cult-condition-{comp.WinCondition.ToString().ToLower()}");
         args.AddLine(winText);
 
         args.AddLine(Loc.GetString("blood-cultists-list-start"));
@@ -196,7 +187,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     private void CheckRoundShouldEnd()
     {
         var query = QueryActiveRules();
-        while (query.MoveNext(out _, out var cult, out _))
+        while (query.MoveNext(out _, out var cult, out _, out _))
         {
             var aliveCultists = cult.Cultists.Count(cultist => !_mob.IsDead(cultist));
             if (aliveCultists != 0)

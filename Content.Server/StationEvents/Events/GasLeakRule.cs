@@ -1,9 +1,11 @@
-using Content.Server.Administration.Logs; // Goobstation
+// <Trauma>
+using Content.Server.Administration.Logs;
+using Content.Server.Chat.Managers;
+using Content.Shared.Database;
+// </Trauma>
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Chat.Managers; // Goobstation
 using Content.Server.StationEvents.Components;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.Database; // Goobstation
 using Robust.Shared.Audio;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -12,10 +14,12 @@ namespace Content.Server.StationEvents.Events
 {
     internal sealed partial class GasLeakRule : StationEventSystem<GasLeakRuleComponent>
     {
-        [Dependency] private IGameTiming _timing = default!;
-        [Dependency] private AtmosphereSystem _atmosphere = default!;
+        // <Trauma>
         [Dependency] private IAdminLogManager _adminLogger = default!;
         [Dependency] private IChatManager _chat = default!;
+        // </Trauma>
+        [Dependency] private IGameTiming _timing = default!;
+        [Dependency] private AtmosphereSystem _atmosphere = default!;
 
         protected override void Started(EntityUid uid, GasLeakRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
         {
@@ -25,8 +29,9 @@ namespace Content.Server.StationEvents.Events
                 return;
 
             // Essentially we'll pick out a target amount of gas to leak, then a rate to leak it at, then work out the duration from there.
-            if (TryFindRandomTile(out component.TargetTile, out var target, out component.TargetGrid, out component.TargetCoords))
+            if (Station.TryFindRandomTile(out component.TargetTile, out var target, out var grid, out component.TargetCoords))
             {
+                component.TargetGrid = grid.Value;
                 component.TargetStation = target.Value;
                 component.FoundTile = true;
 
@@ -34,16 +39,14 @@ namespace Content.Server.StationEvents.Events
                 // Was 50-50 on using normal distribution.
                 var totalGas = RobustRandom.Next(component.MinimumGas, component.MaximumGas);
                 component.MolesPerSecond = RobustRandom.Next(component.MinimumMolesPerSecond, component.MaximumMolesPerSecond);
-                // Goobstation start
-                if (gameRule.Delay is { } startAfter)
+                if (gameRule.Delay is {} startAfter)
+                // <Trauma> - log and admin announce it as well
                 {
-                    stationEvent.EndTime = _timing.CurTime +
-                                           TimeSpan.FromSeconds(totalGas / component.MolesPerSecond +
-                                                                startAfter.Next(RobustRandom));
+                    stationEvent.EndTime = _timing.CurTime + TimeSpan.FromSeconds(totalGas / component.MolesPerSecond + startAfter.Next(RobustRandom));
                     _adminLogger.Add(LogType.EventRan, LogImpact.High, $"Gasleak placing {totalGas} moles of {component.LeakGas} at {component.TargetTile} in grid {component.TargetGrid}.");
                     _chat.SendAdminAnnouncement($"Gasleak placing {totalGas} moles of {component.LeakGas} at {component.TargetTile} in grid {component.TargetGrid}.");
                 }
-                // Goobstation end
+                // </Trauma>
             }
 
             // Look technically if you wanted to guarantee a leak you'd do this in announcement but having the announcement
@@ -73,28 +76,28 @@ namespace Content.Server.StationEvents.Events
             environment?.AdjustMoles(component.LeakGas, component.LeakCooldown * component.MolesPerSecond);
         }
 
-        protected override void Ended(EntityUid uid, GasLeakRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
+        protected override void Ended(Entity<GasLeakRuleComponent> rule, ref GameRuleEndedEvent args)
         {
-            base.Ended(uid, component, gameRule, args);
-            Spark(uid, component);
+            base.Ended(rule, ref args);
+            Spark(rule);
         }
 
-        private void Spark(EntityUid uid, GasLeakRuleComponent component)
+        private void Spark(Entity<GasLeakRuleComponent> rule)
         {
-            if (RobustRandom.NextFloat() <= component.SparkChance)
+            if (RobustRandom.NextFloat() <= rule.Comp.SparkChance)
             {
-                if (!component.FoundTile ||
-                    component.TargetGrid == default ||
-                    (!Exists(component.TargetGrid) ? EntityLifeStage.Deleted : MetaData(component.TargetGrid).EntityLifeStage) >= EntityLifeStage.Deleted ||
-                    !_atmosphere.IsSimulatedGrid(component.TargetGrid))
+                if (!rule.Comp.FoundTile ||
+                    rule.Comp.TargetGrid == default ||
+                    (!Exists(rule.Comp.TargetGrid) ? EntityLifeStage.Deleted : MetaData(rule.Comp.TargetGrid).EntityLifeStage) >= EntityLifeStage.Deleted ||
+                    !_atmosphere.IsSimulatedGrid(rule.Comp.TargetGrid))
                 {
                     return;
                 }
 
                 // Don't want it to be so obnoxious as to instantly murder anyone in the area but enough that
                 // it COULD start potentially start a bigger fire.
-                _atmosphere.HotspotExpose(component.TargetGrid, component.TargetTile, 700f, 50f, null, true);
-                Audio.PlayPvs(new SoundPathSpecifier("/Audio/Effects/sparks4.ogg"), component.TargetCoords);
+                _atmosphere.HotspotExpose(rule.Comp.TargetGrid, rule.Comp.TargetTile, 700f, 50f, null, true);
+                Audio.PlayPvs(new SoundPathSpecifier("/Audio/Effects/sparks4.ogg"), rule.Comp.TargetCoords);
             }
         }
     }

@@ -1,25 +1,26 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Trauma.Server.GameTicking.Rules.Components;
-using Content.Server.Antag;
 using Content.Server.Audio;
 using Content.Server.Chat.Systems;
-using Content.Server.GameTicking;
-using Content.Server.GameTicking.Rules;
 using Content.Server.Nuke;
 using Content.Server.Popups;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
-using Content.Server.Station.Systems;
-using Content.Trauma.Shared.Xenomorphs;
-using Content.Trauma.Shared.Xenomorphs.Caste;
-using Content.Trauma.Shared.Xenomorphs.Xenomorph;
+using Content.Shared.Antag;
 using Content.Shared.Audio;
+using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.GameTicking.Rules;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.RoundEnd;
+using Content.Shared.Station.Systems;
+using Content.Trauma.Shared.GameTicking.Rules;
+using Content.Trauma.Shared.Xenomorphs;
+using Content.Trauma.Shared.Xenomorphs.Caste;
+using Content.Trauma.Shared.Xenomorphs.Xenomorph;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
@@ -71,10 +72,12 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
 
     private void OnXenomorphInit(EntityUid uid, XenomorphComponent component, ComponentInit args)
     {
+        // TODO: better logic bruh
         var query = QueryActiveRules();
-        while (query.MoveNext(out _, out var xenomorphsRule, out _))
+        while (query.MoveNext(out _, out var rule, out _, out _))
         {
-            xenomorphsRule.Xenomorphs.Add(uid);
+            rule.Xenomorphs.Add(uid);
+            break;
         }
     }
 
@@ -88,7 +91,7 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
             return;
 
         var query = QueryActiveRules();
-        while (query.MoveNext(out _, out _, out var rule, out _))
+        while (query.MoveNext(out _, out var rule, out _, out _))
         {
             if (!rule.Xenomorphs.Contains(uid))
                 continue;
@@ -110,7 +113,7 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
     )
     {
         var query = QueryActiveRules();
-        while (query.MoveNext(out _, out _, out var rule, out _))
+        while (query.MoveNext(out _, out var rule, out _, out _))
         {
             if (!rule.Xenomorphs.Remove(uid))
                 continue;
@@ -127,15 +130,15 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
         var correctStation = false;
 
         var query = QueryActiveRules();
-        while (query.MoveNext(out var uid, out _, out var xenomorphs, out _))
+        while (query.MoveNext(out var uid, out var rule, out _, out _))
         {
             foreach (var grid in GetStationGrids())
             {
                 if (ev.OwningStation != grid)
                     continue;
 
-                xenomorphs.WinType = WinType.CrewMinor;
-                xenomorphs.WinConditions.Add(WinCondition.NukeExplodedOnStation);
+                rule.WinType = XenoWinType.CrewMinor;
+                rule.WinConditions.Add(XenoWinCondition.NukeExplodedOnStation);
                 ForceEndSelf(uid);
                 correctStation = true;
             }
@@ -151,16 +154,16 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
             return;
 
         var query = QueryActiveRules();
-        while (query.MoveNext(out var uid, out _, out var xenomorphs, out _))
+        while (query.MoveNext(out var uid, out var rule, out _, out _))
         {
-            OnRoundEnd(xenomorphs);
+            OnRoundEnd(rule);
             ForceEndSelf(uid);
         }
     }
 
     private void OnRoundEnd(XenomorphsRuleComponent component)
     {
-        if (component.WinType != WinType.XenoMinor)
+        if (component.WinType != XenoWinType.XenoMinor)
             return;
 
         var centcomms = _emergencyShuttle.GetCentcommMaps();
@@ -173,8 +176,8 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
             if (xform.MapUid == null || !centcomms.Contains(xform.MapUid.Value))
                 continue;
 
-            component.WinType = WinType.XenoMajor;
-            component.WinConditions.Add(WinCondition.XenoInfiltratedOnCentCom);
+            component.WinType = XenoWinType.XenoMajor;
+            component.WinConditions.Add(XenoWinCondition.XenoInfiltratedOnCentCom);
             break;
         }
 
@@ -184,39 +187,29 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
             if (xform.MapUid == null || !station.Contains(xform.MapUid.Value))
                 continue;
 
-            component.WinType = WinType.CrewMinor;
-            component.WinConditions.Add(WinCondition.NukeActiveInStation);
+            component.WinType = XenoWinType.CrewMinor;
+            component.WinConditions.Add(XenoWinCondition.NukeActiveInStation);
             break;
         }
     }
 
-    protected override void AppendRoundEndText(
-        EntityUid uid,
-        XenomorphsRuleComponent component,
-        GameRuleComponent gameRule,
-        ref RoundEndTextAppendEvent args
-        )
+    protected override void AppendRoundEndText(Entity<XenomorphsRuleComponent> ent, ref RoundEndTextAppendEvent args)
     {
-        var winText = Loc.GetString($"xenomorphs-{component.WinType.ToString().ToLower()}");
+        var winText = Loc.GetString($"xenomorphs-{ent.Comp.WinType.ToString().ToLower()}");
         args.AddLine(winText);
 
-        foreach (var cond in component.WinConditions)
+        foreach (var cond in ent.Comp.WinConditions)
         {
             var text = Loc.GetString($"xenomorphs-cond-{cond.ToString().ToLower()}");
             args.AddLine(text);
         }
     }
 
-    protected override void Started(
-        EntityUid uid,
-        XenomorphsRuleComponent component,
-        GameRuleComponent gameRule,
-        GameRuleStartedEvent args
-    )
+    protected override void Started(Entity<XenomorphsRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
     {
-        base.Started(uid, component, gameRule, args);
+        base.Started(ent, ref args);
 
-        component.NextCheck = _timing.CurTime + component.CheckDelay;
+        ent.Comp1.NextCheck = _timing.CurTime + ent.Comp1.CheckDelay;
     }
 
     protected override void ActiveTick(
@@ -280,21 +273,21 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
             if (component.Announced && !string.IsNullOrEmpty(component.NoMoreThreatAnnouncement))
                 _chat.DispatchGlobalAnnouncement(Loc.GetString(component.NoMoreThreatAnnouncement), component.Sender != null ? Loc.GetString(component.Sender) : null, colorOverride: component.NoMoreThreatAnnouncementColor);
 
-            component.WinType = WinType.CrewMajor;
-            component.WinConditions.Add(WinCondition.AllReproduceXenoDead);
+            component.WinType = XenoWinType.CrewMajor;
+            component.WinConditions.Add(XenoWinCondition.AllReproduceXenoDead);
             ForceEndSelf(uid, gameRule);
         }
 
         if (xenomorphs.Count / (float) (xenomorphs.Count + GetHumans(stationGrids, true).Count) >= 1)
         {
-            component.WinType = WinType.XenoMajor;
-            component.WinConditions.Add(WinCondition.AllCrewDead);
+            component.WinType = XenoWinType.XenoMajor;
+            component.WinConditions.Add(XenoWinCondition.AllCrewDead);
             ForceEndSelf(uid, gameRule);
             _roundEnd.EndRound();
             return;
         }
 
-        if (!component.Announced || component.WinType == WinType.XenoMinor
+        if (!component.Announced || component.WinType == XenoWinType.XenoMinor
             || xenomorphs.Count / (float) (xenomorphs.Count + humans.Count) < component.XenomorphsShuttleCallPercentage)
             return;
 
@@ -310,8 +303,8 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
         _sound.StopStationEventMusic(stationUid, StationEventMusicType.Xenomorph);
         _sound.DispatchStationEventMusic(stationUid, component.XenomorphTakeoverSound, StationEventMusicType.Xenomorph, component.XenomorphTakeoverSound.Params);
 
-        component.WinType = WinType.XenoMinor;
-        component.WinConditions.Add(WinCondition.XenoTakeoverStation);
+        component.WinType = XenoWinType.XenoMinor;
+        component.WinConditions.Add(XenoWinCondition.XenoTakeoverStation);
 
         var station = _station.GetStations().FirstOrNull();
         if (!station.HasValue)
@@ -362,7 +355,7 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
     private HashSet<EntityUid> GetStationGrids()
     {
         var stationGrids = new HashSet<EntityUid>();
-        foreach (var station in _gameTicker.GetSpawnableStations())
+        foreach (var station in _station.GetStationsSet())
         {
             if (_station.GetLargestGrid(station) is { } grid)
                 stationGrids.Add(grid);

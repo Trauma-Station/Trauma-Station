@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Administration.Systems;
-using Content.Server.Antag;
+using Content.Shared.Antag;
 using Content.Shared.Database;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;

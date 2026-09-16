@@ -30,7 +30,7 @@ public sealed partial class BreakerFlipRule : StationEventSystem<BreakerFlipRule
     {
         base.Started(uid, component, gameRule, args);
 
-        if (GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station, blacklist is irrelevant
+        if (Station.GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station, blacklist is irrelevant
             return;
 
         var stationApcs = new List<Entity<ApcComponent>>();

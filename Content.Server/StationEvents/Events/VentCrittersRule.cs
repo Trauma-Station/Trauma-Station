@@ -18,7 +18,7 @@ public sealed partial class VentCrittersRule : StationEventSystem<VentCrittersRu
     {
         base.Started(uid, component, gameRule, args);
 
-        if (GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station
+        if (Station.GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station
         {
             return;
         }

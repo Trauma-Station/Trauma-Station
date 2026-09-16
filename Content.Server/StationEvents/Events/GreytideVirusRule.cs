@@ -47,7 +47,7 @@ public sealed partial class GreytideVirusRule : StationEventSystem<GreytideVirus
         if (virusComp.Severity == null)
             return;
 
-        if (GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station
+        if (Station.GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station
             return;
 
         // pick random access groups

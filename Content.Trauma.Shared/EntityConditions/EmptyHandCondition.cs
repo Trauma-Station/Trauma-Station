@@ -1,14 +1,19 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.EntityConditions;
-using Content.Shared.Hands;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 
 namespace Content.Trauma.Shared.EntityConditions;
 
 /// <summary>
 /// Requires that the target entity has at least 1 empty hand.
 /// </summary>
-public sealed partial class EmptyHandCondition : EntityConditionBase<EmptyHandCondition>;
+public sealed partial class EmptyHandCondition : EntityConditionBase<EmptyHandCondition>
+{
+    public override string EntityConditionGuidebookText(IPrototypeManager proto)
+        => string.Empty;
+}
 
 public sealed partial class EmptyHandConditionSystem : EntityConditionSystem<HandsComponent, EmptyHandCondition>
 {

@@ -22,7 +22,7 @@ public sealed partial class VentClogRule : StationEventSystem<VentClogRuleCompon
     {
         base.Started(uid, component, gameRule, args);
 
-        if (GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station
+        if (Station.GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station
             return;
 
         // TODO: "safe random" for chems. Right now this includes admin chemicals.

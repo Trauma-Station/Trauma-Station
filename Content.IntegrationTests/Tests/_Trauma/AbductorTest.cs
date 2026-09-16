@@ -2,10 +2,10 @@
 
 using Content.IntegrationTests.Tests.Interaction;
 using Content.Medical.Shared.Abductor;
-using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
+using Content.Shared.GameTicking;
 using Content.Shared.Movement.Components;
 using Content.Shared.Power.Components;
 using Robust.Shared.Map;
@@ -56,7 +56,7 @@ public sealed class AbductorTest : InteractionTest
         var shittle = EntityUid.Invalid;
         await Server.WaitPost(() =>
         {
-            rule = ticker.AddGameRule(LoneRule);
+            rule = ticker.AddGameRule(LoneRule)!.Value;
 
             // skipping ftl and just teleporting it to the "station" map, in space far away
             shittle = SEntMan.GetComponent<RuleGridsComponent>(rule).MapGrids[0];

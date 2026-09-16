@@ -15,7 +15,7 @@ namespace Content.Trauma.Shared.Language.Systems;
 
 public abstract partial class SharedLanguageSystem : CommonLanguageSystem
 {
-    [Dependency] private SharedGameTicker _ticker = default!;
+    [Dependency] private GameTicker _ticker = default!;
     [Dependency] private SharedKnowledgeSystem _knowledge = default!;
 
     private readonly StringBuilder _builder = new();

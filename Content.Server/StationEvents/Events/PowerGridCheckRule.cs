@@ -1,17 +1,13 @@
 using System.Threading;
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
-using Content.Server.Station.Components;
 using Content.Server.StationEvents.Components;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.Station;
 using Content.Shared.Station.Components;
 using JetBrains.Annotations;
-using Robust.Shared.Audio;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
 using Timer = Robust.Shared.Timing.Timer;
-using Robust.Shared.Random;
 
 namespace Content.Server.StationEvents.Events
 {
@@ -19,7 +15,6 @@ namespace Content.Server.StationEvents.Events
     public sealed partial class PowerGridCheckRule : StationEventSystem<PowerGridCheckRuleComponent>
     {
         [Dependency] private ApcSystem _apcSystem = default!;
-        [Dependency] private SharedStationSystem _stationSystem = default!;
 
         public override void Initialize()
         {
@@ -32,13 +27,13 @@ namespace Content.Server.StationEvents.Events
         {
             base.Started(uid, component, gameRule, args);
 
-            if (GetRandomStationGrids(out var chosenStation) is not { } stationGrids) // Trauma - get grids instead of comparing station
+            if (Station.GetRandomStationGrids(out var chosenStation) is not { } stationGrids) // Trauma - get grids instead of comparing station
                 return;
 
             component.AffectedStation = chosenStation!.Value; // Trauma - add !, shit language nullables
 
             /* Trauma - no longer needed
-            var largestGrid = _stationSystem.GetLargestGrid(chosenStation.Value);
+            var largestGrid = Station.GetLargestGrid(chosenStation.Value.AsNullable());
 
             if (largestGrid == null)
                 return;
@@ -104,12 +99,12 @@ namespace Content.Server.StationEvents.Events
             }
 
             var activeRules = AllEntityQuery<PowerGridCheckRuleComponent, ActiveGameRuleComponent>();
-            while (activeRules.MoveNext(out var _entity, out var powerGridRule, out var _activeGameRule))
+            while (activeRules.MoveNext(out _, out var powerGridRule, out _))
             {
                 if (stationMemberComp.Station != powerGridRule.AffectedStation)
                     continue;
 
-                var largestGrid = _stationSystem.GetLargestGrid(powerGridRule.AffectedStation);
+                var largestGrid = Station.GetLargestGrid(powerGridRule.AffectedStation);
 
                 if (largestGrid == null)
                     continue;
@@ -123,11 +118,11 @@ namespace Content.Server.StationEvents.Events
             return null;
         }
 
-        protected override void Ended(EntityUid uid, PowerGridCheckRuleComponent component, GameRuleComponent gameRule, GameRuleEndedEvent args)
+        protected override void Ended(Entity<PowerGridCheckRuleComponent> rule, ref GameRuleEndedEvent args)
         {
-            base.Ended(uid, component, gameRule, args);
+            base.Ended(rule, ref args);
 
-            foreach (var entity in component.Unpowered)
+            foreach (var entity in rule.Comp.Unpowered)
             {
                 if (Deleted(entity))
                     continue;
@@ -140,13 +135,15 @@ namespace Content.Server.StationEvents.Events
             }
 
             // Can't use the default EndAudio
-            component.AnnounceCancelToken?.Cancel();
-            component.AnnounceCancelToken = new CancellationTokenSource();
-            Timer.Spawn(3000, () =>
+            rule.Comp.AnnounceCancelToken?.Cancel();
+            rule.Comp.AnnounceCancelToken = new CancellationTokenSource();
+            Timer.Spawn(3000,
+                () =>
             {
-                Audio.PlayGlobal(component.PowerOnSound, Filter.Broadcast(), true);
-            }, component.AnnounceCancelToken.Token);
-            component.Unpowered.Clear();
+                Audio.PlayGlobal(rule.Comp.PowerOnSound, Filter.Broadcast(), true);
+            },
+                rule.Comp.AnnounceCancelToken.Token);
+            rule.Comp.Unpowered.Clear();
         }
 
         protected override void ActiveTick(EntityUid uid, PowerGridCheckRuleComponent component, GameRuleComponent gameRule, float frameTime)
