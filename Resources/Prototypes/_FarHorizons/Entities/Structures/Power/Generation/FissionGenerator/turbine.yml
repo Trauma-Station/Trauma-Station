@@ -54,6 +54,7 @@
     damageContainer: StructuralInorganic
   - type: Anchorable
     delay: 10
+  - type: FultonBlacklist # annnoying
   - type: NodeContainer
     examinable: true
     nodes:
