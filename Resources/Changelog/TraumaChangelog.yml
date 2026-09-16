@@ -14614,3 +14614,10 @@ Entries:
   id: 1592
   time: '2026-09-15T19:48:19.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4569
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed rev telesphere deleting materials when linking machines to it.
+  id: 1593
+  time: '2026-09-16T07:17:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4612
