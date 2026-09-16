@@ -1,7 +1,11 @@
 ﻿- type: entity
-  categories: [ DoNotMap ]
   id: BaseHandheldCrewMonitor
+  !Remove Parent: [ BaseHandheldComputer, BaseGrandTheftContraband ]
   components:
   - type: ItemToggleExaminableStatus
   - type: ItemToggle
     onUse: false # above component does the toggling
+  - type: Tag
+    tags:
+    - !Remove HighRiskItem
+    - !Remove type: StealTarget
