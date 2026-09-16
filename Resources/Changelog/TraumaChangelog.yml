@@ -14635,3 +14635,10 @@ Entries:
   id: 1595
   time: '2026-09-16T09:41:13.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4614
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Vent spiders event is no longer spammed every single round.
+  id: 1596
+  time: '2026-09-16T09:53:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4615
