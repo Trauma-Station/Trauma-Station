@@ -5,7 +5,7 @@
   id: CigarGoldSyndicate
   components:
   - type: ExplosiveCigar
-    triggerAtRemaining: 9.5
+    triggerAtRemaining: 5
   - type: DamageOnTrigger
     keysIn:
     - timer
