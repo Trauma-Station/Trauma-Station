@@ -1,8 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: !Remove [ BaseHandheldComputer, BaseGrandTheftContraband ]
+  abstract: true
   id: BaseHandheldCrewMonitor
+  parent:
+  - !Remove BaseHandheldComputer
+  - !Remove BaseGrandTheftContraband
   !Remove categories: [ DoNotMap ]
   components:
   - type: ItemToggleExaminableStatus

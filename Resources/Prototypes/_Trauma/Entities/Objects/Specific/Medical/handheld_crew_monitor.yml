@@ -61,6 +61,9 @@
   description: An integrated crew monitor for locating crew to rescue.
 
 - type: entity
-  parent: [ BaseHandheldCrewMonitor, BaseHandheldComputer, BaseMedicalContraband ]
+  parent:
+  - BaseHandheldCrewMonitor
+  - BaseHandheldComputer
+  - BaseMedicalContraband
   id: HandheldCrewMonitor
   name: Handheld Crew Monitor
