@@ -214,6 +214,9 @@ public sealed partial class NuclearReactorWindow : FancyWindow
             {
                 var pos = new Vector2i(x, y);
                 var index = x + y * _width;
+                if (index >= _data.Length)
+                    return; // UI isnt setup properly yet
+
                 var data = _data[index];
                 var box = _reactorGrid[pos];
                 switch (_displayMode)

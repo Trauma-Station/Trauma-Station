@@ -166,6 +166,14 @@
 
 - type: entity
   parent: NuclearReactorCrew
+  id: NuclearReactorCrewRunning
+  suffix: Running
+  components:
+  - type: NuclearReactor
+    controlRodInsertion: 0
+
+- type: entity
+  parent: NuclearReactorCrew
   id: NuclearReactorEmpty
   suffix: Empty
   components:
