@@ -55,13 +55,7 @@
         name: power-cell-slot-component-slot-name-default
 
 - type: entity
-  id: BorgCrewMonitor
   parent: BaseHandheldCrewMonitor
+  id: BorgCrewMonitor
   name: Integrated Crew Monitor
-
-- type: entity
-  id: HandheldCrewMonitor
-  name: Handheld Crew Monitor
-  parent: [ BaseHandheldCrewMonitor, BaseHandheldComputer, BaseMedicalContraband ]
-
-
+  description: An integrated crew monitor for locating crew to rescue.

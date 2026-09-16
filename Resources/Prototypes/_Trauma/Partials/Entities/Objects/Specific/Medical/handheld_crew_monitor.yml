@@ -1,6 +1,7 @@
 ﻿- type: entity
+  parent: !Remove [ BaseHandheldComputer, BaseGrandTheftContraband ]
   id: BaseHandheldCrewMonitor
-  !Remove Parent: [ BaseHandheldComputer, BaseGrandTheftContraband ]
+  !Remove categories: [ DoNotMap ]
   components:
   - type: ItemToggleExaminableStatus
   - type: ItemToggle
@@ -8,4 +9,4 @@
   - type: Tag
     tags:
     - !Remove HighRiskItem
-    - !Remove type: StealTarget
+  - !Remove type: StealTarget
