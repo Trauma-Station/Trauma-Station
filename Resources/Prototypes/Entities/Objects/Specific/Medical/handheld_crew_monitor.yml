@@ -34,12 +34,6 @@
     stealGroup: HandheldCrewMonitor
 
 - type: entity
-  id: HandheldCrewMonitor
-  name: Handheld Crew Monitor
-  parent: [ BaseHandheldCrewMonitor, BaseHandheldComputer, BaseMedicalContraband ]
-  description: A hand-held crew monitor displaying the status of suit sensors.
-
-- type: entity
   id: HandheldCrewMonitorEmpty
   parent: HandheldCrewMonitor
   suffix: Empty
