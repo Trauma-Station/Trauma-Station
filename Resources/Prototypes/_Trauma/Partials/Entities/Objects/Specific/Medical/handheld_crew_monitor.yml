@@ -1,0 +1,7 @@
+﻿- type: entity
+  categories: [ DoNotMap ]
+  id: BaseHandheldCrewMonitor
+  components:
+  - type: ItemToggleExaminableStatus
+  - type: ItemToggle
+    onUse: false # above component does the toggling

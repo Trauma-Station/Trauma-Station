@@ -1,9 +1,5 @@
 - type: entity
-  name: handheld crew monitor
-#  categories: [ DoNotMap ] # Goobstation
-  parent: [ BaseHandheldComputer, BaseMedicalContraband ] # Goobstation
-  # CMO-only bud, don't add more. # Goobstation - no lmao
-  id: HandheldCrewMonitor
+  id: BaseHandheldCrewMonitor
   description: A hand-held crew monitor displaying the status of suit sensors.
   components:
   - type: Item
@@ -29,17 +25,4 @@
     price: 500
   - type: Tag
     tags:
-    - HandheldCrewMonitor # Goobstation - start
-    # - HighRiskItem
-  # - type: StealTarget
-  #   stealGroup: HandheldCrewMonitor # Goobstation - end
-
-- type: entity
-  id: HandheldCrewMonitorEmpty
-  parent: HandheldCrewMonitor
-  suffix: Empty
-  components:
-  - type: ItemSlots
-    slots:
-      cell_slot:
-        name: power-cell-slot-component-slot-name-default
+    - HandheldCrewMonitor

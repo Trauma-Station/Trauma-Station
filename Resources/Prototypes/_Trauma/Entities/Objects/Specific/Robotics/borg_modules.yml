@@ -183,3 +183,27 @@
     - item: BorgHandheldGPSBasic
   - type: BorgModuleIcon
     icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: defib }
+
+- type: entity
+  parent: [ BaseBorgModuleMedical, BaseProviderBorgModule ]
+  id: BorgModuleAdvancedOmniSurgery
+  name: Advanced Surgery Omnitool Module
+  components:
+  - type: Sprite
+    layers:
+    - state: medical
+    - state: icon-surgery
+  - type: ItemBorgModule
+    hands:
+    - item: HandheldHealthAnalyzer
+    - item: OmnimedTool
+    - item: BorgCrewMonitor
+    - hand:
+        emptyRepresentative: OrganHumanBrain
+        emptyLabel: borg-slot-organ-empty
+        whitelist:
+          components:
+          - BodyPart
+          - Organ
+  - type: BorgModuleIcon
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: surgery-module }
