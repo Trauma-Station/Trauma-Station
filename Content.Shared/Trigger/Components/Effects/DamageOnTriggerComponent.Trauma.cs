@@ -19,4 +19,10 @@ public sealed partial class DamageOnTriggerComponent
     /// </summary>
     [DataField]
     public TargetBodyPart? TargetPart;
+
+    /// <summary>
+    /// If set, damage only applies when the entity is in this inventory slot.
+    /// </summary>
+    [DataField]
+    public string? RequiredSlot;
 }

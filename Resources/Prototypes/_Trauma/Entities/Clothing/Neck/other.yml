@@ -57,19 +57,26 @@
       path: /Audio/Effects/beep1.ogg
       params:
         volume: 5
+  - type: TriggerConditionInSlot
+    slot: neck
   - type: ExplodeOnTrigger
     keysIn:
     - timer
-  - type: Explosive
-    explosionType: Default
-    maxIntensity: 2
-    intensitySlope: 5
-    totalIntensity: 5
-    canCreateVacuum: false
-  - type: ExplosiveBombCollar
-    neckSlotHeadDamage:
+  - type: DamageOnTrigger
+    keysIn:
+    - timer
+    targetUser: true
+    targetPart: Head
+    damage:
       types:
         Blunt: 800
+        Slash: 200
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 2.5
+    intensitySlope: 5
+    totalIntensity: 10
+    canCreateVacuum: false
   - type: TriggerOnSignal
   - type: DeviceLinkSink
     ports:

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Damage;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Trauma.Shared.Weapons.Bombs.Components;
 
@@ -12,17 +12,12 @@ public sealed partial class ExplosiveCigarComponent : Component
     /// If null, explodes when the solution is fully empty.
     /// </summary>
     [DataField]
-    public float? TriggerAtRemaining = null;
+    public float? TriggerAtRemaining;
 
-    /// <summary>
-    /// Extra damage applied to the wearer's head when exploding while equipped in the mask slot.
-    /// </summary>
-    [DataField]
-    public DamageSpecifier? MaskSlotHeadDamage = null;
-
-    [DataField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField]
     public TimeSpan NextCheck = TimeSpan.Zero;
 
-    [DataField, AutoPausedField]
+    [DataField]
     public TimeSpan CheckInterval = TimeSpan.FromSeconds(3);
 }
