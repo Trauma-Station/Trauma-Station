@@ -405,3 +405,10 @@ Entries:
   id: 42
   time: '2026-09-16T17:28:15.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4620
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Fland now has a nuclear reactor and prebuilt AME.
+  id: 43
+  time: '2026-09-16T17:52:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4622
