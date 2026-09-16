@@ -63,5 +63,3 @@
   id: HandheldCrewMonitor
   name: Handheld Crew Monitor
   parent: [ BaseHandheldCrewMonitor, BaseHandheldComputer, BaseMedicalContraband ]
-
-
