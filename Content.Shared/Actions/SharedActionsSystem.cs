@@ -1,7 +1,6 @@
 // <Trauma>
 using Content.Trauma.Common.Actions;
 using Content.Shared.Ghost.Components;
-using Content.Shared.Popups;
 using Content.Trauma.Common.Heretic;
 using Robust.Shared.Network;
 // </Trauma>
@@ -17,6 +16,7 @@ using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mind;
+using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
@@ -31,7 +31,6 @@ public abstract partial class SharedActionsSystem : EntitySystem
 {
     // <Trauma>
     [Dependency] private INetManager _net = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
     // </Trauma>
     [Dependency] protected IGameTiming GameTiming = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
@@ -44,6 +43,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     [Dependency] private EntityQuery<ActionComponent> _actionQuery = default!;
     [Dependency] private EntityQuery<ActionsComponent> _actionsQuery = default!;
@@ -286,7 +286,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
     /// <param name="ev">The Request Perform Action Event</param>
     /// <param name="user">The user/performer of the action</param>
     /// <param name="skipDoActionRequest">Should this skip the initial doaction request?</param>
-    private bool TryPerformAction(RequestPerformActionEvent ev, EntityUid user, bool skipDoActionRequest = false)
+    private bool TryPerformAction(RequestPerformActionEvent ev, EntityUid user, bool skipDoActionRequest = false, bool showPopups = true)
     {
         if (!_actionsQuery.TryComp(user, out var component))
             return false;
@@ -317,11 +317,18 @@ public abstract partial class SharedActionsSystem : EntitySystem
         if (IsCooldownActive(action, curTime))
             return false;
 
+        var target = GetEntity(ev.EntityTarget);
+
         // check for action use prevention
-        var attemptEv = new ActionAttemptEvent(user);
+        var attemptEv = new ActionAttemptEvent(user, target);
         RaiseLocalEvent(action, ref attemptEv);
         if (attemptEv.Cancelled)
+        {
+            if (attemptEv.Reason != null && showPopups)
+                _popup.PopupEntity(attemptEv.Reason, user, user, attemptEv.Type);
+
             return false;
+        }
 
         // Validate request by checking action blockers and the like
         var provider = action.Comp.Container ?? user;
@@ -453,8 +460,6 @@ public abstract partial class SharedActionsSystem : EntitySystem
             ev.Target = target;
             ev.Entity = targetEntity;
         }
-
-        return;
     }
 
     public bool ValidateEntityTarget(EntityUid user, EntityUid target, Entity<EntityTargetActionComponent> ent)
@@ -641,7 +646,11 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
         UpdateAction(action);
 
-        var performed = new ActionPerformedEvent(performer);
+        EntityUid? actionTarget = null;
+        if (actionEvent is EntityTargetActionEvent targetEv)
+            actionTarget = targetEv.Target;
+
+        var performed = new ActionPerformedEvent(performer, actionTarget);
         RaiseLocalEvent(action, ref performed);
         return true;
     }

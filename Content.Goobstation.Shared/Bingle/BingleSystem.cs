@@ -2,38 +2,28 @@
 
 using Content.Goobstation.Common.Bingle;
 using Content.Goobstation.Shared.Bingle;
-using Content.Server.Polymorph.Components;
-using Content.Server.Polymorph.Systems;
 using Content.Shared.CombatMode;
 using Content.Shared.Flash.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
 using Content.Shared.Actions;
 using Content.Shared.Polymorph;
-using Content.Shared.Actions.Events;
+using Content.Shared.Polymorph.Systems;
 using Robust.Shared.Map;
 
-// TODO: predict everything but polymorph bruh
-namespace Content.Goobstation.Server.Bingle;
+namespace Content.Goobstation.Shared.Bingle;
 
 public sealed partial class BingleSystem : EntitySystem
 {
-    [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private PolymorphSystem _polymorph = default!;
-    [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAppearanceSystem _appearance = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedPolymorphSystem _polymorph = default!;
 
-    public static readonly EntProtoId ActionBingleUpgrade = "ActionBingleUpgrade";
+    private static readonly EntProtoId ActionBingleUpgrade = "ActionBingleUpgrade";
+    private static readonly EntProtoId BinglePit = "BinglePit";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<BingleComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<BingleComponent, AttackAttemptEvent>(OnAttackAttempt);
-        SubscribeLocalEvent<BingleComponent, ToggleCombatActionEvent>(OnCombatToggle);
-        SubscribeLocalEvent<BingleComponent, BingleUpgradeActionEvent>(OnUpgradeAction);
-    }
-
+    [SubscribeLocalEvent]
     private void OnMapInit(EntityUid uid, BingleComponent component, MapInitEvent args)
     {
         var cords = Transform(uid).Coordinates;
@@ -43,7 +33,7 @@ public sealed partial class BingleSystem : EntitySystem
             return;
 
         if (component.Prime)
-            component.MyPit = Spawn("BinglePit", cords);
+            component.MyPit = PredictedSpawnAtPosition(BinglePit, cords);
         else
         {
             var query = EntityQueryEnumerator<BinglePitComponent>();
