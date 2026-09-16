@@ -241,6 +241,20 @@
       tags:
       - Sheet
       - Ingot
+  # prevent lathe restricting it to just plasma and deleting everything else
+  - type: MaterialStorageWhitelist
+    whitelist:
+    - Steel
+    - Glass
+    - Plastic
+    - Gold
+    - Silver
+    - Plasma
+    - Uranium
+    - Diamond
+    - BSCrystal
+    - Cloth
+    - Durathread
   - type: UserInterface
     interfaces:
       enum.LatheUiKey.Key:
