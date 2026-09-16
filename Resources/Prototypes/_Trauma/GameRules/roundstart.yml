@@ -30,6 +30,8 @@
       prob: 0.02
     - id: WraithRoundstart
       prob: 0.1
+    - id: Demonologist
+      prob: 0.2
 
 - type: entity
   parent: BaseGameRule
@@ -168,4 +170,34 @@
   parent: BaseGameRule
   id: SpectatorStatistics
   components:
-    - type: ObserverStatisticRule
+  - type: ObserverStatisticRule
+
+- type: entity
+  parent: BaseGameRule
+  id: Demonologist
+  components:
+  - type: DemonologistRule # TODO
+  - type: GameRule
+    minPlayers: 20
+  - type: AntagSelection
+    agentName: demonologist-round-end-agent-name
+    antags:
+    - !type:FixedAntagCount
+      proto: Demonologist
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: WizardSkills
+    - !type:ChangeFaction
+      newFaction: VampireFaction # TODO: demonologist faction and put under control demons inside it
+  - type: AntagObjectives
+    objectives: # TODO
+    - VampireBloodObjective
+    - VampireSurviveObjective
+    - VampireBloodsuckObjective
+  - type: LoadMapRule
+    mapPath: /Maps/_Goobstation/Nonstations/wizden.yml # TODO
+  - type: RuleGrids
+  - type: AntagLoadProfileRule # Fuck non-humans
+    speciesOverride: Human
+    alwaysUseSpeciesOverride: true

@@ -122,5 +122,9 @@
       - AlienBlood
       - BlackBlood
       - BloodChangeling
+    - type: CollectiveMind
+      defaultChannel: Demonmind
+      channels:
+      - Demonmind
   - type: StaticPrice
     price: 10000

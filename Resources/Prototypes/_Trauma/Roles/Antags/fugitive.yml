@@ -41,6 +41,10 @@
     implants:
     - DeathAcidifierImplant
   - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
   mindRoles:
   - MindRoleGhostRoleHunter
 
@@ -55,6 +59,10 @@
     color: red
   components:
   - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
   mindRoles:
   - MindRoleGhostRoleHunter
 
@@ -90,6 +98,10 @@
     color: red
   components:
   - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
   mindRoles:
   - MindRoleGhostRoleHunter
 # Bounty Hunter
@@ -123,6 +135,10 @@
     color: red
   components:
   - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
   mindRoles:
   - MindRoleGhostRoleHunter
 
@@ -157,6 +173,10 @@
     factions:
     - Syndicate
   - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
   - type: EmitSoundOnSpawn # fell out of the ceiling
     sound: /Audio/Effects/clang.ogg
   mindRoles:
