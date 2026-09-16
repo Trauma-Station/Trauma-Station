@@ -14621,3 +14621,10 @@ Entries:
   id: 1593
   time: '2026-09-16T07:17:53.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4612
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed liquid pumps deleting everything if linked to a chemmaster.
+  id: 1594
+  time: '2026-09-16T09:34:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4613
