@@ -51,20 +51,29 @@ public sealed partial class PlumbingPumpSystem : EntitySystem
             || _exclusive.GetOutputSlot(ent)?.GetSolution() is not {} outputEnt)
             return;
 
+        var filter = _filter.GetFilteredReagent(ent);
+
         var input = inputEnt.Comp.Solution;
         var output = outputEnt.Comp.Solution;
         var limit = _transferQuery.Comp(ent).TransferAmount;
 
-        var amount = FixedPoint2.Min(input.Volume, limit);
+        var inputLimit = input.Volume;
+        if (filter != null)
+            inputLimit = input.GetTotalPrototypeQuantity(filter.Value);
+        var amount = FixedPoint2.Min(inputLimit, limit);
         if (output.MaxVolume > FixedPoint2.Zero)
             amount = FixedPoint2.Min(amount, output.AvailableVolume);
         if (amount <= FixedPoint2.Zero)
             return;
 
-        var split = _filter.GetFilteredReagent(ent) is {} filter
-            ? input.SplitSolutionWithOnly(amount, filter)
+        var newInput = input.Volume - amount;
+        var newOutput = output.Volume + amount;
+        var split = filter != null
+            ? input.SplitSolutionWithOnly(amount, filter.Value)
             : input.SplitSolution(amount);
-        _solution.UpdateChemicals(inputEnt, false); // removing reagents should never cause reactions? don't waste cpu updating it
-        _solution.ForceAddSolution(outputEnt, split);
+        DebugTools.Assert(split.Volume == amount);
+        DebugTools.Assert(input.Volume == newInput);
+        output.AddSolution(split, ProtoMan);
+        DebugTools.Assert(output.Volume == newOutput);
     }
 }
