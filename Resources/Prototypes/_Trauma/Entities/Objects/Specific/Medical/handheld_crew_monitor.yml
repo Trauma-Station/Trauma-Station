@@ -59,3 +59,9 @@
   id: BorgCrewMonitor
   name: Integrated Crew Monitor
   description: An integrated crew monitor for locating crew to rescue.
+
+
+- type: entity
+  id: HandheldCrewMonitor
+  name: Handheld Crew Monitor
+  parent: [ BaseHandheldCrewMonitor, BaseHandheldComputer, BaseMedicalContraband ]
