@@ -46,7 +46,7 @@ public sealed partial class DamageOnTriggerSystem : XOnTriggerSystem<DamageOnTri
 
         var canMiss = ent.Comp.TargetPart == null; // Trauma
 
-        args.Handled |= _damageableSystem.TryChangeDamage(target, ev.Damage, ent.Comp.IgnoreResistances, origin: ent.Owner, targetPart: ent.Comp.TargetPart, canMiss: canMiss); // Trauma - added canMiss
+        args.Handled |= _damageableSystem.TryChangeDamage(target, ev.Damage, ent.Comp.IgnoreResistances, origin: ent.Owner, targetPart: ent.Comp.TargetPart, canMiss: canMiss); // Trauma - added targetPart and canMiss
     }
 }
 
