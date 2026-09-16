@@ -10,20 +10,11 @@ using Content.Trauma.Shared.Nuclear;
 
 namespace Content.Trauma.Server.Nuclear;
 
-public sealed partial class NuclearMachineSystem : SharedNuclearMachineSystem
+public sealed partial class ServerNuclearMachineSystem : NuclearMachineSystem
 {
     [Dependency] private NodeContainerSystem _node = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<NuclearMachineComponent, GasAnalyzerScanEvent>(OnAnalyzerScan);
-        SubscribeLocalEvent<NuclearMachineComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<NuclearMachineComponent, AnchorStateChangedEvent>(OnAnchorChanged);
-    }
 
     public override void Update(float frameTime)
     {
@@ -38,6 +29,7 @@ public sealed partial class NuclearMachineSystem : SharedNuclearMachineSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnAnalyzerScan(Entity<NuclearMachineComponent> ent, ref GasAnalyzerScanEvent args)
     {
         var comp = ent.Comp;
@@ -63,6 +55,7 @@ public sealed partial class NuclearMachineSystem : SharedNuclearMachineSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<NuclearMachineComponent> ent, ref ComponentShutdown args)
     {
         DeletePipes(ent.Comp);
@@ -94,6 +87,7 @@ public sealed partial class NuclearMachineSystem : SharedNuclearMachineSystem
             _node.TryGetNode(outEnt, comp.PipeName, out outlet);
     }
 
+    [SubscribeLocalEvent]
     private void OnAnchorChanged(Entity<NuclearMachineComponent> ent, ref AnchorStateChangedEvent args)
     {
         if (!args.Anchored)

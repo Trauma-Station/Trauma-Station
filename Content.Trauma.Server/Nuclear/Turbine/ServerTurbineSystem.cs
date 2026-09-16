@@ -25,7 +25,7 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Nuclear.Turbine;
 
-public sealed partial class TurbineSystem : SharedTurbineSystem
+public sealed partial class ServerTurbineSystem : TurbineSystem
 {
     [Dependency] private AmbientSoundSystem _ambient = default!;
     [Dependency] private AtmosphereSystem _atmos = default!;
@@ -34,26 +34,12 @@ public sealed partial class TurbineSystem : SharedTurbineSystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
-    [Dependency] private NuclearMachineSystem _machine = default!;
+    [Dependency] private ServerNuclearMachineSystem _machine = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
     public static readonly EntProtoId TurbineBladeShrapnel = "TurbineBladeShrapnel";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<TurbineComponent, MapInitEvent>(OnMapInit);
-
-        SubscribeLocalEvent<TurbineComponent, DamageDealtEvent>(OnDamageDealt);
-
-        SubscribeLocalEvent<TurbineComponent, AtmosDeviceUpdateEvent>(OnUpdate);
-
-        SubscribeLocalEvent<TurbineComponent, TurbineChangeFlowRateMessage>(OnChangeFlowRate);
-        SubscribeLocalEvent<TurbineComponent, TurbineChangeStatorLoadMessage>(OnChangeStatorLoad);
-        SubscribeLocalEvent<TurbineComponent, NuclearMachineLogEvent>(OnMachineLog);
-    }
-
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<TurbineComponent> ent, ref MapInitEvent args)
     {
         var coords = new EntityCoordinates(ent, 0, 0);
@@ -64,6 +50,7 @@ public sealed partial class TurbineSystem : SharedTurbineSystem
     }
 
     #region Main Loop
+    [SubscribeLocalEvent]
     private void OnUpdate(Entity<TurbineComponent> ent, ref AtmosDeviceUpdateEvent args)
     {
         var (uid, comp) = ent;
@@ -159,7 +146,7 @@ public sealed partial class TurbineSystem : SharedTurbineSystem
         }
 
         // Calculate power generation
-        SetLastGen(ent, comp.PowerMultiplier * nextGen * (float)(1 / Math.Cosh(0.01 * (comp.RPM - comp.BestRPM))));
+        SetLastGen(ent, _atmos.Speedup * comp.PowerMultiplier * nextGen * (float)(1 / Math.Cosh(0.01 * (comp.RPM - comp.BestRPM))));
 
         if (float.IsNaN(comp.LastGen))
             throw new NotFiniteNumberException("Turbine made NaN power");
@@ -228,24 +215,28 @@ public sealed partial class TurbineSystem : SharedTurbineSystem
     }
     #endregion
 
+    [SubscribeLocalEvent]
     private void OnChangeFlowRate(Entity<TurbineComponent> ent, ref TurbineChangeFlowRateMessage args)
     {
         if (SetFlowRate(ent, args.FlowRate))
             _machine.QueueLog(ent, args.Actor, args.Monitor);
     }
 
+    [SubscribeLocalEvent]
     private void OnChangeStatorLoad(Entity<TurbineComponent> ent, ref TurbineChangeStatorLoadMessage args)
     {
         if (SetStatorLoad(ent, args.StatorLoad))
             _machine.QueueLog(ent, args.Actor, args.Monitor);
     }
 
+    [SubscribeLocalEvent]
     private void OnMachineLog(Entity<TurbineComponent> ent, ref NuclearMachineLogEvent args)
     {
         _adminLog.Add(LogType.AtmosVolumeChanged, LogImpact.Medium,
             $"{args.User:player} changed turbine {ent.Owner:turbine} flow rate to {ent.Comp.FlowRate:rate} and stator load to {ent.Comp.StatorLoad:load} using {args.Monitor:monitor}");
     }
 
+    [SubscribeLocalEvent]
     private void OnDamageDealt(Entity<TurbineComponent> ent, ref DamageDealtEvent args)
     {
         if (ent.Comp.Ruined)

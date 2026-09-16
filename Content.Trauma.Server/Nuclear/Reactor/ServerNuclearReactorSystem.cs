@@ -38,7 +38,7 @@ namespace Content.Trauma.Server.Nuclear.Reactor;
 /// <remarks>
 /// Logic inspired by https://github.com/goonstation/goonstation/blob/ff86b044/code/obj/nuclearreactor/nuclearreactor.dm
 /// </remarks>
-public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
+public sealed partial class ServerNuclearReactorSystem : NuclearReactorSystem
 {
     [Dependency] private AlertLevelSystem _alertLevel = default!;
     [Dependency] private AmbientSoundSystem _ambient = default!;
@@ -47,10 +47,10 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
     [Dependency] private ExplosionSystem _explosion = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private NuclearMachineSystem _machine = default!;
     [Dependency] private RadioSystem _radio = default!;
     [Dependency] private ReactorPartSystem _part = default!;
     [Dependency] private ServerGlobalSoundSystem _globalSound = default!;
+    [Dependency] private ServerNuclearMachineSystem _machine = default!;
     [Dependency] private SharedRadiationSystem _radiation = default!;
     [Dependency] private SharedPointLightSystem _light = default!;
     [Dependency] private SharedTransformSystem _transform = default!;

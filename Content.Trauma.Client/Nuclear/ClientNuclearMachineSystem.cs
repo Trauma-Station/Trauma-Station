@@ -6,15 +6,9 @@ using Robust.Shared.Map;
 
 namespace Content.Trauma.Client.Nuclear;
 
-public sealed partial class NuclearMachineSystem : SharedNuclearMachineSystem
+public sealed partial class ClientNuclearMachineSystem : NuclearMachineSystem
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<NuclearMachineComponent, ClientExaminedEvent>(OnExamined);
-    }
-
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<NuclearMachineComponent> ent, ref ClientExaminedEvent args)
     {
         Spawn(ent.Comp.ArrowPrototype, new EntityCoordinates(ent, 0, 0));

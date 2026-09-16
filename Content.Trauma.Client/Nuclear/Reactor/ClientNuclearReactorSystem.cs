@@ -6,7 +6,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Trauma.Client.Nuclear.Reactor;
 
-public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
+public sealed partial class ClientNuclearReactorSystem : NuclearReactorSystem
 {
     [Dependency] private IResourceCache _res = default!;
     [Dependency] private SpriteSystem _sprite = default!;
@@ -16,17 +16,7 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
     private static readonly ResPath RsiPath = new("/Textures/_FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_component_cap.rsi");
     private const string EmptyState = "empty_cap";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<NuclearReactorComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<NuclearReactorComponent, EntInsertedIntoContainerMessage>(OnPartInserted);
-        SubscribeLocalEvent<NuclearReactorComponent, EntRemovedFromContainerMessage>(OnPartRemoved);
-
-        SubscribeLocalEvent<ReactorPartComponent, AfterAutoHandleStateEvent>(OnAutoHandleState);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStartup(Entity<NuclearReactorComponent> ent, ref ComponentStartup args)
     {
         var (uid, comp) = ent;
@@ -61,8 +51,7 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
         }
     }
 
-    private static string FormatMap(Vector2i pos) => $"NuclearReactorCap_{pos.X}_{pos.Y}";
-
+    [SubscribeLocalEvent]
     private void OnPartInserted(Entity<NuclearReactorComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         if (args.Container != ent.Comp.PartsContainer || !PartQuery.TryComp(args.Entity, out var part) || part.Position is not { } pos)
@@ -73,6 +62,7 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
         UpdateRodAppearance(ent.Owner, map, part.IconStateCap, color);
     }
 
+    [SubscribeLocalEvent]
     private void OnPartRemoved(Entity<NuclearReactorComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         if (args.Container != ent.Comp.PartsContainer || !PartQuery.TryComp(args.Entity, out var part) || part.Position is not { } pos)
@@ -82,6 +72,7 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
         UpdateRodAppearance(ent.Owner, map, EmptyState, Color.Black);
     }
 
+    [SubscribeLocalEvent]
     private void OnAutoHandleState(Entity<ReactorPartComponent> ent, ref AfterAutoHandleStateEvent args)
     {
         // ignore parts that arent installed in a reactor
@@ -107,4 +98,6 @@ public sealed partial class NuclearReactorSystem : SharedNuclearReactorSystem
         _sprite.LayerSetRsiState(ent, layer, state);
         _sprite.LayerSetColor(ent, layer, color);
     }
+
+    private static string FormatMap(Vector2i pos) => $"NuclearReactorCap_{pos.X}_{pos.Y}";
 }
