@@ -14628,3 +14628,10 @@ Entries:
   id: 1594
   time: '2026-09-16T09:34:03.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4613
+- author: joel
+  changes:
+  - type: Remove
+    message: Removed slop plant bot.
+  id: 1595
+  time: '2026-09-16T09:41:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4614
