@@ -14646,7 +14646,7 @@ Entries:
   changes:
   - type: Tweak
     message: >-
-      Nuclear reactor turbines now make 7x the power to match atmos device
+      Nuclear reactor turbines now make 8x the power to match atmos devices.
       speedup.
   id: 1597
   time: '2026-09-16T11:55:28.0000000+00:00'
