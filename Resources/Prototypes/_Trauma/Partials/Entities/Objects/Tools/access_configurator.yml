@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: AccessConfigurator
+  components:
+  - type: AccessOverrider
+    accessLevels:
+    - Borg
+    - Paramedic # upstream missed it lol
+    - Cryogenics
+    - NanotrasenRepresentative
+    - Journalism
+    - Library
+    - Robotics
+    - Genetics
+
+- type: entity
+  id: AccessConfiguratorUniversal
+  components:
+  - type: AccessOverrider
+    accessLevels:
+    - Revolutionary
+    - StationAi
+    - Xenomorph
