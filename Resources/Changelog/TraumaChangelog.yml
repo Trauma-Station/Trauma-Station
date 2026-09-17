@@ -14438,3 +14438,263 @@ Entries:
   id: 1575
   time: '2026-09-12T07:47:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4557
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed cameras sprite being inside walls
+  id: 1576
+  time: '2026-09-13T11:56:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4570
+- author: Aviu
+  changes:
+  - type: Fix
+    message: >-
+      Fix non-humanoid ghouls counting towards ghoul limit after dying and
+      deconverting.
+  id: 1577
+  time: '2026-09-13T12:01:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4559
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed not being able to do bleeding related surgeries like reattaching
+      torn limbs.
+  - type: Tweak
+    message: Surgery steps now explain why you can't do them when hovered.
+  id: 1578
+  time: '2026-09-13T13:30:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4571
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed spirit candles disintegrating the skull when broken.
+  id: 1579
+  time: '2026-09-13T13:34:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4572
+- author: WrenTheBun
+  changes:
+  - type: Tweak
+    message: >-
+      Updated Heretic Guidebook page. Reality shifts are no longer described as
+      Eldritch Influences.
+  id: 1580
+  time: '2026-09-13T14:52:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4573
+- author: luminargh
+  changes:
+  - type: Add
+    message: >-
+      Added new song "Assimilation" that plays when the blob sets off the delta
+      alarm
+  id: 1581
+  time: '2026-09-13T14:59:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4553
+- author: Endothermix
+  changes:
+  - type: Remove
+    message: Sling shadow walk removed.
+  - type: Tweak
+    message: Sling enthrall now has a 1 minute cooldown.
+  - type: Tweak
+    message: >-
+      Sling base enthrall time is now longer then glare, use cuffs to secure
+      conversions.
+  - type: Tweak
+    message: Sling empowered enthrall can no longer effect mindshielded people.
+  id: 1582
+  time: '2026-09-13T15:01:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4500
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to harvest towercap trees in any way.
+  - type: Fix
+    message: Fixed power drills, omnitools etc being janky.
+  id: 1583
+  time: '2026-09-13T15:04:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4574
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed energy chem UI not updating when a reaction keeps the original
+      volume.
+  id: 1584
+  time: '2026-09-13T15:32:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4575
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Blob core can now hear and use blobmind.
+  id: 1585
+  time: '2026-09-13T18:19:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4577
+- author: yglop
+  changes:
+  - type: Add
+    message: Reactive armor
+  id: 1586
+  time: '2026-09-13T18:34:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4280
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added a new tool in the microelectronics assembler for revolutionaries to
+      use called the revolutionary toolkit
+  - type: Add
+    message: Added .45 magnum to the bullet press
+  - type: Tweak
+    message: >-
+      Made the liberator able to fire .45 magnum instead of .35 as well as
+      reduced the firerate to 1.5
+  - type: Tweak
+    message: >-
+      Increased the damage on combat torch to 8 heat 2 piercing, Still does fire
+      stacks on hit
+  - type: Tweak
+    message: >-
+      Reduced the price for revolutionary chest plates down to 7.5 steel as well
+      as increased their general brute resistance, They however are more
+      vulnerable to heat now and have 15% slowdown
+  - type: Tweak
+    message: >-
+      Reflective Web Vest now has 30% pierce resistance and has delayed stun
+      baton knowdown
+  - type: Tweak
+    message: >-
+      Removed the welding required for making any makeshift turret, hammer or
+      for making revolutionary helmets
+  - type: Tweak
+    message: Simplified the steps for making hammers and makeshift turrets
+  - type: Tweak
+    message: >-
+      Reduced the price for revolutionary masks down to 2 plastic as well as
+      reduced the price for revolutionary helmets down to 3 plasteel
+  - type: Tweak
+    message: >-
+      Armor plates now cost 3 steel and IFF Cards now only cost 0.25 gold
+      instead of 1.5
+  id: 1587
+  time: '2026-09-13T21:24:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4566
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Wailing Horse now deals slash damage.
+  id: 1588
+  time: '2026-09-14T16:35:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4590
+- author: Nothing98512
+  changes:
+  - type: Remove
+    message: Base medborg surgery module omnitool
+  id: 1589
+  time: '2026-09-15T06:16:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4593
+- author: Nothing98512
+  changes:
+  - type: Tweak
+    message: Space Cobras are no longer coughing babies.
+  id: 1590
+  time: '2026-09-15T15:23:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4592
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed observing etc requiring confirmation.
+  id: 1591
+  time: '2026-09-15T19:43:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4604
+- author: idkmaybe69
+  changes:
+  - type: Tweak
+    message: Certain vendors that didn't have contra from hacking now have some
+  id: 1592
+  time: '2026-09-15T19:48:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4569
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed rev telesphere deleting materials when linking machines to it.
+  id: 1593
+  time: '2026-09-16T07:17:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4612
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed liquid pumps deleting everything if linked to a chemmaster.
+  id: 1594
+  time: '2026-09-16T09:34:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4613
+- author: joel
+  changes:
+  - type: Remove
+    message: Removed slop plant bot.
+  id: 1595
+  time: '2026-09-16T09:41:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4614
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Vent spiders event is no longer spammed every single round.
+  id: 1596
+  time: '2026-09-16T09:53:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4615
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Nuclear reactor turbines now make 8x the power to match atmos devices.
+      speedup.
+  id: 1597
+  time: '2026-09-16T11:55:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4616
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed all Flock cameras.
+  id: 1598
+  time: '2026-09-16T17:40:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4621
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed paramedic access being impossible to work with and being missing
+      from CMO/captain IDs.
+  - type: Tweak
+    message: Access configurators can now assign borg access.
+  id: 1599
+  time: '2026-09-17T07:10:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4633
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed watching bodycams immediately disconnecting you.
+  id: 1600
+  time: '2026-09-17T07:19:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4634
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Buffed the HP of Nukie Mice and of Nukie Carps to 30 and 50 max health,
+      respectively.
+  - type: Fix
+    message: >-
+      Fixed the dehydrated holocarp and magicarp items showing the sprite of the
+      regular one when held.
+  id: 1601
+  time: '2026-09-17T11:30:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4638
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      You can now construct a signal clock item, it replaces old nor/xor gate
+      loops.
+  id: 1602
+  time: '2026-09-17T11:32:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4635

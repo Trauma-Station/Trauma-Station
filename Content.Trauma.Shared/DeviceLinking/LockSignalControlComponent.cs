@@ -7,7 +7,7 @@ namespace Content.Trauma.Shared.DeviceLinking;
 /// <summary>
 /// Adds Lock/Unlock/Toggle links and handles their behavior.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class LockSignalControlComponent : Component
 {
     [DataField]

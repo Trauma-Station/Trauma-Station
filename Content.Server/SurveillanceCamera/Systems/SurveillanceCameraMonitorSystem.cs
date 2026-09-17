@@ -2,7 +2,6 @@
 using Content.Goobstation.Common.SurveillanceCamera;
 using Robust.Server.GameStates;
 using Robust.Shared.Map;
-using System.Runtime.InteropServices;
 // </Trauma>
 using System.Linq;
 using Content.Server.DeviceNetwork.Systems;
@@ -47,7 +46,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
         });
     }
 
-    private const float MaxHeartbeatTime = 3f; // Trauma - was 300
+    public const float MaxHeartbeatTime = 3f; // Trauma - was 300, made public
     private const float HeartbeatDelay = 1f; // Trauma - was 30
 
     public override void Update(float frameTime)
@@ -56,7 +55,13 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
         while (query.MoveNext(out var uid, out _, out var monitor))
         {
             monitor.LastHeartbeatSent += frameTime;
-            SendHeartbeat(uid, monitor.ActiveCameraAddress, monitor); // Trauma - added monitor.ActiveCameraAddress
+            // <Trauma> - check LastHeartbeat here, added monitor.ActiveCameraAddress
+            if (monitor.LastHeartbeatSent >= HeartbeatDelay)
+            {
+                SendHeartbeat(uid, monitor.ActiveCameraAddress, monitor);
+                monitor.LastHeartbeat = 0;
+            }
+            // </Trauma>
             monitor.LastHeartbeat += frameTime;
 
             if (monitor.LastHeartbeat > MaxHeartbeatTime)
@@ -70,63 +75,6 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
                 // </Trauma>
             }
         }
-        // <Trauma>
-        // TODO: move this shit out
-        var query2 = EntityQueryEnumerator<HasMobileCamerasSurveillanceCameraMonitorComponent, SurveillanceCameraMonitorComponent>();
-        while (query2.MoveNext(out var uid, out var active, out var monitor))
-        {
-            if (monitor.KnownMobileCameras.Count > 0)
-            {
-                // Collect expired cameras and cache their entity references
-                var expiredCameras = new Dictionary<string, EntityUid>();
-
-                foreach (var (key, cameraData) in monitor.KnownMobileCameras)
-                {
-                    ref var lastSent = ref CollectionsMarshal.GetValueRefOrAddDefault(
-                        monitor.KnownMobileCamerasLastHeartbeatSent, key, out bool sentExists);
-                    ref var lastHeartbeat = ref CollectionsMarshal.GetValueRefOrAddDefault(
-                        monitor.KnownMobileCamerasLastHeartbeat, key, out bool hbExists);
-
-                    if (!sentExists) lastSent = 0f;
-                    if (!hbExists) lastHeartbeat = 0f;
-
-                    lastSent += frameTime;
-                    lastHeartbeat += frameTime;
-
-                    SendHeartbeat(uid, key, monitor);
-
-                    if (lastHeartbeat > MaxHeartbeatTime)
-                        expiredCameras[key] = GetEntity(cameraData.Item2);
-                }
-
-                // Remove PVS overrides for all viewers in a single pass
-                foreach (var player in monitor.Viewers)
-                {
-                    if (!TryComp<ActorComponent>(player, out var actor))
-                        continue;
-
-                    foreach (var entity in expiredCameras.Values)
-                        _pvsOverride.RemoveSessionOverride(entity, actor.PlayerSession);
-                }
-
-                // Remove expired cameras from all dictionaries
-                foreach (var key in expiredCameras.Keys)
-                {
-                    monitor.KnownMobileCameras.Remove(key);
-                    monitor.KnownMobileCamerasLastHeartbeat.Remove(key);
-                    monitor.KnownMobileCamerasLastHeartbeatSent.Remove(key);
-                }
-
-                // Cleanup component if empty
-                if (monitor.KnownMobileCameras.Count == 0)
-                    RemCompDeferred(uid, active);
-
-                // Refresh subnets as clearly something went wrong with the networking
-                if (expiredCameras.Count > 0)
-                    RefreshCameras(uid, monitor);
-            }
-        }
-        // </Trauma>
     }
 
     /// ROUTING:
@@ -246,7 +194,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
     }
 
     // <Trauma>
-    private void RefreshCameras(EntityUid uid, SurveillanceCameraMonitorComponent comp)
+    public void RefreshCameras(EntityUid uid, SurveillanceCameraMonitorComponent comp)
     {
         foreach (var player in comp.Viewers)
         {
@@ -321,11 +269,11 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
 
     #endregion
 
-    private void SendHeartbeat(EntityUid uid, string cameraAddress, SurveillanceCameraMonitorComponent? monitor = null) // Trauma - added cameraAddress
+    public void SendHeartbeat(EntityUid uid, string cameraAddress, SurveillanceCameraMonitorComponent? monitor = null) // Trauma - made public, added cameraAddress
     {
-        if (!Resolve(uid, ref monitor)
-            || monitor.LastHeartbeatSent < HeartbeatDelay)
+        if (!Resolve(uid, ref monitor))
             /* Trauma
+            || monitor.LastHeartbeatSent < HeartbeatDelay)
             || monitor.ActiveSubnet is not { } activeSubnet
             || !monitor.KnownSubnets.TryGetValue(activeSubnet, out var subnetAddress))
             */
@@ -335,12 +283,12 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
 
         var payload = new SurveillanceCameraHeartbeatRequestPayload();
         // <Trauma> - send it to all routers instead of just the active one, use cameraAddress param
+        // TODO: save the subnet instead of this slop bruh
         foreach (var (subnet, subnetAddress) in monitor.KnownSubnets)
         {
             var freq = ProtoMan.Index(subnet).Frequency;
             _deviceNetworkRouter.SendPacketRouted(uid, ref payload, subnetAddress, cameraAddress, freq);
         }
-        monitor.LastHeartbeatSent = 0;
         // </Trauma>
     }
 
