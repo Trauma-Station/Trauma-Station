@@ -55,7 +55,13 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
         while (query.MoveNext(out var uid, out _, out var monitor))
         {
             monitor.LastHeartbeatSent += frameTime;
-            SendHeartbeat(uid, monitor.ActiveCameraAddress, monitor); // Trauma - added monitor.ActiveCameraAddress
+            // <Trauma> - check LastHeartbeat here, added monitor.ActiveCameraAddress
+            if (monitor.LastHeartbeatSent >= HeartbeatDelay)
+            {
+                SendHeartbeat(uid, monitor.ActiveCameraAddress, monitor);
+                monitor.LastHeartbeat = 0;
+            }
+            // </Trauma>
             monitor.LastHeartbeat += frameTime;
 
             if (monitor.LastHeartbeat > MaxHeartbeatTime)
@@ -266,8 +272,8 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
     public void SendHeartbeat(EntityUid uid, string cameraAddress, SurveillanceCameraMonitorComponent? monitor = null) // Trauma - made public, added cameraAddress
     {
         if (!Resolve(uid, ref monitor)
-            || monitor.LastHeartbeatSent < HeartbeatDelay)
             /* Trauma
+            || monitor.LastHeartbeatSent < HeartbeatDelay)
             || monitor.ActiveSubnet is not { } activeSubnet
             || !monitor.KnownSubnets.TryGetValue(activeSubnet, out var subnetAddress))
             */
@@ -277,12 +283,12 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
 
         var payload = new SurveillanceCameraHeartbeatRequestPayload();
         // <Trauma> - send it to all routers instead of just the active one, use cameraAddress param
+        // TODO: save the subnet instead of this slop bruh
         foreach (var (subnet, subnetAddress) in monitor.KnownSubnets)
         {
             var freq = ProtoMan.Index(subnet).Frequency;
             _deviceNetworkRouter.SendPacketRouted(uid, ref payload, subnetAddress, cameraAddress, freq);
         }
-        monitor.LastHeartbeatSent = 0;
         // </Trauma>
     }
 

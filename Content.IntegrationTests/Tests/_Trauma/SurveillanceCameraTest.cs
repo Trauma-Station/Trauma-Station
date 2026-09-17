@@ -109,5 +109,9 @@ public sealed partial class SurveillanceCameraTest : InteractionTest
             Assert.That(cameras[cameraAddr].Item1, Is.EqualTo(CameraName));
             Assert.That(cameras[cameraAddr].Item2, Is.EqualTo(netCamera));
         });
+
+        // TODO: verify that switching to it works and doesnt get disconnected for 10s
     }
+
+    // TODO: verify that switching to a mobile camera works and doesnt get disconnected for 10s
 }
