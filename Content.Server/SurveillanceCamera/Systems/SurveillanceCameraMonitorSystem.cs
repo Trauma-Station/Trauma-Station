@@ -271,7 +271,7 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
 
     public void SendHeartbeat(EntityUid uid, string cameraAddress, SurveillanceCameraMonitorComponent? monitor = null) // Trauma - made public, added cameraAddress
     {
-        if (!Resolve(uid, ref monitor)
+        if (!Resolve(uid, ref monitor))
             /* Trauma
             || monitor.LastHeartbeatSent < HeartbeatDelay)
             || monitor.ActiveSubnet is not { } activeSubnet
