@@ -107,15 +107,15 @@
       WeaponsKnowledge: 20
   - type: Sprite
     layers:
-      - state: engineer_e
-        map: [ "enum.BorgDisguiseVisualLayers.Light" ]
-        shader: unshaded
-        visible: false
-      - state: synd_engi
-        map: [ "enum.BorgVisualLayers.Body" ]
-      - state: engineer
-        map: [ "enum.BorgDisguiseVisualLayers.Body" ]
-        visible: false
+    - state: engineer_e
+      map: [ "enum.BorgDisguiseVisualLayers.Light" ]
+      shader: unshaded
+      visible: false
+    - state: synd_engi
+      map: [ "enum.BorgVisualLayers.Body" ]
+    - state: engineer
+      map: [ "enum.BorgDisguiseVisualLayers.Body" ]
+      visible: false
   - type: BorgChassis
     maxModules: 7
   - type: ShowHealthBars

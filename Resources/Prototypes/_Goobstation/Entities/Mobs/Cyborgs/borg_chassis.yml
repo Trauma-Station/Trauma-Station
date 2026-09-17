@@ -6,7 +6,6 @@
   name: derelict syndicate assasult cyborg
   description: A lean, mean killing machine with access to a variety of deadly modules. This one is in a state of great disrepair.
   components:
-  # <Trauma>
   - type: ModifyKnowledgeGrant
     skills:
       MeleeKnowledge: 51
@@ -18,7 +17,6 @@
     emoteSounds: UnisexSiliconSyndicate
   - type: SpeechSynthesis
     voice: BorgSyndie
-  # </Trauma>
   - type: Sprite
     sprite: _Goobstation/Mobs/Silicon/chassis.rsi
     layers:
