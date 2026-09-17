@@ -74,6 +74,10 @@ public sealed partial class BedSystem : EntitySystem
 
     private void OnUnstrapped(Entity<HealOnBuckleComponent> bed, ref UnstrappedEvent args)
     {
+        // <Trauma>
+        if (_whitelist.IsWhitelistPass(bed.Comp.Blacklist, args.Buckle))
+            return;
+        // </Trauma>
         // If the entity being unbuckled is terminating, we shouldn't try to act upon it, as some components may be gone
         if (!Terminating(args.Buckle.Owner))
         {

@@ -3,7 +3,6 @@
 using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Atmos.EntitySystems;
-using Content.Server.Chat.Systems;
 using Content.Server.Cloning;
 using Content.Server.Flash;
 using Content.Server.Hands.Systems;
@@ -15,14 +14,12 @@ using Content.Shared.Body;
 using Content.Shared.Body.Systems;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
-using Content.Shared.Inventory;
 using Content.Shared.Localizations;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Store.Components;
 using Content.Shared.Stunnable;
 using Content.Shared.Weather;
 using Content.Trauma.Common.CollectiveMind;
@@ -32,7 +29,6 @@ using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
 using Content.Trauma.Shared.Wizard.SanguineStrike;
 using Robust.Server.Containers;
-using Robust.Server.GameStates;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 
@@ -59,34 +55,16 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private BloodstreamSystem _blood = default!;
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private NpcFactionSystem _npcFaction = default!;
-    [Dependency] private PvsOverrideSystem _pvs = default!;
     [Dependency] private CloningSystem _cloning = default!;
     [Dependency] private SharedWeatherSystem _weather = default!;
     [Dependency] private AtmosphereSystem _atmos = default!;
     [Dependency] private ActionContainerSystem _actionContainer = default!;
-    [Dependency] private InventorySystem _inventory = default!;
-    [Dependency] private ChatSystem _chat = default!;
     [Dependency] private SharedSanguineStrikeSystem _lifesteal = default!;
     [Dependency] private ContainerSystem _container = default!;
     [Dependency] private BladeArenaSystem _arena = default!;
     [Dependency] private HereticSystem _heretic = default!;
 
     #endregion
-
-    [SubscribeLocalEvent]
-    private void OnStore(EventHereticOpenStore args)
-    {
-        if (!TryUseAbility(args))
-            return;
-
-        if (!Heretic.TryGetHereticComponent(args.Performer, out _, out var ent))
-            return;
-
-        if (!TryComp<StoreComponent>(ent, out var store))
-            return;
-
-        _store.ToggleUi(args.Performer, ent, store);
-    }
 
     [SubscribeLocalEvent]
     private void OnLivingHeart(EventHereticLivingHeart args)
