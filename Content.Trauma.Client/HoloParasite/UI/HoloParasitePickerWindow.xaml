@@ -13,7 +13,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <BoxContainer Name="StagePane" Orientation="Vertical" MinSize="300 0" Margin="4 4 8 4">
             <PanelContainer HorizontalExpand="True" VerticalExpand="True">
                 <PanelContainer.PanelOverride>
-                    <gfx:StyleBoxFlat BackgroundColor="#11172e" BorderColor="#40a7d7" BorderThickness="2 2 2 2" />
+                    <gfx:StyleBoxFlat BackgroundColor="#0b0d13" BorderColor="#2b3038" BorderThickness="2 2 2 2" />
                 </PanelContainer.PanelOverride>
                 <BoxContainer Orientation="Vertical" Margin="8" VerticalExpand="True">
 
@@ -31,7 +31,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
             <PanelContainer HorizontalExpand="True" Margin="0 6 0 0">
                 <PanelContainer.PanelOverride>
-                    <gfx:StyleBoxFlat BackgroundColor="#181f3d" BorderColor="#2a3358" BorderThickness="1 1 1 1" />
+                    <gfx:StyleBoxFlat BackgroundColor="#0b0d13" BorderColor="#23262d" BorderThickness="1 1 1 1" />
                 </PanelContainer.PanelOverride>
                 <RichTextLabel Name="VariantLore" HorizontalExpand="True" VerticalExpand="True" Margin="6" />
             </PanelContainer>
