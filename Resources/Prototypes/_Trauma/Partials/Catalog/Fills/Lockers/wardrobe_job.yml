@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: WardrobeChapelFilled
   description: "Clothes? Why would a chapel need a locker for clothes? After all you need so much funeral equipment."
