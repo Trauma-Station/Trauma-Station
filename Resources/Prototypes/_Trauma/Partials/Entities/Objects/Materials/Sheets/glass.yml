@@ -30,4 +30,4 @@
     - !type:SpawnRandomEntities
       entity: ShardGlass
       number: 1
-  - type: ReduseStackSizeOnUse
+  - type: ReduceStackSizeOnUse

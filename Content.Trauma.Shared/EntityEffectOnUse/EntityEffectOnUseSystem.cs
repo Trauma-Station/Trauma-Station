@@ -9,7 +9,7 @@ public sealed partial class EntityEffectOnUseSystem : EntitySystem
 {
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
-    [ SubscribeLocalEvent ]
+    [SubscribeLocalEvent]
     private void EffectsOnUse(Entity<EntityEffectOnUseComponent> ent, ref UseInHandEvent args)
     {
         if (ent.Comp.ApplyToUser)

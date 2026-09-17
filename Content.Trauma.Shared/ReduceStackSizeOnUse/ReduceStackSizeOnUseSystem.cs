@@ -3,14 +3,14 @@
 using Content.Shared.Interaction.Events;
 using Content.Shared.Stacks;
 
-namespace Content.Trauma.Shared.ReduseStackSizeOnUse;
+namespace Content.Trauma.Shared.ReduceStackSizeOnUse;
 
-public sealed partial class ReduseStackSizeOnUseSystem : EntitySystem
+public sealed partial class ReduceStackSizeOnUseSystem : EntitySystem
 {
     [Dependency] private SharedStackSystem _stack = default!;
 
     [SubscribeLocalEvent]
-    private void OnUseInHand(Entity<ReduseStackSizeOnUseComponent> ent, ref UseInHandEvent args)
+    private void OnUseInHand(Entity<ReduceStackSizeOnUseComponent> ent, ref UseInHandEvent args)
     {
         if (args.Handled)
             return;

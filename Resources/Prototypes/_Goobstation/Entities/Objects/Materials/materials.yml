@@ -41,7 +41,7 @@
           path: /Audio/Effects/teleport_arrival.ogg
     - !type:Sparks
     applyToUser: true
-  - type: ReduseStackSizeOnUse
+  - type: ReduceStackSizeOnUse
   # interferes with bluespace portals. does nothing inside containers etc for simplicity and not being annoying
   - type: PortalTransitEffects
     effects:
