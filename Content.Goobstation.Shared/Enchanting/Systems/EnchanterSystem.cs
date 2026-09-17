@@ -61,15 +61,25 @@ public sealed partial class EnchanterSystem : EntitySystem
             return;
 
         // do nothing if used without an altar
-        if (_enchanting.FindTable(item) == null)
+        var table = _enchanting.FindTable(item);
+        if (table == null)
             return;
 
         args.Handled = true;
 
+        // check tool whitelist
         var user = args.User;
         if (_whitelist.IsWhitelistFail(ent.Comp.UserWhitelist, user))
         {
-            _popup.PopupEntity("Your spirit is too weak to use this holy book...", user, user, PopupType.MediumCaution);
+            _popup.PopupEntity(Loc.GetString("enchanting-tool-no-whitelist"), user, user, PopupType.MediumCaution);
+            return;
+        }
+
+        // check alter whitelist
+        if (TryComp<EnchantingTableComponent>(table.Value, out var tableComp) &&
+            _whitelist.IsWhitelistFail(tableComp.UserWhitelist, user))
+        {
+            _popup.PopupEntity(Loc.GetString("enchanting-table-no-whitelist"), user, user, PopupType.MediumCaution);
             return;
         }
 

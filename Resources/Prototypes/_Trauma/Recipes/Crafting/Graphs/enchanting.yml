@@ -65,6 +65,27 @@
     entity: MagicInkRandom
 
 - type: constructionGraph
+  id: RandomInkAsh
+  graph:
+  - node: start
+    edges:
+    - to: finish
+      steps:
+      - tag: BloodVial
+        doAfter: 1
+        name: construction-graph-tag-bloodvial
+        icon:
+          sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
+          state: icon
+      - tag: DemonEssense # Switch out
+        name: construction-graph-tag-demonsoul
+        icon:
+          sprite: _Trauma/Objects/Enchanting/demonsoul.rsi
+          state: icon
+  - node: finish
+    entity: MagicInkRandom
+
+- type: constructionGraph
   id: DefaceBible
   graph:
   - node: start
