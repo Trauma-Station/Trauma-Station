@@ -32,35 +32,32 @@ autodoc-error-hand-full = ITEM MANIPULATOR FULL
 autodoc-error-storage-full = ITEM TRAYS FULL
 autodoc-error-patient-unsedated = PATIENT REQUIRES SEDATION
 
-# These intentionally have russian alongside them for ostranauts-like aesthetic.
-# If you are a russian fork, these don't need translating :)
-# Если вы являетесь русскоязычным форком, то они не нуждаются в переводе :)
-autodoc-title = AUTODOC АВТОДОК MK.XIV
-autodoc-create-program = NEW PROGRAM НОВОЕ РАСПИСАНИЕ
-autodoc-program-title = PROGRAM TITLE ТИТУЛ РАСПИСАНИЯ
+autodoc-title = AUTODOC
+autodoc-create-program = NEW PROGRAM
+autodoc-program-title = PROGRAM TITLE
 autodoc-program-title-placeholder = Program {$number}
-autodoc-abort-program = ABORT PROGRAM АБОРТ РАСПИСАНИЯ
+autodoc-abort-program = ABORT PROGRAM
 
-autodoc-view-program-title = VIEW PROGRAM ПРОСМОТРИ
-autodoc-safety-enabled = SAFETY ON БЕЗОПАСНО НА
-autodoc-safety-disabled = SAFETY OFF В БЕЗОПАСНОСТИ
-autodoc-remove-program = REMOVE PROGRAM УДАЛИТЕ
-autodoc-add-step = ADD STEP ДОБАВЬ ШАГ
-autodoc-remove-step = REMOVE STEP УДАЛИ ШАГ
-autodoc-start-program = START PROGRAM НАЧНИ РАСПИСАНИЕ
-autodoc-import-program = IMPORT PROGRAM ИМПОРТА
-autodoc-export-program = EXPORT PROGRAM ЭКСПОРТНАЯ
+autodoc-view-program-title = VIEW PROGRAM
+autodoc-safety-enabled = SAFETY ON
+autodoc-safety-disabled = SAFETY OFF
+autodoc-remove-program = REMOVE PROGRAM
+autodoc-add-step = ADD STEP
+autodoc-remove-step = REMOVE STEP
+autodoc-start-program = START PROGRAM
+autodoc-import-program = IMPORT PROGRAM
+autodoc-export-program = EXPORT PROGRAM
 
-autodoc-add-step-surgery = PERFORM SURGERY РАЗЫГРАЙ ОПЕРАЦИЮ
-autodoc-add-step-grab-item = GRAB ITEM ВОЗЬМИ ОБЪЕКТ
+autodoc-add-step-surgery = PERFORM SURGERY
+autodoc-add-step-grab-item = GRAB ITEM
 autodoc-add-step-grab-item-prompt = Item name
 autodoc-add-step-grab-item-placeholder = heart
-autodoc-add-step-grab-organ = GRAB ORGAN ВОЗЬМИ ОРГАН
-autodoc-add-step-grab-part = GRAB BODY PART ВОЗЬМИ ЧАСТЬ ТЕЛА
-autodoc-add-step-store-item = STORE ITEM МАГАЗИН ОБЪЕКТ
-autodoc-add-step-set-label = SET LABEL НАНЕСИТЕ ЯРЛЫК
+autodoc-add-step-grab-organ = GRAB ORGAN
+autodoc-add-step-grab-part = GRAB BODY PART
+autodoc-add-step-store-item = STORE ITEM
+autodoc-add-step-set-label = SET LABEL
 autodoc-add-step-set-label-prompt = Label
-autodoc-add-step-wait = WAIT ЖДАТЬ
+autodoc-add-step-wait = WAIT
 autodoc-add-step-wait-prompt = Seconds to wait
 
 autodoc-body-part-Other = Other
