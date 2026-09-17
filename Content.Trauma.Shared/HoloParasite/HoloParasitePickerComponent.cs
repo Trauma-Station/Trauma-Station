@@ -13,7 +13,7 @@ public sealed partial class HoloParasitePickerComponent : Component
     [DataField]
     public EntProtoId? ChosenVariant;
 
-    public List<EntityUid> DetectedHosts = new();
+    public EntityUid? HostTarget;
 }
 
 [DataDefinition]

@@ -27,9 +27,9 @@
     distanceAllowed: 10
 
 - type: entity
-  name: Holoparasite Anchor
-  id: HoloParasiteStandard
   parent: BaseHoloParasite
+  id: HoloParasiteStandard
+  name: Holoparasite Anchor
   description: A well-balanced hard-light defender, keyed to its owner's life to sustain itself.
   components:
   - type: RandomSprite
@@ -55,9 +55,9 @@
         Structural: 100
 
 - type: entity
-  name: Holoparasite Wraith
-  id: HoloParasiteAssassin
   parent: BaseHoloParasite
+  id: HoloParasiteAssassin
+  name: Holoparasite Wraith
   description: A shadowy, toxin-laced apparition that slips between the cracks of your enemies' awareness.
   components:
   - type: RandomSprite
@@ -91,9 +91,9 @@
         Poison: 25
 
 - type: entity
-  name: Holoparasite Dart
-  id: HoloParasiteCharger
   parent: BaseHoloParasite
+  id: HoloParasiteCharger
+  name: Holoparasite Dart
   description: A blisteringly fast presence that barrages across the battlefield and bowls over anything in its path.
   components:
   - type: RandomSprite
@@ -132,9 +132,9 @@
         Structural: 20
 
 - type: entity
-  name: Holoparasite Torch
-  id: HoloParasiteBrawler
   parent: BaseHoloParasite
+  id: HoloParasiteBrawler
+  name: Holoparasite Torch
   description: A searing manifestation of raw fury whose every blow leaves its victims ablaze.
   components:
   - type: RandomSprite
@@ -165,9 +165,9 @@
         Structural: 20
 
 - type: entity
-  name: Holoparasite Drift
-  id: HoloParasiteIcicle
   parent: BaseHoloParasite
+  id: HoloParasiteIcicle
+  name: Holoparasite Drift
   description: A frost-warded presence of living shards that leeches strength with each biting strike.
   components:
   - type: RandomSprite
@@ -197,9 +197,9 @@
         Structural: 20
 
 - type: entity
-  name: Holoparasite Aegis
-  id: HoloParasiteProtector
   parent: BaseHoloParasite
+  id: HoloParasiteProtector
+  name: Holoparasite Aegis
   description: A ponderous bulwark of hard-light that anchors itself to its owner and soaks up harm.
   components:
   - type: RandomSprite

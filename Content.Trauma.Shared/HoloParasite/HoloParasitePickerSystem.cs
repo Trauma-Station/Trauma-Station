@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
 using Content.Shared.DoAfter;
 using Content.Shared.Guardian;
 using Content.Shared.Guardian.Components;
@@ -11,9 +10,9 @@ using Content.Shared.Popups;
 
 namespace Content.Trauma.Shared.HoloParasite;
 
-public abstract partial class HoloParasitePickerSystem : EntitySystem
+public sealed partial class HoloParasitePickerSystem : EntitySystem
 {
-    [Dependency] protected SharedPopupSystem Popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
 
@@ -39,7 +38,7 @@ public abstract partial class HoloParasitePickerSystem : EntitySystem
 
         if (TryComp<GuardianCreatorComponent>(ent, out var creator) && creator.Used)
         {
-            Popup.PopupEntity(Loc.GetString("holoparasite-picker-already-used"), ent, args.User);
+            _popup.PopupEntity(Loc.GetString("holoparasite-picker-already-used"), ent, args.User);
             return;
         }
 
@@ -56,7 +55,7 @@ public abstract partial class HoloParasitePickerSystem : EntitySystem
 
         if (TryComp<GuardianCreatorComponent>(ent, out var creator) && creator.Used)
         {
-            Popup.PopupEntity(Loc.GetString("holoparasite-picker-already-used"), ent, args.User);
+            _popup.PopupEntity(Loc.GetString("holoparasite-picker-already-used"), ent, args.User);
             return;
         }
 
@@ -69,18 +68,17 @@ public abstract partial class HoloParasitePickerSystem : EntitySystem
         {
             var msg = Loc.GetString("holoparasite-picker-invalid-target",
                 ("entity", Identity.Entity(host, EntityManager, user)));
-            Popup.PopupEntity(msg, user, user);
+            _popup.PopupEntity(msg, user, user);
             return;
         }
 
         if (_hostQuery.HasComp(host))
         {
-            Popup.PopupEntity(Loc.GetString("holoparasite-picker-host-occupied"), ent, user);
+            _popup.PopupEntity(Loc.GetString("holoparasite-picker-host-occupied"), ent, user);
             return;
         }
 
-        ent.Comp.DetectedHosts.Clear();
-        ent.Comp.DetectedHosts.Add(host);
+        ent.Comp.HostTarget = host;
 
         if (ent.Comp.ChosenVariant == null)
             ent.Comp.ChosenVariant = ent.Comp.Variants[0].Prototype;
@@ -100,23 +98,23 @@ public abstract partial class HoloParasitePickerSystem : EntitySystem
 
         if (creator.Used)
         {
-            Popup.PopupEntity(Loc.GetString("holoparasite-picker-already-used"), ent, user);
+            _popup.PopupEntity(Loc.GetString("holoparasite-picker-already-used"), ent, user);
             _ui.CloseUi(ent.Owner, HoloParasitePickerUiKey.Key, user, predicted: true);
             return;
         }
 
-        if (!ent.Comp.Variants.Select(variant => variant.Prototype.Id).Contains(protoId))
+        if (!ent.Comp.Variants.Exists(variant => variant.Prototype.Id == protoId))
             return;
 
-        if (ent.Comp.DetectedHosts.Count == 0)
-            return;
-
-        var host = ent.Comp.DetectedHosts[0];
-        if (TerminatingOrDeleted(host) || _hostQuery.HasComp(host))
+        var host = ent.Comp.HostTarget;
+        if (host == null || TerminatingOrDeleted(host.Value) || _hostQuery.HasComp(host.Value))
             return;
 
         creator.GuardianProto = protoId;
         ent.Comp.ChosenVariant = protoId;
+
+        Dirty(ent, creator);
+        Dirty(ent);
 
         _ui.CloseUi(ent.Owner, HoloParasitePickerUiKey.Key, user, predicted: true);
 
@@ -125,7 +123,7 @@ public abstract partial class HoloParasitePickerSystem : EntitySystem
             creator.InjectionDelay,
             new GuardianCreatorDoAfterEvent(),
             ent,
-            target: host,
+            target: host.Value,
             used: ent)
         {
             BreakOnMove = true,
