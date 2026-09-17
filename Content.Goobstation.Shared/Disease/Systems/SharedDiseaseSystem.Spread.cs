@@ -35,7 +35,7 @@ public partial class SharedDiseaseSystem
     /// </summary>
     public EntityUid? DoInfectionAttempt(EntityUid target, EntProtoId proto, float power, float chance, ProtoId<DiseaseSpreadPrototype> spreadType)
     {
-        var ent = EntityManager.PredictedSpawn(proto);
+        var ent = PredictedSpawn(proto);
         if (DoInfectionAttempt(target, ent, power, chance, spreadType, false))
             return ent;
 
