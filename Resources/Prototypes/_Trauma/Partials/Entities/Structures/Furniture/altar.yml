@@ -1,0 +1,47 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: AltarNanotrasen
+  components:
+  - type: EnchantingTable
+    userWhitelist:
+      components:
+      - BibleUser
+
+- type: entity
+  id: AltarConvertFestival
+  components:
+  - type: EnchantingTable
+    userWhitelist:
+      components:
+      - BibleUser
+
+- type: entity
+  id: AltarHeaven
+  components:
+  - type: EnchantingTable # Unholy cult altars don't use holy restrictions
+
+- type: entity
+  id: AltarBananium
+  components:
+  - type: EnchantingTable
+    userWhitelist:
+      components:
+      - Clown
+      - BibleUser
+
+- type: entity
+  id: AltarClock
+  components:
+  - type: EnchantingTable
+    userWhitelist:
+      components:
+      - BibleUser
+
+- type: entity
+  id: AltarCosmic
+  components:
+  - type: EnchantingTable
+    userWhitelist:
+      components:
+      - CosmicCult
