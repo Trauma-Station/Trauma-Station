@@ -14658,3 +14658,21 @@ Entries:
   id: 1598
   time: '2026-09-16T17:40:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4621
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed paramedic access being impossible to work with and being missing
+      from CMO/captain IDs.
+  - type: Tweak
+    message: Access configurators can now assign borg access.
+  id: 1599
+  time: '2026-09-17T07:10:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4633
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed watching bodycams immediately disconnecting you.
+  id: 1600
+  time: '2026-09-17T07:19:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4634
