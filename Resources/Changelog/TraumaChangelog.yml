@@ -14676,3 +14676,16 @@ Entries:
   id: 1600
   time: '2026-09-17T07:19:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4634
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Buffed the HP of Nukie Mice and of Nukie Carps to 30 and 50 max health,
+      respectively.
+  - type: Fix
+    message: >-
+      Fixed the dehydrated holocarp and magicarp items showing the sprite of the
+      regular one when held.
+  id: 1601
+  time: '2026-09-17T11:30:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4638
