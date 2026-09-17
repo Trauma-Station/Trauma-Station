@@ -42,12 +42,6 @@
   id: CrateGeneric
   categories: [ HideSpawnMenu ]
   components:
-  # <Trauma>
-  - type: RequireProjectileTarget
-  - type: Tag
-    tags:
-    - Crate
-  # </Trauma>
   - type: Icon
     sprite: Structures/Storage/Crates/generic.rsi
     state: icon
@@ -94,7 +88,7 @@
   - type: ResistLocker
 
 - type: entity
-  parent: CrateBaseWeldable
+  parent: [ CrateBaseWeldable, AntiTamperLowPriority ] # Trauma - Add anti tamper
   id: CrateBaseSecure
   suffix: Secure
   components:

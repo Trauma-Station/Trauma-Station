@@ -15,7 +15,9 @@
     species:
     - Plasmaman
   guides: [ NuclearOperatives ]
-  creditImage: /Textures/_Trauma/EndCredits/Antags/nukeops.png # Trauma
+  tags:
+  - OffStation
+  - Roundstart
 
 - type: antag
   id: NukeopsMedic
@@ -37,7 +39,9 @@
     species:
     - Plasmaman
   guides: [ NuclearOperatives ]
-  dontShowInCredits: true # Trauma
+  tags:
+  - OffStation
+  - Roundstart
 
 - type: antag
   id: NukeopsCommander
@@ -60,7 +64,9 @@
     species:
     - Plasmaman
   guides: [ NuclearOperatives ]
-  dontShowInCredits: true # Trauma
+  tags:
+  - OffStation
+  - Roundstart
 
 - type: antagSpecifier
   abstract: true

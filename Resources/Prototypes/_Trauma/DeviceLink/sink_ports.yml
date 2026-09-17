@@ -72,3 +72,20 @@
   id: ToolLocked
   name: signal-port-name-tool-locked
   description: signal-port-description-tool-locked
+
+# Locker/Unlock
+
+- type: sinkPort
+  id: Lock
+  name: signal-port-name-lock-lock
+  description: signal-port-description-lock-lock
+
+- type: sinkPort
+  id: Unlock
+  name: signal-port-name-lock-unlock
+  description: signal-port-description-lock-unlock
+
+- type: sinkPort
+  id: ToggleLock
+  name: signal-port-name-lock-toggle
+  description: signal-port-description-lock-toggle

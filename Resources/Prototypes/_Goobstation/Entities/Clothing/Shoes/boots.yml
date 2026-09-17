@@ -43,39 +43,7 @@
     sprite: _Goobstation/Clothing/Shoes/Boots/breverb.rsi
 
 - type: entity
-  parent: [ClothingShoesBootsMagAdv, BaseJetpack, BaseCentcommContraband]
-  id: ClothingShoesBootsMagEmergencyResponseTeam
-  name: tactical response magboots
-  description: Look! An emergency responder, we're saved!
-  components:
-  - type: Sprite
-    sprite: _Goobstation/Clothing/Shoes/Boots/emergencyresponseteam.rsi
-    state: icon
-  - type: Clothing
-    sprite: _Goobstation/Clothing/Shoes/Boots/emergencyresponseteam.rsi
-  - type: Item
-    sprite: _Goobstation/Clothing/Shoes/Boots/emergencyresponseteam.rsi
-  - type: Magboots
-  - type: NoSlip
-  - type: Tag
-    tags:
-    - WhitelistChameleon
-  - type: ClothingSlowOnDamageModifier
-    modifier: 0.5
-  - type: ModifyStandingUpTime
-    multiplier: 0.5
-  - type: GasTank
-    releasePressure: 42.6
-    air:
-      # 2 minutes of thrust
-      volume: 2
-      temperature: 293.15
-      moles:
-        Oxygen: 0.153853429
-        Nitrogen: 0.153853429
-
-- type: entity
-  parent: ClothingShoesBootsMagEmergencyResponseTeam
+  parent: ClothingShoesBootsMagERT
   id: ClothingShoesBootsMagDeathsquad
   name: deathsquad magboots
   description: The sound of these boots are iconic; the sound of terror.
@@ -88,22 +56,15 @@
   - type: Item
     sprite: _Goobstation/Clothing/Shoes/Boots/deathsquad.rsi
   - type: ClothingSpeedModifier
-    walkModifier: 1.10
-    sprintModifier: 1.10
+    walkModifier: 1.0
+    sprintModifier: 1.0
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.5
+  - type: ModifyStandingUpTime
+    multiplier: 0.5
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepHeavySuit
-  - type: GasTank
-    releasePressure: 42.6
-    air:
-      # 2 minutes of thrust
-      volume: 2
-      temperature: 293.15
-      moles:
-        Oxygen: 0.153853429
-        Nitrogen: 0.153853429
-  - type: Tag
-    tags: [] # ignore "WhitelistChameleon" tag
 
 - type: entity
   parent: [ClothingShoesBootsMagBase, BaseMajorContraband]

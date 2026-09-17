@@ -1,0 +1,70 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseItem, BaseRevMajorContraband ]
+  id: RevToolkit
+  name: revolutionary toolkit
+  description: An aspiring revolutionary's toolkit contains almost any tool you will need for furthering the revolution.
+  components:
+  - type: UseDelay
+    delay: 0
+  - type: Sprite
+    sprite: &ReferenceToolkit _Trauma/Objects/Revs/toolkit.rsi
+    state: toolkit-wrenching
+  - type: Item
+    sprite: *ReferenceToolkit
+    size: Normal
+  - type: Prying
+    enabled: false
+  - type: Tool
+    qualities:
+    - Anchoring
+    speedModifier: 1.2
+    useSound: /Audio/Items/ratchet.ogg
+  - type: ToolTileCompatible
+  - type: MultipleTool
+    statusShowBehavior: true
+    entries:
+    - behavior: [ Anchoring ]
+      sprite:
+        sprite: *ReferenceToolkit
+        state: toolkit-wrenching
+      useSound:
+        path: /Audio/Items/ratchet.ogg
+      changeSound: &ChangeMode
+        path: /Audio/Items/change_drill.ogg
+    - behavior: [ Cutting ]
+      sprite:
+        sprite: *ReferenceToolkit
+        state: toolkit-cutting
+      useSound:
+        path: /Audio/Items/wirecutter.ogg
+      changeSound: *ChangeMode
+    - behavior: [ Screwing ]
+      sprite:
+        sprite: *ReferenceToolkit
+        state: toolkit-screwing
+      useSound:
+        path: /Audio/Items/screwdriver.ogg
+      changeSound: *ChangeMode
+    - behavior: [ Prying ]
+      sprite:
+        sprite: *ReferenceToolkit
+        state: toolkit-prying
+      useSound:
+        path: /Audio/Items/crowbar.ogg
+      changeSound: *ChangeMode
+    - behavior: [ Hammering ]
+      sprite:
+        sprite: *ReferenceToolkit
+        state: toolkit-hammering
+      useSound:
+        path: /Audio/Items/trayhit2.ogg
+      changeSound: *ChangeMode
+    - behavior: [ Slicing ]
+      sprite:
+        sprite: *ReferenceToolkit
+        state: toolkit-cutting
+      useSound:
+        path: /Audio/Items/Culinary/chop.ogg
+      changeSound: *ChangeMode

@@ -3,13 +3,13 @@
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.DeviceLinking;
-using Content.Shared.DeviceNetwork;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Power;
 using Content.Shared.Power.EntitySystems;
 using Content.Shared.Tools.Systems;
+using Content.Trauma.Common.DeviceLinking;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
@@ -29,16 +29,6 @@ public sealed partial class AccessScannerSystem : EntitySystem
 
     private TimeSpan _updateDelay = TimeSpan.FromSeconds(0.2);
     private TimeSpan _nextUpdate;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<AccessScannerComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<AccessScannerComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<AccessScannerComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<AccessScannerComponent, PowerChangedEvent>(OnPowerChanged);
-    }
 
     public override void Update(float frameTime)
     {
@@ -113,6 +103,7 @@ public sealed partial class AccessScannerSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnInit(Entity<AccessScannerComponent> ent, ref ComponentInit args)
     {
         _device.EnsureSourcePorts(ent.Owner, ent.Comp.ActivePort, ent.Comp.NamePort, ent.Comp.JobPort);
@@ -120,6 +111,7 @@ public sealed partial class AccessScannerSystem : EntitySystem
         _power.SetLoad(ent.Owner, power);
     }
 
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<AccessScannerComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange)
@@ -129,6 +121,7 @@ public sealed partial class AccessScannerSystem : EntitySystem
         args.PushMarkup($"Its range is set to [bold]{range}m[/bold]");
     }
 
+    [SubscribeLocalEvent]
     private void OnInteractUsing(Entity<AccessScannerComponent> ent, ref InteractUsingEvent args)
     {
         if (args.Handled || !_tool.HasQuality(args.Used, ent.Comp.SettingTool))
@@ -144,6 +137,7 @@ public sealed partial class AccessScannerSystem : EntitySystem
         _power.SetLoad(ent.Owner, setting.Power);
     }
 
+    [SubscribeLocalEvent]
     private void OnPowerChanged(Entity<AccessScannerComponent> ent, ref PowerChangedEvent args)
     {
         // interrupt active signal while unpowered
@@ -152,9 +146,8 @@ public sealed partial class AccessScannerSystem : EntitySystem
 
     private void SendString(EntityUid uid, [ForbidLiteral] string port, string value)
     {
-        var data = new NetworkPayload();
-        data["logic_string"] = value;
-        _device.InvokePort(uid, port, data);
+        var payload = new LogicStringPayload(value);
+        _device.InvokePort(uid, port, ref payload );
     }
 
     private void UpdateActive(Entity<AccessScannerComponent> ent)

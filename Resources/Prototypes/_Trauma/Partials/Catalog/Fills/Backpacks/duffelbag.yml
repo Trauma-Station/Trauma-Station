@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: ClothingBackpackDuffelSyndicateFilledGrenadeLauncher
+  name: China-Lake bundle
+  description: "An old China Lake grenade launcher bundled with 13 rounds of various destruction capability."

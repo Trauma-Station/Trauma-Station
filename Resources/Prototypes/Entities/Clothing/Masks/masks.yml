@@ -1025,7 +1025,7 @@
   - type: IdentityBlocker
 
 - type: entity
-  parent: [ClothingMaskBase, BaseClothingViewconeSmall]
+  parent: [ClothingMaskGas, WeldingMaskBase, BaseClothingViewconeSmall] # Trauma - viewcone
   id: ClothingMaskWeldingGas
   name: welding gas mask
   description: A gas mask with built in welding goggles and face shield. Looks like a skull, clearly designed by a nerd.
@@ -1044,16 +1044,14 @@
     state: icon
   - type: Clothing
     sprite: Clothing/Mask/welding-gas.rsi
-  - type: BreathMask
-  - type: IngestionBlocker
-  - type: IdentityBlocker
-  - type: FlashImmunity
-  - type: EyeProtection
   - type: StaticPrice
     price: 100
   - type: Tag
     tags:
     - WhitelistChameleon
+  - type: ImageOverlay
+    pathToOverlayImage: "/Textures/Clothing/Head/Welding/weldingTexture.png"
+    additionalColorOverlay: "#00000050"
 
 # Entity tables
 - type: entityTable

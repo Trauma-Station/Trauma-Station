@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: cargoProduct
+  parent: BaseRedAlert
+  id: ArmorySmg
+  cost: 15000 # was 9000
+
+- type: cargoProduct
+  parent: BaseRedAlert
+  id: ArmoryShotgun
+  cost: 15000 # was 7000
+
+- type: cargoProduct
+  parent: BaseRedAlert
+  id: ArmoryMosin
+  cost: 6000 # scaled up with main gun prices
+
+- type: cargoProduct
+  parent: BaseRedAlert
+  id: SecurityRiot
+  cost: 12000 # was 7500
+
+- type: cargoProduct
+  parent: BaseRedAlert
+  id: ArmoryLaser
+  icon:
+    sprite: _Trauma/Objects/Weapons/Guns/Battery/laser.rsi
+    state: icon
+
+- type: cargoProduct
+  parent: BaseRedAlert
+  id: ArmoryPistol
+  cost: 10000 # was 5200
+
+- type: cargoProduct
+  parent: BaseRedAlert
+  id: ArmoryRifle
+  cost: 15000 # was 8000

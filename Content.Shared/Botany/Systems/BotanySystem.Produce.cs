@@ -1,13 +1,13 @@
 // <Trauma>
 using Content.Trauma.Common.Botany;
 // </Trauma>
-using JetBrains.Annotations;
 using Content.Shared.Botany.Components;
 using Content.Shared.Botany.Items.Components;
 using Content.Shared.EntityEffects;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Random.Helpers;
+using JetBrains.Annotations;
 using Robust.Shared.Map;
 using Robust.Shared.Random;
 

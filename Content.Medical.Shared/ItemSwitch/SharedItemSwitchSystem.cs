@@ -278,7 +278,8 @@ public abstract partial class SharedItemSwitchSystem : EntitySystem
             || !ent.Comp.States.TryGetValue(ent.Comp.State, out var state))
             return;
 
-        var powered = _battery.GetCharge(ent.Owner) >= state.EnergyPerUse;
+        var (charge, _) = _battery.GetCharge(ent.Owner);
+        var powered = charge >= state.EnergyPerUse;
         if (ent.Comp.IsPowered == powered)
             return;
 
