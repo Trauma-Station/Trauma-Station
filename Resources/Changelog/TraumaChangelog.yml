@@ -14698,3 +14698,24 @@ Entries:
   id: 1602
   time: '2026-09-17T11:32:02.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4635
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Derelict borgs now have the correct skills and modules.
+  id: 1603
+  time: '2026-09-17T13:02:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4594
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Radiation storms' mutations are now easier to sequence and thus remove.
+  id: 1604
+  time: '2026-09-17T14:11:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4641
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Moths and arachnids can now breath pluoxium.
+  id: 1605
+  time: '2026-09-17T15:02:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4643
