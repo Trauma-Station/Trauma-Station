@@ -387,9 +387,7 @@
     damage:
       types:
         Piercing: 15
-  - type: Tag
-    tags:
-    - Knife
+
 
 - type: entity
   parent: [ BaseItem, BaseMinorContraband ]

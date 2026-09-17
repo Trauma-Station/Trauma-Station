@@ -70,13 +70,4 @@
   theory:
     ElectronicsKnowledge: 1
 
-- type: construction
-  id: ClothingBeltShankerBelt
-  graph: ClothingBeltShankerBelt
-  targetNode: Shanker
-  category: construction-category-clothing
-  objectType: Item
-  theory:
-    FabricationKnowledge: 1
-  practical:
-    TailoringKnowledge: 1
+
