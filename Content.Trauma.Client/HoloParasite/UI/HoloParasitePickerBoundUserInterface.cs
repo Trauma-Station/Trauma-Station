@@ -7,8 +7,6 @@ namespace Content.Trauma.Client.HoloParasite.UI;
 public sealed partial class HoloParasitePickerBoundUserInterface : BoundUserInterface
 {
     private HoloParasitePickerWindow? _panel;
-    private List<HoloParasiteVariant> _variants = new();
-    private int _currentChoice;
 
     public HoloParasitePickerBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
@@ -18,24 +16,24 @@ public sealed partial class HoloParasitePickerBoundUserInterface : BoundUserInte
     {
         base.Open();
 
-        _variants = EntMan.GetComponent<HoloParasitePickerComponent>(Owner).Variants;
-        _currentChoice = 0;
+        var variants = EntMan.GetComponent<HoloParasitePickerComponent>(Owner).Variants;
+        var currentChoice = 0;
 
         _panel = this.CreateWindow<HoloParasitePickerWindow>();
         _panel.OnVariantPicked += index =>
         {
-            _currentChoice = index;
+            currentChoice = index;
             _panel?.RenderChoice(index);
         };
         _panel.OnBindPressed += () =>
         {
-            if (_currentChoice < 0 || _currentChoice >= _variants.Count)
+            if (currentChoice < 0 || currentChoice >= variants.Count)
                 return;
 
-            SendMessage(new HoloParasitePickMessage(_variants[_currentChoice].Prototype.Id));
+            SendMessage(new HoloParasitePickMessage(variants[currentChoice].Prototype.Id));
             _panel?.Close();
         };
-        _panel.PopulateChoices(_variants);
+        _panel.PopulateChoices(variants);
         _panel.OpenCentered();
     }
 }

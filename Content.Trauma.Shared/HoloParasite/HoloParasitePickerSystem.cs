@@ -103,11 +103,10 @@ public sealed partial class HoloParasitePickerSystem : EntitySystem
             return;
         }
 
-        if (!ent.Comp.Variants.Exists(variant => variant.Prototype.Id == protoId))
+        if (!ent.Comp.Variants.Contains(protoId))
             return;
 
-        var host = ent.Comp.HostTarget;
-        if (host == null || TerminatingOrDeleted(host.Value) || _hostQuery.HasComp(host.Value))
+        if (ent.Comp.HostTarget is not { } host || TerminatingOrDeleted(host) || _hostQuery.HasComp(host))
             return;
 
         creator.GuardianProto = protoId;
@@ -123,7 +122,7 @@ public sealed partial class HoloParasitePickerSystem : EntitySystem
             creator.InjectionDelay,
             new GuardianCreatorDoAfterEvent(),
             ent,
-            target: host.Value,
+            target: host,
             used: ent)
         {
             BreakOnMove = true,
