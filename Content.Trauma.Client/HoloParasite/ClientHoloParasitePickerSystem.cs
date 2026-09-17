@@ -4,6 +4,4 @@ using Content.Trauma.Shared.HoloParasite;
 
 namespace Content.Trauma.Client.HoloParasite;
 
-public sealed partial class ClientHoloParasitePickerSystem : HoloParasitePickerSystem
-{
-}
+public sealed partial class ClientHoloParasitePickerSystem : HoloParasitePickerSystem;

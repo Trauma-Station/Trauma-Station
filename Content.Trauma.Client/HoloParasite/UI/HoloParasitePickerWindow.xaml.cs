@@ -13,7 +13,7 @@ public sealed partial class HoloParasitePickerWindow : FancyWindow
 
     private readonly List<Button> _cards = new();
     private readonly ButtonGroup _cardGroup = new();
-    private List<HoloParasiteChoice> _choices = new();
+    private List<HoloParasiteVariant> _variants = new();
     private int _pickedIndex = -1;
 
     public HoloParasitePickerWindow()
@@ -22,20 +22,20 @@ public sealed partial class HoloParasitePickerWindow : FancyWindow
         BindButton.OnPressed += _ => OnBindPressed?.Invoke();
     }
 
-    public void PopulateChoices(List<HoloParasiteChoice> choices, int defaultIndex)
+    public void PopulateChoices(List<HoloParasiteVariant> variants)
     {
-        _choices = choices;
+        _variants = variants;
         _cards.Clear();
         VariantGrid.RemoveAllChildren();
 
-        for (var i = 0; i < choices.Count; i++)
+        for (var i = 0; i < variants.Count; i++)
         {
             var index = i;
-            var choice = choices[i];
+            var variant = variants[i];
 
             var card = new Button
             {
-                Text = choice.Caption,
+                Text = variant.Caption,
                 HorizontalExpand = true,
                 VerticalExpand = true,
                 MinSize = new Vector2(0, 36),
@@ -54,26 +54,26 @@ public sealed partial class HoloParasitePickerWindow : FancyWindow
             VariantGrid.AddChild(card);
         }
 
-        if (choices.Count > 0)
-            RenderChoice(choices[Math.Clamp(defaultIndex, 0, choices.Count - 1)]);
+        if (variants.Count > 0)
+            RenderChoice(0);
         else
             BindButton.Disabled = true;
     }
 
-    public void RenderChoice(HoloParasiteChoice choice)
+    public void RenderChoice(int index)
     {
-        var index = _choices.IndexOf(choice);
-        if (index >= 0)
-        {
-            _pickedIndex = index;
-            for (var i = 0; i < _cards.Count; i++)
-                _cards[i].Pressed = i == index;
-        }
+        if (index < 0 || index >= _variants.Count)
+            return;
 
-        Preview.SetPrototype(choice.ProtoId);
-        VariantCaption.Text = choice.Caption;
-        VariantSynopsis.SetMessage(choice.Synopsis ?? string.Empty);
-        VariantLore.SetMessage(choice.Lore ?? string.Empty);
+        _pickedIndex = index;
+        for (var i = 0; i < _cards.Count; i++)
+            _cards[i].Pressed = i == index;
+
+        var variant = _variants[index];
+        Preview.SetPrototype(variant.Prototype.Id);
+        VariantCaption.Text = variant.Caption;
+        VariantSynopsis.SetMessage(variant.Synopsis ?? string.Empty);
+        VariantLore.SetMessage(variant.Lore ?? string.Empty);
         BindButton.Disabled = false;
     }
 }

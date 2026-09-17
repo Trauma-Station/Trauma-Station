@@ -23,49 +23,19 @@ public sealed partial class HoloParasiteVariant
     public EntProtoId Prototype = default!;
 
     [DataField(required: true)]
-    public LocId Caption = default!;
+    public string Caption = default!;
 
     [DataField]
-    public LocId? Synopsis;
+    public string? Synopsis;
 
     [DataField]
-    public LocId? Lore;
+    public string? Lore;
 }
 
 [Serializable, NetSerializable]
 public enum HoloParasitePickerUiKey : byte
 {
     Key
-}
-
-[Serializable, NetSerializable]
-public sealed class HoloParasitePickerState : BoundUserInterfaceState
-{
-    public List<HoloParasiteChoice> Choices;
-    public int StartIndex;
-
-    public HoloParasitePickerState(List<HoloParasiteChoice> choices, int startIndex)
-    {
-        Choices = choices;
-        StartIndex = startIndex;
-    }
-}
-
-[Serializable, NetSerializable]
-public sealed class HoloParasiteChoice
-{
-    public string Caption;
-    public string? Synopsis;
-    public string? Lore;
-    public string ProtoId;
-
-    public HoloParasiteChoice(string caption, string? synopsis, string? lore, string protoId)
-    {
-        Caption = caption;
-        Synopsis = synopsis;
-        Lore = lore;
-        ProtoId = protoId;
-    }
 }
 
 [Serializable, NetSerializable]

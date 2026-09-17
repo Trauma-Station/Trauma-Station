@@ -3,33 +3,33 @@
 - type: entity
   id: HoloparasiteInjector
   components:
-    - type: UserInterface
-      interfaces:
-        enum.HoloParasitePickerUiKey.Key:
-          type: HoloParasitePickerBoundUserInterface
-    - type: HoloParasitePicker
-      variants:
-        - prototype: HoloParasiteStandard
-          caption: holoparasite-variant-standard-caption
-          synopsis: holoparasite-variant-standard-synopsis
-          lore: holoparasite-variant-standard-lore
-        - prototype: HoloParasiteAssassin
-          caption: holoparasite-variant-assassin-caption
-          synopsis: holoparasite-variant-assassin-synopsis
-          lore: holoparasite-variant-assassin-lore
-        - prototype: HoloParasiteCharger
-          caption: holoparasite-variant-charger-caption
-          synopsis: holoparasite-variant-charger-synopsis
-          lore: holoparasite-variant-charger-lore
-        - prototype: HoloParasiteBrawler
-          caption: holoparasite-variant-brawler-caption
-          synopsis: holoparasite-variant-brawler-synopsis
-          lore: holoparasite-variant-brawler-lore
-        - prototype: HoloParasiteIcicle
-          caption: holoparasite-variant-icicle-caption
-          synopsis: holoparasite-variant-icicle-synopsis
-          lore: holoparasite-variant-icicle-lore
-        - prototype: HoloParasiteProtector
-          caption: holoparasite-variant-protector-caption
-          synopsis: holoparasite-variant-protector-synopsis
-          lore: holoparasite-variant-protector-lore
+  - type: UserInterface
+    interfaces:
+      enum.HoloParasitePickerUiKey.Key:
+        type: HoloParasitePickerBoundUserInterface
+  - type: HoloParasitePicker
+    variants:
+    - prototype: HoloParasiteStandard
+      caption: Anchor
+      synopsis: A dependable, balanced symbiont suited to any engagement.
+      lore: Blunt and structural hits ignore armor. Predictable speed, steady durability.
+    - prototype: HoloParasiteAssassin
+      caption: Wraith
+      synopsis: A toxin-laced shroud that is nearly invisible while it holds still.
+      lore: Fades from sight in place and betrays itself only by movement. Laces every strike with poison.
+    - prototype: HoloParasiteCharger
+      caption: Dart
+      synopsis: A blistering presence that barrages across the battlefield.
+      lore: Exceptional movement speed. Leaps via Stomp, knocking down whatever it plows through.
+    - prototype: HoloParasiteBrawler
+      caption: Torch
+      synopsis: A searing manifestation whose every blow leaves victims burning.
+      lore: Hits ignore armor and ignite the target. Strikes land slower in exchange.
+    - prototype: HoloParasiteIcicle
+      caption: Drift
+      synopsis: A frost-warded presence that leeches strength with each shard-tipped blow.
+      lore: Raw Cold damage on top of stamina drain, staggering the unwary.
+    - prototype: HoloParasiteProtector
+      caption: Aegis
+      synopsis: A ponderous bulwark that anchors to its owner and swallows harm.
+      lore: Absorbs far more of its master's damage and may roam farther from them.
