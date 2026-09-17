@@ -14600,3 +14600,61 @@ Entries:
   id: 1590
   time: '2026-09-15T15:23:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4592
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed observing etc requiring confirmation.
+  id: 1591
+  time: '2026-09-15T19:43:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4604
+- author: idkmaybe69
+  changes:
+  - type: Tweak
+    message: Certain vendors that didn't have contra from hacking now have some
+  id: 1592
+  time: '2026-09-15T19:48:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4569
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed rev telesphere deleting materials when linking machines to it.
+  id: 1593
+  time: '2026-09-16T07:17:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4612
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed liquid pumps deleting everything if linked to a chemmaster.
+  id: 1594
+  time: '2026-09-16T09:34:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4613
+- author: joel
+  changes:
+  - type: Remove
+    message: Removed slop plant bot.
+  id: 1595
+  time: '2026-09-16T09:41:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4614
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Vent spiders event is no longer spammed every single round.
+  id: 1596
+  time: '2026-09-16T09:53:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4615
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Nuclear reactor turbines now make 8x the power to match atmos devices.
+      speedup.
+  id: 1597
+  time: '2026-09-16T11:55:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4616
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed all Flock cameras.
+  id: 1598
+  time: '2026-09-16T17:40:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4621
