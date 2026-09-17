@@ -385,3 +385,30 @@ Entries:
   id: 40
   time: '2026-08-29T10:01:44.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4352
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Bagel now has a nuclear reactor instead of tesla.
+  - type: Tweak
+    message: Bagel and Amber have AME built and on roundstart.
+  - type: Fix
+    message: Fixed Amber using service access for the library.
+  id: 41
+  time: '2026-09-16T13:30:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4617
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Delta station now has a nuclear reactor instead of tesla, and has a
+      premade AME.
+  id: 42
+  time: '2026-09-16T17:28:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4620
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Fland now has a nuclear reactor and prebuilt AME.
+  id: 43
+  time: '2026-09-16T17:52:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4622

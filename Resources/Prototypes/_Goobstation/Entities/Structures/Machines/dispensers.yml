@@ -106,6 +106,7 @@
       Sulfur: 5
 
 - type: entity
+  abstract: true
   parent: BaseEnergyReagentDispenser
   id: BaseEnergyReagentDispenserAnimated
   components:

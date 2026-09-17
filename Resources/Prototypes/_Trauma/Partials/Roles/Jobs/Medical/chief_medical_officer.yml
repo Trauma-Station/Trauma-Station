@@ -1,0 +1,36 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: ChiefMedicalOfficer
+  guides:
+  - Medical
+  - Command
+  - Chemicals
+  - Virology
+  access:
+  - External
+  - Paramedic # upstream missed it lol
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipCMO
+    - SkillChipPistol
+    - SkillChipEchelonEducation
+  - !type:AddComponentSpecial
+    components:
+    - type: Condemned # Nanotrasen owns your soul pal.
+      soulOwnedNotDevil: true
+    - type: SurgerySpeedModifier
+      speedModifier: 2
+    - type: CPRTraining
+      reviveChance: 0.9 # excellent training and experience
+      inhaleChance: 1 # great kisser too
+
+- type: startingGear
+  id: CMOGear
+  equipment:
+    ears: ClothingHeadsetAltMedical
+    eyes: ClothingEyesGlassesMed
+  storage:
+    back:
+    - TelescopicBaton

@@ -11,6 +11,7 @@ using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
+using Robust.Shared.Collections;
 using Robust.Shared.Timing;
 using static Robust.Client.UserInterface.Controls.BoxContainer;
 
@@ -34,6 +35,7 @@ public sealed partial class EnergyReagentDispenserWindow : FancyWindow
     private Entity<BatteryComponent?> _batteryEnt = default!;
     private EntityUid? _beaker;
     private FixedPoint2 _lastVolume = -1;
+    private int _lastContentsHash;
     private float _batteryCharge = -1;
     private int _selectedAmount = -1;
 
@@ -124,15 +126,24 @@ public sealed partial class EnergyReagentDispenserWindow : FancyWindow
         if (!_solution.TryGetFitsInDispenser(beaker, out _, out var sol))
             return; // bug with the item slot whitelist if this happens
 
-        // currently there should never be a way to have the reagents change without the volume changing
-        // so this is cheap change detection
-        OnChanged(ref _lastVolume, sol.Volume, () => SolutionChanged(sol));
+        OnChanged(ref _lastVolume, sol.Volume, () => VolumeChanged(sol));
+
+        var contents = new ValueList<(string, FixedPoint2)>();
+        foreach (var quantity in sol.Contents)
+        {
+            contents.Add((quantity.Reagent.Prototype, quantity.Quantity));
+        }
+        var contentsHash = contents.GetHashCode();
+        OnChanged(ref _lastContentsHash, contentsHash, () => SolutionChanged(sol));
+    }
+
+    private void VolumeChanged(Solution sol)
+    {
+        ContainerInfoFill.Text = $"{sol.Volume} / {sol.MaxVolume}";
     }
 
     private void SolutionChanged(Solution sol)
     {
-        ContainerInfoFill.Text = $"{sol.Volume} / {sol.MaxVolume}";
-
         ContainerReagents.RemoveAllChildren();
         foreach (var pair in sol.Contents)
         {
