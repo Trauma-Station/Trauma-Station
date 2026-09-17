@@ -15,13 +15,13 @@ public sealed partial class ReactiveArmorSystem : EntitySystem
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     // there has to be a better way to do this then making 3 methods for differen types of attacks... also do we even need a methot for hitscans?
-    [ SubscribeLocalEvent ]
+    [SubscribeLocalEvent]
     private void OnHitMele(EntityUid uid, ReactiveArmorComponent comp, InventoryRelayedEvent<AttackedEvent> args)
     {
         CheckForCooldown(uid, comp, args.Owner);
     }
 
-    [ SubscribeLocalEvent ]
+    [SubscribeLocalEvent]
     private void OnHitProjectile(EntityUid uid, ReactiveArmorComponent comp, InventoryRelayedEvent<GotHitByProjectileEvent> args)
     {
         CheckForCooldown(uid, comp, args.Owner);
