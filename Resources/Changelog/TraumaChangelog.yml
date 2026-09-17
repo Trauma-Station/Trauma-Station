@@ -14719,3 +14719,10 @@ Entries:
   id: 1605
   time: '2026-09-17T15:02:51.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4643
+- author: yglop
+  changes:
+  - type: Add
+    message: Regular glass sheets can be broken by use in hand.
+  id: 1606
+  time: '2026-09-17T19:35:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4640
