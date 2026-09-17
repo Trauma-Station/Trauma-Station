@@ -1,0 +1,31 @@
+- type: entity
+  id: SheetGlassBase
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Materials/Sheets/glass.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Materials/Sheets/glass.rsi
+  - type: BlindHealing
+    whitelist:
+      components:
+      - Silicon
+  - type: ReflectiveSurface
+  - type: Tag
+    tags:
+    - Sheet
+    - ConstructionMaterial
+    - DroneUsable
+    - SheetGlass
+
+- type: entity
+  id: SheetGlass
+  components:
+  - type: EntityEffectOnUse
+    effects:
+    - !type:PlaySoundEffect
+        sound:
+          collection: GlassBreak
+    - !type:SpawnRandomEntities
+      entity: ShardGlass
+      number: 1
+  - type: ReduseStackSizeOnUse
