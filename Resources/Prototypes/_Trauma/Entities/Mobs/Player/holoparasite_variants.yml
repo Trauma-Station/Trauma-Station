@@ -27,7 +27,7 @@
       distanceAllowed: 10
 
 - type: entity
-  name: Holo-Parasite Anchor
+  name: Holoparasite Anchor
   id: HoloParasiteStandard
   parent: BaseHoloParasite
   description: A well-balanced hard-light defender, keyed to its owner's life to sustain itself.
@@ -55,7 +55,7 @@
           Structural: 100
 
 - type: entity
-  name: Holo-Parasite Wraith
+  name: Holoparasite Wraith
   id: HoloParasiteAssassin
   parent: BaseHoloParasite
   description: A shadowy, toxin-laced apparition that slips between the cracks of your enemies' awareness.
@@ -91,7 +91,7 @@
           Poison: 25
 
 - type: entity
-  name: Holo-Parasite Dart
+  name: Holoparasite Dart
   id: HoloParasiteCharger
   parent: BaseHoloParasite
   description: A blisteringly fast presence that barrages across the battlefield and bowls over anything in its path.
@@ -132,7 +132,7 @@
           Structural: 20
 
 - type: entity
-  name: Holo-Parasite Torch
+  name: Holoparasite Torch
   id: HoloParasiteBrawler
   parent: BaseHoloParasite
   description: A searing manifestation of raw fury whose every blow leaves its victims ablaze.
@@ -165,7 +165,7 @@
           Structural: 20
 
 - type: entity
-  name: Holo-Parasite Drift
+  name: Holoparasite Drift
   id: HoloParasiteIcicle
   parent: BaseHoloParasite
   description: A frost-warded presence of living shards that leeches strength with each biting strike.
@@ -197,7 +197,7 @@
           Structural: 20
 
 - type: entity
-  name: Holo-Parasite Aegis
+  name: Holoparasite Aegis
   id: HoloParasiteProtector
   parent: BaseHoloParasite
   description: A ponderous bulwark of hard-light that anchors itself to its owner and soaks up harm.
