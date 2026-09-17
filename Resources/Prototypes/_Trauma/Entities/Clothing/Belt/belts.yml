@@ -194,7 +194,7 @@
 - type: entity
   parent: [ ClothingBeltStorageBase, BaseMinorContraband ]
   id: ClothingBeltShankerBelt
-  name: Shanker's Belt
+  name: improvised knife rig
   description: Sewn together cloth meant to hold all kind of knifes.
   components:
   - type: Sprite
