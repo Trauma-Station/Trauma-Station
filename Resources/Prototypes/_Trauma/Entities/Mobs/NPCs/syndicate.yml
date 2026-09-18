@@ -58,6 +58,11 @@
     - FootstepSound
   - type: Damageable
     damageModifierSet: NukieSpider
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      15: Critical
+      30: Dead
 
 - type: entity
   parent: MobGiantSpiderAngry
@@ -223,6 +228,11 @@
     transferAmount: 1
   - type: Damageable
     damageModifierSet: NukieSpider
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      25: Critical
+      50: Dead
 
 - type: entity
   parent: [ SolutionWeapon, SolutionTiny ]

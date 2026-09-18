@@ -245,8 +245,21 @@ public sealed partial class StationJobsSystem
         Dictionary<NetUserId, HumanoidCharacterProfile> profiles,
         Dictionary<NetUserId, (ProtoId<JobPrototype>?, EntityUid)> assigned)
     {
-        if (stationJobs[station][job] is { } slots)
-            stationJobs[station][job] = slots - 1;
+        // <Trauma> - use TryGetValue twice to be less exception prone
+        if (!stationJobs.TryGetValue(station, out var jobs))
+        {
+            Log.Error($"Tried to assign player {player} to {job} on nonexistent station {ToPrettyString(station)}, have {stationJobs.Count} stations");
+            return;
+        }
+        if (!jobs.TryGetValue(job, out var slots))
+        {
+            Log.Error($"Tried to assign player {player} to unsupported job {job} on station {ToPrettyString(station)}!");
+            return;
+        }
+
+        if (slots != null)
+            jobs[job] = slots.Value - 1;
+        // </Trauma>
 
         RemovePlayerFromCandidates(player, jobCandidates, playerCandidates);
         profiles.Remove(player);
