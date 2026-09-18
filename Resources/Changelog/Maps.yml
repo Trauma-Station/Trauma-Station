@@ -412,3 +412,10 @@ Entries:
   id: 43
   time: '2026-09-16T17:52:32.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4622
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Box station now a nuclear reactor and premade AME.
+  id: 44
+  time: '2026-09-18T13:17:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4660
