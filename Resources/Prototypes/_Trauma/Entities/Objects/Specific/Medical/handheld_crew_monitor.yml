@@ -67,3 +67,6 @@
   - BaseHandheldComputer
   id: HandheldCrewMonitor
   name: Handheld Crew Monitor
+  components:
+  - type: StealTarget
+    stealGroup: HandheldCrewMonitor
