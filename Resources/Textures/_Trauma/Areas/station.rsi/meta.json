@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/a47835a04f3c88216ca1516ec4082a009c5f3451/icons/area/areas_station.dmi. anchor, newsroom, substation, evac_lounge, evac_hall, ranch, vault modified by @deltanedas (github). loot_room by @aineias1",
+    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/a47835a04f3c88216ca1516ec4082a009c5f3451/icons/area/areas_station.dmi. anchor, newsroom, substation, evac_lounge, evac_hall, ranch, vault modified by @deltanedas (github). loot_room by @aineias1. ai_core, arrivals, boxing_ring annd mail_room created by @GoidaYAMLWarrior (github)",
     "size": {
         "x": 32,
         "y": 32
@@ -29,6 +29,9 @@
             "name": "ai"
         },
         {
+            "name": "ai_core"
+        },
+        {
             "name": "ai_upload"
         },
         {
@@ -36,6 +39,9 @@
         },
         {
             "name": "armory"
+        },
+        {
+            "name": "arrivals"
         },
         {
             "name": "atmos"
@@ -69,6 +75,9 @@
         },
         {
             "name": "brig_entry"
+        },
+        {
+            "name": "boxing_ring"
         },
         {
             "name": "cafeteria"
@@ -249,6 +258,9 @@
         },
         {
             "name": "lounge"
+        },
+        {
+            "name": "mail_room"
         },
         {
             "name": "maints"

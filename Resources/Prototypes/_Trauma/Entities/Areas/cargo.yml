@@ -35,6 +35,14 @@
 
 - type: entity
   parent: BaseAreaCargo
+  id: AreaMailRoom
+  name: mail room
+  components:
+  - type: Sprite
+    state: mail_room
+
+- type: entity
+  parent: BaseAreaCargo
   id: AreaPodBay
   name: podbay
   components:
