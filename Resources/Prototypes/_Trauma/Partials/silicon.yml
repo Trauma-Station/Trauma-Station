@@ -1,0 +1,90 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: AiHeld
+  components:
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+  - type: ShowHealthIcons
+  - type: ShowHealthBars
+    damageContainers:
+    - Silicon
+    - SiliconRadiation
+  - type: ContentEye
+    maxZoom: 1.44,1.44
+  - type: CrossContainerInteraction # the brain is inside a container of the core, it would prevent all AI interactions
+  - type: ActionGrant
+    actions:
+    - ActionOpenCameraWarpMenu
+  - type: UserInterface
+    interfaces:
+      enum.CamWarpUiKey.Key:
+        type: AiCameraWarpBoundUserInterface
+
+- type: entity
+  id: AiHeldIntellicard
+  components:
+  - type: CollectiveMind
+    defaultChannel: Binary
+    channels:
+    - Binary
+    canUseInCrit: true
+
+# The actual brain inside the core
+- type: entity
+  id: StationAiBrain
+  components:
+  - type: IonStormTarget # AI can be ion stormed
+  - type: SpeechSynthesis
+    voice: Borg
+  - type: SiliconLawProvider
+    laws: NTDefault
+
+# Hologram projection that the AI's eye tracks.
+- type: entity
+  id: StationAiHolo
+  components:
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 14
+    baseWalkSpeed: 28
+  - type: AiEye
+
+- type: entity
+  id: PlayerBorgSyndicateAssaultBattery
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - BorgModuleStickyGrenadeLauncher
+
+- type: entity
+  id: PlayerBorgSyndicateSaboteurBattery
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - BorgModuleRCD
+      - BorgModuleSyndicateJammer
+      - BorgModuleSyndicateDoorControl
+      - !Remove BorgModuleTool
+      - BorgModuleAdvancedTool
+
+- type: entity
+  id: PlayerMedicalBorgDerelict
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - BorgModuleSurgery
+      - BorgModuleLollypop
+
+# Derelict Salvage borg
+- type: entity
+  id: PlayerMiningBorgDerelict
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - BorgModulePKA

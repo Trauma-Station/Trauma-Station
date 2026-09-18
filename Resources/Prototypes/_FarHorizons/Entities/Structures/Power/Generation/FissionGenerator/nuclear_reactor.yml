@@ -102,6 +102,7 @@
           collection: MetalBreak
   - type: Anchorable
     delay: 10
+  - type: FultonBlacklist # nuclear warhead + annoying
   - type: AtmosDevice
   - type: AtmosMonitoringConsoleDevice # TODO: this doesn't work?
     navMapBlip: Thermoregulator
