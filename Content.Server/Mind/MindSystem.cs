@@ -28,14 +28,7 @@ public sealed partial class MindSystem : SharedMindSystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private PvsOverrideSystem _pvsOverride = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<MindContainerComponent, EntityTerminatingEvent>(OnMindContainerTerminating);
-        SubscribeLocalEvent<MindComponent, ComponentShutdown>(OnMindShutdown);
-    }
-
+    [SubscribeLocalEvent]
     private void OnMindShutdown(EntityUid uid, MindComponent mind, ComponentShutdown args)
     {
         if (mind.UserId is {} user)
@@ -52,6 +45,8 @@ public sealed partial class MindSystem : SharedMindSystem
         mind.OwnedEntity = null;
     }
 
+    // TODO: This should not run on EntityTerminatingEvent, instead we should detach the mind and then queue transferring it.
+    [SubscribeLocalEvent]
     private void OnMindContainerTerminating(EntityUid uid, MindContainerComponent component, ref EntityTerminatingEvent args)
     {
         if (!TryGetMind(uid, out var mindId, out var mind, component))
@@ -60,8 +55,7 @@ public sealed partial class MindSystem : SharedMindSystem
         // If the player is currently visiting some other entity, simply attach to that entity.
         if (mind.VisitingEntity is {Valid: true} visiting
             && visiting != uid
-            && !Deleted(visiting)
-            && !Terminating(visiting))
+            && !TerminatingOrDeleted(visiting))
         {
             TransferTo(mindId, visiting, mind: mind);
             if (TryComp(visiting, out GhostComponent? ghostComp))
@@ -80,8 +74,7 @@ public sealed partial class MindSystem : SharedMindSystem
             // Log these to make sure they're not causing the GameTicker round restart bugs...
             Log.Debug($"Entity \"{ToPrettyString(uid)}\" for {mind.CharacterName} was deleted, spawned \"{ToPrettyString(ghost)}\".");
         else
-            // This should be an error, if it didn't cause tests to start erroring when they delete a player.
-            Log.Warning($"Entity \"{ToPrettyString(uid)}\" for {mind.CharacterName} was deleted, and no applicable spawn location is available.");
+            Log.Error($"Entity \"{ToPrettyString(uid)}\" for {mind.CharacterName} was deleted, and no applicable spawn location is available.");
     }
 
     public override bool TryGetMind(NetUserId user, [NotNullWhen(true)] out EntityUid? mindId, [NotNullWhen(true)] out MindComponent? mind)
@@ -184,7 +177,7 @@ public sealed partial class MindSystem : SharedMindSystem
         MindContainerComponent? component = null;
         var alreadyAttached = false;
 
-        if (entity != null)
+        if (entity != null && !TerminatingOrDeleted(entity))
         {
             component = EnsureComp<MindContainerComponent>(entity.Value);
 
