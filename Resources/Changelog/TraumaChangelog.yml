@@ -14651,3 +14651,107 @@ Entries:
   id: 1597
   time: '2026-09-16T11:55:28.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4616
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed all Flock cameras.
+  id: 1598
+  time: '2026-09-16T17:40:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4621
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed paramedic access being impossible to work with and being missing
+      from CMO/captain IDs.
+  - type: Tweak
+    message: Access configurators can now assign borg access.
+  id: 1599
+  time: '2026-09-17T07:10:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4633
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed watching bodycams immediately disconnecting you.
+  id: 1600
+  time: '2026-09-17T07:19:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4634
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Buffed the HP of Nukie Mice and of Nukie Carps to 30 and 50 max health,
+      respectively.
+  - type: Fix
+    message: >-
+      Fixed the dehydrated holocarp and magicarp items showing the sprite of the
+      regular one when held.
+  id: 1601
+  time: '2026-09-17T11:30:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4638
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      You can now construct a signal clock item, it replaces old nor/xor gate
+      loops.
+  id: 1602
+  time: '2026-09-17T11:32:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4635
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Derelict borgs now have the correct skills and modules.
+  id: 1603
+  time: '2026-09-17T13:02:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4594
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Radiation storms' mutations are now easier to sequence and thus remove.
+  id: 1604
+  time: '2026-09-17T14:11:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4641
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Moths and arachnids can now breath pluoxium.
+  id: 1605
+  time: '2026-09-17T15:02:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4643
+- author: yglop
+  changes:
+  - type: Add
+    message: Regular glass sheets can be broken by use in hand.
+  id: 1606
+  time: '2026-09-17T19:35:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4640
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Materials no longer get deleted if a machine is broken, like a lathe or
+      silo.
+  id: 1607
+  time: '2026-09-18T11:29:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4659
+- author: ReestockMakes
+  changes:
+  - type: Tweak
+    message: Nuclear Operatives and their variants have new ID card icons.
+  id: 1608
+  time: '2026-09-18T15:38:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4360
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Adjusted the chances of getting certain mysterious glands
+  - type: Tweak
+    message: Buffed the effects on smoke, health and shocking mysterious glands
+  - type: Tweak
+    message: >-
+      Increased the chances of getting annoying and or harmful objectives from
+      abductors
+  id: 1609
+  time: '2026-09-18T17:56:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4583

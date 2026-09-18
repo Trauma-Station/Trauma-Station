@@ -200,7 +200,7 @@ public abstract partial class SharedFultonSystem : EntitySystem
         if (_whitelistSystem.IsWhitelistFailOrNull(component.Whitelist, targetUid))
             return false;
 
-        return true;
+        return _whitelistSystem.IsWhitelistFailOrNull(component.Blacklist, targetUid); // Trauma - check the blacklist
     }
 
     protected bool CanFulton(EntityUid uid)

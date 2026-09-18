@@ -33,6 +33,7 @@
           Radiation: 0.25
     - !type:RandomNegativeMutation
       probability: 0.1 # average 10s of exposure per mutation
+      difficulty: 0.75 # less punishing + can be a boon for genetics
     safeIndoors: false # entire station is indoors...
     safeAreas:
     - AreaAiUpload
