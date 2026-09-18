@@ -1,0 +1,10 @@
+﻿
+- type: entity
+  id: ComputerComms
+  components:
+  - type: StationReportTarget # not given to aghost
+  - type: TraumaCommsConsole
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - BorgChassis
