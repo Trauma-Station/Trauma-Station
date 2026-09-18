@@ -264,9 +264,9 @@
   table: !type:AllSelector
     children:
     # todo chaplain backpack
-#    - id: ClothingUniformJumpsuitChaplain # Trauma
-#    - id: ClothingShoesColorBlack # Trauma
-#    - id: ClothingUniformJumpskirtChaplain # Trauma
+    - id: ClothingUniformJumpsuitChaplain
+    - id: ClothingShoesColorBlack
+    - id: ClothingUniformJumpskirtChaplain
     - id: PlushieLizardJobChaplain
       prob: 0.02
 
