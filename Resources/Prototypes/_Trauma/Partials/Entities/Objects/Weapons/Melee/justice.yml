@@ -21,10 +21,10 @@
           soundHit:
             path: /Audio/_Goobstation/Weapons/Effects/energy-short-sword-swing.ogg
         - type: StaminaDamageOnHit
-          damage: 15
-          overtime: 10
-          LightAttackDamageMultiplier: 4
-          LightAttackOvertimeDamageMultiplier: 2
+          damage: 15 # now 55 total over time
+          overtime: 5
+          lightAttackOvertimeDamageMultiplier: 4
+          lightAttackDamageMultiplier: 4
         - type: DelayedKnockdownOnHit
           useDelay: stunbaton
         - type: UseDelayBlockMelee
