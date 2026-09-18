@@ -91,7 +91,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         if (seed.Comp.PlantData is { } uid)
             return uid;
 
-        seed.Comp.PlantData = uid = EntityManager.PredictedSpawn(seed.Comp.PlantProtoId);
+        seed.Comp.PlantData = uid = PredictedSpawn(seed.Comp.PlantProtoId);
         Dirty(seed);
 
         // make sure the dummy plant entity is in pvs so clients can predict it

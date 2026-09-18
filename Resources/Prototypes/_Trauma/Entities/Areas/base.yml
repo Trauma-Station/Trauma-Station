@@ -17,7 +17,7 @@
   - type: Sprite
     noRot: true
     drawdepth: Overdoors
-    sprite: _Trauma/Markers/Areas/station.rsi
+    sprite: _Trauma/Areas/station.rsi
     state: error
   - type: PlacementReplacement
     key: areas
