@@ -3,9 +3,7 @@
 - type: entity
   abstract: true
   id: BaseHandheldCrewMonitor
-  parent:
-    - !Remove BaseGrandTheftContraband
-    - !Remove BaseHandheldComputer
+  parent: !Clear BaseItem
   !Remove categories: [ DoNotMap ]
   components:
   - type: ItemToggleExaminableStatus

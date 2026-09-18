@@ -192,11 +192,12 @@
   - type: Sprite
     layers:
     - state: medical
-    - state: icon-surgery
+    - state: icon-omnimed-surgery
+      sprite: _Trauma/Objects/Specific/Robotics/borgmodule.rsi
   - type: ItemBorgModule
     hands:
     - item: HandheldHealthAnalyzer
-    - item: OmnimedTool
+    - item: BorgOmnimedTool
     - item: BorgCrewMonitor
     - hand:
         emptyRepresentative: OrganHumanBrain
@@ -206,4 +207,4 @@
           - BodyPart
           - Organ
   - type: BorgModuleIcon
-    icon: { sprite: Interface/Actions/actions_borg.rsi, state: surgery-module }
+    icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: omnimed-surgery-module }

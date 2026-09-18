@@ -1,0 +1,12 @@
+﻿- type: latheRecipe
+  id: BorgModuleAdvancedOmniSurgery
+  result: BorgModuleAdvancedOmniSurgery
+  categories:
+  - Robotics
+  completetime: 3
+  materials:
+    Steel: 1200
+    Glass: 600
+    Plasma: 300
+    Gold: 150
+    Silver: 150

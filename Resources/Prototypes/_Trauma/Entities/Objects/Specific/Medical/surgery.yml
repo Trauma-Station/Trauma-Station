@@ -9,3 +9,33 @@
   # TODO: unique sprite
   - type: BoneGel
     speed: 0.7
+
+- type: entity
+  abstract: true
+  parent: OmnimedTool
+  id: BorgOmnimedTool
+  name: Integrated Surgical Omnitool
+  description: An expanded surgical omnitool capable of accelerated function compared to the normal compact version.
+  components:
+  - type: Hemostat
+    speed: 2
+  - type: Scalpel
+    speed: 2
+  - type: Drill
+    speed: 2
+  - type: BoneSetter
+    speed: 2
+  - type: Retractor
+    speed: 2
+  - type: Cautery
+    speed: 2
+  - type: BoneGel
+    speed: 2
+  - type: BoneSaw
+    speed: 2
+  - type: Tweezers
+    speed: 2
+  - type: Tending
+    speed: 2
+  - type: Stitches
+    speed: 2
