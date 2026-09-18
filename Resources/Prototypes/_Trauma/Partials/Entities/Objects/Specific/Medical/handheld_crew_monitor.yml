@@ -4,7 +4,7 @@
   abstract: true
   id: BaseHandheldCrewMonitor
   parent: !Clear BaseItem
-  !Remove categories: [ DoNotMap ]
+  categories: [ !Remove DoNotMap ]
   components:
   - type: ItemToggleExaminableStatus
   - type: ItemToggle
@@ -12,4 +12,5 @@
   - type: Tag
     tags:
     - !Remove HighRiskItem
-  - !Remove type: StealTarget
+  - type: StealTarget
+    !Remove stealGroup: HandheldCrewMonitor
