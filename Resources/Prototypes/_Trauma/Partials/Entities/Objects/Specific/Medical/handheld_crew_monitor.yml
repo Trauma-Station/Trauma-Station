@@ -4,8 +4,8 @@
   abstract: true
   id: BaseHandheldCrewMonitor
   parent:
-  - !Remove BaseHandheldComputer
-  - !Remove BaseGrandTheftContraband
+    - !Remove BaseGrandTheftContraband
+    - !Remove BaseHandheldComputer
   !Remove categories: [ DoNotMap ]
   components:
   - type: ItemToggleExaminableStatus

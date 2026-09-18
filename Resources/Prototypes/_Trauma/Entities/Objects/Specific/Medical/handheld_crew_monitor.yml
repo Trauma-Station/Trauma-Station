@@ -63,7 +63,7 @@
 - type: entity
   parent:
   - BaseHandheldCrewMonitor
-  - BaseHandheldComputer
   - BaseMedicalContraband
+  - BaseHandheldComputer
   id: HandheldCrewMonitor
   name: Handheld Crew Monitor
