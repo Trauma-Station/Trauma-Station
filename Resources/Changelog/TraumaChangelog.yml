@@ -14735,3 +14735,10 @@ Entries:
   id: 1607
   time: '2026-09-18T11:29:57.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4659
+- author: ReestockMakes
+  changes:
+  - type: Tweak
+    message: Nuclear Operatives and their variants have new ID card icons.
+  id: 1608
+  time: '2026-09-18T15:38:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4360
