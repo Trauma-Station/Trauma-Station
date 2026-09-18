@@ -2,7 +2,7 @@
 
 - type: entity
   id: BaseBorgChassisNT
-  components:
+  components: &components
   - type: Reactive
     reactions:
     - reagents: [ Water ]
@@ -18,16 +18,4 @@
 
 - type: entity
   id: BaseBorgChassisDerelict
-  components:
-  - type: Reactive
-    reactions:
-    - reagents: [ Water ]
-      methods: [ Touch ]
-      effects:
-      - !type:Jitter
-      - !type:HealthChange
-        ignoreResistances: true
-        splitDamage: Split
-        damage:
-          types:
-            Shock: 1
+  components: *components
