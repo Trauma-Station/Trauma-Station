@@ -15,6 +15,7 @@
   id: BorgOmnimedTool
   name: integrated surgery omnitool
   description: An expanded surgical omnitool capable of accelerated function compared to the normal compact version.
+  categories: [ DoNotMap ]
   components:
   - type: Hemostat
     speed: 2
