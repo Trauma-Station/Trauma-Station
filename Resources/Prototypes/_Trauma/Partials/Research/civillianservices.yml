@@ -1,4 +1,6 @@
-﻿- type: technology
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: technology
   id: HighEndSurgery
   recipeUnlocks:
   - BorgModuleAdvancedOmniSurgery
