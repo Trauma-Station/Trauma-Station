@@ -4,12 +4,8 @@
   id: ComputerComms
   components:
   - type: StationReportTarget # not given to aghost
-  - type: TraumaCommsConsole
-  - type: ActivatableUI
-    key: enum.CommunicationsConsoleUiKey.Key
-    components:
-    - type: InteractedBlacklist
-      blacklist:
-        components:
-        - BorgChassis
-#test
+  - type: TraumaCommsConsole6471094
+  - type: InteractedBlacklist
+    blacklist:
+      components:
+      - BorgChassis
