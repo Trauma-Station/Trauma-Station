@@ -14,7 +14,7 @@
   abstract: true
   parent: OmnimedTool
   id: BorgOmnimedTool
-  name: Integrated Surgical Omnitool
+  name: integrated surgery omnitool
   description: An expanded surgical omnitool capable of accelerated function compared to the normal compact version.
   components:
   - type: Hemostat
