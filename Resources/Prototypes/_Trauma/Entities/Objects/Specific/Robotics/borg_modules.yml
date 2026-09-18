@@ -187,7 +187,7 @@
 - type: entity
   parent: [ BaseBorgModuleMedical, BaseProviderBorgModule ]
   id: BorgModuleAdvancedOmniSurgery
-  name: Advanced Surgery Omnitool Module
+  name: advanced surgery omnitool module
   components:
   - type: Sprite
     layers:
