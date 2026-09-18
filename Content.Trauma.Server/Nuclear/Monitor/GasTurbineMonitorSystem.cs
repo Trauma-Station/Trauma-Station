@@ -10,7 +10,7 @@ public sealed partial class GasTurbineMonitorSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private NuclearMonitorSystem _monitor = default!;
-    [Dependency] private SharedTurbineSystem _turbine = default!;
+    [Dependency] private TurbineSystem _turbine = default!;
     [Dependency] private EntityQuery<TurbineComponent> _query = default!;
 
     public override void Initialize()
