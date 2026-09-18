@@ -14755,3 +14755,10 @@ Entries:
   id: 1609
   time: '2026-09-18T17:56:22.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4583
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Justice stun now behaves like stun baton
+  id: 1610
+  time: '2026-09-18T21:16:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4663
