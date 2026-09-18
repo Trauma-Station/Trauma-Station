@@ -88,6 +88,14 @@
 
 - type: entity
   parent: BaseAreaCivilian
+  id: AreaBoxingRing
+  name: boxing ring
+  components:
+  - type: Sprite
+    state: boxing_ring
+
+- type: entity
+  parent: BaseAreaCivilian
   id: AreaToolStorage
   name: tool storage
   description: Birthplace of the assistants.

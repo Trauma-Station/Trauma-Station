@@ -9,3 +9,6 @@ signal-port-name-circuit-8 = Circuit IO 8
 
 signal-port-description-circuit-input = A general purpose input that gets sent to the installed circuit.
 signal-port-description-circuit-output = A general purpose output that gets invoked by the installed circuit.
+
+signal-port-name-clock = Clock
+signal-port-description-clock = Signal that constantly gets sent an alternating HIGH or LOW.

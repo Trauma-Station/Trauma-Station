@@ -8,6 +8,12 @@
   components:
   - type: Sprite
     state: holoplush
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: holocarpplush-inhand-left
+      right:
+      - state: holocarpplush-inhand-right
   - type: Rehydratable
     possibleSpawns:
     - MobCarpHolo
