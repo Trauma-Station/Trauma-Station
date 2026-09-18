@@ -4,7 +4,10 @@
   components:
   - type: StationReportTarget # not given to aghost
   - type: TraumaCommsConsole
-  - type: InteractedBlacklist
-    blacklist:
-      components:
-      - BorgChassis
+  - type: ActivatableUI
+    key: enum.CommunicationsConsoleUiKey.Key
+    components:
+    - type: InteractedBlacklist
+      blacklist:
+        components:
+        - BorgChassis
