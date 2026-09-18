@@ -12,5 +12,4 @@
   - type: Tag
     tags:
     - !Remove HighRiskItem
-  - type: StealTarget
-    !Remove stealGroup: HandheldCrewMonitor
+  - type: !Remove StealTarget

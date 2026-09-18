@@ -59,6 +59,7 @@
   id: BorgCrewMonitor
   name: integrated crew monitor
   description: An integrated crew monitor for locating crew to rescue.
+  categories: [ DoNotMap ]
 
 - type: entity
   parent:
