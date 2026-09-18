@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Shared.Inventory;
 using Content.Shared.Whitelist;
 using Robust.Shared.Containers;
 // </Trauma>
@@ -13,7 +12,6 @@ public sealed partial class DamageOnTriggerSystem : XOnTriggerSystem<DamageOnTri
     // <Trauma>
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedContainerSystem _containers = default!;
-    [Dependency] private InventorySystem _inventory = default!;
     // </Trauma>
     [Dependency] private Damage.Systems.DamageableSystem _damageableSystem = default!;
 
@@ -33,10 +31,6 @@ public sealed partial class DamageOnTriggerSystem : XOnTriggerSystem<DamageOnTri
         }
 
         if (!_whitelist.CheckBoth(target, ent.Comp.Blacklist, ent.Comp.Whitelist))
-            return;
-
-        if (ent.Comp.RequiredSlot != null &&
-            (!_inventory.TryGetContainingSlot((ent.Owner, null, null), out var slot) || slot.Name != ent.Comp.RequiredSlot))
             return;
         // </Trauma>
 

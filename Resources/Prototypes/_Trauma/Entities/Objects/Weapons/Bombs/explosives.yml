@@ -6,12 +6,13 @@
   components:
   - type: ExplosiveCigar
     triggerAtRemaining: 5
+  - type: TriggerConditionInSlot
+    slot: mask
   - type: DamageOnTrigger
     keysIn:
     - timer
     targetUser: true
     targetPart: Head
-    requiredSlot: mask
     damage:
       types:
         Blunt: 250

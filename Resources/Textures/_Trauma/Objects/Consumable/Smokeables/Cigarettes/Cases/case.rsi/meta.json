@@ -1,11 +1,11 @@
 {
-    "version": 1,
-    "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from https://github.com/discordia-space/CEV-Eris/blob/f18aa05685f13c8b424867e4219a1e727019c026/icons/obj/cigarettes.dmi",
-    "size": {
-        "x": 32,
-        "y": 32
-    },
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from https://github.com/discordia-space/CEV-Eris/blob/f18aa05685f13c8b424867e4219a1e727019c026/icons/obj/cigarettes.dmi",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
   "states": [
     {
       "name": "open"
