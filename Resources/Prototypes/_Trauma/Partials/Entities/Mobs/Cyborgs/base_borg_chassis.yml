@@ -2,8 +2,6 @@
 
 - type: entity
   id: BaseBorgChassisNT
-  parent: [BaseBorgChassis, BaseBorgTransponder]
-  abstract: true
   components:
   - type: Reactive
     reactions:
@@ -20,8 +18,6 @@
 
 - type: entity
   id: BaseBorgChassisDerelict
-  parent: BaseBorgChassis
-  abstract: true
   components:
   - type: Reactive
     reactions:
