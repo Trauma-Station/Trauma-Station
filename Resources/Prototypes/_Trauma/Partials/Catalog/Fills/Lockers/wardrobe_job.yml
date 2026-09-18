@@ -7,12 +7,9 @@
 - type: entityTable
   id: FillWardrobeChapel
   table: !type:AllSelector
-    children:
+    children: !clear
     - id: ClothingEyesHudMedical
     - id: Syringe
     - id: HandheldHealthAnalyzer
     - id: RollerBedSpawnFolded
     - id: BoxBodyBag
-    - !Remove id: ClothingUniformJumpsuitChaplain
-    - !Remove id: ClothingShoesColorBlack
-    - !Remove id: ClothingUniformJumpskirtChaplain

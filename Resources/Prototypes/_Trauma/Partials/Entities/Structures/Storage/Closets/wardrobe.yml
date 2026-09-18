@@ -1,0 +1,34 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: WardrobeChapel
+  parent: [ LockerBase, AntiTamperLowPriority ]
+  name: chaplain's locker
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: chapel
+    stateDoorOpen: chapel_open
+    stateDoorClosed: chapel_door
+  - type: AccessReader
+    access: [ [ "Chapel" ] ]
+  - type: Sprite
+    sprite: Structures/Storage/closet.rsi
+    layers:
+    - state: generic
+      map: ["enum.StorageVisualLayers.Base"]
+      sprite: _Trauma/Structures/Storage/closet.rsi
+    - state: generic_door
+      map: ["enum.StorageVisualLayers.Door"]
+      sprite: _Trauma/Structures/Storage/closet.rsi
+    - state: locked
+      map: ["enum.LockVisualLayers.Lock"]
+      shader: unshaded
+    - state: welded
+      visible: false
+      map: ["enum.WeldableLayers.BaseWelded"]
+    - state: paper
+      visible: false
+      sprite: Structures/Storage/closet_labels.rsi
+      offset: "-0.065,0"
+      map: ["enum.PaperLabelVisuals.Layer"]
