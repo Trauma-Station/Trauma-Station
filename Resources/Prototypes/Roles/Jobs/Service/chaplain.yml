@@ -3,31 +3,16 @@
   name: job-name-chaplain
   description: job-description-chaplain
   playTimeTracker: JobChaplain
-  requirements:
-    - !type:OverallPlaytimeRequirement
-      time: 1h #Trauma was 36000
   startingGear: ChaplainGear
   icon: "JobIconChaplain"
   supervisors: job-supervisors-hop
-  guides: [ Chaplain ] # goobstation
+  guides: [ Service ] # TODO: should have a more specific guidebook page instead of using the department itself
   access:
   - Chapel
   - Maintenance
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEducation
-    - SkillChipMarksmanship
-    - SkillChipChaplain
-  # </Trauma>
   - !type:AddComponentSpecial
     components:
-    # <Trauma>
-    - type: Condemned
-      soulOwnedNotDevil: true # This just means they won't suffer the effects of being condemned, while still not being able to sell their soul.
-    - type: CurseImmune # Immune to curses of wraith plaguebringer
-    # </Trauma>
     - type: BibleUser #Lets them heal with bibles
 
 - type: startingGear
@@ -38,10 +23,7 @@
     ears: ClothingHeadsetService
   storage:
     back:
-    - ChaplainUndeterminedBible
     - RubberStampChaplain
-    - Nullrod
-    - ArmamentsBeacon # Goobstation
 
 - type: chameleonOutfit
   id: ChaplainChameleonOutfit
