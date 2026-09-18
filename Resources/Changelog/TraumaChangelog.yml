@@ -14726,3 +14726,12 @@ Entries:
   id: 1606
   time: '2026-09-17T19:35:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4640
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Materials no longer get deleted if a machine is broken, like a lathe or
+      silo.
+  id: 1607
+  time: '2026-09-18T11:29:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4659
