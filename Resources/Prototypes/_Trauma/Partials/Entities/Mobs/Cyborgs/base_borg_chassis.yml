@@ -1,0 +1,35 @@
+- type: entity
+  id: BaseBorgChassisNT
+  parent: [BaseBorgChassis, BaseBorgTransponder]
+  abstract: true
+  components:
+  - type: Reactive
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch ]
+      effects:
+      - !type:Jitter
+      - !type:HealthChange
+        ignoreResistances: true
+        splitDamage: Split
+        damage:
+          types:
+            Shock: 1
+
+- type: entity
+  id: BaseBorgChassisDerelict
+  parent: BaseBorgChassis
+  abstract: true
+  components:
+  - type: Reactive
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch ]
+      effects:
+      - !type:Jitter
+      - !type:HealthChange
+        ignoreResistances: true
+        splitDamage: Split
+        damage:
+          types:
+            Shock: 1
