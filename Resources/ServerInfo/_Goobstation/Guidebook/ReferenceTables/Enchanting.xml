@@ -1,24 +1,52 @@
 <Document>
 # Enchanting
 
-Those with magical literacy, through years of study or a magical gift, have access to the arcane art of Enchanting.
+Those with magical literacy, through years of study or a magical gift, (or a rare skillchip), have access to the arcane art of Enchanting, to imbue items with additional stats and properties.
 
 # Equipment
 
+Depending on who or what you are, you may have to use different equipment for enchanting.
+
+## Only chaplains can use:
+
 <Box>
-  <GuideEntityEmbed Entity="BloodEnchanter"/>
-  <GuideEntityEmbed Entity="EnchantingRune"/>
+  <GuideEntityEmbed Entity="Bible"/>
+</Box>
+<Box>
+  <GuideEntityEmbed Entity="AltarSpaceChristian"/>
+  <GuideEntityEmbed Entity="AltarToolbox"/>
+  <GuideEntityEmbed Entity="AltarClock"/>
+  <GuideEntityEmbed Entity="AltarChaos"/>
 </Box>
 
-A holy bible must be [bold]defaced[/bold] to enchant items, atop a [bold]Enchantment Rune[/bold] carved into the floor.
+## Anyone can use:
+
+<Box>
+  <GuideEntityEmbed Entity="BloodEnchanter"/>
+</Box>
+<Box>
+  <GuideEntityEmbed Entity="EnchantingRune"/>
+  <GuideEntityEmbed Entity="AltarHeaven"/>
+  <GuideEntityEmbed Entity="AltarFangs"/>
+</Box>
+
+[color=red]Most magical items are considered [color=purple][bold]highly illegal magical contraband[/bold][/color] which security can [bold]execute you[/bold] for using.[/color] This can be checked by viewing the object's contraband status.
+
+Even legal forms of magical practice must be approved by a chaplain, otherwise you risk the same punishment.
+
+## Clowns can use:
+
+<Box>
+  <GuideEntityEmbed Entity="AltarBananium"/>
+</Box>
 
 # Enchanting an item
 
-To enchant an item, you need a sacrificial offering and an item to enchant. Most often these are the cores of anomalies, but are occasionally more mundane components like Diamonds.
+To enchant an item, you need an offering and an item to enchant. The offering can range from anomaly cores, to enchanting scrolls, to diamonds.
 
 Enchanting scrolls can be scribed using magical inks.
 
-Place an item on your enchanting rune alongside the offering and hit the item with your magical tome. For wizards, this is their Wizard's Grimoire. For Chaplain, their Bible or other religious texts. For Heretics, their Codex Cicatrix.
+Place an item on your altar alongside the offering and press the item with your magical tome in hand. For wizards, this is their Wizard's Grimoire. For Chaplain, their Bible or other religious texts. For Heretics, their Codex Cicatrix.
 
 If the item and offering are compatible, the offering will be consumed and the item will become enchanted. If you use an anomaly core, those from critical anomalies are more potent than inert cores, and empower your item more effectively.
 
@@ -28,7 +56,9 @@ An item can only be enchanted with two kinds of enchantment, unless you perform 
 
 The sacrifice will be possible to revive, but have the ill effects of losing their soul, akin to selling their soul to a Devil.
 
-Sacrafices can be made up to 10 enchantments worth.
+Sacrifices can be made up to 10 enchantments worth.
+
+Consuming peoples' souls is not actually a crime, because NanoTrasen does it all the time. Crime done in the name of obtaining a soul is however not approved by law.
 
 # Types of enchantments
 
@@ -71,7 +101,9 @@ Thorns can be applied to armor, and damages melee attackers with 4 slash damage 
   ### Fortune
 Fortune has a chance to increase ore yield for drills and pickaxes, chance proportional to enchantment level. Obtainable from Santa Anomaly cores and diamonds.
 
-  ### More...
-There are many other enchantments and curses, perhaps creatures from the underworld could provide them?
+  ## More
+There are many other enchantments and even wacky curses obtainable from scrolls inscribed with magic ink. Magic ink can be crafted using demonic soul fragments or holy ash.
+
+Experiment and see what you get!
 
 </Document>
