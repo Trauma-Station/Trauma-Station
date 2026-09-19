@@ -14794,3 +14794,10 @@ Entries:
   id: 1614
   time: '2026-09-19T14:31:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4669
+- author: IvanKuvalda
+  changes:
+  - type: Add
+    message: Added new classes for holoparasites
+  id: 1615
+  time: '2026-09-19T15:03:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4631
