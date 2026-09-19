@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity # pretty much useless if not equipped in mask slot
+  parent: CigarGold
+  id: CigarGoldSyndicate
+  components:
+  - type: ExplosiveCigar
+    triggerAtRemaining: 5
+  - type: TriggerConditionInSlot
+    slot: mask
+  - type: DamageOnTrigger
+    keysIn:
+    - timer
+    targetUser: true
+    targetPart: Head
+    damage:
+      types:
+        Blunt: 250
+        Slash: 50
+  - type: Explosive
+    explosionType: Default
+    maxIntensity: 1
+    intensitySlope: 5
+    totalIntensity: 5
+    canCreateVacuum: false
+
+- type: entity
+  parent: CigarGoldCase
+  id: CigarGoldSyndicateCase
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: CigarGoldSyndicate
+        amount: 8

@@ -19,4 +19,5 @@ public sealed partial class DamageOnTriggerComponent
     /// </summary>
     [DataField]
     public TargetBodyPart? TargetPart;
+
 }
