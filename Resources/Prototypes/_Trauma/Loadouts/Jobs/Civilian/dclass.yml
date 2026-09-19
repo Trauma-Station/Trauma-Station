@@ -129,6 +129,7 @@
     head: ClothingHeadEnvirohelmPrisoner
   effects:
   - *SLE_Plasmaman
+
 - type: loadout
   id: BlackEnvirogloves
   equipment:
