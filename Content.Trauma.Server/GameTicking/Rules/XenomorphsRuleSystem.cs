@@ -244,12 +244,13 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
         if (!component.Announced && component.AnnouncementTime <= _timing.CurTime)
         {
             component.Announced = true;
+            var queenUid = GetXenomorphs(component, "Queen").First; // There should only be one queen so this works.
 
             if (!string.IsNullOrEmpty(component.Announcement))
                 _chat.DispatchGlobalAnnouncement(Loc.GetString(component.Announcement), component.Sender != null ? Loc.GetString(component.Sender) : null, colorOverride: component.AnnouncementColor);
 
-            _sound.StopStationEventMusic(uid, StationEventMusicType.Xenomorph);
-            _sound.DispatchStationEventMusic(uid, component.XenomorphInfestationSound, StationEventMusicType.Xenomorph, component.XenomorphInfestationSound.Params);
+            _sound.StopStationEventMusic(queenUid, StationEventMusicType.Xenomorph);
+            _sound.DispatchStationEventMusic(queenUid, component.XenomorphInfestationSound, StationEventMusicType.Xenomorph, component.XenomorphInfestationSound.Params);
         }
 
         CheckRoundEnd(uid, component, gameRule);
@@ -304,8 +305,9 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
             component.RoundEndTextShuttleCall,
             component.RoundEndTextAnnouncement
         );
-        _sound.StopStationEventMusic(uid, StationEventMusicType.Xenomorph);
-        _sound.DispatchStationEventMusic(uid, component.XenomorphTakeoverSound, StationEventMusicType.Xenomorph, component.XenomorphTakeoverSound.Params);
+        var queenUid = GetXenomorphs(component, "Queen").First;
+        _sound.StopStationEventMusic(queenUid, StationEventMusicType.Xenomorph);
+        _sound.DispatchStationEventMusic(queenUid, component.XenomorphTakeoverSound, StationEventMusicType.Xenomorph, component.XenomorphTakeoverSound.Params);
 
         component.WinType = WinType.XenoMinor;
         component.WinConditions.Add(WinCondition.XenoTakeoverStation);
