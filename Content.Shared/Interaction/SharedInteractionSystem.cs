@@ -1488,6 +1488,13 @@ namespace Content.Shared.Interaction
                 Log.Warning($"Client sent interaction with client-side entity. Session={session}, Uid={uid}");
                 return false;
             }
+            // <Trauma> - why was this never checked lol
+            if (TerminatingOrDeleted(uid))
+            {
+                Log.Warning($"Client {session} tried to interact with a deleted entity {uid}");
+                return false;
+            }
+            // </Trauma>
 
             userEntity = session?.AttachedEntity;
 
