@@ -14762,3 +14762,14 @@ Entries:
   id: 1610
   time: '2026-09-18T21:16:20.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4663
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: IPCs and NT borgs are now weak to water
+  - type: Tweak
+    message: Made IPCs weak to Ion damage, not resistant. ( 0.8 -> 1.5)
+  - type: Tweak
+    message: Made Borgs weak to Shock and Ion damage
+  id: 1611
+  time: '2026-09-19T08:41:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4662
