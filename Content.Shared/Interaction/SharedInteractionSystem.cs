@@ -1489,7 +1489,7 @@ namespace Content.Shared.Interaction
                 return false;
             }
             // <Trauma> - why was this never checked lol
-            if (TerminatingOrDeleted(uid))
+            if (uid.Valid && TerminatingOrDeleted(uid))
             {
                 Log.Warning($"Client {session} tried to interact with a deleted entity {uid}");
                 return false;
