@@ -14787,3 +14787,10 @@ Entries:
   id: 1613
   time: '2026-09-19T12:54:38.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4670
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Fixed xenomorphs not playing music on announcement
+  id: 1614
+  time: '2026-09-19T14:31:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4669
