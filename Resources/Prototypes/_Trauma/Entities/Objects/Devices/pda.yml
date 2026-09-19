@@ -160,4 +160,4 @@
     id: DClassIDCard
   - type: PdaBorderColor
     borderColor: "#eb7732"
-    accentVColor: "#2e2e2e"
+    accentHColor: "#2e2e2e"
