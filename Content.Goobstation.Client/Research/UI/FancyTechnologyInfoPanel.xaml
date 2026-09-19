@@ -3,8 +3,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <Control xmlns="https://spacestation14.io"
-         xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-         xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls;assembly=Content.Client"
+         xmlns:gfx="using:Robust.Client.Graphics"
+         xmlns:controls="using:Content.Client.UserInterface.Controls"
          Margin="5"
          MinWidth="450"
          VerticalExpand="True"
@@ -62,8 +62,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                           Visible="False">
                 <Label Text="{Loc 'research-console-required-text'}"
                         HorizontalAlignment="Center"/>
-                <customControls:HSeparator StyleClasses="LowDivider"
-                        Margin="0 0 0 10"/>
+                <controls:Separator StyleClasses="LowDivider" Margin="0 0 0 10" Orientation="Horizontal"/>
                 <PanelContainer VerticalExpand="True">
                     <PanelContainer.PanelOverride>
                         <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>
@@ -86,10 +85,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 VerticalExpand="True"
                 SizeFlagsStretchRatio="2"
                 Margin="5">
-                <Label Text="{Loc 'research-console-unlocks-text'}"
-                        HorizontalAlignment="Center"/>
-                <customControls:HSeparator StyleClasses="LowDivider"
-                        Margin="0 0 0 10"/>
+                <Label Text="{Loc 'research-console-unlocks-text'}" HorizontalAlignment="Center"/>
+                <controls:Separator StyleClasses="LowDivider" Margin="0 0 0 10" Orientation="Horizontal"/>
                 <PanelContainer VerticalExpand="True">
                     <PanelContainer.PanelOverride>
                         <gfx:StyleBoxFlat BackgroundColor="#1B1B1E"/>

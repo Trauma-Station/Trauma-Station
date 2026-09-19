@@ -1,10 +1,3 @@
-<!--
-SPDX-FileCopyrightText: 2023 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-
-SPDX-License-Identifier: MIT
--->
-
 <controls:FancyWindow xmlns="https://spacestation14.io"
                      xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
                      Title="{Loc 'intercom-menu-title'}"
@@ -26,7 +19,7 @@ SPDX-License-Identifier: MIT
             <Button Name="SpeakerButton" ToggleMode="True" Text="{Loc 'intercom-button-text-speaker'}" StyleClasses="OpenLeft" MinWidth="70"/>
         </BoxContainer>
         <BoxContainer Orientation="Vertical">
-            <PanelContainer StyleClasses="LowDivider" />
+            <controls:Separator StyleClasses="LowDivider"/>
             <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
                 <Label Text="{Loc 'intercom-flavor-text-left'}" StyleClasses="WindowFooterText"
                        HorizontalAlignment="Left" HorizontalExpand="True"  Margin="0 0 5 0" />

@@ -11,7 +11,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     Stylesheet="SpyUplink">
     <BoxContainer Orientation="Vertical">
         <Label Name="RefreshTimeLabel" Access="Public" Margin="5 5 0 0" HorizontalAlignment="Left"/>
-        <controls:HLine StyleClasses="PanelLight" Margin="0 5 0 0" Thickness="1"/>
+        <controls:Separator StyleClasses="PanelLight" Margin="0 5 0 0"/>
         <TabContainer Name="SpyTabs" VerticalExpand="True">
             <!-- Bounties -->
             <PanelContainer StyleClasses="BackgroundPanelDark" VerticalExpand="True">

@@ -136,8 +136,6 @@ namespace Content.Client.Stylesheets
         public const string StyleClassLabelHeading = "LabelHeading";
         public const string StyleClassLabelSubText = "LabelSubText";
         public const string StyleClassRedTopButton = "negative";
-        public const string ClassHighDivider = "HighDivider";
-        public const string ClassLowDivider = "LowDivider";
         public const string ClassAngleRect = "AngleRect";
 
         public override Stylesheet Stylesheet { get; }
@@ -1099,11 +1097,6 @@ namespace Content.Client.Stylesheets
                 Element<PanelContainer>().Class(OptionButton.StyleClassOptionsBackground)
                     .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat(Color.FromHex("#25252A"))),
 
-                new StyleRule(new SelectorElement(typeof(PanelContainer), new []{ ClassHighDivider}, null, null), new []
-                {
-                    new StyleProperty(PanelContainer.StylePropertyPanel, new StyleBoxFlat { BackgroundColor = NanoGold, ContentMarginBottomOverride = 2, ContentMarginLeftOverride = 2}),
-                }),
-
                 // Different Background shapes ---
                 Element<PanelContainer>().Class(ClassAngleRect)
                     .Prop(PanelContainer.StylePropertyPanel, BaseAngleRect)
@@ -1117,15 +1110,6 @@ namespace Content.Client.Stylesheets
                     .Prop(PanelContainer.StylePropertyPanel, BaseButtonOpenLeft)
                     .Prop(Control.StylePropertyModulateSelf, Color.FromHex("#25252A")),
                 // ---
-
-                // Dividers
-                Element<PanelContainer>().Class(ClassLowDivider)
-                    .Prop(PanelContainer.StylePropertyPanel, new StyleBoxFlat
-                    {
-                        BackgroundColor = Color.FromHex("#444"),
-                        ContentMarginLeftOverride = 2,
-                        ContentMarginBottomOverride = 2
-                    }),
 
                 // Window Headers
                 Element<Label>().Class("FancyWindowTitle")
