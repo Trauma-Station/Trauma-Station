@@ -1,0 +1,14 @@
+- type: entity
+  id: CrateMorgue
+  name: morgue supplies crate
+  description: Contains 1x syringe, 3x "embalming fluid bottle", 4x body bag.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children: !clear
+        - id: ChemistryBottleFormaldehyde
+          amount: 3
+        - id: Syringe
+        - id: BoxBodyBag
+          amount: 1

@@ -18,12 +18,12 @@
     - type: Solution
       id: melee
       solution:
-        maxVol: 1
+        maxVol: 0.6
     - type: SolutionRegeneration
       generated:
         reagents:
-        - ReagentId: Amatoxin
-          Quantity: 0.1
+        - ReagentId: Lead
+          Quantity: 0.02
     - type: MeleeChemicalInjector
-      transferAmount: 1
+      transferAmount: 0.2
       solution: melee

@@ -16,3 +16,21 @@
       children:
       - !type:NestedSelector
         tableId: RandomInkEnchant
+
+- type: entity
+  parent: MarkerBase
+  id: RandomInkSpawnerCurse
+  name: random magic ink
+  suffix: Oops, all curses!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Enchanting/inks.rsi
+    state: nocimat
+  - type: Icon
+    sprite: _Trauma/Objects/Enchanting/inks.rsi
+    state: nocimat
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children:
+      - !type:NestedSelector
+        tableId: RandomInkCurse

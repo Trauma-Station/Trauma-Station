@@ -1,0 +1,8 @@
+- type: vendingMachineInventory
+  id: PietyVendInventory
+  startingInventory:
+    EnchantingScrollEmpty: 6
+  contrabandInventory:
+    MagicInkRandomCurse: 1
+  emaggedInventory:
+    MagicInkRandom: 3
