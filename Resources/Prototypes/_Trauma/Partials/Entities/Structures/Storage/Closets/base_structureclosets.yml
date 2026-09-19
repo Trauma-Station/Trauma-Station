@@ -4,8 +4,8 @@
   - type: Penetratable
     penetrateDamage: 5
     damagePenalty: .5
-    - type: EntityStorage
-      masksToRemove: 85
+  - type: EntityStorage
+    masksToRemove: 85
 
 - type: entity
   id: ClosetSteelBase
