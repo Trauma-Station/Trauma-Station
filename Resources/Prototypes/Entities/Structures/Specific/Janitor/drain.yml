@@ -6,9 +6,6 @@
   placement:
     mode: SnapgridCenter
   components:
-  # <Trauma>
-  - type: Fixtures # stop trolling my map yml
-  # </Trauma>
   - type: Sprite
     drawdepth: FloorObjects
     sprite: Objects/Specific/Janitorial/drain.rsi
