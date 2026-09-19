@@ -1,0 +1,4 @@
+- type: entity
+  id: FloorDrain
+  components:
+  - type: Fixtures # stop trolling my map yml

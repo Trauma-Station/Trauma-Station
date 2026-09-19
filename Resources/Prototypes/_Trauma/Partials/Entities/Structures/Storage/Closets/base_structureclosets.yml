@@ -1,0 +1,17 @@
+- type: entity
+  id: ClosetBase
+  components:
+  - type: Penetratable
+    penetrateDamage: 5
+    damagePenalty: .5
+    - type: EntityStorage
+      masksToRemove: 85
+
+- type: entity
+  id: ClosetSteelBase
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 125
+  - type: Damageable
+    damageModifierSet: Metallic

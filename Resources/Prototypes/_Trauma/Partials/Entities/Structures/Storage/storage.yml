@@ -1,0 +1,5 @@
+- type: entity
+  id: Rack
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicRack

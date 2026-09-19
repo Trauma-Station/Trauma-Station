@@ -1,0 +1,11 @@
+- type: entity
+  id: BaseBigBox
+  components:
+  - type: JustABox
+
+- type: entity
+  id: StealthBox
+  components:
+  - type: CardboardBox
+    effectSound: /Audio/_Goobstation/Voice/surprised.ogg
+    quiet: false
