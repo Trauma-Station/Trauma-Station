@@ -1,0 +1,15 @@
+{
+    "version": 1,
+    "license": "CC0-1.0",
+    "copyright": "icon-omnimed-surgery made by _ (github)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+          "name": "icon-omnimed-surgery"
+        }
+    ]
+
+}
