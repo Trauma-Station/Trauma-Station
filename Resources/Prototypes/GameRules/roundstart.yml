@@ -233,6 +233,7 @@
   id: BaseTraitorRuleNoObjectives # Trauma - add NoObjectives, added objectives separately
   components:
   # <Trauma>
+  - type: RoundEndJobListingsInfo
   - type: AntagPlayerEffects
     effects:
     - !type:NestedEffect

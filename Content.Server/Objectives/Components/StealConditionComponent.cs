@@ -13,8 +13,10 @@ public sealed partial class StealConditionComponent : Component
     /// <summary>
     /// A group of items to be stolen
     /// </summary>
-    [DataField(required: true)]
-    public ProtoId<StealTargetGroupPrototype> StealGroup;
+    // <Trauma> - Made StealGroup non-nullable so it can be set after the objective is spawned.
+    [DataField]
+    public ProtoId<StealTargetGroupPrototype>? StealGroup;
+    // </Trauma>
 
     /// <summary>
     /// When enabled, disables generation of this target if there is no entity on the map (disable for objects that can be created mid-round).
