@@ -1,0 +1,612 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: MobSkeletonPerson
+  id: Aerskeleton
+  name: Urist McAer
+  components:
+  - type: AnomalousEntity
+    researchPerSecond: 1000
+    contained: false
+  - type: AerMobActive
+  - type: AerShyGuy
+
+- type: entity
+  parent: SoapHomemadeBanana
+  id: Aersoap
+  name: Aer Soap
+  components:
+  - type: AnomalousEntity
+    researchPerSecond: 0
+    contained: false
+    active: true
+    researchOnBehaviour: 100000
+    idGear: SoapHomemadeBanana
+  - type: AerSoap
+
+
+#scaner for aer
+- type: entity
+  parent: BaseItem
+  id: AerScanner
+  name: AER scanner
+  description: A hand-held scanner built to collect informations on AERs.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Aer/aerScanner.rsi
+    layers:
+      - state: icon
+        map: ["enum.AnomalyScannerVisualLayers.Base"]
+  - type: Appearance
+  - type: AnomalousEntityScanner
+  - type: Item
+    storedRotation: -90
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
+      Glass: 25
+
+# Aer sensor machine that must be used in containment chamber it analyses a linked anomalous entity in range
+- type: entity
+  id: MachineAERContainmentSensor
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: AER Analysis Sensor
+  description: A sensor able to examine an abnormal entity to produce usable research data.
+  components:
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: _Trauma/Structures/Aer/aerSensor.rsi
+    layers:
+    - state: gsensor1
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
+  - type: Transform
+    noRot: false
+  - type: Physics
+    canCollide: false
+  - type: AnomalousEntityContainment
+  - type: ResearchClient
+  - type: ActivatableUI
+    key: enum.ResearchClientUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+  - type: PointLight
+    radius: 1.2
+    energy: 2
+    color: "#fca3c0"
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalGlassBreak
+  - type: Machine
+    board: AerSensorCircuitboard
+
+# Aer sensor board
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: AerSensorCircuitboard
+  name: AER Analysis sensor board
+  description: A machine printed circuit board for an AER Analysis Sensor.
+  components:
+    - type: Sprite
+      state: science
+    - type: MachineBoard
+      prototype: MachineAERContainmentSensor
+      stackRequirements:
+        Manipulator: 1
+        Cable: 1
+        PlasmaGlass: 5
+
+# super shitty base i need ideas on what to make base
+- type: entity
+  abstract: true
+  parent: [ MobSpaceBasic, MobCombat ]
+  id: BaseAer
+  name: AER-123
+  description: It came from hell.
+  components:
+  - type: KnowledgeHolder
+  - type: KnowledgeContainer # no skills lol
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+    blackboard:
+      NavPry: !type:Bool
+        true
+      NavSmash: !type:Bool
+        true
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.5
+    baseSprintSpeed: 4.5
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+  - type: FootstepModifier
+  - type: Physics
+    bodyType: KinematicController
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      1000: Dead
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Heat: -1
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
+        Ballistic: -1
+  - type: ZombieImmune # gibs on death so its not possible to become a zombie
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    understands:
+    - TauCetiBasic
+  - type: ThermalVision
+  - type: Stamina
+    baseCritThreshold: 9999
+  - type: FlashImmunity
+    showInExamine: false
+  - type: Puller
+    needsHands: false
+  - type: GhostRole
+    name: ghost-role-information-demon-name
+    description: ghost-role-information-demon-desc
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleGhostRoleSoloAntagonist
+    raffle:
+      settings: short
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: GhostTakeoverAvailable
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: Targeting
+  - type: WarpPoint
+  - type: AnomalousEntity
+    researchPerSecond: 1000
+    contained: false
+  - type: AerMobActive
+
+# super shitty test yaml, anti specism ipc
+- type: entity
+  parent: BaseAer
+  id: aerIpc
+  name: AER-193
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Aer/noSpecism.rsi
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:GibBehavior
+        recursive: false
+  - type: Silicon
+    entityType: Player
+    batteryPowered: true
+    drainPerSecond: 1.5
+    chargeThresholdMid: 0.80
+    chargeThresholdLow: 0.35
+    chargeThresholdCritical: 0.10
+    speedModifierThresholds:
+      4: 1
+      3: 1
+      2: 0.80
+      1: 0.45
+      0: 0.10
+  - type: Battery
+    maxCharge: 1080
+    startingCharge: 1080
+  - type: BatteryDrinker
+    blacklist:
+      tags:
+      - IPCDrinkBlacklist
+  - type: Damageable
+    damageModifierSet: IPC
+
+- type: entity
+  parent: [MobSpaceBasic, MobCombat, InventoryBase]
+  id: NewBaseAer
+  name: AER-123
+  description: AER-123? how queer you dont remember this one in the files
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Aer/aerMarksman.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Eldritch
+  - type: PassiveDamage
+    allowedStates:
+    - Alive
+    damage:
+      types:
+        Heat: -1
+        Blunt: -1
+        Piercing: -1
+        Slash: -1
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Sulfur
+        Quantity: 300
+  - type: Crawler
+  - type: Inventory
+    templateId: demon
+  - type: Hands
+    hands:
+      hand_left:
+        location: Left
+      hand_right:
+        location: Right
+    sortedHands:
+    - hand_right
+    - hand_left
+  - type: ComplexInteraction
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: alive
+  - type: FootstepModifier
+  - type: Physics
+    bodyType: KinematicController
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: SoftCrit
+      250: Critical
+      300: Dead
+  - type: ZombieImmune
+  - type: Puller
+    needsHands: true
+  - type: RotationVisuals
+    defaultRotation: 90
+    horizontalRotation: 90
+  - type: Targeting
+
+- type: entity
+  parent: [NewBaseAer]
+  id: AerShyGuy
+  name: AER-096
+  description: AER-096 is a humanoid creature measuring approximately 2.38 meters in height, it shows very little muscle mass and its skin is mostly devoid of pigmentation, it has no sign of any body hair.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Aer/aerShyGuy.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+  - type: AnomalousEntity
+    researchPerSecond: 100
+    researchOnBehaviour: 5000
+    idGear: IdGearMagicBullet
+  - type: AerShyGuy
+  - type: GhostRole
+    name: AER-096
+    description: Try not to get your face seen, start breaching due to a passing janitor seeing two pixels
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
+    raffle:
+      settings: default
+
+- type: entity
+  parent: [BaseItem, FragileGrenadeBase, TimerGrenadeBase]
+  id: AerCore
+  name: Aer Core
+  description: an experimental sphere produced by NT HQ capable of forcefully manifest an AER after activation
+  components:
+  - type: ActivatedAerCore
+  - type: TimerTrigger
+    beepSound:
+      path: "/Audio/Effects/beep1.ogg"
+      params:
+        volume: 5
+    initialBeepDelay: 0
+    beepInterval: 2 # 2 beeps total (at 0 and 2)
+
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseAerObjective
+  components:
+  - type: Objective
+    difficulty: 1.5
+    issuer: Self
+
+- type: entity
+  parent: [BaseAerObjective, BaseSurviveObjective]
+  id: AerShyGuyObjective
+  name: THEY SAW YOUR FACE!
+  description: KILL THEM! KILL THEM!
+  components:
+  - type: Objective
+    icon:
+      sprite: _Trauma/Mobs/Aer/aerShyGuy.rsi
+      state: alive
+  - type: AerShyGuyObjective
+
+- type: entity
+  parent: [BaseAerObjective, BaseSurviveObjective]
+  id: AerBreachObjective
+  name: Breach Containment
+  description: Escape containment, be free.
+  components:
+  - type: Objective
+    icon:
+      sprite: _DV/CosmicCult/Icons/objectives.rsi
+      state: colossus
+  - type: AerBreachCondition
+
+- type: entity
+  id: AerActivator
+  parent: [ConstructibleMachine, BaseMachinePowered, BaseConstructibleMachineDestructible]
+  name: aer refiner
+  description: a machine capable of forcefully activating an aer core and extract I.D. Gear
+  components:
+  - type: AerRefiner
+    refiningWhitelist:
+      components:
+      - ActivatedAerCore
+    spawnTable: !type:GroupSelector
+      children:
+      - id: AerShyGuy
+        weight: 25 #25/100
+      - id: AerMarksman
+        weight: 25 #25/100
+  - type: Machine
+    board: aerActivatorBoard
+  - type: WiresPanel
+  - type: Sprite
+    sprite: Structures/Machines/artifact_crusher.rsi
+    offset: 0,0.5
+    noRot: true
+    layers:
+    - state: base
+      map: ["enum.StorageVisualLayers.Base"]
+    - state: door-closed
+      map: ["enum.StorageVisualLayers.Door"]
+    - state: piston
+      map: ["pistonlayer"]
+    - state: glass
+    - state: lights
+      map: ["enum.PowerDeviceVisualLayers.Powered"]
+      shader: unshaded
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeCircle
+          radius: 0.45
+        density: 50
+        mask:
+        - HighImpassable
+        layer:
+        - HighImpassable
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 175
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:EmptyContainersBehaviour
+        containers:
+        - entity_storage
+  - type: EntityStorage
+    capacity: 1
+    whitelist:
+      components:
+      - ActivatedAerCore
+      tags:
+      - CanPilot # People
+      - VimPilot # Pets
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.AerRefinerVisuals.Refining:
+        pistonlayer:
+          True: {state: piston-push}
+          False: {state: piston}
+      enum.PowerDeviceVisuals.Powered:
+        enum.PowerDeviceVisualLayers.Powered:
+          True: { visible: true }
+          False: { visible: false }
+  - type: EntityStorageVisuals
+    stateDoorClosed: door-closed
+    openDrawDepth: 0
+    closedDrawDepth: 4
+  - type: Construction
+    containers:
+    - machine_board
+    - machine_parts
+    - entity_storage
+    - output_container
+  - type: ContainerContainer
+    containers:
+      machine_board: !type:Container
+      machine_parts: !type:Container
+      entity_storage: !type:Container
+      output_container: !type:Container
+
+- type: entity
+  id: aerActivatorBoard
+  parent: BaseMachineCircuitboard
+  name: aer activator machine board
+  description: A machine printed circuit board for an artifact crusher.
+  components:
+  - type: Sprite
+    state: science
+  - type: MachineBoard
+    prototype: AerActivator
+    stackRequirements:
+      Manipulator: 2
+      Glass: 1
+      Steel: 5
+
+- type: entity
+  parent: [ BaseUniquePet, MobAdultSlimes, StripableInventoryBase ]
+  id: AerSlimeSad
+  name: AER-124
+  description: This masterpiece is a result of… wait… why is it frowning?
+  components:
+  - type: NPCRetaliation
+  - type: HTN
+    rootTask:
+      task: RuminantHostileCompound
+  - type: Sprite
+    sprite: _Trauma/Mobs/Aer/aerSlimeSad.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: rainbow_baby_slime
+    - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
+      state: aslime-_3
+      shader: unshaded
+    - map: [ "head" ]
+  - type: Inventory
+    speciesId: slime
+    templateId: head
+    displacements:
+      head:
+        sizeMaps:
+          32:
+            sprite: Mobs/Pets/Smile/smile_displacement.rsi
+            state: head
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Dead
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepSlime
+  - type: Tag
+    tags:
+    - FootstepSound
+    - DoorBumpOpener
+    - CannotSuicide
+    - VimPilot
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: rainbow_baby_slime
+        BaseUnshaded: aslime-_3
+      Dead:
+        Base: rainbow_baby_slime_dead
+  - type: Damageable
+    damageModifierSet: SlimePet
+  - type: Bloodstream
+    bloodlossHealDamage:
+      types:
+        Bloodloss:
+          -0.8
+  - type: Temperature
+  - type: TemperatureDamage
+    heatDamageThreshold: 800
+    coldDamageThreshold: 0
+  - type: MeleeWeapon
+    damage:
+      types:
+        Caustic: 5
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
+  - type: MultiHandedItem
+  - type: Item
+    sprite: Mobs/Pets/Smile/smile.rsi
+    size: Huge
+  - type: MobPrice
+    price: 3000
+  - type: GhostRole
+    name: AER-124
+    description: Spread melancholy all around
+    rules: ghost-role-information-freeagent-rules
+    raffle:
+      settings: default
+  - type: Grammar
+    attributes:
+      proper: true
+      gender: female
+  - type: LanguageSpeaker
+    speaks:
+    - Bubblish
+    understands:
+    - Bubblish
+    - TauCetiBasic
+  - type: AnomalousEntity
+    researchPerSecond: 20
+    researchOnBehaviour: 2500
+    idGear: IdGearMagicBullet
+  - type: AerSlimeSad
+    reagents:
+      Gloom: 10
+  - type: ActionGrant
+    actions:
+    - ActionGloomyFrown
+
+# action for aer-124 sadness area
+- type: entity
+  parent: BaseAction
+  id: ActionGloomyFrown
+  name: Gloomy Frown
+  description: Forcefully saddens creatures around
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Action
+    useDelay: 60
+    itemIconStyle: NoItem
+  - type: Sprite
+    sprite: /Textures/_Trauma/Mobs/Aer/aerMarksmanContract.rsi
+    layers:
+    - state: contract-written
+    #sprite: Interface/Emotes/cry.png
+  - type: InstantAction
+    event: !type:GloomyFrownEvent {}
+
+
+- type: reagent
+  id: Gloom
+  name: Gloom
+  group: Special
+  desc: reagent-desc-laughter
+  physicalDesc: reagent-physical-desc-funny
+  flavor: funny
+  color: "#4d8bff"
+  worksOnTheDead: true
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:Emote
+        emote: Crying
+        showInGuidebook: true
+        showInChat: true
+        force: true
+        probability: 0.3
+      - !type:PopupMessage
+        type: Local
+        visualType: Large
+        messages: [ "laughter-effect-control-laughter" ]
+        probability: 0.2
