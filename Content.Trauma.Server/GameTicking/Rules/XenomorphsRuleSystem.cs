@@ -244,13 +244,13 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
         if (!component.Announced && component.AnnouncementTime <= _timing.CurTime)
         {
             component.Announced = true;
-            var queenUid = GetXenomorphs(component, "Queen").First(); // There should only be one queen so this works.
+            var stationUid = GetStationGrids().First();
 
             if (!string.IsNullOrEmpty(component.Announcement))
                 _chat.DispatchGlobalAnnouncement(Loc.GetString(component.Announcement), component.Sender != null ? Loc.GetString(component.Sender) : null, colorOverride: component.AnnouncementColor);
 
-            _sound.StopStationEventMusic(queenUid, StationEventMusicType.Xenomorph);
-            _sound.DispatchStationEventMusic(queenUid, component.XenomorphInfestationSound, StationEventMusicType.Xenomorph, component.XenomorphInfestationSound.Params);
+            _sound.StopStationEventMusic(stationUid, StationEventMusicType.Xenomorph);
+            _sound.DispatchStationEventMusic(stationUid, component.XenomorphInfestationSound, StationEventMusicType.Xenomorph, component.XenomorphInfestationSound.Params);
         }
 
         CheckRoundEnd(uid, component, gameRule);
@@ -298,8 +298,6 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
             || xenomorphs.Count / (float) (xenomorphs.Count + humans.Count) < component.XenomorphsShuttleCallPercentage)
             return;
 
-        if (GetXenomorphs(component, "Queen").FirstOrNull() is not { } queenUid) return; // No queen no win
-
         _roundEnd.DoRoundEndBehavior(
             RoundEndBehavior.ShuttleCall,
             component.ShuttleCallTime,
@@ -307,8 +305,10 @@ public sealed partial class XenomorphsRuleSystem : GameRuleSystem<XenomorphsRule
             component.RoundEndTextShuttleCall,
             component.RoundEndTextAnnouncement
         );
-        _sound.StopStationEventMusic(queenUid, StationEventMusicType.Xenomorph);
-        _sound.DispatchStationEventMusic(queenUid, component.XenomorphTakeoverSound, StationEventMusicType.Xenomorph, component.XenomorphTakeoverSound.Params);
+
+        var stationUid = GetStationGrids().First();
+        _sound.StopStationEventMusic(stationUid, StationEventMusicType.Xenomorph);
+        _sound.DispatchStationEventMusic(stationUid, component.XenomorphTakeoverSound, StationEventMusicType.Xenomorph, component.XenomorphTakeoverSound.Params);
 
         component.WinType = WinType.XenoMinor;
         component.WinConditions.Add(WinCondition.XenoTakeoverStation);
