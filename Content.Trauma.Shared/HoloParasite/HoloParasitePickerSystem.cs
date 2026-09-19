@@ -80,9 +80,6 @@ public sealed partial class HoloParasitePickerSystem : EntitySystem
 
         ent.Comp.HostTarget = host;
 
-        if (ent.Comp.ChosenVariant == null)
-            ent.Comp.ChosenVariant = ent.Comp.Variants[0].Prototype;
-
         _ui.TryOpenUi(ent.Owner, HoloParasitePickerUiKey.Key, user, predicted: true);
     }
 
@@ -110,10 +107,8 @@ public sealed partial class HoloParasitePickerSystem : EntitySystem
             return;
 
         creator.GuardianProto = protoId;
-        ent.Comp.ChosenVariant = protoId;
 
         Dirty(ent, creator);
-        Dirty(ent);
 
         _ui.CloseUi(ent.Owner, HoloParasitePickerUiKey.Key, user, predicted: true);
 

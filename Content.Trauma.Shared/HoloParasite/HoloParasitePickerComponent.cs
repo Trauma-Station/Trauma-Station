@@ -12,9 +12,6 @@ public sealed partial class HoloParasitePickerComponent : Component
     public List<HoloParasiteVariant> Variants = new();
 
     [DataField, AutoNetworkedField]
-    public EntProtoId? ChosenVariant;
-
-    [DataField, AutoNetworkedField]
     public EntityUid? HostTarget;
 }
 
