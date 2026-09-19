@@ -172,6 +172,13 @@ MachinePowerTransmissionLaserFlatpack: null
 
 # 2026-09-16
 SpawnMobPlantbot: null
+
+# 2026-09-19
+PoweredFloorLight: null
+CMCatwalk: Catwalk
+WallXenoMembrane: ResinMembrane
+WallXenoResin: WallResin
+WallXenoResinThick: WallResin
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV
