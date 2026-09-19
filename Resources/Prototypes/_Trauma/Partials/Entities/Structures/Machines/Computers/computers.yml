@@ -4,7 +4,7 @@
   id: ComputerComms
   components:
   - type: StationReportTarget # not given to aghost
-  - type: TraumaCommsConsole6471094
+  - type: TraumaCommsConsole
   - type: InteractedBlacklist
     blacklist:
       components:
