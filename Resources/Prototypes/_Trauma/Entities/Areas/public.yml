@@ -4,6 +4,14 @@
 
 - type: entity
   parent: BaseAreaStation
+  id: AreaArrivals
+  name: arrivals
+  components:
+  - type: Sprite
+    state: arrivals
+
+- type: entity
+  parent: BaseAreaStation
   id: AreaCryosleep
   name: cryosleep
   components:

@@ -14,7 +14,9 @@
   parent: AreaAi
   id: AreaAiCore
   name: AI core
-  # TODO: unique sprite
+  components:
+  - type: Sprite
+    state: ai_core
 
 - type: entity
   parent: AreaAi

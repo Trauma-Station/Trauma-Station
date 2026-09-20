@@ -12,6 +12,7 @@ public sealed partial class ScannedGenomeSystem : EntitySystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private MutationSystem _mutation = default!;
     [Dependency] private EntityQuery<MutatableComponent> _mutatableQuery = default!;
+    [Dependency] private EntityQuery<MutationComponent> _mutationQuery = default!;
     [Dependency] private EntityQuery<ScannedGenomeComponent> _query = default!;
 
     private StringBuilder _builder = new();
@@ -35,7 +36,7 @@ public sealed partial class ScannedGenomeSystem : EntitySystem
             return;
 
         // new mutation added to an already scanned subject, create a sequence for it
-        TryAddSequence(ent.AsNullable(), args.Id);
+        TryAddSequence(ent.AsNullable(), args.Id, args.Mutation.Comp);
     }
 
     [SubscribeLocalEvent]
@@ -71,11 +72,11 @@ public sealed partial class ScannedGenomeSystem : EntitySystem
             TryAddSequence(ent, id);
         }
 
-        foreach (var (id, _) in mutatable.Mutations)
+        foreach (var (id, uid) in mutatable.Mutations)
         {
             // only add non-dormant so they aren't duplicated
             if (_mutation.IsForeign(mutatable, id))
-                TryAddSequence(ent, id);
+                TryAddSequence(ent, id, _mutationQuery.CompOrNull(uid)); // use the entity's data incase it changed the difficulty
         }
     }
 
@@ -92,15 +93,17 @@ public sealed partial class ScannedGenomeSystem : EntitySystem
     /// <summary>
     /// Adds a randomly generated sequence for a given mutation to the given genome.
     /// </summary>
-    public void TryAddSequence(Entity<ScannedGenomeComponent?> ent, EntProtoId<MutationComponent> id)
+    public void TryAddSequence(Entity<ScannedGenomeComponent?> ent, EntProtoId<MutationComponent> id, MutationComponent? mutation = null)
     {
         if (!_query.Resolve(ent, ref ent.Comp) ||
-            !_mutation.AllMutations.TryGetValue(id, out var mutation) ||
             _mutation.GetRoundData(id) is not {} data ||
             ent.Comp.Sequences.Any(s => s.Mutation == id)) // no dupes
         {
             return;
         }
+
+        if (mutation == null && !_mutation.AllMutations.TryGetValue(id, out mutation))
+            return; // bad id
 
         // discovered sequences have no missing bases
         if (data.Discovered)
@@ -122,7 +125,7 @@ public sealed partial class ScannedGenomeSystem : EntitySystem
         // exactly what it is by grepping the mutations :)
         var difficulty = mutation.Difficulty;
         difficulty += _random.Next(-2, 2);
-        difficulty = Math.Clamp(difficulty, 0, MutationData.BaseCount);
+        difficulty = Math.Clamp(difficulty, 2, MutationData.BaseCount);
 
         // chance of Xing out a whole pair goes up with difficulty
         // so you are less likely to get free easy fixes

@@ -12,6 +12,20 @@
   - node: empty
     entity: LogicEmptyCircuit
     edges:
+    # <Trauma>
+    - to: clock
+      steps:
+      - tag: TimerSignalElectronics
+        store: board
+        name: construction-graph-tag-signal-timer-electronics
+        icon:
+          sprite: "Objects/Misc/module.rsi"
+          state: "charger_APC"
+        doAfter: 1
+      - material: Cable
+        amount: 3
+        doAfter: 1
+    # </Trauma>
     - to: start
       steps:
       - tool: Screwing

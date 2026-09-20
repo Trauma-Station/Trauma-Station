@@ -153,7 +153,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
             BreakOnDamage = true,
             AttemptFrequency = AttemptFrequency.EveryTick
         };
-        SetBusy(ent.Owner, _doAfter.TryStartDoAfter(doAfterArgs));
+        SetBusy(ent.Owner, doAfterArgs);
         Speak(ent, "sequencing");
     }
 
@@ -252,7 +252,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
             BreakOnDamage = true,
             AttemptFrequency = AttemptFrequency.EveryTick
         };
-        SetBusy(ent.Owner, _doAfter.TryStartDoAfter(doAfterArgs));
+        SetBusy(ent.Owner, doAfterArgs);
         Speak(ent, "combining");
     }
 

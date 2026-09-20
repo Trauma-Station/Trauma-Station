@@ -6,7 +6,6 @@ using Content.Shared.Destructible.Thresholds;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Physics;
 using Content.Shared.Random.Helpers;
-using Content.Shared.Stacks;
 using Content.Trauma.Shared.Effects;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -23,37 +22,10 @@ public sealed partial class RandomTeleportSystem : EntitySystem
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedMapSystem _map = default!;
-    [Dependency] private SharedStackSystem _stack = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private SparksSystem _sparks = default!;
     [Dependency] private TeleportSystem _teleport = default!;
     [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
-
-    [SubscribeLocalEvent]
-    private void OnUseInHand(Entity<RandomTeleportOnUseComponent> ent, ref UseInHandEvent args)
-    {
-        if (args.Handled)
-            return;
-
-        args.Handled = true;
-
-        if (!RandomTeleport(args.User, (ent, ent.Comp), out var wp, user: args.User))
-            return;
-
-        _adminLog.Add(LogType.Action, LogImpact.Low, $"{args.User:actor} randomly teleported to {wp} using {ent:used}");
-
-        if (!ent.Comp.ConsumeOnUse)
-            return;
-
-        if (TryComp<StackComponent>(ent, out var stack))
-        {
-            _stack.ReduceCount((ent.Owner, stack), 1);
-            return;
-        }
-
-        // It's consumed on use and it's not a stack so delete it
-        PredictedQueueDel(ent);
-    }
 
     public bool RandomTeleport(EntityUid target, Entity<RandomTeleportComponent> rtp, bool sound = true, EntityUid? user = null, bool predicted = true)
         => RandomTeleport(target, rtp, out _, sound, user, predicted);

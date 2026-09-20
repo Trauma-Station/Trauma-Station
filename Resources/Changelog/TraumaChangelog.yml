@@ -14676,3 +14676,53 @@ Entries:
   id: 1600
   time: '2026-09-17T07:19:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4634
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Buffed the HP of Nukie Mice and of Nukie Carps to 30 and 50 max health,
+      respectively.
+  - type: Fix
+    message: >-
+      Fixed the dehydrated holocarp and magicarp items showing the sprite of the
+      regular one when held.
+  id: 1601
+  time: '2026-09-17T11:30:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4638
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      You can now construct a signal clock item, it replaces old nor/xor gate
+      loops.
+  id: 1602
+  time: '2026-09-17T11:32:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4635
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Derelict borgs now have the correct skills and modules.
+  id: 1603
+  time: '2026-09-17T13:02:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4594
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Radiation storms' mutations are now easier to sequence and thus remove.
+  id: 1604
+  time: '2026-09-17T14:11:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4641
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Moths and arachnids can now breath pluoxium.
+  id: 1605
+  time: '2026-09-17T15:02:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4643
+- author: yglop
+  changes:
+  - type: Add
+    message: Regular glass sheets can be broken by use in hand.
+  id: 1606
+  time: '2026-09-17T19:35:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4640
