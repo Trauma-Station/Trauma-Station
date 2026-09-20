@@ -42,7 +42,7 @@ public sealed partial class RanchingEggLayerComponent : Component
     /// Food level needed to lay eggs.
     /// </summary>
     [DataField]
-    public SatiationValue HungerThreshold = 35;
+    public SatiationValue HungerThreshold = 25;
 
     /// <summary>
     /// When to next try to lay an egg.
