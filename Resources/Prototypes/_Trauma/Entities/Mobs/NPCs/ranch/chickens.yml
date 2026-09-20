@@ -1488,7 +1488,7 @@
   - type: Sprite
     sprite: _Trauma/Mobs/Ranch/chicken-stone.rsi
   - type: EggFertilizer
-    specialReplacementRequiredEgg: SeaEgg
+    specialReplacementRequiredEgg: SelkieEgg
     specialReplacement: CoralEgg
   - type: PlateableChicken
   - type: FavoriteFood
