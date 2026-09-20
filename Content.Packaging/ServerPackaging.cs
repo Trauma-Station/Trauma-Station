@@ -170,6 +170,11 @@ public static class ServerPackaging
 
         // <Trauma> - use helper for all modules not just Content.Server
         var contentAssemblies = ModulePackaging.GetContentAssemblyNamesToCopy(sourcePath, "Server");
+        logger.Info($"{contentAssemblies.Count} assemblies packaged:");
+        foreach (var name in contentAssemblies)
+        {
+            logger.Info($"- {name}");
+        }
         // </Trauma>
 
         await RobustSharedPackaging.DoResourceCopy(

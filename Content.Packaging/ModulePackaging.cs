@@ -34,7 +34,6 @@ public static class ModulePackaging
                     "-c", configuration,
                     "--nologo",
                     "/v:m",
-                    "/t:Rebuild",
                     "/p:FullRelease=true",
                     "/m"
                 }
@@ -52,7 +51,6 @@ public static class ModulePackaging
         }
     }
 
-
     public static IEnumerable<string> GetContentAssemblyNamesToCopy(DepsHandler deps, string module, string side)
     {
         var depsContent = deps.RecursiveGetLibrariesFrom($"Content.{module}.{side}").SelectMany(GetLibraryNames);
@@ -61,7 +59,7 @@ public static class ModulePackaging
         var depsContentExclusive = depsContent.Except(depsRobust).ToHashSet();
 
         // Remove .dll suffix and apply filtering.
-        var names = depsContentExclusive.Select(p => p[..^4]).Where(p => p.StartsWith("JetBrains.Annotations"));
+        var names = depsContentExclusive.Select(p => p[..^4]).Where(p => !p.StartsWith("JetBrains.Annotations"));
 
         return names;
 
