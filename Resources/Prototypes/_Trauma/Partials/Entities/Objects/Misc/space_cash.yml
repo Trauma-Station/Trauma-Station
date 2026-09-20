@@ -3,7 +3,7 @@
 - type: entity
   id: BaseSpaceCash
   components:
-  - !type:Remove Cash # dont want this to be inherited, moved to separate SpaceCash prototype
+  - !Remove Cash # dont want this to be inherited, moved to separate SpaceCash prototype
   - type: Currency
     price:
       Spesos: 1
