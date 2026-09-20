@@ -41424,14 +41424,4 @@ entities:
       parent: 1
       rot: -1.5707963267948966 rad
       pos: -10.509799,5.809138
-- proto: XenoEggDestroyed
-  entities:
-  - uid: 6760
-    components:
-    - type: MetaData
-      name: destroyed xeno egg
-      desc: Who could've guessed pulse weapons cut through these like butter. It's a wonder military companies struggle taking them out.
-    - type: Transform
-      parent: 1
-      pos: -10.5,5.5
 ...
