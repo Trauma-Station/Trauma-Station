@@ -3101,14 +3101,6 @@ entities:
     - type: Transform
       pos: 20.5,10.5
       parent: 1
-- proto: RMCOverheadSignNeonBar
-  entities:
-  - uid: 648
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 24.5,13.5
-      parent: 1
 - proto: Sink
   entities:
   - uid: 447

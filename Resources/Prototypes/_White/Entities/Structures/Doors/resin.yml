@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: CMBaseXenoStructure
+  parent: BaseStructure
   id: ResinDoor
   name: resin Door
   description: Thick resin solidified into a door.
@@ -95,4 +95,7 @@
     closingSpriteState: closed_unlit
   - type: AccessReader
     access: [["Xenomorph"]]
-    breakOnAccessBreaker: false # Goobstation
+    breakOnAccessBreaker: false
+  - type: NpcFactionMember
+    factions:
+    - Xeno
