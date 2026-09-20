@@ -76,7 +76,6 @@
     color: "#befaff"
     castShadows: false
 
-
 - type: entity
   parent: BaseAnomalyCore
   id: AnomalyCoreFlesh

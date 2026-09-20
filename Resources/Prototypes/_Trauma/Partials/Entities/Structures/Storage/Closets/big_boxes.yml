@@ -10,4 +10,4 @@
   components:
   - type: CardboardBox
     effectSound: /Audio/_Goobstation/Voice/surprised.ogg
-    quiet: false
+    quiet: false # false so custom logic can be used to control it

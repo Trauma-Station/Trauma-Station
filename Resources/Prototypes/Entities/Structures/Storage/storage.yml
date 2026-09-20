@@ -4,8 +4,6 @@
   name: rack
   description: A rack for storing things on.
   components:
-  - type: CosmicCorruptible
-    convertTo: CosmicRack
   - type: MeleeSound
     soundGroups:
       Brute:
