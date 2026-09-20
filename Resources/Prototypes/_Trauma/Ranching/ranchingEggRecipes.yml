@@ -79,8 +79,8 @@
   - MethApple
 
 - type: eggRecipe
-  id: SeaEgg
-  egg: SeaEgg
+  id: SelkieEgg
+  egg: SelkieEgg
   requiredChicken:
   - MobWhiteSilkieHen
   - MobSelkieHen

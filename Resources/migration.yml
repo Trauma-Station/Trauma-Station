@@ -169,6 +169,15 @@ LightReplacerEmpty: LightReplacer
 MachinePowerTransmissionLaser: null
 MachinePowerTransmissionLaserCrate: null
 MachinePowerTransmissionLaserFlatpack: null
+
+# 2026-09-16
+SpawnMobPlantbot: null
+
+# 2026-09-19
+PoweredFloorLight: null
+WallXenoMembrane: ResinMembrane
+WallXenoResin: WallResin
+WallXenoResinThick: WallResin
 # </Trauma>
 
 # Goobstation - Submarine from DeltaV

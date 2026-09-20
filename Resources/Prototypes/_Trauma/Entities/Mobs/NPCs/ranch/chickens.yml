@@ -35,17 +35,6 @@
   - type: HTN
     rootTask:
       task: RuminantCompound
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.35
-        density: 8
-        mask:
-        - SmallMobMask
-        layer:
-        - SmallMobLayer
   - type: Inventory
     speciesId: cat
     templateId: pet
@@ -1551,18 +1540,31 @@
       types:
         Piercing: 6
         Poison: 4
-  - type: Solution
-    id: melee
-    solution:
-      reagents:
-      - ReagentId: Hephaestium
-        Quantity: 90
+  - type: SolutionManager
+    solutions:
+    - SolutionCockatrice
   - type: MeleeChemicalInjector
     solution: melee
     transferAmount: 6
   - type: FavoriteFood
     tag:
     - LizardTail
+
+- type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionCockatrice
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Hephaestium
+        Quantity: 1
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Hephaestium
+        Quantity: 30
 
 # Legendary
 
