@@ -79,6 +79,7 @@ public sealed partial class ClientNuclearReactorSystem : NuclearReactorSystem
         var parent = Transform(ent).ParentUid;
         if (ent.Comp.Position is not { } pos ||
             !_query.TryComp(parent, out var reactor) ||
+            reactor.PartsContainer == default ||
             !reactor.PartsContainer.Contains(ent.Owner))
             return;
 

@@ -419,3 +419,10 @@ Entries:
   id: 44
   time: '2026-09-18T13:17:32.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4660
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Oasis now have a nuclear reactor and premade AME.
+  id: 45
+  time: '2026-09-19T14:47:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4671
