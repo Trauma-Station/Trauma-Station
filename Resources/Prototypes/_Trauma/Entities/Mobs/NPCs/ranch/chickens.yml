@@ -1555,13 +1555,11 @@
   id: SolutionCockatrice
   categories: [ HideSpawnMenu ]
   components:
-  # <Trauma>
   - type: SolutionRegeneration
     generated:
       reagents:
       - ReagentId: Hephaestium
         Quantity: 1
-  # </Trauma>
   - type: Solution
     solution:
       reagents:
