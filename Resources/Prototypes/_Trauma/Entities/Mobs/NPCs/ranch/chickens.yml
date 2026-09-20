@@ -35,17 +35,6 @@
   - type: HTN
     rootTask:
       task: RuminantCompound
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeCircle
-          radius: 0.35
-        density: 8
-        mask:
-        - SmallMobMask
-        layer:
-        - SmallMobLayer
   - type: Inventory
     speciesId: cat
     templateId: pet
@@ -1499,7 +1488,7 @@
   - type: Sprite
     sprite: _Trauma/Mobs/Ranch/chicken-stone.rsi
   - type: EggFertilizer
-    specialReplacementRequiredEgg: SelkieEgg
+    specialReplacementRequiredEgg: SeaEgg
     specialReplacement: CoralEgg
   - type: PlateableChicken
   - type: FavoriteFood
