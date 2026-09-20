@@ -36,7 +36,7 @@ public sealed partial class RanchingEggLayerComponent : Component
     /// The amount of nutrient hunger used to lay an egg.
     /// </summary>
     [DataField]
-    public float HungerUsage = 3f;
+    public float HungerUsage = 5f;
 
     /// <summary>
     /// Food level needed to lay eggs.
