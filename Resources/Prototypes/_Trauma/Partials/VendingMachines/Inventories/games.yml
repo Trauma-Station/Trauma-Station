@@ -3,8 +3,4 @@
 - type: vendingMachineInventory
   id: GoodCleanFunInventory
   contrabandInventory:
-    Basketball: 1
-    FoodSnackBoritos: 3
-    DrinkSpaceMountainWindCan: 3
-    BaseBallBat: 1
     MysteryLighterBox: 1
