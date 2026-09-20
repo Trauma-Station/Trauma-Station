@@ -14773,3 +14773,31 @@ Entries:
   id: 1611
   time: '2026-09-19T08:41:22.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4662
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed whispering bypassing language...
+  id: 1612
+  time: '2026-09-19T12:27:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4668
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed larp.
+  id: 1613
+  time: '2026-09-19T12:54:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4670
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Fixed xenomorphs not playing music on announcement
+  id: 1614
+  time: '2026-09-19T14:31:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4669
+- author: IvanKuvalda
+  changes:
+  - type: Add
+    message: Added new classes for holoparasites
+  id: 1615
+  time: '2026-09-19T15:03:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4631
