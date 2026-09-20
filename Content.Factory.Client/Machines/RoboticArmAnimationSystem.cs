@@ -12,6 +12,7 @@ namespace Content.Factory.Client.Machines;
 public sealed partial class RoboticArmAnimationSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     public override void FrameUpdate(float frameTime)
@@ -40,7 +41,7 @@ public sealed partial class RoboticArmAnimationSystem : EntitySystem
         if (!ent.Comp.HasItem) // returning to the resting position when emptied
             progress = 1f - progress;
         var angle = Angle.FromDegrees(progress * 180f);
-        sprite.LayerSetRotation(RoboticArmLayers.Arm, angle);
+        _sprite.LayerSetRotation((ent, sprite), RoboticArmLayers.Arm, angle);
     }
 
     private void Reset(Entity<RoboticArmComponent> ent)
@@ -49,6 +50,6 @@ public sealed partial class RoboticArmAnimationSystem : EntitySystem
             return;
 
         var angle = ent.Comp.HasItem ? new Angle(Math.PI) : Angle.Zero;
-        sprite.LayerSetRotation(RoboticArmLayers.Arm, angle);
+        _sprite.LayerSetRotation((ent, sprite), RoboticArmLayers.Arm, angle);
     }
 }
