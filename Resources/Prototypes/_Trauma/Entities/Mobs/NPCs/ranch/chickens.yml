@@ -1540,18 +1540,33 @@
       types:
         Piercing: 6
         Poison: 4
-  - type: Solution
-    id: melee
-    solution:
-      reagents:
-      - ReagentId: Hephaestium
-        Quantity: 90
+  - type: SolutionManager
+    solutions:
+    - SolutionCockatrice
   - type: MeleeChemicalInjector
     solution: melee
     transferAmount: 6
   - type: FavoriteFood
     tag:
     - LizardTail
+
+- type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionCockatrice
+  categories: [ HideSpawnMenu ]
+  components:
+  # <Trauma>
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Hephaestium
+        Quantity: 1
+  # </Trauma>
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Hephaestium
+        Quantity: 30
 
 # Legendary
 
