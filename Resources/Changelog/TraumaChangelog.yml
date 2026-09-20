@@ -14808,3 +14808,33 @@ Entries:
   id: 1616
   time: '2026-09-19T23:24:56.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4679
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Made it so chicks grow up 3.5x faster, They now become an adult in 60s
+      instead of 200s
+  - type: Tweak
+    message: >-
+      Reduced the amount of food needed for hens to lay eggs as well as
+      decreased the time to lay eggs, However they now consume more hunger from
+      laying eggs
+  - type: Tweak
+    message: Decreased the fertilization time for roosters
+  - type: Tweak
+    message: Made chickens live longer
+  - type: Tweak
+    message: Made normal lollypops work for creating Candy Eggs
+  - type: Fix
+    message: >-
+      Fixed chicks, hens and roosters noclipping through railings and doors, Now
+      you can properly contain them
+  - type: Fix
+    message: Fixed stone roosters trying to turn an invalid egg into a coral egg
+  - type: Fix
+    message: Fixed chicken hens never eating food
+  - type: Fix
+    message: Fixed cockatrice rooster's having a limited amount of Hephaestium
+  id: 1617
+  time: '2026-09-20T09:17:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4680
