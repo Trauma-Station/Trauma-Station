@@ -1,0 +1,8 @@
+- type: vendingMachineInventory
+  id: GoodCleanFunInventory
+  contrabandInventory:
+    Basketball: 1
+    FoodSnackBoritos: 3
+    DrinkSpaceMountainWindCan: 3
+    BaseBallBat: 1
+    EmptyScroll: 1 # I am 100% sure people will bitch about this being in the vendor BUT THESE THINGS ARE NOT THAT POWERFUL
