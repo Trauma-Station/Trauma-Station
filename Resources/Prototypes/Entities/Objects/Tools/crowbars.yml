@@ -195,3 +195,17 @@
       - state: equipped-BELT
       - state: cover-equipped-BELT
         color: "#968000"
+
+# Le Coolbar
+- type: entity
+  parent: BaseCrowbar
+  id: Coolbar
+  name: Le Coolbar
+  description: Le Coolestbar ever.
+  components:
+  - type: Sprite
+    state: icon
+  - type: Item
+    storedSprite:
+      sprite: Objects/Tools/crowbar.rsi
+      state: storage
