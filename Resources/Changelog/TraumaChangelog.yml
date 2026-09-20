@@ -14838,3 +14838,10 @@ Entries:
   id: 1617
   time: '2026-09-20T09:17:48.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4680
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed backpack verb giving you free ESP.
+  id: 1618
+  time: '2026-09-20T10:31:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4686
