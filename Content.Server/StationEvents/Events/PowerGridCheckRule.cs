@@ -11,6 +11,10 @@ using Timer = Robust.Shared.Timing.Timer;
 
 namespace Content.Server.StationEvents.Events
 {
+    /// <summary>
+    /// Handler for events that force a number of APCs off on a station for a period of time.
+    /// </summary>
+    /// <seealso cref="PowerGridCheckRuleComponent"/>
     [UsedImplicitly]
     public sealed partial class PowerGridCheckRule : StationEventSystem<PowerGridCheckRuleComponent>
     {
@@ -23,14 +27,16 @@ namespace Content.Server.StationEvents.Events
             SubscribeLocalEvent<PowerGridCheckNotifyComponent, ApcToggleMainBreakerAttemptEvent>(OnApcToggleMainBreaker);
         }
 
-        protected override void Started(EntityUid uid, PowerGridCheckRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
+        protected override void Started(Entity<PowerGridCheckRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
         {
-            base.Started(uid, component, gameRule, args);
+            base.Started(ent, ref args);
 
             if (Station.GetRandomStationGrids(out var chosenStation) is not { } stationGrids) // Trauma - get grids instead of comparing station
                 return;
 
-            component.AffectedStation = chosenStation!.Value; // Trauma - add !, shit language nullables
+            var powerGridCheck = ent.Comp1;
+
+            powerGridCheck.AffectedStation = chosenStation!.Value; // Trauma - add !, shit language nullables
 
             /* Trauma - no longer needed
             var largestGrid = Station.GetLargestGrid(chosenStation.Value.AsNullable());
@@ -50,13 +56,12 @@ namespace Content.Server.StationEvents.Events
                     continue;
                 // </Trauma>
 
-                component.Powered.Add(apcUid);
+                powerGridCheck.Powered.Add(apcUid);
             }
 
-            RobustRandom.Shuffle(component.Powered);
+            RobustRandom.Shuffle(powerGridCheck.Powered);
 
-            component.NumberPerSecond = Math.Max(1, (int)(component.Powered.Count / component.SecondsUntilOff)); // Number of APCs to turn off every second. At least one.
-
+            powerGridCheck.NumberPerSecond = Math.Max(1, (int)(powerGridCheck.Powered.Count / powerGridCheck.SecondsUntilOff)); // Number of APCs to turn off every second. At least one.
         }
 
         /// <summary>

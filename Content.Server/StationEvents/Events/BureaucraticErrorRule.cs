@@ -7,11 +7,16 @@ using System.Linq;
 using Content.Server.Station.Systems;
 using Content.Server.StationEvents.Components;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Station.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Random;
 
 namespace Content.Server.StationEvents.Events;
 
+/// <summary>
+/// Handler for events that alter job slots for a station.
+/// </summary>
+/// <seealso cref="BureaucraticErrorRuleComponent"/>
 [UsedImplicitly]
 public sealed partial class BureaucraticErrorRule : StationEventSystem<BureaucraticErrorRuleComponent>
 {
@@ -21,16 +26,16 @@ public sealed partial class BureaucraticErrorRule : StationEventSystem<Bureaucra
     // </Trauma>
     [Dependency] private ServerStationJobsSystem _stationJobs = default!;
 
-    protected override void Started(EntityUid uid, BureaucraticErrorRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
+    protected override void Started(Entity<BureaucraticErrorRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
     {
-        base.Started(uid, component, gameRule, args);
+        base.Started(ent, ref args);
 
-        if (!Station.TryGetRandomStation(out var chosenStation, HasComp<Shared.Station.Components.StationJobsComponent>))
+        if (!Station.TryGetRandomStation<StationEventEligibleComponent>(out var chosenStation, HasComp<StationJobsComponent>))
             return;
 
         var jobList = _stationJobs.GetJobs(chosenStation.Value).Keys.ToList();
 
-        foreach(var job in component.IgnoredJobs)
+        foreach (var job in ent.Comp1.IgnoredJobs)
             jobList.Remove(job);
 
         if (jobList.Count == 0)
