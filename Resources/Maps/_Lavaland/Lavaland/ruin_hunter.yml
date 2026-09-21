@@ -655,27 +655,6 @@ entities:
     - type: Transform
       pos: 2.5,-2.5
       parent: 1
-- proto: RMCContainerNovarisLeft
-  entities:
-  - uid: 105
-    components:
-    - type: Transform
-      pos: 15.5,-2.5
-      parent: 1
-- proto: RMCContainerNovarisMiddle
-  entities:
-  - uid: 104
-    components:
-    - type: Transform
-      pos: 16.5,-2.5
-      parent: 1
-- proto: RMCContainerNovarisRight
-  entities:
-  - uid: 103
-    components:
-    - type: Transform
-      pos: 17.5,-2.5
-      parent: 1
 - proto: SalvageCanisterSpawner
   entities:
   - uid: 72

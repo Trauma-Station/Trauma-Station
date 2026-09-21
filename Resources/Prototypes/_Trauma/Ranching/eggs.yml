@@ -238,16 +238,6 @@
       type: Add
 
 - type: entity
-  parent: BaseRanchingEgg
-  id: SeaEgg
-  suffix: Sea
-  components:
-  - type: Sprite
-    state: egg-sea
-  - type: TimedReplace
-    entity: MobChickSelkie
-
-- type: entity
   parent: BaseItem
   id: GoldenEgg
   name: golden chicken egg
