@@ -20,21 +20,8 @@ public static class ModulePackaging
     /// </summary>
     public static async Task BuildModules(string side, string configuration, bool logBuild, string? targetOs = null)
     {
-        if (targetOs != null)
-        {
-            await ProcessHelpers.RunCheck(new()
-            {
-                FileName = "dotnet",
-                ArgumentList =
-                {
-                    "restore",
-                    "--nologo",
-                    "/p:TargetOs={targetOs}"
-                }
-            });
-        }
-
         var logArg = $"/bl:{Path.Combine("release", $"{side.ToLowerInvariant()}.binlog")}";
+        var restore = true;
         foreach (var module in AllModules)
         {
             var startInfo = new ProcessStartInfo
@@ -43,7 +30,6 @@ public static class ModulePackaging
                 ArgumentList =
                 {
                     "build",
-                    "--no-restore",
                     Path.Combine($"Content.{module}.{side}", $"Content.{module}.{side}.csproj"),
                     "-c", configuration,
                     "--nologo",
@@ -60,6 +46,11 @@ public static class ModulePackaging
                 startInfo.ArgumentList.Add(logArg);
                 startInfo.ArgumentList.Add("/p:ReportAnalyzer=true");
             }
+
+            if (!restore)
+                startInfo.ArgumentList.Add("--no-restore");
+
+            restore = false;
 
             await ProcessHelpers.RunCheck(startInfo);
         }
