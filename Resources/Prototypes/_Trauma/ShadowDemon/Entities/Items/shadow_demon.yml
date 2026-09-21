@@ -36,7 +36,6 @@
       reagents:
       - ReagentId: Blood # TODO: actual reagent, chud
         Quantity: 15
-        Blunt: 5
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
