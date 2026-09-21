@@ -35,6 +35,14 @@
 
 - type: entity
   parent: BaseAreaCivilian
+  id: AreaStage
+  name: stage
+  components:
+  - type: Sprite
+    state: stage
+
+- type: entity
+  parent: BaseAreaCivilian
   id: AreaTheatre
   name: theatre
   components:

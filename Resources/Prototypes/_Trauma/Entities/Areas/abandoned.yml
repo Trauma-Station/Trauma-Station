@@ -3,8 +3,32 @@
 # these don't have the relevant department etc, they're for maints rooms
 - type: entity
   abstract: true
-  parent: BaseAreaStation
+  parent: AreaMaints
   id: BaseAreaAbandoned
+
+- type: entity
+  parent: BaseAreaAbandoned
+  id: AreaAbandonedArcade
+  name: abandoned arcade
+  components:
+  - type: Sprite
+    state: abandoned_arcade
+
+- type: entity
+  parent: BaseAreaAbandoned
+  id: AreaAbandonedBar
+  name: abandoned bar
+  components:
+  - type: Sprite
+    state: abandoned_bar
+
+- type: entity
+  parent: BaseAreaAbandoned
+  id: AreaAbandonedChapel
+  name: abandoned chapel
+  components:
+  - type: Sprite
+    state: abandoned_chapel
 
 - type: entity
   parent: BaseAreaAbandoned

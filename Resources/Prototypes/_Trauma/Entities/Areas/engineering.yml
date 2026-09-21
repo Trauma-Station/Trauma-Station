@@ -126,6 +126,24 @@
   - type: Sprite
     state: atmos_gas_storage
 
+- type: entity
+  parent: BaseAreaEngineering
+  id: AreaAtmosBurnChamber
+  name: burn chamber
+  components:
+  - type: Sprite
+    state: burn_chamber
+  # TODO: mark as unsafe
+
+- type: entity
+  parent: BaseAreaEngineering
+  id: AreaAtmosGasMiner
+  name: gas miner
+  components:
+  - type: Sprite
+    state: gas_miner
+  # TODO: mark as unsafe
+
 # Engi adjacent
 
 - type: entity

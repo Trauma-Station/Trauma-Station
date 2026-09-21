@@ -4,6 +4,22 @@
 
 - type: entity
   parent: BaseAreaStation
+  id: AreaAirlock
+  name: airlock
+  components:
+  - type: Sprite
+    state: airlock
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaArcade
+  name: arcade
+  components:
+  - type: Sprite
+    state: arcade
+
+- type: entity
+  parent: BaseAreaStation
   id: AreaArrivals
   name: arrivals
   components:
@@ -16,7 +32,15 @@
   name: cryosleep
   components:
   - type: Sprite
-    state: cryo
+    state: cryosleep
+
+- type: entity
+  parent: BaseAreaStation
+  id: AreaDock
+  name: dock
+  components:
+  - type: Sprite
+    state: dock
 
 - type: entity
   parent: BaseAreaStation
