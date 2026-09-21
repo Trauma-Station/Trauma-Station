@@ -20,6 +20,21 @@ public static class ModulePackaging
     /// </summary>
     public static async Task BuildModules(string side, string configuration, bool logBuild, string? targetOs = null)
     {
+        if (targetOs != null)
+        {
+            await ProcessHelpers.RunCheck(new()
+            {
+                FileName = "dotnet",
+                ArgumentList =
+                {
+                    "restore",
+                    "--nologo",
+                    "/p:TargetOs={targetOs}"
+                }
+            });
+            startInfo.ArgumentList.Add($"/p:TargetOs={targetOs}");
+        }
+
         var logArg = $"/bl:{Path.Combine("release", $"{side.ToLowerInvariant()}.binlog")}";
         foreach (var module in AllModules)
         {
