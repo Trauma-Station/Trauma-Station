@@ -64,9 +64,10 @@
     state: egg-pet
   - type: Solution
     solution:
+      maxVol: 25
       reagents:
       - ReagentId: Ageium
-        Quantity: 50
+        Quantity: 20
   - type: TimedReplace
     entity: MobChickIxworth
 
