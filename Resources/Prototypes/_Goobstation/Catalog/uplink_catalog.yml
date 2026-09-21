@@ -1029,14 +1029,6 @@
     Telecrystal: 60
   categories:
   - UplinkWeaponry
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-      - ContravendUplink
-      components:
-      - SpyRule
 
 - type: listing
   id: UplinkCapoeiraManual
