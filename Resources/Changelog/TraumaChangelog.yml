@@ -14879,3 +14879,14 @@ Entries:
   id: 1620
   time: '2026-09-21T08:23:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4691
+- author: boyofsin
+  changes:
+  - type: Remove
+    message: Chef's Job exclusive CQC from their uplink
+  - type: Tweak
+    message: Capoeira's TC price has been increased from 30 to 60
+  - type: Tweak
+    message: CQC is now available to syndicate agents
+  id: 1621
+  time: '2026-09-21T08:34:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4689
