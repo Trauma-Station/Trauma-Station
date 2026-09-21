@@ -1,0 +1,16 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:FancyWindow xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls"
+        Title="Edit Material Filter"
+        MinSize="280 350">
+    <BoxContainer Orientation="Vertical" Align="Center" Margin="10">
+    	<CheckButton Name="InvertButton" SetWidth="80"/>
+    	<LineEdit Name="Search" PlaceHolder="Search" HorizontalExpand="True" Margin="10"/>
+    	<ScrollContainer VerticalExpand="True" HorizontalExpand="True">
+    		<BoxContainer Name="Materials"/> <!-- Populated in constructor -->
+    	</ScrollContainer>
+    </BoxContainer>
+</controls:FancyWindow>

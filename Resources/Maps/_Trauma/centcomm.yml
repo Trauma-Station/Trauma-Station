@@ -3825,18 +3825,6 @@ entities:
     - type: Transform
       parent: 1
       pos: -10.6244135,4.5721507
-- proto: AmnestizineHypospray
-  entities:
-  - uid: 143
-    components:
-    - type: Transform
-      parent: 1
-      pos: 15.890628,-2.4907317
-  - uid: 144
-    components:
-    - type: Transform
-      parent: 1
-      pos: 16.281254,-2.4594817
 - proto: APCBasic
   entities:
   - uid: 145
@@ -5121,13 +5109,6 @@ entities:
     - type: Transform
       parent: 1
       pos: 20.5,16.5
-- proto: BoxAmnestizineCartridge
-  entities:
-  - uid: 374
-    components:
-    - type: Transform
-      parent: 1
-      pos: 15.328128,-2.3813567
 - proto: BoxFolderBlack
   entities:
   - uid: 375
@@ -20822,18 +20803,6 @@ entities:
     - type: Transform
       parent: 1
       pos: -10.5,-4.5
-    - type: Storage
-      storedItems:
-        3373:
-          position: 0,0
-          _rotation: South
-    - type: ContainerContainer
-      containers:
-        storagebase: !type:Container
-          ents:
-          - 3373
-          showEnts: False
-          occludes: True
 - proto: filingCabinetTall
   entities:
   - uid: 3374
@@ -27164,82 +27133,6 @@ entities:
       pos: -17.5,9.5
 - proto: Paper
   entities:
-  - uid: 3373
-    components:
-    - type: Transform
-      parent: 3372
-    - type: Paper
-      stampState: paper_stamp-centcom
-      stampedBy:
-      - stampedName: stamp-component-stamped-name-centcom
-        stampedColor: '#006600FF'
-      content: >-
-        ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀
-
-        ║░██░░░░██░║
-
-        ║░███░░░██░║
-
-        ║░██░██░██░║
-
-        ║░██░░░███░║─ Central Field Command
-
-        ▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀
-
-        ────────────────────⋆⋅☆⋅⋆──────────────────
-
-
-        Classification Level: Epsilon – Internal Review
-
-        Recipient: Central Command Infrastructure & Security Division
-
-        Origin: Central Command Field Operations
-
-
-        ⚠ Unauthorized access, reproduction, or distribution of this transmission is strictly prohibited. Violators will be subject to immediate corporate sanction under Directive 17-A.
-
-
-        ────────────────────⋆⋅☆⋅⋆──────────────────
-
-
-        Subject: Request for Expanded Defense Installations within Central Command Operations Center
-
-
-        Following the most recent incursion tied to Rat’var and Syndicate aggression, Central Command Operations Center itself has been identified as a potential high-value target lacking sufficient deterrence systems. While field stations were the direct focus of the assault, post-incident analysis indicates that Command infrastructure remains equally vulnerable.
-
-
-        Given that a successful breach of Central Command Operations Center would result in losses not only in material and personnel, but also in irreparable compromise of corporate authority and operational continuity, additional measures are required.
-
-
-        Justification:
-
-        - The cost of reconstructing or relocating a Command hub is measured in tens of billions of spesos, far surpassing the preventative investment in automated defenses.
-
-
-        - Current turret coverage is limited and primarily symbolic; it does not meet the threshold for sustained defense against organized cultist or paramilitary incursions.
-
-
-        - Installation of supplemental turret arrays, both internal chokepoints and external perimeter, would drastically increase defensive resilience.
-
-
-        Investment is minimal in comparison to potential catastrophic loss and reputational damage.
-
-
-        Recommendation:
-
-        Authorize immediate budget allocation for the installation of additional automated turrets within and around Central Command Operations Center. This deployment will ensure continued operational security and uphold Nanotrasen’s strategic dominance.
-
-
-        ────────────────────⋆⋅☆⋅⋆──────────────────
-
-        Transmission Ends
-
-
-        — Leo Malone
-
-        Junior Officer, Central Command
-    - type: Physics
-      canCollide: False
   - uid: 4318
     components:
     - type: Transform
@@ -41531,14 +41424,4 @@ entities:
       parent: 1
       rot: -1.5707963267948966 rad
       pos: -10.509799,5.809138
-- proto: XenoEggDestroyed
-  entities:
-  - uid: 6760
-    components:
-    - type: MetaData
-      name: destroyed xeno egg
-      desc: Who could've guessed pulse weapons cut through these like butter. It's a wonder military companies struggle taking them out.
-    - type: Transform
-      parent: 1
-      pos: -10.5,5.5
 ...

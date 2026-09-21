@@ -2,6 +2,13 @@
   <configuration default="false" name="Trauma Server+Client" type="CompoundRunConfigurationType">
     <toRun name="Content.Trauma.Client" type="DotNetProject" />
     <toRun name="Content.Trauma.Server" type="DotNetProject" />
-    <method v="2" />
+    <method v="2">
+      <option name="Build.Project" projectPath="$PROJECT_DIR$/Content.Factory.Client/Content.Factory.Client.csproj"/>
+      <option name="Build.Project" projectPath="$PROJECT_DIR$/Content.Factory.Server/Content.Factory.Server.csproj"/>
+      <option name="Build.Project" projectPath="$PROJECT_DIR$/Content.Lavaland.Client/Content.Lavaland.Client.csproj"/>
+      <option name="Build.Project" projectPath="$PROJECT_DIR$/Content.Lavaland.Server/Content.Lavaland.Server.csproj"/>
+      <option name="Build.Project" projectPath="$PROJECT_DIR$/Content.Medical.Client/Content.Medical.Client.csproj"/>
+      <option name="Build.Project" projectPath="$PROJECT_DIR$/Content.Medical.Server/Content.Medical.Server.csproj"/>
+    </method>
   </configuration>
 </component>

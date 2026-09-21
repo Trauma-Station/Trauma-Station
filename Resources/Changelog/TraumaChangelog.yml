@@ -14530,3 +14530,406 @@ Entries:
   id: 1585
   time: '2026-09-13T18:19:37.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4577
+- author: yglop
+  changes:
+  - type: Add
+    message: Reactive armor
+  id: 1586
+  time: '2026-09-13T18:34:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4280
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added a new tool in the microelectronics assembler for revolutionaries to
+      use called the revolutionary toolkit
+  - type: Add
+    message: Added .45 magnum to the bullet press
+  - type: Tweak
+    message: >-
+      Made the liberator able to fire .45 magnum instead of .35 as well as
+      reduced the firerate to 1.5
+  - type: Tweak
+    message: >-
+      Increased the damage on combat torch to 8 heat 2 piercing, Still does fire
+      stacks on hit
+  - type: Tweak
+    message: >-
+      Reduced the price for revolutionary chest plates down to 7.5 steel as well
+      as increased their general brute resistance, They however are more
+      vulnerable to heat now and have 15% slowdown
+  - type: Tweak
+    message: >-
+      Reflective Web Vest now has 30% pierce resistance and has delayed stun
+      baton knowdown
+  - type: Tweak
+    message: >-
+      Removed the welding required for making any makeshift turret, hammer or
+      for making revolutionary helmets
+  - type: Tweak
+    message: Simplified the steps for making hammers and makeshift turrets
+  - type: Tweak
+    message: >-
+      Reduced the price for revolutionary masks down to 2 plastic as well as
+      reduced the price for revolutionary helmets down to 3 plasteel
+  - type: Tweak
+    message: >-
+      Armor plates now cost 3 steel and IFF Cards now only cost 0.25 gold
+      instead of 1.5
+  id: 1587
+  time: '2026-09-13T21:24:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4566
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Wailing Horse now deals slash damage.
+  id: 1588
+  time: '2026-09-14T16:35:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4590
+- author: Nothing98512
+  changes:
+  - type: Remove
+    message: Base medborg surgery module omnitool
+  id: 1589
+  time: '2026-09-15T06:16:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4593
+- author: Nothing98512
+  changes:
+  - type: Tweak
+    message: Space Cobras are no longer coughing babies.
+  id: 1590
+  time: '2026-09-15T15:23:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4592
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed observing etc requiring confirmation.
+  id: 1591
+  time: '2026-09-15T19:43:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4604
+- author: idkmaybe69
+  changes:
+  - type: Tweak
+    message: Certain vendors that didn't have contra from hacking now have some
+  id: 1592
+  time: '2026-09-15T19:48:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4569
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed rev telesphere deleting materials when linking machines to it.
+  id: 1593
+  time: '2026-09-16T07:17:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4612
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed liquid pumps deleting everything if linked to a chemmaster.
+  id: 1594
+  time: '2026-09-16T09:34:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4613
+- author: joel
+  changes:
+  - type: Remove
+    message: Removed slop plant bot.
+  id: 1595
+  time: '2026-09-16T09:41:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4614
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Vent spiders event is no longer spammed every single round.
+  id: 1596
+  time: '2026-09-16T09:53:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4615
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Nuclear reactor turbines now make 8x the power to match atmos devices.
+      speedup.
+  id: 1597
+  time: '2026-09-16T11:55:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4616
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed all Flock cameras.
+  id: 1598
+  time: '2026-09-16T17:40:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4621
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed paramedic access being impossible to work with and being missing
+      from CMO/captain IDs.
+  - type: Tweak
+    message: Access configurators can now assign borg access.
+  id: 1599
+  time: '2026-09-17T07:10:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4633
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed watching bodycams immediately disconnecting you.
+  id: 1600
+  time: '2026-09-17T07:19:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4634
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: >-
+      Buffed the HP of Nukie Mice and of Nukie Carps to 30 and 50 max health,
+      respectively.
+  - type: Fix
+    message: >-
+      Fixed the dehydrated holocarp and magicarp items showing the sprite of the
+      regular one when held.
+  id: 1601
+  time: '2026-09-17T11:30:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4638
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      You can now construct a signal clock item, it replaces old nor/xor gate
+      loops.
+  id: 1602
+  time: '2026-09-17T11:32:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4635
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Derelict borgs now have the correct skills and modules.
+  id: 1603
+  time: '2026-09-17T13:02:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4594
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Radiation storms' mutations are now easier to sequence and thus remove.
+  id: 1604
+  time: '2026-09-17T14:11:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4641
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Moths and arachnids can now breath pluoxium.
+  id: 1605
+  time: '2026-09-17T15:02:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4643
+- author: yglop
+  changes:
+  - type: Add
+    message: Regular glass sheets can be broken by use in hand.
+  id: 1606
+  time: '2026-09-17T19:35:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4640
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Materials no longer get deleted if a machine is broken, like a lathe or
+      silo.
+  id: 1607
+  time: '2026-09-18T11:29:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4659
+- author: ReestockMakes
+  changes:
+  - type: Tweak
+    message: Nuclear Operatives and their variants have new ID card icons.
+  id: 1608
+  time: '2026-09-18T15:38:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4360
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Adjusted the chances of getting certain mysterious glands
+  - type: Tweak
+    message: Buffed the effects on smoke, health and shocking mysterious glands
+  - type: Tweak
+    message: >-
+      Increased the chances of getting annoying and or harmful objectives from
+      abductors
+  id: 1609
+  time: '2026-09-18T17:56:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4583
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Justice stun now behaves like stun baton
+  id: 1610
+  time: '2026-09-18T21:16:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4663
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: IPCs and NT borgs are now weak to water
+  - type: Tweak
+    message: Made IPCs weak to Ion damage, not resistant. ( 0.8 -> 1.5)
+  - type: Tweak
+    message: Made Borgs weak to Shock and Ion damage
+  id: 1611
+  time: '2026-09-19T08:41:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4662
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed whispering bypassing language...
+  id: 1612
+  time: '2026-09-19T12:27:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4668
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed larp.
+  id: 1613
+  time: '2026-09-19T12:54:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4670
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Fixed xenomorphs not playing music on announcement
+  id: 1614
+  time: '2026-09-19T14:31:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4669
+- author: IvanKuvalda
+  changes:
+  - type: Add
+    message: Added new classes for holoparasites
+  id: 1615
+  time: '2026-09-19T15:03:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4631
+- author: jorjorwell
+  changes:
+  - type: Tweak
+    message: Improved 1984
+  id: 1616
+  time: '2026-09-19T23:24:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4679
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Made it so chicks grow up 3.5x faster, They now become an adult in 60s
+      instead of 200s
+  - type: Tweak
+    message: >-
+      Reduced the amount of food needed for hens to lay eggs as well as
+      decreased the time to lay eggs, However they now consume more hunger from
+      laying eggs
+  - type: Tweak
+    message: Decreased the fertilization time for roosters
+  - type: Tweak
+    message: Made chickens live longer
+  - type: Tweak
+    message: Made normal lollypops work for creating Candy Eggs
+  - type: Fix
+    message: >-
+      Fixed chicks, hens and roosters noclipping through railings and doors, Now
+      you can properly contain them
+  - type: Fix
+    message: Fixed stone roosters trying to turn an invalid egg into a coral egg
+  - type: Fix
+    message: Fixed chicken hens never eating food
+  - type: Fix
+    message: Fixed cockatrice rooster's having a limited amount of Hephaestium
+  id: 1617
+  time: '2026-09-20T09:17:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4680
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed backpack verb giving you free ESP.
+  id: 1618
+  time: '2026-09-20T10:31:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4686
+- author: StarMade
+  changes:
+  - type: Add
+    message: Medborg Omnitool Module
+  id: 1619
+  time: '2026-09-20T17:22:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4624
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added additional info to the ranching guidebook as well as added the
+      ability to actually see the chart for breeding
+  - type: Add
+    message: >-
+      Added a new cargo order for ranching, Costs 4000 spesos and gives you all
+      the resources you need to setup ranching
+  - type: Tweak
+    message: >-
+      Tweaked ageium to prevent aging all together permanently when you put a
+      total of 5u inside of an animal, You get ageium from ixworth eggs which
+      require feeding tomatoes to a white chicken
+  - type: Tweak
+    message: >-
+      Reduced the happiness required for brown roosters to produce golden eggs
+      from fertilizing eggs, Keep in mind fertilizing an egg does not change the
+      egg and requires putting it into an incubator
+  - type: Tweak
+    message: Chickens now slowly heal all burn damage and a bit of poison damage
+  - type: Fix
+    message: Fixed phoenix egg not properly healing the correct damage types
+  id: 1620
+  time: '2026-09-21T08:23:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4691
+- author: boyofsin
+  changes:
+  - type: Remove
+    message: Chef's Job exclusive CQC from their uplink
+  - type: Tweak
+    message: Capoeira's TC price has been increased from 30 to 60
+  - type: Tweak
+    message: CQC is now available to syndicate agents
+  id: 1621
+  time: '2026-09-21T08:34:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4689
+- author: deltanedas
+  changes:
+  - type: Add
+    message: You can now craft the new material filter.
+  - type: Tweak
+    message: >-
+      All filters now tell you if the item you are holding matches it when
+      examined.
+  id: 1622
+  time: '2026-09-21T08:45:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4688
+- author: WrenTheBun
+  changes:
+  - type: Add
+    message: >-
+      Added craftable improvised knife rig, an unfashionable accessory for knife
+      enthusiasts.
+  id: 1623
+  time: '2026-09-21T10:43:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4626
+- author: Nothing98512
+  changes:
+  - type: Tweak
+    message: Blacklisted cyborgs from comms consoles
+  id: 1624
+  time: '2026-09-21T13:36:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4664
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to summon shadow demons W scam
+  id: 1625
+  time: '2026-09-21T14:24:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4696
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Some signal ports are coloured in the multitool UI according to their data
+      type.
+  id: 1626
+  time: '2026-09-21T14:28:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4697

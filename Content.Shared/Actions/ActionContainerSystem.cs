@@ -118,7 +118,7 @@ public sealed partial class ActionContainerSystem : EntitySystem
             return false; // actions will be networked so dont have to do weird shit when resetting/applying state. the container can be null before ComponentInit is raised
 
         var clientside = IsClientSide(uid);
-        actionId = IsClientSide(uid) ? Spawn(actionPrototypeId) : EntityManager.PredictedSpawn(actionPrototypeId);
+        actionId = IsClientSide(uid) ? Spawn(actionPrototypeId) : PredictedSpawn(actionPrototypeId);
         if (!_query.TryComp(actionId, out action))
         {
             Log.Error($"Tried to add invalid action {ToPrettyString(actionId)} to {ToPrettyString(uid)}!");

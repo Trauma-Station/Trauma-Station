@@ -74,17 +74,11 @@ public sealed partial class MutationSystem : CommonMutationSystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<MutatableComponent, MapInitEvent>(OnMapInit, after: new[] { typeof(BodySystem) });
-        SubscribeLocalEvent<MutatableComponent, PolymorphedEvent>(OnPolymorphed);
-        SubscribeLocalEvent<MutatableComponent, DnaScrambledEvent>(OnDnaScrambled);
-
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-
         LoadRecipes();
         LoadPrototypes();
     }
 
+    [SubscribeLocalEvent(after: [typeof(BodySystem)])]
     private void OnMapInit(Entity<MutatableComponent> ent, ref MapInitEvent args)
     {
         var container = _container.EnsureContainer<Container>(ent.Owner, ent.Comp.ContainerId);
@@ -107,6 +101,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
         RemoveConflictingMutations(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnPolymorphed(Entity<MutatableComponent> ent, ref PolymorphedEvent args)
     {
         var target = args.NewEntity;
@@ -120,13 +115,15 @@ public sealed partial class MutationSystem : CommonMutationSystem
             SetDna(target, oldDna); // don't change dna by reapplying mutations
     }
 
+    [SubscribeLocalEvent]
     private void OnDnaScrambled(Entity<MutatableComponent> ent, ref DnaScrambledEvent args)
     {
         ClearMutations(ent.Owner, automatic: true, predicted: false); // currently it's only raised on server
         Scramble(ent);
     }
 
-    private void MutationAdded(Entity<MutatableComponent> ent, Entity<MutationComponent> mutation, EntityUid? user, bool automatic, bool predicted)
+    private void MutationAdded(Entity<MutatableComponent> ent, Entity<MutationComponent> mutation,
+        EntityUid? user, bool automatic, bool predicted, float difficulty = 1f)
     {
         if (_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
             _container.Insert(mutation.Owner, container);
@@ -136,6 +133,8 @@ public sealed partial class MutationSystem : CommonMutationSystem
             AddInstability(ent, mutation.Comp.Instability, automatic: automatic, predicted: predicted);
 
         mutation.Comp.Target = ent.Owner;
+        if (difficulty != 1f)
+            mutation.Comp.Difficulty = (int) (difficulty * mutation.Comp.Difficulty);
         Dirty(mutation);
 
         var ev = new MutationAddedEvent(ent, mutation, id, user, automatic, predicted);
@@ -152,7 +151,8 @@ public sealed partial class MutationSystem : CommonMutationSystem
             _popup.PopupEntity(popup, ent, ent, PopupType.MediumCaution);
     }
 
-    private void MutationRemoved(Entity<MutatableComponent> ent, Entity<MutationComponent> mutation, EntityUid? user, bool automatic, bool predicted)
+    private void MutationRemoved(Entity<MutatableComponent> ent, Entity<MutationComponent> mutation,
+        EntityUid? user, bool automatic, bool predicted)
     {
         if (_container.TryGetContainer(ent, ent.Comp.ContainerId, out var container))
             _container.Remove(mutation.Owner, container);
@@ -176,12 +176,14 @@ public sealed partial class MutationSystem : CommonMutationSystem
             _popup.PopupEntity(popup, ent, ent, PopupType.MediumCaution);
     }
 
+    [SubscribeLocalEvent]
     private void OnRoundRestart(RoundRestartCleanupEvent args)
     {
         RoundData.Clear();
         MutationNumbers.Clear();
     }
 
+    [SubscribeLocalEvent]
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
         if (args.WasModified<MutationRecipePrototype>())
@@ -351,15 +353,19 @@ public sealed partial class MutationSystem : CommonMutationSystem
            ? (uid, comp)
            : null;
 
-   public EntityUid? GetMutationTarget(EntityUid uid)
-       => _query.CompOrNull(uid)?.Target;
+    /// <summary>
+    /// Returns the mob a mutation is applied to, or null if the entity is not a mutation.
+    /// </summary>
+    public EntityUid? GetMutationTarget(EntityUid uid)
+        => _query.CompOrNull(uid)?.Target;
 
     /// <summary>
     /// Tries to add a mutation to an entity, returning true if it succeeded.
     /// Instability increases if the mutation <see cref="IsForeign"/>.
     /// Automatic mutations (from DefaultMutations etc) don't show a popup or polymorph etc.
     /// </summary>
-    public bool AddMutation(Entity<MutatableComponent?> ent, [ForbidLiteral] EntProtoId<MutationComponent> id, EntityUid? user = null, bool automatic = false, bool predicted = false)
+    public bool AddMutation(Entity<MutatableComponent?> ent, [ForbidLiteral] EntProtoId<MutationComponent> id,
+        EntityUid? user = null, bool automatic = false, bool predicted = false, float difficulty = 1f)
     {
         if (!_mutatableQuery.Resolve(ent, ref ent.Comp))
             return false;
@@ -385,14 +391,14 @@ public sealed partial class MutationSystem : CommonMutationSystem
                 return false; // conflicting mutation found
         }
 
-        if (!TrySpawnInContainer(id, ent, ent.Comp.ContainerId, out var mutEnt))
+        if (!PredictedTrySpawnInContainer(id, ent, ent.Comp.ContainerId, out var mutEnt))
             return false; // inserting failed
 
         var uid = mutEnt.Value;
         Log.Debug($"Added mutation {ToPrettyString(uid)} to {ToPrettyString(ent)}");
         ent.Comp.Mutations[id] = uid;
         DirtyField(ent, ent.Comp, nameof(MutatableComponent.Mutations));
-        MutationAdded((ent, ent.Comp), (uid, _query.Comp(uid)), user, automatic, predicted);
+        MutationAdded((ent, ent.Comp), (uid, _query.Comp(uid)), user, automatic, predicted, difficulty);
         MutateDna(ent, mutation.Difficulty / 4);
         return true;
     }
@@ -400,7 +406,8 @@ public sealed partial class MutationSystem : CommonMutationSystem
     /// <summary>
     /// Add multiple mutations, returning true if any of them succeeded.
     /// </summary>
-    public bool AddMutations(Entity<MutatableComponent?> ent, [ForbidLiteral] IEnumerable<EntProtoId<MutationComponent>> ids, EntityUid? user = null, bool automatic = false, bool predicted = false)
+    public bool AddMutations(Entity<MutatableComponent?> ent, [ForbidLiteral] IEnumerable<EntProtoId<MutationComponent>> ids,
+        EntityUid? user = null, bool automatic = false, bool predicted = false, float difficulty = 1f)
     {
         if (!_mutatableQuery.Resolve(ent, ref ent.Comp))
             return false;
@@ -411,7 +418,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
         var added = false;
         foreach (var id in ids)
         {
-            added |= AddMutation(ent, id, user, automatic, predicted);
+            added |= AddMutation(ent, id, user, automatic, predicted, difficulty);
         }
         return added;
     }
@@ -420,19 +427,21 @@ public sealed partial class MutationSystem : CommonMutationSystem
     /// Tries to activate a dormant mutation, does nothing if the mutation is not present in Dormant.
     /// Won't add instability to the entity.
     /// </summary>
-    public bool ActivateMutation(Entity<MutatableComponent?> ent, [ForbidLiteral] EntProtoId<MutationComponent> id, EntityUid? user = null, bool automatic = false, bool predicted = false)
+    public bool ActivateMutation(Entity<MutatableComponent?> ent, [ForbidLiteral] EntProtoId<MutationComponent> id,
+        EntityUid? user = null, bool automatic = false, bool predicted = false, float difficulty = 1f)
     {
         if (!_mutatableQuery.Resolve(ent, ref ent.Comp))
             return false;
 
-        return ent.Comp.Dormant.Contains(id) && AddMutation(ent, id, user, automatic, predicted);
+        return ent.Comp.Dormant.Contains(id) && AddMutation(ent, id, user, automatic, predicted, difficulty);
     }
 
     /// <summary>
     /// <see cref="AddMutations"/> for activation.
     /// Returns true if any dormant mutations were added.
     /// </summary>
-    public bool ActivateMutations(Entity<MutatableComponent> ent, [ForbidLiteral] IEnumerable<EntProtoId<MutationComponent>> ids, EntityUid? user = null, bool automatic = false, bool predicted = false)
+    public bool ActivateMutations(Entity<MutatableComponent> ent, [ForbidLiteral] IEnumerable<EntProtoId<MutationComponent>> ids,
+        EntityUid? user = null, bool automatic = false, bool predicted = false, float difficulty = 1f)
     {
         if (_mob.IsDead(ent))
             return false;
@@ -441,7 +450,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
         var target = ent.AsNullable();
         foreach (var id in ids)
         {
-            activated |= ActivateMutation(target, id, user, automatic, predicted);
+            activated |= ActivateMutation(target, id, user, automatic, predicted, difficulty);
         }
 
         return activated;
@@ -455,7 +464,11 @@ public sealed partial class MutationSystem : CommonMutationSystem
             ? (uid, comp)
             : null;
 
-    public bool RemoveMutation(Entity<MutatableComponent?> ent, [ForbidLiteral] EntProtoId<MutationComponent> id, EntityUid? user = null, bool automatic = false, bool predicted = false)
+    /// <summary>
+    /// Removes a mutation from the given mob, returning true if it succeeded.
+    /// </summary>
+    public bool RemoveMutation(Entity<MutatableComponent?> ent, [ForbidLiteral] EntProtoId<MutationComponent> id,
+        EntityUid? user = null, bool automatic = false, bool predicted = false)
     {
         if (!_mutatableQuery.Resolve(ent, ref ent.Comp))
             return false;
@@ -491,7 +504,8 @@ public sealed partial class MutationSystem : CommonMutationSystem
     /// <summary>
     /// Removes multiple mutations, returning true if any of them succeeded.
     /// </summary>
-    public bool RemoveMutations(Entity<MutatableComponent?> ent, [ForbidLiteral] IEnumerable<EntProtoId<MutationComponent>> ids, EntityUid? user = null, bool automatic = false, bool predicted = false)
+    public bool RemoveMutations(Entity<MutatableComponent?> ent, [ForbidLiteral] IEnumerable<EntProtoId<MutationComponent>> ids,
+        EntityUid? user = null, bool automatic = false, bool predicted = false)
     {
         if (!_mutatableQuery.Resolve(ent, ref ent.Comp))
             return false;
