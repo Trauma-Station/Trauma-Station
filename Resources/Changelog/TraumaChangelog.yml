@@ -14901,3 +14901,12 @@ Entries:
   id: 1622
   time: '2026-09-21T08:45:23.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4688
+- author: WrenTheBun
+  changes:
+  - type: Add
+    message: >-
+      Added craftable improvised knife rig, an unfashionable accessory for knife
+      enthusiasts.
+  id: 1623
+  time: '2026-09-21T10:43:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4626
