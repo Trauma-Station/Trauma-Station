@@ -14845,3 +14845,68 @@ Entries:
   id: 1618
   time: '2026-09-20T10:31:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4686
+- author: StarMade
+  changes:
+  - type: Add
+    message: Medborg Omnitool Module
+  id: 1619
+  time: '2026-09-20T17:22:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4624
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added additional info to the ranching guidebook as well as added the
+      ability to actually see the chart for breeding
+  - type: Add
+    message: >-
+      Added a new cargo order for ranching, Costs 4000 spesos and gives you all
+      the resources you need to setup ranching
+  - type: Tweak
+    message: >-
+      Tweaked ageium to prevent aging all together permanently when you put a
+      total of 5u inside of an animal, You get ageium from ixworth eggs which
+      require feeding tomatoes to a white chicken
+  - type: Tweak
+    message: >-
+      Reduced the happiness required for brown roosters to produce golden eggs
+      from fertilizing eggs, Keep in mind fertilizing an egg does not change the
+      egg and requires putting it into an incubator
+  - type: Tweak
+    message: Chickens now slowly heal all burn damage and a bit of poison damage
+  - type: Fix
+    message: Fixed phoenix egg not properly healing the correct damage types
+  id: 1620
+  time: '2026-09-21T08:23:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4691
+- author: boyofsin
+  changes:
+  - type: Remove
+    message: Chef's Job exclusive CQC from their uplink
+  - type: Tweak
+    message: Capoeira's TC price has been increased from 30 to 60
+  - type: Tweak
+    message: CQC is now available to syndicate agents
+  id: 1621
+  time: '2026-09-21T08:34:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4689
+- author: deltanedas
+  changes:
+  - type: Add
+    message: You can now craft the new material filter.
+  - type: Tweak
+    message: >-
+      All filters now tell you if the item you are holding matches it when
+      examined.
+  id: 1622
+  time: '2026-09-21T08:45:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4688
+- author: WrenTheBun
+  changes:
+  - type: Add
+    message: >-
+      Added craftable improvised knife rig, an unfashionable accessory for knife
+      enthusiasts.
+  id: 1623
+  time: '2026-09-21T10:43:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4626

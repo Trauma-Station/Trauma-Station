@@ -55,6 +55,7 @@
   - ClothingHandsGlovesSurgical
   - AutodocUpgradeKitBluespace
   - OmnimedTool
+  - BorgModuleAdvancedOmniSurgery
   technologyPrerequisites:
   - Autodoc
   position: -1,6
