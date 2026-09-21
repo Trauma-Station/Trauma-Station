@@ -14910,3 +14910,10 @@ Entries:
   id: 1623
   time: '2026-09-21T10:43:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4626
+- author: Nothing98512
+  changes:
+  - type: Tweak
+    message: Blacklisted cyborgs from comms consoles
+  id: 1624
+  time: '2026-09-21T13:36:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4664
