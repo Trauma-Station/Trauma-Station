@@ -14917,3 +14917,10 @@ Entries:
   id: 1624
   time: '2026-09-21T13:36:30.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4664
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to summon shadow demons W scam
+  id: 1625
+  time: '2026-09-21T14:24:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4696
