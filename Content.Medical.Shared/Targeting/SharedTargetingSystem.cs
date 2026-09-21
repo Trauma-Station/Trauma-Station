@@ -58,4 +58,8 @@ public abstract partial class SharedTargetingSystem : EntitySystem
         comp.Target = target;
         Dirty(user, comp);
     }
+
+    public virtual void CycleTargeting(int delta)
+    {
+    }
 }

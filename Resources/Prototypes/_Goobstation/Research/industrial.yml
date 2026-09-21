@@ -30,18 +30,3 @@
   technologyPrerequisites:
   - AdvancedToolsTechnology
   position: 3, -4
-
-- type: technology
-  id: Plumbing
-  name: research-technology-plumbing
-  icon:
-    sprite: _Goobstation/Structures/Machines/Plumbing/liquid_pump.rsi
-    state: icon
-  discipline: Industrial
-  tier: 1
-  cost: 6500
-  recipeUnlocks:
-  - PlumbingPumpCircuitboard
-  position: 1,-4
-  technologyPrerequisites:
-  - IndustrialEngineering

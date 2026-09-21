@@ -75,6 +75,13 @@
           Dead:
             types:
               Asphyxiation: 1
+  - type: PassiveDamage
+    damage:
+      types:
+        Heat: -0.2
+        Cold: -0.2
+        Caustic: -0.2
+        Poison: -0.2
 
 - type: entity
   abstract: true

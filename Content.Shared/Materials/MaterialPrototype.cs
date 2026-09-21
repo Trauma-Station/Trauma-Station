@@ -31,8 +31,8 @@ namespace Content.Shared.Materials
         [DataField]
         public EntProtoId? StackEntity;
 
-        [DataField]
-        public string Name = string.Empty;
+        [DataField(required: true)] // Trauma - required
+        public LocId Name; // Trauma - use LocId
 
         /// <summary>
         /// Locale id for the unit of this material.

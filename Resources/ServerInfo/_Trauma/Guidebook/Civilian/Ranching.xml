@@ -1,6 +1,6 @@
 <Document>
   # Ranching
-  Ranching in trauma station is a near copy of the ranching for goon-station most things from that wiki are applicable to trauma (https://wiki.ss13.co/Rancher)
+  Ranching in trauma station is a near copy of the ranching for goon-station most things from that wiki are applicable to trauma with some modifications so keep in mind
 
   # Getting Started
   You start your ranching journey buy hatching a white chicken egg that you have been supplied with in your ranching locker, in the incubator which should be on your farm.
@@ -8,12 +8,15 @@
   # Unlocking every chickens
   To unlock every chicken in the game you can follow this guide, most chickens are unlocked by simplify feeding the previous chicken something but others are more complex.
 
+<Box>
   <GuideEntityEmbed Entity="GuidebookRanchingGuide" Caption="The ranching field guide!"/>
+</Box>
 
   # Needs of your chickens
-  Chickens need to be fed and petted every so often, don't hurt them or the roosters will attack you, don't overcrowd them, or they'll become upset and don't feed them chicken nuggets!
+  Chickens need to be fed and petted every so often, don't hurt them or the roosters will attack you, don't overcrowd them, or they'll become upset.
+  In order for a hen to lay eggs they must be sufficiently happy and fed, If you notice your hens not laying eggs try petting them or feeding them food if a chicken is unhappy enough it will not lay eggs.
+  Keep in mind some chickens have special effects whilst alive and some have obtuse methods to obtain them always keep in mind your safety
 
   # Eggs
-  Most chicken eggs have a special effect when you eat them, the best way to find out is to just eat one and see!
-
+   Some chicken eggs have special effects when eaten, Not all eggs however have effects just try out on your own and see what kind of eggs do what
 </Document>
