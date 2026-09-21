@@ -27,3 +27,16 @@
   components:
   - type: StationEvent
     weight: 4
+
+- type: entity
+  id: SpiderSpawnHorde
+  components:
+  - type: StationEvent
+    weight: 3
+
+- type: entity
+  id: SpiderClownSpawnHorde
+  components:
+  - type: StationEvent
+    earliestStart: 45
+    minimumPlayers: 30

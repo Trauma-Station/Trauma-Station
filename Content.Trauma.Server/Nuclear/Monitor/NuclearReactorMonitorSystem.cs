@@ -10,7 +10,7 @@ public sealed partial class NuclearReactorMonitorSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private NuclearMonitorSystem _monitor = default!;
-    [Dependency] private SharedNuclearReactorSystem _reactor = default!;
+    [Dependency] private NuclearReactorSystem _reactor = default!;
     [Dependency] private EntityQuery<NuclearReactorComponent> _query = default!;
 
     public override void Initialize()

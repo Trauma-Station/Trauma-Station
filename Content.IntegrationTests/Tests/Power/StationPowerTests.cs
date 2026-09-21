@@ -25,7 +25,6 @@ public sealed class StationPowerTests : GameTest
     private static readonly string[] GameMaps =
     [
         // <Trauma>
-        "Freighter",
         "Atlas",
         "Amber",
         "Bagel",

@@ -29,12 +29,6 @@ public sealed partial class TraumaStrippingSystem : EntitySystem
     /// </summary>
     private const float CuffedStripTime = 0.75f;
 
-    public override void Update(float frameTime)
-    {
-        base.Update(frameTime);
-        UpdateBagAccess();
-    }
-
     [SubscribeLocalEvent]
     private void OnBeforeStripEnsureComp(Entity<HandsComponent> user, ref BeforeStripEvent args)
     {

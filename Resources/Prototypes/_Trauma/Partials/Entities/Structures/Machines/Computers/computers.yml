@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: ComputerComms
+  components:
+  - type: StationReportTarget # not given to aghost
+  - type: TraumaCommsConsole

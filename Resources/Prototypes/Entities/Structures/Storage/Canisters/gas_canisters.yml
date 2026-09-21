@@ -5,22 +5,6 @@
   name: gas canister
   description: A canister that can contain any type of gas. It can be attached to connector ports using a wrench.
   components:
-  # <Trauma>
-  - type: AutomationSlots
-    slots:
-    - !type:AutomatedItemSlot
-      input: AutomationSlotGasTank
-      output: AutomationSlotGasTank
-      slotId: tank_slot
-    - !type:AutomatedPorts
-      sinks:
-      - Open
-      - Close
-      - Toggle
-  - type: CosmicTransmutable
-    transmuteTo: CosmicVacuousSpire
-    requiresEmpowerment: true
-  # </Trauma>
   - type: Animateable
   - type: InteractionOutline
   - type: Transform

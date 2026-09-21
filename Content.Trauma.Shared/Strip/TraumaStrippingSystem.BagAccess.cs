@@ -14,9 +14,9 @@ using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Strip;
 using Content.Shared.Strip.Components;
 using Content.Shared.Verbs;
+using Content.Trauma.Common.Storage;
 using Content.Trauma.Shared.Strip.Components;
 using Content.Trauma.Shared.Strip.Events;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Strip;
 
@@ -27,55 +27,12 @@ public sealed partial class TraumaStrippingSystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedStorageSystem _storage = default!;
     [Dependency] private SharedStrippableSystem _strippable = default!;
-    [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private ItemSlotsSystem _slots = default!;
-    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private EntityQuery<StorageComponent> _storageQuery = default!;
     [Dependency] private EntityQuery<CuffableComponent> _cuffableQuery = default!;
     [Dependency] private EntityQuery<ItemSlotsComponent> _slotsQuery = default!;
     [Dependency] private EntityQuery<QuickDrawableComponent> _quickDrawableQuery = default!;
-
-    private readonly List<EntityUid> _bagAccessScratch = new(); // Reused buffer for UpdateBagAccess, avoid per-tick allocation
-
-    private void UpdateBagAccess()
-    {
-        var curTime = _timing.CurTime;
-        var query = EntityQueryEnumerator<ActiveStrippingComponent>();
-        while (query.MoveNext(out var uid, out var active))
-        {
-            if (active.BagAccessOpenedStorages.Count == 0)
-                continue;
-
-            if (active.NextBagAccessCheck > curTime)
-                continue;
-
-            active.NextBagAccessCheck += active.BagAccessCheckInterval;
-
-            var userCoords = Transform(uid).Coordinates;
-
-            // Copy since closing a bag's UI removes it from BagAccessOpenedStorages, and we can't modify the set while looping over it.
-            _bagAccessScratch.Clear();
-            _bagAccessScratch.AddRange(active.BagAccessOpenedStorages);
-
-            foreach (var bagEntity in _bagAccessScratch)
-            {
-                if (!Exists(bagEntity))
-                {
-                    active.BagAccessOpenedStorages.Remove(bagEntity);
-                    continue;
-                }
-
-                if (!_transform.InRange(userCoords, Transform(bagEntity).Coordinates, SharedInteractionSystem.InteractionRange))
-                {
-                    _ui.CloseUi(bagEntity, StorageComponent.StorageUiKey.Key, uid);
-                }
-            }
-
-            if (active.BagAccessOpenedStorages.Count == 0)
-                RemComp<IgnoreUIRangeComponent>(uid);
-        }
-    }
 
     [SubscribeLocalEvent]
     private void OnGetStripActionVerbs(Entity<StrippingComponent> ent, ref GetVerbsEvent<Verb> args)
@@ -199,15 +156,8 @@ public sealed partial class TraumaStrippingSystem
         if (!TryComp<StorageComponent>(bagEntity, out var storage))
             return;
 
-        // Temporarily bypass UI range checks so the user can open a bag they aren't holding.
-        // UpdateBagAccess enforces our own range limit instead.
-        var activeComp = EnsureComp<ActiveStrippingComponent>(args.User);
-        EnsureComp<IgnoreUIRangeComponent>(args.User);
+        AddAccessOverride(args.User, bagEntity);
         _storage.OpenStorageUI(bagEntity, args.User, storage, args.Stealth);
-        // Don't remove IgnoreUIRangeComponent yet, remove it when the UI closes.
-        if (activeComp.BagAccessOpenedStorages.Count == 0)
-            activeComp.NextBagAccessCheck = _timing.CurTime + activeComp.BagAccessCheckInterval;
-        activeComp.BagAccessOpenedStorages.Add(bagEntity);
         args.Handled = true;
     }
 
@@ -281,20 +231,20 @@ public sealed partial class TraumaStrippingSystem
     }
 
     [SubscribeLocalEvent]
-    private void OnStorageUiClosed(BoundUIClosedEvent args)
+    private void OnAccessibleOverride(Entity<AccessibleOverrideComponent> ent, ref AccessibleOverrideEvent args)
     {
-        if (args.UiKey is not StorageComponent.StorageUiKey)
+        if (args.User != ent.Owner || args.Handled || !ent.Comp.Allowed.Contains(args.Target))
             return;
 
-        if (!TryComp<ActiveStrippingComponent>(args.Actor, out var active))
-            return;
+        args.Handled = true;
+        args.Accessible = true;
+    }
 
-        // args.Entity is the storage entity the UI was closed on.
-        if (!active.BagAccessOpenedStorages.Remove(args.Entity))
-            return;
-
-        if (active.BagAccessOpenedStorages.Count == 0)
-            RemComp<IgnoreUIRangeComponent>(args.Actor);
+    [SubscribeLocalEvent]
+    private void OnStorageClosed(Entity<AccessibleOverrideComponent> ent, ref StorageClosedEvent args)
+    {
+        // have to do the doafter again if you close it or leave range
+        RemoveAccessOverride(ent, args.Target);
     }
 
     private TimeSpan GetStripActionDelay(Entity<BagAccessComponent> target)
@@ -309,5 +259,23 @@ public sealed partial class TraumaStrippingSystem
             return target.Comp.CuffedOrCritDelay;
 
         return target.Comp.NormalDelay;
+    }
+
+    public void AddAccessOverride(EntityUid user, EntityUid target)
+    {
+        var comp = EnsureComp<AccessibleOverrideComponent>(user);
+        if (comp.Allowed.Add(target))
+            Dirty(user, comp);
+    }
+
+    public void RemoveAccessOverride(Entity<AccessibleOverrideComponent> ent, EntityUid target)
+    {
+        if (!ent.Comp.Allowed.Remove(target))
+            return;
+
+        if (ent.Comp.Allowed.Count > 0)
+            Dirty(ent);
+        else
+            RemComp(ent, ent.Comp);
     }
 }

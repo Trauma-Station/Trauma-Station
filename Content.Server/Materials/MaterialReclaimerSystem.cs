@@ -139,7 +139,10 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
 
         var item = active.Processing[i];
         if (Deleted(item))
+        {
+            active.Processing.RemoveAt(i);
             return false;
+        }
         // </Trauma>
 
         // scales the output if the process was interrupted.
@@ -153,7 +156,7 @@ public sealed partial class MaterialReclaimerSystem : SharedMaterialReclaimerSys
 
         // if it got deleted (always will for items) stop processing it
         // keep processing mobs stacking slash damage
-        if (Deleted(item))
+        if (TerminatingOrDeleted(item))
             active.Processing.RemoveAt(i);
         // </Trauma>
 

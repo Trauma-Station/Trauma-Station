@@ -74,6 +74,7 @@
   recipes:
   - RevTurretBullet
   - RevPistolBullet
+  - RevMagnumBullet
   - RevRifleBullet
   - RevBuckShell
   - RevSlugShell
@@ -89,6 +90,7 @@
   - RevVisor
   - PinpointerCommand
   - FusionCore
+  - RevToolkit
 
 - type: latheRecipePack
   id: RevClothingStatic

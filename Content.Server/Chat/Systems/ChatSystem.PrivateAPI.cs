@@ -3,7 +3,6 @@ using Content.Goobstation.Common.Traits;
 using Content.Trauma.Common.Language;
 using Content.Trauma.Common.Language.Systems;
 using Content.Shared.CCVar;
-using System.Globalization;
 // </Trauma>
 using System.Linq;
 using Content.Shared.Chat;
@@ -61,13 +60,14 @@ public sealed partial class ChatSystem
 
         name = FormattedMessage.EscapeText(name);
 
-        // Einstein Engines - Language begin
-        // var wrappedMessage = Loc.GetString((speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message") + wrappedMessagePostfix, // Goob edit
-        //     ("entityName", name),
-        //     ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
-        //     ("fontType", speech.FontId),
-        //     ("fontSize", speech.FontSize),
-        //     ("message", FormattedMessage.EscapeText(message)));
+        /* <Trauma> - replaced with separate unobf/obf wrapped messages
+        var wrappedMessage = Loc.GetString(speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
+            ("entityName", name),
+            ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
+            ("fontType", speech.FontId),
+            ("fontSize", speech.FontSize),
+            ("message", FormattedMessage.EscapeText(message)));
+        */
 
         var typeLOS = SpeakRespectsLOS || language.SpeechOverride.RequireLOS;
         if (!language.SpeechOverride.RequireSpeech && language.SpeechOverride.RequireLOS)
@@ -80,12 +80,10 @@ public sealed partial class ChatSystem
         // The chat message wrapped in a "x says y" string.
         var wrappedMessage = WrapPublicMessage(source, name, message, speech, language: language, colorOverride);
         // The chat message obfuscated via language obfuscation.
-        var obfuscated = SanitizeInGameICMessage(source, _language.ObfuscateSpeech(message, language, source), out var emoteStr, true, _configurationManager.GetCVar(CCVars.ChatPunctuation),
-        (!CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Parent.Name == "en")
-        || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en"));
+        var obfuscated = SanitizeInGameICMessage(source, _language.ObfuscateSpeech(message, language, source), out var emoteStr, true, _configurationManager.GetCVar(CCVars.ChatPunctuation), true);
         // The language-obfuscated message wrapped in a "x says y" string.
         var wrappedObfuscated = WrapPublicMessage(source, name, obfuscated, speech, language: language, colorOverride);
-        // Einstein Engines - Language end
+        // </Trauma>
 
         SendInVoiceRange(ChatChannel.Local, name, message, wrappedMessage, obfuscated, wrappedObfuscated, source, range, // Trauma - added name and obfuscateds
             languageOverride: language, checkLOS: typeLOS, speech: speech, colorOverride: colorOverride); // Trauma
@@ -162,9 +160,7 @@ public sealed partial class ChatSystem
             name = FormattedMessage.EscapeText(nameOverride ?? Name(ent));
         }
 
-        var languageObfuscatedMessage = SanitizeInGameICMessage(source, _language.ObfuscateSpeech(message, language, source), out var emoteStr, true, _configurationManager.GetCVar(CCVars.ChatPunctuation),
-        (!CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Parent.Name == "en")
-        || (CultureInfo.CurrentCulture.IsNeutralCulture && CultureInfo.CurrentCulture.Name == "en")); // Einstein Engines - Language
+        var languageObfuscatedMessage = SanitizeInGameICMessage(source, _language.ObfuscateSpeech(message, language), out var emoteStr, true, _configurationManager.GetCVar(CCVars.ChatPunctuation), true); // Trauma
 
         foreach (var (session, data) in GetRecipients(source, WhisperMuffledRange))
         {
@@ -174,19 +170,16 @@ public sealed partial class ChatSystem
             if (MessageRangeCheck(session, data, range) != MessageRangeCheckResult.Full)
                 continue; // Won't get logged to chat, and ghosts are too far away to see the pop-up, so we just won't send it to them.
 
-            // Goob edit start
-            if (TryComp<DeafComponent>(listener, out var modifier) && language.SpeechOverride.RequireSpeech)
+            // <Trauma> - fully rewrote for language and LOS checks
+            if (language.SpeechOverride.RequireSpeech && HasComp<DeafComponent>(listener))
                 continue; // blocks anyone with the deaf component from hearing.
-            // Goob edit end
 
-            // Einstein Engines - Language begin
             var canUnderstandLanguage = _language.CanUnderstand(listener, language.ID);
             // How the entity perceives the message depends on whether it can understand its language
             var perceivedMessage = canUnderstandLanguage ? message : languageObfuscatedMessage;
 
             // Result is the intermediate message derived from the perceived one via obfuscation
             // Wrapped message is the result wrapped in an "x says y" string
-            // Floof: handle languages that require LOS
             string result, wrappedMessage;
             if (!language.SpeechOverride.RequireLOS && data.Range <= WhisperClearRange
                 || _examineSystem.InRangeUnOccluded(source, listener, WhisperClearRange)
@@ -196,28 +189,30 @@ public sealed partial class ChatSystem
                 result = perceivedMessage;
                 wrappedMessage = WrapWhisperMessage(source, "chat-manager-entity-whisper-wrap-message", name, result, language, colorOverride);
             }
-            else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange)) // UNEDIT FROM Einstein Engines - Language // They are out of date, this has been reverted to current ChatSystem
+            else if (_examineSystem.InRangeUnOccluded(source, listener, WhisperMuffledRange))
             {
                 // Scenario 2: if the listener is too far, they only hear fragments of the message
-                result = ObfuscateMessageReadability(perceivedMessage, _random); // Trauma - pass _random
+                result = ObfuscateMessageReadability(perceivedMessage, _random);
                 wrappedMessage = WrapWhisperMessage(source, "chat-manager-entity-whisper-wrap-message", nameIdentity, result, language, colorOverride);
             }
             else
             {
-                if (language.SpeechOverride.RequireLOS) // Floof - If there is no LOS, listener sees nothing.
+                if (language.SpeechOverride.RequireLOS)
                     continue;
 
                 // Scenario 3: If listener is too far and has no line of sight, they can't identify the whisperer's identity
-                result = ObfuscateMessageReadability(perceivedMessage, _random); // Trauma - pass _random
+                result = ObfuscateMessageReadability(perceivedMessage, _random);
                 wrappedMessage = WrapWhisperMessage(source, "chat-manager-entity-whisper-unknown-wrap-message", string.Empty, result, language, colorOverride);
             }
 
             _chatManager.ChatMessageToOne(ChatChannel.Whisper, result, wrappedMessage, source, false, session.Channel);
+            // </Trauma>
         }
 
+        // <Trauma> - make a new replayWrap message with the language for replays
         var replayWrap = WrapWhisperMessage(source, "chat-manager-entity-whisper-wrap-message", name, message, language, colorOverride);
         _replay.RecordServerMessage(new ChatMessage(ChatChannel.Whisper, message, replayWrap, GetNetEntity(source), null, MessageRangeHideChatForReplay(range)));
-        // Einstein Engines - Languages end
+        // </Trauma>
 
         var ev = new EntitySpokeEvent(source, message, channel, false, language); // Trauma - changed second null to false, added language
         RaiseLocalEvent(source, ev, true);

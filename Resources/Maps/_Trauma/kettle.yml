@@ -20328,29 +20328,21 @@ entities:
     - type: Transform
       parent: 2
       pos: -30.300417,-21.711071
-    - type: Tag
-      tags: []
   - uid: 1528
     components:
     - type: Transform
       parent: 2
       pos: -30.607363,-21.34996
-    - type: Tag
-      tags: []
   - uid: 1529
     components:
     - type: Transform
       parent: 2
       pos: -60.30357,-43.309906
-    - type: Tag
-      tags: []
   - uid: 1530
     components:
     - type: Transform
       parent: 2
       pos: 28.537066,-32.387794
-    - type: Tag
-      tags: []
   - uid: 1531
     components:
     - type: Transform

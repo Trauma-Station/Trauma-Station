@@ -494,6 +494,13 @@ namespace Content.Shared.Interaction
                 ? !checkAccess || InRangeUnobstructed(user, coordinates)
                 : !checkAccess || InRangeUnobstructed(user, target.Value); // permits interactions with wall mounted entities
 
+            // <Trauma>
+            var attemptEv = new UserInteractAttemptEvent(user, target, coordinates, inRangeUnobstructed);
+            RaiseLocalEvent(user, ref attemptEv);
+            if (attemptEv.Handled)
+                return;
+            // </Trauma>
+
             // empty-hand interactions
             // combat mode hand interactions will always be true here -- since
             // they check this earlier before returning in
@@ -1481,6 +1488,13 @@ namespace Content.Shared.Interaction
                 Log.Warning($"Client sent interaction with client-side entity. Session={session}, Uid={uid}");
                 return false;
             }
+            // <Trauma> - why was this never checked lol
+            if (uid.Valid && TerminatingOrDeleted(uid))
+            {
+                Log.Warning($"Client {session} tried to interact with a deleted entity {uid}");
+                return false;
+            }
+            // </Trauma>
 
             userEntity = session?.AttachedEntity;
 

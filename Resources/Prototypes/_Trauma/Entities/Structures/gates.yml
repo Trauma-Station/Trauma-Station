@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseLogicItem
+  id: SignalClock
+  name: signal clock
+  description: A low-power clock that rapidly emits an alternating signal. Useful for all kinds of technical work.
+  components:
+  - type: Sprite
+    layers:
+    - state: base
+    - sprite: _Trauma/Objects/Devices/gates.rsi
+      state: clock
+  - type: SignalClock
+  - type: DeviceLinkSource
+    ports:
+    - Clock
+    lastSignals:
+      Clock: false
+  - type: Construction
+    node: clock

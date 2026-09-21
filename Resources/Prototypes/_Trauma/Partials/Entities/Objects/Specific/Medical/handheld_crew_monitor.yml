@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: BaseHandheldCrewMonitor
+  parent: !Clear BaseItem
+  categories: [ !Remove DoNotMap ]
+  components:
+  - type: ItemToggleExaminableStatus
+  - type: ItemToggle
+    onUse: false # above component does the toggling
+  - type: Tag
+    tags:
+    - !Remove HighRiskItem
+  - type: !Remove StealTarget

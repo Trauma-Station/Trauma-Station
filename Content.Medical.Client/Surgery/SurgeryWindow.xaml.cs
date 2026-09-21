@@ -259,7 +259,7 @@ public sealed partial class SurgeryWindow : FancyWindow
             if (_system.GetSingleton(surgery) is not { } surgeryEnt)
                 continue;
 
-            var ev = new SurgeryValidEvent(_owner, part);
+            var ev = new SurgeryValidEvent(_owner, part, _player.LocalEntity!.Value);
             _ent.EventBus.RaiseLocalEvent(surgeryEnt, ref ev);
 
             if (ev.Cancelled)
@@ -367,9 +367,13 @@ public sealed partial class SurgeryWindow : FancyWindow
             else
             {
                 stepButton.Button.Modulate = Color.White;
+                stepButton.Button.ToolTip = null;
                 if (status == StepStatus.Next
                     && !_system.CanPerformStepWithHeld(player, _owner, part, stepButton.Step, false, out var popup))
-                    stepButton.ToolTip = popup;
+                {
+                    stepButton.Button.Modulate = Color.Red;
+                    stepButton.Button.ToolTip = popup;
+                }
             }
 
             i++;

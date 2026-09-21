@@ -5,7 +5,7 @@
   result: ClothingOuterArmorRev
   completetime: 15
   materials:
-    Steel: 1500
+    Steel: 750
 
 - type: latheRecipe
   id: RevDropPodTraps
@@ -62,7 +62,7 @@
   completetime: 6
   materials:
     Plastic: 100
-    Gold: 150
+    Gold: 25
 
 - type: latheRecipe
   id: TrackingImplanterRev

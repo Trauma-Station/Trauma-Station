@@ -1050,21 +1050,6 @@ entities:
       linearDamping: 0
       canCollide: False
     - type: InsideEntityStorage
-- proto: RMCOverheadRoadsignAlt3
-  entities:
-  - uid: 218
-    components:
-    - type: Transform
-      pos: 9.5,2.5
-      parent: 1
-- proto: RMCOverheadSignNeonCafe
-  entities:
-  - uid: 94
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 3.5,2.5
-      parent: 1
 - proto: SalvageSpawnerScrapCommon75
   entities:
   - uid: 224

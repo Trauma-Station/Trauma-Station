@@ -138,9 +138,6 @@ public sealed partial class SurgerySystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnTargetDoAfter(Entity<SurgeryTargetComponent> ent, ref SurgeryDoAfterEvent args)
     {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
         if (args.Cancelled)
         {
             var failEv = new SurgeryStepFailedEvent(args.User, ent, args.Surgery, args.Step);
@@ -195,7 +192,10 @@ public sealed partial class SurgerySystem : EntitySystem
                 args.Part,
                 ent.Comp.DamageGroup,
                 healable: true) <= 0)
+        {
             args.Cancelled = true;
+            args.Reason = args.User == args.Body ? "You aren't wounded" : "The patient isn't wounded";
+        }
     }
 
     [SubscribeLocalEvent]
@@ -255,7 +255,10 @@ public sealed partial class SurgerySystem : EntitySystem
     private void OnHasBodyConditionValid(Entity<SurgeryHasBodyConditionComponent> ent, ref SurgeryValidEvent args)
     {
         if (_body.GetBody(args.Part) == null)
+        {
             args.Cancelled = true;
+            args.Reason = "The part must be attached to a body!";
+        }
     }
 
     [SubscribeLocalEvent]
@@ -313,7 +316,10 @@ public sealed partial class SurgerySystem : EntitySystem
     {
         if (args.Part == EntityUid.Invalid
             || !HasComp<BodyPartComponent>(args.Part))
+        {
             args.Cancelled = true;
+            args.Reason = "You aren't operating on a part!";
+        }
     }
 
     [SubscribeLocalEvent]
@@ -325,7 +331,12 @@ public sealed partial class SurgerySystem : EntitySystem
         // not inverted = cancel if no trauma present
         // inverted = cancel if trauma present
         if (_trauma.HasWoundableTrauma(args.Part, ent.Comp.TraumaType) == ent.Comp.Inverted)
+        {
+            var verb = args.User == args.Body ? "You have" : "The patient has";
+            var name = ent.Comp.TraumaType.ToString().ToLower();
             args.Cancelled = true;
+            args.Reason = ent.Comp.Inverted ? $"{verb} a {name} trauma!" : $"{verb} no {name} traumas";
+        }
     }
 
     [SubscribeLocalEvent]
@@ -339,7 +350,16 @@ public sealed partial class SurgerySystem : EntitySystem
 
         if (ent.Comp.Inverted == woundable.Bleeds > 0
             && !HasComp<BleedersClampedComponent>(args.Part))
+        {
             args.Cancelled = true;
+            args.Reason = (ent.Comp.Inverted, args.User == args.Body) switch
+            {
+                (false, false) => "The subject isn't bleeding",
+                (false, true) => "You aren't bleeding",
+                (true, false) => "The subject is bleeding too heavily!",
+                (true, true) => "You're bleeding too heavily!"
+            };
+        }
     }
 
     private bool IsSurgeryValid(EntityUid body, EntityUid targetPart, EntProtoId surgery, EntProtoId stepId,
@@ -359,17 +379,17 @@ public sealed partial class SurgerySystem : EntitySystem
             && !_bodyQuery.HasComp(targetPart))
             return false;
 
-
-        var ev = new SurgeryValidEvent(body, targetPart);
-        if (_timing.IsFirstTimePredicted)
-        {
-            RaiseLocalEvent(stepEnt, ref ev);
-            if (!ev.Cancelled)
-                RaiseLocalEvent(surgeryEntId, ref ev);
-        }
+        var ev = new SurgeryValidEvent(body, targetPart, user);
+        RaiseLocalEvent(stepEnt, ref ev);
+        if (!ev.Cancelled)
+            RaiseLocalEvent(surgeryEntId, ref ev);
 
         if (ev.Cancelled)
+        {
+            if (ev.Reason is { } reason)
+                _popup.PopupEntity(reason, user, user, PopupType.Medium);
             return false;
+        }
 
         surgeryEnt = (surgeryEntId, surgeryComp);
         part = targetPart;

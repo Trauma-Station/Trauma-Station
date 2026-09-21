@@ -3,7 +3,7 @@
 using Content.Server.DeviceLinking.Systems;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceNetwork.Events;
-using Content.Trauma.Common.DeviceLinking;
+using Content.Factory.Common.DeviceLinking;
 
 namespace Content.Trauma.Server.DeviceLinking;
 

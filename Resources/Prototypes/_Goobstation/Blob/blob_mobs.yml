@@ -253,8 +253,6 @@
     - Blob
     - Xeno
     - TauCetiBasic
-  - type: Hands
-    showInHands: true
   - type: BlobObserver
   - type: ExtraReach
     bonus: 0.5 # make it harder to kite a blob's attacks
@@ -306,3 +304,4 @@
     defaultChannel: Blobmind
     channels:
     - Blobmind
+    canUseInCrit: true

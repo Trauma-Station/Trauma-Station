@@ -32,25 +32,10 @@ public abstract partial class BlobObserverSystem : EntitySystem
     [Dependency] private EntityQuery<BlobCoreComponent> _coreQuery = default!;
     [Dependency] private EntityQuery<BlobTileComponent> _tileQuery = default!;
 
-    private static readonly EntProtoId MobObserverBlobController = "MobObserverBlobController";
     private static readonly ProtoId<AlertPrototype> BlobHealth = "BlobHealth";
     private static readonly ProtoId<BlobTilePrototype> CoreTile = "Core";
 
     private HashSet<Entity<BlobTileComponent>> _tiles = new();
-
-    [SubscribeLocalEvent]
-    private void OnMapInit(Entity<BlobObserverComponent> ent, ref MapInitEvent args)
-    {
-        _hands.AddHand(ent.Owner, "BlobHand", HandLocation.Middle);
-
-        ent.Comp.VirtualItem = PredictedSpawnAtPosition(MobObserverBlobController, Transform(ent).Coordinates);
-        var comp = EnsureComp<BlobObserverControllerComponent>(ent.Comp.VirtualItem);
-        comp.Blob = ent;
-        Dirty(ent);
-
-        if (!_hands.TryPickup(ent, ent.Comp.VirtualItem, "BlobHand", false, false, false))
-            PredictedDel(ent.Comp.VirtualItem);
-    }
 
     [SubscribeLocalEvent]
     private void OnGetUsedEntity(Entity<BlobObserverComponent> ent, ref GetUsedEntityEvent args)

@@ -31,8 +31,6 @@
       - ChiefEngineer
       - ChiefMedicalOfficer
       - Command
-      - Cryogenics
-      - EmergencyShuttleRepealAll
       - Engineering
       - External
       - HeadOfPersonnel
@@ -50,15 +48,8 @@
       - Security
       - Service
       - Theatre
-      # Trauma
-      - NanotrasenRepresentative
       - GenpopEnter
       - GenpopLeave
-      - Journalism
-      - Library
-      - Robotics
-      - Genetics
-      # </Trauma>
       privilegedIdSlot:
         name: id-card-console-privileged-id
         ejectSound: /Audio/Machines/id_swipe.ogg
@@ -98,13 +89,10 @@
     sprite: Objects/Tools/universal_access_configurator.rsi
   - type: AccessOverrider
     accessLevels:
-    # <Trauma> - Adds new accesses that weren't present before and removes duplicate ones that parent already has
+    # <Trauma> - removed duplicate ones that parent already has
     - BasicSilicon
-    - Borg
+    - EmergencyShuttleRepealAll
     - CentralCommand
-    - Revolutionary
-    - Xenomorph
-    - StationAi
     - NuclearOperative
     - SyndicateAgent
     - Wizard

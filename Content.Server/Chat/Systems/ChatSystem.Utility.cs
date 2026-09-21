@@ -81,11 +81,10 @@ public sealed partial class ChatSystem
                 continue;
             var entHideChat = entRange == MessageRangeCheckResult.HideChat;
             // <Trauma> - completely different send logic and LOS check
-            if (session.AttachedEntity is not { Valid: true } playerEntity)
+            if (session.AttachedEntity is not { } listener)
                 continue;
             if (checkLOS && !data.Observer && !data.InLOS)
                 continue; // Some things don't go through walls, but they can go through windows!
-            EntityUid listener = session.AttachedEntity.Value;
 
             // Raises a event for the deaf component
             var ev = new ChatMessageOverrideInVoiceRangeEvent(source, name, language.ID, speech, colorOverride, obfuscated, obfuscatedWrappedMessage);

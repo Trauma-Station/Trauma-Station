@@ -5,13 +5,6 @@ using Robust.Shared.Map;
 
 namespace Content.Goobstation.Shared.Blob.Components;
 
-[RegisterComponent]
-public sealed partial class BlobObserverControllerComponent : Component
-{
-    [DataField]
-    public EntityUid Blob;
-}
-
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState(false)]
 public sealed partial class BlobObserverComponent : Component
 {

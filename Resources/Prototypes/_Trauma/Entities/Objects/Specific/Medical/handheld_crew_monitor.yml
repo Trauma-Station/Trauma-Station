@@ -53,3 +53,17 @@
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
+
+- type: entity
+  parent: BaseHandheldCrewMonitor
+  id: BorgCrewMonitor
+  name: integrated crew monitor
+  description: An integrated crew monitor for locating crew to rescue.
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent:
+  - BaseHandheldCrewMonitor
+  - BaseMedicalContraband
+  - BaseHandheldComputer
+  id: HandheldCrewMonitor

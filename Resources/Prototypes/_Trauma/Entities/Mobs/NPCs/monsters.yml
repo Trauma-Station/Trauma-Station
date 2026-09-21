@@ -351,7 +351,7 @@
       path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
     damage:
       types:
-        Blunt: 10
+        Slash: 10
     altDisarm: false
     canWideSwing: true
 

@@ -64,9 +64,10 @@
     state: egg-pet
   - type: Solution
     solution:
+      maxVol: 20
       reagents:
       - ReagentId: Ageium
-        Quantity: 50
+        Quantity: 20
   - type: TimedReplace
     entity: MobChickIxworth
 
@@ -235,16 +236,6 @@
       effectProto: SugarRushEffect
       time: 20
       type: Add
-
-- type: entity
-  parent: BaseRanchingEgg
-  id: SeaEgg
-  suffix: Sea
-  components:
-  - type: Sprite
-    state: egg-sea
-  - type: TimedReplace
-    entity: MobChickSelkie
 
 - type: entity
   parent: BaseItem

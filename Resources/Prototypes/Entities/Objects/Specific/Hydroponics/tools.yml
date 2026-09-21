@@ -42,9 +42,6 @@
       path: /Audio/_Shitmed/Medical/Surgery/retractor1.ogg
     endSound:
       path: /Audio/_Shitmed/Medical/Surgery/retractor2.ogg
-  - type: Tag
-    tags:
-    - HydroponicsToolClippers # for plantbot construction
   # </Trauma>
   - type: Sprite
     sprite: Objects/Tools/Hydroponics/clippers.rsi
