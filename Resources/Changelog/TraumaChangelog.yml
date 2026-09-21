@@ -14890,3 +14890,14 @@ Entries:
   id: 1621
   time: '2026-09-21T08:34:53.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4689
+- author: deltanedas
+  changes:
+  - type: Add
+    message: You can now craft the new material filter.
+  - type: Tweak
+    message: >-
+      All filters now tell you if the item you are holding matches it when
+      examined.
+  id: 1622
+  time: '2026-09-21T08:45:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4688
