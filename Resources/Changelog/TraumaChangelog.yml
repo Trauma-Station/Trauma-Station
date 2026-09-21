@@ -14924,3 +14924,12 @@ Entries:
   id: 1625
   time: '2026-09-21T14:24:47.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4696
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Some signal ports are coloured in the multitool UI according to their data
+      type.
+  id: 1626
+  time: '2026-09-21T14:28:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4697
