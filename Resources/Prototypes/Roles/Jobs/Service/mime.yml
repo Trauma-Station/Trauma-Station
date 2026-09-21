@@ -31,7 +31,6 @@
     #gloves: ClothingHandsGlovesColorWhite - Goobstation, moved to loadouts
     shoes: ClothingShoesColorWhite
     id: MimePDA
-    pocket1: CrayonMime
     ears: ClothingHeadsetService
   storage:
     back:
