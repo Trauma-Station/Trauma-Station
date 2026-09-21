@@ -96,6 +96,9 @@
   - type: MartialArtsKnowledge
     blocked: false
     icon: Objects/Misc/skub.rsi
+    geneBlacklist:
+    - MutationHulk
+    - MutationTelekinesis
 
 # Actual categories
 
