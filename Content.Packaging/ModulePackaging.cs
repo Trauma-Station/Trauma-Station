@@ -32,7 +32,6 @@ public static class ModulePackaging
                     "/p:TargetOs={targetOs}"
                 }
             });
-            startInfo.ArgumentList.Add($"/p:TargetOs={targetOs}");
         }
 
         var logArg = $"/bl:{Path.Combine("release", $"{side.ToLowerInvariant()}.binlog")}";
