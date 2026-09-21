@@ -64,7 +64,7 @@
     state: egg-pet
   - type: Solution
     solution:
-      maxVol: 25
+      maxVol: 20
       reagents:
       - ReagentId: Ageium
         Quantity: 20
