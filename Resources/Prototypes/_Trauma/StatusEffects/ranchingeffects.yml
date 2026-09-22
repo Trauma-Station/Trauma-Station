@@ -36,14 +36,20 @@
       damage:
         types:
           Asphyxiation: -5
+          Bloodloss: -5
           Blunt: -5
-          Heat: -5
           Piercing: -5
           Slash: -5
+          Ballistic: -5
+          Heat: -5
           Cold: -5
+          Caustic: -5
           Radiation: -2
           Poison: -2
-      useTargeting: false
+    - !type:ModifyBloodLevel
+      amount: 3
+    - !type:ModifyBleed
+      amount: -1.5
 
 - type: entity
   parent: MobStatusEffectBase
@@ -141,6 +147,7 @@
     - !type:HealthChange
       damage:
         types:
+          Asphyxiation: -5
           Blunt: -5
           Slash: -5
           Piercing: -5
@@ -150,7 +157,6 @@
           Caustic: -5
           Radiation: -5
           Poison: -5
-      useTargeting: false
 
 - type: entity
   parent: MobStatusEffectBase
@@ -160,6 +166,15 @@
   - type: TemporaryActionGrantEffect
     actionPrototypes:
     - ActionFireballPhoenix
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectWizardChickenPower
+  name: wizard egg effect
+  components:
+  - type: TemporaryActionGrantEffect
+    actionPrototypes:
+    - ActionMagicMissileWizardChicken
 
 - type: entity
   parent: MobStatusEffectBase

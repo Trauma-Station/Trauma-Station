@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  parent: [SimpleMobBase, StripableInventoryBase, BaseExaminableHunger]
+  parent: [ BaseMobRuminant, SimpleMobBase, StripableInventoryBase, BaseExaminableHunger ]
   id: BaseMobChickRanch
   name: chicken
   description: Comes before an egg, and IS a dinosaur!
