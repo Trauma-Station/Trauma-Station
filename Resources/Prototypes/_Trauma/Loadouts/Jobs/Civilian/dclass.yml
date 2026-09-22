@@ -129,10 +129,3 @@
     head: ClothingHeadEnvirohelmPrisoner
   effects:
   - *SLE_Plasmaman
-
-- type: loadout
-  id: BlackEnvirogloves
-  equipment:
-    gloves: ClothingHandsGlovesEnviroglovesBlack
-  effects:
-  - *SLE_Plasmaman
