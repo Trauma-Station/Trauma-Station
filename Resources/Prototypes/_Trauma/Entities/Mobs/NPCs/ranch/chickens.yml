@@ -96,7 +96,7 @@
 
 - type: entity
   abstract: true
-  parent: [ BaseMobAdultChickenRanch, MobCombat]
+  parent: [ BaseMobAdultChickenRanch, MobCombat ]
   id: BaseMobRoosterRanch
   components:
   - type: Sprite
@@ -142,7 +142,7 @@
 
 - type: entity
   abstract: true
-  parent: [ BaseMobAdultChickenRanch, MobCombat]
+  parent: [ BaseMobAdultChickenRanch, MobCombat ]
   id: BaseMobRangedRoosterRanch
   components:
   - type: Sprite
