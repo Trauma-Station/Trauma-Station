@@ -1,8 +1,8 @@
-using Content.Server.GameTicking.Rules;
+using Content.Shared.GameTicking;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map;
 
-namespace Content.Server.GameTicking.Rules.Components; // Trauma - i forgot to give it a namespace lol
+namespace Content.Shared.GameTicking.Rules.Components; // Trauma - i forgot to give it a namespace lol
 
 /// <summary>
 /// Stores grids created by another gamerule component.

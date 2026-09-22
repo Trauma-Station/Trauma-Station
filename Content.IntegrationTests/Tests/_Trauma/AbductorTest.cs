@@ -2,10 +2,10 @@
 
 using Content.IntegrationTests.Tests.Interaction;
 using Content.Medical.Shared.Abductor;
-using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.GameTicking;
+using Content.Shared.GameTicking.Rules.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Power.Components;
 using Robust.Shared.Map;
