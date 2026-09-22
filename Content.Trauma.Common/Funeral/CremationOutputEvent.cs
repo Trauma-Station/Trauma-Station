@@ -1,5 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+/// <summary>
+/// Communicates crematorium output check.
+/// </summary>
+
 namespace Content.Trauma.Common.Funeral;
 
 public sealed class CremationOutputEvent : EntityEventArgs
