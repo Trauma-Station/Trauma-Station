@@ -14968,3 +14968,10 @@ Entries:
   id: 1627
   time: '2026-09-22T08:55:57.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4704
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Jack Galoshes are now Jani Contra
+  id: 1628
+  time: '2026-09-22T17:28:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4709
