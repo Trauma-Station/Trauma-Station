@@ -47,13 +47,17 @@ public partial class MartialArtsSystem
         if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && martialArtsComp.Blocked)
             return;
 
+        // If the martial art has blacklisted a certain gene and that gene is present, all martial art attempts fail.
+        // Only runs if the entity has a mutatable component and mutations, and if the martial arts component has a gene blacklist.
         if (TryComp<MutatableComponent>(user, out var mutatable)
             && martialArtsComp != null
             && martialArtsComp.GeneBlacklist.Count > 0
             && mutatable.Mutations.Keys.Count > 0)
         {
+            // Runs for each mutation on the entity, checking if it's blacklisted for the martial art.
             foreach (var mutation in mutatable.Mutations.Keys)
             {
+                // If the mutation is blacklisted, tada no martial art action.
                 if (martialArtsComp.GeneBlacklist.Contains((mutation)))
                     return;
             }
