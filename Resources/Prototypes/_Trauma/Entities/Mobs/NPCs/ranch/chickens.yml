@@ -957,7 +957,7 @@
         acts: [ "Destruction" ]
 
 - type: entity
-  parent: [GlassChickenBase, BaseMobChickRanch ]
+  parent: [ GlassChickenBase, BaseMobChickRanch ]
   id: MobChickGlass
   name: glass chick
   components:
@@ -972,7 +972,7 @@
     - Rice
 
 - type: entity
-  parent: [GlassChickenBase, BaseMobHenRanch ]
+  parent: [ GlassChickenBase, BaseMobHenRanch ]
   id: MobGlassHen
   name: glass hen
   components:
@@ -983,7 +983,7 @@
     - Rice
 
 - type: entity
-  parent: [GlassChickenBase, BaseMobRoosterRanch ]
+  parent: [ GlassChickenBase, BaseMobRoosterRanch ]
   id: MobGlassRooster
   name: glass rooster
   components:
