@@ -28,7 +28,7 @@
       types:
         Slash: 5
     inject:
-      Nocturine: 10
+      ChloralHydrate: 10
   - type: TypingIndicator
     proto: alien_royal
   - type: Fixtures
