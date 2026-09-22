@@ -2,8 +2,6 @@
 
 using Content.Trauma.Shared.Genetics.Mutations;
 
-using Content.Trauma.Shared.Genetics.Mutations;
-
 namespace Content.Trauma.Shared.MartialArts.Components;
 
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
@@ -23,7 +21,4 @@ public sealed partial class MartialArtsKnowledgeComponent : Component
 
     [DataField(required: true)]
     public SpriteSpecifier Icon;
-
-    [DataField]
-    public List<EntProtoId<MutationComponent>> GeneBlacklist = new();
 }

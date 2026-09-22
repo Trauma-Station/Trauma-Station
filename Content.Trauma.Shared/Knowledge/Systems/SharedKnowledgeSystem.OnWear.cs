@@ -7,8 +7,10 @@ using Content.Shared.Examine;
 using Content.Shared.Implants;
 using Content.Trauma.Common.Silicons.Borgs;
 using Content.Trauma.Shared.Body.Chips;
+using Content.Trauma.Shared.Genetics.Mutations;
 using Content.Trauma.Shared.Knowledge.Components;
 using Content.Trauma.Shared.MartialArts.Components;
+using Content.Trauma.Shared.Wizard.Mutate;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
 
@@ -132,9 +134,6 @@ public abstract partial class SharedKnowledgeSystem
                 Dirty(unit, martial);
             }
         }
-
-        // Updates Genetic Blacklists
-        UpdateGeneticBlacklists(brain, wearer);
     }
 
     private void RemoveKnowledgeModifiers(EntityUid wearer, Entity<KnowledgeGrantOnWearComponent> ent)
@@ -183,9 +182,6 @@ public abstract partial class SharedKnowledgeSystem
                 Dirty(unit, martial);
             }
         }
-
-        // Updates Genetic Blacklists
-        UpdateGeneticBlacklists(brain, wearer);
     }
 
     /// <summary>
