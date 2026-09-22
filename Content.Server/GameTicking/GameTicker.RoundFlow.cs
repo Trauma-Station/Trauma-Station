@@ -347,6 +347,10 @@ namespace Content.Server.GameTicking
                 total++;
             }
 
+            // <Trauma> Adds half a player to ready counter for each unreadied player.
+            total += (_playerGameStatuses.Count - total) / 2;
+            // </Trauma>
+
             return total;
         }
 
