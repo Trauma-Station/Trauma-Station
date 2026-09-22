@@ -160,7 +160,6 @@ public abstract partial class SharedKnowledgeSystem
             _popup.PopupEntity(Loc.GetString("knowledge-martial-art-deselected"), user, user);
         }
         _speed.RefreshMovementSpeedModifiers(user);
-
     }
 
     public EntityUid? GetActiveMartialArt(EntityUid target)
