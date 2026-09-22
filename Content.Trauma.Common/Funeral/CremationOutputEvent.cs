@@ -1,6 +1,4 @@
-/// <summary>
-/// Communicates crematorium output check.
-/// </summary>
+// SPDX-License-Identifier: AGPL-3.0-or-later
 
 namespace Content.Trauma.Common.Funeral;
 
