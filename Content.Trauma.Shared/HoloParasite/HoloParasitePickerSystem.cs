@@ -7,13 +7,11 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Popups;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.HoloParasite;
 
 public sealed partial class HoloParasitePickerSystem : EntitySystem
 {
-    [Dependency] private INetManager _net = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -82,7 +80,7 @@ public sealed partial class HoloParasitePickerSystem : EntitySystem
 
         ent.Comp.HostTarget = host;
 
-        _ui.TryOpenUi(ent.Owner, HoloParasitePickerUiKey.Key, user, predicted: !_net.IsServer);
+        _ui.TryOpenUi(ent.Owner, HoloParasitePickerUiKey.Key, user);
     }
 
     private void OnPickMessage(Entity<HoloParasitePickerComponent> ent, ref HoloParasitePickMessage args)
