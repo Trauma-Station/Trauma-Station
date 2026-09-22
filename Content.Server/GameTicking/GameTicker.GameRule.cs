@@ -439,13 +439,13 @@ public sealed partial class GameTicker
             var minPlayers = gameRule.MinPlayers;
             var name = ToPrettyString(uid);
 
-            if (args.Players.Length >= minPlayers)
+            if (ReadyPlayerCount() >= minPlayers)
                 continue;
 
             if (gameRule.CancelPresetOnTooFewPlayers)
             {
                 _chatManager.SendAdminAnnouncement(Loc.GetString("preset-not-enough-ready-players",
-                    ("readyPlayersCount", args.Players.Length),
+                    ("readyPlayersCount", ReadyPlayerCount()),
                     ("minimumPlayers", minPlayers),
                     ("presetName", name)));
                 args.Cancel();
