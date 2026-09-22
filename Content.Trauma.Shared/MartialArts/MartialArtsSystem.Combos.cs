@@ -7,6 +7,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Shared.Genetics.Mutations;
 using Content.Trauma.Shared.MartialArts.Components;
 
 namespace Content.Trauma.Shared.MartialArts;
@@ -45,6 +46,18 @@ public partial class MartialArtsSystem
 
         if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && martialArtsComp.Blocked)
             return;
+
+        if (TryComp<MutatableComponent>(user, out var mutatable)
+            && martialArtsComp != null
+            && martialArtsComp.GeneBlacklist.Count > 0
+            && mutatable.Mutations.Keys.Count > 0)
+        {
+            foreach (var mutation in mutatable.Mutations.Keys)
+            {
+                if (martialArtsComp.GeneBlacklist.Contains((mutation)))
+                    return;
+            }
+        }
 
         if (!TryComp<MobStateComponent>(args.Target, out var targetState))
             return;
