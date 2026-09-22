@@ -17,13 +17,16 @@
     - map: [ "pocket2" ]
   - type: Xenomorph
     caste: Queen
+  - type: Puller
+    needsHands: false
+    startingGrabStage: Hard
   - type: XenomorphQueen
   - type: TailLash
     tailDamage:
       types:
         Slash: 5
     inject:
-      ChloralHydrate: 10
+      Nocturine: 10
   - type: TypingIndicator
     proto: alien_royal
   - type: Fixtures
