@@ -3,14 +3,15 @@
   name: guide-entry-antagonists
   text: "/ServerInfo/Guidebook/Antagonist/Antagonists.xml"
   children:
-  - Traitors
-  - Thieves
-  - Revolutionaries
+  - Changelings
   - NuclearOperatives
+  - Revolutionaries
   - SpaceNinja
+  - Thieves
+  - Traitors
   - Wizard
-  - Zombies
   - Xenoborgs
+  - Zombies
   - MinorAntagonists
 
 - type: guideEntry
@@ -51,9 +52,7 @@
 - type: guideEntry
   id: Wizard
   name: guide-entry-wizard
-  text: "/ServerInfo/_Goobstation/Guidebook/Antagonist/Wizard.xml" # Goob
-  children: # Goob
-  - WizardSpells
+  text: "/ServerInfo/Guidebook/Antagonist/Wizard.xml"
 
 - type: guideEntry
   id: Xenoborgs
