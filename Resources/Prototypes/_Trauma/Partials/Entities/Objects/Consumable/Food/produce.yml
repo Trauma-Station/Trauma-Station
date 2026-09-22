@@ -1,0 +1,6 @@
+﻿- type: entity
+  id: RiceBushel
+  parent: FoodProduceBase
+  components:
+  - type: Edible
+    requiresSpecialDigestion: false

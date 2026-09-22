@@ -169,6 +169,15 @@
 
 - type: entity
   parent: MobStatusEffectBase
+  id: StatusEffectWizardChickenPower
+  name: wizard egg effect
+  components:
+  - type: TemporaryActionGrantEffect
+    actionPrototypes:
+    - ActionMagicMissileWizardChicken
+
+- type: entity
+  parent: MobStatusEffectBase
   id: StatusEffectDragonPower
   name: dragon's power
   components:
