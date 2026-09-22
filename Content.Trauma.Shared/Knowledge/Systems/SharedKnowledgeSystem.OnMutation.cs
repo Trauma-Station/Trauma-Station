@@ -1,22 +1,7 @@
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
-using Content.Shared.Actions;
-using Content.Shared.Damage.Events;
-using Content.Shared.Damage.Systems;
-using Content.Shared.Interaction;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
-using Content.Shared.Movement.Systems;
-using Content.Shared.Popups;
-using Content.Shared.Projectiles;
-using Content.Shared.Stunnable;
-using Content.Shared.Weapons.Melee.Events;
-using Content.Shared.Weapons.Ranged.Events;
-using Content.Trauma.Common.Knowledge;
+﻿
 using Content.Trauma.Common.Knowledge.Components;
-using Content.Trauma.Common.MartialArts;
 using Content.Trauma.Shared.Genetics.Mutations;
-using Content.Trauma.Shared.MartialArts;
+
 using Content.Trauma.Shared.MartialArts.Components;
 
 namespace Content.Trauma.Shared.Knowledge.Systems;
