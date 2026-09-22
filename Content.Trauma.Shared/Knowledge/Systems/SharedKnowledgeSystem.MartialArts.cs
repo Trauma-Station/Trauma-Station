@@ -47,7 +47,6 @@ public abstract partial class SharedKnowledgeSystem
             return;
 
         ChangeMartialArts(args.Container, args.Holder, ent);
-        UpdateGeneticBlacklists(args.Container, args.Holder);
     }
 
     [SubscribeLocalEvent]
@@ -55,7 +54,6 @@ public abstract partial class SharedKnowledgeSystem
     {
         if (args.Container.Comp.ActiveMartialArt == ent.Owner)
             ChangeMartialArts(args.Container, args.Holder, null); // disables the skill internally
-        UpdateGeneticBlacklists(args.Container, args.Holder);
     }
 
     [SubscribeLocalEvent]
