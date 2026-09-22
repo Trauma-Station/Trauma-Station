@@ -46,6 +46,7 @@
   - MobVoidHen
   noSpecialFoodRequiredChickens:
   - MobVoidHen
+  weight: 5
   whitelist:
     components:
     - VomitedEnoughMarker
@@ -137,6 +138,7 @@
   - MobSilkieHen
   noSpecialFoodRequiredChickens:
   - MobPigeonHen
+  weight: 5
   foodTagsRequired:
   - Peas
 

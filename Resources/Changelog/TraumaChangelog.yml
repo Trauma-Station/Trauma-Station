@@ -14968,3 +14968,49 @@ Entries:
   id: 1627
   time: '2026-09-22T08:55:57.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4704
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Jack Galoshes are now Jani Contra
+  id: 1628
+  time: '2026-09-22T17:28:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4709
+- author: ReestockMakes
+  changes:
+  - type: Tweak
+    message: >-
+      D-Class now have loadout options of orange shoes, orange winter coats, and
+      prisoner envirosuits for plasmamen.
+  - type: Tweak
+    message: Updated D-Class role iconography.
+  id: 1629
+  time: '2026-09-22T17:30:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4527
+- author: assripper.
+  changes:
+  - type: Remove
+    message: xenomorph instant hardgrab for everything except queen
+  - type: Add
+    message: xenomorph shovestun is back
+  - type: Tweak
+    message: xenomorph drones and sentinels can no longer ventcrawl
+  - type: Tweak
+    message: xenomorphs now take x2 heat damage
+  - type: Tweak
+    message: made the xenomorph tail shorter it was too long
+  - type: Tweak
+    message: >-
+      xenomorphs now have a stunnable amount of stamina (except praetorian and
+      queen)
+  id: 1630
+  time: '2026-09-22T20:10:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4708
+- author: Wizard25671
+  changes:
+  - type: Fix
+    message: Fixed ranged roosters not using their ranged attacks, Be scared of dragons
+  - type: Fix
+    message: Fixed being unable to obtain pigeon and void eggs
+  id: 1631
+  time: '2026-09-22T20:20:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4705

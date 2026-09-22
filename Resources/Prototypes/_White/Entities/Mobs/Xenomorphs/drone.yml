@@ -21,7 +21,6 @@
       visible: false
   - type: Xenomorph
     caste: Drone
-  - type: VentCrawler
   - type: Cuffable
   # - type: GuideHelp
   #   guides:

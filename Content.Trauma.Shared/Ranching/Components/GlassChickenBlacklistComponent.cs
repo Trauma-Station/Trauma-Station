@@ -3,7 +3,7 @@
 namespace Content.Trauma.Shared.Ranching.Components;
 
 /// <summary>
-/// first we mine then we craft
+/// Prevents a food from being duped when eaten by a glass chicken.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class ChickenChestComponent : Component;
+public sealed partial class GlassChickenBlacklistComponent : Component;

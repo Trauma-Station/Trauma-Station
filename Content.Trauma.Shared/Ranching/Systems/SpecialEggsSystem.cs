@@ -14,28 +14,23 @@ namespace Content.Trauma.Shared.Ranching.Systems;
 public sealed partial class SpecialEggsSystem : EntitySystem
 {
     [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private EntityQuery<GlassChickenBlacklistComponent> _blacklistQuery = default!;
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnFullyAte(Entity<ChickenChestComponent> ent, ref FullyAteEvent args)
     {
-        SubscribeLocalEvent<PlateableChickenComponent, InteractUsingEvent>(OnInteract);
-
-        SubscribeLocalEvent<ChickenChestComponent, FullyAteEvent>(OnChanged);
-    }
-
-    private void OnChanged(Entity<ChickenChestComponent> ent, ref FullyAteEvent args)
-    {
-        var foodproto = Prototype(args.Food);
-
-        if (foodproto is null)
+        if (_blacklistQuery.HasComp(args.Food) ||
+            Prototype(args.Food)?.ID is not { } proto)
             return;
 
+        // TODO: use cloning
         var coords = Transform(ent).Coordinates;
-
         // Minecraft crazy craft chicken chest, if you know you know.
-        PredictedSpawnAtPosition(foodproto.ID, coords);
-        PredictedSpawnAtPosition(foodproto.ID, coords);
+        PredictedSpawnAtPosition(proto, coords);
+        PredictedSpawnAtPosition(proto, coords);
     }
 
+    [SubscribeLocalEvent]
     private void OnInteract(Entity<PlateableChickenComponent> ent, ref InteractUsingEvent args)
     {
         if (!TryComp<PlateableChickenOreComponent>(args.Used, out var ore))
