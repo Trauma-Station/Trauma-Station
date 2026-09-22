@@ -81,7 +81,7 @@
   - type: Injurable
     damageContainer: Biological
   - type: Stamina
-    baseCritThreshold: 500
+    baseCritThreshold: 200
   - type: Fixtures
     fixtures:
       fix1:
