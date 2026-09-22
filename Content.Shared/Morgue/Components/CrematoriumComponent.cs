@@ -19,6 +19,13 @@ public sealed partial class CrematoriumComponent : Component
     [DataField, AutoNetworkedField]
     public EntProtoId LeftOverProtoId = "Ash";
 
+    // <Trauma>
+    /// <summary>
+    /// Spawned in place of LeftOver if the burned entity had a funeral.
+    /// </summary>
+    public EntProtoId HolyLeftOverProtoId = "HolyAsh";
+    // </Trauma>
+
     /// <summary>
     /// The time it takes to cremate something.
     /// </summary>

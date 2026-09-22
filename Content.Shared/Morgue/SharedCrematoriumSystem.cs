@@ -1,4 +1,5 @@
 using Content.Goobstation.Common.Morgue; // Goob
+using Content.Trauma.Common.Funeral; //Trauma
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Mind;
@@ -139,6 +140,14 @@ public abstract partial class SharedCrematoriumSystem : EntitySystem
 
         if (ent.Comp2.Contents.ContainedEntities.Count > 0)
         {
+            // <Trauma>
+            var contents = new List<EntityUid>(ent.Comp2.Contents.ContainedEntities);
+
+            var outputEvent = new CremationOutputEvent(ent.Owner, contents, ent.Comp1.LeftOverProtoId);
+
+            RaiseLocalEvent(outputEvent); // Event to check if output should be holy ash
+            // </Trauma>
+
             for (var i = ent.Comp2.Contents.ContainedEntities.Count - 1; i >= 0; i--)
             {
                 var item = ent.Comp2.Contents.ContainedEntities[i];
@@ -148,7 +157,7 @@ public abstract partial class SharedCrematoriumSystem : EntitySystem
                 _container.Remove(item, ent.Comp2.Contents);
                 PredictedDel(item);
             }
-            PredictedTrySpawnInContainer(ent.Comp1.LeftOverProtoId, ent.Owner, ent.Comp2.Contents.ID, out _);
+            PredictedTrySpawnInContainer(outputEvent.OutputPrototype, ent.Owner, ent.Comp2.Contents.ID, out _);
         }
 
         EntityStorage.OpenStorage((ent.Owner, ent.Comp2));

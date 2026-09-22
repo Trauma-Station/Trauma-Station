@@ -1,22 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Shared.Funeral.Components;
-using Content.Shared.Administration.Logs;
-using Content.Shared.Database;
-using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
-using Content.Shared.Random.Helpers;
-using Content.Shared.Stacks;
 using Content.Shared.Whitelist;
-using Content.Trauma.Common.Knowledge.Systems;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Mind.Components;
 using Content.Shared.Humanoid;
-using Robust.Shared.Audio.Systems;
-using Robust.Shared.Random;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Funeral.Systems;
 
@@ -25,19 +16,9 @@ namespace Content.Trauma.Shared.Funeral.Systems;
 /// </summary>
 public sealed partial class FuneralAddSystem : EntitySystem
 {
-    [Dependency] private CommonKnowledgeSystem _knowledge = default!;
-    [Dependency] private FuneralAddSystem _enchanting = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private INetManager _net = default!;
-    [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private ISharedAdminLogManager _adminLogger = default!;
-    [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private SharedStackSystem _stack = default!;
     [Dependency] private MobStateSystem _mobState = default!;
-
-    private List<EntProtoId<FuneralHolyComponent>> _pool = new();
 
     // probably shitcode, I'm an amateur.
     [SubscribeLocalEvent]
@@ -45,7 +26,7 @@ public sealed partial class FuneralAddSystem : EntitySystem
     {
         var user = args.User;
         var target = args.Target;
-        if (!args.CanReach || target == args.User || target is not { } item)
+        if (!args.CanReach || target == args.User || target is not { })
             return;
 
         args.Handled = true;
