@@ -596,6 +596,9 @@
     availableModes:
     - SemiAuto
     soundGunshot: /Audio/Magic/fireball.ogg
+  - type: HostileWhenUnhappy
+    happyTask: !type:HTNCompoundTask
+      task: RangedRoosterCompound
   - type: HTN
     rootTask:
       task: RangedRoosterCompound
@@ -1124,6 +1127,9 @@
       components:
       - Cash
     amount: 1000
+  - type: HostileWhenUnhappy
+    happyTask: !type:HTNCompoundTask
+      task: RangedRoosterCompound
   - type: HTN
     rootTask:
       task: RangedRoosterCompound
@@ -1325,6 +1331,9 @@
     availableModes:
     - SemiAuto
     soundGunshot: /Audio/Effects/Lightning/lightningbolt.ogg
+  - type: HostileWhenUnhappy
+    happyTask: !type:HTNCompoundTask
+      task: RangedRoosterCompound
   - type: HTN
     rootTask:
       task: RangedRoosterCompound
@@ -1696,9 +1705,13 @@
     availableModes:
     - SemiAuto
     soundGunshot: /Audio/Effects/Lightning/lightningshock.ogg
+  - type: HostileWhenUnhappy
+    happyTask: !type:HTNCompoundTask
+      task: RangedRoosterCompound
   - type: HTN
     rootTask:
       task: RangedRoosterCompound
+
 
 # Phoenix
 
@@ -1822,9 +1835,13 @@
     availableModes:
     - SemiAuto
     soundGunshot: /Audio/Magic/fireball.ogg
+  - type: HostileWhenUnhappy
+    happyTask: !type:HTNCompoundTask
+      task: RangedRoosterCompound
   - type: HTN
     rootTask:
       task: RangedRoosterCompound
+
 
 # Coral Chicken
 
