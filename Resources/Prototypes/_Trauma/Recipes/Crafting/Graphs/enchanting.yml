@@ -57,30 +57,9 @@
           sprite: Objects/Specific/Chemistry/bottle.rsi
           state: bottle
       - tag: DemonEssense
-        name: construction-graph-tag-demonsoul
+        name: construction-graph-tag-magic-ink-catalyst
         icon:
-          sprite: _Trauma/Objects/Enchanting/demonsoul.rsi
-          state: icon
-  - node: finish
-    entity: MagicInkRandom
-
-- type: constructionGraph
-  id: RandomInkAsh
-  graph:
-  - node: start
-    edges:
-    - to: finish
-      steps:
-      - tag: Bottle
-        doAfter: 1
-        name: construction-graph-tag-bottle
-        icon:
-          sprite: Objects/Specific/Chemistry/bottle.rsi
-          state: bottle
-      - tag: HolyAsh
-        name: construction-graph-tag-holyash
-        icon:
-          sprite: _Trauma/Objects/Enchanting/holyash.rsi
+          sprite: _Trauma/Objects/Enchanting/enchantcatalyst.rsi
           state: icon
   - node: finish
     entity: MagicInkRandom
