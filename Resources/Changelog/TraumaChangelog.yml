@@ -15005,3 +15005,12 @@ Entries:
   id: 1630
   time: '2026-09-22T20:10:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4708
+- author: Wizard25671
+  changes:
+  - type: Fix
+    message: Fixed ranged roosters not using their ranged attacks, Be scared of dragons
+  - type: Fix
+    message: Fixed being unable to obtain pigeon and void eggs
+  id: 1631
+  time: '2026-09-22T20:20:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4705
