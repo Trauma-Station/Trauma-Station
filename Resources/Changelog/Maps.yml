@@ -426,3 +426,12 @@ Entries:
   id: 45
   time: '2026-09-19T14:47:51.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4671
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Cluster's AME is now premade.
+  - type: Add
+    message: Meta station now has a nuclear reactor and premade AME.
+  id: 46
+  time: '2026-09-21T13:26:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4695

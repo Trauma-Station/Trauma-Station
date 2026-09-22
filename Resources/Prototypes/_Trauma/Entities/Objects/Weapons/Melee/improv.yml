@@ -350,7 +350,7 @@
     node: finish
 
 - type: entity
-  parent: [ BaseItem, BaseMinorContraband, MetalToolDurability ]
+  parent: [ BaseKnife, BaseMinorContraband, MetalToolDurability ]
   id: PipeSpear
   name: pipe shank
   description: A pipe sharpened to a nasty point, could be a great throwing weapon.

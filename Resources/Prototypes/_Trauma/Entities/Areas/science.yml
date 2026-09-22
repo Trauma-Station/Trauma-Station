@@ -53,6 +53,22 @@
 
 - type: entity
   parent: BaseAreaScience
+  id: AreaAnomalyLab
+  name: anomaly lab
+  components:
+  - type: Sprite
+    state: anomaly_lab
+
+- type: entity
+  parent: BaseAreaScience
+  id: AreaArtifactLab
+  name: artifact lab
+  components:
+  - type: Sprite
+    state: artifact_lab
+
+- type: entity
+  parent: BaseAreaScience
   id: AreaCytology
   name: cytology
   components:

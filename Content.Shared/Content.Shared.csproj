@@ -19,6 +19,7 @@
     <ProjectReference Include="../Content.Goobstation.Common/Content.Goobstation.Common.csproj" />
     <ProjectReference Include="../Content.Lavaland.Common/Content.Lavaland.Common.csproj" />
     <ProjectReference Include="../Content.Medical.Common/Content.Medical.Common.csproj" />
+    <ProjectReference Include="../Content.Factory.Common/Content.Factory.Common.csproj" />
     <ProjectReference Include="../Content.Common/Content.Common.csproj" />
     <!-- </Trauma> -->
     <ProjectReference Include="..\Content.Shared.Database\Content.Shared.Database.csproj" />

@@ -117,6 +117,14 @@
 
 - type: entity
   parent: BaseAreaMedical
+  id: AreaCryoPods
+  name: cryo pods
+  components:
+  - type: Sprite
+    state: cryo_pods
+
+- type: entity
+  parent: BaseAreaMedical
   id: AreaVirology
   name: virology
   components:

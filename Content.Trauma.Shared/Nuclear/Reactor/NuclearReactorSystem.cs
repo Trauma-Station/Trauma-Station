@@ -8,7 +8,7 @@ using Content.Shared.Database;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Popups;
-using Content.Trauma.Common.DeviceLinking;
+using Content.Factory.Common.DeviceLinking;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Collections;
