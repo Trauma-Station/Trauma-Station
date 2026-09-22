@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.GameTicking.Components;
-using Content.Trauma.Server.BloodCult.Gamerule;
+using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Constructs;
 
-namespace Content.Trauma.Server.BloodCult.Constructs;
+namespace Content.Trauma.Shared.BloodCult.Constructs;
 
 /// <summary>
 /// Tracks constructs in the blood cult gamerule.
 /// </summary>
 public sealed partial class ConstructSystem : EntitySystem
 {
-    // TODO: make event to assign it to a specific cult rule and put this in shared
+    // TODO: make event to assign it to a specific cult rule
     [SubscribeLocalEvent]
     private void OnMapInit(Entity<ConstructComponent> ent, ref MapInitEvent args)
     {

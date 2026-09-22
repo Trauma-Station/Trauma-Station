@@ -15,10 +15,16 @@ public sealed partial class BloodRunePrototype : IPrototype
     public string ID { get; private set; } = default!;
 
     /// <summary>
-    /// The rune entity to spawn.
+    /// The rune entity to spawn when fully drawn.
     /// </summary>
     [DataField(required: true)]
     public EntProtoId Prototype;
+
+    /// <summary>
+    /// The unfinished blood ring to spawn first.
+    /// </summary>
+    [DataField]
+    public EntProtoId Unfinished = "CultRuneUnfinishedRegular";
 
     /// <summary>
     /// How long it takes to draw the rune.
@@ -37,4 +43,29 @@ public sealed partial class BloodRunePrototype : IPrototype
             ["Slash"] = 15,
         }
     };
+
+    /// <summary>
+    /// Whether to require placement in and consume one of the randomly picked areas.
+    /// </summary>
+    [DataField]
+    public bool AreaLimited;
+
+    /// <summary>
+    /// Whether to require sacrificing the cult's target before placing.
+    /// </summary>
+    [DataField]
+    public bool RequireTarget;
+
+    /// <summary>
+    /// If nonzero, the maximum number of this rune a cult can have.
+    /// </summary>
+    [DataField]
+    public int Limit;
+
+    /// <summary>
+    /// Announcement to make from central command after starting to draw this rune.
+    /// Gets "area" passed with the name of the area it was placed in.
+    /// </summary>
+    [DataField]
+    public LocId? Announcement;
 }

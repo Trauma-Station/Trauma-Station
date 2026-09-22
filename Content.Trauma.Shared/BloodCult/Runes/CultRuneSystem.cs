@@ -13,21 +13,25 @@ using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
+using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.BloodCult.Empower;
 using Content.Trauma.Shared.BloodCult.Runes;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Timing;
 using System.Linq;
 
 namespace Content.Trauma.Shared.BloodCult.Runes;
 
 public sealed partial class CultRuneSystem : EntitySystem
 {
+    [Dependency] private AreaSystem _area = default!;
     [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedChatSystem _chat = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -41,45 +45,31 @@ public sealed partial class CultRuneSystem : EntitySystem
     private void OnRuneSelected(Entity<RuneDrawerComponent> ent, ref RuneDrawerSelectedMessage args)
     {
         var user = args.Actor;
-        if (!ProtoMan.TryIndex(args.Rune, out var rune) || !CanDrawRune(user))
+        if (!ProtoMan.TryIndex(args.Rune, out var rune) || !CanDrawRune(user, rune))
             return;
 
         var timeToDraw = rune.DrawTime;
         if (TryComp(user, out BloodCultEmpoweredComponent? empowered))
-            timeToDraw *= empowered.RuneTimeMultiplier;
+            timeToDraw -= empowered.RuneTimeDiscount;
         // if you want to modify this any more, make an event
 
-        var ev = new DrawRuneDoAfterEvent(args.Rune);
+        DealDamage(user, rune.DrawDamage); // damage upfront so you can't spam them everywhere
+        _audio.PlayPredicted(ent.Comp.StartDrawingSound, user, user);
 
-        var argsDoAfterEvent = new DoAfterArgs(EntityManager, user, timeToDraw, ev, eventTarget: ent, used: ent)
-        {
-            BreakOnMove = true,
-            NeedHand = true
-        };
-
-        if (_doAfter.TryStartDoAfter(argsDoAfterEvent))
-            _audio.PlayPredicted(ent.Comp.StartDrawingSound, user, user, AudioParams.Default.WithMaxDistance(2f));
-    }
-
-    [SubscribeLocalEvent]
-    private void OnDrawRune(Entity<RuneDrawerComponent> ent, ref DrawRuneDoAfterEvent args)
-    {
-        if (args.Cancelled || !ProtoMan.Resolve(args.Rune, out var rune))
-            return;
-
-        var user = args.User;
-        DealDamage(user, rune.DrawDamage);
-
-        _audio.PlayPredicted(ent.Comp.EndDrawingSound, user, user, AudioParams.Default.WithMaxDistance(2f));
         var pos = Transform(user).Coordinates.SnapToGrid(EntityManager);
-        var uid = PredictedSpawnAtPosition(rune.Prototype, pos);
+        var uid = PredictedSpawnAtPosition(rune.Unfinished, pos);
+        var comp = Comp<CultRuneDrawingComponent>(uid);
+        comp.Rune = args.Rune;
+        comp.TimeRemaining = timeToDraw;
+        Dirty(uid, comp);
 
-        var ev = new RunePlacedEvent(user);
-        RaiseLocalEvent(uid, ref ev);
+        _cult.CopyMember(user, uid); // set member immediately so it counts against rune limits
+
+        _popup.PopupEntity("Click the rune with your blade to begin carving it.", ent, user);
     }
 
     [SubscribeLocalEvent]
-    private void OnInteractUsing(Entity<CultRuneComponent> ent, ref InteractUsingEvent args)
+    private void OnInteractUsing(Entity<CultRuneDrawingComponent> ent, ref InteractUsingEvent args)
     {
         if (args.Handled)
             return;
@@ -98,19 +88,66 @@ public sealed partial class CultRuneSystem : EntitySystem
         if (!TryComp<RuneDrawerComponent>(item, out var runeDrawer))
             return;
 
-        var argsDoAfterEvent =
-            new DoAfterArgs(EntityManager, user, runeDrawer.EraseTime, new RuneEraseDoAfterEvent(), ent)
+        DoAfterArgs doAfter = default!;
+        string msg = default!;
+        if (ent.Comp.Rune is { } rune)
+        {
+            var ev = new DrawRuneDoAfterEvent();
+            doAfter = new(EntityManager, user, ent.Comp.TimeRemaining, ev, ent, ent, used: item)
             {
                 BreakOnMove = true,
                 BreakOnDamage = true,
                 NeedHand = true
             };
+            msg = "You start carving a rune into the blood...";
+            ent.Comp.StartedDrawing = _timing.CurTime;
+            Dirty(ent);
+        }
+        else
+        {
+            var ev = new RuneEraseDoAfterEvent();
+            doAfter = new(EntityManager, user, runeDrawer.EraseTime, ev, ent, ent, used: item)
+            {
+                BreakOnMove = true,
+                BreakOnDamage = true,
+                NeedHand = true
+            };
+            msg = "You start erasing the rune...";
+        }
 
-        if (!_doAfter.TryStartDoAfter(argsDoAfterEvent))
+        if (!_doAfter.TryStartDoAfter(doAfter))
             return;
 
-        _popup.PopupEntity(Loc.GetString("cult-rune-started-erasing"), ent, user);
+        _popup.PopupEntity(msg, ent, user);
         args.Handled = true;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnDrawRune(Entity<CultRuneDrawingComponent> ent, ref DrawRuneDoAfterEvent args)
+    {
+        if (!ProtoMan.TryIndex(ent.Comp.Rune, out var rune))
+            return;
+
+        if (args.Cancelled)
+        {
+            var spent = _timing.CurTime - ent.Comp.StartedDrawing;
+            // recover half the spent time so failing at 39.9s doesnt fully cuck you, but attacking can still make progress
+            ent.Comp.TimeRemaining -= spent * 0.5;
+            Dirty(ent);
+            return;
+        }
+
+        var user = args.User;
+        _audio.PlayPredicted(ent.Comp.EndDrawingSound, user, user);
+        var pos = Transform(ent).Coordinates;
+        var uid = PredictedSpawnAtPosition(rune.Prototype, pos);
+
+        var ev = new RunePlacedEvent(user);
+        RaiseLocalEvent(uid, ref ev);
+
+        _cult.CopyMember(ent.Owner, uid);
+
+        PredictedDel(ent.Owner);
     }
 
     [SubscribeLocalEvent]
@@ -167,7 +204,7 @@ public sealed partial class CultRuneSystem : EntitySystem
         }
     }
 
-    private bool CanDrawRune(EntityUid uid)
+    private bool CanDrawRune(EntityUid uid, BloodRunePrototype rune)
     {
         var xform = Transform(uid);
         if (xform.GridUid is not {} gridUid || !_gridQuery.TryComp(gridUid, out var grid))
@@ -176,11 +213,59 @@ public sealed partial class CultRuneSystem : EntitySystem
             return false;
         }
 
-        if (_map.GetTileRef((gridUid, grid), xform.Coordinates) != null)
-            return true;
+        if (_cult.GetRule(uid) is not { } rule)
+        {
+            _popup.PopupEntity("You aren't a cultist..?", uid, uid);
+            return false;
+        }
 
-        _popup.PopupEntity(Loc.GetString("cult-rune-cant-draw"), uid, uid);
-        return false;
+        if (_map.GetTileRef((gridUid, grid), xform.Coordinates) == null)
+        {
+            _popup.PopupEntity(Loc.GetString("cult-rune-cant-draw"), uid, uid);
+            return false;
+        }
+
+        if (rune.AreaLimited &&
+            (_area.GetArea(uid) is not { } area ||
+            _area.GetAreaPrototype(area) is not { } areaId ||
+            !rule.Comp.Areas.Contains(areaId)))
+        {
+            _popup.PopupEntity("You need to place this rune in one of the cult's unique areas!", uid, uid);
+            return false;
+        }
+
+        if (rune.Limit > 0)
+        {
+            if (GetRuneCount(rule, rune) >= rune.Limit)
+            {
+                _popup.PopupEntity("You can't make any more of that rune!", uid, uid);
+                return false;
+            }
+        }
+
+        if (rune.RequireTarget && !rule.Comp.TargetSacrificed)
+        {
+            _popup.PopupEntity("Nar'Sie still demands her target be offered to her.", uid, uid);
+            return false;
+        }
+
+        return true;
+    }
+
+    public int GetRuneCount(EntityUid rule, BloodRunePrototype proto)
+    {
+        var count = 0;
+        foreach (var rune in EntityQueryEnumerator<CultRuneDrawingComponent>())
+        {
+            if (_cult.GetRule(rune)?.Owner != rule)
+                continue;
+
+            // unfinished vs finished runes, count both to prevent cheese
+            if (rune.Comp.Rune == proto.ID || Prototype(rune)?.ID == proto.Prototype)
+                count++;
+        }
+
+        return count;
     }
 
     private void DealDamage(EntityUid user, DamageSpecifier? damage = null)
@@ -188,14 +273,13 @@ public sealed partial class CultRuneSystem : EntitySystem
         if (damage is null)
             return;
 
+        // Create a new one so the original DamageSpecifier can't be changed.
         var newDamage = new DamageSpecifier(damage);
         if (TryComp(user, out BloodCultEmpoweredComponent? empowered))
         {
-            // Create a new one so the original DamageSpecifier will not be changed.
-            damage = new DamageSpecifier(damage);
-            damage *= empowered.RuneDamageMultiplier;
+            newDamage *= empowered.RuneDamageMultiplier;
         }
 
-        _damageable.ChangeDamage(user, damage, increaseOnly: true);
+        _damageable.ChangeDamage(user, newDamage, increaseOnly: true);
     }
 }

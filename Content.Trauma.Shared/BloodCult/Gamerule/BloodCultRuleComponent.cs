@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.BloodCult;
+namespace Content.Trauma.Shared.BloodCult.Gamerule;
 
-namespace Content.Trauma.Server.BloodCult.Gamerule;
-
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class BloodCultRuleComponent : Component
 {
     [DataField]
@@ -31,8 +30,33 @@ public sealed partial class BloodCultRuleComponent : Component
     /// <summary>
     /// Set to true when the target is sacrificed, allowing the Nar'Sie summoning ritual.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool TargetSacrificed;
+
+    /// <summary>
+    /// Set to true after summoning Nar'Sie, used for the objective.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool NarSieSummoned;
+
+    /// <summary>
+    /// Allowed areas for area-specific runes.
+    /// Consumed when they are placed.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public List<EntProtoId> Areas = new();
+
+    /// <summary>
+    /// Possible areas to pick for <see cref="Areas"/>.
+    /// </summary>
+    [DataField(required: true)]
+    public List<EntProtoId> AreaPool = new();
+
+    /// <summary>
+    /// Number of aras to pick from <see cref="AreaPool"/>.
+    /// </summary>
+    [DataField]
+    public int AreaCount = 3;
 
     [DataField]
     public EntityUid? CultLeader;

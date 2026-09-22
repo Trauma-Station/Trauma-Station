@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Server.Antag;
 using Content.Server.Antag.Components;
+using Content.Server.Chat.Managers;
 using Content.Server.GameTicking;
 using Content.Server.GameTicking.Rules;
 using Content.Server.RoundEnd;
@@ -25,11 +26,10 @@ using Content.Shared.Roles;
 using Content.Trauma.Server.BloodCult.Objectives;
 using Content.Trauma.Shared.BloodCult;
 using Content.Trauma.Shared.BloodCult.Components;
+using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Items;
-using Content.Trauma.Shared.BloodCult.Items.BloodSpear;
 using Content.Trauma.Shared.BloodCult.Runes.Offering;
 using Content.Trauma.Shared.BloodCult.Runes.Rending;
-using Content.Trauma.Shared.BloodCult.Spells;
 using Content.Trauma.Shared.Roles;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
@@ -41,6 +41,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
 {
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private BloodCultSystem _cult = default!;
+    [Dependency] private IChatManager _chat = default!;
     [Dependency] private GibbingSystem _gibbing = default!;
     [Dependency] private HumanoidProfileSystem _humanoid = default!;
     [Dependency] private InventorySystem _inventory = default!;
@@ -52,8 +53,10 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
 
     private static readonly ProtoId<AntagSpecifierPrototype> CultistSpecifier = "BloodCultist";
+    private static readonly Color AnnounceColor = Color.FromHex("#dc143c");
 
     private List<EntityUid> _targets = new();
 
@@ -61,15 +64,22 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
 
     protected override void Started(
         EntityUid uid,
-        BloodCultRuleComponent component,
-        GameRuleComponent gameRule,
+        BloodCultRuleComponent comp,
+        GameRuleComponent rule,
         GameRuleStartedEvent args
     )
     {
-        base.Started(uid, component, gameRule, args);
+        base.Started(uid, comp, rule, args);
 
         // TODO: pick a new target if they go cryo or whatever
-        component.OfferingTarget = PickTarget();
+        comp.OfferingTarget = PickTarget();
+        while (comp.Areas.Count < comp.AreaCount)
+        {
+            var area = _random.Pick(comp.AreaPool);
+            // TODO: maybe verify that the map has the area, only really matters for reach but that shouldnt have a cult anyway
+            if (!comp.Areas.Contains(area))
+                comp.Areas.Add(area);
+        }
     }
 
     protected override void AppendRoundEndText(
@@ -101,16 +111,17 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
             return;
 
         rule.Comp.TargetSacrificed = true;
-        // TODO: announcement to the cult or whatever
+        AnnounceToCult(rule, "Nar'Sie's target has been sacrificed! Summon her to your realm and elevate your cult to godhood!");
     }
 
     [SubscribeLocalEvent]
-    private void OnNarsieSummon(ref BloodCultNarsieSummonedEvent ev)
+    private void OnNarsieSummoned(ref BloodCultNarsieSummonedEvent ev)
     {
         // TODO: if someone wants to make multi-cult gamemode, only make the winning cult ascend instead of arbitrary first one
         var rulesQuery = QueryActiveRules();
         while (rulesQuery.MoveNext(out _, out var cult, out _))
         {
+            cult.NarSieSummoned = true;
             cult.WinCondition = CultWinCondition.Win;
             _roundEnd.EndRound();
 
@@ -134,8 +145,10 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         var query = QueryActiveRules();
         while (query.MoveNext(out _, out var cult, out _))
         {
+            _cult.SetRule(cultist, cult);
             cult.Cultists.Add(cultist);
             UpdateCultStage(cult);
+            return;
         }
     }
 
@@ -144,7 +157,9 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     {
         var query = QueryActiveRules();
         while (query.MoveNext(out _, out var cult, out _))
+        {
             cult.Cultists.Remove(cultist);
+        }
 
         CheckRoundShouldEnd();
 
@@ -227,6 +242,17 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         return _targets.Count > 0 ? _random.Pick(_targets) : null;
     }
 
+    public void AnnounceToCult(Entity<BloodCultRuleComponent> rule, string message)
+    {
+        var clients = new List<INetChannel>();
+        foreach (var cultist in rule.Comp.Cultists)
+        {
+            if (_actorQuery.TryComp(cultist, out var actor))
+                clients.Add(actor.PlayerSession.Channel);
+        }
+        _chat.ChatMessageToMany(channel, message, message, rule, false, true, clients, AnnounceColor);
+    }
+
     private void RemoveAllCultItems(Entity<BloodCultistComponent> cultist)
     {
         if (!_inventory.TryGetContainerSlotEnumerator(cultist.Owner, out var enumerator))
@@ -307,7 +333,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         if (cultRule.LeaderSelected)
             return;
 
-        var candidats = cultRule.Cultists;
+        var candidats = new List(cultRule.Cultists);
         candidats.RemoveAll(
             entity =>
                 TryComp(entity, out PullableComponent? pullable) && pullable.BeingPulled ||

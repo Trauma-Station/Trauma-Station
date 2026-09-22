@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Pinpointer;
 using Content.Shared.Chat;
 using Content.Shared.DoAfter;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
+using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.BloodCult;
 using Content.Trauma.Shared.BloodCult.Runes;
 using Content.Trauma.Shared.BloodCult.Runes.Rending;
@@ -17,22 +17,19 @@ namespace Content.Trauma.Server.BloodCult.Runes;
 
 public sealed partial class CultRuneRendingSystem : EntitySystem
 {
+    [Dependency] private AreaSystem _area = default!;
     [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private MobStateSystem _mobState = default!;
-    [Dependency] private NavMapSystem _navMap = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedChatSystem _chat = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private SharedTransformSystem _transform = default!;
 
     [SubscribeLocalEvent]
     private void OnRendingRunePlaced(Entity<CultRuneRendingComponent> rune, ref RunePlacedEvent args)
     {
-        var position = _transform.GetMapCoordinates(rune);
-        var message = Loc.GetString("cult-rending-drawing-finished",
-            ("location", FormattedMessage.RemoveMarkupPermissive(_navMap.GetNearestBeaconString(position))));
+        var message = Loc.GetString("cult-rending-drawing-finished", ("area", _area.GetAreaName(rune)));
 
         _chat.DispatchGlobalAnnouncement(message,
             Loc.GetString("blood-cult-title"),

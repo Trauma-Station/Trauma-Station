@@ -15,10 +15,10 @@ public sealed partial class RuneDrawerComponent : Component
     public TimeSpan EraseTime = TimeSpan.FromSeconds(4);
 
     [DataField]
-    public SoundSpecifier StartDrawingSound = new SoundPathSpecifier("/Audio/_Trauma/BloodCult/butcher.ogg");
-
-    [DataField]
-    public SoundSpecifier EndDrawingSound = new SoundPathSpecifier("/Audio/_Trauma/BloodCult/blood.ogg");
+    public SoundSpecifier StartDrawingSound = new SoundPathSpecifier("/Audio/_Trauma/BloodCult/butcher.ogg")
+    {
+        Params = AudioParams.Default.WithMaxDistance(4f)
+    };
 }
 
 [Serializable, NetSerializable]
@@ -37,15 +37,4 @@ public sealed class RuneDrawerSelectedMessage(ProtoId<BloodRunePrototype> rune) 
 public sealed partial class RuneEraseDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
-public sealed partial class DrawRuneDoAfterEvent : DoAfterEvent
-{
-    public ProtoId<BloodRunePrototype> Rune;
-
-    public DrawRuneDoAfterEvent(ProtoId<BloodRunePrototype> rune)
-    {
-        Rune = rune;
-    }
-
-    public override DoAfterEvent Clone()
-        => new DrawRuneDoAfterEvent(Rune);
-}
+public sealed partial class DrawRuneDoAfterEvent : SimpleDoAfterEvent;

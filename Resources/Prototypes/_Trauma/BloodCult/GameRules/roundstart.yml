@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: BaseGameRule
   id: BloodCult
@@ -5,6 +7,20 @@
   - type: GameRule
     minPlayers: 30
   - type: BloodCultRule
+    # TODO: base it off map areas with a habitable blacklist for maints and stuff
+    areaPool:
+    - AreaAiCore
+    - AreaBar
+    - AreaBotany
+    - AreaBrig
+    - AreaCargo
+    - AreaChem
+    - AreaEngineering
+    - AreaKitchen
+    - AreaMedical
+    - AreaPrison
+    - AreaSecurity
+    - AreaScience
   - type: AntagObjectives
     objectives:
     - KillTargetCultObjective

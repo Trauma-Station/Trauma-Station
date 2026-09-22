@@ -3,19 +3,52 @@
 using Content.Shared.Humanoid;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles;
+using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Spells;
 using Content.Trauma.Shared.Roles;
+using Robust.Shared.Player;
 
 namespace Content.Trauma.Shared.BloodCult;
 
 public abstract partial class BloodCultSystem : EntitySystem
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedPvsOverrideSystem _pvsOverride = default!;
     [Dependency] private SharedRoleSystem _role = default!;
+    [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
+    [Dependency] private EntityQuery<BloodCultMemberComponent> _query = default!;
+    [Dependency] private EntityQuery<BloodCultRuleComponent> _ruleQuery = default!;
     [Dependency] private EntityQuery<MindContainerComponent> _mcQuery = default!;
 
     private HashSet<Entity<BloodCultMemberComponent>> _cultists = new();
     private HashSet<Entity<HumanoidProfileComponent>> _targets = new();
+
+    [SubscribeLocalEvent]
+    private void OnPlayerAttached(Entity<BloodCultMemberComponent> ent, ref PlayerAttachedEvent args)
+    {
+        _pvsOverride.AddSessionOverride(ent.Comp.Rule, args.Player);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnPlayerDetached(Entity<BloodCultMemberComponent> ent, ref PlayerDetachedEvent args)
+    {
+        _pvsOverride.RemoveSessionOverride(ent.Comp.Rule, args.Player);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnShutdown(Entity<BloodCultMemberComponent> ent, ref ComponentShutdown args)
+    {
+        if (_actorQuery.TryComp(ent, out var actor))
+            _pvsOverride.RemoveSessionOverride(ent.Comp.Rule, actor.PlayerSession);
+    }
+
+    /// <summary>
+    /// Get the gamerule associated with a cultist.
+    /// </summary>
+    public Entity<BloodCultRuleComponent>? GetRule(EntityUid mob)
+        => _query.CompOrNull(mob)?.Rule is { } rule && _ruleQuery.TryComp(rule, out var ruleComp)
+            ? (rule, ruleComp)
+            : null;
 
     /// <summary>
     /// Returns true if a player is a blood cultist, leader or construct.
@@ -42,17 +75,17 @@ public abstract partial class BloodCultSystem : EntitySystem
             ? (mind, comp)
             : null;
 
-    public virtual EntityUid? GetTarget(EntityUid member)
-        => null;
+    public EntityUid? GetTarget(EntityUid member)
+        => GetRule(member)?.Comp.OfferingTarget;
 
-    public virtual bool IsTarget(EntityUid member, EntityUid target)
-        => false;
+    public bool IsTarget(EntityUid member, EntityUid target)
+        => GetTarget(member) == target;
 
     /// <summary>
     /// Returns true if a cult's target was sacraficed.
     /// </summary>
-    public virtual bool TargetKilled(EntityUid member)
-        => false;
+    public bool TargetKilled(EntityUid member)
+        => GetRule(member)?.Comp.TargetSacrificed ?? false;
 
     public virtual void Convert(EntityUid member, EntityUid target)
     {
@@ -81,5 +114,31 @@ public abstract partial class BloodCultSystem : EntitySystem
         _targets.Clear();
         _lookup.GetEntitiesInRange(pos, range, _targets);
         return _targets;
+    }
+
+    /// <summary>
+    /// Set a cultist's gamerule and network it to them.
+    /// </summary>
+    public void SetCultRule(EntityUid mob, EntityUid rule)
+    {
+        var comp = EnsureComp<BloodCultMemberComponent>(mob);
+        comp.Rule = rule;
+        Dirty(mob, comp);
+
+        if (_actorQuery.TryComp(mob, out var actor))
+            _pvsOverride.AddSessionOverride(rule, actor.PlayerSession);
+    }
+
+    /// <summary>
+    /// Copy a cult member's cult rule to another entity.
+    /// </summary>
+    public void CopyMember(Entity<BloodCultMemberComponent?> src, Entity<BloodCultMemberComponent?> dest)
+    {
+        if (!_query.Resolve(src, ref src.Comp))
+            return;
+
+        dest.Comp ??= EnsureComp<BloodCultMemberComponent>(dest);
+        dest.Comp.Rule = src.Comp.Rule;
+        Dirty(dest, dest.Comp);
     }
 }

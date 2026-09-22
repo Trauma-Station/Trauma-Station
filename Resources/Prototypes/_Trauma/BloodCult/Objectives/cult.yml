@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   parent: BaseObjective
@@ -28,10 +30,10 @@
   parent: BaseBloodCultObjective
   id: SummonNarSieCultObjective
   name: Summon Nar'Sie
-  description: Once Her target has been sacraficed, we can perform the Ritual of Dimensional Rending!
+  description: Once Her target has been sacrificed, we can perform the Ritual of Dimensional Rending!
   components:
   - type: Objective
     icon:
       sprite: _Trauma/BloodCult/mobs.rsi
       state: harvester
-  - type: RoleplayObjective # TODO: greentext when summoning
+  - type: NarSieObjective

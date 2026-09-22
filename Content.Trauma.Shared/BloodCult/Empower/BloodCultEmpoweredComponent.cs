@@ -21,7 +21,7 @@ public sealed partial class BloodCultEmpoweredComponent : Component
     ///     Changes the drawing time of runes.
     /// </summary>
     [DataField]
-    public float RuneTimeMultiplier = 0.5f;
+    public TimeSpan RuneTimeDiscount = TimeSpan.FromSeconds(3);
 
     /// <summary>
     ///     Increases the amount of spells cultists can create at once.

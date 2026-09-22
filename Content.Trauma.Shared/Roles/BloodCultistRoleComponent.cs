@@ -4,5 +4,13 @@ using Content.Shared.Roles.Components;
 
 namespace Content.Trauma.Shared.Roles;
 
-[RegisterComponent]
-public sealed partial class BloodCultistRoleComponent : BaseMindRoleComponent;
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
+public sealed partial class BloodCultistRoleComponent : BaseMindRoleComponent
+{
+    /// <summary>
+    /// The blood cult gamerule that created this cultist.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid Rule;
+}

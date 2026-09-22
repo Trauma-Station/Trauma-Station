@@ -1,6 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
-  id: BaseCultRune
+  parent: BaseMagicalContraband
+  id: BaseCultBlood
   placement:
     mode: SnapgridCenter
   components:
@@ -19,7 +22,6 @@
   - type: Physics
   - type: Clickable
   - type: InteractionOutline
-  - type: CultRune
   - type: Appearance
   # Spraying runes with holy water erases them
   - type: Reactive
@@ -28,6 +30,39 @@
       methods: [ Touch ]
       effects:
       - !type:Delete
+
+- type: entity
+  abstract: true
+  parent: BaseCultBlood
+  id: BaseCultRune
+  suffix: An intricate, eldritch smearing and carving of blood. Who knows what it could be for?
+  components:
+  - type: CultRune
+
+# Unfinished
+
+- type: entity
+  parent: BaseCultBlood
+  id: CultRuneUnfinishedRegular
+  name: blood ring
+  description: "A sizeable smearing of blood, it definitely isn't red crayon."
+  components:
+  - type: Sprite
+    state: unfinished
+  - type: CultUnfinishedRune
+
+- type: entity
+  parent: BaseCultBlood
+  id: CultRuneUnfinishedLarge
+  name: large blood ring
+  description: "A huge smearing of blood in a circle, it's distinctly evil and unnatural."
+  components:
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Runes/large.rsi
+    state: unfinished
+  - type: CultUnfinishedRune
+
+# Finished runes
 
 - type: entity
   parent: BaseCultRune
@@ -139,10 +174,10 @@
   name: rune of apocalypse
   components:
   - type: Sprite
-    sprite: _Trauma/BloodCult/Entities/Runes/apocalypse.rsi
+    sprite: _Trauma/BloodCult/Entities/Runes/large.rsi
     layers:
-      - state: icon
-        map: [ "enum.ApocalypseRuneVisuals.Layer" ]
+    - state: apocalpyse
+      map: [ "enum.ApocalypseRuneVisuals.Layer" ]
   - type: CultRune
     requiredInvokers: 3
     invokePhrase: "Ta'gh fara'qha fel d'amar det!"
@@ -155,6 +190,7 @@
       enum.ApocalypseRuneVisuals.Used:
         enum.ApocalypseRuneVisuals.Layer:
           True: { color: "#696969" }
+          False: { color: "#ffffff" }
 
 - type: entity
   parent: BaseCultRune
@@ -162,9 +198,9 @@
   name: rune of dimensional rending
   components:
   - type: Sprite
-    sprite: _Trauma/BloodCult/Entities/Runes/dimensional_rending.rsi
+    sprite: _Trauma/BloodCult/Entities/Runes/large.rsi
     layers:
-    - state: rune
+    - state: rending
       map: [ "enum.RendingRuneVisuals.Layer" ]
   - type: CultRune
     requiredInvokers: 10
@@ -175,5 +211,5 @@
     visuals:
       enum.RendingRuneVisuals.Active:
         enum.RendingRuneVisuals.Layer:
-          True: { state: "rune_animated" }
-          False: { state: "rune"}
+          True: { state: "rending_animated" }
+          False: { state: "rending"}

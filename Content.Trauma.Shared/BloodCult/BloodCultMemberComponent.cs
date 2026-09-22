@@ -7,7 +7,11 @@ namespace Content.Trauma.Shared.BloodCult;
 /// Added/removed with the antag role.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class BloodCultMemberComponent : Component
 {
     public override bool SessionSpecific => true;
+
+    [DataField, AutoNetworkedField]
+    public EntityUid Rule;
 }

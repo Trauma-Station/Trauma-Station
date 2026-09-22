@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: bloodRune
   id: CultRuneOffering
   prototype: CultRuneOffering
@@ -29,19 +31,23 @@
 - type: bloodRune
   id: CultRuneApocalypse
   prototype: CultRuneApocalypse
+  unfinished: CultRuneUnfinishedLarge
   drawTime: 40
   drawDamage:
     types:
       Slash: 20
-  # TODO: limit to the cult special areas
+  areaLimited: true
+  limit: 1
 
 - type: bloodRune
   id: CultRuneDimensionalRending
   prototype: CultRuneDimensionalRending
+  unfinished: CultRuneUnfinishedLarge
   drawTime: 40
   drawDamage:
     types:
       Slash: 50
-  # TODO: limit to the cult special areas
-  # TODO: cant draw if you didnt sacrafice the target yet
-  # TODO: announcement when drawing it
+  areaLimited: true
+  needsTarget: true
+  limit: 1
+  announcement: blood-cult-rending-announcement
