@@ -14933,3 +14933,38 @@ Entries:
   id: 1626
   time: '2026-09-21T14:28:55.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4697
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added a functioning egg ability for wizard chickens
+  - type: Add
+    message: >-
+      Added peanut seeds to the megaseed vendor, Now you can get Onagadori
+      Chickens
+  - type: Add
+    message: Added a magical contraband tag to phoenix, dragon and wizard eggs
+  - type: Tweak
+    message: Lowered the tile radius for overcrowding for chickens
+  - type: Tweak
+    message: >-
+      Lowered the amount of unhappinesss you need for cluwne chickens, now you
+      only need -50 instead of -777
+  - type: Tweak
+    message: >-
+      Adjusted the chemicals on the following plants, Steel Wheat, Magic
+      Mushrooms, Clear Corn, Balloon Melons, Synthflesh, Meth Apples,
+  - type: Tweak
+    message: >-
+      Buffed Dream Egg and Phoenix Egg, Dream egg now heals all limbs as well as
+      heals more damage in general as well as restoring blood level and stopping
+      bleeding, Phoenix egg also heals all limbs now and a bit more damage in
+      general
+  - type: Fix
+    message: Fixed not being able to get onagadori chickens and phoenix chickens
+  - type: Fix
+    message: >-
+      Fixed not being able to feed steel wheat bushels and rice bushels to
+      chickens
+  id: 1627
+  time: '2026-09-22T08:55:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4704
