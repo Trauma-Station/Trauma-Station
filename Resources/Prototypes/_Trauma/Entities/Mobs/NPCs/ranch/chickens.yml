@@ -1842,7 +1842,6 @@
     rootTask:
       task: RangedRoosterCompound
 
-
 # Coral Chicken
 
 - type: entity
