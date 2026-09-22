@@ -15,6 +15,7 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Shared.Genetics.Mutations;
 using Content.Trauma.Shared.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
 
@@ -47,6 +48,7 @@ public abstract partial class SharedKnowledgeSystem
             return;
 
         ChangeMartialArts(args.Container, args.Holder, ent);
+        UpdateGeneticBlacklists(args.Container, args.Holder);
     }
 
     [SubscribeLocalEvent]
@@ -54,6 +56,7 @@ public abstract partial class SharedKnowledgeSystem
     {
         if (args.Container.Comp.ActiveMartialArt == ent.Owner)
             ChangeMartialArts(args.Container, args.Holder, null); // disables the skill internally
+        UpdateGeneticBlacklists(args.Container, args.Holder);
     }
 
     [SubscribeLocalEvent]
@@ -160,6 +163,8 @@ public abstract partial class SharedKnowledgeSystem
             _popup.PopupEntity(Loc.GetString("knowledge-martial-art-deselected"), user, user);
         }
         _speed.RefreshMovementSpeedModifiers(user);
+
+        UpdateGeneticBlacklists(ent, user);
     }
 
     public EntityUid? GetActiveMartialArt(EntityUid target)

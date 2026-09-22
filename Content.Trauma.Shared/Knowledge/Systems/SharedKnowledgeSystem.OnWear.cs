@@ -135,20 +135,8 @@ public abstract partial class SharedKnowledgeSystem
             }
         }
 
-        foreach (var id in )
-
-        TryComp<MutatableComponent>(wearer, out var mutatable);
-        bool martialsBlocked = false;
-        if (mutatable != null)
-        {
-            foreach (var mut in mutatable.Mutations.Keys)
-            {
-                if (martial.GeneBlacklist.Contains(mut))
-                    martialsBlocked = true;
-            }
-            if (martialsBlocked)
-                martial.Blocked = true;
-        }
+        // Updates Genetic Blacklists
+        UpdateGeneticBlacklists(brain, wearer);
     }
 
     private void RemoveKnowledgeModifiers(EntityUid wearer, Entity<KnowledgeGrantOnWearComponent> ent)
@@ -197,6 +185,9 @@ public abstract partial class SharedKnowledgeSystem
                 Dirty(unit, martial);
             }
         }
+
+        // Updates Genetic Blacklists
+        UpdateGeneticBlacklists(brain, wearer);
     }
 
     /// <summary>
