@@ -161,7 +161,6 @@ public abstract partial class SharedKnowledgeSystem
         }
         _speed.RefreshMovementSpeedModifiers(user);
 
-        UpdateGeneticBlacklists(ent, user);
     }
 
     public EntityUid? GetActiveMartialArt(EntityUid target)
