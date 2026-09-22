@@ -15,7 +15,6 @@ using Content.Shared.Weapons.Ranged.Events;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
 using Content.Trauma.Common.MartialArts;
-using Content.Trauma.Shared.Genetics.Mutations;
 using Content.Trauma.Shared.MartialArts;
 using Content.Trauma.Shared.MartialArts.Components;
 
