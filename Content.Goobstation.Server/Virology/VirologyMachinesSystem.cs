@@ -118,7 +118,18 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
         if (!ent.Comp.Vaccinator) // TODO: kys israelgpt blindly using events with 0 human thought then pulling this shit
             AnalyzeSwab(ent, (slot.Item.Value, null));
         else
-            CreatePen(ent, (slot.Item.Value, null));
+        {
+            for (int pen = 0; pen < 5; pen++)
+            {
+                CreatePen(ent, (slot.Item.Value, null));
+            }
+            EjectSwab(ent, (slot.Item.Value, null));
+        }
+    }
+
+    private void EjectSwab(Entity<VirologyMachineComponent> ent, Entity<DiseaseSwabComponent?> swab)
+    {
+        _slots.TryEject(ent.Owner, ent.Comp.SwabSlot, null, out _);
     }
 
     private void CreatePen(Entity<VirologyMachineComponent> ent, Entity<DiseaseSwabComponent?> swab)
@@ -136,8 +147,6 @@ public sealed partial class VirologyMachinesSystem : EntitySystem
             vaccineComponent.Genotype = disease.Genotype;
             vaccineComponent.DiseaseUid = swab.Comp.DiseaseUid.Value;
         }
-
-        _slots.TryEject(ent.Owner, ent.Comp.SwabSlot, null, out _);
     }
 
     private void AnalyzeSwab(Entity<VirologyMachineComponent> ent, Entity<DiseaseSwabComponent?> swab)
