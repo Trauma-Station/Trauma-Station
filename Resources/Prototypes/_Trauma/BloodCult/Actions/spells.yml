@@ -68,7 +68,7 @@
   - type: EffectAction
     effects:
     - !type:ModifyStatusEffect
-      proto: StatusEffectMuted
+      effectProto: StatusEffectMuted
       time: 12
     - !type:ModifyParalysis
       time: 16
