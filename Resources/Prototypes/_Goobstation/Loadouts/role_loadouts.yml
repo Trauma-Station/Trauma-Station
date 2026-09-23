@@ -34,11 +34,9 @@
   groups:
   - GroupTankHarness
   - RoboticistHead
-  - ScientistNeck
   - RoboticistJumpsuit
   - RoboticistBackpack
   - RoboticistOuterClothing
-  - RoboticistGloves
   - RoboticistShoes
   - RoboticistPDA
   - Glasses

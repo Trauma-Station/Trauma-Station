@@ -5,6 +5,10 @@
   id: LockerRoboticist
   name: roboticist's locker
   components:
-  # TODO: unique sprite
   - type: AccessReader
     access: [["Robotics"]]
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: robo_base
+    stateDoorOpen: robo_open
+    stateDoorClosed: robo_door

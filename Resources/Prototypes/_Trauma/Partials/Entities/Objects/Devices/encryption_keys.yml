@@ -1,0 +1,9 @@
+
+- type: entity
+  parent: [ EncryptionKey, BaseEngineeringContraband ]
+  id: EncryptionKeyRobo
+  components:
+  - type: EncryptionKey
+    channels: !Clear
+    - Engineering
+    defaultChannel: Engineering

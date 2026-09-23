@@ -1,0 +1,7 @@
+- type: entity
+  id: ClothingHandsGlovesRobohands
+  parent: !Clear
+  - ClothingHandsButcherable
+  - BaseEngineeringContraband
+  components:
+  - type: Insulated

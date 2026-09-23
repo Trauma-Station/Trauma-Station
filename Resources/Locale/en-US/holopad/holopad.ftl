@@ -1,11 +1,3 @@
-# SPDX-FileCopyrightText: 2024 ScarKy0 <106310278+ScarKy0@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 Southbridge <7013162+southbridge-fur@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2024 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 # Window headers
 holopad-window-title = {CAPITALIZE($title)}
 holopad-window-subtitle = [color=white][bold]Holographic communication system[/bold][/color]
@@ -82,7 +74,8 @@ holopad-science-anomaly = Science - Anomaly
 holopad-science-artifact = Science - Artifact
 holopad-science-artifact-north = Science - Artifact North
 holopad-science-artifact-south = Science - Artifact South
-holopad-science-robotics = Science - Robotics
+# Trauma - robotics is engi now
+holopad-science-robotics = Engineering - Robotics
 holopad-science-rnd = Science - R&D
 holopad-science-front = Science - Front
 holopad-science-breakroom = Science - Breakroom
