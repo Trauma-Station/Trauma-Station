@@ -5,6 +5,7 @@ using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Popups;
 using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Wizard.Teleport;
+using System.Linq;
 
 namespace Content.Trauma.Shared.BloodCult.Runes.Summon;
 
@@ -31,7 +32,7 @@ public sealed partial class CultRuneSummonSystem : EntitySystem
         var warps = new List<WizardWarp>();
         while (cultistsQuery.MoveNext(out var cultistUid, out _))
         {
-            if (args.Invokers.Contains(cultistUid))
+            if (args.Invokers.Any(ent => ent.Owner == cultistUid))
                 continue;
 
             var metaData = MetaData(cultistUid);

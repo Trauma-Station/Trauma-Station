@@ -218,8 +218,8 @@ public sealed partial class BloodRitesSystem : EntitySystem
             bloodCost = rites.Comp.StoredBlood;
         }
 
-        _blood.TryModifyBleedAmount(target, -3);
-        _blood.TryModifyBloodLevel(target, bloodCost / rites.Comp.BloodRegenerationRatio);
+        _blood.TryModifyBleedAmount(target.AsNullable(), -3);
+        _blood.TryModifyBloodLevel(target.AsNullable(), bloodCost / rites.Comp.BloodRegenerationRatio);
 
         rites.Comp.StoredBlood -= bloodCost;
         Dirty(rites);

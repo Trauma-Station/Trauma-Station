@@ -48,9 +48,9 @@ public sealed partial class PylonComponent : Component
     [DataField]
     public SoundSpecifier? CorruptTileSound = new SoundPathSpecifier("/Audio/_Trauma/BloodCult/curse.ogg");
 
-    [DataField]
-    public DamageSpecifier? Healing;
+    [DataField(required: true)]
+    public DamageSpecifier Healing = default!;
 
-    [DataField]
-    public DamageSpecifier? DamageOnInteract;
+    [DataField(required: true)]
+    public DamageSpecifier DamageOnInteract = default!;
 }

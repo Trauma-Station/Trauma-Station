@@ -22,7 +22,7 @@ public sealed partial class RemoveFaction : EntityEffectBase<RemoveFaction>
         => null;
 }
 
-public sealed class RemoveFactionEffectSystem : EntityEffectSystem<NpcFactionMemberComponent, RemoveFaction>
+public sealed partial class RemoveFactionEffectSystem : EntityEffectSystem<NpcFactionMemberComponent, RemoveFaction>
 {
     [Dependency] private NpcFactionSystem _faction = default!;
 

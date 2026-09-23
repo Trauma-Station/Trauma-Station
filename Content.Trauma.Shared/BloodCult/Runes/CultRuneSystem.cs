@@ -327,7 +327,7 @@ public sealed partial class CultRuneSystem : EntitySystem
                 continue;
 
             // unfinished vs finished runes, count both to prevent cheese
-            if (rune.Comp.Rune == proto.ID || Prototype(rune)?.ID == proto.Prototype)
+            if (rune.Comp.Rune == proto.ID || Prototype(rune)?.ID == proto.Prototype.Id)
                 count++;
         }
 

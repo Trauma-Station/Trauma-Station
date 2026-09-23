@@ -137,6 +137,7 @@ public sealed partial class PylonSystem : EntitySystem
             _audio.PlayPredicted(pylon.Comp.CorruptTileSound, tilePos, null, AudioParams.Default.WithVolume(-5));
             _tile.ReplaceTile(tile, cultTile);
             // also means this effect can be purely clientside
+            // TODO: make a spawn effect message
             if (_net.IsClient)
                 Spawn(pylon.Comp.TileCorruptEffect, tilePos);
             return; // only replace the first found tile, not all of them!
