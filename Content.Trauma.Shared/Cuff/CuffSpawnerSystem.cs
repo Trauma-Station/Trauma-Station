@@ -20,14 +20,11 @@ public sealed partial class CuffSpawnerSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedCuffableSystem _cuff = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
-
-    private EntityQuery<CuffableComponent> _cuffQuery = default!;
+    [Dependency] private EntityQuery<CuffableComponent> _cuffQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
-
-        _cuffQuery = GetEntityQuery<CuffableComponent>();
 
         SubscribeLocalEvent<CuffSpawnerComponent, UserActivateInWorldEvent>(OnInteract);
         SubscribeLocalEvent<CuffSpawnerComponent, CuffSpawnerDoAfterEvent>(OnCuff);

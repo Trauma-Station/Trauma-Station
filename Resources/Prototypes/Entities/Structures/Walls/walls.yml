@@ -264,7 +264,13 @@
   parent: BaseWall
   id: WallCult
   name: cult wall
+  description: Keeps the cult in and the crew out.
   components:
+  # <Trauma>
+  - type: Construction
+    graph: CultGirder
+    node: wall
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/cult.rsi
   - type: Icon

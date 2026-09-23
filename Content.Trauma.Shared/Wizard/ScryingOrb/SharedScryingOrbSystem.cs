@@ -11,17 +11,17 @@ public abstract partial class SharedScryingOrbSystem : CommonScryingOrbSystem
 {
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private EntityQuery<ScryingOrbComponent> _query = default!;
 
     public override bool IsScryingOrbEquipped(EntityUid uid)
     {
-        var scryingOrbQuery = GetEntityQuery<ScryingOrbComponent>();
-        if (_hands.EnumerateHeld(uid).Any(held => scryingOrbQuery.HasComponent(held)))
+        if (_hands.EnumerateHeld(uid).Any(held => _query.HasComponent(held)))
             return true;
 
         var enumerator = _inventory.GetSlotEnumerator(uid);
         while (enumerator.MoveNext(out var container))
         {
-            if (scryingOrbQuery.HasComp(container.ContainedEntity))
+            if (_query.HasComp(container.ContainedEntity))
                 return true;
         }
 
