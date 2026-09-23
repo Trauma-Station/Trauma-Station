@@ -1,0 +1,4 @@
+- type: vendingMachineInventory 
+  id: SecDrobeInventory
+  startingInventory:
+    ClothingShoesBootsMagSecurity: 2

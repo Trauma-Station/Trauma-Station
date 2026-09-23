@@ -12,10 +12,4 @@
   - type: Clothing
     sprite: _Trauma/Clothing/Shoes/Boots/magboots-security.rsi
   - type: ExplosionResistance
-    damageCoefficient: 0.5
-  - type: ClothingSlowOnDamageModifier
-    modifier: 0.5
-  - type: Item
-    sprite: null
-    size: Normal
-
+    damageCoefficient: 0.75
