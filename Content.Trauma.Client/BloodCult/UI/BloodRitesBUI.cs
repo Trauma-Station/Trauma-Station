@@ -33,7 +33,7 @@ public sealed partial class BloodRitesBUI : BoundUserInterface
     {
         base.Open();
 
-        _menu.OpenOverMouseScreenPosition();
+        _menu?.OpenOverMouseScreenPosition();
     }
 
     private List<RadialMenuOptionBase> GetButtons(Dictionary<EntProtoId, FixedPoint2> crafts)

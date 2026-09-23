@@ -37,7 +37,7 @@ public sealed partial class KillTargetCultSystem : EntitySystem
     private string GetTitle(EntityUid target, LocId title)
     {
         var mind = Comp<MindComponent>(target);
-        var targetName = mind.CharacterName;
+        var targetName = mind.CharacterName ?? Name(target);
         var jobName = _job.MindTryGetJobName(target);
         return Loc.GetString(title, ("targetName", targetName), ("job", jobName));
     }

@@ -29,7 +29,8 @@ public sealed partial class ClientBloodCultSystem : BloodCultSystem
         if (!TryComp<SpriteComponent>(uid, out var sprite) || sprite.LayerMapTryGet(PentagramKey.Key, out _))
             return;
 
-        var adj = sprite.Bounds.Height / 2 + 1.0f / 32 * 10.0f;
+        var bounds = _sprite.GetLocalBounds((uid, sprite));
+        var adj = bounds.Height / 2 + 1.0f / 32 * 10.0f;
 
         var randomState = _random.Pick(component.States);
 
@@ -42,10 +43,7 @@ public sealed partial class ClientBloodCultSystem : BloodCultSystem
     [SubscribeLocalEvent]
     private void OnPentagramRemoved(EntityUid uid, PentagramComponent component, ComponentShutdown args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite) || !sprite.LayerMapTryGet(PentagramKey.Key, out var layer))
-            return;
-
-        _sprite.RemoveLayer((uid, sprite), layer);
+        _sprite.RemoveLayer(uid, PentagramKey.Key);
     }
 
     [SubscribeLocalEvent]

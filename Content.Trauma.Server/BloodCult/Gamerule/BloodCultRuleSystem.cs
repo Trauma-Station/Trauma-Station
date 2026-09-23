@@ -167,7 +167,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
             return;
 
         RemoveAllCultItems(cultist);
-        RemoveCultistAppearance(cultist);
+        RemoveCultistAppearance(cultist.AsNullable());
 
         if (_cult.GetSpells(cultist) is { } spells)
         {
@@ -188,8 +188,6 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         if (_cult.GetRule(member) is not { } rule ||
             !TryComp<AntagSelectionComponent>(rule, out var antag) ||
             !TryComp<ActorComponent>(target, out var actor))
-            return;
-
             return;
 
         var antagEnt = (rule.Owner, antag);
@@ -261,8 +259,11 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         }
     }
 
-    private void RemoveCultistAppearance(Entity<BloodCultistComponent> cultist)
+    private void RemoveCultistAppearance(Entity<BloodCultistComponent?> cultist)
     {
+        if (!Resolve(cultist, ref cultist.Comp))
+
+            return;
         _humanoid.SetEyeColor(cultist, cultist.Comp.OriginalEyeColor);
         RemComp<PentagramComponent>(cultist);
     }
