@@ -8,9 +8,8 @@
     Piercing: 0.8
     Heat: 1.7
     Shock: 2
-  # Goobstation
     Radiation: 0.4
-    Ion: 0.8
+    Ion: 1.5
   ignoreArmorPierceFlags: All
 
 - type: damageModifierSet

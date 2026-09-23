@@ -383,9 +383,8 @@
           !type:PhysShapeCircle
           radius: 0.35
         density: 25
-  - type: Tag
-    tags:
-    - WideSwingIgnore
+        layer:
+        - BulletImpassable
   - type: FactionException
   - type: NpcFactionMember
     factions:

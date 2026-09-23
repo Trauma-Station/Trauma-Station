@@ -2,7 +2,6 @@
 
 - type: constructionGraph
   id: portableChemicalMixerGraph
-  start: start
   graph:
   - node: start
     edges:

@@ -30,7 +30,6 @@
     - id: ClothingOuterArmorCult
     - id: LavalandVampirismCrystal
     # TODO add more interesting obtain methods for crusher upgrades (from megafauna, ruins, etc.)
-    - id: CrusherUpgradeMainRudeBuster
 
     - !type:NestedSelector
       weight: 2

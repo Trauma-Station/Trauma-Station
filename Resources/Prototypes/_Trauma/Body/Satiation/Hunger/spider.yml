@@ -4,6 +4,7 @@
   parent: SimpleMobBaseHunger
   id: SpiderHunger
   startingValue: 15
+  maximumValue: 150
   thresholds:
     Overfed: 150
     Okay: 140

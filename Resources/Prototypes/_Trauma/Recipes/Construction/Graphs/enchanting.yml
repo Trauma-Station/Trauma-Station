@@ -2,7 +2,6 @@
 
 - type: constructionGraph
   id: EnchantingRune
-  start: start
   graph:
   - node: start
     edges:
@@ -33,7 +32,6 @@
 
 - type: constructionGraph
   id: MinorSummoning
-  start: start
   graph:
   - node: start
     edges:
@@ -64,7 +62,6 @@
 
 - type: constructionGraph
   id: MediumSummoning
-  start: start
   graph:
   - node: start
     edges:
@@ -101,7 +98,6 @@
 
 - type: constructionGraph
   id: MajorSummoning
-  start: start
   graph:
   - node: start
     edges:

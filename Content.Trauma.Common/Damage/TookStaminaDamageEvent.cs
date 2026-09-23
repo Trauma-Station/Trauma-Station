@@ -7,4 +7,4 @@ namespace Content.Trauma.Common.Damage;
 /// Overtime stamina damage from batong etc is not counted.
 /// </summary>
 [ByRefEvent]
-public record struct TookStaminaDamageEvent(EntityUid Target, float Amount);
+public record struct TookStaminaDamageEvent(EntityUid Target, EntityUid? Source, float Amount);

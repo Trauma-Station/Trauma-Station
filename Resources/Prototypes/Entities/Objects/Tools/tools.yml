@@ -59,21 +59,17 @@
       - Shearing
     useSound:
       path: /Audio/Items/wirecutter.ogg
-  # <Trauma> - moved to Screwdriver proper, dont want it interfering with forged screwdriver
-  #- type: RandomSprite
-  #  available:
-  #    - enum.DamageStateVisualLayers.Base:
-  #        cutters: Rainbow
-  # </Trauma>
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          cutters: Rainbow
   - type: Item
     sprite: Objects/Tools/wirecutters.rsi
     storedRotation: -90
   - type: ToolTileCompatible
-  # <Trauma>
-  #- type: PhysicalComposition
-  #  materialComposition:
-  #    Steel: 100
-  # </Trauma>
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 100
   - type: StaticPrice
     price: 30
   - type: BotanySampleTaker

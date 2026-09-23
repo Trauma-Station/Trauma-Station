@@ -14,7 +14,6 @@ public partial class MartialArtsSystem
 {
     [Dependency] private MovementSpeedModifierSystem _speed = default!;
     [Dependency] private EntityQuery<MartialArtModifiersComponent> _query = default!;
-    [Dependency] private EntityQuery<NoMartialMeleeSpeedComponent> _noSpeedQuery = default!;
 
     private void UpdateModifiers()
     {
@@ -127,8 +126,8 @@ public partial class MartialArtsSystem
     [SubscribeLocalEvent]
     private void OnModifyAttackRate(Entity<MartialArtModifiersComponent> ent, ref GetMeleeAttackRateEvent args)
     {
-        if (_noSpeedQuery.HasComp(args.Weapon))
-            return;
+        if (args.Weapon != args.User)
+            return; // don't speed up actual weapons just punches
 
         var (mult, mod) = GetModifiers(ent, MartialArtModifierType.AttackRate, args.Weapon == args.User);
         args.Multipliers *= mult;

@@ -18,7 +18,6 @@
     type: Add # paradise parity...
   - !type:TakeStaminaDamage
     amount: 10
-  levelRequired: 0
 
 - type: combo
   id: JudoEyePoke
@@ -43,7 +42,6 @@
     damage:
       types:
         Blunt: 10
-  levelRequired: 20
 
 - type: combo
   id: JudoThrow
@@ -65,7 +63,6 @@
   - !type:StopPull
   userConditions:
   - !type:StandingCondition
-  levelRequired: 0
 
 - type: combo
   id: JudoArmbar
@@ -95,7 +92,6 @@
     blacklist:
       components:
       - Armbarred # don't do it if already armbarred
-  levelRequired: 0
 
 - type: combo
   id: JudoWheelThrow
@@ -132,4 +128,3 @@
     whitelist:
       components:
       - Armbarred # needs to be armbarred
-  levelRequired: 0

@@ -12,8 +12,11 @@ heretic-knowledge-loss = You're forgotten something
 
 heretic-clothing-component-fail = Cannot wear this!
 heretic-clothing-component-equip = You can feel yourself unravelling while you equip the {$item}!
+heretic-clothing-component-wear = You can feel yourself unravelling while wearing the {$item}!
 
 heretic-protective-blade-component-no-targets = No targets!
+
+heretic-sacraments-can-attack = You can now safely attack {$heretic}!
 
 rust-corruption-silicon-damage = You are being corrupted by the rust!
 

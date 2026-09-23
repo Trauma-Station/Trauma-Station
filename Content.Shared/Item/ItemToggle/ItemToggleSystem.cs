@@ -273,6 +273,15 @@ public sealed partial class ItemToggleSystem : EntitySystem
     /// </summary>
     private void Deactivate(Entity<ItemToggleComponent> ent, bool predicted, EntityUid? user = null, bool showPopup = true)
     {
+        // <Trauma>
+        if (TerminatingOrDeleted(ent))
+        {
+            // dont play sounds if its deleting just let other systems clean up
+            var ev = new ItemToggledEvent(predicted, Activated: false, user);
+            RaiseLocalEvent(ent, ref ev);
+            return;
+        }
+        // </Trauma>
         var (uid, comp) = ent;
         var soundToPlay = comp.SoundDeactivate;
         if (predicted)
@@ -325,8 +334,10 @@ public sealed partial class ItemToggleSystem : EntitySystem
     [SubscribeLocalEvent]
     private void TurnOffOnUnwielded(Entity<ItemToggleComponent> ent, ref ItemUnwieldedEvent args)
     {
-        if (!ent.Comp.WieldToggle) // Goobstation
+        // <Trauma>
+        if (!ent.Comp.WieldToggle)
             return;
+        // </Trauma>
 
         TryDeactivate((ent, ent.Comp), args.User);
     }
@@ -393,7 +404,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
         if (args.Cancelled)
             return;
 
-        if (_battery.GetCharge(ent.Owner) >= ent.Comp.RequiredCharge)
+        if (_battery.GetCharge(ent.Owner).Charge >= ent.Comp.RequiredCharge)
             return;
 
         args.Popup = Loc.GetString(ent.Comp.FailPopup);
@@ -403,7 +414,7 @@ public sealed partial class ItemToggleSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnChargeChanged(Entity<ItemToggleRequiresChargeComponent> ent, ref ChargeChangedEvent args)
     {
-        if (_battery.GetCharge(ent.Owner) >= ent.Comp.RequiredCharge)
+        if (_battery.GetCharge(ent.Owner).Charge >= ent.Comp.RequiredCharge)
             return;
 
         TryDeactivate(ent.Owner);

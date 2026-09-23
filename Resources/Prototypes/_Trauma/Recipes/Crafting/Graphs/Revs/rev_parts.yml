@@ -3,7 +3,6 @@
 # Basic should be ~30s of doafters
 - type: constructionGraph
   id: RevParts
-  start: start
   graph:
   - node: start
     edges:

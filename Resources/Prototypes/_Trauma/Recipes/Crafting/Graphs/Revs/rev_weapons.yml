@@ -3,7 +3,6 @@
 # TODO add hammering and shit as well just touching it with wood shouldn't complete it
 - type: constructionGraph
   id: RevSword
-  start: start
   graph:
   - node: start
     edges:
@@ -17,7 +16,6 @@
 
 - type: constructionGraph
   id: RevMace
-  start: start
   graph:
   - node: start
     edges:
@@ -31,7 +29,6 @@
 
 - type: constructionGraph
   id: RevKnife
-  start: start
   graph:
   - node: start
     edges:
@@ -45,7 +42,6 @@
 
 - type: constructionGraph
   id: RevPitchfork
-  start: start
   graph:
   - node: start
     edges:
@@ -59,7 +55,6 @@
 
 - type: constructionGraph
   id: RevTorch
-  start: start
   graph:
   - node: start
     edges:
@@ -99,7 +94,6 @@
 
 - type: constructionGraph
   id: RevGuns
-  start: start
   graph:
   - node: start
     edges:
@@ -128,16 +122,16 @@
         icon:
           sprite: Objects/Misc/modular_receiver.rsi
           state: icon
-      - tool: Welding
-        doAfter: 1
       - tool: Screwing
         doAfter: 1
     - to: resistance
       steps:
-      - tool: Welding
+      - tool: Screwing
         doAfter: 1
       - material: RevBolt
+        amount: 2
       - material: RevNut
+        amount: 2
       - tool: Anchoring
         doAfter: 1
       - material: RevGunParts
@@ -146,11 +140,9 @@
         icon:
           sprite: Objects/Misc/modular_receiver.rsi
           state: icon
-      - material: RevBolt
-      - material: RevNut
       - tool: Anchoring
         doAfter: 1
-      - tool: Welding
+      - tool: Screwing
     - to: RPG2
       steps:
       - tool: Hammering
@@ -318,11 +310,7 @@
         doAfter: 1
       - tool: Hammering
         doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Hammering
-        doAfter: 0.5
-      - tool: Slicing
+      - tool: Screwing
         doAfter: 1
     - to: Proletariat
       steps:
@@ -340,7 +328,7 @@
       - tool: Hammering
         doAfter: 0.5
       - material: RevGunParts
-        amount: 5
+        amount: 3
         doAfter: 1
       - tool: Screwing
         doAfter: 1
@@ -364,8 +352,6 @@
         doAfter: 1
       - tool: Screwing
         doAfter: 1
-      - tool: Screwing
-        doAfter: 1
 
   - node: liberator
     entity: WeaponPistolLiberatorEmpty
@@ -382,7 +368,6 @@
 
 - type: constructionGraph
   id: RevIED
-  start: start
   graph:
   - node: start
     edges:

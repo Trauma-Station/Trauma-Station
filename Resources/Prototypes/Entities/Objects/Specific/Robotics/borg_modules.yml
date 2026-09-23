@@ -1972,7 +1972,7 @@
         state: xenoborg_heavy_rad
       shader: unshaded
     - type: RadiationSource
-      intensity: 4
+      intensity: 1 # Trauma - was 4
       slope: 1
     - type: AmbientSound
       range: 6

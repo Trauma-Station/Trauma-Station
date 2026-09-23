@@ -1,0 +1,94 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: borgType
+  id: generic
+  addComponents:
+  - type: ModifyKnowledgeGrant
+    skills:
+      FabricationKnowledge: 50 # not good at much else
+      BotsKnowledge: 50
+      InfrastructureKnowledge: 20
+      WallsKnowledge: 20 # containing anoms or whatever
+      WindowsKnowledge: 20
+
+# Engineering borg
+- type: borgType
+  id: engineering
+  lawset: Engineer
+  addComponents:
+  - type: ModifyKnowledgeGrant
+    skills:
+      # crafting
+      FabricationKnowledge: 60
+      MetalworkingKnowledge: 40
+      CarvingKnowledge: 40
+      MechanicsKnowledge: 40
+      # recipes
+      DoorsKnowledge: 50
+      AirlocksKnowledge: 50
+      BotsKnowledge: 30
+      InfrastructureKnowledge: 50
+      FurnitureKnowledge: 50
+      ElectronicsKnowledge: 50
+      WallsKnowledge: 50
+      WindowsKnowledge: 50
+
+# Salvage borg
+- type: borgType
+  id: mining
+  lawset: Salvage
+  defaultModules:
+  - BorgModulePKA
+  addComponents:
+  - type: NoWieldNeeded
+  - type: SlavedBorg # Special AI labeling for salv borgs.
+    law: ObeyAI
+  - type: ModifyKnowledgeGrant
+    skills:
+      KnowledgeWeaponsShortBlade: 30
+      KnowledgeWeaponsMining: 50
+      ShootingKnowledge: 20
+
+# Janitor borg
+- type: borgType
+  id: janitor
+  lawset: Janitor
+  defaultModules:
+  - !Index:0 BorgModuleTool
+  addComponents:
+  - type: ModifyKnowledgeGrant
+    skills:
+      JanitorKnowledge: 100 # mankind is dead. trash is fuel. disposals is full.
+      FabricationKnowledge: 10
+      InfrastructureKnowledge: 10
+      WallsKnowledge: 10
+
+# Medical borg
+- type: borgType
+  id: medical
+  lawset: Medical
+  defaultModules:
+  - !Index:0 BorgModuleTool
+  - BorgModuleSurgery
+  - BorgModuleLollypop
+  addComponents:
+  - type: ModifyKnowledgeGrant
+    skills:
+      FirstAidKnowledge: 50
+      SurgeryKnowledge: 80 # robots are unsurprisingly good at making cuts
+  - type: Sanitized
+  - type: SurgeryIgnoreClothing
+  - type: SurgerySpeedModifier
+    speedModifier: 1.5
+
+# Service borg
+- type: borgType
+  id: service
+  lawset: Clown
+  defaultModules:
+  - !Index:0 BorgModuleTool
+  addComponents:
+  - type: ModifyKnowledgeGrant
+    skills:
+      FabricationKnowledge: 50
+      BotsKnowledge: 50

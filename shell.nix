@@ -3,7 +3,7 @@
     let
       lock = builtins.fromJSON (builtins.readFile ./flake.lock);
     in
-    import (builtins.fetchTarball {
+    import (fetchTarball {
       url = "https://github.com/NixOS/nixpkgs/archive/${lock.nodes.nixpkgs.locked.rev}.tar.gz";
       sha256 = lock.nodes.nixpkgs.locked.narHash;
     }) { }
@@ -63,5 +63,7 @@ pkgs.mkShell {
     export ROBUST_SOUNDFONT_OVERRIDE=${pkgs.soundfont-fluid}/share/soundfonts/FluidR3_GM2-2.sf2
     export XDG_DATA_DIRS=$GSETTINGS_SCHEMAS_PATH
     export LD_LIBRARY_PATH=${pkgs.lib.makeLibraryPath dependencies}
+    export DOTNET_ROOT=${pkgs.dotnet-sdk_10}/share/dotnet
+    export DOTNET_ROOT_X64=${pkgs.dotnet-sdk_10}/share/dotnet
   '';
 }

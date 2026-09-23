@@ -4,19 +4,6 @@
   description: Components added / removed from an entity that gets inserted into an AI core.
   categories: [ HideSpawnMenu ]
   components:
-  # <Trauma>
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
-  - type: ShowHealthIcons
-  - type: ShowHealthBars
-    damageContainers:
-    - Silicon
-    - SiliconRadiation
-  - type: ContentEye
-    maxZoom: 1.44,1.44
-  # </Trauma>
   - type: IntrinsicRadioReceiver
   - type: IntrinsicRadioTransmitter
     channels:
@@ -48,7 +35,6 @@
     actions:
     - ActionJumpToCore
     - ActionAIViewLaws
-    - ActionOpenCameraWarpMenu # Goobstation-Ai-Camera-Jumping
   - type: UserInterface
     interfaces:
       enum.RadarConsoleUiKey.Key:
@@ -61,8 +47,6 @@
         type: SiliconLawBoundUserInterface
       enum.CommunicationsConsoleUiKey.Key:
         type: CommunicationsConsoleBoundUserInterface
-      enum.CamWarpUiKey.Key: # Goobstation-Ai-Camera-Jumping
-        type: AiCameraWarpBoundUserInterface
   - type: IntrinsicUI
     uis:
       enum.RadarConsoleUiKey.Key:
@@ -96,17 +80,10 @@
   description: Components added / removed from an entity that gets inserted into an Intellicard.
   categories: [ HideSpawnMenu ]
   components:
-  # <Trauma>
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
-    canUseInCrit: true
-  # </Trauma>
   - type: IntrinsicRadioReceiver
   #- type: IntrinsicRadioTransmitter
   #  channels:
-  #  - Binary # Goobstation - replaced with collective mind
+  # - Binary # Goobstation - replaced with collective mind
   - type: ActiveRadio
     channels:
     # - Binary # Goobstation - replaced with collective mind
@@ -441,16 +418,11 @@
   parent: PositronicBrain
   categories: [ HideSpawnMenu, DoNotMap ]
   components:
-  # <Trauma>
-  - type: IonStormTarget # AI can be ion stormed
-  - type: SpeechSynthesis
-    voice: Borg
-  # </Trauma>
   - type: Sprite
     # Once it's in a core it's pretty much an abstract entity at that point.
     visible: false
   - type: SiliconLawProvider
-    laws: NTDefault # Goobstation - AI/borg law changes - set AI to NTDefault
+    laws: Crewsimov
   - type: SiliconLawBound
   - type: ActionGrant
     actions:
@@ -513,12 +485,6 @@
   description: The AI's viewer.
   categories: [ HideSpawnMenu, DoNotMap ]
   components:
-  # <Trauma>
-  - type: MovementSpeedModifier
-    baseSprintSpeed: 14
-    baseWalkSpeed: 28
-  - type: AiEye
-  # </Trauma>
   - type: Fixtures
     fixtures:
       lightTrigger:
@@ -595,9 +561,6 @@
       borg_brain:
         - PositronicBrain
       borg_module:
-        # <Trauma>
-        - BorgModuleStickyGrenadeLauncher
-        # </Trauma>
         - BorgModuleL6C
         - BorgModuleDoubleEsword
   - type: ItemSlots
@@ -631,13 +594,8 @@
       borg_brain:
         - PositronicBrain
       borg_module:
-        # <Trauma>
-        - BorgModuleRCD
-        - BorgModuleSyndicateJammer
-        - BorgModuleSyndicateDoorControl
-        # </Trauma>
         - BorgModuleSyndicateWeapon
-        - BorgModuleAdvancedTool # Trauma - was BorgModuleTool
+        - BorgModuleTool
         - BorgModuleOperative
   - type: ItemSlots
     slots:

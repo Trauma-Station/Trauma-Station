@@ -32,13 +32,10 @@ public sealed partial class AbductorTaskSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AbductorSubjectComponent, MapInitEvent>(OnMapInit);
-
-        SubscribeLocalEvent<PrototypesReloadedEventArgs>(OnPrototypesReloaded);
-
         LoadPrototypes();
     }
 
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<AbductorSubjectComponent> ent, ref MapInitEvent args)
     {
         if (ent.Comp.Tasks.Count > 0)
@@ -46,10 +43,12 @@ public sealed partial class AbductorTaskSystem : EntitySystem
 
         var count = _random.Next(MinTasks, MaxTasks);
         ent.Comp.Tasks = PickTasks(ent, count);
-        ent.Comp.Tasks.Add(FinalTask);
+        if (CanAddTask(ent, ProtoMan.Index(FinalTask)))
+            ent.Comp.Tasks.Add(FinalTask);
         DirtyField(ent, ent.Comp, nameof(AbductorSubjectComponent.Tasks));
     }
 
+    [SubscribeLocalEvent]
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
         if (args.WasModified<AbductorTaskPrototype>())
@@ -77,10 +76,7 @@ public sealed partial class AbductorTaskSystem : EntitySystem
         _validTasks.Clear();
         foreach (var task in AllTasks)
         {
-            if (!_random.Prob(task.Chance))
-                continue;
-
-            if (_conditions.TryConditions(target, task.Valid))
+            if (CanAddTask(target, task))
                 _validTasks.Add(task);
         }
 
@@ -91,6 +87,13 @@ public sealed partial class AbductorTaskSystem : EntitySystem
         }
         return picked;
     }
+
+    /// <summary>
+    /// Returns true if a task can be given for a subject.
+    /// </summary>
+    public bool CanAddTask(EntityUid target, AbductorTaskPrototype task)
+        => _random.Prob(task.Chance) &&
+            _conditions.TryConditions(target, task.Valid);
 
     /// <summary>
     /// Returns true if a task is currently complete for a subject.

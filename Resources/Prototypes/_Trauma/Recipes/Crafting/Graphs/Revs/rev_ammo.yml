@@ -79,7 +79,6 @@
 
 - type: constructionGraph
   id: RevFlamethrowerAmmo
-  start: start
   graph:
   - node: start
     edges:

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.Blob;
 using Content.Server.GameTicking.Rules;
 using Content.Shared.Mind;
 using Robust.Shared.Audio;
@@ -13,7 +14,7 @@ public sealed partial class BlobRuleComponent : Component
     public SoundSpecifier? DetectedAudio = new SoundPathSpecifier("/Audio/_Goobstation/Announcements/blob_detected.ogg");
 
     [DataField]
-    public SoundSpecifier? CriticalAudio = new SoundPathSpecifier("/Audio/_Goobstation/StationEvents/blobin_time.ogg");
+    public SoundSpecifier? CriticalAudio = new SoundPathSpecifier("/Audio/_Trauma/StationEvents/assimilation.ogg");
 
     [ViewVariables]
     public List<(EntityUid mindId, MindComponent mind)> Blobs = new(); //BlobRoleComponent

@@ -5,29 +5,22 @@ using Content.Shared.Interaction;
 
 namespace Content.Trauma.Shared.Interaction;
 
-public sealed class ExtraReachSystem : EntitySystem
+public sealed partial class ExtraReachSystem : EntitySystem
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ExtraReachComponent, OrganEnabledEvent>(OnPartEnabled);
-        SubscribeLocalEvent<ExtraReachComponent, OrganDisabledEvent>(OnPartDisabled);
-        // run before TK so it can use the extra reach for its check
-        SubscribeLocalEvent<ExtraReachComponent, InRangeOverrideEvent>(OnRangeOverride,
-            before: new[] { typeof(TelekinesisSystem) });
-    }
-
+    [SubscribeLocalEvent]
     private void OnPartEnabled(Entity<ExtraReachComponent> ent, ref OrganEnabledEvent args)
     {
         ModifyReach(args.Body, ent.Comp.Bonus);
     }
 
+    [SubscribeLocalEvent]
     private void OnPartDisabled(Entity<ExtraReachComponent> ent, ref OrganDisabledEvent args)
     {
         ModifyReach(args.Body, -ent.Comp.Bonus);
     }
 
+    // run before TK so it can use the extra reach for its check
+    [SubscribeLocalEvent(before: [typeof(TelekinesisSystem)])]
     private void OnRangeOverride(Entity<ExtraReachComponent> ent, ref InRangeOverrideEvent args)
     {
         args.Range += ent.Comp.Bonus;

@@ -29,7 +29,7 @@
     anchored: true
     noRot: true
   - type: Damageable
-    damageModifierSet: StructuralMetallicStrong
+    damageModifierSet: Metallic # Trauma - Was StructuralMetallicStrong
   - type: Injurable
     damageContainer: StructuralInorganic
   - type: RCDDeconstructable

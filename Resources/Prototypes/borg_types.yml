@@ -21,17 +21,6 @@
   radioChannels:
   - Science
 
-  # <Trauma>
-  addComponents:
-  - type: ModifyKnowledgeGrant
-    skills:
-      FabricationKnowledge: 50 # not good at much else
-      BotsKnowledge: 50
-      InfrastructureKnowledge: 20
-      WallsKnowledge: 20 # containing anoms or whatever
-      WindowsKnowledge: 20
-  # </Trauma>
-
   # Visual
   inventoryTemplateId: borgShort
   spriteBodyState: robot
@@ -65,31 +54,9 @@
   - BorgModuleRCD
   - BorgModuleCable
 
-  lawset: Engineer # DeltaV: Custom lawset
-
   radioChannels:
   - Engineering
   - Science
-
-  # <Trauma>
-  addComponents:
-  - type: ModifyKnowledgeGrant
-    skills:
-      # crafting
-      FabricationKnowledge: 60
-      MetalworkingKnowledge: 40
-      CarvingKnowledge: 40
-      MechanicsKnowledge: 40
-      # recipes
-      DoorsKnowledge: 50
-      AirlocksKnowledge: 50
-      BotsKnowledge: 30
-      InfrastructureKnowledge: 50
-      FurnitureKnowledge: 50
-      ElectronicsKnowledge: 50
-      WallsKnowledge: 50
-      WindowsKnowledge: 50
-  # </Trauma>
 
   # Visual
   inventoryTemplateId: borgShort
@@ -123,24 +90,10 @@
   - BorgModuleMining
   - BorgModuleTraversal
   - BorgModuleAppraisal
-  - BorgModulePKA # Lavaland
 
   radioChannels:
   - Supply
   - Science
-
-  # <Trauma>
-  addComponents:
-  - type: NoWieldNeeded
-  - type: SlavedBorg # Special AI labeling for salv borgs.
-    law: ObeyAI
-  - type: ModifyKnowledgeGrant
-    skills:
-      MeleeKnowledge: 30 # TODO: mining skill
-      ShootingKnowledge: 20 # for pka module??
-  # </Trauma>
-
-  lawset: Salvage # DeltaV: Custom lawset
 
   # Visual
   inventoryTemplateId: borgTall
@@ -170,7 +123,6 @@
     - BorgModuleJanitor
 
   defaultModules:
-  - BorgModuleTool # Trauma - fuck you borgs get tools
   - BorgModulePrying
   - BorgModuleCleaning
   - BorgModuleCustodial
@@ -178,18 +130,6 @@
   radioChannels:
   - Science
   - Service
-
-  # <Trauma>
-  addComponents:
-  - type: ModifyKnowledgeGrant
-    skills:
-      JanitorKnowledge: 100 # mankind is dead. trash is fuel. disposals is full.
-      FabricationKnowledge: 10
-      InfrastructureKnowledge: 10
-      WallsKnowledge: 10
-  # </Trauma>
-
-  lawset: Janitor # DeltaV: Custom lawset
 
   # Visual
   inventoryTemplateId: borgShort
@@ -219,20 +159,14 @@
     - BorgModuleMedical
 
   defaultModules:
-  - BorgModuleTool # Trauma - fuck you borgs get tools
   - BorgModulePrying
   - BorgModuleChemical
   - BorgModuleTopicals
   - BorgModuleRescue
-  - BorgModuleSurgery
-  - BorgModuleLollypop # Goobstation
-
-  lawset: Medical # DeltaV: Custom lawset
 
   radioChannels:
   - Science
   - Medical
-
 
   addComponents:
   - type: SolutionScanner
@@ -242,16 +176,6 @@
   - type: ShowHealthIcons
     damageContainers:
     - Biological
-  # <Trauma>
-  - type: ModifyKnowledgeGrant
-    skills:
-      FirstAidKnowledge: 50
-      SurgeryKnowledge: 80 # robots are unsurprisingly good at making cuts
-  - type: Sanitized # Shitmed
-  - type: SurgeryIgnoreClothing
-  - type: SurgerySpeedModifier
-    speedModifier: 1.5
-  # </Trauma>
 
   # Visual
   inventoryTemplateId: borgDutch
@@ -285,27 +209,15 @@
     - BorgModuleService
 
   defaultModules:
-  - BorgModuleTool # Trauma - serviceborgs on suicide watch
   - BorgModulePrying
   - BorgModuleMusique
   - BorgModuleService
   - BorgModuleClowning
   - BorgModuleGardening
   - BorgModuleHarvesting
-
-  lawset: Clown # DeltaV: Custom lawset
-
   radioChannels:
   - Science
   - Service
-
-  # <Trauma>
-  addComponents:
-  - type: ModifyKnowledgeGrant
-    skills:
-      FabricationKnowledge: 50
-      BotsKnowledge: 50
-  # </Trauma>
 
   # Visual
   inventoryTemplateId: borgTall

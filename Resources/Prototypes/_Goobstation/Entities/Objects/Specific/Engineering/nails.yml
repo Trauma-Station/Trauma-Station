@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: nail
   parent: BaseItem
-  description: A tiny metal stick. It is probably used to fix walls.
   id: Nail
+  name: nail
+  description: A tiny metal stick. It is probably used to fix walls.
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/Engineering/nail.rsi
@@ -57,10 +57,6 @@
         mask:
         - Impassable
         - BulletImpassable
-  - type: CartridgeAmmo # Total goida. This is needed to examine the damage. TODO: just make bullets themselves examinable
-    proto: Nail
-    deleteOnSpawn: true
-    muzzleFlash: null
   - type: Tag
     tags:
     - Nail
@@ -78,13 +74,11 @@
     reflective: NonEnergy
 
 - type: entity
-  name: nail (armor-piercing)
   parent: [ Nail, BaseSyndicateContraband ]
-  description: A heavy nail designed to pierce through hard surfaces. Looks just like a regular nail, until it suddenly kills you.
   id: NailArmorPiercing
+  name: nail (armor-piercing)
+  description: A heavy nail designed to pierce through hard surfaces. Looks just like a regular nail, until it suddenly kills you.
   components:
-  - type: CartridgeAmmo
-    proto: NailArmorPiercing
   - type: Projectile
     damage:
       types:

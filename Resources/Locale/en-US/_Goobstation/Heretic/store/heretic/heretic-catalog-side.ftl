@@ -75,7 +75,7 @@ knowledge-path-side-t1-coin-name = Eldritch Coin
 knowledge-path-side-t1-coin-desc =
     The Mansus is a place of all sorts of sins. But greed held a special role.
 
-    Allows you to transmute a bar of silver and gold to create an Eldritch Coin.
+    Allows you to transmute a bar of silver or gold to create an Eldritch Coin.
     The coin will open or close nearby doors when landing on heads and toggle their bolts when landing on tails.
 
 knowledge-path-side-t1-ice-spear-name = Mysteries of Creation
@@ -86,16 +86,17 @@ knowledge-path-side-t1-ice-spear-desc =
     upon hit, but more importantly, it shatters upon throwing, dealing a significant amount of damage and temporarily freezing the target into an ice cube.
     Spear can be freely recalled in your hand unless it is destroyed.
 
-## T2
-knowledge-path-side-t2-curio-name = Unfatomable Curio
-knowledge-path-side-t2-curio-desc =
-    The Mansus holds many curiosities, some are not meant for the mortal eye.
+knowledge-path-side-t1-curio-name = Unfatomable Curio
+knowledge-path-side-t1-curio-desc =
+    Along the way, on this long journey, I encounter all sorts of wonders.
+    My passion for collecting is insatiable, and I would not let a single thing slip by.
+    After all, my own ascension may depend on it.
 
     Allows you to transmute 3 rods, lungs, and utility belt into an Unfathomable Curio -
-    a belt that has a lot of storage space. Whilst worn it will veil you,
+    a belt that has a lot of storage space, and also functions as a focus. Whilst worn it will veil you,
     blocking one blow of incoming damage, at the cost of the veil. The veil will recharge itself out of combat.
-    Additionally, when veil is active, you gan an aura that massively slows down projectiles passing by.
 
+## T2
 knowledge-path-side-t2-rustwalker-name = Rusted Ritual
 knowledge-path-side-t2-rustwalker-desc =
     I combined my knowledge of creation with my desire for corruption. The Marshal knew my name, and the Rusted Hills echoed out.

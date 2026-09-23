@@ -30,6 +30,7 @@ using Robust.Shared.Toolshed;
 
 namespace Content.Server.Silicons.Laws;
 
+/// <inheritdoc/>
 public sealed partial class SiliconLawSystem : SharedSiliconLawSystem
 {
     [Dependency] private IChatManager _chatManager = default!;
@@ -361,6 +362,7 @@ public sealed partial class SiliconLawSystem : SharedSiliconLawSystem
 
     }
 
+    /// <summary>
     /// Updates the version on a target SiliconLawBoundComponent. This is used in the law UI as flair to show the
     /// number of updates a silicon player's laws has had
     /// </summary>

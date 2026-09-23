@@ -2,6 +2,7 @@
 
 using Content.Goobstation.Shared.CloneProjector.Clone;
 using Content.Goobstation.Shared.Holograms;
+using Content.Shared.Cloning.Events;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
@@ -48,5 +49,11 @@ public abstract partial class SharedCloneProjectorSystem : EntitySystem
 
         _popup.PopupEntity(Loc.GetString("gun-disabled"), ent, ent);
         args.Cancel();
+    }
+
+    [SubscribeLocalEvent]
+    private void OnCloningAttempt(Entity<HolographicCloneComponent> ent, ref CloningAttemptEvent args)
+    {
+        args.Cancelled = true; // inception
     }
 }

@@ -84,9 +84,9 @@ public sealed class RevsTest : InteractionTest
     [Test]
     public async Task HeadrevHasRadio()
     {
-        Assert.That(!SEntMan.HasComponent<ImplantedComponent>(SPlayer), "Urist shouldnt be implanted");
+        Assert.That(!SHasComp<ImplantedComponent>(SPlayer), "Urist shouldnt be implanted");
         await MakePlayerHeadRev();
-        Assert.That(SEntMan.HasComponent<ImplantedComponent>(SPlayer), "Headrev should have gotten a radio implant");
+        Assert.That(SHasComp<ImplantedComponent>(SPlayer), "Headrev should have gotten a radio implant");
         var radio = SComp<ActiveRadioComponent>(SPlayer);
         Assert.That(radio.Channels.Contains(HeadRevRadio), "Radio implant did not add the headrev channel");
     }
@@ -166,7 +166,7 @@ public sealed class RevsTest : InteractionTest
         await Server.WaitPost(() =>
         {
             _antag.ForceMakeAntag<RevolutionaryRuleComponent>(ServerSession, DefaultRevsRule);
-            Assert.That(SEntMan.HasComponent<HeadRevolutionaryComponent>(SPlayer), "Making test player a headrev failed");
+            Assert.That(SHasComp<HeadRevolutionaryComponent>(SPlayer), "Making test player a headrev failed");
             Assert.That(SComp<MindContainerComponent>(SPlayer).HasMind, "Test's player must have a mind");
         });
     }

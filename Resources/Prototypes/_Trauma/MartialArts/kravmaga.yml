@@ -72,7 +72,6 @@
   - !type:ModifyKnockdown
     time: 4
     type: Update
-  levelRequired: 26
 
 - type: combo
   id: KravNeckChop
@@ -93,7 +92,6 @@
   - !type:ModifyStatusEffect
     effectProto: StatusEffectMuted
     time: 20
-  levelRequired: 26
 
 - type: combo
   id: KravLungPunch
@@ -114,4 +112,3 @@
   # TODO: status effect
   - !type:BlockedBreathing
     time: 10
-  levelRequired: 26

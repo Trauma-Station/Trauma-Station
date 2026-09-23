@@ -11,6 +11,7 @@ using Content.Server.Hands.Systems;
 using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
+using Content.Server.Polymorph.Components;
 using Content.Server.Polymorph.Systems;
 using Content.Server.Roles;
 using Content.Server.Storage.EntitySystems;
@@ -19,7 +20,6 @@ using Content.Shared.Body;
 using Content.Shared.CombatMode;
 using Content.Shared.Coordinates;
 using Content.Shared.EntityEffects;
-using Content.Shared.Examine;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Gibbing;
 using Content.Shared.Hands;
@@ -48,6 +48,7 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Flesh;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Prototypes;
+using Content.Trauma.Shared.Heretic.Rituals;
 using Content.Trauma.Shared.Heretic.Systems;
 using Content.Trauma.Shared.Heretic.Systems.Abilities;
 using Content.Trauma.Shared.Physics.ComplexJoint;
@@ -90,15 +91,6 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
     [Dependency] private HumanoidProfileSystem _humanoid = default!;
     [Dependency] private SharedEntityEffectsSystem _effect = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        UpdatesAfter.Add(typeof(HolyFlammableSystem));
-        SubscribeLocalEvent<GhoulComponent, MapInitEvent>(OnGhoulInit, after: [typeof(InitialBodySystem)]);
-        SubscribeLocalEvent<ShatteredRisenComponent, MapInitEvent>(OnRisenMapInit, after: [typeof(InitialBodySystem)]);
-    }
 
     [SubscribeLocalEvent]
     private void OnBeforeBeamDamaged(Entity<HereticMinionComponent> ent, ref BeforeContinuousBeamDamagedEvent args)
@@ -145,6 +137,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         RefreshShatteredHands(ent);
     }
 
+    [SubscribeLocalEvent(after: [typeof(InitialBodySystem)])]
     private void OnRisenMapInit(Entity<ShatteredRisenComponent> ent, ref MapInitEvent args)
     {
         RefreshShatteredHands(ent);
@@ -223,12 +216,6 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         args.Append(Loc.GetString("heretic-ghoul-briefing-end"));
     }
 
-    [SubscribeLocalEvent]
-    private void OnWeaponExamine(Entity<GhoulWeaponComponent> ent, ref ExaminedEvent args)
-    {
-        args.PushMarkup(Loc.GetString(ent.Comp.ExamineMessage));
-    }
-
     public void SetBoundHeretic(Entity<HereticMinionComponent?, HTNComponent?> ent,
         EntityUid heretic,
         EntityUid? ritual = null,
@@ -253,6 +240,35 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
     {
         _effect.TryApplyEffect(ent, ent.Comp.SkillEffectRemove, predicted: false);
 
+        if (_mind.TryGetMind(ent, out var mindId, out var mind))
+            _role.MindRemoveRole<GhoulRoleComponent>((mindId, mind));
+
+        if (TryComp(ent, out HereticMinionComponent? minion))
+        {
+            if (Exists(minion.BoundHeretic) &&
+                _heretic.TryGetHereticComponent(minion.BoundHeretic.Value, out var heretic, out var masterMind))
+            {
+                heretic.Minions.Remove(ent);
+                if (TryComp(masterMind, out FleshHereticMindComponent? fleshMind))
+                {
+                    fleshMind.Ghouls.Remove(ent);
+                    Dirty<HereticComponent, FleshHereticMindComponent>((masterMind, heretic, fleshMind));
+                }
+                else
+                    Dirty(masterMind, heretic);
+            }
+
+            if (Exists(minion.CreationRitual) && TryComp(minion.CreationRitual.Value, out HereticRitualComponent? ritual))
+            {
+                ritual.LimitedOutput.Remove(ent);
+                Dirty(minion.CreationRitual.Value, ritual);
+            }
+        }
+
+        _popup.PopupCoordinates(Loc.GetString("ghoul-unghoulify-message", ("ent", Identity.Entity(ent, EntityManager))), Transform(ent).Coordinates, PopupType.LargeCaution);
+
+        // Revert to species default comps if its humanoid
+        // If not, polymorph into itself
         if (!TryComp(ent, out HumanoidProfileComponent? humanoid))
         {
             if (Prototype(ent) is not { } proto)
@@ -270,7 +286,11 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
                 AllowRepeatedMorphs = true,
             };
 
-            _polymorph.PolymorphEntity(ent, config);
+            if (_polymorph.PolymorphEntity(ent, config) is { } newEnt)
+            {
+                RemCompDeferred<PolymorphedEntityComponent>(newEnt);
+                QueueDel(ent);
+            }
             return;
         }
 
@@ -306,38 +326,10 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
             _faction.AddFactions((ent.Owner, fact), ent.Comp.OldFactions);
         }
 
-        if (_mind.TryGetMind(ent, out var mindId, out var mind))
-            _role.MindRemoveRole<GhoulComponent>((mindId, mind));
-
-        if (TryComp(ent, out HereticMinionComponent? minion))
-        {
-            if (Exists(minion.BoundHeretic) &&
-                _heretic.TryGetHereticComponent(minion.BoundHeretic.Value, out var heretic, out var masterMind))
-            {
-                heretic.Minions.Remove(ent);
-                if (TryComp(masterMind, out FleshHereticMindComponent? fleshMind))
-                {
-                    fleshMind.Ghouls.Remove(ent);
-                    Dirty<HereticComponent, FleshHereticMindComponent>((masterMind, heretic, fleshMind));
-                }
-                else
-                    Dirty(masterMind, heretic);
-            }
-
-            if (Exists(minion.CreationRitual) &&
-                TryComp(minion.CreationRitual.Value, out Shared.Heretic.Rituals.HereticRitualComponent? ritual))
-            {
-                ritual.LimitedOutput.Remove(ent);
-                Dirty(minion.CreationRitual.Value, ritual);
-            }
-        }
-
         if (TryComp(ent, out HolyFlammableComponent? holyFlam))
             _holyFlam.HolyExtinguish(ent, holyFlam);
 
         EntityManager.RemoveComponents(ent, ProtoMan.Index(ComponentsToRemoveOnUnGhoulify).Components);
-
-        _popup.PopupEntity(Loc.GetString("ghoul-unghoulify-message", ("ent", Identity.Entity(ent, EntityManager))), ent, PopupType.LargeCaution);
     }
 
     public void GhoulifyEntity(Entity<GhoulComponent> ent)
@@ -470,6 +462,7 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
         _antag.SendBriefing(ent, brief, Color.MediumPurple, sound);
     }
 
+    [SubscribeLocalEvent(after: [typeof(InitialBodySystem)])]
     private void OnGhoulInit(Entity<GhoulComponent> ent, ref MapInitEvent args)
     {
         GhoulifyEntity(ent);
@@ -491,15 +484,6 @@ public sealed partial class GhoulSystem : SharedGhoulSystem
     private void OnTakeGhostRole(Entity<HereticMinionComponent> ent, ref TakeGhostRoleEvent args)
     {
         SendBriefing(ent.AsNullable());
-    }
-
-    [SubscribeLocalEvent]
-    private void OnExamine(Entity<GhoulComponent> ent, ref ExaminedEvent args)
-    {
-        if (ent.Comp.ExamineMessage == null)
-            return;
-
-        args.PushMarkup(Loc.GetString(ent.Comp.ExamineMessage));
     }
 
     private void GiveGhoulWeapon(Entity<GhoulComponent> ent)

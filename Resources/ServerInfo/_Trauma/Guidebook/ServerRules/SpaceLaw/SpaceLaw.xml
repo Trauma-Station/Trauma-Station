@@ -1,58 +1,34 @@
 <Document>
-  # Space Law
-  The charter of corporate rights grants the following rights to Nanotrasen Employees, in order of importance.
+  # Corporate Law
+  This is the law by which Nanotrasen enforces order upon the station.
 
-  - 1. The right to follow corporate law.
-  - 2. The right to work towards the greater wealth and prosperity of Nanotrasen.
-  - 3. The right to respect one's superiors in management and understand the hard work they accomplished to achieve their position.
-  - 4. The right to a Nanotrasen appointed public defender. If no lawyer is currently available, then the security officer who arrested the employee will be appointed as their defender.
-  - 5. The right to not be prosecuted under a C§ 01 offense. This right is waived if the party fails to comply with lawful orders from security officers that resolves this offence.
 
-  ## Treatment Of Prisoners
 
-  The charter of corporate rights grants the following rights to Nanotrasen Prisoners, in order of importance.
 
-  - 1. The right to medical treatment.
-  - 2. The right to communications equipment, if not abused.
-  - 3. The right to food and water.
-  - 4. The right to their shift mandated PDA, unless tampered with; in which case a replacement will be issued.
-  - 5. The right to freedom of movement within the designated brig.
+  ## Escalation
+  These are the general practices for escalation. Gross misconduct involving over-escalation may waive punishments that would otherwise go to a violator of Corporate Law.
+  - Arresting: A violator of a Type 3 or less Violation must be hailed before being arrested, and is not to be violently arrested if complying, unless corporal punishment is to be issued.
+  - Issuance of Corporal Punishment: If a violator of a Type 1 violation refuses to rectify the violation upon the first command to do so, and only if a command was issued, corporal punishment may then be applied. It is otherwise approved to do so immediately.
+  - Authorization of lethal force: If an officer feels reasonable concern for their life, or the entitiy has violated a Type 4, 5, or non-standard Violation and is not complying.
 
-  ## Security
+  ## Special Punishments
+  - 1.1: Any Nanotrasen Employees without their company-mandated ID is to stay within custody until their ID is re-acquired or until a new ID is assigned. If forceful methods are needed to keep them in custody, they are to be applied.
+  - 3.1: Dereliction of Duty is not to be punished with brig time, and should first be met with corporal punishment, or reduction of access if the employee fills a dangerous occupation.
+  - 3.2: Any officers who fail to meet the standards such as described are to be immediately demoted to cadet as reduction of access. Further violations are to be punished through application of non-standard violations to escalate to a Type 4 Violation, and to result in immediate demotion to D-Class upon even a single further offense. This applies to both Warden and the Head of security in full.
+  - 4.1: Any grossly incompetent command as described in the violation are to be immediately demoted to D-Class.
+  - 4.2: If the Head of Staff fails the evaluation, a treatment plan shall be issued and the command member's access shall be reduced until said treatment is completed. Failure to comply with said treatment plan may result in demotion to D-Class.
 
-  The charter of corporate rights grants the following rights to Security Employees, in order of importance.
-
-  - 1. The right to search employees possessions on blue or higher alert, and to secure any contraband.
-  - 2. The right to search employees suspected of a crime on any alert, and to secure any contraband.
-  - 3. The right to check and remove any suspected illegal implants from crewmates suspected of possessing one.
-  - 4. The right to implant any crewmate convicted of any crime with tracking and/or mindshield implants.
-  - 5. The right to execute any crewmate refusing a mindshield implant.
-  - 6. The right to waive brig time for corporal punishment, not exceeding critical condition.
-
-  ## Sentencing
-
-  The charter of corporate rights grants the following rights to the Warden, Head of Security, and in their absence other security employees.
-
-  - 1. The right to sentence crewmates convicted of a crime for an appropriate time in the brig.
-  - 2. The right to extend brig times for trouble caused.
-  - 3. The right to use corporal punishment to retaliate against trouble caused.
-  - 4. The right to the responsibility to preserve the life of all captured terrorists, magic users, and alien creatures for study at centcom.
-
-  [color=red][bold]YOU MAY NOT EXCEED 5 MINUTES AS A BRIG TIME[/bold][/color]
-
-  ## Any total brig time that adds up to above 5 minutes will be shortened to meet this limit.
-
-  ## If it goes above 20 minutes, you may perma the person.
-
-  # Execution
-  - [bold]All executions are to be confirmed and overseen by the Captain.
-
-  # Narcotics and Prohibited substances
-
-  Schedule A: Any substance that is deemed minor or department-only contraband by the NT chemical compendium.
-  Schedule B: Any substance that is deemed major contraband by the NT chemical compendium.
-  Pyrotechnic: Any substance that is used for the purpose of arson or inciendiary attacks.
-
-  ## Crime Listing
-  - [textlink="Crime Listing" link="SpaceLawCrimeList"]
+  ## Definitions
+  - Schedule A Narcotics - Minor and department restricted chemicals.
+  - Schedule B Narcotics - Major restricted chemicals.
+  - Pyrotechnic Chemicals - Flammable and explosive chemicals.
+  - Employee, Nanotrasen Employee - Sentient beings who have a contract with Nanotrasen to serve as an employee aboard the station.
+  - Foreign Agents - Any sentient humanoid which is not a violator of the Taboo Violations.
+  - Command - Sentient Employees with command access assigned by Nanotrasen or appointed by the Captain.
+  - Head of Staff - Members of command who reign over a specific department.
+  - Captain - The Nanotrasen dictated captain of the station. Acting captains are not awarded the same rights as the Nanotrasen appointed one.
+  - D-Class - Disposable Nanotrasen property to be utilized for experimentation, undesirable labor, and any other tasks.
+  - Execution - A punishment of which the sentencing is dictated in the Mandate of the Captain Charter. Methods of execution always involve preventing revival through decapitation and collection of the head, incineration, or other methods that ultimately fully prevent revival.
+  - Trial - A Nanotrasen frontier station trial consists of the Head of Security as the Judge and Prosecutor of the case, against the defendant and legally appointed defender. If there is no Head of Security, the Warden and then Captain should act in their place.
+  - Magic Organs - Organs with abnormal and magical effects, such as those of a Space Cobra. Space Hearts and Space lungs are the sole exceptions to this, as how they function is understood to be scientific.
 </Document>

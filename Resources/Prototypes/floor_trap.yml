@@ -99,7 +99,6 @@
     - type: DeleteOnTrigger
 
 - type: entity
-  abstract: true # Trauma - no chud xenos
   parent: CollideFloorTrapSpawn
   id: SpawnFloorTrapXenoDrone
   suffix: Xeno. Drone
@@ -112,7 +111,6 @@
     - type: DeleteOnTrigger
 
 - type: entity
-  abstract: true # Trauma - no chud xenos
   parent: CollideFloorTrapSpawn
   id: SpawnFloorTrapXenoBurrower
   suffix: Xeno. Burrower

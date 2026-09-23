@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Common.Effects;
+using Content.Trauma.Common.Effects;
 // </Trauma>
 using Content.Server.Communications;
 using Content.Server.CriminalRecords.Systems;
@@ -129,19 +129,19 @@ public sealed partial class SpaceNinjaSystem : SharedSpaceNinjaSystem
             : Loc.GetString("ninja-research-steal-success", ("count", gained), ("server", args.Target));
 
         Popup.PopupEntity(str, uid, uid, PopupType.Medium);
-        _sparks.DoSparks(args.Target); // Trauma
+        _sparks.DoSparks(args.Target, user: null); // Trauma
     }
 
     private void OnThreatCalledIn(Entity<SpaceNinjaComponent> ent, ref ThreatCalledInEvent args)
     {
         _codeCondition.SetCompleted(ent.Owner, ent.Comp.TerrorObjective);
-        _sparks.DoSparks(args.Target); // Trauma
+        _sparks.DoSparks(args.Target, user: null); // Trauma
     }
 
     private void OnCriminalRecordsHacked(Entity<SpaceNinjaComponent> ent, ref CriminalRecordsHackedEvent args)
     {
         _codeCondition.SetCompleted(ent.Owner, ent.Comp.MassArrestObjective);
-        _sparks.DoSparks(args.Target); // Trauma
+        _sparks.DoSparks(args.Target, user: null); // Trauma
     }
 
     /// <summary>

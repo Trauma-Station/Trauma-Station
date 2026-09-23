@@ -37,6 +37,7 @@ public sealed partial class SatiationComponent : Component
 
     /// <inheritdoc cref="_satiations"/>
     // Hide `SatiationDictionary` from public API
+    [ViewVariables] // Trauma
     public Dictionary<ProtoId<SatiationTypePrototype>, Satiation> Satiations => _satiations.Data;
 
     /// <summary>

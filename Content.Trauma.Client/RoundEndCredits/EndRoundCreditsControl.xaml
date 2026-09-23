@@ -2,9 +2,8 @@
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
-<roundEndCredits:EndRoundCreditsControl
+<ScrollContainer
     xmlns="https://spacestation14.io"
-    xmlns:roundEndCredits="using:Content.Trauma.Client.RoundEndCredits"
     MouseFilter="Ignore"
     ReserveScrollbarSpace="False"
     HScrollEnabled="False"
@@ -16,7 +15,9 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         Name="MainCreditVBox"
         Access="Public"
         Align="Center"
-        Orientation="Vertical">
+        Orientation="Vertical"
+        HorizontalExpand="True"
+        VerticalExpand="True">
 
         <BoxContainer
             Name="ServerImageBox"
@@ -63,5 +64,4 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             Margin="0 0 0 150" />
 
     </BoxContainer>
-
-</roundEndCredits:EndRoundCreditsControl>
+</ScrollContainer>

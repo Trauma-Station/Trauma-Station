@@ -38,16 +38,17 @@ public sealed partial class MobGrowthSystem : EntitySystem
     {
         base.Update(frameTime);
 
+        var now = _timing.CurTime;
         var query = EntityQueryEnumerator<MobGrowthComponent, SatiationComponent>();
         while (query.MoveNext(out var uid, out var growth, out var satiation))
         {
-            if (_timing.CurTime < growth.NextGrowthTime)
+            if (now < growth.NextGrowthTime)
                 continue;
 
-            growth.NextGrowthTime = _timing.CurTime + growth.GrowthInterval;
+            growth.NextGrowthTime = now + growth.GrowthInterval;
 
             if (_mobState.IsDead(uid)
-                || _satiation.IsValueInRange((uid, satiation), SatiationSystem.Hunger, above: growth.HungerRequired)
+                || !_satiation.IsValueInRange((uid, satiation), SatiationSystem.Hunger, above: growth.HungerRequired)
                 || !growth.Stages.TryGetValue(growth.CurrentStage, out var currentData)
                 || string.IsNullOrEmpty(currentData.NextStage))
                 continue;

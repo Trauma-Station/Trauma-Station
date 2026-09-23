@@ -59,6 +59,7 @@
 ## Mob
 
 - type: entity
+  categories: [ HideSpawnMenu ]
   parent: BaseSpeciesAppearance
   id: AppearanceIPC
   name: IPC appearance
@@ -97,6 +98,7 @@
   - MobFlammable
   - BaseSpeciesMob
   id: MobIPC
+  name: Urist McPositronic
   components:
   - type: LanguageSpeaker
     speaks:
@@ -230,6 +232,25 @@
         - MobMask
         layer:
         - MobLayer
+  - type: Reactive
+    groups:
+      Flammable: [ Touch ]
+      Extinguish: [ Touch ]
+    reactions:
+    - reagents: [ Water, SpaceCleaner ]
+      methods: [ Touch ]
+      effects:
+      - !type:WashCreamPie
+    - reagents: [ Water ]
+      methods: [ Touch ]
+      effects:
+      - !type:Jitter
+      - !type:HealthChange
+        ignoreResistances: true
+        splitDamage: Split
+        damage:
+          types:
+            Shock: 1.5
   - type: Temperature
     specificHeat: 300
     temperature: 310.15 # 310K is the standard operating temperature of a home circuit breaker
@@ -248,6 +269,8 @@
     needsCritical: false
   - type: SurgeryTarget
     sepsisImmune: true
+  - type: IntellicardableMind # recovery mode
+    downloadTimeFactor: 1.2
   - type: Tag
     tags:
     - SiliconMob

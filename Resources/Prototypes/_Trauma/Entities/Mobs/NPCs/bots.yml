@@ -96,7 +96,7 @@
       state: boogie-d3
 
 - type: entity
-  parent: [MobSiliconBase, MobCombat]
+  parent: [MobSiliconBase, MobCombat, ShowSecurityIcons]
   id: MobED209
   name: ED-209
   description: Officer Beepsky's bigger brother

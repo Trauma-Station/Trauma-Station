@@ -2,7 +2,6 @@
 
 - type: constructionGraph
   id: Killdozer
-  start: start
   graph:
   - node: start
     edges:

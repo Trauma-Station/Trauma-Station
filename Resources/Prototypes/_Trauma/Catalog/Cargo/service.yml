@@ -19,3 +19,13 @@
   cost: 7500
   category: cargoproduct-category-name-service
   group: market
+
+- type: cargoProduct
+  id: RanchingSuppliesSet
+  icon:
+    sprite: _Trauma/Structures/Machines/ranchobjects.rsi
+    state: incubator
+  product: CrateRanchingSupplies
+  cost: 4000
+  category: cargoproduct-category-name-service
+  group: market

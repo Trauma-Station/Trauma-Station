@@ -1,0 +1,191 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: BorgChassisSelectable
+  components:
+  - type: BorgSwitchableSubtype
+
+- type: entity
+  id: BorgChassisGeneric
+  components:
+  - type: BorgSwitchableSubtype
+    borgSubtype: generic_default
+
+- type: entity
+  id: BorgChassisMining
+  components:
+  - type: BorgSwitchableSubtype
+    borgSubtype: mining_default
+
+- type: entity
+  id: BorgChassisEngineer
+  components:
+  - type: BorgSwitchableSubtype
+    borgSubtype: engineer_default
+
+- type: entity
+  id: BorgChassisJanitor
+  components:
+  - type: BorgSwitchableSubtype
+    borgSubtype: janitor_default
+
+- type: entity
+  id: BorgChassisMedical
+  components:
+  - type: BorgSwitchableSubtype
+    borgSubtype: default_medical
+
+- type: entity
+  id: BorgChassisService
+  components:
+  - type: BorgSwitchableSubtype
+    borgSubtype: default_service
+
+# Syndicate Assault borg
+- type: entity
+  id: BorgChassisSyndicateAssault
+  components:
+  - type: BorgChassis
+    maxModules: 7
+  - type: ModifyKnowledgeGrant
+    skills:
+      MeleeKnowledge: 51
+      ShootingKnowledge: 50
+      WeaponsKnowledge: 51
+
+# Syndicate Medical borg
+- type: entity
+  id: BorgChassisSyndicateMedical
+  components:
+  - type: ModifyKnowledgeGrant
+    skills:
+      SurgeryKnowledge: 60
+      FirstAidKnowledge: 60
+      ChemistryKnowledge: 60
+      MeleeKnowledge: 20
+      ShootingKnowledge: 20
+      WeaponsKnowledge: 20
+  - type: BorgChassis
+    maxModules: 7
+
+# Syndicate Saboteur borg
+- type: entity
+  id: BorgChassisSyndicateSaboteur
+  components:
+  - type: BorgDisguise
+    action: ActionBorgDisguiseToggle
+    disguisedPrototype: BorgChassisEngineer
+    hasMindState: engineer_e
+    noMindState: engineer_e_r
+    disguisedLight: engineer_l
+    realLight: synd_engi_l
+  - type: GenericVisualizer
+    visuals:
+      enum.BorgDisguiseVisuals.IsDisguised:
+        enum.BorgVisualLayers.Body:
+          True: { visible: false }
+          False: { visible: true }
+        enum.BorgDisguiseVisualLayers.Body:
+          True: { visible: true }
+          False: { visible: false }
+  - type: ModifyKnowledgeGrant
+    skills:
+      FabricationKnowledge: 60
+      DoorsKnowledge: 60
+      AirlocksKnowledge: 60
+      FurnitureKnowledge: 60
+      InfrastructureKnowledge: 60
+      ElectronicsKnowledge: 60
+      WallsKnowledge: 60
+      WindowsKnowledge: 60
+      MetalworkingKnowledge: 60
+      GunsmithingKnowledge: 60
+      MechanicsKnowledge: 60
+      BotsKnowledge: 60
+      MeleeKnowledge: 20
+      ShootingKnowledge: 20
+      WeaponsKnowledge: 20
+  - type: Sprite
+    layers:
+    - state: engineer_e
+      map: [ "enum.BorgDisguiseVisualLayers.Light" ]
+      shader: unshaded
+      visible: false
+    - state: synd_engi
+      map: [ "enum.BorgVisualLayers.Body" ]
+    - state: engineer
+      map: [ "enum.BorgDisguiseVisualLayers.Body" ]
+      visible: false
+  - type: BorgChassis
+    maxModules: 7
+  - type: ShowHealthBars
+    damageContainers:
+    - SiliconRadiation # Make IPCs take radiation
+
+# Derelict Generic borg
+- type: entity
+  id: BorgChassisDerelict
+  components:
+  - type: ModifyKnowledgeGrant
+    skills:
+      FabricationKnowledge: 50 # not good at much else
+      BotsKnowledge: 50
+      InfrastructureKnowledge: 20
+      WallsKnowledge: 20 # containing anoms or whatever
+      WindowsKnowledge: 20
+
+# Derelict Engineering borg
+- type: entity
+  id: EngineeringBorgChassisDerelict
+  components:
+  - type: ModifyKnowledgeGrant
+    skills:
+      # crafting
+      FabricationKnowledge: 60
+      MetalworkingKnowledge: 40
+      CarvingKnowledge: 40
+      MechanicsKnowledge: 40
+      # recipes
+      DoorsKnowledge: 50
+      AirlocksKnowledge: 50
+      BotsKnowledge: 30
+      InfrastructureKnowledge: 50
+      FurnitureKnowledge: 50
+      ElectronicsKnowledge: 50
+      WallsKnowledge: 50
+      WindowsKnowledge: 50
+
+# Derelict Salvage borg
+- type: entity
+  id: MiningBorgChassisDerelict
+  components:
+  - type: NoWieldNeeded
+  - type: ModifyKnowledgeGrant
+    skills:
+      KnowledgeWeaponsShortBlade: 30
+      KnowledgeWeaponsMining: 50
+      ShootingKnowledge: 20
+
+# Derelict Janitor borg
+- type: entity
+  id: JanitorBorgChassisDerelict
+  components:
+  - type: ModifyKnowledgeGrant
+    skills:
+      JanitorKnowledge: 100 # mankind is dead. trash is fuel. disposals is full.
+      FabricationKnowledge: 10
+      InfrastructureKnowledge: 10
+      WallsKnowledge: 10
+
+# Derelict Medical borg
+- type: entity
+  id: MedicalBorgChassisDerelict
+  components:
+  - type: ModifyKnowledgeGrant
+    skills:
+      FirstAidKnowledge: 50
+      SurgeryKnowledge: 80 # robots are unsurprisingly good at making cuts
+  - type: Sanitized
+  - type: SurgeryIgnoreClothing
+  - type: SurgerySpeedModifier
+    speedModifier: 1.5

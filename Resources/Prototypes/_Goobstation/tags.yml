@@ -279,9 +279,6 @@
   id: HonkmotherMaw
 
 - type: Tag
-  id: HydroponicsToolClippers
-
-- type: Tag
   id: IgnoreBindSoul
 
 - type: Tag
@@ -514,9 +511,6 @@
 
 - type: Tag
   id: Steel
-
-- type: Tag
-  id: StunBaton # for heretic ritual
 
 - type: Tag
   id: SummonSimiansMaxLevelAction

@@ -11,7 +11,7 @@ public sealed partial class FleshHereticMindComponent : Component
     public List<EntityUid> Ghouls = new();
 
     [DataField, AutoNetworkedField]
-    public int GhoulLimit = 5;
+    public int GhoulLimit = 3;
 
     [DataField, AutoNetworkedField]
     public DamageSpecifier WormSustainedDamage = new();

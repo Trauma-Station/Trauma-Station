@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Common.Effects;
+using Content.Trauma.Common.Effects;
 // </Trauma>
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
@@ -59,7 +59,7 @@ public sealed partial class EmagProviderSystem : EntitySystem
             return;
 
         _audio.PlayPredicted(comp.EmagSound, uid, uid);
-        _sparks.DoSparks(args.Target); // Trauma
+        _sparks.DoSparks(args.Target, user: uid); // Trauma
 
         _adminLogger.Add(LogType.Emag, LogImpact.High, $"{ToPrettyString(uid):player} emagged {ToPrettyString(target):target} with flag(s): {ent.Comp.EmagType}");
         var ev = new EmaggedSomethingEvent(target);

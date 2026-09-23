@@ -24,6 +24,9 @@ jobs:
     - name: Get Engine Tag
       run: |
         cd RobustToolbox
+        ENGINE_TAG=$(git describe --tags --abbrev=0)
+        git remote add wizden https://github.com/space-wizards/RobustToolbox
+        git fetch wizden $ENGINE_TAG # make sure vanilla clients will be able to connect
         git fetch --depth=1 --tags
         git describe --tags --abbrev=0
 

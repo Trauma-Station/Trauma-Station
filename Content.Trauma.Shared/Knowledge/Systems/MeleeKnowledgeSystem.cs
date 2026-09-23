@@ -11,7 +11,6 @@ namespace Content.Trauma.Shared.Knowledge.Systems;
 public sealed partial class MeleeKnowledgeSystem : EntitySystem
 {
     [Dependency] private SharedKnowledgeSystem _knowledge = default!;
-    [Dependency] private EntityQuery<NoMartialMeleeSpeedComponent> _noSpeedQuery = default!;
 
     public override void Initialize()
     {
@@ -23,8 +22,8 @@ public sealed partial class MeleeKnowledgeSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnGetMeleeAttackRate(Entity<MeleeSpeedKnowledgeComponent> ent, ref GetMeleeAttackRateEvent args)
     {
-        if (_noSpeedQuery.HasComp(args.Weapon))
-            return;
+        if (args.Weapon != args.User)
+            return; // don't speed up actual weapons just punches
 
         var level = _knowledge.GetLevel(ent.Owner);
         args.Multipliers *= ent.Comp.Curve.GetCurve(level);

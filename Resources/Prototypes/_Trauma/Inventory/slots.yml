@@ -1,0 +1,72 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# All valid inventory slot for yml linting
+
+- type: inventorySlot
+  id: jumpsuit
+  flags: INNERCLOTHING
+
+- type: inventorySlot
+  id: back
+  flags: BACK
+
+- type: inventorySlot
+  id: id
+  flags: IDCARD
+
+- type: inventorySlot
+  id: outerClothing
+  flags: OUTERCLOTHING
+
+- type: inventorySlot
+  id: suitstorage
+  flags: SUITSTORAGE
+
+- type: inventorySlot
+  id: shoes
+  flags: FEET
+
+- type: inventorySlot
+  id: gloves
+  flags: GLOVES
+
+- type: inventorySlot
+  id: head
+  flags: HEAD
+
+- type: inventorySlot
+  id: ears
+  flags: EARS
+
+- type: inventorySlot
+  id: mask
+  flags: MASK
+
+- type: inventorySlot
+  id: neck
+  flags: NECK
+
+- type: inventorySlot
+  id: eyes
+  flags: EYES
+
+- type: inventorySlot
+  id: belt
+  flags: BELT
+
+# pockets being considered inventory slots has been a curse on mankind
+- type: inventorySlot
+  id: pocket1
+  flags: POCKET
+
+- type: inventorySlot
+  id: pocket2
+  flags: POCKET
+
+- type: inventorySlot
+  id: pocket3
+  flags: POCKET
+
+- type: inventorySlot
+  id: pocket4
+  flags: POCKET

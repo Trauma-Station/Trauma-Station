@@ -5,7 +5,6 @@ using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
-using Content.Shared.Silicons.Laws; // DeltaV
 
 namespace Content.Shared.Silicons.Borgs;
 
@@ -21,7 +20,9 @@ public sealed partial class BorgTypePrototype : IPrototype
     [IdDataField]
     public required string ID { get; set; }
 
+    //
     // Description info (name/desc) is configured via localization strings directly.
+    //
 
     /// <summary>
     /// The prototype displayed in the selection menu for this type.
@@ -29,7 +30,9 @@ public sealed partial class BorgTypePrototype : IPrototype
     [DataField]
     public required EntProtoId DummyPrototype;
 
+    //
     // Functional information
+    //
 
     /// <summary>
     /// The amount of free module slots this borg type has.
@@ -85,7 +88,9 @@ public sealed partial class BorgTypePrototype : IPrototype
     [DataField]
     public ComponentRegistry? AddComponents { get; set; }
 
+    //
     // Visual information
+    //
 
     /// <summary>
     /// The sprite state for the main borg body.
@@ -119,7 +124,9 @@ public sealed partial class BorgTypePrototype : IPrototype
     [DataField]
     public string SpriteToggleLightState { get; set; } = "robot_l";
 
+    //
     // Minor information
+    //
 
     /// <summary>
     /// String to use on petting success.
@@ -135,18 +142,13 @@ public sealed partial class BorgTypePrototype : IPrototype
     [DataField]
     public string PetFailureString { get; set; } = "petting-failure-generic-cyborg";
 
+    //
     // Sounds
+    //
 
     /// <summary>
     /// Sound specifier for footstep sounds created by this borg.
     /// </summary>
     [DataField]
     public SoundSpecifier FootstepCollection { get; set; } = new SoundCollectionSpecifier(DefaultFootsteps);
-
-    /// <summary>
-    /// DeltaV: Lawset to use instead of crewsimov.
-    /// If the chassis is emagged or ion stormed this is ignored.
-    /// </summary>
-    [DataField]
-    public ProtoId<SiliconLawsetPrototype>? Lawset;
 }

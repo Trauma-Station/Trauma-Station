@@ -69862,7 +69862,7 @@ entities:
         actions: !type:Container
           ents:
           - 15
-- proto: RMCCampfire
+- proto: Bonfire
   entities:
   - uid: 10770
     components:

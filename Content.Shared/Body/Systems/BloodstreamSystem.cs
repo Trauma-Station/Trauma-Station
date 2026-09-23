@@ -3,6 +3,7 @@ using Content.Goobstation.Common.Bloodstream;
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
+using Robust.Shared.Collections;
 // </Trauma>
 using Content.Shared.Alert;
 using Content.Shared.Body.Components;
@@ -53,30 +54,37 @@ public sealed partial class BloodstreamSystem : EntitySystem
         base.Update(frameTime);
 
         var curTime = _timing.CurTime;
-        // <Trauma> - moved actual update logic into helper method, client only predicts its own entity
+        // <Trauma> - moved actual update logic into helper method, client only predicts its own entity. also defer updating from enumeration for spawns
         if (_net.IsClient)
         {
             if (!_timing.IsFirstTimePredicted ||
                 _timing.ApplyingState ||
                 _player.LocalEntity is not { } uid ||
-                !_query.TryComp(uid, out var comp))
+                !_query.TryComp(uid, out var comp) ||
+                curTime < comp.NextUpdate)
                 return;
 
             UpdateMob(uid, comp);
             return; // no predicting other mobs it wastes so much cpu
         }
 
+        var updating = new ValueList<Entity<BloodstreamComponent>>();
         var query = EntityQueryEnumerator<BloodstreamComponent>();
         while (query.MoveNext(out var uid, out var bloodstream))
         {
-            UpdateMob(uid, bloodstream);
+            if (curTime < bloodstream.NextUpdate)
+                continue;
+
+            updating.Add((uid, bloodstream));
+        }
+
+        foreach (var ent in updating)
+        {
+            UpdateMob(ent, ent.Comp);
         }
         void UpdateMob(EntityUid uid, BloodstreamComponent bloodstream)
         // </Trauma>
         {
-            if (curTime < bloodstream.NextUpdate)
-                return; // Trauma - no longer in a loop
-
             bloodstream.NextUpdate += bloodstream.AdjustedUpdateInterval;
             DirtyField(uid, bloodstream, nameof(BloodstreamComponent.NextUpdate)); // needs to be dirtied on the client so it can be rerolled during prediction
 
@@ -486,6 +494,9 @@ public sealed partial class BloodstreamSystem : EntitySystem
             || amount == 0)
             return false;
 
+        if (!ent.Comp.BloodIncreaseEnabled && amount > 0)
+            return false;
+
         // TODO: Either make this percentage based regeneration and pre-pass the percentage.
         // TODO: Solution regulation API that doesn't result in very minor FixedPoint2 errors (Currently gingerbreadman only regenerates 0.99u instead of 1.00u)
         referenceFactor = Math.Clamp(referenceFactor, 0f, ent.Comp.MaxVolumeModifier);
@@ -670,7 +681,12 @@ public sealed partial class BloodstreamSystem : EntitySystem
             currentVolume += bloodSolution.RemoveReagent(reagent.Reagent, quantity: bloodSolution.Volume, ignoreReagentData: true);
         }
 
-        ent.Comp.BloodReferenceSolution = reagents.Clone();
+        // Scale the solution to the volume of the blood.
+        var newReagentsSolution = reagents.Clone();
+        newReagentsSolution.ScaleTo(ent.Comp.BloodReferenceSolution.MaxVolume);
+
+        // Set the scaled solution as the new blood reference.
+        ent.Comp.BloodReferenceSolution = newReagentsSolution;
         DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.BloodReferenceSolution));
 
         if (currentVolume == FixedPoint2.Zero)
@@ -679,6 +695,34 @@ public sealed partial class BloodstreamSystem : EntitySystem
         var solution = ent.Comp.BloodReferenceSolution.Clone();
         solution.ScaleSolution(currentVolume / solution.Volume);
         _solutionContainer.AddSolution(ent.Comp.BloodSolution.Value, solution);
+    }
+
+    /// <summary>
+    /// Change how much blood is recovered in a bloodstream.
+    /// </summary>
+    public void ChangeBloodRefreshAmount(Entity<BloodstreamComponent?> ent, FixedPoint2 amount)
+    {
+        if(!Resolve(ent, ref ent.Comp, logMissing: false))
+        {
+            return;
+        }
+        if(amount < 0f)
+        {
+            amount = 0f;
+        }
+        ent.Comp.BloodRefreshAmount = amount;
+        DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.BloodRefreshAmount));
+    }
+
+    /// <summary>
+    /// Change whether or not blood can be increased in a bloodstream.
+    /// </summary>
+    public void ChangeBloodIncreaseEnabled(Entity<BloodstreamComponent?> ent, bool status = true)
+    {
+        if (!Resolve(ent, ref ent.Comp, logMissing: false))
+            return;
+        ent.Comp.BloodIncreaseEnabled = status;
+        DirtyField(ent, ent.Comp, nameof(BloodstreamComponent.BloodIncreaseEnabled));
     }
 
     /// <summary>

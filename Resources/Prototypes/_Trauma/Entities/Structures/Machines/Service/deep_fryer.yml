@@ -33,6 +33,7 @@
       flavors:
       - DeepFried
       - oily
+    - type: GlassChickenBlacklist
     componentsToRemoveObjects:
     - type: Storage
     - type: Tool

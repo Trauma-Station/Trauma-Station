@@ -6,10 +6,10 @@ using Content.Shared.CCVar;
 using Content.Shared.MouseRotator;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Movement.Pulling.Events;
+using Content.Trauma.Client.Sprite;
 using Content.Trauma.Client.Viewcone.Overlays;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Popups;
-using Content.Trauma.Common.Sprite;
 using Content.Trauma.Shared.Viewcone;
 using Content.Trauma.Shared.Viewcone.Components;
 using Robust.Client.Input;
@@ -35,7 +35,7 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
     [Dependency] private IOverlayManager _overlay = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private ViewconeAngleSystem _angle = default!;
-    [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
+    [Dependency] private SpriteVisibilitySystem _spriteVis = default!;
     [Dependency] private EntityQuery<MouseRotatorComponent> _rotatorQuery = default!;
 
     private ViewconeConeOverlay _coneOverlay = default!;
@@ -53,20 +53,6 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<ViewconeComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<ViewconeComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<ViewconeComponent, ShowPopupAttemptEvent>(OnShowPopupAttempt);
-
-        SubscribeLocalEvent<ViewconeComponent, LocalPlayerAttachedEvent>(OnPlayerAttached);
-        SubscribeLocalEvent<ViewconeComponent, LocalPlayerDetachedEvent>(OnPlayerDetached);
-
-        SubscribeLocalEvent<ViewconeOccludableComponent, ComponentInit>(OnOccludableInit);
-        SubscribeLocalEvent<ViewconeOccludableComponent, ComponentShutdown>(OnOccludableShutdown);
-        SubscribeLocalEvent<ViewconeOccludableComponent, EntParentChangedMessage>(OnOccludableParentChanged);
-
-        SubscribeLocalEvent<PullableComponent, ViewconeOverrideEvent>(OnPullableOverride);
-        SubscribeLocalEvent<TailedEntitySegmentComponent, ViewconeOverrideEvent>(OnTailedOverride);
 
         _coneOverlay = new();
         _setAlphaOverlay = new();
@@ -182,6 +168,7 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
         return angleDist < MathHelper.DegreesToRadians(ent.Comp.CurrentConeAngle) * 0.5f;
     }
 
+    [SubscribeLocalEvent]
     private void OnPullableOverride(Entity<PullableComponent> ent, ref ViewconeOverrideEvent args)
     {
         if (ent.Comp.Puller != _player.LocalEntity)
@@ -190,6 +177,7 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
         args.Override = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnTailedOverride(Entity<TailedEntitySegmentComponent> ent, ref ViewconeOverrideEvent args)
     {
         if (ent.Comp.Head != _player.LocalEntity)
@@ -198,27 +186,32 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
         args.Override = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnPlayerAttached(Entity<ViewconeComponent> ent, ref LocalPlayerAttachedEvent args)
     {
         AddOverlays();
     }
 
+    [SubscribeLocalEvent]
     private void OnPlayerDetached(Entity<ViewconeComponent> ent, ref LocalPlayerDetachedEvent args)
     {
         RemoveOverlays();
     }
 
+    [SubscribeLocalEvent]
     private void OnInit(Entity<ViewconeComponent> ent, ref ComponentInit args)
     {
         if (ent.Owner == _player.LocalEntity)
             AddOverlays();
     }
 
+    [SubscribeLocalEvent]
     private void OnShowPopupAttempt(Entity<ViewconeComponent> ent, ref ShowPopupAttemptEvent args)
     {
         args.Cancelled |= !IsVisible(ent, args.ViewerPos, args.WorldPos);
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<ViewconeComponent> ent, ref ComponentShutdown args)
     {
         if (ent.Owner == _player.LocalEntity)
@@ -244,35 +237,33 @@ public sealed partial class ViewconeOverlaySystem : EntitySystem
         _overlay.RemoveOverlay(_coneOverlay);
         _overlay.RemoveOverlay(_setAlphaOverlay);
 
-        // hide memories
+        // hide memories and reset everythings opacity
         var query = EntityQueryEnumerator<ViewconeOccludableComponent>();
-        while (query.MoveNext(out var comp))
+        while (query.MoveNext(out var uid, out var comp))
         {
             if (comp.Memory is { } memory && !TerminatingOrDeleted(memory))
                 SetAlpha(memory, 0f);
-        }
 
-        // reset everythings opacity
-        var query2 = EntityQueryEnumerator<ViewconeOccludedComponent>();
-        while (query2.MoveNext(out var uid, out var comp))
-        {
             SetAlpha(uid, 1f);
-            RemCompDeferred(uid, comp);
+            RemCompDeferred<ViewconeOccludedComponent>(uid);
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnOccludableInit(Entity<ViewconeOccludableComponent> ent, ref ComponentInit args)
     {
         if (ent.Comp.Inverted)
             SetAlpha(ent, 0f); // wait for overlay to maybe show effects next frame
     }
 
+    [SubscribeLocalEvent]
     private void OnOccludableShutdown(Entity<ViewconeOccludableComponent> ent, ref ComponentShutdown args)
     {
         if (ent.Comp.Memory is { } memory && !TerminatingOrDeleted(memory))
             Del(memory);
     }
 
+    [SubscribeLocalEvent]
     private void OnOccludableParentChanged(Entity<ViewconeOccludableComponent> ent, ref EntParentChangedMessage args)
     {
         if (ent.Comp.Memory is not { } memory ||

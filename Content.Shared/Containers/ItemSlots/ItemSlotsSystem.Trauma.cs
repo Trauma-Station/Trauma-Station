@@ -65,7 +65,8 @@ public sealed partial class ItemSlotsSystem
 
         foreach (var slot in slots)
         {
-            TryInsertOrDoAfter(ent, slot, toInsert, (user, hands), doAfter);
+            if (TryInsertOrDoAfter(ent, slot, toInsert, (user, hands), doAfter))
+                return true;
         }
 
         return false;
@@ -99,7 +100,7 @@ public sealed partial class ItemSlotsSystem
         if (slot.InsertDelay is not {} delay || user == null)
             return false;
 
-        _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
+        return _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
             user.Value,
             delay,
             new ItemSlotInteractionDoAfterEvent(slot.ID!, false, true),
@@ -112,7 +113,6 @@ public sealed partial class ItemSlotsSystem
             BreakOnDropItem = true,
             BreakOnDamage = true,
         });
-        return true;
     }
 
     private bool TryStartEjectDoAfter(ItemSlot slot, EntityUid item, EntityUid? user)

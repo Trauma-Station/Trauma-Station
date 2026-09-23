@@ -39,7 +39,7 @@ public sealed partial class ShadowlingComponent : Component
     /// <summary>
     /// Indicates whether the shadowling is hatching, or not.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool IsHatching;
 
     /// <summary>

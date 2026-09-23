@@ -30,8 +30,9 @@ guide-entry-rules-s4 = S4
 guide-entry-rules-s5 = S5
 guide-entry-rules-s6 = S6
 
-guide-entry-rules-space-law = Space Law
+guide-entry-rules-space-law = Corporate Law
 guide-entry-rules-sl-crime-list = Crime List
+guide-entry-rules-sl-rights-charter = Rights Charter
 guide-entry-rules-sl-controlled-substances = Controlled Substances
 guide-entry-rules-sl-restricted-gear = Restricted Gear
 guide-entry-rules-sl-restricted-weapons = Restricted Weapons

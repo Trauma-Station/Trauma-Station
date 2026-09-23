@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Effects;
 using Content.Server.Electrocution;
 using Content.Shared.Throwing;
 using Content.Trauma.Common.Wizard;
 using Content.Trauma.Common.Wizard.Projectile;
 using Content.Trauma.Server.Wizard.Components;
+using Content.Trauma.Shared.Effects;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
@@ -13,7 +13,7 @@ public sealed partial class ThrownLightningSystem : EntitySystem
 {
     [Dependency] private ElectrocutionSystem _electrocution = default!;
     [Dependency] private SpellsSystem _spells = default!;
-    [Dependency] private CommonSparksSystem _sparks = default!;
+    [Dependency] private SparksSystem _sparks = default!;
 
     [SubscribeLocalEvent]
     private void OnStopThrow(Entity<ThrownLightningComponent> ent, ref StopThrowEvent args)
@@ -51,7 +51,7 @@ public sealed partial class ThrownLightningSystem : EntitySystem
             return;
 
         if (_electrocution.TryDoElectrocution(args.Target, ent, 1, ent.Comp.StunTime, true, 1f, ignoreInsulation: true))
-            _sparks.DoSparks(ent, predicted: false);
+            _sparks.DoSparks(ent);
     }
 
     private bool Deleting(EntityUid ent)

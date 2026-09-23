@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Common.Effects;
+using Content.Trauma.Common.Effects;
 // </Trauma>
 using Content.Server.Ninja.Events;
 using Content.Server.Power.Components;
@@ -108,7 +108,7 @@ public sealed partial class BatteryDrainerSystem : SharedBatteryDrainerSystem
         var output = input * comp.DrainEfficiency;
         _battery.ChangeCharge((comp.BatteryUid.Value, battery), output);
         // TODO: create effect message or something
-        _sparks.DoSparks(target); // Trauma - replaced spark effect spawn with this
+        _sparks.DoSparks(target, user: null); // Trauma - replaced spark effect spawn with this
         _audio.PlayPvs(comp.SparkSound, target);
         _popup.PopupEntity(Loc.GetString("battery-drainer-success", ("battery", target)), uid, uid);
 

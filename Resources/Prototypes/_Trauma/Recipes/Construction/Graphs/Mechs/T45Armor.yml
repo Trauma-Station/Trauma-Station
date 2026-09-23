@@ -2,7 +2,6 @@
 
 - type: constructionGraph
   id: T45Armor
-  start: start
   graph:
   - node: start
     entity: PowerArmorFrame
@@ -79,7 +78,6 @@
 
 - type: constructionGraph
   id: PowerArmorFrame
-  start: start
   graph:
   - node: start
     edges:

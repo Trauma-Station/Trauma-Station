@@ -236,7 +236,8 @@ public abstract partial class SharedRadioDeviceSystem : EntitySystem
 
         var channel = ProtoMan.Index(ent.Comp.BroadcastChannel);
         if (_recentlySent.Add((args.Message, args.Source, channel)))
-            _radio.SendRadioMessage(args.Source, args.Message, channel, ent.Owner);
+            _radio.SendRadioMessage(args.Source, args.Message, channel, ent.Owner,
+                language: ProtoMan.Index(args.Language));
     }
 
     [SubscribeLocalEvent]

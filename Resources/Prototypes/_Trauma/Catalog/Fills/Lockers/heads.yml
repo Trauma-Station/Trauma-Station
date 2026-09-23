@@ -29,7 +29,6 @@
     - id: CartridgeRocketSingularityBuster
     - id: CartridgeRocketSingularityBuster
     - id: WeaponLauncherSingularityBuster
-    - id: MachinePowerTransmissionLaserFlatpack
     - id: ArmoryOverrideKeyComponents
 
 - type: entityTable
@@ -59,6 +58,7 @@
     - id: MMI
     - id: FreeformLawboard
     - id: ArmoryOverrideKeyComponents
+    - id: ClothingOuterArmorReactiveRD
 
 - type: entityTable
   id: LockerFillHeadOfSecurityTrauma

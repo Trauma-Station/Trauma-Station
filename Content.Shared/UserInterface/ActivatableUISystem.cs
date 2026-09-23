@@ -38,7 +38,6 @@ public sealed partial class ActivatableUISystem : EntitySystem
 
         SubscribeLocalEvent<UserInterfaceComponent, OpenUiActionEvent>(OnActionPerform);
 
-        InitializeTrauma(); // Trauma
         InitializePower();
     }
 
@@ -96,7 +95,7 @@ public sealed partial class ActivatableUISystem : EntitySystem
         });
     }
 
-    private bool ShouldAddVerb<T>(EntityUid uid, ActivatableUIComponent component, GetVerbsEvent<T> args) where T : Verb
+    public bool ShouldAddVerb<T>(EntityUid uid, ActivatableUIComponent component, GetVerbsEvent<T> args) where T : Verb // Trauma - made public
     {
         if (!args.CanAccess)
             return false;
@@ -183,14 +182,16 @@ public sealed partial class ActivatableUISystem : EntitySystem
         SetCurrentSingleUser(uid, null, component);
     }
 
-    private bool InteractUI(EntityUid user, EntityUid uiEntity, ActivatableUIComponent aui)
+    public bool InteractUI(EntityUid user, EntityUid uiEntity, ActivatableUIComponent aui, Enum? key = null) // Trauma - made public, added key
     {
-        if (aui.Key == null || !_uiSystem.HasUi(uiEntity, aui.Key))
+        // <Trauma> - replace aui.Key with key, default to the comp's key
+        key ??= aui.Key;
+        if (key == null || !_uiSystem.HasUi(uiEntity, key))
             return false;
 
-        if (_uiSystem.IsUiOpen(uiEntity, aui.Key, user))
+        if (_uiSystem.IsUiOpen(uiEntity, key, user))
         {
-            _uiSystem.CloseUi(uiEntity, aui.Key, user);
+            _uiSystem.CloseUi(uiEntity, key, user);
             return true;
         }
 
@@ -223,10 +224,10 @@ public sealed partial class ActivatableUISystem : EntitySystem
             var message = Loc.GetString("machine-already-in-use", ("machine", uiEntity));
             _popupSystem.PopupEntity(message, uiEntity, user);
 
-            if (_uiSystem.IsUiOpen(uiEntity, aui.Key))
+            if (_uiSystem.IsUiOpen(uiEntity, key))
                 return true;
 
-            Log.Error($"Activatable UI has user without being opened? Entity: {ToPrettyString(uiEntity)}. User: {aui.CurrentSingleUser}, Key: {aui.Key}");
+            Log.Error($"Activatable UI has user without being opened? Entity: {ToPrettyString(uiEntity)}. User: {aui.CurrentSingleUser}, Key: {key}");
         }
 
         // If we've gotten this far, fire a cancellable event that indicates someone is about to activate this.
@@ -240,7 +241,8 @@ public sealed partial class ActivatableUISystem : EntitySystem
         RaiseLocalEvent(uiEntity, bae);
 
         SetCurrentSingleUser(uiEntity, user, aui);
-        _uiSystem.OpenUi(uiEntity, aui.Key, user);
+        _uiSystem.OpenUi(uiEntity, key, user);
+        // </Trauma>
 
         //Let the component know a user opened it so it can do whatever it needs to do
         var aae = new AfterActivatableUIOpenEvent(user);

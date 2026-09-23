@@ -30,6 +30,7 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
 
     private readonly EntityQuery<HumanoidProfileComponent> _humanoidQuery;
     private readonly EntityQuery<SpriteComponent> _spriteQuery;
+    private readonly EntityQuery<ViewconeComponent> _query;
     private readonly EntityQuery<ViewconeOccludedComponent> _occludedQuery;
 
     public override OverlaySpace Space => OverlaySpace.WorldSpaceBelowEntities;
@@ -52,6 +53,7 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
 
         _humanoidQuery = _ent.GetEntityQuery<HumanoidProfileComponent>();
         _spriteQuery = _ent.GetEntityQuery<SpriteComponent>();
+        _query = _ent.GetEntityQuery<ViewconeComponent>();
         _occludedQuery = _ent.GetEntityQuery<ViewconeOccludedComponent>();
     }
 
@@ -65,11 +67,14 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
 
         // This is really stupid but there isn't another way to reverse an eye entity from just an IEye afaict
         // It's not really inefficient though. theres only at most a few of these inside PVS anyway
-        var enumerator = _ent.AllEntityQueryEnumerator<LerpingEyeComponent, EyeComponent, ViewconeComponent>();
-        while (enumerator.MoveNext(out var uid, out _, out var eye, out var viewcone))
+        var enumerator = _ent.AllEntityQueryEnumerator<LerpingEyeComponent, EyeComponent>();
+        while (enumerator.MoveNext(out var uid, out _, out var eye))
         {
             if (args.Viewport.Eye != eye.Eye)
                 continue;
+
+            if (!_query.TryComp(uid, out var viewcone))
+                return false;
 
             _nextEye = (uid, eye, viewcone);
             break;
@@ -80,10 +85,10 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
 
     protected override void Draw(in OverlayDrawArgs args)
     {
-        if (_nextEye == null)
+        if (_nextEye is not { } nextEye)
             return;
 
-        var (ent, eye, cone) = _nextEye.Value;
+        var (ent, eye, cone) = nextEye;
 
         var eyeTransform = _ent.GetComponent<TransformComponent>(ent);
         var eyePos = _xform.GetWorldPosition(eyeTransform);
@@ -93,6 +98,7 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
         // !! Thank You Bhijn God (TYBG) for 95% of the rest of this methods code !!
         // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         var radConeAngle = MathHelper.DegreesToRadians(cone.CurrentConeAngle);
+        var enabled = cone.CurrentConeAngle < 360f; // dont have feather jank with full vision arc
         var halfAngle = radConeAngle * 0.5f;
         var radConeFeather = MathHelper.DegreesToRadians(cone.ConeFeather);
 
@@ -132,9 +138,13 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
             var angleDist = Math.Abs(Angle.ShortestDistance(dist.ToWorldAngle(), eyeRot).Theta);
 
             // calculate opacity for the actual entity first
-            var angleAlpha = (float) Math.Clamp((angleDist - halfAngle) + (radConeFeather * 0.5f), 0f, radConeFeather) / radConeFeather;
-            var distAlpha = Math.Clamp((distLength - cone.ConeIgnoreRadius) + (cone.ConeIgnoreFeather * 0.5f), 0f, cone.ConeIgnoreFeather) / cone.ConeIgnoreFeather;
-            var targetAlpha = 1f - Math.Min(angleAlpha, distAlpha);
+            var targetAlpha = 1f;
+            if (enabled)
+            {
+                var angleAlpha = (float) Math.Clamp((angleDist - halfAngle) + (radConeFeather * 0.5f), 0f, radConeFeather) / radConeFeather;
+                var distAlpha = Math.Clamp((distLength - cone.ConeIgnoreRadius) + (cone.ConeIgnoreFeather * 0.5f), 0f, cone.ConeIgnoreFeather) / cone.ConeIgnoreFeather;
+                targetAlpha = 1f - Math.Min(angleAlpha, distAlpha);
+            }
 
             // simplified logic for effects that dont spawn memories or anything likely stealthed
             if (!comp.UseMemory || ((!sprite.Visible || sprite.Color.A < 0.4) && !_occludedQuery.HasComp(uid)))

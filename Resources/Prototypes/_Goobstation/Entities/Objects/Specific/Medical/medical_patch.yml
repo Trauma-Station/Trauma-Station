@@ -199,7 +199,6 @@
 
 - type: constructionGraph
   id: MedicalPatchMakeshift
-  start: start
   graph:
   - node: start
     edges:
@@ -225,7 +224,6 @@
 
 - type: constructionGraph
   id: SilkPatchMakeshift
-  start: start
   graph:
   - node: start
     edges:

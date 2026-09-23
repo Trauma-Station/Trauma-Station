@@ -21,18 +21,19 @@
   - Automatically getting one knowledge point every 20 minutes.
   - Draining influences that spawn randomly after you complete a sacrifice.
 
-  ## Eldritch Influences
+  ## Reality Shifts
   <Box>
-    <GuideEntityEmbed Entity="EldritchInfluence" Caption="Eldritch Influence"/>
+    <GuideEntityEmbed Entity="EldritchInfluence" Caption="Reality Shift"/>
   </Box>
-  Influences are the easy way to gain power points. Anytime a heretic completes a sacrifice, influences will randomly spawn across the station.
+  Reality shifts are the easy way to gain power points. Anytime a Heretic completes a sacrifice, shifts will randomly spawn across the station.
+  Coming near a Reality Shift will temporarily grant Heretic the ability to see them through walls, making it easier to locate them.
   They are not visible to the naked eye of a crew member, however they [bold]will[/bold] become visible after harvesting, aside from suddenly changing colors.
-  Influences give 1 knowledge point when harvested normally, and can be harvested with either [color=green]Codex Cicatrix[/color] or [color=green]Codex Morbus[/color] to get a knowledge point in addition to a side point.
+  Shifts give 1 knowledge point when harvested normally, and can be harvested with either [color=green]Codex Cicatrix[/color] or [color=green]Codex Morbus[/color] to get a knowledge point in addition to a side point.
   <Box>
-    <GuideEntityEmbed Entity="EldritchInfluenceSpent" Caption="Harvested influence. Notice the glow."/>
+    <GuideEntityEmbed Entity="EldritchInfluenceSpent" Caption="Harvested Reality Fracture. Notice the glow."/>
   </Box>
 
-  Each influence can only be harvested once, so try to get them before other heretics, even if that means killing other heretics.
+  Each reality shift can only be harvested once, so try to get them before other heretics, even if that means killing other heretics.
 
   ## Transmutation is Key
   Eventually, you'll need to start using proper magics. To draw a transmutation rune, you'll need a writing tool, such as a pen or crayon.
@@ -79,7 +80,14 @@
 
   You are limited in the amounts of blades you can create at a time - most paths limit you to two blades, and Blade limits you to four.
 
-  Additionally, you can break your blade by activating it in-hand to teleport to a random, (mostly) safe location in a pinch. Better to lose your weapon and live another day than die fighting. The ability to blade break is lost once your Path Robes are crafted or you accrue 10 knowledge points or research Blade upgrade.
+  Additionally, you can break your blade by activating it in-hand to teleport to a random, (mostly) safe location in a pinch. Better to lose your weapon and live another day than die fighting. The ability to blade break is lost once your Path Robes are crafted or you acquire 10 knowledge points or research Blade upgrade.
+
+  ## The Heretic Robe
+
+  Heretic Robes are unlocked as you progress through the Research Tree, you can find them in [bold]Special Knowledge[/bold] tab when it is available.
+
+  To conjure them, you'll need to transmute various materials on a Transmutation Rune, namely: table or suit with sensors, any mask and extra step/ingredient that matches your path's blade creation ritual.
+  Each path has its own Robes, and each robes have their unique effects.
 
   ## Passive Abilities
 
@@ -100,7 +108,7 @@
 
   ## Point of No Return: The Heretic Aura
 
-  This is the most important turning point for any Heretic. When you either craft your [bold]Path-Specific Robes[/bold] or accrue [bold]10 knowledge points[/bold] or researching [bold]Path-Specific Blade Upgrade[/bold] (whichever comes first), the following permanent changes occur:
+  This is the most important turning point for any Heretic. When you either craft your [bold]Path-Specific Robes[/bold] or acquire [bold]10 knowledge points[/bold] or researching [bold]Path-Specific Blade Upgrade[/bold] (whichever comes first), the following permanent changes occur:
 
   - You lose the ability to Blade Break (emergency teleport by activating blade in-hand).
   - You gain a permanent visible aura that identifies you as a Heretic to everyone. This makes you valid to kill.

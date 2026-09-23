@@ -13,17 +13,12 @@ public sealed partial class ContainerInteractionSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityQuery<CrossContainerInteractionComponent> _crossQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<TransformComponent, InteractionAttemptEvent>(OnInteractionAttempt);
-    }
-
+    [SubscribeLocalEvent]
     private void OnInteractionAttempt(Entity<TransformComponent> ent, ref InteractionAttemptEvent args)
     {
-        if (args.Cancelled || args.Target is not {} target)
+        if (args.Cancelled || args.Target is not {} target || _crossQuery.HasComp(ent))
             return;
 
         _container.TryGetContainingContainer((ent, ent.Comp, null), out var ourContainer);

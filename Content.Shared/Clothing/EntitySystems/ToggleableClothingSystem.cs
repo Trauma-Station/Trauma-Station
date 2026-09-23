@@ -439,8 +439,7 @@ public sealed partial class ToggleableClothingSystem : EntitySystem
 
         if (toggleableComp.Container is {} container && !TerminatingOrDeleted(container.Owner))
         {
-            var succ = _containerSystem.Insert(attached.Owner, container, force: true);
-            Log.Debug($"Trying to insert {ToPrettyString(attached)} into {ToPrettyString(container.Owner)}: {succ}");
+            _containerSystem.Insert(attached.Owner, container, force: true);
         }
         // </Trauma>
     }

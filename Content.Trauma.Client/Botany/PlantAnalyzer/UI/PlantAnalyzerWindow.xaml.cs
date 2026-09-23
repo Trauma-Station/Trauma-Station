@@ -51,13 +51,10 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
         };
 
         // offset individual lists index to shitty per-databank index
-        var consume = _geneCount;
-        var exude = consume + _consumeCount;
-        var chemicals = exude + _exudeCount;
         GeneDatabaseList.OnItemSelected += args => SelectEntry(args.ItemIndex, 0);
-        ConsumeDatabaseList.OnItemSelected += args => SelectEntry(args.ItemIndex, consume);
-        ExudeDatabaseList.OnItemSelected += args => SelectEntry(args.ItemIndex, exude);
-        ChemicalDatabaseList.OnItemSelected += args => SelectEntry(args.ItemIndex, chemicals);
+        ConsumeDatabaseList.OnItemSelected += args => SelectEntry(args.ItemIndex, _geneCount);
+        ExudeDatabaseList.OnItemSelected += args => SelectEntry(args.ItemIndex, _geneCount + _consumeCount);
+        ChemicalDatabaseList.OnItemSelected += args => SelectEntry(args.ItemIndex, _geneCount + _consumeCount + _exudeCount);
 
         DeleteDatabaseEntryButton.OnPressed += _ => OnDeleteEntry?.Invoke();
     }
@@ -165,13 +162,13 @@ public sealed partial class PlantAnalyzerWindow : FancyWindow
         foreach (var gene in _comp.ChemicalBank)
         {
             var data = gene.ChemValue;
-            var foreign = data.Inherent ? " [Foreign]" : "";
+            var foreign = data.Inherent ? "" : " [Foreign]";
             ChemicalDatabaseList.AddItem($"{gene.ChemID}{foreign}: Min - {data.Min}, Max - {data.Max}, Potency Divisor - {data.PotencyDivisor}");
         }
 
         var index = _comp.DatabankIndex - (_geneCount + _consumeCount + _exudeCount);
         if (index >= 0 && index < _chemicalCount)
-            GeneDatabaseList[index].Selected = true;
+            ChemicalDatabaseList[index].Selected = true;
     }
 
     public void Populate(EntityUid? uid, EntProtoId? seed)

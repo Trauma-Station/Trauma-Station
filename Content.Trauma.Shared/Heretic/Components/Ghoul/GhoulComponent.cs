@@ -7,7 +7,7 @@ using Robust.Shared.Audio;
 
 namespace Content.Trauma.Shared.Heretic.Components.Ghoul;
 
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class GhoulComponent : Component
 {
     /// <summary>
@@ -31,7 +31,7 @@ public sealed partial class GhoulComponent : Component
     [DataField]
     public bool ChangeHumanoidProfile = true;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public LocId? ExamineMessage = "examine-system-cant-see-entity";
 
     [DataField]

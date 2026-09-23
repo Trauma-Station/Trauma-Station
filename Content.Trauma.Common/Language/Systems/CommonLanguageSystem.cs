@@ -64,7 +64,12 @@ public abstract partial class CommonLanguageSystem : EntitySystem
     public abstract void RemoveLanguage(Entity<LanguageSpeakerComponent?> ent, ProtoId<LanguagePrototype> language, bool removeSpoken = true, bool removeUnderstood = true);
 
     /// <summary>
-    ///     Obfuscate a message using the given language.
+    ///     Obfuscate a message using the given language, intended to be shown to entities that can't understand it.
+    /// </summary>
+    public abstract string ObfuscateSpeech(string message, LanguagePrototype language);
+
+    /// <summary>
+    ///     Obfuscate a message using the given language, intended to be shown to entities that can understand it.
     /// </summary>
     public abstract string ObfuscateSpeech(string message, LanguagePrototype language, EntityUid messageSource);
 

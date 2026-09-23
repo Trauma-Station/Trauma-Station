@@ -11,11 +11,14 @@ public sealed partial class SacramentsOfPowerComponent : BaseSpriteOverlayCompon
     [DataField, AutoNetworkedField]
     public SacramentsState State = SacramentsState.Opening;
 
+    [DataField, AutoNetworkedField]
+    public HashSet<EntityUid> IgnoredEntities = new();
+
     [DataField]
     public TimeSpan StateUpdateAt;
 
     [DataField]
-    public float DamageReturnRatio = 0.65f;
+    public float DamageReturnRatio = 0.75f;
 
     [DataField]
     public float StaminaDamageReturnRatio = 1f;

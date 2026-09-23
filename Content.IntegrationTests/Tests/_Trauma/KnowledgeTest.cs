@@ -12,7 +12,10 @@ namespace Content.IntegrationTests.Tests._Trauma;
 
 public sealed class KnowledgeTest : GameTest
 {
-    public static readonly EntProtoId Human = "MobHuman";
+    private static readonly EntProtoId Borg = "PlayerBorgGeneric";
+    private static readonly EntProtoId Brain = "OrganHumanBrain";
+    private static readonly EntProtoId Human = "MobHuman";
+    private static readonly EntProtoId MMI = "MMI";
 
     [SidedDependency(Side.Server)] private BodySystem _body = default!;
     [SidedDependency(Side.Server)] private SharedContainerSystem _container = default!;
@@ -27,10 +30,9 @@ public sealed class KnowledgeTest : GameTest
     {
         await Server.WaitPost(() =>
         {
-            var coords = MapCoordinates.Nullspace;
-            var human = SEntMan.SpawnEntity(Human, coords);
+            var human = SSpawn(Human);
 
-            Assert.That(SEntMan.HasComponent<KnowledgeHolderComponent>(human), "Human needs a KnowledgeHolder");
+            Assert.That(SHasComp<KnowledgeHolderComponent>(human), "Human needs a KnowledgeHolder");
             var brain = _knowledge.GetContainer(human);
             Assert.That(brain, Is.Not.Null, "Human has no knowledge container");
             var (uid, comp) = brain!.Value;
@@ -45,7 +47,7 @@ public sealed class KnowledgeTest : GameTest
             Assert.That(comp.Holder, Is.EqualTo(human), "Brain's knowledge holder was not set after inserting it");
             Assert.That(_knowledge.GetContainer(human)?.Owner, Is.EqualTo(uid), "Human's knowledge container was not set back to the brain after inserting it");
 
-            SEntMan.DeleteEntity(human);
+            SDel(human);
         });
     }
 
@@ -58,11 +60,9 @@ public sealed class KnowledgeTest : GameTest
     {
         await Server.WaitPost(() =>
         {
-            var coords = MapCoordinates.Nullspace;
-
-            var borg = SEntMan.SpawnEntity("PlayerBorgGeneric", coords);
-            var mmi = SEntMan.SpawnEntity("MMI", coords);
-            var brain = SEntMan.SpawnEntity("OrganHumanBrain", coords);
+            var borg = SSpawn(Borg);
+            var mmi = SSpawn(MMI);
+            var brain = SSpawn(Brain);
 
             var borgComp = SComp<KnowledgeHolderComponent>(borg);
             var brainSlot = _container.GetContainer(mmi, "brain_slot");

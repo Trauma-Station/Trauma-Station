@@ -30,14 +30,7 @@ public sealed partial class IntellicardExtrasSystem : EntitySystem
 
     private static readonly EntProtoId DefaultAi = "StationAiBrain";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<IntellicardComponent, AfterInteractEvent>(OnHolderInteract);
-        SubscribeLocalEvent<IntellicardableMindComponent, IntellicardDoAfterEvent>(OnIntellicardDoAfter);
-    }
-
+    [SubscribeLocalEvent]
     private void OnHolderInteract(Entity<IntellicardComponent> ent, ref AfterInteractEvent args)
     {
         var user = args.User;
@@ -93,6 +86,7 @@ public sealed partial class IntellicardExtrasSystem : EntitySystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnIntellicardDoAfter(Entity<IntellicardableMindComponent> ent, ref IntellicardDoAfterEvent args)
     {
         if (args.Cancelled || args.Handled || args.Used is not { } cardUid)

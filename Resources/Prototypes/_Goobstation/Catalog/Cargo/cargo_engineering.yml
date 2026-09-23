@@ -1,16 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: cargoProduct
-  id: CargoEngineeringPTL
-  icon:
-    sprite: _Goobstation/Structures/Machines/PTL/pt_laser.rsi
-    state: base
-  product: MachinePowerTransmissionLaserCrate
-  cost: 5000
-  category: cargoproduct-category-name-engineering
-  group: market
-
-- type: cargoProduct
   id: CargoEngineeringTEGKit
   icon:
     sprite: Structures/Power/Generation/teg.rsi

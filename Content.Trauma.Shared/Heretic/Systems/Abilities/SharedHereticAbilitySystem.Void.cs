@@ -78,12 +78,7 @@ public abstract partial class SharedHereticAbilitySystem
         {
             if (condition)
                 Voidcurse.DoCurse(pookie, 2);
-            _dmg.ChangeDamage(pookie.Owner,
-                args.Damage * _body.GetVitalBodyPartRatio(pookie.Owner),
-                true,
-                origin: ent,
-                targetPart: TargetBodyPart.All,
-                canMiss: false);
+            _dmg.ChangeDamage(pookie.Owner, args.Damage, origin: ent, targetPart: TargetBodyPart.Vital);
         }
 
         args.Handled = true;
@@ -106,12 +101,7 @@ public abstract partial class SharedHereticAbilitySystem
         var pookies = GetNearbyPeople(ent, args.Radius, path);
         foreach (var pookie in pookies)
         {
-            _dmg.ChangeDamage(pookie.Owner,
-                args.Damage * _body.GetVitalBodyPartRatio(pookie.Owner),
-                true,
-                origin: ent,
-                targetPart: TargetBodyPart.All,
-                canMiss: false);
+            _dmg.ChangeDamage(pookie.Owner, args.Damage, origin: ent, targetPart: TargetBodyPart.Vital);
 
             _stun.TryKnockdown(pookie.Owner, args.KnockDownTime, refresh: true, drop: args.DropItems);
 

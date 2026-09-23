@@ -1,43 +1,52 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Chemistry;
+using Content.Shared.Chemistry.Reagent;
 
 namespace Content.Goobstation.Client.Chemistry.UI;
 
 [GenerateTypedNameReferences]
 public sealed partial class EnergyReagentCardControl : Control
 {
-    public string ReagentId { get; }
-    public float PowerCostPerUnit { get; }
+    public readonly ProtoId<ReagentPrototype> Reagent;
+    public readonly int EnergyCost;
     public bool IsDisabled => MainButton.Disabled;
-    public Action<string>? OnPressed;
 
-    public EnergyReagentCardControl(EnergyReagentInventoryItem item)
+    public Action<ProtoId<ReagentPrototype>>? OnPressed;
+
+    public EnergyReagentCardControl(ReagentPrototype proto, int cost)
     {
         RobustXamlLoader.Load(this);
 
-        ReagentId = item.ReagentId;
-        PowerCostPerUnit = item.PowerCostPerUnit;
-        ColorPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = item.ReagentColor };
-        ReagentNameLabel.Text = item.ReagentLabel;
-        FillLabel.Text = $"{item.PowerCostPerUnit}J/u";
+        Reagent = proto.ID;
+        EnergyCost = cost;
+        ColorPanel.PanelOverride = new StyleBoxFlat { BackgroundColor = proto.SubstanceColor };
+        ReagentNameLabel.Text = proto.LocalizedName;
 
-        MainButton.OnPressed += args => OnPressed?.Invoke(ReagentId);
+        MainButton.OnPressed += args => OnPressed?.Invoke(Reagent);
     }
-    public void SetDisabled(bool disabled, string tooltip = "")
+
+    public void SetDisabled(bool disabled, string tooltip)
     {
+        if (disabled == IsDisabled)
+            return;
+
+        MainButton.Disabled = disabled;
         if (disabled)
         {
             // Gray out the card when disabled
             Modulate = Color.Gray;
-            MainButton.Disabled = true;
             ToolTip = tooltip;
         }
         else
         {
             Modulate = Color.White;
-            MainButton.Disabled = false;
             ToolTip = null;
         }
+    }
+
+    public void SetAmount(int amount)
+    {
+        var total = EnergyCost * amount;
+        FillLabel.Text = $"{total} J ({EnergyCost} J/u)";
     }
 }

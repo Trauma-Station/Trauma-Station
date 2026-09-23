@@ -54,18 +54,25 @@ public sealed partial class SlimeLatchSystem : EntitySystem
         var query = EntityQueryEnumerator<SlimeDamageOvertimeComponent>();
         while (query.MoveNext(out var uid, out var comp))
         {
-            if (_mobState.IsDead(uid))
+            if (_mobState.IsDead(uid) ||
+                // incase some bullshit doesnt clean it up properly
+                comp.SourceEntityUid is not { } source ||
+                !_slimeQuery.TryComp(source, out var slime) ||
+                slime.LatchedTarget != uid)
+            {
+                RemCompDeferred(uid, comp);
                 continue;
+            }
 
-            UpdateHunger((uid, comp));
+            UpdateHunger((uid, comp), source);
         }
     }
 
-    private void UpdateHunger(Entity<SlimeDamageOvertimeComponent> ent)
+    private void UpdateHunger(Entity<SlimeDamageOvertimeComponent> ent, EntityUid source)
     {
         _damageable.ChangeDamage(ent.Owner, ent.Comp.Damage, ignoreResistances: true, targetPart: TargetBodyPart.All);
 
-        if (ent.Comp.SourceEntityUid is { } source && _satiationQuery.TryComp(source, out var satiation))
+        if (_satiationQuery.TryComp(source, out var satiation))
         {
             var addedHunger = (float) ent.Comp.Damage.GetTotal();
             _satiation.ModifyValue((source, satiation), SatiationSystem.Hunger, addedHunger);
@@ -211,7 +218,7 @@ public sealed partial class SlimeLatchSystem : EntitySystem
         => ent.Comp.LatchedTarget.HasValue;
 
     public bool IsLatched(Entity<SlimeComponent> ent, EntityUid target)
-        => IsLatched(ent) && ent.Comp.LatchedTarget!.Value == target;
+        => ent.Comp.LatchedTarget == target;
 
     public bool CanLatch(Entity<SlimeComponent> ent, EntityUid target)
     {
@@ -255,16 +262,15 @@ public sealed partial class SlimeLatchSystem : EntitySystem
 
     public void Unlatch(Entity<SlimeComponent> ent)
     {
-        if (!IsLatched(ent))
+        if (ent.Comp.LatchedTarget is not { } target)
             return;
-
-        var target = ent.Comp.LatchedTarget!.Value;
 
         RemCompDeferred<BeingLatchedComponent>(target);
         RemCompDeferred<SlimeDamageOvertimeComponent>(target);
 
         _xform.SetParent(ent, _xform.GetParentUid(target)); // deparent it. probably.
         ent.Comp.LatchedTarget = null;
+        Dirty(ent);
         _actionBlocker.UpdateCanMove(ent.Owner);
     }
 

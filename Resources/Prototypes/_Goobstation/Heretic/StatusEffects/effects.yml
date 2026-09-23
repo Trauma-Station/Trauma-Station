@@ -333,3 +333,12 @@
   name: influence xray
   components:
   - type: XRayVisionStatusEffect
+  - type: StatusEffectAlert
+    alert: InfluenceXRay
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectXRayHeretic
+  name: x-ray vision
+  components:
+  - type: XRayVisionStatusEffect

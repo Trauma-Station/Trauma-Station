@@ -1,5 +1,7 @@
+// <Trauma>
 using Content.Goobstation.Common.BlockTeleport;
-using Content.Goobstation.Common.Effects;
+using Content.Trauma.Common.Effects;
+// </Trauma>
 using Content.Shared.Examine;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
@@ -188,8 +190,8 @@ public sealed partial class SwapTeleporterSystem : EntitySystem
             PopupType.MediumCaution);
         _transform.SwapPositions(teleEnt, otherTeleEnt);
 
-        // <Trauma>
-        _sparks.DoSparks(teleEnt);
+        // <Trauma> (client doesnt predict it)
+        _sparks.DoSparks(teleEnt, source: ent);
         _sparks.DoSparks(otherTeleEnt);
         // </Trauma>
     }

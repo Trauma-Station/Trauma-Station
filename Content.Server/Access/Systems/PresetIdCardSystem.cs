@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Access.Components;
+// </Trauma>
 using Content.Server.Access.Components;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
@@ -78,6 +81,7 @@ public sealed partial class PresetIdCardSystem : EntitySystem
 
         _cardSystem.TryChangeJobTitle(uid, job.LocalizedName);
         _cardSystem.TryChangeJobDepartment(uid, job);
+        Comp<IdCardComponent>(uid).JobPrototype = job; // Trauma
 
         if (ProtoMan.Resolve(job.Icon, out var jobIcon))
             _cardSystem.TryChangeJobIcon(uid, jobIcon);

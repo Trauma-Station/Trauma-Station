@@ -378,3 +378,69 @@ Entries:
   id: 39
   time: '2026-08-20T19:46:12.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4182
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Screens are no longer rotated on every map.
+  id: 40
+  time: '2026-08-29T10:01:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4352
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Bagel now has a nuclear reactor instead of tesla.
+  - type: Tweak
+    message: Bagel and Amber have AME built and on roundstart.
+  - type: Fix
+    message: Fixed Amber using service access for the library.
+  id: 41
+  time: '2026-09-16T13:30:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4617
+- author: deltanedas
+  changes:
+  - type: Add
+    message: >-
+      Delta station now has a nuclear reactor instead of tesla, and has a
+      premade AME.
+  id: 42
+  time: '2026-09-16T17:28:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4620
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Fland now has a nuclear reactor and prebuilt AME.
+  id: 43
+  time: '2026-09-16T17:52:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4622
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Box station now a nuclear reactor and premade AME.
+  id: 44
+  time: '2026-09-18T13:17:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4660
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Oasis now have a nuclear reactor and premade AME.
+  id: 45
+  time: '2026-09-19T14:47:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4671
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Cluster's AME is now premade.
+  - type: Add
+    message: Meta station now has a nuclear reactor and premade AME.
+  id: 46
+  time: '2026-09-21T13:26:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4695
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Leonid now has Roboticist job slots.
+  - type: Add
+    message: Leonid now has a nuclear reactor and premade AME.
+  id: 47
+  time: '2026-09-23T11:55:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4719

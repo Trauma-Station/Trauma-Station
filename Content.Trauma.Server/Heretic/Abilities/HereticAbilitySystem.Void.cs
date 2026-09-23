@@ -34,7 +34,7 @@ public sealed partial class HereticAbilitySystem
         args.Handled = true;
 
         var ev = new BeforeCastTouchSpellEvent(target);
-        RaiseLocalEvent(target, ev, true);
+        RaiseLocalEvent(target, ref ev, true);
         if (ev.Cancelled)
             return;
 

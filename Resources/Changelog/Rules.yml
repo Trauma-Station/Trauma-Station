@@ -38,4 +38,11 @@ Entries:
   id: 4
   time: '2026-05-31T11:55:12.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/2938
+- author: Joel, 1984
+  changes:
+  - type: Add
+    message: Server Role-Specific Rule 2 include Crew-Aligned D-Class
+  id: 5
+  time: '2026-08-25T01:48:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4254
 Order: 1

@@ -1,0 +1,88 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: gamePreset
+  id: AllAtOnce
+  rules:
+  - Thief
+  - HereticRoundstart
+  - BlobGameMode
+  - LoneAbductorSpawn
+  - Changeling
+  - Insurgency
+  - CosmicCult
+  - XenomorphsInfestationRoundstart
+  - Spies
+
+- type: gamePreset
+  id: AllerAtOnce
+  rules:
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - Thief
+  - HereticRoundstart
+  - BlobGameMode
+  - LoneAbductorSpawn
+  - Changeling
+  - ShadowlingRoundstart
+  - Insurgency
+  - CosmicCult
+  - XenomorphsInfestationRoundstart
+  - Spies
+
+- type: gamePreset
+  id: Secret
+  rules:
+  - Insurgency
+
+- type: gamePreset
+  id: Traitor
+  rules:
+  - !Remove SubGamemodesRuleNoWizard
+  - SubGamemodesRule
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+
+- type: gamePreset
+  id: Nukeops
+  rules:
+  - !Remove SubGamemodesRuleNoWizard
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+
+- type: gamePreset
+  id: Revolutionary
+  rules:
+  - !Remove SubGamemodesRuleNoWizard
+  - SubGamemodesRule
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+
+- type: gamePreset
+  id: Wizard
+  alias:
+  - wiz
+  rules:
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - SleepersOnWizardDeath
+
+- type: gamePreset
+  id: Xenoborgs
+  rules:
+  - !Remove MeteorSwarmScheduler
+  - !Remove SubGamemodesRuleNoWizardNoXenoborg
+  - SubGamemodesRuleNoXenoborg
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+
+- type: gamePreset
+  id: Zombie
+  rules:
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+
+- type: gamePreset
+  id: Zombieteors
+  rules:
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler

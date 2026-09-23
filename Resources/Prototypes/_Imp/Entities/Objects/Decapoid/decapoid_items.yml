@@ -7,6 +7,8 @@
   suffix: Unremoveable
   description: A large claw. Not very good for fine manipulation, but very strong and very sharp.
   components:
+  - type: WeaponClass
+    class: Unarmed
   - type: Sprite
     sprite: _Impstation/Objects/Decapoid/claw.rsi
     state: icon

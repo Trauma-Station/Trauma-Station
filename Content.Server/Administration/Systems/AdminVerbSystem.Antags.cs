@@ -159,6 +159,23 @@ public sealed partial class AdminVerbSystem
         };
         args.Verbs.Add(thief);
 
+        /* Trauma - goob ling used instead
+        var changelingName = Loc.GetString("admin-verb-text-make-changeling");
+        Verb changeling = new()
+        {
+            Text = changelingName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/Objects/Weapons/Melee/armblade.rsi"), "icon"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<ChangelingRuleComponent>(targetPlayer, DefaultChangelingRule);
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", changelingName, Loc.GetString("admin-verb-make-changeling")),
+        };
+        args.Verbs.Add(changeling);
+        */
+
         var paradoxCloneName = Loc.GetString("admin-verb-text-make-paradox-clone");
         Verb paradox = new()
         {

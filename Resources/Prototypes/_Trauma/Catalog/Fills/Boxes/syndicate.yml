@@ -28,3 +28,19 @@
         - id: ClothingNeckBombCollar
         - id: RemoteSignallerAdvanced
         - id: Multitool
+
+- type: entity
+  parent: [ BoxCardboard, BaseSyndicateContraband ]
+  id: BoxGrenadeViscerators
+  name: viscerator delivery grenade box
+  description: A box containing unique grenades that deploys a swarm of viscerators upon activation, which will chase down and shred any non-operatives in the area.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: GrenadeViscerators
+        amount: 4
+  - type: Sprite
+    layers:
+    - state: box_of_doom
+    - state: flashbang

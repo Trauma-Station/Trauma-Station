@@ -21,6 +21,12 @@ public sealed partial class AddMutation : EntityEffectBase<AddMutation>
     /// </summary>
     [DataField]
     public bool Automatic;
+
+    /// <summary>
+    /// Multiplier on difficulty for sequencing the mutation.
+    /// </summary>
+    [DataField]
+    public float Difficulty = 1f;
 }
 
 public sealed partial class AddMutationEffectSystem : EntityEffectSystem<MutatableComponent, AddMutation>
@@ -31,6 +37,6 @@ public sealed partial class AddMutationEffectSystem : EntityEffectSystem<Mutatab
     {
         var e = args.Effect;
         _mutation.AddMutation(ent.AsNullable(), e.Mutation, user: args.User,
-            automatic: e.Automatic, predicted: args.Predicted);
+            automatic: e.Automatic, predicted: args.Predicted, difficulty: e.Difficulty);
     }
 }
