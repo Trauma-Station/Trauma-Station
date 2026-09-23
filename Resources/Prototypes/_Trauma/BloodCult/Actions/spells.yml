@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   abstract: true
   parent: BaseAction
@@ -24,6 +26,7 @@
   - type: Magic
     requiresSpeech: true
   - type: SpeakOnAction
+  - type: SelfRemovingAction
 
 - type: entity
   parent: BaseActionBloodCult

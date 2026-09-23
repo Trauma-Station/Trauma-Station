@@ -2,6 +2,7 @@
 
 using Content.Shared.Chat;
 using Content.Shared.Damage;
+using Content.Trauma.Shared.BloodCult.Gamerule;
 
 namespace Content.Trauma.Shared.BloodCult.Runes;
 
@@ -43,4 +44,4 @@ public record struct RuneInvokeEvent(EntityUid User, HashSet<Entity<BloodCultMem
 /// Raised on a rune after it has been placed by a cultist.
 /// </summary>
 [ByRefEvent]
-public record struct RunePlacedEvent(EntityUid User);
+public record struct RunePlacedEvent(EntityUid User, BloodRunePrototype Rune, Entity<BloodCultRuleComponent> Rule);

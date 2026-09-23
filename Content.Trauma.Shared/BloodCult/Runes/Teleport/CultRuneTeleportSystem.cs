@@ -23,13 +23,24 @@ public sealed partial class CultRuneTeleportSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnNameSelected(Entity<CultRuneTeleportComponent> rune, ref NameSelectedMessage args)
     {
-        rune.Comp.Name = args.Name;
+        var name = args.Name.Trim();
+        if (string.IsNullOrEmpty(name) || name == rune.Comp.Name)
+            return;
+
+        rune.Comp.Name = name;
+        Dirty(rune);
     }
 
     [SubscribeLocalEvent]
     private void OnTeleportRuneInvoked(Entity<CultRuneTeleportComponent> rune, ref RuneInvokeEvent args)
     {
         var uid = rune.Owner;
+        if (string.IsNullOrEmpty(rune.Comp.Name))
+        {
+            _ui.OpenUi(rune.Owner, NameSelectorUiKey.Key, args.User);
+            return;
+        }
+
         var key = WizardTeleportUiKey.Key;
         if (_ui.IsUiOpen(uid, key))
             return;
@@ -73,7 +84,7 @@ public sealed partial class CultRuneTeleportSystem : EntitySystem
         var query = EntityQueryEnumerator<CultRuneTeleportComponent>();
         while (query.MoveNext(out var rune, out var comp))
         {
-            if (rune == exclude)
+            if (rune == exclude || string.IsNullOrEmpty(comp.Name))
                 continue;
 
             runes.Add(new(GetNetEntity(rune), comp.Name));

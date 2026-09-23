@@ -1,5 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  parent: [ BaseItem, BaseMagicalContraband ]
+  parent: [ BaseItem, BaseBloodContraband ]
   id: ConstructShell
   name: construct shell
   description: empty construct shell

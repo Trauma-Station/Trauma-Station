@@ -5,13 +5,11 @@ using Content.Shared.Mind;
 using Content.Shared.Stacks;
 using Content.Trauma.Shared.BloodCult.Components;
 using Content.Trauma.Shared.BloodCult.Spells;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.BloodCult.Spells;
 
 public sealed partial class TwistedConstructionSystem : EntitySystem
 {
-    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -39,7 +37,7 @@ public sealed partial class TwistedConstructionSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnDoAfter(Entity<TwistedConstructionTargetComponent> target, ref TwistedConstructionDoAfterEvent args)
     {
-        if (args.Handled || args.Cancelled || !_timing.IsFirstTimePredicted)
+        if (args.Handled || args.Cancelled)
             return;
 
         args.Handled = true;

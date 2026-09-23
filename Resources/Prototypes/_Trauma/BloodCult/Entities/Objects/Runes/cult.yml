@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  parent: BaseMagicalContraband
+  parent: BaseBloodContraband
   id: BaseCultBlood
   placement:
     mode: SnapgridCenter
@@ -23,21 +23,23 @@
   - type: Clickable
   - type: InteractionOutline
   - type: Appearance
-  # Spraying runes with holy water erases them
+  - type: CultRuneDrawing # runes can be erased with a bible/dagger regardless of being finished
+
+- type: entity
+  abstract: true
+  parent: BaseCultBlood
+  id: BaseCultRune
+  description: An intricate, eldritch smearing and carving of blood. Who knows what it could be for?
+  components:
+  - type: CultRune
+  - type: BloodCultExamine
+  # Spraying runes with holy water erases them, too cheese to have it for unfinished
   - type: Reactive
     reactions:
     - reagents: [ Holywater ]
       methods: [ Touch ]
       effects:
       - !type:Delete
-
-- type: entity
-  abstract: true
-  parent: BaseCultBlood
-  id: BaseCultRune
-  suffix: An intricate, eldritch smearing and carving of blood. Who knows what it could be for?
-  components:
-  - type: CultRune
 
 # Unfinished
 
@@ -49,7 +51,6 @@
   components:
   - type: Sprite
     state: unfinished
-  - type: CultUnfinishedRune
 
 - type: entity
   parent: BaseCultBlood
@@ -60,7 +61,6 @@
   - type: Sprite
     sprite: _Trauma/BloodCult/Entities/Runes/large.rsi
     state: unfinished
-  - type: CultUnfinishedRune
 
 # Finished runes
 
@@ -74,6 +74,8 @@
   - type: CultRune
     invokePhrase: "Mah'weyh pleggh at e'ntrath!"
   - type: CultRuneOffering
+  - type: BloodCultExamine
+    text: "Offers a noncultist above it to Nar'Sie, either converting them or sacrificing them."
 
 - type: entity
   parent: BaseCultRune
@@ -85,6 +87,8 @@
   - type: CultRune
     invokePhrase: "Qu'laris ver'don, thal'sorin mik'thar!"
   - type: CultRuneEmpower
+  - type: BloodCultExamine
+    text: "Allows cultists to prepare greater amounts of blood magic at far less of a cost."
 
 - type: entity
   parent: BaseCultRune
@@ -102,6 +106,8 @@
         type: WizardTeleportBoundUserInterface
       enum.NameSelectorUiKey.Key:
         type: NameSelectorBUI
+  - type: BloodCultExamine
+    text: "Warps everything above it to another chosen teleport rune."
 
 - type: entity
   parent: BaseCultRune
@@ -113,6 +119,10 @@
   - type: CultRune
     invokePhrase: "Pasnar val'keriam usinar. Savrae ines amutan. Yam'toth remium il'tarat!"
   - type: CultRuneRevive
+  - type: BloodCultExamine
+    text: |
+      Requires a dead, mindless, or inactive cultist placed upon the rune.
+      For each three bodies sacrificed to the dark patron, one body will be mended and their mind awoken.
 
 - type: entity
   parent: BaseCultRune
@@ -132,6 +142,8 @@
     - !type:SpawnEntity
       entity: BloodCultBarrier
     - !type:Delete # single use rune for obvious reasons (it gets blocked by the barrier)
+  - type: BloodCultExamine
+    text: "Makes a temporary invisible wall to block passage. Single use."
 
 - type: entity
   parent: BaseCultRune
@@ -141,13 +153,15 @@
   - type: Sprite
     state: summon
   - type: CultRune
-    requiredInvokers: 3
+    requiredInvokers: 2
     invokePhrase: "N'ath reth sh'yro eth d'rekkathnor!"
   - type: CultRuneSummon
   - type: UserInterface
     interfaces:
       enum.WizardTeleportUiKey.Key:
         type: WizardTeleportBoundUserInterface
+  - type: BloodCultExamine
+    text: "Summons a single cultist to the rune. Requires 2 invokers."
 
 - type: entity
   parent: BaseCultRune
@@ -167,6 +181,8 @@
     - !type:Flammable
       multiplier: 1
     - !type:Ignite
+  - type: BloodCultExamine
+    text: "Boils the blood of non-believers who can see the rune, rapidly dealing extreme amounts of damage. Requires 3 invokers."
 
 - type: entity
   parent: BaseCultRune
@@ -176,7 +192,7 @@
   - type: Sprite
     sprite: _Trauma/BloodCult/Entities/Runes/large.rsi
     layers:
-    - state: apocalpyse
+    - state: apocalypse
       map: [ "enum.ApocalypseRuneVisuals.Layer" ]
   - type: CultRune
     requiredInvokers: 3
@@ -191,6 +207,8 @@
         enum.ApocalypseRuneVisuals.Layer:
           True: { color: "#696969" }
           False: { color: "#ffffff" }
+  - type: BloodCultExamine
+    text: "A harbinger of the end times. Grows in strength with the cult's desperation - but at the risk of... side effects."
 
 - type: entity
   parent: BaseCultRune
@@ -213,3 +231,5 @@
         enum.RendingRuneVisuals.Layer:
           True: { state: "rending_animated" }
           False: { state: "rending"}
+  - type: BloodCultExamine
+    text: "Tears apart dimensional barriers, calling forth the Geometer. Requires 9 invokers."

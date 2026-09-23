@@ -33,6 +33,13 @@ public sealed partial class BloodRunePrototype : IPrototype
     public TimeSpan DrawTime = TimeSpan.FromSeconds(4);
 
     /// <summary>
+    /// How many tiles wide the rune is.
+    /// Has to be odd, and is used in a squared.
+    /// </summary>
+    [DataField]
+    public int Size = 1;
+
+    /// <summary>
     /// Damage dealt to the user after drawing the rune.
     /// </summary>
     [DataField]
@@ -61,11 +68,4 @@ public sealed partial class BloodRunePrototype : IPrototype
     /// </summary>
     [DataField]
     public int Limit;
-
-    /// <summary>
-    /// Announcement to make from central command after starting to draw this rune.
-    /// Gets "area" passed with the name of the area it was placed in.
-    /// </summary>
-    [DataField]
-    public LocId? Announcement;
 }

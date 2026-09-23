@@ -2,7 +2,7 @@
 
 using Content.Server.GameTicking;
 using Content.Shared.Emp;
-using Content.Trauma.Server.BloodCult.Gamerule;
+using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Runes.Apocalypse;
 using Robust.Shared.Player;
 using Robust.Shared.Random;

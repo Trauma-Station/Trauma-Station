@@ -1,5 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  parent: [ BaseBola, BaseMagicalContraband]
+  parent: [ BaseBola, BaseBloodContraband]
   id: CultBola
   name: nar'sien bola
   description: A strong bola, bound with dark magic that allows it to pass harmlessly through Nar'Sien cultists. Throw it to trip and slow your victim.

@@ -1,77 +1,50 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: construction
+  abstract: true
+  id: BaseBloodCultStructure
+  objectType: Structure
+  placementMode: SnapgridCenter
+  category: construction-category-antagonist
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  theory:
+    EldritchKnowledge: 5
+
+- type: construction
+  parent: BaseBloodCultStructure
   id: CultPylon
-  category: construction-category-structures
   graph: CultPylon
   targetNode: pylon
-  objectType: Structure
   placementMode: AlignPylonConstruction
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    EldritchKnowledge: 5
 
 - type: construction
+  parent: BaseBloodCultStructure
   id: CultFactoryAltar
-  category: construction-category-structures
   graph: CultFactoryAltar
   targetNode: altar
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    EldritchKnowledge: 5
 
 - type: construction
+  parent: BaseBloodCultStructure
   id: CultFactoryForge
-  category: construction-category-structures
   graph: CultFactoryForge
   targetNode: forge
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    EldritchKnowledge: 5
 
 - type: construction
+  parent: BaseBloodCultStructure
   id: CultFactoryArchives
-  category: construction-category-structures
   graph: CultFactoryArchives
   targetNode: archives
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    EldritchKnowledge: 5
 
 - type: construction
+  parent: BaseBloodCultStructure
   id: CultDoor
-  category: construction-category-structures
   graph: CultDoor
   targetNode: door
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    EldritchKnowledge: 5
 
 - type: construction
+  parent: BaseBloodCultStructure
   id: CultGirder
-  category: construction-category-structures
   graph: CultGirder
   targetNode: girder
-  objectType: Structure
-  placementMode: SnapgridCenter
-  canBuildInImpassable: false
-  conditions:
-  - !type:TileNotBlocked
-  theory:
-    EldritchKnowledge: 5

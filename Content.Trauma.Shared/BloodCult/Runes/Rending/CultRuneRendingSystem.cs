@@ -101,7 +101,7 @@ public sealed partial class CultRuneRendingSystem : EntitySystem
         }
 
         // GG
-        var ev = new BloodCultNarsieSummonedEvent();
+        var ev = new BloodCultNarsieSummonedEvent(args.User);
         RaiseLocalEvent(ref ev);
         PredictedSpawnAtPosition(rune.Comp.NarsiePrototype, Transform(rune).Coordinates);
     }

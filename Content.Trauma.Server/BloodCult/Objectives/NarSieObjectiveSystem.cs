@@ -1,18 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Objectives.Components;
-using Content.Trauma.Server.BloodCult.Gamerule;
+using Content.Trauma.Shared.BloodCult;
 
 namespace Content.Trauma.Server.BloodCult.Objectives;
 
 public sealed partial class NarSieObjectiveSystem : EntitySystem
 {
-    [Dependency] private BloodCultRuleSystem _rule = default!;
+    [Dependency] private BloodCultSystem _cult = default!;
 
     [SubscribeLocalEvent]
     private void OnGetProgress(Entity<NarSieObjectiveComponent> ent, ref ObjectiveGetProgressEvent args)
     {
-        // TODO: store the rule on the mind role
-        args.Progress = args.Mind.OwnedEntity is {} member && _rule.GetRule(member)?.Comp.NarSieSummoned ?? false ? 1f : 0f;
+        args.Progress = (_cult.MindGetRule(args.MindId)?.Comp.NarSieSummoned ?? false) ? 1f : 0f;
     }
 }

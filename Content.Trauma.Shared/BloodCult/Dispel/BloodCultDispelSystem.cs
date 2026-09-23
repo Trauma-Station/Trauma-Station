@@ -4,22 +4,22 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Trauma.Shared.BloodCult.Runes;
 
-namespace Content.Trauma.Shared.BloodCult.CultBarrier;
+namespace Content.Trauma.Shared.BloodCult.Dispel;
 
-public sealed partial class BloodCultBarrierSystem : EntitySystem
+public sealed partial class BloodCultDispelSystem : EntitySystem
 {
     [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private EntityQuery<RuneDrawerComponent> _drawerQuery = default!;
 
     [SubscribeLocalEvent]
-    private void OnInteract(Entity<BloodCultBarrierComponent> ent, ref InteractUsingEvent args)
+    private void OnInteract(Entity<BloodCultDispelComponent> ent, ref InteractUsingEvent args)
     {
         var user = args.User;
         if (args.Handled || !_drawerQuery.HasComp(args.Used) || !_cult.IsCultist(user))
             return;
 
-        _popup.PopupEntity("You tap the barrier with your dagger and it vanishes.", user, user);
+        _popup.PopupEntity(ent.Comp.Text, user, user);
         PredictedQueueDel(ent);
         args.Handled = true;
     }

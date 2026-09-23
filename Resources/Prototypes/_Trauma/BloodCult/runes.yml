@@ -33,6 +33,7 @@
   prototype: CultRuneApocalypse
   unfinished: CultRuneUnfinishedLarge
   drawTime: 40
+  size: 3
   drawDamage:
     types:
       Slash: 20
@@ -44,10 +45,10 @@
   prototype: CultRuneDimensionalRending
   unfinished: CultRuneUnfinishedLarge
   drawTime: 40
+  size: 3
   drawDamage:
     types:
       Slash: 50
   areaLimited: true
-  needsTarget: true
+  requireTarget: true
   limit: 1
-  announcement: blood-cult-rending-announcement

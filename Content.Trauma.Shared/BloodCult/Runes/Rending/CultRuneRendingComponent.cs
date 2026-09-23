@@ -55,4 +55,4 @@ public sealed partial class RendingRuneDoAfter : SimpleDoAfterEvent;
 /// Broadcast after summoning Nar'Sie.
 /// </summary>
 [ByRefEvent]
-public record struct BloodCultNarsieSummonedEvent();
+public record struct BloodCultNarsieSummonedEvent(EntityUid User);

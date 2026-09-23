@@ -43,12 +43,17 @@ public abstract partial class BloodCultSystem : EntitySystem
     }
 
     /// <summary>
-    /// Get the gamerule associated with a cultist.
+    /// Get the gamerule associated with an entity belonging to the cult.
     /// </summary>
     public Entity<BloodCultRuleComponent>? GetRule(EntityUid mob)
-        => _query.CompOrNull(mob)?.Rule is { } rule && _ruleQuery.TryComp(rule, out var ruleComp)
+    {
+        if (_mcQuery.CompOrNull(mob)?.Mind is { } mind)
+            return MindGetRule(mind);
+
+        return _query.CompOrNull(mob)?.Rule is { } rule && _ruleQuery.TryComp(rule, out var ruleComp)
             ? (rule, ruleComp)
             : null;
+    }
 
     /// <summary>
     /// Returns true if a player is a blood cultist, leader or construct.
@@ -62,12 +67,17 @@ public abstract partial class BloodCultSystem : EntitySystem
     public bool IsMindCultist(EntityUid mind)
         => MindGetRole(mind) != null;
 
-    public EntityUid? GetRole(EntityUid uid)
+    public Entity<BloodCultistRoleComponent>? GetRole(EntityUid uid)
         => _mcQuery.CompOrNull(uid)?.Mind is {} mind ? MindGetRole(mind) : null;
 
-    public EntityUid? MindGetRole(EntityUid mind)
+    public Entity<BloodCultistRoleComponent>? MindGetRole(EntityUid mind)
         => _role.MindHasRole<BloodCultistRoleComponent>(mind, out var role)
-            ? role
+            ? (role.Value.Owner, role.Value.Comp2)
+            : null;
+
+    public Entity<BloodCultRuleComponent>? MindGetRule(EntityUid mind)
+        => MindGetRole(mind)?.Comp.Rule is { } rule && _ruleQuery.TryComp(rule, out var ruleComp)
+            ? (rule, ruleComp)
             : null;
 
     public Entity<BloodCultSpellsComponent>? GetSpells(EntityUid uid)
@@ -127,6 +137,11 @@ public abstract partial class BloodCultSystem : EntitySystem
 
         if (_actorQuery.TryComp(mob, out var actor))
             _pvsOverride.AddSessionOverride(rule, actor.PlayerSession);
+        if (GetRole(mob) is { } role)
+        {
+            role.Comp.Rule = rule;
+            Dirty(role);
+        }
     }
 
     /// <summary>

@@ -13,5 +13,3 @@ cult-rending-target-alive = Can not start the ritual: the target is alive.
 cult-rending-already-summoning = Can not start the ritual: it's already in progress.
 cult-rending-started = The Geometer Of Blood has started the ritual of Dimensional Rending!
 cult-rending-prevented = Someone has stopped the ritual.
-
-blood-cult-rending-announcement = Strong interdimensional energy transfer detected near {area}, all crew must prevent the station's destruction!

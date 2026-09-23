@@ -1,8 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  parent: [ BaseStructure, BaseMagicalContraband ]
+  parent: [ BaseStructure, BaseBloodContraband ]
   id: BloodCultBarrier
   name: cult barrier
-  description: An eldritch cultist barrier. Can be destroyed by using a ritual dagger.
+  description: An eldritch cultist barrier.
   components:
   - type: Transform
     noRot: true
@@ -29,33 +31,22 @@
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
-        damage: 600
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger: !type:DamageTrigger
         damage: 300
       behaviors:
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          RunedMetal:
-            min: 5
-            max: 5
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
   - type: PointLight
-    enabled: false
     radius: 3
     color: red
-  - type: BloodCultBarrier
+  - type: BloodCultExamine
+    text: "Can be dispelled by using a ritual dagger."
+  - type: BloodCultDispel
+    text: "You tap the barrier with your dagger and it vanishes."
   - type: Airtight
     noAirWhenFullyAirBlocked: false
 
 - type: entity
-  parent: [ WallForce, BaseMagicalContraband ]
+  parent: [ WallForce, BaseBloodContraband ]
   id: WallForceCult
   name: glowing wall
   description: An unholy shield that blocks all attacks.

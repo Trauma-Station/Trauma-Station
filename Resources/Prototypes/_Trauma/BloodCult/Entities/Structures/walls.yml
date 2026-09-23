@@ -1,5 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  parent: [ Girder, BaseMagicalContraband ]
+  parent: [ Girder, BaseBloodContraband ]
   id: CultGirder
   name: runed girder
   description: Framework made of a strange and shockingly cold metal. It doesn't seem to have any bolts

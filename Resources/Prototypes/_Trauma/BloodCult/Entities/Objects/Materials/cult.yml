@@ -1,5 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  parent: [ SheetOtherBase, BaseMagicalContraband ]
+  parent: [ SheetOtherBase, BaseBloodContraband ]
   id: RunedMetal
   name: runic metal
   description: An unusual sheet of metal with a pulsating rune.

@@ -11,9 +11,9 @@ blood-cult-role-greeting = The Geometer of Blood, Nar-Sie, has sent a number of 
 blood-cult-role-briefing-short = Use '+c' to contact other members of your cult.
 blood-cult-role-briefing-construct = Use '+c' to contact your eldritch creators.
 
-blood-cult-condition-win = The Geometer of Blood has successfully summoned their Eldritch Goddess!
-blood-cult-condition-draw = Both parties were destroyed.
-blood-cult-condition-failure = The crew have managed to stop the rending of reality!
+blood-cult-condition-win = [color=#dc143c]The Geometer of Blood has successfully summoned their Eldritch Goddess![/color]
+blood-cult-condition-draw = [italic]Both the cult and crew were destroyed.[/italic]
+blood-cult-condition-failure = [bold]The crew have managed to stop the rending of reality![/bold]
 
 blood-cultists-list-start = Members of the Geometer of Blood were:
 blood-cultists-list-name = [color=White]{ $name }[/color] ([color=gray]{ $user }[/color])

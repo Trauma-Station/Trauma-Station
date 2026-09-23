@@ -1,5 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  parent: [ BaseMaterialDoor, BaseMagicalContraband ]
+  parent: [ BaseMaterialDoor, BaseBloodContraband ]
   id: CultDoor
   name: runed door
   description: It opens, it closes, and maybe crushes you. This one has a strange glowing rune on it.

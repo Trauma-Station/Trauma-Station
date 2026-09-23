@@ -6,15 +6,20 @@ using Content.Shared.Chat;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Construction.EntitySystems;
 using Content.Shared.Coordinates.Helpers;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
+using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
+using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.BloodCult.Empower;
+using Content.Trauma.Shared.BloodCult.Examine;
+using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Runes;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -27,8 +32,10 @@ namespace Content.Trauma.Shared.BloodCult.Runes;
 
 public sealed partial class CultRuneSystem : EntitySystem
 {
+    [Dependency] private AnchorableSystem _anchorable = default!;
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private BloodCultSystem _cult = default!;
+    [Dependency] private BloodCultExamineSystem _cultExamine = default!;
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
@@ -138,20 +145,34 @@ public sealed partial class CultRuneSystem : EntitySystem
         }
 
         var user = args.User;
+        if (_cult.GetRule(user) is not { } rule)
+            return;
+
         _audio.PlayPredicted(ent.Comp.EndDrawingSound, user, user);
         var pos = Transform(ent).Coordinates;
         var uid = PredictedSpawnAtPosition(rune.Prototype, pos);
 
-        var ev = new RunePlacedEvent(user);
+        var ev = new RunePlacedEvent(user, rune, rule);
         RaiseLocalEvent(uid, ref ev);
 
-        _cult.CopyMember(ent.Owner, uid);
+        _cult.SetCultRule(uid, rule);
 
         PredictedDel(ent.Owner);
     }
 
     [SubscribeLocalEvent]
-    private void OnRuneErase(Entity<CultRuneComponent> ent, ref RuneEraseDoAfterEvent args)
+    private void OnDrawingExamined(Entity<CultRuneDrawingComponent> ent, ref ExaminedEvent args)
+    {
+        if (ent.Comp.Rune is not { } id)
+            return;
+
+        var rune = ProtoMan.Index(id).Prototype;
+        var name = ProtoMan.Index(rune).Name;
+        _cultExamine.PushExamine($"This will be carved into a {name}", ref args);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnRuneErase(Entity<CultRuneDrawingComponent> ent, ref RuneEraseDoAfterEvent args)
     {
         if (!args.Cancelled)
             EraseRune(ent, args.User);
@@ -204,6 +225,22 @@ public sealed partial class CultRuneSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
+    private void OnRunePlaced(Entity<CultRuneComponent> ent, ref RunePlacedEvent args)
+    {
+        var rule = args.Rule;
+
+        if (args.Rune.AreaLimited &&
+            _area.GetArea(ent) is { } area &&
+            _area.GetAreaPrototype(area) is { } areaId)
+        {
+            // no more using this area for other area locked runes
+            // technically this has a minor bypass but it's not very useful
+            rule.Comp.RitualAreas.Remove(areaId);
+            DirtyField(rule, rule.Comp, nameof(BloodCultRuleComponent.RitualAreas));
+        }
+    }
+
     private bool CanDrawRune(EntityUid uid, BloodRunePrototype rune)
     {
         var xform = Transform(uid);
@@ -219,18 +256,44 @@ public sealed partial class CultRuneSystem : EntitySystem
             return false;
         }
 
-        if (_map.GetTileRef((gridUid, grid), xform.Coordinates) == null)
+        var gridEnt = new Entity<MapGridComponent>(gridUid, grid);
+        var tile = _map.GetTileRef(gridEnt, xform.Coordinates);
+        if (tile == TileRef.Zero)
         {
             _popup.PopupEntity(Loc.GetString("cult-rune-cant-draw"), uid, uid);
             return false;
         }
 
-        if (rune.AreaLimited &&
-            (_area.GetArea(uid) is not { } area ||
-            _area.GetAreaPrototype(area) is not { } areaId ||
-            !rule.Comp.Areas.Contains(areaId)))
+        // can't spam runes ontop of eachother
+        var coords = _transform.GetMapCoordinates(uid);
+        var map = coords.MapId;
+        var box = Box2.CenteredAround(coords.Position, new(rune.Size));
+        if (_lookup.AnyComponentsIntersecting(typeof(CultRuneDrawingComponent), map, box))
         {
-            _popup.PopupEntity("You need to place this rune in one of the cult's unique areas!", uid, uid);
+            _popup.PopupEntity("The area needs to be free of other runes.", uid, uid);
+            return false;
+        }
+
+        // can't place large runes inside walls
+        var max = rune.Size / 2;
+        var min = -max;
+        for (var y = min; y <= max; y++)
+        {
+            for (var x = min; x <= max; x++)
+            {
+                var offset = new Vector2i(x, y);
+                var pos = tile.GridIndices + offset;
+                if (!_anchorable.TileFree(gridEnt, pos, (int) CollisionGroup.WallLayer))
+                {
+                    _popup.PopupEntity("The area needs to be free of obstacles.", uid, uid);
+                    return false;
+                }
+            }
+        }
+
+        if (rune.RequireTarget && !rule.Comp.TargetSacrificed)
+        {
+            _popup.PopupEntity("Nar'Sie still demands that her target be sacrificed!", uid, uid);
             return false;
         }
 
@@ -243,9 +306,12 @@ public sealed partial class CultRuneSystem : EntitySystem
             }
         }
 
-        if (rune.RequireTarget && !rule.Comp.TargetSacrificed)
+        if (rune.AreaLimited &&
+            (_area.GetArea(uid) is not { } area ||
+            _area.GetAreaPrototype(area) is not { } areaId ||
+            !rule.Comp.RitualAreas.Contains(areaId)))
         {
-            _popup.PopupEntity("Nar'Sie still demands her target be offered to her.", uid, uid);
+            _popup.PopupEntity("You need to place this rune in one of the cult's ritual areas!", uid, uid);
             return false;
         }
 

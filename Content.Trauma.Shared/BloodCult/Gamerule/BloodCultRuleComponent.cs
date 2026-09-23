@@ -3,7 +3,7 @@
 namespace Content.Trauma.Shared.BloodCult.Gamerule;
 
 [RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
+[AutoGenerateComponentState(fieldDeltas: true)]
 public sealed partial class BloodCultRuleComponent : Component
 {
     [DataField]
@@ -44,7 +44,7 @@ public sealed partial class BloodCultRuleComponent : Component
     /// Consumed when they are placed.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public List<EntProtoId> Areas = new();
+    public List<EntProtoId> RitualAreas = new();
 
     /// <summary>
     /// Possible areas to pick for <see cref="Areas"/>.

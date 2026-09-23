@@ -15,7 +15,7 @@ public abstract partial class CultRuneApocalypseSystem : EntitySystem
         if (ent.Comp.Used)
             return;
 
-        var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.InvokeTime, new ApocalypseRuneDoAfter(), ent)
+        var doAfter = new DoAfterArgs(EntityManager, args.User, ent.Comp.InvokeTime, new ApocalypseRuneDoAfter(), ent, target: ent)
         {
             BreakOnMove = true
         };

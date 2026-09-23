@@ -1,5 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
-  parent: [ BaseItem, BaseMagicalContraband ]
+  parent: [ BaseItem, BaseBloodContraband ]
   id: EldritchLongsword
   name: eldritch longsword
   description: A sword humming with unholy energy. It glows with a dim red light.
@@ -32,7 +34,7 @@
     softness: 1
 
 - type: entity
-  parent: [ BaseItem, BaseMagicalContraband ]
+  parent: [ BaseItem, BaseBloodContraband ]
   id: BloodSpear
   name: blood halberd
   description: A sickening spear composed entirely of crystallized blood.
@@ -95,7 +97,7 @@
   - type: BloodSpear
 
 - type: entity
-  parent: [ BaseItem, BaseMagicalContraband ]
+  parent: [ BaseItem, BaseBloodContraband ]
   id: BloodRitesAura
   name: blood rite aura
   description: Absorbs blood from anything you touch. Touching cultists and constructs can heal them. Use in-hand to cast an advanced rite.
