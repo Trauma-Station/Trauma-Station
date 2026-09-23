@@ -26,7 +26,7 @@ public sealed partial class ClientBloodCultSystem : BloodCultSystem
     [SubscribeLocalEvent]
     private void OnPentagramAdded(EntityUid uid, PentagramComponent component, ComponentStartup args)
     {
-        if (!TryComp<SpriteComponent>(uid, out var sprite) || sprite.LayerMapTryGet(PentagramKey.Key, out _))
+        if (!TryComp<SpriteComponent>(uid, out var sprite) || _sprite.LayerMapTryGet((uid, sprite), PentagramKey.Key, out _))
             return;
 
         var bounds = _sprite.GetLocalBounds((uid, sprite));
