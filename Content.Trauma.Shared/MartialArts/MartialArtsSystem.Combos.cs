@@ -38,9 +38,10 @@ public partial class MartialArtsSystem
         if (!_timing.IsFirstTimePredicted || args.Weapon != user)
             return;
 
-        var attemptEv = new ComboAttemptEvent();
-        RaiseLocalEvent(ent, ref attemptEv);
-        if (attemptEv.Cancelled)
+        var userAttemptEv = new ComboAttemptEvent();
+        RaiseLocalEvent(user, ref userAttemptEv);
+
+        if (userAttemptEv.Cancelled)
             return;
 
         if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && martialArtsComp.Blocked)

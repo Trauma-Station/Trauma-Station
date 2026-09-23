@@ -12,7 +12,11 @@ using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Cuffs;
 using Content.Trauma.Common.Knockdown;
+using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Shared.Areas;
 using Content.Trauma.Common.Wizard;
+using Content.Trauma.Shared.MartialArts;
+using Content.Trauma.Shared.MartialArts.Components;
 
 namespace Content.Trauma.Shared.Wizard.Mutate;
 
@@ -37,6 +41,7 @@ public abstract partial class SharedHulkSystem : EntitySystem
         SubscribeLocalEvent<HulkComponent, EnsnareBrokenEvent>(OnEnsnareBreak);
         SubscribeLocalEvent<HulkComponent, EnsnareModifyFreeDurationEvent>(OnEnsnareModifyDuration);
         SubscribeLocalEvent<HulkComponent, KnockdownOnCollideAttemptEvent>(OnKnockDownAttempt);
+        SubscribeLocalEvent<HulkComponent, ComboAttemptEvent>(OnComboAttempt);
     }
 
     private void OnStartup(Entity<HulkComponent> ent, ref ComponentStartup args)
@@ -57,6 +62,11 @@ public abstract partial class SharedHulkSystem : EntitySystem
 
         if (args.HitEntities.Count > 0)
             Roar(ent, 0.2f);
+    }
+
+    private void OnComboAttempt(Entity<HulkComponent> ent, ref ComboAttemptEvent args)
+    {
+        args.Cancelled = ent.Comp.MartialsBlocked;
     }
 
     private void OnSlipAttempt(Entity<HulkComponent> ent, ref SlipAttemptEvent args)
