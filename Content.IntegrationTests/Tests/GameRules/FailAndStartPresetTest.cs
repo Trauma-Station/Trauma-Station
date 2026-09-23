@@ -152,5 +152,6 @@ public sealed partial class TestRuleSystem : EntitySystem
         }
     }
 }
+
 [RegisterComponent]
 public sealed partial class TestRuleComponent : Component;
