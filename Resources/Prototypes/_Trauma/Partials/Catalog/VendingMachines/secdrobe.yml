@@ -1,4 +1,6 @@
-- type: vendingMachineInventory 
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: vendingMachineInventory
   id: SecDrobeInventory
   startingInventory:
     ClothingShoesBootsMagSecurity: 2
