@@ -6,9 +6,9 @@
         <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
             <LineEdit Name="_callShuttleTime" Text="4:00" PlaceHolder="m:ss" HorizontalExpand="True" SizeFlagsStretchRatio="2"/>
             <Control HorizontalExpand="True" SizeFlagsStretchRatio="1"/>
-            <cc:CommandButton Command="callshuttle 4:00" Name="_callShuttleButton" Text="Call Shuttle" HorizontalExpand="True" SizeFlagsStretchRatio="2" /> <!-- Trauma - replaced bad loc -->
+            <cc:CommandButton Command="callshuttle 4:00" Name="_callShuttleButton" Text="Call Shuttle" HorizontalExpand="True" SizeFlagsStretchRatio="2" Dangerous="True"/> <!-- Trauma - replaced bad loc + add dangerous -->
         </BoxContainer>
-        <cc:CommandButton Command="recallshuttle" Name="_recallShuttleButton" Text="Recall shuttle" HorizontalAlignment="Center"/> <!-- Trauma - replaced bad loc -->
+        <cc:CommandButton Command="recallshuttle" Name="_recallShuttleButton" Text="Recall shuttle" HorizontalAlignment="Center" Dangerous="True"/> <!-- Trauma - replaced bad loc + add dangerous -->
     </BoxContainer>
 
 </DefaultWindow>

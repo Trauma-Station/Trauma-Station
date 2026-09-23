@@ -4,7 +4,6 @@ using Content.Client.Construction;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Construction.Prototypes;
 using Content.Trauma.Shared.Construction;
-using Robust.Client.Input;
 using Robust.Client.Placement;
 using Robust.Shared.Enums;
 
@@ -12,19 +11,15 @@ namespace Content.Trauma.Client.Construction.UI;
 
 public sealed partial class ShortConstructionBUI : BoundUserInterface
 {
-    [Dependency] private IClyde _clyde = default!;
-    [Dependency] private IInputManager _input = default!;
     [Dependency] private IPlacementManager _placement = default!;
     [Dependency] private IPrototypeManager _proto = default!;
     private readonly ConstructionSystem _construction;
-    private readonly SpriteSystem _sprite;
 
-    private RadialMenu? _menu;
+    private SimpleRadialMenu? _menu;
 
     public ShortConstructionBUI(EntityUid owner, Enum uiKey) : base(owner, uiKey)
     {
         _construction = EntMan.System<ConstructionSystem>();
-        _sprite = EntMan.System<SpriteSystem>();
     }
 
     protected override void Open()
@@ -32,22 +27,18 @@ public sealed partial class ShortConstructionBUI : BoundUserInterface
         base.Open();
 
         _menu = CreateMenu();
-        _menu.OpenCenteredAt(_input.MouseScreenPosition.Position / _clyde.ScreenSize);
+        _menu.OpenOverMouseScreenPosition();
     }
 
-    private RadialMenu CreateMenu()
+    private SimpleRadialMenu CreateMenu()
     {
-        var menu = this.CreateWindow<RadialMenu>();
-        menu.HorizontalExpand = true;
-        menu.VerticalExpand = true;
-        menu.BackButtonStyleClass = "RadialMenuBackButton";
-        menu.CloseButtonStyleClass = "RadialMenuCloseButton";
-        menu.OnClose += Close;
+        var menu = this.CreateWindow<SimpleRadialMenu>();
+        menu.CloseOnPressed = false; // custom closing logic
 
         if (!EntMan.TryGetComponent<ShortConstructionComponent>(Owner, out var comp))
             return menu;
 
-        var options = new RadialContainer();
+        var options = new List<RadialMenuOptionBase>();
         foreach (var protoId in comp.Prototypes)
         {
             if (!_proto.Resolve(protoId, out var proto) ||
@@ -55,32 +46,15 @@ public sealed partial class ShortConstructionBUI : BoundUserInterface
                 !_proto.Resolve(targetId, out var target))
                 continue;
 
-            var button = new RadialMenuButton
+            var tooltip = proto.SetName is {} loc ? Loc.GetString(loc) : target.Name;
+            options.Add(new RadialMenuActionOption<ConstructionPrototype>(ConstructItem, proto)
             {
-                ToolTip = proto.SetName is {} loc ? Loc.GetString(loc) : target.Name,
-                StyleClasses = { "RadialMenuButton" },
-                SetSize = new Vector2(48f, 48f)
-            };
-
-            var texture = new TextureRect
-            {
-                VerticalAlignment = Control.VAlignment.Center,
-                HorizontalAlignment = Control.HAlignment.Center,
-                Texture = _sprite.Frame0(target),
-                TextureScale = new Vector2(2f, 2f)
-            };
-
-            button.AddChild(texture);
-
-            button.OnPressed += _ =>
-            {
-                ConstructItem(proto);
-            };
-
-            options.AddChild(button);
+                ToolTip = tooltip,
+                IconSpecifier = RadialMenuIconSpecifier.With(targetId)
+            });
         }
 
-        menu.AddChild(options);
+        menu.SetButtons(options);
         return menu;
     }
 

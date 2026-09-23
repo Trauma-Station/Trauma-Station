@@ -1,3 +1,5 @@
+# Best job.
+
 - type: job
   id: ChiefMedicalOfficer
   name: job-name-cmo
@@ -16,15 +18,7 @@
   startingGear: CMOGear
   icon: "JobIconChiefMedicalOfficer"
   supervisors: job-supervisors-captain
-  guides: # Trauma
-  - Medical
-  - Command
-  - Chemicals
-  - Virology
   access:
-  # <Trauma>
-  - External
-  # </Trauma>
   - Medical
   - Command
   - Maintenance
@@ -33,38 +27,20 @@
   - Brig
   - Cryogenics
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipCMO
-    - SkillChipPistol
-    - SkillChipEchelonEducation
-  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
-      # <Trauma>
-      - type: Condemned # Nanotrasen owns your soul pal.
-        soulOwnedNotDevil: true
-      - type: SurgerySpeedModifier
-        speedModifier: 2
-      - type: CPRTraining
-        reviveChance: 0.9 # excellent training and experience
-        inhaleChance: 1 # great kisser too
-      # </Trauma>
       - type: CommandStaff
 
 - type: startingGear
   id: CMOGear
   equipment:
     id: CMOPDA
-    ears: ClothingHeadsetAltMedical # Goobstation
-    eyes: ClothingEyesGlassesMed # Goobstation
+    ears: ClothingHeadsetCMO
   storage:
     back:
     - Flash
-    - TelescopicBaton # Goobstation
 
 - type: chameleonOutfit
   id: ChiefMedicalOfficerChameleonOutfit

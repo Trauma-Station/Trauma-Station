@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Medical.Client.Targeting;
+using Content.Medical.Shared.Targeting;
 using Content.Shared.Movement.Components;
 using Content.Shared.Movement.Systems;
 using Content.Trauma.Common.CCVar;
@@ -19,9 +19,8 @@ public sealed partial class MouseWheelSystem : CommonMouseWheelSystem
     [Dependency] private IPlayerManager _player = default!;
     [Dependency] private IInputManager _inputMan = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
-
     [Dependency] private InputSystem _input = default!;
-    [Dependency] private TargetingSystem _targeting = default!;
+    [Dependency] private SharedTargetingSystem _targeting = default!;
 
     private bool _zoom;
     private bool _rotate;

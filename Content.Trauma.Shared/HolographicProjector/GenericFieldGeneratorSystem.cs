@@ -345,10 +345,8 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
         if (ent.Comp.ConnectedGenerator is not { } pair)
             return;
 
-        var xFormQuery = GetEntityQuery<TransformComponent>();
-
-        var gen1ParentGrid = xFormQuery.GetComponent(ent).GridUid;
-        var gent2ParentGrid = xFormQuery.GetComponent(pair).GridUid;
+        var gen1ParentGrid = Transform(ent).GridUid;
+        var gent2ParentGrid = Transform(pair).GridUid;
 
         if (gen1ParentGrid != gent2ParentGrid)
             RemoveConnections(ent);
