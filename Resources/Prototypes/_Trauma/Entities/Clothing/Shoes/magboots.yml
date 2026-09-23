@@ -1,0 +1,22 @@
+- type: entity
+  parent: [ClothingShoesBootsMagBase, ClothingShoesMilitaryBase, BaseSecurityContraband]
+  id: ClothingShoesBootsMagSecurity
+  name: security magboots
+  description: Standard issue magboots of Nanotrasen security forces.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Shoes/Boots/magboots-security.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Trauma/Clothing/Shoes/Boots/magboots-security.rsi
+  - type: ClothingSpeedModifier
+    walkModifier: 0.80
+    sprintModifier: 0.80
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: ClothingSlowOnDamageModifier
+    modifier: 0.5
+  - type: Item
+    sprite: null
+    size: Normal
+  
