@@ -162,6 +162,7 @@
     - state: glow_artificer_cult
       map: [ "enum.ConstructVisualsState.Glow" ]
   - type: MovementIgnoreGravity
+  - type: GravityAffected
   - type: MeleeWeapon
     hidden: true
     angle: 30
