@@ -332,7 +332,9 @@ namespace Content.Server.GameTicking
             RaiseLocalEvent(new PostGameMapLoad(proto, targetMap, gridUids, stationName));
             return gridUids;
         }
-
+        /// <summary>
+        /// Returns the readied player count.
+        /// </summary>
         public int ReadyPlayerCount()
         {
             var total = 0;
@@ -346,13 +348,18 @@ namespace Content.Server.GameTicking
 
                 total++;
             }
-
-            // <Trauma> Adds half a player to ready counter for each unreadied player.
-            total += (_playerGameStatuses.Count - total) / 2;
-            // </Trauma>
-
             return total;
         }
+        // </Trauma>
+        /// <summary>
+        /// Returns the readied player count as well as half a player per unreadied player.
+        /// </summary>
+        public int ReadyPlayerCountEffective()
+        {
+            int total = ReadyPlayerCount();
+            return total + (_playerGameStatuses.Count - total) / 2;
+        }
+        // </Trauma>
 
         public void StartRound(bool force = false)
         {
