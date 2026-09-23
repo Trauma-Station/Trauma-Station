@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Trauma.Shared.BloodCult.Runes;
 using Content.Trauma.Shared.BloodCult.Runes.Teleport;
@@ -11,9 +12,10 @@ namespace Content.Trauma.Shared.BloodCult.Spells;
 
 public sealed partial class BloodCultTeleportSpellSystem : EntitySystem
 {
-    [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private CultRuneSystem _rune = default!;
     [Dependency] private CultRuneTeleportSystem _runeTeleport = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
@@ -29,7 +31,7 @@ public sealed partial class BloodCultTeleportSpellSystem : EntitySystem
         var action = ev.Action; // action stores the UI
         _ui.SetUiState(action.Owner, WizardTeleportUiKey.Key, new WizardTeleportState(runes));
         _ui.TryToggleUi(action.Owner, WizardTeleportUiKey.Key, user);
-        ev.Handled = true;
+        // not handled so the action lasts until it's selected
     }
 
     [SubscribeLocalEvent]
@@ -54,5 +56,6 @@ public sealed partial class BloodCultTeleportSpellSystem : EntitySystem
 
         var coords = Transform(rune).Coordinates;
         _teleport.Teleport(target, coords, ent.Comp.TeleportInSound, ent.Comp.TeleportOutSound, user: args.User);
+        _actions.RemoveAction(ent.Owner);
     }
 }

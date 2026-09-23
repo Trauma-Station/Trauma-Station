@@ -2,18 +2,22 @@
 
 using Content.Shared.Antag;
 using Content.Shared.Ghost;
+using Content.Shared.Localizations;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 using Content.Trauma.Shared.BloodCult;
 using Content.Trauma.Shared.BloodCult.Components;
 using Content.Trauma.Shared.BloodCult.Constructs;
+using Robust.Shared.Player;
 using Robust.Shared.Random;
+using static Content.Client.CharacterInfo.CharacterInfoSystem;
 
 namespace Content.Trauma.Client.BloodCult;
 
 public sealed partial class ClientBloodCultSystem : BloodCultSystem
 {
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private SpriteSystem _sprite = default!;
 
     private static readonly ProtoId<FactionIconPrototype> CultistIcon = "BloodCultMember";
@@ -52,5 +56,26 @@ public sealed partial class ClientBloodCultSystem : BloodCultSystem
             : CultistIcon;
         if (ProtoMan.Resolve(id, out var icon))
             args.StatusIcons.Add(icon);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnGetCharacterInfoControls(ref GetCharacterInfoControlsEvent args)
+    {
+        if (_player.LocalEntity is not { } mob ||
+            GetRule(mob) is not { } rule)
+            return;
+
+        var areasList = new List<string>();
+        foreach (var id in rule.Comp.RitualAreas)
+        {
+            areasList.Add(ProtoMan.Index(id).Name);
+        }
+
+        var areas = ContentLocalizationManager.FormatList(areasList);
+        var label = new Label()
+        {
+            Text = $"The veil is thin in these special ritual sites:\n{areas}"
+        };
+        args.Controls.Add(label);
     }
 }
