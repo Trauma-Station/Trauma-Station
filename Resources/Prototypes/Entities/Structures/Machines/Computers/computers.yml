@@ -477,6 +477,7 @@
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: CrewMonitor
+    prefix: device-address-prefix-crew-monitor
   - type: WirelessNetworkConnection
     range: 1200
   - type: AmbientMusicMarkerMedical
@@ -544,6 +545,10 @@
     access: [["Command"]]
   - type: Lock
     unlockOnClick: false
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - storagebase
+
 
 - type: entity
   parent: ComputerStationTeleportersControl
@@ -765,10 +770,6 @@
   name: communications computer
   description: A computer used to make station wide announcements via keyboard, set the appropriate alert level, and call the emergency shuttle.
   components:
-  # <Trauma>
-  - type: StationReportTarget # not given to aghost
-  - type: TraumaCommsConsole
-  # </Trauma>
   - type: Sprite
     layers:
     - map: ["computerLayerBody"]
@@ -1406,6 +1407,7 @@
     deviceNetId: Wired
     receiveFrequencyId: SurveillanceCamera
     transmitFrequencyId: SurveillanceCamera
+    prefix: device-address-prefix-camera-monitor
   - type: WiredNetworkConnection
   - type: DeviceNetworkRequiresPower
   - type: SurveillanceCameraMonitor
@@ -1445,6 +1447,7 @@
     deviceNetId: Wireless
     receiveFrequencyId: SurveillanceCamera
     transmitFrequencyId: SurveillanceCamera
+    prefix: device-address-prefix-camera-monitor
   - type: WirelessNetworkConnection
     range: 200
   - type: DeviceNetworkRequiresPower

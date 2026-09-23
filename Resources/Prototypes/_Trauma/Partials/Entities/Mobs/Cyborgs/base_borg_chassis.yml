@@ -77,3 +77,24 @@
     - Crying
     - Whistle
   - !Remove EmpResistance
+
+- type: entity
+  id: BaseBorgChassisNT
+  components: &components
+  - type: Reactive
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch ]
+      effects:
+      - !type:Jitter
+      - !type:HealthChange
+        ignoreResistances: true
+        splitDamage: Split
+        damage:
+          types:
+            Shock: 1
+  - type: BlockShuttleRecall
+
+- type: entity
+  id: BaseBorgChassisDerelict
+  components: *components

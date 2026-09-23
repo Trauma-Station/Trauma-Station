@@ -4,7 +4,7 @@
   parent: [ BaseItem, BaseRevMajorContraband ]
   id: WeaponPistolLiberator
   name: Liberator
-  description: A shitty little pistol that can only hold 6 rounds and has to be hand fed.
+  description: A shitty little revolver that can only hold 6 rounds and has to be hand fed.
   suffix: Full
   components:
   - type: WeaponClass
@@ -23,17 +23,17 @@
     - state: icon
       map: ["enum.GunVisualLayers.Base"]
   - type: Gun
-    fireRate: 3
+    fireRate: 1.5
     availableModes:
     - SemiAuto
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/pistol.ogg
+      path: /Audio/Weapons/Guns/Gunshots/revolver.ogg
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - CartridgePistol
+      - CartridgeMagnum
     capacity: 6
-    proto: CartridgePistol
+    proto: CartridgeMagnum
   - type: AmmoCounter
   - type: ContainerContainer
     containers:

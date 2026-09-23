@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: Rack
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicRack

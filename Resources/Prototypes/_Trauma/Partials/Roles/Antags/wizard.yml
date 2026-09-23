@@ -2,9 +2,11 @@
 
 - type: antag
   id: Wizard
-  setPreference: true
   objective: roles-antag-wizard-description-goob
   creditImage: /Textures/_Trauma/EndCredits/Antags/wizard.png
+  setPreference: true
+  tags:
+  - Roundstart
 
 - type: antagSpecifier
   id: Wizard

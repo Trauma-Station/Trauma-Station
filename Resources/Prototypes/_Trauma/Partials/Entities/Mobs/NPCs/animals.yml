@@ -482,6 +482,10 @@
   - type: Tag
     tags:
     - Spider
+  - type: MobThresholds
+    thresholds: !Clear
+      0: Alive
+      30: Dead
   - type: ActionGrant
     actions:
     - ActionSpiderCall
@@ -526,7 +530,6 @@
   - type: Inventory
     templateId: xenomorph
   - type: ComplexInteraction
-  # </Trauma>
 
 - type: entity
   id: MobClownSpider

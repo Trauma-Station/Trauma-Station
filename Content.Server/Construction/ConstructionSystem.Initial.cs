@@ -1,7 +1,7 @@
 // <Trauma>
-using Content.Trauma.Common.Construction;
-using Content.Goobstation.Common.Construction;
+using Content.Factory.Common.Construction;
 using Content.Shared.Mind.Components;
+using Content.Trauma.Common.Construction;
 // </Trauma>
 using System.IO;
 using System.Linq;

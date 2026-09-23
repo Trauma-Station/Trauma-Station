@@ -107,7 +107,11 @@ public sealed partial class SurveillanceCameraTest : InteractionTest
             var cameras = monitorComp.KnownCameras;
             Assert.That(cameras.ContainsKey(cameraAddr), "Refreshing cameras didn't find the camera");
             Assert.That(cameras[cameraAddr].Item1, Is.EqualTo(CameraName));
-            Assert.That(cameras[cameraAddr].Item2.Item1, Is.EqualTo(netCamera));
+            Assert.That(cameras[cameraAddr].Item2, Is.EqualTo(netCamera));
         });
+
+        // TODO: verify that switching to it works and doesnt get disconnected for 10s
     }
+
+    // TODO: verify that switching to a mobile camera works and doesnt get disconnected for 10s
 }

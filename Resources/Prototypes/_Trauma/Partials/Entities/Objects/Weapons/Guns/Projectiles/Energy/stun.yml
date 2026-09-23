@@ -10,6 +10,7 @@
         mask:
         - !Remove Impassable
         - !Remove BulletImpassable
+  - !Remove type: StunOnCollide # lol
   - type: StaminaDamageOnCollide
     damage: 22
 
@@ -32,3 +33,9 @@
     damage:
       types: !Clear
         Ballistic: 2
+
+- type: entity
+  id: BulletDisablerSmgStunning
+  components:
+  - type: StaminaDamageOnCollide
+    damage: 13

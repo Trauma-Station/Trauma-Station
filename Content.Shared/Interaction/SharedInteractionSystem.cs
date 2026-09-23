@@ -32,7 +32,8 @@ using Content.Shared.Popups;
 using Content.Shared.Storage;
 using Content.Shared.Strip;
 using Content.Shared.Tag;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Verbs;
 using Content.Shared.Wall;
@@ -492,6 +493,13 @@ namespace Content.Shared.Interaction
             var inRangeUnobstructed = target == null
                 ? !checkAccess || InRangeUnobstructed(user, coordinates)
                 : !checkAccess || InRangeUnobstructed(user, target.Value); // permits interactions with wall mounted entities
+
+            // <Trauma>
+            var attemptEv = new UserInteractAttemptEvent(user, target, coordinates, inRangeUnobstructed);
+            RaiseLocalEvent(user, ref attemptEv);
+            if (attemptEv.Handled)
+                return;
+            // </Trauma>
 
             // empty-hand interactions
             // combat mode hand interactions will always be true here -- since
@@ -1256,7 +1264,7 @@ namespace Content.Shared.Interaction
                     _adminLogger.Add(LogType.InteractActivate, LogImpact.Low, $"{ToPrettyString(user):user} activated {ToPrettyString(used):used}");
 
                 if (delayComponent != null)
-                    _useDelay.TryResetDelay(used, component: delayComponent);
+                    _useDelay.TryResetDelay((used, delayComponent));
                 return true;
             }
 
@@ -1269,7 +1277,7 @@ namespace Content.Shared.Interaction
             DoContactInteraction(user, used);
             // Still need to call this even without checkUseDelay in case this gets relayed from Activate.
             if (delayComponent != null)
-                _useDelay.TryResetDelay(used, component: delayComponent);
+                _useDelay.TryResetDelay((used, delayComponent));
 
             _adminLogger.Add(LogType.InteractActivate, LogImpact.Low, $"{ToPrettyString(user):user} activated {ToPrettyString(used):used}");
             return true;
@@ -1480,6 +1488,13 @@ namespace Content.Shared.Interaction
                 Log.Warning($"Client sent interaction with client-side entity. Session={session}, Uid={uid}");
                 return false;
             }
+            // <Trauma> - why was this never checked lol
+            if (uid.Valid && TerminatingOrDeleted(uid))
+            {
+                Log.Warning($"Client {session} tried to interact with a deleted entity {uid}");
+                return false;
+            }
+            // </Trauma>
 
             userEntity = session?.AttachedEntity;
 

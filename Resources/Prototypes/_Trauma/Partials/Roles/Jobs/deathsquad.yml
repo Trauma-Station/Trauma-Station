@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: DeathSquad
+  access:
+  - NanotrasenRepresentative
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipDeathSquad
+  - !type:AddImplantSpecial
+    implants: [FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant ]
+
+- type: startingGear
+  id: DeathSquadGear
+  equipment:
+    eyes: ClothingEyesGlassesDeathsquad
+    neck: ExecutiveIDCard
+    shoes: ClothingShoesBootsMagDeathsquad
+    ears: ClothingHeadsetDeathsquad
+    gloves: ClothingHandsGlovesDeathsquad
+    pocket1: PhoronSabre
+    pocket2: WeaponRevolverMatebaAP
+    belt: ClothingBeltDeathsquadWebbingFilled
+  storage:
+    back:
+    - !Remove WeaponRevolverMatebaAP
+    - !Remove BoxFlashbang
+    - !Remove Hypospray
+    - !Remove DeathAcidifierImplanter
+    - !Remove FreedomImplanter
+    - BlueShieldShieldEvilFilled
+    - DeterrentCaseFilled

@@ -26,7 +26,7 @@ public sealed partial class MutationComponent : Component
     /// The chance to roll entire missing pairs increases linearly with this.
     /// Do not increase it past <see cref="MutationData.BaseCount"/> (32).
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public int Difficulty = 8;
 
     /// <summary>
@@ -67,13 +67,17 @@ public sealed partial class MutationComponent : Component
 /// Event raised on both mutation and target entities after a mutation has been added to a target.
 /// </summary>
 [ByRefEvent]
-public record struct MutationAddedEvent(Entity<MutatableComponent> Target, Entity<MutationComponent> Mutation, EntProtoId<MutationComponent> Id, EntityUid? User, bool Automatic, bool Predicted);
+public record struct MutationAddedEvent(Entity<MutatableComponent> Target,
+    Entity<MutationComponent> Mutation, EntProtoId<MutationComponent> Id,
+    EntityUid? User, bool Automatic, bool Predicted);
 
 /// <summary>
 /// Event raised on both mutation and target entities before a mutation has been removed from a target.
 /// </summary>
 [ByRefEvent]
-public record struct MutationRemovedEvent(Entity<MutatableComponent> Target, Entity<MutationComponent> Mutation, EntProtoId<MutationComponent> Id, EntityUid? User, bool Automatic, bool Predicted);
+public record struct MutationRemovedEvent(Entity<MutatableComponent> Target,
+    Entity<MutationComponent> Mutation, EntProtoId<MutationComponent> Id,
+    EntityUid? User, bool Automatic, bool Predicted);
 
 /// <summary>
 /// Rarity tier shown in the scanner UI.

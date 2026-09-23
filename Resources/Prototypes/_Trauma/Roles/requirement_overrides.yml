@@ -154,6 +154,15 @@
     - !type:DepartmentTimeRequirement
       department: Command
       time: 5h
+    InitialInfected:
+    - !type:OverallPlaytimeRequirement
+      time: 1h
+    - &biological_requirement
+      !type:SpeciesRequirement
+      inverted: true
+      species:
+      - IPC
+      - Plasmaman
     Nukeops:
     - &no_plasmamen !type:SpeciesRequirement
       inverted: true
@@ -186,6 +195,7 @@
     - !type:DepartmentTimeRequirement
       department: Security
       time: 2h
+    - *biological_requirement
     Wizard:
     - !type:OverallPlaytimeRequirement
       time: 5h
@@ -197,3 +207,5 @@
     - !type:RoleTimeRequirement
       role: JobBorg
       time: 5h
+    Zombie:
+    - *biological_requirement

@@ -1,0 +1,36 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: chatFilter
+  id: GamerWords
+  regex: "" # ez repo takedown
+  cvar: "chat.gamer_words_regex"
+  banMessage: "Automatically banned for violation of rule C9: No bigotry."
+  effects:
+  - !type:Thunderstrike
+
+- type: chatFilter
+  id: WordsThatKill #, would you speak them to me?
+  regex: "" # maybe repo takedown
+  cvar: "chat.kill_regex"
+  # no autoban, admins can decide what to do with you
+  effects:
+  - !type:HealthChange
+    damage:
+      types:
+        Blunt: 300 # perish
+  - !type:IfElse
+    condition: !type:HasOrgan
+      organCategory: Brain
+    trueEffects:
+    - !type:RelayOrgan
+      category: Brain
+      effects:
+      - !type:DetachOrgan # round
+      - !type:Gib # removed
+    falseEffects:
+    - !type:Thunderstrike # fuck you chud
+      conditions:
+      - !type:WhitelistCondition
+        blacklist:
+          components:
+          - Ghost

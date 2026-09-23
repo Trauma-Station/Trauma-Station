@@ -4,9 +4,9 @@
   id: DubiousOrgansTable
   table: !type:GroupSelector
     children:
-    # Not-so Annoying Organs Group - 50% chance
+    # Not-so Annoying Organs Group - 45% chance
     - !type:GroupSelector
-      weight: 50
+      weight: 45
       children:
       - id: OrganDubiousHealth
       - id: OrganDubiousInvisible
@@ -28,14 +28,16 @@
       - id: OrganDubiousGravityWell
       - id: OrganDubiousFlash
       - id: OrganDubiousSmoke
-      - id: OrganDubiousGas
-    # Very Disruptive Organs Group - 15% chance
-    - !type:GroupSelector
-      weight: 15
-      children:
-      - id: OrganDubiousAA
       - id: OrganDubiousSpiderEggs
       - id: OrganDubiousSlimeEggs
+    # Very Disruptive Organs Group - 20% chance
+    - !type:GroupSelector
+      weight: 20
+      children:
+      - id: OrganDubiousAA
+      - id: OrganDubiousGravityWell
+      - id: OrganDubiousGas
+
 
 - type: entity
   name: Dubious Organ Spawner

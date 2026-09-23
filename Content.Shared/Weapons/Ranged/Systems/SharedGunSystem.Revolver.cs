@@ -33,7 +33,7 @@ public partial class SharedGunSystem
         if (args.Handled)
             return;
 
-        if (!_useDelay.TryResetDelay(ent))
+        if (!_useDelay.TryResetDelay(ent.Owner))
             return;
 
         args.Handled = true;
@@ -294,7 +294,7 @@ public partial class SharedGunSystem
                     continue;
 
                 // <Trauma> - predicted this shit
-                var uid = EntityManager.PredictedSpawn(ent.Comp.FillPrototype, mapCoordinates);
+                var uid = PredictedSpawn(ent.Comp.FillPrototype, mapCoordinates);
 
                 if (TryComp<CartridgeAmmoComponent>(uid, out var cartridge))
                     SetCartridgeSpent(uid, cartridge, !(bool) chamber);

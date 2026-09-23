@@ -1,0 +1,57 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: GrenadeBaton
+  name: baton grenade (40mm)
+  components:
+  - type: SpentAmmoVisuals
+    suffix: true
+  - type: Tag
+    tags:
+    - Grenade
+    - NonLethalGrenade
+
+- type: entity
+  id: GrenadeBlast
+  name: blast grenade round (40mm)
+  components:
+  - type: SpentAmmoVisuals
+    suffix: true
+
+- type: entity
+  id: GrenadeFlash
+  name: flash grenade round (40mm)
+  components:
+  - type: SpentAmmoVisuals
+    suffix: true
+  - type: Tag
+    tags:
+    - Grenade
+    - NonLethalGrenade
+
+- type: entity
+  id: GrenadeFrag
+  name: frag grenade round (40mm)
+  components:
+  - type: SpentAmmoVisuals
+    suffix: true
+
+- type: entity
+  id: GrenadeCleanade
+  name: cleanade grenade round (40mm)
+  components:
+  - type: Tag
+    tags:
+    - Grenade
+    - NonLethalGrenade
+
+- type: entity
+  id: GrenadeEMP
+  name: EMP grenade round (40mm)
+  components:
+  - type: SpentAmmoVisuals
+    suffix: true
+  - type: Tag
+    tags:
+    - Grenade
+    - NonLethalGrenade
