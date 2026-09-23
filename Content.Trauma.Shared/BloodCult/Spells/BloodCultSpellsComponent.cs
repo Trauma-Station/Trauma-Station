@@ -10,7 +10,7 @@ namespace Content.Trauma.Shared.BloodCult.Spells;
 public sealed partial class BloodCultSpellsComponent : Component
 {
     [DataField]
-    public TimeSpan SpellCreationTime = TimeSpan.FromSeconds(2);
+    public TimeSpan SpellCreationTime = TimeSpan.FromSeconds(10);
 
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> ActiveSpells = new();

@@ -6,7 +6,11 @@ using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Cuffs;
+using Content.Shared.Damage;
+using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Mindshield.Components;
@@ -24,6 +28,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private BloodCultSystem _cult = default!;
+    [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedCuffableSystem _cuffable = default!;
@@ -36,6 +41,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
     [Dependency] private StatusEffectsSystem _status = default!;
 
     private static readonly EntProtoId Muted = "StatusEffectMuted";
+    private static readonly ProtoId<DamageTypePrototype> Slash = "Slash";
 
     #region Event Handlers
 
@@ -104,10 +110,16 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
             return;
         }
 
+        var time = ent.Comp.SpellCreationTime;
+        if (HasComp<BloodCultEmpoweredComponent>(user))
+            time *= 0.4;
+
+        _popup.PopupEntity("You begin to carve unnatural symbols into your flesh!", user, user, PopupType.MediumCaution);
+
         var createSpellEvent = new CreateSpellDoAfterEvent(id);
         var doAfter = new DoAfterArgs(EntityManager,
             args.Actor,
-            ent.Comp.SpellCreationTime,
+            time,
             createSpellEvent,
             eventTarget: ent)
         {
@@ -141,7 +153,19 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         if (_actions.AddAction(user, args.ActionProtoId, container: ent) is not { } action)
             return;
 
-        _popup.PopupEntity($"You prepare your {Name(action)} spell", user, user, PopupType.Medium);
+        var damage = FixedPoint2.New(20);
+        if (HasComp<BloodCultEmpoweredComponent>(user))
+            damage /= 5;
+
+        _damage.ChangeDamage(user, new DamageSpecifier()
+        {
+            DamageDict = new()
+            {
+                { Slash, damage }
+            }
+        });
+
+        _popup.PopupEntity($"Your wounds glow with power, you have prepared a {Name(action)} invocation!", user, user, PopupType.Medium);
         _actions.SetTemporary(action, true); // can't be temp in the prototype or AddAction will queue del it :D
         ent.Comp.ActiveSpells.Add(action);
         Dirty(ent);

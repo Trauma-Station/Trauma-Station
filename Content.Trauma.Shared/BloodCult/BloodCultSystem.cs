@@ -102,7 +102,7 @@ public abstract partial class BloodCultSystem : EntitySystem
     }
 
     /// <summary>
-    /// Gets all cultists/constructs near a rune.
+    /// Gets all cultists/construct players near a rune.
     /// The hashset returned is reused between calls, do not store it.
     /// </summary>
     public HashSet<Entity<BloodCultMemberComponent>> GatherCultists(EntityUid rune, float range)
@@ -110,6 +110,7 @@ public abstract partial class BloodCultSystem : EntitySystem
         var pos = Transform(rune).Coordinates;
         _cultists.Clear();
         _lookup.GetEntitiesInRange(pos, range, _cultists);
+        _cultists.RemoveWhere(uid => !_actorQuery.HasComp(uid));
         return _cultists;
     }
 

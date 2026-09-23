@@ -12,4 +12,7 @@ public sealed partial class CultTeleportActionComponent : Component
 
     [DataField]
     public SoundSpecifier? TeleportOutSound;
+
+    [DataField]
+    public EntityUid Target;
 }

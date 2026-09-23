@@ -26,6 +26,7 @@
   - type: Magic
     requiresSpeech: true
   - type: SpeakOnAction
+    chatType: Whisper
   - type: SelfRemovingAction
 
 - type: entity
@@ -207,6 +208,9 @@
     effects:
     - !type:SpawnHeldItems
       items: [ RitualDagger ]
+    - !type:PopupMessage
+      type: Pvs
+      messages: [ entity-effect-popup-blood-cult-summon-dagger ]
   - type: SpeakOnAction
     sentence: blood-cult-action-summon-equipment
 

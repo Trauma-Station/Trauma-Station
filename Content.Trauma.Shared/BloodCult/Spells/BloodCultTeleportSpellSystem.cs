@@ -28,6 +28,8 @@ public sealed partial class BloodCultTeleportSpellSystem : EntitySystem
         if (ev.Handled || !_runeTeleport.TryGetTeleportRunes(out var runes, user))
             return;
 
+        ent.Comp.Target = ev.Target;
+
         var action = ev.Action; // action stores the UI
         _ui.SetUiState(action.Owner, WizardTeleportUiKey.Key, new WizardTeleportState(runes));
         _ui.TryToggleUi(action.Owner, WizardTeleportUiKey.Key, user);
@@ -44,7 +46,7 @@ public sealed partial class BloodCultTeleportSpellSystem : EntitySystem
 
         var user = args.Actor;
         var ev = new TeleportActionDoAfterEvent();
-        var doAfterArgs = new DoAfterArgs(EntityManager, user, duration, ev, eventTarget: ent, used: rune);
+        var doAfterArgs = new DoAfterArgs(EntityManager, user, duration, ev, ent, target: ent.Comp.Target, used: rune);
         _doAfter.TryStartDoAfter(doAfterArgs);
     }
 
