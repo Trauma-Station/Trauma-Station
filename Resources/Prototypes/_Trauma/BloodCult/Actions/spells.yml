@@ -67,9 +67,8 @@
     sentence: blood-cult-action-stun
   - type: EffectAction
     effects:
-    - !type:GenericStatusEffect
-      key: Muted
-      component: Muted
+    - !type:ModifyStatusEffect
+      proto: StatusEffectMuted
       time: 12
     - !type:ModifyParalysis
       time: 16

@@ -28,8 +28,7 @@
   - type: ExplosionResistance
     damageCoefficient: 0.5
   - type: TemperatureProtection
-    heatingCoefficient: 0.001
-    coolingCoefficient: 0.001
+    coefficient: 0.001
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHelmetCultArmor
@@ -129,4 +128,6 @@
     damageContainers:
     - Biological
   - type: NightVision
-    isEquipment: true
+    relayOverlay: true
+    lightingColor: "#dc143cee"
+    overlayColor: "#dc143c"

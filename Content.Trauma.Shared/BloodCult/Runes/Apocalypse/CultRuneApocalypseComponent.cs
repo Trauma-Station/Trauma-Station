@@ -52,7 +52,6 @@ public sealed partial class CultRuneApocalypseComponent : Component
     public Dictionary<EntProtoId, int> PossibleEvents = new()
     {
         ["ImmovableRodSpawn"] = 3,
-        ["MimicVendorRule"] = 2,
         ["KingRatMigration"] = 2,
         ["MeteorSwarm"] = 2,
         ["SpiderSpawnHorde"] = 3, // more spiders

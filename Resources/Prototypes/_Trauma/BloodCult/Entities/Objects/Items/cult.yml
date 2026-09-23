@@ -97,8 +97,8 @@
       components:
       - BloodCultMember
   - type: Parry
-    maxParries: 1
-    maxReflects: 5
+    parryExhaustionCost: 0.3
+    reflectExhaustionCost: 0.1
   - type: Blocking
     passiveBlockModifier:
       coefficients:
@@ -117,8 +117,6 @@
         Slash: 1
         Piercing: 1
         Heat: 1
-  - type: Damageable
-    damageContainer: Shield
   - type: Destructible
     thresholds:
     - trigger:

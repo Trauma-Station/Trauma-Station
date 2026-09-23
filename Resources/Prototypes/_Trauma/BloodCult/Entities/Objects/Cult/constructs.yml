@@ -69,8 +69,9 @@
         layer:
         - FlyingMobLayer
   - type: Damageable
-    damageContainer: ManifestedSpirit
     damageModifierSet: ManifestedSpirit
+  - type: Injurable
+    damageContainer: ManifestedSpirit
   - type: MobThresholds
     thresholds:
       0: Alive
