@@ -14,11 +14,8 @@
     SurveillanceWirelessCameraBodySecurity: 5 # Goobstation
     ClothingMaskGasSecurity: 5 # Goobstation
     ClothingMaskNeckGaiterRed: 3
-    # ClothingHandsGlovesColorBlack: 3 # Trauma
-    # ClothingHandsGlovesFingerless: 3 # Trauma
-    ClothingHandsGlovesSecurity: 3 # Trauma
-    ClothingHandsGlovesSecurityBlue: 3 # Trauma
-    ClothingHandsGlovesSecurityDuty: 6 # Trauma
+    ClothingHandsGlovesColorBlack: 3 # Trauma
+    ClothingHandsGlovesFingerless: 3 # Trauma
     ClothingUniformJumpskirtSec: 3
     ClothingUniformJumpsuitSecGrey: 3
     ClothingUniformJumpskirtSecGrey: 3
@@ -46,10 +43,3 @@
     ToyFigurineBrigmedic: 1 # Goobstation
     ToyFigurineWarden: 1
     ToyFigurineHeadOfSecurity: 1
-  # <Trauma>
-  emaggedInventory:
-    ClothingOuterCoatSyndieCapArmored: 1
-    ClothingOuterWinterSyndieCapArmored: 1
-    ClothingHeadHelmetSwatSyndicate: 1
-    ClothingMaskGasSyndicate: 1
-  # </Trauma>

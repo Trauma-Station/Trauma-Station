@@ -2,3 +2,13 @@
   id: SecDrobeInventory
   startingInventory:
     ClothingShoesBootsMagSecurity: 2
+    ClothingHandsGlovesSecurity: 3
+    ClothingHandsGlovesSecurityBlue: 3
+    ClothingHandsGlovesSecurityDuty: 6
+    ClothingHandsGlovesColorBlack: !Remove
+    ClothingHandsGlovesFingerless: !Remove
+  emaggedInventory:
+    ClothingOuterCoatSyndieCapArmored: 1
+    ClothingOuterWinterSyndieCapArmored: 1
+    ClothingHeadHelmetSwatSyndicate: 1
+    ClothingMaskGasSyndicate: 1
