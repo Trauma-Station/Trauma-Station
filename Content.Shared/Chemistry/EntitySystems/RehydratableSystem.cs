@@ -1,3 +1,4 @@
+using Content.Trauma.Common.Chemistry; //Trauma
 using Content.Shared.Administration.Logs;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Database;
@@ -60,6 +61,11 @@ public sealed partial class RehydratableSystem : EntitySystem
 
         var ev = new GotRehydratedEvent(target);
         RaiseLocalEvent(uid, ref ev);
+
+        // <Trauma>
+        // differentiates beings of the cube
+        EnsureComp<CubeBornComponent>(target);
+        // </Trauma>
 
         // prevent double hydration while queued
         RemComp<RehydratableComponent>(uid);

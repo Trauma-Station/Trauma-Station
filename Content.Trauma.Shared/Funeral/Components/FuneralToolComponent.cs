@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Whitelist;
+using Robust.Shared.Audio;
 
 namespace Content.Trauma.Shared.Funeral.Components;
 
@@ -15,4 +16,16 @@ public sealed partial class FuneralToolComponent : Component
     /// </summary>
     [DataField]
     public EntityWhitelist? UserWhitelist;
+
+    /// <summary>
+    /// Which effect to display.
+    /// </summary>
+    [DataField]
+    public EntProtoId EffectProto = "EffectSpark";
+
+    /// <summary>
+    /// Which sound effect to play.
+    /// </summary>
+    [DataField]
+    public SoundSpecifier? SoundPath = new SoundPathSpecifier("/Audio/Effects/hallelujah.ogg");
 }
