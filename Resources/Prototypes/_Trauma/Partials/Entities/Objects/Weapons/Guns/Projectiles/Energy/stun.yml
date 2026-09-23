@@ -20,7 +20,7 @@
   - *disabler_fixtures
 
 - type: entity
-  id: BulletDisablerSmg
+  id: BulletDisablerSmgStunning
   components:
   - *disabler_fixtures
   - type: StaminaDamageOnCollide
