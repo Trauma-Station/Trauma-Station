@@ -75,7 +75,7 @@ public sealed partial class SecretRuleSystem : GameRuleSystem<SecretRuleComponen
     private bool TryPickPreset(ProtoId<WeightedRandomPrototype> weights, [NotNullWhen(true)] out GamePresetPrototype? preset)
     {
         var options = ProtoMan.Index(weights).Weights.ShallowClone();
-        var players = GameTicker.ReadyPlayerCountEffective();
+        var players = GameTicker.ReadyPlayerCountEffective(); // Trauma, used to be ReadyPlayerCount()
 
         GamePresetPrototype? selectedPreset = null;
         var sum = options.Values.Sum();
@@ -133,7 +133,7 @@ public sealed partial class SecretRuleSystem : GameRuleSystem<SecretRuleComponen
     /// </summary>
     public bool CanPickAny(IEnumerable<ProtoId<GamePresetPrototype>> protos)
     {
-        var players = GameTicker.ReadyPlayerCountEffective();
+        var players = GameTicker.ReadyPlayerCountEffective(); // Trauma, used to be ReadyPlayerCount()
         foreach (var id in protos)
         {
             if (!ProtoMan.TryIndex(id, out var selectedPreset))

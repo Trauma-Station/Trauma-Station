@@ -350,16 +350,6 @@ namespace Content.Server.GameTicking
             }
             return total;
         }
-        // </Trauma>
-        /// <summary>
-        /// Returns the readied player count as well as half a player per unreadied player.
-        /// </summary>
-        public int ReadyPlayerCountEffective()
-        {
-            int total = ReadyPlayerCount();
-            return total + (_playerGameStatuses.Count - total) / 2;
-        }
-        // </Trauma>
 
         public void StartRound(bool force = false)
         {
