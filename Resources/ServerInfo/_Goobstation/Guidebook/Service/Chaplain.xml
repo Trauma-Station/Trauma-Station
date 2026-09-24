@@ -3,10 +3,10 @@
 There's something about the vast infinity of space that turns men to prayer... Especially if they get thrown into it without a space suit.
 
 
-As a chaplain, you would ideally proselytize whatever crazy religion you've made up for that round over your headset. However, besides your office, the hellish crematorium next to your office, and the rarely used morgue, you have no access.
+As a chaplain, you would ideally proselytize whatever crazy religion you've made up for that round over your headset. However, your station is probably getting overrun by the occult and you're the only one with the holy hotline to shut them down.
 
   <Box>
-    <GuideEntityEmbed Entity="Bible"/>
+    <GuideEntityEmbed Entity="ChaplainUndeterminedBible"/>
     <GuideEntityEmbed Entity="Nullrod"/>
     <GuideEntityEmbed Entity="ArmamentsBeacon"/>
   </Box>
@@ -14,18 +14,29 @@ As a chaplain, you would ideally proselytize whatever crazy religion you've made
 ## Religions:
 You are free to propagate any present day religions you know of, or even invent one of your own! Just make sure it doesn't go against NanoTrasen and its values, or you may well end up in the brig.
 
-## Holy Artefacts
+## Duties
 
-### Armaments Beacon
-Allows you to choose a set of armor. All armors have identical stats.
+- Church Services: Give sermons and sing hymns.
+- Proselytizing: Most crew members are godless heathens, show them god's love.
+- Burial Services: Security or Medical may require someone, or something... to be cremated, familiarise yourself with your Chapel so you can make things quick!
+- Metaphysical Investigation: Most crew aren't aware of the threats posed by the unholy, be on the look out for anything suspicious.
+- Magic Approval: With the power vested in your regular stamp, you can give your fellow crewmembers permission to practice magic as much they are able. Beware though, [color=red]you can't permit magic-based crime, the law will always recognize [color=purple]magical contraband[/color] as contraband.[/color]
+
+## Metaphysical Threats
+As Chaplain you are the first line of defense against metaphysical threats. They could strike at any moment, so be ready for the holy war to come to town. They could also not strike at all, so be ready to be disappointed too.
 
 ### Null Rod
-The obsidian rod will be your defense against the forces of evil. [color=blue][bold] Having it in your hands will make you completely immune to the effects of magic. [/bold][/color]
+Your Null Rod is your main arm against any magical threat, with the ability to block all magical offense as long as you're holding it. Whacking an unholy entity with a Null Rod will smite them with holy force!
 
-You can transform it into a holy weapon of choice by placing it on an altar!
+The Null Rod can be transformed into a themed tool by placing it onto an altar.
+
+### Holy Scripture
+Using your bluespace scripture beacon, you can select a holy scripture of your choosing. Which one you pick will not affect your abilities. Not picking one [italic]will[/italic] affect your abilities.
+
+The scriptures can heal a living being if you touch it to them, they can daze an unholy entity if you whack them with it, they can turn water into holy water and blood into wine, and you can use them to consecrate corpses. Truly the omnitool of your god's favorite child.
 
 ### Spirit Candles
-You can craft a spirit candle by putting a candle on a skull. Spirit Candles are useful against evil spirits like Wraith.
+You can craft a spirit candle by putting a candle on a skull. Spirit Candles are useful against invisible spirits like Wraith.
 
 When they are ignited, they create a 12x12 tile area that reveals evil spirits. It also has a special function when you use it in-hand.
 By using it [bold]when an evil spirit is within(!!) your 12x12 area[/bold], it will make them corporeal.
@@ -34,16 +45,26 @@ It has 2 charges per spirit candle, and [bold]it only consumes a charge when you
 
 It drops the skull once the candle has melted, so you can craft another one.
 
-## Duties
+### Holy Water
+By blessing a container of water with your scripture, you can turn it to holy water. Holy water, unlike regular water, lights unholy beings on fire. Not only is this good for putting the pressure on adversaries, but it's good for figuring out who or what counts as unholy.
 
-- Church Services: Give sermons and sing hymns.
-- Proselytizing: Most crew members are godless heathens, show them god's love.
-- Burial Services: Security or Medical may require someone, or something... to be cremated, familiarise yourself with your Chapel so you can make things quick!
-- [bold] Metaphysical Investigation: Most crew aren't aware of the threats posed by the unholy, be on the look out for anything suspicious. [/bold]
+Secretly, fire extinguishers can be emptied out and refilled with any reagent, including holy water. Do with this information as you will.
 
-### Metaphysical Threats
-As Chaplain you are the first line of defence against metaphysical threats, [bold] ready your Null Rod - the time is now. [/bold]
+[color=red]Use of excessive force against targets which you cannot confirm are metaphysical threats may land you in trouble with the law, use caution and investigate carefully.[/color]
 
-[color=red][bold] Use of excessive force against targets which you cannot confirm are metaphysical threats may land you in trouble with the law, use caution and investigate carefully. [/bold][/color]
+## Enchanting
+As a chaplain, you get ample opportunity to perform enchantment. It's a fun side activity than an actual duty. With your inherent magical literacy, you can craft [bold]random magic ink[/bold] by combining an ordinary bottle with an enchanted catalyst, including demonic soul fragments and holy ashes.
+
+See the dedicated [textlink="Enchanting guidebook entry" link="Enchanting"/] for a comprehensive guide on how to put magic ink to use.
+
+Enchanting can be used to power yourself up for your next battle, or to improve the equipment of your fellow crewmembers, or even just to screw around and create a super roach. It's a sandbox of magical enhancements!
+
+### Obtaining Holy Ash
+Most humanoid corpses can be consecrated, but there may be extra criteria that you don't know about, so use your bible to check if the corpse is able to be consecrated.
+
+To complete a consecration you must embalm the corpse by injecting more than 10u of formaldehyde. The formaldehyde will be used up over time, so aim for a number above 10.
+
+Once complete, the corpse will sparkle with holy light, and can then be burnt up in the crematorium to obtain holy ash, with which you can craft a magic ink.
+
 
 </Document>
