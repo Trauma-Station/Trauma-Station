@@ -56,6 +56,8 @@
     tags:
     - SiliconMob
     - IPCDrinkBlacklist # no selfantagging ipcs
+  - type: TwistedConstructionTarget
+    replacementProto: ConstructShell
 
 - type: entity
   id: BaseXenoborgChassis

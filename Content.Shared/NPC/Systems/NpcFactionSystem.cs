@@ -1,9 +1,11 @@
+// <Trauma>
+using Content.Shared.Stealth.Components;
+// </Trauma>
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
 using Robust.Shared.Prototypes;
 using System.Collections.Frozen;
 using System.Linq;
-using Content.Shared.Stealth.Components; // Goobstation - filter out stealthed entities
 
 namespace Content.Shared.NPC.Systems;
 
