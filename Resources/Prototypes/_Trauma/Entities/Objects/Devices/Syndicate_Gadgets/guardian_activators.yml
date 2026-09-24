@@ -9,4 +9,4 @@
   - type: GuardianCreator
     guardianProto: MobIfritGuardian
   - type: AccessReader
-    access: [["Wizard"]] 
+    access: [["Wizard"]]
