@@ -16,7 +16,6 @@
     added:
     - type: Hulk
       laserEyes: false # that's a separate mutation
-      martialsBlocked: true
   # TODO: make sure goob hulk is good for this
   # TODO: species lock to human?
 

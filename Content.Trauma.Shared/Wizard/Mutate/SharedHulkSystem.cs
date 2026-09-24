@@ -41,7 +41,6 @@ public abstract partial class SharedHulkSystem : EntitySystem
         SubscribeLocalEvent<HulkComponent, EnsnareBrokenEvent>(OnEnsnareBreak);
         SubscribeLocalEvent<HulkComponent, EnsnareModifyFreeDurationEvent>(OnEnsnareModifyDuration);
         SubscribeLocalEvent<HulkComponent, KnockdownOnCollideAttemptEvent>(OnKnockDownAttempt);
-        SubscribeLocalEvent<HulkComponent, ComboAttemptEvent>(OnComboAttempt);
     }
 
     private void OnStartup(Entity<HulkComponent> ent, ref ComponentStartup args)
@@ -64,9 +63,10 @@ public abstract partial class SharedHulkSystem : EntitySystem
             Roar(ent, 0.2f);
     }
 
+    [SubscribeLocalEvent]
     private void OnComboAttempt(Entity<HulkComponent> ent, ref ComboAttemptEvent args)
     {
-        args.Cancelled = ent.Comp.MartialsBlocked;
+        args.Cancelled |= ent.Comp.MartialsBlocked;
     }
 
     private void OnSlipAttempt(Entity<HulkComponent> ent, ref SlipAttemptEvent args)

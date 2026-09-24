@@ -38,20 +38,11 @@ public partial class MartialArtsSystem
         if (!_timing.IsFirstTimePredicted || args.Weapon != user)
             return;
 
-        var entAttemptEv = new ComboAttemptEvent();
-        RaiseLocalEvent(ent, ref entAttemptEv);
-
-        if (entAttemptEv.Cancelled)
+        var attemptEV = new ComboAttemptEvent();
+        RaiseLocalEvent(ent, ref attemptEV);
+        RaiseLocalEvent(user, ref attemptEV); // Raises on user for blacklists suck as HulkComp
+        if (attemptEV.Cancelled)
             return;
-
-        if (ent.Owner != user)
-        {
-            var userAttemptEv = new ComboAttemptEvent();
-            RaiseLocalEvent(user, ref userAttemptEv);
-
-            if (userAttemptEv.Cancelled)
-                return;
-        }
 
         if (TryComp<MartialArtsKnowledgeComponent>(ent, out var martialArtsComp) && martialArtsComp.Blocked)
             return;
