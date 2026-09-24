@@ -25,7 +25,7 @@ public sealed partial class SatiationProductionSystem : EntitySystem
         base.Update(frameTime);
 
         // <Trauma> - strip actual production from the query so entities with SatiationProduction
-        var producing = new Robust.Shared.Collections.ValueList<Entity<SatiationProductionComponent>>();
+        var producing = new Robust.Shared.Collections.ValueList<Entity<SatiationProductionComponent?>>();
         var query = EntityQueryEnumerator<SatiationProductionComponent>();
         while (query.MoveNext(out var uid, out var producer))
         {
