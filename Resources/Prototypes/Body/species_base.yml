@@ -6,7 +6,7 @@
   - MobDamageable
   - MobPolymorphable
   - StripableInventoryBase
-  - BaseSpeciesAppearance
+  #- BaseSpeciesAppearance # Trauma - every species inherits this itself
   id: BaseSpeciesMob
   save: false
   components:
