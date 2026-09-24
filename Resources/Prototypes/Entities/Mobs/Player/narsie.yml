@@ -85,19 +85,34 @@
     globalReceive: true
   # Goobstation
   - type: CollectiveMind
-    defaultChannel: Binary
+    defaultChannel: BloodCult
     channels:
+    - BloodCult
+    - Dragonmind
+    - Lingmind
+    - Tidemind
+    - Blobmind
+    - MansusLink
+    - Abductormind
     - Binary
+    - Dronemind
+    - Mousemind
+    - Binglemind
+    - Shadowmind
+    - Xenomorphivemind
+    - Wraithmind
   - type: Physics
     bodyStatus: InAir
   - type: CanMoveInAir
   # singulose components
-  - type: EventHorizon
-    radius: 5
-    canBreachContainment: true
-  - type: GravityWell
-    baseRadialAcceleration: 6
-    maxRange: 8
+  # <Trauma> - removed for blood cult, maybe it's parity who knows
+  #- type: EventHorizon
+  #  radius: 5
+  #  canBreachContainment: true
+  #- type: GravityWell
+  #  baseRadialAcceleration: 6
+  #  maxRange: 8
+  # </Trauma>
   - type: WarpPoint
     follow: true
     location: location-nar-sie

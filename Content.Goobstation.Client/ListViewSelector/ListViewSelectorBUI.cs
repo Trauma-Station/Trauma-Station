@@ -12,7 +12,7 @@ namespace Content.Goobstation.Client.ListViewSelector;
 [UsedImplicitly]
 public sealed partial class ListViewSelectorBUI(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     private FancyWindow _window = new();
     private BoxContainer? _itemsContainer;
@@ -53,7 +53,7 @@ public sealed partial class ListViewSelectorBUI(EntityUid owner, Enum uiKey) : B
             VerticalExpand = true,
             MinWidth = 350,
             MinHeight = 400,
-            Title = Loc.GetString("list-view-window-default-title")
+            Title = "List selector"
         };
 
         var scrollContainer = new ScrollContainer
@@ -86,10 +86,10 @@ public sealed partial class ListViewSelectorBUI(EntityUid owner, Enum uiKey) : B
         {
             var itemName = item.Name;
             var itemDesc = item.Description;
-            if (_prototypeManager.Resolve(item.Id, out var itemPrototype))
+            if (_proto.TryIndex(item.Id, out var proto))
             {
-                itemName = itemPrototype.Name;
-                itemDesc = itemPrototype.Description;
+                itemName = proto.Name;
+                itemDesc = proto.Description;
             }
 
             var button = new Button
@@ -103,7 +103,7 @@ public sealed partial class ListViewSelectorBUI(EntityUid owner, Enum uiKey) : B
             button.OnButtonUp += _ =>
             {
                 var msg = new ListViewItemSelectedMessage(item, items.IndexOf(item), _metaData);
-                SendMessage(msg);
+                SendPredictedMessage(msg);
                 Close();
             };
 

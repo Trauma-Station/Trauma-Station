@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: construction
+  abstract: true
+  id: BaseBloodCultStructure
+  objectType: Structure
+  placementMode: SnapgridCenter
+  category: construction-category-antagonist
+  canBuildInImpassable: false
+  conditions:
+  - !type:TileNotBlocked
+  entityWhitelist: # if skills are disabled, prevents randoms making cult shit
+    components:
+    - BloodCultist
+  theory:
+    EldritchKnowledge: 5
+
+- type: construction
+  parent: BaseBloodCultStructure
+  id: CultPylon
+  graph: CultPylon
+  targetNode: pylon
+  placementMode: AlignPylonConstruction
+
+- type: construction
+  parent: BaseBloodCultStructure
+  id: CultFactoryAltar
+  graph: CultFactoryAltar
+  targetNode: altar
+
+- type: construction
+  parent: BaseBloodCultStructure
+  id: CultFactoryForge
+  graph: CultFactoryForge
+  targetNode: forge
+
+- type: construction
+  parent: BaseBloodCultStructure
+  id: CultFactoryArchives
+  graph: CultFactoryArchives
+  targetNode: archives
+
+- type: construction
+  parent: BaseBloodCultStructure
+  id: CultDoor
+  graph: CultDoor
+  targetNode: door
+
+- type: construction
+  parent: BaseBloodCultStructure
+  id: CultGirder
+  graph: CultGirder
+  targetNode: girder

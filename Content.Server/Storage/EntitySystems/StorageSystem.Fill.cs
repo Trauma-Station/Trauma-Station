@@ -26,7 +26,7 @@ public sealed partial class StorageSystem
         }
         else
         {
-            Log.Error($"StorageFillComponent couldn't find any StorageComponent ({uid})");
+            Log.Error($"StorageFillComponent couldn't find any StorageComponent {ToPrettyString(uid)}"); // Trauma - use pretty string bruh
         }
     }
 

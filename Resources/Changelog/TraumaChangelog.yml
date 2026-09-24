@@ -14968,3 +14968,84 @@ Entries:
   id: 1627
   time: '2026-09-22T08:55:57.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4704
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Jack Galoshes are now Jani Contra
+  id: 1628
+  time: '2026-09-22T17:28:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4709
+- author: ReestockMakes
+  changes:
+  - type: Tweak
+    message: >-
+      D-Class now have loadout options of orange shoes, orange winter coats, and
+      prisoner envirosuits for plasmamen.
+  - type: Tweak
+    message: Updated D-Class role iconography.
+  id: 1629
+  time: '2026-09-22T17:30:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4527
+- author: assripper.
+  changes:
+  - type: Remove
+    message: xenomorph instant hardgrab for everything except queen
+  - type: Add
+    message: xenomorph shovestun is back
+  - type: Tweak
+    message: xenomorph drones and sentinels can no longer ventcrawl
+  - type: Tweak
+    message: xenomorphs now take x2 heat damage
+  - type: Tweak
+    message: made the xenomorph tail shorter it was too long
+  - type: Tweak
+    message: >-
+      xenomorphs now have a stunnable amount of stamina (except praetorian and
+      queen)
+  id: 1630
+  time: '2026-09-22T20:10:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4708
+- author: Wizard25671
+  changes:
+  - type: Fix
+    message: Fixed ranged roosters not using their ranged attacks, Be scared of dragons
+  - type: Fix
+    message: Fixed being unable to obtain pigeon and void eggs
+  id: 1631
+  time: '2026-09-22T20:20:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4705
+- author: hoodsie
+  changes:
+  - type: Add
+    message: Re added character descriptions
+  id: 1632
+  time: '2026-09-23T12:56:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4720
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Hello!
+  id: 1633
+  time: '2026-09-23T20:38:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4724
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed triclor
+  id: 1634
+  time: '2026-09-24T06:49:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4731
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed glass chickens exploding when looked at.
+  id: 1635
+  time: '2026-09-24T07:14:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4733
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mice not being breedable.
+  id: 1636
+  time: '2026-09-24T11:44:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4738

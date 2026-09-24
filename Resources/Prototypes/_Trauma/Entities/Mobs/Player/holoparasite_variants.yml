@@ -81,14 +81,14 @@
     passiveVisibilityRate: -0.35
     movementVisibilityRate: 0.5
   - type: Guardian
-    damageShare: 0.5
+    damageShare: 0.7
     distanceAllowed: 10
   - type: MeleeWeapon
     attackRate: 1.6
     damage:
       types:
         Blunt: 25
-        Poison: 25
+        Poison: 15
 
 - type: entity
   parent: BaseHoloParasite

@@ -117,6 +117,20 @@ public sealed partial class AreaSystem : EntitySystem
     }
 
     /// <summary>
+    /// Get the name of an area a mob is in, or unknown if there is none.
+    /// </summary>
+    public string GetAreaName(EntityUid target)
+        => GetAreaName(Transform(target).Coordinates);
+
+    /// <summary>
+    /// Get the name of an area at a position, or unknown if there is none.
+    /// </summary>
+    public string GetAreaName(EntityCoordinates coords)
+        => GetArea(coords) is { } area
+            ? Name(area)
+            : "unknown";
+
+    /// <summary>
     /// Get the department an area belongs to, or null if it lacks <see cref="DepartmentAreaComponent"/>.
     /// </summary>
     public ProtoId<DepartmentPrototype>? GetAreaDepartment(EntityUid area)
