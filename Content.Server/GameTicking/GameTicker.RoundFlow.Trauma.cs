@@ -1,4 +1,4 @@
-﻿
+
 namespace Content.Server.GameTicking
 {
     public sealed partial class GameTicker
