@@ -15035,3 +15035,10 @@ Entries:
   id: 1634
   time: '2026-09-24T06:49:20.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4731
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed glass chickens exploding when looked at.
+  id: 1635
+  time: '2026-09-24T07:14:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4733
