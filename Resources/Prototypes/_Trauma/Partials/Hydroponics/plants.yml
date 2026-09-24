@@ -64,7 +64,7 @@
   components:
   - type: PlantData
     mutationPrototypes:
-    - MagicMushrooms
+    - MagicMushroomsPlants
 
 - type: entity
   id: ChillyPlants
@@ -82,13 +82,6 @@
   - type: PlantData
     mutationPrototypes:
     - BalloonWatermelonPlants
-
-- type: entity
-  id: BerryPlants
-  components:
-  - type: PlantData
-    mutationPrototypes:
-    - StrangeBerryPlants
 
 - type: entity
   id: PeaPlants
