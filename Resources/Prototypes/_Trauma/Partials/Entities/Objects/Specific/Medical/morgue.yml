@@ -9,8 +9,7 @@
     containers:
       entity_storage: !type:AllSelector
         children: !clear
-        - id: ChemistryBottleFormaldehyde
-          amount: 3
+        - id: BoxEmbalmingFluid
         - id: Syringe
         - id: BoxBodyBag
           amount: 1

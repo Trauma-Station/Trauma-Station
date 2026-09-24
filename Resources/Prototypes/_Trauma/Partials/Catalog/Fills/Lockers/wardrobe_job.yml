@@ -12,5 +12,6 @@
     - id: Syringe
     - id: HandheldHealthAnalyzer
     - id: RollerBedSpawnFolded
+    - id: BoxEmbalmingFluid
     - id: BoxBottle
     - id: BoxBodyBag

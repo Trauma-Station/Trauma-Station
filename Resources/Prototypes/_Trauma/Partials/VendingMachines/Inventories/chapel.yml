@@ -3,6 +3,7 @@
 - type: vendingMachineInventory
   id: PietyVendInventory
   startingInventory:
+    ChemistryBottleFormaldehyde: 3
     EnchantingScrollEmpty: 6
   contrabandInventory:
     MagicInkRandomCurse: 1

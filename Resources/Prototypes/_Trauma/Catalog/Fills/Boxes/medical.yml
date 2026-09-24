@@ -1,0 +1,16 @@
+- type: entity
+  parent: BoxCardboardSmall
+  id: BoxEmbalmingFluid
+  name: embalming fluid bottle box
+  description: A small box containing three bottles of "embalming fluid".
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ChemistryBottleFormaldehyde
+          amount: 3
+  - type: Sprite
+    layers:
+    - state: box
+    - state: bottle
