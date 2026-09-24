@@ -16,7 +16,7 @@ using Content.Trauma.Shared.MartialArts.Components;
 
 namespace Content.Trauma.Client.Knowledge;
 
-public sealed class KnowledgeSystem : SharedKnowledgeSystem
+public sealed partial class KnowledgeSystem : SharedKnowledgeSystem
 {
     private WeakReference<CharacterWindow>? _activeWindow;
     private bool _showPopups;
