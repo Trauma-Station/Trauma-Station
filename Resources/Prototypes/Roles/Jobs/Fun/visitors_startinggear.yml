@@ -1457,7 +1457,7 @@
   id: VisitorMusicianRelaxedAltF
   equipment:
     jumpsuit: ClothingUniformRandomShirt
-    shoes: ClothingShoesWizard
+    shoes: ClothingShoesSandalsBrown
     head: ClothingHeadRastaHat
     id: VisitorPDA
     back: ClothingBackpackSatchel
