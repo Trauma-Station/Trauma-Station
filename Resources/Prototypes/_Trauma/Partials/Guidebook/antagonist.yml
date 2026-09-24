@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: guideEntry
+  id: Antagonists
+  children:
+  - BloodCult
+  - Changelings
+  - Heretics
+  - Blob
+  - CosmicCult
+  - CosmicColossus
+  - Abductors
+  - Bingle
+  - Devil
+  - Insurgents
+  - Morph
+  - Shadowlings
+  - SlaughterDemon
+  - Xenomorphs
+  - Wraith
+  - Slasher
+  - ShadowDemon
+  - Vampires
+  - Spy

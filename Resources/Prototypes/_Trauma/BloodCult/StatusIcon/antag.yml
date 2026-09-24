@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: factionIcon
+  id: BloodCultMember
+  priority: 11
+  locationPreference: left
+  showTo:
+    components:
+    - BloodCultMember
+  icon:
+    sprite: /Textures/_Trauma/BloodCult/cult_hud.rsi
+    state: cult_member
+
+- type: factionIcon
+  id: BloodCultLeader
+  priority: 11
+  locationPreference: left
+  showTo:
+    components:
+    - BloodCultMember
+  icon:
+    sprite: /Textures/_Trauma/BloodCult/cult_hud.rsi
+    state: cult_leader
