@@ -1,6 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
+  parent:
+  - !Remove BaseSpeciesAppearance # every species inherits this itself
   id: BaseSpeciesMob
   components:
   - type: BagAccess
