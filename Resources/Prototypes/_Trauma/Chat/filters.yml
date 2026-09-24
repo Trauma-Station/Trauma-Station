@@ -4,7 +4,7 @@
   id: GamerWords
   regex: "" # ez repo takedown
   cvar: "chat.gamer_words_regex"
-  banMessage: "Automatically banned for violation of rule C9: No bigotry."
+  #banMessage: "Automatically banned for violation of rule C9: No bigotry." # kill arm
   applyToName: true
   effects:
   - !type:Thunderstrike
