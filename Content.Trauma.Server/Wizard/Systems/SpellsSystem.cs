@@ -228,7 +228,6 @@ public sealed partial class SpellsSystem : SharedSpellsSystem
         var baseMatrixDeltaV = new Matrix3x2(-ev.Force, 0f, 0f, -ev.Force, 0f, 0f);
         var epicenter = mapPos.Position;
         var minRange2 = ev.MinRange * ev.MinRange;
-        var xformQuery = GetEntityQuery<TransformComponent>();
 
         foreach (var (entity, physics) in Lookup.GetEntitiesInRange<PhysicsComponent>(mapPos,
                      ev.MaxRange,
@@ -243,9 +242,9 @@ public sealed partial class SpellsSystem : SharedSpellsSystem
             if (!_gravityWell.CanGravPulseAffect(entity))
                 continue;
 
-            var xform = xformQuery.Comp(entity);
+            var xform = Transform(entity);
 
-            var displacement = epicenter - TransformSystem.GetWorldPosition(xform, xformQuery);
+            var displacement = epicenter - TransformSystem.GetWorldPosition(xform);
             var distance2 = displacement.LengthSquared();
             if (distance2 < minRange2)
                 continue;

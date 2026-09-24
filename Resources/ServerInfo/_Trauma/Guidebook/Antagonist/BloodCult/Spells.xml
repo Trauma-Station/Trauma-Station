@@ -1,0 +1,58 @@
+<Document>
+  # Spells List
+
+  <Box>
+    <GuideEntityEmbed Entity="ActionBloodCultBloodRites"/>
+  </Box>
+
+  Summons a grasp-like spell focus to your hand. It needs blood to cast spells, feed it from puddles or living beings. It can also be used to heal cultists.
+
+  <Box>
+    <GuideEntityEmbed Entity="ActionBloodCultTwistedConstruction"/>
+  </Box>
+
+  Can be used on some objects like airlocks and plasteel, turning them into cult versions.
+  [bold]This is how you get [color=#dc143c]runed metal[/color]![/bold]
+
+
+  <Box>
+    <GuideEntityEmbed Entity="ActionBloodCultShadowShackles"/>
+  </Box>
+
+  Cuffs and mutes a victim with ethereal [bold]shadow shackles[/bold], which disintegrate if removed so they can't be used against you.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="ActionBloodCultStun"/>
+  </Box>
+
+  Stuns and mutes the target, giving you plenty of time to kidnap them and bring them to your cult's lair.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="ActionBloodCultTeleport"/>
+  </Box>
+
+  Can be cast on yourself or a fellow cultist, teleporting them to a teleport rune of your choice after a few seconds.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="ActionBloodCultEmp"/>
+  </Box>
+
+  Creates a 20 second EMP instantly, taking out sec's batongs and such.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="ActionBloodCultSummonCombatEquipment"/>
+  </Box>
+
+
+  Gives you armored cult robes, a cult bola and a longsword. The sword can't be used in rituals, it's just a good weapon.
+
+  <Box>
+    <GuideEntityEmbed Entity="ActionBloodCultSummonRitualDagger"/>
+  </Box>
+
+  Gives you another ritual dagger incase you lost the one you spawned with.
+</Document>

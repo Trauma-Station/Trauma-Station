@@ -19,3 +19,5 @@ entity-effect-popup-vampire-light-2 = You should go away from space...
 entity-effect-popup-vampire-light-3 = You look pale!
 
 entity-effect-popup-pressurized-slime-death = The blob ruptures, spraying the area with liquid!
+
+entity-effect-popup-blood-cult-summon-dagger = {CAPITALIZE($entity)}'s hand glows red for a moment.

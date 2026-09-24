@@ -11,7 +11,7 @@ public sealed partial class UnhappyWhenCrowdedComponent : Component
     public int MinEntities = 6;
 
     [DataField]
-    public int Range = 5;
+    public int Range = 3;
 
     [DataField]
     public float HappinessToDecrease = -5;

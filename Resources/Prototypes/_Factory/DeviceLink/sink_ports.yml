@@ -230,4 +230,3 @@
   id: Text
   name: signal-port-name-text
   description: signal-port-description-text
-  color: *color_string

@@ -2,8 +2,11 @@
 
 using Content.Server.Administration.Managers;
 using Content.Server.Chat.Managers;
+using Content.Server.GameTicking.Rules;
 using Content.Shared.Database;
 using Content.Shared.EntityEffects;
+using Content.Shared.GameTicking;
+using Content.Shared.Humanoid;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Common.Chat;
 using Content.Trauma.Shared.Administration;
@@ -18,6 +21,7 @@ public sealed partial class ChatFilterSystem : EntitySystem
     [Dependency] private IBanManager _ban = default!;
     [Dependency] private IChatManager _chat = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
+    [Dependency] private NamingSystem _naming = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
 
@@ -42,6 +46,13 @@ public sealed partial class ChatFilterSystem : EntitySystem
         args.Cancelled |= CheckMessage(args.User, args.Message);
     }
 
+    [SubscribeLocalEvent(before: [typeof(DeathMatchRuleSystem)])] // this is the only thing that uses this event
+    private void OnBeforeSpawn(PlayerBeforeSpawnEvent args)
+    {
+        if (!IsNameAllowed(args.Player.Name, args.Profile.Name))
+            args.Profile.Name = _naming.GetName(args.Profile.Species, args.Profile.Gender);
+    }
+
     [SubscribeLocalEvent]
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
     {
@@ -61,6 +72,9 @@ public sealed partial class ChatFilterSystem : EntitySystem
         _filters.Clear();
         foreach (var proto in ProtoMan.EnumeratePrototypes<ChatFilterPrototype>())
         {
+            if (proto.Disabled)
+                continue;
+
             var text = proto.Regex;
             if (proto.Cvar is { } cvar)
             {
@@ -68,8 +82,10 @@ public sealed partial class ChatFilterSystem : EntitySystem
                 text = _cfg.GetCVar<string>(cvar);
             }
 
-            if (ParseRegex(text, proto.ID) is { } regex)
-                _filters.Add((regex, proto));
+            if (ParseRegex(text, proto.ID) is not { } regex)
+                continue;
+
+            _filters.Add((regex, proto));
         }
     }
 
@@ -108,7 +124,7 @@ public sealed partial class ChatFilterSystem : EntitySystem
         var blocked = false;
         foreach (var (regex, proto) in _filters)
         {
-            if (!regex.IsMatch(message))
+            if (!proto.ApplyToChat || !regex.IsMatch(message))
                 continue;
 
             Punish(player, message, proto);
@@ -116,6 +132,26 @@ public sealed partial class ChatFilterSystem : EntitySystem
         }
 
         return blocked;
+    }
+
+    public bool IsNameAllowed(ICommonSession player, string name)
+        => IsNameAllowed(player.Name, name);
+
+    /// <summary>
+    /// Returns true if a name was not blocked by any filters that apply to names.
+    /// No punishment is done, it's left to the caller.
+    /// </summary>
+    public bool IsNameAllowed(string username, string name)
+    {
+        foreach (var (regex, proto) in _filters)
+        {
+            if (proto.ApplyToName && regex.IsMatch(name))
+            {
+                _chat.SendAdminAlert($"Player {username} ({name}) has hit the name filter {proto.ID}");
+                return false;
+            }
+        }
+        return true;
     }
 
     // Starring

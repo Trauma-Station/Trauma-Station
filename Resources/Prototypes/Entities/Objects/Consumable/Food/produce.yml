@@ -2049,11 +2049,6 @@
   id: RiceBushel
   parent: ProduceBaseRuminant
   components:
-  # <Trauma>
-  - type: Tag
-    tags:
-    - Rice
-  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/rice.rsi
   - type: Item

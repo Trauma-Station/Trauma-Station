@@ -64,4 +64,38 @@ public sealed partial class BloodstreamSystem
         return flushedSolution.Volume == 0 ? null : flushedSolution;
     }
 
+    /// <summary>
+    /// Drains all blood from a mob, returning the solution.
+    /// </summary>
+    public Solution? DrainBlood(Entity<BloodstreamComponent?> ent)
+    {
+        if (!_query.Resolve(ent, ref ent.Comp) ||
+            !_solutionContainer.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution, out var solution))
+            return null;
+
+        return _solutionContainer.SplitSolution(ent.Comp.BloodSolution.Value, solution.Volume);
+    }
+
+    /// <summary>
+    /// Get the quantity of the largest missing blood reagent in a mob.
+    /// </summary>
+    public FixedPoint2 GetMissingBlood(Entity<BloodstreamComponent?> ent)
+    {
+        if (!_query.Resolve(ent, ref ent.Comp) ||
+            !_solutionContainer.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution, out var sol) ||
+            ent.Comp.BloodReferenceSolution.Volume == 0)
+        {
+            return FixedPoint2.Zero;
+        }
+
+        var missing = FixedPoint2.Zero;
+
+        foreach (var (reagentId, quantity) in ent.Comp.BloodReferenceSolution.Contents)
+        {
+            var diff = FixedPoint2.Max(FixedPoint2.Zero, quantity - sol.GetTotalPrototypeQuantity(reagentId.Prototype));
+            missing = FixedPoint2.Max(missing, diff);
+        }
+
+        return missing;
+    }
 }

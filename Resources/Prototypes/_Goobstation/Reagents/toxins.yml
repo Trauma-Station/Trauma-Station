@@ -1,42 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: reagent
-  id: Triclor
-  name: reagent-name-triclor
-  group: Toxins
-  desc: reagent-desc-triclor
-  physicalDesc: reagent-physical-desc-pungent
-  flavor: terrible
-  color: "#174f17"
-  metabolisms:
-    Bloodstream:
-      effects: # considering vomiting and re-add the metabolism rate works out to ~2.5/s
-      - !type:HealthChange # ~20/20 damage per 15u, inconsistent
-        damage:
-          types:
-            Blunt: 4
-            Poison: 4
-      - !type:AdjustReagent
-        reagent: Triclor
-        amount: 0.5 # Counteracts some loss from vomiting, makes effects more linear
-        conditions:
-        - !type:ReagentCondition
-          reagent: Triclor
-          max: 15 # Limit self-replication to prevent infinite accumulation
-      - !type:Vomit
-      - !type:ModifyBloodLevel
-        amount: -5
-      - !type:ModifyBleed
-        amount: 0.5
-      - !type:ModifyStatusEffect # primairly to decrease speed for a while longer after finishing vomiting
-        effectProto: TriclorSlowdownStatusEffect
-        time: 6
-      - !type:GenericStatusEffect
-        key: Stutter
-        component: StutteringAccent
-      - !type:Jitter
-
-- type: reagent
   id: Cyanide
   name: reagent-name-cyanide
   group: Toxins

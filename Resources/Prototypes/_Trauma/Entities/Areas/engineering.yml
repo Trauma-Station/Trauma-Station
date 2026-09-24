@@ -194,3 +194,11 @@
   components:
   - type: Sprite
     state: tcom_sat
+
+- type: entity
+  parent: AreaEngineering
+  id: AreaShuttleBuilding
+  name: shuttle building room
+  components:
+  - type: Sprite
+    state: shuttle_build

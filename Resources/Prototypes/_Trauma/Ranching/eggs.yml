@@ -317,7 +317,7 @@
     entity: MobChickOnagadori
 
 - type: entity
-  parent: BaseRanchingEgg
+  parent: [BaseRanchingEgg, BaseMagicalContraband]
   id: WizardEgg
   suffix: Wizard
   components:
@@ -325,6 +325,12 @@
     state: egg-wizard
   - type: TimedReplace
     entity: MobChickWizard
+  - type: EntityEffectOnEaten
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectWizardChickenPower
+      time: 60
+      type: Add
 
 - type: entity
   parent: BaseRanchingEgg
@@ -512,7 +518,7 @@
       type: Add
 
 - type: entity
-  parent: BaseRanchingEgg
+  parent: [BaseRanchingEgg, BaseMagicalContraband]
   id: PhoenixEgg
   suffix: Phoenix
   components:
@@ -532,7 +538,7 @@
       type: Add
 
 - type: entity
-  parent: BaseRanchingEgg
+  parent: [BaseRanchingEgg, BaseMagicalContraband]
   id: DragonEgg
   suffix: Dragon Chicken
   components:

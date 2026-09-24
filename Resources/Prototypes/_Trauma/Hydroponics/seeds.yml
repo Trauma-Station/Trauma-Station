@@ -156,8 +156,8 @@
         potencyDivisor: 25
       Desoxyephedrine:
         min: 1
-        max: 3
-        potencyDivisor: 10
+        max: 5
+        potencyDivisor: 20
 
 - type: entity
   parent: CornPlants
@@ -176,14 +176,14 @@
       Nutriment:
         min: 1
         max: 10
-        potencyDivisor: 20
+        potencyDivisor: 10
       Cornmeal:
         min: 5
         max: 15
         potencyDivisor: 10
       Ethanol:
-        min: 15
-        max: 60
+        min: 5
+        max: 15
         potencyDivisor: 10
 
 - type: entity
@@ -212,7 +212,7 @@
     chemicals:
       Nutriment:
         min: 1
-        max: 20
+        max: 5
         potencyDivisor: 20
 
 - type: entity
@@ -231,12 +231,16 @@
     chemicals:
       Nutriment:
         min: 1
-        max: 25
+        max: 4
         potencyDivisor: 25
       THC:
         min: 1
         max: 10
         potencyDivisor: 10
+      Tilenol:
+        min: 1
+        max: 2
+        potencyDivisor: 100
 
 - type: entity
   parent: BasePlant
@@ -262,11 +266,11 @@
     chemicals:
       Nutriment:
         min: 1
-        max: 20
+        max: 5
         potencyDivisor: 20
       Synthflesh:
         min: 5
-        max: 20
+        max: 10
         potencyDivisor: 20
 
 - type: entity
@@ -297,6 +301,10 @@
         min: 1
         max: 5
         potencyDivisor: 20
+      Plasma:
+        min: 1
+        max: 5
+        potencyDivisor: 20
 
 - type: entity
   parent: WheatPlants
@@ -317,8 +325,12 @@
       Iron:
         min: 1
         max: 16
-        potencyDivisor: 20
+        potencyDivisor: 6
       Flour:
         min: 5
-        max: 20
+        max: 10
         potencyDivisor: 20
+      Lead:
+        min: 0.1
+        max: 2
+        potencyDivisor: 5

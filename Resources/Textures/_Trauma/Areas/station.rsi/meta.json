@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/a47835a04f3c88216ca1516ec4082a009c5f3451/icons/area/areas_station.dmi | anchor, newsroom, substation, evac_lounge, evac_hall, ranch, vault modified by @deltanedas (github) | loot_room by @aineias1 | abandoned_arcade, abandoned_bar, abandoned_chapel, ai_core, airlock, anomaly_lab, arcade, artifact_lab, arrivals, boxing_ring, burn_chamber, cryo_pods, dock, gas_miner, ntr_office, mail_room and stage created by @GoidaYAMLWarrior (github)",
+    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/a47835a04f3c88216ca1516ec4082a009c5f3451/icons/area/areas_station.dmi | anchor, newsroom, substation, evac_lounge, evac_hall, ranch, vault modified by @deltanedas (github) | loot_room by @aineias1 | abandoned_arcade, abandoned_bar, abandoned_chapel, ai_core, airlock, anomaly_lab, arcade, artifact_lab, arrivals, boxing_ring, burn_chamber, cryo_pods, dock, gas_miner, ntr_office, mail_room, shuttle_build and stage created by @GoidaYAMLWarrior (github)",
     "size": {
         "x": 32,
         "y": 32
@@ -417,6 +417,9 @@
         },
         {
             "name": "showroom"
+        },
+        {
+            "name": "shuttle_build"
         },
         {
             "name": "solar_panels"

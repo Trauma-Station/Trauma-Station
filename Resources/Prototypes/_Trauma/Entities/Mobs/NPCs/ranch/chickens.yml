@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  parent: [SimpleMobBase, StripableInventoryBase, BaseExaminableHunger]
+  parent: [ BaseMobRuminant, SimpleMobBase, StripableInventoryBase, BaseExaminableHunger ]
   id: BaseMobChickRanch
   name: chicken
   description: Comes before an egg, and IS a dinosaur!
@@ -96,7 +96,7 @@
 
 - type: entity
   abstract: true
-  parent: [BaseMobAdultChickenRanch, MobCombat]
+  parent: [ BaseMobAdultChickenRanch, MobCombat ]
   id: BaseMobRoosterRanch
   components:
   - type: Sprite
@@ -126,6 +126,52 @@
   - type: HTN
     rootTask:
       task: RoosterCompound
+    blackboard:
+      MinimumIdleTime: !type:Single
+        5
+      MaximumIdleTime: !type:Single
+        20
+  - type: DamageStateVisuals
+    states:
+      Alive:
+        Base: rooster
+      Critical:
+        Base: rooster-dead
+      Dead:
+        Base: rooster-dead
+
+- type: entity
+  abstract: true
+  parent: [ BaseMobAdultChickenRanch, MobCombat ]
+  id: BaseMobRangedRoosterRanch
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Ranch/chicken-white.rsi
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: rooster
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      60: Critical
+      100: Dead
+  - type: MeleeWeapon
+    angle: 0
+    animation: WeaponArcBite
+    damage:
+      types:
+        Piercing: 10
+  - type: NPCRetaliation
+    attackMemoryLength: 60
+  - type: EggFertilizer
+  - type: HostileWhenUnhappy
+    unhappyTask: !type:HTNCompoundTask
+      task: SimpleHostileCompound
+    happyTask: !type:HTNCompoundTask
+      task: RangedRoosterCompound
+  - type: HTN
+    rootTask:
+      task: RangedRoosterCompound
     blackboard:
       MinimumIdleTime: !type:Single
         5
@@ -469,7 +515,7 @@
     coldDamageThreshold: 200
 
 - type: entity
-  parent: [BaseChickenCold, BaseMobChickRanch]
+  parent: [ BaseChickenCold, BaseMobChickRanch ]
   id: MobChickSnow
   name: snow chick
   components:
@@ -481,7 +527,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-snow.rsi
 
 - type: entity
-  parent: [BaseChickenCold, BaseMobHenRanch]
+  parent: [ BaseChickenCold, BaseMobHenRanch ]
   id: MobSnowHen
   name: snow hen
   components:
@@ -489,7 +535,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-snow.rsi
 
 - type: entity
-  parent: [BaseChickenCold, BaseMobRoosterRanch]
+  parent: [ BaseChickenCold, BaseMobRoosterRanch ]
   id: MobSnowRooster
   name: snow rooster
   components:
@@ -596,9 +642,6 @@
     availableModes:
     - SemiAuto
     soundGunshot: /Audio/Magic/fireball.ogg
-  - type: HTN
-    rootTask:
-      task: RangedRoosterCompound
   - type: Damageable
     damageModifierSet: SpicyChicken
 
@@ -620,7 +663,7 @@
     - Chili
 
 - type: entity
-  parent: [BaseChickenSpicy, BaseMobHenRanch]
+  parent: [ BaseChickenSpicy, BaseMobHenRanch ]
   id: MobSpicyHen
   name: spicy hen
   components:
@@ -631,7 +674,7 @@
     - Chili
 
 - type: entity
-  parent: [BaseChickenSpicy, BaseMobRoosterRanch]
+  parent: [ BaseChickenSpicy, BaseMobRangedRoosterRanch ]
   id: MobSpicyRooster
   name: spicy rooster
   components:
@@ -820,7 +863,7 @@
         variation: 0.125
 
 - type: entity
-  parent: [BaseChickenClown, BaseMobChickRanch]
+  parent: [ BaseChickenClown, BaseMobChickRanch ]
   id: MobChickClown
   name: clown chick #TODO think of a funny pun to use instead
   components:
@@ -839,7 +882,7 @@
     - FootstepSound
 
 - type: entity
-  parent: [BaseChickenClown, BaseMobHenRanch]
+  parent: [ BaseChickenClown, BaseMobHenRanch ]
   id: MobClownHen
   name: henk
   components:
@@ -856,7 +899,7 @@
     - FootstepSound
 
 - type: entity
-  parent: [BaseChickenClown, BaseMobRoosterRanch]
+  parent: [ BaseChickenClown, BaseMobRoosterRanch ]
   id: MobClownRooster
   name: henkster
   components:
@@ -928,12 +971,6 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 200
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-    - trigger:
-        !type:DamageTrigger
         damage: 15
       behaviors:
       - !type:PopupBehavior
@@ -954,7 +991,7 @@
         acts: [ "Destruction" ]
 
 - type: entity
-  parent: [GlassChickenBase, BaseMobChickRanch]
+  parent: [ GlassChickenBase, BaseMobChickRanch ]
   id: MobChickGlass
   name: glass chick
   components:
@@ -969,7 +1006,7 @@
     - Rice
 
 - type: entity
-  parent: [GlassChickenBase, BaseMobHenRanch]
+  parent: [ GlassChickenBase, BaseMobHenRanch ]
   id: MobGlassHen
   name: glass hen
   components:
@@ -980,7 +1017,7 @@
     - Rice
 
 - type: entity
-  parent: [GlassChickenBase, BaseMobRoosterRanch]
+  parent: [ GlassChickenBase, BaseMobRoosterRanch ]
   id: MobGlassRooster
   name: glass rooster
   components:
@@ -1028,7 +1065,7 @@
     - Nugget
 
 - type: entity
-  parent: [BaseChickenRaptor, BaseMobChickRanch]
+  parent: [ BaseChickenRaptor, BaseMobChickRanch ]
   id: MobChickRaptor
   name: raptor chick
   components:
@@ -1040,7 +1077,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-raptor.rsi
 
 - type: entity
-  parent: [BaseChickenRaptor, BaseMobHenRanch]
+  parent: [ BaseChickenRaptor, BaseMobHenRanch ]
   id: MobRaptorHen
   name: raptor hen
   components:
@@ -1048,7 +1085,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-raptor.rsi
 
 - type: entity
-  parent: [BaseChickenRaptor, BaseMobRoosterRanch]
+  parent: [ BaseChickenRaptor, BaseMobRoosterRanch ]
   id: MobRaptorRooster
   name: tiercel # the truecell roosters
   components:
@@ -1124,9 +1161,6 @@
       components:
       - Cash
     amount: 1000
-  - type: HTN
-    rootTask:
-      task: RangedRoosterCompound
 
 - type: entity
   parent: BaseMobChickRanch
@@ -1173,7 +1207,7 @@
     - MagicMushroom
 
 - type: entity
-  parent: [BaseChickenWizard, BaseMobRoosterRanch]
+  parent: [ BaseChickenWizard, BaseMobRangedRoosterRanch ]
   id: MobWizardRooster
   name: wizter
   components:
@@ -1325,9 +1359,6 @@
     availableModes:
     - SemiAuto
     soundGunshot: /Audio/Effects/Lightning/lightningbolt.ogg
-  - type: HTN
-    rootTask:
-      task: RangedRoosterCompound
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -1335,7 +1366,7 @@
         Quantity: 250
 
 - type: entity
-  parent: [BaseChickenRobot, BaseMobChickRanch]
+  parent: [ BaseChickenRobot, BaseMobChickRanch ]
   id: MobChickRobot
   name: robot chick
   components:
@@ -1350,7 +1381,7 @@
     - SynthMeat
 
 - type: entity
-  parent: [BaseChickenRobot, BaseMobHenRanch]
+  parent: [ BaseChickenRobot, BaseMobHenRanch ]
   id: MobRobotHen
   name: robot hen
   components:
@@ -1361,7 +1392,7 @@
     - SynthMeat
 
 - type: entity
-  parent: [BaseChickenRobot, BaseMobRoosterRanch]
+  parent: [ BaseChickenRobot, BaseMobRangedRoosterRanch ]
   id: MobRobotRooster
   name: robot rooster
   components:
@@ -1461,7 +1492,7 @@
         acts: [ "Destruction" ]
 
 - type: entity
-  parent: [BaseChickenStone, BaseMobChickRanch]
+  parent: [ BaseChickenStone, BaseMobChickRanch ]
   id: MobChickStone
   name: stone chick
   components:
@@ -1476,7 +1507,7 @@
     - Rice
 
 - type: entity
-  parent: [BaseChickenStone, BaseMobHenRanch]
+  parent: [ BaseChickenStone, BaseMobHenRanch ]
   id: MobStoneHen
   name: stone hen
   components:
@@ -1488,7 +1519,7 @@
     - Rice
 
 - type: entity
-  parent: [BaseChickenStone, BaseMobRoosterRanch]
+  parent: [ BaseChickenStone, BaseMobRoosterRanch ]
   id: MobStoneRooster
   name: stone rooster
   components:
@@ -1602,7 +1633,7 @@
         Base: dead
 
 - type: entity
-  parent: [BaseChickenSicle, BaseMobChickRanch]
+  parent: [ BaseChickenSicle, BaseMobChickRanch ]
   id: MobChickSicle
   name: sickle chick
   components:
@@ -1614,7 +1645,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-dreamsickle.rsi
 
 - type: entity
-  parent: [BaseChickenSicle, BaseMobHenRanch]
+  parent: [ BaseChickenSicle, BaseMobHenRanch ]
   id: MobSicleHen
   name: sickle hen
   components:
@@ -1622,7 +1653,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-dreamsickle.rsi
 
 - type: entity
-  parent: [BaseChickenSicle, BaseMobRoosterRanch]
+  parent: [ BaseChickenSicle, BaseMobRoosterRanch ]
   id: MobSicleRooster
   name: sickle rooster
   components:
@@ -1655,7 +1686,7 @@
     color: "#4080FF"
 
 - type: entity
-  parent: [BaseChickenZappy, BaseMobChickRanch]
+  parent: [ BaseChickenZappy, BaseMobChickRanch ]
   id: MobChickZappy
   name: zappy chick
   components:
@@ -1667,7 +1698,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-zappy.rsi
 
 - type: entity
-  parent: [BaseChickenZappy, BaseMobHenRanch]
+  parent: [ BaseChickenZappy, BaseMobHenRanch ]
   id: MobZappyHen
   name: zappy hen
   components:
@@ -1675,7 +1706,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-zappy.rsi
 
 - type: entity
-  parent: [BaseChickenZappy, BaseMobRoosterRanch]
+  parent: [ BaseChickenZappy, BaseMobRangedRoosterRanch ]
   id: MobZappyRooster
   name: zappy rooster
   components:
@@ -1696,9 +1727,6 @@
     availableModes:
     - SemiAuto
     soundGunshot: /Audio/Effects/Lightning/lightningshock.ogg
-  - type: HTN
-    rootTask:
-      task: RangedRoosterCompound
 
 # Phoenix
 
@@ -1726,7 +1754,7 @@
     - Chili
 
 - type: entity
-  parent: [BaseChickenPhoenix, BaseMobChickRanch]
+  parent: [ BaseChickenPhoenix, BaseMobChickRanch ]
   id: MobChickPhoenix
   name: phoenix chick
   components:
@@ -1738,7 +1766,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-phoenix.rsi
 
 - type: entity
-  parent: [BaseChickenPhoenix, BaseMobHenRanch]
+  parent: [ BaseChickenPhoenix, BaseMobHenRanch ]
   id: MobPhoenixHen
   name: phoenix hen
   components:
@@ -1746,7 +1774,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-phoenix.rsi
 
 - type: entity
-  parent: [BaseChickenPhoenix, BaseMobRoosterRanch]
+  parent: [ BaseChickenPhoenix, BaseMobRoosterRanch ]
   id: MobPhoenixRooster
   name: phoenix rooster
   components:
@@ -1783,7 +1811,7 @@
     - Ore
 
 - type: entity
-  parent: [BaseChickenDragon, BaseMobChickRanch]
+  parent: [ BaseChickenDragon, BaseMobChickRanch ]
   id: MobChickDragon
   name: dragon chick
   components:
@@ -1795,7 +1823,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-dragon.rsi
 
 - type: entity
-  parent: [BaseChickenDragon, BaseMobHenRanch]
+  parent: [ BaseChickenDragon, BaseMobHenRanch ]
   id: MobDragonHen
   name: dragon hen
   components:
@@ -1803,7 +1831,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-dragon.rsi
 
 - type: entity
-  parent: [BaseChickenDragon, BaseMobRoosterRanch]
+  parent: [ BaseChickenDragon, BaseMobRangedRoosterRanch ]
   id: MobDragonRooster
   name: dragon rooster
   components:
@@ -1822,9 +1850,6 @@
     availableModes:
     - SemiAuto
     soundGunshot: /Audio/Magic/fireball.ogg
-  - type: HTN
-    rootTask:
-      task: RangedRoosterCompound
 
 # Coral Chicken
 
@@ -1843,7 +1868,7 @@
       400: Dead
 
 - type: entity
-  parent: [BaseChickenCoral, BaseMobChickRanch]
+  parent: [ BaseChickenCoral, BaseMobChickRanch ]
   id: MobChickCoral
   name: coral chick
   components:
@@ -1855,7 +1880,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-coral.rsi
 
 - type: entity
-  parent: [BaseChickenCoral, BaseMobHenRanch]
+  parent: [ BaseChickenCoral, BaseMobHenRanch ]
   id: MobCoralHen
   name: coral hen
   components:
@@ -1863,7 +1888,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-coral.rsi
 
 - type: entity
-  parent: [BaseChickenCoral, BaseMobRoosterRanch]
+  parent: [ BaseChickenCoral, BaseMobRoosterRanch ]
   id: MobCoralRooster
   name: coral rooster
   components:
