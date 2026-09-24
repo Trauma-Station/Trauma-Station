@@ -1,13 +1,25 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Xenomorphs.Infection;
 using Content.Shared.EntityEffects;
+using Content.Shared.StatusIcon;
 
-namespace Content.Trauma.Server.Xenomorphs.Infection;
+namespace Content.Trauma.Shared.Xenomorphs.Infection;
 
-[RegisterComponent]
-public sealed partial class XenomorphInfectionComponent : SharedXenomorphInfectionComponent
+[RegisterComponent, NetworkedComponent]
+public sealed partial class XenomorphInfectionComponent : Component
 {
+    /// <summary>
+    /// A set of prototype IDs for status icons representing different growth stages of the infection.
+    /// </summary>
+    [DataField]
+    public Dictionary<int, ProtoId<StatusIconPrototype>> InfectedIcons = new();
+
+    /// <summary>
+    /// Current stage of infection development.
+    /// </summary>
+    [DataField]
+    public int GrowthStage;
+
     [DataField]
     public int MaxGrowthStage = 1;
 

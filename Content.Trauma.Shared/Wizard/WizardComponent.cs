@@ -8,5 +8,5 @@ namespace Content.Trauma.Shared.Wizard;
 public sealed partial class WizardComponent : Component
 {
     [DataField]
-    public ProtoId<FactionIconPrototype> StatusIcon = "WizardFaction";
+    public ProtoId<StatusIconPrototype> StatusIcon = "WizardFaction";
 }

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-- type: ssdIcon
+- type: statusIcon
   id: CosmicSSDIcon
   icon:
     sprite: /Textures/_DV/CosmicCult/Effects/astralsleep.rsi
