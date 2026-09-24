@@ -13,13 +13,10 @@ public sealed partial class DealDamageOnPulledSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnPullStarted(Entity<DealDamageOnPulledComponent> ent, ref PullStartedMessage args)
     {
-        SubscribeLocalEvent<DealDamageOnPulledComponent, BeingPulledAttemptEvent>(OnPullAttempt);
-    }
-
-    private void OnPullAttempt(Entity<DealDamageOnPulledComponent> ent, ref BeingPulledAttemptEvent args)
-    {
-        _damageable.ChangeDamage(ent.Owner, ent.Comp.Damage, origin: args.Puller);
+        if (ent.Owner == args.PulledUid)
+            _damageable.ChangeDamage(ent.Owner, ent.Comp.Damage, origin: args.PullerUid);
     }
 }
