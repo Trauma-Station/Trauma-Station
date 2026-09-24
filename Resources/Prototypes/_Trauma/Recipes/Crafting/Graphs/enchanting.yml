@@ -50,16 +50,16 @@
     edges:
     - to: finish
       steps:
-      - tag: BloodVial
+      - tag: Bottle
         doAfter: 1
-        name: construction-graph-tag-bloodvial
+        name: construction-graph-tag-bottle
         icon:
-          sprite: _Trauma/Objects/Enchanting/bloodvial.rsi
-          state: icon
+          sprite: Objects/Specific/Chemistry/bottle.rsi
+          state: bottle
       - tag: DemonEssense
-        name: construction-graph-tag-demonsoul
+        name: construction-graph-tag-magic-ink-catalyst
         icon:
-          sprite: _Trauma/Objects/Enchanting/demonsoul.rsi
+          sprite: _Trauma/Objects/Enchanting/enchantcatalyst.rsi
           state: icon
   - node: finish
     entity: MagicInkRandom

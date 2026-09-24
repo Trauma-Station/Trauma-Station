@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: cargoProduct
+  id: MedicalFormaldehyde
+  icon:
+    sprite: Structures/Storage/morgue.rsi
+    state: morgue_closed
+  product: CrateMorgue
+  cost: 1200
+  category: cargoproduct-category-name-medical
+  group: market
