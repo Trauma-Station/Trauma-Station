@@ -15028,3 +15028,10 @@ Entries:
   id: 1633
   time: '2026-09-23T20:38:11.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4724
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed triclor
+  id: 1634
+  time: '2026-09-24T06:49:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4731
