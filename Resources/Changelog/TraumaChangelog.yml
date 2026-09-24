@@ -15042,3 +15042,10 @@ Entries:
   id: 1635
   time: '2026-09-24T07:14:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4733
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mice not being breedable.
+  id: 1636
+  time: '2026-09-24T11:44:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4738
