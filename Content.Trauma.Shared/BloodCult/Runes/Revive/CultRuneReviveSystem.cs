@@ -7,6 +7,7 @@ using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Trauma.Shared.BloodCult.Gamerule;
 using Robust.Shared.Player;
 using System.Linq;
 
@@ -24,7 +25,8 @@ public abstract partial class CultRuneReviveSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnReviveRuneInvoked(Entity<CultRuneReviveComponent> ent, ref RuneInvokeEvent args)
     {
-        if (EnsureChargesProvider(ent) is not {} provider || provider.Comp.Charges <= 0)
+        var cost = ent.Comp.ChargesUsed;
+        if (_cult.GetRule(args.User) is not { } rule || rule.Comp.ReviveCharges < cost)
         {
             args.Popup = Loc.GetString("cult-revive-rune-no-charges");
             return;
@@ -45,31 +47,24 @@ public abstract partial class CultRuneReviveSystem : EntitySystem
 
         var victim = targets.First();
 
-        Revive(victim, args.User, ent);
+        Revive(rule, victim, args.User, ent);
         args.Handled = true;
     }
 
-    public void AddCharges(EntityUid ent, int charges)
+    public void AddCharges(Entity<BloodCultRuleComponent> rule, int charges)
     {
-        if (EnsureChargesProvider(ent) is not {} provider)
-            return;
-
-        provider.Comp.Charges += charges;
-        Dirty(provider);
+        rule.Comp.ReviveCharges += charges;
+        DirtyField(rule, rule.Comp, nameof(BloodCultRuleComponent.ReviveCharges));
     }
 
-    private void Revive(EntityUid target, EntityUid user, Entity<CultRuneReviveComponent> rune)
+    private void Revive(Entity<BloodCultRuleComponent> rule, EntityUid target, EntityUid user, Entity<CultRuneReviveComponent> rune)
     {
-        if (EnsureChargesProvider(rune) is not {} provider)
-            return;
-
-        provider.Comp.Charges--;
-        Dirty(provider);
+        AddCharges(rule, -rune.Comp.ChargesUsed);
 
         var deadThreshold = _threshold.GetThresholdForState(target, MobState.Dead);
         _damage.TryChangeDamage(target, rune.Comp.Healing);
 
-        if (_damage.GetTotalDamage(target) > deadThreshold)
+        if (_threshold.CheckVitalDamage(target) > deadThreshold)
             return;
 
         // yet another system bypassing Unrevivable etc :face_holding_back_tears:
@@ -82,12 +77,6 @@ public abstract partial class CultRuneReviveSystem : EntitySystem
         // notify them they're being revived.
         OpenReturnEui((mindId, mind), session);
     }
-
-    private Entity<ReviveRuneChargesProviderComponent>? EnsureChargesProvider(EntityUid ent)
-        // TODO: why the FUCK is this on the map and not gamerule or something ?!
-        => Transform(ent).MapUid is {} map
-            ? (map, EnsureComp<ReviveRuneChargesProviderComponent>(map))
-            : null;
 
     protected virtual void OpenReturnEui(Entity<MindComponent> mind, ICommonSession session)
     {
