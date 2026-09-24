@@ -41,7 +41,6 @@ public sealed partial class CultRuneRendingSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnRendingRuneInvoked(Entity<CultRuneRendingComponent> rune, ref RuneInvokeEvent args)
     {
-        args.Predicted = false;
         var user = args.User;
         if (_cult.GetTarget(rune) is not {} target ||
             !TryComp<MobStateComponent>(target, out var mob) ||
