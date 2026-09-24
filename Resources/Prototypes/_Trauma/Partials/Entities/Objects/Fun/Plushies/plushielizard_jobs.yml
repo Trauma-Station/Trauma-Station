@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: PlushieLizardJobMultiweh
+  components:
+  - type: Clothing
+    sprite: Objects/Fun/Plushies/lizard.rsi # multiweh has no equipped sprite...
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET
+        sprite: Objects/Fun/Plushies/lizard.rsi
+        offset: "0, 0.03"
