@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 286.0.0
+  engineVersion: 289.0.2
   forkId: ""
   forkVersion: ""
-  time: 08/20/2026 17:35:48
-  entityCount: 30137
+  time: 09/24/2026 21:10:36
+  entityCount: 30136
 maps:
 - 1
 grids:
@@ -13038,7 +13038,7 @@ entities:
       pos: -44.5,-30.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -55531.574
+      secondsUntilStateChange: -55579.266
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -13793,7 +13793,7 @@ entities:
       pos: 18.5,-46.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -59240.582
+      secondsUntilStateChange: -59288.273
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -13973,11 +13973,6 @@ entities:
       pos: -10.5,-36.5
 - proto: AirlockMedicalLocked
   entities:
-  - uid: 451
-    components:
-    - type: Transform
-      parent: 2
-      pos: -1.5,-29.5
   - uid: 452
     components:
     - type: Transform
@@ -14013,6 +14008,13 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: -36.5,-39.5
+- proto: AirlockMedicalMorgueLocked
+  entities:
+  - uid: 451
+    components:
+    - type: Transform
+      parent: 2
+      pos: -1.5,-29.5
 - proto: AirlockQuartermasterGlassLocked
   entities:
   - uid: 458
@@ -15796,13 +15798,6 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: -48.397327,23.32597
-- proto: AsimovCircuitBoard
-  entities:
-  - uid: 676
-    components:
-    - type: Transform
-      parent: 2
-      pos: 58.42447,22.640966
 - proto: AsteroidRock
   entities:
   - uid: 677
@@ -78152,13 +78147,6 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: 23.5,4.5
-- proto: ComputerNTRTasks
-  entities:
-  - uid: 8502
-    components:
-    - type: Transform
-      parent: 2
-      pos: 35.5,9.5
 - proto: ComputerPowerMonitoring
   entities:
   - uid: 8503
@@ -79584,6 +79572,13 @@ entities:
     - type: SingletonDeviceNetServer
       available: False
       active: False
+- proto: CrewsimovCircuitBoard
+  entities:
+  - uid: 676
+    components:
+    - type: Transform
+      parent: 2
+      pos: 58.42447,22.640966
 - proto: Crowbar
   entities:
   - uid: 8662
@@ -135244,7 +135239,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -19.5,70.5
-- proto: LightReplacer
+- proto: LightReplacerFilled
   entities:
   - uid: 15990
     components:

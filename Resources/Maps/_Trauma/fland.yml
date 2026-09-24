@@ -4,7 +4,7 @@ meta:
   engineVersion: 289.0.2
   forkId: ""
   forkVersion: ""
-  time: 09/16/2026 17:34:13
+  time: 09/24/2026 21:09:04
   entityCount: 38090
 maps:
 - 1
@@ -21643,21 +21643,23 @@ entities:
       pos: 16.5,67.5
 - proto: AirlockMedicalLocked
   entities:
-  - uid: 660
-    components:
-    - type: Transform
-      parent: 2
-      pos: 3.5,35.5
-  - uid: 661
-    components:
-    - type: Transform
-      parent: 2
-      pos: 3.5,42.5
   - uid: 662
     components:
     - type: Transform
       parent: 2
       pos: 9.5,60.5
+- proto: AirlockMedicalMorgueLocked
+  entities:
+  - uid: 660
+    components:
+    - type: Transform
+      parent: 2
+      pos: 3.5,42.5
+  - uid: 661
+    components:
+    - type: Transform
+      parent: 2
+      pos: 3.5,35.5
 - proto: AirlockQuartermasterGlassLocked
   entities:
   - uid: 663
@@ -205467,8 +205469,8 @@ entities:
           occludes: True
     - type: Turbine
       turbineMass: 800
-      flowRate: 1000
       statorLoad: 22000
+      flowRate: 1000
       currentStator: 31745
       currentBlade: 31744
     - type: DeviceLinkSource

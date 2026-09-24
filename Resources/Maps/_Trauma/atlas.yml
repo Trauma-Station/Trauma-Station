@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 286.0.0
+  engineVersion: 289.0.2
   forkId: ""
   forkVersion: ""
-  time: 08/20/2026 16:30:25
-  entityCount: 9308
+  time: 09/24/2026 22:10:56
+  entityCount: 9305
 maps:
 - 1
 grids:
@@ -4602,7 +4602,7 @@ entities:
       pos: 4.5,19.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -101719.62
+      secondsUntilStateChange: -101971.48
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -4763,11 +4763,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 14.5,-5.5
-  - uid: 208
-    components:
-    - type: Transform
-      parent: 2
-      pos: 6.5,-14.5
   - uid: 209
     components:
     - type: Transform
@@ -4842,16 +4837,25 @@ entities:
       pos: 14.5,-2.5
 - proto: AirlockMedicalLocked
   entities:
-  - uid: 221
-    components:
-    - type: Transform
-      parent: 2
-      pos: 3.5,-13.5
   - uid: 222
     components:
     - type: Transform
       parent: 2
       pos: 6.5,-5.5
+- proto: AirlockMedicalMorgueLocked
+  entities:
+  - uid: 208
+    components:
+    - type: Transform
+      parent: 2
+      pos: 3.5,-13.5
+- proto: AirlockMedicalMorgueMaintLocked
+  entities:
+  - uid: 221
+    components:
+    - type: Transform
+      parent: 2
+      pos: 6.5,-14.5
 - proto: AirlockQuartermasterGlassLocked
   entities:
   - uid: 223
@@ -5003,6 +5007,13 @@ entities:
     - type: DeviceNetwork
       deviceLists:
       - 44
+- proto: AltarSpawner
+  entities:
+  - uid: 397
+    components:
+    - type: Transform
+      parent: 2
+      pos: 25.5,14.5
 - proto: AmeController
   entities:
   - uid: 247
@@ -5244,13 +5255,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 37.867573,2.5540442
-- proto: AsimovCircuitBoard
-  entities:
-  - uid: 282
-    components:
-    - type: Transform
-      parent: 2
-      pos: -48.563347,7.369644
 - proto: AtmosDeviceFanDirectional
   entities:
   - uid: 283
@@ -5773,11 +5777,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 32.5,-5.5
-  - uid: 375
-    components:
-    - type: Transform
-      parent: 2
-      pos: 23.5,19.5
   - uid: 376
     components:
     - type: Transform
@@ -5899,13 +5898,6 @@ entities:
       canCollide: False
 - proto: BedsheetCult
   entities:
-  - uid: 397
-    components:
-    - type: Transform
-      parent: 2
-      pos: 23.5,19.5
-    - type: Physics
-      canCollide: False
   - uid: 398
     components:
     - type: Transform
@@ -21439,13 +21431,6 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: 8.5,-13.5
-- proto: ComputerNTRTasks
-  entities:
-  - uid: 3369
-    components:
-    - type: Transform
-      parent: 2
-      pos: 37.5,4.5
 - proto: ComputerPowerMonitoring
   entities:
   - uid: 3370
@@ -21885,6 +21870,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -23.5,-10.5
+- proto: CrewsimovCircuitBoard
+  entities:
+  - uid: 282
+    components:
+    - type: Transform
+      parent: 2
+      pos: -48.563347,7.369644
 - proto: CrowbarRed
   entities:
   - uid: 3440
@@ -24908,6 +24900,10 @@ entities:
           ents: []
           showEnts: False
           occludes: True
+        energyBeakerSlot: !type:ContainerSlot
+          ent: null
+          showEnts: False
+          occludes: True
   - uid: 3933
     components:
     - type: Transform
@@ -24943,6 +24939,10 @@ entities:
           ents: []
           showEnts: False
           occludes: True
+        energyBeakerSlot: !type:ContainerSlot
+          ent: null
+          showEnts: False
+          occludes: True
 - proto: EnergySodaDispenser
   entities:
   - uid: 3935
@@ -24970,6 +24970,10 @@ entities:
           occludes: True
         storagebase: !type:Container
           ents: []
+          showEnts: False
+          occludes: True
+        energyBeakerSlot: !type:ContainerSlot
+          ent: null
           showEnts: False
           occludes: True
   - uid: 3936
@@ -41089,7 +41093,7 @@ entities:
       pos: -43.645462,-17.224262
     - type: Physics
       canCollide: True
-- proto: LightReplacer
+- proto: LightReplacerFilled
   entities:
   - uid: 6262
     components:
@@ -41575,14 +41579,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 6.5,-9.5
-- proto: MachinePowerTransmissionLaser
-  entities:
-  - uid: 6326
-    components:
-    - type: Transform
-      parent: 2
-      rot: -1.5707963267948966 rad
-      pos: -59.5,-7.5
 - proto: MaintenanceFluffSpawner
   entities:
   - uid: 6327
@@ -51588,11 +51584,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -43.5,-10.5
-  - uid: 7869
-    components:
-    - type: Transform
-      parent: 2
-      pos: 25.5,14.5
   - uid: 7870
     components:
     - type: Transform
@@ -58472,6 +58463,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -11.5,20.5
+- proto: WardrobeChapelFilled
+  entities:
+  - uid: 375
+    components:
+    - type: Transform
+      parent: 2
+      pos: 23.5,19.5
 - proto: WarningCO2
   entities:
   - uid: 9125

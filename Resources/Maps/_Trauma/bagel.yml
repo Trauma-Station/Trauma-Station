@@ -4,7 +4,7 @@ meta:
   engineVersion: 289.0.2
   forkId: ""
   forkVersion: ""
-  time: 09/16/2026 14:28:52
+  time: 09/24/2026 20:03:19
   entityCount: 25905
 maps:
 - 1
@@ -6900,6 +6900,11 @@ entities:
           moles:
             Oxygen: 27.225372
             Nitrogen: 102.419266
+        - temperature: 293.14975
+          volume: 2500
+          moles:
+            Oxygen: 21.824879
+            Nitrogen: 82.10312
         - temperature: 293.15
           volume: 2500
           moles:
@@ -6910,11 +6915,11 @@ entities:
             Nitrogen: 6666.982
         - temperature: 293.15
           volume: 2500
-          moles: {}
-        - temperature: 293.15
-          volume: 2500
           moles:
             Oxygen: 6666.982
+        - temperature: 293.15
+          volume: 2500
+          moles: {}
         tiles:
           0,-4:
             0: 13107
@@ -7517,7 +7522,8 @@ entities:
             0: 12543
             1: 32768
           -6,3:
-            0: 45875
+            0: 13107
+            3: 32768
             1: 128
           -6,4:
             0: 15355
@@ -8476,7 +8482,7 @@ entities:
             0: 112
             1: 28672
           17,-7:
-            3: 1
+            4: 1
             1: 4104
           17,-6:
             1: 4593
@@ -8577,7 +8583,7 @@ entities:
           -13,7:
             1: 39312
           -12,8:
-            4: 12
+            5: 12
             6: 3072
           -11,5:
             0: 63351
@@ -8585,7 +8591,7 @@ entities:
             0: 4607
             1: 49152
           -11,8:
-            4: 1
+            5: 1
             1: 17476
             6: 256
           -11,7:
@@ -8680,10 +8686,10 @@ entities:
             0: 255
             1: 57344
           -8,11:
-            5: 816
+            7: 816
             1: 34952
           -9,11:
-            5: 2176
+            7: 2176
             1: 8738
           -8,12:
             1: 34959
@@ -8801,21 +8807,21 @@ entities:
             1: 35033
             0: 12544
           -12,9:
-            5: 3084
+            7: 3084
           -12,10:
-            3: 12
-            5: 3072
+            4: 12
+            7: 3072
           -12,11:
-            5: 12
+            7: 12
           -11,9:
-            5: 257
+            7: 257
             1: 17476
           -11,10:
-            3: 1
-            5: 256
+            4: 1
+            7: 256
             1: 17476
           -11,11:
-            5: 1
+            7: 1
             1: 17476
           -11,12:
             1: 17487
@@ -8866,7 +8872,7 @@ entities:
           -13,12:
             1: 34952
             6: 48
-            4: 12288
+            5: 12288
           -12,13:
             1: 61455
           -13,13:
@@ -8901,11 +8907,11 @@ entities:
             1: 64719
           -7,14:
             1: 252
-            5: 57344
+            7: 57344
             0: 1024
           -7,15:
             1: 61440
-            5: 238
+            7: 238
             0: 1024
           -7,16:
             1: 65524
@@ -8966,7 +8972,7 @@ entities:
             0: 1
             1: 8738
             6: 128
-            4: 32768
+            5: 32768
           -17,12:
             0: 30523
           -16,13:
@@ -13431,13 +13437,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 52.5,-21.5
-  - uid: 445
-    components:
-    - type: MetaData
-      name: Morgue
-    - type: Transform
-      parent: 2
-      pos: 35.5,-6.5
 - proto: AirlockMaintRnDLocked
   entities:
   - uid: 446
@@ -13550,13 +13549,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 42.5,-18.5
-  - uid: 462
-    components:
-    - type: MetaData
-      name: morgue
-    - type: Transform
-      parent: 2
-      pos: 42.5,-9.5
   - uid: 463
     components:
     - type: MetaData
@@ -13570,6 +13562,20 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: 48.5,-15.5
+- proto: AirlockMedicalMorgueLocked
+  entities:
+  - uid: 462
+    components:
+    - type: Transform
+      parent: 2
+      pos: 42.5,-9.5
+- proto: AirlockMedicalMorgueMaintLocked
+  entities:
+  - uid: 445
+    components:
+    - type: Transform
+      parent: 2
+      pos: 35.5,-6.5
 - proto: AirlockQuartermasterGlassLocked
   entities:
   - uid: 465
@@ -115888,11 +115894,6 @@ entities:
       pos: -0.5,-7.5
 - proto: PottedPlant24
   entities:
-  - uid: 17783
-    components:
-    - type: Transform
-      parent: 2
-      pos: -20.580471,15.2164345
   - uid: 17784
     components:
     - type: Transform
@@ -157233,6 +157234,13 @@ entities:
           Oxygen: 1.6495836
           Nitrogen: 6.2055764
         immutable: False
+- proto: WardrobeChapelFilled
+  entities:
+  - uid: 17783
+    components:
+    - type: Transform
+      parent: 2
+      pos: -20.5,15.5
 - proto: WardrobePrisonFilled
   entities:
   - uid: 24874

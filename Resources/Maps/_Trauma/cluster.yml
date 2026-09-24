@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 286.0.0
+  engineVersion: 289.0.2
   forkId: ""
   forkVersion: ""
-  time: 08/20/2026 17:10:42
-  entityCount: 12870
+  time: 09/24/2026 20:48:52
+  entityCount: 12869
 maps:
 - 1
 grids:
@@ -7108,17 +7108,18 @@ entities:
     - type: Transform
       parent: 2
       pos: -23.5,19.5
+  - uid: 279
+    components:
+    - type: Transform
+      parent: 2
+      pos: -23.5,12.5
+- proto: AirlockMedicalMorgueLocked
+  entities:
   - uid: 278
     components:
     - type: Transform
       parent: 2
       pos: -23.5,17.5
-  - uid: 279
-    components:
-    - type: Transform
-      parent: 2
-      rot: 3.141592653589793 rad
-      pos: -23.5,12.5
 - proto: AirlockQuartermasterLocked
   entities:
   - uid: 280
@@ -7758,13 +7759,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -3.3723423,48.60457
-- proto: AsimovCircuitBoard
-  entities:
-  - uid: 389
-    components:
-    - type: Transform
-      parent: 2
-      pos: -3.3574803,48.545105
 - proto: AtmosDeviceFanDirectional
   entities:
   - uid: 390
@@ -29205,6 +29199,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -2.4571166,54.52544
+- proto: CrewsimovCircuitBoard
+  entities:
+  - uid: 389
+    components:
+    - type: Transform
+      parent: 2
+      pos: -3.3574803,48.545105
 - proto: CrowbarRed
   entities:
   - uid: 4435
@@ -56756,7 +56757,7 @@ entities:
       parent: 8542
     - type: Physics
       canCollide: False
-- proto: LightReplacer
+- proto: LightReplacerFilled
   entities:
   - uid: 8544
     components:
@@ -57301,13 +57302,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -22.5,9.5
-- proto: MachinePowerTransmissionLaser
-  entities:
-  - uid: 8609
-    components:
-    - type: Transform
-      parent: 2
-      pos: 25.5,-26.5
 - proto: MaintenanceFluffSpawner
   entities:
   - uid: 8610

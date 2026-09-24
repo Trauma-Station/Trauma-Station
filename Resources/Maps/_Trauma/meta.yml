@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 286.0.0
+  engineVersion: 289.0.2
   forkId: ""
   forkVersion: ""
-  time: 08/20/2026 17:30:40
-  entityCount: 28099
+  time: 09/24/2026 21:37:34
+  entityCount: 28097
 maps:
 - 1
 grids:
@@ -11656,7 +11656,7 @@ entities:
       pos: -42.5,29.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -104208.875
+      secondsUntilStateChange: -104250.555
     - type: DeviceLinkSink
       invokeCounter: 2
     - type: DeviceLinkSource
@@ -13043,13 +13043,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -12.5,-41.5
-  - uid: 509
-    components:
-    - type: MetaData
-      name: Morgue
-    - type: Transform
-      parent: 2
-      pos: -7.5,-50.5
   - uid: 510
     components:
     - type: Transform
@@ -13293,6 +13286,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -28.5,-57.5
+- proto: AirlockMedicalMorgueMaintLocked
+  entities:
+  - uid: 509
+    components:
+    - type: Transform
+      parent: 2
+      pos: -7.5,-50.5
 - proto: AirlockQuartermasterGlassLocked
   entities:
   - uid: 555
@@ -14950,13 +14950,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -1.8845375,-5.58767
-- proto: AsimovCircuitBoard
-  entities:
-  - uid: 832
-    components:
-    - type: Transform
-      parent: 2
-      pos: -13.445552,18.49222
 - proto: AtmosDeviceFanDirectional
   entities:
   - uid: 833
@@ -63543,14 +63536,6 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: 107.5,-3.5
-- proto: ComputerNTRTasks
-  entities:
-  - uid: 10245
-    components:
-    - type: Transform
-      parent: 2
-      rot: 3.141592653589793 rad
-      pos: -17.5,3.5
 - proto: ComputerPowerMonitoring
   entities:
   - uid: 10246
@@ -64455,6 +64440,13 @@ entities:
     - type: Transform
       parent: 2
       pos: 29.5,-36.5
+- proto: CrewsimovCircuitBoard
+  entities:
+  - uid: 832
+    components:
+    - type: Transform
+      parent: 2
+      pos: -13.445552,18.49222
 - proto: Crowbar
   entities:
   - uid: 10386
@@ -122255,7 +122247,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 12.202136,26.903582
-- proto: LightReplacer
+- proto: LightReplacerFilled
   entities:
   - uid: 19010
     components:
@@ -123293,14 +123285,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -31.5,-31.5
-- proto: MachinePowerTransmissionLaser
-  entities:
-  - uid: 19109
-    components:
-    - type: Transform
-      parent: 2
-      rot: 1.5707963267948966 rad
-      pos: 69.5,36.5
 - proto: MailingUnit
   entities:
   - uid: 19110
