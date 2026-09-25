@@ -32,7 +32,7 @@ public sealed partial class MapVoteOnRoundRestartSystem : EntitySystem
     {
         if (!_voteEnabled ||
         !_lobbyEnabled ||
-        args.New != GameRunLevel.PreRoundLobby) 
+        args.New != GameRunLevel.PreRoundLobby)
             return;
         _vote.CreateStandardVote(null, StandardVoteType.Map);
     }
