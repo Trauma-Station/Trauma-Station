@@ -78,3 +78,11 @@
   components:
   - type: RoleBriefing
     briefing: blood-cult-role-briefing-construct
+
+- type: entity
+  parent: BaseMindRole
+  id: MindRolePurifiedConstruct
+  name: Purified Construct Role
+  components:
+  - type: RoleBriefing
+    briefing: blood-cult-role-briefing-purified-construct

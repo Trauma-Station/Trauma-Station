@@ -67,6 +67,12 @@ public sealed partial class BloodCultRuleComponent : Component
     [DataField, AutoNetworkedField]
     public int ReviveCharges = 9;
 
+    /// <summary>
+    /// How many times shuttle delay orbs can be shattered. No way to increase this.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int ShuttleDelays = 3;
+
     [DataField]
     public CultStage Stage = CultStage.Start;
 

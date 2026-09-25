@@ -8,6 +8,7 @@ using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Player;
 
 namespace Content.Trauma.Shared.BloodCult.Constructs.SoulShard;
 
@@ -21,6 +22,9 @@ public sealed partial class SoulShardSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+
+    private static readonly EntProtoId ConstructRole = "MindRoleBloodCultConstruct";
+    private static readonly EntProtoId PurifiedRole = "MindRolePurifiedConstruct";
 
     [SubscribeLocalEvent]
     private void OnActivate(Entity<SoulShardComponent> shard, ref ActivateInWorldEvent args)
@@ -56,14 +60,32 @@ public sealed partial class SoulShardSystem : EntitySystem
         _light.SetColor(shard.Owner, shard.Comp.BlessedLightColor);
         shard.Comp.IsBlessed = true;
         Dirty(shard);
+
+        // life is gem
+        _cult.DeconvertConstruct(shard.Owner);
+        if (_mind.GetMind(shard.Owner) is { } mind)
+        {
+            _role.MindClearRoles(mind);
+            _role.MindAddRole(mind, PurifiedRole);
+        }
     }
 
     [SubscribeLocalEvent]
     private void OnShardMindAdded(Entity<SoulShardComponent> shard, ref MindAddedMessage args)
     {
-        // TODO: ummmmmmmmmmmmmmmm this isnt every antag
-        _role.MindRemoveRole<TraitorRoleComponent>(args.Mind.AsNullable());
+        var mind = args.Mind.AsNullable();
+        _role.MindClearRoles(mind);
+        _role.MindAddRole(mind, shard.Comp.IsBlessed ? PurifiedRole : ConstructRole);
         UpdateGlowVisuals(shard, true);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnPlayerAttached(Entity<SoulShardComponent> shard, ref PlayerAttachedEvent args)
+    {
+        if (_cult.GetRule(shard.Owner) is not { } rule)
+            return;
+
+        _cult.ConvertConstruct(rule, shard.Owner);
     }
 
     [SubscribeLocalEvent]
@@ -80,6 +102,7 @@ public sealed partial class SoulShardSystem : EntitySystem
         _mind.UnVisit(mind);
         shard.Comp.ShadeUid = shadeUid;
         Dirty(shard);
+        _cult.CopyMember(shard.Owner, shadeUid);
     }
 
     private void DespawnShade(Entity<SoulShardComponent> shard, EntityUid shade)

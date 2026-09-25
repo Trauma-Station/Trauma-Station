@@ -33,6 +33,8 @@
   components:
   - type: CultRune
   - type: BloodCultExamine
+  - type: UseDelay
+    delay: 5
   # Spraying runes with holy water erases them, too cheese to have it for unfinished
   - type: Reactive
     reactions:

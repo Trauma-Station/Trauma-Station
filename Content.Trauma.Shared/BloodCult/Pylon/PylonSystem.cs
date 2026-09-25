@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
@@ -21,7 +22,7 @@ namespace Content.Trauma.Shared.BloodCult.Pylon;
 public sealed partial class PylonSystem : EntitySystem
 {
     [Dependency] private BloodCultSystem _cult = default!;
-    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
@@ -73,7 +74,7 @@ public sealed partial class PylonSystem : EntitySystem
         {
             _audio.PlayPredicted(pylon.Comp.BurnHandSound, pylon, user);
             _popup.PopupEntity(Loc.GetString("powered-light-component-burn-hand"), pylon, user);
-            _damageable.ChangeDamage(user, pylon.Comp.DamageOnInteract, increaseOnly: true);
+            _damage.ChangeDamage(user, pylon.Comp.DamageOnInteract, increaseOnly: true, targetPart: TargetBodyPart.Hands, canMiss: false);
             return;
         }
 
@@ -147,7 +148,7 @@ public sealed partial class PylonSystem : EntitySystem
     private void HealInRange(Entity<PylonComponent> pylon)
     {
         // this will only heal humanoid cultists, not constructs.
-        // due to how BloodCultistComponent is networked,  it also means
+        // due to how BloodCultistComponent is networked, it also means
         // the client only predicts healing itself with no extra checks :)
         var pos = Transform(pylon).Coordinates;
         _targets.Clear();
@@ -155,7 +156,7 @@ public sealed partial class PylonSystem : EntitySystem
         foreach (var target in _targets)
         {
             if (!_mobState.IsDead(target.Owner))
-                _damageable.ChangeDamage(target.Owner, pylon.Comp.Healing, true);
+                _damage.ChangeDamage(target.Owner, pylon.Comp.Healing, true, targetPart: TargetBodyPart.All, canMiss: false);
         }
     }
 }
