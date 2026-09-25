@@ -15049,3 +15049,16 @@ Entries:
   id: 1636
   time: '2026-09-24T11:44:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4738
+- author: TechnicFighter
+  changes:
+  - type: Remove
+    message: Chaplain can no longer summon demons
+  - type: Tweak
+    message: Changed the name of the chaplain's skillchip.
+  - type: Tweak
+    message: >-
+      Changed the skills of the chaplain's skillchip: MagicLit > 25. Lit > 100.
+      Smoke > 100.
+  id: 1637
+  time: '2026-09-25T10:03:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4748
