@@ -632,8 +632,6 @@
         Slash: 10
 
 - type: entity
-  parent:
-  - !Index:-1 MobNightVision
   id: MobCatSyndy
   components:
   - type: LanguageSpeaker

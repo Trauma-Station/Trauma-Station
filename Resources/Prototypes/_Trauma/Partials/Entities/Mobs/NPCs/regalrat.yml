@@ -1,8 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent:
-  - AppearanceRatKing
   id: MobRatKing
   components:
   - type: VentCrawler
@@ -30,8 +28,6 @@
     - Mouse
 
 - type: entity
-  parent:
-  - !Index:-1 MobNightVision
   id: MobRatServant
   components:
   - type: Penetratable

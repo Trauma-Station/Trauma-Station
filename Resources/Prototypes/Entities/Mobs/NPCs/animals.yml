@@ -3346,7 +3346,7 @@
 - type: entity
   name: syndicat
   id: MobCatSyndy
-  parent: MobCatSpace
+  parent: [ MobCatSpace, MobNightVision ] # Trauma - added MobNightVision
   description: Explosive kitten.
   components:
   - type: Sprite
