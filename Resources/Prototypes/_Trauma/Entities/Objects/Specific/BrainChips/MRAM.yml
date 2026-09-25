@@ -266,6 +266,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
+      MagicalLiteracyKnowledge: 25
       LiteracyKnowledge: 100
       SmokeablesKnowledge: 100
 
