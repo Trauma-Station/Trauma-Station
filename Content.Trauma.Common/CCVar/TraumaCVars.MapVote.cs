@@ -17,5 +17,5 @@ public sealed partial class TraumaCVars
     /// If true, the server will automatically start a map vote on round restart
     /// </summary>
     public static readonly CVarDef<bool> AutomaticMapVote =
-        CVarDef.Create("trauma.automatic_map_vote", true, CVar.SERVER);
+        CVarDef.Create("trauma.automatic_map_vote", false, CVar.SERVER);
 }

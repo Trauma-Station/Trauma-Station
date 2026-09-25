@@ -36,6 +36,9 @@ easy_mode = false # woodchipper is actually dangerous
 ssd_sleep = false # chuddy and doesnt account for NPCs
 flavor_text = true # Born to larp
 
+[mapVote]
+automatic_map_vote = true
+
 [infolinks]
 bug_report = "https://github.com/Trauma-Station/Trauma-Station/issues/created_by/choose"
 discord    = "https://discord.traumastation.com"
