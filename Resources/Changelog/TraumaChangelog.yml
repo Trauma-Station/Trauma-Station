@@ -15090,3 +15090,10 @@ Entries:
   id: 1641
   time: '2026-09-25T20:27:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4758
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Unreadied players count as half a player for gamemodes.
+  id: 1642
+  time: '2026-09-25T21:38:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4756
