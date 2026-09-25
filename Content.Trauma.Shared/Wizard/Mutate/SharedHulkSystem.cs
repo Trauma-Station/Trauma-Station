@@ -1,15 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Cargo;
 using Content.Shared.Cuffs;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.Damage.Systems;
 using Content.Shared.Slippery;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Cuffs;
 using Content.Trauma.Common.Knockdown;
+using Content.Trauma.Common.Wizard;
 using Content.Trauma.Shared.MartialArts;
 
 namespace Content.Trauma.Shared.Wizard.Mutate;
