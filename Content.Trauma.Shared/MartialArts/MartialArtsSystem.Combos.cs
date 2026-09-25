@@ -40,7 +40,7 @@ public partial class MartialArtsSystem
 
         var attemptEV = new ComboAttemptEvent();
         RaiseLocalEvent(ent, ref attemptEV);
-        RaiseLocalEvent(user, ref attemptEV); // Raises on user for blacklists suck as HulkComp
+        RaiseLocalEvent(user, ref attemptEV);
         if (attemptEV.Cancelled)
             return;
 
