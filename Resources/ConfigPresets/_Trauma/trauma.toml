@@ -36,7 +36,7 @@ easy_mode = false # woodchipper is actually dangerous
 ssd_sleep = false # chuddy and doesnt account for NPCs
 flavor_text = true # Born to larp
 
-[mapVote]
+[trauma]
 automatic_map_vote = true
 
 [infolinks]
