@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
   parent: [ BaseStructure, BaseBloodContraband ]
   id: CultFactoryBase
-  abstract: true
   components:
   - type: Sprite
     sprite: _Trauma/BloodCult/Entities/Structures/altar.rsi
@@ -59,8 +59,8 @@
           False: { state: "icon_off" }
 
 - type: entity
-  id: CultFactoryAltar
   parent: CultFactoryBase
+  id: CultFactoryAltar
   name: altar
   description: A bloodstained altar dedicated to Nar'Sie.
   components:
@@ -75,8 +75,8 @@
     node: altar
 
 - type: entity
-  id: CultFactoryForge
   parent: CultFactoryBase
+  id: CultFactoryForge
   name: daemon forge
   description: A forge used in crafting the unholy weapons used by the armies of Nar'Sie.
   components:
@@ -85,7 +85,7 @@
   - type: TimedFactory
     entries:
     - prototype: MirrorShieldCult
-    - prototype: EldritchLongsword
+#    - prototype: EldritchLongsword
     - prototype: ClothingOuterCultArmor
     - prototype: ClothingOuterRobesCultTrue
   - type: Construction
@@ -93,8 +93,8 @@
     node: forge
 
 - type: entity
-  id: CultFactoryArchives
   parent: CultFactoryBase
+  id: CultFactoryArchives
   name: archives
   description: A desk covered in arcane manuscripts and tomes in unknown languages. Looking at the text makes your skin crawl.
   components:

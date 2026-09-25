@@ -56,7 +56,6 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
 
-    private static readonly ProtoId<AntagSpecifierPrototype> CultistSpecifier = "BloodCultist";
     private static readonly Color AnnounceColor = Color.FromHex("#dc143c");
 
     private List<EntityUid> _targets = new();
@@ -108,7 +107,8 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     [SubscribeLocalEvent]
     private void OnSacrificed(ref BloodCultSacrificedEvent args)
     {
-        if (_cult.GetRule(args.User) is not { } rule || args.Target != rule.Comp.OfferingTarget)
+        var rule = args.Rule;
+        if (args.Target != rule.Comp.OfferingTarget)
             return;
 
         rule.Comp.TargetSacrificed = true;
@@ -183,15 +183,14 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
             CheckRoundShouldEnd();
     }
 
-    public void Convert(EntityUid member, EntityUid target)
+    public void Convert(EntityUid rule, EntityUid target, [ForbidLiteral] ProtoId<AntagSpecifierPrototype> specifier)
     {
-        if (_cult.GetRule(member) is not { } rule ||
-            !TryComp<AntagSelectionComponent>(rule, out var antag) ||
+        if (!TryComp<AntagSelectionComponent>(rule, out var antag) ||
             !TryComp<ActorComponent>(target, out var actor))
             return;
 
-        var antagEnt = (rule.Owner, antag);
-        _antag.TryMakeAntag(antagEnt, CultistSpecifier, actor.PlayerSession);
+        var antagEnt = (rule, antag);
+        _antag.TryMakeAntag(antagEnt, specifier, actor.PlayerSession);
     }
 
     private void CheckRoundShouldEnd()

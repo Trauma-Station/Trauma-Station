@@ -27,6 +27,12 @@
   id: BloodCultLeader
   mindRoles: [ MindRoleBloodCultLeader ]
 
+- type: antagSpecifier
+  parent: BloodCultist
+  id: BloodCultConstruct
+  startingGear: null
+  mindRoles: [ MindRoleBloodCultConstruct ]
+
 - type: startingGear
   id: BloodCultistGear
   storage:

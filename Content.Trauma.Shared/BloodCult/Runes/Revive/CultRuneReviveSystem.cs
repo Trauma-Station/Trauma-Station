@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Medical.Common.Damage;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Ghost;
@@ -62,7 +64,7 @@ public abstract partial class CultRuneReviveSystem : EntitySystem
         AddCharges(rule, -rune.Comp.ChargesUsed);
 
         var deadThreshold = _threshold.GetThresholdForState(target, MobState.Dead);
-        _damage.TryChangeDamage(target, rune.Comp.Healing);
+        _damage.ChangeDamage(target, rune.Comp.Healing, targetPart: TargetBodyPart.All, canMiss: false, splitDamage: SplitDamageBehavior.None);
 
         if (_threshold.CheckVitalDamage(target) > deadThreshold)
             return;
