@@ -75,7 +75,7 @@ public sealed partial class SecretRuleSystem : GameRuleSystem<SecretRuleComponen
     private bool TryPickPreset(ProtoId<WeightedRandomPrototype> weights, [NotNullWhen(true)] out GamePresetPrototype? preset)
     {
         var options = ProtoMan.Index(weights).Weights.ShallowClone();
-        var players = GameTicker.ReadyPlayerCount();
+        var players = GameTicker.ReadyPlayerCountEffective(); // Trauma, used to be ReadyPlayerCount()
 
         GamePresetPrototype? selectedPreset = null;
         var sum = options.Values.Sum();
@@ -83,11 +83,17 @@ public sealed partial class SecretRuleSystem : GameRuleSystem<SecretRuleComponen
         {
             var accumulated = 0f;
             var rand = _random.NextFloat(sum);
+            string minReadyKeyCheck = ""; // Trauma
             foreach (var (key, weight) in options)
             {
+                // <Trauma>
                 accumulated += weight;
                 if (accumulated < rand)
+                {
+                    minReadyKeyCheck = key;
                     continue;
+                }
+                // </Trauma>
 
                 if (!ProtoMan.TryIndex(key, out selectedPreset))
                     Log.Error($"Invalid preset {selectedPreset} in secret rule weights: {weights}");
@@ -96,6 +102,14 @@ public sealed partial class SecretRuleSystem : GameRuleSystem<SecretRuleComponen
                 sum -= weight;
                 break;
             }
+            // <Trauma> Removes any presets that which the minimum players is not the ready count.
+            if (minReadyKeyCheck != null && selectedPreset != null &&
+                selectedPreset.MinPlayers < GameTicker.ReadyPlayerCountEffective())
+            {
+                options.Remove(minReadyKeyCheck);
+                continue;
+            }
+            // </Trauma>
 
             if (CanPick(selectedPreset, players))
             {
@@ -133,7 +147,7 @@ public sealed partial class SecretRuleSystem : GameRuleSystem<SecretRuleComponen
     /// </summary>
     public bool CanPickAny(IEnumerable<ProtoId<GamePresetPrototype>> protos)
     {
-        var players = GameTicker.ReadyPlayerCount();
+        var players = GameTicker.ReadyPlayerCountEffective(); // Trauma, used to be ReadyPlayerCount()
         foreach (var id in protos)
         {
             if (!ProtoMan.TryIndex(id, out var selectedPreset))
