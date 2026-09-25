@@ -45,7 +45,6 @@
   name: Blood Cultist Role
   components:
   - type: MindRole
-    roleType: TeamAntagonist
     subtype: role-subtype-blood-cultist
     antagPrototype: BloodCultist
   - type: RoleBriefing
@@ -76,15 +75,18 @@
   id: MindRoleBloodCultConstruct
   name: Blood Cult Construct Role
   components:
+  - type: MindRole
+    subtype: role-subtype-construct
+    antagPrototype: BloodCultConstruct
   - type: RoleBriefing
     briefing: blood-cult-role-briefing-construct
-    subtype: role-subtype-construct
 
 - type: entity
   parent: BaseMindRole
   id: MindRolePurifiedConstruct
   name: Purified Construct Role
   components:
+  - type: MindRole
+    subtype: role-subtype-purified-construct
   - type: RoleBriefing
     briefing: blood-cult-role-briefing-purified-construct
-    subtype: role-subtype-purified-construct
