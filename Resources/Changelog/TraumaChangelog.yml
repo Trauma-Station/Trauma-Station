@@ -15083,3 +15083,10 @@ Entries:
   id: 1640
   time: '2026-09-25T18:45:41.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4753
+- author: StarMade
+  changes:
+  - type: Remove
+    message: Cryo Chems no longer burn you to death.
+  id: 1641
+  time: '2026-09-25T20:27:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4758
