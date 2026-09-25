@@ -13,6 +13,7 @@ heretic-ability-fail-mirror-jaunt-no-mirrors = There are no reflective surfaces 
 heretic-ability-fail-not-enough-space = Not enough space to cast this spell!
 heretic-ability-fail-arena-nearby = Other arena nearby!
 heretic-ability-fail-too-close = Target is too close!
+dash-ability-cant-see = Target destination is not visible!
 
 heretic-ability-lose-focus-shadow-cloak = As you lose your focus, you are pulled out of the shadows!
 heretic-ability-lose-focus-pale-cloak = As you lose your focus, you are pulled out of the light!
