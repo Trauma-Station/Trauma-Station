@@ -10,6 +10,7 @@ blood-cult-role-greeting = The Geometer of Blood, Nar-Sie, has sent a number of 
 
 blood-cult-role-briefing-short = Use '+c' to contact other members of your cult.
 blood-cult-role-briefing-construct = Use '+c' to contact your eldritch creators.
+blood-cult-role-briefing-purified-construct = Help the crew defeat the eldritch cult that stole your life.
 
 blood-cult-condition-win = [color=#dc143c]The Geometer of Blood has successfully summoned their Eldritch Goddess![/color]
 blood-cult-condition-draw = [italic]Both the cult and crew were destroyed.[/italic]
