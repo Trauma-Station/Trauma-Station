@@ -52,6 +52,13 @@
     understands:
     - Eldritch
     - TauCetiBasic
+  - type: NameIdentifier
+    group: AdjectivePrefix
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Xenoborg # evil
+  - type: SpeechSynthesis
+    voice: Borg
   - type: Fixtures
     fixtures:
       fix1:
@@ -66,6 +73,7 @@
     damageModifierSet: ManifestedSpirit
   - type: Injurable
     damageContainer: ManifestedSpirit
+  - type: MindExaminable
   - type: MobThresholds
     thresholds:
       0: Alive
