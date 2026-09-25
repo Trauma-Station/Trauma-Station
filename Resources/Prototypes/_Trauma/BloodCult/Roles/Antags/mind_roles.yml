@@ -78,6 +78,7 @@
   components:
   - type: RoleBriefing
     briefing: blood-cult-role-briefing-construct
+    subtype: role-subtype-construct
 
 - type: entity
   parent: BaseMindRole
@@ -86,3 +87,4 @@
   components:
   - type: RoleBriefing
     briefing: blood-cult-role-briefing-purified-construct
+    subtype: role-subtype-purified-construct
