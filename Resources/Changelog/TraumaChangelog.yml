@@ -15062,3 +15062,10 @@ Entries:
   id: 1637
   time: '2026-09-25T10:03:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4748
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Dough is easy to make again, 125mL flour and 83.3333333333mL water.
+  id: 1638
+  time: '2026-09-25T12:50:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4751
