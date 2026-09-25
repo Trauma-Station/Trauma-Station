@@ -83,7 +83,7 @@ public sealed partial class SecretRuleSystem : GameRuleSystem<SecretRuleComponen
         {
             var accumulated = 0f;
             var rand = _random.NextFloat(sum);
-            string minReadyKeyCheck = "";
+            string minReadyKeyCheck = ""; // Trauma
             foreach (var (key, weight) in options)
             {
                 // <Trauma>

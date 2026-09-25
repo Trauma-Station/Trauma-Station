@@ -1,6 +1,5 @@
 
-namespace Content.Server.GameTicking
-{
+namespace Content.Server.GameTicking;
     public sealed partial class GameTicker
     {
         /// <summary>
@@ -12,4 +11,3 @@ namespace Content.Server.GameTicking
             return total + (_playerGameStatuses.Count - total) / 2;
         }
     }
-}

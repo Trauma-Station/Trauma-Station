@@ -332,9 +332,7 @@ namespace Content.Server.GameTicking
             RaiseLocalEvent(new PostGameMapLoad(proto, targetMap, gridUids, stationName));
             return gridUids;
         }
-        /// <summary>
-        /// Returns the readied player count.
-        /// </summary>
+
         public int ReadyPlayerCount()
         {
             var total = 0;
@@ -348,6 +346,7 @@ namespace Content.Server.GameTicking
 
                 total++;
             }
+
             return total;
         }
 
