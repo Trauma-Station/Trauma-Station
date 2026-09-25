@@ -5,6 +5,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
+using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -38,7 +39,12 @@ public abstract partial class SharedCosmicSiphonSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("cosmicability-siphon-full"), ent, ent);
             return;
         }
-        if (_cosmicCult.EntityIsCultist(args.Target) || _mobState.IsDead(args.Target))
+
+        if (!TryComp<HumanoidProfileComponent>(args.Target, out var humanoidProfile))
+            return;
+        if (_cosmicCult.EntityIsCultist(args.Target) || _mobState.IsDead(args.Target)
+                                                     || humanoidProfile.Species == "Monkey"
+                                                     || humanoidProfile.Species == "Kobold")
         {
             _popup.PopupEntity(Loc.GetString("cosmicability-siphon-fail", ("target", Identity.Entity(args.Target, EntityManager))), ent, ent);
             return;
