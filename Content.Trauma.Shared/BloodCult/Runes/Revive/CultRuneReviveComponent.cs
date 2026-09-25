@@ -10,6 +10,12 @@ public sealed partial class CultRuneReviveComponent : Component
     [DataField]
     public float ReviveRange = 0.5f;
 
+    /// <summary>
+    /// Number of sacrifices needed for 1 revival.
+    /// </summary>
+    [DataField]
+    public int ChargesUsed = 3;
+
     // TODO: why not just rejuv, it's magic anyway
     [DataField]
     public DamageSpecifier Healing = new()

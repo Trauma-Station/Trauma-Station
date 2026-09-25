@@ -33,6 +33,10 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnOfferingRuneInvoked(Entity<CultRuneOfferingComponent> ent, ref RuneInvokeEvent args)
     {
+        var user = args.User;
+        if (_cult.GetRule(user) is not { } rule)
+            return;
+
         var targets = _cult.GetTargetsNearRune(ent, ent.Comp.OfferingRange);
         targets.RemoveWhere(uid => _cult.IsCultist(uid));
 
@@ -43,7 +47,6 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
         }
 
         var target = targets.First();
-        var user = args.User;
         // if the target is dead we should always sacrifice it.
         if (_mob.IsDead(target))
         {
@@ -54,7 +57,7 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
 
         var invokers = args.Invokers.Count;
         if (_mind.GetMind(target) == null ||
-            _cult.IsTarget(user, target) ||
+            target == rule.Comp.OfferingTarget ||
             HasComp<BibleUserComponent>(target) ||
             HasComp<MindShieldComponent>(target))
         {
@@ -77,7 +80,7 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
             Convert(ent, target, user);
         }
 
-        _runeRevive.AddCharges(ent, ent.Comp.ReviveChargesPerOffering);
+        _runeRevive.AddCharges(rule, 1);
         args.Handled = true;
     }
 

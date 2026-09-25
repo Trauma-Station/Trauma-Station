@@ -88,9 +88,6 @@ public abstract partial class BloodCultSystem : EntitySystem
     public EntityUid? GetTarget(EntityUid member)
         => GetRule(member)?.Comp.OfferingTarget;
 
-    public bool IsTarget(EntityUid member, EntityUid target)
-        => GetTarget(member) == target;
-
     /// <summary>
     /// Returns true if a cult's target was sacraficed.
     /// </summary>

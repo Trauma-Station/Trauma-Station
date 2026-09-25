@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: guideEntry
+  id: BloodCult
+  name: guide-entry-blood-cult
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/BloodCult/BloodCult.xml"
+  children:
+  - BloodCultRunes
+  - BloodCultSpells
+
+- type: guideEntry
+  id: BloodCultRunes
+  name: guide-entry-blood-cult-runes
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/BloodCult/Runes.xml"
+
+- type: guideEntry
+  id: BloodCultSpells
+  name: guide-entry-blood-cult-spells
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/BloodCult/Spells.xml"

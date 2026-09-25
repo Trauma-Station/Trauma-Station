@@ -15028,3 +15028,37 @@ Entries:
   id: 1633
   time: '2026-09-23T20:38:11.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4724
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed triclor
+  id: 1634
+  time: '2026-09-24T06:49:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4731
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed glass chickens exploding when looked at.
+  id: 1635
+  time: '2026-09-24T07:14:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4733
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mice not being breedable.
+  id: 1636
+  time: '2026-09-24T11:44:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4738
+- author: TechnicFighter
+  changes:
+  - type: Remove
+    message: Chaplain can no longer summon demons
+  - type: Tweak
+    message: Changed the name of the chaplain's skillchip.
+  - type: Tweak
+    message: >-
+      Changed the skills of the chaplain's skillchip: MagicLit > 25. Lit > 100.
+      Smoke > 100.
+  id: 1637
+  time: '2026-09-25T10:03:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4748

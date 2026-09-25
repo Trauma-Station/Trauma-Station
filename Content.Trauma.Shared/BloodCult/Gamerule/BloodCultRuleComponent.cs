@@ -24,7 +24,7 @@ public sealed partial class BloodCultRuleComponent : Component
     /// <summary>
     /// The current player that Nar'Sie wants sacraficed.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? OfferingTarget;
 
     /// <summary>
@@ -60,6 +60,12 @@ public sealed partial class BloodCultRuleComponent : Component
 
     [DataField]
     public EntityUid? CultLeader;
+
+    /// <summary>
+    /// How many charges there are for the revival rune to take from, equivalent to number of sacrificed bodies.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int ReviveCharges = 9;
 
     [DataField]
     public CultStage Stage = CultStage.Start;
