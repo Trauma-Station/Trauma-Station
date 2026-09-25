@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Religion;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Bible.Components;
 using Content.Shared.Chat;
 using Content.Shared.Chemistry.Components;
@@ -16,6 +17,9 @@ using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Station;
+using Content.Shared.Station.Components;
+using Content.Shared.Timing.Systems;
 using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.BloodCult.Empower;
 using Content.Trauma.Shared.BloodCult.Examine;
@@ -36,7 +40,7 @@ public sealed partial class CultRuneSystem : EntitySystem
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private BloodCultExamineSystem _cultExamine = default!;
-    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -45,8 +49,11 @@ public sealed partial class CultRuneSystem : EntitySystem
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private SharedStationSystem _station = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
     [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
+    [Dependency] private EntityQuery<StationDataComponent> _stationQuery = default!;
 
     [SubscribeLocalEvent]
     private void OnRuneSelected(Entity<RuneDrawerComponent> ent, ref RuneDrawerSelectedMessage args)
@@ -197,6 +204,11 @@ public sealed partial class CultRuneSystem : EntitySystem
             return;
 
         args.Handled = true;
+        if (!_useDelay.TryResetDelay(ent.Owner))
+        {
+            _popup.PopupEntity("The rune's magic is on cooldown!", ent, user);
+            return;
+        }
 
         var cultists = _cult.GatherCultists(ent, ent.Comp.RuneActivationRange);
         if (cultists.Count < ent.Comp.RequiredInvokers)
@@ -265,7 +277,7 @@ public sealed partial class CultRuneSystem : EntitySystem
         }
 
         // can't spam runes ontop of eachother
-        var coords = _transform.GetMapCoordinates(uid);
+        var coords = _transform.GetMapCoordinates((uid, xform));
         var map = coords.MapId;
         var box = Box2.CenteredAround(coords.Position, new(rune.Size));
         if (_lookup.AnyComponentsIntersecting(typeof(CultRuneDrawingComponent), map, box))
@@ -289,6 +301,15 @@ public sealed partial class CultRuneSystem : EntitySystem
                     return false;
                 }
             }
+        }
+
+        // have to make your base on station not lavaland vgroid shittle etc
+        if (_station.GetOwningStation(uid, xform) is not { } station ||
+            !_stationQuery.TryComp(station, out var stationData) ||
+            !stationData.OwnedGrids.Contains(gridUid))
+        {
+            _popup.PopupEntity("You must draw runes on station!", uid, uid);
+            return false;
         }
 
         if (rune.RequireTarget && !rule.Comp.TargetSacrificed)
@@ -346,6 +367,6 @@ public sealed partial class CultRuneSystem : EntitySystem
             newDamage *= empowered.RuneDamageMultiplier;
         }
 
-        _damageable.ChangeDamage(user, newDamage, increaseOnly: true);
+        _damage.ChangeDamage(user, newDamage, increaseOnly: true, targetPart: TargetBodyPart.Arms, canMiss: false);
     }
 }

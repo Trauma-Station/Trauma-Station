@@ -9,14 +9,6 @@ public sealed partial class DelayedVisualsSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<DelayedVisualsComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<DelayedVisualsComponent, ComponentShutdown>(OnShutdown);
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -32,6 +24,7 @@ public sealed partial class DelayedVisualsSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<DelayedVisualsComponent> ent, ref MapInitEvent args)
     {
         ent.Comp.Finished = _timing.CurTime + ent.Comp.Delay;
@@ -39,8 +32,12 @@ public sealed partial class DelayedVisualsSystem : EntitySystem
         _appearance.SetData(ent.Owner, ent.Comp.Key, true);
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<DelayedVisualsComponent> ent, ref ComponentShutdown args)
     {
+        if (ent.Comp.Key == null)
+            return;
+
         _appearance.SetData(ent.Owner, ent.Comp.Key, false);
     }
 }
