@@ -262,11 +262,12 @@
 - type: entity
   parent: BaseSkillChipMRAM
   id: SkillChipMagLit
-  name: MRAM-Chip (Memories of a Cultist)
+  name: MRAM-Chip (Memories of a Priest)
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MagicalLiteracyKnowledge: 100
+      LiteracyKnowledge: 100
+      SmokeablesKnowledge: 100
 
 - type: entity
   parent: BaseSkillChipMRAM
