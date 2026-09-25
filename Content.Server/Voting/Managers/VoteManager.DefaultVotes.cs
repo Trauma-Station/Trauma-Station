@@ -294,8 +294,7 @@ namespace Content.Server.Voting.Managers
             }
             // Trim the vote options
             var maxCount = _cfg.GetCVar(TraumaCVars.MapVoteOptions);
-            if (maps.Count > maxCount + 1
-            && maxCount > 0) // No negative amount of maps in the vote
+            if (maps.Count > maxCount + 1 && maxCount > 0)
             {
                 var randomMap = _random.Pick(maps.Keys);
                 options.Options.Add(("Random", randomMap));
