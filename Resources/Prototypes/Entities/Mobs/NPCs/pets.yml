@@ -180,7 +180,7 @@
   parent: [ BaseUniquePet, MobCat ]
   id: MobCatRuntime
   name: Runtime
-  description: The cat who walks by himself.
+  description: Professional mouse hunter. Escape artist.
   components:
   - type: NpcFactionMember
     factions:
@@ -330,20 +330,6 @@
   name: McGriff
   description: This dog can tell something smells around here, and that something is CRIME!
   components:
-  # <Trauma>
-  - type: NPCRetaliation
-  - type: HTN
-    rootTask:
-      task: RuminantHostileCompound
-  - type: MeleeWeapon
-    soundHit:
-        path: /Audio/Effects/bite.ogg
-    angle: 0
-    animation: WeaponArcBite
-    damage:
-      types:
-        Slash: 10
-  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     sprite: Mobs/Pets/mcgriff.rsi
@@ -390,12 +376,6 @@
     refineResult:
     - id: FoodMeat
       amount: 2
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Dog
-    understands:
-    - Dog
-    - TauCetiBasic
   - type: InteractionPopup
     successChance: 0.5
     interactSuccessString: petting-success-dog
@@ -451,12 +431,6 @@
     attributes:
       proper: true
       gender: male
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Hissing
-    understands:
-    - Hissing
-    - TauCetiBasic
 
 - type: entity
   parent: [ BaseUniquePet, SimpleMobBase, StripableInventoryBase, BaseSlicingRefinable , BaseMobDestructible ]
@@ -497,12 +471,6 @@
     refineResult:
     - id: FoodMeat
       amount: 3
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Dog
-    understands:
-    - Dog
-    - TauCetiBasic
   - type: InteractionPopup
     successChance: 0.7
     interactSuccessString: petting-success-dog
@@ -548,12 +516,6 @@
     - VimPilot
   - type: StealTarget
     stealGroup: AnimalMorty
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Hissing
-    understands:
-    - Hissing
-    - TauCetiBasic
 
 - type: entity
   parent: MobPossumMorty
@@ -618,12 +580,6 @@
     tags:
     - CannotSuicide
     - VimPilot
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Hissing
-    understands:
-    - Hissing
-    - TauCetiBasic
 
 - type: entity
   parent: [ BaseUniquePet, MobPig ]
@@ -646,12 +602,6 @@
     tags:
     - CannotSuicide
     - VimPilot
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Pig
-    understands:
-    - Pig
-    - TauCetiBasic
 
 - type: entity
   parent: [ BaseUniquePet, MobFox, BaseSlicingRefinable ]
@@ -659,38 +609,6 @@
   name: Renault
   description: The captain's trustworthy fox.
   components:
-  # <Trauma>
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Blunt
-        damage: 400
-      behaviors:
-      - !type:GibBehavior
-      - !type:SpawnEntitiesBehavior
-        spawn:
-          Telecrystal1:
-            min: 25
-            max: 40
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Radiation
-        damage: 15
-      behaviors:
-      - !type:PopupBehavior
-        popup: mouth-taste-metal
-        popupType: LargeCaution
-        targetOnly: true
-    - trigger:
-        !type:DamageTypeTrigger
-        damageType: Radiation
-        damage: 40
-      behaviors:
-      - !type:VomitBehavior
-  - type: StaticPrice
-    price: 32500
-  # </Trauma>
   - type: InteractionPopup
     successChance: 1
     interactSuccessString: petting-success-soft-floofy
@@ -714,12 +632,6 @@
     - VimPilot
   - type: StealTarget
     stealGroup: AnimalRenault
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Fox
-    understands:
-    - Fox
-    - TauCetiBasic
 
 - type: entity
   parent: [ BaseUniquePet, MobHamster, BaseSlicingRefinable ]
@@ -773,15 +685,6 @@
     flavors:
     - meaty
     - sadness
-  # Goobstation - hamlet is unique so higher chance to actually get faxed
-  - type: FaxSlip
-    slipChance: 0.5
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Mouse
-    understands:
-    - Mouse
-    - TauCetiBasic
 
 - type: entity
   parent: MobHamsterHamlet
@@ -805,14 +708,6 @@
   name: Shiva
   description: The first defender of the station.
   components:
-  # <Trauma>
-  - type: SolutionManager
-    solutions:
-    - SolutionShivaSpider
-  - type: MeleeChemicalInjector
-    transferAmount: 2
-    solution: melee
-  # </Trauma>
   - type: InteractionPopup
     successChance: 0.5 # spider is mean
     interactSuccessString: petting-success-tarantula
@@ -860,7 +755,6 @@
         Piercing: 8
         Poison: 8
   - type: Spider
-    spawnsWebsAsNonPlayer: false # Trauma
   - type: Grammar
     attributes:
       proper: true
@@ -873,12 +767,6 @@
     - FootstepSound
   - type: StealTarget
     stealGroup: AnimalShiva
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Xeno
-    understands:
-    - Xeno
-    - TauCetiBasic
 
 - type: entity
   parent: [ BaseUniquePet, MobKangaroo ]
@@ -910,12 +798,6 @@
   - type: GhostTakeoverAvailable
   - type: Loadout
     prototypes: [ BoxingKangarooGear ]
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - Kangaroo
-    understands:
-    - Kangaroo
-    - TauCetiBasic
 
 - type: entity
   parent: [ BaseUniquePet, MobAdultSlimes, StripableInventoryBase, BaseSlicingRefinable ]
@@ -923,12 +805,6 @@
   name: Smile
   description: This masterpiece has gone through thousands of experiments. But it is the sweetest creature in the world. Smile Slime!
   components:
-  # <Trauma>
-  - type: NPCRetaliation
-  - type: HTN
-    rootTask:
-      task: RuminantHostileCompound
-  # </Trauma>
   - type: Sprite
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
