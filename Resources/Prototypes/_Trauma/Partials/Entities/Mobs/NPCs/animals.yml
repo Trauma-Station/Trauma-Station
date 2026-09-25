@@ -547,11 +547,6 @@
         Slash: 4
         Piercing: 2
         Blunt: 2
-  - type: Bloodstream
-    bloodReferenceSolution:
-      reagents: !Clear
-      - ReagentId: SpaceLube # was Laughter
-        Quantity: 150
 
 - type: entity
   id: MobGiantSpiderWizard
