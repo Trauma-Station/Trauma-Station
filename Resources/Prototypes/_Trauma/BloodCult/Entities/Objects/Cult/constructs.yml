@@ -4,7 +4,7 @@
   parent: [ BaseItem, BaseBloodContraband ]
   id: ConstructShell
   name: construct shell
-  description: empty construct shell
+  description: An empty construct shell awaiting a soulstone to whirr to life.
   components:
   - type: Sprite
     sprite: _Trauma/BloodCult/Entities/Items/construct_shell.rsi
@@ -27,37 +27,38 @@
   - type: Examiner
     skipChecks: true
 
-# TODO: jesus christ use base mob prototypes
 - type: entity
   abstract: true
+  parent:
+  - BaseMob
+  - MobCombat
+  - MobDamageable
   id: ConstructBase
   components:
-  - type: LagCompensation
-  - type: Input
-    context: "human"
-  - type: MobMover
-  - type: InputMover
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 3
-    baseSprintSpeed: 3
-  - type: DamageOnHighSpeedImpact
-    damage:
-      types:
-        Blunt: 5
-    soundHit:
-      path: /Audio/Effects/hit_kick.ogg
   - type: Sprite
-    drawdepth: Mobs
     sprite: _Trauma/BloodCult/mobs.rsi
-    noRot: true
-  - type: Clickable
-  - type: InteractionOutline
-  - type: Physics
-    bodyType: KinematicController
-  - type: Construct
+  - type: Evil
+  - type: Appearance
   - type: DelayedVisuals
     key: enum.ConstructVisualsState.Transforming
     delay: 1
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 3
+  - type: Construct
+  - type: LanguageSpeaker
+    speaks:
+    - Eldritch
+    understands:
+    - Eldritch
+    - TauCetiBasic
+  - type: NameIdentifier
+    group: AdjectivePrefix
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Xenoborg # evil
+  - type: SpeechSynthesis
+    voice: Borg
   - type: Fixtures
     fixtures:
       fix1:
@@ -72,6 +73,7 @@
     damageModifierSet: ManifestedSpirit
   - type: Injurable
     damageContainer: ManifestedSpirit
+  - type: MindExaminable
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -82,21 +84,17 @@
     - Dead
   - type: CombatMode
     canDisarm: false
-  - type: Internals
-  - type: Examiner
-  - type: Speech
+  - type: MeleeWeapon
+    hidden: true
+    angle: 30
   - type: TypingIndicator
     proto: guardian
-  - type: Pullable
   - type: Puller
     needsHands: false
   - type: ActionsContainer
   - type: ContainerContainer
     containers:
       actions: !type:Container
-  - type: Visibility
-  - type: ContentEye
-  - type: Actions
   - type: Hands
   - type: IsDeadIC
   - type: ShowHealthBars
@@ -110,7 +108,6 @@
     tags:
     - CannotSuicide
     - DoorBumpOpener
-  - type: Appearance
 
 - type: entity
   parent: ConstructBase
@@ -128,11 +125,10 @@
     thresholds:
       0: Alive
       100: Dead
+  - type: Damageable
+    damageModifierSet: CultJuggernaut
   - type: MeleeWeapon
-    hidden: true
-    angle: 30
     animation: WeaponArcSmash
-    attackRate: 1
     damage:
       types:
         Structural: 90
@@ -148,6 +144,7 @@
         enum.ConstructVisualsState.Glow:
           True: { visible: false }
           False: { visible: true }
+  # TODO: shield, gauntlet echo, barrier rune
 
 - type: entity
   parent: ConstructBase
@@ -164,10 +161,7 @@
   - type: MovementIgnoreGravity
   - type: GravityAffected
   - type: MeleeWeapon
-    hidden: true
-    angle: 30
     animation: WeaponArcPunch
-    attackRate: 1
     damage:
       types:
         Blunt: 5
@@ -181,6 +175,8 @@
         enum.ConstructVisualsState.Glow:
           True: { visible: false }
           False: { visible: true }
+  # TODO: heal allied constructs when hit
+  # TODO: cult floor, wall, greater conjuration, soulstone, lesser magic missile, revive rune
 
 - type: entity
   parent: ConstructBase
@@ -202,10 +198,7 @@
     baseWalkSpeed: 4
     baseSprintSpeed: 4
   - type: MeleeWeapon
-    hidden: true
-    angle: 30
     animation: WeaponArcSmash
-    attackRate: 1
     damage:
       types:
         Structural: 40
@@ -219,6 +212,8 @@
         enum.ConstructVisualsState.Glow:
           True: { visible: false }
           False: { visible: true }
+  # TODO: jaunting, lower cooldown by 1s per attack, 5s for critting and removing it on kill
+  # TODO: summon teleport rune
 
 - type: entity
   parent: ConstructBase
@@ -240,14 +235,12 @@
     baseWalkSpeed: 5
     baseSprintSpeed: 5
   - type: MeleeWeapon
-    hidden: true
-    angle: 30
     animation: WeaponArcSmash
-    attackRate: 1
     damage:
       types:
         Structural: 40
-        Blunt: 50
+        Blunt: 3
+  # TODO: pass through cult walls, area conversion and shield spells
 
 - type: entity
   parent: ConstructBase # It's not technically a construct but it code wise? it is.
@@ -262,16 +255,14 @@
       0: Alive
       40: Dead
   - type: MeleeWeapon
-    hidden: true
-    angle: 30
     animation: WeaponArcSmash
-    attackRate: 1
     damage:
       types:
         Blunt: 10
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.5
     baseSprintSpeed: 5.5
+  - type: VentCrawler
 
 - type: entity
   parent: ConstructJuggernaut
