@@ -191,8 +191,10 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:AdjustTemperature
-        amount: 80000 # Heats you up as it metabolizes necessitating constant cooling.
+      # <Trauma>
+      #- !type:AdjustTemperature
+      #  amount: 80000 # Heats you up as it metabolizes necessitating constant cooling.
+      # </Trauma>
       - !type:EvenHealthChange
         conditions:
         - !type:TemperatureCondition
@@ -1398,8 +1400,10 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:AdjustTemperature
-        amount: 80000 # Heats you up as it metabolizes necessitating constant cooling.
+      # <Trauma>
+      #- !type:AdjustTemperature
+      #  amount: 80000 # Heats you up as it metabolizes necessitating constant cooling.
+      # </Trauma>
       - !type:EvenHealthChange
         conditions:
         - !type:TemperatureCondition
