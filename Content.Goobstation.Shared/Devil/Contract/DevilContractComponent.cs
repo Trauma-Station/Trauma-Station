@@ -26,6 +26,12 @@ public sealed partial class DevilContractComponent : Component
     public HashSet<DevilClausePrototype> CurrentClauses = [];
 
     /// <summary>
+    /// Clause blacklist for restricting available clauses
+    /// </summary>
+    [DataField]
+    public List<ProtoId<DevilClausePrototype>> ClauseBlacklist = [];
+
+    /// <summary>
     /// Has the contract been signed by the signer?
     /// </summary>
     [DataField, AutoNetworkedField]
