@@ -1,0 +1,337 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseItem, BaseBloodContraband ]
+  id: ConstructShell
+  name: construct shell
+  description: An empty construct shell awaiting a soulstone to whirr to life.
+  components:
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Items/construct_shell.rsi
+    state: icon
+  - type: ItemSlots
+  - type: ConstructShell
+    shardSlot:
+      ejectOnBreak: true
+      whitelist:
+        components:
+        - SoulShard
+  - type: UserInterface
+    interfaces:
+      enum.RadialSelectorUiKey.Key:
+        type: RadialSelectorMenuBUI
+  - type: ContainerContainer
+    containers:
+      Shard: !type:ContainerSlot
+  - type: CultItem
+  - type: Examiner
+    skipChecks: true
+
+- type: entity
+  abstract: true
+  parent:
+  - BaseMob
+  - MobCombat
+  - MobDamageable
+  id: ConstructBase
+  components:
+  - type: Sprite
+    sprite: _Trauma/BloodCult/mobs.rsi
+  - type: Evil
+  - type: Appearance
+  - type: DelayedVisuals
+    key: enum.ConstructVisualsState.Transforming
+    delay: 1
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3
+    baseSprintSpeed: 3
+  - type: Construct
+  - type: LanguageSpeaker
+    speaks:
+    - Eldritch
+    understands:
+    - Eldritch
+    - TauCetiBasic
+  - type: NameIdentifier
+    group: AdjectivePrefix
+  - type: Speech
+    speechVerb: Robotic
+    speechSounds: Xenoborg # evil
+  - type: SpeechSynthesis
+    voice: Borg
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape: !type:PhysShapeCircle
+          radius: 0.35
+        density: 300
+        mask:
+        - FlyingMobMask
+        layer:
+        - FlyingMobLayer
+  - type: Damageable
+    damageModifierSet: ManifestedSpirit
+  - type: Injurable
+    damageContainer: ManifestedSpirit
+  - type: MindExaminable
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      60: Dead
+  - type: MobState
+    allowedStates:
+    - Alive
+    - Dead
+  - type: CombatMode
+    canDisarm: false
+  - type: MeleeWeapon
+    hidden: true
+    angle: 30
+  - type: TypingIndicator
+    proto: guardian
+  - type: Puller
+    needsHands: false
+  - type: ActionsContainer
+  - type: ContainerContainer
+    containers:
+      actions: !type:Container
+  - type: Hands
+  - type: IsDeadIC
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+    - Inorganic
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
+  - type: Tag
+    tags:
+    - CannotSuicide
+    - DoorBumpOpener
+
+- type: entity
+  parent: ConstructBase
+  id: ConstructJuggernaut
+  name: juggernaut
+  description: A massive, armored construct built to spearhead attacks and soak up enemy fire.
+  components:
+  - type: Sprite
+    layers:
+    - state: juggernaut
+      map: [ "enum.ConstructVisualsState.Sprite" ]
+    - state: glow_juggernaut_cult
+      map: [ "enum.ConstructVisualsState.Glow" ]
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Dead
+  - type: Damageable
+    damageModifierSet: CultJuggernaut
+  - type: MeleeWeapon
+    animation: WeaponArcSmash
+    damage:
+      types:
+        Structural: 90
+        Blunt: 25
+    soundHit:
+      path: /Audio/_Trauma/Weapons/Melee/breaching_hammer/club.ogg
+  - type: GenericVisualizer
+    visuals:
+      enum.ConstructVisualsState.Transforming:
+        enum.ConstructVisualsState.Sprite:
+          True: { state: make_juggernaut_cult }
+          False: { state: juggernaut }
+        enum.ConstructVisualsState.Glow:
+          True: { visible: false }
+          False: { visible: true }
+  # TODO: shield, gauntlet echo, barrier rune
+
+- type: entity
+  parent: ConstructBase
+  id: ConstructArtificer
+  name: artificer
+  description: A bulbous construct dedicated to building and maintaining the Cult of Nar'Sie's armies.
+  components:
+  - type: Sprite
+    layers:
+    - state: artificer
+      map: [ "enum.ConstructVisualsState.Sprite" ]
+    - state: glow_artificer_cult
+      map: [ "enum.ConstructVisualsState.Glow" ]
+  - type: MovementIgnoreGravity
+  - type: GravityAffected
+  - type: MeleeWeapon
+    animation: WeaponArcPunch
+    damage:
+      types:
+        Blunt: 5
+        Structural: 60
+  - type: GenericVisualizer
+    visuals:
+      enum.ConstructVisualsState.Transforming:
+        enum.ConstructVisualsState.Sprite:
+          True: { state: make_artificer_cult }
+          False: { state: artificer }
+        enum.ConstructVisualsState.Glow:
+          True: { visible: false }
+          False: { visible: true }
+  # TODO: heal allied constructs when hit
+  # TODO: cult floor, wall, greater conjuration, soulstone, lesser magic missile, revive rune
+
+- type: entity
+  parent: ConstructBase
+  id: ConstructWraith
+  name: wraith
+  description: A wicked, clawed shell constructed to assassinate enemies and sow chaos behind enemy lines.
+  components:
+  - type: Sprite
+    layers:
+    - state: wraith
+      map: [ "enum.ConstructVisualsState.Sprite" ]
+    - state: glow_wraith_cult
+      map: [ "enum.ConstructVisualsState.Glow" ]
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      65: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 4
+    baseSprintSpeed: 4
+  - type: MeleeWeapon
+    animation: WeaponArcSmash
+    damage:
+      types:
+        Structural: 40
+        Blunt: 20
+  - type: GenericVisualizer
+    visuals:
+      enum.ConstructVisualsState.Transforming:
+        enum.ConstructVisualsState.Sprite:
+          True: { state: make_wraith_cult }
+          False: { state: wraith }
+        enum.ConstructVisualsState.Glow:
+          True: { visible: false }
+          False: { visible: true }
+  # TODO: jaunting, lower cooldown by 1s per attack, 5s for critting and removing it on kill
+  # TODO: summon teleport rune
+
+- type: entity
+  parent: ConstructBase
+  id: ConstructHarvester
+  name: harvester
+  description: A long, thin construct built to herald Nar'Sie's rise. It'll be all over soon.
+  components:
+  - type: Sprite
+    layers:
+    - state: harvester
+      map: [ "enum.ConstructVisualsState.Sprite" ]
+    - state: glow_harvester_cult
+      map: [ "enum.ConstructVisualsState.Glow" ]
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      65: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 5
+    baseSprintSpeed: 5
+  - type: MeleeWeapon
+    animation: WeaponArcSmash
+    damage:
+      types:
+        Structural: 40
+        Blunt: 3
+  # TODO: pass through cult walls, area conversion and shield spells
+
+- type: entity
+  parent: ConstructBase # It's not technically a construct but it code wise? it is.
+  id: ShadeCult
+  name: shade
+  description: A bound spirit.
+  components:
+  - type: Sprite
+    state: shade_cult
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      40: Dead
+  - type: MeleeWeapon
+    animation: WeaponArcSmash
+    damage:
+      types:
+        Blunt: 10
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 5.5
+    baseSprintSpeed: 5.5
+  - type: VentCrawler
+
+- type: entity
+  parent: ConstructJuggernaut
+  id: ConstructJuggernautHoly
+  name: purified juggernaut
+  components:
+  - type: Sprite
+    layers:
+    - state: juggernaut
+      map: [ "enum.ConstructVisualsState.Sprite" ]
+    - state: glow_juggernaut_holy
+      map: [ "enum.ConstructVisualsState.Glow" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.ConstructVisualsState.Transforming:
+        enum.ConstructVisualsState.Sprite:
+          True: { state: make_juggernaut_holy }
+          False: { state: juggernaut }
+        enum.ConstructVisualsState.Glow:
+          True: { visible: false }
+          False: { visible: true }
+
+- type: entity
+  parent: ConstructArtificer
+  id: ConstructArtificerHoly
+  name: purified artificer
+  description: A bulbous construct dedicated to building and maintaining the holy armies.
+  components:
+  - type: Sprite
+    layers:
+    - state: artificer
+      map: [ "enum.ConstructVisualsState.Sprite" ]
+    - state: glow_artificer_holy
+      map: [ "enum.ConstructVisualsState.Glow" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.ConstructVisualsState.Transforming:
+        enum.ConstructVisualsState.Sprite:
+          True: { state: make_artificer_holy }
+          False: { state: artificer }
+        enum.ConstructVisualsState.Glow:
+          True: { visible: false }
+          False: { visible: true }
+
+- type: entity
+  parent: ConstructWraith
+  id: ConstructWraithHoly
+  name: purified wraith
+  components:
+  - type: Sprite
+    layers:
+    - state: wraith
+      map: [ "enum.ConstructVisualsState.Sprite" ]
+    - state: glow_wraith_holy
+      map: [ "enum.ConstructVisualsState.Glow" ]
+  - type: GenericVisualizer
+    visuals:
+      enum.ConstructVisualsState.Transforming:
+        enum.ConstructVisualsState.Sprite:
+          True: { state: make_wraith_holy }
+          False: { state: wraith }
+        enum.ConstructVisualsState.Glow:
+          True: { visible: false }
+          False: { visible: true }
+
+- type: entity
+  parent: ShadeCult
+  id: ShadeHoly
+  name: purified shade
+  components:
+  - type: Sprite
+    state: shade_holy

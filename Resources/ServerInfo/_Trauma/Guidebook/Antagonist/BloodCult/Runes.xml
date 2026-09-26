@@ -1,0 +1,104 @@
+<Document>
+  # Runes List
+
+  <Box>
+    <GuideEntityEmbed Entity="CultRuneOffering"/>
+  </Box>
+
+  Probably the first rune you'll draw. It's needed to sacrifice the cult's target and convert new members.
+
+  Requires 3 invokers to sacrifice a living person, but only 2 to convert and just 1 to sacrifice a corpse.
+
+  Constructs can help invoke runes, so you could recover from being the last cultist by sacrificing for a soul stone.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="CultRuneDimensionalRending"/>
+  </Box>
+
+  Bring Nar'Sie into your realm over 45 seconds.
+
+  Requires 9 invokers and it must be drawn in a ritual site.
+
+  This is it, prepare and make it count.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="CultRuneApocalypse"/>
+  </Box>
+
+  A powerful single-use rune that will cause all manner of bad things to happen to the station.
+
+  It gets stronger when the cult is outnumbered by the crew.
+
+  Requires 3 invokers and it must be drawn in a ritual site.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="CultRuneEmpower"/>
+  </Box>
+
+  Strengthens the efficacy of your blood magic, letting you prepare spells and draw runes faster.
+
+  It has a variety of smaller ability buffs too but doesn't last long.
+
+  Requires 1 invoker.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="CultRuneTeleport"/>
+  </Box>
+
+  Once give a name, lets you teleport to any other teleport rune of your choosing.
+
+  Can also be used with the teleportation spell.
+
+  Requires 1 invoker.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="CultRuneRevive"/>
+  </Box>
+
+  Heals and revives a crit or dead cultist, if the damage is low enough after healing.
+
+  Every 3 sacrifices to Nar'Sie grants 1 revival charge, you get 3 charges for free.
+
+  Use medicine if you can afford to and save these revival charges for emergencies.
+
+  Requires 1 invoker.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="CultRuneBarrier"/>
+  </Box>
+
+  Summons a durable cult barrier. It can be seen through but nothing can pass, unless they destroy it.
+
+  You can use this from 1.5 tiles so you don't have to be right on top of it.
+
+  Requires 1 invoker and vanishes after being used.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="CultRuneSummoning"/>
+  </Box>
+
+  Summons another cultist to a teleport rune of your choice.
+
+  It will fail if the target is cuffed.
+
+  Requires 2 invokers.
+
+
+  <Box>
+    <GuideEntityEmbed Entity="CultRuneBloodBoil"/>
+  </Box>
+
+  A powerful base defence rune, nonbelievers within 15 tiles will be set alight and shoot blood projectiles at eachother.
+
+  Completely harmless to the cult, assuming the fire doesn't spread to you.
+
+  Requires 3 invokers.
+
+</Document>

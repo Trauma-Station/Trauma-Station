@@ -15,6 +15,7 @@
         damage:
           types:
             Shock: 1
+  - type: BlockShuttleRecall
 
 - type: entity
   id: BaseBorgChassisDerelict

@@ -1,12 +1,21 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/a47835a04f3c88216ca1516ec4082a009c5f3451/icons/area/areas_station.dmi. anchor, newsroom, substation, evac_lounge, evac_hall, ranch, vault modified by @deltanedas (github). loot_room by @aineias1. ai_core, arrivals, boxing_ring annd mail_room created by @GoidaYAMLWarrior (github)",
+    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/a47835a04f3c88216ca1516ec4082a009c5f3451/icons/area/areas_station.dmi | anchor, newsroom, substation, evac_lounge, evac_hall, ranch, vault modified by @deltanedas (github) | loot_room by @aineias1 | abandoned_arcade, abandoned_bar, abandoned_chapel, ai_core, airlock, anomaly_lab, arcade, artifact_lab, arrivals, boxing_ring, burn_chamber, cryo_pods, dock, gas_miner, ntr_office, mail_room, shuttle_build and stage created by @GoidaYAMLWarrior (github)",
     "size": {
         "x": 32,
         "y": 32
     },
     "states": [
+        {
+            "name": "abandoned_arcade"
+        },
+        {
+            "name": "abandoned_bar"
+        },
+        {
+            "name": "abandoned_chapel"
+        },
         {
             "name": "abandoned_garden"
         },
@@ -35,10 +44,22 @@
             "name": "ai_upload"
         },
         {
+            "name": "airlock"
+        },
+        {
+            "name": "anomaly_lab"
+        },
+        {
             "name": "anchor"
         },
         {
             "name": "armory"
+        },
+        {
+            "name": "arcade"
+        },
+        {
+            "name": "artifact_lab"
         },
         {
             "name": "arrivals"
@@ -65,6 +86,9 @@
             "name": "barber"
         },
         {
+            "name": "boxing_ring"
+        },
+        {
             "name": "bridge"
         },
         {
@@ -77,7 +101,7 @@
             "name": "brig_entry"
         },
         {
-            "name": "boxing_ring"
+            "name": "burn_chamber"
         },
         {
             "name": "cafeteria"
@@ -125,7 +149,10 @@
             "name": "cremate"
         },
         {
-            "name": "cryo"
+            "name": "cryosleep"
+        },
+        {
+            "name": "cryo_pods"
         },
         {
             "name": "cytology"
@@ -138,6 +165,9 @@
         },
         {
             "name": "disposals"
+        },
+        {
+            "name": "dock"
         },
         {
             "name": "dojo"
@@ -201,6 +231,9 @@
         },
         {
             "name": "garden"
+        },
+        {
+            "name": "gas_miner"
         },
         {
             "name": "gateway"
@@ -288,6 +321,9 @@
         },
         {
             "name": "newsroom"
+        },
+        {
+            "name": "ntr_office"
         },
         {
             "name": "nuke_storage"
@@ -383,7 +419,13 @@
             "name": "showroom"
         },
         {
+            "name": "shuttle_build"
+        },
+        {
             "name": "solar_panels"
+        },
+        {
+            "name": "stage"
         },
         {
             "name": "station"

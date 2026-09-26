@@ -14845,3 +14845,262 @@ Entries:
   id: 1618
   time: '2026-09-20T10:31:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4686
+- author: StarMade
+  changes:
+  - type: Add
+    message: Medborg Omnitool Module
+  id: 1619
+  time: '2026-09-20T17:22:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4624
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added additional info to the ranching guidebook as well as added the
+      ability to actually see the chart for breeding
+  - type: Add
+    message: >-
+      Added a new cargo order for ranching, Costs 4000 spesos and gives you all
+      the resources you need to setup ranching
+  - type: Tweak
+    message: >-
+      Tweaked ageium to prevent aging all together permanently when you put a
+      total of 5u inside of an animal, You get ageium from ixworth eggs which
+      require feeding tomatoes to a white chicken
+  - type: Tweak
+    message: >-
+      Reduced the happiness required for brown roosters to produce golden eggs
+      from fertilizing eggs, Keep in mind fertilizing an egg does not change the
+      egg and requires putting it into an incubator
+  - type: Tweak
+    message: Chickens now slowly heal all burn damage and a bit of poison damage
+  - type: Fix
+    message: Fixed phoenix egg not properly healing the correct damage types
+  id: 1620
+  time: '2026-09-21T08:23:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4691
+- author: boyofsin
+  changes:
+  - type: Remove
+    message: Chef's Job exclusive CQC from their uplink
+  - type: Tweak
+    message: Capoeira's TC price has been increased from 30 to 60
+  - type: Tweak
+    message: CQC is now available to syndicate agents
+  id: 1621
+  time: '2026-09-21T08:34:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4689
+- author: deltanedas
+  changes:
+  - type: Add
+    message: You can now craft the new material filter.
+  - type: Tweak
+    message: >-
+      All filters now tell you if the item you are holding matches it when
+      examined.
+  id: 1622
+  time: '2026-09-21T08:45:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4688
+- author: WrenTheBun
+  changes:
+  - type: Add
+    message: >-
+      Added craftable improvised knife rig, an unfashionable accessory for knife
+      enthusiasts.
+  id: 1623
+  time: '2026-09-21T10:43:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4626
+- author: Nothing98512
+  changes:
+  - type: Tweak
+    message: Blacklisted cyborgs from comms consoles
+  id: 1624
+  time: '2026-09-21T13:36:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4664
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to summon shadow demons W scam
+  id: 1625
+  time: '2026-09-21T14:24:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4696
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Some signal ports are coloured in the multitool UI according to their data
+      type.
+  id: 1626
+  time: '2026-09-21T14:28:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4697
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added a functioning egg ability for wizard chickens
+  - type: Add
+    message: >-
+      Added peanut seeds to the megaseed vendor, Now you can get Onagadori
+      Chickens
+  - type: Add
+    message: Added a magical contraband tag to phoenix, dragon and wizard eggs
+  - type: Tweak
+    message: Lowered the tile radius for overcrowding for chickens
+  - type: Tweak
+    message: >-
+      Lowered the amount of unhappinesss you need for cluwne chickens, now you
+      only need -50 instead of -777
+  - type: Tweak
+    message: >-
+      Adjusted the chemicals on the following plants, Steel Wheat, Magic
+      Mushrooms, Clear Corn, Balloon Melons, Synthflesh, Meth Apples,
+  - type: Tweak
+    message: >-
+      Buffed Dream Egg and Phoenix Egg, Dream egg now heals all limbs as well as
+      heals more damage in general as well as restoring blood level and stopping
+      bleeding, Phoenix egg also heals all limbs now and a bit more damage in
+      general
+  - type: Fix
+    message: Fixed not being able to get onagadori chickens and phoenix chickens
+  - type: Fix
+    message: >-
+      Fixed not being able to feed steel wheat bushels and rice bushels to
+      chickens
+  id: 1627
+  time: '2026-09-22T08:55:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4704
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Jack Galoshes are now Jani Contra
+  id: 1628
+  time: '2026-09-22T17:28:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4709
+- author: ReestockMakes
+  changes:
+  - type: Tweak
+    message: >-
+      D-Class now have loadout options of orange shoes, orange winter coats, and
+      prisoner envirosuits for plasmamen.
+  - type: Tweak
+    message: Updated D-Class role iconography.
+  id: 1629
+  time: '2026-09-22T17:30:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4527
+- author: assripper.
+  changes:
+  - type: Remove
+    message: xenomorph instant hardgrab for everything except queen
+  - type: Add
+    message: xenomorph shovestun is back
+  - type: Tweak
+    message: xenomorph drones and sentinels can no longer ventcrawl
+  - type: Tweak
+    message: xenomorphs now take x2 heat damage
+  - type: Tweak
+    message: made the xenomorph tail shorter it was too long
+  - type: Tweak
+    message: >-
+      xenomorphs now have a stunnable amount of stamina (except praetorian and
+      queen)
+  id: 1630
+  time: '2026-09-22T20:10:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4708
+- author: Wizard25671
+  changes:
+  - type: Fix
+    message: Fixed ranged roosters not using their ranged attacks, Be scared of dragons
+  - type: Fix
+    message: Fixed being unable to obtain pigeon and void eggs
+  id: 1631
+  time: '2026-09-22T20:20:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4705
+- author: hoodsie
+  changes:
+  - type: Add
+    message: Re added character descriptions
+  id: 1632
+  time: '2026-09-23T12:56:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4720
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Hello!
+  id: 1633
+  time: '2026-09-23T20:38:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4724
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed triclor
+  id: 1634
+  time: '2026-09-24T06:49:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4731
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed glass chickens exploding when looked at.
+  id: 1635
+  time: '2026-09-24T07:14:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4733
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mice not being breedable.
+  id: 1636
+  time: '2026-09-24T11:44:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4738
+- author: TechnicFighter
+  changes:
+  - type: Remove
+    message: Chaplain can no longer summon demons
+  - type: Tweak
+    message: Changed the name of the chaplain's skillchip.
+  - type: Tweak
+    message: >-
+      Changed the skills of the chaplain's skillchip: MagicLit > 25. Lit > 100.
+      Smoke > 100.
+  id: 1637
+  time: '2026-09-25T10:03:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4748
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Dough is easy to make again, 125mL flour and 83.3333333333mL water.
+  id: 1638
+  time: '2026-09-25T12:50:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4751
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed a ton of blood cult bugs.
+  id: 1639
+  time: '2026-09-25T15:48:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4750
+- author: StarMade
+  changes:
+  - type: Fix
+    message: Void Heretic blink fail not having text
+  id: 1640
+  time: '2026-09-25T18:45:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4753
+- author: StarMade
+  changes:
+  - type: Remove
+    message: Cryo Chems no longer burn you to death.
+  id: 1641
+  time: '2026-09-25T20:27:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4758
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Unreadied players count as half a player for gamemodes.
+  id: 1642
+  time: '2026-09-25T21:38:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4756
+- author: StarMade
+  changes:
+  - type: Remove
+    message: hulk cqc
+  id: 1643
+  time: '2026-09-25T21:39:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4757

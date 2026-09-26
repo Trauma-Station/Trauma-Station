@@ -132,6 +132,14 @@
 
 - type: entity
   parent: BaseAreaCommand
+  id: AreaOfficeNtr
+  name: NTR office
+  components:
+  - type: Sprite
+    state: ntr_office
+
+- type: entity
+  parent: BaseAreaCommand
   id: AreaOfficeRd
   name: RD office
   components:

@@ -12,26 +12,6 @@
   - Zombies
   - Xenoborgs
   - MinorAntagonists
-  # <Trauma>
-  - Changelings
-  - Heretics
-  - Blob
-  - CosmicCult
-  - CosmicColossus
-  - Abductors
-  - Bingle
-  - Devil
-  - Insurgents
-  - Morph
-  - Shadowlings
-  - SlaughterDemon
-  - Xenomorphs
-  - Wraith
-  - Slasher
-  - ShadowDemon
-  - Vampires
-  - Spy
-  # </Trauma>
 
 - type: guideEntry
   id: Traitors

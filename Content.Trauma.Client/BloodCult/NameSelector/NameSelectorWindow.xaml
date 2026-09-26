@@ -1,0 +1,12 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:FancyWindow xmlns="https://spacestation14.io"
+		xmlns:controls="using:Content.Client.UserInterface.Controls"
+		Title="{Loc 'name-selector-title'}">
+	<BoxContainer Orientation="Vertical" Align="Center">
+		<LineEdit Name="NameEdit" HorizontalExpand="True"/>
+        <Button Name="AcceptButton" Text="{Loc 'name-selector-accept-button'}"/>
+	</BoxContainer>
+</controls:FancyWindow>

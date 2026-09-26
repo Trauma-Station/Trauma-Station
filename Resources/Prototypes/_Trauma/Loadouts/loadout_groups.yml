@@ -148,11 +148,36 @@
   name: loadout-group-dclass-outerclothing
   minLimit: 0
   loadouts:
-  - PassengerWintercoat
+  - OrangeWintercoat
 
 - type: loadoutGroup
   id: DClassShoes
   name: loadout-group-dclass-shoes
   loadouts:
+  - OrangeShoes
   - BlackShoes
   - WinterBoots
+
+- type: loadoutGroup
+  id: DClassEnvirohelm
+  name: loadout-group-dclass-envirohelm
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - DClassEnvirohelm
+
+- type: loadoutGroup
+  id: DClassEnvirosuit
+  name: loadout-group-dclass-envirosuit
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - DClassEnvirosuit
+
+- type: loadoutGroup
+  id: DClassEnvirogloves
+  name: loadout-group-dclass-envirogloves
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - BlackEnvirogloves

@@ -3,6 +3,7 @@
   id: ControlRodInsertion
   name: signal-port-name-nuclear-reactor-control-rods
   description: signal-port-description-nuclear-reactor-control-rods
+  color: &color_int "#00ff00"
 
 - type: sinkPort
   id: NuclearReactorDataReceiver
@@ -14,11 +15,13 @@
   id: TurbineStatorLoad
   name: signal-port-name-gas-turbine-stator-load
   description: signal-port-description-gas-turbine-stator-load
+  color: *color_int
 
 - type: sinkPort
   id: TurbineFlowRate
   name: signal-port-name-gas-turbine-flow-rate
   description: signal-port-description-gas-turbine-flow-rate
+  color: *color_int
 
 - type: sinkPort
   id: GasTurbineDataReceiver
