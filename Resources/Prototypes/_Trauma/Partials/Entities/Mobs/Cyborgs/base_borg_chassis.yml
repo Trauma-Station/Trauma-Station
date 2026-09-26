@@ -16,7 +16,21 @@
           types:
             Shock: 1
   - type: BlockShuttleRecall
+  - type: AccessReader
+    access: !Clear [["Command"], ["Engineering"]]
 
 - type: entity
   id: BaseBorgChassisDerelict
   components: *components
+
+- type: entity
+  id: BaseBorgChassisNotIonStormable
+  components:
+  - type: IntrinsicRadioTransmitter
+    channels: !Clear
+    - Common
+    - Engineering
+  - type: ActiveRadio
+    channels: !Clear
+    - Common
+    - Engineering

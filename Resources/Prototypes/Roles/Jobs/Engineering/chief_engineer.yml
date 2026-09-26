@@ -16,7 +16,6 @@
   startingGear: ChiefEngineerGear
   icon: "JobIconChiefEngineer"
   supervisors: job-supervisors-captain
-  antagAdvantage: 75 # Trauma
   guides: # Trauma
   - Engineering
   - Command
@@ -30,22 +29,10 @@
   - Brig
   - Cryogenics
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEchelonEducation
-    - SkillChipDatabase
-    - SkillChipTool
-  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
-      # <Trauma>
-      - type: Condemned # Nanotrasen owns your soul pal.
-        soulOwnedNotDevil: true
-      - type: EngineeringStaff
-      # </Trauma>
       - type: CommandStaff
 
 - type: startingGear

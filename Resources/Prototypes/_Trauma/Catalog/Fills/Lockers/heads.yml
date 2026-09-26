@@ -30,6 +30,7 @@
     - id: CartridgeRocketSingularityBuster
     - id: WeaponLauncherSingularityBuster
     - id: ArmoryOverrideKeyComponents
+    - id: Intellicard # Robotics is engi now
 
 - type: entityTable
   id: LockerFillChiefMedicalOfficerTrauma

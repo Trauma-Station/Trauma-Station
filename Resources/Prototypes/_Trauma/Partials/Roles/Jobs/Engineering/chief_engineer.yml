@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: ChiefEngineer
+  antagAdvantage: 75 # Trauma
+  access:
+  - Robotics
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipEchelonEducation
+    - SkillChipDatabase
+    - SkillChipTool
+  - !type:AddComponentSpecial
+    components:
+      - type: Condemned # Nanotrasen owns your soul pal.
+        soulOwnedNotDevil: true
+      - type: EngineeringStaff
