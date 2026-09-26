@@ -8,7 +8,7 @@
   - type: EntityTableContainerFill
     containers:
       entity_storage: !type:AllSelector
-        children: !clear
+        children: !Clear
         - id: BoxEmbalmingFluid
         - id: Syringe
         - id: BoxBodyBag

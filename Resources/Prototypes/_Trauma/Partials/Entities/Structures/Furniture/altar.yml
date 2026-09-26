@@ -4,7 +4,7 @@
   id: AltarNanotrasen
   components:
   - type: EnchantingTable
-    userWhitelist:
+    userWhitelist: &bibleWhitelist
       components:
       - BibleUser
 
@@ -12,9 +12,7 @@
   id: AltarConvertFestival
   components:
   - type: EnchantingTable
-    userWhitelist:
-      components:
-      - BibleUser
+    userWhitelist: *bibleWhitelist
 
 - type: entity
   id: AltarHeaven
@@ -34,9 +32,7 @@
   id: AltarClock
   components:
   - type: EnchantingTable
-    userWhitelist:
-      components:
-      - BibleUser
+    userWhitelist: *bibleWhitelist
 
 - type: entity
   id: AltarCosmic

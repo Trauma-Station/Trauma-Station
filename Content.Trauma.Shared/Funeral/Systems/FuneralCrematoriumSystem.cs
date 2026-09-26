@@ -1,31 +1,29 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Funeral.Components;
+using Content.Trauma.Common.Funeral;
+using Content.Shared.Morgue.Components;
+
+namespace Content.Trauma.Shared.Funeral;
 
 /// <summary>
 /// Determines crematorium output.
 /// </summary>
-
-namespace Content.Trauma.Common.Funeral;
-
-public sealed class FuneralCrematoriumSystem : EntitySystem
+public sealed partial class FuneralCrematoriumSystem : EntitySystem
 {
-    public override void Initialize()
-    {
-        base.Initialize();
+    [Dependency] private EntityQuery<FuneralHolyComponent> _compQuery = default!;
 
-        SubscribeLocalEvent<CremationOutputEvent>(OnCremationOutput);
-    }
+    private static readonly EntProtoId HolyAsh = "HolyAsh";
 
-    private void OnCremationOutput(CremationOutputEvent args)
+    [SubscribeLocalEvent]
+    private void OnCremationOutput(Entity<CrematoriumComponent> ent, ref CremationOutputEvent args)
     {
         foreach (var entity in args.Contents)
         {
-            if (!HasComp<FuneralHolyComponent>(entity))
-                continue;
-
-            args.OutputPrototype = "HolyAsh";
-            return;
+            if (_compQuery.HasComp(entity))
+            {
+                args.OutputPrototype = HolyAsh;
+                return;
+            }
         }
     }
 }

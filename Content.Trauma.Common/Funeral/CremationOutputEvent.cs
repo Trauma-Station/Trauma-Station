@@ -3,14 +3,13 @@
 /// <summary>
 /// Communicates crematorium output check.
 /// </summary>
-
 namespace Content.Trauma.Common.Funeral;
 
-public sealed class CremationOutputEvent : EntityEventArgs
+[ByRefEvent]
+public struct CremationOutputEvent
 {
     public readonly EntityUid Crematorium;
     public readonly IReadOnlyList<EntityUid> Contents;
-
     public EntProtoId OutputPrototype;
 
     public CremationOutputEvent(

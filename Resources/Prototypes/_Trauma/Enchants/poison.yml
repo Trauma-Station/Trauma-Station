@@ -18,7 +18,7 @@
     - type: Solution
       id: melee
       solution:
-        maxVol: 0.6
+        maxVol: 2
     - type: SolutionRegeneration
       generated:
         reagents:

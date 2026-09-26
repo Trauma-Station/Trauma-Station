@@ -1,11 +1,11 @@
 {
     "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Secure chapel locker by Reestock",
     "size": {
         "x": 32,
         "y": 32
     },
-    "copyright": "Secure chapel locker by Reestock",
-    "license": "CC-BY-SA-3.0",
     "states": [
         {
             "name": "chapel"

@@ -7,7 +7,7 @@
 - type: entityTable
   id: FillWardrobeChapel
   table: !type:AllSelector
-    children: !clear
+    children: !Clear
     - id: ClothingEyesHudMedical
     - id: Syringe
     - id: HandheldHealthAnalyzer

@@ -2,9 +2,9 @@
 
 - type: entity
   abstract: true
-  parent: [BaseItem]
+  parent: BaseItem
   id: BaseInk
-  description: A vial of magical ink, can be used on a scroll to prepare an encantment or curse.
+  description: A vial of magical ink, can be used on a scroll to prepare an enchantment or curse.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Enchanting/inks.rsi
@@ -12,7 +12,7 @@
     size: Tiny
     sprite: _Trauma/Objects/Enchanting/inks.rsi
   - type: EnchantAdder
-    desc: A scroll imbued with an enchantment. Could do any number of things.
+    desc: A scroll embued with an enchantment. Could do any number of things.
     whitelist:
       tags:
       - EnchantingScroll
@@ -25,7 +25,7 @@
 
 - type: entity
   parent: BaseItem
-  id: MagicInkRandom
+  id: MagicInkRandom # Not redundant, prevents magic ink crafting recipe from breaking
   name: random magic ink
   components:
   - type: Sprite
@@ -38,14 +38,6 @@
   - type: Construction
     graph: RandomInk
     node: finish
-
-- type: entity
-  parent: MagicInkRandom
-  id: MagicInkRandomCurse
-  suffix: Oops, all curses!
-  components:
-  - type: SpawnOnDespawn
-    prototype: RandomInkSpawnerCurse
 
 ## Enchants
 

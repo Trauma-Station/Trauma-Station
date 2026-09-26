@@ -6,6 +6,6 @@
     ChemistryBottleFormaldehyde: 3
     EnchantingScrollEmpty: 6
   contrabandInventory:
-    MagicInkRandomCurse: 1
+    RandomInkSpawnerCurse: 1
   emaggedInventory:
-    MagicInkRandom: 3
+    RandomInkSpawner: 3
