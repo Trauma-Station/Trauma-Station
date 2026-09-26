@@ -56,7 +56,7 @@ Example:
     damage:
       types: !Clear # remove the existing damage, this will replace it and behave like prototype inheritance
         Blunt: 50
-  - !Remove type: PhysicalComposition # remove a component
+  - !Remove PhysicalComposition # remove a component
 ```
 
 See the documentation of partial prototypes on the xmldoc of `IPrototypeManager.PartialDirectory` for everything you can do.

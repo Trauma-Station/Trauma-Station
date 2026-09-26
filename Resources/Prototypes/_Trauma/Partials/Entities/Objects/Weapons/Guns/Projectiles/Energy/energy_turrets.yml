@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: BulletEnergyTurretLaser
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Heat: 20 # down from 28
+  - type: BlurOnCollide
+    blurTime: 3
+
+- type: entity
+  id: TeslaGunBullet
+  components:
+  - type: Ammo
+    muzzleFlash: null
+  - type: SmartLinkBlacklist

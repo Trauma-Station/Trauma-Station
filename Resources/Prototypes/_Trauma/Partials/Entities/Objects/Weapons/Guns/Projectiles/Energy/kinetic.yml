@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: BulletKinetic
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 8
+        Structural: 11
+  - type: TimedDespawn
+    lifetime: 0.18 # roughly 4 tiles
+
+- type: entity
+  id: BulletKineticShuttle
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 30
+  - type: TimedDespawn
+    lifetime: 0.3
+
+- type: entity
+  id: BulletCharge
+  components:
+  - type: DamageMarkerOnCollide
+    effect: { sprite: /Textures/Objects/Weapons/effects.rsi, state: shield2 }
+    sound: /Audio/Weapons/Guns/Gunshots/kinetic_accel.ogg
+    damage:
+      types:
+        Blunt: 18
+        Slash: 4

@@ -1,0 +1,76 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antag
+  id: Traitor
+  creditImage: /Textures/_Trauma/EndCredits/Antags/traitor.png
+
+- type: antagSpecifier
+  id: BaseTraitor
+  blacklist: &blacklist
+    components:
+    - AntagImmune
+    - Changeling
+
+- type: antagSpecifier
+  id: Traitor
+  blacklist: *blacklist
+
+- type: antagSpecifier
+  id: TraitorReinforcement
+  mindRoles: null
+
+- type: startingGear
+  id: SyndicateOperativeClothing
+  equipment:
+    id: SyndiPDA
+    ears: ClothingHeadsetAltSyndicate
+
+- type: startingGear
+  parent: SyndicateOperativeClothing
+  id: SyndicateReinforcementMedic
+  equipment: !Clear
+    eyes: ClothingEyesHudSyndicateAgent
+    id: SyndiMedicPDA
+    gloves: ClothingHandsGlovesNitrile
+    pocket1: WeaponPistolViper
+  inhand: !Clear
+  - ClothingBackpackDuffelSyndicateFilledMedical
+  storage:
+    back: !Clear
+    - MedkitCombatFilled
+    - CigPackSyndicate # 1
+    - CigPackSyndicate # 2
+    - InterdyneFlippo
+    - CombatMedipen # 1
+
+- type: startingGear
+  parent: SyndicateOperativeClothing
+  id: SyndicateReinforcementSpy
+  equipment:
+    gloves: ClothingHandsGlovesColorBlack
+    pocket1: WeaponPistolCobra
+  inhand:
+  - ClothingBackpackChameleonFillAgent
+  storage:
+    back:
+    - VoiceMaskImplanter
+    - MagazinePistolCaselessRifle # 1
+    - MagazinePistolCaselessRifle # 2
+    - RadioJammer
+    - ChameleonProjector
+
+- type: startingGear
+  id: SyndicateReinforcementThief
+  equipment:
+    shoes: ClothingShoesBootsCombatFilled
+    gloves: ClothingHandsChameleonThief
+  storage:
+    back:
+    - MagazinePistolHighCapacity # 2 (1 in pocket)
+    - Fulton
+    - FultonBeacon
+
+- type: startingGear
+  id: SyndicateOperativeGearBasic
+  equipment:
+    pocket1: BaseUplinkRadio200TC # 5x

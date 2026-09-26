@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antag
+  id: Thief
+  creditImage: /Textures/_Trauma/EndCredits/Antags/thief.png
+
+- type: startingGear
+  id: ThiefGear
+  storage:
+    back:
+    - !Remove ThiefBeacon # no objs anymore

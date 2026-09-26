@@ -673,7 +673,7 @@
     name: seeds-tomato-name
     packetPrototype: TomatoSeeds
     productPrototypes: [ FoodTomato ]
-    mutationPrototypes: [ BlueTomatoPlants, BloodTomatoPlants, BluespaceTomatoPlants ] # Trauma - added BluespaceTomatoPlants
+    mutationPrototypes: [ BlueTomatoPlants, BloodTomatoPlants ]
   - type: Plant
     lifespan: 25
     maturation: 8
@@ -934,7 +934,7 @@
     name: seeds-apple-name
     packetPrototype: AppleSeeds
     productPrototypes: [ FoodApple ]
-    mutationPrototypes: [ GoldenApplePlants, DeliciousApplePlants, MethApplePlants ] # Trauma - added delicious + meth
+    mutationPrototypes: [ GoldenApplePlants ]
   - type: Plant
     lifespan: 55
     maturation: 6
@@ -963,7 +963,6 @@
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/golden_apple.rsi
   - type: PlantData
-    mutationPrototypes: [ DeliciousApplePlants, MethApplePlants ] # Trauma
     name: seeds-goldenapple-name
     packetPrototype: GoldenAppleSeeds
     productPrototypes: [ FoodGoldenApple ]
@@ -1001,7 +1000,6 @@
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/corn.rsi
   - type: PlantData
-    mutationPrototypes: [ ClearCornPlants ] # Trauma
     name: seeds-corn-name
     packetPrototype: CornSeeds
     productPrototypes: [ FoodCorn ]
@@ -1080,7 +1078,6 @@
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/onion_red.rsi
   - type: PlantData
-    mutationPrototypes: [ OnionPlants, BloonionPlants ] # Trauma
     name: seeds-onionred-name
     packetPrototype: OnionRedSeeds
     productPrototypes: [ FoodOnionRed ]
@@ -1389,12 +1386,6 @@
     highHeatTolerance: 308 # 35°C
   - type: PlantChemicals
     chemicals:
-      # <Trauma>
-      Fresium:
-        min: 1
-        max: 5
-        potencyDivisor: 20
-      # </Trauma>
       CapsaicinOil:
         min: 1
         max: 10
@@ -2006,7 +1997,7 @@
     name: seeds-watermelon-name
     packetPrototype: WatermelonSeeds
     productPrototypes: [ FoodWatermelon ]
-    mutationPrototypes: [ HolymelonPlants, BalloonWatermelonPlants ] # Trauma - added BalloonWatermelonPlants
+    mutationPrototypes: [ HolymelonPlants ]
   - type: Plant
     lifespan: 55
     maturation: 12
@@ -2179,7 +2170,7 @@
     name: seeds-pea-name
     packetPrototype: PeaSeeds
     productPrototypes: [ FoodPeaPod ]
-    mutationPrototypes: [ LaughinPeaPlants, PeanutPlants ] # Trauma - added PeanutPlants
+    mutationPrototypes: [ LaughinPeaPlants ]
   - type: Plant
     lifespan: 25
     growthStages: 3
@@ -2235,7 +2226,7 @@
         min: 1
         max: 3
         potencyDivisor: 20
-      Tilenol: # Trauma - was Pax
+      Pax:
         min: 1
         max: 2
         potencyDivisor: 50
@@ -2379,9 +2370,8 @@
   name: cherry tree
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi # Trauma
+    sprite: Objects/Specific/Hydroponics/cherry.rsi
   - type: PlantData
-    mutationPrototypes: [ CherryBombPlants ] # Trauma
     name: seeds-cherry-name
     packetPrototype: CherrySeeds
     productPrototypes: [ FoodCherry ]
@@ -2465,14 +2455,18 @@
     nutrientConsumption: 0.5
   - type: PlantChemicals
     chemicals:
-      # <Trauma> - change 1/5/20 to 1/15/6
-      Potassium: &smoke
+      Potassium:
         min: 1
-        max: 15
-        potencyDivisor: 6
-      Phosphorus: *smoke
-      Sugar: *smoke
-      # </Trauma>
+        max: 5
+        potencyDivisor: 20
+      Phosphorus:
+        min: 1
+        max: 5
+        potencyDivisor: 20
+      Sugar:
+        min: 1
+        max: 5
+        potencyDivisor: 20
       Allicin:
         min: 1
         max: 10

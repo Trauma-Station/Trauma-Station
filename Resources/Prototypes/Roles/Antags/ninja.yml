@@ -53,10 +53,9 @@
     ears: ClothingHeadsetNinja
     pocket1: SpiderCharge
     pocket2: PinpointerStation
-    belt: ClothingBeltSheathKatanaNinjaFilled # Trauma - was EnergyKatana
+    belt: EnergyKatana
   inhand:
     - JetpackBlackFilled
-    - NinjutsuScroll # Goobstation
   storage:
     back: # belt holds katana so satchel has the tools for sabotaging things
     - Crowbar
@@ -67,7 +66,7 @@
     - Multitool
     - EmergencyMedipen
     - Flare
-    #- FoodSnackNutribrick # Trauma - rob chef instead chud
+    - FoodSnackNutribrick
     - DrinkWaterBottleFull
 
 - type: chameleonOutfit

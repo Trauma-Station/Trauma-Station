@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: BaseWelder
+  components:
+  - type: EmitSoundOnPickup
+    sound:
+      path: /Audio/_Goobstation/Items/handling/weldingtool_pickup.ogg
+  - type: ToolTileCompatible
+    delay: 2
+  - type: Cautery
+    speed: 0.7
+  - type: SurgeryTool
+    startSound:
+      collection: Welder
+    endSound:
+      collection: WelderOff
+  - type: Tag
+    tags:
+    - DroneUsable
+    - WeldingTool
+  - type: MeleeWeapon
+    animationRotation: -90
+  - type: Tool
+    alwaysCheckDoAfter: true
+    qualities:
+    - Axing
+    - Ignition
+
+- type: entity
+  id: WelderExperimental
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 200
+      Plasma: 50
+  - type: StaticPrice
+    price: 50
+  - type: Tag # new tag for weldbot
+    tags:
+    - WelderExperimental
