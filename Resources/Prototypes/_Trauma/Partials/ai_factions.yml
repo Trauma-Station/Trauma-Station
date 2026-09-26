@@ -50,6 +50,7 @@
   - PirateFaction
   - Lavafauna
   - Insurgent
+  - BloodCult
   friendly:
   - Wizard
   - Shadowling
@@ -132,6 +133,7 @@
   id: Wizard
   hostile:
   - Insurgent
+  - BloodCult
 
 - type: npcFaction
   id: Xenoborg

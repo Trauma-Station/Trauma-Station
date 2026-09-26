@@ -15014,3 +15014,93 @@ Entries:
   id: 1631
   time: '2026-09-22T20:20:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4705
+- author: hoodsie
+  changes:
+  - type: Add
+    message: Re added character descriptions
+  id: 1632
+  time: '2026-09-23T12:56:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4720
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Hello!
+  id: 1633
+  time: '2026-09-23T20:38:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4724
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed triclor
+  id: 1634
+  time: '2026-09-24T06:49:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4731
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed glass chickens exploding when looked at.
+  id: 1635
+  time: '2026-09-24T07:14:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4733
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed mice not being breedable.
+  id: 1636
+  time: '2026-09-24T11:44:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4738
+- author: TechnicFighter
+  changes:
+  - type: Remove
+    message: Chaplain can no longer summon demons
+  - type: Tweak
+    message: Changed the name of the chaplain's skillchip.
+  - type: Tweak
+    message: >-
+      Changed the skills of the chaplain's skillchip: MagicLit > 25. Lit > 100.
+      Smoke > 100.
+  id: 1637
+  time: '2026-09-25T10:03:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4748
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Dough is easy to make again, 125mL flour and 83.3333333333mL water.
+  id: 1638
+  time: '2026-09-25T12:50:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4751
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed a ton of blood cult bugs.
+  id: 1639
+  time: '2026-09-25T15:48:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4750
+- author: StarMade
+  changes:
+  - type: Fix
+    message: Void Heretic blink fail not having text
+  id: 1640
+  time: '2026-09-25T18:45:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4753
+- author: StarMade
+  changes:
+  - type: Remove
+    message: Cryo Chems no longer burn you to death.
+  id: 1641
+  time: '2026-09-25T20:27:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4758
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Unreadied players count as half a player for gamemodes.
+  id: 1642
+  time: '2026-09-25T21:38:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4756
+- author: StarMade
+  changes:
+  - type: Remove
+    message: hulk cqc
+  id: 1643
+  time: '2026-09-25T21:39:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4757
