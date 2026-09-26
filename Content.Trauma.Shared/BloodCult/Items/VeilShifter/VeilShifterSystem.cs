@@ -3,6 +3,7 @@
 using Content.Shared.Charges.Components;
 using Content.Shared.Charges.Systems;
 using Content.Shared.Coordinates.Helpers;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
@@ -18,8 +19,10 @@ namespace Content.Trauma.Shared.BloodCult.Items.VeilShifter;
 
 public sealed partial class VeilShifterSystem : EntitySystem
 {
+    [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedChargesSystem _charges = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -30,13 +33,20 @@ public sealed partial class VeilShifterSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnUseInHand(Entity<VeilShifterComponent> veil, ref UseInHandEvent args)
     {
-        // TODO: check if tg lets non cultists use it
+        var user = args.User;
+        if (!_cult.IsCultist(user))
+        {
+            args.Handled = true;
+            _popup.PopupEntity($"The {Name(veil)} flickers out of your hands, your connection to this dimension is too strong!", veil, user);
+            _hands.TryDrop(user, veil.Owner);
+            return;
+        }
 
         if (!TryComp<LimitedChargesComponent>(veil, out var charges) ||
             !_charges.HasCharges((veil.Owner, charges), 1))
             return;
 
-        if (!Teleport(veil, args.User))
+        if (!Teleport(veil, user))
             return;
 
         _charges.TryUseCharge((veil.Owner));
