@@ -491,10 +491,10 @@
   description: Produces organs and limbs that can be surgically implanted or attached to unwilling experiments.
   components:
   - type: Sprite
-    sprite: _Shitmed/Structures/Machines/limbgrower.rsi
+    sprite: _Trauma/Structures/Machines/abductorbiofab.rsi
     snapCardinals: true
     layers:
-    - state: limbgrower_idleoff
+    - state: abductorbiofab_idleoff
       map: ["enum.LatheVisualLayers.IsRunning"]
   - type: Machine
     board: AbductorBiofabMachineBoard
@@ -504,7 +504,7 @@
       - Sheet
       - RawMaterial
   - type: Lathe
-    idleState: limbgrower_idleoff
-    runningState: limbgrower_idleon
+    idleState: abductorbiofab_idleoff
+    runningState: abductorbiofab_idleon
     staticPacks:
     - AbductorBiofabPartsStatic
