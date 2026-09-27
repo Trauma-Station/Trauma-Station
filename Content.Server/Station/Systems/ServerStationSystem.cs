@@ -66,7 +66,7 @@ public sealed partial class ServerStationSystem : Shared.Station.Systems.Station
 
         stationData.Grids.Remove(uid);
         stationData.OwnedGrids.Remove(uid); // Trauma
-        Dirty(uid, component);
+        Dirty(component.Station, stationData);
     }
 
     public override void Shutdown()
