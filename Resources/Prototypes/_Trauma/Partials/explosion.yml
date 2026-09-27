@@ -10,7 +10,6 @@
       Blunt: Fracture
       Slash: Laceration
       Piercing: Puncture
-  tileBreakIntensity: !Clear [ 0, 10, 30 ]
   tileBreakRerollReduction: 20
 
 - type: explosion
@@ -22,7 +21,6 @@
       Piercing: 3
       Slash: 3
     woundTypeOverrides: *woundoverrides
-  tileBreakIntensity: !Clear [ 0, 10, 30 ]
   tileBreakRerollReduction: 20
 
 - type: explosion
@@ -54,7 +52,6 @@
       Blunt: 32
       Slash: 4
     woundTypeOverrides: *woundoverrides
-  tileBreakIntensity: !Clear [0, 10, 30]
 
 - type: explosion
   id: PowerSink

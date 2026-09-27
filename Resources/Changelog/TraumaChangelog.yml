@@ -15118,3 +15118,10 @@ Entries:
   id: 1644
   time: '2026-09-27T14:10:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4767
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed tiny explosions always breaking floor tiles.
+  id: 1645
+  time: '2026-09-27T14:23:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4770
