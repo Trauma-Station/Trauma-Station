@@ -114,10 +114,8 @@
         hard: false
         mask:
         - Opaque
-        # <Trauma>
-        #- Impassable
-        #- BulletImpassable
-        # </Trauma>
+        - Impassable
+        - BulletImpassable
       fly-by: *flybyfixture
   - type: Ammo
   - type: StunOnCollide
@@ -159,10 +157,8 @@
         hard: false
         mask:
         - Opaque
-        # <Trauma>
-        #- Impassable
-        #- BulletImpassable
-        # </Trauma>
+        - Impassable
+        - BulletImpassable
       fly-by: *flybyfixture
   - type: Ammo
   - type: StaminaDamageOnCollide
@@ -205,10 +201,8 @@
         hard: false
         mask:
         - Opaque
-        # <Trauma>
-        #- Impassable
-        #- BulletImpassable
-        # </Trauma>
+        - Impassable
+        - BulletImpassable
       fly-by: *flybyfixture
   - type: Ammo
   - type: Projectile

@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antagSpecifier
+  id: BaseAntagSpecifier
+  jobBlacklist:
+  - Conquest
+  - GovernmentMan
+  - SyndicateHighCommander # already ontag...
+  - NanotrasenRepresentative
+  - HecuOperative
+
+- type: antagSpecifier
+  id: SecurityBlacklistedAntag
+  jobBlacklist:
+  - SecurityClown

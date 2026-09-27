@@ -5,11 +5,6 @@
   name: tie
   description: A neosilk clip-on tie.
   components:
-  # <Trauma>
-  - type: PhysicalComposition
-    materialComposition:
-      Cloth: 25
-  # </Trauma>
   - type: Tag
     tags:
     - ClothMade

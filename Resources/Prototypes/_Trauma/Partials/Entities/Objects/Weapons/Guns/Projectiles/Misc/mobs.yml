@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: WatcherBolt
+  components:
+  - type: Ammo
+    muzzleFlash: null
+  - type: Projectile
+    damage:
+      types:
+        Cold: 10 # to account for lower firerate and projectile speed. low dmg because nothing resists cold
+  - type: ChangeTemperatureOnCollide
+    heat: -15000 # lowered from -50kJ
+
+- type: entity
+  id: WatcherBoltMagmawing
+  components:
+  - type: Ammo
+    muzzleFlash: null
+  - type: Projectile
+    damage:
+      types:
+        Heat: 30 # to account for lower firerate and projectile speed. also so you can't just stand there and tank
+  - type: ChangeTemperatureOnCollide
+    heat: 20000 # lowered from 50kJ

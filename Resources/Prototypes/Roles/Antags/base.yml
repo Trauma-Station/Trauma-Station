@@ -2,13 +2,6 @@
   abstract: true
   id: BaseAntagSpecifier
   jobBlacklist:
-  # <Trauma>
-  - Conquest
-  - GovernmentMan
-  - SyndicateHighCommander # already ontag...
-  - NanotrasenRepresentative
-  - HecuOperative
-  # </Trauma>
   - CentralCommandOfficial
   - DeathSquad
   - ERTLeader
@@ -63,9 +56,6 @@
   parent: BaseAntagSpecifier
   id: SecurityBlacklistedAntag
   jobBlacklist:
-  # <Trauma>
-  - SecurityClown
-  # </Trauma>
   - HeadOfSecurity
   - Warden
   - Detective

@@ -33,14 +33,11 @@
           True: { visible: True }
           False: { visible: False }
   - type: BorgChassis
-    maxModules: 8 # Trauma - was 7
+    maxModules: 7
     hasMindState: xenoborg_engi_e
     noMindState: xenoborg_engi_e_r
     moduleWhitelist:
       tags:
-      # <Trauma>
-      - BorgModuleJanitor
-      # </Trauma>
       - XenoborgModuleGeneric
       - XenoborgModuleEngi
   - type: ContainerFill
@@ -53,9 +50,6 @@
       - XenoborgModuleConstruction
       - XenoborgModuleAccessBreaker
       - XenoborgModuleTileGun
-      # <Trauma>
-      - BorgModuleAdvancedCleaning
-      # <Trauma>
   - type: ShowElectrocutionHUD
   - type: ShowHealthBars
     damageContainers:
@@ -343,9 +337,6 @@
       - XenoborgModuleConstruction
       - XenoborgModuleAccessBreaker
       - XenoborgModuleTileGun
-      # <Trauma>
-      - BorgModuleAdvancedCleaning
-      # </Trauma>
   - type: ItemSlots
     slots:
       cell_slot:
