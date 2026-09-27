@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.CCVar;
+// </Trauma>
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -276,7 +279,8 @@ namespace Content.Server.Voting.Managers
 
             if (alone)
                 options.InitiatorTimeout = TimeSpan.FromSeconds(10);
-            // <Trauma> - only allow calling map vote when it matters
+            // <Trauma>
+            // Only allow calling map vote when it matters
             var roundEnd = _entityManager.System<RoundEndSystem>();
             if (_gameTicker?.RunLevel == GameRunLevel.InRound && !roundEnd.IsRoundEndRequested())
             {
@@ -287,6 +291,18 @@ namespace Content.Server.Voting.Managers
                     _chatManager.ChatMessageToOne(ChatChannel.Server, msg, msg, default, false, session.Channel);
                 }
                 return;
+            }
+            // Trim the vote options
+            var maxCount = _cfg.GetCVar(TraumaCVars.MapVoteOptions);
+            if (maps.Count > maxCount + 1 && maxCount > 0)
+            {
+                var randomMap = _random.Pick(maps.Keys);
+                options.Options.Add(("Random", randomMap));
+                maps.Remove(randomMap);
+                while (maps.Count > maxCount)
+                {
+                    maps.Remove(_random.Pick(maps.Keys));
+                }
             }
             // </Trauma>
 
