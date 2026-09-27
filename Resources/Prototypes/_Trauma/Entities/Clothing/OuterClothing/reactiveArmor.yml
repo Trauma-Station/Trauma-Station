@@ -42,7 +42,7 @@
         sound: &arrival_sound
           path: /Audio/Effects/teleport_arrival.ogg
     - !type:Sparks
-    activationDelay: 30
+    activationDelay: 15
   - type: Tag
     tags:
     - WhitelistChameleon
@@ -83,12 +83,12 @@
     - !type:Sparks
     - !type:RandomTeleport
       radius:
-        min: 4.0
-        max: 7.0
+        min: 5.0
+        max: 8.0
     - !type:PlaySoundEffect
         sound: *arrival_sound
     - !type:Sparks
-    activationDelay: 45
+    activationDelay: 15
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
