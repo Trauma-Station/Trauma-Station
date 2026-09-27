@@ -183,16 +183,22 @@ public sealed partial class TurbineComponent : Component
     public ProtoId<ToolQualityPrototype> RepairTool = "Welding";
 
     /// <summary>
-    /// The blade currently installed in the turbine
+    /// The container slot for the turbine blade.
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntityUid? CurrentBlade;
+    [ViewVariables]
+    public ContainerSlot? BladeSlot;
+
+    [ViewVariables]
+    public EntityUid? CurrentBlade => BladeSlot?.ContainedEntity;
 
     /// <summary>
-    /// The stator currently installed in the turbine
+    /// The container slot for the turbine stator.
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntityUid? CurrentStator;
+    [ViewVariables]
+    public ContainerSlot? StatorSlot;
+
+    [ViewVariables]
+    public EntityUid? CurrentStator => StatorSlot?.ContainedEntity;
 
     #region Device Network
     /// <summary>
