@@ -31,9 +31,9 @@ public sealed partial class MapVoteOnRoundRestartSystem : EntitySystem
     private void OnRunLevelChanged(GameRunLevelChangedEvent args)
     {
         if (!_voteEnabled ||
-        !_lobbyEnabled ||
-        args.New != GameRunLevel.PreRoundLobby)
-            return;
+            !_lobbyEnabled ||
+            args.New != GameRunLevel.PreRoundLobby)
+                return;
         _vote.CreateStandardVote(null, StandardVoteType.Map);
     }
 }
