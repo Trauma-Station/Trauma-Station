@@ -15125,3 +15125,10 @@ Entries:
   id: 1645
   time: '2026-09-27T14:23:11.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4770
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Map vote is back and it's better than ever
+  id: 1646
+  time: '2026-09-27T15:48:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3564
