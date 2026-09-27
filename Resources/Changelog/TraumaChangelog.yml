@@ -15104,3 +15104,17 @@ Entries:
   id: 1643
   time: '2026-09-25T21:39:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4757
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added a new machine to the abductor shuttle called the Abductor
+      Biofabricator. It can produce random limbs and organs as well as extra
+      mysterious glands
+  - type: Add
+    message: Added biomass to the abductor shuttle so they can use their biofabricator
+  - type: Tweak
+    message: Increased the surgery speed on the Abductor Operating Table
+  id: 1644
+  time: '2026-09-27T14:10:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4767
