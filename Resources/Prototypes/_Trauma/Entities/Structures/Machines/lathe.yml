@@ -483,3 +483,28 @@
     - blueprint
   - type: Construction
     node: hidden medifab
+
+- type: entity
+  parent: BaseLathe
+  id: AbductorBiofabricator
+  name: abductor biofabricator
+  description: Produces organs and limbs that can be surgically implanted or attached to unwilling experiments.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/abductorbiofab.rsi
+    snapCardinals: true
+    layers:
+    - state: abductorbiofab_idleoff
+      map: ["enum.LatheVisualLayers.IsRunning"]
+  - type: Machine
+    board: AbductorBiofabMachineBoard
+  - type: MaterialStorage
+    whitelist:
+      tags:
+      - Sheet
+      - RawMaterial
+  - type: Lathe
+    idleState: abductorbiofab_idleoff
+    runningState: abductorbiofab_idleon
+    staticPacks:
+    - AbductorBiofabPartsStatic

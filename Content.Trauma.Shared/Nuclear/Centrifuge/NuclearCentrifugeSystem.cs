@@ -29,15 +29,6 @@ public sealed partial class NuclearCentrifugeSystem : EntitySystem
     [Dependency] private EntityQuery<ReactorFuelRodComponent> _fuelQuery = default!;
     [Dependency] private EntityQuery<StackComponent> _stackQuery = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ActiveNuclearCentrifugeComponent, ComponentInit>(OnActiveInit);
-        SubscribeLocalEvent<NuclearCentrifugeComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<NuclearCentrifugeComponent, PowerChangedEvent>(OnPowerChanged);
-    }
-
     public override void Update(float frameTime)
     {
         var query = EntityQueryEnumerator<ActiveNuclearCentrifugeComponent, NuclearCentrifugeComponent>();
@@ -68,6 +59,7 @@ public sealed partial class NuclearCentrifugeSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnActiveInit(Entity<ActiveNuclearCentrifugeComponent> ent, ref ComponentInit args)
     {
         ent.Comp.NextExtract = _timing.CurTime;
@@ -78,12 +70,14 @@ public sealed partial class NuclearCentrifugeSystem : EntitySystem
         _appearance.SetData(ent.Owner, NuclearCentrifugeVisuals.Processing, true);
     }
 
+    [SubscribeLocalEvent]
     private void OnActiveShutdown(Entity<ActiveNuclearCentrifugeComponent> ent, ref ComponentShutdown args)
     {
         ent.Comp.AudioProcess = _audio.Stop(ent.Comp.AudioProcess);
         _appearance.SetData(ent.Owner, NuclearCentrifugeVisuals.Processing, false);
     }
 
+    [SubscribeLocalEvent]
     private void OnInteractUsing(Entity<NuclearCentrifugeComponent> ent, ref InteractUsingEvent args)
     {
         if (!_power.IsPowered(ent.Owner))
@@ -124,6 +118,7 @@ public sealed partial class NuclearCentrifugeSystem : EntitySystem
         PredictedQueueDel(item);
     }
 
+    [SubscribeLocalEvent]
     private void OnPowerChanged(Entity<NuclearCentrifugeComponent> ent, ref PowerChangedEvent args)
     {
         if (!args.Powered)

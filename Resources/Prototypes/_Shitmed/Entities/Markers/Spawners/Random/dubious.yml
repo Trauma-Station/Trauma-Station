@@ -40,9 +40,10 @@
 
 
 - type: entity
-  name: Dubious Organ Spawner
+  name: Mysterious Gland Fabrication
   id: DubiousOrganSpawner
   parent: MarkerBase
+  description: A random mysterious gland, Quality not guaranteed
   components:
   - type: Sprite
     layers:
