@@ -15132,3 +15132,10 @@ Entries:
   id: 1646
   time: '2026-09-27T15:48:23.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3564
+- author: cog
+  changes:
+  - type: Tweak
+    message: Makeshift bone gel now has a unique sprite.
+  id: 1647
+  time: '2026-09-27T15:56:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4775
