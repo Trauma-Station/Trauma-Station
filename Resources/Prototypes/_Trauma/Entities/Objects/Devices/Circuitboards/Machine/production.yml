@@ -35,8 +35,8 @@
         defaultPrototype: Beaker
 
 - type: entity
-  id: AbductorBiofabMachineBoard
   parent: BaseMachineCircuitboard
+  id: AbductorBiofabMachineBoard
   name: abductor biofab machine board
   description: A machine printed circuit board for a abductor biofab.
   components:

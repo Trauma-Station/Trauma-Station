@@ -7,7 +7,7 @@
   table: !type:GroupSelector
     children:
     - !type:GroupSelector
-      weight: 70
+      weight: 95
       children:
       - id: OrganArachnidEyes
       - id: OrganDionaEyes
@@ -15,13 +15,10 @@
       - id: OrganAbductorEyes
       - id: OrganPlasmamanEyes
     - !type:GroupSelector
-      weight: 20
-      children:
-      - id: OrganLaserEyes
-    - !type:GroupSelector
-      weight: 10
+      weight: 5
       children:
       - id: OrganXenomorphEyes
+      - id: OrganLaserEyes
 
 - type: entityTable
   id: RandomAbductorLungs
@@ -196,9 +193,9 @@
 # Organ Spawners
 
 - type: entity
-  name: Random Eye Fabrication
-  id: RandomAbductorEyeSpawner
   parent: MarkerBase
+  id: RandomAbductorEyeSpawner
+  name: Random Eye Fabrication
   description: A random set of eyes, quality not guaranteed
   components:
   - type: EntityTableSpawner
@@ -206,9 +203,9 @@
       tableId: RandomAbductorEyes
 
 - type: entity
-  name: Random Lung Fabrication
-  id: RandomAbductorLungSpawner
   parent: MarkerBase
+  id: RandomAbductorLungSpawner
+  name: Random Lung Fabrication
   description: A random set of lungs, quality not guaranteed
   components:
   - type: EntityTableSpawner
@@ -216,9 +213,9 @@
       tableId: RandomAbductorLungs
 
 - type: entity
-  name: Random Stomach Fabrication
-  id: RandomAbductorStomachSpawner
   parent: MarkerBase
+  id: RandomAbductorStomachSpawner
+  name: Random Stomach Fabrication
   description: A random stomach, quality not guaranteed
   components:
   - type: EntityTableSpawner
@@ -228,9 +225,9 @@
 # Limb Spawners
 
 - type: entity
-  name: Random Right Hand Fabrication
-  id: RandomAbductorRightHandSpawner
   parent: MarkerBase
+  id: RandomAbductorRightHandSpawner
+  name: Random Right Hand Fabrication
   description: A random right hand, quality not guaranteed
   components:
   - type: EntityTableSpawner
@@ -238,9 +235,9 @@
       tableId: RandomAbductorHandRight
 
 - type: entity
-  name: Random Right Arm Fabrication
-  id: RandomAbductorRightArmSpawner
   parent: MarkerBase
+  id: RandomAbductorRightArmSpawner
+  name: Random Right Arm Fabrication
   description: A random right arm, quality not guaranteed
   components:
   - type: EntityTableSpawner
@@ -248,9 +245,9 @@
       tableId: RandomAbductorArmRight
 
 - type: entity
-  name: Random Left Hand Fabrication
-  id: RandomAbductorLeftHandSpawner
   parent: MarkerBase
+  id: RandomAbductorLeftHandSpawner
+  name: Random Left Hand Fabrication
   description: A random left hand, quality not guaranteed
   components:
   - type: EntityTableSpawner
@@ -258,9 +255,9 @@
       tableId: RandomAbductorHandLeft
 
 - type: entity
-  name: Random Left Arm Fabrication
-  id: RandomAbductorLeftArmSpawner
   parent: MarkerBase
+  id: RandomAbductorLeftArmSpawner
+  name: Random Left Arm Fabrication
   description: A random left arm, quality not guaranteed
   components:
   - type: EntityTableSpawner
@@ -268,9 +265,9 @@
       tableId: RandomAbductorArmLeft
 
 - type: entity
-  name: Random Right Foot Fabrication
-  id: RandomAbductorRightFootSpawner
   parent: MarkerBase
+  id: RandomAbductorRightFootSpawner
+  name: Random Right Foot Fabrication
   description: A random right foot, quality not guaranteed
   components:
   - type: EntityTableSpawner
@@ -278,9 +275,9 @@
       tableId: RandomAbductorFootRight
 
 - type: entity
-  name: Random Right Leg Fabrication
-  id: RandomAbductorRightLegSpawner
   parent: MarkerBase
+  id: RandomAbductorRightLegSpawner
+  name: Random Right Leg Fabrication
   description: A random right leg, quality not guaranteed
   components:
   - type: EntityTableSpawner
@@ -288,9 +285,9 @@
       tableId: RandomAbductorLegRight
 
 - type: entity
-  name: Random Left Foot Fabrication
-  id: RandomAbductorLeftFootSpawner
   parent: MarkerBase
+  id: RandomAbductorLeftFootSpawner
+  name: Random Left Foot Fabrication
   description: A random left foot, quality not guaranteed
   components:
   - type: EntityTableSpawner
@@ -298,9 +295,9 @@
       tableId: RandomAbductorFootLeft
 
 - type: entity
-  name: Random Left Leg Fabrication
-  id: RandomAbductorLeftLegSpawner
   parent: MarkerBase
+  id: RandomAbductorLeftLegSpawner
+  name: Random Left Leg Fabrication
   description: A random left leg, quality not guaranteed
   components:
   - type: EntityTableSpawner
