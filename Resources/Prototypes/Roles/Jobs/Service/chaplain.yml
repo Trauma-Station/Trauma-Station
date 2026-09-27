@@ -19,7 +19,7 @@
     chips:
     - SkillChipEducation
     - SkillChipMarksmanship
-    - SkillChipMagLit
+    - SkillChipChaplain
   # </Trauma>
   - !type:AddComponentSpecial
     components:

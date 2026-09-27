@@ -25,7 +25,6 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
-
 namespace Content.Trauma.Shared.CosmicCult;
 
 public abstract partial class SharedCosmicCultSystem : EntitySystem

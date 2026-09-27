@@ -54,7 +54,7 @@ public sealed partial class KnowledgeTab : Control
 
             var box = new BoxContainer
             {
-                MinSize = new System.Numerics.Vector2(10, 0),
+                MinSize = new Vector2(10, 0),
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
             };
 
@@ -80,7 +80,7 @@ public sealed partial class KnowledgeTab : Control
                 MinValue = 0,
                 MaxValue = conditions.ExpCost,
                 Value = conditions.CurrentExp,
-                MinSize = new System.Numerics.Vector2(200, 20)
+                MinSize = new Vector2(200, 20)
             };
 
             var horizontalContainer = new BoxContainer

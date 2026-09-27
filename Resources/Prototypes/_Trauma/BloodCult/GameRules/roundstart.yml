@@ -1,0 +1,39 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseGameRule
+  id: BloodCult
+  components:
+  - type: GameRule
+    minPlayers: 30
+  - type: BloodCultRule
+    # TODO: base it off map areas with a habitable blacklist for maints and stuff
+    areaPool:
+    - AreaAiCore
+    - AreaBar
+    - AreaBotany
+    - AreaBrig
+    - AreaCargoBay
+    - AreaChem
+    - AreaEngineering
+    - AreaKitchen
+    - AreaMedical
+    - AreaPrison
+    - AreaSecurity
+    - AreaScience
+  - type: AntagObjectives
+    objectives:
+    - KillTargetCultObjective
+    - SummonNarSieCultObjective
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: BloodCultLeader
+    - !type:LinearAntagCount
+      proto: BloodCultist
+      range:
+        min: 1
+        max: 3
+      playerRatio: 15
+  - type: DynamicRuleCost
+    cost: 150

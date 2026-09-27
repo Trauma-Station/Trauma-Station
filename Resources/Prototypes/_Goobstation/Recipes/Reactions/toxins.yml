@@ -1,21 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: reaction
-  id: Triclor
-  impact: Medium
-  reactants:
-    Ammonia:
-      amount: 1
-    SodiumHydroxide:
-      amount: 1
-    Ipecac:
-      amount: 1
-    Chlorine:
-      amount: 3
-  products:
-    Triclor: 3
-
-- type: reaction
   id: Cyanide
   impact: Medium
   minTemp: 380

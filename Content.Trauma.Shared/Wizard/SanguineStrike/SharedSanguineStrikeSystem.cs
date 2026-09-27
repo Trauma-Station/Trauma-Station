@@ -18,6 +18,7 @@ namespace Content.Trauma.Shared.Wizard.SanguineStrike;
 public abstract partial class SharedSanguineStrikeSystem : EntitySystem
 {
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
 
     public override void Initialize()
     {
@@ -40,9 +41,8 @@ public abstract partial class SharedSanguineStrikeSystem : EntitySystem
         if (args.HitEntities.Contains(args.User))
             return;
 
-        var mobStateQuery = GetEntityQuery<MobStateComponent>();
         var hitMobs = args.HitEntities
-            .Where(x => mobStateQuery.TryComp(x, out var mobState) && mobState.CurrentState != MobState.Dead)
+            .Where(x => _mobQuery.TryComp(x, out var mobState) && mobState.CurrentState != MobState.Dead)
             .ToList();
         if (hitMobs.Count == 0)
             return;

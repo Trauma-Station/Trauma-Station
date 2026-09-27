@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Emoting;
@@ -13,6 +12,7 @@ using Content.Shared.Movement.Pulling.Events;
 using Content.Shared.Speech;
 using Content.Shared.Tag;
 using Content.Shared.Throwing;
+using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using Robust.Shared.Physics.Dynamics;
@@ -29,6 +29,7 @@ public sealed partial class FreezeContactsSystem : EntitySystem
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private TagSystem _tag = default!;
+    [Dependency] private EntityQuery<FreezeContactsComponent> _query = default!;
 
     private static readonly ProtoId<TagPrototype> FrozenIgnoreMindActionTag = "FrozenIgnoreMindAction";
 
@@ -177,8 +178,7 @@ public sealed partial class FreezeContactsSystem : EntitySystem
         if (!TryComp<PhysicsComponent>(otherUid, out var body))
             return;
 
-        var query = GetEntityQuery<FreezeContactsComponent>();
-        if (_physics.GetContactingEntities(otherUid, body).Where(ent => ent != uid).Any(ent => query.HasComponent(ent)))
+        if (_physics.GetContactingEntities(otherUid, body).Where(ent => ent != uid).Any(ent => _query.HasComponent(ent)))
             return;
 
         RemCompDeferred<FrozenComponent>(otherUid);
