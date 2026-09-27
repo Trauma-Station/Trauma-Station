@@ -104,9 +104,9 @@ public abstract partial class SharedChatSystem
         if (didEmote && emote.ChatMessages.Count != 0)
         {
             // not all emotes are loc'd, but for the ones that are we pass in entity
-            var action = Loc.GetString(_random.Pick(emote.ChatMessages), ("entity", source));
-            var language = _language.GetLanguage(source); // Einstein Engines - Language
-            SendEntityEmote(source, action, range, nameOverride, language, hideLog: hideLog, checkEmote: false, ignoreActionBlocker: ignoreActionBlocker); // Einstein Engines - Language
+            var action = Loc.GetString(Random.Pick(emote.ChatMessages), ("entity", source));
+            // Trauma - pass language
+            SendEntityEmote(source, action, range, nameOverride, language: _language.GetLanguage(source), hideLog: hideLog, checkEmote: false, ignoreActionBlocker: ignoreActionBlocker);
         }
 
         return didEmote;

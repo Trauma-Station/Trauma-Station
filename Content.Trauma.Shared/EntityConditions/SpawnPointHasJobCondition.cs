@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.EntityConditions;
+using Content.Shared.Spawners.Components;
 
 namespace Content.Trauma.Shared.EntityConditions;
 
@@ -11,4 +12,12 @@ public sealed partial class SpawnPointHasJob : EntityConditionBase<SpawnPointHas
 {
     public override string EntityConditionGuidebookText(IPrototypeManager prototype)
         => string.Empty;
+}
+
+public sealed class SpawnPointHasJobSystem : EntityConditionSystem<SpawnPointComponent, SpawnPointHasJob>
+{
+    protected override void Condition(Entity<SpawnPointComponent> ent, ref EntityConditionEvent<SpawnPointHasJob> args)
+    {
+        args.Result = ent.Comp.Job != null;
+    }
 }

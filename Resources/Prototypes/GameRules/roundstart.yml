@@ -5,6 +5,13 @@
   - type: GameRule
 
 - type: entity
+  id: BaseSilentGameRule
+  abstract: true
+  components:
+  - type: GameRule
+    silent: true
+
+- type: entity
   parent: BaseGameRule
   id: BaseRoundstartAntagRule
   abstract: true
@@ -446,7 +453,7 @@
       proto: Xenoborg
       count: 4
   - type: DynamicRuleCost
-    cost: 200
+    cost: 100
 
 - type: entity
   parent: [ BaseXenoborgsRule, BaseRoundstartAntagRule]
@@ -571,7 +578,7 @@
 # variation passes
 - type: entity
   id: BasicRoundstartVariation
-  parent: BaseGameRule
+  parent: BaseSilentGameRule
   components:
   - type: RoundstartStationVariationRule
     rules:

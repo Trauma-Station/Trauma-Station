@@ -38,7 +38,7 @@ public sealed partial class FollowerSystem : EntitySystem
 
     private static readonly ProtoId<TagPrototype> FollowerStayOnPolymorph = "FollowerStayOnPolymorph"; // Trauma
     private static readonly ProtoId<TagPrototype> ForceableFollowTag = "ForceableFollow";
-    private static readonly ProtoId<TagPrototype> PreventGhostnadoWarpTag = "NotGhostnadoWarpable";
+    public static readonly ProtoId<TagPrototype> PreventGhostnadoWarpTag = "NotGhostnadoWarpable";
 
     public override void Initialize()
     {

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.GameTicking;
-using Content.Server.Spawners.EntitySystems;
-using Content.Server.Station.Systems;
+using Content.Shared.GameTicking;
+using Content.Shared.Spawners.EntitySystems;
+using Content.Shared.Station.Systems;
 using Content.Trauma.Shared.Containers;
 using Content.Trauma.Shared.Spawners;
 using Robust.Shared.Random;

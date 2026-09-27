@@ -1,0 +1,139 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: technology
+  id: SalvageWeapons
+  recipeUnlocks:
+  - MechEquipmentKineticAccelerator
+  - WeaponProtoKineticShotgun
+  - WeaponProtoKineticRepeater
+  - WeaponProtoKineticPistol
+  position: 4,2
+
+- type: technology
+  id: DraconicMunitions
+  position: 6,2
+  recipeUnlocks:
+  # light rifle ammo was removed
+  - !Remove MagazineLightRifleIncendiary
+  - !Remove MagazineBoxLightRifleIncendiary
+  technologyPrerequisites:
+  - SalvageWeapons
+
+- type: technology
+  id: WeaponizedLaserManipulation
+  recipeUnlocks:
+  - WeaponMechCombatFiredartLaser
+  - PowerCellIonRevolver
+  - WeaponLaserSidearm
+  position: 7,0
+  technologyPrerequisites:
+  - WeaponLaserCellRevolverTech
+
+- type: technology
+  id: NonlethalAmmunition
+  recipeUnlocks:
+  - !Remove WeaponDisabler
+  - !Remove WeaponDisablerSMG
+  - WeaponMechCombatDisabler
+  position: 6,3
+  technologyPrerequisites:
+  - SalvageWeapons
+
+- type: technology
+  id: UraniumMunitions
+  icon:
+    sprite: _Trauma/Objects/Materials/Sheets/other.rsi
+  recipeUnlocks:
+  - !Remove MagazineLightRifleUranium
+  - !Remove MagazineBoxLightRifleUranium
+  position: 7,2
+  technologyPrerequisites:
+  - DraconicMunitions
+
+- type: technology
+  id: ExplosiveTechnology
+  position: 6,1
+  recipeUnlocks:
+  - !Remove SignalTrigger # these are roundstart now
+  - !Remove VoiceTrigger
+  - !Remove TimerTrigger
+  - !Remove FlashPayload
+  - !Remove ExplosivePayload # replaced by shrapnel
+  - !Remove ChemicalPayload
+  - ShrapnelPayload
+  technologyPrerequisites:
+  - NonlethalAmmunition
+
+- type: technology
+  id: SpecialMeans
+  position: 8,3
+  technologyPrerequisites:
+  - AdvancedRiotControl
+  - RestraintTechnology
+
+# Tier 2
+
+- type: technology
+  id: AdvancedRiotControl
+  recipeUnlocks:
+  - PolymerBaton
+  - SpearTelescopic
+  position: 7,3
+  technologyPrerequisites:
+  - NonlethalAmmunition
+
+- type: technology
+  id: ConcentratedLaserWeaponry
+  position: 8,0
+  recipeUnlocks:
+  - WeaponMechCombatSolarisLaser
+  technologyPrerequisites:
+  - WeaponizedLaserManipulation
+
+- type: technology
+  id: WaveParticleHarnessing
+  recipeUnlocks:
+  - HoloprojectorSecurityAdvanced
+  - PowerCellXrayRevolver
+  - PowerCellXraySMG
+  - PowerCellXraySniper
+  - AntiMindControlDevice
+  technologyPrerequisites:
+  - WeaponizedLaserManipulation
+  position: 8,1
+
+- type: technology
+  id: BasicShuttleArmament
+  technologyPrerequisites: !Clear
+  - Shuttlecraft
+  position: 3,-1
+
+- type: technology
+  id: DualWieldingTechnology
+  technologyPrerequisites:
+  - SpecialMeans
+  position: 9,3
+
+- type: technology
+  id: PortableMicrofusionWeaponry
+  icon:
+    sprite: Objects/Power/portable_recharger.rsi
+    state: charging
+  cost: 20000
+  recipeUnlocks:
+  - !Remove WeaponAdvancedLaser # No longer has a niche
+  - WeaponMechCombatImmolationGun
+  - EnergyMagRifleOverchargeLethal
+  - PowerCellOverchargedRevolver
+  - PowerCellOverchargedSMG
+  - PowerCellOverchargedSniper
+  position: 9,0
+  technologyPrerequisites:
+  - ConcentratedLaserWeaponry
+
+- type: technology
+  id: AdvancedShuttleWeapon
+  cost: 20000
+  technologyPrerequisites:
+  - Shuttlecraft
+  position: 4,-1

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.GameTicking;
+using Content.Shared.GameTicking;
 using Content.Shared.Emp;
 using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Runes.Apocalypse;
@@ -19,7 +19,7 @@ public sealed partial class ServerCultRuneApocalypseSystem : CultRuneApocalypseS
     [Dependency] private SharedEmpSystem _emp = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
-    // basically none of this can be predicted
+    // the player scaling can't be predicted
     [SubscribeLocalEvent]
     private void OnDoAfter(Entity<CultRuneApocalypseComponent> ent, ref ApocalypseRuneDoAfter args)
     {

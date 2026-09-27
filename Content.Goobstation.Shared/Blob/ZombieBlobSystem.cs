@@ -11,12 +11,14 @@ namespace Content.Goobstation.Shared.Blob;
 public abstract partial class ZombieBlobSystem : EntitySystem
 {
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private EntityQuery<ZombieBlobComponent> _query = default!;
+    [Dependency] private EntityQuery<ActivatableUIComponent> _auiQuery = default!;
 
-    [SubscribeLocalEvent(after: [typeof(SharedInteractionSystem)])]
-    private void OnBUIMessageAttempt(Entity<ActivatableUIComponent> ent, ref BoundUserInterfaceMessageAttempt args)
+    [SubscribeLocalEvent]
+    private void OnOpenActivatableUIAttempt(Entity<ZombieBlobComponent> ent, ref UserOpenActivatableUIAttemptEvent args)
     {
-        if (args.Cancelled || !ent.Comp.RequiresComplex || !_query.HasComp(args.Actor))
+        if (args.Cancelled ||
+            !_auiQuery.TryComp(args.Target, out var aui) ||
+            !aui.RequiresComplex)
             return;
 
         args.Cancel(); // no using computers and shit for blob zombies

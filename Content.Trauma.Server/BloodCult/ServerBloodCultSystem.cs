@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Antag.Components;
 using Content.Shared.Antag;
+using Content.Shared.Antag.Components;
 using Content.Shared.Mind;
 using Content.Trauma.Server.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult;

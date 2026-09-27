@@ -17,8 +17,8 @@ using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
-using Content.Shared.Station;
 using Content.Shared.Station.Components;
+using Content.Shared.Station.Systems;
 using Content.Shared.Timing.Systems;
 using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.BloodCult.Empower;
@@ -49,7 +49,7 @@ public sealed partial class CultRuneSystem : EntitySystem
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
-    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private StationSystem _station = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
     [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;

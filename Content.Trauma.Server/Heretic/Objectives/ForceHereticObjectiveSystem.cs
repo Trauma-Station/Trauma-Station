@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Administration.Logs;
-using Content.Server.Antag;
+using Content.Shared.Antag;
 using Content.Shared.Database;
 using Content.Shared.Objectives.Components;
-using Content.Trauma.Server.Heretic.Components;
+using Content.Trauma.Shared.GameTicking.Rules;
 using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Heretic.Objectives;
@@ -14,7 +14,7 @@ public sealed partial class ForceHereticObjectiveSystem : EntitySystem
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private IAdminLogManager _adminLog = default!;
 
-    public static readonly EntProtoId HereticRule = "HereticRoundstart";
+    private static readonly EntProtoId HereticRule = "HereticRoundstart";
 
     public override void Initialize()
     {

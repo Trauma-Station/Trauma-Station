@@ -1,18 +1,20 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Client.GameTicking.Managers;
+using Content.Client.GameTicking;
 using Robust.Client.UserInterface.Controllers;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.UserActions.Tabs;
 
 [GenerateTypedNameReferences]
-public sealed partial class StatusTabControl : BaseTabControl, IOnSystemChanged<ClientGameTicker>
+public sealed partial class StatusTabControl : BaseTabControl, IOnSystemChanged<ClientGameTicker>, IOnSystemChanged<StatusControlSystem>
 {
-    [Dependency] private IEntitySystemManager _entMan = default!;
     [Dependency] private IGameTiming _timing = default!;
 
-    private ClientGameTicker? _gameTicker;
+    private ClientGameTicker? _ticker;
+    private StatusControlSystem? _status;
+
+    private int _minutes = -1;
 
     public StatusTabControl()
     {
@@ -22,54 +24,49 @@ public sealed partial class StatusTabControl : BaseTabControl, IOnSystemChanged<
 
     public void OnSystemLoaded(ClientGameTicker system)
     {
-        _gameTicker = system;
-        _gameTicker.InGameInfoBlobUpdated += UpdateInfoBlob;
-        UpdateInfoBlob();
+        _ticker = system;
     }
 
     public void OnSystemUnloaded(ClientGameTicker system)
     {
-        if (_gameTicker is { })
-        {
-            _gameTicker.InGameInfoBlobUpdated -= UpdateInfoBlob;
-            _gameTicker = null;
-        }
+        _ticker = null;
     }
 
+    public void OnSystemLoaded(StatusControlSystem system)
+    {
+        _status = system;
+        system.OnInfoUpdated += UpdateInfoBlob;
+        UpdateInfoBlob();
+    }
+
+    public void OnSystemUnloaded(StatusControlSystem system)
+    {
+        system.OnInfoUpdated -= UpdateInfoBlob;
+        _status = null;
+    }
 
     protected override void FrameUpdate(FrameEventArgs e)
     {
-        if (_gameTicker is { })
-        {
-            var roundTime = _timing.CurTime.Subtract(_gameTicker.RoundStartTimeSpan);
-            StationTime.Text = Loc.GetString("lobby-state-player-status-round-time", ("hours", roundTime.Hours), ("minutes", roundTime.Minutes));
+        if (_ticker is not { })
             return;
-        }
 
-        StationTime.Text = Loc.GetString("lobby-state-player-status-round-not-started");
+        var time = _timing.CurTime.Subtract(_ticker.RoundStartTimeSpan);
+        if (time.Minutes == _minutes)
+            return;
+
+        _minutes = time.Minutes;
+        StationTime.Text = Loc.GetString("lobby-state-player-status-round-time", ("hours", time.Hours), ("minutes", time.Minutes));
     }
 
     public override bool UpdateState()
     {
-        if (_gameTicker is not { } && _entMan is { })
-        {
-            try
-            {
-                if (_entMan.TryGetEntitySystem<ClientGameTicker>(out var ticker))
-                    OnSystemLoaded(ticker);
-            }
-            catch (Exception)
-            {
-                return true;
-            }
-        }
         UpdateInfoBlob();
         return true;
     }
 
     private void UpdateInfoBlob()
     {
-        if (_gameTicker?.InGameInfoBlob is { } info)
+        if (_status?.Info is { } info)
             ServerInfo.SetInfoBlob(info);
     }
 }
