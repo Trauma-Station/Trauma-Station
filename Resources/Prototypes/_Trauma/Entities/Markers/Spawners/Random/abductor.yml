@@ -45,7 +45,6 @@
     - !type:GroupSelector
       weight: 5
       children:
-      - id: OrganCyberneticLungsUpgraded
       - id: OrganDragonLungs
 
 - type: entityTable
