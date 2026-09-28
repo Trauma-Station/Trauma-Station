@@ -1,3 +1,4 @@
+using Robust.Client.UserInterface.RichText; // Trauma
 using System.Numerics;
 using Content.Shared.CCVar;
 using Content.Shared.Chat;
@@ -18,6 +19,19 @@ namespace Content.Client.Chat.UI
         [Dependency] private IEntityManager _entityManager = default!;
         [Dependency] protected IConfigurationManager ConfigManager = default!;
         private readonly SharedTransformSystem _transformSystem;
+
+        // <Trauma>
+        public static readonly Type[] AllowedTags =
+        [
+            typeof(BoldItalicTag),
+            typeof(BoldTag),
+            typeof(BulletTag),
+            typeof(ColorTag),
+            typeof(HeadingTag),
+            typeof(ItalicTag),
+            typeof(FontTag),
+        ];
+        // </Trauma>
 
         public enum SpeechType : byte
         {
@@ -216,7 +230,7 @@ namespace Content.Client.Chat.UI
                 OutlineColorOverride = TextOutline.Default.Color,
             };
 
-            label.SetMessage(FormatSpeech(message.WrappedMessage, fontColor), tagsAllowed: null);
+            label.SetMessage(FormatSpeech(message.WrappedMessage, fontColor), AllowedTags); // Trauma - added AllowedTags
 
             var panel = new PanelContainer
             {
@@ -247,7 +261,7 @@ namespace Content.Client.Chat.UI
                     OutlineColorOverride = TextOutline.Default.Color,
                 };
 
-                label.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor), tagsAllowed: null);
+                label.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor), AllowedTags); // Trauma - added AllowedTags
 
                 var unfanciedPanel = new PanelContainer
                 {
@@ -275,8 +289,8 @@ namespace Content.Client.Chat.UI
             };
 
             //We'll be honest. *Yes* this is hacky. Doing this in a cleaner way would require a bottom-up refactor of how saycode handles sending chat messages. -Myr
-            bubbleHeader.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleHeader", fontColor), tagsAllowed:null);
-            bubbleContent.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor), tagsAllowed:null);
+            bubbleHeader.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleHeader", fontColor), AllowedTags); // Trauma - added AllowedTags
+            bubbleContent.SetMessage(ExtractAndFormatSpeechSubstring(message, "BubbleContent", fontColor), AllowedTags); // Trauma - added AllowedTags
 
             //As for below: Some day this could probably be converted to xaml. But that is not today. -Myr
             var mainPanel = new PanelContainer
