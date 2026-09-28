@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.EntityEffects;
+using Content.Shared.Station.Components;
 using Content.Trauma.Shared.EntityEffects.Station;
 
 namespace Content.Trauma.Server.EntityEffects.Station;
 
 public sealed partial class StationModifyJobsSystem : EntityEffectSystem<StationJobsComponent, StationModifyJobs>
 {
-    [Dependency] private StationJobsSystem _stationJobs = default!;
+    [Dependency] private ServerStationJobsSystem _stationJobs = default!;
 
     protected override void Effect(Entity<StationJobsComponent> ent, ref EntityEffectEvent<StationModifyJobs> args)
     {

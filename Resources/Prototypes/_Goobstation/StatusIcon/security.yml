@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-- type: securityIcon
+- type: statusIcon
   id: MindShieldBrokenIcon
   priority: 2
   locationPreference: Right
@@ -10,14 +10,14 @@
     sprite: /Textures/_Goobstation/Interface/Misc/security_icons.rsi
     state: MindShield-broken
 
-- type: securityIcon
+- type: statusIcon
   parent: SecurityIcon
   id: SecurityIconPerma
   icon:
     sprite: /Textures/Interface/Misc/security_icons.rsi
     state: hud_perma
 
-- type: securityIcon
+- type: statusIcon
   parent: SecurityIcon
   id: SecurityIconSearch
   icon:

@@ -9,12 +9,14 @@ using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Blocking;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.BloodCult.Items;
 
 public sealed partial class CultItemSystem : EntitySystem
 {
     [Dependency] private BloodCultSystem _cult = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedStunSystem _stun = default!;
@@ -43,7 +45,7 @@ public sealed partial class CultItemSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnEquipAttempt(Entity<CultItemComponent> item, ref BeingEquippedAttemptEvent args)
     {
-        if (CanUse(args.EquipTarget))
+        if (_timing.ApplyingState || CanUse(args.EquipTarget))
             return;
 
         args.Cancel();

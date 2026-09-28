@@ -3,7 +3,7 @@
 using Content.Shared.UserInterface;
 using Content.Shared.Access.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Station;
+using Content.Shared.Station.Systems;
 using Content.Shared.Tag;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Teleportation.Systems;
@@ -22,7 +22,7 @@ public sealed partial class GatewaySystem : EntitySystem
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private SharedStationSystem _stations = default!;
+    [Dependency] private StationSystem _stations = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private TagSystem _tag = default!;
     [Dependency] private EntityQuery<GatewayComponent> _query = default!;

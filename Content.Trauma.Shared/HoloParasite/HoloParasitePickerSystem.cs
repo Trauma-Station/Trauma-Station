@@ -80,7 +80,7 @@ public sealed partial class HoloParasitePickerSystem : EntitySystem
 
         ent.Comp.HostTarget = host;
 
-        _ui.TryOpenUi(ent.Owner, HoloParasitePickerUiKey.Key, user, predicted: true);
+        _ui.TryOpenUi(ent.Owner, HoloParasitePickerUiKey.Key, user);
     }
 
     private void OnPickMessage(Entity<HoloParasitePickerComponent> ent, ref HoloParasitePickMessage args)
@@ -96,7 +96,7 @@ public sealed partial class HoloParasitePickerSystem : EntitySystem
         if (creator.Used)
         {
             _popup.PopupEntity(Loc.GetString("holoparasite-picker-already-used"), ent, user);
-            _ui.CloseUi(ent.Owner, HoloParasitePickerUiKey.Key, user, predicted: true);
+            _ui.CloseUi(ent.Owner, HoloParasitePickerUiKey.Key, user);
             return;
         }
 
@@ -110,7 +110,7 @@ public sealed partial class HoloParasitePickerSystem : EntitySystem
 
         Dirty(ent, creator);
 
-        _ui.CloseUi(ent.Owner, HoloParasitePickerUiKey.Key, user, predicted: true);
+        _ui.CloseUi(ent.Owner, HoloParasitePickerUiKey.Key, user);
 
         _doAfter.TryStartDoAfter(new DoAfterArgs(EntityManager,
             user,

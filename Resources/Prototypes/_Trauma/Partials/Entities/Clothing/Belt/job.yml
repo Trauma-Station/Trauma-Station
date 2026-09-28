@@ -1,0 +1,60 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: BaseClothingBeltEngineering
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - Hammer
+      - Nailgun
+      - MagazineNailgun
+      - HereticBladeLock
+
+- type: entity
+  id: ClothingBeltJanitor
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - Keyring
+
+- type: entity
+  id: ClothingBeltMedical
+  components:
+  - type: Storage
+    whitelist:
+      tags:
+      - Tourniquet
+      - HandheldCrewMonitor
+      components:
+      - SurgeryTool
+      - Defibrillator
+      - SyringeGun
+      - GunApplySolution # syndicate dart gun
+      - SolutionCartridge
+      - MedicalPatch
+
+- type: entity
+  id: ClothingBeltPlant
+  components:
+  - type: Storage
+    whitelist:
+      components:
+      - PlantAnalyzer
+
+- type: entity
+  id: ClothingBeltSecurity
+  components:
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: Storage
+    whitelist:
+      tags:
+      - BolaEnergy
+      - EnergySpeedloader
+      - MilitaryPowerCell
+      - Truncheon
+      components:
+      - ScatteringGrenade

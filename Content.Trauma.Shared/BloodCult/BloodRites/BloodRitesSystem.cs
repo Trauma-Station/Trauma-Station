@@ -30,7 +30,7 @@ public sealed partial class BloodRitesSystem : EntitySystem
 {
     [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private BloodstreamSystem _blood = default!;
-    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -139,7 +139,7 @@ public sealed partial class BloodRitesSystem : EntitySystem
 
     private bool Heal(Entity<BloodRitesAuraComponent> rites, EntityUid user, Entity<DamageableComponent?> target)
     {
-        var damage = _damageable.GetAllDamage(target);
+        var damage = _damage.GetAllDamage(target);
         if (damage.GetTotal() == 0)
             return false;
 
@@ -176,7 +176,7 @@ public sealed partial class BloodRitesSystem : EntitySystem
             if (toHeal > healingLeft)
                 toHeal = healingLeft;
 
-            _damageable.ChangeDamage(target, new DamageSpecifier(damageType, -toHeal));
+            _damage.ChangeDamage(target, new DamageSpecifier(damageType, -toHeal));
 
             healingLeft -= toHeal;
             if (healingLeft == 0)

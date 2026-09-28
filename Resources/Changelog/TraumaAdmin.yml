@@ -342,3 +342,12 @@ Entries:
   id: 44
   time: '2026-09-16T16:03:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4619
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Gamer words chat filter now applies to character names and usernames in
+      the ban webhook.
+  id: 45
+  time: '2026-09-24T10:51:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4735

@@ -1,0 +1,117 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: latheRecipe
+  abstract: true
+  id: RandomOrganBase
+  completetime: 5
+  materials:
+    Biomass: 10
+
+- type: latheRecipe
+  abstract: true
+  id: RandomLimbBase
+  completetime: 5
+  materials:
+    Biomass: 4
+
+# Organs
+
+- type: latheRecipe
+  parent: RandomOrganBase
+  id: OrganRandomEye
+  result: RandomAbductorEyeSpawner
+  icon:
+    sprite: Mobs/Species/Human/organs.rsi
+    state: eyeball-l
+
+- type: latheRecipe
+  parent: RandomOrganBase
+  id: OrganRandomLung
+  result: RandomAbductorLungSpawner
+  icon:
+    sprite: Mobs/Species/Human/organs.rsi
+    state: lung-l
+
+- type: latheRecipe
+  parent: RandomOrganBase
+  id: OrganRandomStomach
+  result: RandomAbductorStomachSpawner
+  icon:
+    sprite: Mobs/Species/Human/organs.rsi
+    state: stomach
+
+- type: latheRecipe
+  parent: RandomOrganBase
+  id: OrganRandomAbductorGland
+  result: DubiousOrganSpawner
+  materials:
+    Biomass: 20
+  icon:
+    sprite: _Shitmed/Mobs/Species/Misc/Dubious/organs.rsi
+    state: emp
+
+# Limbs
+
+- type: latheRecipe
+  parent: RandomLimbBase
+  id: LimbRandomHandRight
+  result: RandomAbductorRightHandSpawner
+  icon:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: r_hand
+
+- type: latheRecipe
+  parent: RandomLimbBase
+  id: LimbRandomArmRight
+  result: RandomAbductorRightArmSpawner
+  icon:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: r_arm
+
+- type: latheRecipe
+  parent: RandomLimbBase
+  id: LimbRandomHandLeft
+  result: RandomAbductorLeftHandSpawner
+  icon:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: l_hand
+
+- type: latheRecipe
+  parent: RandomLimbBase
+  id: LimbRandomArmLeft
+  result: RandomAbductorLeftArmSpawner
+  icon:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: l_arm
+
+- type: latheRecipe
+  parent: RandomLimbBase
+  id: LimbRandomFootRight
+  result: RandomAbductorRightFootSpawner
+  icon:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: r_foot
+
+- type: latheRecipe
+  parent: RandomLimbBase
+  id: LimbRandomLegRight
+  result: RandomAbductorRightLegSpawner
+  icon:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: r_leg
+
+- type: latheRecipe
+  parent: RandomLimbBase
+  id: LimbRandomFootLeft
+  result: RandomAbductorLeftFootSpawner
+  icon:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: l_foot
+
+- type: latheRecipe
+  parent: RandomLimbBase
+  id: LimbRandomLegLeft
+  result: RandomAbductorLeftLegSpawner
+  icon:
+    sprite: Mobs/Species/Human/parts.rsi
+    state: l_leg

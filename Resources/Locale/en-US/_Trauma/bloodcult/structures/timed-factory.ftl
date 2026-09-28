@@ -1,1 +1,1 @@
-timed-factory-cooldown = The factory is recharging. Time left: {$cooldown}
+timed-factory-cooldown = It's still recharging, wait {$cooldown} seconds.

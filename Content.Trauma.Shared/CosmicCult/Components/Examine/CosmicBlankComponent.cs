@@ -14,5 +14,5 @@ public sealed partial class CosmicBlankComponent : Component
     /// The status icon corresponding to the effect.
     /// </summary>
     [DataField]
-    public ProtoId<SsdIconPrototype> StatusIcon = "CosmicSSDIcon";
+    public ProtoId<StatusIconPrototype> StatusIcon = "CosmicSSDIcon";
 }

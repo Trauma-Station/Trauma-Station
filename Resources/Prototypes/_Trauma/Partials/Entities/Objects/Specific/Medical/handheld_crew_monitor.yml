@@ -11,5 +11,6 @@
     onUse: false # above component does the toggling
   - type: Tag
     tags:
+    - HandheldCrewMonitor
     - !Remove HighRiskItem
   - type: !Remove StealTarget

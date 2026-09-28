@@ -2,18 +2,17 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Server.Antag;
-using Content.Server.Antag.Components;
 using Content.Server.Chat.Managers;
-using Content.Server.GameTicking;
-using Content.Server.GameTicking.Rules;
 using Content.Server.RoundEnd;
 using Content.Server.StationEvents.Components;
 using Content.Shared.Actions;
 using Content.Shared.Antag;
+using Content.Shared.Antag.Components;
 using Content.Shared.Chat;
 using Content.Shared.Cuffs.Components;
+using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.GameTicking.Rules;
 using Content.Shared.Gibbing;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Humanoid;
@@ -56,22 +55,17 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
 
-    private static readonly ProtoId<AntagSpecifierPrototype> CultistSpecifier = "BloodCultist";
     private static readonly Color AnnounceColor = Color.FromHex("#dc143c");
 
     private List<EntityUid> _targets = new();
 
     // TODO: make a thing so if target cryos it picks a new one
 
-    protected override void Started(
-        EntityUid uid,
-        BloodCultRuleComponent comp,
-        GameRuleComponent rule,
-        GameRuleStartedEvent args
-    )
+    protected override void Started(Entity<BloodCultRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
     {
-        base.Started(uid, comp, rule, args);
+        base.Started(ent, ref args);
 
+        var comp = ent.Comp1;
         comp.OfferingTarget = PickTarget();
         while (comp.RitualAreas.Count < comp.AreaCount)
         {
@@ -80,19 +74,15 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
             if (!comp.RitualAreas.Contains(area))
                 comp.RitualAreas.Add(area);
         }
-        DirtyField(uid, comp, nameof(BloodCultRuleComponent.RitualAreas));
+        DirtyField(ent, comp, nameof(BloodCultRuleComponent.RitualAreas));
     }
 
-    protected override void AppendRoundEndText(
-        EntityUid uid,
-        BloodCultRuleComponent component,
-        GameRuleComponent gameRule,
-        ref RoundEndTextAppendEvent args
-    )
+    protected override void AppendRoundEndText(Entity<BloodCultRuleComponent> ent, ref RoundEndTextAppendEvent args)
     {
-        base.AppendRoundEndText(uid, component, gameRule, ref args);
+        base.AppendRoundEndText(ent, ref args);
 
-        var winText = Loc.GetString($"blood-cult-condition-{component.WinCondition.ToString().ToLower()}");
+        var (uid, comp) = ent;
+        var winText = Loc.GetString($"blood-cult-condition-{comp.WinCondition.ToString().ToLower()}");
         args.AddLine(winText);
 
         args.AddLine(Loc.GetString("blood-cultists-list-start"));
@@ -108,7 +98,8 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     [SubscribeLocalEvent]
     private void OnSacrificed(ref BloodCultSacrificedEvent args)
     {
-        if (_cult.GetRule(args.User) is not { } rule || args.Target != rule.Comp.OfferingTarget)
+        var rule = args.Rule;
+        if (args.Target != rule.Comp.OfferingTarget)
             return;
 
         rule.Comp.TargetSacrificed = true;
@@ -183,21 +174,20 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
             CheckRoundShouldEnd();
     }
 
-    public void Convert(EntityUid member, EntityUid target)
+    public void Convert(EntityUid rule, EntityUid target, [ForbidLiteral] ProtoId<AntagSpecifierPrototype> specifier)
     {
-        if (_cult.GetRule(member) is not { } rule ||
-            !TryComp<AntagSelectionComponent>(rule, out var antag) ||
+        if (!TryComp<AntagSelectionComponent>(rule, out var antag) ||
             !TryComp<ActorComponent>(target, out var actor))
             return;
 
-        var antagEnt = (rule.Owner, antag);
-        _antag.TryMakeAntag(antagEnt, CultistSpecifier, actor.PlayerSession);
+        var antagEnt = (rule, antag);
+        _antag.TryMakeAntag(antagEnt, specifier, actor.PlayerSession);
     }
 
     private void CheckRoundShouldEnd()
     {
         var query = QueryActiveRules();
-        while (query.MoveNext(out _, out var cult, out _))
+        while (query.MoveNext(out _, out var cult, out _, out _))
         {
             var aliveCultists = cult.Cultists.Count(cultist => !_mob.IsDead(cultist));
             if (aliveCultists != 0)

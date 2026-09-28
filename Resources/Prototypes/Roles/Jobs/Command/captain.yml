@@ -19,32 +19,18 @@
     - !type:DepartmentTimeRequirement
       department: Command
       time: 4h
-  # <Trauma>
-  guides:
-  - Command
-  # </Trauma>
   startingGear: CaptainGear
   icon: "JobIconCaptain"
   joinNotifyCrew: true
   supervisors: job-supervisors-centcom
+  guides: [ Command ] # TODO: should have a more specific guidebook page instead of using the department itself
   accessGroups:
   - AllAccess
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEchelonEducation
-    - SkillChipLaser
-    - SkillChipLongBlade
-  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
-      # <Trauma>
-      - type: Condemned # Nanotrasen owns your soul pal.
-        soulOwnedNotDevil: true
-      # </Trauma>
       - type: CommandStaff
 
 - type: startingGear
@@ -52,13 +38,12 @@
   equipment:
     shoes: ClothingShoesBootsLaceup
     eyes: ClothingEyesGlassesCommand
-    #gloves: ClothingHandsGlovesCaptain # Goobstation, moved to loadouts
-    #id: CaptainPDA # Trauma - moved to loadouts
+    gloves: ClothingHandsGlovesCaptain
+    id: CaptainPDA
     ears: ClothingHeadsetAltCommand
   storage:
     back:
     - Flash
-    - TelescopicBaton # Goobstation
     # - StationCharter
 
 - type: chameleonOutfit

@@ -46,28 +46,22 @@
     - MindShieldImplant
     - FakeMindShieldImplant
     - RadioImplant
-    # Goob implants
-    - MindcontrolImplant
-    - NutrimentPumpImplant
-    - SmokeImplant
-    # - StypticStimulatorImplant # Uncomment if given to traitors, currently it's DS only implant
-    - BinaryImplant
     - ChameleonControllerImplant
     - VoiceMaskImplant
     deimplantFailureDamage:
       types:
-        Caustic: 5 # Goobstation - unnerf implanters (why was it 50 genetic??)
-        Heat: 5
+        Cellular: 50
+        Heat: 10
   - type: Sprite
     sprite: Objects/Specific/Medical/implanter.rsi
     state: implanter0
     layers:
-      - state: implanter0
-        map: [ "implantOnly" ]
-        visible: true
-      - state: implanter1
-        map: [ "implantFull" ]
-        visible: false
+    - state: implanter0
+      map: [ "implantOnly" ]
+      visible: true
+    - state: implanter1
+      map: [ "implantFull" ]
+      visible: false
   - type: Item
     sprite: Objects/Specific/Medical/implanter.rsi
     heldPrefix: implanter
@@ -87,10 +81,9 @@
     interfaces:
       enum.DeimplantUiKey.Key:
         type: DeimplantBoundUserInterface
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Steel: 125
-      Glass: 125
+  - type: Tag
+    tags:
+    - SmeltingImmune
 
 - type: entity
   id: Implanter
@@ -163,7 +156,8 @@
           True: {state: broken}
           False: {state: implanter1}
   - type: Tag
-    tags: []
+    tags:
+    - SmeltingImmune
 
 #Fun implanters
 

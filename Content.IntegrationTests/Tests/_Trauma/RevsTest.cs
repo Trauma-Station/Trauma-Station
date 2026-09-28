@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.IntegrationTests.Tests.Interaction;
-using Content.Server.Antag;
-using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.ActionBlocker;
+using Content.Shared.Antag;
+using Content.Shared.GameTicking.Rules.Components;
 using Content.Shared.Implants;
 using Content.Shared.Implants.Components;
 using Content.Shared.Mind;

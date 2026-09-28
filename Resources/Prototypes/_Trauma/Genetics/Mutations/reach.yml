@@ -69,7 +69,6 @@
       partType: Arm
       effects:
       - !type:AddComponents
-        guidebookText: entity-effect-guidebook-increases-reach
         conditions:
         - !type:WhitelistCondition # has to be an organic arm
           blacklist:
@@ -84,6 +83,5 @@
       partType: Arm
       effects:
       - !type:RemoveComponents
-        guidebookText: entity-effect-guidebook-decreases-reach
         components:
         - type: ExtraReach

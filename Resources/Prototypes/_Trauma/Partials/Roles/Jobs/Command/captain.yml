@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: Captain
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipEchelonEducation
+    - SkillChipLaser
+    - SkillChipLongBlade
+  - !type:AddComponentSpecial
+    components:
+    - type: Condemned # Nanotrasen owns your soul pal.
+      soulOwnedNotDevil: true
+
+- type: startingGear
+  id: CaptainGear
+  equipment:
+    # moved to loadouts
+    gloves: !Remove
+    id: !Remove
+  storage:
+    back:
+    - TelescopicBaton

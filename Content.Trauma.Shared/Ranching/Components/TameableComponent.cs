@@ -11,10 +11,10 @@ namespace Content.Trauma.Shared.Ranching.Components;
 public sealed partial class TameableComponent : Component
 {
     [DataField]
-    public int MinPetsRequired = 10;
+    public int MinPetsRequired = 5;
 
     [DataField]
-    public int MaxPetsRequired = 20;
+    public int MaxPetsRequired = 10;
 
     [DataField]
     public int PetsRequired;

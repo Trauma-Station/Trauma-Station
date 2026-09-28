@@ -444,3 +444,10 @@ Entries:
   id: 47
   time: '2026-09-23T11:55:05.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4719
+- author: Hoodsie
+  changes:
+  - type: Tweak
+    message: Added more docking ports to oasis
+  id: 48
+  time: '2026-09-27T14:56:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4773

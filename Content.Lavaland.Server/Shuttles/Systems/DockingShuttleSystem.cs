@@ -5,8 +5,8 @@ using Content.Server.Station.Systems;
 using Content.Lavaland.Shared.Shuttles.Components;
 using Content.Lavaland.Shared.Shuttles.Systems;
 using Content.Shared.Shuttles.Components;
-using Content.Shared.Station;
 using Content.Shared.Station.Components;
+using Content.Shared.Station.Systems;
 using Content.Shared.Whitelist;
 using Robust.Shared.Map.Components;
 using System.Linq;
@@ -21,7 +21,7 @@ public sealed partial class DockingShuttleSystem : SharedDockingShuttleSystem
 {
     [Dependency] private DockingConsoleSystem _console = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
-    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private StationSystem _station = default!;
 
     public override void Initialize()
     {
