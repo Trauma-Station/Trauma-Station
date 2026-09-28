@@ -13,7 +13,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Funeral.Components;
-using Content.Trauma.Common.Chemistry;
+using Content.Trauma.Shared.Chemistry;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Shared.Funeral.Systems;
@@ -42,36 +42,43 @@ public sealed partial class FuneralAddSystem : EntitySystem
 
         args.Handled = true;
 
-        // check target is dead and humanoid and not already marked
-        if (!HasComp<MobStateComponent>(target) || !HasComp<HumanoidProfileComponent>(target) || HasComp<FuneralHolyComponent>(target)
+        // check target is dead and humanoid
+        if (!HasComp<MobStateComponent>(target) || !HasComp<HumanoidProfileComponent>(target)
         || !_mobState.IsDead(target))
             return;
 
         // check tool whitelist
         if (_whitelist.IsWhitelistFail(ent.Comp.UserWhitelist, user))
         {
-            _popup.PopupEntity(Loc.GetString("You aren't qualified to consecrate."), user, user, PopupType.SmallCaution);
+            _popup.PopupEntity("You aren't qualified to consecrate.", user, user, PopupType.SmallCaution);
+            return;
+        }
+
+        // check target is not already marked
+        if (HasComp<FuneralHolyComponent>(target))
+        {
+            _popup.PopupEntity("Individual has already been consecrated.", user, user, PopupType.Small);
             return;
         }
 
         // ensure head exists
         if (_body.GetOrgan(target, Head) is null)
         {
-            _popup.PopupEntity(Loc.GetString("Can't consecrate an individual with no head."), user, user, PopupType.SmallCaution);
+            _popup.PopupEntity("Can't consecrate an individual with no head.", user, user, PopupType.SmallCaution);
             return;
         }
 
         // check target was not made via cube
         if (HasComp<CubeBornComponent>(target))
         {
-            _popup.PopupEntity(Loc.GetString("Can't consecrate an individual with no history."), user, user, PopupType.SmallCaution);
+            _popup.PopupEntity("Can't consecrate an individual with no history.", user, user, PopupType.SmallCaution);
             return;
         }
 
         // check target's soul moved on
         if (TryComp<MindContainerComponent>(target, out var mind) && mind.HasMind)
         {
-            _popup.PopupEntity(Loc.GetString("Can't consecrate because the soul is still present."), user, user, PopupType.SmallCaution);
+            _popup.PopupEntity("Can't consecrate because the soul is still present.", user, user, PopupType.SmallCaution);
             return;
         }
 
@@ -80,7 +87,7 @@ public sealed partial class FuneralAddSystem : EntitySystem
             !_solution.ResolveSolution(target, blood.BloodSolutionName, ref blood.BloodSolution, out var solution) ||
             !solution.TryGetReagentQuantity(new ReagentId(Formaldehyde, null), out var qty) || qty <= 10)
         {
-            _popup.PopupEntity(Loc.GetString("Next, embalm the corpse with 15u formaldehyde."), user, user, PopupType.Small);
+            _popup.PopupEntity("Next, embalm the corpse with 15u formaldehyde.", user, user, PopupType.Small);
             return;
         }
 
@@ -90,15 +97,13 @@ public sealed partial class FuneralAddSystem : EntitySystem
 
         // add holy component
         EnsureComp<FuneralHolyComponent>(target);
-        _popup.PopupEntity(Loc.GetString("The consecration has been completed."), user, user, PopupType.Medium);
+        _popup.PopupEntity("The consecration has been completed.", user, user, PopupType.Medium);
     }
 
     // inspect details for holy comp
     [SubscribeLocalEvent]
     private void OnExamined(EntityUid uid, FuneralHolyComponent comp, ExaminedEvent args)
     {
-        args.PushMarkup(Loc.GetString("[color=yellow]This individual has been consecrated and can be cremated for holy ash.[/color]"));
+        args.PushMarkup("[color=yellow]This individual has been consecrated and can be cremated for holy ash.[/color]");
     }
 }
-// add embalming criteria,
-// come up with a fix for reviving a corpse that had a funeral maybe.

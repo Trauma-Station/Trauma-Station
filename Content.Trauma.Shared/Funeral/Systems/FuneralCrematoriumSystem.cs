@@ -21,7 +21,7 @@ public sealed partial class FuneralCrematoriumSystem : EntitySystem
         {
             if (_compQuery.HasComp(entity))
             {
-                args.OutputPrototype = HolyAsh;
+                args = args with { OutputPrototype = HolyAsh };
                 return;
             }
         }

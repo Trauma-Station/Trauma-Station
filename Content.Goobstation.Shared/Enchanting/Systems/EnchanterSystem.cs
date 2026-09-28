@@ -61,8 +61,7 @@ public sealed partial class EnchanterSystem : EntitySystem
             return;
 
         // do nothing if used without an altar
-        var table = _enchanting.FindTable(item);
-        if (table is not {})
+        if (_enchanting.FindTable(item) is not {} table)
             return;
 
         args.Handled = true;

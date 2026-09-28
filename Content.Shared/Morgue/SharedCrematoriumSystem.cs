@@ -1,5 +1,7 @@
-using Content.Goobstation.Common.Morgue; // Goob
-using Content.Trauma.Common.Funeral; //Trauma - For switching to holy ash product
+//<Trauma>
+using Content.Goobstation.Common.Morgue;
+using Content.Trauma.Common.Funeral; //Trauma
+//</Trauma>
 using Content.Shared.Database;
 using Content.Shared.Examine;
 using Content.Shared.Mind;
@@ -145,7 +147,7 @@ public abstract partial class SharedCrematoriumSystem : EntitySystem
 
             var outputEvent = new CremationOutputEvent(ent.Owner, contents, ent.Comp1.LeftOverProtoId);
 
-            RaiseLocalEvent(ent.Owner, ref outputEvent); // Event to check if output should be holy ash
+            RaiseLocalEvent(ent.Owner, ref outputEvent);
             // </Trauma>
 
             for (var i = ent.Comp2.Contents.ContainedEntities.Count - 1; i >= 0; i--)

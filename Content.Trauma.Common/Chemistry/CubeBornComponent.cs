@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Trauma.Common.Chemistry;
+namespace Content.Trauma.Shared.Chemistry;
 
 /// <summary>
 /// Component marking entities that were made from cube hydration.

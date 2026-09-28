@@ -2,7 +2,6 @@
 
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Components;
-using Content.Trauma.Common.Chemistry;
 
 namespace Content.Trauma.Shared.Chemistry;
 
@@ -11,15 +10,13 @@ namespace Content.Trauma.Shared.Chemistry;
 /// </summary>
 public sealed partial class RehydratedCompSystem : EntitySystem
 {
-
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<GotRehydratedEvent>(OnRehydrated);
+        SubscribeLocalEvent<RehydratableComponent, GotRehydratedEvent>(OnRehydrated);
     }
 
-    private void OnRehydrated(ref GotRehydratedEvent args)
+    private void OnRehydrated(Entity<RehydratableComponent> ent, ref GotRehydratedEvent args)
     {
         // differentiates beings of the cube
         EnsureComp<CubeBornComponent>(args.Target);
