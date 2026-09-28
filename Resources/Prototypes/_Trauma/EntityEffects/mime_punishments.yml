@@ -8,21 +8,17 @@
     probability: 0.25 # 75% chance of nothing happening
     children:
     - effect: !type:AddComponents
-        guidebookText: entity-effect-guidebook-add-accents
         components:
         - type: OhioAccent
     - effect: !type:AddComponents
-        guidebookText: entity-effect-guidebook-add-accents
         components:
         - type: BackwardsAccent
         - type: DementiaAccent
     - effect: !type:AddComponents
-        guidebookText: entity-effect-guidebook-add-accents
         components:
         - type: VulgarAccent
         - type: BoganAccent
     - effect: !type:AddComponents
-        guidebookText: entity-effect-guidebook-add-accents
         components:
         - type: VulgarAccent
         - type: RussianAccent

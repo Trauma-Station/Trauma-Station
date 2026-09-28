@@ -6,34 +6,17 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Medical
-      time: 1h # Trauma was 2.5
+      time: 2.5h
   startingGear: DoctorGear
   icon: "JobIconMedicalDoctor"
   supervisors: job-supervisors-cmo
-  guides: # goobstation
-  - MedicalDoctor
-  - Medical
-  - Medicine
+  guides: [ Medical ] # TODO: should have a more specific guidebook page instead of using the department itself
   access:
   - Medical
   - Maintenance
   extendedAccess:
   - Chemistry
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipDoctor
-    - SkillChipEducation
-    - SkillChipSurgeon
-  - !type:AddComponentSpecial
-    components:
-    - type: SurgerySpeedModifier
-      speedModifier: 1.5
-    - type: CPRTraining
-      reviveChance: 0.45 # a bit better at chest compressions
-      inhaleChance: 0.75 # decent at mouth to mouth res.
-  # </Trauma>
   - !type:GiveItemOnHolidaySpecial
     holiday: DoctorDay
     prototype: WehMedipen

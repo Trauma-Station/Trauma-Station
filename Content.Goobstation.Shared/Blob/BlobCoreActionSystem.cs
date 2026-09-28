@@ -168,7 +168,7 @@ public sealed partial class BlobCoreActionSystem : EntitySystem
         _damage.ChangeDamage(target, chem.Damage);
 
         if (chem.AttackEffects is { } effects)
-            _effects.ApplyEffects(target, effects, user: ent.Comp.Observer, predicted: false);
+            _effects.TryApplyEffects(target, effects, user: ent.Comp.Observer, predicted: false);
 
         ent.Comp.NextAction = _timing.CurTime + _cooldown + TimeSpan.FromSeconds(Math.Abs(ent.Comp.AttackRate));
         DirtyField(ent, ent.Comp, nameof(BlobCoreComponent.NextAction));

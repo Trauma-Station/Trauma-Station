@@ -15104,3 +15104,38 @@ Entries:
   id: 1643
   time: '2026-09-25T21:39:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4757
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added a new machine to the abductor shuttle called the Abductor
+      Biofabricator. It can produce random limbs and organs as well as extra
+      mysterious glands
+  - type: Add
+    message: Added biomass to the abductor shuttle so they can use their biofabricator
+  - type: Tweak
+    message: Increased the surgery speed on the Abductor Operating Table
+  id: 1644
+  time: '2026-09-27T14:10:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4767
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed tiny explosions always breaking floor tiles.
+  id: 1645
+  time: '2026-09-27T14:23:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4770
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Map vote is back and it's better than ever
+  id: 1646
+  time: '2026-09-27T15:48:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3564
+- author: cog
+  changes:
+  - type: Tweak
+    message: Makeshift bone gel now has a unique sprite.
+  id: 1647
+  time: '2026-09-27T15:56:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4775

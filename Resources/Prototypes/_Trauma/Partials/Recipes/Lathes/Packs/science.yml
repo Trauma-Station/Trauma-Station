@@ -28,6 +28,7 @@
   id: ScienceWeapons
   recipes:
   - !Remove WeaponProtoKineticAccelerator # Moved to MiningWeapons
+  - ClothingOuterArmorReactiveUnfinished
 
 - type: latheRecipePack
   id: ScienceExplosives

@@ -37,7 +37,7 @@
         # axes are kinda like sharp hammers, you know?
         Blunt: 5
         Slash: 10
-        Structural: 10
+        Structural: 3
       woundSeverityMultipliers: # Trauma
         Blunt: 2
         Slash: 2.5
