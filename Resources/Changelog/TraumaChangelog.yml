@@ -15187,3 +15187,16 @@ Entries:
   id: 1651
   time: '2026-09-28T08:36:09.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4785
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed cult teleport spell (not rune) not working.
+  - type: Fix
+    message: >-
+      Fixed cult veil shifter not bringing whatever you are pulling like it
+      said.
+  - type: Fix
+    message: Fixed empowered alert saying it made you immune to pressure.
+  id: 1652
+  time: '2026-09-28T11:27:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4789
