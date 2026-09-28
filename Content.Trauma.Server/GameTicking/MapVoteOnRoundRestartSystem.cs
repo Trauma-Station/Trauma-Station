@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.GameTicking;
 using Content.Server.Voting.Managers;
-using Content.Shared.Voting;
 using Content.Shared.CCVar;
+using Content.Shared.GameTicking;
+using Content.Shared.Voting;
 using Content.Trauma.Common.CCVar;
 using Robust.Shared.Configuration;
 
@@ -16,6 +16,7 @@ public sealed partial class MapVoteOnRoundRestartSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IVoteManager _vote = default!;
+
     private bool _voteEnabled;
     private bool _lobbyEnabled;
 

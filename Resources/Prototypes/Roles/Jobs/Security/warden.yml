@@ -13,10 +13,7 @@
   startingGear: WardenGear
   icon: "JobIconWarden"
   supervisors: job-supervisors-hos
-  guides: # Trauma
-  - SpaceLaw
-  - Security
-  - KravMaga
+  guides: [ Security ] # TODO: should have a more specific guidebook page instead of using the department itself
   access:
   - Security
   - Brig
@@ -28,15 +25,6 @@
   - GenpopEnter
   - GenpopLeave
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipCombatEducation
-    - SkillChipLaser
-  - !type:AddComponentSpecial
-    components:
-    - type: SecurityStaff
-  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
 
@@ -45,12 +33,12 @@
   equipment:
     eyes: ClothingEyesGlassesSecurity
     id: WardenPDA
-    ears: ClothingHeadsetAltWarden # Goobstation
-    pocket1: WeaponLaserSidearm
+    ears: ClothingHeadsetSecurity
+    pocket1: WeaponPistolMk58
   storage:
     back:
     - Flash
-    - ClothingMaskGasSecurity # Goobstation
+    - MagazinePistol
 
 - type: chameleonOutfit
   id: WardenChameleonOutfit

@@ -4,33 +4,17 @@
   description: job-description-lawyer
   playTimeTracker: JobLawyer
   requirements:
-    # - !type:OverallPlaytimeRequirement
-    #   time: 2.5h
-    - !type:DepartmentTimeRequirement # Trauma
-      department: Security
-      time: 1h
+    - !type:OverallPlaytimeRequirement
+      time: 2.5h
   startingGear: LawyerGear
   icon: "JobIconLawyer"
   supervisors: job-supervisors-hop
+  guides: [ SpaceLaw ] # TODO: should have a more specific guidebook page instead of just linking to Space Law
   access:
-  #- Service # Trauma - piss off
+  - Service
   - Lawyer
   - Brig
   - Maintenance
-  # <Trauma>
-  guides:
-  - SpaceLaw
-  special:
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEducation
-  # Everyone knows lawyers are soulless.
-  - !type:AddComponentSpecial
-    components:
-    - type: Condemned
-      soulOwnedNotDevil: true
-    - type: Lawyer
-  # </Trauma>
 
 - type: startingGear
   id: LawyerGear

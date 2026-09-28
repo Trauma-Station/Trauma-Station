@@ -150,7 +150,7 @@
     groups:
       Flammable: [ Touch ]
       Extinguish: [ Touch ]
-      Acidic: [ Touch, Ingestion ] # Trauma
+      Acidic: [ Touch, Ingestion ] # Trauma - added Ingestion
     reactions:
     - reagents: [ Water, SpaceCleaner ]
       methods: [ Touch ]

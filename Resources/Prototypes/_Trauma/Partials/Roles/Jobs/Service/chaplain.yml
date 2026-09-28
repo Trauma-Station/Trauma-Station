@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: Chaplain
+  guides:
+  - !Remove Service
+  - Chaplain
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipEducation
+    - SkillChipMarksmanship
+    - SkillChipChaplain
+  - !type:AddComponentSpecial
+    components:
+    - type: Condemned
+      soulOwnedNotDevil: true # This just means they won't suffer the effects of being condemned, while still not being able to sell their soul.
+    - type: CurseImmune # Immune to curses of wraith plaguebringer
+
+- type: startingGear
+  id: ChaplainGear
+  storage:
+    back:
+    - ChaplainUndeterminedBible
+    - Nullrod
+    - ArmamentsBeacon

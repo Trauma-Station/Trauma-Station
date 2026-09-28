@@ -8,6 +8,9 @@ age-markup-senior = [color=#d1d1d1]It's movements are slow and it's hairs are tu
 grabbed-shatter-popup = The chicken shatters!
 
 dream-egg-popup = You feel your muscles shut down as they undergo regeneration...
+knight-egg-popup = Your skin feels tougher then usual.
+clown-egg-popup = You feel clumsy.
+cluwne-egg-popup = You feel dangerously clumsy.
 medusa-popup = You turn into a stone statue!
 
 # Bizarre....

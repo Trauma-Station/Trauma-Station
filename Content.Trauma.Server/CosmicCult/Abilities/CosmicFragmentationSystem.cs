@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Actions;
-using Content.Server.Antag;
-using Content.Server.Popups;
+using Content.Shared.Actions;
+using Content.Shared.Antag;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
 using Content.Shared.NPC;
+using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Shared.Silicons.Borgs.Components;
@@ -18,14 +18,15 @@ using Robust.Shared.Containers;
 
 namespace Content.Trauma.Server.CosmicCult.Abilities;
 
+// TODO: predict this shit
 public sealed partial class CosmicFragmentationSystem : EntitySystem
 {
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private CosmicCultSystem _cult = default!;
     [Dependency] private CosmicCultRuleSystem _cultRule = default!;
-    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedContainerSystem _container = default!;
-    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     private static readonly EntProtoId CosmicBorgChantry = "CosmicBorgChantry";
     private static readonly EntProtoId CosmicCultLawBoard = "CosmicCultLawBoard";

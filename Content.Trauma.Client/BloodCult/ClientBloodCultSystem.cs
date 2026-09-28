@@ -20,8 +20,8 @@ public sealed partial class ClientBloodCultSystem : BloodCultSystem
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private SpriteSystem _sprite = default!;
 
-    private static readonly ProtoId<FactionIconPrototype> CultistIcon = "BloodCultMember";
-    private static readonly ProtoId<FactionIconPrototype> LeaderIcon = "BloodCultLeader";
+    private static readonly ProtoId<StatusIconPrototype> CultistIcon = "BloodCultMember";
+    private static readonly ProtoId<StatusIconPrototype> LeaderIcon = "BloodCultLeader";
 
     [SubscribeLocalEvent]
     private void OnPentagramAdded(EntityUid uid, PentagramComponent component, ComponentStartup args)

@@ -15139,3 +15139,30 @@ Entries:
   id: 1647
   time: '2026-09-27T15:56:55.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4775
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added fertilized white eggs to biogenerators
+  - type: Add
+    message: Made clown, cluwne and mime chickens wackier
+  - type: Add
+    message: >-
+      Added a proper way to get mime chickens, You just need to feed clown hen's
+      mimanas now
+  - type: Add
+    message: Added unique effects to the clown and cluwne eggs
+  - type: Add
+    message: Added unique flavor text when eating knight, clown and cluwne eggs
+  - type: Tweak
+    message: Raptor's now only require 5-10 pets in order to tame now
+  - type: Tweak
+    message: Zappy Roosters now have reduced projectile speed, They are now more lethal
+  - type: Fix
+    message: >-
+      Fixed knight's coming from feeding an ixworth chicken steelwheat now it
+      properly correlates to the chart
+  - type: Fix
+    message: Fixed phoenix eggs using onagadori eggs instead of knight eggs
+  id: 1648
+  time: '2026-09-28T06:20:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4780
