@@ -26,6 +26,8 @@
 
   Cuffs and mutes a victim with ethereal [bold]shadow shackles[/bold], which disintegrate if removed so they can't be used against you.
 
+  This only works if the victim is [bold]already stunned[/bold], consider using the stun spell or a trusty batong.
+
 
   <Box>
     <GuideEntityEmbed Entity="ActionBloodCultStun"/>
@@ -46,14 +48,6 @@
   </Box>
 
   Creates a 20 second EMP instantly, taking out sec's batongs and such.
-
-
-  <Box>
-    <GuideEntityEmbed Entity="ActionBloodCultSummonCombatEquipment"/>
-  </Box>
-
-
-  Gives you armored cult robes, a cult bola and a longsword. The sword can't be used in rituals, it's just a good weapon.
 
   <Box>
     <GuideEntityEmbed Entity="ActionBloodCultSummonRitualDagger"/>

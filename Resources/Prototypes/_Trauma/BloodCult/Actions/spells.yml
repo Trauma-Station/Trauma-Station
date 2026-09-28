@@ -21,7 +21,7 @@
     itemIconStyle: BigAction
     raiseOnAction: true
   - type: LimitedCharges
-    maxCharges: 1 # single use
+    maxCharges: 1 # single use by default
   - type: CultSpell
   - type: Magic
     requiresSpeech: true
@@ -127,7 +127,7 @@
   parent: BaseBloodCultSpell
   id: ActionBloodCultShadowShackles
   name: Shadow Shackles
-  description: Empowers your hand to handcuff a victim on contact, and mute them if successful.
+  description: Empowers your hand to handcuff an already stunned victim on contact, and mute them if successful.
   components:
   - type: Sprite
     layers:
@@ -141,8 +141,10 @@
   - type: EntityTargetAction
     canTargetSelf: false
     whitelist:
+      requireAll: true
       components:
       - Body
+      - Stunned # can't driveby instacuff someone
     event: !type:BloodCultShacklesEvent
   - type: SpeakOnAction
     sentence: blood-cult-action-shadow-shackles
@@ -168,29 +170,6 @@
     event: !type:BloodCultTwistedConstructionEvent
   - type: SpeakOnAction
     sentence: blood-cult-action-twisted-construction
-
-- type: entity
-  parent: BaseBloodCultSpell
-  id: ActionBloodCultSummonCombatEquipment
-  name: Summon Combat Equipment
-  description: Allows you to summon combat cult gear. Includes cult armor, a cult bola and a cult sword.
-  components:
-  - type: Sprite
-    layers:
-    - state: summon_combat_equipment
-  - type: InstantAction
-    event: !type:EffectInstantActionEvent
-  - type: EffectAction
-    effects:
-    - !type:SpawnEquipment
-      slots:
-        outerClothing: ClothingOuterCultArmor
-    - !type:SpawnHeldItems
-      items:
-      - EldritchLongsword
-      - CultBola
-  - type: SpeakOnAction
-    sentence: blood-cult-action-summon-equipment
 
 - type: entity
   parent: BaseBloodCultSpell
