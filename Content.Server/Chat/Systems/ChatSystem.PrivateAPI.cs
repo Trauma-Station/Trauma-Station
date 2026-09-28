@@ -58,11 +58,11 @@ public sealed partial class ChatSystem
                 speech = proto;
         }
 
-        var messageName = ChatNameLinks ? $"[textlink=\"{FormattedMessage.EscapeStringParameter(name)}\" entity=\"{GetNetEntity(source)}\" entitynamecolor=\"true\"]" : FormattedMessage.EscapeText(name);
+        name = ChatNameLinks ? $"[textlink=\"{FormattedMessage.EscapeStringParameter(name)}\" entity=\"{GetNetEntity(source)}\" entitynamecolor=\"true\"]" : FormattedMessage.EscapeText(name);
 
         /* <Trauma> - replaced with separate unobf/obf wrapped messages
         var wrappedMessage = Loc.GetString(speech.Bold ? "chat-manager-entity-say-bold-wrap-message" : "chat-manager-entity-say-wrap-message",
-            ("entityName", messageName),
+            ("entityName", name),
             ("verb", Loc.GetString(_random.Pick(speech.SpeechVerbStrings))),
             ("fontType", speech.FontId),
             ("fontSize", speech.FontSize),
@@ -151,7 +151,7 @@ public sealed partial class ChatSystem
             RaiseLocalEvent(source, nameEv);
             name = nameEv.VoiceName;
         }
-        name = FormattedMessage.EscapeText(name);
+        name = ChatNameLinks ? $"[textlink=\"{FormattedMessage.EscapeStringParameter(name)}\" entity=\"{GetNetEntity(source)}\" entitynamecolor=\"true\"]" : FormattedMessage.EscapeText(name);
 
         if (!language.SpeechOverride.RequireSpeech && language.SpeechOverride.RequireLOS)
         {
