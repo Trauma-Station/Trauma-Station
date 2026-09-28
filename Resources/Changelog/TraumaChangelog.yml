@@ -15180,3 +15180,10 @@ Entries:
   id: 1650
   time: '2026-09-28T08:19:37.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4784
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Blood cult revive rune now heals missing limbs, blood, etc.
+  id: 1651
+  time: '2026-09-28T08:36:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4785
