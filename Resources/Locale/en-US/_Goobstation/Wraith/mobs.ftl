@@ -24,7 +24,7 @@ shade-4 = šìr...áa ina šìr-kug záh-bi!
 
 repairbot-1 = I will fix you.
 repairbot-2 = Please, stop destroying the station. I can't anymore.
-repairbot-3 = Witnes. The purity of entropy.
+repairbot-3 = Witness. The purity of entropy.
 repairbot-4 = I will fix it.
 repairbot-5 = Vandalism is a crime. Consult corporate law section...sec-...s...
 repairbot-6 = Why must I fix everything I touch?
