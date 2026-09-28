@@ -681,7 +681,7 @@
   - type: Sprite
     sprite: _Trauma/Mobs/Ranch/chicken-spicy.rsi
   - type: EggFertilizer
-    specialReplacementRequiredEgg: OnagadoriEgg
+    specialReplacementRequiredEgg: KnightEgg
     specialReplacement: PhoenixEgg
   - type: FavoriteFood
     tag:
@@ -1130,9 +1130,6 @@
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Ranch/chicken-onagadori.rsi
-  - type: EggFertilizer
-    specialReplacementRequiredEgg: SpicyEgg
-    specialReplacement: PhoenixEgg
   - type: FavoriteFood
     tag:
     - Peanut
@@ -1277,7 +1274,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-mime.rsi
   - type: FavoriteFood
     tag:
-    - Cigarette
+    - Mimana
 
 - type: entity
   parent: BaseMobHenRanch
@@ -1288,7 +1285,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-mime.rsi
   - type: FavoriteFood
     tag:
-    - Cigarette
+    - Mimana
 
 - type: entity
   parent: BaseMobRoosterRanch
@@ -1299,7 +1296,7 @@
     sprite: _Trauma/Mobs/Ranch/chicken-mime.rsi
   - type: FavoriteFood
     tag:
-    - Cigarette
+    - Mimana
 
 # Balloon Chicken
 
@@ -1437,6 +1434,9 @@
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Ranch/chicken-knight.rsi
+  - type: EggFertilizer
+    specialReplacementRequiredEgg: SpicyEgg
+    specialReplacement: PhoenixEgg
   - type: FavoriteFood
     tag:
     - SteelWheat

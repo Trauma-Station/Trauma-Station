@@ -236,7 +236,13 @@
   id: MimeEgg
   egg: MimeEgg
   requiredChicken:
+  - MobClownHen
   - MobMimeHen
+  noSpecialFoodRequiredChickens:
+  - MobMimeHen
+  weight: 10
+  foodTagsRequired:
+  - Mimana
 
 - type: eggRecipe
   id: BalloonEgg
@@ -265,7 +271,7 @@
   id: KnightEgg
   egg: KnightEgg
   requiredChicken:
-  - MobIxworthHen
+  - MobOnagadoriHen
   - MobKnightHen
   noSpecialFoodRequiredChickens:
   - MobKnightHen
