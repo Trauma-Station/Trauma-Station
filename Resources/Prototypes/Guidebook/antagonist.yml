@@ -32,7 +32,7 @@
 - type: guideEntry
   id: Revolutionaries
   name: guide-entry-revolutionaries
-  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Revolutionaries.xml" # Trauma
+  text: "/ServerInfo/Guidebook/Antagonist/Revolutionaries.xml"
 
 - type: guideEntry
   id: MinorAntagonists
