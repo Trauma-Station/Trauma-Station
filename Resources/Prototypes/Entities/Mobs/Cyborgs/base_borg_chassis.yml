@@ -39,6 +39,8 @@
       WallsKnowledge: 10
       InfrastructureKnowledge: 10
       ElectronicsKnowledge: 10
+  - type: TwistedConstructionTarget
+    replacementProto: ConstructShell
   # </Trauma>
   - type: Reactive
     groups:

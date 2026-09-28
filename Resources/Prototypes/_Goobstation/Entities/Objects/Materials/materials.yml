@@ -26,10 +26,22 @@
   - type: PhysicalComposition
     materialComposition:
       BSCrystal: 100
-  - type: RandomTeleportOnUse
-    radius:
-      min: 2
-      max: 5
+  - type: EntityEffectOnUse
+    effects:
+    - !type:PlaySoundEffect
+        sound:
+          path: /Audio/Effects/teleport_departure.ogg
+    - !type:Sparks
+    - !type:RandomTeleport
+      radius:
+        min: 2.0
+        max: 5.0
+    - !type:PlaySoundEffect
+        sound:
+          path: /Audio/Effects/teleport_arrival.ogg
+    - !type:Sparks
+    applyToUser: true
+  - type: ReduceStackSizeOnUse
   # interferes with bluespace portals. does nothing inside containers etc for simplicity and not being annoying
   - type: PortalTransitEffects
     effects:

@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: RiceBushel
+  components:
+  - type: Tag
+    tags:
+    - Ruminant
+    - Rice

@@ -17,7 +17,12 @@
     - map: [ "pocket2" ]
   - type: Xenomorph
     caste: Queen
+  - type: Puller
+    needsHands: false
+    startingGrabStage: Hard
   - type: XenomorphQueen
+  - type: Stamina
+    baseCritThreshold: 500
   - type: TailLash
     tailDamage:
       types:

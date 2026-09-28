@@ -326,3 +326,19 @@ Entries:
   id: 42
   time: '2026-08-19T20:33:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4159
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Admin command buttons now require confirmation before you restart the
+      round...
+  id: 43
+  time: '2026-09-13T19:57:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4579
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed set outfit verb duping items for hecu and stuff.
+  id: 44
+  time: '2026-09-16T16:03:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4619

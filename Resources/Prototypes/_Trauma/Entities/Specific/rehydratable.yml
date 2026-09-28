@@ -8,6 +8,12 @@
   components:
   - type: Sprite
     state: magicplush
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: magicarpplush-inhand-left
+      right:
+      - state: magicarpplush-inhand-right
   - type: Rehydratable
     possibleSpawns:
     - MobCarpMagic

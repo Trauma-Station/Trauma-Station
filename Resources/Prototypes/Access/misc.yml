@@ -1,12 +1,6 @@
 - type: accessGroup
   id: AllAccess
   tags:
-  # <Trauma>
-  - Robotics
-  - Genetics
-  - Journalism
-  - Library
-  # </Trauma>
   - EmergencyShuttleRepealAll
   - Captain
   - HeadOfPersonnel

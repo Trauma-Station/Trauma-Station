@@ -24,25 +24,25 @@ public sealed partial class RanchingEggLayerComponent : Component
     /// Minimum cooldown used for the egg laying.
     /// </summary>
     [DataField]
-    public float EggLayCooldownMin = 15f;
+    public float EggLayCooldownMin = 10f;
 
     /// <summary>
     /// Maximum cooldown used for the egg laying.
     /// </summary>
     [DataField]
-    public float EggLayCooldownMax = 40f;
+    public float EggLayCooldownMax = 30f;
 
     /// <summary>
     /// The amount of nutrient hunger used to lay an egg.
     /// </summary>
     [DataField]
-    public float HungerUsage = 3f;
+    public float HungerUsage = 5f;
 
     /// <summary>
     /// Food level needed to lay eggs.
     /// </summary>
     [DataField]
-    public SatiationValue HungerThreshold = 50;
+    public SatiationValue HungerThreshold = 25;
 
     /// <summary>
     /// When to next try to lay an egg.

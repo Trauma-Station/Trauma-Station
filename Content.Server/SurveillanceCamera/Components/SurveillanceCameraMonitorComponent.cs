@@ -7,7 +7,7 @@ using Robust.Shared.Prototypes;
 namespace Content.Server.SurveillanceCamera;
 
 [RegisterComponent]
-[Access(typeof(SurveillanceCameraMonitorSystem))]
+// Trauma - removed Access
 public sealed partial class SurveillanceCameraMonitorComponent : Component
 {
     /// <summary>

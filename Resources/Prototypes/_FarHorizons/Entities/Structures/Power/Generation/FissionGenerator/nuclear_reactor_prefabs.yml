@@ -23,8 +23,22 @@
     4,3: SteelReactorHeatExchanger
     4,5: SteelReactorHeatExchanger
 
-    3,2: BohrumReactorReflector
-    3,4: BohrumReactorReflector
+    1,1: BohrumReactorReflector
+    1,2: BohrumReactorReflector
+    1,3: BohrumReactorReflector
+    1,4: BohrumReactorReflector
+    1,5: BohrumReactorReflector
+    5,1: BohrumReactorReflector
+    5,2: BohrumReactorReflector
+    5,3: BohrumReactorReflector
+    5,4: BohrumReactorReflector
+    5,5: BohrumReactorReflector
+
+    3,1: UraniumReactorFuelRod
+    3,2: UraniumReactorFuelRod
+    3,3: UraniumReactorFuelRod
+    3,4: UraniumReactorFuelRod
+    3,5: UraniumReactorFuelRod
 
 - type: nuclearReactorPrefab
   id: 7x7Debug

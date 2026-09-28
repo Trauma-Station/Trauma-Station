@@ -17,42 +17,49 @@ public sealed partial class ThunderstrikeSystem : EntitySystem
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPointLightSystem _light = default!;
-    [Dependency] private SharedElectrocutionSystem _elect = default!;
+    [Dependency] private SharedElectrocutionSystem _electrocution = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
+    private static readonly EntProtoId Ash = "Ash";
     private const string Sound = "/Audio/_Goobstation/Effects/Smites/Thunderstrike/thunderstrike.ogg";
     private const string God = "/Textures/_Goobstation/For he does not need no fucking rsi.png";
 
-    public void Smite(EntityUid mumu, bool kill = true, TransformComponent? transform = null)
+    public void Smite(Entity<TransformComponent?> ent, bool kill = true, bool predicted = false, EntityUid? user = null)
     {
-        if (!Resolve(mumu, ref transform))
+        if (!Resolve(ent, ref ent.Comp))
             return;
 
-        CreateLighting(transform.Coordinates);
+        CreateLighting(ent.Comp.Coordinates, predicted: predicted, user: user);
 
-        _elect.TryDoElectrocution(mumu, null, 250, TimeSpan.FromSeconds(1), false, ignoreInsulation: true);
+        _electrocution.TryDoElectrocution(ent, null, 250, TimeSpan.FromSeconds(1), false, ignoreInsulation: true);
 
-        if (!kill || !_player.TryGetSessionByEntity(mumu, out var sesh))
+        if (!kill || !_player.TryGetSessionByEntity(ent, out var sesh))
             return;
 
         var text = new SpriteSpecifier.Texture(new ResPath(God));
         _jumpscare.Jumpscare(text, sesh);
 
-        QueueDel(mumu);
-        Spawn("Ash", transform.Coordinates);
-        _popup.PopupEntity(Loc.GetString("admin-smite-turned-ash-other", ("name", mumu)), mumu, PopupType.LargeCaution);
+        PredictedQueueDel(ent);
+        PredictedSpawnAtPosition(Ash, ent.Comp.Coordinates);
+        _popup.PopupEntity(Loc.GetString("admin-smite-turned-ash-other", ("name", ent)), ent, PopupType.LargeCaution);
     }
 
-    public void CreateLighting(EntityCoordinates coordinates, int energy = 125, int radius = 15)
+    public void CreateLighting(EntityCoordinates coordinates, int energy = 125, int radius = 15, bool predicted = false, EntityUid? user = null)
     {
-        var ent = Spawn(null, coordinates);
+        var ent = PredictedSpawnAtPosition(null, coordinates);
         var comp = _light.EnsureLight(ent);
         _light.SetColor(ent, new Color(255, 255, 255), comp);
         _light.SetEnergy(ent, energy, comp);
         _light.SetRadius(ent, radius, comp);
 
-        var sound = new SoundPathSpecifier(Sound);
-        _audio.PlayPvs(sound, coordinates, AudioParams.Default.WithVolume(150f));
+        var sound = new SoundPathSpecifier(Sound)
+        {
+            Params = AudioParams.Default.WithVolume(150f)
+        };
+        if (predicted)
+            _audio.PlayPredicted(sound, coordinates, user);
+        else
+            _audio.PlayPvs(sound, coordinates);
 
         EnsureComp<TimedDespawnComponent>(ent).Lifetime = 0.125f;
     }

@@ -1,8 +1,4 @@
-// <Trauma>
 using Content.Server.Hands.Systems;
-using Content.Shared.Radio.Components;
-using Content.Shared.Storage.EntitySystems;
-// </Trauma>
 using Content.Server.Preferences.Managers;
 using Content.Server.Storage.EntitySystems;
 using Content.Shared.Access.Components;
@@ -24,9 +20,6 @@ namespace Content.Server.Clothing.Systems;
 
 public sealed partial class OutfitSystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private SharedStorageSystem _storage = default!;
-    // </Trauma>
     [Dependency] private IServerPreferencesManager _preferenceManager = default!;
     [Dependency] private HandsSystem _handSystem = default!;
     [Dependency] private InventorySystem _invSystem = default!;
@@ -34,8 +27,8 @@ public sealed partial class OutfitSystem : EntitySystem
     [Dependency] private ItemSlotsSystem _itemSlotsSystem = default!;
     [Dependency] private StorageSystem _storageSystem = default!;
 
-    // Goob - added doSpecial
-    public bool SetOutfit(EntityUid target, string gear, Action<EntityUid, EntityUid>? onEquipped = null, bool unremovable = false, bool doSpecial = false)
+    public bool SetOutfit(EntityUid target, string gear, Action<EntityUid, EntityUid>? onEquipped = null, bool unremovable = false,
+        bool doSpecial = false) // Trauma
     {
         if (!TryComp(target, out InventoryComponent? inventoryComponent))
             return false;
@@ -76,26 +69,6 @@ public sealed partial class OutfitSystem : EntitySystem
                     EnsureComp<UnremoveableComponent>(equipmentEntity);
 
                 onEquipped?.Invoke(target, equipmentEntity);
-
-                // Goobstation - Start
-                if (startingGear.Storage.Count <= 0
-                    || slot.SlotFlags != SlotFlags.BACK
-                    || !TryComp<StorageComponent>(equipmentEntity, out var storage))
-                    continue;
-
-                foreach (var (_, entProtos) in startingGear.Storage)
-                {
-                    if (entProtos.Count == 0)
-                        continue;
-
-                    foreach (var entProto in entProtos)
-                    {
-                        var spawnedEntity = Spawn(entProto, Transform(target).Coordinates);
-                        _storage.Insert(equipmentEntity, spawnedEntity, out _, storageComp: storage, playSound: false);
-                    }
-
-                }
-                // Goobstation - End
             }
         }
 
@@ -142,11 +115,15 @@ public sealed partial class OutfitSystem : EntitySystem
             if (job.StartingGear != gear)
                 continue;
 
-            // Goobstation start - Implants for set-outfits
+            // <Trauma>
             if (doSpecial)
+            {
                 foreach (var jobSpecial in job.Special)
+                {
                     jobSpecial.AfterEquip(target);
-            // Goobstation end
+                }
+            }
+            // </Trauma>
 
             var jobProtoId = LoadoutSystem.GetJobPrototype(job.ID);
             if (!ProtoMan.TryIndex<RoleLoadoutPrototype>(jobProtoId, out var jobProto))

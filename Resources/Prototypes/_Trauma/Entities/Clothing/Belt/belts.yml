@@ -190,3 +190,24 @@
     sprite: _Trauma/Clothing/Belt/ranchers_belt.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Belt/ranchers_belt.rsi
+
+- type: entity
+  parent: [ ClothingBeltStorageBase, BaseMinorContraband ]
+  id: ClothingBeltShankerBelt
+  name: improvised knife rig
+  description: Sewn together cloth meant to hold all kind of knifes.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Belt/shankers.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Belt/shankers.rsi
+  - type: Construction
+    graph: ClothingBeltShankerBelt
+    node: Shanker
+  - type: Storage
+    grid:
+    - 0,0,7,2
+    quickInsert: true
+    whitelist:
+      tags:
+      - Knife

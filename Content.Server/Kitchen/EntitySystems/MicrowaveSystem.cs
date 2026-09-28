@@ -397,7 +397,7 @@ namespace Content.Server.Kitchen.EntitySystems
 
         private void OnAnchorChanged(EntityUid uid, MicrowaveComponent component, ref AnchorStateChangedEvent args)
         {
-            if (!args.Anchored)
+            if (!args.Anchored && !TerminatingOrDeleted(uid)) // Trauma - dont try to empty it if it's deleting
                 _container.EmptyContainer(component.Storage);
         }
 

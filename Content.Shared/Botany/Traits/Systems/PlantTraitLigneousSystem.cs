@@ -41,13 +41,18 @@ public sealed partial class PlantTraitLigneousSystem : EntitySystem
         if (harvestToolQuality.HasValue && !_tool.HasQuality(args.Used, harvestToolQuality.Value))
             return;
 
-        _plantHarvest.TryHandleHarvest(ent.Owner, args.User);
+        _plantHarvest.TryHandleHarvest(ent.Owner, args.User,
+            tool: args.Used); // Trauma - pass the tool
         args.Handled = true;
     }
 
     [SubscribeLocalEvent(before: [typeof(PlantHarvestSystem)])]
     private void OnHarvestAttempt(Entity<PlantTraitLigneousComponent> ent, ref PlantHarvestAttemptEvent args)
     {
+        // <Trauma>
+        if (ent.Comp.HarvestToolQuality is not { } quality || args.Tool is { } tool && _tool.HasQuality(tool, quality))
+            return;
+        // </Trauma>
         _popup.PopupCursor(Loc.GetString("plant-component-ligneous-cant-harvest-message"), args.User);
         args.Cancelled = true;
     }

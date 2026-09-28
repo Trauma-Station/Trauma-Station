@@ -1,0 +1,54 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: bloodRune
+  id: CultRuneOffering
+  prototype: CultRuneOffering
+
+- type: bloodRune
+  id: CultRuneEmpower
+  prototype: CultRuneEmpower
+
+- type: bloodRune
+  id: CultRuneTeleport
+  prototype: CultRuneTeleport
+
+- type: bloodRune
+  id: CultRuneRevive
+  prototype: CultRuneRevive
+
+- type: bloodRune
+  id: CultRuneBarrier
+  prototype: CultRuneBarrier
+
+- type: bloodRune
+  id: CultRuneSummoning
+  prototype: CultRuneSummoning
+
+- type: bloodRune
+  id: CultRuneBloodBoil
+  prototype: CultRuneBloodBoil
+
+- type: bloodRune
+  id: CultRuneApocalypse
+  prototype: CultRuneApocalypse
+  unfinished: CultRuneUnfinishedLarge
+  drawTime: 40
+  size: 3
+  drawDamage:
+    types:
+      Slash: 20
+  areaLimited: true
+  limit: 1
+
+- type: bloodRune
+  id: CultRuneDimensionalRending
+  prototype: CultRuneDimensionalRending
+  unfinished: CultRuneUnfinishedLarge
+  drawTime: 40
+  size: 3
+  drawDamage:
+    types:
+      Slash: 50
+  areaLimited: true
+  requireTarget: true
+  limit: 1

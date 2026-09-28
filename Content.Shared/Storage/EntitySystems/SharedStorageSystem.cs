@@ -303,6 +303,10 @@ public abstract partial class SharedStorageSystem : EntitySystem
 
     private void OnBoundUIClosed(EntityUid uid, StorageComponent storageComp, BoundUIClosedEvent args)
     {
+        // <Trauma>
+        var ev = new StorageClosedEvent(uid);
+        RaiseLocalEvent(args.Actor, ref ev);
+        // </Trauma>
         CloseNestedInterfaces(uid, args.Actor, storageComp);
 
         // If UI is closed for everyone

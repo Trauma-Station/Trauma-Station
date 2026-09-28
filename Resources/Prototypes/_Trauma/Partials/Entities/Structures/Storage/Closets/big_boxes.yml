@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: BaseBigBox
+  components:
+  - type: JustABox
+
+- type: entity
+  id: StealthBox
+  components:
+  - type: CardboardBox
+    effectSound: /Audio/_Goobstation/Voice/surprised.ogg
+    quiet: false # false so custom logic can be used to control it

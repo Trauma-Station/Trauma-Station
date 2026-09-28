@@ -1,4 +1,5 @@
 // <Trauma>
+using Content.Trauma.Common.Blocking;
 using Content.Trauma.Common.Knowledge;
 // </Trauma>
 using Content.Shared.Blocking.Components;
@@ -45,6 +46,13 @@ public sealed partial class BlockingSystem
     {
         if (entity.Comp.BlockingItem is not { } item || !_blockQuery.TryComp(item, out var blocking))
             return;
+
+        // <Trauma>
+        var attemptEv = new BlockAttemptEvent(entity);
+        RaiseLocalEvent(item, ref attemptEv);
+        if (attemptEv.Cancelled)
+            return;
+        // </Trauma>
 
         if (args.Damage.GetTotal() <= 0)
             return;

@@ -154,7 +154,7 @@
   meltingPoint: 607
   metabolisms:
     Bloodstream:
-      metabolismRate: 0.4
+      metabolismRate: 0.5
       effects:
       - !type:AddComponents
         components:
@@ -162,15 +162,7 @@
         conditions:
         - !type:ReagentCondition
           reagent: Ageium
-          min: 20
-      - !type:RemoveComponents
-        components:
-        - type: Ageless
-        conditions:
-        - !type:ReagentCondition
-          reagent: Ageium
-          min: 0
-          max: 5
+          min: 5
 
 - type: reagent
   id: NanoProcessor

@@ -64,9 +64,10 @@
     state: egg-pet
   - type: Solution
     solution:
+      maxVol: 20
       reagents:
       - ReagentId: Ageium
-        Quantity: 50
+        Quantity: 20
   - type: TimedReplace
     entity: MobChickIxworth
 
@@ -237,16 +238,6 @@
       type: Add
 
 - type: entity
-  parent: BaseRanchingEgg
-  id: SeaEgg
-  suffix: Sea
-  components:
-  - type: Sprite
-    state: egg-sea
-  - type: TimedReplace
-    entity: MobChickSelkie
-
-- type: entity
   parent: BaseItem
   id: GoldenEgg
   name: golden chicken egg
@@ -326,7 +317,7 @@
     entity: MobChickOnagadori
 
 - type: entity
-  parent: BaseRanchingEgg
+  parent: [BaseRanchingEgg, BaseMagicalContraband]
   id: WizardEgg
   suffix: Wizard
   components:
@@ -334,6 +325,12 @@
     state: egg-wizard
   - type: TimedReplace
     entity: MobChickWizard
+  - type: EntityEffectOnEaten
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectWizardChickenPower
+      time: 60
+      type: Add
 
 - type: entity
   parent: BaseRanchingEgg
@@ -521,7 +518,7 @@
       type: Add
 
 - type: entity
-  parent: BaseRanchingEgg
+  parent: [BaseRanchingEgg, BaseMagicalContraband]
   id: PhoenixEgg
   suffix: Phoenix
   components:
@@ -541,7 +538,7 @@
       type: Add
 
 - type: entity
-  parent: BaseRanchingEgg
+  parent: [BaseRanchingEgg, BaseMagicalContraband]
   id: DragonEgg
   suffix: Dragon Chicken
   components:

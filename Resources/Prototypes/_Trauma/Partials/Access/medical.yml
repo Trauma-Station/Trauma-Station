@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: accessGroup
+  id: Medical
+  tags:
+  - Paramedic # lol upstream didnt add it

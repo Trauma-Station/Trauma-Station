@@ -16,3 +16,11 @@
   components:
   - type: Label
     localizedLabel: station-beacon-genetics
+
+- type: entity
+  parent: Holopad
+  id: HolopadEngineeringReactor
+  suffix: Reactor
+  components:
+  - type: Label
+    localizedLabel: station-beacon-reactor

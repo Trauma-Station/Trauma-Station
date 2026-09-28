@@ -13,14 +13,15 @@
     ResearchDirector: 10
     HeadOfSecurity: 15
     Warden: 5
-  # These can be drafted from players if they have the job at least set to low
   required:
     Captain: 1
-    StationEngineer: 3
-    MedicalDoctor: 2
-    HeadOfSecurity: 1
-    SecurityOfficer: 3
-    SalvageSpecialist: 2
+  # These can be drafted from players if they have the job at least set to low
+  # shitcode is unused and unmaintained upstream it won't be fixed...
+  #  StationEngineer: 3
+  #  MedicalDoctor: 2
+  #  HeadOfSecurity: 1
+  #  SecurityOfficer: 3
+  #  SalvageSpecialist: 2
 
 - type: jobWeight
   id: Reach

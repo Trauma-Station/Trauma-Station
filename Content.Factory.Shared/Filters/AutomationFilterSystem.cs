@@ -1,0 +1,558 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Construction.Components;
+using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Cuffs;
+using Content.Shared.Cuffs.Components;
+using Content.Shared.DeviceLinking;
+using Content.Shared.Examine;
+using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Interaction.Events;
+using Content.Shared.Item.ItemToggle;
+using Content.Shared.Labels.Components;
+using Content.Shared.Localizations;
+using Content.Shared.Materials;
+using Content.Shared.Mobs;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Popups;
+using Content.Shared.Stacks;
+
+namespace Content.Factory.Shared.Filters;
+
+public sealed partial class AutomationFilterSystem : EntitySystem
+{
+    [Dependency] private ItemSlotsSystem _slots = default!;
+    [Dependency] private ItemToggleSystem _toggle = default!;
+    [Dependency] private SharedCuffableSystem _cuffable = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedStackSystem _stack = default!;
+    [Dependency] private EntityQuery<AnchorableComponent> _anchorableQuery = default!;
+    [Dependency] private EntityQuery<CuffableComponent> _cuffableQuery = default!;
+    [Dependency] private EntityQuery<FilterSlotComponent> _slotQuery = default!;
+    [Dependency] private EntityQuery<ItemSlotsComponent> _slotsQuery = default!;
+    [Dependency] private EntityQuery<LabelComponent> _labelQuery = default!;
+    [Dependency] private EntityQuery<MaterialComponent> _materialQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobQuery = default!;
+    [Dependency] private EntityQuery<PhysicalCompositionComponent> _compositionQuery = default!;
+    [Dependency] private EntityQuery<StackComponent> _stackQuery = default!;
+
+    public static readonly int GateCount = Enum.GetValues(typeof(LogicGate)).Length;
+
+    private List<string> _materials = new(5);
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        Subs.BuiEvents<LabelFilterComponent>(FilterUiKey.Key, subs =>
+        {
+            subs.Event<LabelFilterSetLabelMessage>(OnLabelSet);
+        });
+
+        Subs.BuiEvents<NameFilterComponent>(FilterUiKey.Key, subs =>
+        {
+            subs.Event<NameFilterSetNameMessage>(OnNameSet);
+            subs.Event<NameFilterSetModeMessage>(OnNameSetMode);
+        });
+
+        Subs.BuiEvents<StackFilterComponent>(FilterUiKey.Key, subs =>
+        {
+            subs.Event<StackFilterSetMinMessage>(OnStackSetMin);
+            subs.Event<StackFilterSetSizeMessage>(OnStackSetSize);
+        });
+
+        Subs.BuiEvents<PressureFilterComponent>(FilterUiKey.Key, subs =>
+        {
+            subs.Event<PressureFilterSetMinMessage>(OnPressureSetMin);
+            subs.Event<PressureFilterSetMaxMessage>(OnPressureSetMax);
+        });
+        // OnPressureFilter is in server because atmos is serverside
+
+        Subs.BuiEvents<MobFilterComponent>(FilterUiKey.Key, subs =>
+        {
+            subs.Event<MobFilterToggleMessage>(OnMobToggle);
+        });
+
+        Subs.BuiEvents<MaterialFilterComponent>(FilterUiKey.Key, subs =>
+        {
+            subs.Event<MaterialFilterInvertMessage>(OnMaterialInvert);
+            subs.Event<MaterialFilterToggleMessage>(OnMaterialToggle);
+        });
+    }
+
+    [SubscribeLocalEvent]
+    private void OnExamined(Entity<AutomationFilterComponent> ent, ref ExaminedEvent args)
+    {
+        if (!args.IsInDetailsRange ||
+            _hands.GetActiveItem(args.Examiner) is not { } item ||
+            item == ent.Owner)
+            return;
+
+        var allowed = IsAllowed(ent, item);
+        var msg = new FormattedMessage();
+        msg.AddMarkupOrThrow("Your [bold]");
+        msg.AddText(Name(item));
+        msg.AddMarkupOrThrow("[/bold] ");
+        msg.AddMarkupOrThrow(allowed ? "[color=green]matches[/color]" : "[color=red]does not match[/color]");
+        msg.AddText(" this filter.");
+        args.PushMessage(msg, priority: 1);
+    }
+
+    /* Label filter */
+
+    private void OnLabelSet(Entity<LabelFilterComponent> ent, ref LabelFilterSetLabelMessage args)
+    {
+        var label = args.Label.Trim();
+        if (label.Length > ent.Comp.MaxLength)
+            return;
+
+        ent.Comp.Label = label;
+        Dirty(ent);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnLabelExamined(Entity<LabelFilterComponent> ent, ref ExaminedEvent args)
+    {
+        if (!args.IsInDetailsRange)
+            return;
+
+        if (string.IsNullOrEmpty(ent.Comp.Label))
+        {
+            args.PushMarkup(Loc.GetString("automation-filter-examine-empty"));
+            return;
+        }
+
+        args.PushText(Loc.GetString("automation-filter-examine-string", ("name", ent.Comp.Label)));
+    }
+
+    [SubscribeLocalEvent]
+    private void OnLabelFilter(Entity<LabelFilterComponent> ent, ref AutomationFilterEvent args)
+    {
+        args.Allowed = _labelQuery.CompOrNull(args.Item)?.CurrentLabel == ent.Comp.Label;
+        args.CouldAllow = true; // hand labelers can change the label
+    }
+
+    /* Name filter */
+
+    private void OnNameSet(Entity<NameFilterComponent> ent, ref NameFilterSetNameMessage args)
+    {
+        var name = args.Name.Trim();
+        if (name.Length > ent.Comp.MaxLength || ent.Comp.Name == name)
+            return;
+
+        ent.Comp.Name = name;
+        Dirty(ent);
+    }
+
+    private void OnNameSetMode(Entity<NameFilterComponent> ent, ref NameFilterSetModeMessage args)
+    {
+        if (ent.Comp.Mode == args.Mode)
+            return;
+
+        ent.Comp.Mode = args.Mode;
+        Dirty(ent);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnNameExamined(Entity<NameFilterComponent> ent, ref ExaminedEvent args)
+    {
+        if (!args.IsInDetailsRange)
+            return;
+
+        if (string.IsNullOrEmpty(ent.Comp.Name))
+        {
+            args.PushMarkup(Loc.GetString("automation-filter-examine-empty"));
+            return;
+        }
+
+        args.PushText(Loc.GetString("automation-filter-examine-string", ("name", ent.Comp.Name)));
+    }
+
+    [SubscribeLocalEvent]
+    private void OnNameFilter(Entity<NameFilterComponent> ent, ref AutomationFilterEvent args)
+    {
+        var name = Name(args.Item);
+        var check = ent.Comp.Name;
+        args.Allowed = ent.Comp.Mode switch
+        {
+            NameFilterMode.Contain => name.Contains(check),
+            NameFilterMode.Start => name.StartsWith(check),
+            NameFilterMode.End => name.EndsWith(check),
+            NameFilterMode.Match => name == check,
+            _ => false
+        };
+        // entity names usually don't change except for the end including a label
+        args.CouldAllow = ent.Comp.Mode switch
+        {
+            NameFilterMode.End | NameFilterMode.Match => true,
+            _ => false
+        };
+    }
+
+    /* Stack filter */
+
+    private void OnStackSetMin(Entity<StackFilterComponent> ent, ref StackFilterSetMinMessage args)
+    {
+        if (args.Min < 1 || ent.Comp.Min == args.Min)
+            return;
+
+        ent.Comp.Min = args.Min;
+        Dirty(ent);
+    }
+
+    private void OnStackSetSize(Entity<StackFilterComponent> ent, ref StackFilterSetSizeMessage args)
+    {
+        if (args.Size < 0 || ent.Comp.Size == args.Size)
+            return;
+
+        ent.Comp.Size = args.Size;
+        Dirty(ent);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnStackExamined(Entity<StackFilterComponent> ent, ref ExaminedEvent args)
+    {
+        if (!args.IsInDetailsRange)
+            return;
+
+        args.PushMarkup(Loc.GetString("stack-filter-examine", ("size", ent.Comp.Size)));
+    }
+
+    [SubscribeLocalEvent]
+    private void OnStackFilter(Entity<StackFilterComponent> ent, ref AutomationFilterEvent args)
+    {
+        args.Allowed = _stackQuery.CompOrNull(args.Item)?.Count >= ent.Comp.Min;
+        args.CouldAllow = true;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnStackSplit(Entity<StackFilterComponent> ent, ref AutomationFilterSplitEvent args)
+    {
+        args.Size = ent.Comp.Size;
+    }
+
+    /* Combined filter */
+
+    [SubscribeLocalEvent]
+    private void OnCombinedInit(Entity<CombinedFilterComponent> ent, ref ComponentInit args)
+    {
+        if (!_slotsQuery.TryComp(ent, out var slots))
+            return;
+
+        if (!_slots.TryGetSlot((ent, slots), CombinedFilterComponent.FilterAName, out var filterA) ||
+            !_slots.TryGetSlot((ent, slots), CombinedFilterComponent.FilterBName, out var filterB))
+        {
+            Log.Error($"{ToPrettyString(ent)} was missing filter slots!");
+            RemCompDeferred<CombinedFilterComponent>(ent);
+            return;
+        }
+
+        ent.Comp.FilterA = filterA;
+        ent.Comp.FilterB = filterB;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnCombinedUse(Entity<CombinedFilterComponent> ent, ref UseInHandEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        args.Handled = true;
+
+        var gate = (int) ent.Comp.Gate;
+        gate = ++gate % GateCount;
+        ent.Comp.Gate = (LogicGate) gate;
+        Dirty(ent);
+
+        var msg = Loc.GetString("logic-gate-cycle", ("gate", ent.Comp.Gate.ToString().ToUpper()));
+        _popup.PopupEntity(msg, ent, args.User);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnCombinedExamined(Entity<CombinedFilterComponent> ent, ref ExaminedEvent args)
+    {
+        if (!args.IsInDetailsRange)
+            return;
+
+        args.PushMarkup(Loc.GetString("combined-filter-examine", ("gate", ent.Comp.Gate.ToString().ToUpper())));
+    }
+
+    [SubscribeLocalEvent]
+    private void OnCombinedFilter(Entity<CombinedFilterComponent> ent, ref AutomationFilterEvent args)
+    {
+        var a = IsAllowed(ent.Comp.FilterA.Item, args.Item, out var couldAllowA);
+        var b = IsAllowed(ent.Comp.FilterB.Item, args.Item, out var couldAllowB);
+        args.Allowed = ent.Comp.Gate switch
+        {
+            LogicGate.Or => a || b,
+            LogicGate.And => a && b,
+            LogicGate.Xor => a != b,
+            LogicGate.Nor => !(a || b),
+            LogicGate.Nand => !(a && b),
+            LogicGate.Xnor => a == b,
+            _ => false
+        };
+        args.CouldAllow = couldAllowA || couldAllowB; // if any subfilter could allow it, this could allow it too
+    }
+
+    [SubscribeLocalEvent]
+    private void OnCombinedSplit(Entity<CombinedFilterComponent> ent, ref AutomationFilterSplitEvent args)
+    {
+        var a = GetSplitSize(ent.Comp.FilterA.Item);
+        var b = GetSplitSize(ent.Comp.FilterB.Item);
+        args.Size = Math.Max(a, b);
+    }
+
+    /* Pressure filter */
+
+    private void OnPressureSetMin(Entity<PressureFilterComponent> ent, ref PressureFilterSetMinMessage args)
+    {
+        var min = args.Min;
+        if (min == ent.Comp.Min || min > ent.Comp.Max || min < 0f)
+            return;
+
+        ent.Comp.Min = min;
+        Dirty(ent);
+    }
+
+    private void OnPressureSetMax(Entity<PressureFilterComponent> ent, ref PressureFilterSetMaxMessage args)
+    {
+        var max = args.Max;
+        if (max == ent.Comp.Max || max < ent.Comp.Min)
+            return;
+
+        ent.Comp.Max = max;
+        Dirty(ent);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnPressureExamined(Entity<PressureFilterComponent> ent, ref ExaminedEvent args)
+    {
+        if (!args.IsInDetailsRange)
+            return;
+
+        args.PushMarkup(Loc.GetString("pressure-filter-examine", ("min", ent.Comp.Min), ("max", ent.Comp.Max)));
+    }
+
+    /* Anchor filter */
+
+    [SubscribeLocalEvent]
+    private void OnAnchorFilter(Entity<AnchorFilterComponent> ent, ref AutomationFilterEvent args)
+    {
+        // only care about anchorable objects, not walls etc which aren't useful to filter
+        if (!_anchorableQuery.HasComp(args.Item))
+            return;
+
+        var setting = _toggle.IsActivated(ent.Owner);
+        args.Allowed = Transform(args.Item).Anchored == setting;
+        args.CouldAllow = true; // wrench
+    }
+
+    /* Mob filter */
+
+    private void OnMobToggle(Entity<MobFilterComponent> ent, ref MobFilterToggleMessage args)
+    {
+        // no chudding out
+        if (args is not { State: MobState.Alive or MobState.Dead or MobState.Critical or MobState.SoftCrit })
+            return;
+
+        if (!ent.Comp.States.Remove(args.State))
+            ent.Comp.States.Add(args.State);
+        Dirty(ent);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnMobFilter(Entity<MobFilterComponent> ent, ref AutomationFilterEvent args)
+    {
+        if (!_mobQuery.TryComp(args.Item, out var mob))
+            return;
+
+        args.Allowed = ent.Comp.States.Contains(mob.CurrentState);
+        args.CouldAllow = true; // dying and defibbing etc
+    }
+
+    [SubscribeLocalEvent]
+    private void OnMobExamined(Entity<MobFilterComponent> ent, ref ExaminedEvent args)
+    {
+        if (!args.IsInDetailsRange)
+            return;
+
+        args.PushMarkup(ent.Comp.States.Count == 0
+            ? Loc.GetString("mob-filter-examine-unset")
+            : Loc.GetString("mob-filter-examine-set", ("states", string.Join(", ", ent.Comp.States))));
+    }
+
+    /* Cuff filter */
+
+    [SubscribeLocalEvent]
+    private void OnCuffFilter(Entity<CuffFilterComponent> ent, ref AutomationFilterEvent args)
+    {
+        if (!_cuffableQuery.TryComp(args.Item, out var cuffable))
+            return;
+
+        var setting = _toggle.IsActivated(ent.Owner);
+        args.Allowed = _cuffable.IsCuffed((args.Item, cuffable)) == setting;
+        args.CouldAllow = true;
+    }
+
+    /* Material filter */
+
+    private void OnMaterialInvert(Entity<MaterialFilterComponent> ent, ref MaterialFilterInvertMessage args)
+    {
+        ent.Comp.Inverted ^= true;
+        DirtyField(ent, ent.Comp, nameof(MaterialFilterComponent.Inverted));
+    }
+
+    private void OnMaterialToggle(Entity<MaterialFilterComponent> ent, ref MaterialFilterToggleMessage args)
+    {
+        if (!ProtoMan.HasIndex(args.Material))
+            return;
+
+        if (!ent.Comp.Whitelist.Add(args.Material))
+            ent.Comp.Whitelist.Remove(args.Material);
+
+        DirtyField(ent, ent.Comp, nameof(MaterialFilterComponent.Whitelist));
+    }
+
+    [SubscribeLocalEvent]
+    private void OnMaterialFilter(Entity<MaterialFilterComponent> ent, ref AutomationFilterEvent args)
+    {
+        if (!_materialQuery.HasComp(args.Item) ||
+            !_compositionQuery.TryComp(args.Item, out var comp))
+        {
+            args.Allowed = ent.Comp.Inverted;
+            return;
+        }
+
+        // empty acts as every material to be easier to use.
+        var matched = ent.Comp.Whitelist.Count == 0;
+        foreach (var material in comp.MaterialComposition.Keys) // it's assumed that nobody will use material: 0
+        {
+            if (matched)
+                break;
+            matched = ent.Comp.Whitelist.Contains(material);
+        }
+        args.Allowed = matched ^ ent.Comp.Inverted;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnMaterialExamined(Entity<MaterialFilterComponent> ent, ref ExaminedEvent args)
+    {
+        if (!args.IsInDetailsRange)
+            return;
+
+        var mode = ent.Comp.Inverted ? "[color=red]deny[/color]" : "[color=green]allow[/color]";
+        var msg = new FormattedMessage();
+        msg.AddMarkupOrThrow($"It's set to {mode} ");
+        if (ent.Comp.Whitelist.Count == 0)
+        {
+            msg.AddText("all materials.");
+        }
+        else if (ent.Comp.Whitelist.Count > 5)
+        {
+            msg.AddText($"{ent.Comp.Whitelist.Count} materials.");
+        }
+        else
+        {
+            _materials.Clear();
+            foreach (var id in ent.Comp.Whitelist)
+            {
+                _materials.Add(Loc.GetString(ProtoMan.Index(id).Name));
+            }
+            msg.AddText(ContentLocalizationManager.FormatList(_materials));
+        }
+        args.PushMessage(msg);
+    }
+
+    /* Filter slot */
+
+    [SubscribeLocalEvent]
+    private void OnSlotInit(Entity<FilterSlotComponent> ent, ref ComponentInit args)
+    {
+        if (!_slotsQuery.TryComp(ent, out var slots))
+            return; // hopefully this is the add all comps test...
+
+        if (!_slots.TryGetSlot((ent, slots), ent.Comp.FilterSlotId, out var filterSlot))
+        {
+            Log.Error($"Missing filter slot {ent.Comp.FilterSlotId} on {ToPrettyString(ent)}");
+            RemCompDeferred<FilterSlotComponent>(ent);
+            return;
+        }
+
+        ent.Comp.FilterSlot = filterSlot;
+    }
+
+    #region Public API
+    /// <summary>
+    /// Returns true if an item is allowed by the filter, false if it's blocked.
+    /// If there is no filter, items are always allowed.
+    /// </summary>
+    public bool IsAllowed(EntityUid? filter, EntityUid item, out bool couldAllow)
+    {
+        couldAllow = false;
+        if (filter is not {} uid)
+            return true;
+
+        var ev = new AutomationFilterEvent(item);
+        RaiseLocalEvent(uid, ref ev);
+        couldAllow = ev.CouldAllow;
+        return ev.Allowed;
+    }
+
+    public bool IsAllowed(EntityUid? filter, EntityUid item) => IsAllowed(filter, item, out _);
+
+    /// <summary>
+    /// Inverse of <see cref="IsAllowed"/>.
+    /// </summary>
+    public bool IsBlocked(EntityUid? filter, EntityUid item, out bool couldAllow) => !IsAllowed(filter, item, out couldAllow);
+
+    public bool IsBlocked(EntityUid? filter, EntityUid item) => IsBlocked(filter, item, out _);
+
+    /// <summary>
+    /// Returns true if an item can never be allowed by a filter, even if some data about it changes.
+    /// </summary>
+    public bool IsAlwaysBlocked(EntityUid? filter, EntityUid item) => IsBlocked(filter, item, out var couldAllow) && !couldAllow;
+
+    /// <summary>
+    /// Gets the split size for a filter.
+    /// If non-zero then the pulled item is split into a multiple of the return value.
+    /// If zero then nothing special is done.
+    /// </summary>
+    public int GetSplitSize(EntityUid? filter)
+    {
+        if (filter is not {} uid)
+            return 0;
+
+        var ev = new AutomationFilterSplitEvent();
+        RaiseLocalEvent(uid, ref ev);
+        return ev.Size;
+    }
+
+    public EntityUid? TrySplit(EntityUid? filter, EntityUid item)
+    {
+        // if it's 0 don't need to split, take the item out directly
+        var split = GetSplitSize(filter);
+        if (split == 0)
+            return item;
+
+        // don't need to split if it's already a multiple of the split size
+        var stack = _stackQuery.Comp(item);
+        var excess = stack.Count % split;
+        if (excess == 0)
+            return item;
+
+        // have to split it, client will return null here
+        var coords = Transform(item).Coordinates;
+        return _stack.Split((item, stack), stack.Count - excess, coords);
+    }
+
+    /// <summary>
+    /// Get the filter in a machine's filter slot, or null if it has none.
+    /// </summary>
+    public EntityUid? GetSlot(EntityUid uid)
+    {
+        return _slotQuery.CompOrNull(uid)?.Filter;
+    }
+    #endregion
+}
