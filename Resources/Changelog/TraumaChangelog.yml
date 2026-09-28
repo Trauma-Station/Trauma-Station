@@ -15173,3 +15173,10 @@ Entries:
   id: 1649
   time: '2026-09-28T06:59:44.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4781
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed blood cult leader and constructs having 2 prepare spell actions.
+  id: 1650
+  time: '2026-09-28T08:19:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4784
