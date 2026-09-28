@@ -250,14 +250,14 @@
     price: 5000
 
 - type: entity
-  parent: WaterBalloonBase
+  parent: BaseRanchingEgg
   id: ClownEgg
   name: egg?
   suffix: Clown
   description: doesn't look very eggy to me.
   components:
   - type: Sprite
-    state: egg-honk'
+    state: egg-honk
   - type: EntityEffectOnEaten
     effects:
     - !type:PopupMessage
