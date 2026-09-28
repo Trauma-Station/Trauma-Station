@@ -15224,3 +15224,10 @@ Entries:
   id: 1654
   time: '2026-09-28T11:53:53.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4791
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Reverted shitty chat update from hardlight
+  id: 1655
+  time: '2026-09-28T21:23:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4798
