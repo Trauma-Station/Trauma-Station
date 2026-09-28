@@ -1,3 +1,5 @@
-﻿- type: entity
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
   id: BookSpaceLaw
   name: corporate law
