@@ -104,8 +104,7 @@ public sealed partial class TextLinkTag : IMarkupTagHandler
             linkLabel.FontOverride = boldFont;
         }
 
-        // Must be runnable from a pre-connected context!
-        _chat ??= _entity.SystemOrNull<SharedChatSystem>();
+        _chat ??= _entity.System<SharedChatSystem>();
         linkLabel.UpdateLabelProperties(_chat);
 
         control = linkLabel;
