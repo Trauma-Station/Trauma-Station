@@ -49,7 +49,7 @@ public abstract partial class AntagSelectionSystem
     public void ForceMakeAntag(ICommonSession player, [ForbidLiteral] EntProtoId defaultRule, [ForbidLiteral] CompName comp)
     {
         if (ForceGetGameRuleEnt(defaultRule, comp) is not { } rule ||
-            TryAssignNextAvailableAntag(rule, player) ||
+            TryAssignNextAvailableAntag(rule, player, checkPref: false) ||
             rule.Comp.Antags.LastOrDefault() is not { } antag ||
             !ProtoMan.Resolve(antag.Proto, out var proto))
             return;
