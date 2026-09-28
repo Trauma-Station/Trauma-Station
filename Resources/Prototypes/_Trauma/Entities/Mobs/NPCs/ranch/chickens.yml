@@ -861,6 +861,8 @@
       collection: BikeHorn
       params:
         variation: 0.125
+  - type: NoSlip
+
 
 - type: entity
   parent: [ BaseChickenClown, BaseMobChickRanch ]
@@ -899,7 +901,7 @@
     - FootstepSound
 
 - type: entity
-  parent: [ BaseChickenClown, BaseMobRoosterRanch ]
+  parent: [ BaseChickenClown, BaseMobRangedRoosterRanch ]
   id: MobClownRooster
   name: henkster
   components:
@@ -914,11 +916,44 @@
   - type: Tag
     tags:
     - FootstepSound
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 1
+  - type: BasicEntityAmmoProvider
+    proto: FoodPieBananaCream
+    capacity: 1
+    count: 1
+  - type: Gun
+    projectileSpeed: 25
+    fireRate: 0.2
+    useKey: false
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/Effects/thunk.ogg
 
 # Cluwne
 
 - type: entity
-  parent: BaseMobChickRanch
+  id: BaseChickenCluwne
+  components:
+  - type: FootstepModifier
+    footstepSoundCollection:
+      collection: FootstepClown
+  - type: SpamEmitSound
+    minInterval: 2
+    maxInterval: 12
+    sound:
+      collection: CluwneHorn
+      params:
+        variation: 0.125
+  - type: SpawnLootOnDeath
+    deleteOnDeath: false
+    table:
+      id: TrashBananaPeel
+  - type: NoSlip
+
+- type: entity
+  parent: [ BaseMobChickRanch, BaseChickenCluwne ]
   id: MobChickCluwne
   name: huOnkHoNkHoeNKs
   components:
@@ -928,31 +963,54 @@
     entToSpawn:
     - MobCluwneHen
     - MobCluwneRooster
+  - type: Tag
+    tags:
+    - FootstepSound
   - type: FavoriteFood
     tag:
     - Banana
 
 - type: entity
-  parent: BaseMobHenRanch
+  parent: [ BaseMobHenRanch, BaseChickenCluwne ]
   id: MobCluwneHen
   name: huOnkHoNkHoeNKs
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Ranch/chicken-cluwne.rsi
+  - type: Tag
+    tags:
+    - FootstepSound
   - type: FavoriteFood
     tag:
     - Banana
 
 - type: entity
-  parent: BaseMobRoosterRanch
+  parent: [ BaseMobRangedRoosterRanch, BaseChickenCluwne ]
   id: MobCluwneRooster
   name: huOnkHoNkHoeNKs
   components:
   - type: Sprite
     sprite: _Trauma/Mobs/Ranch/chicken-cluwne.rsi
+  - type: Tag
+    tags:
+    - FootstepSound
   - type: FavoriteFood
     tag:
     - Banana
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 1
+  - type: BasicEntityAmmoProvider
+    proto: TrashBananaPeel
+    capacity: 1
+    count: 1
+  - type: Gun
+    projectileSpeed: 15
+    fireRate: 0.2
+    useKey: false
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot: /Audio/Voice/Cluwne/cluwnelaugh1.ogg
 
 # Glass chicken
 
@@ -1262,7 +1320,17 @@
 # Mime Chicken
 
 - type: entity
-  parent: BaseMobChickRanch
+  id: BaseChickenMime
+  components:
+  - type: SpawnLootOnDeath
+    deleteOnDeath: false
+    table:
+      id: TrashMimanaPeel
+  - type: NoSlip
+
+
+- type: entity
+  parent: [ BaseMobChickRanch, BaseChickenMime]
   id: MobChickMime
   name: mime chick
   components:
@@ -1277,7 +1345,7 @@
     - Mimana
 
 - type: entity
-  parent: BaseMobHenRanch
+  parent: [ BaseMobHenRanch, BaseChickenMime]
   id: MobMimeHen
   name: mime hen
   components:
@@ -1288,7 +1356,7 @@
     - Mimana
 
 - type: entity
-  parent: BaseMobRoosterRanch
+  parent: [ BaseMobRoosterRanch, BaseChickenMime]
   id: MobMimeRooster
   name: mime rooster
   components:
@@ -1721,7 +1789,8 @@
     capacity: 1
     count: 1
   - type: Gun
-    fireRate: 0.1
+    projectileSpeed: 5
+    fireRate: 0.05
     useKey: false
     selectedMode: SemiAuto
     availableModes:
