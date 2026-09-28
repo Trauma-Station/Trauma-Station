@@ -15200,3 +15200,20 @@ Entries:
   id: 1652
   time: '2026-09-28T11:27:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4789
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed only being able to use shadow shackles once instead of 4 times.
+  - type: Tweak
+    message: Shadow shackles now needs you to stun someone first.
+  - type: Remove
+    message: >-
+      Removed summon combat equipment, it made the cult forge obsolete and was
+      way too strong.
+  - type: Tweak
+    message: Cult bolas can be made in the cult altar.
+  - type: Tweak
+    message: Cult longswords can be made in the daemon forge.
+  id: 1653
+  time: '2026-09-28T11:39:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4790
