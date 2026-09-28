@@ -37,13 +37,6 @@
 
 - type: guideEntry
   id: Wizard
-  name: guide-entry-wizard
-  text: "/ServerInfo/_Goobstation/Guidebook/Antagonist/Wizard.xml"
-  children:
-  - WizardSpells
-
-- type: guideEntry
-  id: Wizard
   text: "/ServerInfo/_Goobstation/Guidebook/Antagonist/Wizard.xml"
   children:
   - WizardSpells
