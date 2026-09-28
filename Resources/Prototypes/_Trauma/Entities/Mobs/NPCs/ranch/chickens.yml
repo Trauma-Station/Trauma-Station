@@ -1330,7 +1330,7 @@
 
 
 - type: entity
-  parent: [ BaseMobChickRanch, BaseChickenMime]
+  parent: [ BaseMobChickRanch, BaseChickenMime ]
   id: MobChickMime
   name: mime chick
   components:
@@ -1345,7 +1345,7 @@
     - Mimana
 
 - type: entity
-  parent: [ BaseMobHenRanch, BaseChickenMime]
+  parent: [ BaseMobHenRanch, BaseChickenMime ]
   id: MobMimeHen
   name: mime hen
   components:
@@ -1356,7 +1356,7 @@
     - Mimana
 
 - type: entity
-  parent: [ BaseMobRoosterRanch, BaseChickenMime]
+  parent: [ BaseMobRoosterRanch, BaseChickenMime ]
   id: MobMimeRooster
   name: mime rooster
   components:
