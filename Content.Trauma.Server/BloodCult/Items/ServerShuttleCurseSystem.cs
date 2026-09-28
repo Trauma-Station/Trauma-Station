@@ -5,6 +5,7 @@ using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Popups;
+using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Items;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Random;
@@ -19,7 +20,7 @@ public sealed partial class ServerShuttleCurseSystem : ShuttleCurseSystem
     [Dependency] private RoundEndSystem _roundEnd = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
 
-    protected override void DelayShuttle(Entity<ShuttleCurseComponent> ent, Entity<ShuttleCurseProviderComponent> provider, EntityUid user)
+    protected override void DelayShuttle(Entity<ShuttleCurseComponent> ent, Entity<BloodCultRuleComponent> rule, EntityUid user)
     {
         if (_evac.EmergencyShuttleArrived)
         {
@@ -44,9 +45,8 @@ public sealed partial class ServerShuttleCurseSystem : ShuttleCurseSystem
             Loc.GetString("shuttle-curse-system-failure"),
             colorOverride: Color.Gold);
 
-        Popup.PopupEntity(Loc.GetString("shuttle-curse-success"), user, user, PopupType.Large);
-        provider.Comp.CurrentUses++;
-        Dirty(provider);
+        rule.Comp.ShuttleDelays--;
+        DirtyField(rule, rule.Comp, nameof(BloodCultRuleComponent.ShuttleDelays));
 
         _audio.PlayPvs(ent.Comp.ScatterSound, Transform(ent).Coordinates);
         Del(ent);

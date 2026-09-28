@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.GameTicking;
+using Content.Shared.GameTicking;
 using Content.Trauma.Common.StationEvents;
 
 namespace Content.Trauma.Server.StationEvents;
@@ -9,13 +9,7 @@ public sealed partial class RuleSchedulerLimitSystem : EntitySystem
 {
     [Dependency] private GameTicker _ticker = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<RuleSchedulerLimitComponent, RuleScheduledEvent>(OnRuleScheduled);
-    }
-
+    [SubscribeLocalEvent]
     private void OnRuleScheduled(Entity<RuleSchedulerLimitComponent> ent, ref RuleScheduledEvent args)
     {
         ent.Comp.Count++;

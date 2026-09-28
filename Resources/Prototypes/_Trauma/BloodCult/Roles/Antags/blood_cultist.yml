@@ -11,8 +11,9 @@
     time: 2h
 
 - type: antagSpecifier
+  abstract: true
   parent: RestrictedAntag
-  id: BloodCultist
+  id: BaseBloodCult
   jobBlacklist: [ Chaplain ]
   briefing:
     text: blood-cult-role-greeting
@@ -20,12 +21,22 @@
     sound: "/Audio/_Trauma/BloodCult/blood_cult_greeting.ogg"
   startingGear: BloodCultistGear
   prefRoles: [ BloodCultist ]
+
+- type: antagSpecifier
+  parent: BaseBloodCult
+  id: BloodCultist
   mindRoles: [ MindRoleBloodCultist ]
 
 - type: antagSpecifier
-  parent: BloodCultist
+  parent: BaseBloodCult
   id: BloodCultLeader
   mindRoles: [ MindRoleBloodCultLeader ]
+
+- type: antagSpecifier
+  parent: BaseBloodCult
+  id: BloodCultConstruct
+  startingGear: null
+  mindRoles: [ MindRoleBloodCultConstruct ]
 
 - type: startingGear
   id: BloodCultistGear

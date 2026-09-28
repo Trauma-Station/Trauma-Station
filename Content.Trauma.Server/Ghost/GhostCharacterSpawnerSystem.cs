@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Antag;
 using Content.Server.Ghost.Roles;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Preferences.Managers;
-using Content.Server.Station.Systems;
+using Content.Shared.Antag;
 using Content.Shared.Ghost;
 using Content.Shared.Preferences;
+using Content.Shared.Station.Systems;
 using Content.Trauma.Shared.Ghost;
 using Robust.Shared.Map;
 

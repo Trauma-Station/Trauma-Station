@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Trauma.Server.StationEvents.Components;
-using Content.Server.Antag;
 using Content.Server.StationEvents.Components;
 using Content.Server.StationEvents.Events;
+using Content.Shared.Antag;
 using Content.Shared.GameTicking.Components;
 using Robust.Shared.Map;
 
@@ -24,7 +24,7 @@ public sealed partial class VentSpawnRule : StationEventSystem<VentSpawnRuleComp
     {
         var comp = Comp<GameRuleComponent>(args.GameRule);
 
-        if (GetRandomStationGrids() is not { } stationGrids)
+        if (Station.GetRandomStationGrids() is not { } stationGrids)
         {
             ForceEndSelf(ent, comp);
             return;

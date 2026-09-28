@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: ClothingOuterHardsuitBase
+  parent: [ ClothingOuterHardsuitBase, BaseBloodContraband ]
   id: ClothingOuterCultArmor
   name: true nar'sien hardened armor
   description: heavily-armored exosuit worn by warriors of the Nar'Sien cult. It can withstand hard vacuum.
@@ -22,6 +22,7 @@
         Blunt: 0.5
         Slash: 0.6
         Piercing: 0.6
+        Ballistic: 0.5
         Heat: 0.7
         Caustic: 0.2
         Radiation: 0.2
@@ -35,7 +36,7 @@
   - type: CultItem
 
 - type: entity
-  parent: ClothingHeadHardsuitBase
+  parent: [ ClothingHeadHardsuitBase, BaseBloodContraband ]
   id: ClothingHeadHelmetCultArmor
   categories: [ HideSpawnMenu ]
   name: true nar'sien hardened helmet
@@ -56,7 +57,7 @@
     coefficient: 0.001
 
 - type: entity
-  parent: ClothingOuterRobesCult
+  parent: [ ClothingOuterRobesCult, BaseBloodContraband ]
   id: ClothingOuterRobesCultTrue
   name: flagellant's robe
   description: Blood-soaked robes infused with dark magic; allows the user to move at inhuman speeds, but at the cost of increased damage.
@@ -70,11 +71,12 @@
     walkModifier: 1.25
     sprintModifier: 1.25
   - type: Armor
-    modifiers:
+    modifiers: &flagellant_modifiers
       coefficients:
         Blunt: 1.4
         Slash: 1.4
         Piercing: 1.4
+        Ballistic: 1.4
         Heat: 1.4
   - type: ToggleableClothing
     clothingPrototypes:
@@ -84,7 +86,7 @@
       toggleable-clothing: !type:Container
 
 - type: entity
-  parent: ClothingHeadHatHoodCulthood
+  parent: [ ClothingHeadHatHoodCulthood, BaseBloodContraband ]
   id: ClothingHeadHatHoodCultHoodTrue
   name: flagellant's hood
   description: A blood-soaked hood infused with dark magic.
@@ -100,12 +102,9 @@
     walkModifier: 1.25
     sprintModifier: 1.25
   - type: Armor
-    modifiers:
-      coefficients:
-        Blunt: 1.4
-        Slash: 1.4
-        Piercing: 1.4
-        Heat: 1.4
+    coverage:
+    - Head
+    modifiers: *flagellant_modifiers
 
 - type: entity
   parent: ClothingEyesBase

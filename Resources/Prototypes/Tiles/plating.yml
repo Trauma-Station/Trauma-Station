@@ -9,6 +9,8 @@
   deconstructTimeMultiplier: 5 # Goobstation
   footstepSounds:
     collection: FootstepPlating
+  materialComposition:
+    Steel: 75 # 0.75 sheets; 0.5 for the lattice, 0.25 for the tile
   baseTurf: Lattice
   baseWhitelist:
     - TrainLattice
@@ -84,11 +86,10 @@
 - type: tile
   id: Lattice
   name: tiles-lattice
-  sprite: /Textures/_Trauma/Tiles/lattice.png # Trauma
+  sprite: /Textures/Tiles/lattice.png
   baseTurf: Space
   isSubfloor: true
   deconstructTools: [ Cutting ]
-  deconstructTimeMultiplier: 1 # Goobstation
   weather: true
   footstepSounds:
     collection: FootstepCatwalk
@@ -97,11 +98,6 @@
   itemDrop: PartRodMetal1
   heatCapacity: 10000
   mass: 200
-
-- type: tile
-  id: TrainLattice
-  parent: Lattice
-  name: tiles-lattice-train
-  sprite: /Textures/Tiles/latticeTrain.png
-  footstepSounds:
-    collection: FootstepPlating
+  variants: 3
+  materialComposition:
+    Steel: 50 # 0.5 sheets = 1 rod

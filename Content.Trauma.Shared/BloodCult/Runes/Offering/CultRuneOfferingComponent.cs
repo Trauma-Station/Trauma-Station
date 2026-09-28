@@ -26,12 +26,6 @@ public sealed partial class CultRuneOfferingComponent : Component
     public int AliveSacrificeInvokersAmount = 3;
 
     /// <summary>
-    ///     The amount of charges revive rune system should recieve on sacrifice/convert.
-    /// </summary>
-    [DataField]
-    public int ReviveChargesPerOffering = 1;
-
-    /// <summary>
     /// Damage done to the target after converting them.
     /// Values must be negative to heal.
     /// </summary>

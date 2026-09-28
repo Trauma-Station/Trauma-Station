@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.CCVar;
-using Content.Server.GameTicking;
+using Content.Shared.GameTicking;
 using Content.Shared.Ghost.Components;
 using Content.Trauma.Common.LinkAccount;
 using Content.Trauma.Shared.GhostColor;
@@ -66,7 +66,7 @@ public sealed partial class LinkAccountSystem : EntitySystem
             _nextLobbyMessageTime = _timing.RealTime + _lobbyMessageInitialDelay;
     }
 
-    private void OnRoundEndTextAppend(RoundEndTextAppendEvent ev)
+    private void OnRoundEndTextAppend(ref RoundEndTextAppendEvent ev)
     {
         if (_nextNTShoutout != null)
         {

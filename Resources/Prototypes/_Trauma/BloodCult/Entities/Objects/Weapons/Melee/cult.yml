@@ -22,7 +22,7 @@
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item
-    size: Normal
+    size: Huge
   - type: Clothing
     slots:
     - back

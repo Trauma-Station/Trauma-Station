@@ -97,9 +97,6 @@ public sealed partial class IngestionSystem : EntitySystem
         SubscribeLocalEvent<EdibleComponent, AttemptShakeEvent>(OnAttemptShake);
         SubscribeLocalEvent<EdibleComponent, BeforeToolRefinedEvent>(OnBeforeToolRefined);
 
-        // Actions
-        SubscribeLocalEvent<ActionRequireMouthUncoveredComponent, ActionAttemptEvent>(OnMouthUncoveredActionAttempt);
-
         InitializeBlockers();
         InitializeUtensils();
     }
@@ -550,12 +547,6 @@ public sealed partial class IngestionSystem : EntitySystem
     private void OnAttemptShake(Entity<EdibleComponent> entity, ref AttemptShakeEvent args)
     {
         if (IsEmpty(entity))
-            args.Cancelled = true;
-    }
-
-    private void OnMouthUncoveredActionAttempt(Entity<ActionRequireMouthUncoveredComponent> ent, ref ActionAttemptEvent args)
-    {
-        if (!HasMouthAvailable(args.User, ent.Comp.Slots))
             args.Cancelled = true;
     }
 }

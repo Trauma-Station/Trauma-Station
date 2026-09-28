@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.ActionBlocker;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles;
@@ -12,6 +13,7 @@ namespace Content.Trauma.Shared.BloodCult;
 
 public abstract partial class BloodCultSystem : EntitySystem
 {
+    [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedPvsOverrideSystem _pvsOverride = default!;
     [Dependency] private SharedRoleSystem _role = default!;
@@ -88,16 +90,21 @@ public abstract partial class BloodCultSystem : EntitySystem
     public EntityUid? GetTarget(EntityUid member)
         => GetRule(member)?.Comp.OfferingTarget;
 
-    public bool IsTarget(EntityUid member, EntityUid target)
-        => GetTarget(member) == target;
-
     /// <summary>
     /// Returns true if a cult's target was sacraficed.
     /// </summary>
     public bool TargetKilled(EntityUid member)
         => GetRule(member)?.Comp.TargetSacrificed ?? false;
 
-    public virtual void Convert(EntityUid member, EntityUid target)
+    public virtual void Convert(EntityUid rule, EntityUid target)
+    {
+    }
+
+    public virtual void ConvertConstruct(EntityUid rule, EntityUid target)
+    {
+    }
+
+    public virtual void DeconvertConstruct(EntityUid target)
     {
     }
 
@@ -110,7 +117,8 @@ public abstract partial class BloodCultSystem : EntitySystem
         var pos = Transform(rune).Coordinates;
         _cultists.Clear();
         _lookup.GetEntitiesInRange(pos, range, _cultists);
-        _cultists.RemoveWhere(uid => !_actorQuery.HasComp(uid));
+        // have to be awake and able to speak to invoke a rune
+        _cultists.RemoveWhere(uid => !_actorQuery.HasComp(uid) || !_blocker.CanConsciouslyPerformAction(uid) || !_blocker.CanSpeak(uid));
         return _cultists;
     }
 
@@ -132,6 +140,12 @@ public abstract partial class BloodCultSystem : EntitySystem
     /// </summary>
     public void SetCultRule(EntityUid mob, EntityUid rule)
     {
+        if (!_ruleQuery.TryComp(rule, out var ruleComp))
+        {
+            Log.Error($"Tried to set cult rule of {ToPrettyString(mob)} to bad entity {ToPrettyString(rule)}");
+            return;
+        }
+
         var comp = EnsureComp<BloodCultMemberComponent>(mob);
         comp.Rule = rule;
         Dirty(mob, comp);
@@ -143,6 +157,9 @@ public abstract partial class BloodCultSystem : EntitySystem
             role.Comp.Rule = rule;
             Dirty(role);
         }
+
+        var ev = new CultAssignedEvent((rule, ruleComp));
+        RaiseLocalEvent(mob, ref ev);
     }
 
     /// <summary>
@@ -158,3 +175,9 @@ public abstract partial class BloodCultSystem : EntitySystem
         Dirty(dest, dest.Comp);
     }
 }
+
+/// <summary>
+/// Raised on an entity after its cult gamerule is set.
+/// </summary>
+[ByRefEvent]
+public record struct CultAssignedEvent(Entity<BloodCultRuleComponent> Rule);

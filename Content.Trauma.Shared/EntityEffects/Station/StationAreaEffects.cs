@@ -3,8 +3,8 @@
 using Content.Shared.EntityEffects;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
-using Content.Shared.Station;
 using Content.Shared.Station.Components;
+using Content.Shared.Station.Systems;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Shared.EntityEffects.Station;
@@ -44,7 +44,7 @@ public sealed partial class StationAreaEffectsSystem : EntityEffectSystem<Statio
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private StationSystem _station = default!;
     [Dependency] private TurfSystem _turf = default!;
 
     private List<EntityUid> _areas = new();

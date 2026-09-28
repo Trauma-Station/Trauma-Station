@@ -12,7 +12,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         <Button Name="SaveButton" Text="{Loc 'genetics-console-save-enzymes'}" Margin="4" Disabled="True"/>
     </BoxContainer>
 
-    <controls:HLine Color="#222" Margin="10" Thickness="2" HorizontalExpand="True"/>
+    <controls:Separator ColorOverride="#222" Margin="10" HorizontalExpand="True"/>
 
     <controls:NanoHeading Text="{Loc 'genetics-console-disk-enzymes'}"/>
     <BoxContainer Orientation="Horizontal" Align="Center">

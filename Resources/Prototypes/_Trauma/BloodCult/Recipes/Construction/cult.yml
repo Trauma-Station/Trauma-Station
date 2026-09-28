@@ -9,6 +9,9 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  entityWhitelist: # if skills are disabled, prevents randoms making cult shit
+    components:
+    - BloodCultist
   theory:
     EldritchKnowledge: 5
 

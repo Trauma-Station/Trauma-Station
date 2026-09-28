@@ -13,11 +13,13 @@ namespace Content.Trauma.Shared.BloodCult.Constructs.Shell;
 
 public sealed partial class ConstructShellSystem : EntitySystem
 {
+    [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private ItemSlotsSystem _slots = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private EntityQuery<SoulShardComponent> _shardQuery = default!;
 
     [SubscribeLocalEvent]
     private void OnGetVerbs(Entity<ConstructShellComponent> ent, ref GetVerbsEvent<ExamineVerb> args)
@@ -34,7 +36,7 @@ public sealed partial class ConstructShellSystem : EntitySystem
         {
             if (_slots.GetItemOrNull(shell, ent.Comp.ShardSlotId) is not { } shard ||
                 shard != user ||
-                !TryComp<SoulShardComponent>(shard, out var shardComp))
+                !_shardQuery.TryComp(shard, out var shardComp))
                 return;
 
             blessed = shardComp.IsBlessed;
@@ -65,10 +67,9 @@ public sealed partial class ConstructShellSystem : EntitySystem
     private void OnInsertAttempt(Entity<ConstructShellComponent> ent, ref ItemSlotInsertAttemptEvent args)
     {
         var item = args.Item;
-        var shell = ent.Owner;
-        if (args.Slot.ID != ent.Comp.ShardSlotId ||
-            !TryComp(item, out SoulShardComponent? soulShard) ||
-            _ui.IsUiOpen(shell, RadialSelectorUiKey.Key))
+        var (uid, comp) = ent;
+        if (args.Slot.ID != comp.ShardSlotId ||
+            !_shardQuery.TryComp(item, out var soulShard))
         {
             args.Cancelled = true;
             return;
@@ -76,17 +77,28 @@ public sealed partial class ConstructShellSystem : EntitySystem
 
         if (!TryComp<MindContainerComponent>(item, out var mindContainer) || !mindContainer.HasMind)
         {
-            _popup.PopupEntity("The shard has no soul.", ent, args.User);
+            _popup.PopupEntity("The shard has no soul.", uid, args.User);
             args.Cancelled = true;
             return;
         }
+    }
 
-        _slots.SetLock(shell, ent.Comp.ShardSlotId, true);
-        _ui.SetUiState(shell,
+    [SubscribeLocalEvent]
+    private void OnInserted(Entity<ConstructShellComponent> ent, ref EntInsertedIntoContainerMessage args)
+    {
+        var item = args.Entity;
+        var (uid, comp) = ent;
+        if (args.Container.ID != comp.ShardSlotId ||
+            !_shardQuery.TryComp(item, out var soulShard) ||
+            _ui.IsUiOpen(uid, RadialSelectorUiKey.Key))
+            return;
+
+        _slots.SetLock(uid, comp.ShardSlotId, true);
+        _ui.SetUiState(uid,
             RadialSelectorUiKey.Key,
-            new RadialSelectorState(soulShard.IsBlessed ? ent.Comp.PurifiedConstructs : ent.Comp.Constructs));
+            new RadialSelectorState(soulShard.IsBlessed ? comp.PurifiedConstructs : comp.Constructs));
 
-        _ui.TryToggleUi(shell, RadialSelectorUiKey.Key, item);
+        _ui.TryToggleUi(uid, RadialSelectorUiKey.Key, item);
     }
 
     [SubscribeLocalEvent]
@@ -98,6 +110,7 @@ public sealed partial class ConstructShellSystem : EntitySystem
         _ui.CloseUi(shell.Owner, RadialSelectorUiKey.Key);
         var coords = Transform(shell).Coordinates;
         var construct = PredictedSpawnAtPosition(args.SelectedItem, coords);
+        _cult.CopyMember(shell.Owner, construct);
         _mind.TransferTo(mindId, construct, mind: mind);
         // TODO: unvisit or something??? set this as original entity??
         PredictedDel(shell.Owner);

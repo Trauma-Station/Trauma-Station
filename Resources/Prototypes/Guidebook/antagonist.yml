@@ -3,35 +3,16 @@
   name: guide-entry-antagonists
   text: "/ServerInfo/Guidebook/Antagonist/Antagonists.xml"
   children:
-  - Traitors
-  - Thieves
-  - Revolutionaries
-  - NuclearOperatives
-  - SpaceNinja
-  - Wizard
-  - Zombies
-  - Xenoborgs
-  - MinorAntagonists
-  # <Trauma>
   - Changelings
-  - Heretics
-  - Blob
-  - CosmicCult
-  - CosmicColossus
-  - Abductors
-  - Bingle
-  - Devil
-  - Insurgents
-  - Morph
-  - Shadowlings
-  - SlaughterDemon
-  - Xenomorphs
-  - Wraith
-  - Slasher
-  - ShadowDemon
-  - Vampires
-  - Spy
-  # </Trauma>
+  - NuclearOperatives
+  - Revolutionaries
+  - SpaceNinja
+  - Thieves
+  - Traitors
+  - Wizard
+  - Xenoborgs
+  - Zombies
+  - MinorAntagonists
 
 - type: guideEntry
   id: Traitors
@@ -75,9 +56,7 @@
 - type: guideEntry
   id: Wizard
   name: guide-entry-wizard
-  text: "/ServerInfo/_Goobstation/Guidebook/Antagonist/Wizard.xml" # Goob
-  children: # Goob
-  - WizardSpells
+  text: "/ServerInfo/Guidebook/Antagonist/Wizard.xml"
 
 - type: guideEntry
   id: Xenoborgs

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Client.GameTicking.Managers;
+using Content.Client.GameTicking;
 using Content.Shared.GameTicking;
 using Content.Shared.Roles;
 using Robust.Client.ResourceManagement;
@@ -32,7 +32,6 @@ public sealed partial class EndRoundCreditsControl : ScrollContainer
 
     public void Populate(RoundEndMessageEvent message, IResourceCache cache, IPrototypeManager proto, string shoutout, bool debug = false)
     {
-
         var stationName = "Unknown";
 
         foreach (var (_, name) in _ticker.StationNames)

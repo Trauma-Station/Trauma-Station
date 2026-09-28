@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: HeadOfPersonnel
+  guides:
+  - Writing
+  access:
+  - Journalism
+  - Library
+  - Robotics
+  - Genetics
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipEchelonEducation
+    - SkillChipLaser
+  - !type:AddComponentSpecial
+    components:
+    - type: Condemned # Nanotrasen owns your soul pal.
+      soulOwnedNotDevil: true
+
+- type: startingGear
+  id: HoPGear
+  equipment:
+    id: !Remove # moved to loadout
+    gloves: !Remove # plasmaman bullshit
+  storage:
+    back:
+    - TelescopicBaton

@@ -2,8 +2,9 @@
 
 # Xenomorph
 
-- type: infectionIcon
-  id: XenomorphInfectionIconStageZero
+- type: statusIcon
+  abstract: true
+  id: BaseXenoInfection
   priority: 0
   locationPreference: Right
   isShaded: true
@@ -12,90 +13,52 @@
     components:
     - Xenomorph
     - LarvaInfestationVision
+
+- type: statusIcon
+  parent: BaseXenoInfection
+  id: XenomorphInfectionIconStageZero
   icon:
-    sprite: /Textures/_White/Interface/Misc/infection_icons.rsi
+    sprite: &sprite /Textures/_White/Interface/Misc/infection_icons.rsi
     state: xenomorph_0
 
-- type: infectionIcon
+- type: statusIcon
+  parent: BaseXenoInfection
   id: XenomorphInfectionIconStageOne
-  priority: 0
-  locationPreference: Right
-  isShaded: true
-  visibleToOwner: false
-  showTo:
-    components:
-    - Xenomorph
-    - LarvaInfestationVision
   icon:
-    sprite: /Textures/_White/Interface/Misc/infection_icons.rsi
+    sprite: *sprite
     state: xenomorph_1
 
-- type: infectionIcon
+- type: statusIcon
+  parent: BaseXenoInfection
   id: XenomorphInfectionIconStageTwo
-  priority: 0
-  locationPreference: Right
-  isShaded: true
-  visibleToOwner: false
-  showTo:
-    components:
-    - Xenomorph
-    - LarvaInfestationVision
   icon:
-    sprite: /Textures/_White/Interface/Misc/infection_icons.rsi
+    sprite: *sprite
     state: xenomorph_2
 
-- type: infectionIcon
+- type: statusIcon
+  parent: BaseXenoInfection
   id: XenomorphInfectionIconStageThree
-  priority: 0
-  locationPreference: Right
-  isShaded: true
-  visibleToOwner: false
-  showTo:
-    components:
-    - Xenomorph
-    - LarvaInfestationVision
   icon:
-    sprite: /Textures/_White/Interface/Misc/infection_icons.rsi
+    sprite: *sprite
     state: xenomorph_3
 
-- type: infectionIcon
+- type: statusIcon
+  parent: BaseXenoInfection
   id: XenomorphInfectionIconStageFour
-  priority: 0
-  locationPreference: Right
-  isShaded: true
-  visibleToOwner: false
-  showTo:
-    components:
-    - Xenomorph
-    - LarvaInfestationVision
   icon:
-    sprite: /Textures/_White/Interface/Misc/infection_icons.rsi
+    sprite: *sprite
     state: xenomorph_4
 
-- type: infectionIcon
+- type: statusIcon
+  parent: BaseXenoInfection
   id: XenomorphInfectionIconStageFive
-  priority: 0
-  locationPreference: Right
-  isShaded: true
-  visibleToOwner: false
-  showTo:
-    components:
-    - Xenomorph
-    - LarvaInfestationVision
   icon:
-    sprite: /Textures/_White/Interface/Misc/infection_icons.rsi
+    sprite: *sprite
     state: xenomorph_5
 
-- type: infectionIcon
+- type: statusIcon
+  parent: BaseXenoInfection
   id: XenomorphInfectionIconStageSix
-  priority: 0
-  locationPreference: Right
-  isShaded: true
-  visibleToOwner: false
-  showTo:
-    components:
-    - Xenomorph
-    - LarvaInfestationVision
   icon:
-    sprite: /Textures/_White/Interface/Misc/infection_icons.rsi
+    sprite: *sprite
     state: xenomorph_6

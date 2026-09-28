@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.GameTicking.Components;
 using Content.Trauma.Shared.BloodCult.Gamerule;
-using Content.Trauma.Shared.BloodCult.Constructs;
 
 namespace Content.Trauma.Shared.BloodCult.Constructs;
 
@@ -11,26 +9,23 @@ namespace Content.Trauma.Shared.BloodCult.Constructs;
 /// </summary>
 public sealed partial class ConstructSystem : EntitySystem
 {
-    // TODO: make event to assign it to a specific cult rule
+    [Dependency] private BloodCultSystem _cult = default!;
+
     [SubscribeLocalEvent]
-    private void OnMapInit(Entity<ConstructComponent> ent, ref MapInitEvent args)
+    private void OnCultAssigned(Entity<ConstructComponent> ent, ref CultAssignedEvent args)
     {
-        var query = EntityQueryEnumerator<BloodCultRuleComponent, ActiveGameRuleComponent>();
-        while (query.MoveNext(out _, out var rule, out _))
-        {
-            rule.Constructs.Add(ent);
-            break;
-        }
+        var rule = args.Rule;
+        rule.Comp.Constructs.Add(ent);
+        DirtyField(rule, rule.Comp, nameof(BloodCultRuleComponent.Constructs));
     }
 
     [SubscribeLocalEvent]
     private void OnShutdown(Entity<ConstructComponent> ent, ref ComponentShutdown args)
     {
-        var query = EntityQueryEnumerator<BloodCultRuleComponent, ActiveGameRuleComponent>();
-        while (query.MoveNext(out _, out var rule, out _))
-        {
-            rule.Constructs.Remove(ent);
-            break;
-        }
+        if (_cult.GetRule(ent) is not { } rule)
+            return;
+
+        rule.Comp.Constructs.Remove(ent);
+        DirtyField(rule, rule.Comp, nameof(BloodCultRuleComponent.Constructs));
     }
 }

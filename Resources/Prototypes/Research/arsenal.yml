@@ -12,14 +12,7 @@
   recipeUnlocks:
   - WeaponProtoKineticAccelerator
   - ShuttleGunKineticCircuitboard
-  - MechEquipmentKineticAccelerator # Goobstation
-  # Lavaland Change start
-  - WeaponProtoKineticShotgun
-  - WeaponProtoKineticRepeater
-  - WeaponProtoKineticPistol
-  # Lavaland Change end
   # These are roundstart but not replenishable for salvage
-  position: 4,2 # Goobstation R&D Console rework
 
 - type: technology
   id: DraconicMunitions
@@ -35,18 +28,13 @@
   - MagazineRifleIncendiary
   - MagazinePistolIncendiary
   - MagazinePistolSubMachineGunIncendiary
-  # - MagazineLightRifleIncendiary # Goobstation - remove light rifle
+  - MagazineLightRifleIncendiary
   - SpeedLoaderMagnumIncendiary
   - MagazineShotgunIncendiary
   - MagazineBoxPistolIncendiary
   - MagazineBoxMagnumIncendiary
-  # - MagazineBoxLightRifleIncendiary # Goobstation - remove light rifle
+  - MagazineBoxLightRifleIncendiary
   - MagazineBoxRifleIncendiary
-  # Goobstation R&D Console rework start
-  position: 6,2
-  technologyPrerequisites:
-  - SalvageWeapons
-  # Goobstation R&D Console rework end
 
 - type: technology
   id: WeaponizedLaserManipulation
@@ -59,21 +47,13 @@
   cost: 7500
   recipeUnlocks:
   - WeaponLaserCarbine
-  - WeaponMechCombatFiredartLaser # Goobstation
-  - PowerCellIonRevolver # Goobstation
-  - WeaponLaserSidearm # Trauma
-  # Goobstation R&D Console rework start
-  position: 7,0
-  technologyPrerequisites:
-  - WeaponLaserCellRevolverTech
-  # Goobstation R&D Console rework end
 
 - type: technology
   id: NonlethalAmmunition
   name: research-technology-nonlethal-ammunition
   icon:
-    sprite: Objects/Weapons/Guns/Ammunition/Casings/shotgun_shell.rsi
-    state: beanbag
+    sprite: Objects/Weapons/Guns/Battery/disabler_smg.rsi
+    state: icon
   discipline: Arsenal
   tier: 1
   cost: 5000
@@ -81,19 +61,14 @@
   - MagazineShotgunBeanbag
   - BoxShellTranquilizer
   - BoxBeanbag
-  # - WeaponDisabler # Trauma
-  - WeaponMechCombatDisabler # Goobstation
-  # Goobstation R&D Console rework start
-  position: 6,3
-  technologyPrerequisites:
-  - SalvageWeapons
-  # Goobstation R&D Console rework end
+  - WeaponDisabler
+  - WeaponDisablerSMG
 
 - type: technology
   id: UraniumMunitions
   name: research-technology-uranium-munitions
   icon:
-    sprite: _Trauma/Objects/Materials/Sheets/other.rsi # Trauma
+    sprite: Objects/Materials/Sheets/other.rsi
     state: uranium
   discipline: Arsenal
   tier: 1
@@ -102,40 +77,13 @@
   - MagazineRifleUranium
   - MagazinePistolUranium
   - MagazinePistolSubMachineGunUranium
-  # - MagazineLightRifleUranium # Goobstation - remove light rifle
+  - MagazineLightRifleUranium
   - SpeedLoaderMagnumUranium
   - MagazineBoxPistolUranium
   - MagazineBoxMagnumUranium
-  # - MagazineBoxLightRifleUranium # Goobstation - remove light rifle
+  - MagazineBoxLightRifleUranium
   - MagazineBoxRifleUranium
   - BoxShotgunUranium
-  # Goobstation R&D Console rework start
-  position: 7,2
-  technologyPrerequisites:
-  - DraconicMunitions
-  # Goobstation R&D Console rework end
-
-- type: technology
-  id: AdvancedRiotControl
-  name: research-technology-advanced-riot-control
-  icon:
-    sprite: Objects/Weapons/Melee/truncheon.rsi
-    state: icon
-  discipline: Arsenal
-  tier: 1
-  cost: 8000
-  recipeUnlocks:
-  - Truncheon
-  - TelescopicShield
-  - HoloprojectorSecurity
-  # - WeaponDisablerSMG # Trauma
-  - PolymerBaton #goob
-  - SpearTelescopic #goob
-  # Goobstation R&D Console rework start
-  position: 7,3
-  technologyPrerequisites:
-  - NonlethalAmmunition
-  # Goobstation R&D Console rework end
 
 - type: technology
   id: ExplosiveTechnology
@@ -148,21 +96,14 @@
   cost: 10000
   recipeUnlocks:
   - SignallerAdvanced
-  # <Trauma>
-  #- SignalTrigger # These are roundstart
-  #- VoiceTrigger
-  #- TimerTrigger
-  #- FlashPayload
-  - ShrapnelPayload # was ExplosivePayload
-  #- ChemicalPayload # roundstart
-  # </Trauma>
+  - SignalTrigger
+  - VoiceTrigger
+  - TimerTrigger
+  - FlashPayload
+  - ExplosivePayload
+  - ChemicalPayload
   - CableDetStack1
   - EmptyDetonator
-  # <Trauma>
-  position: 6,1
-  technologyPrerequisites:
-  - NonlethalAmmunition
-  # </Trauma>
 
 - type: technology
   id: SpecialMeans
@@ -175,14 +116,22 @@
   cost: 5000
   recipeUnlocks:
   - ClothingBackpackElectropack
-  # Goobstation R&D Console rework start
-  position: 8,3
-  technologyPrerequisites:
-  - AdvancedRiotControl
-  - RestraintTechnology
-  # Goobstation R&D Console rework end
 
 # Tier 2
+
+- type: technology
+  id: AdvancedRiotControl
+  name: research-technology-advanced-riot-control
+  icon:
+    sprite: Objects/Weapons/Melee/truncheon.rsi
+    state: icon
+  discipline: Arsenal
+  tier: 2
+  cost: 8000
+  recipeUnlocks:
+  - Truncheon
+  - TelescopicShield
+  - HoloprojectorSecurity
 
 - type: technology
   id: ConcentratedLaserWeaponry
@@ -195,12 +144,6 @@
   cost: 10000
   recipeUnlocks:
   - WeaponLaserCannon
-  - WeaponMechCombatSolarisLaser # Goobstation
-  # Goobstation R&D Console rework start
-  position: 8,0
-  technologyPrerequisites:
-  - WeaponizedLaserManipulation
-  # Goobstation R&D Console rework end
 
 - type: technology
   id: WaveParticleHarnessing
@@ -213,16 +156,6 @@
   cost: 10000
   recipeUnlocks:
   - WeaponXrayCannon
-  - HoloprojectorSecurityAdvanced # Goobstation
-  - PowerCellXrayRevolver # Goobstation
-  - PowerCellXraySMG # Goobstation
-  - PowerCellXraySniper # Goobstation
-  - AntiMindControlDevice # Goobstation
-  # Goobstation R&D Console rework start
-  technologyPrerequisites:
-  - WeaponizedLaserManipulation
-  position: 8,1
-  # Goobstation R&D Console rework end
 
 - type: technology
   id: BasicShuttleArmament
@@ -244,8 +177,7 @@
   - ShuttleGunPerforatorCircuitboard
   - ShuttleGunFriendshipCircuitboard
   technologyPrerequisites:
-  - Shuttlecraft  # Goobstation R&D Console rework
-  position: 3,-1  # Goobstation R&D Console rework
+  - SalvageWeapons
 
 - type: technology
   id: DualWieldingTechnology
@@ -258,9 +190,6 @@
   cost: 10000
   recipeUnlocks:
   - ClothingBackpackHarmpack
-  technologyPrerequisites: # Goobstation R&D Console rework
-  - SpecialMeans
-  position: 9, 3 # Goobstation R&D Console rework
 
 # Tier 3
 
@@ -268,24 +197,14 @@
   id: PortableMicrofusionWeaponry
   name: research-technology-portable-microfusion-weaponry
   icon:
-    sprite: Objects/Power/portable_recharger.rsi # Trauma
-    state: charging
+    sprite: Objects/Weapons/Guns/Battery/advancedlasergun.rsi
+    state: icon
   discipline: Arsenal
   tier: 3
-  cost: 20000 # Goobstation 15000 -> 20000
+  cost: 15000
   recipeUnlocks:
-  # - WeaponAdvancedLaser # Trauma, No longer has a niche
+  - WeaponAdvancedLaser
   - PortableRecharger
-  - WeaponMechCombatImmolationGun # Goobstation
-  - EnergyMagRifleOverchargeLethal # Goobstation - CR second energy bolt update(and ion)
-  - PowerCellOverchargedRevolver # Goobstation
-  - PowerCellOverchargedSMG # Goobstation
-  - PowerCellOverchargedSniper # Goobstation
-  # Goobstation R&D Console rework start
-  position: 9,0
-  technologyPrerequisites:
-  - ConcentratedLaserWeaponry
-  # Goobstation R&D Console rework end
 
 # Goobstation commented
 # - type: technology
@@ -308,12 +227,10 @@
     state: icon
   discipline: Arsenal
   tier: 3
-  cost: 20000 # Goobstation 15000 -> 20000
+  cost: 15000
   recipeUnlocks:
   - GrenadeEMP
   - PowerCageHigh
   - ShuttleGunDusterCircuitboard
   technologyPrerequisites:
   - BasicShuttleArmament
-  - Shuttlecraft  # Goobstation R&D Console rework
-  position: 4,-1  # Goobstation R&D Console rework

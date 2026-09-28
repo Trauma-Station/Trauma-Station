@@ -20,7 +20,7 @@ public sealed partial class CosmicCultComponent : Component
     /// The status icon prototype displayed for cosmic cultists.
     /// </summary>
     [DataField]
-    public ProtoId<FactionIconPrototype> StatusIcon = "CosmicCultIcon";
+    public ProtoId<StatusIconPrototype> StatusIcon = "CosmicCultIcon";
     #endregion
 
     #region Ability Data

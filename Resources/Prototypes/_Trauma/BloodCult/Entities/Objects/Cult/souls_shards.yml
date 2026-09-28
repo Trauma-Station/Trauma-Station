@@ -4,9 +4,8 @@
   parent: [ BaseItem, BaseBloodContraband ]
   id: SoulShard
   name: soul shard
-  description: Mysterious glowing shard.
+  description: A mysterious glowing shard.
   components:
-  - type: LagCompensation
   - type: Sprite
     sprite: _Trauma/BloodCult/Entities/Items/soul_stone.rsi
     layers:
@@ -15,6 +14,12 @@
     - state: soul_stone_glow
       map: [ "enum.SoulShardVisualState.Glow" ]
       visible: false
+  - type: LanguageSpeaker
+    speaks:
+    - Eldritch
+    understands:
+    - Eldritch
+    - TauCetiBasic
   - type: MindContainer
   - type: Examiner
     skipChecks: true
@@ -37,12 +42,6 @@
   - type: Speech
   - type: IsDeadIC
   - type: SoulShard
-
-- type: entity
-  parent: SoulShard
-  id: SoulShardGhost
-  suffix: Ghost Role
-  components:
   - type: GhostRole
     allowMovement: true
     name: ghost-role-information-soul-shard-name
