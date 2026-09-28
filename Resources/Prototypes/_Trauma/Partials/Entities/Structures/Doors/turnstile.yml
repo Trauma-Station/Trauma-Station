@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: Turnstile
+  components:
+  - type: Turnstile
+    turnSound:
+      path: /Audio/Items/ratchet.ogg
+      params:
+        volume: -6

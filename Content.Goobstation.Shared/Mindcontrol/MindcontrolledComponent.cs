@@ -9,12 +9,12 @@ namespace Content.Goobstation.Shared.Mindcontrol;
 public sealed partial class MindcontrolledComponent : Component
 {
     [DataField]
-    public EntityUid? Master = null;
+    public EntityUid? Master;
     [DataField]
     public SoundSpecifier MindcontrolStartSound = new SoundPathSpecifier("/Audio/_Goobstation/Ambience/Antag/mindcontrol_start.ogg");
     [DataField]
-    public bool BriefingSent = false;
+    public bool BriefingSent;
 
-    [DataField, ViewVariables(VVAccess.ReadOnly)]
-    public ProtoId<FactionIconPrototype> MindcontrolIcon { get; set; } = "MindcontrolledFaction";
+    [DataField]
+    public ProtoId<StatusIconPrototype> MindcontrolIcon = "MindcontrolledFaction";
 }

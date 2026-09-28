@@ -89,7 +89,8 @@
       - id: ClothingShoesLeather
       - id: ClothingShoesBootsSalvage
       - id: ClothingShoesBootsWork
-      - id: ClothingShoesTourist
+      - id: ClothingShoesSandalsBlack
+      - id: ClothingShoesSandalsBrown
       - id: ClothingUniformJumpsuitLoungewear
       - id: ClothingHeadHatCowboyRed
       - id: ClothingShoesSkates #GoobStation

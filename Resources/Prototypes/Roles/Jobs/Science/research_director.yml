@@ -13,16 +13,8 @@
   startingGear: ResearchDirectorGear
   icon: "JobIconResearchDirector"
   supervisors: job-supervisors-captain
-  antagAdvantage: 75 # Trauma
-  guides: # Trauma
-  - Science
-  - Command
+  guides: [ Command ] # TODO: should have a more specific guidebook page instead of using the department itself
   access:
-  # <Trauma>
-  - External
-  - Robotics
-  - Genetics
-  # </Trauma>
   - Research
   - Command
   - Maintenance
@@ -30,30 +22,20 @@
   - Brig
   - Cryogenics
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEchelonEducation
-  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
-      # <Trauma>
-      - type: Condemned # Nanotrasen owns your soul pal.
-        soulOwnedNotDevil: true
-      # </Trauma>
       - type: CommandStaff
 
 - type: startingGear
   id: ResearchDirectorGear
   equipment:
     id: RnDPDA
-    ears: ClothingHeadsetAltScience # Goobstation
+    ears: ClothingHeadsetRD
   storage:
     back:
     - Flash
-    - TelescopicBaton # Goobstation
 
 - type: chameleonOutfit
   id: ResearchDirectorChameleonOutfit

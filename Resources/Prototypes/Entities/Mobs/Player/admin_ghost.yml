@@ -125,6 +125,7 @@
     damageCoefficient: 0
   - type: GluedImmune
   - type: LubedImmune
+  - type: ShowNewPlayerIcon
 
 - type: entity
   abstract: true

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.StationReport;
-using Content.Server.GameTicking;
+using Content.Shared.GameTicking;
 using Content.Shared.Paper;
 
 namespace Content.Goobstation.Server.StationReport;
@@ -12,13 +12,8 @@ public sealed partial class NtrStationReportSystem : EntitySystem
 
     //this is shitcode? yes it is
 
-    public override void Initialize()
-    {
-        //subscribes to the endroundevent
-        SubscribeLocalEvent<RoundEndTextAppendEvent>(OnRoundEndTextAppend);
-    }
-
-    private void OnRoundEndTextAppend(RoundEndTextAppendEvent args)
+    [SubscribeLocalEvent]
+    private void OnRoundEndTextAppend(ref RoundEndTextAppendEvent args)
     {
         //locates the first entity with StationReportComponent then stops
         string? stationReportText = null;

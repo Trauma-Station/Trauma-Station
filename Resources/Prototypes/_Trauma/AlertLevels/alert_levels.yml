@@ -18,7 +18,7 @@
   name: alert-level-octarine
   announcement: alert-level-octarine-announcement
   instructions: alert-level-octarine-instructions
-  sound: /Audio/Announcements/Alerts/code_octarine.ogg
+  sound: /Audio/Cosmic/alarm-octarine.ogg
   color: CadetBlue
   emergencyLightColor: CadetBlue
   selectable: false
