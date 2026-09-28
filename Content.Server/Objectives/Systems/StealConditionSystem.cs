@@ -1,6 +1,6 @@
 // <Trauma>
-using Robust.Shared.Prototypes;
 using Content.Shared.Objectives;
+using Robust.Shared.Prototypes;
 // </Trauma>
 using Content.Server.Objectives.Components;
 using Content.Shared.CartridgeLoader;
@@ -86,15 +86,7 @@ public sealed partial class StealConditionSystem : EntitySystem
     //Set the visual, name, icon for the objective.
     private void OnAfterAssign(Entity<StealConditionComponent> condition, ref ObjectiveAfterAssignEvent args)
     {
-        // <Trauma> - Made StealGroup nullable
-        if (condition.Comp.StealGroup is not { } groupId)
-        {
-            Log.Error($"Steal Objective {condition}'s StealGroup field was null.");
-            return;
-        }
-
-        var group = ProtoMan.Index(groupId);
-        // </Trauma>
+        var group = ProtoMan.Index(condition.Comp.StealGroup);
         string localizedName = Loc.GetString(group.Name);
 
         var title = condition.Comp.OwnerText == null

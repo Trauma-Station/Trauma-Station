@@ -56,9 +56,9 @@ public sealed partial class ServerJobListingsSystem
     [SubscribeLocalEvent]
     private void OnClaim(Entity<StealSideJobGeneratorComponent> ent, ref SideJobClaimedEvent args)
     {
-        if (!TryComp<StealConditionComponent>(args.SideJob, out var stealComp) || stealComp.StealGroup is not { } groupId)
+        if (!TryComp<StealConditionComponent>(args.SideJob, out var stealComp))
             return;
 
-        ent.Comp.Targets.Remove(groupId);
+        ent.Comp.Targets.Remove(stealComp.StealGroup);
     }
 }

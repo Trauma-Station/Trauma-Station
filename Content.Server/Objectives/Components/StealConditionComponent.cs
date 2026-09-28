@@ -15,7 +15,7 @@ public sealed partial class StealConditionComponent : Component
     /// </summary>
     // <Trauma> - Made StealGroup non-nullable so it can be set after the objective is spawned.
     [DataField]
-    public ProtoId<StealTargetGroupPrototype>? StealGroup;
+    public ProtoId<StealTargetGroupPrototype> StealGroup;
     // </Trauma>
 
     /// <summary>

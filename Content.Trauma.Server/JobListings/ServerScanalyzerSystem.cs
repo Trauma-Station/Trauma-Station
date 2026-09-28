@@ -16,13 +16,7 @@ public sealed partial class ServerScanalyzerSystem : ScanalyzerSystem
         if (!TryComp<StealConditionComponent>(ent.Owner, out var stealComp))
             return;
 
-        if (stealComp.StealGroup is not { } groupId)
-        {
-            Log.Error($"Steal Objective {ent}'s StealGroup field was null.");
-            return;
-        }
-
-        if (IsScanned((args.MindId, args.Mind), groupId))
+        if (IsScanned((args.MindId, args.Mind), stealComp.StealGroup))
             args.Progress = 1.0f;
     }
 
