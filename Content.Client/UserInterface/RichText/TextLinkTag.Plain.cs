@@ -15,7 +15,7 @@ public sealed partial class TextLinkTag
             return false;
         }
 
-        data = new LinkData(LinkString: linkStr, LinkEntity: null, Color: null);
+        data = new LinkData(LinkString: linkStr, LinkEntity: null, Color: null, Clickable: true);
         return true;
     }
 }
