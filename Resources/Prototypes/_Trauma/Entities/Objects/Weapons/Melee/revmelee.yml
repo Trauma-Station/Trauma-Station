@@ -273,7 +273,8 @@
     animationRotation: -135
     damage:
       types:
-        Heat: 4
+        Heat: 8
+        Piercing: 2
     soundHit:
       path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
   - type: PointLight

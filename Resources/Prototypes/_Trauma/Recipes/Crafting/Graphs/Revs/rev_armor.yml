@@ -9,7 +9,7 @@
     - to: finished
       steps:
       - material: Plastic
-        amount: 4
+        amount: 2
         doAfter: 1
       - tool: Screwing
         doAfter: 1
@@ -25,9 +25,7 @@
     - to: finished
       steps:
       - material: Plasteel
-        amount: 5
-        doAfter: 1
-      - tool: Welding
+        amount: 3
         doAfter: 1
       - tool: Hammering
         doAfter: 1

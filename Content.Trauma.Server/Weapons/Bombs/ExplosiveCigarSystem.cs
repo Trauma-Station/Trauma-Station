@@ -1,16 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Medical.Common.Body;
-using Content.Medical.Shared.Body;
 using Content.Server.Explosion.EntitySystems;
 using Content.Server.Nutrition.EntitySystems;
-using Content.Shared.Body;
 using Content.Shared.Chemistry.EntitySystems;
-using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
-using Content.Shared.Inventory;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Smoking;
+using Content.Shared.Trigger.Systems;
 using Content.Trauma.Shared.Weapons.Bombs.Components;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
@@ -21,9 +17,7 @@ public sealed partial class ExplosiveCigarSystem : EntitySystem
 {
     [Dependency] private ExplosionSystem _explosion = default!;
     [Dependency] private SharedSolutionContainerSystem _solutions = default!;
-    [Dependency] private InventorySystem _inventory = default!;
-    [Dependency] private DamageableSystem _damageable = default!;
-    [Dependency] private BodyPartSystem _bodyPart = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
     [Dependency] private SharedContainerSystem _containers = default!;
     [Dependency] private IGameTiming _timing = default!;
 
@@ -62,34 +56,19 @@ public sealed partial class ExplosiveCigarSystem : EntitySystem
 
     private void Explode(EntityUid uid)
     {
-        if (TryComp<ExplosiveCigarComponent>(uid, out var comp))
-            TryApplyHeadDamage(uid, comp);
+        EntityUid? user = null;
+        if (_containers.TryGetContainingContainer(uid, out var container))
+            user = container.Owner;
+        else
+        {
+            var parent = Transform(uid).ParentUid;
+            if (parent.IsValid())
+                user = parent;
+        }
+
+        _trigger.Trigger(uid, user, "timer");
 
         _explosion.TriggerExplosive(uid);
         QueueDel(uid);
-    }
-
-    private void TryApplyHeadDamage(EntityUid uid, ExplosiveCigarComponent comp)
-    {
-        if (comp.MaskSlotHeadDamage == null)
-            return;
-
-        if (!_inventory.TryGetContainingSlot((uid, null, null), out var slot) || slot.Name != "mask")
-            return;
-
-        EntityUid wearer;
-        if (_containers.TryGetContainingContainer(uid, out var container))
-            wearer = container.Owner;
-        else
-            wearer = Transform(uid).ParentUid;
-
-        if (!TryComp<BodyComponent>(wearer, out var body))
-            return;
-
-        var head = _bodyPart.FindBodyPart((wearer, body), BodyPartType.Head);
-        if (head == null)
-            return;
-
-        _damageable.TryChangeDamage(head.Value.Owner, comp.MaskSlotHeadDamage);
     }
 }

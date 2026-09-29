@@ -28,7 +28,7 @@
   id: RevArmorPlate
   result: RevArmorPlate
   materials:
-    Steel: 500
+    Steel: 300
 
 - type: latheRecipe
   parent: BaseRevComponent

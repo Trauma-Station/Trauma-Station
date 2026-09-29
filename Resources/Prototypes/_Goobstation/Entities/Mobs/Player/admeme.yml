@@ -1,22 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Central Command!
-
-- type: randomHumanoidSettings
-  id: CentcommHumanoid
-  speciesWhitelist: Human
-  components:
-  - type: RandomHumanoidAppearance
-    randomizeName: false
-  - type: GhostTakeoverAvailable
-  - type: MindShield
-  - type: AntagImmune
-  - type: Speech
-    speechVerb: HolierThanThou
-  - type: GhostRole
-
-## Other Shit
-
 # Chrono Legioneer
 
 - type: entity
@@ -65,14 +48,13 @@
   id: HecuSoldier
   parent: EventHumanMindShielded
   components:
-  - type: AutoImplant
-    implants: [ FreedomImplant ]
   - type: GhostRole
     name: ghost-role-information-Hecu-name
     description: ghost-role-information-Hecu-description
     rules: ghost-role-information-Hecu-rules
     raffle:
       settings: short
+    job: HecuOperative
   - type: Loadout
     prototypes: [HECUOperativeGear]
   - type: RandomMetadata

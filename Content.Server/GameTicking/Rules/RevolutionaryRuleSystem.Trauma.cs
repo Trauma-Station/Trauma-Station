@@ -9,5 +9,5 @@ public sealed partial class RevolutionaryRuleSystem
 {
     [Dependency] private CommonNewAntagOrEvacSystem _antagEvac = default!;
 
-    private static readonly EntProtoId ErtSecurity = "SpawnERTSecurity";
+    private static readonly EntProtoId ErtSecurity = "SpawnHECURoundEnd";
 }

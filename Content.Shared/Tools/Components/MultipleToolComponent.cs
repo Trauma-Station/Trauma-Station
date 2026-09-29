@@ -31,7 +31,7 @@ public sealed partial class MultipleToolComponent : Component
     [AutoNetworkedField]
     public uint CurrentEntry = 0;
 
-    [ViewVariables]
+    [ViewVariables, AutoNetworkedField] // Trauma - network it bruh
     public string CurrentQualityName = string.Empty;
 
     [ViewVariables(VVAccess.ReadWrite)]

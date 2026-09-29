@@ -58,6 +58,7 @@
     - id: MMI
     - id: FreeformLawboard
     - id: ArmoryOverrideKeyComponents
+    - id: ClothingOuterArmorReactiveRD
 
 - type: entityTable
   id: LockerFillHeadOfSecurityTrauma

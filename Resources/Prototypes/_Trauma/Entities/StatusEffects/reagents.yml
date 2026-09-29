@@ -46,15 +46,6 @@
     walkSpeedModifier: 0.8
 
 - type: entity
-  parent: StatusEffectSlowdown
-  id: AmnestizineSlowdownStatusEffect
-  name: amnestizine slowdown
-  components:
-  - type: MovementModStatusEffect
-    sprintSpeedModifier: 0.4
-    walkSpeedModifier: 0.4
-
-- type: entity
   parent: StatusEffectSpeed
   id: AranespStatusEffect
   name: aranesp speedup

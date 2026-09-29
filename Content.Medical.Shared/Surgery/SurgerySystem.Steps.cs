@@ -483,12 +483,11 @@ public sealed partial class SurgerySystem
 
     private void OnSurgeryTargetStepChosen(Entity<SurgeryTargetComponent> ent, ref SurgeryStepChosenBuiMsg args)
     {
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
         var user = args.Actor;
         if (GetEntity(args.Entity) is {} body &&
-            GetEntity(args.Part) is {} targetPart)
+            GetEntity(args.Part) is {} targetPart &&
+            body == ent.Owner && // replace this check if operating on random parts becomes a thing
+            _body.GetBody(targetPart) == body)
         {
             TryDoSurgeryStep(body, targetPart, user, args.Surgery, args.Step);
         }
@@ -847,17 +846,24 @@ public sealed partial class SurgerySystem
 
         var check = new SurgeryCanPerformStepEvent(user, body, tool, slot);
         RaiseLocalEvent(step, ref check);
-        if (check.IsValid) // if the step doesn't stop it check the body after
-            RaiseLocalEvent(body, ref check);
 
         popup = check.Popup;
         reason = check.Invalid;
         data = check.ValidTool;
 
         if (check.IsValid)
-            return true;
+        {
+            // surgery conditions are fucking awful and apply to both the surgery and steps...
+            var ev = new SurgeryValidEvent(body, part, tool);
+            RaiseLocalEvent(step, ref ev);
+            if (!ev.Cancelled)
+                return true;
 
-        if (doPopup && check.Popup != null)
+            reason = StepInvalidReason.SurgeryInvalid;
+            popup = ev.Reason;
+        }
+
+        if (doPopup && popup != null)
             _popup.PopupEntity(check.Popup, user, user, PopupType.SmallCaution);
 
         return false;
