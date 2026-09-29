@@ -112,7 +112,7 @@ public sealed partial class GatewaySystem : EntitySystem
 
     private void UpdateAppearance(EntityUid uid)
     {
-        _appearance.SetData(uid, GatewayVisuals.Active, IsActive(destUid));
+        _appearance.SetData(uid, GatewayVisuals.Active, IsActive(uid));
     }
 
     [SubscribeLocalEvent]
