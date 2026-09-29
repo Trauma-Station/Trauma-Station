@@ -15299,3 +15299,10 @@ Entries:
   id: 1663
   time: '2026-09-29T12:02:41.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4813
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed separated hud' status part being blank.
+  id: 1664
+  time: '2026-09-29T19:27:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4815
