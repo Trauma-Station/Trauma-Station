@@ -77,6 +77,18 @@ public sealed partial class BloodstreamSystem
     }
 
     /// <summary>
+    /// Get the total volume of the bloodstream solution, including blood and processed chemicals.
+    /// </summary>
+    public FixedPoint2 GetBloodstreamVolume(Entity<BloodstreamComponent?> ent)
+    {
+        if (!_query.Resolve(ent, ref ent.Comp) ||
+            !_solutionContainer.ResolveSolution(ent.Owner, ent.Comp.BloodSolutionName, ref ent.Comp.BloodSolution, out var sol))
+            return FixedPoint2.Zero;
+
+        return sol.Volume;
+    }
+
+    /// <summary>
     /// Get the quantity of the largest missing blood reagent in a mob.
     /// </summary>
     public FixedPoint2 GetMissingBlood(Entity<BloodstreamComponent?> ent)
