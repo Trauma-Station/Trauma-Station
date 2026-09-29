@@ -15249,3 +15249,10 @@ Entries:
   id: 1657
   time: '2026-09-29T06:40:45.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4801
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed gemini slop. Please update your star signs.
+  id: 1658
+  time: '2026-09-29T06:51:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4802
