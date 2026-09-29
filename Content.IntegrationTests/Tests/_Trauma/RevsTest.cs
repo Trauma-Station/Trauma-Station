@@ -25,13 +25,13 @@ namespace Content.IntegrationTests.Tests._Trauma;
 [Category("GameRuleTests")]
 public sealed class RevsTest : InteractionTest
 {
-    public static readonly EntProtoId Urist = "MobHuman";
-    public static readonly EntProtoId Mouse = "MobMouse";
-    public static readonly EntProtoId Propaganda = "RevPropaganda";
-    public static readonly EntProtoId MindShieldImplant = "MindShieldImplant";
-    public static readonly EntProtoId MindShieldImplanter = "MindShieldImplanter";
-    public static readonly EntProtoId DefaultRevsRule = "Revolutionary";
-    public static readonly ProtoId<RadioChannelPrototype> HeadRevRadio = "HeadRevolutionary";
+    private static readonly EntProtoId Urist = "MobHuman";
+    private static readonly EntProtoId Mouse = "MobMouse";
+    private static readonly EntProtoId Propaganda = "RevPropaganda";
+    private static readonly EntProtoId MindShieldImplant = "MindShieldImplant";
+    private static readonly EntProtoId MindShieldImplanter = "MindShieldImplanter";
+    private static readonly EntProtoId DefaultRevsRule = "Revolutionary";
+    private static readonly ProtoId<RadioChannelPrototype> HeadRevRadio = "HeadRevolutionary";
 
     protected override string PlayerPrototype => Urist; // needs to have a tongue to speak
 

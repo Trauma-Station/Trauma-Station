@@ -16,7 +16,7 @@ public sealed partial class ServerBloodCultSystem : BloodCultSystem
     private static readonly ProtoId<AntagSpecifierPrototype> CultistSpecifier = "BloodCultist";
     private static readonly ProtoId<AntagSpecifierPrototype> ConstructSpecifier = "BloodCultConstruct";
 
-    public override void Convert(EntityUid rule, EntityUid target)
+    public override bool Convert(EntityUid rule, EntityUid target)
         => _rule.Convert(rule, target, CultistSpecifier);
 
     public override void ConvertConstruct(EntityUid rule, EntityUid target)
