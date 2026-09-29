@@ -18,6 +18,9 @@
       Gold: 125
   - type: StaticPrice
     price: 1000
+  - type: Tag
+    tags:
+    - WhitelistChameleon
 
 - type: entity
   parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
@@ -43,17 +46,15 @@
           path: /Audio/Effects/teleport_arrival.ogg
     - !type:Sparks
     activationDelay: 10
-  - type: Tag
-    tags:
-    - WhitelistChameleon
+  # emp_message = span_warning("The reactive armor's teleportation calculations begin spewing errors!")
 
 
 - type: entity
   parent: ClothingOuterArmorBase
   id: ClothingOuterArmorReactiveUnfinished
-  name: unfinished reactive armor
+  name: reactive armor shell
   suffix: empty
-  description: This one needs an anomaly core.
+  description: An experimental suit of armor, awaiting installation of an anomaly core.
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Armor/reactiveoff.rsi
@@ -64,15 +65,12 @@
     defaultTarget: teleport
     deconstructionTarget: null
     node: start
-  - type: Tag
-    tags:
-    - WhitelistChameleon
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
   id: ClothingOuterArmorReactiveTeleport
   name: reactive teleport armor
-  description: Reactive armor with bluespace core in it.
+  description: Doesn't seem to do much for some reason.
   components:
   - type: StealTarget
     stealGroup: TeleportArmor
@@ -93,15 +91,13 @@
     graph: ArmorReactive
     deconstructionTarget: null
     node: teleport
-  - type: Tag
-    tags:
-    - WhitelistChameleon
+  # emp_message = span_warning("The reactive armor's teleportation calculations begin spewing errors!")
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
-  id: ClothingOuterArmorReactiveTesla
+  id: ClothingOuterArmorReactiveTesla # electricity
   name: reactive tesla armor
-  description: Reactive armor with tesla core in it.
+  description: An experimental suit of armor with sensitive detectors hooked up to a huge capacitor grid, with emitters strutting out of it. Zap.
   components:
   - type: ReactiveArmor
     effects:
@@ -113,6 +109,201 @@
     graph: ArmorReactive
     deconstructionTarget: null
     node: tesla
-  - type: Tag
-    tags:
-    - WhitelistChameleon
+  # emp_message = span_warning("The tesla capacitors beep ominously for a moment.")
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveRepulsive # gravity
+  name: reactive repulsive armor
+  description: An experimental suit of armor that violently throws back attackers.
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:Sparks
+    # - !type:GrantTemporatyComponent # it supposed to be better gameplay wise but i cant make it work on client currently
+    #   components:
+    #   - type: GravityWell
+    #     maxRange: 10
+    #     baseRadialAcceleration: -180
+    #     baseTangentialAcceleration: -5
+    #     gravPulsePeriod: 0.01
+    #   - type: SingularityDistortion
+    #     intensity: 10
+    #     falloffPower: 1.5
+    #     lifeSpan: 1
+    - !type:GravPulse
+      maxRange: 10
+      baseRadialAcceleration: -180
+      baseTangentialAcceleration: -15
+    # empEffects:
+    # - !type:Sparks
+    # - !type:GravPulse
+    #   maxRange: 10
+    #   baseRadialAcceleration: 15
+    #   baseTangentialAcceleration: .5
+    # emp_message = span_warning("The repulse generator is reset to default settings...")
+    activationDelay: 10
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: repulsive
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveHealing # liquid
+  name: reactive healing armor
+  description: An experimental suit of armor. # WRITE SOMETHING
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:Sparks
+    - !type:InjectBloodstream # Kinda lazy tbh. But Can't think about anything more intresting
+      solution:
+        reagents:
+        - ReagentId: Omnizine
+          Quantity: 5
+    # empEffects:
+    # - !type:Sparks
+    # - !type:InjectBloodstream
+    #   solution:
+    #   - ReagentId: Lexorine
+    #     Quantity: 5
+    #   - ReagentId: Amatoxin
+    #     Quantity: 5
+    activationDelay: 10
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: healing
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveStealth # shadow
+  name: reactive stealth armor
+  description: An experimental suit of armor that renders the wearer invisible on detection of imminent harm. You can't fight what you can't see.
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:PlaySoundEffect
+        sound: *deparure_sound
+    - !type:GrantTemporatyComponentEffect # why it refuses to work on client whyyyyy
+      components:
+      - type: Stealth
+        lastVisibility: -1.5
+        maxVisibility: -1.5
+      lifeSpan: 5
+    activationDelay: 10
+    # emp_message = span_warning("The reactive stealth armor's threat assessment system crashes...")
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: stealth
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveTable # tech
+  name: reactive table armor
+  description: An experimental suit of armor that... does something really wierd. Eh, science am i right? # TG desc (it was admem) = If you can't beat the memes, embrace them.
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:PlaySoundEffect
+        sound: *deparure_sound
+    - !type:Sparks
+    - !type:RandomTeleport
+      radius:
+        min: 6.0
+        max: 8.0
+    - !type:PlaySoundEffect
+        sound: *arrival_sound
+    - !type:Sparks
+    - !type:SpawnRandomEntities
+      entity: TableBase
+      number: 1
+    - !type:TableSlam
+    activationDelay: 10
+    # emp_message = span_danger("The reactive table armor's fabricators click and whirr ominously for a moment...")
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: table
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveIncendiary # pyroclastic
+  name: reactive incendiary armor
+  description: An experimental suit of armor with a reactive sensor array rigged to a flame emitter. For the stylish pyromaniac.
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:Sparks
+    activationDelay: 10
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: incendiary
+  # emp_message = span_warning("The reactive incendiary armor's targeting system begins rebooting...")
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveCryogenic # ice
+  name: reactive cryogenic armor
+  description: An experimental suit of armor. # WRITE SOMETHING
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:Sparks
+    activationDelay: 10
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: cryogenic
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveAberration # flesh
+  name: reactive aberration armor
+  description: An experimental suit of armor. # WRITE SOMETHING
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:Sparks
+    activationDelay: 10
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: aberration
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveRock # rock
+  name: reactive rock armor
+  description: An experimental suit of armor. # WRITE SOMETHING feel yourself as duane junson or something
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:Sparks
+    activationDelay: 10
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: rock
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveHallucinating # flora
+  name: reactive hallucinating armor
+  description: An experimental suit of armor with sensitive detectors hooked up to the mind of the wearer, sending mind pulses that causes hallucinations around you.
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:Sparks
+    activationDelay: 10
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: hallucinating
+  # emp_message = span_warning("You feel the backsurge of a mind pulse.")
+
+# ToDo: i have no idea what behavior to give santa armor
+# 9 items to go... 15-18-ish systems?
