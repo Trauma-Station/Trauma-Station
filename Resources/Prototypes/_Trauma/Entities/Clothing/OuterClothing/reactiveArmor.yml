@@ -157,15 +157,12 @@
   - type: ReactiveArmor
     effects:
     - !type:Sparks
-    - !type:InjectBloodstream # Kinda lazy tbh. But Can't think about anything more intresting
-      solution:
-        reagents:
-        - ReagentId: Omnizine
-          Quantity: 5
+    - !type:AddReagentToBlood
+        reagent: Omnizine
+        amount: 5
     # empEffects:
     # - !type:Sparks
-    # - !type:InjectBloodstream
-    #   solution:
+    # - !type:AddReagentToBlood
     #   - ReagentId: Lexorine
     #     Quantity: 5
     #   - ReagentId: Amatoxin
@@ -186,12 +183,10 @@
     effects:
     - !type:PlaySoundEffect
         sound: *deparure_sound
-    - !type:GrantTemporatyComponentEffect # why it refuses to work on client whyyyyy
-      components:
-      - type: Stealth
-        lastVisibility: -1.5
-        maxVisibility: -1.5
-      lifeSpan: 5
+    - !type:ModifyStatusEffect
+        effectProto: ForcedTrueStealthStatusEffect
+        type: Add
+        time: 5
     activationDelay: 10
     # emp_message = span_warning("The reactive stealth armor's threat assessment system crashes...")
   - type: Construction
@@ -218,7 +213,7 @@
         sound: *arrival_sound
     - !type:Sparks
     - !type:SpawnRandomEntities
-      entity: TableBase
+      entity: Table
       number: 1
     - !type:TableSlam
     activationDelay: 10
@@ -283,6 +278,10 @@
   - type: ReactiveArmor
     effects:
     - !type:Sparks
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectDamageModArmorReactiveRock
+      time: 5
+      type: Add
     activationDelay: 10
   - type: Construction
     graph: ArmorReactive

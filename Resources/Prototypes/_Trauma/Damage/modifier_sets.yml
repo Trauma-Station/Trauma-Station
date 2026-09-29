@@ -163,3 +163,16 @@
     Slash: 10
     Piercing: 10
     Heat: 5 # welder ops
+
+# Reactive Armor
+
+- type: damageModifierSet
+  id: ReactiveArmorRock
+  coefficients:
+    Blunt: 0.1
+    Slash: 0.1
+    Piercing: 0.1
+    Ballistic: 0.1
+    Heat: 0.1
+    Cold: 0.1
+    Shock: 0.1

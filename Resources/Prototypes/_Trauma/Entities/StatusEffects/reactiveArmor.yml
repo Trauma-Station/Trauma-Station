@@ -1,0 +1,17 @@
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectDamageModArmorReactiveRock
+  name: damage mod changed
+  components:
+  - type: ChangeDamageModiferSetStatusEffect
+    damageModifierSet: ReactiveArmorRock
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: ForcedTrueStealthStatusEffect
+  name: camouflage
+  components:
+  - type: ForcedStealthStatusEffect
+    visibility: 0
+    revealOnAttack: false
+    revealOnDamage: false
