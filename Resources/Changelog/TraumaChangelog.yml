@@ -15292,3 +15292,10 @@ Entries:
   id: 1662
   time: '2026-09-29T11:55:16.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4584
+- author: Clanky Station Consent Cult
+  changes:
+  - type: Fix
+    message: Cult conversion no longer lets you just opt out of being converted...
+  id: 1663
+  time: '2026-09-29T12:02:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4813
