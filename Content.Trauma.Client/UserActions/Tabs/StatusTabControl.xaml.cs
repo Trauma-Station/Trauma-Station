@@ -7,12 +7,13 @@ using Robust.Shared.Timing;
 namespace Content.Trauma.Client.UserActions.Tabs;
 
 [GenerateTypedNameReferences]
-public sealed partial class StatusTabControl : BaseTabControl, IOnSystemChanged<ClientGameTicker>, IOnSystemChanged<StatusControlSystem>
+public sealed partial class StatusTabControl : BaseTabControl
 {
+    [Dependency] private IEntityManager _ent = default!;
     [Dependency] private IGameTiming _timing = default!;
 
-    private ClientGameTicker? _ticker;
-    private StatusControlSystem? _status;
+    private ClientGameTicker _ticker;
+    private StatusControlSystem _status;
 
     private int _minutes = -1;
 
@@ -20,36 +21,28 @@ public sealed partial class StatusTabControl : BaseTabControl, IOnSystemChanged<
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
+
+        _ticker = _ent.System<ClientGameTicker>();
+        _status = _ent.System<StatusControlSystem>();
     }
 
-    public void OnSystemLoaded(ClientGameTicker system)
+    protected override void EnteredTree()
     {
-        _ticker = system;
-    }
+        base.EnteredTree();
 
-    public void OnSystemUnloaded(ClientGameTicker system)
-    {
-        _ticker = null;
-    }
-
-    public void OnSystemLoaded(StatusControlSystem system)
-    {
-        _status = system;
-        system.OnInfoUpdated += UpdateInfoBlob;
+        _status.OnInfoUpdated += UpdateInfoBlob;
         UpdateInfoBlob();
     }
 
-    public void OnSystemUnloaded(StatusControlSystem system)
+    protected override void ExitedTree()
     {
-        system.OnInfoUpdated -= UpdateInfoBlob;
-        _status = null;
+        base.ExitedTree();
+
+        _status.OnInfoUpdated -= UpdateInfoBlob;
     }
 
     protected override void FrameUpdate(FrameEventArgs e)
     {
-        if (_ticker is not { })
-            return;
-
         var time = _timing.CurTime.Subtract(_ticker.RoundStartTimeSpan);
         if (time.Minutes == _minutes)
             return;
@@ -66,7 +59,6 @@ public sealed partial class StatusTabControl : BaseTabControl, IOnSystemChanged<
 
     private void UpdateInfoBlob()
     {
-        if (_status?.Info is { } info)
-            ServerInfo.SetInfoBlob(info);
+        ServerInfo.SetInfoBlob(_status.Info);
     }
 }
