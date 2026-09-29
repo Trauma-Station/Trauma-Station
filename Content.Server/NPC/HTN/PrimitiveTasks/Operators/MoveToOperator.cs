@@ -14,6 +14,9 @@ namespace Content.Server.NPC.HTN.PrimitiveTasks.Operators;
 /// </summary>
 public sealed partial class MoveToOperator : HTNOperator, IHtnConditionalShutdown
 {
+    // <Trauma>
+    [Dependency] private ILogManager _log = default!;
+    // </Trauma>
     [Dependency] private IEntityManager _entManager = default!;
     private NPCSteeringSystem _steering = default!;
     private PathfindingSystem _pathfind = default!;
@@ -169,7 +172,7 @@ public sealed partial class MoveToOperator : HTNOperator, IHtnConditionalShutdow
         // <Trauma> - better error than shitty mapcoords one
         if (_entManager.Deleted(targetCoordinates.EntityId))
         {
-            Log.Error($"{_entManager.ToPrettyString(uid)} tried to move towards invalid coordinates {targetCoordinates}");
+            _log.GetSawmill("npc").Error($"{_entManager.ToPrettyString(uid)} tried to move towards invalid coordinates {targetCoordinates}");
             return;
         }
         // </Trauma>
