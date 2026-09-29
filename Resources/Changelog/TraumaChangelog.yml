@@ -15272,3 +15272,12 @@ Entries:
   id: 1660
   time: '2026-09-29T09:05:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4806
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Blood rites now works on puddles, has popups and only drains 50u at a time
+      maximum.
+  id: 1661
+  time: '2026-09-29T10:28:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4808
