@@ -166,6 +166,13 @@ public sealed partial class MoveToOperator : HTNOperator, IHtnConditionalShutdow
         blackboard.Remove<EntityCoordinates>(NPCBlackboard.OwnerCoordinates);
         var targetCoordinates = blackboard.GetValue<EntityCoordinates>(TargetKey);
         var uid = blackboard.GetValue<EntityUid>(NPCBlackboard.Owner);
+        // <Trauma> - better error than shitty mapcoords one
+        if (_entManager.Deleted(targetCoordinates.EntityId))
+        {
+            Log.Error($"{_entManager.ToPrettyString(uid)} tried to move towards invalid coordinates {targetCoordinates}");
+            return;
+        }
+        // </Trauma>
 
         // Re-use the path we may have if applicable.
         var comp = _steering.Register(uid, targetCoordinates);
