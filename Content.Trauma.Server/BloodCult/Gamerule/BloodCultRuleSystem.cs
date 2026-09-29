@@ -55,7 +55,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
     [Dependency] private EntityQuery<BloodCultistComponent> _cultistQuery = default!;
-    [Dependency] private EntityQuery<BloodCultiLeaderComponent> _leaderQuery = default!;
+    [Dependency] private EntityQuery<BloodCultLeaderComponent> _leaderQuery = default!;
 
     private static readonly Color AnnounceColor = Color.FromHex("#dc143c");
 
