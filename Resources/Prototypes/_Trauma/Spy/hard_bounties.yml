@@ -94,13 +94,6 @@
 
 - type: spyBounty
   parent: HardBountyBase
-  id: ClothingBeltGeminiHoloProjector
-  jobBlacklist: [ResearchDirector]
-  selector: !type:SpyStealTargetBountySelectorEvent
-    stealTarget: ClothingBeltGeminiHoloProjector
-
-- type: spyBounty
-  parent: HardBountyBase
   id: ComputerCargoOrdersSecurity
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [ComputerCargoOrdersSecurity]
