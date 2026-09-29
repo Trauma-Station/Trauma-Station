@@ -15256,3 +15256,12 @@ Entries:
   id: 1658
   time: '2026-09-29T06:51:27.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4802
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Probably fixed new blood cult converts not seeing cultists icons and vice
+      versa.
+  id: 1659
+  time: '2026-09-29T07:24:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4804
