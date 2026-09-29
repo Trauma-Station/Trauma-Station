@@ -15281,3 +15281,14 @@ Entries:
   id: 1661
   time: '2026-09-29T10:28:37.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4808
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added the Explosive Cigar Case, you can buy it for 20 TC.
+  - type: Tweak
+    message: >-
+      Tweaked the Bomb Collar, it is now stronger, but pretty weak if not
+      equipped.
+  id: 1662
+  time: '2026-09-29T11:55:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4584
