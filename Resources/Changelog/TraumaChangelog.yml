@@ -15238,3 +15238,14 @@ Entries:
   id: 1656
   time: '2026-09-28T21:24:17.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4792
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added a new way to get Clown Eggs, Obtained from feeding a white hen
+      bananas and keeping it very happy (60+ Happiness)
+  - type: Tweak
+    message: Fixed clown eggs turning into white chicks when put into an incubator
+  id: 1657
+  time: '2026-09-29T06:40:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4801
