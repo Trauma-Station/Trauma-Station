@@ -3,6 +3,7 @@
 - type: entity # pretty much useless if not equipped in mask slot
   parent: CigarGold
   id: CigarGoldSyndicate
+  suffix: Explosive
   components:
   - type: ExplosiveCigar
     triggerAtRemaining: 5
