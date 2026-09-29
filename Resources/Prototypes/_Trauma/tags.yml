@@ -246,6 +246,9 @@
   id: MimicToolbox # Emote: Tweak
 
 - type: Tag
+  id: Mimana # For ranching, Used by clown hens to produce mime eggs
+
+- type: Tag
   id: MagicMushroom
 
 ## P ##

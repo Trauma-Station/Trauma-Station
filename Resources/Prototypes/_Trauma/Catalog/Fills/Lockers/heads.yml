@@ -54,7 +54,6 @@
     - id: AnomalyLocator # added anomaly locator to (try) reduce the amount of anoms that crit
     - id: CigarCase # RD needs cigs for uhh... science...
       prob: 0.15
-    - id: ClothingBeltGeminiHoloProjector # Who better to do science with than yourself?
     - id: MMI
     - id: FreeformLawboard
     - id: ArmoryOverrideKeyComponents

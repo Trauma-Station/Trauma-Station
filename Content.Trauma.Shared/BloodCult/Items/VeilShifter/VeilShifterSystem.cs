@@ -87,7 +87,8 @@ public sealed partial class VeilShifterSystem : EntitySystem
         }
 
         var oldCoords = xform.Coordinates;
-        _teleport.Teleport(user, coords, veil.Comp.TeleportInSound, veil.Comp.TeleportOutSound, user);
+        _teleport.Teleport(user, coords, veil.Comp.TeleportInSound, veil.Comp.TeleportOutSound,
+            user, pulled: true);
         PredictedSpawnAtPosition(veil.Comp.TeleportInEffect, coords);
         PredictedSpawnAtPosition(veil.Comp.TeleportOutEffect, oldCoords);
         return true;

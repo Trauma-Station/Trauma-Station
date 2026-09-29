@@ -84,7 +84,11 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
                 return;
             }
 
-            Convert(ent, rule, target, user);
+            if (!Convert(ent, rule, target, user))
+            {
+                args.Popup = "It no work!";
+                return;
+            }
         }
 
         args.Handled = true;
@@ -110,9 +114,10 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
         _runeRevive.AddCharges(rule, 1);
     }
 
-    private void Convert(Entity<CultRuneOfferingComponent> rune, EntityUid rule, EntityUid target, EntityUid user)
+    private bool Convert(Entity<CultRuneOfferingComponent> rune, EntityUid rule, EntityUid target, EntityUid user)
     {
-        _cult.Convert(rule, target);
+        if (!_cult.Convert(rule, target))
+            return false;
 
         _stun.TryKnockdown(target, TimeSpan.FromSeconds(2f));
         _stun.TryUpdateParalyzeDuration(target, TimeSpan.FromSeconds(2f));
@@ -126,6 +131,8 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
         // free
         var dagger = PredictedSpawnAtPosition(Dagger, Transform(rune).Coordinates);
         _hands.TryPickupAnyHand(target, dagger);
+
+        return true;
     }
 }
 

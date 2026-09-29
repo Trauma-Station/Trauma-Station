@@ -13,6 +13,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
@@ -40,6 +41,20 @@ public sealed partial class BloodRitesSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
+    [Dependency] private EntityQuery<DrawableSolutionComponent> _drawableQuery = default!;
+
+    private static readonly FixedPoint2 BloodDrainLimit = FixedPoint2.New(50);
+    private static readonly ProtoId<ReagentPrototype>[] BloodReagents =
+    [
+        "Blood",
+        "AmmoniaBlood",
+        "InsectBlood",
+        "CopperBlood",
+        "ZombieBlood",
+        "AlienBlood",
+        "BlackBlood",
+        "BloodChangeling",
+    ];
 
     [SubscribeLocalEvent]
     private void OnExamined(Entity<BloodRitesAuraComponent> rites, ref ExaminedEvent args)
@@ -58,7 +73,7 @@ public sealed partial class BloodRitesSystem : EntitySystem
             _cult.IsCultist(target)) // no stabbing your fellow cultists
             return;
 
-        if (!_bloodQuery.HasComp(target))
+        if (!_bloodQuery.HasComp(target) && !_drawableQuery.HasComp(target))
             return;
 
         var ev = new BloodRitesExtractDoAfterEvent();
@@ -83,13 +98,22 @@ public sealed partial class BloodRitesSystem : EntitySystem
 
         if (args.Cancelled ||
             args.Handled ||
-            args.Target is not { } target ||
-            _blood.DrainBlood(target) is not {} blood)
+            args.Target is not { } target)
             return;
 
-        rites.Comp.StoredBlood += blood.Volume;
-        Dirty(rites);
-        _audio.PlayPredicted(rites.Comp.BloodRitesAudio, rites, args.User);
+        var user = args.User;
+        var name = Identity.Name(target, EntityManager);
+        var blood = DrainBlood(target);
+        if (blood <= FixedPoint2.Zero)
+        {
+            _popup.PopupEntity($"You couldn't absorb any blood from {name}!", user, user);
+            return;
+        }
+
+        rites.Comp.StoredBlood += blood;
+        _popup.PopupEntity($"You absorbed {blood}u of blood from {name}.", user, user);
+
+        _audio.PlayPredicted(rites.Comp.BloodRitesAudio, rites, user);
         args.Handled = true;
     }
 
@@ -224,5 +248,31 @@ public sealed partial class BloodRitesSystem : EntitySystem
         rites.Comp.StoredBlood -= bloodCost;
         Dirty(rites);
         return true;
+    }
+
+    /// <summary>
+    /// Drains either all blood from a puddle or 50u of blood from a mob.
+    /// Returns the volume of blood removed.
+    /// </summary>
+    private FixedPoint2 DrainBlood(EntityUid uid)
+    {
+        if (!_bloodQuery.TryComp(uid, out var blood))
+            return DrainPuddle(uid);
+
+        var ent = (uid, blood);
+        var start = _blood.GetBloodstreamVolume(ent);
+        _blood.TryModifyBloodLevel(ent, -BloodDrainLimit);
+        var end = _blood.GetBloodstreamVolume(ent);
+        return start - end;
+    }
+
+    private FixedPoint2 DrainPuddle(EntityUid uid)
+    {
+        if (!_solution.TryGetDrawableSolution(uid, out var ent, out var sol))
+            return FixedPoint2.Zero;
+
+        var blood = sol.SplitSolutionWithOnly(BloodDrainLimit, BloodReagents);
+        _solution.UpdateChemicals(ent.Value);
+        return blood.Volume;
     }
 }

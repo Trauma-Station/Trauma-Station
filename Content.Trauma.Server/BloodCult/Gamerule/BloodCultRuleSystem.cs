@@ -54,6 +54,8 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
+    [Dependency] private EntityQuery<BloodCultistComponent> _cultistQuery = default!;
+    [Dependency] private EntityQuery<BloodCultLeaderComponent> _leaderQuery = default!;
 
     private static readonly Color AnnounceColor = Color.FromHex("#dc143c");
 
@@ -142,6 +144,24 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         _cult.SetCultRule(mob, rule);
         rule.Comp.Cultists.Add(mob);
         UpdateCultStage(rule.Comp);
+
+        // W pvs
+        var query = EntityQueryEnumerator<BloodCultMemberComponent>();
+        foreach (var ent in query)
+        {
+            if (ent.Comp.Rule != rule.Owner)
+                continue;
+
+            Dirty(ent);
+
+            if (!_cultistQuery.TryComp(ent, out var cultist))
+                continue;
+
+            Dirty(ent, cultist);
+
+            if (_leaderQuery.TryComp(ent, out var leader))
+                Dirty(ent, leader);
+        }
     }
 
     [SubscribeLocalEvent]
@@ -174,14 +194,19 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
             CheckRoundShouldEnd();
     }
 
-    public void Convert(EntityUid rule, EntityUid target, [ForbidLiteral] ProtoId<AntagSpecifierPrototype> specifier)
+    public bool Convert(EntityUid rule, EntityUid target, [ForbidLiteral] ProtoId<AntagSpecifierPrototype> specifier)
     {
-        if (!TryComp<AntagSelectionComponent>(rule, out var antag) ||
-            !TryComp<ActorComponent>(target, out var actor))
-            return;
+        if (!TryComp<AntagSelectionComponent>(rule, out var antag))
+        {
+            Log.Error($"Bad gamerule {ToPrettyString(rule)} was missing AntagSelectionComponent!");
+            return false;
+        }
+
+        if (!_actorQuery.TryComp(target, out var actor))
+            return false;
 
         var antagEnt = (rule, antag);
-        _antag.TryMakeAntag(antagEnt, specifier, actor.PlayerSession);
+        return _antag.TryMakeAntag(antagEnt, specifier, actor.PlayerSession, checkPref: false);
     }
 
     private void CheckRoundShouldEnd()

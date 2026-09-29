@@ -137,3 +137,9 @@
   - type: RefillableSolution
     refillTime: 0
     maxRefill: null
+  - type: Injector
+    # replace shitty delayed draw with regular one
+    activeModeProtoId: HyposprayDynamicMode
+    allowedModes:
+    - !Remove HypopenDynamicMode
+    - HyposprayDynamicMode

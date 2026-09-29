@@ -15139,3 +15139,163 @@ Entries:
   id: 1647
   time: '2026-09-27T15:56:55.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4775
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added fertilized white eggs to biogenerators
+  - type: Add
+    message: Made clown, cluwne and mime chickens wackier
+  - type: Add
+    message: >-
+      Added a proper way to get mime chickens, You just need to feed clown hen's
+      mimanas now
+  - type: Add
+    message: Added unique effects to the clown and cluwne eggs
+  - type: Add
+    message: Added unique flavor text when eating knight, clown and cluwne eggs
+  - type: Tweak
+    message: Raptor's now only require 5-10 pets in order to tame now
+  - type: Tweak
+    message: Zappy Roosters now have reduced projectile speed, They are now more lethal
+  - type: Fix
+    message: >-
+      Fixed knight's coming from feeding an ixworth chicken steelwheat now it
+      properly correlates to the chart
+  - type: Fix
+    message: Fixed phoenix eggs using onagadori eggs instead of knight eggs
+  id: 1648
+  time: '2026-09-28T06:20:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4780
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed hypopen having a doafter when you use it on containers.
+  id: 1649
+  time: '2026-09-28T06:59:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4781
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed blood cult leader and constructs having 2 prepare spell actions.
+  id: 1650
+  time: '2026-09-28T08:19:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4784
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Blood cult revive rune now heals missing limbs, blood, etc.
+  id: 1651
+  time: '2026-09-28T08:36:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4785
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed cult teleport spell (not rune) not working.
+  - type: Fix
+    message: >-
+      Fixed cult veil shifter not bringing whatever you are pulling like it
+      said.
+  - type: Fix
+    message: Fixed empowered alert saying it made you immune to pressure.
+  id: 1652
+  time: '2026-09-28T11:27:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4789
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed only being able to use shadow shackles once instead of 4 times.
+  - type: Tweak
+    message: Shadow shackles now needs you to stun someone first.
+  - type: Remove
+    message: >-
+      Removed summon combat equipment, it made the cult forge obsolete and was
+      way too strong.
+  - type: Tweak
+    message: Cult bolas can be made in the cult altar.
+  - type: Tweak
+    message: Cult longswords can be made in the daemon forge.
+  id: 1653
+  time: '2026-09-28T11:39:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4790
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Cult longsword is now huge instead of medium.
+  id: 1654
+  time: '2026-09-28T11:53:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4791
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Reverted shitty chat update from hardlight
+  id: 1655
+  time: '2026-09-28T21:23:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4798
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Removed most deadnaming of SpaceLaw.
+  id: 1656
+  time: '2026-09-28T21:24:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4792
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added a new way to get Clown Eggs, Obtained from feeding a white hen
+      bananas and keeping it very happy (60+ Happiness)
+  - type: Tweak
+    message: Fixed clown eggs turning into white chicks when put into an incubator
+  id: 1657
+  time: '2026-09-29T06:40:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4801
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed gemini slop. Please update your star signs.
+  id: 1658
+  time: '2026-09-29T06:51:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4802
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Probably fixed new blood cult converts not seeing cultists icons and vice
+      versa.
+  id: 1659
+  time: '2026-09-29T07:24:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4804
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lavaland gateway not working.
+  id: 1660
+  time: '2026-09-29T09:05:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4806
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Blood rites now works on puddles, has popups and only drains 50u at a time
+      maximum.
+  id: 1661
+  time: '2026-09-29T10:28:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4808
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added the Explosive Cigar Case, you can buy it for 20 TC.
+  - type: Tweak
+    message: >-
+      Tweaked the Bomb Collar, it is now stronger, but pretty weak if not
+      equipped.
+  id: 1662
+  time: '2026-09-29T11:55:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4584
+- author: Clanky Station Consent Cult
+  changes:
+  - type: Fix
+    message: Cult conversion no longer lets you just opt out of being converted...
+  id: 1663
+  time: '2026-09-29T12:02:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4813

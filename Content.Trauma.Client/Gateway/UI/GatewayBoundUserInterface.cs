@@ -18,7 +18,7 @@ public sealed class GatewayBoundUserInterface(EntityUid owner, Enum uiKey) : Bou
 
         _window.OpenPortal += destination =>
         {
-            SendMessage(new GatewayOpenPortalMessage(destination));
+            SendPredictedMessage(new GatewayOpenPortalMessage(destination));
         };
     }
 

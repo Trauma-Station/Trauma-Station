@@ -41,12 +41,18 @@ public sealed partial class BloodCultTeleportSpellSystem : EntitySystem
     {
         var duration = TimeSpan.FromSeconds(4);
         var rune = GetEntity(args.Location);
-        if (TerminatingOrDeleted(rune) || !HasComp<CultRuneComponent>(rune))
-            return;
-
         var user = args.Actor;
+        if (TerminatingOrDeleted(rune) || !HasComp<CultRuneComponent>(rune))
+        {
+            Log.Error($"Client {ToPrettyString(user)} sent invalid rune {ToPrettyString(rune)} to teleport to!");
+            return;
+        }
+
         var ev = new TeleportActionDoAfterEvent();
-        var doAfterArgs = new DoAfterArgs(EntityManager, user, duration, ev, ent, target: ent.Comp.Target, used: rune);
+        var doAfterArgs = new DoAfterArgs(EntityManager, user, duration, ev, ent, target: ent.Comp.Target, used: rune)
+        {
+            DistanceThreshold = null // the rune may be far away...
+        };
         _doAfter.TryStartDoAfter(doAfterArgs);
     }
 

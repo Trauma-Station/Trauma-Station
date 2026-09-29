@@ -96,9 +96,8 @@ public abstract partial class BloodCultSystem : EntitySystem
     public bool TargetKilled(EntityUid member)
         => GetRule(member)?.Comp.TargetSacrificed ?? false;
 
-    public virtual void Convert(EntityUid rule, EntityUid target)
-    {
-    }
+    public virtual bool Convert(EntityUid rule, EntityUid target)
+        => false;
 
     public virtual void ConvertConstruct(EntityUid rule, EntityUid target)
     {

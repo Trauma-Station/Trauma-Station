@@ -70,6 +70,7 @@
     entries:
     - prototype: ConstructShell
     - prototype: WhetstoneCult
+    - prototype: CultBola
   - type: Construction
     graph: CultFactoryAltar
     node: altar
@@ -85,7 +86,7 @@
   - type: TimedFactory
     entries:
     - prototype: MirrorShieldCult
-#    - prototype: EldritchLongsword
+    - prototype: EldritchLongsword
     - prototype: ClothingOuterCultArmor
     - prototype: ClothingOuterRobesCultTrue
   - type: Construction
