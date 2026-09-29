@@ -12,8 +12,8 @@ public sealed partial class StatusTabControl : BaseTabControl
     [Dependency] private IEntityManager _ent = default!;
     [Dependency] private IGameTiming _timing = default!;
 
-    private ClientGameTicker _ticker;
-    private StatusControlSystem _status;
+    private ClientGameTicker? _ticker;
+    private StatusControlSystem? _status;
 
     private int _minutes = -1;
 
@@ -22,15 +22,18 @@ public sealed partial class StatusTabControl : BaseTabControl
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        _ticker = _ent.System<ClientGameTicker>();
-        _status = _ent.System<StatusControlSystem>();
+        _ent.TrySystem(out _ticker);
+        _ent.TrySystem(out _status);
     }
 
     protected override void EnteredTree()
     {
         base.EnteredTree();
 
-        _status.OnInfoUpdated += UpdateInfoBlob;
+        _ent.TrySystem(out _ticker);
+        _ent.TrySystem(out _status);
+
+        _status?.OnInfoUpdated += UpdateInfoBlob;
         UpdateInfoBlob();
     }
 
@@ -38,11 +41,14 @@ public sealed partial class StatusTabControl : BaseTabControl
     {
         base.ExitedTree();
 
-        _status.OnInfoUpdated -= UpdateInfoBlob;
+        _status?.OnInfoUpdated -= UpdateInfoBlob;
     }
 
     protected override void FrameUpdate(FrameEventArgs e)
     {
+        if (_ticker is not { })
+            return;
+
         var time = _timing.CurTime.Subtract(_ticker.RoundStartTimeSpan);
         if (time.Minutes == _minutes)
             return;
@@ -59,6 +65,7 @@ public sealed partial class StatusTabControl : BaseTabControl
 
     private void UpdateInfoBlob()
     {
-        ServerInfo.SetInfoBlob(_status.Info);
+        if (_status?.Info is { } info)
+            ServerInfo.SetInfoBlob(info);
     }
 }
