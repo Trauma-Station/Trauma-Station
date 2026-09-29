@@ -54,6 +54,8 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
+    [Dependency] private EntityQuery<BloodCultistComponent> _cultistQuery = default!;
+    [Dependency] private EntityQuery<BloodCultLeaderComponent> _leaderQuery = default!;
 
     private static readonly Color AnnounceColor = Color.FromHex("#dc143c");
 
@@ -142,6 +144,24 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         _cult.SetCultRule(mob, rule);
         rule.Comp.Cultists.Add(mob);
         UpdateCultStage(rule.Comp);
+
+        // W pvs
+        var query = EntityQueryEnumerator<BloodCultMemberComponent>();
+        foreach (var ent in query)
+        {
+            if (ent.Comp.Rule != rule.Owner)
+                continue;
+
+            Dirty(ent);
+
+            if (!_cultistQuery.TryComp(ent, out var cultist))
+                continue;
+
+            Dirty(ent, cultist);
+
+            if (_leaderQuery.TryComp(ent, out var leader))
+                Dirty(ent, leader);
+        }
     }
 
     [SubscribeLocalEvent]
