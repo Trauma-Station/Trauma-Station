@@ -68,7 +68,7 @@
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
-  id: ClothingOuterArmorReactiveTeleport
+  id: ClothingOuterArmorReactiveTeleport # bluespace core
   name: reactive teleport armor
   description: Doesn't seem to do much for some reason.
   components:
@@ -95,7 +95,7 @@
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
-  id: ClothingOuterArmorReactiveTesla # electricity
+  id: ClothingOuterArmorReactiveTesla # electricity core
   name: reactive tesla armor
   description: An experimental suit of armor with sensitive detectors hooked up to a huge capacitor grid, with emitters strutting out of it. Zap.
   components:
@@ -113,7 +113,29 @@
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
-  id: ClothingOuterArmorReactiveRepulsive # gravity
+  id: ClothingOuterArmorReactiveIncendiary # pyroclastic core
+  name: reactive incendiary armor
+  description: An experimental suit of armor with a reactive sensor array rigged to a flame emitter. For the stylish pyromaniac.
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:PlaySoundEffect
+      sound: /Audio/Magic/fireball.ogg
+    - !type:SetOnFireInRange
+      seachRange: 6.0
+      fireStacks: 2.0
+    - !type:ExtinguishInRange
+      seachRange: 0.1 # or should i just make extinguish self method?
+    activationDelay: 10
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: incendiary
+  # emp_message = span_warning("The reactive incendiary armor's targeting system begins rebooting...")
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveRepulsive # gravity core
   name: reactive repulsive armor
   description: An experimental suit of armor that violently throws back attackers.
   components:
@@ -150,7 +172,66 @@
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
-  id: ClothingOuterArmorReactiveHealing # liquid
+  id: ClothingOuterArmorReactiveCryogenic # ice core
+  name: reactive cryogenic armor
+  description: An experimental suit of armor. # WRITE SOMETHING
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:PlaySoundEffect
+      sound: /Audio/_Goobstation/Wraith/flameswoosh.ogg
+    - !type:Sparks
+    - !type:IceBrickInRange
+      seachRange: 6.0
+      breakFreeDelay: 5
+    activationDelay: 10
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: cryogenic
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveAberration # flesh core
+  name: reactive aberration armor
+  description: An experimental suit of armor. # WRITE SOMETHING
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:PlaySoundEffect
+      sound: /Audio/_Goobstation/Changeling/Effects/armour_transform.ogg
+    - !type:SpawnFriendly
+      entity: MobFleshGolem
+    - !type:SpawnFriendly
+      entity: MobFleshLover
+    activationDelay: 10
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: aberration
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveRock # rock core
+  name: reactive rock armor
+  description: An experimental suit of armor. # WRITE SOMETHING feel yourself as duane junson or something
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:Sparks
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectDamageModArmorReactiveRock
+      time: 5
+      type: Add
+    activationDelay: 10
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: rock
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveHealing # liquid core
   name: reactive healing armor
   description: An experimental suit of armor. # WRITE SOMETHING
   components:
@@ -175,7 +256,23 @@
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
-  id: ClothingOuterArmorReactiveStealth # shadow
+  id: ClothingOuterArmorReactiveHallucinating # flora core
+  name: reactive hallucinating armor
+  description: An experimental suit of armor with sensitive detectors hooked up to the mind of the wearer, sending mind pulses that causes hallucinations around you.
+  components:
+  - type: ReactiveArmor # last one
+    effects:
+    - !type:Sparks
+    activationDelay: 10
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: hallucinating
+  # emp_message = span_warning("You feel the backsurge of a mind pulse.")
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveStealth # shadow core
   name: reactive stealth armor
   description: An experimental suit of armor that renders the wearer invisible on detection of imminent harm. You can't fight what you can't see.
   components:
@@ -196,7 +293,7 @@
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
-  id: ClothingOuterArmorReactiveTable # tech
+  id: ClothingOuterArmorReactiveTable # tech core
   name: reactive table armor
   description: An experimental suit of armor that... does something really wierd. Eh, science am i right? # TG desc (it was admem) = If you can't beat the memes, embrace them.
   components:
@@ -223,86 +320,4 @@
     deconstructionTarget: null
     node: table
 
-- type: entity
-  parent: ClothingOuterArmorReactiveBase
-  id: ClothingOuterArmorReactiveIncendiary # pyroclastic
-  name: reactive incendiary armor
-  description: An experimental suit of armor with a reactive sensor array rigged to a flame emitter. For the stylish pyromaniac.
-  components:
-  - type: ReactiveArmor
-    effects:
-    - !type:Sparks
-    activationDelay: 10
-  - type: Construction
-    graph: ArmorReactive
-    deconstructionTarget: null
-    node: incendiary
-  # emp_message = span_warning("The reactive incendiary armor's targeting system begins rebooting...")
-
-- type: entity
-  parent: ClothingOuterArmorReactiveBase
-  id: ClothingOuterArmorReactiveCryogenic # ice
-  name: reactive cryogenic armor
-  description: An experimental suit of armor. # WRITE SOMETHING
-  components:
-  - type: ReactiveArmor
-    effects:
-    - !type:Sparks
-    activationDelay: 10
-  - type: Construction
-    graph: ArmorReactive
-    deconstructionTarget: null
-    node: cryogenic
-
-- type: entity
-  parent: ClothingOuterArmorReactiveBase
-  id: ClothingOuterArmorReactiveAberration # flesh
-  name: reactive aberration armor
-  description: An experimental suit of armor. # WRITE SOMETHING
-  components:
-  - type: ReactiveArmor
-    effects:
-    - !type:Sparks
-    activationDelay: 10
-  - type: Construction
-    graph: ArmorReactive
-    deconstructionTarget: null
-    node: aberration
-
-- type: entity
-  parent: ClothingOuterArmorReactiveBase
-  id: ClothingOuterArmorReactiveRock # rock
-  name: reactive rock armor
-  description: An experimental suit of armor. # WRITE SOMETHING feel yourself as duane junson or something
-  components:
-  - type: ReactiveArmor
-    effects:
-    - !type:Sparks
-    - !type:ModifyStatusEffect
-      effectProto: StatusEffectDamageModArmorReactiveRock
-      time: 5
-      type: Add
-    activationDelay: 10
-  - type: Construction
-    graph: ArmorReactive
-    deconstructionTarget: null
-    node: rock
-
-- type: entity
-  parent: ClothingOuterArmorReactiveBase
-  id: ClothingOuterArmorReactiveHallucinating # flora
-  name: reactive hallucinating armor
-  description: An experimental suit of armor with sensitive detectors hooked up to the mind of the wearer, sending mind pulses that causes hallucinations around you.
-  components:
-  - type: ReactiveArmor
-    effects:
-    - !type:Sparks
-    activationDelay: 10
-  - type: Construction
-    graph: ArmorReactive
-    deconstructionTarget: null
-    node: hallucinating
-  # emp_message = span_warning("You feel the backsurge of a mind pulse.")
-
 # ToDo: i have no idea what behavior to give santa armor
-# 9 items to go... 15-18-ish systems?

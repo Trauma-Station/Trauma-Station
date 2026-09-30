@@ -15,7 +15,7 @@ namespace Content.Trauma.Shared.EntityEffects.Effects;
 public sealed partial class TableSlam : EntityEffectBase<TableSlam>
 {
     [DataField]
-    public float seachRange = 1.0f;
+    public float SeachRange = 1.0f;
 }
 
 public sealed partial class TableSlamEffectSystem : EntityEffectSystem<PullableComponent, TableSlam>
@@ -27,8 +27,7 @@ public sealed partial class TableSlamEffectSystem : EntityEffectSystem<PullableC
     protected override void Effect(Entity<PullableComponent> ent, ref EntityEffectEvent<TableSlam> args)
     {
         var entPos = _transform.GetMapCoordinates(ent.Owner);
-        // why not work why
-        foreach (var (uid, comp) in _lookup.GetEntitiesInRange<BonkableComponent>(entPos, args.Effect.seachRange)){
+        foreach (var (uid, comp) in _lookup.GetEntitiesInRange<BonkableComponent>(entPos, args.Effect.SeachRange)){
             _slam.TableSlam(ent, uid);
             break;
         }
