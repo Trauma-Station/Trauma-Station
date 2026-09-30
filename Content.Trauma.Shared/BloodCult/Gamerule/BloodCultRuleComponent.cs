@@ -22,6 +22,12 @@ public sealed partial class BloodCultRuleComponent : Component
     public bool LeaderSelected;
 
     /// <summary>
+    /// The station the cult is targeting.
+    /// </summary>
+    [DataField]
+    public EntityUid Station;
+
+    /// <summary>
     /// The current player that Nar'Sie wants sacraficed.
     /// </summary>
     [DataField, AutoNetworkedField]
@@ -85,3 +91,9 @@ public sealed partial class BloodCultRuleComponent : Component
     [DataField]
     public List<EntityUid> Constructs = new();
 }
+
+/// <summary>
+/// Event broadcast when a cult has its target changed.
+/// </summary>
+[ByRefEvent]
+public record struct CultTargetAssignedEvent(EntityUid Rule, EntityUid Target);
