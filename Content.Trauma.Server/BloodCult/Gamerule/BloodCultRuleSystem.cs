@@ -233,7 +233,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         var query = EntityQueryEnumerator<ActorComponent, HumanoidProfileComponent, MindContainerComponent>();
         while (query.MoveNext(out var uid, out _, out _, out var mc))
         {
-            // never include cultsits as targets
+            // never include cultists as targets
             if (mc.Mind is not { } mind || _cult.IsMindCultist(mind))
                 continue;
 
@@ -277,8 +277,8 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     private void RemoveCultistAppearance(Entity<BloodCultistComponent?> cultist)
     {
         if (!Resolve(cultist, ref cultist.Comp))
-
             return;
+
         _humanoid.SetEyeColor(cultist, cultist.Comp.OriginalEyeColor);
         RemComp<PentagramComponent>(cultist);
     }

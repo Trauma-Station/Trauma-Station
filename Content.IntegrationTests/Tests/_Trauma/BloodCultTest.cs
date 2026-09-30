@@ -5,6 +5,7 @@ using Content.Shared.Antag;
 using Content.Shared.Antag.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Rules.Components;
+using Content.Shared.Humanoid;
 using Content.Shared.Mind;
 using Content.Shared.Roles;
 using Content.Trauma.Shared.BloodCult;
@@ -44,17 +45,10 @@ public sealed class BloodCultTest : InteractionTest
         {
             var helper = SpawnWithMind(dummies[0], coords);
 
-            if (!_ticker.StartGameRule(GameRule, out var rule))
-            {
-                Assert.Fail($"Failed to start gamerule {GameRule}");
-                return;
-            }
+            var (antag, rule) = StartRule();
 
             // spawned after starting the rule so its not picked to be sacrificed
             var initiate = SpawnWithMind(dummies[1], coords);
-
-            var antag = (rule.Value.Owner, SComp<AntagSelectionComponent>(rule.Value));
-            var ruleComp = SComp<BloodCultRuleComponent>(rule.Value);
 
             Assert.That(_antag.IsEntityValid(SPlayer, specifier), "Player entity somehow wasnt valid");
             Assert.That(_antag.IsSessionValid(ServerSession, antag, specifier), "Session wasnt valid for some reason");
@@ -71,7 +65,7 @@ public sealed class BloodCultTest : InteractionTest
             Assert.That(SComp<BloodCultMemberComponent>(SPlayer).Rule, Is.EqualTo(antag.Owner));
 
             Assert.That(_mind.GetMind(initiate), Is.Not.Null, "Initiate had no mind");
-            Assert.That(initiate, Is.Not.EqualTo(ruleComp.OfferingTarget), "Can't convert the sacrifice target!");
+            Assert.That(initiate, Is.Not.EqualTo(rule.OfferingTarget), "Can't convert the sacrifice target!");
 
             // spawn the rune to convert with
             var rune = SSpawn(CultRuneOffering, coords);
@@ -82,7 +76,7 @@ public sealed class BloodCultTest : InteractionTest
 
             Assert.That(SHasComp<BloodCultistComponent>(initiate));
 
-            Assert.That(_antag.GetAntagIdentifiers(rule.Value.Owner).Count(), Is.EqualTo(3), "Conversion didn't work");
+            Assert.That(_antag.GetAntagIdentifiers(antag).Count(), Is.EqualTo(3), "Conversion didn't work");
 
             SDel(_mind.GetMind(initiate));
             SDel(_mind.GetMind(helper));
@@ -90,7 +84,7 @@ public sealed class BloodCultTest : InteractionTest
             SDel(rune);
             SDel(initiate);
             SDel(helper);
-            SDel(rule.Value);
+            SDel(antag);
         });
 
         /*
@@ -111,13 +105,53 @@ public sealed class BloodCultTest : InteractionTest
         */
     }
 
-    private EntityUid SpawnWithMind(ICommonSession session, EntityCoordinates coords)
+    /// <summary>
+    /// Checks that a cult starts with an offering target and enough ritual sites.
+    /// </summary>
+    [Test]
+    public async Task CultStartTest()
     {
-        var mob = SSpawn(Urist, coords);
+        var coords = SEntMan.GetCoordinates(PlayerCoords);
+
+        await Server.WaitPost(() =>
+        {
+            var mind = AssignMind(ServerSession, SPlayer);
+
+            Assert.That(SHasComp<ActorComponent>(SPlayer));
+            Assert.That(SHasComp<HumanoidProfileComponent>(SPlayer));
+            Assert.That(_mind.GetMind(SPlayer), Is.Not.Null);
+
+            var (antag, rule) = StartRule();
+            Assert.That(rule.OfferingTarget, Is.Not.Null, "Blood cult rule didn't pick an offering target");
+            Assert.That(rule.RitualAreas.Count, Is.EqualTo(rule.AreaCount), "Blood cult rule didn't start with enough ritual areas");
+            SDel(mind);
+            SDel(antag);
+        });
+    }
+
+    private EntityUid AssignMind(ICommonSession session, EntityUid mob)
+    {
         var mind = _mind.CreateMind(session.UserId);
         _mind.TransferTo(mind, mob);
         Assert.That(session.AttachedEntity, Is.EqualTo(mob));
+        return mind;
+    }
+
+    private EntityUid SpawnWithMind(ICommonSession session, EntityCoordinates coords)
+    {
+        var mob = SSpawn(Urist, coords);
+        AssignMind(session, mob);
         return mob;
+    }
+
+    private (Entity<AntagSelectionComponent>, BloodCultRuleComponent) StartRule()
+    {
+        if (!_ticker.StartGameRule(GameRule, out var rule))
+            throw new Exception($"Failed to start gamerule {GameRule}");
+
+        var antag = (rule.Value.Owner, SComp<AntagSelectionComponent>(rule.Value));
+        var ruleComp = SComp<BloodCultRuleComponent>(rule.Value);
+        return (antag, ruleComp);
     }
 
     private Entity<T> GetFirst<T>() where T : IComponent
