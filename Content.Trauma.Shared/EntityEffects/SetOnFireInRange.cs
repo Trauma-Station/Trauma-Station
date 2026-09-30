@@ -15,4 +15,3 @@ public sealed partial class SetOnFireInRange : EntityEffectBase<SetOnFireInRange
     [DataField(required: true)]
     public float FireStacks = default!;
 }
-
