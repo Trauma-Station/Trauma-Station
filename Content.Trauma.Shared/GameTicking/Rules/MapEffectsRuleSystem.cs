@@ -15,22 +15,11 @@ public sealed partial class MapEffectsRuleSystem : GameRuleSystem<MapEffectsRule
 
     protected override void Started(Entity<MapEffectsRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
     {
-        if (GetFirstStation() is not {} station ||
-            _station.GetLargestGrid(station) is not {} grid ||
+        if (!_station.TryGetRandomStation(out var station) ||
+            _station.GetStationGridUid(station.Value) is not {} grid ||
             Transform(grid).MapUid is not {} map)
             return;
 
         _effects.ApplyEffects(map, ent.Comp1.Effects, predicted: false); // they probably arent predicted yet
-    }
-
-    private EntityUid? GetFirstStation()
-    {
-        var query = EntityQueryEnumerator<StationDataComponent>();
-        while (query.MoveNext(out var uid, out _))
-        {
-            return uid;
-        }
-
-        return null;
     }
 }

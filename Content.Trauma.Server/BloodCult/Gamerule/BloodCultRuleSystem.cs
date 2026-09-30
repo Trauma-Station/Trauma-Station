@@ -23,6 +23,7 @@ using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Roles;
+using Content.Shared.Station.Systems;
 using Content.Trauma.Server.BloodCult.Objectives;
 using Content.Trauma.Shared.BloodCult;
 using Content.Trauma.Shared.BloodCult.Components;
@@ -53,22 +54,35 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private StationSystem _station = default!;
     [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
     [Dependency] private EntityQuery<BloodCultistComponent> _cultistQuery = default!;
     [Dependency] private EntityQuery<BloodCultLeaderComponent> _leaderQuery = default!;
+    [Dependency] private EntityQuery<BloodCultRuleComponent> _query = default!;
 
     private static readonly Color AnnounceColor = Color.FromHex("#dc143c");
 
     private List<EntityUid> _targets = new();
 
-    // TODO: make a thing so if target cryos it picks a new one
+    protected override void Added(Entity<BloodCultRuleComponent, GameRuleComponent> ent, ref GameRuleAddedEvent args)
+    {
+        base.Added(ent, ref args);
+
+        if (!_station.TryGetRandomStation(out var station))
+        {
+            ForceEndSelf((ent, ent.Comp2));
+            return;
+        }
+
+        ent.Comp1.Station = station.Value;
+    }
 
     protected override void Started(Entity<BloodCultRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
     {
         base.Started(ent, ref args);
 
         var comp = ent.Comp1;
-        comp.OfferingTarget = PickTarget();
+        comp.OfferingTarget = PickTarget(comp.Station);
         while (comp.RitualAreas.Count < comp.AreaCount)
         {
             var area = _random.Pick(comp.AreaPool);
@@ -194,6 +208,25 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
             CheckRoundShouldEnd();
     }
 
+    [SubscribeLocalEvent]
+    private void OnTargetShutdown(Entity<BloodCultTargetComponent> ent, ref ComponentShutdown args)
+    {
+        var rule = ent.Comp.Rule;
+        if (TerminatingOrDeleted(rule) || !_query.TryComp(rule, out var comp))
+            return;
+
+        comp.OfferingTarget = comp.TargetSacrificed
+            ? null // done the job
+            : PickTarget(comp.Station); // find a new target
+
+        if (comp.OfferingTarget is { } target)
+        {
+            AnnounceToCult((rule, comp), $"Nar'Sie now demands the sacrifice of {Name(target)}!");
+            var ev = new CultTargetAssignedEvent(rule, target);
+            RaiseLocalEvent(ref ev);
+        }
+    }
+
     public bool Convert(EntityUid rule, EntityUid target, [ForbidLiteral] ProtoId<AntagSpecifierPrototype> specifier)
     {
         if (!TryComp<AntagSelectionComponent>(rule, out var antag))
@@ -226,15 +259,15 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         }
     }
 
-    private EntityUid? PickTarget()
+    private EntityUid? PickTarget(EntityUid station)
     {
         _targets.Clear();
         // TODO: use mind pools, prioritize command and sec before literally everyone
         var query = EntityQueryEnumerator<ActorComponent, HumanoidProfileComponent, MindContainerComponent>();
         while (query.MoveNext(out var uid, out _, out _, out var mc))
         {
-            // never include cultists as targets
-            if (mc.Mind is not { } mind || _cult.IsMindCultist(mind))
+            // never include cultists as targets or people off station
+            if (mc.Mind is not { } mind || _cult.IsMindCultist(mind) || _station.GetOwningStation(uid) != station)
                 continue;
 
             _targets.Add(uid);

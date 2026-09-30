@@ -36,7 +36,7 @@ public abstract partial class StationSystem
         }
 
         // use members if there are somehow no owned grids
-        return GetLargestGrid((station, station));
+        return GetLargestGrid(station.AsNullable());
     }
 
     public virtual bool TryFindTileOnGrid(Entity<MapGridComponent> grid,
