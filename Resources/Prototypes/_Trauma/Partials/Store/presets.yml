@@ -1,0 +1,48 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: StorePresetRemoteUplink
+  components:
+  - type: BasicSideJobGenerator
+    protos:
+    - KillHeadSideJob
+    - BattlecruiserSideJob
+    # this side job gets special priority
+    # the major side jobs are 1 kill + 7 steal side jobs
+    # this would make kill very rare
+    # so we give it priority so it actually shows up
+    priorityProtos:
+    - KillSideJob
+  - type: BugSideJobGenerator
+    proto: BugAreaSideJob
+    areas:
+    - AreaOfficeCmo
+    - AreaOfficeCE
+    - AreaOfficeHop
+    - AreaOfficeHos
+    - AreaOfficeRd
+    - AreaOfficeQm
+  - type: StealSideJobGenerator
+    proto: StealSideJob
+    targets:
+    - Hypospray
+    - ClothingOuterHardsuitRd
+    - HandTeleporter
+    - ClothingShoesBootsMagAdv
+    - BoxFolderQmClipboard
+    - JetpackCaptainFilled
+    - WeaponAntiqueLaser
+  - type: JobListings
+    maximumSideJobs: 4
+    maximumAcceptedSideJobs: 2
+    sideJobsPerLevel: 2
+    reputationLevels: # minor mission gives 100, major mission gives 200, extreme mission gives 500 and final mission gives 10000
+    - 100 # 1 minor
+    - 500 # 1 minor + 2 majors
+    - 1000 # 1 minor + 2 majors + 1 extreme
+    - 10000 # 1 final
+    refreshWaitDuration: 600 # 10 minutes
+  - type: ContainerContainer
+    containers:
+      available_side_jobs: !type:Container
+      accepted_side_jobs: !type:Container
