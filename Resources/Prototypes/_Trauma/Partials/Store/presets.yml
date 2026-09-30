@@ -39,7 +39,7 @@
     reputationLevels: # minor mission gives 100, major mission gives 200, extreme mission gives 500 and final mission gives 10000
     - 100 # 1 minor
     - 500 # 1 minor + 2 majors
-    - 1000 # 1 minor + 2 majors + 1 extreme
+    - 2000 # 2 minor + 4 majors + 2 extreme
     - 10000 # 1 final
     refreshWaitDuration: 600 # 10 minutes
   - type: ContainerContainer
