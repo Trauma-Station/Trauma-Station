@@ -15,6 +15,27 @@
         },
         {
             "name": "chapel_open"
+        },
+        {
+            "name": "generic"
+        },
+        {
+            "name": "generic_door"
+        },
+        {
+            "name": "generic_open"
+        },
+        {
+            "name": "generic_icon"
+        },
+        {
+            "name": "welded"
+        },
+        {
+            "name": "unlocked"
+        },
+        {
+            "name": "locked"
         }
     ]
 }
