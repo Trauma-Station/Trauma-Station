@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 289.0.2
+  engineVersion: 286.0.0
   forkId: ""
   forkVersion: ""
-  time: 09/24/2026 20:48:52
-  entityCount: 12869
+  time: 08/20/2026 17:10:42
+  entityCount: 12870
 maps:
 - 1
 grids:
@@ -7108,18 +7108,17 @@ entities:
     - type: Transform
       parent: 2
       pos: -23.5,19.5
-  - uid: 279
-    components:
-    - type: Transform
-      parent: 2
-      pos: -23.5,12.5
-- proto: AirlockMedicalMorgueLocked
-  entities:
   - uid: 278
     components:
     - type: Transform
       parent: 2
       pos: -23.5,17.5
+  - uid: 279
+    components:
+    - type: Transform
+      parent: 2
+      rot: 3.141592653589793 rad
+      pos: -23.5,12.5
 - proto: AirlockQuartermasterLocked
   entities:
   - uid: 280
@@ -7759,6 +7758,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -3.3723423,48.60457
+- proto: AsimovCircuitBoard
+  entities:
+  - uid: 389
+    components:
+    - type: Transform
+      parent: 2
+      pos: -3.3574803,48.545105
 - proto: AtmosDeviceFanDirectional
   entities:
   - uid: 390
@@ -29199,13 +29205,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -2.4571166,54.52544
-- proto: CrewsimovCircuitBoard
-  entities:
-  - uid: 389
-    components:
-    - type: Transform
-      parent: 2
-      pos: -3.3574803,48.545105
 - proto: CrowbarRed
   entities:
   - uid: 4435
@@ -56757,7 +56756,7 @@ entities:
       parent: 8542
     - type: Physics
       canCollide: False
-- proto: LightReplacerFilled
+- proto: LightReplacer
   entities:
   - uid: 8544
     components:
@@ -57302,6 +57301,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -22.5,9.5
+- proto: MachinePowerTransmissionLaser
+  entities:
+  - uid: 8609
+    components:
+    - type: Transform
+      parent: 2
+      pos: 25.5,-26.5
 - proto: MaintenanceFluffSpawner
   entities:
   - uid: 8610
@@ -65605,56 +65611,67 @@ entities:
     components:
     - type: Transform
       parent: 2
+      rot: -1.5707963267948966 rad
       pos: -38.5,11.5
   - uid: 10047
     components:
     - type: Transform
       parent: 2
+      rot: 3.141592653589793 rad
       pos: -13.5,4.5
   - uid: 10048
     components:
     - type: Transform
       parent: 2
+      rot: -1.5707963267948966 rad
       pos: -38.5,0.5
   - uid: 10049
     components:
     - type: Transform
       parent: 2
+      rot: 3.141592653589793 rad
       pos: -10.5,-4.5
   - uid: 10050
     components:
     - type: Transform
       parent: 2
+      rot: 3.141592653589793 rad
       pos: 6.5,7.5
   - uid: 10051
     components:
     - type: Transform
       parent: 2
+      rot: 3.141592653589793 rad
       pos: 2.5,18.5
   - uid: 10052
     components:
     - type: Transform
       parent: 2
+      rot: 3.141592653589793 rad
       pos: 16.5,4.5
   - uid: 10053
     components:
     - type: Transform
       parent: 2
+      rot: 3.141592653589793 rad
       pos: -11.5,-23.5
   - uid: 10054
     components:
     - type: Transform
       parent: 2
+      rot: 3.141592653589793 rad
       pos: 7.5,-24.5
   - uid: 10055
     components:
     - type: Transform
       parent: 2
+      rot: 3.141592653589793 rad
       pos: 14.5,-8.5
   - uid: 10056
     components:
     - type: Transform
       parent: 2
+      rot: 3.141592653589793 rad
       pos: 37.5,4.5
 - proto: SecurityTechFab
   entities:
