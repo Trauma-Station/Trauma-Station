@@ -83,7 +83,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
             RemCompDeferred(ent, ent.Comp);
 
             if (_query.TryComp(rule, out var comp))
-                PickTarget(comp);
+                PickTarget((rule, comp));
         }
     }
 
@@ -93,6 +93,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
 
         if (!_station.TryGetRandomStation(out var station))
         {
+            Log.Error($"Ending {ToPrettyString(ent)} since there is no station");
             ForceEndSelf((ent, ent.Comp2));
             return;
         }
@@ -105,7 +106,13 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         base.Started(ent, ref args);
 
         var comp = ent.Comp1;
-        PickTarget(comp);
+        PickTarget((ent, comp));
+        if (comp.OfferingTarget == null)
+        {
+            Log.Warning($"Couldn't find an offering target, cult won't need it");
+            comp.TargetSacrificed = true;
+            DirtyField(ent, comp, nameof(BloodCultRuleComponent.TargetSacrificed));
+        }
 
         while (comp.RitualAreas.Count < comp.AreaCount)
         {
@@ -242,7 +249,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         ent.Comp.Rule = EntityUid.Invalid;
 
         // gibbed or something pick a new target if it wasn't just sacrificed
-        PickTarget(comp);
+        PickTarget((rule, comp));
     }
 
     [SubscribeLocalEvent]
@@ -290,15 +297,16 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         }
     }
 
-    private void PickTarget(BloodCultRuleComponent rule)
+    private void PickTarget(Entity<BloodCultRuleComponent> rule)
     {
+        var comp = rule.Comp;
         comp.OfferingTarget = comp.TargetSacrificed
             ? null // done the job
             : PickTarget(comp.Station);
 
         if (comp.OfferingTarget is { } target)
         {
-            AnnounceToCult((rule, comp), $"Nar'Sie demands the sacrifice of {Name(target)}!");
+            AnnounceToCult(rule, $"Nar'Sie demands the sacrifice of {Name(target)}!");
             var ev = new CultTargetAssignedEvent(rule, target);
             RaiseLocalEvent(ref ev);
         }

@@ -48,4 +48,22 @@ public abstract partial class StationSystem
         targetCoords = EntityCoordinates.Invalid;
         return false;
     }
+
+    /// <summary>
+    /// Get the grids of every station in every map.
+    /// </summary>
+    public HashSet<EntityUid> GetAllStationGrids()
+    {
+        // Collect all grids owned by stations
+        var grids = new HashSet<EntityUid>();
+
+        var query = EntityQueryEnumerator<StationDataComponent>();
+        while (query.MoveNext(out var uid, out var data))
+        {
+            // Add to the list of grids
+            grids.UnionWith(data.Grids);
+        }
+
+        return grids;
+    }
 }
