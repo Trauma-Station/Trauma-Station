@@ -2,8 +2,12 @@
 
 namespace Content.Trauma.Common.Funeral;
 
+/// <summary>
+/// Triggers when a crematorium burns something
+/// </summary>
+
 [ByRefEvent]
-public readonly record struct CremationOutputEvent(
+public record struct CremationOutputEvent(
     EntityUid Crematorium,
     IReadOnlyList<EntityUid> Contents,
     EntProtoId OutputPrototype);

@@ -70,7 +70,7 @@ public sealed partial class EnchanterSystem : EntitySystem
         var user = args.User;
         if (_whitelist.IsWhitelistFail(ent.Comp.UserWhitelist, user))
         {
-            _popup.PopupEntity(Loc.GetString("You are not worthy of using this tome..."), user, user, PopupType.MediumCaution);
+            _popup.PopupEntity("You are not worthy of using this tome...", user, user, PopupType.MediumCaution);
             return;
         }
 
@@ -78,7 +78,7 @@ public sealed partial class EnchanterSystem : EntitySystem
         if (TryComp<EnchantingTableComponent>(table, out var tableComp) &&
             _whitelist.IsWhitelistFail(tableComp.UserWhitelist, user))
         {
-            _popup.PopupEntity(Loc.GetString("You are not worhty of using this altar..."), user, user, PopupType.MediumCaution);
+            _popup.PopupEntity("You are not worthy of using this altar...", user, user, PopupType.MediumCaution);
             return;
         }
 

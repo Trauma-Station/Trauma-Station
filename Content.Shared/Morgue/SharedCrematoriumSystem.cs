@@ -1,6 +1,6 @@
 //<Trauma>
 using Content.Goobstation.Common.Morgue;
-using Content.Trauma.Common.Funeral; //Trauma
+using Content.Trauma.Common.Funeral;
 //</Trauma>
 using Content.Shared.Database;
 using Content.Shared.Examine;
