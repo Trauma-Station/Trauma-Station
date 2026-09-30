@@ -35,6 +35,7 @@ using Content.Trauma.Shared.Roles;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.BloodCult.Gamerule;
 
@@ -46,6 +47,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     [Dependency] private GibbingSystem _gibbing = default!;
     [Dependency] private HumanoidProfileSystem _humanoid = default!;
     [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private RoundEndSystem _roundEnd = default!;
@@ -59,10 +61,31 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     [Dependency] private EntityQuery<BloodCultistComponent> _cultistQuery = default!;
     [Dependency] private EntityQuery<BloodCultLeaderComponent> _leaderQuery = default!;
     [Dependency] private EntityQuery<BloodCultRuleComponent> _query = default!;
+    [Dependency] private EntityQuery<BloodCultTargetComponent> _targetQuery = default!;
 
     private static readonly Color AnnounceColor = Color.FromHex("#dc143c");
 
     private List<EntityUid> _targets = new();
+
+    public override void Update(float frameTime)
+    {
+        base.Update(frameTime);
+
+        var now = _timing.CurTime;
+        foreach (var ent in EntityQueryEnumerator<BloodCultTargetComponent>())
+        {
+            if (ent.Comp.NextExiled is not { } exiled || exiled < now)
+                continue;
+
+            var rule = ent.Comp.Rule;
+            // target fucked off to lavaland cryod etc so pick a new one
+            ent.Comp.Rule = EntityUid.Invalid;
+            RemCompDeferred(ent, ent.Comp);
+
+            if (_query.TryComp(rule, out var comp))
+                PickTarget(comp);
+        }
+    }
 
     protected override void Added(Entity<BloodCultRuleComponent, GameRuleComponent> ent, ref GameRuleAddedEvent args)
     {
@@ -82,7 +105,8 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         base.Started(ent, ref args);
 
         var comp = ent.Comp1;
-        comp.OfferingTarget = PickTarget(comp.Station);
+        PickTarget(comp);
+
         while (comp.RitualAreas.Count < comp.AreaCount)
         {
             var area = _random.Pick(comp.AreaPool);
@@ -215,16 +239,23 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         if (TerminatingOrDeleted(rule) || !_query.TryComp(rule, out var comp))
             return;
 
-        comp.OfferingTarget = comp.TargetSacrificed
-            ? null // done the job
-            : PickTarget(comp.Station); // find a new target
+        ent.Comp.Rule = EntityUid.Invalid;
 
-        if (comp.OfferingTarget is { } target)
-        {
-            AnnounceToCult((rule, comp), $"Nar'Sie now demands the sacrifice of {Name(target)}!");
-            var ev = new CultTargetAssignedEvent(rule, target);
-            RaiseLocalEvent(ref ev);
-        }
+        // gibbed or something pick a new target if it wasn't just sacrificed
+        PickTarget(comp);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnTargetGridChanged(Entity<BloodCultTargetComponent> ent, ref GridUidChangedEvent args)
+    {
+        var rule = ent.Comp.Rule;
+        if (TerminatingOrDeleted(ent) || !_query.TryComp(rule, out var comp))
+            return; // shutdown will handle it when detaching
+
+        var station = _station.GetOwningStation(args.NewGrid);
+        ent.Comp.NextExiled = station == comp.Station
+            ? null // still on station don't care
+            : _timing.CurTime + ent.Comp.ExileTime;
     }
 
     public bool Convert(EntityUid rule, EntityUid target, [ForbidLiteral] ProtoId<AntagSpecifierPrototype> specifier)
@@ -259,6 +290,20 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         }
     }
 
+    private void PickTarget(BloodCultRuleComponent rule)
+    {
+        comp.OfferingTarget = comp.TargetSacrificed
+            ? null // done the job
+            : PickTarget(comp.Station);
+
+        if (comp.OfferingTarget is { } target)
+        {
+            AnnounceToCult((rule, comp), $"Nar'Sie demands the sacrifice of {Name(target)}!");
+            var ev = new CultTargetAssignedEvent(rule, target);
+            RaiseLocalEvent(ref ev);
+        }
+    }
+
     private EntityUid? PickTarget(EntityUid station)
     {
         _targets.Clear();
@@ -268,6 +313,10 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         {
             // never include cultists as targets or people off station
             if (mc.Mind is not { } mind || _cult.IsMindCultist(mind) || _station.GetOwningStation(uid) != station)
+                continue;
+
+            // multiple cults cant target the same guy
+            if (_targetQuery.HasComp(uid))
                 continue;
 
             _targets.Add(uid);
