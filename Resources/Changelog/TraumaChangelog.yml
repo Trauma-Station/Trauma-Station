@@ -15315,3 +15315,12 @@ Entries:
   id: 1665
   time: '2026-09-30T13:22:39.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4820
+- author: SpeltIncorrectyl
+  changes:
+  - type: Add
+    message: >-
+      Ported progressive traitor from ss13. Do side-jobs for extra TC and
+      enshrine your reputation as a living legend.
+  id: 1666
+  time: '2026-09-30T13:35:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3074
