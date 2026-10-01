@@ -15340,3 +15340,10 @@ Entries:
   id: 1668
   time: '2026-10-01T16:19:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4839
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed visual effects from being drunk etc lasting forever.
+  id: 1669
+  time: '2026-10-01T16:31:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4840
