@@ -59,6 +59,7 @@
     - type: HealthAnalyzer
     - type: CablePlacer
       cablePrototypeID: CableHV
+    - type: Store # infinite TC glitch
     componentsToRemove:
     - type: Perishable
   # -----------------

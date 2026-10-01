@@ -343,41 +343,51 @@ public abstract partial class JobListingsSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsAcceptJobMessage msg)
+    private void OnRemoteShutdown(Entity<RemoteJobListingsComponent> ent, ref ComponentShutdown args)
     {
-        if (GetJobBoard(owner.Owner) is not { } jobBoard)
+        if (GetJobBoard(ent.Owner) is not { } jobBoard)
+            return;
+
+        jobBoard.Comp.Remotes.Remove(ent.Owner);
+        DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.Remotes));
+    }
+
+    [SubscribeLocalEvent]
+    private void OnMessage(Entity<RemoteJobListingsComponent> ent, ref JobListingsAcceptJobMessage msg)
+    {
+        if (GetJobBoard(ent.Owner) is not { } jobBoard)
             return;
         AcceptSideJob(jobBoard, msg.Actor, GetEntity(msg.Job));
-        UpdateUi(owner.Owner, msg.Actor);
+        UpdateUi(ent.Owner, msg.Actor);
     }
 
     [SubscribeLocalEvent]
-    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsClaimJobMessage msg)
+    private void OnMessage(Entity<RemoteJobListingsComponent> ent, ref JobListingsClaimJobMessage msg)
     {
-        if (GetJobBoard(owner.Owner) is not { } jobBoard)
+        if (GetJobBoard(ent.Owner) is not { } jobBoard)
             return;
         ClaimSideJob(jobBoard, msg.Actor, GetEntity(msg.Job));
-        UpdateUi(owner.Owner, msg.Actor);
+        UpdateUi(ent.Owner, msg.Actor);
     }
 
     [SubscribeLocalEvent]
-    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsCancelJobMessage msg)
+    private void OnMessage(Entity<RemoteJobListingsComponent> ent, ref JobListingsCancelJobMessage msg)
     {
-        if (GetJobBoard(owner.Owner) is not { } jobBoard)
+        if (GetJobBoard(ent.Owner) is not { } jobBoard)
             return;
         CancelSideJob(jobBoard, GetEntity(msg.Job));
-        UpdateUi(owner.Owner, msg.Actor);
+        UpdateUi(ent.Owner, msg.Actor);
     }
 
     [SubscribeLocalEvent]
-    private void OnMessage(Entity<RemoteJobListingsComponent> owner, ref JobListingsRefreshMessage msg)
+    private void OnMessage(Entity<RemoteJobListingsComponent> ent, ref JobListingsRefreshMessage msg)
     {
-        if (GetJobBoard(owner.Owner) is not { } jobBoard)
+        if (GetJobBoard(ent.Owner) is not { } jobBoard)
             return;
         if (!CanRefresh(jobBoard))
             return;
         Refresh(jobBoard);
-        UpdateUi(owner.Owner, msg.Actor);
+        UpdateUi(ent.Owner, msg.Actor);
     }
 }
 

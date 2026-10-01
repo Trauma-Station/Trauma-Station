@@ -15333,3 +15333,33 @@ Entries:
   id: 1667
   time: '2026-09-30T21:29:51.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4823
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed clankers not having any radio keys.
+  id: 1668
+  time: '2026-10-01T16:19:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4839
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed visual effects from being drunk etc lasting forever.
+  id: 1669
+  time: '2026-10-01T16:31:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4840
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: Vaccines are now infinite use. This was a necessary change.
+  id: 1670
+  time: '2026-10-01T17:42:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4829
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Only one sliver can be taken from the supermatter crystal.
+  - type: Tweak
+    message: Taking a sliver dusts the knife you used.
+  id: 1671
+  time: '2026-10-01T17:54:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4841
