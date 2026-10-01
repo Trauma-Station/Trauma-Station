@@ -72,18 +72,54 @@
   metabolisms:
     Bloodstream:
       effects:
-      # Healing done only between 0-50kpa, poisoning has different damage
       - !type:EvenHealthChange
         conditions:
         - !type:PressureCondition
-            min: 0
-            max: 50
+          min: 0
+          max: 3
         damage:
           Toxin: -3
           Brute: -3
           Burn: -3
           Airloss: -1.5
-      # Improper pressure effects below
+      - !type:ModifyBleed
+        amount: -1.5
+        conditions:
+        - !type:PressureCondition
+          min: 0
+          max: 50
+          worksOnLavaland: true
+      - !type:ModifyBloodLevel
+        amount: 1.5
+        conditions:
+        - !type:PressureCondition
+          min: 0
+          max: 50
+          worksOnLavaland: true
+      - !type:EvenHealthChange
+        damage:
+          Toxin: -6
+          Brute: -6
+          Burn: -6
+          Airloss: -2
+        conditions:
+        - !type:PressureCondition
+          min: 3
+          max: 50
+          worksOnLavaland: true
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Luxurium
+          min: 16
+        - !type:PressureCondition
+          min: 0
+          max: 50
+          worksOnLavaland: true
+        damage:
+          types:
+            Poison: 5
+            Cold: 5
       - !type:HealthChange
         conditions:
         - !type:PressureCondition
