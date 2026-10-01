@@ -33,6 +33,7 @@
             # Engineering
             ChiefEngineer: [ 1, 1 ]
             AtmosphericTechnician: [ 2, 2 ]
+            Roboticist: [ 2, 2 ]
             StationEngineer: [ 2, 4 ]
             TechnicalAssistant: [ 1, 1 ]
             # Medical

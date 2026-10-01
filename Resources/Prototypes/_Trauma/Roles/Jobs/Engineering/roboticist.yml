@@ -7,14 +7,14 @@
   playTimeTracker: JobRoboticist
   requirements:
   - !type:DepartmentTimeRequirement
-    department: Science
+    department: Engineering
     time: 1.5h
   startingGear: RoboticistGear
   icon: "JobIconRoboticist"
-  supervisors: job-supervisors-rd
+  supervisors: job-supervisors-ce
   guides: [ Robotics ]
-  access:
-  - Research
+  access: # No external for you, you're OP enough
+  - Engineering
   - Maintenance
   - Robotics
   special:
@@ -35,7 +35,6 @@
     head: ClothingHeadBandSkull
     eyes: ClothingEyesGlassesCheapSunglasses
     mask: ClothingMaskGas
-    neck: ClothingNeckTieSci
     outerClothing: ClothingOuterCoatRobo
     gloves: ClothingHandsGlovesRobohands
     ear: ClothingHeadsetRobotics

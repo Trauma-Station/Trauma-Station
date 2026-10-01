@@ -2,6 +2,8 @@
 
 - type: borgType
   id: generic
+  radioChannels:
+  - Engineering
   addComponents:
   - type: ModifyKnowledgeGrant
     skills:
@@ -15,6 +17,9 @@
 - type: borgType
   id: engineering
   lawset: Engineer
+  radioChannels:
+  - Engineering
+  - !Remove Science
   addComponents:
   - type: ModifyKnowledgeGrant
     skills:
@@ -39,6 +44,9 @@
   lawset: Salvage
   defaultModules:
   - BorgModulePKA
+  radioChannels:
+  - Engineering
+  - !Remove Science
   addComponents:
   - type: NoWieldNeeded
   - type: SlavedBorg # Special AI labeling for salv borgs.
@@ -55,6 +63,9 @@
   lawset: Janitor
   defaultModules:
   - !Index:0 BorgModuleTool
+  radioChannels:
+  - Engineering
+  - !Remove Science
   addComponents:
   - type: ModifyKnowledgeGrant
     skills:
@@ -71,6 +82,9 @@
   - !Index:0 BorgModuleTool
   - BorgModuleSurgery
   - BorgModuleLollypop
+  radioChannels:
+  - Engineering
+  - !Remove Science
   addComponents:
   - type: ModifyKnowledgeGrant
     skills:
@@ -87,6 +101,9 @@
   lawset: Clown
   defaultModules:
   - !Index:0 BorgModuleTool
+  radioChannels:
+  - Engineering
+  - !Remove Science
   addComponents:
   - type: ModifyKnowledgeGrant
     skills:
