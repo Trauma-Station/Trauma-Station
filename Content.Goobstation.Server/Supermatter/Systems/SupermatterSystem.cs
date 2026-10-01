@@ -23,6 +23,7 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Kitchen.Components;
 using Content.Shared.Mobs.Components;
+using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Radiation.Systems;
 using Content.Shared.Station.Systems;
@@ -48,8 +49,9 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private ExplosionSystem _explosion = default!;
-    [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private AmbientSoundSystem _ambient = default!;
     [Dependency] private LightningSystem _lightning = default!;
     [Dependency] private AlertLevelSystem _alert = default!;
@@ -643,7 +645,10 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
             sm.Activated = true;
 
         if (sm.SliverRemoved)
+        {
+            _popup.PopupEntity("It already had a sliver removed...", uid, args.User);
             return;
+        }
 
         if (!_tool.HasQuality(args.Used, Slicing))
             return;
