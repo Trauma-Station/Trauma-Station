@@ -17,3 +17,42 @@
     visibility: 0
     revealOnAttack: false
     revealOnDamage: false
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: PointLight10StatusEffect
+  name: point light
+  components:
+  - type: PointLight
+    # enabled: true
+    # radius: 5
+    energy: 10
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: WhiteHoleStatusEffect
+  name: gravity well
+  components:
+  - type: GravityWell
+    maxRange: 6
+    baseRadialAcceleration: -180
+    baseTangentialAcceleration: -5
+    gravPulsePeriod: 0.01
+  - type: SingularityDistortion
+    intensity: -200
+    falloffPower: 1.5
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: BlackHoleStatusEffect
+  name: gravity well
+  components:
+  - type: GravityWell
+    maxRange: 6
+    minRange: 0.25
+    baseRadialAcceleration: 25
+    baseTangentialAcceleration: 5
+    gravPulsePeriod: 0.03
+  - type: SingularityDistortion
+    intensity: 10
+    falloffPower: 1.5

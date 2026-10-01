@@ -23,11 +23,9 @@
     - WhitelistChameleon
 
 - type: entity
-  parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
-  id: ClothingOuterArmorReactiveRD
-  name: reactive teleport armor
-  suffix: RD
-  description: Someone separated our Research Director from his own head!
+  abstract: true
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveTeleportBase
   components:
   - type: StealTarget
     stealGroup: TeleportArmor
@@ -40,14 +38,24 @@
     - !type:RandomTeleport
       radius:
         min: 6.0
-        max: 10.0
+        max: 8.0
     - !type:PlaySoundEffect
         sound: &arrival_sound
           path: /Audio/Effects/teleport_arrival.ogg
     - !type:Sparks
-    activationDelay: 10
-  # emp_message = span_warning("The reactive armor's teleportation calculations begin spewing errors!")
-
+    empEffects:
+    - !type:PlaySoundEffect
+        sound: *deparure_sound
+    - !type:Sparks
+    - !type:RandomTeleport
+      radius:
+        min: 6.0
+        max: 8.0
+    - !type:PlaySoundEffect
+        sound: *arrival_sound
+    - !type:Sparks
+    applyEmpEffectOnUser: false
+    empMessage: reactive-armor-emp-teleport
 
 - type: entity
   parent: ClothingOuterArmorBase
@@ -67,31 +75,22 @@
     node: start
 
 - type: entity
-  parent: ClothingOuterArmorReactiveBase
+  parent: [ BaseGrandTheftContraband, ClothingOuterArmorReactiveTeleportBase]
+  id: ClothingOuterArmorReactiveRD
+  name: reactive teleport armor
+  suffix: RD
+  description: Someone separated our Research Director from his own head!
+
+- type: entity
+  parent: ClothingOuterArmorReactiveTeleportBase
   id: ClothingOuterArmorReactiveTeleport # bluespace core
   name: reactive teleport armor
   description: Doesn't seem to do much for some reason.
   components:
-  - type: StealTarget
-    stealGroup: TeleportArmor
-  - type: ReactiveArmor
-    effects:
-    - !type:PlaySoundEffect
-        sound: *deparure_sound
-    - !type:Sparks
-    - !type:RandomTeleport
-      radius:
-        min: 6.0
-        max: 10.0
-    - !type:PlaySoundEffect
-        sound: *arrival_sound
-    - !type:Sparks
-    activationDelay: 10
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
     node: teleport
-  # emp_message = span_warning("The reactive armor's teleportation calculations begin spewing errors!")
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
@@ -104,12 +103,18 @@
     - !type:Sparks
     - !type:ShootRandomLightnings
       lightningRange: 8.0
-    activationDelay: 10
+    empEffects:
+    - !type:Sparks
+    - !type:TakeStaminaDamage
+      amount: 100
+    - !type:EvenHealthChange
+        damage:
+          Shock: 15
+    empMessage: reactive-armor-emp-tesla
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
     node: tesla
-  # emp_message = span_warning("The tesla capacitors beep ominously for a moment.")
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
@@ -126,12 +131,17 @@
       fireStacks: 2.0
     - !type:ExtinguishInRange
       seachRange: 0.1 # or should i just make extinguish self method?
-    activationDelay: 10
+    empEffects:
+    - !type:PlaySoundEffect
+      sound: /Audio/Magic/fireball.ogg
+    - !type:SetOnFireInRange
+      seachRange: 0.1
+      fireStacks: 3.0
+    empMessage: reactive-armor-emp-incendiary
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
     node: incendiary
-  # emp_message = span_warning("The reactive incendiary armor's targeting system begins rebooting...")
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
@@ -142,29 +152,17 @@
   - type: ReactiveArmor
     effects:
     - !type:Sparks
-    # - !type:GrantTemporatyComponent # it supposed to be better gameplay wise but i cant make it work on client currently
-    #   components:
-    #   - type: GravityWell
-    #     maxRange: 10
-    #     baseRadialAcceleration: -180
-    #     baseTangentialAcceleration: -5
-    #     gravPulsePeriod: 0.01
-    #   - type: SingularityDistortion
-    #     intensity: 10
-    #     falloffPower: 1.5
-    #     lifeSpan: 1
-    - !type:GravPulse
-      maxRange: 10
-      baseRadialAcceleration: -180
-      baseTangentialAcceleration: -15
-    # empEffects:
-    # - !type:Sparks
-    # - !type:GravPulse
-    #   maxRange: 10
-    #   baseRadialAcceleration: 15
-    #   baseTangentialAcceleration: .5
-    # emp_message = span_warning("The repulse generator is reset to default settings...")
-    activationDelay: 10
+    - !type:ModifyStatusEffect
+        effectProto: WhiteHoleStatusEffect
+        type: Add
+        time: 2.5
+    empEffects:
+    - !type:Sparks
+    - !type:ModifyStatusEffect
+        effectProto: BlackHoleStatusEffect
+        type: Add
+        time: 2.5
+    empMessage: reactive-armor-emp-repulsive
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
@@ -174,7 +172,7 @@
   parent: ClothingOuterArmorReactiveBase
   id: ClothingOuterArmorReactiveCryogenic # ice core
   name: reactive cryogenic armor
-  description: An experimental suit of armor. # WRITE SOMETHING
+  description: An experimental suit of armor with a reactive sensor array rigged to a cryogenic emitter.
   components:
   - type: ReactiveArmor
     effects:
@@ -184,7 +182,15 @@
     - !type:IceBrickInRange
       seachRange: 6.0
       breakFreeDelay: 5
-    activationDelay: 10
+    empEffects:
+    - !type:PlaySoundEffect
+      sound: /Audio/_Goobstation/Wraith/flameswoosh.ogg
+    - !type:Sparks
+    - !type:IceBrickInRange
+      seachRange: 0.1
+      breakFreeDelay: 5
+      ignoreSelf: false
+    empMessage: reactive-armor-emp-cryogenic
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
@@ -194,7 +200,7 @@
   parent: ClothingOuterArmorReactiveBase
   id: ClothingOuterArmorReactiveAberration # flesh core
   name: reactive aberration armor
-  description: An experimental suit of armor. # WRITE SOMETHING
+  description: Just by looking at it you feel strange presence, like you are an ant and some old God gazes upon you.
   components:
   - type: ReactiveArmor
     effects:
@@ -204,7 +210,16 @@
       entity: MobFleshGolem
     - !type:SpawnFriendly
       entity: MobFleshLover
-    activationDelay: 10
+    empEffects:
+    - !type:PlaySoundEffect
+      sound: /Audio/_Goobstation/Changeling/Effects/armour_transform.ogg
+    - !type:SpawnRandomEntities
+      entity: MobFleshGolem
+      number: 1
+    - !type:SpawnRandomEntities
+      entity: MobFleshLover
+      number: 1
+    empMessage: reactive-armor-emp-aberration
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
@@ -214,7 +229,7 @@
   parent: ClothingOuterArmorReactiveBase
   id: ClothingOuterArmorReactiveRock # rock core
   name: reactive rock armor
-  description: An experimental suit of armor. # WRITE SOMETHING feel yourself as duane junson or something
+  description: An experimental suit of armor with matter replicating emitter. Feel yourself as John "Rock" Johnson.
   components:
   - type: ReactiveArmor
     effects:
@@ -223,7 +238,18 @@
       effectProto: StatusEffectDamageModArmorReactiveRock
       time: 5
       type: Add
-    activationDelay: 10
+    empEffects: # should i make it one time only?
+    # - !type:PlaySoundEffect
+    #   sound: /Audio/_Goobstation/Changeling/Effects/armour_transform.ogg # pipe sound
+    - !type:ModifyKnockdown
+      time: 2
+    - !type:HealthChange
+      targetPart: Chest
+      damage:
+        types:
+          Blunt: 25
+    empMessage: reactive-armor-emp-rock
+    applyOnEmpOnly: true
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
@@ -233,22 +259,26 @@
   parent: ClothingOuterArmorReactiveBase
   id: ClothingOuterArmorReactiveHealing # liquid core
   name: reactive healing armor
-  description: An experimental suit of armor. # WRITE SOMETHING
+  description: An experimental suit of armor with solution auto-injector. Tuned on keeping the user alive.
   components:
   - type: ReactiveArmor
     effects:
-    - !type:Sparks
+    - !type:Sparks # hypospray inject sound
     - !type:AddReagentToBlood
         reagent: Omnizine
         amount: 5
-    # empEffects:
-    # - !type:Sparks
-    # - !type:AddReagentToBlood
-    #   - ReagentId: Lexorine
-    #     Quantity: 5
-    #   - ReagentId: Amatoxin
-    #     Quantity: 5
-    activationDelay: 10
+    - !type:AddReagentToBlood
+        reagent: TranexamicAcid
+        amount: 2.5
+    empEffects:
+    - !type:Sparks
+    - !type:AddReagentToBlood
+        reagent: Lexorin
+        amount: 5
+    - !type:AddReagentToBlood
+        reagent: Amatoxin
+        amount: 5
+    empMessage: reactive-armor-emp-healing
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
@@ -263,12 +293,13 @@
   - type: ReactiveArmor # last one
     effects:
     - !type:Sparks
-    activationDelay: 10
+    empEffects:
+    - !type:Sparks
+    empMessage: reactive-armor-emp-hallucinating
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
     node: hallucinating
-  # emp_message = span_warning("You feel the backsurge of a mind pulse.")
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
@@ -284,8 +315,15 @@
         effectProto: ForcedTrueStealthStatusEffect
         type: Add
         time: 5
-    activationDelay: 10
-    # emp_message = span_warning("The reactive stealth armor's threat assessment system crashes...")
+    empEffects:
+    - !type:PlaySoundEffect
+        sound: *deparure_sound
+    #- !type:BlindingTrapFlashEffect
+    - !type:ModifyStatusEffect
+        effectProto: PointLight10StatusEffect
+        type: Add
+        time: 5
+    empMessage: reactive-armor-emp-stealth
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
@@ -313,8 +351,22 @@
       entity: Table
       number: 1
     - !type:TableSlam
-    activationDelay: 10
-    # emp_message = span_danger("The reactive table armor's fabricators click and whirr ominously for a moment...")
+    empEffects:
+    - !type:PlaySoundEffect
+        sound: *deparure_sound
+    - !type:Sparks
+    - !type:RandomTeleport
+      radius:
+        min: 6.0
+        max: 8.0
+    - !type:PlaySoundEffect
+        sound: *arrival_sound
+    - !type:Sparks
+    - !type:SpawnRandomEntities
+      entity: TableGlass
+      number: 1
+    - !type:TableSlam
+    empMessage: reactive-armor-emp-table
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
