@@ -41,5 +41,6 @@ public sealed partial class TraumaInventorySystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, BeforeDamageChangedEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, SpeechFontOverrideEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, GotHitByProjectileEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, EmpPulseEvent>(_inventory.RelayEvent);
     }
 }

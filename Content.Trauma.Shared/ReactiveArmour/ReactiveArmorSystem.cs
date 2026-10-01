@@ -31,12 +31,12 @@ public sealed partial class ReactiveArmorSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnEmpPulse(EntityUid uid, ReactiveArmorComponent comp, EmpPulseEvent args)
+    private void OnEmpPulse(EntityUid uid, ReactiveArmorComponent comp, InventoryRelayedEvent<EmpPulseEvent> args)
     {
         comp.LastEmpd = _timing.CurTime;
         Dirty(uid, comp);
-        /// How to make it work??
-        // _popup.PopupEntity(Loc.GetString(comp.EmpMessage), args.Owner, args.Owner);
+
+        _popup.PopupEntity(Loc.GetString(comp.EmpMessage), args.Owner, args.Owner);
     }
 
     private void CheckForCooldown(EntityUid uid, ReactiveArmorComponent comp, EntityUid target)
