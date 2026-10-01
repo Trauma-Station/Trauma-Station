@@ -25,7 +25,6 @@ public sealed partial class InternalEncryptionKeySpawnerSystem : EntitySystem
     [SubscribeLocalEvent]
     public void OnStartingGearEquipped(Entity<EncryptionKeyHolderComponent> ent, ref StartingGearEquippedEvent ev)
     {
-        Log.Error($"Equipped {ev.StartingGear} to {ToPrettyString(ent)}: {Environment.StackTrace}");
         TryInsertEncryptionKey(ent, ev.StartingGear);
     }
 
@@ -44,7 +43,6 @@ public sealed partial class InternalEncryptionKeySpawnerSystem : EntitySystem
             !fill.Containers.TryGetValue(EncryptionKeyHolderComponent.KeyContainerName, out var keys))
             return;
 
-        Log.Error($"{keys.Count} keys from {headsetId}");
         _container.CleanContainer(ent.Comp.KeyContainer);
         foreach (var key in keys)
         {
