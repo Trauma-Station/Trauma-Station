@@ -49,6 +49,13 @@ public sealed class ClankerTest : GameTest
                     continue;
 
                 var mob = _spawning.SpawnPlayerMob(coords, job.ID, profile, null);
+                if (!SHasComp<EncryptionKeyHolderComponent>(mob))
+                {
+                    failed.Add($"{job.ID} - bad mob {SToPrettyString(mob)} was missing EncryptionKeyHolder!");
+                    SDel(mob);
+                    continue;
+                }
+
                 if (!_container.TryGetContainer(mob, containerId, out var container))
                 {
                     failed.Add($"{job.ID} - missing {containerId} container on {SToPrettyString(mob)}!");
