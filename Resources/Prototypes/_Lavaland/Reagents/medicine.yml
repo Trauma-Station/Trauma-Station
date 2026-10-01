@@ -78,10 +78,9 @@
           min: 0
           max: 3
         damage:
-          Toxin: -1
           Brute: -3
-          Burn: -3
-          Airloss: -1.5
+          Burn: -2
+          Airloss: -.75
       - !type:ModifyBleed
         amount: -1.5
         conditions:
