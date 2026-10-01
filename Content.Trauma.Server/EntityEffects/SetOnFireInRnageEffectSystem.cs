@@ -21,6 +21,8 @@ public sealed partial class SetOnFireInRangeSystem : EntityEffectSystem<Flammabl
     {
         var entPos = _transform.GetMapCoordinates(ent.Owner);
         foreach (var (uid, comp) in _lookup.GetEntitiesInRange<FlammableComponent>(entPos, args.Effect.SeachRange)){
+            if (args.Effect.IgnoreSelf && uid == ent.Owner)
+                continue;
             _flammable.AdjustFireStacks(uid, args.Effect.FireStacks, comp);
             _flammable.Ignite(uid, ent.Owner, comp, ent.Owner);
         }

@@ -104,7 +104,8 @@
     - !type:ShootRandomLightnings
       lightningRange: 8.0
     empEffects:
-    - !type:Sparks # zap sound
+    - !type:PlaySoundEffect
+      sound: /Audio/Effects/tesla_collapse.ogg
     - !type:TakeStaminaDamage
       amount: 100
     - !type:HealthChange
@@ -127,18 +128,18 @@
   - type: ReactiveArmor
     effects:
     - !type:PlaySoundEffect
-      sound: /Audio/Magic/fireball.ogg
+      sound: &fireball_sound
+        path: /Audio/Magic/fireball.ogg
     - !type:SetOnFireInRange
       seachRange: 6.0
-      fireStacks: 2.0
-    - !type:ExtinguishInRange
-      seachRange: 0.1 # or should i just make extinguish self method?
+      fireStacks: 3.0
     empEffects:
     - !type:PlaySoundEffect
-      sound: /Audio/Magic/fireball.ogg
+      sound: *fireball_sound
     - !type:SetOnFireInRange
       seachRange: 0.1
       fireStacks: 3.0
+      ignoreSelf: false
     empMessage: reactive-armor-emp-incendiary
   - type: Construction
     graph: ArmorReactive
@@ -153,13 +154,17 @@
   components:
   - type: ReactiveArmor
     effects:
-    - !type:Sparks # ou-ou-ou-ou sound # i am sure it is exist somewhere
+    - !type:PlaySoundEffect
+      sound:
+        collection: RadiationPulse
     - !type:ModifyStatusEffect
         effectProto: WhiteHoleStatusEffect
         type: Add
         time: 2.5
     empEffects:
-    - !type:Sparks
+    - !type:PlaySoundEffect
+      sound:
+        collection: RadiationPulse
     - !type:ModifyStatusEffect
         effectProto: BlackHoleStatusEffect
         type: Add
@@ -179,14 +184,15 @@
   - type: ReactiveArmor
     effects:
     - !type:PlaySoundEffect
-      sound: /Audio/_Goobstation/Wraith/flameswoosh.ogg
+      sound: &ice_brick_sound
+        path: /Audio/_Goobstation/Wraith/flameswoosh.ogg
     - !type:Sparks
     - !type:IceBrickInRange
       seachRange: 6.0
       breakFreeDelay: 5
     empEffects:
     - !type:PlaySoundEffect
-      sound: /Audio/_Goobstation/Wraith/flameswoosh.ogg
+      sound: *ice_brick_sound
     - !type:Sparks
     - !type:IceBrickInRange
       seachRange: 0.1
@@ -207,14 +213,15 @@
   - type: ReactiveArmor
     effects:
     - !type:PlaySoundEffect
-      sound: /Audio/_Goobstation/Changeling/Effects/armour_transform.ogg
+      sound: &aberration_sound
+        path: /Audio/Effects/Fluids/splat.ogg
     - !type:SpawnFriendly
       entity: MobFleshGolem
     - !type:SpawnFriendly
       entity: MobFleshLover
     empEffects:
     - !type:PlaySoundEffect
-      sound: /Audio/_Goobstation/Changeling/Effects/armour_transform.ogg
+      sound: *aberration_sound
     - !type:SpawnRandomEntities
       entity: MobFleshGolem
       number: 1
@@ -241,17 +248,16 @@
       time: 5
       type: Add
     empEffects:
-    # - !type:PlaySoundEffect
-    #   sound: /Audio/_Goobstation/Changeling/Effects/armour_transform.ogg # pipe sound
+    - !type:PlaySoundEffect
+      sound: /Audio/_Trauma/Effects/metal_pipe_falling.ogg
     - !type:ModifyKnockdown
       time: 3
     - !type:HealthChange
       targetPart: Chest
       damage:
         types:
-          Blunt: 25
+          Blunt: 5
     empMessage: reactive-armor-emp-rock
-    applyOnEmpOnly: true
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
@@ -265,7 +271,9 @@
   components:
   - type: ReactiveArmor
     effects:
-    - !type:Sparks # hypospray inject sound
+    - !type:PlaySoundEffect
+      sound: &healing_sound
+        path: /Audio/Items/Medical/jet_injector.ogg
     - !type:AddReagentToBlood
         reagent: Omnizine
         amount: 5
@@ -274,6 +282,8 @@
         amount: 2.5
     empEffects:
     - !type:Sparks
+    - !type:PlaySoundEffect
+      sound: *healing_sound
     - !type:AddReagentToBlood
         reagent: Lexorin
         amount: 5

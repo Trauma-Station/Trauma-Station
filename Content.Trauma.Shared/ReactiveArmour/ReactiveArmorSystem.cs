@@ -37,15 +37,6 @@ public sealed partial class ReactiveArmorSystem : EntitySystem
         Dirty(uid, comp);
         /// How to make it work??
         // _popup.PopupEntity(Loc.GetString(comp.EmpMessage), args.Owner, args.Owner);
-
-        // if (comp.ApplyOnEmpOnly){
-        //     if (comp.ApplyEmpEffectOnUser) {
-        //         _effects.ApplyEffects(args.Owner, comp.EmpEffects);
-        //     }
-        //     else {
-        //         _effects.ApplyEffects(uid, comp.EmpEffects);
-        //     }
-        // }
     }
 
     private void CheckForCooldown(EntityUid uid, ReactiveArmorComponent comp, EntityUid target)
@@ -56,11 +47,7 @@ public sealed partial class ReactiveArmorSystem : EntitySystem
         comp.LastActivated = _timing.CurTime;
         Dirty(uid, comp);
 
-        // apply emp or regular fx
         if (_timing.CurTime < comp.LastEmpd + comp.EmpDuration){
-            if (comp.ApplyOnEmpOnly)
-                return;
-
             if (comp.ApplyEmpEffectOnUser) {
                 _effects.ApplyEffects(target, comp.EmpEffects);
             }

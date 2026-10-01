@@ -37,7 +37,4 @@ public sealed partial class ReactiveArmorComponent : Component
 
     [DataField]
     public bool ApplyEmpEffectOnUser = true;
-
-    [DataField]
-    public bool ApplyOnEmpOnly = false;
 }
