@@ -3,22 +3,27 @@
 using Content.Shared.Containers;
 using Content.Shared.Radio.Components;
 using Content.Shared.Roles;
+using Content.Trauma.Common.Inventory;
 using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Silicon.IPC;
 
-public sealed partial class InternalEncryptionKeySpawner : EntitySystem
+public sealed partial class InternalEncryptionKeySpawnerSystem : EntitySystem
 {
     [Dependency] private SharedContainerSystem _container = default!;
+
+    private static readonly ProtoId<InventorySlotPrototype> Slot = "ears";
+    private CompName _fillName;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<EncryptionKeyHolderComponent, StartingGearEquippedEvent>(OnRoleAdded);
+        _fillName = Factory.CompName<ContainerFillComponent>();
     }
 
-    public void OnRoleAdded(Entity<EncryptionKeyHolderComponent> ent, ref StartingGearEquippedEvent ev)
+    [SubscribeLocalEvent]
+    public void OnStartingGearEquipped(Entity<EncryptionKeyHolderComponent> ent, ref StartingGearEquippedEvent ev)
     {
         TryInsertEncryptionKey(ent, ev.StartingGear);
     }
@@ -31,24 +36,17 @@ public sealed partial class InternalEncryptionKeySpawner : EntitySystem
     /// </remarks>
     public void TryInsertEncryptionKey(Entity<EncryptionKeyHolderComponent> ent, IEquipmentLoadout? startingGear)
     {
-        if (startingGear is not { }
-            || !startingGear.Equipment.TryGetValue("ears", out var headsetId)
-            || string.IsNullOrEmpty(headsetId))
-            return;
-
-        var headset = Spawn(headsetId, Transform(ent.Owner).Coordinates);
-        if (!HasComp<EncryptionKeyHolderComponent>(headset)
-            || !TryComp<ContainerFillComponent>(headset, out var fillComp)
-            || !fillComp.Containers.TryGetValue(EncryptionKeyHolderComponent.KeyContainerName, out var defaultKeys))
+        if (startingGear is not { } ||
+            !startingGear.Equipment.TryGetValue(Slot, out var headsetId) ||
+            !ProtoMan.Resolve(headsetId, out var proto) ||
+            !proto.TryComp<ContainerFillComponent>(_fillName, out var fill) ||
+            !fill.Containers.TryGetValue(EncryptionKeyHolderComponent.KeyContainerName, out var keys))
             return;
 
         _container.CleanContainer(ent.Comp.KeyContainer);
-
-        foreach (var key in defaultKeys)
+        foreach (var key in keys)
         {
             SpawnInContainerOrDrop(key, ent.Owner, ent.Comp.KeyContainer.ID);
         }
-
-        Del(headset);
     }
 }
