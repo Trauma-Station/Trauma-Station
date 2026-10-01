@@ -115,7 +115,7 @@ public sealed partial class TableSlamSystem : EntitySystem
         var modifierOnGlassBreak = 1;
         if (TryComp<GlassTableComponent>(table, out var glassTableComponent))
         {
-            _damageable.TryChangeDamage(table, glassTableComponent.TableDamage, origin: ent, targetPart: TargetBodyPart.Chest);
+            _damageable.TryChangeDamage(ent.Owner, glassTableComponent.TableDamage, origin: ent, targetPart: TargetBodyPart.Chest);
             _damageable.TryChangeDamage(table, glassTableComponent.ClimberDamage, origin: ent);
             modifierOnGlassBreak = 2;
         }
@@ -127,7 +127,7 @@ public sealed partial class TableSlamSystem : EntitySystem
                     DamageDict = new() { { "Blunt", ent.Comp.TabledDamage } },
                 },
                 targetPart: TargetBodyPart.Chest);
-            _damageable.TryChangeDamage(ent.Owner,
+            _damageable.TryChangeDamage(table,
                 new DamageSpecifier()
                 {
                     DamageDict = new() { { "Blunt", ent.Comp.TabledDamage } },

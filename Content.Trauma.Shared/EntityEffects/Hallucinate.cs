@@ -10,7 +10,7 @@ namespace Content.Trauma.Shared.EntityEffects.Effects;
 /// <summary>
 /// Ice bricks all entitys in set range.
 /// </summary>
-public sealed partial class Fear : EntityEffectBase<Fear>
+public sealed partial class Hallucinate : EntityEffectBase<Hallucinate>
 {
     [DataField]
     public float SeachRange = 1.0f;
@@ -19,22 +19,24 @@ public sealed partial class Fear : EntityEffectBase<Fear>
     public bool IgnoreSelf = true;
 
     [DataField]
-    public float FearAmount = 2.0f;
+    public float FearAmount = 50.0f; // Is it even doing anything besides "scary" visual effect?
 }
 
-public sealed partial class FearEffectSystem : EntityEffectSystem<BodyComponent, Fear>
+public sealed partial class FearEffectSystem : EntityEffectSystem<BodyComponent, Hallucinate>
 {
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedFearSystem _fear = default!;
 
-    protected override void Effect(Entity<BodyComponent> ent, ref EntityEffectEvent<Fear> args)
+    protected override void Effect(Entity<BodyComponent> ent, ref EntityEffectEvent<Hallucinate> args)
     {
         var entPos = _transform.GetMapCoordinates(ent.Owner);
         foreach (var (uid, comp) in _lookup.GetEntitiesInRange<BodyComponent>(entPos, args.Effect.SeachRange)){
             if (args.Effect.IgnoreSelf && uid == ent.Owner)
                 continue;
-            _fear.AddFear(uid, args.Effect.FearAmount, uid);
+            _fear.AdjustFear(uid, uid, args.Effect.FearAmount);
+
+            // is there a better way to do it then just writing same shit 30 times?... RelayNearby...
         }
     }
 }

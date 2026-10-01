@@ -250,7 +250,7 @@
     - !type:PlaySoundEffect
       sound: /Audio/_Trauma/Effects/metal_pipe_falling.ogg
     - !type:ModifyKnockdown
-      time: 3
+      time: 5
     - !type:HealthChange
       targetPart: Chest
       damage:
@@ -301,19 +301,27 @@
   name: reactive hallucinating armor
   description: An experimental suit of armor with sensitive detectors hooked up to the mind of the wearer, sending mind pulses that causes hallucinations around you.
   components:
-  - type: ReactiveArmor # last one
+  - type: ReactiveArmor
     effects:
     - !type:PlaySoundEffect
       sound: &hallucinating_sound
         collection: Curse
-    - !type:Fear
+    - !type:Hallucinate
       seachRange: 8.0
+      # knokdown
+      # stamina damage
+      # attack self?
+      # RelayNearby
     empEffects:
     - !type:PlaySoundEffect
       sound: *hallucinating_sound
-    - !type:Fear
+    - !type:Hallucinate
       seachRange: 0.1
       ignireSelf: false
+    - !type:ModifyKnockdown
+      time: 3
+    - !type:TakeStaminaDamage
+      amount: 30
     empMessage: reactive-armor-emp-hallucinating
   - type: Construction
     graph: ArmorReactive
