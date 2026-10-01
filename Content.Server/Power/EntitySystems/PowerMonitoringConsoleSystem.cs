@@ -857,6 +857,10 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
     private void UpdateCollectionMasterMetaData(EntityUid master, int childCount)
     {
+        // <Trauma> - shitfix throwing in update
+        if (TerminatingOrDeleted(master))
+            return;
+        // </Trauma>
         var netEntity = GetNetEntity(master);
         var xform = Transform(master);
 
