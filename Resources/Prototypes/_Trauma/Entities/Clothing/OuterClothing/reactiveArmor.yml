@@ -135,9 +135,6 @@
       range: 8
       effect: !type:NestedEffect
         proto: incendiaryArmor
-    - !type:SetOnFireInRange
-      seachRange: 6.0
-      fireStacks: 3.0
     empEffects:
     - !type:PlaySoundEffect
       sound: *fireball_sound
