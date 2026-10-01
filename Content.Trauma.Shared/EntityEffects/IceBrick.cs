@@ -7,7 +7,7 @@ using Content.Trauma.Shared.Wizard.Traps;
 namespace Content.Trauma.Shared.EntityEffects.Effects;
 
 /// <summary>
-/// Ice bricks all entitys in set range.
+/// Ice bricks the ent.
 /// </summary>
 public sealed partial class IceBrick : EntityEffectBase<IceBrick>
 {

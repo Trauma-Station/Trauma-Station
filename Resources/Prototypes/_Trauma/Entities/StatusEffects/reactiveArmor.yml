@@ -24,8 +24,6 @@
   name: point light
   components:
   - type: PointLight
-    # enabled: true
-    # radius: 5
     energy: 10
 
 - type: entity
