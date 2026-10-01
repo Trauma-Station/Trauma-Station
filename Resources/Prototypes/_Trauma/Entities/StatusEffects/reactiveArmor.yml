@@ -56,3 +56,19 @@
   - type: SingularityDistortion
     intensity: 10
     falloffPower: 1.5
+
+- type: entityEffect
+  id: hallucinatingArmor
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectBlurryVision
+    time: 3
+  - !type:ModifyParalysis
+    time: 2
+
+- type: entityEffect
+  id: incendiaryArmor
+  effects:
+  - !type:Flammable
+    multiplier: 3
+  - !type:Ignite

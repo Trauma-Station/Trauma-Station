@@ -130,16 +130,20 @@
     - !type:PlaySoundEffect
       sound: &fireball_sound
         path: /Audio/Magic/fireball.ogg
+    - !type:RelayNearby
+      compName: Flammable
+      range: 8
+      effect: !type:NestedEffect
+        proto: incendiaryArmor
     - !type:SetOnFireInRange
       seachRange: 6.0
       fireStacks: 3.0
     empEffects:
     - !type:PlaySoundEffect
       sound: *fireball_sound
-    - !type:SetOnFireInRange
-      seachRange: 0.1
-      fireStacks: 3.0
-      ignoreSelf: false
+    - !type:Flammable
+      multiplier: 3
+    - !type:Ignite
     empMessage: reactive-armor-emp-incendiary
   - type: Construction
     graph: ArmorReactive
@@ -186,17 +190,17 @@
       sound: &ice_brick_sound
         path: /Audio/_Goobstation/Wraith/flameswoosh.ogg
     - !type:Sparks
-    - !type:IceBrickInRange
-      seachRange: 6.0
-      breakFreeDelay: 5
+    - !type:RelayNearby
+      compName: Body
+      range: 6
+      effect: !type:IceBrick
+        breakFreeDelay: 5
     empEffects:
     - !type:PlaySoundEffect
       sound: *ice_brick_sound
     - !type:Sparks
-    - !type:IceBrickInRange
-      seachRange: 0.1
+    - !type:IceBrick
       breakFreeDelay: 5
-      ignoreSelf: false
     empMessage: reactive-armor-emp-cryogenic
   - type: Construction
     graph: ArmorReactive
@@ -306,22 +310,16 @@
     - !type:PlaySoundEffect
       sound: &hallucinating_sound
         collection: Curse
-    - !type:Hallucinate
-      seachRange: 8.0
-      # knokdown
-      # stamina damage
-      # attack self?
-      # RelayNearby
+    - !type:RelayNearby
+      compName: Body
+      range: 8
+      effect: !type:NestedEffect
+        proto: hallucinatingArmor
     empEffects:
     - !type:PlaySoundEffect
       sound: *hallucinating_sound
-    - !type:Hallucinate
-      seachRange: 0.1
-      ignireSelf: false
-    - !type:ModifyKnockdown
-      time: 3
-    - !type:TakeStaminaDamage
-      amount: 30
+    - !type:NestedEffect
+        proto: hallucinatingArmor
     empMessage: reactive-armor-emp-hallucinating
   - type: Construction
     graph: ArmorReactive
