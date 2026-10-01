@@ -27,7 +27,10 @@ public sealed partial class BugSystem : EntitySystem
     /// </summary>
     public bool IsInCorrectArea(Entity<BugComponent> ent)
     {
-        return _area.GetAreaPrototype(ent.Owner) == ent.Comp.TargetArea;
+        if (_area.GetArea(ent) is not { } area)
+            return false;
+
+        return Prototype(area)?.ID == ent.Comp.TargetArea;
     }
 
     /// <summary>
