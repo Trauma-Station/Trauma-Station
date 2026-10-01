@@ -172,7 +172,7 @@ public abstract partial class JobListingsSystem : EntitySystem
     public void OpenUi(EntityUid owner, EntityUid actor)
     {
         UpdateUi(owner, actor);
-        Ui.TryOpenUi(owner, JobListingsUiKey.Key, actor);
+        Ui.TryToggleUi(owner, JobListingsUiKey.Key, actor);
     }
 
     /// <summary>
