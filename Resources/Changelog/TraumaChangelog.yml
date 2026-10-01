@@ -15324,3 +15324,12 @@ Entries:
   id: 1666
   time: '2026-09-30T13:35:45.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/3074
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Traitors now only have 50 TC to accomodate for progtot
+  - type: Tweak
+    message: Traitors final objective now requires 2000 reputation
+  id: 1667
+  time: '2026-09-30T21:29:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4823
