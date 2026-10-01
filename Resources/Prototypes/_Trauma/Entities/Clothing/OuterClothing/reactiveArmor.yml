@@ -104,11 +104,13 @@
     - !type:ShootRandomLightnings
       lightningRange: 8.0
     empEffects:
-    - !type:Sparks
+    - !type:Sparks # zap sound
     - !type:TakeStaminaDamage
       amount: 100
-    - !type:EvenHealthChange
-        damage:
+    - !type:HealthChange
+      targetPart: Chest
+      damage:
+        types:
           Shock: 15
     empMessage: reactive-armor-emp-tesla
   - type: Construction
@@ -151,7 +153,7 @@
   components:
   - type: ReactiveArmor
     effects:
-    - !type:Sparks
+    - !type:Sparks # ou-ou-ou-ou sound # i am sure it is exist somewhere
     - !type:ModifyStatusEffect
         effectProto: WhiteHoleStatusEffect
         type: Add
@@ -238,11 +240,11 @@
       effectProto: StatusEffectDamageModArmorReactiveRock
       time: 5
       type: Add
-    empEffects: # should i make it one time only?
+    empEffects:
     # - !type:PlaySoundEffect
     #   sound: /Audio/_Goobstation/Changeling/Effects/armour_transform.ogg # pipe sound
     - !type:ModifyKnockdown
-      time: 2
+      time: 3
     - !type:HealthChange
       targetPart: Chest
       damage:
@@ -318,7 +320,6 @@
     empEffects:
     - !type:PlaySoundEffect
         sound: *deparure_sound
-    #- !type:BlindingTrapFlashEffect
     - !type:ModifyStatusEffect
         effectProto: PointLight10StatusEffect
         type: Add
