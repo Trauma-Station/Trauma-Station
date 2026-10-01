@@ -15333,3 +15333,10 @@ Entries:
   id: 1667
   time: '2026-09-30T21:29:51.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4823
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed clankers not having any radio keys.
+  id: 1668
+  time: '2026-10-01T16:19:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4839
