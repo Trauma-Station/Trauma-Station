@@ -23,7 +23,7 @@ public sealed partial class ThunderstrikeSystem : EntitySystem
     private static readonly EntProtoId Ash = "Ash";
     private const string Sound = "/Audio/_Goobstation/Effects/Smites/Thunderstrike/thunderstrike.ogg";
     private const string God = "/Textures/_Goobstation/For he does not need no fucking rsi.png";
-    private static readonly SpriteSpecifier Sprite = new SpriteSpecifier.Texture(new ResPath(God));
+    private static readonly SpriteSpecifier.Texture Sprite = new(new(God));
 
     public void Smite(Entity<TransformComponent?> ent, bool kill = true, bool predicted = false, EntityUid? user = null)
     {
