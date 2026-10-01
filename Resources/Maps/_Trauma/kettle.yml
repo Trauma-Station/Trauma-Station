@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 289.0.2
+  engineVersion: 286.0.0
   forkId: ""
   forkVersion: ""
-  time: 09/24/2026 22:01:17
+  time: 08/20/2026 17:52:26
   entityCount: 27173
 maps:
 - 1
@@ -14282,6 +14282,16 @@ entities:
       pos: -40.5,53.5
 - proto: AirlockMaintMedLocked
   entities:
+  - uid: 457
+    components:
+    - type: Transform
+      parent: 2
+      pos: -55.5,-33.5
+  - uid: 458
+    components:
+    - type: Transform
+      parent: 2
+      pos: -55.5,-23.5
   - uid: 459
     components:
     - type: Transform
@@ -14416,27 +14426,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -48.5,-33.5
-- proto: AirlockMedicalMorgueLocked
+- proto: AirlockMedicalLocked
   entities:
-  - uid: 4632
+  - uid: 483
     components:
     - type: Transform
       parent: 2
       pos: -55.5,-29.5
-- proto: AirlockMedicalMorgueMaintLocked
-  entities:
-  - uid: 457
-    components:
-    - type: Transform
-      parent: 2
-      rot: -1.5707963267948966 rad
-      pos: -55.5,-23.5
-  - uid: 458
-    components:
-    - type: Transform
-      parent: 2
-      rot: -1.5707963267948966 rad
-      pos: -55.5,-33.5
 - proto: AirlockQuartermasterLocked
   entities:
   - uid: 484
@@ -15522,6 +15518,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -48.505005,-44.078358
+- proto: AsimovCircuitBoard
+  entities:
+  - uid: 669
+    components:
+    - type: Transform
+      parent: 2
+      pos: 10.387522,-86.26191
 - proto: AsteroidRock
   entities:
   - uid: 670
@@ -20423,11 +20426,6 @@ entities:
       pos: 27.5,-51.5
 - proto: CableApcExtension
   entities:
-  - uid: 483
-    components:
-    - type: Transform
-      parent: 2
-      pos: -55.5,-29.5
   - uid: 1543
     components:
     - type: Transform
@@ -35868,6 +35866,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -55.5,-30.5
+  - uid: 4632
+    components:
+    - type: Transform
+      parent: 2
+      pos: -55.5,-29.5
   - uid: 4633
     components:
     - type: Transform
@@ -67119,13 +67122,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 12.5,62.5
-- proto: CrewsimovCircuitBoard
-  entities:
-  - uid: 669
-    components:
-    - type: Transform
-      parent: 2
-      pos: 10.387522,-86.26191
 - proto: CrowbarRed
   entities:
   - uid: 10424
