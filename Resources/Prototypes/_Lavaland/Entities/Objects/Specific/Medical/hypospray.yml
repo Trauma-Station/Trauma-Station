@@ -50,7 +50,5 @@
       reagents:
         - ReagentId: Luxurium
           Quantity: 20
-        - ReagentId: TranexamicAcid
-          Quantity: 10
         - ReagentId: Saline
           Quantity: 10
