@@ -155,7 +155,7 @@
   - type: ReactiveArmor
     effects:
     - !type:PlaySoundEffect
-      sound:
+      sound: &repulsive_sound
         collection: RadiationPulse
     - !type:ModifyStatusEffect
         effectProto: WhiteHoleStatusEffect
@@ -163,8 +163,7 @@
         time: 2.5
     empEffects:
     - !type:PlaySoundEffect
-      sound:
-        collection: RadiationPulse
+      sound: *repulsive_sound
     - !type:ModifyStatusEffect
         effectProto: BlackHoleStatusEffect
         type: Add
@@ -304,9 +303,17 @@
   components:
   - type: ReactiveArmor # last one
     effects:
-    - !type:Sparks
+    - !type:PlaySoundEffect
+      sound: &hallucinating_sound
+        collection: Curse
+    - !type:Fear
+      seachRange: 8.0
     empEffects:
-    - !type:Sparks
+    - !type:PlaySoundEffect
+      sound: *hallucinating_sound
+    - !type:Fear
+      seachRange: 0.1
+      ignireSelf: false
     empMessage: reactive-armor-emp-hallucinating
   - type: Construction
     graph: ArmorReactive
