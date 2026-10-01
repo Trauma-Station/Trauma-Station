@@ -78,7 +78,7 @@
           min: 0
           max: 3
         damage:
-          Toxin: -3
+          Toxin: -1
           Brute: -3
           Burn: -3
           Airloss: -1.5
@@ -98,7 +98,7 @@
           worksOnLavaland: true
       - !type:EvenHealthChange
         damage:
-          Toxin: -6
+          Toxin: -2
           Brute: -6
           Burn: -6
           Airloss: -2
