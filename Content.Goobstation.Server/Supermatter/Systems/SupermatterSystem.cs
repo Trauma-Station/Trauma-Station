@@ -606,7 +606,7 @@ public sealed partial class SupermatterSystem : SharedSupermatterSystem
         if (_foodQuery.TryComp(target, out var food))
             added = food.Energy;
         else if (isProjectile)
-            added = (float) projectile.Damage.GetTotal();
+            added = (float) projectile!.Damage.GetTotal();
 
         ent.Comp.Power += added;
 
