@@ -1,0 +1,22 @@
+- type: reaction
+  id: ChlorineTrifluoride
+  minTemp: 370
+  priority: 20
+  reactants:
+    Chlorine:
+      amount: 1
+    Fluorine:
+      amount: 3
+  effects:
+  - !type:Explosion
+    explosionType: Default
+    maxIntensity: 4 # reduced delimbing on armoured people, lower max explosion, similar size
+    intensityPerUnit: 4
+    intensitySlope: 5
+    maxTotalIntensity: 80 #80u max
+  - !type:PopupMessage
+    messages: [ "clf3-explosion" ]
+    type: Pvs
+    visualType: LargeCaution
+  products:
+    ChlorineTrifluoride: 4

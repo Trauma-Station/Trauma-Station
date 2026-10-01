@@ -129,10 +129,10 @@
   effects:
     - !type:Explosion
       explosionType: Default
-      intensityPerUnit: 0.25
-      maxTotalIntensity: 100
-      intensitySlope: 4
-      maxIntensity: 7
+      intensityPerUnit: 0.1  # was 0.25
+      maxTotalIntensity: 12 # was 100
+      intensitySlope: 2  # was 4
+      maxIntensity: 3 # was 7
 
 - type: reaction
   id: Smoke
