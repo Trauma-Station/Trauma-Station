@@ -4,6 +4,7 @@ using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
 using Content.Shared.Stunnable;
+using Content.Shared.Emp;
 using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.Speech;
 using Content.Trauma.Common.Strip;
