@@ -1,8 +1,9 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+﻿# SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
   id: TrashBag
   components:
-   whitelist:
+  - type: Storage
+    whitelist:
     components:
-      - Organ #Makes cleaning less awful
+    - Organ #Makes cleaning less awful
