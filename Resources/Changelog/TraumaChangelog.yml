@@ -15370,3 +15370,12 @@ Entries:
   id: 1672
   time: '2026-10-01T22:06:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4846
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed traitors that started with an uplink implant not having access to
+      side jobs.
+  id: 1673
+  time: '2026-10-02T11:08:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4852

@@ -12,9 +12,9 @@ namespace Content.Trauma.Common.Traitor;
 public record struct UplinkAssignedEvent(EntityUid User, EntityUid Uplink, EntityUid Host);
 
 /// <summary>
-/// A pre-existing uplink is linked to a new host.
+/// Event broadcast when a pre-existing uplink is linked to a new host.
 /// </summary>
 /// <param name="Uplink">The the entity that represents the uplink itself. Contains the store and the jobboard</param>
 /// <param name="Host">The new host. Could be an implant</param>
 [ByRefEvent]
-public record struct UplinkLinkedEvent(EntityUid Uplink, EntityUid Host);
+public record struct UplinkLinkedEvent(EntityUid Uplink, EntityUid Host, EntityUid? Mind);

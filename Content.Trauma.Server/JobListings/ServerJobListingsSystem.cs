@@ -1,21 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Random;
-using Robust.Shared.Player;
-using Robust.Server.GameStates;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Traitor;
 using Content.Trauma.Shared.JobListings;
 using System.Linq;
+using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.JobListings;
 
 public sealed partial class ServerJobListingsSystem : JobListingsSystem
 {
-    [Dependency] private PvsOverrideSystem _pvsOverride = default!;
-    [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private IRobustRandom _random = default!;
 
     /// <summary>
@@ -130,20 +126,6 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
     }
 
     /// <summary>
-    /// Helper method to add a PVS override for the job board.
-    /// The job board / uplink store is a nullspace entity which would not normally be replicated.
-    /// It is supposed to be shared between uplinks and persist if any of them are destroyed so it can't be put in an uplink's container.
-    /// </summary>
-    private void PVSOverrideEntity(Entity<MindComponent> mind, EntityUid entity)
-    {
-        if (mind.Comp.OwnedEntity is null)
-            return;
-        if (!_player.TryGetSessionByEntity(mind.Comp.OwnedEntity.Value, out var session))
-            return;
-        _pvsOverride.AddSessionOverride(entity, session);
-    }
-
-    /// <summary>
     /// Update the CachedProgress field on a sidejob.
     /// </summary>
     /// <param name="sideJob"></param>
@@ -181,31 +163,27 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
     [SubscribeLocalEvent]
     private void OnUplinkAssigned(ref UplinkAssignedEvent args)
     {
-        if (!JobListingsQuery.TryComp(args.Uplink, out var jobListingsComp))
-            return;
-        if (Mind.GetMind(args.User) is not { } mind)
-            return;
-        if (!MindQuery.TryComp(mind, out var mindComp))
-            return;
-
-        // set mind
-        jobListingsComp.Mind = mind;
-        DirtyField(args.Uplink, jobListingsComp, nameof(JobListingsComponent.Mind));
-        PVSOverrideEntity((mind, mindComp), args.Uplink);
-        AddComp(mind, new JobListingsOwnerComponent { JobListings = args.Uplink });
-
-        // init job board
-        FillSideJobs((args.Uplink, jobListingsComp));
-        Link((args.Uplink, jobListingsComp), args.Host);
-        SetRefreshTime((args.Uplink, jobListingsComp));
+        LinkUplink(args.Uplink, args.Host, Mind.GetMind(args.User));
     }
 
     [SubscribeLocalEvent]
     private void OnUplinkLinked(ref UplinkLinkedEvent args)
     {
-        if (!JobListingsQuery.TryComp(args.Uplink, out var jobListingsComp))
+        LinkUplink(args.Uplink, args.Host, args.Mind);
+    }
+
+    private void LinkUplink(EntityUid uid, EntityUid host, EntityUid? mind)
+    {
+        if (!JobListingsQuery.TryComp(uid, out var comp))
             return;
 
-        Link((args.Uplink, jobListingsComp), args.Host);
+        // set mind
+        comp.Mind = mind;
+        DirtyField(uid, comp, nameof(JobListingsComponent.Mind));
+
+        // init job board
+        FillSideJobs((uid, comp));
+        Link((uid, comp), host);
+        SetRefreshTime((uid, comp));
     }
 }
