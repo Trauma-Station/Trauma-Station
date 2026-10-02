@@ -30,7 +30,7 @@
   - name: bounty-item-magic-ink
     amount: 1
     whitelist:
-      tags:
+      components:
       - EnchantAdder
 
 - type: cargoBounty
@@ -60,7 +60,7 @@
   reward: 4000
   description: bounty-description-ranching-hen
   entries:
-  - name: bounty-ranching-hen
+  - name: bounty-item-ranching-hen
     amount: 1
     whitelist:
       components:
@@ -72,7 +72,7 @@
   reward: 3000
   description: bounty-description-ranching-rooster
   entries:
-  - name: bounty-ranching-rooster
+  - name: bounty-item-ranching-rooster
     amount: 1
     whitelist:
       components:
