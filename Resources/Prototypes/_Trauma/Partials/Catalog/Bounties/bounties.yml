@@ -17,14 +17,6 @@
   reward: 3000
 
 - type: cargoBounty
-  id: BountyHandcuffs
-  reward: 2000
-
-- type: cargoBounty
-  id: BountyInstrument
-  reward: 4000
-
-- type: cargoBounty
   id: BountyLung
   reward: 3000
 
