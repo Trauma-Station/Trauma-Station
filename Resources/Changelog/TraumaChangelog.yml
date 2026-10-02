@@ -15402,3 +15402,10 @@ Entries:
   id: 1676
   time: '2026-10-02T19:15:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4856
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Nerfed Luxurium
+  id: 1677
+  time: '2026-10-02T19:25:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4826
