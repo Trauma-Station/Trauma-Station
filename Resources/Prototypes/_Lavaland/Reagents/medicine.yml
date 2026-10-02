@@ -88,6 +88,7 @@
           min: 30
           max: 50
           worksOnLavaland: true
+      # In Lavaland Pressure, heals Tox/Brut/Brn/Air
       - !type:EvenHealthChange
         damage:
           Toxin: -2
@@ -99,6 +100,7 @@
           min: 30
           max: 50
           worksOnLavaland: true
+      # In Lavaland Pressure, Severe OD if using more than one injection
       - !type:HealthChange
         conditions:
         - !type:ReagentCondition
