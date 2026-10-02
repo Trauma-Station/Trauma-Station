@@ -9,8 +9,8 @@
       <option name="Build.Project" projectPath="$PROJECT_DIR$/Content.Lavaland.Server/Content.Lavaland.Server.csproj"/>
       <option name="Build.Project" projectPath="$PROJECT_DIR$/Content.Medical.Client/Content.Medical.Client.csproj"/>
       <option name="Build.Project" projectPath="$PROJECT_DIR$/Content.Medical.Server/Content.Medical.Server.csproj"/>
-      <option name="Build.Project" projectPath="$PROJECT_DIR$/Content.Medical.Client/Content.Trauma.Client.csproj"/>
-      <option name="Build.Project" projectPath="$PROJECT_DIR$/Content.Medical.Server/Content.Trauma.Server.csproj"/>
+      <option name="Build.Project" projectPath="$PROJECT_DIR$/Content.Trauma.Client/Content.Trauma.Client.csproj"/>
+      <option name="Build.Project" projectPath="$PROJECT_DIR$/Content.Trauma.Server/Content.Trauma.Server.csproj"/>
     </method>
   </configuration>
 </component>

@@ -47,7 +47,7 @@ public sealed partial class TameableSystem : EntitySystem
         if (TryComp<SpawnEntityOnAgeUpComponent>(ent.Owner, out var ageUp) && ent.Comp.AgeUpReplace is not null)
             ageUp.EntToSpawn = ent.Comp.AgeUpReplace;
 
-        _popup.PopupEntity(Loc.GetString("popup-successfully-tamed", ("entity", MetaData(ent.Owner).EntityName)), ent.Owner, PopupType.Large);
+        _popup.PopupEntity(Loc.GetString("popup-successfully-tamed", ("entity", Name(ent.Owner))), ent.Owner, args.User, PopupType.Large);
         RemComp<TameableComponent>(ent.Owner);
     }
 
