@@ -15395,3 +15395,10 @@ Entries:
   id: 1675
   time: '2026-10-02T19:04:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4857
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed raptor chicks not staying tamed when they grow up
+  id: 1676
+  time: '2026-10-02T19:15:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4856
