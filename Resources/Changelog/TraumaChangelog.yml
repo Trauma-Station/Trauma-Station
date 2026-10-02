@@ -15416,3 +15416,10 @@ Entries:
   id: 1678
   time: '2026-10-02T19:30:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4860
+- author: momoyawn
+  changes:
+  - type: Tweak
+    message: Less instant death from holy water
+  id: 1679
+  time: '2026-10-02T20:34:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4861
