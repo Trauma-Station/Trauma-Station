@@ -57,6 +57,8 @@
     - jumpsuit
   - type: FireProtection
     reduction: 0.25
+  - type: PressureProtection
+    lowPressureMultiplier: 1000
   - type: HideHereticAura
   - type: HereticClothing
   - type: ContainerContainer
