@@ -21,9 +21,6 @@
     whitelist:
       tags:
         - Trash
-      components:
-        - Organ #Makes cleaning less awful
-      requireAll: false
   - type: UseDelay
     delay: 0.5
   - type: Tag

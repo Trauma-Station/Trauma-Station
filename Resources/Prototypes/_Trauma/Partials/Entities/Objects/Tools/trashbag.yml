@@ -1,0 +1,6 @@
+﻿- type: entity
+  id: TrashBag
+  components:
+   whitelist:
+    components:
+      - Organ #Makes cleaning less awful
