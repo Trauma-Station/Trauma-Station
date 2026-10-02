@@ -1,16 +1,16 @@
 
 - type: reaction
   id: PotassiumExplosion
-  effects:
-    - !type:Explosion
-      explosionType: Default
-      intensityPerUnit: 0.1 # overall reduce the max boom to 120u and make it not delimb too much
-      maxTotalIntensity: 12
-      intensitySlope: 2
-      maxIntensity: 3
+  effects: !Clear
+  - !type:Explosion
+    explosionType: Default
+    intensityPerUnit: 0.1 # overall reduce the max boom to 120u and make it not delimb too much
+    maxTotalIntensity: 12
+    intensitySlope: 2
+    maxIntensity: 3
 
 - type: reaction
-  id: Smoke
+  id: Smoke  # Trauma - Changed foam/smoke duration, check AreaReactionEntityEffectSystem.cs for more info, this still works, just not the same
   priority: 10
 
 - type: reaction
