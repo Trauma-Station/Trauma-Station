@@ -27,4 +27,7 @@ public sealed partial class TameableComponent : Component
 
     [DataField]
     public ProtoId<NpcFactionPrototype> Faction = "RaptorTamed";
+
+    [DataField]
+    public List<EntProtoId>? AgeUpReplace;
 }

@@ -2,6 +2,8 @@
 
 using Content.Shared.Interaction.Events;
 using Content.Shared.NPC.Systems;
+using Content.Shared.Popups;
+using Content.Trauma.Shared.AnimalAgeing.Components;
 using Content.Trauma.Shared.Ranching.Components;
 using Robust.Shared.Random;
 
@@ -11,6 +13,7 @@ public sealed partial class TameableSystem : EntitySystem
 {
     [Dependency] private NpcFactionSystem _faction = default!;
     [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     public override void Initialize()
     {
@@ -41,6 +44,10 @@ public sealed partial class TameableSystem : EntitySystem
 
         _faction.AddFaction(ent.Owner, ent.Comp.Faction);
 
+        if (TryComp<SpawnEntityOnAgeUpComponent>(ent.Owner, out var ageUp) && ent.Comp.AgeUpReplace is not null)
+            ageUp.EntToSpawn = ent.Comp.AgeUpReplace;
+
+        _popup.PopupEntity(Loc.GetString("popup-successfully-tamed", ("entity", MetaData(ent.Owner).EntityName)), ent.Owner, PopupType.Large);
         RemComp<TameableComponent>(ent.Owner);
     }
 

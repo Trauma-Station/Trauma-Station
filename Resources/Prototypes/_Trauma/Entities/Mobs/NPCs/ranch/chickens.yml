@@ -1092,7 +1092,6 @@
   abstract: true
   description: It looks hungry...
   components:
-  - type: Tameable
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.5
     baseSprintSpeed: 5.5
@@ -1131,6 +1130,10 @@
     entToSpawn:
     - MobRaptorHen
     - MobRaptorRooster
+  - type: Tameable
+    ageUpReplace:
+    - MobRaptorHenFriendly
+    - MobRaptorRoosterFriendly
   - type: Sprite
     sprite: _Trauma/Mobs/Ranch/chicken-raptor.rsi
 
@@ -1152,6 +1155,34 @@
   - type: HTN
     rootTask:
       task: RaptorRoosterCompound
+
+
+- type: entity
+  suffix: Friendly
+  parent: MobRaptorHen
+  id: MobRaptorHenFriendly
+  name: raptor hen
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Ranch/chicken-raptor.rsi
+  - type: NpcFactionMember
+    factions:
+    - Nanotrasen
+
+- type: entity
+  suffix: Friendly
+  parent: MobRaptorRooster
+  id: MobRaptorRoosterFriendly
+  name: tiercel # the truecell roosters
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Ranch/chicken-raptor.rsi
+  - type: HTN
+    rootTask:
+      task: RaptorRoosterCompound
+  - type: NpcFactionMember
+    factions:
+    - Nanotrasen
 
 # Onagadori
 
