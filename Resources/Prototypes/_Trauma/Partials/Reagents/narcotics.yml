@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: reagent
   id: StrawberryIce
   metabolisms: !Clear
@@ -126,7 +128,7 @@
         messages:
         - hydroxysomnolene-effect-numb
         probability: 0.05
-      
+
       # Heart stops from withdrawal
       - !type:HealthChange
         conditions:
