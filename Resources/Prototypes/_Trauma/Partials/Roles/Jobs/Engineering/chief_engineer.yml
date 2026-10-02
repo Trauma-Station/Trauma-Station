@@ -5,6 +5,8 @@
   antagAdvantage: 75
   guides:
   - Engineering
+  access:
+  - Robotics
   special:
   - !type:OrganChipsSpecial
     chips:

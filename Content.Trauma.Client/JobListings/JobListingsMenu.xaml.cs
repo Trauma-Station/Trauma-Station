@@ -37,15 +37,12 @@ public sealed partial class JobListingsMenu : FancyWindow
         IoCManager.InjectDependencies(this);
         RefreshButton.OnPressed += _ => OnRefresh?.Invoke();
         _sprite = _entity.System<SpriteSystem>();
-        _jobs = _entity.System<JobListingsSystem>();
     }
 
-    public void SetOwner(EntityUid owner)
+    public void Setup(JobListingsSystem jobs, Entity<JobListingsComponent> board)
     {
-        if (_jobs.GetJobBoard(owner) is not { } jobBoard)
-            return;
-
-        _jobBoard = jobBoard;
+        _jobBoard = board;
+        _jobs = jobs;
         UpdateReputation();
         UpdateSideJobListings();
     }
