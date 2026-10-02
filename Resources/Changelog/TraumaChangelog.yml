@@ -15379,3 +15379,12 @@ Entries:
   id: 1673
   time: '2026-10-02T11:08:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4852
+- author: Endothermix
+  changes:
+  - type: Tweak
+    message: >-
+      Potassium Water and CLF3 bombs have had their explosive power
+      significantly reduced, go make real explosives.
+  id: 1674
+  time: '2026-10-02T14:20:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4847
