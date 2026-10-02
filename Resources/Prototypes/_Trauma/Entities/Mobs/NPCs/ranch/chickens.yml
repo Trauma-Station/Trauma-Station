@@ -1167,7 +1167,6 @@
     sprite: _Trauma/Mobs/Ranch/chicken-raptor.rsi
   - type: NpcFactionMember
     factions:
-    - Nanotrasen
     - RaptorTamed
 
 - type: entity
@@ -1183,7 +1182,6 @@
       task: RaptorRoosterCompound
   - type: NpcFactionMember
     factions:
-    - Nanotrasen
     - RaptorTamed
 
 # Onagadori
