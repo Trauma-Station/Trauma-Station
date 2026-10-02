@@ -15409,3 +15409,10 @@ Entries:
   id: 1677
   time: '2026-10-02T19:25:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4826
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed truncheon having an awful item shape.
+  id: 1678
+  time: '2026-10-02T19:30:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4860
