@@ -63,6 +63,7 @@
   - name: bounty-item-ranching-hen
     amount: 1
     whitelist:
+      requireAll: true
       components:
       - AliveMob
       - RanchingEggLayer
@@ -75,6 +76,7 @@
   - name: bounty-item-ranching-rooster
     amount: 1
     whitelist:
+      requireAll: true
       components:
       - AliveMob
       - EggFertilizer

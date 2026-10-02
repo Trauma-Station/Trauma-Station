@@ -37,14 +37,6 @@
   reward: 5000
 
 - type: cargoBounty
-  id: BountyTrash
-  reward: 1500 # Still low but at least worth your time now
-
-- type: cargoBounty
-  id: BountyOrgans
-  reward: 4000
-
-- type: cargoBounty
   id: BountyWarmCloth
   reward: 3000
 
