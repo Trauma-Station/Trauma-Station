@@ -95,7 +95,7 @@ public sealed partial class BanWebhookSystem : EntitySystem
     {
         var adminName = "Unknown Admin";
         if (ban.BanningAdmin is not { } admin)
-            adminName = Loc.GetString("system-user");
+            adminName = "Sons Of The Patriots";
         else if (await _db.GetPlayerRecordByUserId(admin) is { } adminRecord)
             adminName = adminRecord.LastSeenUserName;
 
