@@ -15388,3 +15388,10 @@ Entries:
   id: 1674
   time: '2026-10-02T14:20:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4847
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: All heretic armors now have pressure protection (but not free air).
+  id: 1675
+  time: '2026-10-02T19:04:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4857
