@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: LoneOpsSpawn
+  id: SyndicateBattlecruiserRule
+  components:
+  - type: StationEvent
+    weight: 0 # this CANNOT happen naturally
+    startAnnouncement: station-event-syndicate-battle-cruiser
+    startAnnouncementColor: "#FF0000"
+    startAudio:
+      path: "/Audio/Announcements/war.ogg"
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/ShuttleEvent/battlecruiser.yml # syndicate infiltraitor with a bunch of nukie ghostroles
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: NukeopsOperative
+      count: 20 # this should be enough to end the round

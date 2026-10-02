@@ -258,6 +258,8 @@
   components:
   - type: Sprite
     state: egg-honk
+  - type: TimedReplace
+    entity: MobChickClown
   - type: EntityEffectOnEaten
     effects:
     - !type:PopupMessage

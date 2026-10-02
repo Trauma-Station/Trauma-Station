@@ -1,6 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  id: UplinkImplant
+  components:
+  - type: JobListingsImplant
+    action: ActionOpenSideJobsImplant
+
+- type: entity
   abstract: true
   id: BaseSubdermalImplant
   components:

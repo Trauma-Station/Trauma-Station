@@ -161,7 +161,7 @@
 - type: spyBounty
   parent: MediumBountyBase
   id: ExosuitFabricator
-  departmentBlacklist: [Science]
+  departmentBlacklist: [Engineering]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [ExosuitFabricator]
     queryComp: Lathe

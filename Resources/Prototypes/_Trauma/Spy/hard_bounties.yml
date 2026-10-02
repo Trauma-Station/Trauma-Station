@@ -94,13 +94,6 @@
 
 - type: spyBounty
   parent: HardBountyBase
-  id: ClothingBeltGeminiHoloProjector
-  jobBlacklist: [ResearchDirector]
-  selector: !type:SpyStealTargetBountySelectorEvent
-    stealTarget: ClothingBeltGeminiHoloProjector
-
-- type: spyBounty
-  parent: HardBountyBase
   id: ComputerCargoOrdersSecurity
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [ComputerCargoOrdersSecurity]
@@ -117,7 +110,7 @@
 - type: spyBounty
   parent: HardBountyBase
   id: ComputerRoboticsControl
-  jobBlacklist: [ResearchDirector]
+  jobBlacklist: [ChiefEngineer]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [ComputerRoboticsControl]
     queryComp: RoboticsConsole
@@ -125,7 +118,7 @@
 - type: spyBounty
   parent: HardBountyBase
   id: StationAiUploadComputer
-  jobBlacklist: [ResearchDirector]
+  jobBlacklist: [ChiefEngineer]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [StationAiUploadComputer]
     queryComp: SiliconLawUpdater
@@ -133,7 +126,7 @@
 - type: spyBounty
   parent: HardBountyBase
   id: StationAiFixerComputer
-  jobBlacklist: [ResearchDirector]
+  jobBlacklist: [ChiefEngineer]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [StationAiFixerComputer]
     queryComp: StationAiFixerConsole

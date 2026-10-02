@@ -15238,3 +15238,135 @@ Entries:
   id: 1656
   time: '2026-09-28T21:24:17.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4792
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added a new way to get Clown Eggs, Obtained from feeding a white hen
+      bananas and keeping it very happy (60+ Happiness)
+  - type: Tweak
+    message: Fixed clown eggs turning into white chicks when put into an incubator
+  id: 1657
+  time: '2026-09-29T06:40:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4801
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed gemini slop. Please update your star signs.
+  id: 1658
+  time: '2026-09-29T06:51:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4802
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Probably fixed new blood cult converts not seeing cultists icons and vice
+      versa.
+  id: 1659
+  time: '2026-09-29T07:24:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4804
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lavaland gateway not working.
+  id: 1660
+  time: '2026-09-29T09:05:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4806
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Blood rites now works on puddles, has popups and only drains 50u at a time
+      maximum.
+  id: 1661
+  time: '2026-09-29T10:28:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4808
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added the Explosive Cigar Case, you can buy it for 20 TC.
+  - type: Tweak
+    message: >-
+      Tweaked the Bomb Collar, it is now stronger, but pretty weak if not
+      equipped.
+  id: 1662
+  time: '2026-09-29T11:55:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4584
+- author: Clanky Station Consent Cult
+  changes:
+  - type: Fix
+    message: Cult conversion no longer lets you just opt out of being converted...
+  id: 1663
+  time: '2026-09-29T12:02:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4813
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed separated hud' status part being blank.
+  id: 1664
+  time: '2026-09-29T19:27:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4815
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      The blood cult's target now gets rerolled if they can't be sacrificed,
+      e.g. from cryo.
+  id: 1665
+  time: '2026-09-30T13:22:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4820
+- author: SpeltIncorrectyl
+  changes:
+  - type: Add
+    message: >-
+      Ported progressive traitor from ss13. Do side-jobs for extra TC and
+      enshrine your reputation as a living legend.
+  id: 1666
+  time: '2026-09-30T13:35:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3074
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Traitors now only have 50 TC to accomodate for progtot
+  - type: Tweak
+    message: Traitors final objective now requires 2000 reputation
+  id: 1667
+  time: '2026-09-30T21:29:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4823
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed clankers not having any radio keys.
+  id: 1668
+  time: '2026-10-01T16:19:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4839
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed visual effects from being drunk etc lasting forever.
+  id: 1669
+  time: '2026-10-01T16:31:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4840
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: Vaccines are now infinite use. This was a necessary change.
+  id: 1670
+  time: '2026-10-01T17:42:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4829
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Only one sliver can be taken from the supermatter crystal.
+  - type: Tweak
+    message: Taking a sliver dusts the knife you used.
+  id: 1671
+  time: '2026-10-01T17:54:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4841
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed progtot job listings UI breaking if you relogged.
+  id: 1672
+  time: '2026-10-01T22:06:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4846
