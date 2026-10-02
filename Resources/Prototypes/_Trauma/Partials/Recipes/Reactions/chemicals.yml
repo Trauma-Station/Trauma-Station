@@ -11,7 +11,7 @@
     maxIntensity: 3
 
 - type: reaction
-  id: Smoke  # Trauma - Changed foam/smoke duration, check AreaReactionEntityEffectSystem.cs for more info, this still works, just not the same
+  id: Smoke #Changed foam/smoke duration, check AreaReactionEntityEffectSystem.cs for more info, this still works, just not the same
   priority: 10
 
 - type: reaction
@@ -40,7 +40,7 @@
 
 - type: reaction
   id: Ethyloxyephedrine
-  minTemp: 370    #Goobstation edit added
+  minTemp: 370
 
 - type: reaction
   id: Nocturine
