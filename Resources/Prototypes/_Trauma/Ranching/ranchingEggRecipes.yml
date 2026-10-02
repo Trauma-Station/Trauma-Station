@@ -165,8 +165,14 @@
   id: ClownEgg
   egg: ClownEgg
   requiredChicken:
+  - MobWhiteHen
+  - MobClownHen
+  noSpecialFoodRequiredChickens:
   - MobClownHen
   happinessRequired: 60
+  weight: 10
+  foodTagsRequired:
+  - Banana
 
 - type: eggRecipe
   id: CluwneEgg

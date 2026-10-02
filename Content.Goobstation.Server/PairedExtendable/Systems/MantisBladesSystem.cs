@@ -79,6 +79,9 @@ public sealed partial class MantisBladesSystem : EntitySystem
 
     private void OnDisabled(Entity<MantisBladeArmComponent> ent, ref OrganDisabledEvent args)
     {
+        if (TerminatingOrDeleted(ent.Comp.BladeUid))
+            return;
+
         Del(ent.Comp.BladeUid);
         Del(ent.Comp.ActionUid);
     }
