@@ -75,7 +75,7 @@
   - node: rock
     entity: ClothingOuterArmorReactiveRock
   - node: healing
-    entity: ClothingOuterArmorReactiveReagent
+    entity: ClothingOuterArmorReactiveHealing
   - node: hallucinating
     entity: ClothingOuterArmorReactiveHallucinating
   - node: stealth
