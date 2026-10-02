@@ -49,8 +49,6 @@
       maxVol: 40
       reagents:
         - ReagentId: Luxurium
-          Quantity: 20
+          Quantity: 15
         - ReagentId: TranexamicAcid
-          Quantity: 10
-        - ReagentId: Saline
           Quantity: 10
