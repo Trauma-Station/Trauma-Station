@@ -78,7 +78,7 @@
           min: 0
           max: 3
         damage:
-          Brute: -3
+          Brute: -2
           Burn: -2
           Airloss: -.75
       - !type:ModifyBleed
