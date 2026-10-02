@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entityTable
   id: RandomDeliveryBasic # More letters less packages
   table: !type:GroupSelector
@@ -132,7 +134,7 @@
       - id: MaterialCosmicCultEntropy1
     - !type:GroupSelector # Gamer loot
       weight: 2
-      children: 
+      children:
       - id: SeismicCharge
       - id: WeaponMakeshiftLaser
       - id: Stunprod # It's so underrated I swear
