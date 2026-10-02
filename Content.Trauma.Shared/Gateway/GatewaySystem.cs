@@ -3,7 +3,7 @@
 using Content.Shared.UserInterface;
 using Content.Shared.Access.Systems;
 using Content.Shared.Popups;
-using Content.Shared.Station;
+using Content.Shared.Station.Systems;
 using Content.Shared.Tag;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Teleportation.Systems;
@@ -22,11 +22,10 @@ public sealed partial class GatewaySystem : EntitySystem
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private SharedStationSystem _stations = default!;
+    [Dependency] private StationSystem _stations = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private TagSystem _tag = default!;
     [Dependency] private EntityQuery<GatewayComponent> _query = default!;
-    [Dependency] private EntityQuery<PortalComponent> _portalQuery = default!;
 
     [SubscribeLocalEvent]
     private void OnMapInit(Entity<GatewayComponent> ent, ref MapInitEvent args)
@@ -97,7 +96,7 @@ public sealed partial class GatewaySystem : EntitySystem
                 Entity = GetNetEntity(destUid),
                 // Fallback to grid's ID if applicable.
                 Name = dest.Name.IsEmpty && destXform.GridUid is { } grid ? FormattedMessage.FromUnformatted(Name(grid)) : dest.Name ,
-                Portal = _portalQuery.HasComp(destUid)
+                Portal = IsActive(destUid)
             });
         }
 
@@ -113,35 +112,43 @@ public sealed partial class GatewaySystem : EntitySystem
 
     private void UpdateAppearance(EntityUid uid)
     {
-        _appearance.SetData(uid, GatewayVisuals.Active, _portalQuery.HasComp(uid));
+        _appearance.SetData(uid, GatewayVisuals.Active, IsActive(uid));
     }
 
     [SubscribeLocalEvent]
     private void OnOpenPortal(Entity<GatewayComponent> ent, ref GatewayOpenPortalMessage args)
     {
+        if (!ent.Comp.Interactable)
+            return;
+
+        var user = args.Actor;
+        if (_timing.CurTime < ent.Comp.NextReady)
+        {
+            _popup.PopupCursor("This gateway isn't ready yet", user);
+            return;
+        }
+
         var dest = GetEntity(args.Destination);
         if (!ent.Comp.Enabled ||
-            !ent.Comp.Interactable ||
             dest == ent.Owner ||
             !_query.TryComp(dest, out var destComp) ||
-            _portalQuery.HasComp(dest) ||
-            !destComp.Enabled ||
-            _timing.CurTime < ent.Comp.NextReady)
+            IsActive(dest) ||
+            !destComp.Enabled)
         {
+            _popup.PopupCursor("The destination gateway is busy!", user, PopupType.SmallCaution);
             return;
         }
 
         // if the gateway has an access reader check it before allowing opening
-        var user = args.Actor;
         if (CheckAccess(user, ent.AsNullable()))
             return;
 
         // TODO: admin log???
-        ClosePortal(ent.AsNullable());
-        OpenPortal(ent, (dest, destComp));
+        ClosePortal(ent.AsNullable(), user);
+        OpenPortal(ent, (dest, destComp), user);
     }
 
-    private void OpenPortal(Entity<GatewayComponent> ent, Entity<GatewayComponent> dest)
+    private void OpenPortal(Entity<GatewayComponent> ent, Entity<GatewayComponent> dest, EntityUid user)
     {
         _linkedEntity.TryLink(ent.Owner, dest.Owner);
 
@@ -158,15 +165,15 @@ public sealed partial class GatewaySystem : EntitySystem
         ent.Comp.NextReady = _timing.CurTime + ent.Comp.Cooldown;
         Dirty(ent);
 
-        _audio.PlayPvs(ent.Comp.OpenSound, ent);
-        _audio.PlayPvs(dest.Comp.OpenSound, dest);
+        _audio.PlayPredicted(ent.Comp.OpenSound, ent, user);
+        _audio.PlayPredicted(dest.Comp.OpenSound, dest, user);
 
         UpdateUI(ent);
         UpdateAppearance(ent);
         UpdateAppearance(dest);
     }
 
-    private void ClosePortal(Entity<GatewayComponent?> ent)
+    private void ClosePortal(Entity<GatewayComponent?> ent, EntityUid user)
     {
         if (!_query.Resolve(ent, ref ent.Comp))
             return;
@@ -182,8 +189,8 @@ public sealed partial class GatewaySystem : EntitySystem
             Dirty(dest.Value, destComp);
         }
 
-        _audio.PlayPvs(ent.Comp.CloseSound, ent);
-        _audio.PlayPvs(ent.Comp.CloseSound, dest.Value);
+        _audio.PlayPredicted(ent.Comp.CloseSound, ent, user);
+        _audio.PlayPredicted(ent.Comp.CloseSound, dest.Value, user);
 
         _linkedEntity.TryUnlink(ent.Owner, dest.Value);
         RemComp<PortalComponent>(dest.Value);
@@ -203,7 +210,7 @@ public sealed partial class GatewaySystem : EntitySystem
         if (CheckAccess(user, source.Value))
             return;
 
-        ClosePortal(source.Value);
+        ClosePortal(source.Value, user);
     }
 
     /// <summary>
@@ -219,7 +226,10 @@ public sealed partial class GatewaySystem : EntitySystem
             return false;
 
         _popup.PopupEntity(Loc.GetString("gateway-access-denied"), user, user);
-        _audio.PlayPvs(ent.Comp.AccessDeniedSound, ent);
+        _audio.PlayPredicted(ent.Comp.AccessDeniedSound, ent, user);
         return true;
     }
+
+    private bool IsActive(EntityUid uid)
+        => _linkedEntity.GetLink(uid, out _);
 }

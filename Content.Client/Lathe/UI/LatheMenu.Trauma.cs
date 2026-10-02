@@ -1,5 +1,5 @@
 using Content.Shared.AlertLevel;
-using Content.Shared.Station;
+using Content.Shared.Station.Systems;
 using Content.Trauma.Common.Salvage;
 using Robust.Client.Player;
 using Robust.Shared.Prototypes;
@@ -14,7 +14,7 @@ public sealed partial class LatheMenu
     [Dependency] private IPlayerManager _player = default!;
     private AlertLevelSystem _alertLevel = default!;
     private CommonMiningPointsSystem _miningPoints = default!;
-    private SharedStationSystem _station = default!;
+    private StationSystem _station = default!;
 
     public event Action? OnResetQueueList;
     public event Action? OnClaimMiningPoints;
@@ -26,7 +26,7 @@ public sealed partial class LatheMenu
     {
         _alertLevel = _entityManager.System<AlertLevelSystem>();
         _miningPoints = _entityManager.System<CommonMiningPointsSystem>();
-        _station = _entityManager.System<SharedStationSystem>();
+        _station = _entityManager.System<StationSystem>();
 
         ResetQueueList.OnPressed += _ => OnResetQueueList?.Invoke();
     }

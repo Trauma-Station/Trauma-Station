@@ -26,7 +26,6 @@ public sealed partial class BloodCultSpellsComponent : Component
         "ActionBloodCultEmp",
         "ActionBloodCultShadowShackles",
         "ActionBloodCultTwistedConstruction",
-        "ActionBloodCultSummonCombatEquipment",
         "ActionBloodCultSummonRitualDagger",
         "ActionBloodCultBloodRites"
     };

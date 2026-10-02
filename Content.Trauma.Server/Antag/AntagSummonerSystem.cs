@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.GameTicking;
+using Content.Shared.GameTicking;
 using Content.Shared.Popups;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.Antag;

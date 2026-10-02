@@ -100,7 +100,7 @@ public sealed partial class ChatFilterSystem : EntitySystem
         if (string.IsNullOrEmpty(text))
             return null;
 
-        var timeout = TimeSpan.FromMilliseconds(1); // incase config is stupid
+        var timeout = TimeSpan.FromMilliseconds(15); // incase config is stupid
         try
         {
             return new Regex(text, RegexOptions.Compiled | RegexOptions.IgnoreCase, timeout);
@@ -124,7 +124,7 @@ public sealed partial class ChatFilterSystem : EntitySystem
         var blocked = false;
         foreach (var (regex, proto) in _filters)
         {
-            if (!proto.ApplyToChat || !regex.IsMatch(message))
+            if (!proto.ApplyToChat || !IsMatch(regex, message))
                 continue;
 
             Punish(player, message, proto);
@@ -145,7 +145,7 @@ public sealed partial class ChatFilterSystem : EntitySystem
     {
         foreach (var (regex, proto) in _filters)
         {
-            if (proto.ApplyToName && regex.IsMatch(name))
+            if (proto.ApplyToName && IsMatch(regex, name))
             {
                 _chat.SendAdminAlert($"Player {username} ({name}) has hit the name filter {proto.ID}");
                 return false;
@@ -174,5 +174,18 @@ public sealed partial class ChatFilterSystem : EntitySystem
             .AddAddress(player.Channel.RemoteEndPoint.Address)
             .WithSeverity(NoteSeverity.High);
         _ban.CreateServerBan(ban);
+    }
+
+    private bool IsMatch(Regex regex, string s)
+    {
+        try
+        {
+            return regex.IsMatch(s);
+        }
+        catch
+        {
+            // dogshit language throws for timeout :D
+            return  false;
+        }
     }
 }

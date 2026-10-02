@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Medical.Common.Targeting;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
+using Content.Shared.Body.Components;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Cuffs;
 using Content.Shared.Damage;
@@ -13,7 +15,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
-using Content.Shared.Mindshield.Components;
+using Content.Shared.Mindshield;
 using Content.Shared.Popups;
 using Content.Shared.Speech.Muting;
 using Content.Shared.StatusEffectNew;
@@ -30,6 +32,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
     [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedCuffableSystem _cuffable = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -39,6 +42,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
 
     private static readonly EntProtoId Muted = "StatusEffectMuted";
     private static readonly ProtoId<DamageTypePrototype> Slash = "Slash";
@@ -71,7 +75,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         var target = GetEntity(netTarget);
 
         // TODO: actual magic protection shit, show a popup
-        if (HasComp<MindShieldComponent>(target))
+        if (_mindShield.IsShielded(target))
         {
             var user = args.User;
             _popup.PopupEntity("Mind protection blocks your magic!", user, user, PopupType.MediumCaution);
@@ -105,8 +109,15 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         var id = ent.Comp.AvailableActions[i];
         if (GetActiveSpell(ent, id) is { } action)
         {
-            _popup.PopupEntity("You remove your current spell", user, user);
+            _popup.PopupEntity("You forget your current spell", user, user);
             _actions.RemoveAction(user, action);
+            return;
+        }
+
+        // can't do blood magic in a robot or pai
+        if (!_bloodQuery.HasComp(user))
+        {
+            _popup.PopupEntity("You have no blood to channel the spell through!", user, user, PopupType.LargeCaution);
             return;
         }
 
@@ -157,13 +168,14 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         if (HasComp<BloodCultEmpoweredComponent>(user))
             damage /= 5;
 
-        _damage.ChangeDamage(user, new DamageSpecifier()
+        var damageSpec = new DamageSpecifier()
         {
             DamageDict = new()
             {
                 { Slash, damage }
-            }
-        });
+            },
+        };
+        _damage.ChangeDamage(user, damageSpec, targetPart: TargetBodyPart.Arms, canMiss: false);
 
         _popup.PopupEntity($"Your wounds glow with power, you have prepared a {Name(action)} invocation!", user, user, PopupType.Medium);
         _actions.SetTemporary(action, true); // can't be temp in the prototype or AddAction will queue del it :D

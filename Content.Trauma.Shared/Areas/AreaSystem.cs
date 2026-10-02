@@ -32,8 +32,6 @@ public sealed partial class AreaSystem : EntitySystem
     private const float Range = 0.25f;
     private const LookupFlags Flags = LookupFlags.Static;
 
-    private HashSet<Entity<AreaComponent>> _areas = new();
-
     public override void Initialize()
     {
         base.Initialize();
@@ -62,18 +60,16 @@ public sealed partial class AreaSystem : EntitySystem
     {
         AllAreas.Clear();
         DepartmentAreas.Clear();
-        var name = Factory.GetComponentName<AreaComponent>();
-        var dept = Factory.GetComponentName<DepartmentAreaComponent>();
+        var name = Factory.CompName<AreaComponent>();
+        var dept = Factory.CompName<DepartmentAreaComponent>();
         foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
         {
-            // TODO: proto.HasComp(name) after engine update
-            if (!proto.Components.ContainsKey(name))
+            if (!proto.HasComp(name))
                 continue;
 
             var id = proto.ID;
             AllAreas.Add(id);
-            // TODO: proto.TryComp(name, Factory) after engine update
-            if (!proto.TryGetComponent<DepartmentAreaComponent>(dept, out var comp))
+            if (!proto.TryComp<DepartmentAreaComponent>(dept, out var comp))
                 continue;
 
             var deptId = comp.Department;
@@ -165,7 +161,7 @@ public sealed partial class AreaSystem : EntitySystem
     /// Add areas not blocked by anything on a given map to a list, matching a predicate.
     /// Uses the name of a component to narrow down the query, use a marker component's name for it to be faster.
     /// </summary>
-    public void AddOpenAreas(MapId map, List<Entity<TransformComponent>> areas, string comp, Predicate<Entity<TransformComponent>> pred) // TODO: switch to CompName after contingency
+    public void AddOpenAreas(MapId map, List<Entity<TransformComponent>> areas, [ForbidLiteral] CompName comp, Predicate<Entity<TransformComponent>> pred)
     {
         var type = Factory.GetRegistration(comp).Type;
         AddOpenAreas(map, areas, type, pred);

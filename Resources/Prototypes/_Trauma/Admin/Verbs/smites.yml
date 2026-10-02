@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: adminVerb
+  id: AdminSmiteThunderstrike
+  categoryPrototype: Smite
+  name: admin-smite-thunderstrike-name
+  description: admin-smite-thunderstrike-desc
+  icon: /Textures/Interface/VerbIcons/smite.svg.192dpi.png
+  effects:
+  - !type:Thunderstrike
+    kill: true

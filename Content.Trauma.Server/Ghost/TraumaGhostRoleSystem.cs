@@ -2,7 +2,7 @@
 
 using Content.Medical.Common.Body;
 using Content.Server.Ghost.Roles.Components;
-using Content.Server.Station.Systems;
+using Content.Shared.Station.Systems;
 
 namespace Content.Trauma.Server.Ghost;
 

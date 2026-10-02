@@ -16,10 +16,7 @@
   startingGear: ChiefEngineerGear
   icon: "JobIconChiefEngineer"
   supervisors: job-supervisors-captain
-  antagAdvantage: 75 # Trauma
-  guides: # Trauma
-  - Engineering
-  - Command
+  guides: [ Command ] # TODO: should have a more specific guidebook page instead of using the department itself
   access:
   - Maintenance
   - Engineering
@@ -30,22 +27,10 @@
   - Brig
   - Cryogenics
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEchelonEducation
-    - SkillChipDatabase
-    - SkillChipTool
-  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
-      # <Trauma>
-      - type: Condemned # Nanotrasen owns your soul pal.
-        soulOwnedNotDevil: true
-      - type: EngineeringStaff
-      # </Trauma>
       - type: CommandStaff
 
 - type: startingGear
@@ -53,12 +38,11 @@
   equipment:
     id: CEPDA
     eyes: ClothingEyesGlassesMeson
-    ears: ClothingHeadsetAltEngineering # Goobstation
+    ears: ClothingHeadsetCE
     belt: ClothingBeltUtilityEngineering
   storage:
     back:
     - Flash
-    - TelescopicBaton # Goobstation
 
 - type: chameleonOutfit
   id: ChiefEngineerChameleonOutfit

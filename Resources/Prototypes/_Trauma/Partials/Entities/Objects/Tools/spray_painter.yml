@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: SprayPainterRecharging
+  components:
+  - type: Item
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,1,0,1
+    storedOffset: 0,-4
+  - type: Tool
+    qualities:
+    - Painting
+
+- type: entity
+  id: SprayPainterAmmo
+  components:
+  - type: SprayPainterAmmo
+    whitelist: # let it refill spray cans too
+      components:
+      - SprayPainter
+      - PaintCan

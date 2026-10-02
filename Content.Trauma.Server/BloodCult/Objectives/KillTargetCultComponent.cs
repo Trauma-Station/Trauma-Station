@@ -10,4 +10,10 @@ public sealed partial class KillTargetCultComponent : Component
 
     [DataField]
     public EntityUid? Target;
+
+    /// <summary>
+    /// The cult rule that assigned this objective.
+    /// </summary>
+    [DataField]
+    public EntityUid? Rule;
 }

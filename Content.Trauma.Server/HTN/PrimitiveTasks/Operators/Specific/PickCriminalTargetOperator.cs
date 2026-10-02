@@ -43,7 +43,6 @@ public sealed partial class PickCriminalTargetOperator : HTNOperator
     private EntityQuery<EmaggedComponent> _emagQuery = default!;
     private EntityQuery<StealthComponent> _stealthQuery = default!;
 
-
     /// <summary>
     /// Target entity to inject
     /// </summary>
@@ -60,7 +59,7 @@ public sealed partial class PickCriminalTargetOperator : HTNOperator
     /// The criminal status the target has to be for it to be a target
     /// </summary>
     [DataField(required: true)]
-    public ProtoId<SecurityIconPrototype> CriminalStatus;
+    public ProtoId<StatusIconPrototype> CriminalStatus;
 
     /// <summary>
     /// The sound to play when it finds a target

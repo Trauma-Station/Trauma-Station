@@ -250,7 +250,7 @@
     price: 5000
 
 - type: entity
-  parent: WaterBalloonBase
+  parent: BaseRanchingEgg
   id: ClownEgg
   name: egg?
   suffix: Clown
@@ -258,6 +258,19 @@
   components:
   - type: Sprite
     state: egg-honk
+  - type: TimedReplace
+    entity: MobChickClown
+  - type: EntityEffectOnEaten
+    effects:
+    - !type:PopupMessage
+      visualType: MediumCaution
+      type: Local
+      messages:
+      - clown-egg-popup
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectClumsyClown
+      time: 60
+      type: Add
 
 - type: entity
   parent: BaseRanchingEgg
@@ -268,6 +281,17 @@
     state: egg-cluwne
   - type: TimedReplace
     entity: MobChickCluwne
+  - type: EntityEffectOnEaten
+    effects:
+    - !type:PopupMessage
+      visualType: MediumCaution
+      type: Local
+      messages:
+      - cluwne-egg-popup
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectClumsyCluwne
+      time: 120
+      type: Add
 
 - type: entity
   parent: [BaseChickenCold, BaseRanchingEgg]
@@ -449,9 +473,14 @@
     entity: MobChickKnight
   - type: EntityEffectOnEaten
     effects:
+    - !type:PopupMessage
+      visualType: MediumCaution
+      type: Local
+      messages:
+      - knight-egg-popup
     - !type:ModifyStatusEffect
       effectProto: StatusEffectDamageModKnightEgg
-      time: 30
+      time: 60
       type: Add
 
 - type: entity

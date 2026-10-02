@@ -15,7 +15,7 @@ public sealed partial class WarAnimationSystem : EntitySystem
     [Dependency] private SharedSpecialAnimationSystem _specialAnimation = default!;
     [Dependency] private ServerGlobalSoundSystem _sound = default!;
 
-    [SubscribeLocalEvent(after: [typeof(NukeopsRuleSystem)])] // shitty event as api antipattern
+    [SubscribeLocalEvent(after: [typeof(ServerNukeopsRuleSystem)])] // shitty event as api antipattern
     private void OnWarDeclared(ref WarDeclaredEvent args)
     {
         if (args.Status != WarConditionStatus.WarReady)

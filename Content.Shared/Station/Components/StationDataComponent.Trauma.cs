@@ -7,5 +7,6 @@ public sealed partial class StationDataComponent
     /// Unlike <see cref="Grids"/> it does not include members like ATS, cargo shuttle or split grids (engi shittles usually)
     /// </summary>
     [DataField, AutoNetworkedField]
+    [Access(Other = AccessPermissions.ReadWriteExecute)]
     public HashSet<EntityUid> OwnedGrids = new();
 }

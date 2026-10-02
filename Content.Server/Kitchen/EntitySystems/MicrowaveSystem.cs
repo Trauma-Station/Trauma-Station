@@ -101,7 +101,8 @@ namespace Content.Server.Kitchen.EntitySystems
             SubscribeLocalEvent<ActiveMicrowaveComponent, EntRemovedFromContainerMessage>(OnActiveMicrowaveRemove);
 
             SubscribeLocalEvent<ActivelyMicrowavedComponent, OnConstructionTemperatureEvent>(OnConstructionTemp);
-            SubscribeLocalEvent<ActivelyMicrowavedComponent, SolutionRelayEvent<ReactionAttemptEvent>>(OnReactionAttempt);
+            SubscribeLocalEvent<ActivelyMicrowavedComponent, SolutionRelayEvent<ReactionAttemptEvent>>(OnReactionAttemptRelay);
+            SubscribeLocalEvent<ActivelyMicrowavedComponent, ReactionAttemptEvent>(OnReactionAttempt);
 
             SubscribeLocalEvent<FoodRecipeProviderComponent, GetSecretRecipesEvent>(OnGetSecretRecipes);
         }
@@ -146,9 +147,14 @@ namespace Content.Server.Kitchen.EntitySystems
             args.Result = HandleResult.False;
         }
 
+        private void OnReactionAttemptRelay(Entity<ActivelyMicrowavedComponent> ent, ref SolutionRelayEvent<ReactionAttemptEvent> args)
+        {
+            OnReactionAttempt(ent, ref args.Event);
+        }
+
         // Stop reagents from reacting if they are currently reserved for a microwave recipe.
         // For example Egg would cook into EggCooked, causing it to not being removed once we are done microwaving.
-        private void OnReactionAttempt(Entity<ActivelyMicrowavedComponent> ent, ref SolutionRelayEvent<ReactionAttemptEvent> args)
+        private void OnReactionAttempt(Entity<ActivelyMicrowavedComponent> ent, ref ReactionAttemptEvent args)
         {
             if (!TryComp<ActiveMicrowaveComponent>(ent.Comp.Microwave, out var activeMicrowaveComp))
                 return;
@@ -160,9 +166,9 @@ namespace Content.Server.Kitchen.EntitySystems
 
             foreach (var reagent in recipeReagents)
             {
-                if (args.Event.Reaction.Reactants.ContainsKey(reagent))
+                if (args.Reaction.Reactants.ContainsKey(reagent))
                 {
-                    args.Event.Cancelled = true;
+                    args.Cancelled = true;
                     return;
                 }
             }
