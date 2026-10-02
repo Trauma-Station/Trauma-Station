@@ -205,7 +205,7 @@ public sealed partial class StationSpawningSystem : EntitySystem
 
         if (raiseEvent)
         {
-            var ev = new StartingGearEquippedEvent(entity);
+            var ev = new StartingGearEquippedEvent(entity, startingGear); // Trauma - pass startingGear
             RaiseLocalEvent(entity, ref ev);
         }
     }
