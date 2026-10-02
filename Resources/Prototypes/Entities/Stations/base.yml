@@ -19,6 +19,7 @@
         Security: [ ]
         Service: [ ]
     - type: StationCargoBountyDatabase
+      maxBounties: 8
     - type: StationXenobiologyBountyDatabase # Goobstaton
 
 - type: entity

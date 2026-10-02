@@ -15,7 +15,7 @@ public sealed partial class StationCargoBountyDatabaseComponent : Component
     /// Maximum amount of bounties a station can have.
     /// </summary>
     [DataField]
-    public int MaxBounties = 8; // Trauma - was 6
+    public int MaxBounties = 6;
 
     /// <summary>
     /// A list of all the bounties currently active for a station.
