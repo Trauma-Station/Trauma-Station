@@ -15363,3 +15363,10 @@ Entries:
   id: 1671
   time: '2026-10-01T17:54:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4841
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed progtot job listings UI breaking if you relogged.
+  id: 1672
+  time: '2026-10-01T22:06:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4846
