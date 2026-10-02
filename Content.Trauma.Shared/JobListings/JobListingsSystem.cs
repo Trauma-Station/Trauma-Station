@@ -273,8 +273,6 @@ public abstract partial class JobListingsSystem : EntitySystem
 
         if (MindQuery.TryComp(jobBoard.Comp.Mind, out var mind))
             PVSOverrideEntity(mind.OwnedEntity, jobBoard);
-        else
-            Log.Error($"Job board {ToPrettyString(jobBoard)} had no mind when linking to {ToPrettyString(remote)}");
     }
 
     /// <summary>
