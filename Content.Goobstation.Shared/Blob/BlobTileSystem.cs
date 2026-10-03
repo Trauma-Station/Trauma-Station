@@ -12,6 +12,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
+using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Verbs;
 using Content.Trauma.Common.Fluids;
@@ -33,6 +34,7 @@ public sealed partial class BlobTileSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private NpcFactionSystem _faction = default!;
     [Dependency] private EntityQuery<BlobCoreComponent> _coreQuery = default!;
