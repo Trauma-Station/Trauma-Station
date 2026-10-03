@@ -2,7 +2,6 @@
 
 using Content.Shared.Chat.RadioIconsEvents;
 using Content.Shared.Damage.Systems;
-using Content.Shared.Emp;
 using Content.Shared.Inventory;
 using Content.Shared.Stunnable;
 using Content.Trauma.Common.Heretic;
@@ -42,6 +41,5 @@ public sealed partial class TraumaInventorySystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, BeforeDamageChangedEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, SpeechFontOverrideEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, GotHitByProjectileEvent>(_inventory.RelayEvent);
-        SubscribeLocalEvent<InventoryComponent, EmpPulseEvent>(_inventory.RelayEvent);
     }
 }
