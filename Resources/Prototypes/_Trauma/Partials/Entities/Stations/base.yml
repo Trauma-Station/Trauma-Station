@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: BaseStationCargo
   abstract: true
+  id: BaseStationCargo
   components:
   - type: StationBankAccount
     primaryCut: 0.9
