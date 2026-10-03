@@ -968,6 +968,16 @@
       state: generic_panel_open
   - type: CargoOrderConsole
     removeLimitAccess: [ "Quartermaster" ]
+    allowedGroups:
+    - CargoWeapon
+    - CargoMedical
+    - CargoFood
+    - CargoMilitaryTier2
+    - CargoMilitaryTier3
+    - CargoMedicalTier2
+    - CargoMedicalTier3
+    - CargoServiceTier2
+    - CargoServiceTier3
   - type: ActiveRadio
     channels:
     - Supply
@@ -1172,7 +1182,6 @@
   id: ComputerCargoBounty
   parent: BaseComputerAiAccess
   name: cargo bounty computer
-  description: Used to manage currently active bounties.
   components:
   - type: Sprite
     layers:
@@ -1203,6 +1212,7 @@
     color: "#b89f25"
   - type: AccessReader
     access: [["Cargo"]] # Trauma - Was QM.
+  - type: CargoReputation
   - type: GuideHelp
     guides:
     - CargoBounties

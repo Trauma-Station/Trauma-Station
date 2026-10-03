@@ -143,3 +143,18 @@ bounty-description-cotton-boll = A massive swarm of mothroaches ate all the pape
 bounty-description-microwave-machine-board = Mr. Giggles thought it'd be funny to stick forks in all the kitchen microwaves. Help us replace them before the chefs start making clown burgers.
 bounty-description-flashes = GREETINGS \[Station] WE REQUIRE 6 FLASHES DUE TO A NORMAL \[TrainingExercise] WITH SECURITY. EVERYTHING IS \[Normal].
 bounty-description-ring = On this EXTRAORDINARY day there will be a wedding between the Gelts, but Mr. Gelt has lost the rings. They need a new pair.
+bounty-description-weapons = Provide high-quality firearms for the station security forces and frontier vanguards
+WeaponPistolViper = Viper
+WeaponRifleLecter = Lecter
+WeaponShotgunKammerer = Kammerer
+WeaponPistolAnaconda = Anaconda
+bounty-description-military-improvised = [SPECIAL CONTRACT] Supply the frontier vanguards with makeshift craftable weapons. Completion awards +5 Military Reputation and locks the contract for infinite repeatable farming.
+bounty-name-flintlock = [MILITARY] Craft 1x Flintlock Pistol (+5 Rep)
+bounty-name-improvised-shotgun = [MILITARY] Craft 1x Improvised Shotgun (+5 Rep)
+bounty-name-pipe-rifle = [MILITARY] Craft 1x Pipe Rifle (+5 Rep)
+ent-ComputerCargoBounty = cargo bounty computer
+    .desc = Used to manage currently active bounties.
+cargo-bounty-console-reputation =
+    » Military: {$militaryXp} XP
+    » Medical: {$medicalXp} XP
+    » Service: {$serviceXp} XP

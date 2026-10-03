@@ -33,9 +33,7 @@ namespace Content.Client.Cargo.UI
         public event Action<CargoProductRow?>? OnItemSelected;
         public event Action<CargoOrderData?>? OnOrderApproved;
         public event Action<CargoOrderData?>? OnOrderCanceled;
-
         public event Action<ProtoId<CargoAccountPrototype>?, int>? OnAccountAction;
-
         public event Action<ButtonEventArgs>? OnToggleUnboundedLimit;
 
         private readonly List<string> _categoryStrings = new();
@@ -55,7 +53,7 @@ namespace Content.Client.Cargo.UI
 
             _orderConsoleQuery = _entityManager.GetEntityQuery<CargoOrderConsoleComponent>();
             _bankQuery = _entityManager.GetEntityQuery<StationBankAccountComponent>();
-            InitializeTrauma(); // Trauma
+            InitializeTrauma();
 
             Title = entMan.GetComponent<MetaDataComponent>(owner).EntityName;
 
@@ -74,10 +72,7 @@ namespace Content.Client.Cargo.UI
             TabContainer.SetTabTitle(0, Loc.GetString("cargo-console-menu-tab-title-orders"));
             TabContainer.SetTabTitle(1, Loc.GetString("cargo-console-menu-tab-title-funds"));
 
-            ActionOptions.OnItemSelected += idx =>
-            {
-                ActionOptions.SelectId(idx.Id);
-            };
+            ActionOptions.OnItemSelected += idx => ActionOptions.SelectId(idx.Id);
 
             TransferSpinBox.IsValid = val =>
             {
@@ -85,19 +80,16 @@ namespace Content.Client.Cargo.UI
                     !_entityManager.TryGetComponent<StationBankAccountComponent>(_station, out var bank))
                     return true;
 
-                return val >= 0 && val <= (int) (console.TransferLimit * bank.Accounts[console.Account]);
+                return val >= 0 && val <= (int)(console.TransferLimit * bank.Accounts[console.Account]);
             };
 
             AccountActionButton.OnPressed += _ =>
             {
-                var account = (ProtoId<CargoAccountPrototype>?) ActionOptions.SelectedMetadata;
+                var account = (ProtoId<CargoAccountPrototype>?)ActionOptions.SelectedMetadata;
                 OnAccountAction?.Invoke(account, TransferSpinBox.Value);
             };
 
-            AccountLimitToggleButton.OnPressed += a =>
-            {
-                OnToggleUnboundedLimit?.Invoke(a);
-            };
+            AccountLimitToggleButton.OnPressed += a => OnToggleUnboundedLimit?.Invoke(a);
         }
 
         private void OnCategoryItemSelected(OptionButton.ItemSelectedEventArgs args)
@@ -135,74 +127,106 @@ namespace Content.Client.Cargo.UI
             }
         }
 
-        /// <summary>
-        ///     Populates the list of products that will actually be shown, using the current filters.
-        /// </summary>
         public void PopulateProducts()
         {
             Products.RemoveAllChildren();
             var products = ProductPrototypes.ToList();
-            products.Sort((x, y) =>
-                string.Compare(x.Name, y.Name, StringComparison.CurrentCultureIgnoreCase));
+            products.Sort((x, y) => string.Compare(x.Name, y.Name, StringComparison.CurrentCultureIgnoreCase));
 
             var search = SearchBar.Text.Trim().ToLowerInvariant();
             foreach (var prototype in products)
             {
-                // if no search or category
-                // else if search
-                // else if category and not search
                 if (search.Length == 0 && _category == null ||
                     search.Length != 0 && prototype.Name.ToLowerInvariant().Contains(search) ||
                     search.Length != 0 && prototype.Description.ToLowerInvariant().Contains(search) ||
-                    search.Length == 0 && _category != null && Loc.GetString(prototype.Category).Equals(_category))
+                    search.Length == 0 && _category != null && IsProductInSelectedCategory(prototype))
                 {
                     var button = new CargoProductRow
                     {
                         Product = prototype,
                         ProductName = { Text = prototype.Name },
                         MainButton = { ToolTip = prototype.Description },
-                        PointCost = { Text = Loc.GetString("cargo-console-menu-points-amount", ("amount", ModifyCost(prototype.Cost).ToString())) }, // Trauma - use ModifyCost
+                        PointCost = { Text = Loc.GetString("cargo-console-menu-points-amount", ("amount", ModifyCost(prototype.Cost).ToString())) },
                         Icon = { Texture = _spriteSystem.Frame0(prototype.Icon) },
                     };
-                    button.MainButton.OnPressed += args =>
-                    {
-                        OnItemSelected?.Invoke(button);
-                    };
+
+                    button.MainButton.OnPressed += args => OnItemSelected?.Invoke(button);
                     Products.AddChild(button);
                 }
             }
         }
 
-        /// <summary>
-        ///     Populates the list of products that will actually be shown, using the current filters.
-        /// </summary>
+        private bool IsProductInSelectedCategory(CargoProductPrototype prototype)
+        {
+            var category = prototype.Category.ToString();
+
+            return category switch
+            {
+                "cargoproduct-category-name-military-t2" or
+                "cargoproduct-category-name-military-t3" => _category == "Military",
+
+                "cargoproduct-category-name-medical-t2" or
+                "cargoproduct-category-name-medical-t3" => _category == "Medical",
+
+                "cargoproduct-category-name-service-t2" or
+                "cargoproduct-category-name-service-t3" => _category == "Service",
+
+                _ => Loc.GetString(prototype.Category).Equals(_category)
+            };
+        }
+
         public void PopulateCategories()
         {
             _categoryStrings.Clear();
             Categories.Clear();
 
+            var hasMilitary = false;
+            var hasMedical = false;
+            var hasService = false;
+
             foreach (var prototype in ProductPrototypes)
             {
-                if (!_categoryStrings.Contains(Loc.GetString(prototype.Category)))
+                switch (prototype.Category)
                 {
-                    _categoryStrings.Add(Loc.GetString(prototype.Category));
+                    case "cargoproduct-category-name-military-t2":
+                    case "cargoproduct-category-name-military-t3":
+                        hasMilitary = true;
+                        continue;
+
+                    case "cargoproduct-category-name-medical-t2":
+                    case "cargoproduct-category-name-medical-t3":
+                        hasMedical = true;
+                        continue;
+
+                    case "cargoproduct-category-name-service-t2":
+                    case "cargoproduct-category-name-service-t3":
+                        hasService = true;
+                        continue;
                 }
+
+                var category = Loc.GetString(prototype.Category);
+                if (!_categoryStrings.Contains(category))
+                    _categoryStrings.Add(category);
             }
 
-            _categoryStrings.Sort();
+            // Эти категории появляются автоматически только тогда, когда сервер
+            // уже добавил соответствующие товары в ProductCatalogue после проверки репутации.
+            if (hasMilitary)
+                _categoryStrings.Add("Military");
 
-            // Add "All" category at the top of the list
+            if (hasMedical)
+                _categoryStrings.Add("Medical");
+
+            if (hasService)
+                _categoryStrings.Add("Service");
+
+            _categoryStrings.Sort();
             _categoryStrings.Insert(0, Loc.GetString("cargo-console-menu-populate-categories-all-text"));
 
             foreach (var str in _categoryStrings)
-            {
                 Categories.AddItem(str);
-            }
         }
 
-        /// <summary>
-        ///     Populates the list of orders and requests.
-        /// </summary>
         public void PopulateOrders(IEnumerable<CargoOrderData> orders)
         {
             if (!_orderConsoleQuery.TryComp(_owner, out var orderConsole))
@@ -217,61 +241,24 @@ namespace Content.Client.Cargo.UI
 
                 var product = _protoManager.Index<EntityPrototype>(productProto.Product);
                 var productName = productProto.Name;
-                var requester = !string.IsNullOrEmpty(order.Requester) ?
-                    order.Requester : Loc.GetString("cargo-console-menu-order-row-alerts-requester-unknown");
+                var requester = !string.IsNullOrEmpty(order.Requester) ? order.Requester : Loc.GetString("cargo-console-menu-order-row-alerts-requester-unknown");
                 var account = _protoManager.Index(order.Account);
 
                 var row = new CargoOrderRow
                 {
                     Order = order,
-
-                    Title =
-                    {
-                        Text = Loc.GetString(
-                            "cargo-console-menu-order-row-title",
-                            ("productName", productName),
-                            ("orderAmount", order.OrderQuantity),
-                            ("orderPrice", ModifyCost(productProto.Cost))), // Trauma - use ModifyCost
-                    },
-
-                    Stride =
-                    {
-                        PanelOverride = new StyleBoxFlat
-                        {
-                            BackgroundColor = account.Color,
-                            ContentMarginBottomOverride = 2,
-                        },
-                    },
-
+                    Title = { Text = Loc.GetString("cargo-console-menu-order-row-title", ("productName", productName), ("orderAmount", order.OrderQuantity), ("orderPrice", ModifyCost(productProto.Cost))) },
+                    Stride = { PanelOverride = new StyleBoxFlat { BackgroundColor = account.Color, ContentMarginBottomOverride = 2 } },
                     Icon = { Texture = _spriteSystem.Frame0(product) },
-
-                    ProductName =
-                    {
-                        Text = Loc.GetString(
-                            "cargo-console-menu-populate-orders-cargo-order-row-product-name-text",
-                            ("orderRequester", requester),
-                            ("accountColor", account.Color),
-                            ("account", Loc.GetString(account.Code)))
-                    },
-
-                    Description =
-                    {
-                        Text = !string.IsNullOrEmpty(order.Reason) ?
-                            Loc.GetString(
-                                "cargo-console-menu-order-row-product-description",
-                                ("orderReason", order.Reason))
-                        :
-                            Loc.GetString(
-                                "cargo-console-menu-order-row-product-description",
-                                ("orderReason", Loc.GetString("cargo-console-menu-order-row-alerts-reason-absent")))
-                    }
+                    ProductName = { Text = Loc.GetString("cargo-console-menu-populate-orders-cargo-order-row-product-name-text", ("orderRequester", requester), ("accountColor", account.Color), ("account", Loc.GetString(account.Code))) },
+                    Description = { Text = !string.IsNullOrEmpty(order.Reason)
+                        ? Loc.GetString("cargo-console-menu-order-row-product-description", ("orderReason", order.Reason))
+                        : Loc.GetString("cargo-console-menu-order-row-product-description", ("orderReason", Loc.GetString("cargo-console-menu-order-row-alerts-reason-absent"))) }
                 };
 
-                row.Cancel.OnPressed += (args) => { OnOrderCanceled?.Invoke(order); };
-
-                // TODO: Disable based on access.
+                row.Cancel.OnPressed += args => OnOrderCanceled?.Invoke(order);
                 row.SetApproveVisible(orderConsole.Mode != CargoOrderConsoleMode.SendToPrimary);
-                row.Approve.OnPressed += (args) => { OnOrderApproved?.Invoke(order); };
+                row.Approve.OnPressed += args => OnOrderApproved?.Invoke(order);
                 Requests.AddChild(row);
             }
         }
@@ -284,15 +271,16 @@ namespace Content.Client.Cargo.UI
 
             var i = 0;
             ActionOptions.Clear();
-            ActionOptions.AddItem(Loc.GetString("cargo-console-menu-account-action-option-withdraw"), i);
-            i++;
+            ActionOptions.AddItem(Loc.GetString("cargo-console-menu-account-action-option-withdraw"), i++);
+
             foreach (var account in bank.Accounts.Keys)
             {
                 if (account == console.Account)
                     continue;
+
                 var accountProto = _protoManager.Index(account);
-                ActionOptions.AddItem(Loc.GetString("cargo-console-menu-account-action-option-transfer",
-                    ("code", Loc.GetString(accountProto.Code))),
+                ActionOptions.AddItem(
+                    Loc.GetString("cargo-console-menu-account-action-option-transfer", ("code", Loc.GetString(accountProto.Code))),
                     i);
                 ActionOptions.SetItemMetadata(i, account);
                 i++;
@@ -310,15 +298,13 @@ namespace Content.Client.Cargo.UI
 
             if (!_bankQuery.TryComp(_station, out var bankAccount) ||
                 !_orderConsoleQuery.TryComp(_owner, out var orderConsole))
-            {
                 return;
-            }
-            UpdateDestination(orderConsole.Destination); // Trauma
+
+            UpdateDestination(orderConsole.Destination);
 
             var balance = _cargoSystem.GetBalanceFromAccount((_station.Value, bankAccount), orderConsole.Account);
             PointsLabel.Text = Loc.GetString("cargo-console-menu-points-amount", ("amount", balance));
-            TransferLimitLabel.Text = Loc.GetString("cargo-console-menu-account-action-transfer-limit",
-                ("limit", (int) (balance * orderConsole.TransferLimit)));
+            TransferLimitLabel.Text = Loc.GetString("cargo-console-menu-account-action-transfer-limit", ("limit", (int)(balance * orderConsole.TransferLimit)));
 
             UnlimitedNotifier.Visible = orderConsole.TransferUnbounded;
             AccountActionButton.Disabled = TransferSpinBox.Value <= 0 ||

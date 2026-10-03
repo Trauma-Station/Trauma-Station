@@ -732,3 +732,37 @@
     whitelist:
       tags:
       - Ring
+
+- type: cargoBounty
+  id: FactionWeaponPistolFlintlock
+  reward: 3500
+  description: bounty-description-military-improvised
+  entries:
+  - name: bounty-name-flintlock # Исправлено! Это ключ локализации
+    amount: 1
+    whitelist:
+      components:
+      - Gun
+
+- type: cargoBounty
+  id: FactionWeaponShotgunImprovised
+  reward: 4500
+  description: bounty-description-military-improvised
+  entries:
+  - name: bounty-name-improvised-shotgun
+    amount: 1
+    whitelist:
+      components:
+      - Gun
+
+- type: cargoBounty
+  id: FactionWeaponRiflePipe
+  reward: 5500
+  description: bounty-description-military-improvised
+  entries:
+  - name: bounty-name-pipe-rifle
+    amount: 1
+    whitelist:
+      components:
+      - Gun
+

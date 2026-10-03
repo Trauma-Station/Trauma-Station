@@ -18,18 +18,10 @@ public sealed class CargoBountyConsoleBoundUserInterface : BoundUserInterface
     protected override void Open()
     {
         base.Open();
-
         _menu = this.CreateWindow<CargoBountyMenu>();
 
-        _menu.OnLabelButtonPressed += id =>
-        {
-            SendMessage(new BountyPrintLabelMessage(id));
-        };
-
-        _menu.OnSkipButtonPressed += id =>
-        {
-            SendMessage(new BountySkipMessage(id));
-        };
+        _menu.OnLabelButtonPressed += id => SendMessage(new BountyPrintLabelMessage(id));
+        _menu.OnSkipButtonPressed += id => SendMessage(new BountySkipMessage(id));
     }
 
     protected override void UpdateState(BoundUserInterfaceState message)

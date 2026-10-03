@@ -32,3 +32,24 @@
   cost: 30000
   category: cargoproduct-category-name-armory
   group: market
+
+- type: cargoProduct
+  id: CargoWeaponLethalAmmoTier2
+  product: CrateArmoryLaserCarbine
+  cost: 1502
+  icon:
+    sprite: _DV/Clothing/Head/Hardsuits/Combat/riot.rsi
+    state: icon
+  category: cargoproduct-category-name-military-t2 # МЕНЯЕМ ЗДЕСЬ!
+  group: market
+
+- type: cargoProduct
+  id: CargoWeaponBigCrateTier3
+  product: CrateArmoryCombatHardsuit
+  cost: 4001
+  icon:
+    sprite: _DV/Clothing/Head/Hardsuits/Combat/riot.rsi
+    state: icon
+  category: cargoproduct-category-name-military-t3 # МЕНЯЕМ ЗДЕСЬ!
+  group: market
+

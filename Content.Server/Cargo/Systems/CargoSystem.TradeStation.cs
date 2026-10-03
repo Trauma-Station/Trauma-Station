@@ -140,10 +140,15 @@ public sealed partial class CargoSystem
 
         foreach (var ent in toSell)
         {
-            // Начисляем репутацию за конкретный предмет для нашей станции
-            ProcessReputationForSoldItem(ent, station);
-
-            // Удаляем предмет (оригинальный код)
+            // EntitySoldEvent, отправленный выше, обрабатывается
+            // CargoSystem.Bounty.cs и самостоятельно определяет,
+            // является ли предмет частью выполненного bounty.
+            //
+            // Репутацию здесь напрямую не начисляем:
+            // TradeStation не знает, какой CargoBountyPrototype
+            // соответствует продаваемому предмету.
+            //
+            // Это также предотвращает двойное начисление репутации.
             Del(ent);
         }
 

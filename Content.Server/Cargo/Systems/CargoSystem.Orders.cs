@@ -758,13 +758,18 @@ namespace Content.Server.Cargo.Systems
 
             var products = new List<ProtoId<CargoProductPrototype>>();
 
-            CargoReputationComponent? reputationComp = null;
-            var repQuery = EntityQueryEnumerator<CargoReputationComponent>();
-            while (repQuery.MoveNext(out var _, out var comp))
+            // Репутация должна браться именно у станции, для которой открыта эта Cargo Console.
+            // Если компонента ещё нет, считаем репутацию равной 0 и держим фракционные товары закрытыми.
+            var militaryReputation = 0f;
+            var medicalReputation = 0f;
+            var serviceReputation = 0f;
+
+            if (TryComp<CargoReputationComponent>(station, out var reputation))
             {
-                reputationComp = comp;
-                break; 
-            } // <- ЗДЕСЬ ЗАКРЫЛСЯ WHILE!
+                militaryReputation = reputation.MilitaryReputation;
+                medicalReputation = reputation.MedicalReputation;
+                serviceReputation = reputation.ServiceReputation;
+            }
 
             var markets = ent.Comp.AllowedGroups.Intersect(db.Markets).ToList();
             foreach (var product in ProtoMan.EnumeratePrototypes<CargoProductPrototype>())
@@ -772,17 +777,21 @@ namespace Content.Server.Cargo.Systems
                 if (!markets.Contains(product.Group))
                     continue;
 
-                if (reputationComp != null)
-                {
-                    if (product.Group == "CargoMilitaryTier2" && reputationComp.MilitaryReputation < 15f)
-                        continue;
+                // --- ФИЛЬТРАЦИЯ ФРАКЦИОННЫХ ТОВАРОВ ПО РЕПУТАЦИИ ---
+                if (product.Category == "cargoproduct-category-name-military-t2" && militaryReputation < 15f)
+                    continue;
+                if (product.Category == "cargoproduct-category-name-military-t3" && militaryReputation < 30f)
+                    continue;
 
-                    if (product.Group == "CargoMedicalTier2" && reputationComp.MedicalReputation < 15f)
-                        continue;
+                if (product.Category == "cargoproduct-category-name-medical-t2" && medicalReputation < 15f)
+                    continue;
+                if (product.Category == "cargoproduct-category-name-medical-t3" && medicalReputation < 30f)
+                    continue;
 
-                    if (product.Group == "CargoServiceTier2" && reputationComp.ServiceReputation < 15f)
-                        continue;
-                }
+                if (product.Category == "cargoproduct-category-name-service-t2" && serviceReputation < 15f)
+                    continue;
+                if (product.Category == "cargoproduct-category-name-service-t3" && serviceReputation < 30f)
+                    continue;
 
                 products.Add(product.ID);
             } // <- ЗДЕСЬ ЗАКРЫЛСЯ FOREACH!
