@@ -10,6 +10,9 @@
   id: AnomalyCorePyroclastic
   name: pyroclastic anomaly core
   components:
+  - type: Tag
+    tags:
+    - AnomalyCorePyroclastic
   - type: Enchanter
     enchants:
     - EnchantFireAspect
@@ -19,6 +22,9 @@
   id: AnomalyCoreGravity
   name: gravity anomaly core
   components:
+  - type: Tag
+    tags:
+    - AnomalyCoreGravity
   - type: Enchanter
     enchants:
     - EnchantKnockback
@@ -27,6 +33,9 @@
   id: AnomalyCoreIce
   name: ice anomaly core
   components:
+  - type: Tag
+    tags:
+    - AnomalyCoreIce
   - type: Enchanter
     enchants:
     - EnchantProtFire
@@ -35,6 +44,9 @@
   id: AnomalyCoreFlesh
   name: flesh anomaly core
   components:
+  - type: Tag
+    tags:
+    - AnomalyCoreFlesh
   - type: Enchanter
     enchants:
     - EnchantSharpness
@@ -43,6 +55,9 @@
   id: AnomalyCoreRock
   name: rock anomaly core
   components:
+  - type: Tag
+    tags:
+    - AnomalyCoreRock
   - type: Enchanter
     enchants:
     - EnchantProtection
@@ -52,6 +67,9 @@
   id: AnomalyCoreLiquid
   name: liquid anomaly core
   components:
+  - type: Tag
+    tags:
+    - AnomalyCoreLiquid
   - type: Enchanter
     enchants:
     - EnchantSlippery
@@ -80,6 +98,9 @@
   id: AnomalyCoreFlora
   name: flora anomaly core
   components:
+  - type: Tag
+    tags:
+    - AnomalyCoreFlora
   - type: Enchanter
     enchants:
     - EnchantThorns
@@ -87,10 +108,18 @@
 - type: entity
   id: AnomalyCoreShadow
   name: shadow anomaly core
+  components:
+  - type: Tag
+    tags:
+    - AnomalyCoreShadow
 
 - type: entity
   id: AnomalyCoreTech
   name: tech anomaly core
+  components:
+  - type: Tag
+    tags:
+    - AnomalyCoreTech
 
 - type: entity
   id: AnomalyCoreSanta

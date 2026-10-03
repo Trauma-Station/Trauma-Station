@@ -18,6 +18,33 @@
   id: AnomalyCoreElectricity # Construction: tesla reactive armor
 
 - type: Tag
+  id: AnomalyCorePyroclastic # Construction: tesla reactive armor
+
+- type: Tag
+  id: AnomalyCoreGravity # Construction: tesla reactive armor
+
+- type: Tag
+  id: AnomalyCoreIce # Construction: tesla reactive armor
+
+- type: Tag
+  id: AnomalyCoreFlesh # Construction: tesla reactive armor
+
+- type: Tag
+  id: AnomalyCoreRock # Construction: tesla reactive armor
+
+- type: Tag
+  id: AnomalyCoreLiquid # Construction: tesla reactive armor
+
+- type: Tag
+  id: AnomalyCoreFlora # Construction: tesla reactive armor
+
+- type: Tag
+  id: AnomalyCoreShadow # Construction: tesla reactive armor
+
+- type: Tag
+  id: AnomalyCoreTech # Construction: tesla reactive armor
+
+- type: Tag
   id: AnvilTop # Construction: Anvil, added to AnvilTop after cooling it down
 
 - type: Tag

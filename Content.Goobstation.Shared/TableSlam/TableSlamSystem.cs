@@ -107,11 +107,16 @@ public sealed partial class TableSlamSystem : EntitySystem
         if (!HasComp<BonkableComponent>(args.OtherEntity))
             return;
 
+        TableSlam(ent, args.OtherEntity);
+    }
+
+    public void TableSlam(Entity<PullableComponent> ent, EntityUid table)
+    {
         var modifierOnGlassBreak = 1;
-        if (TryComp<GlassTableComponent>(args.OtherEntity, out var glassTableComponent))
+        if (TryComp<GlassTableComponent>(table, out var glassTableComponent))
         {
-            _damageable.TryChangeDamage(args.OtherEntity, glassTableComponent.TableDamage, origin: ent, targetPart: TargetBodyPart.Chest);
-            _damageable.TryChangeDamage(args.OtherEntity, glassTableComponent.ClimberDamage, origin: ent);
+            _damageable.TryChangeDamage(ent.Owner, glassTableComponent.ClimberDamage, origin: ent, targetPart: TargetBodyPart.Chest);
+            _damageable.TryChangeDamage(table, glassTableComponent.TableDamage, origin: ent);
             modifierOnGlassBreak = 2;
         }
         else
@@ -122,7 +127,7 @@ public sealed partial class TableSlamSystem : EntitySystem
                     DamageDict = new() { { "Blunt", ent.Comp.TabledDamage } },
                 },
                 targetPart: TargetBodyPart.Chest);
-            _damageable.TryChangeDamage(ent.Owner,
+            _damageable.TryChangeDamage(table,
                 new DamageSpecifier()
                 {
                     DamageDict = new() { { "Blunt", ent.Comp.TabledDamage } },

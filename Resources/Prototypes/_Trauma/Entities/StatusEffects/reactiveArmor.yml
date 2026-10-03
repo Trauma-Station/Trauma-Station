@@ -1,0 +1,80 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: StatusEffectDamageModArmorReactiveRock
+  name: damage mod changed
+  components:
+  - type: ChangeDamageModiferSetStatusEffect
+    damageModifierSet: ReactiveArmorRock
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: ForcedTrueStealthStatusEffect
+  name: camouflage
+  components:
+  - type: ForcedStealthStatusEffect
+    visibility: 0
+    revealOnAttack: false
+    revealOnDamage: false
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: PointLight10StatusEffect
+  name: point light
+  components:
+  - type: PointLight
+    energy: 10
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: WhiteHoleStatusEffect
+  name: gravity well
+  components:
+  - type: GravityWell
+    maxRange: 6
+    baseRadialAcceleration: -180
+    baseTangentialAcceleration: -5
+    gravPulsePeriod: 0.01
+  - type: SingularityDistortion
+    intensity: -200
+    falloffPower: 1.5
+
+- type: entity
+  parent: MobStatusEffectBase
+  id: BlackHoleStatusEffect
+  name: gravity well
+  components:
+  - type: GravityWell
+    maxRange: 6
+    minRange: 0.25
+    baseRadialAcceleration: 25
+    baseTangentialAcceleration: 5
+    gravPulsePeriod: 0.03
+  - type: SingularityDistortion
+    intensity: 10
+    falloffPower: 1.5
+
+- type: entityEffect
+  id: hallucinatingArmor
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectBlurryVision
+    time: 3
+  - !type:ModifyParalysis
+    time: 3.5
+
+- type: entityEffect
+  id: incendiaryArmor
+  effects:
+  - !type:Flammable
+    multiplier: 3
+  - !type:Ignite
+
+- type: entityEffect
+  id: cryogenicArmor
+  effects:
+  - !type:AddComponents
+    components:
+    - type: IceCube
+      breakFreeDelay: 5

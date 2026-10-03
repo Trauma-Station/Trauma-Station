@@ -15,8 +15,26 @@ public sealed partial class ReactiveArmorComponent : Component
     public EntityEffect[] Effects = default!;
 
     [DataField(required: true)]
-    public TimeSpan ActivationDelay;
+    public EntityEffect[] EmpEffects = default!;
+
+
+    [DataField]
+    public TimeSpan ActivationDelay = TimeSpan.FromSeconds(10);
+
+    [DataField]
+    public TimeSpan EmpDuration = TimeSpan.FromSeconds(15);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField, AutoNetworkedField]
     public TimeSpan LastActivated = default;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField, AutoNetworkedField]
+    public TimeSpan LastEmpd = default;
+
+
+    [DataField]
+    public LocId EmpMessage = "reactive-armor-emp-default";
+
+
+    [DataField]
+    public bool ApplyEmpEffectOnUser = true;
 }

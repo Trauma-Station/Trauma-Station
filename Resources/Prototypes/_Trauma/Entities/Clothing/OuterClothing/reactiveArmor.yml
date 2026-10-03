@@ -18,13 +18,14 @@
       Gold: 125
   - type: StaticPrice
     price: 1000
+  - type: Tag
+    tags:
+    - WhitelistChameleon
 
 - type: entity
-  parent: [ ClothingOuterArmorReactiveBase, BaseGrandTheftContraband ]
-  id: ClothingOuterArmorReactiveRD
-  name: reactive teleport armor
-  suffix: RD
-  description: Someone separated our Research Director from his own head!
+  abstract: true
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveTeleportBase
   components:
   - type: StealTarget
     stealGroup: TeleportArmor
@@ -37,23 +38,31 @@
     - !type:RandomTeleport
       radius:
         min: 6.0
-        max: 10.0
+        max: 8.0
     - !type:PlaySoundEffect
         sound: &arrival_sound
           path: /Audio/Effects/teleport_arrival.ogg
     - !type:Sparks
-    activationDelay: 10
-  - type: Tag
-    tags:
-    - WhitelistChameleon
-
+    empEffects:
+    - !type:PlaySoundEffect
+        sound: *deparure_sound
+    - !type:Sparks
+    - !type:RandomTeleport
+      radius:
+        min: 6.0
+        max: 8.0
+    - !type:PlaySoundEffect
+        sound: *arrival_sound
+    - !type:Sparks
+    applyEmpEffectOnUser: false
+    empMessage: reactive-armor-emp-teleport
 
 - type: entity
   parent: ClothingOuterArmorBase
   id: ClothingOuterArmorReactiveUnfinished
-  name: unfinished reactive armor
+  name: reactive armor shell
   suffix: empty
-  description: This one needs an anomaly core.
+  description: An experimental suit of armor, awaiting installation of an anomaly core.
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Armor/reactiveoff.rsi
@@ -64,18 +73,294 @@
     defaultTarget: teleport
     deconstructionTarget: null
     node: start
-  - type: Tag
-    tags:
-    - WhitelistChameleon
+
+- type: entity
+  parent: [ BaseGrandTheftContraband, ClothingOuterArmorReactiveTeleportBase]
+  id: ClothingOuterArmorReactiveRD
+  name: reactive teleport armor
+  suffix: RD
+  description: Someone separated our Research Director from his own head!
+
+- type: entity
+  parent: ClothingOuterArmorReactiveTeleportBase
+  id: ClothingOuterArmorReactiveTeleport # bluespace core
+  name: reactive teleport armor
+  description: Doesn't seem to do much for some reason.
+  components:
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: teleport
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
-  id: ClothingOuterArmorReactiveTeleport
-  name: reactive teleport armor
-  description: Reactive armor with bluespace core in it.
+  id: ClothingOuterArmorReactiveTesla # electricity core
+  name: reactive tesla armor
+  description: An experimental suit of armor with sensitive detectors hooked up to a huge capacitor grid, with emitters strutting out of it. Zap.
   components:
-  - type: StealTarget
-    stealGroup: TeleportArmor
+  - type: ReactiveArmor
+    effects:
+    - !type:Sparks
+    - !type:ShootRandomLightnings
+      lightningRange: 8.0
+    empEffects:
+    - !type:PlaySoundEffect
+      sound: /Audio/Effects/tesla_collapse.ogg
+    - !type:TakeStaminaDamage
+      amount: 100
+    - !type:HealthChange
+      targetPart: Chest
+      damage:
+        types:
+          Shock: 15
+    empMessage: reactive-armor-emp-tesla
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: tesla
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveIncendiary # pyroclastic core
+  name: reactive incendiary armor
+  description: An experimental suit of armor with a reactive sensor array rigged to a flame emitter. For the stylish pyromaniac.
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:PlaySoundEffect
+      sound: &fireball_sound
+        path: /Audio/Magic/fireball.ogg
+    - !type:RelayNearby
+      compName: Flammable
+      range: 8
+      effect: !type:NestedEffect
+        proto: incendiaryArmor
+    empEffects:
+    - !type:PlaySoundEffect
+      sound: *fireball_sound
+    - !type:Flammable
+      multiplier: 3
+    - !type:Ignite
+    empMessage: reactive-armor-emp-incendiary
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: incendiary
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveRepulsive # gravity core
+  name: reactive repulsive armor
+  description: An experimental suit of armor that violently throws back attackers.
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:PlaySoundEffect
+      sound: &repulsive_sound
+        collection: RadiationPulse
+    - !type:ModifyStatusEffect
+        effectProto: WhiteHoleStatusEffect
+        type: Add
+        time: 2.5
+    empEffects:
+    - !type:PlaySoundEffect
+      sound: *repulsive_sound
+    - !type:ModifyStatusEffect
+        effectProto: BlackHoleStatusEffect
+        type: Add
+        time: 2.5
+    empMessage: reactive-armor-emp-repulsive
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: repulsive
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveCryogenic # ice core
+  name: reactive cryogenic armor
+  description: An experimental suit of armor with a reactive sensor array rigged to a cryogenic emitter.
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:Sparks
+    - !type:PlaySoundEffect
+      sound: &ice_brick_sound
+        path: /Audio/_Goobstation/Wraith/flameswoosh.ogg
+    - !type:RelayNearby
+      compName: Body
+      range: 6
+      effect: !type:NestedEffect
+        proto: cryogenicArmor
+    empEffects:
+    - !type:Sparks
+    - !type:PlaySoundEffect
+      sound: *ice_brick_sound
+    - !type:NestedEffect
+      proto: cryogenicArmor
+    empMessage: reactive-armor-emp-cryogenic
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: cryogenic
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveAberration # flesh core
+  name: reactive aberration armor
+  description: Just by looking at it you feel strange presence, like you are an ant and some old God gazes upon you.
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:PlaySoundEffect
+      sound: &aberration_sound
+        path: /Audio/Effects/Fluids/splat.ogg
+    - !type:SpawnFriendly
+      entity: MobFleshGolem
+    - !type:SpawnFriendly
+      entity: MobFleshLover
+    empEffects:
+    - !type:PlaySoundEffect
+      sound: *aberration_sound
+    - !type:SpawnRandomEntities
+      entity: MobFleshGolem
+      number: 1
+    - !type:SpawnRandomEntities
+      entity: MobFleshLover
+      number: 1
+    empMessage: reactive-armor-emp-aberration
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: aberration
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveRock # rock core
+  name: reactive rock armor
+  description: An experimental suit of armor with matter replicating emitter. Feel yourself as John "Rock" Johnson.
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:Sparks
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectDamageModArmorReactiveRock
+      time: 5
+      type: Add
+    empEffects:
+    - !type:PlaySoundEffect
+      sound: /Audio/_Trauma/Effects/metal_pipe_falling.ogg
+    - !type:ModifyKnockdown
+      time: 5
+    - !type:HealthChange
+      targetPart: Chest
+      damage:
+        types:
+          Blunt: 5
+    empMessage: reactive-armor-emp-rock
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: rock
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveHealing # liquid core
+  name: reactive healing armor
+  description: An experimental suit of armor with solution auto-injector. Tuned on keeping the user alive.
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:PlaySoundEffect
+      sound: &healing_sound
+        path: /Audio/Items/Medical/jet_injector.ogg
+    - !type:AddReagentToBlood
+        reagent: Omnizine
+        amount: 5
+    - !type:AddReagentToBlood
+        reagent: TranexamicAcid
+        amount: 2.5
+    empEffects:
+    - !type:Sparks
+    - !type:PlaySoundEffect
+      sound: *healing_sound
+    - !type:AddReagentToBlood
+        reagent: Lexorin
+        amount: 5
+    - !type:AddReagentToBlood
+        reagent: Amatoxin
+        amount: 5
+    empMessage: reactive-armor-emp-healing
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: healing
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveHallucinating # flora core
+  name: reactive hallucinating armor
+  description: An experimental suit of armor with sensitive detectors hooked up to the mind of the wearer, sending mind pulses that causes hallucinations around you.
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:PlaySoundEffect
+      sound: &hallucinating_sound
+        collection: Curse
+    - !type:RelayNearby
+      compName: Body
+      range: 8
+      effect: !type:NestedEffect
+        proto: hallucinatingArmor
+    empEffects:
+    - !type:PlaySoundEffect
+      sound: *hallucinating_sound
+    - !type:NestedEffect
+        proto: hallucinatingArmor
+    empMessage: reactive-armor-emp-hallucinating
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: hallucinating
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveStealth # shadow core
+  name: reactive stealth armor
+  description: An experimental suit of armor that renders the wearer invisible on detection of imminent harm. You can't fight what you can't see.
+  components:
+  - type: ReactiveArmor
+    effects:
+    - !type:PlaySoundEffect
+        sound: *deparure_sound
+    - !type:ModifyStatusEffect
+        effectProto: ForcedTrueStealthStatusEffect
+        type: Add
+        time: 5
+    empEffects:
+    - !type:PlaySoundEffect
+        sound: *deparure_sound
+    - !type:ModifyStatusEffect
+        effectProto: PointLight10StatusEffect
+        type: Add
+        time: 5
+    - !type:HealthChange
+      targetPart: Chest
+      damage:
+        types:
+          Heat: 5
+    empMessage: reactive-armor-emp-stealth
+  - type: Construction
+    graph: ArmorReactive
+    deconstructionTarget: null
+    node: stealth
+
+- type: entity
+  parent: ClothingOuterArmorReactiveBase
+  id: ClothingOuterArmorReactiveTable # tech core
+  name: reactive table armor
+  description: An experimental suit of armor that... does something really wierd. Eh, science am i right? # TG desc (it was admem) = If you can't beat the memes, embrace them.
+  components:
   - type: ReactiveArmor
     effects:
     - !type:PlaySoundEffect
@@ -84,35 +369,31 @@
     - !type:RandomTeleport
       radius:
         min: 6.0
-        max: 10.0
+        max: 8.0
     - !type:PlaySoundEffect
         sound: *arrival_sound
     - !type:Sparks
-    activationDelay: 10
-  - type: Construction
-    graph: ArmorReactive
-    deconstructionTarget: null
-    node: teleport
-  - type: Tag
-    tags:
-    - WhitelistChameleon
-
-- type: entity
-  parent: ClothingOuterArmorReactiveBase
-  id: ClothingOuterArmorReactiveTesla
-  name: reactive tesla armor
-  description: Reactive armor with tesla core in it.
-  components:
-  - type: ReactiveArmor
-    effects:
+    - !type:SpawnRandomEntities
+      entity: Table
+      number: 1
+    - !type:TableSlam
+    empEffects:
+    - !type:PlaySoundEffect
+        sound: *deparure_sound
     - !type:Sparks
-    - !type:ShootRandomLightnings
-      lightningRange: 8.0
-    activationDelay: 10
+    - !type:RandomTeleport
+      radius:
+        min: 6.0
+        max: 8.0
+    - !type:PlaySoundEffect
+        sound: *arrival_sound
+    - !type:Sparks
+    - !type:SpawnRandomEntities
+      entity: TableGlass
+      number: 1
+    - !type:TableSlam
+    empMessage: reactive-armor-emp-table
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
-    node: tesla
-  - type: Tag
-    tags:
-    - WhitelistChameleon
+    node: table
