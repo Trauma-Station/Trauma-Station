@@ -1092,7 +1092,6 @@
   abstract: true
   description: It looks hungry...
   components:
-  - type: Tameable
   - type: MovementSpeedModifier
     baseWalkSpeed: 5.5
     baseSprintSpeed: 5.5
@@ -1131,6 +1130,7 @@
     entToSpawn:
     - MobRaptorHen
     - MobRaptorRooster
+  - type: Tameable
   - type: Sprite
     sprite: _Trauma/Mobs/Ranch/chicken-raptor.rsi
 
