@@ -15423,3 +15423,10 @@ Entries:
   id: 1679
   time: '2026-10-02T20:34:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4861
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed blob tile upgrading being free.
+  id: 1680
+  time: '2026-10-03T08:50:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4868
