@@ -254,9 +254,6 @@
   parent: BaseCQCConsecutive
   id: CQCConsecutiveAdvanced
   opponentEffects:
-  - !type:ModifyStatusEffect
-    effectProto: StatusEffectForcedSleeping
-    time: 7
   - !type:HealthChange
     targetPart: Chest
     damage:
