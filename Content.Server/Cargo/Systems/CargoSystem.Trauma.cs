@@ -14,7 +14,7 @@ namespace Content.Server.Cargo.Systems;
 public sealed partial class CargoSystem
 {
     [Dependency] private AlertLevelSystem _alertLevel = default!;
-    
+
     private List<(string, NetEntity)> _dests = new();
 
     /// <summary>
