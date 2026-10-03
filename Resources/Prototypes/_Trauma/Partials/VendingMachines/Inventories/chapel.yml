@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: vendingMachineInventory
+  id: PietyVendInventory
+  startingInventory:
+    ChemistryBottleFormaldehyde: 3
+    EnchantingScrollEmpty: 6
+  contrabandInventory:
+    RandomInkSpawnerCurse: 1
+  emaggedInventory:
+    RandomInkSpawner: 3

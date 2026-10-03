@@ -1,0 +1,41 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Secure chapel locker by Reestock",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "chapel"
+        },
+        {
+            "name": "chapel_door"
+        },
+        {
+            "name": "chapel_open"
+        },
+        {
+            "name": "generic"
+        },
+        {
+            "name": "generic_door"
+        },
+        {
+            "name": "generic_open"
+        },
+        {
+            "name": "generic_icon"
+        },
+        {
+            "name": "welded"
+        },
+        {
+            "name": "unlocked"
+        },
+        {
+            "name": "locked"
+        }
+    ]
+}
