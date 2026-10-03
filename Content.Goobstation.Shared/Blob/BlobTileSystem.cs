@@ -235,6 +235,7 @@ public sealed partial class BlobTileSystem : EntitySystem
         var current = ProtoMan.Index(target.Comp.Tile);
         if (current.Upgrade is not { } nextId ||
             !TryComp<BlobCoreComponent>(core, out var coreComp))
+            return;
 
         if (_core.GetNearNode(coords, coreComp.TilesRadiusLimit) is not { } node)
         {
