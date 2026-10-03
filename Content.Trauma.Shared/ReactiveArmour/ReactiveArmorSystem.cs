@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Timing;
-
 using Content.Shared.Emp;
 using Content.Shared.EntityEffects;
 using Content.Shared.Inventory;
@@ -9,6 +7,7 @@ using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Shared.Projectiles;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.ReactiveArmor;
 
