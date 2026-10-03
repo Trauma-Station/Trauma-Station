@@ -1,0 +1,8 @@
+- type: entity
+  id: BaseStationCargo
+  components:
+    - type: StationBankAccount
+      primaryCut: 0.9
+    - type: StationCargoBountyDatabase
+      maxBounties: 8
+    - type: StationXenobiologyBountyDatabase
