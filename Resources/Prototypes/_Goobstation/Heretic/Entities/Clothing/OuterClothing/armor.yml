@@ -22,6 +22,8 @@
       VeinsDamage: 0.0
   - type: ExplosionResistance
     damageCoefficient: 0.65
+  - type: PressureProtection
+    lowPressureMultiplier: 1000
 
 - type: entity
   parent: [ ArmorHeretic, ClothingOuterJacketBase, AllowSuitStorageClothing, BaseMagicalContraband ]
@@ -144,8 +146,6 @@
       damageCoefficient: 0
     - type: FireProtection
       reduction: 0.75
-    - type: PressureProtection
-      lowPressureMultiplier: 1000
     deactivateComponents:
     - type: Armor
       coverage:
@@ -534,7 +534,6 @@
       - CarvingKnife
       - HereticMagicItem
   - type: HereticClothing
-  - type: PressureProtection
   - type: VoidCloak
   - type: StripBlockBypass
   - type: SurgeryIgnoreClothing
