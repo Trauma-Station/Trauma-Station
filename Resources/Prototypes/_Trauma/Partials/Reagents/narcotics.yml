@@ -104,7 +104,7 @@
           max: 0.1
         - !type:ReagentCondition
           reagent: Hydroxysomnolene
-          min: 10
+          min: 15
         damage:
           types:
             Poison: 0.3
@@ -117,7 +117,7 @@
           max: 0.1
         - !type:ReagentCondition
           reagent: Hydroxysomnolene
-          min: 10
+          min: 15
         - !type:ReagentCondition # so the heart attack popups are visible
           reagent: Hydroxysomnolene
           max: 30
@@ -126,7 +126,7 @@
         messages:
         - hydroxysomnolene-effect-numb
         probability: 0.05
-      
+
       # Heart stops from withdrawal
       - !type:HealthChange
         conditions:
