@@ -234,8 +234,16 @@ public sealed partial class BlobTileSystem : EntitySystem
         var coords = Transform(target).Coordinates;
         var current = ProtoMan.Index(target.Comp.Tile);
         if (current.Upgrade is not { } nextId ||
-            !TryComp<BlobCoreComponent>(core, out var coreComp) ||
-            _core.GetNearNode(coords, coreComp.TilesRadiusLimit) is not { } node)
+            !TryComp<BlobCoreComponent>(core, out var coreComp))
+
+        if (_core.GetNearNode(coords, coreComp.TilesRadiusLimit) is not { } node)
+        {
+            _popup.PopupEntity("There's no node nearby!", target, observer, PopupType.SmallCaution);
+            return;
+        }
+
+        var cost = ProtoMan.Index(nextId).Cost;
+        if (!_core.TryUseAbility((core, coreComp), cost, coords))
             return;
 
         _core.TransformBlobTile(target.AsNullable(), (core, coreComp), node, nextId, coords, doEffects: false);
