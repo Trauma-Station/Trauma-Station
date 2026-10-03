@@ -29,7 +29,7 @@ public sealed partial class TableSlamEffectSystem : EntityEffectSystem<PullableC
     {
         var entPos = _transform.GetMapCoordinates(ent.Owner);
 
-        _tablesNearby.Clear();aa
+        _tablesNearby.Clear();
         _lookup.GetEntitiesInRange<BonkableComponent>(entPos, args.Effect.SeachRange, _tablesNearby, LookupFlags.Static);
         foreach (var (uid, comp) in _tablesNearby){
             _slam.TableSlam(ent, uid);
