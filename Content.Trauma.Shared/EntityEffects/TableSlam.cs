@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.TableSlam;
 using Content.Shared.Climbing.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.EntityEffects;
 using Content.Shared.Movement.Pulling.Components;
-using Content.Goobstation.Shared.TableSlam;
 
 namespace Content.Trauma.Shared.EntityEffects.Effects;
 
