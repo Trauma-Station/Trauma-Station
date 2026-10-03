@@ -18,21 +18,20 @@ public sealed partial class ReactiveArmorSystem : EntitySystem
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
-    // there has to be a better way to do this then making 3 methods for differen types of attacks... also do we even need a methot for hitscans?
     [SubscribeLocalEvent]
-    private void OnHitMele(Entity<ReactiveArmorComponent> ent, InventoryRelayedEvent<AttackedEvent> args)
+    private void OnHitMele(Entity<ReactiveArmorComponent> ent, ref InventoryRelayedEvent<AttackedEvent> args)
     {
         CheckForCooldown(ent, args.Owner);
     }
 
     [SubscribeLocalEvent]
-    private void OnHitProjectile(Entity<ReactiveArmorComponent> ent, InventoryRelayedEvent<GotHitByProjectileEvent> args)
+    private void OnHitProjectile(Entity<ReactiveArmorComponent> ent, ref InventoryRelayedEvent<GotHitByProjectileEvent> args)
     {
         CheckForCooldown(ent, args.Owner);
     }
 
     [SubscribeLocalEvent]
-    private void OnEmpPulse(Entity<ReactiveArmorComponent> ent, EmpPulseEvent args)
+    private void OnEmpPulse(Entity<ReactiveArmorComponent> ent, ref EmpPulseEvent args)
     {
         ent.Comp.LastEmpd = _timing.CurTime;
         Dirty(ent.Owner, ent.Comp);
@@ -47,7 +46,7 @@ public sealed partial class ReactiveArmorSystem : EntitySystem
             return;
 
         ent.Comp.LastActivated = _timing.CurTime;
-        Dirty(ent.Owner ent.Comp);
+        Dirty(ent.Owner, ent.Comp);
 
         EntityUid target = user;
         EntityEffect[] effects = ent.Comp.Effects;

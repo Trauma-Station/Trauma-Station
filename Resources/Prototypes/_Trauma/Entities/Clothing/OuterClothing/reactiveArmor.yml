@@ -344,6 +344,11 @@
         effectProto: PointLight10StatusEffect
         type: Add
         time: 5
+    - !type:HealthChange
+      targetPart: Chest
+      damage:
+        types:
+          Heat: 5
     empMessage: reactive-armor-emp-stealth
   - type: Construction
     graph: ArmorReactive
