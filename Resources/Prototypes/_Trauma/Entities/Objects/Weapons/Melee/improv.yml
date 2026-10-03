@@ -142,7 +142,7 @@
   parent: [ BaseItem, BaseRevMinorContraband ]
   id: NailBoardTrap
   name: nail board
-  description: A nasty trap, probbaly gonna give your foot an infection.
+  description: A nasty trap, probably gonna give your foot an infection.
   placement:
     mode: SnapgridCenter
   components:
