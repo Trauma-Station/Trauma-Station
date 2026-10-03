@@ -268,6 +268,43 @@
     type: Update
   levelRequired: 60
 
+# Leg sweep
+
+- type: combo
+  abstract: true
+  id: BaseCQCLegSweep
+  attacks:
+  - Harm
+  userConditions:
+  - !type:StandingCondition
+    inverted: true # user must be downed
+  conditions:
+  - !type:StandingCondition
+    failMessage: martial-arts-fail-target-down
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit1.ogg
+  - !type:PopupMessage
+    messages:
+    - cqc-leg-sweep
+
+- type: combo
+  parent: BaseCQCLegSweep
+  id: CQCLegSweepSimple
+  opponentEffects:
+  - !type:LegSweep
+    time: 2
+  levelRequired: 10
+  levelExceeded: 35
+
+- type: combo
+  parent: BaseCQCLegSweep
+  id: CQCLegSweep
+  opponentEffects:
+  - !type:LegSweep
+    time: 5
+  levelRequired: 35
+
 # Neck snap
 
 - type: combo
@@ -277,6 +314,7 @@
   - !type:TargetingCondition
     target: Head
   conditions:
+  # no fail popups since its a single intent
   - !type:HasOrgan
     organCategory: Head
   - !type:PulledByUser

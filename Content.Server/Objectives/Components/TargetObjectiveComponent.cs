@@ -7,8 +7,8 @@ public sealed partial class TargetObjectiveComponent : Component
 {
     /// <summary>
     /// Locale id for the objective title.
-    /// It is passed "targetName" and "job" arguments.
-    /// If null, the objective title will not be set.
+    /// It is passed "targetName", "job" and "department" arguments.
+    /// Standing for the name of the target, their job, and their job's department.
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)] // Trauma - was required: true
     public string? Title;
@@ -19,18 +19,4 @@ public sealed partial class TargetObjectiveComponent : Component
     /// </summary>
     [DataField, ViewVariables(VVAccess.ReadWrite)]
     public EntityUid? Target;
-
-    /// <summary>
-    /// Goobstation.
-    /// Whether name for this objective would change when person's mind attaches to other entity.
-    /// </summary>
-    [DataField]
-    public bool DynamicName;
-
-    /// <summary>
-    /// Goobstation.
-    /// Whether job name should be shown in objective name
-    /// </summary>
-    [DataField]
-    public bool ShowJobTitle = true;
 }

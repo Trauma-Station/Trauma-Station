@@ -6,4 +6,7 @@ public sealed partial class ForensicsComponent
 {
     [DataField]
     public bool CanStoreDNA = true;
+
+    [DataField, AutoNetworkedField]
+    public string Scent = string.Empty;
 }

@@ -1,0 +1,42 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ RMCStairs, BaseCosmicCultStructure ]
+  id: CosmicStairs
+  description: Somewhat unnvering, yet stll as great as any other stairs.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/stairs.rsi
+    state: stair_full
+
+- type: entity
+  parent: CosmicStairs
+  id: CosmicStairsLeft
+  suffix: Left
+  components:
+  - type: Sprite
+    state: stair_left_cap
+
+- type: entity
+  parent: CosmicStairs
+  id: CosmicStairsRight
+  suffix: Right
+  components:
+  - type: Sprite
+    state: stair_right_cap
+
+- type: entity
+  parent: CosmicStairs
+  id: CosmicStairsSolo
+  suffix: Solo
+  components:
+  - type: Sprite
+    state: stair_solo
+
+- type: entity
+  parent: CosmicStairs
+  id: CosmicStairsCorner
+  suffix: Corner
+  components:
+  - type: Sprite
+    state: stair_corner

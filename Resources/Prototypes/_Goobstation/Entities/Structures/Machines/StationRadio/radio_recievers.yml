@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   id: StationRadioReceiver
   name: station radio
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
   description: Listen to the top hits of your stations local radio.
   components:
   - type: Appearance

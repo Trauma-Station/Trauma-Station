@@ -77,8 +77,7 @@
     - id: FlashlightSeclite
       prob: 0.8
     #- id: WeaponDisabler # Trauma - disablers are in belts
-    - id: SecurityBola
-      amount: 2
+    - id: WeaponDisabler
     - id: ClothingUniformJumpsuitSecGrey
       prob: 0.3
     - id: ClothingHeadHelmetBasic

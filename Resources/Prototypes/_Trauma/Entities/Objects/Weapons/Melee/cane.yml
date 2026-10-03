@@ -9,6 +9,8 @@
   components:
   - type: MeleeWeapon
     attackRate: 1.15
+  - type: StealTarget
+    stealGroup: CaneBladeLibrarian
 
 - type: entity
   parent: CaneSheath

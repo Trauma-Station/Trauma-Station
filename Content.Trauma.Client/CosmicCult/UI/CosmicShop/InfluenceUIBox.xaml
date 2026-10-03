@@ -5,7 +5,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 <BoxContainer xmlns="https://spacestation14.io"
               Margin="10 10 10 0"
               HorizontalExpand="True"
-              MinHeight="120"
+              MinSize="120 250"
               Name="InfluenceBox">
     <BoxContainer Orientation="Vertical" HorizontalExpand="True">
         <!-- Header -->

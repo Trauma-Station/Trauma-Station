@@ -1,10 +1,3 @@
-<!--
-SPDX-FileCopyrightText: 2024 f0x-n3rd <150924715+f0x-n3rd@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-
-SPDX-License-Identifier: MIT
--->
-
 <Document>
 
 # Solids
@@ -59,6 +52,7 @@ Gunpowder can be created by combining the following ingredients:
 - 6 Potassium
 - 2 Sulfur
 - 2 Charcoal
+- Heating the solution to 374K
 
 ## Plastic
   <Box>
@@ -69,7 +63,7 @@ Gunpowder can be created by combining the following ingredients:
 - 10 Oil
 - 6 Ash
 - 4 Sulfuric Acid
-- Heating the solution to 374 degrees
+- Heating the solution to 374K
 
 ## Regenerative Mesh
   <Box>
@@ -126,7 +120,7 @@ Sutures can be created by microwaving the following ingredients for 10 seconds:
 
   ## Synthmeat
     <Box>
-      <GuideEntityEmbed Entity="FoodMeatSynth" Captain="Synthmeat"/>
+      <GuideEntityEmbed Entity="FoodSynthMeat" Caption="Synthmeat"/>
     </Box>
 
   Synthmeat can be created by combining the following ingredients

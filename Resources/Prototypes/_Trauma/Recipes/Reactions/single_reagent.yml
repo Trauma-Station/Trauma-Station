@@ -85,3 +85,16 @@
     intensityPerUnit: 1 # Lower because hardbomb
     intensitySlope: 0.5 # very high detonation velocity
     maxTotalIntensity: 100
+
+# chaplain stuff
+
+- type: reaction
+  id: CLF3toHolyCLF3
+  impact: Low
+  requiredMixerCategories:
+  - Holy
+  reactants:
+    ChlorineTrifluoride:
+      amount: 1
+  products:
+    HolyChlorineTrifluoride: 1

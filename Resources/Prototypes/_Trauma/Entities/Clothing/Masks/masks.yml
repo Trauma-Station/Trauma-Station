@@ -45,7 +45,7 @@
     - HeadSide
 
 - type: entity
-  parent: [ ClothingMaskGas, BaseCentcommContraband ]
+  parent: [ BaseCentcommContraband, ClothingMaskGasSwat ]
   id: ClothingHunterMaskGasSwat
   name: spacepol swat gas mask
   description: A standard issue gas mask for SpacePol Officers
@@ -74,6 +74,3 @@
         Slash: 0.8
         Piercing: 0.9
         Heat: 0.9
-  - type: IngestionBlocker
-    blockSmokeIngestion: true
-  - type: Hailer

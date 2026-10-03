@@ -4,11 +4,12 @@ using Content.Shared.Inventory;
 
 namespace Content.Goobstation.Shared.Clothing;
 
-public sealed class DelayedKnockdownAttemptEvent : CancellableEntityEventArgs, IInventoryRelayEvent
+[ByRefEvent]
+public record struct DelayedKnockdownAttemptEvent() : IInventoryRelayEvent
 {
     public SlotFlags TargetSlots => SlotFlags.OUTERCLOTHING;
 
-    public float DelayDelta = 0f;
-
-    public float KnockdownTimeDelta = 0f;
+    public TimeSpan DelayDelta;
+    public TimeSpan KnockdownTimeDelta;
+    public bool Cancelled;
 }

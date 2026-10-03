@@ -74,7 +74,16 @@ public sealed partial class TemperatureSystem
             if (entity.Comp.TakingDamage && deltaTime < entity.Comp.UpdateInterval)
                 continue;
 
-            ChangeDamage(entity, deltaTime);
+            // <Trauma> - try catch this shit
+            try
+            {
+                ChangeDamage(entity, deltaTime);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"Caught exception while dealing temperature damage for {ToPrettyString(entity)}: {e}");
+            }
+            // </Trauma>
         }
 
         ShouldUpdateDamage.Clear();

@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.JoinQueue;
 using Content.Goobstation.Common.ServerCurrency;
-using Content.Goobstation.Server.JoinQueue;
 using Content.Goobstation.Server.JumpScare;
 using Content.Goobstation.Server.Polls;
 using Content.Goobstation.Server.Redial;
@@ -17,7 +15,6 @@ internal static class ServerGoobContentIoC
     {
         instance.Register<RedialManager>();
         instance.Register<PollManager>();
-        instance.Register<IJoinQueueManager, JoinQueueManager>();
         instance.Register<IFullScreenImageJumpscare, ServerFullScreenImageJumpscare>();
         instance.Register<ICommonCurrencyManager, ServerCurrencyManager>();
     }

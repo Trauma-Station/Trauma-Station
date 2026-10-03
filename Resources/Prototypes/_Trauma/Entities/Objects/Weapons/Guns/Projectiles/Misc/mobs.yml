@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: WatcherBolt
+  id: WatcherBoltIcewing
+  name: icewing watcher bolt
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Cold: 15 # matches magmawings in terms of damage
+  - type: ChangeTemperatureOnCollide
+    heat: -30000

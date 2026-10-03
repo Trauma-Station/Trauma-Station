@@ -1,0 +1,42 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: guideEntry
+  id: Antagonists
+  children:
+  - BloodCult
+  - Heretics
+  - Blob
+  - CosmicCult
+  - CosmicColossus
+  - Abductors
+  - Bingle
+  - Devil
+  - Insurgents
+  - Morph
+  - Shadowlings
+  - SlaughterDemon
+  - Xenomorphs
+  - Wraith
+  - Slasher
+  - ShadowDemon
+  - Vampires
+  - Spy
+
+- type: guideEntry
+  id: Antagonists
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Antagonists.xml"
+
+- type: guideEntry
+  id: Zombies
+  name: guide-entry-zombies
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Zombies.xml"
+
+- type: guideEntry
+  id: Revolutionaries
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Revolutionaries.xml"
+
+- type: guideEntry
+  id: Wizard
+  text: "/ServerInfo/_Goobstation/Guidebook/Antagonist/Wizard.xml"
+  children:
+  - WizardSpells

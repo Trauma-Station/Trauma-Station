@@ -477,6 +477,7 @@
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: CrewMonitor
+    prefix: device-address-prefix-crew-monitor
   - type: WirelessNetworkConnection
     range: 1200
   - type: AmbientMusicMarkerMedical
@@ -544,6 +545,10 @@
     access: [["Command"]]
   - type: Lock
     unlockOnClick: false
+  - type: EmptyOnMachineDeconstruct
+    containers:
+    - storagebase
+
 
 - type: entity
   parent: ComputerStationTeleportersControl
@@ -767,6 +772,8 @@
   components:
   # <Trauma>
   - type: StationReportTarget # not given to aghost
+  - type: StealTarget
+    stealGroup: CommsComputer
   - type: TraumaCommsConsole
   # </Trauma>
   - type: Sprite
@@ -1005,7 +1012,7 @@
   - type: DeviceLinkSource
     range: 200
     ports:
-      - OrderSender
+    - OrderSender
   - type: GuideHelp
     guides:
     - Cargo
@@ -1416,6 +1423,7 @@
     deviceNetId: Wired
     receiveFrequencyId: SurveillanceCamera
     transmitFrequencyId: SurveillanceCamera
+    prefix: device-address-prefix-camera-monitor
   - type: WiredNetworkConnection
   - type: DeviceNetworkRequiresPower
   - type: SurveillanceCameraMonitor
@@ -1455,6 +1463,7 @@
     deviceNetId: Wireless
     receiveFrequencyId: SurveillanceCamera
     transmitFrequencyId: SurveillanceCamera
+    prefix: device-address-prefix-camera-monitor
   - type: WirelessNetworkConnection
     range: 200
   - type: DeviceNetworkRequiresPower

@@ -8,8 +8,8 @@ using Content.Shared.Inventory;
 using Content.Shared.Preferences;
 using Content.Shared.Preferences.Loadouts;
 using Content.Shared.Roles;
-using Content.Shared.Station;
-using Content.Shared.Timing;
+using Content.Shared.Station.Systems;
+using Content.Shared.Timing.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 
@@ -18,7 +18,7 @@ namespace Content.Server.Implants;
 public sealed partial class ChameleonControllerSystem : SharedChameleonControllerSystem
 {
     [Dependency] private InventorySystem _inventory = default!;
-    [Dependency] private SharedStationSpawningSystem _stationSpawningSystem = default!;
+    [Dependency] private StationSpawningSystem _stationSpawningSystem = default!;
     [Dependency] private ChameleonClothingSystem _chameleonClothingSystem = default!;
     [Dependency] private IServerPreferencesManager _preferences = default!;
     [Dependency] private UseDelaySystem _delay = default!;
@@ -103,7 +103,7 @@ public sealed partial class ChameleonControllerSystem : SharedChameleonControlle
 
     private void ChameleonControllerOutfitItemSelected(Entity<ChameleonClothingComponent> ent, ref InventoryRelayedEvent<ChameleonControllerOutfitSelectedEvent> args)
     {
-        if (!_inventory.TryGetContainingSlot(ent.Owner, out var slot))
+        if (!ent.Comp.CanBeSetByController || !_inventory.TryGetContainingSlot(ent.Owner, out var slot))
             return;
 
         _chameleonClothingSystem.SetSelectedPrototype(ent, GetGearForSlot(args, slot.Name), component: ent.Comp);

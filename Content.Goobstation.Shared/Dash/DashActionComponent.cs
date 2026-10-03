@@ -5,13 +5,14 @@ using Content.Shared.Chat.Prototypes;
 
 namespace Content.Goobstation.Shared.Dash;
 
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
 public sealed partial class DashActionComponent : Component
 {
-    [DataField]
-    public string? ActionProto;
+    [DataField(required: true)]
+    public EntProtoId ActionProto;
 
-    [ViewVariables(VVAccess.ReadOnly)]
+    [DataField, AutoNetworkedField]
     public EntityUid? ActionUid;
 }
 

@@ -3,15 +3,14 @@
 using Content.Goobstation.Shared.Mindcontrol;
 using Content.Goobstation.Shared.Roles;
 using Content.Server.Administration.Logs;
-using Content.Server.Antag;
 using Content.Server.Mind;
-using Content.Server.Popups;
-using Content.Server.Roles;
 using Content.Server.Stunnable;
+using Content.Shared.Antag;
 using Content.Shared.Database;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mindshield;
+using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
 using Content.Shared.Popups;
 using Content.Trauma.Common.Mindshield;
@@ -22,12 +21,12 @@ namespace Content.Goobstation.Server.Mindcontrol;
 public sealed partial class MindcontrolSystem : EntitySystem
 {
     [Dependency] private IAdminLogManager _adminLogManager = default!;
-    [Dependency] private RoleSystem _roleSystem = default!;
-    [Dependency] private MindSystem _mindSystem = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
+    [Dependency] private MindSystem _mind = default!;
     [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private StunSystem _stun = default!;
-    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private IPlayerManager _player = default!;
 
     private static EntProtoId MindRole = "MindRoleBrainwashed";
@@ -45,8 +44,8 @@ public sealed partial class MindcontrolSystem : EntitySystem
             return;
 
         _stun.TryUpdateParalyzeDuration(uid, TimeSpan.FromSeconds(5f));
-        if (_mindSystem.TryGetMind(uid, out var mindId, out var mind))
-            _roleSystem.MindRemoveRole<MindcontrolledRoleComponent>((mindId, mind));
+        if (_mind.TryGetMind(uid, out var mindId, out var mind))
+            _role.MindRemoveRole<MindcontrolledRoleComponent>((mindId, mind));
         _popup.PopupEntity(Loc.GetString("mindcontrol-popup-stop"), uid, PopupType.Large);
         _adminLogManager.Add(LogType.Mind, LogImpact.Medium, $"{ToPrettyString(uid)} is no longer Mindcontrolled.");
     }
@@ -56,12 +55,12 @@ public sealed partial class MindcontrolSystem : EntitySystem
         if (component.Master is not {} master ||
             _mindShield.IsShielded(uid) || // you somehow managed to implant someone with a mindshield.
             uid == master || // good job, you implanted yourself
-            !_mindSystem.TryGetMind(uid, out var mindId, out var mind)) // no mind, how can you mindcontrol with no mind?
+            !_mind.TryGetMind(uid, out var mindId, out var mind)) // no mind, how can you mindcontrol with no mind?
             return;
 
-        _roleSystem.MindAddRole(mindId, MindRole, mind, silent: true);
+        _role.MindAddRole(mindId, MindRole, mind, silent: true);
 
-        if (_roleSystem.MindHasRole<MindcontrolledRoleComponent>((mindId, mind), out var mr))
+        if (_role.MindHasRole<MindcontrolledRoleComponent>((mindId, mind), out var mr))
             AddComp(mr.Value, new RoleBriefingComponent { Briefing = MakeBriefing(master) }, true);
 
         if (_player.TryGetSessionById(mind.UserId, out var session) &&
@@ -79,7 +78,7 @@ public sealed partial class MindcontrolSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnMindAdded(EntityUid uid, MindcontrolledComponent component, MindAddedMessage args)
     {
-        if (!_roleSystem.MindHasRole<MindcontrolledRoleComponent>(args.Mind.Owner))
+        if (!_role.MindHasRole<MindcontrolledRoleComponent>(args.Mind.Owner))
             Start(uid, component); //goes agein if comp added before mind.
     }
 
@@ -92,7 +91,7 @@ public sealed partial class MindcontrolSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnMindRemoved(EntityUid uid, MindcontrolledComponent component, MindRemovedMessage args)
     {
-        _roleSystem.MindRemoveRole<MindcontrolledRoleComponent>(args.Mind.Owner);
+        _role.MindRemoveRole<MindcontrolledRoleComponent>(args.Mind.Owner);
     }
 
     [SubscribeLocalEvent]

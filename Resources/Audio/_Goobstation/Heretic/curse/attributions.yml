@@ -1,4 +1,4 @@
 - files: ["curse1.ogg", "curse2.ogg", "curse3.ogg", "curse4.ogg", "curse5.ogg", "curse6.ogg"]
   license: "CC-BY-SA-3.0"
   copyright: "Taken from /tg/station"
-  source: "https://github.com/tgstation/tgstation/tree/master/sound/effects/curse"
+  source: "https://github.com/tgstation/tgstation/tree/e6636c5d7ac979d4b7fa361910f2bf7f241fa32b/sound/effects/curse"

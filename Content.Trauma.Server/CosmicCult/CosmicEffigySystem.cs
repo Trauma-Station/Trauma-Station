@@ -21,19 +21,14 @@ public sealed partial class CosmicEffigySystem : EntitySystem
 
     private HashSet<Entity<PoweredLightComponent>> _lights = [];
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicEffigyComponent, ComponentStartup>(OnEffigyStarted);
-    }
-
     public override void Update(float frameTime)
     {
         var effigyQuery = EntityQueryEnumerator<CosmicEffigyComponent>();
         while (effigyQuery.MoveNext(out var ent, out var comp))
         {
-            if (_timing.CurTime < comp.EffectTimer) continue;
+            if (_timing.CurTime < comp.EffectTimer)
+                continue;
+
             _audio.PlayPvs(comp.ActivationSfx, ent);
             Spawn(comp.ActivationVfx, Transform(ent).Coordinates);
             comp.EffectTimer = _timing.CurTime + comp.EffectTime;
@@ -46,14 +41,18 @@ public sealed partial class CosmicEffigySystem : EntitySystem
             else if (comp.SummonedCustodians.Count < comp.CustodianCap)
                 comp.SummonedCustodians.Add(Spawn(comp.CustodianProto, Transform(ent).Coordinates));
 
-            _lookup.GetEntitiesInRange<PoweredLightComponent>(Transform(ent).Coordinates, comp.LightShatterRange, _lights);
+            _lights.Clear();
+            _lookup.GetEntitiesInRange(Transform(ent).Coordinates, comp.LightShatterRange, _lights);
             foreach (var light in _lights)
+            {
                 if (_poweredLight.TryDestroyBulb(light))
                     Spawn(comp.ActivationVfx, Transform(light.Owner).Coordinates);
+            }
             comp.LightShatterRange += (comp.LightShatterRangeCap - comp.LightShatterRange) / 8f;
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnEffigyStarted(Entity<CosmicEffigyComponent> ent, ref ComponentStartup args)
     {
         ent.Comp.EffectTimer = _timing.CurTime + ent.Comp.EffectTime;

@@ -110,8 +110,6 @@
     duration: null
     maxOccurrences: 1
   - type: BlobSpawnRule
-    carrierBlobProtos:
-    - SpawnPointGhostBlobRat
     playersPerCarrierBlob: 30
     maxCarrierBlob: 1
 

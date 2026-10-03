@@ -1,34 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: strange berries
-  parent: FoodProduceBase
-  id: FoodStrangeBerries
-  description: A handful of strange berries.
-  components:
-  - type: FlavorProfile
-    flavors:
-      - metallic
-      - berry
-  - type: Solution
-    solution:
-      maxVol: 11
-      reagents:
-      - ReagentId: Artifexium
-        Quantity: 5
-      - ReagentId: Vitamin
-        Quantity: 4
-  - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Hydroponics/strange_berries.rsi
-  - type: Produce
-    seedId: strangeBerries
-  - type: Extractable
-    juiceSolution:
-      reagents:
-      - ReagentId: Artifexium
-        Quantity: 5
-
-- type: entity
   parent: [ ProduceBase, BaseSlicingRefinable ]
   id: Nevcotta
   name: nevcotta log
@@ -38,7 +10,7 @@
     sprite: _Goobstation/Objects/Specific/Hydroponics/nevcotta.rsi
     state: icon
   - type: Produce
-    seedId: towercap # Shhh, I don't want to make this an actual plant yet!
+    plantId: TowercapPlants # Shhh, I don't want to make this an actual plant yet!
   - type: ToolRefinable
     refineResult:
     - id: NevcottaBark
@@ -87,7 +59,7 @@
   - type: Item
     heldPrefix: produce
   - type: Produce
-    seedId: bluespaceTomato
+    plantId: BluespaceTomatoPlants
   - type: Extractable
     grindableSolutionName: food
     juiceSolution:

@@ -22,6 +22,9 @@ public sealed class CargoTest : GameTest
     /// </summary>
     private static readonly HashSet<ProtoId<CargoProductPrototype>> Ignored =
     [
+        // <Trauma>
+        "FunInstrumentsRandom", // its random nobody is buying it to have 1.2% chance of having percussiion bounty
+        // </Trauma>
         // This is ignored because it is explicitly intended to be able to sell for more than it costs.
         new("FunCrateGambling"),
     ];
@@ -80,6 +83,10 @@ public sealed class CargoTest : GameTest
             {
                 foreach (var proto in SProtoMan.EnumeratePrototypes<CargoProductPrototype>())
                 {
+                    // <Trauma> - w speed
+                    if (Ignored.Contains(proto.ID))
+                        continue;
+                    // </Trauma>
                     var ent = SSpawnAtPosition(proto.Product, coordinates);
 
                     foreach (var bounty in SProtoMan.EnumeratePrototypes<CargoBountyPrototype>())

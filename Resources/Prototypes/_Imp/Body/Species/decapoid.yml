@@ -194,13 +194,9 @@
       293: 1.0
       280: 1.0
       260: 1.0
-  - type: Clumsy
-    clumsySound:
-      path: /Audio/_Impstation/Effects/Clumsy/crab_snap.ogg
-    clumsyHypo: false
-    clumsyVaulting: false
-    clumsyDefib: false
-    gunFailedMessage: gun-clumsy-decapoid # The gun slips out of your claws!
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectClumsyDecapoid
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -214,8 +210,11 @@
   - type: TypingIndicator
     proto: robot
   - type: Exoskeleton # Prevents injections with syringes. Ideally it'd be on their body parts instead but eh.
-  - type: Thirst
-    baseDecayRate: -0.1 # Regen, no thirst
+  - type: Satiation
+    satiations:
+      Hunger:
+        prototype: NormalSatiationHunger
+    # no thirst
 
 - type: entity
   abstract: true

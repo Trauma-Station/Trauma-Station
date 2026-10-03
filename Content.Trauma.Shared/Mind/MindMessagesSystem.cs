@@ -2,6 +2,7 @@
 
 using Content.Shared.Chat;
 using Content.Shared.Mind.Components;
+using Content.Trauma.Common.Mind;
 
 namespace Content.Trauma.Shared.Mind;
 
@@ -9,24 +10,24 @@ public sealed partial class MindMessagesSystem : EntitySystem
 {
     [Dependency] private EntityQuery<MindMessagesComponent> _query = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        // relay event to the mind, other systems can use it too
-        SubscribeLocalEvent<MindContainerComponent, EntitySpokeEvent>(OnContainerSpoke);
-        SubscribeLocalEvent<MindMessagesComponent, EntitySpokeEvent>(OnSpoke);
-    }
-
+    [SubscribeLocalEvent]
     private void OnContainerSpoke(Entity<MindContainerComponent> ent, ref EntitySpokeEvent args)
     {
+        // relay event to the mind, other systems can use it too
         if (ent.Comp.Mind is {} mind)
             RaiseLocalEvent(mind, args);
     }
 
+    [SubscribeLocalEvent]
     private void OnSpoke(Entity<MindMessagesComponent> ent, ref EntitySpokeEvent args)
     {
         AddMessage(ent.Comp, args.Message);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnGetPlayerInfo(Entity<MindMessagesComponent> ent, ref RoundEndGetPlayerInfoEvent args)
+    {
+        args.LastWords = GetMessage(ent.Comp, ent.Comp.Messages.Length - 1);
     }
 
     public void AddMessage(MindMessagesComponent comp, string message)
@@ -37,7 +38,7 @@ public sealed partial class MindMessagesSystem : EntitySystem
     }
 
     public MindMessagesComponent? GetMessages(EntityUid? mind)
-        => mind != null && _query.TryComp(mind.Value, out var comp)
+        => mind is { } && _query.TryComp(mind, out var comp)
             ? comp
             : null;
 

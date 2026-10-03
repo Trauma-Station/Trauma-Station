@@ -23,6 +23,31 @@
     roleType: SoloAntagonist
     subtype: role-subtype-heretic
   - type: HereticRole
+  - type: UserInterface
+    interfaces:
+      enum.StoreUiKey.Key:
+        type: StoreBoundUserInterface
+        interactionRange: 0 # no range or validation because it's on the role and would immediately get closed
+        requireInputValidation: false
+  - type: Store
+    name: store-preset-name-heretic
+    categories:
+    - HereticPathAsh
+    - HereticPathLock
+    - HereticPathFlesh
+    - HereticPathBlade
+    - HereticPathVoid
+    - HereticPathRust
+    - HereticPathCosmos
+    - HereticPathSpecial
+    - HereticPathSideT1
+    - HereticPathSideT2
+    - HereticPathSideT3
+    currencyWhitelist:
+    - KnowledgePoint
+    - SideKnowledgePoint
+    balance:
+      SideKnowledgePoint: 1
 
 - type: entity
   parent: BaseMindRoleAntag

@@ -8,11 +8,12 @@ namespace Content.Trauma.Shared.Physics.ComplexJoint;
 public readonly record struct ComplexJointUpdateEvent(EntityUid Uid, Dictionary<string, HashSet<EntityUid>> UpdatedIds);
 
 [ByRefEvent]
-public readonly record struct ComplexJointCollisionEvent(
+public record struct ComplexJointCollisionEvent(
     EntityUid Origin,
     RayCastResults Hit,
     EntityUid Target,
-    ComplexJointVisualsData Data);
+    ComplexJointVisualsData Data,
+    bool BlockNextCollisions = false);
 
 [ByRefEvent]
 public record struct BeforeContinuousBeamDamagedEvent(EntityUid Uid, EntityUid Target, bool Cancelled = false);

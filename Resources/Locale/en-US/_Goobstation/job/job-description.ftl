@@ -1,18 +1,3 @@
-# SPDX-FileCopyrightText: 2024 starch <starchpersonal@gmail.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-# SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
-# Navy
-
-job-description-navy-officer-undercover = Complete your assigned tasks, Terminate the given targets. Good luck.
-job-description-navy-captain = Classified.
-job-description-navy-officer = Answer faxes and radio communications directed at Central Command. Perform investigations on the station and it's crew.
-job-description-diplomat = Represent Central Command, managing relationships with other factions aboard the station. Cleanup the issues the captain has likely caused.
-job-description-inspector = Inspect the station.
-
 # Generic Nanotrasen
 
 job-description-ntr = Represent NT, Send reports back to them on the station's situation, Inform the heads of anything CentCom orders them to do.

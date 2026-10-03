@@ -93,7 +93,7 @@ public abstract partial class SharedStarGazerSystem : EntitySystem
         if (!TryComp(uid, out ContinuousBeamGunComponent? gun))
             return;
 
-        if (args.Cancelled || args.Handled || gun.CursorPosition == null)
+        if (args.Cancelled || args.Handled || gun.ShootCoordinates is not { } coords || !coords.IsValid(EntityManager))
         {
             if (TryGetEntity(args.OrbEffect, out var orb) && Exists(orb.Value))
                 PredictedQueueDel(orb.Value);
@@ -102,15 +102,7 @@ public abstract partial class SharedStarGazerSystem : EntitySystem
             return;
         }
 
-        var coords = Xform.GetMapCoordinates(uid);
-
-        if (gun.CursorPosition.Value.MapId != coords.MapId)
-        {
-            RemCompDeferred(uid, comp);
-            return;
-        }
-
-        if (_beam.ShootLaser(uid, uid, Xform.ToCoordinates(coords)) == null)
+        if (_beam.ShootLaser(uid, uid) == null)
         {
             RemCompDeferred(uid, comp);
             return;

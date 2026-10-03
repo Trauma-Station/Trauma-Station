@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: AnomalyLiquid
+  components:
+  - type: ReagentProducerAnomaly
+    dangerousChemicals:
+    - Cyanide
+    - Genecide
+    - NitricAcid
+    - Heroin
+    - Microplastics
+    - Bungotoxin
+    - WeldingFuel
+    - ChloralHydrate
+    - Allicin
+    - Phenol
+    usefulChemicals:
+    - Probital
+    - Tirimol
+    - Multiver
+    - Immurin
+    - Devirate
+    - Probital
+    - Mitotrophin
+    - Monover
+    - Ibuprofen
+    - Formaldehyde
+    - Morphine
+    funChemicals:
+    - CatDrugs
+    - MouseBites
+    - Copium
+    - Nostalgia
+    - Profanol

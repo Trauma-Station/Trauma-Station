@@ -5,6 +5,7 @@ using Content.Shared.Damage.Prototypes;
 using Content.Shared.Dataset;
 using Content.Shared.FixedPoint;
 using Content.Shared.Polymorph;
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 
 namespace Content.Goobstation.Shared.Devil;
@@ -90,6 +91,24 @@ public sealed partial class DevilComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan ParalyzeDurationOnTrueName = TimeSpan.FromSeconds(4);
+
+    /// <summary>
+    /// Blacklist for chat message sources that cannot affect a devil by speaking their true name.
+    /// </summary>
+    [DataField]
+    public EntityWhitelist TrueNameBlacklist = new()
+    {
+        Components =
+        [
+            "Devil", // lol
+            "Condemned", // soulless
+            // clankers have no soul
+            "Silicon",
+            "BorgChassis",
+            "Drone",
+            "PAI"
+        ]
+    };
 
     [ViewVariables(VVAccess.ReadOnly)]
     public EntityUid? DevilGrip;

@@ -40,22 +40,6 @@ public sealed partial class CosmicRiftSystem : EntitySystem
 
     private readonly HashSet<Entity<HumanoidProfileComponent>> _targets = [];
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<CosmicMalignRiftComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<CosmicMalignRiftComponent, InteractHandEvent>(OnInteract);
-        SubscribeLocalEvent<CosmicMalignRiftComponent, InteractUsingEvent>(OnInteractUsing);
-        SubscribeLocalEvent<CosmicCultComponent, EventAbsorbRiftDoAfter>(OnAbsorbDoAfter);
-        SubscribeLocalEvent<CosmicMalignRiftComponent, EventPurgeRiftDoAfter>(OnPurgeDoAfter);
-    }
-
-    private void OnStartup(Entity<CosmicMalignRiftComponent> ent, ref ComponentStartup args)
-    {
-        if (ent.Comp.DangerWait is not { } dangerWait) return;
-        ent.Comp.DangerTimer = _timing.CurTime + dangerWait;
-    }
-
     public override void Update(float frameTime)
     {
         base.Update(frameTime);
@@ -92,6 +76,14 @@ public sealed partial class CosmicRiftSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
+    private void OnStartup(Entity<CosmicMalignRiftComponent> ent, ref ComponentStartup args)
+    {
+        if (ent.Comp.DangerWait is not { } dangerWait) return;
+        ent.Comp.DangerTimer = _timing.CurTime + dangerWait;
+    }
+
+    [SubscribeLocalEvent]
     private void OnInteract(Entity<CosmicMalignRiftComponent> uid, ref InteractHandEvent args)
     {
         if (args.Handled)
@@ -117,7 +109,7 @@ public sealed partial class CosmicRiftSystem : EntitySystem
         var doargs = new DoAfterArgs(EntityManager,
             args.User,
             uid.Comp.AbsorbTime,
-            new EventAbsorbRiftDoAfter(),
+            new AbsorbRiftDoAfterEvent(),
             args.User,
             uid)
         {
@@ -126,6 +118,7 @@ public sealed partial class CosmicRiftSystem : EntitySystem
         _doAfter.TryStartDoAfter(doargs);
     }
 
+    [SubscribeLocalEvent]
     private void OnInteractUsing(Entity<CosmicMalignRiftComponent> uid, ref InteractUsingEvent args)
     {
         if (args.Handled)
@@ -140,7 +133,7 @@ public sealed partial class CosmicRiftSystem : EntitySystem
             var doargs = new DoAfterArgs(EntityManager,
                 args.User,
                 HasComp<BibleUserComponent>(args.User) ? uid.Comp.ChaplainTime : uid.Comp.BibleTime, // Chap gets a speed boost for purging rifts
-                new EventPurgeRiftDoAfter(),
+                new PurgeRiftDoAfterEvent(),
                 uid,
                 uid)
             {
@@ -151,7 +144,8 @@ public sealed partial class CosmicRiftSystem : EntitySystem
         }
     }
 
-    private void OnAbsorbDoAfter(Entity<CosmicCultComponent> uid, ref EventAbsorbRiftDoAfter args)
+    [SubscribeLocalEvent]
+    private void OnAbsorbDoAfter(Entity<CosmicCultComponent> uid, ref AbsorbRiftDoAfterEvent args)
     {
         var comp = uid.Comp;
         if (args.Target is not { } target || args.Cancelled || args.Handled || !TryComp<CosmicMalignRiftComponent>(target, out var rift))
@@ -174,32 +168,30 @@ public sealed partial class CosmicRiftSystem : EntitySystem
         _status.TrySetStatusEffectDuration(args.User, PressureImmunity);
         EnsureComp<SpecialLowTempImmunityComponent>(args.User);
         EnsureComp<CosmicNonRespiratingComponent>(args.User);
-        RemComp<HungerComponent>(args.User); // Eschew Metabolism is kill, rifts give the effect instead
-        RemComp<ThirstComponent>(args.User);
+        RemComp<SatiationComponent>(args.User); // Eschew Metabolism is kill, rifts give the effect instead
         _cult.AddEntropy(uid, rift.EntropyGranted);
         _popup.PopupCoordinates(
-            Loc.GetString("cosmiccult-rift-absorb", ("NAME", Identity.Entity(args.Args.User, EntityManager))),
-            Transform(args.Args.User).Coordinates,
+            Loc.GetString("cosmiccult-rift-absorb", ("NAME", Identity.Entity(args.User, EntityManager))),
+            Transform(args.User).Coordinates,
             PopupType.MediumCaution);
         QueueDel(target);
-
-        if (comp.CosmicShopActionEntity is { } shop)
-            _ui.SetUiState(shop, CosmicShopKey.Key, new CosmicShopBuiState());
     }
 
-    private void OnPurgeDoAfter(Entity<CosmicMalignRiftComponent> uid, ref EventPurgeRiftDoAfter args)
+    // TODO: predict all this shit
+    [SubscribeLocalEvent]
+    private void OnPurgeDoAfter(Entity<CosmicMalignRiftComponent> ent, ref PurgeRiftDoAfterEvent args)
     {
-        if (args.Args.Target == null || args.Cancelled || args.Handled)
+        if (args.Cancelled || args.Handled)
             return;
 
         args.Handled = true;
-        var tgtpos = Transform(uid).Coordinates;
-        Spawn(uid.Comp.PurgeVFX, tgtpos);
-        _audio.PlayPvs(uid.Comp.PurgeSound, args.User);
+        var tgtpos = Transform(ent).Coordinates;
+        Spawn(ent.Comp.PurgeVFX, tgtpos);
+        _audio.PlayPvs(ent.Comp.PurgeSound, args.User);
         _popup.PopupCoordinates(
-            Loc.GetString("cosmiccult-rift-purge", ("NAME", Identity.Entity(args.Args.User, EntityManager))),
-            Transform(args.Args.User).Coordinates,
+            Loc.GetString("cosmiccult-rift-purge", ("NAME", Identity.Entity(args.User, EntityManager))),
+            Transform(args.User).Coordinates,
             PopupType.Medium);
-        QueueDel(uid);
+        QueueDel(ent);
     }
 }

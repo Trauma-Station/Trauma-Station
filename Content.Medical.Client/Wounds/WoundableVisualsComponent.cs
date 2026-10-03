@@ -2,6 +2,7 @@
 
 using Content.Medical.Common.Wounds;
 using Content.Shared.Damage.Prototypes;
+using Content.Shared.DisplacementMap;
 using Content.Shared.FixedPoint;
 
 namespace Content.Medical.Client.Wounds;
@@ -42,4 +43,7 @@ public sealed partial class WoundableVisualsComponent : Component
         (BleedingSeverity.Severe, 7),
         (BleedingSeverity.Minor, 2.6)
     ];
+
+    [DataField]
+    public ProtoId<DisplacementDataPrototype>? Displacement;
 }

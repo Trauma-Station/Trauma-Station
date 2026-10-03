@@ -1,8 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Collections.Immutable;
 using Content.Trauma.Server.CosmicCult.Components;
-using Content.Goobstation.Shared.Religion; // Goobstation - Bible
+using Content.Goobstation.Shared.Religion;
 using Content.Server.Popups;
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
@@ -19,6 +18,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Trauma.Server.CosmicCult.Abilities;
 
@@ -36,19 +36,12 @@ public sealed partial class CosmicBlankSystem : EntitySystem
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private DivineInterventionSystem _divineIntervention = default!;
 
-    public SoundSpecifier BlankSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ability_blank.ogg");
-    public EntProtoId BlankVFX = "CosmicBlankAbilityVFX";
-    public EntProtoId SpawnWisp = "MobCosmicWisp";
+    private static readonly SoundSpecifier BlankSFX = new SoundPathSpecifier("/Audio/_DV/CosmicCult/ability_blank.ogg");
+    private static readonly EntProtoId BlankVFX = "CosmicBlankAbilityVFX";
+    private static readonly EntProtoId SpawnWisp = "MobCosmicWisp";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicCultComponent, EventCosmicBlank>(OnCosmicBlank);
-        SubscribeLocalEvent<CosmicCultComponent, EventCosmicBlankDoAfter>(OnCosmicBlankDoAfter);
-    }
-
-    private void OnCosmicBlank(Entity<CosmicCultComponent> uid, ref EventCosmicBlank args)
+    [SubscribeLocalEvent]
+    private void OnCosmicBlank(Entity<CosmicCultComponent> uid, ref CosmicBlankEvent args)
     {
         if (_cosmicCult.EntityIsCultist(args.Target)
             || HasComp<CosmicBlankComponent>(args.Target)
@@ -64,7 +57,7 @@ public sealed partial class CosmicBlankSystem : EntitySystem
         if (args.Handled)
             return;
 
-        var doargs = new DoAfterArgs(EntityManager, uid, uid.Comp.CosmicBlankDelay, new EventCosmicBlankDoAfter(), uid, args.Target)
+        var doargs = new DoAfterArgs(EntityManager, uid, uid.Comp.CosmicBlankDelay, new CosmicBlankDoAfterEvent(), uid, args.Target)
         {
             DistanceThreshold = 1.5f,
             Hidden = true,
@@ -97,11 +90,12 @@ public sealed partial class CosmicBlankSystem : EntitySystem
         }
     }
 
-    private void OnCosmicBlankDoAfter(Entity<CosmicCultComponent> uid, ref EventCosmicBlankDoAfter args)
+    [SubscribeLocalEvent]
+    private void OnCosmicBlankDoAfter(Entity<CosmicCultComponent> uid, ref CosmicBlankDoAfterEvent args)
     {
-        if (args.Args.Target is not { } target
-            || args.Cancelled
-            || args.Handled)
+        if (args.Target is not { } target ||
+            args.Cancelled ||
+            args.Handled)
             return;
 
         args.Handled = true;
@@ -119,9 +113,9 @@ public sealed partial class CosmicBlankSystem : EntitySystem
         var tgtpos = Transform(target).Coordinates;
         var spawnPoints = EntityManager
             .GetAllComponents(typeof(CosmicVoidSpawnComponent))
-            .ToImmutableList();
+            .ToList();
 
-        if (spawnPoints.IsEmpty)
+        if (spawnPoints.Count == 0)
             return;
 
         if (!TryComp<MindContainerComponent>(target, out var mindContainer)

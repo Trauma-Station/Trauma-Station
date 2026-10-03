@@ -75,7 +75,7 @@
     node: lit
   - type: ItemSlotHeater
     slot: ItemCabinet
-    temp: 50000
+    heatChange: 50000
     maxTemp: 4000
   - type: ContainerContainer
     containers:

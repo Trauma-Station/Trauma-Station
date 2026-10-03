@@ -133,7 +133,7 @@ public sealed partial class DiseaseDnaSamplerSystem : EntitySystem
             return;
 
         // spawn and set up the disease's dna target
-        var disease = EntityManager.PredictedSpawn(proto);
+        var disease = PredictedSpawn(proto);
         _target.AddTargetDnas(disease, ent.Comp.TargetDnas);
         Clear(ent);
 

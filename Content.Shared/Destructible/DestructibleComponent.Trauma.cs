@@ -9,4 +9,10 @@ public sealed partial class DestructibleComponent
     /// </summary>
     [DataField, AutoNetworkedField]
     public FixedPoint2 Scale = 1;
+
+    /// <summary>
+    /// If false, thresholds won't trigger
+    /// </summary>
+    [DataField]
+    public bool Enabled = true;
 }

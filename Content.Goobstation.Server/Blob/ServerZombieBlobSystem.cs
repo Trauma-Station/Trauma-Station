@@ -1,0 +1,220 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Goobstation.Shared.Blob;
+using Content.Goobstation.Shared.Blob.Components;
+using Content.Server.Body.Systems;
+using Content.Server.Chat.Managers;
+using Content.Server.NPC;
+using Content.Server.NPC.HTN;
+using Content.Server.NPC.Systems;
+using Content.Shared.Atmos;
+using Content.Shared.Atmos.Components;
+using Content.Shared.Inventory;
+using Content.Shared.Mind.Components;
+using Content.Shared.Mobs;
+using Content.Shared.NPC.Components;
+using Content.Shared.NPC.Prototypes;
+using Content.Shared.NPC.Systems;
+using Content.Shared.Physics;
+using Content.Shared.StatusEffectNew;
+using Content.Shared.Temperature.Components;
+using Content.Shared.Trigger.Systems;
+using Content.Shared.Zombies;
+using Content.Trauma.Common.CollectiveMind;
+using Robust.Server.Player;
+using Robust.Shared.Audio.Systems;
+using Robust.Shared.Physics;
+using Robust.Shared.Physics.Systems;
+using Robust.Shared.Player;
+
+namespace Content.Goobstation.Server.Blob;
+
+public sealed partial class ServerZombieBlobSystem : ZombieBlobSystem
+{
+    [Dependency] private NpcFactionSystem _faction = default!;
+    [Dependency] private NPCSystem _npc = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private IChatManager _chatMan = default!;
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private StatusEffectsSystem _status = default!;
+    [Dependency] private TriggerSystem _trigger = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private IPlayerManager _player = default!;
+
+    private const int ClimbingCollisionGroup = (int) (CollisionGroup.BlobImpassable);
+
+    private readonly GasMixture _normalAtmos;
+
+    public static readonly EntProtoId PressureImmunity = "StatusEffectPressureImmunity";
+    public static readonly ProtoId<NpcFactionPrototype> BlobFaction = "Blob";
+
+    public ServerZombieBlobSystem()
+    {
+        _normalAtmos = new GasMixture(Atmospherics.CellVolume)
+        {
+            Temperature = Atmospherics.T20C
+        };
+        _normalAtmos.AdjustMoles(Gas.Oxygen, Atmospherics.OxygenMolesStandard);
+        _normalAtmos.AdjustMoles(Gas.Nitrogen, Atmospherics.NitrogenMolesStandard);
+        _normalAtmos.MarkImmutable();
+    }
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        SubscribeLocalEvent<ZombieBlobComponent, MobStateChangedEvent>(OnMobStateChanged);
+        SubscribeLocalEvent<ZombieBlobComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<ZombieBlobComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<ZombieBlobComponent, InhaleLocationEvent>(OnInhale);
+        SubscribeLocalEvent<ZombieBlobComponent, ExhaleLocationEvent>(OnExhale);
+
+    }
+
+    private void OnInhale(Entity<ZombieBlobComponent> ent, ref InhaleLocationEvent args)
+    {
+        args.Gas = _normalAtmos;
+    }
+    private void OnExhale(Entity<ZombieBlobComponent> ent, ref ExhaleLocationEvent args)
+    {
+        args.Gas = GasMixture.SpaceGas;
+    }
+
+    /// <summary>
+    /// Replaces the current fixtures with non-climbing collidable versions so that climb end can be detected
+    /// </summary>
+    /// <returns>Returns whether adding the new fixtures was successful</returns>
+    private void ReplaceFixtures(EntityUid uid, ZombieBlobComponent climbingComp, FixturesComponent fixturesComp)
+    {
+        foreach (var (name, fixture) in fixturesComp.Fixtures)
+        {
+            if (climbingComp.DisabledFixtureMasks.ContainsKey(name)
+                || fixture.Hard == false
+                || (fixture.CollisionMask & ClimbingCollisionGroup) == 0)
+                continue;
+
+            climbingComp.DisabledFixtureMasks.Add(name, fixture.CollisionMask & ClimbingCollisionGroup);
+            _physics.SetCollisionMask(uid, name, fixture, fixture.CollisionMask & ~ClimbingCollisionGroup, fixturesComp);
+        }
+    }
+
+    private void OnStartup(EntityUid uid, ZombieBlobComponent component, ComponentStartup args)
+    {
+        _ui.CloseUis(uid);
+        _inventory.TryUnequip(uid, "underpants", true, true);
+        _inventory.TryUnequip(uid, "neck", true, true);
+        _inventory.TryUnequip(uid, "mask", true, true);
+        _inventory.TryUnequip(uid, "eyes", true, true);
+        _inventory.TryUnequip(uid, "ears", true, true);
+
+        EnsureComp<BlobMobComponent>(uid);
+        EnsureComp<BlobSpeakComponent>(uid);
+
+        var oldFactions = new List<string>();
+        var factionComp = EnsureComp<NpcFactionMemberComponent>(uid);
+        foreach (var factionId in new List<ProtoId<NpcFactionPrototype>>(factionComp.Factions))
+        {
+            oldFactions.Add(factionId);
+            _faction.RemoveFaction(uid, factionId);
+        }
+        _faction.AddFaction(uid, BlobFaction);
+        component.OldFactions = oldFactions;
+
+        _status.TryAddStatusEffect(uid, PressureImmunity, out _, null);
+
+        if (TryComp<TemperatureDamageComponent>(uid, out var tempDamage))
+        {
+            component.OldColdDamageThreshold = tempDamage.ColdDamageThreshold;
+            tempDamage.ColdDamageThreshold = 0;
+        }
+
+        if (TryComp<FixturesComponent>(uid, out var fixturesComp))
+        {
+            ReplaceFixtures(uid, component, fixturesComp);
+        }
+
+        var mindComp = EnsureComp<MindContainerComponent>(uid);
+        if (mindComp.Mind != null)
+        {
+            if (_player.TryGetSessionByEntity(mindComp.Mind.Value, out var session))
+            {
+                _chatMan.DispatchServerMessage(session, Loc.GetString("blob-zombie-greeting"));
+                _audio.PlayGlobal(component.GreetSoundNotification, session);
+            }
+        }
+        else
+        {
+            var htn = EnsureComp<HTNComponent>(uid);
+            htn.RootTask = new HTNCompoundTask() {Task = "SimpleHostileCompound"};
+            htn.Blackboard.SetValue(NPCBlackboard.Owner, uid);
+            htn.Blackboard.SetValue(NPCBlackboard.NavBlob, true);
+
+            if (!HasComp<ActorComponent>(component.BlobPodUid))
+            {
+                _npc.WakeNPC(uid, htn);
+            }
+        }
+
+        var ev = new EntityZombifiedEvent(uid);
+        RaiseLocalEvent(uid, ref ev, true);
+    }
+
+    private void OnShutdown(EntityUid uid, ZombieBlobComponent component, ComponentShutdown args)
+    {
+        if (TerminatingOrDeleted(uid))
+            return;
+
+        _ui.CloseUis(uid);
+        RemComp<BlobSpeakComponent>(uid);
+        RemComp<BlobMobComponent>(uid);
+        RemComp<HTNComponent>(uid);
+        _status.TryRemoveStatusEffect(uid, PressureImmunity);
+
+        if (TryComp<TemperatureDamageComponent>(uid, out var tempDamage) && component.OldColdDamageThreshold != null)
+        {
+            tempDamage.ColdDamageThreshold = component.OldColdDamageThreshold.Value;
+        }
+
+        /*
+        var mindComp = EnsureComp<MindContainerComponent>(uid);
+        if (mindComp.Mind != null)
+        {
+            _roleSystem.MindTryRemoveRole<BlobRoleComponent>(mindComp.Mind.Value);
+        }
+        */
+        _trigger.Trigger(component.BlobPodUid);
+        QueueDel(component.BlobPodUid);
+
+        EnsureComp<NpcFactionMemberComponent>(uid);
+        foreach (var factionId in component.OldFactions)
+        {
+            _faction.AddFaction(uid, factionId);
+        }
+        _faction.RemoveFaction(uid, BlobFaction);
+
+        if (TryComp<FixturesComponent>(uid, out var fixtures))
+        {
+            foreach (var (name, fixtureMask) in component.DisabledFixtureMasks)
+            {
+                if (!fixtures.Fixtures.TryGetValue(name, out var fixture))
+                {
+                    continue;
+                }
+
+                _physics.SetCollisionMask(uid, name, fixture, fixture.CollisionMask | fixtureMask, fixtures);
+            }
+            component.DisabledFixtureMasks.Clear();
+        }
+    }
+
+    private void OnMobStateChanged(EntityUid uid, ZombieBlobComponent component, MobStateChangedEvent args)
+    {
+        if (args.NewMobState == MobState.Dead)
+        {
+            if (TryComp<CollectiveMindComponent>(uid, out var comp))
+                comp.Channels.Remove(component.CollectiveMindAdded);
+            RemComp<ZombieBlobComponent>(uid);
+        }
+    }
+}

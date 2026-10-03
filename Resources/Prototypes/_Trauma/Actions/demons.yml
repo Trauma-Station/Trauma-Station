@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# Trauma Demons
+
 - type: entity
   parent: ActionBlink
   id: ActionDemonRift
@@ -20,6 +22,25 @@
     effects:
     - !type:SpawnParticles
       particleProto: DemonPassage
+
+- type: entity
+  parent: ActionRepulseNoRobes
+  id: ActionDemonRepulse
+  name: Demonic Pulse
+  description: Release a pulse of raw demonic energy, pushing everyone away from you.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Actions/demon.rsi
+    layers:
+    - state: repulse
+  - type: Action
+    useDelay: 25
+    raiseOnAction: false
+    sound: !type:SoundPathSpecifier
+      path: /Audio/_Goobstation/Heretic/disintegrate.ogg
+
+
+# Goobstation heretic
 
 - type: entity
   id: ActionDemonGaze

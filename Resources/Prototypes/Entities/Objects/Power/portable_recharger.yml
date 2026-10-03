@@ -31,9 +31,9 @@
     containers:
       charger_slot: !type:ContainerSlot
   - type: ItemSlots
+    allowSmartEquip: true
     slots:
       charger_slot:
-        ejectOnInteract: false # Trauma - Left click picks up instead of ejects content
         whitelist:
           components:
           - BatteryAmmoProvider

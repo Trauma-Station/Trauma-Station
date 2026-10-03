@@ -39,3 +39,102 @@
           amount: 3
         - id: SkillChipShortBlade
           amount: 3
+
+- type: entity
+  parent: GunSafeBaseSecure
+  id: GunSafeLaserRandom
+  name: laser safe
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RandomLaserWeapon
+        rolls: 3
+
+- type: entity
+  parent: GunSafeBaseSecure
+  id: GunSafeBallisticRandom
+  name: ballistic safe
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: RandomBallisticWeapon
+        rolls: 3
+
+- type: entity
+  parent: GunSafeBaseSecure
+  id: GunSafeTruncheon
+  name: truncheon safe
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: Truncheon
+          amount: 5
+
+- type: entity
+  parent: GunSafeBaseSecure
+  id: GunSafeCburnSpear
+  name: dispatch spear safe
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: CburnSpear
+          amount: 5
+
+- type: entityTable
+  id: RandomLaserWeapon
+  table: !type:GroupSelector
+    children:
+    - !type:AllSelector
+      children:
+      - id: WeaponLaserCellRevolver
+      - id: PowerCellIRRevolver
+        amount: 4
+      - id: PowerCellOverchargedRevolver
+        amount: 2
+    - !type:AllSelector
+      children:
+      - id: WeaponLaserCellSMG
+      - id: PowerCellIRSMG
+        amount: 4
+      - id: PowerCellOverchargedSMG
+        amount: 2
+    - !type:AllSelector
+      children:
+      - id: WeaponEnergyRifle
+      - id: EnergyMagRifleLethal
+        amount: 4
+      - id: EnergyMagRifleOverchargeLethal
+        amount: 2
+
+- type: entityTable
+  id: RandomBallisticWeapon
+  table: !type:GroupSelector
+    children:
+    - !type:AllSelector
+      children:
+      - id: WeaponSubMachineGunWt550
+      - id: MagazinePistolSubMachineGunTopMounted
+        amount: 4
+    - !type:AllSelector
+      children:
+      - id: WeaponSubMachineGunDrozd
+      - id: MagazinePistolSubMachineGun
+        amount: 4
+    - !type:AllSelector
+      children:
+      - id: WeaponRifleLecter
+      - id: MagazineRifle
+        amount: 4
+    - !type:AllSelector
+      children:
+      - id: WeaponShotgunEnforcer
+      - id: BoxLethalshot
+        amount: 2
+      - id: BoxShotgunSlug
+        amount: 2

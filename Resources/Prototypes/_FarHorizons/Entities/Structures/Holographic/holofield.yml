@@ -1,7 +1,7 @@
 - type: entity
-  parent: [BaseStructure, ConstructibleMachine]
-  id: GenericFieldGeneratorBase
   abstract: true
+  parent: [ BaseStructure, ConstructibleMachine, BaseConstructibleMachineDestructible ]
+  id: GenericFieldGeneratorBase
   components:
   - type: Fixtures
     fixtures:

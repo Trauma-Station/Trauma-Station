@@ -1,13 +1,13 @@
 - type: entity
-  id: BaseBigBox
+  parent: StructureHealthContainerFlimsy
+  id: BigBox
   name: cardboard box #it's still just a box
   description: Huh? Just a box...
-  abstract: true
   components:
-    - type: JustABox # Trauma - just a box...
     - type: Transform
       noRot: true
     - type: Clickable
+    - type: InteractionOutline
     - type: Physics
       bodyType: KinematicController
     - type: Fixtures
@@ -60,37 +60,21 @@
     - type: GravityAffected
 
 - type: entity
+  parent: BigBox
   id: StealthBox
   suffix: stealth
-  parent: BaseBigBox
   description: Kept ya waiting, huh?
   components:
     - type: Damageable
       damageModifierSet: FlimsyMetallic #Syndicate boxes should have a bit of protection
     - type: CardboardBox
-      effectSound: /Audio/_Goobstation/Voice/surprised.ogg # Trauma - more impactful sound
-      quiet: false # Trauma - false so custom logic can be used to control it
+      quiet: true
     - type: Stealth
       hadOutline: true
       shimmerFrequency: 0.05
     - type: StealthOnMove
       passiveVisibilityRate: -1 # very useful for going around the station concealed, if you start jitterstrafing you get seen
       movementVisibilityRate: 0.20
-
-- type: entity
-  id: BigBox
-  parent: BaseBigBox
-  components:
-  - type: InteractionOutline
-  - type: Destructible
-    thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 15
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
-
 
 #For admin spawning only
 - type: entity

@@ -26,9 +26,6 @@ public sealed partial class MobSpamSystem : EntitySystem
         base.Initialize();
 
         _buffer = new(64, DespawnTime, _timing);
-
-        SubscribeLocalEvent<MobSpamComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
     }
 
     public override void Update(float frameTime)
@@ -39,6 +36,7 @@ public sealed partial class MobSpamSystem : EntitySystem
             Despawn(uid);
     }
 
+    [SubscribeLocalEvent]
     private void OnMobStateChanged(Entity<MobSpamComponent> ent, ref MobStateChangedEvent args)
     {
         if (args.NewMobState != MobState.Dead)
@@ -47,6 +45,7 @@ public sealed partial class MobSpamSystem : EntitySystem
         QueueDespawn(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnRoundRestart(RoundRestartCleanupEvent args)
     {
         _buffer.Reset();

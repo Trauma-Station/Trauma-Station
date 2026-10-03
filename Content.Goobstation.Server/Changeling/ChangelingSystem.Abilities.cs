@@ -228,7 +228,7 @@ public sealed partial class ChangelingSystem
         {
             if (GetMindStore((mindId, mind)) is {} store)
             {
-                _store.TryAddCurrency(new Dictionary<string, FixedPoint2> { { "EvolutionPoint", bonusEvolutionPoints } }, store.Owner, store.Comp);
+                _store.TryAddCurrency(new() { { "EvolutionPoint", bonusEvolutionPoints } }, store.Owner, store.Comp);
                 _store.UpdateUserInterface(args.User, store.Owner, store.Comp);
             }
 

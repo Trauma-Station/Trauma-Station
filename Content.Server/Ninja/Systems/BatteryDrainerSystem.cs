@@ -1,4 +1,6 @@
-using Content.Goobstation.Common.Effects;
+// <Trauma>
+using Content.Trauma.Common.Effects;
+// </Trauma>
 using Content.Server.Ninja.Events;
 using Content.Server.Power.Components;
 using Content.Shared.DoAfter;
@@ -17,11 +19,13 @@ namespace Content.Server.Ninja.Systems;
 /// </summary>
 public sealed partial class BatteryDrainerSystem : SharedBatteryDrainerSystem
 {
+    // <Trauma>
+    [Dependency] private CommonSparksSystem _sparks = default!;
+    // </Trauma>
     [Dependency] private SharedBatterySystem _battery = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private SparksSystem _sparks = default!; // goob edit - sparks everywhere
 
     public override void Initialize()
     {
@@ -104,7 +108,7 @@ public sealed partial class BatteryDrainerSystem : SharedBatteryDrainerSystem
         var output = input * comp.DrainEfficiency;
         _battery.ChangeCharge((comp.BatteryUid.Value, battery), output);
         // TODO: create effect message or something
-        _sparks.DoSparks(Transform(target).Coordinates); // goob edit - replace spark effect spawn with this
+        _sparks.DoSparks(target, user: null); // Trauma - replaced spark effect spawn with this
         _audio.PlayPvs(comp.SparkSound, target);
         _popup.PopupEntity(Loc.GetString("battery-drainer-success", ("battery", target)), uid, uid);
 

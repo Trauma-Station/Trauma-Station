@@ -3,7 +3,7 @@
 # Autodocs
 
 - type: entity
-  parent: [ConstructibleMachine, BaseMachinePowered]
+  parent: [ ConstructibleMachine, BaseMachinePowered, BaseConstructibleMachineDestructible ]
   id: Autodoc
   name: Autodoc Mk.XIV
   description: A programmable robotic surgeon capable of automatically operating on patients.

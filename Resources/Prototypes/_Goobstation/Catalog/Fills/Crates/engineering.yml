@@ -1,16 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: MachinePowerTransmissionLaserCrate
-  parent: CrateGenericSteel
-  name: power transmission laser crate
-  components:
-  - type: EntityTableContainerFill
-    containers:
-      entity_storage:
-        id: MachinePowerTransmissionLaserFlatpack
-
-- type: entity
   id: CrateEngineeringTEG
   parent: CrateEngineeringSecure
   name: thermo-electric generator crate

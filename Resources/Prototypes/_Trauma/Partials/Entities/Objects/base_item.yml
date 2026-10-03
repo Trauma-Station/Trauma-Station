@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: BaseItem
+  components:
+  - type: EmitSoundOnPickup
+    sound:
+      collection: GenericPickup
+      params:
+        volume: -7
+  - type: EmitSoundOnDrop
+    sound:
+      collection: GenericDrop
+      params:
+        volume: -7
+  - type: ViewconeOccludable # can't remember items that are out of view
+
+- type: entity
+  abstract: true
+  id: BaseStash
+  components:
+  - type: SecretStash
+    blacklist:
+      # fun legal
+      components:
+      - !Remove NukeDisk
+      tags:
+      - !Remove FakeNukeDisk

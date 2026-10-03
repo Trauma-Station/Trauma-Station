@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseMachine, BaseMinorContraband ]
+  parent: [ BaseMachine, BaseMinorContraband, BaseMachineDestructible ]
   id: RevUnfinishedMachine
   name: steel contraption
   description: A large mass of steel worked into some kind of machine. Only a madman knows what this could be!

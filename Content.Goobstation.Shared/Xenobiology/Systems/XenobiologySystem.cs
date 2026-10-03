@@ -22,11 +22,11 @@ namespace Content.Goobstation.Shared.Xenobiology.Systems;
 public sealed partial class XenobiologySystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private HungerSystem _hunger = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private MobStateSystem _mob = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private MetaDataSystem _meta = default!;
+    [Dependency] private SatiationSystem _satiation = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedAudioSystem _audio = default!;

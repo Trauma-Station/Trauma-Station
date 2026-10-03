@@ -1,14 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Antag;
 using Content.Server.Audio;
 using Content.Server.Chat.Systems;
 using Content.Server.Ghost.Roles.Components;
 using Content.Server.Pinpointer;
 using Content.Server.Popups;
-using Content.Trauma.Shared.Silicons.Borgs.Components;
-using Content.Trauma.Shared.CosmicCult;
-using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Shared.Antag;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -21,6 +18,9 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Silicons.Borgs.Components;
+using Content.Trauma.Shared.Silicons.Borgs.Components;
+using Content.Trauma.Shared.CosmicCult;
+using Content.Trauma.Shared.CosmicCult.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -51,15 +51,6 @@ public sealed partial class CosmicChantrySystem : EntitySystem
     /// </summary>
     public static readonly EntProtoId MindRole = "MindRoleCosmicColossus";
     private readonly SoundSpecifier _briefingSound = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_AI_briefing.ogg");
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicChantryComponent, DestructionEventArgs>(OnChantryDestroyed);
-        SubscribeLocalEvent<CosmicChantryComponent, CosmicChantryDoAfter>(OnDoAfter);
-        SubscribeLocalEvent<CosmicChantryVictimComponent, MindRemovedMessage>(OnMindLeftVictim);
-        SubscribeLocalEvent<CosmicChantryVictimComponent, MindAddedMessage>(OnMindAddedToVictim);
-    }
 
     public override void Update(float frameTime)
     {
@@ -112,7 +103,7 @@ public sealed partial class CosmicChantrySystem : EntitySystem
                 _popup.PopupCoordinates(Loc.GetString("cosmiccult-chantry-powerup"), Transform(uid).Coordinates, PopupType.LargeCaution);
                 comp.Spawned = true;
 
-                var doAfterArgs = new DoAfterArgs(EntityManager, uid, comp.EventTime, new CosmicChantryDoAfter(), uid, victim)
+                var doAfterArgs = new DoAfterArgs(EntityManager, uid, comp.EventTime, new CosmicChantryDoAfterEvent(), uid, victim)
                 {
                     NeedHand = false,
                     BreakOnWeightlessMove = false,
@@ -129,12 +120,14 @@ public sealed partial class CosmicChantrySystem : EntitySystem
         }
     }
 
-    private void OnDoAfter(Entity<CosmicChantryComponent> ent, ref CosmicChantryDoAfter args)
+    [SubscribeLocalEvent]
+    private void OnDoAfter(Entity<CosmicChantryComponent> ent, ref CosmicChantryDoAfterEvent args)
     {
         ent.Comp.Completed = true;
         TransformVictim(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnChantryDestroyed(Entity<CosmicChantryComponent> ent, ref DestructionEventArgs args)
     {
         _container.EmptyContainer(ent.Comp.Container);
@@ -212,12 +205,16 @@ public sealed partial class CosmicChantrySystem : EntitySystem
         }
     }
 
-    private void OnMindLeftVictim(Entity<CosmicChantryVictimComponent> ent, ref MindRemovedMessage args) =>
+    [SubscribeLocalEvent]
+    private void OnMindLeftVictim(Entity<CosmicChantryVictimComponent> ent, ref MindRemovedMessage args)
+    {
         MakeVictimGhostRole(ent);
+    }
 
+    [SubscribeLocalEvent]
     private void OnMindAddedToVictim(Entity<CosmicChantryVictimComponent> ent, ref MindAddedMessage args)
     {
-        if (!ent.Comp.Chantry.Comp.Completed) return;
-        TransformVictim(ent.Comp.Chantry);
+        if (ent.Comp.Chantry.Comp.Completed)
+            TransformVictim(ent.Comp.Chantry);
     }
 }

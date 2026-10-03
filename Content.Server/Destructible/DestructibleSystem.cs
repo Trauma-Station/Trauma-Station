@@ -67,6 +67,11 @@ public sealed partial class DestructibleSystem : SharedDestructibleSystem
     {
         var (uid, comp) = entity;
 
+        // <Trauma>
+        if (!comp.Enabled)
+            return;
+        // </Trauma>
+
         comp.IsBroken = false;
 
         foreach (var threshold in comp.Thresholds)

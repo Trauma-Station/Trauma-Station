@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   id: StationRadioServer
   name: station radio server
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
   description: A rack of servers, controls whether your voice is being broadcasted or not
   components:
   - type: Sprite
@@ -28,8 +28,8 @@
     unobstructedRequired: true
 
 - type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   id: StationRadioRig
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
   name: station radio rig
   description: A collection of everything you need to play music over the station.
   components:

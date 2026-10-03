@@ -724,7 +724,7 @@
   description: This spell teleports you to an area of your selection.
   components:
   - type: Action
-    raiseOnUser: true
+    raiseOnAction: true
     checkCanInteract: false
     useDelay: 60
     itemIconStyle: BigAction
@@ -738,6 +738,7 @@
     requiresSpeech: true
     requiresClothes: true
     school: Translocation
+  - type: TeleportScroll
   - type: UserInterface
     interfaces:
       enum.WizardTeleportUiKey.Key:

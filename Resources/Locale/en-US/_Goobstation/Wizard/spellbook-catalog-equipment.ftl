@@ -96,9 +96,3 @@ spellbook-hammer-mjollnir-description =
 spellbook-hammer-singularity-name = Singularity Hammer
 spellbook-hammer-singularity-description =
     A hammer that creates an intensely powerful field of gravity where it strikes, pulling everything nearby to the point of impact.
-
-spellbook-crate-of-enchanting-name = Crate of Enchanting
-spellbook-crate-of-enchanting-description =
-    A crate of stolen anomaly cores, summoned by arcane power.
-    Used for enchanting your gear to be even more powerful!
-    The selection is random and may be effectively useless. No refunds!

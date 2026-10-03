@@ -1,8 +1,3 @@
-// <Trauma>
-using Content.Server.Audio;
-using Content.Shared.Audio;
-// </Trauma>
-using Content.Goobstation.Shared.SpecialAnimation;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.Popups;
@@ -14,7 +9,6 @@ using Content.Shared.NukeOps;
 using Content.Shared.UserInterface;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
-using Robust.Shared.Player;
 using Robust.Shared.Timing;
 
 namespace Content.Server.NukeOps;
@@ -24,10 +18,6 @@ namespace Content.Server.NukeOps;
 /// </summary>
 public sealed partial class WarDeclaratorSystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private SharedSpecialAnimationSystem _specialAnimation = default!;
-    [Dependency] private ServerGlobalSoundSystem _sound = default!;
-    // </Trauma>
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
@@ -68,7 +58,7 @@ public sealed partial class WarDeclaratorSystem : EntitySystem
 
     private void OnActivated(Entity<WarDeclaratorComponent> ent, ref WarDeclaratorActivateMessage args)
     {
-        var ev = new WarDeclaredEvent(ent.Comp.CurrentStatus, ent);
+        var ev = new WarDeclaredEvent(ent.Comp.CurrentStatus, ent, args.Actor); // Trauma - pass Actor
         RaiseLocalEvent(ref ev);
 
         if (ent.Comp.DisableAt < _gameTiming.CurTime)
@@ -86,10 +76,6 @@ public sealed partial class WarDeclaratorSystem : EntitySystem
             var title = Loc.GetString(ent.Comp.SenderTitle);
             _chat.DispatchGlobalAnnouncement(ent.Comp.Message, title, true, ent.Comp.Sound, ent.Comp.Color);
             _adminLogger.Add(LogType.Chat, LogImpact.Low, $"{ToPrettyString(args.Actor):player} has declared war with this text: {ent.Comp.Message}");
-            // <Trauma>
-            _specialAnimation.PlayAnimationFiltered(args.Actor, Filter.Broadcast(), "NukeOpsWarAnimation");
-            _sound.DispatchStationEventMusic(ent, ent.Comp.Music, StationEventMusicType.Nuke, ent.Comp.Music.Params);
-            // </Trauma>
         }
 
         UpdateUI(ent, ev.Status);

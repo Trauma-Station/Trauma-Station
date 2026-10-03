@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   id: TapeDeck
   name: tape deck
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
   description: An old school tape deck, ready to play the newest podcast made by the crew.
   components:
   - type: Transform

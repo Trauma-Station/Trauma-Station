@@ -17,14 +17,8 @@ public sealed partial class CosmicIngressSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private LockSystem _lock = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<CosmicCultComponent, EventCosmicIngress>(OnCosmicIngress);
-    }
-
-    private void OnCosmicIngress(Entity<CosmicCultComponent> ent, ref EventCosmicIngress args)
+    [SubscribeLocalEvent]
+    private void OnCosmicIngress(Entity<CosmicCultComponent> ent, ref CosmicIngressEvent args)
     {
         var target = args.Target;
 

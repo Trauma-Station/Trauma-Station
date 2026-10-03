@@ -28,14 +28,7 @@ public sealed partial class CosmicSpireSystem : EntitySystem
 
     private readonly HashSet<Entity<CosmicEntropyMoteComponent>> _motes = [];
 
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<CosmicSpireComponent, AnchorStateChangedEvent>(OnAnchorChanged);
-        SubscribeLocalEvent<CosmicSpireComponent, AtmosDeviceUpdateEvent>(OnDeviceUpdated);
-        SubscribeLocalEvent<CosmicSpireComponent, GasAnalyzerScanEvent>(OnSpireAnalyzed);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAnchorChanged(Entity<CosmicSpireComponent> ent, ref AnchorStateChangedEvent args)
     {
         if (args.Anchored)
@@ -54,6 +47,7 @@ public sealed partial class CosmicSpireSystem : EntitySystem
         _lights.SetEnabled(ent, ent.Comp.Enabled);
     }
 
+    [SubscribeLocalEvent]
     private void OnDeviceUpdated(Entity<CosmicSpireComponent> ent, ref AtmosDeviceUpdateEvent args)
     {
         if (!ent.Comp.Enabled
@@ -93,6 +87,13 @@ public sealed partial class CosmicSpireSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
+    private void OnSpireAnalyzed(Entity<CosmicSpireComponent> ent, ref GasAnalyzerScanEvent args)
+    {
+        args.GasMixtures ??= [];
+        args.GasMixtures.Add((Name(ent), ent.Comp.Storage));
+    }
+
     private bool Drain(float timeDelta, Entity<CosmicSpireComponent> ent, GasMixture? tile)
     {
         return _scrub.Scrub(timeDelta,
@@ -103,12 +104,8 @@ public sealed partial class CosmicSpireSystem : EntitySystem
             ent.Comp.Storage);
     }
 
-    private void OnSpireAnalyzed(Entity<CosmicSpireComponent> ent, ref GasAnalyzerScanEvent args)
+    private void UpdateSpireAppearance(EntityUid uid, SpireStatus status)
     {
-        args.GasMixtures ??= [];
-        args.GasMixtures.Add((Name(ent), ent.Comp.Storage));
-    }
-
-    private void UpdateSpireAppearance(EntityUid uid, SpireStatus status) =>
         _appearance.SetData(uid, SpireVisuals.Status, status);
+    }
 }

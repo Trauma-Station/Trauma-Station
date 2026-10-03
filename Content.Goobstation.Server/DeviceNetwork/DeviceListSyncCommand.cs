@@ -33,10 +33,14 @@ public sealed partial class DeviceListSyncCommand : LocalizedCommands
         {
             foreach (var device in listComp.Devices)
             {
-                if (!_entityManager.TryGetComponent(device, out DeviceNetworkComponent? networkComp) || networkComp.DeviceLists.Contains(listEnt))
+                if (!_entityManager.TryGetComponent(device, out DeviceNetworkComponent? networkComp))
                     continue;
 
-                networkComp.DeviceLists.Add(listEnt);
+                var lists = networkComp.DeviceLists;
+                if (lists.Contains(listEnt))
+                    continue;
+
+                lists.Add(listEnt);
                 updatedDevices++;
             }
         }

@@ -9,7 +9,7 @@ namespace Content.Trauma.Shared.Genetics.Abilities;
 
 public sealed partial class BleedingMutationSystem : EntitySystem
 {
-    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
     [Dependency] private EntityQuery<BloodstreamComponent> _bloodstreamQuery = default!;
 
     public override void Initialize()

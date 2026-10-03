@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Server.Implants.Components;
-using Content.Server.Body.Systems;
 using Content.Shared.Body.Components;
+using Content.Shared.Body.Systems;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Implants;
 using Robust.Shared.Containers;

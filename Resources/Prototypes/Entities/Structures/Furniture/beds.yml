@@ -50,6 +50,10 @@
   name: bed
   description: This is used to lie in, sleep in or strap on. Resting here provides extremely slow healing.
   components:
+  # <Trauma>
+  - type: CosmicCorruptible
+    convertTo: CosmicBed
+  # </Trauma>
   - type: Destructible
     thresholds:
     - trigger:

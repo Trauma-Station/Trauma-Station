@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ CMPlatform, BaseCosmicCultStructure ]
+  id: CosmicPlatform
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/platforms.rsi
+    state: platform
+
+- type: entity
+  parent: [ CMPlatformCorner, BaseCosmicCultStructure ]
+  id: CosmicPlatformCorner
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/platforms.rsi
+    state: platform_corner
+
+- type: entity
+  parent: [ RMCPlatformCornerSmall, BaseCosmicCultStructure ]
+  id: CosmicPlatformCornerSmall
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/platforms.rsi
+    state: platform_deco
+
+- type: entity
+  parent: [ RMCPlatformStairRight, BaseCosmicCultStructure ]
+  id: CosmicPlatformStairRight
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/platforms.rsi
+    state: platform_stair
+
+- type: entity
+  parent: [ RMCPlatformStairLeft, BaseCosmicCultStructure ]
+  id: CosmicPlatformStairLeft
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/platforms.rsi
+    state: platform_stair_alt

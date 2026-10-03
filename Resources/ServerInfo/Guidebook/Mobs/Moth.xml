@@ -1,11 +1,3 @@
-<!--
-SPDX-FileCopyrightText: 2024 Errant <35878406+Errant-4@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-
-SPDX-License-Identifier: AGPL-3.0-or-later
--->
-
 <Document>
   # Moth People
 
@@ -17,7 +9,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
   Their wings give them better acceleration if there is no gravity on the station, but they still can't move without equipment when floating out in space.
 
-  They take [color=#1e90ff]30% less Cold damage[/color] but [color=#ffa500]30% more Heat and 6.5% more Brute damage, and catch on fire more easily[/color].
+  They take [color=#1e90ff]50% less Cold damage[/color] but [color=#ffa500]100% more Heat damage, and catch on fire more easily[/color].
 
   They have innate [textlink="Tackle" link="Tackle"], allowing them to dash a short distance, as well as bonus to tackling with special gloves.
 

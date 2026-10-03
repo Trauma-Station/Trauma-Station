@@ -18,7 +18,7 @@ namespace Content.Goobstation.Shared.Slasher.Systems;
 
 public sealed partial class SlasherRegenerateSystem : EntitySystem
 {
-    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
     [Dependency] private SharedCuffableSystem _cuffs = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedPopupSystem _popup = default!;

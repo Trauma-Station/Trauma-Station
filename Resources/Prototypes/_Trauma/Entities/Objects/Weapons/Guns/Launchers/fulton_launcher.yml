@@ -1,0 +1,80 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseItem, BaseSalvageContraband ]
+  id: WeaponLauncherFulton
+  name: FB MR R-L FLTN
+  suffix: fulton launcher
+  description: The Falkenberg Multi-Role Rocket Launcher, modified to fire high-speed fultons. For when your running speed is the bottleneck to growing your army.
+  components:
+  - type: WeaponClass
+    class: Heavy
+  - type: Sprite
+    sprite: &sprite _Trauma/Objects/Weapons/Guns/Launchers/fulton_launcher.rsi
+    layers:
+    - state: base
+      map: [ "enum.GunVisualLayers.Base" ]
+    - state: mag-1
+      map: [ "enum.GunVisualLayers.Mag" ]
+  - type: Clothing
+    sprite: *sprite
+    quickEquip: false
+    slots:
+    - Back
+    - SuitStorage
+  - type: Item
+    heldPrefix: loaded
+    sprite: *sprite
+    size: Huge
+    shape:
+    - 0,0,5,2
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.AmmoVisuals.HasAmmo:
+        enum.GunVisualLayers.Mag:
+          True: { visible: true }
+          False: { visible: false }
+  - type: Gun
+    fireRate: 0.5
+    projectileSpeed: 25
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/rpgfire.ogg
+  - type: BasicEntityAmmoProvider
+    capacity: 6
+    count: 6
+    proto: ProjectileFulton
+  - type: AmmoStackReload
+    whitelist: [ Fulton ]
+  - type: BasicAmmoHeldVisuals
+  - type: AmmoCounter
+  - type: Fulton
+    attachOnInteract: false # it's for linking...
+    duration: 10
+    whitelist: &fulton_whitelist
+      components:
+      - Item # its gonna be hard to hit items...
+      - Anchorable
+      - Body
+
+- type: entity
+  parent: BaseBulletTrigger
+  id: ProjectileFulton
+  name: fulton
+  description: CP! A ballooon just pulled one of our men into the air!
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    # TODO: actual sprite
+    sprite: Objects/Tools/fulton.rsi
+    layers:
+    - state: extraction_pack
+  - type: FultonProjectile
+  - type: EntityEffectOnTrigger
+    targetUser: true
+    effects:
+    - !type:ModifyKnockdown
+      time: 3

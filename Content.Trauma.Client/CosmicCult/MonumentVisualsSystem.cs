@@ -12,13 +12,7 @@ public sealed partial class MonumentVisualizerSystem : EntitySystem
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SpriteSystem _sprite = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<MonumentComponent, AppearanceChangeEvent>(OnAppearanceChanged);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAppearanceChanged(Entity<MonumentComponent> ent, ref AppearanceChangeEvent args)
     {
         if (args.Sprite is not { } spriteComp)

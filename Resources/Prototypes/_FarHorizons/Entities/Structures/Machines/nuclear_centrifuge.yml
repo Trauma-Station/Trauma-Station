@@ -1,6 +1,6 @@
 - type: entity
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
   id: NuclearCentrifuge
-  parent: [ BaseMachinePowered, ConstructibleMachine ]
   name: nuclear centrifuge
   description: A large machine that can be used to separate radioactive isotopes from spent fuel.
   components:

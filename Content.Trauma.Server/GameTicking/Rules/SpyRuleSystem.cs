@@ -5,23 +5,23 @@ using System.Linq;
 using Content.Goobstation.Server.ManifestListings;
 using Content.Goobstation.Shared.ManifestListings;
 using Content.Medical.Shared.Body;
-using Content.Server.Antag;
-using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
-using Content.Server.Roles;
 using Content.Server.Roles.Jobs;
-using Content.Server.Station.Systems;
 using Content.Server.Store.Systems;
 using Content.Server.Traitor.Uplink;
+using Content.Shared.Antag;
 using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.GameTicking.Rules;
 using Content.Shared.Humanoid;
 using Content.Shared.Localizations;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Objectives.Components;
 using Content.Shared.Random;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Roles;
+using Content.Shared.Station.Systems;
 using Content.Shared.Store.Components;
 using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.Roles;
@@ -44,7 +44,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
     [Dependency] private MindSystem _mind = default!;
     [Dependency] private UplinkSystem _uplink = default!;
     [Dependency] private SpyUplinkSystem _spyUplink = default!;
-    [Dependency] private RoleSystem _role = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private StationSystem _station = default!;
     [Dependency] private StoreSystem _store = default!;
@@ -102,26 +102,23 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 
         if (component.CurrentBounties.Count == 0)
         {
-            RefreshBounties(uid, component, now, component.FirstRefreshTime);
+            RefreshBounties(uid, component, now);
             return;
         }
 
         if (component.NextRefresh > now)
             return;
 
-        RefreshBounties(uid, component, now, component.RefreshTime);
+        RefreshBounties(uid, component, now);
     }
 
-    protected override void Started(EntityUid uid,
-        SpyRuleComponent component,
-        GameRuleComponent gameRule,
-        GameRuleStartedEvent args)
+    protected override void Started(Entity<SpyRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
     {
-        base.Started(uid, component, gameRule, args);
+        base.Started(ent, ref args);
 
         foreach (var grid in _station.GetAllStationGrids())
         {
-            component.StationMaps.Add(Transform(grid).MapID);
+            ent.Comp1.StationMaps.Add(Transform(grid).MapID);
         }
     }
 
@@ -138,7 +135,8 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 
         foreach (var listing in store.LastAvailableListings)
         {
-            if (!listing.OriginalCost.TryGetValue(tc, out var cost) || listing.ProductEntity == null)
+            if (!listing.OriginalCost.TryGetValue(tc, out var cost) || cost > comp.MaxCost ||
+                listing.ProductEntity == null)
                 continue;
 
             var difficulty = SpyBountyDifficulty.Easy;
@@ -160,7 +158,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
         }
     }
 
-    private void RefreshBounties(EntityUid uid, SpyRuleComponent rule, TimeSpan curTime, TimeSpan refreshTime)
+    private void RefreshBounties(EntityUid uid, SpyRuleComponent rule, TimeSpan curTime)
     {
         foreach (var bounty in rule.CurrentBounties)
         {
@@ -179,7 +177,7 @@ public sealed partial class SpyRuleSystem : GameRuleSystem<SpyRuleComponent>
 
         rule.CachedRewards.Clear();
         rule.CurrentBounties.Clear();
-        rule.NextRefresh = curTime + refreshTime;
+        rule.NextRefresh = curTime + rule.RefreshTime;
 
         if (rule.BountyPool is not { } pool || pool.Count < rule.NumBounties)
             GenerateBountyPool(rule);

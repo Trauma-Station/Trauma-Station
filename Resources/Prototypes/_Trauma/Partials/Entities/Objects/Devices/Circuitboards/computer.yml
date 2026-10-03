@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: RoboticsConsoleCircuitboard
+  components:
+  - type: Sprite
+    state: cpu_engineering
+
+- type: entity
+  id: StationAiUploadCircuitboard
+  components:
+  - type: Sprite
+    state: cpu_engineering
+
+- type: entity
+  id: StationAiFixerCircuitboard
+  components:
+  - type: Sprite
+    state: cpu_engineering

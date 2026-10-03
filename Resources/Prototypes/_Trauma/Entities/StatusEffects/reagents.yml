@@ -2,15 +2,6 @@
 
 - type: entity
   parent: StatusEffectSlowdown
-  id: TriclorSlowdownStatusEffect
-  name: triclor slowdown
-  components:
-  - type: MovementModStatusEffect
-    sprintSpeedModifier: 0.8
-    walkSpeedModifier: 0.8
-
-- type: entity
-  parent: StatusEffectSlowdown
   id: SarinSlowdownStatusEffect
   name: sarin slowdown
   components:
@@ -44,15 +35,6 @@
   - type: MovementModStatusEffect
     sprintSpeedModifier: 0.8
     walkSpeedModifier: 0.8
-
-- type: entity
-  parent: StatusEffectSlowdown
-  id: AmnestizineSlowdownStatusEffect
-  name: amnestizine slowdown
-  components:
-  - type: MovementModStatusEffect
-    sprintSpeedModifier: 0.4
-    walkSpeedModifier: 0.4
 
 - type: entity
   parent: StatusEffectSpeed

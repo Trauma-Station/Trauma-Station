@@ -2,12 +2,12 @@
 
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Managers;
-using Content.Server.GameTicking;
 using Content.Trauma.Shared.Wizard;
 using Content.Trauma.Shared.Wizard.EventSpells;
 using Content.Shared.Chat;
 using Content.Shared.Database;
 using Content.Shared.Eye;
+using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Ghost.Components;
 using Robust.Server.Audio;

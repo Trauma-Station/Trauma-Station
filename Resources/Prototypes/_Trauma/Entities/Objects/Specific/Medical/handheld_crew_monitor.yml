@@ -8,7 +8,8 @@
   components:
   - type: Sprite
     sprite: Objects/Tools/spy_device.rsi
-    state: icon
+    layers:
+    - state: icon
   - type: Item
     sprite: Objects/Tools/spy_device.rsi
   - type: PowerCellDraw
@@ -36,8 +37,13 @@
   description: The syndicated version of crew monitor, intercepts information from the server.
   components:
   - type: Sprite
-    sprite: Objects/Specific/Medical/syndihandheldcrewmonitor.rsi
-    state: syndiscanner
+    layers:
+    - state: syndiscanner
+      sprite: Objects/Specific/Medical/syndihandheldcrewmonitor.rsi
+    - state: screen
+      shader: unshaded
+      visible: false
+      map: [ "enum.PowerDeviceVisualLayers.Powered" ]
   - type: Item
     sprite: Objects/Specific/Medical/syndihandheldcrewmonitor.rsi
   - type: PowerCellDraw
@@ -53,3 +59,17 @@
     slots:
       cell_slot:
         name: power-cell-slot-component-slot-name-default
+
+- type: entity
+  parent: BaseHandheldCrewMonitor
+  id: BorgCrewMonitor
+  name: integrated crew monitor
+  description: An integrated crew monitor for locating crew to rescue.
+  categories: [ HideSpawnMenu ]
+
+- type: entity
+  parent:
+  - BaseHandheldCrewMonitor
+  - BaseMedicalContraband
+  - BaseHandheldComputer
+  id: HandheldCrewMonitor

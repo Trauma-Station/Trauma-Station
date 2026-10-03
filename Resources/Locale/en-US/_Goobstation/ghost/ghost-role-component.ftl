@@ -31,24 +31,6 @@ ghost-role-information-c4-description = Assist your user with bombing things.
 ghost-role-information-derelict-cyborg-syndicate-name = Derelict Syndicate Cyborg
 ghost-role-information-derelict-cyborg-syndicate-description = You were lost during an assault on a station. After years of exposure to ion storms you find yourself near a space station.
 
-ghost-role-information-navy-captain-name = Navy Captain
-ghost-role-information-navy-captain-description = Classified.
-ghost-role-information-navy-captain-rules = You are beholden to no rules.
-
-ghost-role-information-navy-officer-name = Navy Officer
-ghost-role-information-navy-officer-description = Answer faxes and radio communications directed at Central Command. Perform investigations on the station and it's crew.
-ghost-role-information-navy-officer-rules = Follow the orders of the [color=#yellow][bold]Navy Captain[/bold][/color]. In the absence of one, make your own judgements.
-
-ghost-role-information-navy-officer-undercover-name = Undercover Navy officer
-ghost-role-information-navy-officer-undercover-description = Complete your assigned tasks and terminate the given targets. Good luck.
-ghost-role-information-navy-officer-undercover-rules = Follow the orders of the [color=#yellow][bold]Navy Captain[/bold][/color], or other Central Command official.
-
-ghost-role-information-diplomat-name = Diplomat
-ghost-role-information-diplomat-description = Represent Central Command, managing relationships with other factions aboard the station. Cleanup the issues the captain has likely caused.
-
-ghost-role-information-inspector-name = Central Command Auditor
-ghost-role-information-inspector-description = Perform inspections on the stations assets and its crew. Probably die in a horrific accident and get a deathsquad called.
-
 ghost-role-information-sentient-shark-name = Sentient Sharkminnow
 ghost-role-information-plague-mouse-name = Plague Mouse
 ghost-role-information-plague-mouse-description = A hungry and mischievous mouse. This one carries a disease and will spread it on bite.

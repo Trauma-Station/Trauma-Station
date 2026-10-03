@@ -191,7 +191,7 @@
   effects:
   - !type:Vomit
   - !type:ModifyKnockdown
-    time: 20
+    time: 5
 
 - type: entityEffect
   id: HereticMarkVoid

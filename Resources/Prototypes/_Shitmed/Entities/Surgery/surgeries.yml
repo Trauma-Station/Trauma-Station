@@ -337,7 +337,7 @@
       Brain:
       - type: OhioAccent
       - type: RatvarianLanguage
-      - type: Clumsy
+      #- type: Clumsy # TODO: add system for modifying OrganStatusEffects
     inverse: true
   - type: SurgeryPartCondition
     parts: [ Head ]
@@ -360,6 +360,6 @@
       Brain:
       - type: OhioAccent
       - type: RatvarianLanguage
-      - type: Clumsy
+      #- type: Clumsy
   - type: SurgeryPartCondition
     parts: [ Head ]

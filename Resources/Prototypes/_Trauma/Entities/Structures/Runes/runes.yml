@@ -129,6 +129,7 @@
     - MinorDemonVox
     - MinorDemonVulp
     - MinorDemonCentifiend
+    - MinorDemonFlesh
 
 - type: entity
   parent: BaseCarvedRune
@@ -162,10 +163,11 @@
     demons:
     - MediumDemonChad
     - MediumDemonHamlet
-    - MediumDemon64Fat
-    - MediumDemon64Buff
-    - MediumDemon64
     - MediumDemonCentifiend
+    - MediumDemonAbomination
+    - MediumDemonMindflayer
+    - MediumDemonImp
+    - MediumDemonDark
 
 - type: entity
   parent: BaseCarvedRune
@@ -204,6 +206,10 @@
     - MajorDemonHiver
     - MajorDemonSteamer
     - MajorDemonButcher
+    - MajorAngelHuman
+    - MajorAngelLizard
+    - MajorAngelMoth
+    - MajorDemonSaturn
 
 - type: entity
   parent: BaseCarvedRune

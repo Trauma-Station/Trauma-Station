@@ -1,3 +1,5 @@
+using Robust.Shared.GameStates;
+
 namespace Content.Shared.StatusEffectNew.Components;
 
 /// <summary>
@@ -5,5 +7,5 @@ namespace Content.Shared.StatusEffectNew.Components;
 /// by the CloningSystem (for example for paradox clones, cloning pods or changeling transformations).
 /// This is used for traits that use permanent status effects.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class CloneableStatusEffectComponent : Component;

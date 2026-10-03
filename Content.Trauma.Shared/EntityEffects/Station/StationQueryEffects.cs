@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.EntityEffects;
-using Content.Shared.Station;
 using Content.Shared.Station.Components;
+using Content.Shared.Station.Systems;
 
 namespace Content.Trauma.Shared.EntityEffects.Station;
 
@@ -15,8 +15,7 @@ public sealed partial class StationQueryEffects : EntityEffectBase<StationQueryE
     /// Name of the component to query.
     /// </summary>
     [DataField(required: true)]
-    public string CompName = string.Empty;
-    // TODO: use CompName if SpawnPoint is moved to shared...
+    public CompName CompName;
 
     /// <summary>
     /// The effects to apply to each entity.
@@ -35,7 +34,7 @@ public sealed partial class StationQueryEffects : EntityEffectBase<StationQueryE
 public sealed partial class StationQueryEffectsSystem : EntityEffectSystem<StationDataComponent, StationQueryEffects>
 {
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
-    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private StationSystem _station = default!;
 
     protected override void Effect(Entity<StationDataComponent> ent, ref EntityEffectEvent<StationQueryEffects> args)
     {

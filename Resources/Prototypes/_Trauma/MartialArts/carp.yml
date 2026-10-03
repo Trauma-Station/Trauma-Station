@@ -9,7 +9,7 @@
   - !type:MartialArtsSaying
     randomSayings:
     - carp-saying-huah
-    - carv-vaying-hya
+    - carp-saying-hya
     - carp-saying-choo
     - carp-saying-wuo
     - carp-saying-kya
@@ -24,37 +24,62 @@
     - carp-saying-see
     - carp-saying-time
     - carp-saying-cowabunga
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit1.ogg
+  # TODO: scale damage with number of times you use the combo up to a limit that gets reset
   opponentEffects:
   - !type:HealthChange
     targetPart: Chest
     damage:
       types:
         Slash: 20
-  levelRequired: 26
 
 - type: combo
   id: SleepingCarpKneeHaul
   attacks:
   - Harm
   - Grab
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit3.ogg
   opponentEffects:
-  - !type:TakeStaminaDamage
-    amount: 60
-  - !type:ModifyParalysis
-    time: 6
-  - !type:HealthChange
-    targetPart: Chest
-    damage:
-      types:
-        Blunt: 10
-  levelRequired: 26
+  - !type:IfElse
+    # knee'ing someone who's standing does more damage
+    condition: !type:StandingCondition
+    trueEffects:
+    - !type:HealthChange
+      targetPart: Chest
+      damage:
+        types:
+          Blunt: 10
+    - !type:TakeStaminaDamage
+      amount: 60
+    - !type:ModifyKnockdown
+      time: 6
+      drop: true
+    falseEffects:
+    - !type:HealthChange
+      targetPart: Chest
+      damage:
+        types:
+          Blunt: 5
+    - !type:TakeStaminaDamage
+      amount: 40
+    - !type:DropItems
 
 - type: combo
   id: SleepingCarpCrashingWaves
   attacks:
   - Harm
   - Disarm
+  conditions:
+  - !type:StandingCondition
+    failMessage: martial-arts-fail-target-down
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Weapons/genhit2.ogg
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 25
-  levelRequired: 26
+  - !type:StopPull
+  - !type:GrabThrow

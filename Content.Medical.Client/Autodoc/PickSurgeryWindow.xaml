@@ -18,7 +18,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <Button Name="SubmitButton" Text="{Loc 'autodoc-submit'}" Disabled="True"/>
         </BoxContainer>
         <ScrollContainer HorizontalExpand="True">
-            <ItemList Name="Surgeries"/> <!-- Populated with SharedSurgerySystem.AllSurgeries -->
+            <ItemList Name="Surgeries"/> <!-- Populated with SurgerySystem.AllSurgeries -->
         </ScrollContainer>
     </BoxContainer>
 </controls:FancyWindow>

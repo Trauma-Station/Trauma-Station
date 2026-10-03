@@ -6858,8 +6858,6 @@ entities:
     - type: Transform
       pos: -0.38201576,4.505081
       parent: 1
-- proto: RandomHumanoidSpawnerNavyOfficer
-  entities:
   - uid: 963
     components:
     - type: Transform

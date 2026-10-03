@@ -3,7 +3,8 @@
 using System.Linq;
 using Content.Medical.Shared.ItemSwitch;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Containers;
@@ -19,6 +20,7 @@ public sealed partial class CounterattackWeaponSystem : EntitySystem
     [Dependency] private SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private SharedItemSwitchSystem _switch = default!;
     [Dependency] private IGameTiming _timing = default!;
+
     public override void Initialize()
     {
         base.Initialize();

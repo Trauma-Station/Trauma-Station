@@ -146,8 +146,8 @@ namespace Content.Client.Cargo.UI
                         Product = prototype,
                         ProductName = { Text = prototype.Name },
                         MainButton = { ToolTip = prototype.Description },
-                        PointCost = { Text = Loc.GetString("cargo-console-menu-points-amount", ("amount", ModifyCost(prototype.Cost).ToString())) },
-                        Icon = { Texture = _spriteSystem.Frame0(prototype.Icon) },
+                        PointCost = { Text = Loc.GetString("cargo-console-menu-points-amount", ("amount", ModifyCost(prototype.Cost).ToString())) }, // Trauma - use ModifyCost
+                        Icon = { Texture = _spriteSystem.Frame0(prototype.Icon) }
                     };
 
                     button.MainButton.OnPressed += args => OnItemSelected?.Invoke(button);

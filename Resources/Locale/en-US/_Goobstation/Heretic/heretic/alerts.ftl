@@ -21,3 +21,6 @@ alerts-marshal-cooldown-desc = You have recently entered wounded soldier state. 
 
 alerts-ether-name = Eldritch Slumber
 alerts-ether-desc = You feel an indescribable warmth keeping you safe...
+
+alerts-influence-xray-name = Eldritch Sight
+alerts-influence-xray-desc = You get a glimpse of something new...

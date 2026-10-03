@@ -1,8 +1,13 @@
+// <Trauma>
+using Robust.Shared.Collections;
+using Robust.Shared.Physics.Components;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Construction;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Destructible;
 using Content.Shared.FixedPoint;
 using Content.Shared.Gibbing;
@@ -23,6 +28,9 @@ namespace Content.Shared.Tools.Systems;
 
 public sealed partial class ToolRefinableSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private EntityQuery<PhysicsComponent> _physicsQuery = default!;
+    // </Trauma>
     [Dependency] private SharedToolSystem _toolSystem = default!;
     [Dependency] private GibbingSystem _gib = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -38,7 +46,7 @@ public sealed partial class ToolRefinableSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<ToolRefinableComponent, GetVerbsEvent<InteractionVerb>>(AddVerb);
-        SubscribeLocalEvent<ToolRefinableComponent, InteractUsingEvent>(OnInteractUsing);
+        SubscribeLocalEvent<ToolRefinableComponent, InteractUsingEvent>(OnInteractUsing, after: [typeof(ItemSlotsSystem)]);
         SubscribeLocalEvent<ToolRefinableComponent, ToolRefineDoAfterEvent>(OnDoAfter);
     }
 
@@ -164,7 +172,7 @@ public sealed partial class ToolRefinableSystem : EntitySystem
     private void SpawnRefinement(List<EntitySpawnEntry> spawnList, EntityUid source, IRobustRandom rng)
     {
         var spawns = EntitySpawnCollection.GetSpawns(spawnList, rng);
-        var spawned = new List<EntityUid>(spawns.Count);
+        var spawned = new ValueList<EntityUid>(spawns.Count); // Trauma - use ValueList
 
         if (_container.TryGetContainingContainer(source, out var container))
             _container.Remove((source, null, null), container);
@@ -174,10 +182,10 @@ public sealed partial class ToolRefinableSystem : EntitySystem
             var refineResultUid = PredictedSpawnNextToOrDrop(protoId, source);
             spawned.Add(refineResultUid);
 
-            if (container == null || !_container.Insert(refineResultUid, container))
+            if (_physicsQuery.TryComp(refineResultUid, out var physics) && (container == null || !_container.Insert(refineResultUid, container))) // Trauma - check physics first
             {
                 var randVect = rng.NextVector2(2.0f, 2.5f);
-                _physics.SetLinearVelocity(refineResultUid, randVect);
+                _physics.SetLinearVelocity(refineResultUid, randVect, body: physics); // Trauma - pass physics from above
             }
         }
 

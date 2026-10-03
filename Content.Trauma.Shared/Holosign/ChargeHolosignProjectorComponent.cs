@@ -1,13 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Containers;
-
 namespace Content.Trauma.Shared.Holosign;
 
 /// <summary>
 /// A holosign projector that uses <c>LimitedCharges</c> instead of a power cell slot.
 /// If there is already a sign on the clicked tile it reclaims it for a charge instead of stacking it.
-/// Currently there is no spawning prediction so signs are spawned once in a container and moved out to allow prediction.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState, Access(typeof(ChargeHolosignSystem))]
 public sealed partial class ChargeHolosignProjectorComponent : Component
@@ -22,22 +19,13 @@ public sealed partial class ChargeHolosignProjectorComponent : Component
     /// Component on <see cref="SignProto"/> to check for duplicates.
     /// </summary>
     [DataField(required: true)]
-    public string SignComponentName;
+    public CompName SignComponentName;
 
     public Type SignComponent = default!;
 
     /// <summary>
-    /// Container to store sign entities in before they are "spawned" on use.
+    /// Active holosigns we "own".
     /// </summary>
-    [DataField]
-    public string ContainerId = "signs";
-
-    /// <summary>
-    /// Holosigns we "own".
-    /// </summary>
-    [ViewVariables, AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public List<EntityUid> Signs = new();
-
-    [ViewVariables]
-    public Container Container = default!;
 }

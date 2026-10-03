@@ -1,15 +1,3 @@
-# SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Galactic Chimp <63882831+GalacticChimp@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2021 cyclowns <cyclowns@protonmail.ch>
-# SPDX-FileCopyrightText: 2021 mirrorcult <notzombiedude@gmail.com>
-# SPDX-FileCopyrightText: 2022 0x6273 <0x40@keemail.me>
-# SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Aiden <aiden@djkraz.com>
-#
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
 ### EmitterComponent
 
 # Shows when attempting to turn the emitter on or off without proper access
@@ -27,6 +15,6 @@ emitter-component-current-type = The current selected type is: [color=yellow]{$t
 emitter-component-type-set = Type set to: {$type}
 
 emitter-destroyed-broadcast = A powered emitter {$location} has been destroyed.
-emitter-deconstructed-broadcast = A powered emitter {$location} has been deconstructed.
 emitter-unlocked-broadcast = A powered emitter {$location} has been unlocked.
 emitter-unpowered-broadcast = A powered emitter {$location} has lost power.
+emitter-turn-off-broadcast = A powered emitter {$location} was turned off.

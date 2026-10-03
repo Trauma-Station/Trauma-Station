@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Weapons.Melee.Events;
 
 namespace Content.Trauma.Shared.Weapons.UseDelay;
@@ -10,13 +11,7 @@ public sealed partial class UseDelayBlockMeleeSystem : EntitySystem
 {
     [Dependency] private UseDelaySystem _useDelay = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<UseDelayBlockMeleeComponent, AttemptMeleeEvent>(OnMeleeAttempt);
-    }
-
+    [SubscribeLocalEvent]
     private void OnMeleeAttempt(Entity<UseDelayBlockMeleeComponent> ent, ref AttemptMeleeEvent args)
     {
         if (!TryComp(ent, out UseDelayComponent? useDelay))

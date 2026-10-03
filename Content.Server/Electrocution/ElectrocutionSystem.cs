@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Common.Effects;
+using Content.Trauma.Common.Effects;
 // </Trauma>
 using Content.Server.Administration.Logs;
 using Content.Server.Doors.Systems;
@@ -42,7 +42,7 @@ namespace Content.Server.Electrocution;
 public sealed partial class ElectrocutionSystem : SharedElectrocutionSystem
 {
     // <Trauma>
-    [Dependency] private SparksSystem _sparks = default!;
+    [Dependency] private CommonSparksSystem _sparks = default!;
     // </Trauma>
     [Dependency] private IAdminLogManager _adminLogger = default!;
     [Dependency] private IRobustRandom _random = default!;
@@ -164,7 +164,7 @@ public sealed partial class ElectrocutionSystem : SharedElectrocutionSystem
 
     private void OnElectrifiedStartCollide(EntityUid uid, ElectrifiedComponent electrified, ref StartCollideEvent args)
     {
-        if (!electrified.OnBump)
+        if (!electrified.OnBump || !args.OtherFixture.Hard) // Trauma - ignore non-hard fixtures
             return;
         TryDoElectrifiedAct(uid, args.OtherEntity, 1, electrified);
     }
@@ -449,7 +449,7 @@ public sealed partial class ElectrocutionSystem : SharedElectrocutionSystem
 
 
         // TODO: Sparks here.
-        _sparks.DoSparks(Transform(uid).Coordinates); // goob edit - DONE! I HATE YOU AVIU
+        _sparks.DoSparks(uid); // Trauma
 
         if (shockDamage is { } dmg)
         {
