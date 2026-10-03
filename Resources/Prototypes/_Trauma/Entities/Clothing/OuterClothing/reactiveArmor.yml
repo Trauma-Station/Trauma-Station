@@ -36,13 +36,13 @@
     - !type:Sparks
     - !type:RandomTeleport
       radius:
-        min: 6.0
+        min: 5.0
         max: 10.0
     - !type:PlaySoundEffect
         sound: &arrival_sound
           path: /Audio/Effects/teleport_arrival.ogg
     - !type:Sparks
-    activationDelay: 10
+    activationDelay: 25 # You get it roundstart so it should be weaker
   - type: Tag
     tags:
     - WhitelistChameleon
