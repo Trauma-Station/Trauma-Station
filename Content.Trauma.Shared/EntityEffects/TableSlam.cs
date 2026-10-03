@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.EntityEffects;
-using Content.Shared.Coordinates;
-using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Climbing.Components;
+using Content.Shared.Coordinates;
+using Content.Shared.EntityEffects;
+using Content.Shared.Movement.Pulling.Components;
 using Content.Goobstation.Shared.TableSlam;
-using Robust.Shared.GameObjects;
 
 namespace Content.Trauma.Shared.EntityEffects.Effects;
 
@@ -20,14 +19,19 @@ public sealed partial class TableSlam : EntityEffectBase<TableSlam>
 
 public sealed partial class TableSlamEffectSystem : EntityEffectSystem<PullableComponent, TableSlam>
 {
-    [Dependency] private TableSlamSystem _slam = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private TableSlamSystem _slam = default!;
+
+    private readonly HashSet<Entity<BonkableComponent>> _tablesNearby = new();
 
     protected override void Effect(Entity<PullableComponent> ent, ref EntityEffectEvent<TableSlam> args)
     {
         var entPos = _transform.GetMapCoordinates(ent.Owner);
-        foreach (var (uid, comp) in _lookup.GetEntitiesInRange<BonkableComponent>(entPos, args.Effect.SeachRange)){
+
+        _tablesNearby.Clear();
+        _lookup.GetEntitiesInRange<BonkableComponent>(entPos, args.Effect.SeachRange, _tablesNearby);
+        foreach (var (uid, comp) in _tablesNearby){
             _slam.TableSlam(ent, uid);
             break;
         }

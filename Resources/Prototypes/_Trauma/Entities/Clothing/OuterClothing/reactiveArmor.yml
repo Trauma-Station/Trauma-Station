@@ -183,21 +183,21 @@
   components:
   - type: ReactiveArmor
     effects:
+    - !type:Sparks
     - !type:PlaySoundEffect
       sound: &ice_brick_sound
         path: /Audio/_Goobstation/Wraith/flameswoosh.ogg
-    - !type:Sparks
     - !type:RelayNearby
       compName: Body
       range: 6
-      effect: !type:IceBrick
-        breakFreeDelay: 5
+      effect: !type:NestedEffect
+        proto: cryogenicArmor
     empEffects:
+    - !type:Sparks
     - !type:PlaySoundEffect
       sound: *ice_brick_sound
-    - !type:Sparks
-    - !type:IceBrick
-      breakFreeDelay: 5
+    - !type:NestedEffect
+      proto: cryogenicArmor
     empMessage: reactive-armor-emp-cryogenic
   - type: Construction
     graph: ArmorReactive

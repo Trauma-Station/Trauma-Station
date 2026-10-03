@@ -32,7 +32,7 @@ public sealed partial class ReactiveArmorComponent : Component
 
 
     [DataField]
-    public string EmpMessage = Loc.GetString("reactive-armor-emp-default");
+    public LocId EmpMessage = "reactive-armor-emp-default";
 
 
     [DataField]

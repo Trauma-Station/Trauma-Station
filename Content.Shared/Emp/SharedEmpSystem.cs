@@ -1,4 +1,3 @@
-using Content.Shared.Inventory; // Trauma
 using Content.Shared.Examine;
 using Content.Shared.Rejuvenate;
 using Robust.Shared.Audio;
@@ -194,13 +193,8 @@ public record struct EmpAttemptEvent(bool Cancelled);
 /// <param name="Duration">The duration the entity will be disabled.</param>
 /// <param name="User">The player that caused the EMP. For prediction purposes.</param>
 
-// <Trauma> - IInventoryRelayedEvent
 [ByRefEvent]
-public record struct EmpPulseEvent(float EnergyConsumption, bool Affected, bool Disabled, TimeSpan Duration, EntityUid? User) : IInventoryRelayEvent
-{
-    SlotFlags IInventoryRelayEvent.TargetSlots => SlotFlags.WITHOUT_POCKET;
-}
-// </Trauma>
+public record struct EmpPulseEvent(float EnergyConsumption, bool Affected, bool Disabled, TimeSpan Duration, EntityUid? User);
 
 /// <summary>
 /// Raised on an entity after <see cref="EmpDisabledComponent"/> is removed.

@@ -62,7 +62,7 @@
     effectProto: StatusEffectBlurryVision
     time: 3
   - !type:ModifyParalysis
-    time: 2
+    time: 3.5
 
 - type: entityEffect
   id: incendiaryArmor
@@ -70,3 +70,11 @@
   - !type:Flammable
     multiplier: 3
   - !type:Ignite
+
+- type: entityEffect
+  id: cryogenicArmor
+  effects:
+  - !type:AddComponents
+    components:
+    - type: IceCube
+      breakFreeDelay: 5
