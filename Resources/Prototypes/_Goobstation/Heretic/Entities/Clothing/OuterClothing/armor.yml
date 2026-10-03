@@ -214,8 +214,6 @@
       head: ClothingHeadHatHoodHereticVoid
   - type: FireProtection
     reduction: 0.5
-  - type: PressureProtection
-    lowPressureMultiplier: 1000
   - type: HollowWeave
   - type: TemperatureProtection
     coefficient: 0.01
@@ -393,8 +391,6 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticCosmos
-  - type: PressureProtection
-    lowPressureMultiplier: 1000
   - type: MovementIgnoreGravityClothing
   - type: TemperatureProtection
     coefficient: 0.01
