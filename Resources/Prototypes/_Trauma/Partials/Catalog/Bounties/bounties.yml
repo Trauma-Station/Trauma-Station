@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: cargoBounty
+  id: BountyArtifact
+  reward: 4000
+
+- type: cargoBounty
+  id: BountyBread
+  reward: 3000
+
+- type: cargoBounty
+  id: BountyCrayon
+  reward: 3000
+
+- type: cargoBounty
+  id: BountyFlower
+  reward: 3000
+
+- type: cargoBounty
+  id: BountyLung
+  reward: 3000
+
+- type: cargoBounty
+  id: BountyMouse
+  reward: 4000
+
+- type: cargoBounty
+  id: BountyPercussion
+  reward: 5000
+
+- type: cargoBounty
+  id: BountyWarmCloth
+  reward: 3000
+
+- type: cargoBounty
+  id: BountyMedkitBox
+  reward: 3000
+
+- type: cargoBounty
+  id: BountyCardboardBox
+  reward: 3000
+
+- type: cargoBounty
+  id: BountyWine
+  reward: 3000
