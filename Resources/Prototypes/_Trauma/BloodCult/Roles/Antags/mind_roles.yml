@@ -9,9 +9,6 @@
     roleType: TeamAntagonist
     exclusiveAntag: true
   - type: BloodCultistRole
-  - type: RoleActions
-    actions:
-    - ActionBloodCultSpells
   - type: RoleEffects
     added:
     - !type:AddFaction

@@ -90,14 +90,6 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
             Dirty(ent);
     }
 
-    private int GetLimit(EntityUid user)
-    {
-        var limit = 1;
-        if (TryComp<BloodCultEmpoweredComponent>(user, out var empowered))
-            limit += empowered.ExtraSpells;
-        return limit;
-    }
-
     [SubscribeLocalEvent]
     private void OnSpellSelected(Entity<BloodCultSpellsComponent> ent, ref CultSpellSelectedMessage args)
     {
@@ -148,7 +140,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
 
         var user = args.User;
         var count = ent.Comp.ActiveSpells.Count;
-        if (count >= GetLimit(args.User))
+        if (count >= ent.Comp.SpellsLimit)
         {
             if (count != 1)
             {

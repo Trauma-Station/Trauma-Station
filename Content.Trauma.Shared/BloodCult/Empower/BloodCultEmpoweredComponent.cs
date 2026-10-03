@@ -24,12 +24,6 @@ public sealed partial class BloodCultEmpoweredComponent : Component
     public TimeSpan RuneTimeDiscount = TimeSpan.FromSeconds(3);
 
     /// <summary>
-    ///     Increases the amount of spells cultists can create at once.
-    /// </summary>
-    [DataField]
-    public int ExtraSpells = 3;
-
-    /// <summary>
     /// How long empowering lasts.
     /// </summary>
     [DataField]

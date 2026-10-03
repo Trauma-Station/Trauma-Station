@@ -114,3 +114,24 @@
         doAfter: 2
   - node: wall
     entity: WallCult
+
+- type: constructionGraph
+  id: CultDagger
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: dagger
+      conditions:
+      - !type:MinSolution
+        solution: drink
+        reagent:
+          ReagentId: Blood
+        quantity: 30
+        name: construction-graph-tag-blood-30
+      steps:
+      - tag: Knife
+        amount: 1
+        name: construction-graph-tag-knife
+  - node: dagger
+    entity: RitualDagger

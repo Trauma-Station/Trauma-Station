@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Alert;
-using Content.Trauma.Shared.BloodCult.Spells;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using Content.Trauma.Shared.BloodCult.Spells;
+using Content.Trauma.Client.BloodCult.UI;
 
 namespace Content.Trauma.Shared.BloodCult.Empower;
 
@@ -90,5 +91,33 @@ public sealed partial class BloodCultEmpoweredSystem : EntitySystem
         }
 
         return false;
+    }
+
+    private void OnSelect(Entity<BloodCultEmpoweredComponent> ent, ref CultSpellsSelectMessage args)
+    {
+        // blood cult it
+
+        // var index = args.Index;
+        // if (index < 0 || index >= ent.Comp.Kits.Count)
+        //     return;
+
+        // var user = args.Actor;
+        // var kit = ProtoMan.Index(ent.Comp.Kits[index]);
+        // var name = Loc.GetString(kit.Name);
+        // _popup.PopupEntity(Loc.GetString("mining-voucher-selected", ("kit", name)), user, user);
+
+        // EntityUid? voucher = null;
+        // if (_hands.EnumerateHeld(user) is { } items)
+        // {
+        //     foreach (var item in items)
+        //     {
+        //         if (TryComp<MiningVoucherComponent>(item, out var voucherComp))
+        //         {
+        //             voucher = item;
+        //             Redeem(ent, (voucher.Value, voucherComp), index, args.Actor);
+        //             break;
+        //         }
+        //     }
+        // }
     }
 }

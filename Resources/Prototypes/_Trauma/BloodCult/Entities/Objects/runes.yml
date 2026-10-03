@@ -91,6 +91,12 @@
   - type: CultRuneEmpower
   - type: BloodCultExamine
     text: "Allows cultists to prepare greater amounts of blood magic at far less of a cost."
+  - type: ActivatableUI
+    key: enum.CultSpellsUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.CultSpellsUiKey.Key:
+        type: MiningVoucherBoundUserInterface
 
 - type: entity
   parent: BaseCultRune

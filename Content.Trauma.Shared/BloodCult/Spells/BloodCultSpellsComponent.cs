@@ -15,6 +15,9 @@ public sealed partial class BloodCultSpellsComponent : Component
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> ActiveSpells = new();
 
+    [DataField]
+    public int SpellsLimit = 3;
+
     /// <summary>
     /// Actions that you can create.
     /// </summary>

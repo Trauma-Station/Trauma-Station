@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: RitualDagger
+  id: RitualDagger #ToDo: make proper partial
   components:
   - type: CultItem
   - type: RuneDrawer
@@ -19,6 +19,16 @@
   - type: MeleeWeapon
     soundHit: &sound
       path: /Audio/Weapons/bladeslice.ogg
+    damage:
+      types:
+        Slash: 15
+      armorPenetration: 0.25
+  - type: Parry # You still need skill to parry with it
+  - type: Tool
+    qualities:
+      - Anchoring
+    useSound:
+      path: /Audio/Items/ratchet.ogg
 
 - type: entity
   id: EldritchBlade
