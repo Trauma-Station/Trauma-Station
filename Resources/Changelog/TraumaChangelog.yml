@@ -15445,3 +15445,10 @@ Entries:
   id: 1681
   time: '2026-10-03T22:43:03.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4854
+- author: Endothermix
+  changes:
+  - type: Remove
+    message: Removed disabler from sec lockers.
+  id: 1682
+  time: '2026-10-04T20:00:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4882
