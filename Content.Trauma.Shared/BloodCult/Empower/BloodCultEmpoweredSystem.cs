@@ -6,7 +6,6 @@ using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using Content.Trauma.Shared.BloodCult.Spells;
-using Content.Trauma.Client.BloodCult.UI;
 
 namespace Content.Trauma.Shared.BloodCult.Empower;
 
@@ -93,9 +92,10 @@ public sealed partial class BloodCultEmpoweredSystem : EntitySystem
         return false;
     }
 
-    private void OnSelect(Entity<BloodCultEmpoweredComponent> ent, ref CultSpellsSelectMessage args)
-    {
-        // blood cult it
+    // blood cult it
+    // private void OnSelect(Entity<BloodCultEmpoweredComponent> ent, ref CultSpellsSelectMessage args)
+    // {
+    //
 
         // var index = args.Index;
         // if (index < 0 || index >= ent.Comp.Kits.Count)
@@ -119,5 +119,5 @@ public sealed partial class BloodCultEmpoweredSystem : EntitySystem
         //         }
         //     }
         // }
-    }
+    // }
 }

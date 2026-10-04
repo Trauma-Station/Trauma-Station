@@ -28,7 +28,7 @@ public enum RuneDrawerBuiKey : byte
 }
 
 [Serializable, NetSerializable]
-public sealed class RuneDrawerSelectedMessage(ProtoId<BloodRunePrototype> rune) : BoundUserInterfaceMessage // use it as reference
+public sealed class RuneDrawerSelectedMessage(ProtoId<BloodRunePrototype> rune) : BoundUserInterfaceMessage
 {
     public readonly ProtoId<BloodRunePrototype> Rune = rune;
 }

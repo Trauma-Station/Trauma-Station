@@ -19,7 +19,7 @@ public sealed partial class BloodCultSpellsComponent : Component
     public int SpellsLimit = 3;
 
     /// <summary>
-    /// Actions that you can create.
+    /// Spells that you can get with empower rune.
     /// </summary>
     [DataField]
     public List<EntProtoId> AvailableActions = new()

@@ -112,6 +112,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
             _popup.PopupEntity("You have no blood to channel the spell through!", user, user, PopupType.LargeCaution);
             return;
         }
+        // ToDo: disregard constructs
 
         var time = ent.Comp.SpellCreationTime;
         if (HasComp<BloodCultEmpoweredComponent>(user))
