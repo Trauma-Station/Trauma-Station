@@ -534,6 +534,7 @@
       - CarvingKnife
       - HereticMagicItem
   - type: HereticClothing
+  - type: PressureProtection
   - type: VoidCloak
   - type: StripBlockBypass
   - type: SurgeryIgnoreClothing
