@@ -4,6 +4,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.GameTicking.Rules;
 using Content.Shared.Station.Components;
+using Content.Shared.Station.Systems;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
@@ -14,16 +15,17 @@ public sealed partial class RandomEffectsRuleSystem : GameRuleSystem<RandomEffec
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private StationSystem _station = default!;
 
     protected override void Added(Entity<RandomEffectsRuleComponent, GameRuleComponent> ent, ref GameRuleAddedEvent args)
     {
-        if (GetFirstStation() is not {} station)
+        if (!_station.TryGetRandomStation(out var station))
         {
             GameTicker.EndGameRule((ent, ent.Comp2));
             return;
         }
 
-        ent.Comp1.Station = station;
+        ent.Comp1.Station = station.Value;
     }
 
     protected override void Started(Entity<RandomEffectsRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
@@ -42,17 +44,6 @@ public sealed partial class RandomEffectsRuleSystem : GameRuleSystem<RandomEffec
 
         SetCooldown(comp);
         _effects.ApplyEffects(comp.Station, comp.Effects, predicted: false);
-    }
-
-    private EntityUid? GetFirstStation()
-    {
-        var query = EntityQueryEnumerator<StationDataComponent>();
-        while (query.MoveNext(out var uid, out _))
-        {
-            return uid;
-        }
-
-        return null;
     }
 
     private void SetCooldown(RandomEffectsRuleComponent comp)

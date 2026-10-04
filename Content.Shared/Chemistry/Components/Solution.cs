@@ -1,3 +1,6 @@
+// <Trauma>
+using Robust.Shared.Collections;
+// </Trauma>
 using System.Collections;
 using System.Linq;
 using Content.Shared.Chemistry.Reagent;
@@ -525,7 +528,7 @@ namespace Content.Shared.Chemistry.Components
             if (toRemove.Quantity <= FixedPoint2.Zero)
                 return FixedPoint2.Zero;
 
-            List<int> reagentIndices = new List<int>();
+            ValueList<int> reagentIndices = new(); // Trauma - use ValueList
             int totalRemoveVolume = 0;
 
             for (var i = 0; i < Contents.Count; i++)
@@ -625,7 +628,7 @@ namespace Content.Shared.Chemistry.Components
         public Solution SplitSolutionWithout(FixedPoint2 toTake, params string[] excludedPrototypes)
         {
             // First remove the blacklisted prototypes
-            List<ReagentQuantity> excluded = new();
+            ValueList<ReagentQuantity> excluded = new(); // Trauma - use ValueList
             foreach (var id in excludedPrototypes)
             {
                 foreach (var tuple in Contents)
@@ -657,7 +660,7 @@ namespace Content.Shared.Chemistry.Components
         public Solution SplitSolutionWithout(FixedPoint2 toTake, params ProtoId<ReagentPrototype>[] excludedPrototypes)
         {
             // First remove the blacklisted prototypes
-            List<ReagentQuantity> excluded = new();
+            ValueList<ReagentQuantity> excluded = new(); // Trauma - use ValueList
             foreach (var id in excludedPrototypes)
             {
                 foreach (var tuple in Contents)
@@ -689,7 +692,7 @@ namespace Content.Shared.Chemistry.Components
         public Solution SplitSolutionWithOnly(FixedPoint2 toTake, params ProtoId<ReagentPrototype>[] includedPrototypes)
         {
             // First remove the non-included prototypes
-            List<ReagentQuantity> excluded = new();
+            ValueList<ReagentQuantity> excluded = new(); // Trauma - use ValueList
             for (var i = Contents.Count - 1; i >= 0; i--)
             {
                 if (includedPrototypes.Contains(Contents[i].Reagent.Prototype))
@@ -793,7 +796,7 @@ namespace Content.Shared.Chemistry.Components
             if (toTakePer <= FixedPoint2.Zero)
                 return splitSolution;
             var reagentsCount = Contents.Count;
-            var reagentsToRemove = new List<ReagentQuantity>();
+            var reagentsToRemove = new ValueList<ReagentQuantity>(); // Trauma - use ValueList
             for (var i = 0; i < reagentsCount; i++)
             {
                 var currentReagent = Contents[i];

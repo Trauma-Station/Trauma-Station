@@ -25,13 +25,13 @@ namespace Content.IntegrationTests.Tests._Trauma;
 [Category("GameRuleTests")]
 public sealed class RevsTest : InteractionTest
 {
-    public static readonly EntProtoId Urist = "MobHuman";
-    public static readonly EntProtoId Mouse = "MobMouse";
-    public static readonly EntProtoId Propaganda = "RevPropaganda";
-    public static readonly EntProtoId MindShieldImplant = "MindShieldImplant";
-    public static readonly EntProtoId MindShieldImplanter = "MindShieldImplanter";
-    public static readonly EntProtoId DefaultRevsRule = "Revolutionary";
-    public static readonly ProtoId<RadioChannelPrototype> HeadRevRadio = "HeadRevolutionary";
+    private static readonly EntProtoId Urist = "MobHuman";
+    private static readonly EntProtoId Mouse = "MobMouse";
+    private static readonly EntProtoId Propaganda = "RevPropaganda";
+    private static readonly EntProtoId MindShieldImplant = "MindShieldImplant";
+    private static readonly EntProtoId MindShieldImplanter = "MindShieldImplanter";
+    private static readonly EntProtoId DefaultRevsRule = "Revolutionary";
+    private static readonly ProtoId<RadioChannelPrototype> HeadRevRadio = "HeadRevolutionary";
 
     protected override string PlayerPrototype => Urist; // needs to have a tongue to speak
 
@@ -40,7 +40,7 @@ public sealed class RevsTest : InteractionTest
     [SidedDependency(Side.Server)] private EntityWhitelistSystem _whitelist = default!;
     [SidedDependency(Side.Server)] private RevPropagandaSystem _rev = default!;
     [SidedDependency(Side.Server)] private SharedMindSystem _mind = default!;
-    [SidedDependency(Side.Server)] private SharedRoleSystem _roles = default!;
+    [SidedDependency(Side.Server)] private SharedRoleSystem _role = default!;
     [SidedDependency(Side.Server)] private SharedSubdermalImplantSystem _implant = default!;
 
     /// <summary>
@@ -147,7 +147,7 @@ public sealed class RevsTest : InteractionTest
             // conversion count must've gone up too
             var mind = SComp<MindContainerComponent>(SPlayer).Mind;
             Assert.That(mind != null, "Head rev must have a mind");
-            Assert.That(_roles.MindHasRole<RevolutionaryRoleComponent>(mind!.Value, out var role), "Head rev must have the role");
+            Assert.That(_role.MindHasRole<RevolutionaryRoleComponent>(mind!.Value, out var role), "Head rev must have the role");
             Assert.That(role.Value.Comp2.ConvertedCount > 0, "ConvertedCount must go up after a conversion");
         }
     }

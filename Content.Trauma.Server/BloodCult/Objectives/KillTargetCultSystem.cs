@@ -7,6 +7,7 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Objectives.Components;
 using Content.Trauma.Shared.BloodCult;
+using Content.Trauma.Shared.BloodCult.Gamerule;
 
 namespace Content.Trauma.Server.BloodCult.Objectives;
 
@@ -18,14 +19,29 @@ public sealed partial class KillTargetCultSystem : EntitySystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedMindSystem _mind = default!;
 
-    // TODO: make event for setting the cult's target incase they cryo or something
     [SubscribeLocalEvent]
     private void OnAfterAssign(Entity<KillTargetCultComponent> ent, ref ObjectiveAfterAssignEvent args)
     {
+        ent.Comp.Rule = _cult.MindGetRule(args.MindId);
+
         if (GetTargetMind(args.Mind) is not {} mind)
             return;
 
         _metaData.SetEntityName(ent, GetTitle(mind, ent.Comp.Title), args.Meta);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnCultTargetAssigned(ref CultTargetAssignedEvent args)
+    {
+        if (_mind.GetMind(args.Target) is not { } target)
+            return;
+
+        var rule = args.Rule;
+        foreach (var obj in EntityQueryEnumerator<KillTargetCultComponent>())
+        {
+            if (obj.Comp.Rule == rule)
+                _metaData.SetEntityName(obj.Owner, GetTitle(target, obj.Comp.Title));
+        }
     }
 
     [SubscribeLocalEvent]

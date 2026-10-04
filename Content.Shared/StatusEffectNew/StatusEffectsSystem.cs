@@ -74,8 +74,10 @@ public sealed partial class StatusEffectsSystem : EntitySystem
 
     private void OnEntityInserted(Entity<StatusEffectContainerComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
+        /* Trauma - W idiot made all visual status effects infinite
         if (_timing.ApplyingState)
             return;
+        */
 
         if (args.Container.ID != StatusEffectContainerComponent.ContainerId)
             return;
@@ -93,8 +95,10 @@ public sealed partial class StatusEffectsSystem : EntitySystem
 
     private void OnEntityRemoved(Entity<StatusEffectContainerComponent> ent, ref EntRemovedFromContainerMessage args)
     {
+        /* Trauma - W idiot made all visual status effects infinite
         if (_timing.ApplyingState)
             return;
+        */
 
         if (args.Container.ID != StatusEffectContainerComponent.ContainerId)
             return;

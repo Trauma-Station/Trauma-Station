@@ -233,9 +233,11 @@ public abstract partial class AntagSelectionSystem
     }
 
     /// <inheritdoc cref="TryAssignNextAvailableAntag(Entity{AntagSelectionComponent},ICommonSession,int)"/>
-    public bool TryAssignNextAvailableAntag(Entity<AntagSelectionComponent> gameRule, ICommonSession session)
+    public bool TryAssignNextAvailableAntag(Entity<AntagSelectionComponent> gameRule, ICommonSession session,
+        bool checkPref = true) // Trauma
     {
-        return TryAssignNextAvailableAntag(gameRule, session, GetActivePlayerCount());
+        return TryAssignNextAvailableAntag(gameRule, session, GetActivePlayerCount(),
+            checkPref: checkPref); // Trauma
     }
 
     /// <summary>
@@ -247,7 +249,8 @@ public abstract partial class AntagSelectionSystem
     /// <returns>Returns true if an open antag slot was found and successfully assigned, false otherwise.</returns>
     public bool TryAssignNextAvailableAntag(Entity<AntagSelectionComponent> gameRule,
         ICommonSession session,
-        int players)
+        int players,
+        bool checkPref = true) // Trauma
     {
         foreach (var selector in gameRule.Comp.Antags)
         {
@@ -259,7 +262,7 @@ public abstract partial class AntagSelectionSystem
                 continue;
 
             // Try and assign this antag, if we fail, then try the next definition!
-            if (TryMakeAntag(gameRule, antag, session))
+            if (TryMakeAntag(gameRule, antag, session, checkPref: checkPref)) // Trauma - pass checkPref
                 return true;
         }
 

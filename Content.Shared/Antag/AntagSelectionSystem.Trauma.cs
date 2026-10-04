@@ -49,7 +49,7 @@ public abstract partial class AntagSelectionSystem
     public void ForceMakeAntag(ICommonSession player, [ForbidLiteral] EntProtoId defaultRule, [ForbidLiteral] CompName comp)
     {
         if (ForceGetGameRuleEnt(defaultRule, comp) is not { } rule ||
-            TryAssignNextAvailableAntag(rule, player) ||
+            TryAssignNextAvailableAntag(rule, player, checkPref: false) ||
             rule.Comp.Antags.LastOrDefault() is not { } antag ||
             !ProtoMan.Resolve(antag.Proto, out var proto))
             return;
@@ -62,7 +62,14 @@ public abstract partial class AntagSelectionSystem
     /// Type-erased ForceGetGameRuleEnt overload
     /// </summary>
     public virtual Entity<AntagSelectionComponent>? ForceGetGameRuleEnt([ForbidLiteral] EntProtoId id, [ForbidLiteral] CompName comp)
+        => null;
+
+    /// <summary>
+    /// Forces a player to become a specific antag of a gamerule, ignoring its limits.
+    /// </summary>
+    public void ForceMakeAntag(ICommonSession player, Entity<AntagSelectionComponent> rule, AntagSpecifierPrototype specifier)
     {
-        return null;
+        PreSelectSession(rule, specifier, player);
+        TryInitializeAntag(rule, specifier, player);
     }
 }

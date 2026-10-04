@@ -22,6 +22,8 @@
       VeinsDamage: 0.0
   - type: ExplosionResistance
     damageCoefficient: 0.65
+  - type: PressureProtection
+    lowPressureMultiplier: 1000
 
 - type: entity
   parent: [ ArmorHeretic, ClothingOuterJacketBase, AllowSuitStorageClothing, BaseMagicalContraband ]
@@ -214,8 +216,6 @@
       head: ClothingHeadHatHoodHereticVoid
   - type: FireProtection
     reduction: 0.5
-  - type: PressureProtection
-    lowPressureMultiplier: 1000
   - type: HollowWeave
   - type: TemperatureProtection
     coefficient: 0.01
@@ -393,8 +393,6 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodHereticCosmos
-  - type: PressureProtection
-    lowPressureMultiplier: 1000
   - type: MovementIgnoreGravityClothing
   - type: TemperatureProtection
     coefficient: 0.01
@@ -536,7 +534,6 @@
       - CarvingKnife
       - HereticMagicItem
   - type: HereticClothing
-  - type: PressureProtection
   - type: VoidCloak
   - type: StripBlockBypass
   - type: SurgeryIgnoreClothing
