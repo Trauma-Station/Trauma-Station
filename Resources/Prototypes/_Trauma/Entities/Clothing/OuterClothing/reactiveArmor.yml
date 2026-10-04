@@ -36,13 +36,13 @@
     - !type:Sparks
     - !type:RandomTeleport
       radius:
-        min: 5.0
+        min: 6.0
         max: 10.0
     - !type:PlaySoundEffect
         sound: &arrival_sound
           path: /Audio/Effects/teleport_arrival.ogg
     - !type:Sparks
-    activationDelay: 25 # You get it roundstart so it should be weaker
+    activationDelay: 45 # Command item so its slightly stronger
   - type: Tag
     tags:
     - WhitelistChameleon
@@ -88,7 +88,7 @@
     - !type:PlaySoundEffect
         sound: *arrival_sound
     - !type:Sparks
-    activationDelay: 10
+    activationDelay: 60
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
