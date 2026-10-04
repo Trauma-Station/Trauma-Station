@@ -159,16 +159,16 @@
       sound: &repulsive_sound
         collection: RadiationPulse
     - !type:ModifyStatusEffect
-        effectProto: WhiteHoleStatusEffect
-        type: Add
-        time: 2.5
+      effectProto: WhiteHoleStatusEffect
+      type: Add
+      time: 2.5
     empEffects:
     - !type:PlaySoundEffect
       sound: *repulsive_sound
     - !type:ModifyStatusEffect
-        effectProto: BlackHoleStatusEffect
-        type: Add
-        time: 2.5
+      effectProto: BlackHoleStatusEffect
+      type: Add
+      time: 2.5
     empMessage: reactive-armor-emp-repulsive
   - type: Construction
     graph: ArmorReactive
@@ -275,21 +275,21 @@
       sound: &healing_sound
         path: /Audio/Items/Medical/jet_injector.ogg
     - !type:AddReagentToBlood
-        reagent: Omnizine
-        amount: 5
+      reagent: Omnizine
+      amount: 5
     - !type:AddReagentToBlood
-        reagent: TranexamicAcid
-        amount: 2.5
+      reagent: TranexamicAcid
+      amount: 2.5
     empEffects:
     - !type:Sparks
     - !type:PlaySoundEffect
       sound: *healing_sound
     - !type:AddReagentToBlood
-        reagent: Lexorin
-        amount: 5
+      reagent: Lexorin
+      amount: 5
     - !type:AddReagentToBlood
-        reagent: Amatoxin
-        amount: 5
+      reagent: Amatoxin
+      amount: 5
     empMessage: reactive-armor-emp-healing
   - type: Construction
     graph: ArmorReactive
@@ -316,7 +316,7 @@
     - !type:PlaySoundEffect
       sound: *hallucinating_sound
     - !type:NestedEffect
-        proto: hallucinatingArmor
+      proto: hallucinatingArmor
     empMessage: reactive-armor-emp-hallucinating
   - type: Construction
     graph: ArmorReactive
@@ -334,16 +334,16 @@
     - !type:PlaySoundEffect
         sound: *deparure_sound
     - !type:ModifyStatusEffect
-        effectProto: ForcedTrueStealthStatusEffect
-        type: Add
-        time: 5
+      effectProto: ForcedTrueStealthStatusEffect
+      type: Add
+      time: 5
     empEffects:
     - !type:PlaySoundEffect
         sound: *deparure_sound
     - !type:ModifyStatusEffect
-        effectProto: PointLight10StatusEffect
-        type: Add
-        time: 5
+      effectProto: PointLight10StatusEffect
+      type: Add
+      time: 5
     - !type:HealthChange
       targetPart: Chest
       damage:

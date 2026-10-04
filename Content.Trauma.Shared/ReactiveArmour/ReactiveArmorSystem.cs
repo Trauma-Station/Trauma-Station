@@ -35,7 +35,7 @@ public sealed partial class ReactiveArmorSystem : EntitySystem
         ent.Comp.LastEmpd = _timing.CurTime;
         Dirty(ent.Owner, ent.Comp);
 
-        EntityUid userUid = Transform(ent.Owner).ParentUid;
+        var userUid = Transform(ent.Owner).ParentUid;
         _popup.PopupEntity(Loc.GetString(ent.Comp.EmpMessage), userUid, userUid);
     }
 
@@ -47,8 +47,8 @@ public sealed partial class ReactiveArmorSystem : EntitySystem
         ent.Comp.LastActivated = _timing.CurTime;
         Dirty(ent.Owner, ent.Comp);
 
-        EntityUid target = user;
-        EntityEffect[] effects = ent.Comp.Effects;
+        var target = user;
+        var effects = ent.Comp.Effects;
 
         if (_timing.CurTime < ent.Comp.LastEmpd + ent.Comp.EmpDuration){
             effects = ent.Comp.EmpEffects;
