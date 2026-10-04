@@ -63,7 +63,7 @@ public sealed partial class CrackedLanternSystem : EntitySystem
         if (!args.IsHit || args.HitEntities.Count == 0 || !_heretic.IsHereticOrGhoul(args.User))
             return;
 
-        var target = args.HitEntities[0];
+        var target = args.HitEntities.First();
         if (args.User == target || !_mob.IsAlive(target))
             return;
 
