@@ -5,5 +5,5 @@
   components:
   - type: Storage
     whitelist:
-    components:
-    - Organ #Makes cleaning less awful
+     components:
+      - Organ #Makes cleaning less awful
