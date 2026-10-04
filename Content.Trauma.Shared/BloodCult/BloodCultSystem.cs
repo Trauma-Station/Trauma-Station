@@ -5,6 +5,7 @@ using Content.Shared.ActionBlocker;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles;
+using Content.Trauma.Shared.BloodCult.Components;
 using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Spells;
 using Content.Trauma.Shared.Roles;
