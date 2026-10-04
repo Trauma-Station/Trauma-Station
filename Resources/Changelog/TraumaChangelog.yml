@@ -15465,3 +15465,10 @@ Entries:
   id: 1683
   time: '2026-10-04T22:05:41.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4864
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed rainbow cannabis being gmod error for half its growth stages.
+  id: 1684
+  time: '2026-10-04T22:23:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4886
