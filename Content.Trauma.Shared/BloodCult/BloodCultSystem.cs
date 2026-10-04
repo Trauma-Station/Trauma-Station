@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.Religion;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind.Components;
@@ -42,6 +43,19 @@ public abstract partial class BloodCultSystem : EntitySystem
     {
         if (_actorQuery.TryComp(ent, out var actor))
             _pvsOverride.RemoveSessionOverride(ent.Comp.Rule, actor.PlayerSession);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnMemberTakeHoly(Entity<BloodCultMemberComponent> ent, ref UserShouldTakeHolyEvent args)
+    {
+        args.WeakToHoly = true;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnPentagramTakeHoly(Entity<PentagramComponent> ent, ref UserShouldTakeHolyEvent args)
+    {
+        args.WeakToHoly = true;
+        args.ShouldTakeHoly = true;
     }
 
     /// <summary>
