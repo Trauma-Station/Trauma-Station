@@ -8,17 +8,17 @@ namespace Content.Trauma.Shared.BloodCult;
 /// <summary>
 /// Component added to blood cultists and the leader.
 /// </summary>
-[RegisterComponent, NetworkedComponent]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class BloodCultistComponent : Component
 {
     public override bool SessionSpecific => true;
 
     [DataField]
-    public float HolyConvertTime = 15f;
-
-    [DataField]
-    public int MaximumAllowedEmpowers = 4;
-
-    [DataField]
     public Color OriginalEyeColor = Color.White;
+
+    [DataField, AutoNetworkedField]
+    public HashSet<EntityUid> ActiveSpells = new();
+
+    [DataField]
+    public int SpellsLimit = 3;
 }

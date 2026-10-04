@@ -21,7 +21,9 @@ using Content.Shared.Speech.Muting;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Trauma.Common.RadialSelector;
+using Content.Trauma.Shared.BloodCult;
 using Content.Trauma.Shared.BloodCult.Empower;
+using Content.Trauma.Shared.BloodCult.Runes.Empower;
 using System.Linq;
 
 namespace Content.Trauma.Shared.BloodCult.Spells;
@@ -50,13 +52,13 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
     #region Event Handlers
 
     [SubscribeLocalEvent]
-    private void OnStartup(Entity<BloodCultSpellsComponent> ent, ref ComponentStartup args)
+    private void OnStartup(Entity<CultRuneEmpowerComponent> ent, ref ComponentStartup args)
     {
         _ui.SetUi(ent.Owner, CultSpellsUiKey.Key, new InterfaceData("CultSpellsBUI", 0f, false));
     }
 
     [SubscribeLocalEvent]
-    private void OnCultSpellAttempt(Entity<CultSpellComponent> ent, ref ActionAttemptEvent args)
+    private void OnCultSpellAttempt(Entity<BloodCultistComponent> ent, ref ActionAttemptEvent args)
     {
         var user = args.User;
         if (args.Cancelled || _blocker.CanSpeak(user))
@@ -67,9 +69,9 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnCultSpellValidate(Entity<CultSpellComponent> ent, ref ActionValidateEvent args)
+    private void OnCultSpellValidate(Entity<BloodCultistComponent> ent, ref ActionValidateEvent args)
     {
-        if (ent.Comp.BypassProtection || args.Invalid || args.Input.EntityTarget is not { } netTarget)
+        if (args.Invalid || args.Input.EntityTarget is not { } netTarget)
             return;
 
         var target = GetEntity(netTarget);
@@ -84,22 +86,25 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnActionRemoved(Entity<BloodCultSpellsComponent> ent, ref ActionRemovedEvent args)
+    private void OnActionRemoved(Entity<BloodCultistComponent> ent, ref ActionRemovedEvent args)
     {
         if (ent.Comp.ActiveSpells.Remove(args.Action))
             Dirty(ent);
     }
 
     [SubscribeLocalEvent]
-    private void OnSpellSelected(Entity<BloodCultSpellsComponent> ent, ref CultSpellSelectedMessage args)
+    private void OnSpellSelected(Entity<CultRuneEmpowerComponent> ent, ref CultSpellSelectedMessage args)
     {
         var user = args.Actor;
         var i = args.Index;
         if (i < 0 || i >= ent.Comp.AvailableActions.Count)
             return;
 
+        if (!TryComp<BloodCultistComponent>(user, out var _bloodCultistComponent))
+            return;
+
         var id = ent.Comp.AvailableActions[i];
-        if (GetActiveSpell(ent, id) is { } action)
+        if (GetActiveSpell(_bloodCultistComponent, id) is { } action)
         {
             _popup.PopupEntity("You forget your current spell", user, user);
             _actions.RemoveAction(user, action);
@@ -122,10 +127,10 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
 
         var createSpellEvent = new CreateSpellDoAfterEvent(id);
         var doAfter = new DoAfterArgs(EntityManager,
-            args.Actor,
+            user,
             time,
             createSpellEvent,
-            eventTarget: ent)
+            eventTarget: user)
         {
             BreakOnMove = true
         };
@@ -134,32 +139,25 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnSpellCreated(Entity<BloodCultSpellsComponent> ent, ref CreateSpellDoAfterEvent args)
+    private void OnSpellCreated(Entity<BloodCultistComponent> ent, ref CreateSpellDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
             return;
 
-        var user = args.User;
-        var count = ent.Comp.ActiveSpells.Count;
-        if (count >= ent.Comp.SpellsLimit)
-        {
-            if (count != 1)
-            {
-                _popup.PopupEntity("You need to remove another spell first!", user, user, PopupType.MediumCaution);
-                return;
-            }
+        var user = ent.Owner;
+        var cultistComp = ent.Comp;
 
-            // just swap the spell if unempowered, where 1 is the limit
-            var old = ent.Comp.ActiveSpells.First();
-            _actions.RemoveAction(user, old);
+        var count = cultistComp.ActiveSpells.Count;
+        if (count >= cultistComp.SpellsLimit)
+        {
+            _popup.PopupEntity("You need to remove another spell first!", user, user, PopupType.MediumCaution);
+            return;
         }
 
-        if (_actions.AddAction(user, args.ActionProtoId, container: ent) is not { } action)
+        if (_actions.AddAction(user, args.ActionProtoId) is not { } action)
             return;
 
-        var damage = FixedPoint2.New(20);
-        if (HasComp<BloodCultEmpoweredComponent>(user))
-            damage /= 5;
+        var damage = FixedPoint2.New(5); // ToDo: remove fucking magic number
 
         var damageSpec = new DamageSpecifier()
         {
@@ -168,12 +166,16 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
                 { Slash, damage }
             },
         };
-        _damage.ChangeDamage(user, damageSpec, targetPart: TargetBodyPart.Arms, canMiss: false);
+
+        // ToDo: actually randomize this shit
+        // TargetBodyPart.LeftArm
+        // TargetBodyPart.RightArm
+        _damage.ChangeDamage(user, damageSpec, targetPart: TargetBodyPart.LeftArm, canMiss: false);
 
         _popup.PopupEntity($"Your wounds glow with power, you have prepared a {Name(action)} invocation!", user, user, PopupType.Medium);
         _actions.SetTemporary(action, true); // can't be temp in the prototype or AddAction will queue del it :D
-        ent.Comp.ActiveSpells.Add(action);
-        Dirty(ent);
+        cultistComp.ActiveSpells.Add(action);
+        Dirty(user, cultistComp);
     }
 
     #endregion
@@ -220,9 +222,9 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
 
     #region Helpers
 
-    private EntityUid? GetActiveSpell(Entity<BloodCultSpellsComponent> ent, string id)
+    private EntityUid? GetActiveSpell(BloodCultistComponent comp, string id)
     {
-        foreach (var action in ent.Comp.ActiveSpells)
+        foreach (var action in comp.ActiveSpells)
         {
             if (id == Prototype(action)?.ID)
                 return action;

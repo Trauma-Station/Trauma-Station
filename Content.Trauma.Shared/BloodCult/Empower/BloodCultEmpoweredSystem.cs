@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Alert;
+using Content.Trauma.Shared.BloodCult.Spells;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
-using Content.Trauma.Shared.BloodCult.Spells;
 
 namespace Content.Trauma.Shared.BloodCult.Empower;
 

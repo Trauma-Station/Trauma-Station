@@ -82,8 +82,8 @@ public abstract partial class BloodCultSystem : EntitySystem
             ? (rule, ruleComp)
             : null;
 
-    public Entity<BloodCultSpellsComponent>? GetSpells(EntityUid uid)
-        => _mcQuery.CompOrNull(uid)?.Mind is {} mind && TryComp<BloodCultSpellsComponent>(mind, out var comp)
+    public Entity<BloodCultistComponent>? GetSpells(EntityUid uid)
+        => _mcQuery.CompOrNull(uid)?.Mind is {} mind && TryComp<BloodCultistComponent>(mind, out var comp)
             ? (mind, comp)
             : null;
 

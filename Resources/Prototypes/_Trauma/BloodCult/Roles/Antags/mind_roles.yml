@@ -47,10 +47,6 @@
   - type: RoleBriefing
     briefing: blood-cult-role-briefing-short
   - type: RoleEffects
-    mindAdded:
-    - !type:AddComponents
-      components:
-      - type: BloodCultSpells
     added:
     - !type:AddComponents
       components:
