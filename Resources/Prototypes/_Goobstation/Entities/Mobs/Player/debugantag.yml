@@ -38,9 +38,6 @@
     - NamesFirst
     - NamesLast
     nameFormat: name-format-standard
-  - type: AutoImplant
-    implants:
-    - AntagImplantChangeling
 
 - type: entity
   parent: MobHuman
@@ -56,9 +53,6 @@
     - NamesFirst
     - NamesLast
     nameFormat: name-format-standard
-  - type: AutoImplant
-    implants:
-    - AntagImplantSpaceNinja
 
 - type: entity
   parent: MobHuman
