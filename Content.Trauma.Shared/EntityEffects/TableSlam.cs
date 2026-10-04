@@ -30,7 +30,7 @@ public sealed partial class TableSlamEffectSystem : EntityEffectSystem<PullableC
         var entPos = _transform.GetMapCoordinates(ent.Owner);
         // all the flags dont wotk
         _tablesNearby.Clear();
-        _lookup.GetEntitiesInRange<BonkableComponent>(entPos, args.Effect.SeachRange, _tablesNearby);
+        _lookup.GetEntitiesInRange(entPos, args.Effect.SeachRange, _tablesNearby);
         foreach (var (uid, comp) in _tablesNearby)
         {
             _slam.TableSlam(ent, uid);

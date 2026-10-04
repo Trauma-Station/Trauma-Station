@@ -1,5 +1,3 @@
-reactive-armor-emp-default = The reactive armor beeps ominously for a moment.
-
 reactive-armor-emp-teleport = The reactive armor's teleportation calculations begin spewing errors!
 reactive-armor-emp-tesla = The tesla capacitors beeps ominously for a moment.
 reactive-armor-emp-incendiary = The reactive incendiary armor's targeting system begins rebooting...
