@@ -15472,3 +15472,10 @@ Entries:
   id: 1684
   time: '2026-10-04T22:23:00.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4886
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Blood cultists are now unholy...
+  id: 1685
+  time: '2026-10-04T23:48:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4889
