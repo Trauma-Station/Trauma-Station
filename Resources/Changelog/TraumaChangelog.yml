@@ -15452,3 +15452,16 @@ Entries:
   id: 1682
   time: '2026-10-04T20:00:39.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4882
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: >-
+      Methylenedioxystraquinone (Strawberry Ice) now metabolises in the
+      bloodstream correctly.
+  - type: Tweak
+    message: >-
+      Methylenedioxystraquinone (Strawberry Ice) now has much more severe
+      withdrawal effects, up to a heart attack. Get the HOS addicted.
+  id: 1683
+  time: '2026-10-04T22:05:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4864
