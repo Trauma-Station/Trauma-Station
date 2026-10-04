@@ -15430,3 +15430,18 @@ Entries:
   id: 1680
   time: '2026-10-03T08:50:53.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4868
+- author: NoElkaTheGod
+  changes:
+  - type: Remove
+    message: Salvagers can no longer buy money for mining points.
+  - type: Add
+    message: Added new cargo bounties.
+  - type: Tweak
+    message: Bounties and mail now give more money.
+  - type: Tweak
+    message: >-
+      Tweaked mail loot pool, it now has less trash and more useful items.
+      Sometimes you can even find contraband, so open those letters!
+  id: 1681
+  time: '2026-10-03T22:43:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4854
