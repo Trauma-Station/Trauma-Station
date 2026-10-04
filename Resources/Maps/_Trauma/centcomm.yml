@@ -4113,7 +4113,7 @@ entities:
     - type: Transform
       parent: 1
       pos: 9.3326025,-13.708471
-- proto: ArmBlade
+- proto: Armblade
   entities:
   - uid: 199
     components:

@@ -4,7 +4,6 @@
   id: Antagonists
   children:
   - BloodCult
-  - Changelings
   - Heretics
   - Blob
   - CosmicCult
@@ -22,3 +21,22 @@
   - ShadowDemon
   - Vampires
   - Spy
+
+- type: guideEntry
+  id: Antagonists
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Antagonists.xml"
+
+- type: guideEntry
+  id: Zombies
+  name: guide-entry-zombies
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Zombies.xml"
+
+- type: guideEntry
+  id: Revolutionaries
+  text: "/ServerInfo/_Trauma/Guidebook/Antagonist/Revolutionaries.xml"
+
+- type: guideEntry
+  id: Wizard
+  text: "/ServerInfo/_Goobstation/Guidebook/Antagonist/Wizard.xml"
+  children:
+  - WizardSpells

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Religion;
+using Content.Medical.Common.Targeting;
 using Content.Shared.Bible.Components;
 using Content.Shared.Chat;
 using Content.Shared.Chemistry.Components;
@@ -16,6 +17,9 @@ using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Station.Components;
+using Content.Shared.Station.Systems;
+using Content.Shared.Timing.Systems;
 using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.BloodCult.Empower;
 using Content.Trauma.Shared.BloodCult.Examine;
@@ -36,7 +40,7 @@ public sealed partial class CultRuneSystem : EntitySystem
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private BloodCultExamineSystem _cultExamine = default!;
-    [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -45,8 +49,11 @@ public sealed partial class CultRuneSystem : EntitySystem
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private StationSystem _station = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private UseDelaySystem _useDelay = default!;
     [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
+    [Dependency] private EntityQuery<StationDataComponent> _stationQuery = default!;
 
     [SubscribeLocalEvent]
     private void OnRuneSelected(Entity<RuneDrawerComponent> ent, ref RuneDrawerSelectedMessage args)
@@ -187,42 +194,12 @@ public sealed partial class CultRuneSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnRuneActivate(Entity<CultRuneComponent> ent, ref ActivateInWorldEvent args)
     {
-        var user = args.User;
-        var runeCoordinates = Transform(ent).Coordinates;
-        var userCoordinates = Transform(user).Coordinates;
-        if (args.Handled ||
-            !_cult.IsCultist(user) ||
-            !userCoordinates.TryDistance(EntityManager, runeCoordinates, out var distance) ||
-            distance > ent.Comp.RuneActivationRange)
+        if (args.Handled)
             return;
 
         args.Handled = true;
-
-        var cultists = _cult.GatherCultists(ent, ent.Comp.RuneActivationRange);
-        if (cultists.Count < ent.Comp.RequiredInvokers)
-        {
-            _popup.PopupEntity(Loc.GetString("cult-rune-not-enough-cultists"), ent, user);
-            return;
-        }
-
-        var ev = new RuneInvokeEvent(user, cultists);
-        RaiseLocalEvent(ent, ref ev);
-        if (ev.Popup is {} msg)
-        {
-            _popup.PopupEntity(msg, user, user);
-        }
-        if (!ev.Handled)
-            return;
-
-        foreach (var cultist in cultists)
-        {
-            DealDamage(cultist, ent.Comp.ActivationDamage);
-            _chat.TrySendInGameICMessage(cultist,
-                ent.Comp.InvokePhrase,
-                ent.Comp.InvokeChatType,
-                false,
-                checkRadioPrefix: false);
-        }
+        if (InvokeRune(ent, args.User) is { } reason)
+            _popup.PopupEntity(reason, ent, args.User, PopupType.SmallCaution);
     }
 
     [SubscribeLocalEvent]
@@ -239,6 +216,52 @@ public sealed partial class CultRuneSystem : EntitySystem
             rule.Comp.RitualAreas.Remove(areaId);
             DirtyField(rule, rule.Comp, nameof(BloodCultRuleComponent.RitualAreas));
         }
+    }
+
+    /// <summary>
+    /// Tries to invoke a rune, returning null if it succeeded, otherwise a failure message.
+    /// </summary>
+    public string? InvokeRune(Entity<CultRuneComponent> ent, EntityUid user)
+    {
+        if (!_cult.IsCultist(user))
+            return "You stare blankly at the blood scribing";
+
+        var userPos = Transform(user).Coordinates;
+        var runePos = Transform(ent).Coordinates;
+        if (!userPos.TryDistance(EntityManager, runePos, out var distance) ||
+            distance > ent.Comp.RuneActivationRange)
+            return "Come closer...";
+
+        if (!_useDelay.TryResetDelay(ent.Owner))
+            return "The rune's magic is on cooldown!";
+
+        var cultists = _cult.GatherCultists(ent, ent.Comp.RuneActivationRange);
+        if (cultists.Count < ent.Comp.RequiredInvokers)
+        {
+            var diff = ent.Comp.RequiredInvokers - cultists.Count;
+            var plural = diff == 1 ? "" : "s";
+            return $"You need {diff} more cultist{plural} to perform the ritual!";
+        }
+
+        var ev = new RuneInvokeEvent(user, cultists);
+        RaiseLocalEvent(ent, ref ev);
+        if (ev.Popup is {} msg)
+            return msg;
+
+        if (!ev.Handled)
+            return "Nar'Sie frowns upon you..?";
+
+        foreach (var cultist in cultists)
+        {
+            DealDamage(cultist, ent.Comp.ActivationDamage);
+            _chat.TrySendInGameICMessage(cultist,
+                ent.Comp.InvokePhrase,
+                ent.Comp.InvokeChatType,
+                false,
+                checkRadioPrefix: false);
+        }
+
+        return null;
     }
 
     private bool CanDrawRune(EntityUid uid, BloodRunePrototype rune)
@@ -265,7 +288,7 @@ public sealed partial class CultRuneSystem : EntitySystem
         }
 
         // can't spam runes ontop of eachother
-        var coords = _transform.GetMapCoordinates(uid);
+        var coords = _transform.GetMapCoordinates((uid, xform));
         var map = coords.MapId;
         var box = Box2.CenteredAround(coords.Position, new(rune.Size));
         if (_lookup.AnyComponentsIntersecting(typeof(CultRuneDrawingComponent), map, box))
@@ -289,6 +312,15 @@ public sealed partial class CultRuneSystem : EntitySystem
                     return false;
                 }
             }
+        }
+
+        // have to make your base on station not lavaland vgroid shittle etc
+        if (_station.GetOwningStation(uid, xform) is not { } station ||
+            !_stationQuery.TryComp(station, out var stationData) ||
+            !stationData.OwnedGrids.Contains(gridUid))
+        {
+            _popup.PopupEntity("You must draw runes on station!", uid, uid);
+            return false;
         }
 
         if (rune.RequireTarget && !rule.Comp.TargetSacrificed)
@@ -346,6 +378,6 @@ public sealed partial class CultRuneSystem : EntitySystem
             newDamage *= empowered.RuneDamageMultiplier;
         }
 
-        _damageable.ChangeDamage(user, newDamage, increaseOnly: true);
+        _damage.ChangeDamage(user, newDamage, increaseOnly: true, targetPart: TargetBodyPart.Arms, canMiss: false);
     }
 }

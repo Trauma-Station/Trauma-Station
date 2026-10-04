@@ -132,6 +132,7 @@
     Blunt: 0.8
     Slash: 0.8
     Piercing: 0.8
+    Ballistic: 0.8
 
 # Blob
 
@@ -150,3 +151,16 @@
     Slash: 2
     Piercing: 2
     Ballistic: 2
+
+# Blood Cult
+
+- type: damageModifierSet
+  id: CultJuggernaut
+  coefficients:
+    Holy: 2
+  flatReductions:
+    # can't be hurt by weak melee attacks
+    Blunt: 10
+    Slash: 10
+    Piercing: 10
+    Heat: 5 # welder ops

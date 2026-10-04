@@ -86,3 +86,14 @@
   id: ChaplainHoodie
   equipment:
     outerClothing: ClothingOuterHoodieChaplain
+
+# Shoes
+- type: loadout
+  id: BlackSandals
+  equipment:
+    shoes: ClothingShoesSandalsBlack
+
+- type: loadout
+  id: BrownSandals
+  equipment:
+    shoes: ClothingShoesSandalsBrown

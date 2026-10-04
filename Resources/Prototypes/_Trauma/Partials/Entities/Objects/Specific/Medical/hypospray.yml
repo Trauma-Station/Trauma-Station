@@ -1,0 +1,145 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: AdminHypo
+  categories: [ DoNotMap ]
+  components:
+  - type: IgnoreHypoport
+
+- type: entity
+  id: ChemicalMedipen
+  components:
+  - type: IgnoreHypoport # medipens have a needle, they aren't actually hyposprays
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 25
+  - type: Tag
+    tags:
+    - Medipen
+
+- type: entity
+  id: EmergencyMedipen
+  description: A rapid and safe way to heal minor damage, stop bleeding, and stabilize patients for personnel without advanced medical knowledge.
+  components:
+  - type: Tag
+    tags:
+    - Medipen
+    - EmergencyMedipen
+  - type: Solution
+    solution:
+      maxVol: 15 # you gotta set the maxVol if you change the amount of chemicals
+      reagents: !Clear
+      - ReagentId: Epinephrine
+        Quantity: 5
+      - ReagentId: Atropine
+        Quantity: 5
+      - ReagentId: TranexamicAcid
+        Quantity: 5
+
+- type: entity
+  id: AntiPoisonMedipen
+  description: A rapid dose of anti-poison. Causes extreme stress when mixed with other medications.
+  components:
+  - type: Solution
+    solution:
+      maxVol: 15 # you gotta set the maxVol if you change the amount of chemicals
+      reagents: !Clear
+      - ReagentId: Monover
+        Quantity: 15
+
+- type: entity
+  id: BruteAutoInjector
+  description: A rapid dose of bicaridine, salicylic acid, tranexamic acid, and tramadol, intended for combat applications. Usage of multiple is highly recommended against.
+  components:
+  - type: Solution
+    solution:
+      reagents: !Clear
+      - ReagentId: Bicaridine
+        Quantity: 5
+      - ReagentId: SalicylicAcid
+        Quantity: 5
+      - ReagentId: Tramadol
+        Quantity: 5
+      - ReagentId: TranexamicAcid
+        Quantity: 5
+
+- type: entity
+  id: BurnAutoInjector
+  description: A rapid dose of oxandrolone, leporazine, and tramadol, intended for combat applications.
+  components:
+  - type: Solution
+    solution:
+      reagents: !Clear
+      - ReagentId: Oxandrolone
+        Quantity: 5
+      - ReagentId: Tramadol
+        Quantity: 5
+      - ReagentId: Leporazine
+        Quantity: 10
+
+- type: entity
+  id: PunctAutoInjector
+  components:
+  - type: Solution
+    solution:
+      maxVol: 17 # you gotta set the maxVol if you change the amount of chemicals
+      reagents: !Clear
+      - ReagentId: Puncturase
+        Quantity: 12
+      - ReagentId: TranexamicAcid
+        Quantity: 5
+
+- type: entity
+  id: PyraAutoInjector
+  description: A rapid dose of pyrazine and oxandrolone, intended for combat applications.
+  components:
+  - type: Solution
+    solution:
+      reagents: !Clear
+      - ReagentId: Pyrazine
+        Quantity: 10
+      - ReagentId: Oxandrolone
+        Quantity: 10
+
+- type: entity
+  id: SpaceMedipen
+  name: environmental stabilization medipen
+  description: Contains a mix of chemicals that will temporarily protect you from low pressure environments, and stabilizes your body temperature.
+  components:
+  - type: Tag
+    tags:
+    - Medipen
+    - SpaceMedipen
+
+- type: entity
+  id: Stimpack
+  components:
+  - type: Solution
+    solution:
+      maxVol: 10 # you gotta set the maxVol if you change the amount of chemicals
+      reagents: !Clear
+      - ReagentId: Stimulants
+        Quantity: 10
+
+- type: entity
+  id: StimpackMini
+  components:
+  - type: Solution
+    solution:
+      maxVol: 5 # you gotta set the maxVol if you change the amount of chemicals
+      reagents: !Clear
+      - ReagentId: Stimulants
+        Quantity: 5
+
+- type: entity
+  id: Hypopen
+  components:
+  - type: RefillableSolution
+    refillTime: 0
+    maxRefill: null
+  - type: Injector
+    # replace shitty delayed draw with regular one
+    activeModeProtoId: HyposprayDynamicMode
+    allowedModes:
+    - !Remove HypopenDynamicMode
+    - HyposprayDynamicMode

@@ -1,0 +1,59 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: BaseWeaponPistol
+  components:
+  - type: WeaponClass
+    class: Pistol
+  - type: EmitSoundOnPickup
+    sound:
+      collection: PistolsPickUp
+  - type: EmitSoundOnDrop
+    sound: &drop_sound
+      collection: PistolsDrop
+  - type: EmitSoundOnLand
+    sound: *drop_sound
+  - type: AltFireMelee
+    attackType: Heavy
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 8 # pistol whip
+    angle: 0
+    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
+    soundHit:
+      collection: MetalThud
+
+- type: entity
+  id: WeaponPistolViper
+  components:
+  - type: Gun
+    fireRate: 4
+
+- type: entity
+  id: WeaponPistolEchis
+  components:
+  - type: Gun
+    fireRate: 4 # was 6
+
+- type: entity
+  id: WeaponPistolCobra
+  description: Integrally suppressed semi-automatic pistol used by the Syndicate, firing caseless subsonic rounds. Favored by any agent who likes to keep things quiet and leave no evidence behind. Feeds from 9.5mm pistol magazines.
+
+- type: entity
+  id: WeaponPistolMk58
+  components:
+  - type: Gun
+    fireRate: 3
+
+- type: entity
+  id: WeaponPistolN1984
+  components:
+  - type: Gun
+    maxAngle: 8 # was 20
+    angleIncrease: 3 # was 8
+    angleDecay: 4 # was 9
+    fireRate: 3 # was 4
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/mateba.ogg

@@ -40,6 +40,7 @@ public partial class MartialArtsSystem
 
         var attemptEv = new ComboAttemptEvent();
         RaiseLocalEvent(ent, ref attemptEv);
+        RaiseLocalEvent(user, ref attemptEv);
         if (attemptEv.Cancelled)
             return;
 

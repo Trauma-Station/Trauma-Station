@@ -203,7 +203,7 @@ public sealed partial class BanWebhookSystem : EntitySystem
 
         // add each antag unless there are too many of them
         if (antags.Count > 5)
-            names.Add($"{antags.Count} antagonist roles");
+            names.Add($"{antags.Count} antagonist");
         else
             names.AddRange(antags);
 

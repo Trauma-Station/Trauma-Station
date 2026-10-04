@@ -15049,3 +15049,333 @@ Entries:
   id: 1636
   time: '2026-09-24T11:44:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4738
+- author: TechnicFighter
+  changes:
+  - type: Remove
+    message: Chaplain can no longer summon demons
+  - type: Tweak
+    message: Changed the name of the chaplain's skillchip.
+  - type: Tweak
+    message: >-
+      Changed the skills of the chaplain's skillchip: MagicLit > 25. Lit > 100.
+      Smoke > 100.
+  id: 1637
+  time: '2026-09-25T10:03:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4748
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Dough is easy to make again, 125mL flour and 83.3333333333mL water.
+  id: 1638
+  time: '2026-09-25T12:50:15.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4751
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed a ton of blood cult bugs.
+  id: 1639
+  time: '2026-09-25T15:48:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4750
+- author: StarMade
+  changes:
+  - type: Fix
+    message: Void Heretic blink fail not having text
+  id: 1640
+  time: '2026-09-25T18:45:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4753
+- author: StarMade
+  changes:
+  - type: Remove
+    message: Cryo Chems no longer burn you to death.
+  id: 1641
+  time: '2026-09-25T20:27:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4758
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Unreadied players count as half a player for gamemodes.
+  id: 1642
+  time: '2026-09-25T21:38:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4756
+- author: StarMade
+  changes:
+  - type: Remove
+    message: hulk cqc
+  id: 1643
+  time: '2026-09-25T21:39:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4757
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added a new machine to the abductor shuttle called the Abductor
+      Biofabricator. It can produce random limbs and organs as well as extra
+      mysterious glands
+  - type: Add
+    message: Added biomass to the abductor shuttle so they can use their biofabricator
+  - type: Tweak
+    message: Increased the surgery speed on the Abductor Operating Table
+  id: 1644
+  time: '2026-09-27T14:10:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4767
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed tiny explosions always breaking floor tiles.
+  id: 1645
+  time: '2026-09-27T14:23:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4770
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Map vote is back and it's better than ever
+  id: 1646
+  time: '2026-09-27T15:48:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3564
+- author: cog
+  changes:
+  - type: Tweak
+    message: Makeshift bone gel now has a unique sprite.
+  id: 1647
+  time: '2026-09-27T15:56:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4775
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added fertilized white eggs to biogenerators
+  - type: Add
+    message: Made clown, cluwne and mime chickens wackier
+  - type: Add
+    message: >-
+      Added a proper way to get mime chickens, You just need to feed clown hen's
+      mimanas now
+  - type: Add
+    message: Added unique effects to the clown and cluwne eggs
+  - type: Add
+    message: Added unique flavor text when eating knight, clown and cluwne eggs
+  - type: Tweak
+    message: Raptor's now only require 5-10 pets in order to tame now
+  - type: Tweak
+    message: Zappy Roosters now have reduced projectile speed, They are now more lethal
+  - type: Fix
+    message: >-
+      Fixed knight's coming from feeding an ixworth chicken steelwheat now it
+      properly correlates to the chart
+  - type: Fix
+    message: Fixed phoenix eggs using onagadori eggs instead of knight eggs
+  id: 1648
+  time: '2026-09-28T06:20:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4780
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed hypopen having a doafter when you use it on containers.
+  id: 1649
+  time: '2026-09-28T06:59:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4781
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed blood cult leader and constructs having 2 prepare spell actions.
+  id: 1650
+  time: '2026-09-28T08:19:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4784
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Blood cult revive rune now heals missing limbs, blood, etc.
+  id: 1651
+  time: '2026-09-28T08:36:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4785
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed cult teleport spell (not rune) not working.
+  - type: Fix
+    message: >-
+      Fixed cult veil shifter not bringing whatever you are pulling like it
+      said.
+  - type: Fix
+    message: Fixed empowered alert saying it made you immune to pressure.
+  id: 1652
+  time: '2026-09-28T11:27:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4789
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed only being able to use shadow shackles once instead of 4 times.
+  - type: Tweak
+    message: Shadow shackles now needs you to stun someone first.
+  - type: Remove
+    message: >-
+      Removed summon combat equipment, it made the cult forge obsolete and was
+      way too strong.
+  - type: Tweak
+    message: Cult bolas can be made in the cult altar.
+  - type: Tweak
+    message: Cult longswords can be made in the daemon forge.
+  id: 1653
+  time: '2026-09-28T11:39:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4790
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Cult longsword is now huge instead of medium.
+  id: 1654
+  time: '2026-09-28T11:53:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4791
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Reverted shitty chat update from hardlight
+  id: 1655
+  time: '2026-09-28T21:23:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4798
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Removed most deadnaming of SpaceLaw.
+  id: 1656
+  time: '2026-09-28T21:24:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4792
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added a new way to get Clown Eggs, Obtained from feeding a white hen
+      bananas and keeping it very happy (60+ Happiness)
+  - type: Tweak
+    message: Fixed clown eggs turning into white chicks when put into an incubator
+  id: 1657
+  time: '2026-09-29T06:40:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4801
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed gemini slop. Please update your star signs.
+  id: 1658
+  time: '2026-09-29T06:51:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4802
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Probably fixed new blood cult converts not seeing cultists icons and vice
+      versa.
+  id: 1659
+  time: '2026-09-29T07:24:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4804
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lavaland gateway not working.
+  id: 1660
+  time: '2026-09-29T09:05:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4806
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Blood rites now works on puddles, has popups and only drains 50u at a time
+      maximum.
+  id: 1661
+  time: '2026-09-29T10:28:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4808
+- author: TechnicFighter
+  changes:
+  - type: Add
+    message: Added the Explosive Cigar Case, you can buy it for 20 TC.
+  - type: Tweak
+    message: >-
+      Tweaked the Bomb Collar, it is now stronger, but pretty weak if not
+      equipped.
+  id: 1662
+  time: '2026-09-29T11:55:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4584
+- author: Clanky Station Consent Cult
+  changes:
+  - type: Fix
+    message: Cult conversion no longer lets you just opt out of being converted...
+  id: 1663
+  time: '2026-09-29T12:02:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4813
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed separated hud' status part being blank.
+  id: 1664
+  time: '2026-09-29T19:27:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4815
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      The blood cult's target now gets rerolled if they can't be sacrificed,
+      e.g. from cryo.
+  id: 1665
+  time: '2026-09-30T13:22:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4820
+- author: SpeltIncorrectyl
+  changes:
+  - type: Add
+    message: >-
+      Ported progressive traitor from ss13. Do side-jobs for extra TC and
+      enshrine your reputation as a living legend.
+  id: 1666
+  time: '2026-09-30T13:35:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/3074
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Traitors now only have 50 TC to accomodate for progtot
+  - type: Tweak
+    message: Traitors final objective now requires 2000 reputation
+  id: 1667
+  time: '2026-09-30T21:29:51.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4823
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed clankers not having any radio keys.
+  id: 1668
+  time: '2026-10-01T16:19:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4839
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed visual effects from being drunk etc lasting forever.
+  id: 1669
+  time: '2026-10-01T16:31:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4840
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: Vaccines are now infinite use. This was a necessary change.
+  id: 1670
+  time: '2026-10-01T17:42:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4829
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Only one sliver can be taken from the supermatter crystal.
+  - type: Tweak
+    message: Taking a sliver dusts the knife you used.
+  id: 1671
+  time: '2026-10-01T17:54:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4841
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed progtot job listings UI breaking if you relogged.
+  id: 1672
+  time: '2026-10-01T22:06:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4846
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed traitors that started with an uplink implant not having access to
+      side jobs.
+  id: 1673
+  time: '2026-10-02T11:08:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4852

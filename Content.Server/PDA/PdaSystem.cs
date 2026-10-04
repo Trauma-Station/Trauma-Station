@@ -38,7 +38,7 @@ namespace Content.Server.PDA
         [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
         [Dependency] private InstrumentSystem _instrument = default!;
         [Dependency] private RingerSystem _ringer = default!;
-        [Dependency] private StationSystem _station = default!;
+        [Dependency] private ServerStationSystem _station = default!;
         [Dependency] private StoreSystem _store = default!;
         [Dependency] private IChatManager _chatManager = default!;
         [Dependency] private UserInterfaceSystem _ui = default!;
@@ -142,13 +142,6 @@ namespace Content.Server.PDA
         private void OnLightToggle(EntityUid uid, PdaComponent pda, LightToggleEvent args)
         {
             pda.FlashlightOn = args.IsOn;
-            UpdatePdaUi(uid, pda);
-        }
-
-        public void SetOwner(EntityUid uid, PdaComponent pda, EntityUid owner, string ownerName)
-        {
-            pda.OwnerName = ownerName;
-            pda.PdaOwner = owner;
             UpdatePdaUi(uid, pda);
         }
 
@@ -325,7 +318,8 @@ namespace Content.Server.PDA
         /// <summary>
         /// Returns the currently unlocked store, if there is one.
         /// </summary>
-        private bool TryGetUnlockedStore(EntityUid uid, [NotNullWhen(true)] out EntityUid? store)
+        // Trauma - made public for job listings
+        public bool TryGetUnlockedStore(EntityUid uid, [NotNullWhen(true)] out EntityUid? store)
         {
             store = null;
             if (!TryComp<RingerUplinkComponent>(uid, out var uplink) || !uplink.Unlocked)

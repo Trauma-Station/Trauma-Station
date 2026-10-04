@@ -7,3 +7,11 @@
     tags:
     - Ruminant
     - Rice
+
+- type: entity
+  id: FoodMimana
+  components:
+  - type: Tag
+    tags:
+    - Fruit
+    - Mimana

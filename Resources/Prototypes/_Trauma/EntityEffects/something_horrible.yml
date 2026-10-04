@@ -64,7 +64,6 @@
     entity: VehicleWheelchair
   # TODO: change this to paraplegic brain trauma if anyone ever makes that
   - !type:AddComponents
-    guidebookText: entity-effect-guidebook-paralyze-legs
     components:
     - type: LegsParalyzed
   - !type:PopupMessage
@@ -93,7 +92,6 @@
   id: MakeFragile
   effects:
   - !type:AddComponents
-    guidebookText: entity-effect-guidebook-make-fragile
     components:
     - type: Fragile
 

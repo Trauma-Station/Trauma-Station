@@ -102,7 +102,7 @@ public sealed partial class BlobTileSystem : EntitySystem
         if (chem.DestructionEffects is not { } effects)
             return;
 
-        _effects.ApplyEffects(ent, effects, predicted: false); // destruction prediction when
+        _effects.TryApplyEffects(ent, effects, predicted: false); // destruction prediction when
     }
 
     [SubscribeLocalEvent]
