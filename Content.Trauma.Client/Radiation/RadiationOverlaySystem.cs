@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Trauma.Common.Radiation;
 using Robust.Client.Player;
 using Robust.Shared.Timing;
@@ -22,7 +24,7 @@ public sealed partial class RadiationOverlaySystem : EntitySystem
         base.Initialize();
 
         _overlay = new();
-        Subs.CVar(_cfg, CCVars.RadiationGridcastUpdateRate, updateRate => 
+        Subs.CVar(_cfg, CCVars.RadiationGridcastUpdateRate, updateRate =>
             _updateRate = TimeSpan.FromSeconds(updateRate + 0.2f), true); // Extra 200ms of delay before the overlay is removed to compensate for network delay changes
     }
 
