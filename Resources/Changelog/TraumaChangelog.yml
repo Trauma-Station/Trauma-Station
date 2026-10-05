@@ -15495,3 +15495,12 @@ Entries:
   id: 1687
   time: '2026-10-05T00:09:35.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4892
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed new blood cult converts not getting halo or red eyes applied.
+  - type: Fix
+    message: Fixed purified soul shards not indicating that in their ghost role text.
+  id: 1688
+  time: '2026-10-05T12:30:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4901
