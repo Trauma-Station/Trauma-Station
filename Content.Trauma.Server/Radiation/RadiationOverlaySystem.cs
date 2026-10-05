@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Radiation.Events;
+using Content.Shared.Radiation.Events;
 using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Radiation;
