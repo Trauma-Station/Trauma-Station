@@ -50,4 +50,4 @@
   - type: AlwaysTakeHoly
   - type: Damageable
   - type: Injurable
-    damageContainerId: Metaphysical
+    damageContainer: Metaphysical
