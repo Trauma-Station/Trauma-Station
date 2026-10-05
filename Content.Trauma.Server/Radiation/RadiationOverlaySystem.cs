@@ -9,7 +9,7 @@ namespace Content.Trauma.Server.Radiation;
 public sealed partial class RadiationOverlaySystem : EntitySystem
 {
     /// <summary>
-    /// Updates the overlay whenever the local player gets irradiated.
+    /// When a player entity is irradiated, send them a network message to update their radiation visuals.
     /// </summary>
     [SubscribeLocalEvent]
     private void OnIrradiated(Entity<ActorComponent> ent, ref OnIrradiatedEvent args)
