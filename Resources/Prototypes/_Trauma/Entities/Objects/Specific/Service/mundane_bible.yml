@@ -1,0 +1,28 @@
+- type: entity
+  id: BibleMundane
+  parent: BaseStorageItem # Non-magical sibling of the space bible
+  name: mundane bible
+  description: New Interstellar Version 776. Non-magical.
+  components:
+  - type: Blessable
+    blessResult:
+      Bible
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Chapel/mundane_bible.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: _Trauma/Objects/Specific/Chapel/mundane_bible.rsi
+  - type: Clothing
+    slots:
+    - Belt
+  - type: Storage
+    grid:
+    - 0,0,0,1
+  - type: UserInterface
+    interfaces:
+      enum.StorageUiKey.Key:
+        type: StorageBoundUserInterface
+  - type: Tag
+    tags:
+    - Book
