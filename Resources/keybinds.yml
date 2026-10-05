@@ -20,6 +20,12 @@ binds:
 - function: TargetingMod
   type: State
   key: Alt
+- function: OpenLanguageMenu
+  type: State
+  key: L
+- function: OpenMartialArtsMenu
+  type: State
+  key: O
 # </Trauma>
 - function: UIClick
   type: State
@@ -215,12 +221,6 @@ binds:
 - function: OpenEmotesMenu
   type: State
   key: Y
-- function: OpenLanguageMenu # Einstein Engines - Language
-  type: State
-  key: L
-- function: OpenMartialArtsMenu # Trauma
-  type: State
-  key: O
 - function: TextCursorSelect
   # TextCursorSelect HAS to be above ExamineEntity
   # So that LineEdit receives it correctly.

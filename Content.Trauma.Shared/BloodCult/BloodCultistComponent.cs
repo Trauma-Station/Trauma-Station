@@ -20,5 +20,5 @@ public sealed partial class BloodCultistComponent : Component
     public int MaximumAllowedEmpowers = 4;
 
     [DataField]
-    public Color OriginalEyeColor = Color.White;
+    public Color? OriginalEyeColor;
 }
