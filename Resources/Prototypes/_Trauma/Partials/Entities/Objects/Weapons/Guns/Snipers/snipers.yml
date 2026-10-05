@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: WeaponSniperHristov
   parent: [BaseWeaponSniperMagazine, BaseGunWieldable, BaseSyndicateContraband] # Trauma - added Magazine
@@ -16,4 +18,3 @@
     pvsIncrease: 0.8
   - type: MeleeWeapon
     wideAnimationRotation: 45 # - Trauma the sprite is diagonal so the animation must be too
-
