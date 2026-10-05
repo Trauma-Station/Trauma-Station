@@ -188,7 +188,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         var mob = args.EntityUid;
         _cult.SetCultRule(mob, rule);
         rule.Comp.Cultists.Add(mob);
-        UpdateCultistAppearance(mob, rule.Comp.Stage);
+        UpdateCultistAppearance(mob, rule.Comp.Stage, rule.Comp.EyeColor);
         UpdateCultStage(rule.Comp);
 
         // W pvs
@@ -397,22 +397,23 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     private void UpdateCultistsAppearance(BloodCultRuleComponent cultRule)
     {
         var stage = cultRule.Stage;
+        var eyeColor = cultRule.EyeColor;
         foreach (var cultist in cultRule.Cultists)
         {
-            UpdateCultistAppearance(cultist, stage);
+            UpdateCultistAppearance(cultist, stage, eyeColor);
         }
     }
 
-    private void UpdateCultistAppearance(EntityUid cultist, CultStage stage)
+    private void UpdateCultistAppearance(EntityUid uid, CultStage stage, Color ruleEyeColor)
     {
         if (stage == CultStage.Pentagram)
-            EnsureComp<PentagramComponent>(cultist);
+            EnsureComp<PentagramComponent>(uid);
         else
-            RemComp<PentagramComponent>(cultist);
+            RemComp<PentagramComponent>(uid);
 
         if (stage == CultStage.Start)
         {
-            RemoveCultistAppearance(cultist);
+            RemoveCultistAppearance(uid);
             return;
         }
 
@@ -421,7 +422,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
 
         if (_humanoid.GetEyeColor(uid) is { } eyeColor)
             cultist.OriginalEyeColor = eyeColor;
-        _humanoid.SetEyeColor(uid, cultRule.EyeColor);
+        _humanoid.SetEyeColor(uid, ruleEyeColor);
     }
 
     /// <summary>
