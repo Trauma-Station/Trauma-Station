@@ -15479,3 +15479,12 @@ Entries:
   id: 1685
   time: '2026-10-04T23:48:34.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4889
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed being able to walk through cult barrier rune's spawned barrier
+      serverside.
+  id: 1686
+  time: '2026-10-05T00:06:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4891
