@@ -15504,3 +15504,10 @@ Entries:
   id: 1688
   time: '2026-10-05T12:30:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4901
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed issues with blood cult's pylon healing and range.
+  id: 1689
+  time: '2026-10-05T12:34:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4899
