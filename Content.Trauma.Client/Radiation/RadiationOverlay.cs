@@ -7,7 +7,7 @@ namespace Content.Trauma.Client.Radiation;
 public sealed partial class RadiationOverlay : Overlay
 {
     private static readonly ProtoId<ShaderPrototype> RadiationShader = "RadiationNoise";
-    [Dependency] private IPrototypeManager _prototypeManager = default!;
+    [Dependency] private IPrototypeManager _proto = default!;
 
     public float Radiation;
     private readonly ShaderInstance _shader;
@@ -16,7 +16,7 @@ public sealed partial class RadiationOverlay : Overlay
     public RadiationOverlay()
     {
         IoCManager.InjectDependencies(this);
-        _shader = _prototypeManager.Index(RadiationShader).Instance().Duplicate();
+        _shader = _proto.Index(RadiationShader).InstanceUnique().Duplicate();
     }
 
     protected override void Draw(in OverlayDrawArgs args)

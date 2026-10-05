@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-namespace Content.Trauma.Common.Radiation;
+namespace Content.Trauma.Shared.Radiation;
 
 /// <summary>
 /// Raised on server as networked event when radiation system updates its state

@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Common.Radiation;
-using Robust.Client.Player;
-using Robust.Shared.Timing;
 using Content.Shared.CCVar;
+using Content.Trauma.Shared.Radiation;
 using Robust.Shared.Configuration;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Radiation;
 
