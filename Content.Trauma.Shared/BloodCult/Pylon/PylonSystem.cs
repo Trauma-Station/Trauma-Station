@@ -125,7 +125,7 @@ public sealed partial class PylonSystem : EntitySystem
         if (enabling)
             EnsureComp<ActivePylonComponent>(pylon);
         else
-            RemComp(pylon, active!.Value);
+            RemComp(pylon, active!);
 
         _appearance.SetData(pylon.Owner, PylonVisuals.Activated, enabling);
         _pointLight.SetEnabled(pylon.Owner, enabling);
