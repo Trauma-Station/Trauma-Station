@@ -60,7 +60,7 @@ public abstract partial class NukeopsRuleSystem : GameRuleSystem<NukeopsRuleComp
         var target = (ent.Comp.TargetStation is not null) ? Name(ent.Comp.TargetStation.Value) : "the target";
 
         Antag.SendBriefing(args.Session,
-            Loc.GetString($"{ent.Comp.LocalePrefix}-welcome", // Trauma - use the prefix
+            Loc.GetString($"{ent.Comp.LocalePrefix}welcome", // Trauma - use the prefix
                 ("station", target),
                 ("name", Name(ent))),
             Color.Red,

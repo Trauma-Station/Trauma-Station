@@ -2,6 +2,7 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Implants;
+using Content.Shared.Popups;
 
 namespace Content.Trauma.Shared.JobListings;
 
@@ -11,6 +12,7 @@ namespace Content.Trauma.Shared.JobListings;
 public sealed partial class JobListingsImplantSystem : EntitySystem
 {
     [Dependency] private SharedActionsSystem _actions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private JobListingsSystem _jobs = default!;
 
     [SubscribeLocalEvent]
@@ -36,7 +38,9 @@ public sealed partial class JobListingsImplantSystem : EntitySystem
     {
         if (args.Handled)
             return;
-        _jobs.OpenUi(ent.Owner, args.Performer);
+
+        var user = args.Performer;
+        _jobs.OpenUi(ent, user);
         args.Handled = true;
     }
 }

@@ -40,7 +40,7 @@ public sealed class RevsTest : InteractionTest
     [SidedDependency(Side.Server)] private EntityWhitelistSystem _whitelist = default!;
     [SidedDependency(Side.Server)] private RevPropagandaSystem _rev = default!;
     [SidedDependency(Side.Server)] private SharedMindSystem _mind = default!;
-    [SidedDependency(Side.Server)] private SharedRoleSystem _roles = default!;
+    [SidedDependency(Side.Server)] private SharedRoleSystem _role = default!;
     [SidedDependency(Side.Server)] private SharedSubdermalImplantSystem _implant = default!;
 
     /// <summary>
@@ -147,7 +147,7 @@ public sealed class RevsTest : InteractionTest
             // conversion count must've gone up too
             var mind = SComp<MindContainerComponent>(SPlayer).Mind;
             Assert.That(mind != null, "Head rev must have a mind");
-            Assert.That(_roles.MindHasRole<RevolutionaryRoleComponent>(mind!.Value, out var role), "Head rev must have the role");
+            Assert.That(_role.MindHasRole<RevolutionaryRoleComponent>(mind!.Value, out var role), "Head rev must have the role");
             Assert.That(role.Value.Comp2.ConvertedCount > 0, "ConvertedCount must go up after a conversion");
         }
     }
