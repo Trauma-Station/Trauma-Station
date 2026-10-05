@@ -2,10 +2,10 @@
 
 - type: entity
   id: WeaponSniperHristov
-  parent: [BaseWeaponSniperMagazine, BaseGunWieldable, BaseSyndicateContraband] # Trauma - added Magazine
+  parent: [BaseWeaponSniperMagazine, BaseGunWieldable, BaseSyndicateContraband] #  added Magazine
   components:
   - type: Gun
-    resetOnHandSelected: false # Goobstation - quickscope pro
+    resetOnHandSelected: false # quickscope pro
   - type: CustomSpriteAmmoCounter
     loadedAmmoSprite: Interface/ItemStatus/Sniper_Cartriges/not_spent.png
     spentAmmoSprite: Interface/ItemStatus/Sniper_Cartriges/spent.png
@@ -17,4 +17,4 @@
     maxOffset: 8
     pvsIncrease: 0.8
   - type: MeleeWeapon
-    wideAnimationRotation: 45 # - Trauma the sprite is diagonal so the animation must be too
+    wideAnimationRotation: 45 # the sprite is diagonal so the animation must be too
