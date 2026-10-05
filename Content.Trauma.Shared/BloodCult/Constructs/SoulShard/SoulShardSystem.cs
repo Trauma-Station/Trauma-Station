@@ -27,27 +27,6 @@ public sealed partial class SoulShardSystem : EntitySystem
     private static readonly EntProtoId PurifiedRole = "MindRolePurifiedConstruct";
 
     [SubscribeLocalEvent]
-    private void OnActivate(Entity<SoulShardComponent> shard, ref ActivateInWorldEvent args)
-    {
-        if (!_mind.TryGetMind(shard, out var mindId, out var mind))
-            return;
-
-        var proto = shard.Comp.PurifiedShadeProto;
-        if (!shard.Comp.IsBlessed)
-        {
-            if (!_cult.IsCultist(args.User))
-                return;
-
-            proto = shard.Comp.ShadeProto;
-        }
-
-        if (shard.Comp.ShadeUid is {} shade)
-            DespawnShade(shard, shade);
-        else
-            SpawnShade(shard, proto, (mindId, mind));
-    }
-
-    [SubscribeLocalEvent]
     private void OnInteractUsing(Entity<SoulShardComponent> shard, ref InteractUsingEvent args)
     {
         if (shard.Comp.IsBlessed || !TryComp(args.Used, out BibleComponent? bible))
@@ -92,30 +71,6 @@ public sealed partial class SoulShardSystem : EntitySystem
     private void OnShardMindRemoved(Entity<SoulShardComponent> shard, ref MindRemovedMessage args)
     {
         UpdateGlowVisuals(shard, false);
-    }
-
-    private void SpawnShade(Entity<SoulShardComponent> shard, EntProtoId proto, Entity<MindComponent?> mind)
-    {
-        var coords = Transform(shard).Coordinates;
-        var shadeUid = PredictedSpawnAtPosition(proto, coords);
-        _mind.TransferTo(mind, shadeUid);
-        _mind.UnVisit(mind);
-        shard.Comp.ShadeUid = shadeUid;
-        Dirty(shard);
-        _cult.CopyMember(shard.Owner, shadeUid);
-    }
-
-    private void DespawnShade(Entity<SoulShardComponent> shard, EntityUid shade)
-    {
-        if (!_mind.TryGetMind(shade, out var mindId, out var mind))
-        {
-            _mind.TransferTo(mindId, shard, mind: mind);
-            _mind.UnVisit(mindId, mind: mind);
-        }
-
-        PredictedDel(shade);
-        shard.Comp.ShadeUid = null;
-        Dirty(shard);
     }
 
     private void UpdateGlowVisuals(Entity<SoulShardComponent> shard, bool state)
