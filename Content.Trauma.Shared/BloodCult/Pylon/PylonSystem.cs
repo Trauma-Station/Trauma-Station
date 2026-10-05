@@ -98,6 +98,13 @@ public sealed partial class PylonSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
+    private void OnAnchorStateChanged(Entity<ActivePylonComponent> ent, ref AnchorStateChangedEvent args)
+    {
+        if (!args.Anchored && !_timing.ApplyingState)
+            RemCompDeferred(ent, ent.Comp);
+    }
+
     private bool ToggleActive(Entity<PylonComponent> pylon, EntityUid user)
     {
         // if it already existed, we are removing it, so invert the state
