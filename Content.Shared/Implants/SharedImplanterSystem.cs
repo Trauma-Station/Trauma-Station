@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Trauma.Common.Implants;
+using Content.Shared.Mind.Components;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -318,7 +319,12 @@ public abstract partial class SharedImplanterSystem : EntitySystem
             return false;
 
         if (!CheckTarget(target, ent.Comp.Whitelist, ent.Comp.Blacklist) ||
-            !CheckTarget(target, implantComp.Whitelist, implantComp.Blacklist))
+            !CheckTarget(target, implantComp.Whitelist, implantComp.Blacklist) ||
+            // <Trauma> Checks for blacklisted mindroles as well before allowing implanting
+            (TryComp<MindContainerComponent>(target, out var mindCont) &&
+            mindCont.Mind is {} mind &&
+            !CheckTarget(mind, implantComp.MindRoleWhitelist, implantComp.MindRoleBlacklist)))
+            // </Trauma>
         {
             return false;
         }

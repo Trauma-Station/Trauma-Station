@@ -24,6 +24,9 @@
         components:
         - Changeling
         - BorgChassis #dermal means skin. borgs dont have skin
+      mindRoleBlacklist:
+        components:
+        - Heretic
     - type: MindcontrolImplant
 
 - type: statusIcon #  There are no statusicon for group for what is needed here. a new group is needed whit ShowToUid. Faction will do for now.
