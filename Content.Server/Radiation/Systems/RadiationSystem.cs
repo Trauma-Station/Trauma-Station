@@ -48,6 +48,7 @@ public sealed partial class RadiationSystem : SharedRadiationSystem
     {
         var msg = new OnIrradiatedEvent(time, radsPerSecond, origin);
         RaiseLocalEvent(uid, msg);
+        UpdateRadiationVisuals(uid, radsPerSecond); // Trauma
     }
 
     public void SetSourceEnabled(Entity<RadiationSourceComponent?> entity, bool val)
