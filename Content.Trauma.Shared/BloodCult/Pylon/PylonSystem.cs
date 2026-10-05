@@ -1,13 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
 using Content.Shared.Maps;
 using Content.Shared.Mobs.Systems;
-using Content.Shared.Random.Helpers;
 using Content.Shared.Popups;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
@@ -37,7 +38,10 @@ public sealed partial class PylonSystem : EntitySystem
     [Dependency] private TurfSystem _turfs = default!;
     [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
 
+    private const float PylonLookupRange = 10;
+
     private HashSet<Entity<BloodCultistComponent>> _targets = new();
+    private HashSet<Entity<ActivePylonComponent>> _pylons = new();
 
     public override void Update(float frameTime)
     {
@@ -78,9 +82,7 @@ public sealed partial class PylonSystem : EntitySystem
             return;
         }
 
-        var active = ToggleActive(pylon) ? "on" : "off";
-        var msg = Loc.GetString($"pylon-toggle-{active}");
-        _popup.PopupEntity(msg, pylon, user);
+        ToggleActive(pylon, user);
         args.Handled = true;
     }
 
@@ -96,16 +98,42 @@ public sealed partial class PylonSystem : EntitySystem
         Dirty(ent);
     }
 
-    private bool ToggleActive(Entity<PylonComponent> pylon)
+    [SubscribeLocalEvent]
+    private void OnAnchorStateChanged(Entity<ActivePylonComponent> ent, ref AnchorStateChangedEvent args)
     {
-        // if it already existed, we are removing it, so invert the return value
-        var state = !EnsureComp<ActivePylonComponent>(pylon, out var active);
-        if (!state)
-            RemComp(pylon, active);
+        if (!args.Anchored && !_timing.ApplyingState)
+            RemCompDeferred(ent, ent.Comp);
+    }
 
-        _appearance.SetData(pylon.Owner, PylonVisuals.Activated, state);
-        _pointLight.SetEnabled(pylon.Owner, state);
-        return state;
+    private bool ToggleActive(Entity<PylonComponent> pylon, EntityUid user)
+    {
+        // if it already existed, we are removing it, so invert the state
+        var enabling = !TryComp<ActivePylonComponent>(pylon, out var active);
+
+        if (enabling)
+        {
+            var coords = Transform(pylon).Coordinates;
+            _pylons.Clear();
+            _lookup.GetEntitiesInRange(coords, PylonLookupRange, _pylons);
+            if (_pylons.Count > 0)
+            {
+                _popup.PopupEntity($"There can't be other pylons within {PylonLookupRange} meters!", pylon, user, PopupType.MediumCaution);
+                return false;
+            }
+        }
+
+        if (enabling)
+            EnsureComp<ActivePylonComponent>(pylon);
+        else
+            RemComp(pylon, active!);
+
+        _appearance.SetData(pylon.Owner, PylonVisuals.Activated, enabling);
+        _pointLight.SetEnabled(pylon.Owner, enabling);
+
+        var suffix = enabling ? "on" : "off";
+        var msg = Loc.GetString($"pylon-toggle-{suffix}");
+        _popup.PopupEntity(msg, pylon, user);
+        return true;
     }
 
     private void CorruptRandomTile(Entity<PylonComponent> pylon)
@@ -156,7 +184,7 @@ public sealed partial class PylonSystem : EntitySystem
         foreach (var target in _targets)
         {
             if (!_mobState.IsDead(target.Owner))
-                _damage.ChangeDamage(target.Owner, pylon.Comp.Healing, true, targetPart: TargetBodyPart.All, canMiss: false);
+                _damage.ChangeDamage(target.Owner, pylon.Comp.Healing, true, targetPart: TargetBodyPart.All, canMiss: false, splitDamage: SplitDamageBehavior.None);
         }
     }
 }
