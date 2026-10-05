@@ -188,6 +188,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         var mob = args.EntityUid;
         _cult.SetCultRule(mob, rule);
         rule.Comp.Cultists.Add(mob);
+        UpdateCultistAppearance(mob, rule.Comp.Stage, rule.Comp.EyeColor);
         UpdateCultStage(rule.Comp);
 
         // W pvs
@@ -210,7 +211,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
     }
 
     [SubscribeLocalEvent]
-    private void OnCultistComponentRemoved(Entity<BloodCultistComponent> cultist, ref ComponentRemove args)
+    private void OnCultistRemove(Entity<BloodCultistComponent> cultist, ref ComponentRemove args)
     {
         if (_cult.GetRule(cultist) is { } rule)
         {
@@ -369,7 +370,8 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         if (!Resolve(cultist, ref cultist.Comp))
             return;
 
-        _humanoid.SetEyeColor(cultist, cultist.Comp.OriginalEyeColor);
+        if (cultist.Comp.OriginalEyeColor is { } eyeColor)
+            _humanoid.SetEyeColor(cultist, eyeColor);
         RemComp<PentagramComponent>(cultist);
     }
 
@@ -383,41 +385,44 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
             cultRule.Stage = CultStage.Pentagram;
             SelectRandomLeader(cultRule);
         }
-        else if (cultistsCount >= cultRule.ReadEyeThreshold)
+        else if (cultistsCount >= cultRule.RedEyeThreshold)
             cultRule.Stage = CultStage.RedEyes;
         else
             cultRule.Stage = CultStage.Start;
 
         if (cultRule.Stage != prevStage)
-            UpdateCultistsAppearance(cultRule, prevStage);
+            UpdateCultistsAppearance(cultRule);
     }
 
-    private void UpdateCultistsAppearance(BloodCultRuleComponent cultRule, CultStage prevStage)
+    private void UpdateCultistsAppearance(BloodCultRuleComponent cultRule)
     {
-        switch (cultRule.Stage)
+        var stage = cultRule.Stage;
+        var eyeColor = cultRule.EyeColor;
+        foreach (var cultist in cultRule.Cultists)
         {
-            case CultStage.Start when prevStage == CultStage.RedEyes:
-                foreach (var cultist in cultRule.Cultists)
-                    RemoveCultistAppearance(cultist);
-
-                break;
-            case CultStage.RedEyes when prevStage == CultStage.Start:
-                foreach (var uid in cultRule.Cultists)
-                {
-                    if (!TryComp<BloodCultistComponent>(uid, out var cultist))
-                        continue;
-                    if (_humanoid.GetEyeColor(uid) is { } eyeColor)
-                        cultist.OriginalEyeColor = eyeColor;
-                    _humanoid.SetEyeColor(uid, cultRule.EyeColor);
-                }
-
-                break;
-            case CultStage.Pentagram:
-                foreach (var cultist in cultRule.Cultists)
-                    EnsureComp<PentagramComponent>(cultist);
-
-                break;
+            UpdateCultistAppearance(cultist, stage, eyeColor);
         }
+    }
+
+    private void UpdateCultistAppearance(EntityUid uid, CultStage stage, Color ruleEyeColor)
+    {
+        if (stage == CultStage.Pentagram)
+            EnsureComp<PentagramComponent>(uid);
+        else
+            RemComp<PentagramComponent>(uid);
+
+        if (stage == CultStage.Start)
+        {
+            RemoveCultistAppearance(uid);
+            return;
+        }
+
+        if (!TryComp<BloodCultistComponent>(uid, out var cultist) || cultist.OriginalEyeColor != null)
+            return;
+
+        if (_humanoid.GetEyeColor(uid) is { } eyeColor)
+            cultist.OriginalEyeColor = eyeColor;
+        _humanoid.SetEyeColor(uid, ruleEyeColor);
     }
 
     /// <summary>

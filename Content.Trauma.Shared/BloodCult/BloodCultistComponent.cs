@@ -21,4 +21,7 @@ public sealed partial class BloodCultistComponent : Component
 
     [DataField]
     public int SpellsLimit = 3;
+    
+    [DataField]
+    public Color? OriginalEyeColor;
 }

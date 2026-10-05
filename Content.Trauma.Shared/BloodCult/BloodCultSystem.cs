@@ -1,9 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.Religion;
+using Content.Goobstation.Shared.Religion;
+using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles;
+using Content.Trauma.Shared.BloodCult.Components;
 using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Spells;
 using Content.Trauma.Shared.Roles;
@@ -38,10 +42,43 @@ public abstract partial class BloodCultSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
+    private void OnMapInit(Entity<BloodCultMemberComponent> ent, ref MapInitEvent args)
+    {
+        EnsureComp<WeakToHolyComponent>(ent);
+    }
+
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<BloodCultMemberComponent> ent, ref ComponentShutdown args)
     {
         if (_actorQuery.TryComp(ent, out var actor))
             _pvsOverride.RemoveSessionOverride(ent.Comp.Rule, actor.PlayerSession);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnMemberTakeHoly(Entity<BloodCultMemberComponent> ent, ref UserShouldTakeHolyEvent args)
+    {
+        args.WeakToHoly = true;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnPentagramStartup(Entity<PentagramComponent> ent, ref ComponentStartup args)
+    {
+        var ev = new UnholyStatusChangedEvent(ent, ent, true);
+        RaiseLocalEvent(ent, ref ev);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnPentagramShutdown(Entity<PentagramComponent> ent, ref ComponentShutdown args)
+    {
+        var ev = new UnholyStatusChangedEvent(ent, ent, false);
+        RaiseLocalEvent(ent, ref ev);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnPentagramTakeHoly(Entity<PentagramComponent> ent, ref UserShouldTakeHolyEvent args)
+    {
+        args.WeakToHoly = true;
+        args.ShouldTakeHoly = true;
     }
 
     /// <summary>

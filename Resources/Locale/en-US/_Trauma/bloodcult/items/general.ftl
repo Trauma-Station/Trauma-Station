@@ -8,6 +8,10 @@ ghost-role-information-soul-shard-name = Soul Shard
 ghost-role-information-soul-shard-description = Become the servant of The Blood Cult.
 ghost-role-information-soul-shard-rules = Take the form of one of the constructs and help your Masters bring their Old Goddess back to the world!
 
+ghost-role-information-purified-soul-shard-name = Purified Soul Shard
+ghost-role-information-purified-soul-shard-description = Help the crew fight back against The Blood Cult.
+ghost-role-information-purified-soul-shard-rules = Take the form of a purified construct and help the crew defeat your eldritch creators!
+
 shuttle-curse-cant-activate = Nar'Sien power doesn't seem to work.
 shuttle-curse-max-charges = You try to shatter the orb, but it remains as solid as a rock!
 shuttle-curse-shuttle-arrived = The shuttle has already arived! You can't delay it anymore.

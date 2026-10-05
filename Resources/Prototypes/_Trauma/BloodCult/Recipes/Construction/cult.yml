@@ -20,7 +20,6 @@
   id: CultPylon
   graph: CultPylon
   targetNode: pylon
-  placementMode: AlignPylonConstruction
 
 - type: construction
   parent: BaseBloodCultStructure
