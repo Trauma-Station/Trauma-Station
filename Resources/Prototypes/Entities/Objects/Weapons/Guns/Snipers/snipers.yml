@@ -121,7 +121,7 @@
 
 - type: entity
   name: Hristov
-  parent: [BaseWeaponSniperMagazine, BaseGunWieldable, BaseSyndicateContraband] # Trauma - added Magazine
+  parent: [BaseWeaponSniper, BaseGunWieldable, BaseSyndicateContraband] # Trauma - added Magazine
   id: WeaponSniperHristov
   description: For when you absolutely, positively need to make someone regret their life choices from a safe distance. Uses .60 anti-materiel ammo.
   components:
@@ -141,27 +141,24 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
-    resetOnHandSelected: false # Goobstation - quickscope pro
   - type: CustomSpriteAmmoCounter
     loadedAmmoSprite: Interface/ItemStatus/Sniper_Cartriges/not_spent.png
     spentAmmoSprite: Interface/ItemStatus/Sniper_Cartriges/spent.png
-  #- type: BallisticAmmoProvider - Goobstation - Magazine Sniper
-  #  whitelist:
-  #    tags:
-  #    - CartridgeAntiMateriel
-  #  capacity: 5
-  #  proto: CartridgeAntiMateriel
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CartridgeAntiMateriel
+    capacity: 5
+    proto: CartridgeAntiMateriel
   - type: SpeedModifiedOnWield
-    walkModifier: 0.8 # goob edit V
-    sprintModifier: 0.8 # goob edit ^
+    walkModifier: 0.25
+    sprintModifier: 0.25
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 8 # Goobstation - Sniper rifles buff
-    pvsIncrease: 0.8 # Goobstation - Sniper rifles buff
+    maxOffset: 3
+    pvsIncrease: 0.3
   - type: StaticPrice
     price: 3500
-  - type: MeleeWeapon
-    wideAnimationRotation: 45 # - Trauma the sprite is diagonal so the animation must be too
 
 - type: entity
   name: musket
