@@ -15527,3 +15527,12 @@ Entries:
   id: 1691
   time: '2026-10-05T13:28:32.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4902
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: >-
+      Advanced CQC Consecutive sleep now requires stamcrit, and deals a total 75
+      stamina damage on its own.
+  id: 1692
+  time: '2026-10-05T15:31:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4867
