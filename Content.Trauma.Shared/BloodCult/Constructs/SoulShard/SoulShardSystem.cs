@@ -12,7 +12,7 @@ using Robust.Shared.Player;
 
 namespace Content.Trauma.Shared.BloodCult.Constructs.SoulShard;
 
-public sealed partial class SoulShardSystem : EntitySystem
+public abstract partial class SoulShardSystem : EntitySystem
 {
     [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
@@ -68,6 +68,8 @@ public sealed partial class SoulShardSystem : EntitySystem
             _role.MindClearRoles(mind);
             _role.MindAddRole(mind, PurifiedRole);
         }
+
+        PurifyGhostRole(shard);
     }
 
     [SubscribeLocalEvent]
@@ -122,5 +124,10 @@ public sealed partial class SoulShardSystem : EntitySystem
     {
         _appearance.SetData(shard.Owner, SoulShardVisualState.HasMind, state);
         _light.SetEnabled(shard.Owner, state);
+    }
+
+    protected virtual void PurifyGhostRole(EntityUid uid)
+    {
+        // W ghost role comp still being in server
     }
 }
