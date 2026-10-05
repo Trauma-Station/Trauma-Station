@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.CCVar;
+using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.Radiation;
 using Robust.Shared.Configuration;
 using Robust.Shared.Timing;
@@ -17,6 +18,7 @@ public sealed partial class RadiationOverlaySystem : EntitySystem
     private TimeSpan _lastUpdate;
     private TimeSpan _updateRate;
     private float _lastValue;
+    private bool _disabled;
 
     public override void Initialize()
     {
@@ -25,11 +27,12 @@ public sealed partial class RadiationOverlaySystem : EntitySystem
         _overlay = new();
         Subs.CVar(_cfg, CCVars.RadiationGridcastUpdateRate, updateRate =>
             _updateRate = TimeSpan.FromSeconds(updateRate + 0.2f), true); // Extra 200ms of delay before the overlay is removed to compensate for network delay changes
+        Subs.CVar(_cfg, TraumaCVars.NoRadiationNoise, disabled => _disabled = disabled, true);
     }
 
     public override void Update(float frameTime)
     {
-        if (_lastValue == 0) return;
+        if (_lastValue == 0 || _disabled) return;
 
         if (_timing.CurTime < _lastUpdate + _updateRate)
         {
@@ -50,6 +53,7 @@ public sealed partial class RadiationOverlaySystem : EntitySystem
     [SubscribeNetworkEvent]
     private void OnIrradiated(IrradiatedNetworkEvent args)
     {
+        if (_disabled) return;
         if (_lastValue == 0)
         {
             _overlayMan.AddOverlay(_overlay);
