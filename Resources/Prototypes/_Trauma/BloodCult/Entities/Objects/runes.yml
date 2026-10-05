@@ -141,7 +141,7 @@
         Slash: 5
   - type: CultEffectRune
     effects:
-    - !type:SpawnEntity
+    - !type:SpawnAnchored
       entity: BloodCultBarrier
     - !type:Delete # single use rune for obvious reasons (it gets blocked by the barrier)
   - type: BloodCultExamine
