@@ -15520,3 +15520,10 @@ Entries:
   id: 1690
   time: '2026-10-05T12:37:52.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4900
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed slasher slop.
+  id: 1691
+  time: '2026-10-05T13:28:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4902
