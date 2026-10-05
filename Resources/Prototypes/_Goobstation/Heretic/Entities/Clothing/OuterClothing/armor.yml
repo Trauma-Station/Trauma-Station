@@ -22,6 +22,8 @@
       VeinsDamage: 0.0
   - type: ExplosionResistance
     damageCoefficient: 0.65
+  - type: PressureProtection
+    lowPressureMultiplier: 1000
 
 - type: entity
   parent: [ ArmorHeretic, ClothingOuterJacketBase, AllowSuitStorageClothing, BaseMagicalContraband ]

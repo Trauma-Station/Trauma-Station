@@ -15423,3 +15423,107 @@ Entries:
   id: 1679
   time: '2026-10-02T20:34:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4861
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed blob tile upgrading being free.
+  id: 1680
+  time: '2026-10-03T08:50:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4868
+- author: NoElkaTheGod
+  changes:
+  - type: Remove
+    message: Salvagers can no longer buy money for mining points.
+  - type: Add
+    message: Added new cargo bounties.
+  - type: Tweak
+    message: Bounties and mail now give more money.
+  - type: Tweak
+    message: >-
+      Tweaked mail loot pool, it now has less trash and more useful items.
+      Sometimes you can even find contraband, so open those letters!
+  id: 1681
+  time: '2026-10-03T22:43:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4854
+- author: Endothermix
+  changes:
+  - type: Remove
+    message: Removed disabler from sec lockers.
+  id: 1682
+  time: '2026-10-04T20:00:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4882
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: >-
+      Methylenedioxystraquinone (Strawberry Ice) now metabolises in the
+      bloodstream correctly.
+  - type: Tweak
+    message: >-
+      Methylenedioxystraquinone (Strawberry Ice) now has much more severe
+      withdrawal effects, up to a heart attack. Get the HOS addicted.
+  id: 1683
+  time: '2026-10-04T22:05:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4864
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed rainbow cannabis being gmod error for half its growth stages.
+  id: 1684
+  time: '2026-10-04T22:23:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4886
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Blood cultists are now unholy...
+  id: 1685
+  time: '2026-10-04T23:48:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4889
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed being able to walk through cult barrier rune's spawned barrier
+      serverside.
+  id: 1686
+  time: '2026-10-05T00:06:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4891
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed evac buttons being blocked while on blue alert.
+  id: 1687
+  time: '2026-10-05T00:09:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4892
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed new blood cult converts not getting halo or red eyes applied.
+  - type: Fix
+    message: Fixed purified soul shards not indicating that in their ghost role text.
+  id: 1688
+  time: '2026-10-05T12:30:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4901
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed issues with blood cult's pylon healing and range.
+  id: 1689
+  time: '2026-10-05T12:34:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4899
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Soul shards from ghost roles can no longer move around...
+  - type: Remove
+    message: Soul shards can no longer spawn shades.
+  id: 1690
+  time: '2026-10-05T12:37:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4900
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed slasher slop.
+  id: 1691
+  time: '2026-10-05T13:28:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4902
