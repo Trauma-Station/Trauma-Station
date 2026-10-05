@@ -17,7 +17,6 @@
     damage:
       types:
         Slash: 24
-    heavyStaminaCost: 10
     angle: 90
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
@@ -109,7 +108,6 @@
     damage:
       types:
         Blunt: 0
-    heavyStaminaCost: 0
   - type: Unremoveable
   - type: BloodRitesAura
     crafts:

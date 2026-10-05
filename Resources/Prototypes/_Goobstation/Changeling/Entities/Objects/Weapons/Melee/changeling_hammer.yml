@@ -20,7 +20,6 @@
         Structural: 50
       woundSeverityMultipliers:
         Blunt: 2
-    heavyStaminaCost: 12
     soundHit:
       collection: MetalThud
   - type: Item

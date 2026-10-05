@@ -10,7 +10,6 @@
     sprite: _Lavaland/Objects/Weapons/Melee/bone_axe.rsi
     state: icon
   - type: MeleeWeapon
-    heavyStaminaCost: 15
     wideAnimationRotation: 135
     attackRate: 0.75
     damage:

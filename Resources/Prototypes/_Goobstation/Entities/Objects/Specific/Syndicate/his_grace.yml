@@ -32,7 +32,6 @@
       path: /Audio/Items/toolbox_drop.ogg
   - type: MeleeWeapon
     canWideSwing: false # Git Gud
-    heavyStaminaCost: 10
     damage:
       types:
         Blunt: 12

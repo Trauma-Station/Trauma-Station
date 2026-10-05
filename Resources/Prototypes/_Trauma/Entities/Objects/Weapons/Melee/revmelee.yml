@@ -361,7 +361,6 @@
   - type: MeleeWeapon
     attackRate: 0.625
     animationRotation: -45
-    heavyStaminaCost: 25
     range: 1.70
     damage:
       types:

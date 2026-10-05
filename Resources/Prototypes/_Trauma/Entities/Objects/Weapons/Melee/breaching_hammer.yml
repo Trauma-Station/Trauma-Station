@@ -14,7 +14,6 @@
   - type: MeleeWeapon
     attackRate: 0.5
     range: 1.70
-    heavyStaminaCost: 25
     damage:
       types:
         Blunt: 5

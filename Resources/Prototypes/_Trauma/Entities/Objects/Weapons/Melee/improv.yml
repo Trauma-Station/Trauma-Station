@@ -109,7 +109,6 @@
     state: finished
   - type: MeleeWeapon
     animationRotation: -135
-    heavyStaminaCost: 15
     wideAnimationRotation: -135
     damage:
       types:
@@ -367,7 +366,6 @@
     damage:
       types:
         Piercing: 10
-    heavyStaminaCost: 6
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item
@@ -406,7 +404,6 @@
     damage:
       types:
         Blunt: 3
-    heavyStaminaCost: 6
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Construction
@@ -463,7 +460,6 @@
     damage:
       types:
         Blunt: 10
-    heavyStaminaCost: 6
     soundHit:
       collection: MetalThud
   - type: Item
@@ -537,7 +533,6 @@
       types:
         Blunt: 10
         Piercing: 3
-    heavyStaminaCost: 6
     soundHit:
       collection: MetalThud
   - type: Item
@@ -568,7 +563,6 @@
       types:
         Blunt: 10
         Slash: 5
-    heavyStaminaCost: 6
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item
@@ -616,7 +610,6 @@
     damage:
       types:
         Slash: 18
-    heavyStaminaCost: 6
     soundHit:
       path: /Audio/Weapons/bladeslice.ogg
   - type: Item

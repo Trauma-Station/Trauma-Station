@@ -18,7 +18,6 @@
     damage:
       types:
         Blunt: 10
-    heavyStaminaCost: 6
     soundHit:
       path: /Audio/_Trauma/Weapons/Melee/forging/tink.ogg
   - type: Item

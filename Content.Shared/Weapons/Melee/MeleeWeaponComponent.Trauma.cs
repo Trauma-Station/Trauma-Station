@@ -38,12 +38,6 @@ public sealed partial class MeleeWeaponComponent
     [DataField]
     public bool CanMiss = true;
 
-    /// <summary>
-    /// Applies stamina damage on each successful wideswing hit to the attacker.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float HeavyStaminaCost = 10f;
-
     [DataField, AutoNetworkedField]
     public EntProtoId MissAnimation = "WeaponArcPunch";
 
