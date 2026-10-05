@@ -79,7 +79,3 @@
 - type: objectiveIssuer
   id: Self # not to be cofused with SELF
   name: objective-issuer-self
-
-- type: objectiveIssuer
-  id: Slasher
-  name: objective-issuer-slasher
