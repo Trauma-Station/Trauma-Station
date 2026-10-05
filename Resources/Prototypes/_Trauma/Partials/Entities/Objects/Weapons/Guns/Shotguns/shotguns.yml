@@ -1,20 +1,10 @@
 - type: entity
-  name: BaseWeaponShotgun
-  parent: BaseItem
-  id: BaseWeaponShotgun
-  description: A rooty tooty point and shooty.
-  abstract: true
+  id: WeaponShotgunBulldog
   components:
-  # <Trauma>
-  - type: EmitSoundOnPickup
-    sound:
-      collection: ShotgunsPickUp
-  - type: EmitSoundOnDrop
-    sound:
-      collection: ShotgunsDrop
-  - type: EmitSoundOnLand
-    sound:
-      collection: ShotgunsDrop
+  - type: WeaponClass
+    class: Shotgun
+  - type: Gun
+    fireRate: 1.5
   - type: AltFireMelee
     attackType: Heavy
   - type: MeleeWeapon
@@ -22,114 +12,9 @@
       types:
        Blunt: 12
     angle: 0
-    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
+    wideAnimationRotation: 90
     soundHit:
       collection: MetalThud
-  - type: WeaponClass
-    class: Shotgun
-  # </Trauma>
-  - type: Sprite
-    layers:
-    - state: icon
-      map: [ "enum.GunVisualLayers.Base" ]
-  - type: Item
-    size: Large
-    shape:
-    - 0,0,4,0
-  - type: Clothing
-    sprite: Objects/Weapons/Guns/Shotguns/db_shotgun.rsi
-    quickEquip: false
-    slots:
-    - Back
-    - suitStorage
-  - type: AmmoCounter
-  - type: Gun
-    fireRate: 2
-    selectedMode: SemiAuto
-    availableModes:
-    - SemiAuto
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
-    soundEmpty:
-      path: /Audio/Weapons/Guns/Empty/empty.ogg
-  - type: CustomSpriteAmmoCounter
-    loadedAmmoSprite: Interface/ItemStatus/Shotgun_Shells/not_spent.png
-    spentAmmoSprite: Interface/ItemStatus/Shotgun_Shells/spent.png
-  - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-      - ShellShotgun
-    capacity: 7
-    proto: ShellShotgun
-    soundInsert:
-      path: /Audio/Weapons/Guns/MagIn/shotgun_insert.ogg
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-        ents: []
-  - type: StaticPrice
-    price: 500
-
-- type: entity
-  name: Bulldog
-  # Don't parent to BaseWeaponShotgun because it differs significantly
-  parent: [BaseItem, BaseGunWieldable, BaseSyndicateContraband]
-  id: WeaponShotgunBulldog
-  description: An automatic magazine-fed shotgun for close-quarters combat. Kicks like a mule on steroids. Uses 12 Gauge shotgun shells. # Goob edit
-  components:
-  - type: Sprite
-    sprite: Objects/Weapons/Guns/Shotguns/bulldog.rsi
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-0
-      map: ["enum.GunVisualLayers.Mag"]
-  - type: Item
-    size: Large
-  - type: Clothing
-    sprite: Objects/Weapons/Guns/Shotguns/bulldog.rsi
-    quickEquip: false
-    slots:
-    - Back
-    - suitStorage
-  - type: AmmoCounter
-  - type: CustomSpriteAmmoCounter
-    loadedAmmoSprite: Interface/ItemStatus/Shotgun_Shells/not_spent.png
-    spentAmmoSprite: Interface/ItemStatus/Shotgun_Shells/spent.png
-  - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
-  - type: Gun
-    fireRate: 2
-    selectedMode: FullAuto
-    availableModes:
-    - FullAuto
-    soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/shotgun.ogg
-    soundEmpty:
-      path: /Audio/Weapons/Guns/Empty/empty.ogg
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineShotgun
-        priority: 2
-        whitelist:
-          tags:
-          - MagazineShotgun
-        whitelistFailPopup: gun-magazine-whitelist-fail
-        insertSound: /Audio/Weapons/Guns/MagIn/smg_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/smg_magout.ogg
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-  - type: MagazineAmmoProvider
-  - type: MagazineVisuals
-    magState: mag
-    steps: 1
-    zeroVisible: true
-  - type: Appearance
-  - type: StaticPrice
-    price: 5000
 
 - type: entity
   name: double-barreled shotgun

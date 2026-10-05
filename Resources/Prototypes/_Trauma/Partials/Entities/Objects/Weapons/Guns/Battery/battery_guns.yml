@@ -1,29 +1,35 @@
 - type: entity
-  abstract: true
-  parent: BaseItem
   id: BaseWeaponBatteryNoAmmoCounter
   components:
-  - type: Sprite
-  - type: Item
-    size: Huge
-  - type: Clothing
-    sprite: Objects/Weapons/Guns/Battery/laser_retro.rsi
-    quickEquip: false
-    slots:
-    - Back
-    - suitStorage
-  - type: Gun
-    fireRate: 2
-    selectedMode: SemiAuto
-    availableModes:
-    - SemiAuto
-    soundGunshot:
+  - type: EmitSoundOnPickup
+    sound:
+      collection: LasersPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: LasersDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: LasersDrop
+  - type: Cautery
+    speed: 0.9
+  - type: SurgeryTool
+    endSound:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
-  - type: Battery
-    maxCharge: 1000
-    startingCharge: 1000
-  - type: StaticPrice
-    price: 500
+  - type: AlwaysHot
+  - type: AltFireMelee # Trauma
+    attackType: Heavy
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 12
+    angle: 0
+    wideAnimationRotation: 90
+    soundHit:
+      collection: MetalThud
+  - type: BatteryDrinkerSource
+    maxAmount: 180 # you probably don't want to drain your entire gun charging in battle
+  - type: WeaponClass
+    class: Laser
 
 - type: entity
   abstract: true

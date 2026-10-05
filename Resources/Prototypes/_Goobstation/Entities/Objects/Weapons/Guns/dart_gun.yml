@@ -43,6 +43,15 @@
   - type: Tag
     tags:
     - GunCanAimShooter
+  - type: AltFireMelee
+    attackType: Heavy
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 8
+    angle: 0
+    wideAnimationRotation: 90
+    soundHit:
 
 - type: entity
   categories: [ HideSpawnMenu ]

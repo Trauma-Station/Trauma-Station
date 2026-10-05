@@ -15,6 +15,8 @@
   - type: EmitSoundOnLand
     sound:
       collection: SnipersDrop
+  - type: AltFireMelee # Trauma
+    attackType: Heavy
   - type: MeleeWeapon
     damage:
       types:
@@ -158,6 +160,8 @@
     pvsIncrease: 0.8 # Goobstation - Sniper rifles buff
   - type: StaticPrice
     price: 3500
+  - type: MeleeWeapon
+    wideAnimationRotation: 45 # - Trauma the sprite is diagonal so the animation must be too
 
 - type: entity
   name: musket
