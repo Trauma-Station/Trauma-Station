@@ -15511,3 +15511,12 @@ Entries:
   id: 1689
   time: '2026-10-05T12:34:35.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4899
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Soul shards from ghost roles can no longer move around...
+  - type: Remove
+    message: Soul shards can no longer spawn shades.
+  id: 1690
+  time: '2026-10-05T12:37:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4900
