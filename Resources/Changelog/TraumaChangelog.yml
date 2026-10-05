@@ -15488,3 +15488,10 @@ Entries:
   id: 1686
   time: '2026-10-05T00:06:43.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4891
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed evac buttons being blocked while on blue alert.
+  id: 1687
+  time: '2026-10-05T00:09:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4892
