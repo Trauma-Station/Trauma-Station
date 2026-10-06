@@ -8,12 +8,12 @@ using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Silicons.Laws.Components;
+using Content.Shared.Station.Components;
 using Content.Shared.Station.Systems;
 using Content.Trauma.Common.Silicon;
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
 using Robust.Shared.Containers;
-using Robust.Shared.Map.Components;
 
 namespace Content.Trauma.Server.CosmicCult.Abilities;
 
@@ -74,8 +74,8 @@ public sealed partial class CosmicFragmentationSystem : EntitySystem
 
         // No chantry on cargo shuttle
         if (_station.GetStationInMap(xform.MapID) is not { } station ||
-            _station.GetLargestGrid(station) != null &&
-            _station.GetLargestGrid(station) != gridUid)
+            !TryComp<StationDataComponent>(station, out var stationComp) ||
+            _station.GetStationGridUid((station, stationComp)) != gridUid)
         {
             _popup.PopupEntity(Loc.GetString("cosmicability-chantry-spawn-error-station"), ent, ent);
             args.Canceled = true;
