@@ -75,7 +75,7 @@ public sealed partial class CosmicFragmentationSystem : EntitySystem
         // No chantry on cargo shuttle
         if (_station.GetStationInMap(xform.MapID) is not { } station ||
             !TryComp<StationDataComponent>(station, out var stationComp) ||
-            _station.GetStationGridUid((station, stationComp)) != gridUid)
+            !stationComp.OwnedGrids.Contains(gridUid))
         {
             _popup.PopupEntity(Loc.GetString("cosmicability-chantry-spawn-error-station"), ent, ent);
             args.Canceled = true;
