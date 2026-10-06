@@ -15536,3 +15536,12 @@ Entries:
   id: 1692
   time: '2026-10-05T15:31:42.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4867
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: >-
+      Cosmic cult can now only place vacuous spires and vacuous chantries on the
+      station
+  id: 1693
+  time: '2026-10-06T11:26:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4918
