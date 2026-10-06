@@ -3,6 +3,7 @@
 using System.Linq;
 using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.ManifestListings;
+using Content.Goobstation.Shared.Mindcontrol;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Chat.Systems;
 using Content.Server.Hands.Systems;
@@ -329,6 +330,8 @@ public sealed partial class HereticSystem : SharedHereticSystem
         {
             TryAddKnowledge((ent, null, ent), k);
         }
+
+        EnsureComp<MindControlImmuneComponent>(ent.Owner);
 
         RaiseLocalEvent(ent, new EventHereticRerollTargets());
         // Check for mind comp to prevent test fail
