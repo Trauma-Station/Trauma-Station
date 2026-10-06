@@ -43,8 +43,12 @@
   - type: IsDeadIC
   - type: SoulShard
   - type: GhostRole
-    allowMovement: true
     name: ghost-role-information-soul-shard-name
     description: ghost-role-information-soul-shard-description
     rules: ghost-role-information-soul-shard-rules
+    mindRoles: [] # handled by the shard system
   - type: GhostTakeoverAvailable
+  - type: AlwaysTakeHoly
+  - type: Damageable
+  - type: Injurable
+    damageContainer: InorganicMetaphysical

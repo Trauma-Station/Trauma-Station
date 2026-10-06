@@ -34,6 +34,7 @@
     clothingPrototypes:
       head: ClothingHeadHelmetCultArmor
   - type: CultItem
+  - type: UnholyItem
 
 - type: entity
   parent: [ ClothingHeadHardsuitBase, BaseBloodContraband ]
@@ -67,6 +68,7 @@
   - type: Clothing
     sprite: _Trauma/BloodCult/Entities/Clothes/Outer/cult_robe.rsi
   - type: CultItem
+  - type: UnholyItem
   - type: ClothingSpeedModifier
     walkModifier: 1.25
     sprintModifier: 1.25

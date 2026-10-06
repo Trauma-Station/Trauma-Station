@@ -18,3 +18,9 @@
   components:
   - type: PlantData
     mutationPrototypes: [ LemonadePlants ]
+
+- type: entity
+  id: RainbowCannabisPlants
+  components:
+  - type: Plant
+    growthStages: 3 # default 6 stages have no sprites for 4-6...

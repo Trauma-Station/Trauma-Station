@@ -28,7 +28,7 @@
       stunbaton:
         length: 2.5
   - type: Item
-    shape:
+    shape: !Clear
     - 0,0,2,0
     storedRotation: 45
   - !Remove type: PreventForcedThrow # AHELP: clown slip me kill he
@@ -45,7 +45,7 @@
     animationRotation: -45
   - type: Item
     size: Normal
-    shape:
+    shape: !Clear
     - 0,0,2,0
 
 - type: entity
