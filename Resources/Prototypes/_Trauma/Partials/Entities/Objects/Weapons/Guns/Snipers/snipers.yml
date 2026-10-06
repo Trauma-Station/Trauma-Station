@@ -1,5 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: [BaseWeaponSniper, WeaponPistolFlintlock]
-  parent: BasePistolWhip
+  id: WeaponPistolFlintlock
+  parent: [BaseWeaponSniper, BasePistolWhip]
+
+- type: entity
+  id: WeaponSniperHristov
+  components:
+  - type: MeleeWeapon
+    wideAnimationRotation: 45
