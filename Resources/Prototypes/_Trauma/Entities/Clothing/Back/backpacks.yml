@@ -83,5 +83,5 @@
   - type: Solution
     solution:
       reagents:
-      - ReagentId: Holywater
+      - ReagentId: HolyChlorineTrifluoride
         Quantity: 1200
