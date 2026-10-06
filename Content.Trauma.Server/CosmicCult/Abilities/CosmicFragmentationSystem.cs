@@ -2,19 +2,18 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Antag;
-using Content.Shared.Mobs;
-using Content.Shared.Mobs.Components;
 using Content.Shared.NPC;
 using Content.Shared.Popups;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Silicons.Laws.Components;
+using Content.Shared.Station.Systems;
 using Content.Trauma.Common.Silicon;
 using Content.Trauma.Shared.CosmicCult;
 using Content.Trauma.Shared.CosmicCult.Components;
-using Content.Trauma.Shared.Silicons;
 using Robust.Shared.Containers;
+using Robust.Shared.Map.Components;
 
 namespace Content.Trauma.Server.CosmicCult.Abilities;
 
@@ -27,6 +26,8 @@ public sealed partial class CosmicFragmentationSystem : EntitySystem
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedMapSystem _map = default!;
+    [Dependency] private StationSystem _station = default!;
 
     private static readonly EntProtoId CosmicBorgChantry = "CosmicBorgChantry";
     private static readonly EntProtoId CosmicCultLawBoard = "CosmicCultLawBoard";
@@ -58,6 +59,24 @@ public sealed partial class CosmicFragmentationSystem : EntitySystem
         {
             _popup.PopupEntity(Loc.GetString("cosmicability-chantry-active"), args.User, args.User);
             args.Canceled = true;
+            return;
+        }
+
+        var xform = Transform(ent);
+
+        // No chantry in space
+        if (xform.GridUid is not { } gridUid)
+        {
+            _popup.PopupEntity(Loc.GetString("cosmicability-chantry-spawn-error-grid"), ent, ent);
+            return;
+        }
+
+        // No chantry on cargo shuttle
+        if (_station.GetStationInMap(xform.MapID) is not { } station ||
+            _station.GetLargestGrid(station) != null &&
+            _station.GetLargestGrid(station) != gridUid)
+        {
+            _popup.PopupEntity(Loc.GetString("cosmicability-chantry-spawn-error-station"), ent, ent);
             return;
         }
 
