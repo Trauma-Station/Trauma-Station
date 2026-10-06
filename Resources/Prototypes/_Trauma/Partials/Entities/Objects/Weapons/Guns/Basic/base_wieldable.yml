@@ -1,6 +1,6 @@
-# A basic inheritable template for a gun that is wieldable and has the standard inaccuracy.
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   id: BaseGunWieldable
   parent: BaseStockHit
   abstract: true
-
