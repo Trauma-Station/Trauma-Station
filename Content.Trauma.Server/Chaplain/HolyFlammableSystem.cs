@@ -44,7 +44,7 @@ public sealed partial class HolyFlammableSystem : EntitySystem
 
     private const float InitialGrowthRate = 0.4f;
     private const float IntermediateGrowthRate = 0.2f;
-    private const float LateGrowthRate = 0.1.0f;
+    private const float LateGrowthRate = 0.1f;
 
     public override void Initialize()
     {
