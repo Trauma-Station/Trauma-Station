@@ -174,7 +174,7 @@ public sealed partial class CosmicMonumentSystem : EntitySystem
         var xform = Transform(uid);
         outPos = new EntityCoordinates();
 
-        if (xform.GridUid is not {} gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
+        if (xform.GridUid is not { } gridUid || !TryComp<MapGridComponent>(gridUid, out var grid))
         {
             _popup.PopupEntity(Loc.GetString("cosmicability-monument-spawn-error-grid"), uid, uid);
             return false;
