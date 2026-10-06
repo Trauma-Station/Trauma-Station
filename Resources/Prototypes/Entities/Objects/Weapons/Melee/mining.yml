@@ -70,7 +70,6 @@
   - type: MeleeWeapon
     # <Trauma>
     animationRotation: -90
-    heavyStaminaCost: 0 # Mining drill is for mining
     # </Trauma>
     autoAttack: true
     angle: 0
