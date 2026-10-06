@@ -1,0 +1,93 @@
+﻿
+- type: entity
+  parent: [ BaseItem, BaseHighlyIllegalContraband ]
+  id: SamuraiEnergyPolearm
+  name: energy polearm
+  description: The honorable weapon of a space samurai. It takes the form of a sharp energy glaive, engineered to pierce armor well and allow superior reach, as well as the form of a heavy bō staff, able to knock foes down and push them back.
+  components:
+  - type: BindItemOnEquip
+  - type: WeaponClass
+    class: Polearm
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Melee/samurai_energy_polearm.rsi
+    size: Ginormous # Use your sheath.
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/samurai_energy_polearm.rsi
+    state: glaive-icon
+  - type: DisarmMalus
+    malus: .50
+  - type: MeleeWeapon
+    wideAnimationRotation: -120
+    attackRate: 1.5
+    damage:
+      types:
+        Slash: 15
+        Heat: 15
+    soundHit:
+      path: /Audio/Weapons/bladeslice.ogg
+  - type: ItemSwitch
+    defaultState: glaive
+    state: "glaive"
+    showLabel: true
+    states:
+      # Energy Glaive Form
+      glaive: !type:ItemSwitchState
+        verb: glaive
+        sprite:
+          sprite: _Trauma/Objects/Weapons/Melee/samurai_energy_polearm.rsi
+          state: glaive-icon
+        components:
+        - type: Sharp
+        - type: Tool
+          qualities:
+          - Slicing
+        - type: Execution
+          doAfterDuration: 4.0
+        - type: MeleeWeapon
+          attackRate: 1.5
+          wideAnimationRotation: -135
+          range: 2.5
+          heavyStaminaCost: 5
+          canBeParried: false
+          damage:
+            types:
+              Slash: 10
+              Heat: 15
+            armorPenetration: 0.50
+          soundHit:
+            path: /Audio/Weapons/bladeslice.ogg
+        - type: ThrowingAngle
+          angle: 225
+        - type: EmbeddableProjectile
+        - type: DamageOtherOnHit
+          damage:
+            types:
+              Piercing: 50
+            armorPenetration: 1
+      # Bo Staff Form
+      staff: !type:ItemSwitchState
+        verb: staff
+        sprite:
+          sprite: _Trauma/Objects/Weapons/Melee/samurai_energy_polearm.rsi
+          state: staff-icon
+        components:
+        - type: MeleeWeapon
+          attackRate: .5
+          wideAnimationRotation: -135
+          angle: 120
+          heavyStaminaCost: 5
+          canBeParried: false
+          damage:
+            types:
+              Blunt: 30
+            armorPenetration: 0.30
+          bluntStaminaDamageFactor: 2
+          soundHit:
+            path: /Audio/_Trauma/Weapons/Melee/breaching_hammer/club.ogg
+        - type: ThrowingAngle
+          angle: 135
+        - type: DamageOtherOnHit
+          damage:
+            types:
+              Blunt: 25
+            armorPenetration: .20

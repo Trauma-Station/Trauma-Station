@@ -172,3 +172,23 @@
     rules: ghost-role-information-wraith-rules
     mindRoles:
     - MindRoleGhostRoleSoloAntagonist
+
+- type: entity
+  categories: [ HideSpawnMenu, Spawner ]
+  parent: BaseAntagSpawner
+  id: SpawnPointGhostSamurai
+  components:
+  - type: GhostRole
+    name: ghost-role-information-samurai-name
+    description: ghost-role-information-samurai-description
+    rules: ghost-role-information-antagonist-rules
+    mindRoles:
+    - MindRoleSamurai
+    raffle:
+      settings: default
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+    - sprite: _Trauma/Objects/Weapons/Melee/samurai_energy_polearm.rsi
+      state: glaive-icon

@@ -1,0 +1,49 @@
+﻿
+- type: entity
+  parent: [ ClothingOuterHardsuitBase, BaseHighlyIllegalContraband ]
+  id: ClothingOuterSamuraiArmor
+  name: samurai o-yoroi
+  description: The classic regalia of Spider Clan samurai.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Hardsuits/samurai_armor.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Hardsuits/samurai_armor.rsi
+  - type: Item
+    size: Ginormous
+  - type: ClothingSpeedModifier
+    walkModifier: .8
+    sprintModifier: .8
+  - type: Armor
+    coverage:
+    - Torso
+    - Arm
+    - Hand
+    - Leg
+    - Foot
+    - Tail
+    - Wings
+    traumaDeductions:
+      Dismemberment: 0
+      OrganDamage: 0
+      BoneDamage: 0
+      VeinsDamage: 0
+    modifiers:
+      coefficients:
+        Blunt: 0.50
+        Slash: 0.50
+        Piercing: 0.50
+        Ballistic: .20
+        Heat: 0.20
+        Radiation: 0.10
+      flatReductions:
+        Ballistic: 5
+        Heat: 5
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: FireProtection
+    reduction: .9
+  - type: ToggleableClothing # Goobstation - Modsuits change
+    clothingPrototypes:
+      head: ClothingHeadHardsuitSamuraiArmor
+  - type: SamuraiArmor

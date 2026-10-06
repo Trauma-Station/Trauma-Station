@@ -89,3 +89,15 @@
     subtype: role-subtype-purified-construct
   - type: RoleBriefing
     briefing: blood-cult-role-briefing-purified-construct
+
+# Samurai
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleSamurai
+  name: Samurai Role
+  components:
+  - type: MindRole
+    antagPrototype: Samurai
+    subtype: role-subtype-samurai
+    exclusiveAntag: true
+  - type: SamuraiRole

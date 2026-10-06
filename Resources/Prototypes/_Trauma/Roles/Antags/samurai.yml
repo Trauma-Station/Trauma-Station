@@ -1,0 +1,70 @@
+﻿- type: antag
+  id: Samurai
+  name: roles-antag-space-ninja-name
+  antagonist: true
+  setPreference: false
+  objective: roles-antag-space-ninja-objective
+  guides: [ SpaceNinja ]
+  tags:
+  - OffStation
+  - Midround
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: Samurai
+  spawnerPrototype: SpawnPointGhostSamurai
+  pickPlayer: false
+  startingGear: SamuraiGear
+  roleLoadout:
+  - RoleSurvivalSpaceNinja
+  briefing:
+    text: samurai-role-greeting
+    color: Green
+    sound: /Audio/Misc/ninja_greeting.ogg
+  components:
+  - type: Samurai
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: AutoImplant
+    implants:
+    - MacroBombImplant # Trauma - was DeathAcidifierImplant, bada bing
+  - type: RandomMetadata
+    nameSegments:
+    - NamesNinjaTitle
+    - NamesNinja
+    nameFormat: name-format-ninja
+  mindRoles:
+  - MindRoleSamurai
+
+#Ninja Gear
+- type: startingGear
+  id: SamuraiGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitNinja
+    back: ClothingBackpackSatchelNinja
+    mask: ClothingMaskNinja
+    head: ClothingHeadHardsuitSamuraiArmor
+    eyes: ClothingEyesVisorNinja
+    gloves: ClothingHandsGlovesSpaceNinja
+    outerClothing: ClothingOuterSamuraiArmor
+    shoes: ClothingShoesSpaceNinja
+    id: NinjaPDA
+    ears: ClothingHeadsetNinja
+    pocket1: SpiderCharge
+    pocket2: PinpointerStation
+  inhand:
+  - JetpackBlackFilled
+  - SamuraiEnergyPolearm
+  storage:
+    back: # belt holds katana so satchel has the tools for sabotaging things
+    - Crowbar
+    - Wrench
+    - Screwdriver
+    - Wirecutter
+    - Welder
+    - Multitool
+    - EmergencyMedipen
+    - Flare
+    #- FoodSnackNutribrick # Trauma - rob chef instead chud
+    - DrinkWaterBottleFull

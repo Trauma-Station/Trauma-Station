@@ -1,0 +1,41 @@
+﻿
+- type: entity
+  abstract: true
+  parent: [ ClothingHeadHardsuitInsulatedBase, BaseHighlyIllegalContraband ]
+  id: ClothingHeadHardsuitSamuraiArmor
+  name: samurai o-yoroi helmet
+  description: The helmet of the mighty yoroi regalia.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Hardsuits/samurai_armor.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Hardsuits/samurai_armor.rsi
+    state: icon
+  - type: EyeProtection
+  - type: ViewconeModifier
+    angleModifier: 1.2
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: Armor
+    coverage: # Shitmed
+    - Head
+    traumaDeductions: # having a suit on saves your limbs
+      Dismemberment: 0
+      OrganDamage: 0
+      BoneDamage: 0
+      VeinsDamage: 0
+    modifiers:
+      coefficients:
+        Blunt: 0.50
+        Slash: 0.50
+        Piercing: 0.50
+        Ballistic: .20
+        Heat: 0.20
+        Radiation: 0.10
+      flatReductions:
+        Ballistic: 5
+        Heat: 5
+  - type: BreathMask
+  - type: IdentityBlocker
+  - type: IngestionBlocker
+    blockSmokeIngestion: true
