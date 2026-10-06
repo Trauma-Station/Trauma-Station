@@ -1,10 +1,23 @@
 - type: entity
   name: BaseWeaponSniper
   parent: BaseItem
-  id: BaseWeaponSniper
+  id: BaseWeaponSniperNoAmmo # Trauma - this has no ammo provider, moved that to BaseWeaponSniper
   description: A rooty tooty point and shooty.
   abstract: true
   components:
+  # <Trauma>
+  - type: EmitSoundOnPickup
+    sound:
+      collection: SnipersPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: SnipersDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: SnipersDrop
+  - type: WeaponClass
+    class: Sniper
+  # </Trauma>
   - type: Sprite
     layers:
     - state: base
@@ -25,16 +38,18 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
-  - type: BallisticAmmoProvider
-    capacity: 10
-    proto: CartridgeLightRifle
-    whitelist:
-      tags:
-      - CartridgeLightRifle
-  - type: ContainerContainer
-    containers:
-      ballistic-ammo: !type:Container
-        ents: []
+  # <Trauma> - moved to BaseWeaponSniper
+  #- type: BallisticAmmoProvider
+  #  capacity: 10
+  #  proto: CartridgeLightRifle
+  #  whitelist:
+  #    tags:
+  #    - CartridgeLightRifle
+  #- type: ContainerContainer
+  #  containers:
+  #    ballistic-ammo: !type:Container
+  #      ents: []
+  # </Trauma>
   - type: StaticPrice
     price: 500
 
@@ -96,7 +111,7 @@
 
 - type: entity
   name: Hristov
-  parent: [BaseWeaponSniper, BaseGunWieldable, BaseSyndicateContraband]
+  parent: [BaseWeaponSniperMagazine, BaseGunWieldable, BaseSyndicateContraband] # Trauma - added Magazine
   id: WeaponSniperHristov
   description: For when you absolutely, positively need to make someone regret their life choices from a safe distance. Uses .60 anti-materiel ammo.
   components:
@@ -116,22 +131,23 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
+    resetOnHandSelected: false # Goobstation - quickscope pro
   - type: CustomSpriteAmmoCounter
     loadedAmmoSprite: Interface/ItemStatus/Sniper_Cartriges/not_spent.png
     spentAmmoSprite: Interface/ItemStatus/Sniper_Cartriges/spent.png
-  - type: BallisticAmmoProvider
-    whitelist:
-      tags:
-      - CartridgeAntiMateriel
-    capacity: 5
-    proto: CartridgeAntiMateriel
+  #- type: BallisticAmmoProvider - Goobstation - Magazine Sniper
+  #  whitelist:
+  #    tags:
+  #    - CartridgeAntiMateriel
+  #  capacity: 5
+  #  proto: CartridgeAntiMateriel
   - type: SpeedModifiedOnWield
-    walkModifier: 0.25
-    sprintModifier: 0.25
+    walkModifier: 0.8 # goob edit V
+    sprintModifier: 0.8 # goob edit ^
   - type: CursorOffsetRequiresWield
   - type: EyeCursorOffset
-    maxOffset: 3
-    pvsIncrease: 0.3
+    maxOffset: 8 # Goobstation - Sniper rifles buff
+    pvsIncrease: 0.8 # Goobstation - Sniper rifles buff
   - type: StaticPrice
     price: 3500
 

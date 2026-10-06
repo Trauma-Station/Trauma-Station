@@ -16,12 +16,13 @@
   - type: UseDelay
     delay: 1
 
-
 - type: entity
-  id: BasePistolWhip
   abstract: true
+  parent: BaseItem
+  id: BasePistolWhip
   components:
   - type: AltFireMelee
+    attackType: Heavy
   - type: MeleeWeapon
     damage:
       types:

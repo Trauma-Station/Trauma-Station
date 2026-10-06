@@ -53,10 +53,12 @@
   - type: Appearance
 
 - type: entity
-  id: BaseStockHit
   abstract: true
+  parent: BaseItem
+  id: BaseStockHit
   components:
   - type: AltFireMelee
+    attackType: Heavy
   - type: MeleeWeapon
     damage:
       types:
