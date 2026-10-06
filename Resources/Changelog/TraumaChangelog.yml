@@ -15545,3 +15545,10 @@ Entries:
   id: 1693
   time: '2026-10-06T11:26:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4918
+- author: gravest0ne
+  changes:
+  - type: Remove
+    message: Removed holy water lighting unholy antags on fire. Use Holy CLF3.
+  id: 1694
+  time: '2026-10-06T12:13:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4915
