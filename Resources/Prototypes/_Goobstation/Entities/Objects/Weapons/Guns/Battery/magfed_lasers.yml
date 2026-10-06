@@ -202,7 +202,7 @@
 
 - type: entity
   name: energy LMG
-  parent: [BaseItem, BaseSecurityContraband]
+  parent: [BaseItem, BaseSecurityContraband, BaseStockHit]
   id: WeaponLaserLMG
   description: A high-tech laser LMG, that draws power from specialized backpack.
   components:
@@ -254,13 +254,6 @@
   - type: Tag
     tags:
     - LaserLMG
-  - type: AltFireMelee
-    attackType: Heavy
   - type: MeleeWeapon
-    damage:
-      types:
-       Blunt: 12
     angle: 0
     wideAnimationRotation: -90
-    soundHit:
-      collection: MetalThud

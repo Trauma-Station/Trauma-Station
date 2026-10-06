@@ -98,16 +98,6 @@
     - suitStorage
   - type: Gun
     fireRate: 2
-  - type: AltFireMelee
-    attackType: Heavy
-  - type: MeleeWeapon
-    damage:
-      types:
-       Blunt: 12
-    angle: 0
-    wideAnimationRotation: 90
-    soundHit:
-      collection: MetalThud
 
 - type: entity
   parent: [ BaseMajorContraband, WeaponGaussgun ]
@@ -129,7 +119,7 @@
     node: finish
 
 - type: entity
-  parent: [ BaseMajorContraband, BaseWeaponGaussgun ]
+  parent: [ BaseMajorContraband, BaseWeaponGaussgun, BasePistolWhip ]
   id: WeaponGaussgunPistol
   name: gauss pistol
   description: A much ligher alternative to the gauss gun, but far more innacurate and only semiautomatic.
@@ -160,16 +150,6 @@
   - type: Construction
     graph: GaussPistolGraph
     node: finish
-  - type: AltFireMelee
-    attackType: Heavy
-  - type: MeleeWeapon
-    damage:
-      types:
-       Blunt: 8  # pistol whip
-    angle: 0
-    wideAnimationRotation: 90
-    soundHit:
-      collection: MetalThud
 
 # crafting
 

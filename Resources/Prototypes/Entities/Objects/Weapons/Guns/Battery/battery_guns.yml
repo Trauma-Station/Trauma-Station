@@ -151,14 +151,6 @@
     quickEquip: false
     slots:
     - Belt
-  - type: MeleeWeapon # Goobstation V
-    damage:
-      types:
-       Blunt: 8 # pistol whip
-    angle: 0
-    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
-    soundHit:
-      collection: MetalThud # Goobstation ^
 
 - type: entity
   name: svalinn laser pistol

@@ -3,7 +3,7 @@
 # TODO: clean up, person below is an idiot
 - type: entity # literally BaseWeaponPowerCell cuz we can't get rid of components in children HELL YEA
   id: BaseWeaponCustomCell
-  parent: BaseItem
+  parent: [BaseItem, BaseStockHit]
   abstract: true
   components:
   - type: WeaponClass
@@ -43,16 +43,6 @@
     endSound:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
   - type: AlwaysHot
-  - type: AltFireMelee
-    attackType: Heavy
-  - type: MeleeWeapon
-    damage:
-      types:
-       Blunt: 12
-    angle: 0
-    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
-    soundHit:
-      collection: MetalThud
   - type: EmitSoundOnPickup
     sound:
       collection: LasersPickUp
@@ -65,7 +55,7 @@
 
 - type: entity
   id: BaseWeaponCustomCellSmall
-  parent: BaseWeaponCustomCell
+  parent: [BaseWeaponCustomCell, BasePistolWhip]
   abstract: true
   components:
   - type: Item
@@ -81,14 +71,6 @@
     quickEquip: false
     slots:
     - Belt
-  - type: MeleeWeapon # Goobstation V
-    damage:
-      types:
-       Blunt: 8 # pistol whip
-    angle: 0
-    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
-    soundHit:
-      collection: MetalThud # Goobstation ^
 
 - type: entity
   parent: BaseWeaponBattery

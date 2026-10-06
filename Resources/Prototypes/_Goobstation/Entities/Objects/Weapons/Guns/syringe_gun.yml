@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  parent: BaseStorageItem
+  parent: [ BaseStorageItem, BasePistolWhip ]
   id: BaseSyringeGun
   components:
   - type: WeaponClass
@@ -39,15 +39,6 @@
   - type: Tag
     tags:
     - GunCanAimShooter
-  - type: AltFireMelee
-    attackType: Heavy
-  - type: MeleeWeapon
-    damage:
-      types:
-       Blunt: 8
-    angle: 0
-    wideAnimationRotation: 90
-    soundHit:
 
 - type: entity
   name: syringe gun

@@ -2,6 +2,7 @@
 
 - type: entity
   id: BaseWeaponBatteryNoAmmoCounter
+  parent: BaseStockHit
   components:
   - type: EmitSoundOnPickup
     sound:
@@ -18,37 +19,22 @@
     endSound:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
   - type: AlwaysHot
-  - type: AltFireMelee
-    attackType: Heavy
-  - type: MeleeWeapon
-    damage:
-      types:
-       Blunt: 12
-    angle: 0
-    wideAnimationRotation: 90
-    soundHit:
-      collection: MetalThud
   - type: BatteryDrinkerSource
     maxAmount: 180 # you probably don't want to drain your entire gun charging in battle
   - type: WeaponClass
     class: Laser
 
 - type: entity
-  id: BaseWeaponBatterySmallNoAmmoCounter
-  components:
-  - type: AltFireMelee # Trauma
-    attackType: Heavy
-  - type: MeleeWeapon # Goobstation V
-    damage:
-      types:
-       Blunt: 8 # pistol whip
-    angle: 0
-    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
-    soundHit:
-      collection: MetalThud # Goobstation ^
+  id: BaseWeaponBatterySmall
+  parent: [BaseWeaponBatterySmallNoAmmoCounter, BasePistolWhip]
+
+- type: entity
+  id: BaseWeaponPowerCellSmall
+  parent: BasePistolWhip
 
 - type: entity
   id: BaseWeaponPowerCell
+  parent: BaseStockHit
   components:
   - type: Cautery # Shitmed
     speed: 0.9
@@ -56,13 +42,3 @@
     endSound:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
   - type: AlwaysHot
-  - type: AltFireMelee
-    attackType: Heavy
-  - type: MeleeWeapon
-    damage:
-      types:
-       Blunt: 12
-    angle: 0
-    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
-    soundHit:
-      collection: MetalThud
