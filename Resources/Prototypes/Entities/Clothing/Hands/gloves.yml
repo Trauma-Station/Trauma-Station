@@ -492,6 +492,7 @@
       collection: Punch
     animation: WeaponArcFist
     mustBeEquippedToUse: true
+    canWideSwing: false # Trauma
   - type: Fiber
     fiberMaterial: fibers-leather
     fiberColor: fibers-blue
