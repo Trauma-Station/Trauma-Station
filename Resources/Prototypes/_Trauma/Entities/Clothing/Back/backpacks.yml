@@ -74,8 +74,8 @@
 - type: entity
   parent: ClothingBackpackFirefighterTank
   id: ClothingBackpackHolyFirefighterTank
-  name: holy water tank backpack
-  description: A refrigerated water tank backpack that can launch Holy Water or work as a high pressure extinguisher.
+  name: holy fire backpack tank
+  description: A backpack tank consecrated by the finest chaplains Nanotrasen could buy the loyalty of. This one begins full of CLF3 and will burn with divine righteousness.
   components:
   - type: Sprite
     sprite: _Trauma/Clothing/Back/Backpacks/holybackpacktank.rsi
@@ -83,5 +83,5 @@
   - type: Solution
     solution:
       reagents:
-      - ReagentId: Holywater
+      - ReagentId: HolyChlorineTrifluoride
         Quantity: 1200
