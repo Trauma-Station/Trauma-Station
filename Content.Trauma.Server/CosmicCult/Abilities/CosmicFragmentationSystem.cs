@@ -68,6 +68,7 @@ public sealed partial class CosmicFragmentationSystem : EntitySystem
         if (xform.GridUid is not { } gridUid)
         {
             _popup.PopupEntity(Loc.GetString("cosmicability-chantry-spawn-error-grid"), ent, ent);
+            args.Canceled = true;
             return;
         }
 
@@ -77,6 +78,7 @@ public sealed partial class CosmicFragmentationSystem : EntitySystem
             _station.GetLargestGrid(station) != gridUid)
         {
             _popup.PopupEntity(Loc.GetString("cosmicability-chantry-spawn-error-station"), ent, ent);
+            args.Canceled = true;
             return;
         }
 
