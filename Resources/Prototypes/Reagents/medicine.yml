@@ -1260,6 +1260,12 @@
       effects:
       - !type:Extinguish
         holy: true # Trauma - don't let it extinguish its own holy fire
+    Acidic: # Trauma
+      methods: [ Touch ]
+      effects:
+      - !type:HolyIgnite
+        stacks: 1
+        conditions:
 #    Acidic:  # Goobstation - Removing holy water damage on touch pending rework.
 #      methods: [ Touch ]
 #      effects:

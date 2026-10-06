@@ -18,10 +18,10 @@ public sealed partial class HolyFlammableComponent : Component
     public float FireStacks;
 
     [DataField]
-    public float FireStacksDropoff = 15f;
+    public float FireStacksDropoff = 10f;
 
     [DataField]
-    public float MaximumFireStacks = 30f;
+    public float MaximumFireStacks = 18f;
 
     [DataField]
     public float MinimumFireStacks = -10f;
@@ -60,7 +60,7 @@ public sealed partial class HolyFlammableComponent : Component
     /// Determines how quickly the object will fade out. With positive values, the object will flare up instead of going out.
     /// </summary>
     [DataField]
-    public float FirestackFade = -1f;
+    public float FirestackFade = -0.4f;
 
     [DataField]
     public ProtoId<AlertPrototype> FireAlert = "HolyFire";

@@ -12,7 +12,7 @@
   - type: AlternatePrayable
     requireBibleUser: false
   - type: HolyIgniteOnMeleeHit # it makes holy water
-    fireStacks: 1.0
+    fireStacks: 2.0
   - type: StatusEffectOnCollideGhost
     whitelist:
       tags:
