@@ -42,9 +42,9 @@ public sealed partial class HolyFlammableSystem : EntitySystem
 
     public static readonly ProtoId<DamageTypePrototype> Holy = "Holy";
 
-    private const float InitialGrowthRate = 0.7f;
-    private const float IntermediateGrowthRate = 0.4f;
-    private const float LateGrowthRate = 20.0f;
+    private const float InitialGrowthRate = 0.4f;
+    private const float IntermediateGrowthRate = 0.2f;
+    private const float LateGrowthRate = 0.1.0f;
 
     public override void Initialize()
     {
