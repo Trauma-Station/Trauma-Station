@@ -254,7 +254,7 @@
   - type: Tag
     tags:
     - LaserLMG
-  - type: AltFireMelee # Trauma
+  - type: AltFireMelee
     attackType: Heavy
   - type: MeleeWeapon
     damage:

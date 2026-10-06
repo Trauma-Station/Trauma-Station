@@ -15,3 +15,18 @@
       path: /Audio/Items/appraiser.ogg
   - type: UseDelay
     delay: 1
+
+
+- type: entity
+  id: BasePistolWhip
+  abstract: true
+  components:
+  - type: AltFireMelee
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 8 # pistol whip
+    angle: 0
+    wideAnimationRotation: 90
+    soundHit:
+      collection: MetalThud

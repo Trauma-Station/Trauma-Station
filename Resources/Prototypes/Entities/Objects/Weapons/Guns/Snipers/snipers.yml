@@ -1,33 +1,10 @@
 - type: entity
   name: BaseWeaponSniper
   parent: BaseItem
-  id: BaseWeaponSniperNoAmmo # Trauma - this has no ammo provider, moved that to BaseWeaponSniper
+  id: BaseWeaponSniper
   description: A rooty tooty point and shooty.
   abstract: true
   components:
-  # <Trauma>
-  - type: EmitSoundOnPickup
-    sound:
-      collection: SnipersPickUp
-  - type: EmitSoundOnDrop
-    sound:
-      collection: SnipersDrop
-  - type: EmitSoundOnLand
-    sound:
-      collection: SnipersDrop
-  - type: AltFireMelee # Trauma
-    attackType: Heavy
-  - type: MeleeWeapon
-    damage:
-      types:
-        Blunt: 12
-    angle: 0
-    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
-    soundHit:
-      collection: MetalThud
-  - type: WeaponClass
-    class: Sniper
-  # </Trauma>
   - type: Sprite
     layers:
     - state: base
@@ -48,18 +25,16 @@
     - SemiAuto
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/sniper.ogg
-  # <Trauma> - moved to BaseWeaponSniper
-  #- type: BallisticAmmoProvider
-  #  capacity: 10
-  #  proto: CartridgeLightRifle
-  #  whitelist:
-  #    tags:
-  #    - CartridgeLightRifle
-  #- type: ContainerContainer
-  #  containers:
-  #    ballistic-ammo: !type:Container
-  #      ents: []
-  # </Trauma>
+  - type: BallisticAmmoProvider
+    capacity: 10
+    proto: CartridgeLightRifle
+    whitelist:
+      tags:
+      - CartridgeLightRifle
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+        ents: []
   - type: StaticPrice
     price: 500
 
@@ -121,7 +96,7 @@
 
 - type: entity
   name: Hristov
-  parent: [BaseWeaponSniper, BaseGunWieldable, BaseSyndicateContraband] # Trauma - added Magazine
+  parent: [BaseWeaponSniper, BaseGunWieldable, BaseSyndicateContraband]
   id: WeaponSniperHristov
   description: For when you absolutely, positively need to make someone regret their life choices from a safe distance. Uses .60 anti-materiel ammo.
   components:

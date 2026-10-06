@@ -18,7 +18,7 @@
     endSound:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
   - type: AlwaysHot
-  - type: AltFireMelee # Trauma
+  - type: AltFireMelee
     attackType: Heavy
   - type: MeleeWeapon
     damage:

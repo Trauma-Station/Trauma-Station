@@ -1,0 +1,65 @@
+- type: entity
+  id: BaseWeaponRevolver
+  components:
+  - type: WeaponClass
+    class: Pistol
+  - type: Gun
+    fireRate: 2
+  - type: EmitSoundOnPickup
+    sound:
+      collection: RevolversPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: RevolversDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: RevolversDrop
+  - type: AltFireMelee
+    attackType: Heavy
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 8
+    angle: 0
+    wideAnimationRotation: 90
+    soundHit:
+      collection: MetalThud
+
+- type: entity
+  id: WeaponRevolverDeckard
+  components:
+  - type: Gun
+    fireRate: 2.5
+
+- type: entity
+  id: WeaponRevolverMateba
+  components:
+  - type: Gun
+    fireRate: 4
+  - type: RevolverAmmoProvider
+    whitelist:
+      tags:
+        - CartridgeMagnum
+        - SpeedLoaderMagnum
+    proto: CartridgeMagnumAP
+    capacity: 7
+    chambers: [ True, True, True, True, True, True, True ]
+    ammoSlots: [ null, null, null, null, null, null, null ]
+    soundEject:
+      path: /Audio/Weapons/Guns/MagOut/revolver_magout.ogg
+    soundInsert:
+      path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
+
+- type: entity
+  parent: WeaponRevolverMateba
+  id: WeaponRevolverMatebaAP # For deathsquad
+  suffix: armor-piercing
+  components:
+  - type: RevolverAmmoProvider
+    proto: CartridgeMagnumAP
+
+- type: entity
+  id: WeaponRevolverPython
+  components:
+  - type: Gun
+    fireRate: 2
