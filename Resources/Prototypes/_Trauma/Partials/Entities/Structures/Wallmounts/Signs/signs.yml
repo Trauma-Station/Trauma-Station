@@ -1,0 +1,182 @@
+- type: entity
+  id: BaseSign
+  abstract: true
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSign
+
+- type: entity
+  id: BaseSignDirectional
+  abstract: true
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignDirectional
+
+# Every single warning sign individually because they don't have a common parent. Ugh.
+- type: entity
+  id: SignCorrosives
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignCryogenics
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignDanger
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignExplosives
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignFlammable
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignLaser
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignMagnetics
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignMemetic
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignSecure
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignSecurearea
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignShock
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignOptical
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignOxidants
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignRadiation
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignSecureMedRed
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignSecureSmall
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignSecureSmallRed
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignBlankMed
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignMagneticsMed
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignDangerMed
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: ExplosivesSignMed
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignCryogenicsMed
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignElectricalMed
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignBiohazardMed
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignRadiationMed
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignFlammableMed
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignLaserMed
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignSecureMed
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning

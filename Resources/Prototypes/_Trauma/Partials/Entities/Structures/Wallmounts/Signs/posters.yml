@@ -1,0 +1,6 @@
+- type: entity
+  id: PosterBase
+  abstract: true
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicPoster
