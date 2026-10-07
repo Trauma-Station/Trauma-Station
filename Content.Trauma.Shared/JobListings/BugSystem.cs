@@ -126,8 +126,7 @@ public sealed partial class BugSystem : EntitySystem
             return;
 
         ent.Comp.TargetArea ??= objComp.TargetArea;
-        if (!ent.Comp.Mind.Valid)
-            ent.Comp.Mind = args.Mind;
+        ent.Comp.Mind ??= args.Mind;
         Dirty(ent);
     }
 }
