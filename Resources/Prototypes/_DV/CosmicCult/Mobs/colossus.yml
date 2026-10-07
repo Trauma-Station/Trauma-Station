@@ -230,6 +230,26 @@
   - type: NpcFactionMember
     factions:
     - SimpleHostile
+
+- type: entity
+  parent: [ MobCosmicColossusBase ]
+  categories: [ HideSpawnMenu ]
+  id: MobCosmicColossusLone
+  suffix: MidRoundAntag
+  description: An ancient monstrosity of malign plating and dendritic infestation.
+  components:
+  - type: RandomMetadata
+    nameSegments:
+    - ColossusNames
+    - ColossusTitlesLone
+    nameFormat: name-format-colossus
+  - type: CosmicColossus
+    timed: true
+
+- type: entity
+  parent: [ MobCosmicColossusBase ]
+  id: MobCosmicColossus
+  components:
   - type: RandomMetadata
     nameSegments:
     - ColossusNames
