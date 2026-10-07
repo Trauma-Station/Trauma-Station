@@ -69,6 +69,7 @@
         - FlyingMobMask
         layer:
         - FlyingMobLayer
+  - type: AlwaysTakeHoly # even for purified ones, be careful
   - type: Damageable
     damageModifierSet: ManifestedSpirit
   - type: Injurable
