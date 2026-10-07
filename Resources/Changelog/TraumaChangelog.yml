@@ -15597,3 +15597,14 @@ Entries:
   id: 1697
   time: '2026-10-07T09:15:04.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4934
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: >-
+      Abductor teleport is no longer interrupted by dropping an item or changing
+      hands.
+  - type: Tweak
+    message: Abductor's teleport can now be interrupted by damage or movement.
+  id: 1698
+  time: '2026-10-07T09:48:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4936
