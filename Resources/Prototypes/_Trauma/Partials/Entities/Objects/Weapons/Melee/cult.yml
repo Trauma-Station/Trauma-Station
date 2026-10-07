@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: RitualDagger #ToDo: make proper partial
+  id: RitualDagger
   components:
   - type: CultItem
   - type: RuneDrawer
@@ -31,6 +31,10 @@
       path: /Audio/Items/ratchet.ogg
   - type: Item
     size: Small # it's a knife
+  - type: Construction
+    graph: CultDagger
+    deconstructionTarget: null
+    node: dagger
   - !Remove type: Clothing # it has no equipped sprite W wizden
 
 - type: entity

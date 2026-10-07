@@ -91,33 +91,4 @@ public sealed partial class BloodCultEmpoweredSystem : EntitySystem
 
         return false;
     }
-
-    // blood cult it
-    // private void OnSelect(Entity<BloodCultEmpoweredComponent> ent, ref CultSpellsSelectMessage args)
-    // {
-    //
-
-        // var index = args.Index;
-        // if (index < 0 || index >= ent.Comp.Kits.Count)
-        //     return;
-
-        // var user = args.Actor;
-        // var kit = ProtoMan.Index(ent.Comp.Kits[index]);
-        // var name = Loc.GetString(kit.Name);
-        // _popup.PopupEntity(Loc.GetString("mining-voucher-selected", ("kit", name)), user, user);
-
-        // EntityUid? voucher = null;
-        // if (_hands.EnumerateHeld(user) is { } items)
-        // {
-        //     foreach (var item in items)
-        //     {
-        //         if (TryComp<MiningVoucherComponent>(item, out var voucherComp))
-        //         {
-        //             voucher = item;
-        //             Redeem(ent, (voucher.Value, voucherComp), index, args.Actor);
-        //             break;
-        //         }
-        //     }
-        // }
-    // }
 }

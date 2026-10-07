@@ -65,10 +65,10 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
 
         var invokers = args.Invokers.Count;
         bool invokerEmpowered = false;
-        Log.Info($"{args.Invokers}");
-        if (invokers == 1){
-            foreach (var (invokersUid, comp) in args.Invokers){
-                Log.Info($"{invokersUid}");
+        if (invokers == 1)
+        {
+            foreach (var (invokersUid, comp) in args.Invokers)
+            {
                 if (TryComp<BloodCultEmpoweredComponent>(invokersUid, out var invokerComp))
                     invokerEmpowered = true;
             }

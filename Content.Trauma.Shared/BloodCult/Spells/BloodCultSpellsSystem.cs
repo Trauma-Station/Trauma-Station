@@ -103,13 +103,14 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         if (!TryComp<BloodCultistComponent>(user, out var _bloodCultistComponent))
             return;
 
-        var id = ent.Comp.AvailableActions[i];
-        if (GetActiveSpell(_bloodCultistComponent, id) is { } action)
-        {
-            _popup.PopupEntity("You forget your current spell", user, user);
-            _actions.RemoveAction(user, action);
-            return;
-        }
+        /// Nothing bad is gonna happend if i just do this right? right?
+        // var id = ent.Comp.AvailableActions[i];
+        // if (GetActiveSpell(_bloodCultistComponent, id) is { } action)
+        // {
+        //     _popup.PopupEntity("You forget your current spell", user, user);
+        //     _actions.RemoveAction(user, action);
+        //     return;
+        // }
 
         // can't do blood magic in a robot or pai
         if (!_bloodQuery.HasComp(user))
@@ -119,9 +120,12 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         }
         // ToDo: disregard constructs
 
-        var time = ent.Comp.SpellCreationTime;
-        if (HasComp<BloodCultEmpoweredComponent>(user))
-            time *= 0.4;
+        var count = _bloodCultistComponent.ActiveSpells.Count;
+        if (count >= _bloodCultistComponent.SpellsLimit)
+        {
+            _popup.PopupEntity("You need to remove another spell first!", user, user, PopupType.MediumCaution);
+            return;
+        }
 
         _popup.PopupEntity("You begin to carve unnatural symbols into your flesh!", user, user, PopupType.MediumCaution);
 
@@ -146,13 +150,6 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
 
         var user = ent.Owner;
         var cultistComp = ent.Comp;
-
-        var count = cultistComp.ActiveSpells.Count;
-        if (count >= cultistComp.SpellsLimit)
-        {
-            _popup.PopupEntity("You need to remove another spell first!", user, user, PopupType.MediumCaution);
-            return;
-        }
 
         if (_actions.AddAction(user, args.ActionProtoId) is not { } action)
             return;

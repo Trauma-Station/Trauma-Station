@@ -123,15 +123,20 @@
     edges:
     - to: dagger
       conditions:
+      completed:
+      - !type:DamageEntity # will taht damage cultist or knife?
+        damage:
+          types:
+            Slash: 15
+      steps:
+      - tag: Knife
+        amount: 1
+        name: construction-graph-tag-knife
       - !type:MinSolution
         solution: drink
         reagent:
           ReagentId: Blood
         quantity: 30
-        name: construction-graph-tag-blood-30
-      steps:
-      - tag: Knife
-        amount: 1
-        name: construction-graph-tag-knife
+      #  name: construction-graph-tag-blood-30
   - node: dagger
     entity: RitualDagger
