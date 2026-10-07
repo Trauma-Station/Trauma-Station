@@ -13,12 +13,12 @@ public sealed partial class ServerScanalyzerSystem : ScanalyzerSystem
     private void OnGetProgress(Entity<StealConditionRequireScanComponent> ent, ref ObjectiveGetProgressEvent args)
     {
         args.Progress = 0.0f;
-        if (!TryComp<StealConditionComponent>(ent.Owner, out var stealComp))
+        if (!TryComp<StealConditionComponent>(ent, out var stealComp))
             return;
 
         if (stealComp.StealGroup is not { } groupId)
         {
-            Log.Error($"Steal Objective {ent}'s StealGroup field was null.");
+            Log.Error($"Steal Objective {ToPrettyString(ent)}'s StealGroup field was null.");
             return;
         }
 
@@ -27,7 +27,7 @@ public sealed partial class ServerScanalyzerSystem : ScanalyzerSystem
     }
 
     [SubscribeLocalEvent]
-    private void OnToolSpawned(Entity<ScanalyzerComponent> ent, ref SideJobToolSpawned args)
+    private void OnToolSpawned(Entity<ScanalyzerComponent> ent, ref SideJobToolSpawnedEvent args)
     {
         if (!TryComp<StealConditionComponent>(args.Objective, out var objComp))
             return;
