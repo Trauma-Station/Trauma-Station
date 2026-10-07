@@ -18,5 +18,5 @@ public sealed partial class BugComponent : Component
     /// The mind that this bug belongs to.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid Mind;
+    public EntityUid? Mind;
 }

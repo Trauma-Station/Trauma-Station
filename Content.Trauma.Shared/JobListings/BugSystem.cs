@@ -114,7 +114,7 @@ public sealed partial class BugSystem : EntitySystem
             return;
         }
 
-        var mind = (ent.Comp.Mind, mindComp);
+        var mind = (ent.Comp.Mind.Value, mindComp);
         RegisterBuggedArea(mind, area);
         _jobs.UpdateUi(mind);
     }
