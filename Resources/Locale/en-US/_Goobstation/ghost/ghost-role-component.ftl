@@ -130,9 +130,6 @@ vox-raider-role-greeting = You are a [color=#7851A9]Vox Raider[/color], a Vox th
 ghost-role-information-clown-goblin-name = Clown goblin
 ghost-role-information-clown-goblin-description = A terrible creature, born out of hell.
 
-ghost-role-information-slasher-token = The Slasher (Token)
-
 ghost-role-information-contractor-name = Syndicate Contractor
-ghost-role-information-contractor-token = Syndicate Contractor (Token)
 ghost-role-information-contractor-description = GET DA... tider..?
 contractor-role-greeting = You are a [color=#611b2b]Syndicate Contractor[/color], a bounty hunter, you are tasked with retreving targets from the station, dead or alive.

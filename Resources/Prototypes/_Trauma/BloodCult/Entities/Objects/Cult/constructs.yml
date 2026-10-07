@@ -69,6 +69,7 @@
         - FlyingMobMask
         layer:
         - FlyingMobLayer
+  - type: AlwaysTakeHoly # even for purified ones, be careful
   - type: Damageable
     damageModifierSet: ManifestedSpirit
   - type: Injurable
@@ -243,28 +244,6 @@
   # TODO: pass through cult walls, area conversion and shield spells
 
 - type: entity
-  parent: ConstructBase # It's not technically a construct but it code wise? it is.
-  id: ShadeCult
-  name: shade
-  description: A bound spirit.
-  components:
-  - type: Sprite
-    state: shade_cult
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      40: Dead
-  - type: MeleeWeapon
-    animation: WeaponArcSmash
-    damage:
-      types:
-        Blunt: 10
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 5.5
-    baseSprintSpeed: 5.5
-  - type: VentCrawler
-
-- type: entity
   parent: ConstructJuggernaut
   id: ConstructJuggernautHoly
   name: purified juggernaut
@@ -327,11 +306,3 @@
         enum.ConstructVisualsState.Glow:
           True: { visible: false }
           False: { visible: true }
-
-- type: entity
-  parent: ShadeCult
-  id: ShadeHoly
-  name: purified shade
-  components:
-  - type: Sprite
-    state: shade_holy

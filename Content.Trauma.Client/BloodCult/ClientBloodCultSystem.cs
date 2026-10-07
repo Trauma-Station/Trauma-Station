@@ -24,7 +24,7 @@ public sealed partial class ClientBloodCultSystem : BloodCultSystem
     private static readonly ProtoId<StatusIconPrototype> LeaderIcon = "BloodCultLeader";
 
     [SubscribeLocalEvent]
-    private void OnPentagramAdded(EntityUid uid, PentagramComponent component, ComponentStartup args)
+    private void OnPentagramInit(EntityUid uid, PentagramComponent component, ComponentInit args)
     {
         if (!TryComp<SpriteComponent>(uid, out var sprite) || _sprite.LayerExists((uid, sprite), PentagramKey.Key))
             return;
@@ -41,7 +41,7 @@ public sealed partial class ClientBloodCultSystem : BloodCultSystem
     }
 
     [SubscribeLocalEvent]
-    private void OnPentagramRemoved(EntityUid uid, PentagramComponent component, ComponentShutdown args)
+    private void OnPentagramRemoved(EntityUid uid, PentagramComponent component, ComponentRemove args)
     {
         _sprite.RemoveLayer(uid, PentagramKey.Key);
     }

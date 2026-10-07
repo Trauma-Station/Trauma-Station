@@ -145479,6 +145479,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -38.5,-56.5
+  - uid: 26061
+    components:
+    - type: Transform
+      parent: 2
+      pos: -44.5,50.5
 - proto: KnifePlastic
   entities:
   - uid: 22460
@@ -167505,13 +167510,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 54.49004,14.54105
-- proto: SlasherMeatSpike
-  entities:
-  - uid: 26061
-    components:
-    - type: Transform
-      parent: 2
-      pos: -44.5,50.5
 - proto: SlimeGrinder
   entities:
   - uid: 26062

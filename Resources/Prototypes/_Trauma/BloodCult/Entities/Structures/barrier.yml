@@ -59,3 +59,6 @@
   - type: Icon
     sprite: _Trauma/BloodCult/Entities/Structures/cult_shield.rsi
     state: icon
+  # TODO: maybe make animation sprite for it
+  - type: GenericVisualizer
+    visuals: {}

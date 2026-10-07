@@ -8,6 +8,7 @@
   components:
   - type: Transform
     noRot: true
+  - type: Anchorable
   - type: Fixtures
     fixtures:
       pylonFix:

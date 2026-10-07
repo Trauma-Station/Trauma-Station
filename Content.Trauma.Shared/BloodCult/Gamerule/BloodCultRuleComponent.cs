@@ -12,9 +12,18 @@ public sealed partial class BloodCultRuleComponent : Component
     [DataField]
     public Color EyeColor = Color.FromHex("#f80000");
 
+    /// <summary>
+    /// How many cultists are needed for the whole cult to have their eyes turn red.
+    /// </summary>
+    /// <remarks>
+    /// *eyes turn red
+    /// </remarks>
     [DataField]
-    public int ReadEyeThreshold = 5;
+    public int RedEyeThreshold = 5;
 
+    /// <summary>
+    /// How many cultists are needed for the whole cult to gain a pentagram overlay.
+    /// </summary>
     [DataField]
     public int PentagramThreshold = 8;
 
