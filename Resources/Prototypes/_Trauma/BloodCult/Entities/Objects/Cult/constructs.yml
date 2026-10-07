@@ -145,7 +145,9 @@
         enum.ConstructVisualsState.Glow:
           True: { visible: false }
           False: { visible: true }
-  # TODO: shield, gauntlet echo, barrier rune
+  - type: ActionGrant
+    actions:
+    - ActionJuggernautSummonBarrierRune
 
 - type: entity
   parent: ConstructBase
@@ -176,8 +178,14 @@
         enum.ConstructVisualsState.Glow:
           True: { visible: false }
           False: { visible: true }
-  # TODO: heal allied constructs when hit
-  # TODO: cult floor, wall, greater conjuration, soulstone, lesser magic missile, revive rune
+  - type: ActionGrant
+    actions:
+    - ActionArtificerSummonReviveRune
+    - ActionArtificerSummonCultFloor
+    - ActionArtificerSummonCultWall
+    - ActionArtificerGreaterConjuration
+    - ActionArtificerSummonSoulstone
+    - ActionArtificerLesserMagicMissile
 
 - type: entity
   parent: ConstructBase
@@ -213,9 +221,10 @@
         enum.ConstructVisualsState.Glow:
           True: { visible: false }
           False: { visible: true }
-  # why the easy shit was left for the future is beyond me
-  # TODO: jaunting, lower cooldown by 1s per attack, 5s for critting and removing it on kill
-  # TODO: summon teleport rune
+  - type: ActionGrant
+    actions:
+    - ActionWraithJaunt
+    - ActionWraithSummonTeleportRune
 
 - type: entity
   parent: ConstructBase

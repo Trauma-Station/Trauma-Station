@@ -78,6 +78,9 @@
         },
         {
             "name": "veiling"
+        },
+        {
+            "name": "phaseshift"
         }
     ]
 }

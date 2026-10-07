@@ -13,9 +13,6 @@ public sealed partial class BloodCultistComponent : Component
 {
     public override bool SessionSpecific => true;
 
-    [DataField]
-    public Color OriginalEyeColor = Color.White;
-
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> ActiveSpells = new();
 

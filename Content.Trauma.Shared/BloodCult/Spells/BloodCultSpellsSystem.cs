@@ -104,7 +104,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
             return;
 
         /// Nothing bad is gonna happend if i just do this right? right?
-        // var id = ent.Comp.AvailableActions[i];
+        var id = ent.Comp.AvailableActions[i];
         // if (GetActiveSpell(_bloodCultistComponent, id) is { } action)
         // {
         //     _popup.PopupEntity("You forget your current spell", user, user);
@@ -132,7 +132,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         var createSpellEvent = new CreateSpellDoAfterEvent(id);
         var doAfter = new DoAfterArgs(EntityManager,
             user,
-            time,
+            ent.Comp.SpellCreationTime,
             createSpellEvent,
             eventTarget: user)
         {
