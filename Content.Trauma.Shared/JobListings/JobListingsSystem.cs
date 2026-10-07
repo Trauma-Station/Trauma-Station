@@ -40,12 +40,16 @@ public abstract partial class JobListingsSystem : EntitySystem
     /// </summary>
     public bool AcceptSideJob(Entity<JobListingsComponent> jobBoard, EntityUid actor, EntityUid sideJob)
     {
-        if (jobBoard.Comp.AcceptedSideJobs.Count >= jobBoard.Comp.MaximumAcceptedSideJobs)
+        if (jobBoard.Comp.AcceptedSideJobs.Count >= jobBoard.Comp.MaximumAcceptedSideJobs ||
+            !jobBoard.Comp.AvailableSideJobs.Contains(sideJob) ||
+            !SideJobQuery.TryComp(sideJob, out var sideJobComp))
             return false;
-        if (!jobBoard.Comp.AvailableSideJobs.Contains(sideJob))
+
+        if (jobBoard.Comp.Mind is not { } mind)
+        {
+            Log.Error($"Job board {ToPrettyString(jobBoard)} had no mind, can't accept job {ToPrettyString(sideJob)}!");
             return false;
-        if (!SideJobQuery.TryComp(sideJob, out var sideJobComp))
-            return false;
+        }
 
         Container.Insert(sideJob, jobBoard.Comp.AcceptedSideJobs);
 
@@ -53,7 +57,7 @@ public abstract partial class JobListingsSystem : EntitySystem
         {
             var tool = PredictedSpawnAtPosition(toolProto, Transform(actor).Coordinates);
             Hands.PickupOrDrop(actor, tool);
-            var ev = new SideJobToolSpawned(sideJob);
+            var ev = new SideJobToolSpawnedEvent(sideJob, mind);
             RaiseLocalEvent(tool, ref ev);
         }
 
@@ -425,7 +429,7 @@ public record struct SideJobCreatedEvent(int EffectiveLevel, bool Cancelled = fa
 /// Raised on a side job's tool when it is spawned.
 /// </summary>
 [ByRefEvent]
-public record struct SideJobToolSpawned(EntityUid Objective);
+public record struct SideJobToolSpawnedEvent(EntityUid Objective, EntityUid Mind);
 
 /// <summary>
 /// Raised on the job board when a non-repeatable side job is completed and its reward claimed, so the same job is not generated again.

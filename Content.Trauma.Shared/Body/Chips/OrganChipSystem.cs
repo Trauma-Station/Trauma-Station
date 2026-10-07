@@ -334,10 +334,12 @@ public sealed partial class OrganChipSystem : EntitySystem
         if (!_query.TryComp(chip, out var comp))
             return null;
 
+        // aghosts don't need to hardgrab (they can't)
+        var isAdmin = _bypassQuery.HasComp(user);
         if (_body.GetBody(organ) is { } body)
         {
             bodyEnt = body;
-            if (body != user && _pullableQuery.TryComp(body, out var pullable) && pullable.GrabStage < GrabStage.Hard)
+            if (body != user && !isAdmin && _pullableQuery.TryComp(body, out var pullable) && pullable.GrabStage < GrabStage.Hard)
             {
                 _popup.PopupEntity("You need to hardgrab them first!", body, user);
                 return null;
