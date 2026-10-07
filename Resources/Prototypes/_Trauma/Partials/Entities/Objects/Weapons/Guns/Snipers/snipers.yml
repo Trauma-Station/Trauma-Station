@@ -2,7 +2,7 @@
 
 - type: entity
   id: WeaponPistolFlintlock
-  parent: [BaseWeaponSniper, BasePistolWhip]
+  !Clear parent: [BaseWeaponSniper, BasePistolWhip, BaseMajorContraband]
 
 - type: entity
   id: WeaponSniperHristov
