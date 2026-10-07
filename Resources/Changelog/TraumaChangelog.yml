@@ -15608,3 +15608,12 @@ Entries:
   id: 1698
   time: '2026-10-07T09:48:31.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4936
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Siphon entropy is now instant and less metagameable
+  - type: Fix
+    message: Fixed cosmic cultists being unable to level up
+  id: 1699
+  time: '2026-10-07T12:45:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4937
