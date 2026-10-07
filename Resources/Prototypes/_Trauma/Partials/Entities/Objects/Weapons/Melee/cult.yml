@@ -19,6 +19,7 @@
   - type: MeleeWeapon
     soundHit: &sound
       path: /Audio/Weapons/bladeslice.ogg
+  - !Remove type: Clothing # it has no equipped sprite W wizden
 
 - type: entity
   id: EldritchBlade
