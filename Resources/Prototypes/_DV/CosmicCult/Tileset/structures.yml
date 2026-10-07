@@ -241,7 +241,7 @@
     state: poster
 
 - type: entity
-  parent: [ FlagBase, BaseCosmicCultStructure ]
+  parent: [ BaseFlag, BaseCosmicCultStructure ]
   id: CosmicFlag
   name: malign flag
   description: A flag depicting an astral brand, symbol of the Unknown's followers. At least this one doesn't glow in the dark.
