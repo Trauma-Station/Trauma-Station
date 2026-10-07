@@ -15580,3 +15580,20 @@ Entries:
   id: 1696
   time: '2026-10-07T09:01:48.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4921
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Ritual daggers are now small instead of normal.
+  - type: Fix
+    message: Blood cult Constructs now take holy damage.
+  - type: Tweak
+    message: Lockers no longer send alerts if they get blown up by a nuke etc.
+  - type: Tweak
+    message: >-
+      Handheld genome scanner printouts are now labelled with mutation id or mob
+      name.
+  - type: Fix
+    message: Fixed not being able to have minions plant progtot bugs for you.
+  id: 1697
+  time: '2026-10-07T09:15:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4934
