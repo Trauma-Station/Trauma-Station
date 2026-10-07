@@ -54,27 +54,3 @@
   - type: SingularityDistortion
     intensity: 10
     falloffPower: 1.5
-
-- type: entityEffect
-  id: hallucinatingArmor
-  effects:
-  - !type:ModifyStatusEffect
-    effectProto: StatusEffectBlurryVision
-    time: 3
-  - !type:ModifyParalysis
-    time: 3.5
-
-- type: entityEffect
-  id: incendiaryArmor
-  effects:
-  - !type:Flammable
-    multiplier: 3
-  - !type:Ignite
-
-- type: entityEffect
-  id: cryogenicArmor
-  effects:
-  - !type:AddComponents
-    components:
-    - type: IceCube
-      breakFreeDelay: 5

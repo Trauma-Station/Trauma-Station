@@ -1,0 +1,23 @@
+- type: entityEffect
+  id: HallucinatingArmor
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectBlurryVision
+    time: 3
+  - !type:ModifyParalysis
+    time: 3.5
+
+- type: entityEffect
+  id: IncendiaryArmor
+  effects:
+  - !type:Flammable
+    multiplier: 3
+  - !type:Ignite
+
+- type: entityEffect
+  id: CryogenicArmor
+  effects:
+  - !type:AddComponents
+    components:
+    - type: IceCube
+      breakFreeDelay: 5

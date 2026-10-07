@@ -134,7 +134,7 @@
       compName: Flammable
       range: 8
       effect: !type:NestedEffect
-        proto: incendiaryArmor
+        proto: IncendiaryArmor
     empEffects:
     - !type:PlaySoundEffect
       sound: *fireball_sound
@@ -191,13 +191,13 @@
       compName: Body
       range: 6
       effect: !type:NestedEffect
-        proto: cryogenicArmor
+        proto: CryogenicArmor
     empEffects:
     - !type:Sparks
     - !type:PlaySoundEffect
       sound: *ice_brick_sound
     - !type:NestedEffect
-      proto: cryogenicArmor
+      proto: CryogenicArmor
     empMessage: reactive-armor-emp-cryogenic
   - type: Construction
     graph: ArmorReactive
@@ -311,12 +311,12 @@
       compName: Body
       range: 8
       effect: !type:NestedEffect
-        proto: hallucinatingArmor
+        proto: HallucinatingArmor
     empEffects:
     - !type:PlaySoundEffect
       sound: *hallucinating_sound
     - !type:NestedEffect
-      proto: hallucinatingArmor
+      proto: HallucinatingArmor
     empMessage: reactive-armor-emp-hallucinating
   - type: Construction
     graph: ArmorReactive
