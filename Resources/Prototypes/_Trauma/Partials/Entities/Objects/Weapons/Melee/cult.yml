@@ -29,6 +29,9 @@
       - Anchoring
     useSound:
       path: /Audio/Items/ratchet.ogg
+  - type: Item
+    size: Small # it's a knife
+  - !Remove type: Clothing # it has no equipped sprite W wizden
 
 - type: entity
   id: EldritchBlade
