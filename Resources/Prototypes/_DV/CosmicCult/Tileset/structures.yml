@@ -229,3 +229,56 @@
   - type: Sprite
     sprite: _DV/CosmicCult/Tileset/railing.rsi
     state: round
+
+- type: entity
+  parent: [ PosterBase, BaseCosmicCultStructure ]
+  id: CosmicPoster
+  name: the End
+  description: A poster advertising the long-awaited final chapter of a niche TV-series. The release date is today. Your name is among the actors.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/furniture.rsi
+    state: poster
+
+- type: entity
+  parent: [ BaseFlag, BaseCosmicCultStructure ]
+  id: CosmicFlag
+  name: malign flag
+  description: A flag depicting an astral brand, symbol of the Unknown's followers. At least this one doesn't glow in the dark.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/furniture.rsi
+    state: flag
+
+- type: entity
+  parent: [ BaseSign, BaseCosmicCultStructure ]
+  id: CosmicSign
+  name: sign?
+  description: A sign indicating the abscense of nothingness in the area.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/furniture.rsi
+    state: sign-room
+
+- type: entity
+  parent: [ BaseSign, BaseCosmicCultStructure ]
+  id: CosmicSignWarning
+  name: psionic warning sign
+  description: A sign indicating a psionic hazard.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/furniture.rsi
+    state: sign-warning
+  - type: CosmicCultExamine
+    cultistText: cosmic-examine-text-sign-cult
+    othersText: cosmic-examine-text-sign
+
+- type: entity
+  parent: [ BaseSignDirectional, BaseCosmicCultStructure ]
+  id: CosmicSignDirectional
+  name: "\"directional\" sign"
+  description: Well, this isn't very helpful.
+  components:
+  - type: Sprite
+    sprite: _DV/CosmicCult/Tileset/furniture.rsi
+    state: sign-dir

@@ -4,7 +4,6 @@ using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
-using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
@@ -15,10 +14,9 @@ using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.CosmicCult.Abilities;
 
-public abstract partial class SharedCosmicSiphonSystem : EntitySystem
+public sealed partial class CosmicSiphonSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedCosmicCultSystem _cosmicCult = default!;
     [Dependency] private MobStateSystem _mobState = default!;
@@ -27,44 +25,24 @@ public abstract partial class SharedCosmicSiphonSystem : EntitySystem
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private IRobustRandom _random = default!;
 
-    private readonly ProtoId<DamageTypePrototype> DamageType = "Cold";
+    private readonly ProtoId<DamageTypePrototype> _damageType = "Cold";
 
     // Doesn't check for DivineIntervention. Yes, this is intentional.
     [SubscribeLocalEvent]
     private void OnSiphonAction(Entity<CosmicCultComponent> ent, ref CosmicSiphonEvent args)
     {
+        var target = args.Target;
         if (ent.Comp.EntropyLocked)
         {
             _popup.PopupEntity(Loc.GetString("cosmicability-siphon-full"), ent, ent);
             return;
         }
-        if (_cosmicCult.EntityIsCultist(args.Target) || _mobState.IsDead(args.Target))
+        if (_cosmicCult.EntityIsCultist(target) || _mobState.IsDead(target))
         {
-            _popup.PopupEntity(Loc.GetString("cosmicability-siphon-fail", ("target", Identity.Entity(args.Target, EntityManager))), ent, ent);
+            _popup.PopupEntity(Loc.GetString("cosmicability-siphon-fail", ("target", Identity.Entity(target, EntityManager))), ent, ent);
             return;
         }
         if (args.Handled)
-            return;
-
-        var doargs = new DoAfterArgs(EntityManager, ent, ent.Comp.CosmicSiphonDelay, new CosmicSiphonDoAfterEvent(), ent, args.Target)
-        {
-            DistanceThreshold = 2.5f,
-            Hidden = _mobState.IsAlive(args.Target), // Visible on crit targets
-            BreakOnHandChange = false,
-            BreakOnDamage = false,
-            BreakOnMove = false,
-            BreakOnDropItem = false,
-        };
-        args.Handled = true;
-        _doAfter.TryStartDoAfter(doargs);
-    }
-
-    [SubscribeLocalEvent]
-    protected virtual void OnSiphonDoAfter(Entity<CosmicCultComponent> ent, ref CosmicSiphonDoAfterEvent args)
-    {
-        if (args.Target is not {} target
-            || args.Cancelled
-            || args.Handled)
             return;
 
         args.Handled = true;
@@ -81,7 +59,7 @@ public abstract partial class SharedCosmicSiphonSystem : EntitySystem
 
             var curDamage = _damage.GetTotalDamage(target).Float();
             DamageSpecifier dspec = new();
-            dspec.DamageDict.Add(DamageType, damage.Value - curDamage + _random.NextFloat(30f, 60f));
+            dspec.DamageDict.Add(_damageType, damage.Value - curDamage + _random.NextFloat(30f, 60f));
             _damage.TryChangeDamage(target, dspec, true);
         }
 
