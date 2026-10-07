@@ -15552,3 +15552,9 @@ Entries:
   id: 1694
   time: '2026-10-06T12:13:28.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4915
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Security and command now have a +50% bias to antag roll chances.
+  id: 1694
+  time: '2026-10-07T07:43:12.0000000+00:00'
