@@ -65,6 +65,36 @@ public abstract partial class AntagSelectionSystem
         => null;
 
     /// <summary>
+    /// Find the first antag gamerule with a given component.
+    /// </summary>
+    public Entity<AntagSelectionComponent>? FindRule([ForbidLiteral] CompName comp)
+    {
+        var type = Factory.GetRegistration(comp).Type;
+        var query = EntityManager.AllEntityQueryEnumerator(type);
+        while (query.MoveNext(out var uid, out _))
+        {
+            if (_query.TryComp(uid, out var ontag))
+                return (uid, ontag);
+        }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Returns true if a player was selected for any antag from a gamerule.
+    /// </summary>
+    public bool IsPlayerAnyAntag(Entity<AntagSelectionComponent> rule, ICommonSession player)
+    {
+        foreach (var players in rule.PreSelectedSessions.Values)
+        {
+            if (players.Contains(player))
+                return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
     /// Forces a player to become a specific antag of a gamerule, ignoring its limits.
     /// </summary>
     public void ForceMakeAntag(ICommonSession player, Entity<AntagSelectionComponent> rule, AntagSpecifierPrototype specifier)
