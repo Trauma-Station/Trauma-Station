@@ -7,6 +7,7 @@ using Content.Trauma.Common.Traitor;
 using Content.Trauma.Shared.JobListings;
 using System.Linq;
 using Robust.Shared.Random;
+using Content.Trauma.Common.JobListings;
 
 namespace Content.Trauma.Server.JobListings;
 
@@ -163,16 +164,18 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
     [SubscribeLocalEvent]
     private void OnUplinkAssigned(ref UplinkAssignedEvent args)
     {
-        LinkUplink(args.Uplink, args.Host, Mind.GetMind(args.User));
+        if (Mind.GetMind(args.User) is { } mind)
+            LinkUplink(args.Uplink, args.Host, mind);
     }
 
     [SubscribeLocalEvent]
     private void OnUplinkLinked(ref UplinkLinkedEvent args)
     {
-        LinkUplink(args.Uplink, args.Host, args.Mind);
+        if (args.Mind is { } mind)
+            LinkUplink(args.Uplink, args.Host, mind);
     }
 
-    private void LinkUplink(EntityUid uid, EntityUid host, EntityUid? mind)
+    private void LinkUplink(EntityUid uid, EntityUid host, EntityUid mind)
     {
         if (!JobListingsQuery.TryComp(uid, out var comp))
             return;
@@ -180,10 +183,12 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
         // set mind
         comp.Mind = mind;
         DirtyField(uid, comp, nameof(JobListingsComponent.Mind));
+        AddComp(mind, new JobListingsOwnerComponent { JobListings = uid });
 
         // init job board
         FillSideJobs((uid, comp));
         Link((uid, comp), host);
         SetRefreshTime((uid, comp));
+        AddComp(host, new HiddenJobListingsComponent()); // no such thing as a free lunch
     }
 }

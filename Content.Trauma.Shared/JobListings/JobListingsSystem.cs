@@ -2,6 +2,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Reflection.Metadata;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
@@ -32,8 +33,9 @@ public abstract partial class JobListingsSystem : EntitySystem
     [Dependency] protected EntityQuery<SideJobComponent> SideJobQuery = default!;
     [Dependency] protected EntityQuery<MindComponent> MindQuery = default!;
     [Dependency] protected EntityQuery<ObjectiveComponent> ObjectiveQuery = default!;
-    [Dependency] private EntityQuery<JobListingsOwnerComponent> _ownqerQuery = default!;
+    [Dependency] private EntityQuery<JobListingsOwnerComponent> _ownerQuery = default!;
     [Dependency] private EntityQuery<RemoteJobListingsComponent> _remoteQuery = default!;
+    [Dependency] private EntityQuery<HiddenJobListingsComponent> _hiddenQuery = default!;
 
     /// <summary>
     /// Accept an already assigned job.
@@ -178,6 +180,8 @@ public abstract partial class JobListingsSystem : EntitySystem
     /// </summary>
     public void OpenUi(EntityUid owner, EntityUid actor)
     {
+        if (_hiddenQuery.HasComp(owner))
+            return;
         UpdateUi(owner, actor);
         Ui.TryToggleUi(owner, JobListingsUiKey.Key, actor);
     }
@@ -220,7 +224,7 @@ public abstract partial class JobListingsSystem : EntitySystem
     {
         if (mind.Comp.OwnedEntity is null)
             return;
-        if (!_ownqerQuery.TryComp(mind.Owner, out var jobListingsOwnerComp))
+        if (!_ownerQuery.TryComp(mind.Owner, out var jobListingsOwnerComp))
             return;
         var jobBoard = jobListingsOwnerComp.JobListings;
         if (!JobListingsQuery.TryComp(jobBoard, out var jobBoardComp))
@@ -351,6 +355,28 @@ public abstract partial class JobListingsSystem : EntitySystem
         DirtyFields(jobBoard.AsNullable(), null, nameof(JobListingsComponent.Reputation), nameof(JobListingsComponent.BonusRefresh));
     }
 
+    /// <summary>
+    /// Reveal a hidden job board.
+    /// The progtot job board is hidden by default and must be revealed via an uplink purchase.
+    /// </summary>
+    public void RevealJobBoard(Entity<MindComponent> mind)
+    {
+        if (!_ownerQuery.TryComp(mind, out var jobListingsOwnerComp))
+            return;
+        if (!JobListingsQuery.TryComp(jobListingsOwnerComp.JobListings, out var jobListingsComp))
+            return;
+        foreach (var remote in jobListingsComp.Remotes)
+        {
+            RemComp<HiddenJobListingsComponent>(remote);
+        }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnRevealJobBoard(Entity<MindComponent> ent, ref RevealJobBoardEvent args)
+    {
+        RevealJobBoard(ent);
+    }
+
     [SubscribeLocalEvent]
     private void OnStartup(Entity<JobListingsComponent> ent, ref ComponentStartup args)
     {
@@ -436,3 +462,9 @@ public record struct SideJobToolSpawnedEvent(EntityUid Objective, EntityUid Mind
 /// </summary>
 [ByRefEvent]
 public record struct SideJobClaimedEvent(EntityUid SideJob);
+
+/// <summary>
+/// Raised on a mind to remove the <see cref="HiddenJobListingsComponent"/> from its associated job board.
+/// </summary>
+[DataDefinition]
+public sealed partial class RevealJobBoardEvent : EntityEventArgs;

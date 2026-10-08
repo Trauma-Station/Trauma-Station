@@ -1,0 +1,39 @@
+- type: listing
+  id: UplinkJobRunnerKit
+  name: uplink-job-runner-kit-name
+  description: uplink-job-runner-kit-desc
+  icon:
+    sprite: Objects/Specific/Syndicate/telecrystal.rsi
+    state: telecrystal
+  raiseProductEventOnMind: true
+  productEvent: !type:RevealJobBoardEvent
+  cost:
+    Telecrystal: 50
+  categories:
+    - UplinkContractors
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+  - !type:ListingLimitedStockCondition
+    stock: 1
+
+- type: listing
+  id: UplinkManhunterKit
+  name: uplink-manhunter-kit-name
+  description: uplink-manhunter-kit-desc
+  icon:
+    sprite: _Goobstation/Objects/Weapons/Melee/contractor_baton.rsi
+    state: icon
+  cost:
+    Telecrystal: 100
+  categories:
+    - UplinkContractors
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+  - !type:ListingLimitedStockCondition
+    stock: 1
