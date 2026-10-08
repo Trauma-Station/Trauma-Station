@@ -19,7 +19,19 @@
     duration: 5
   - type: Bible
     damage:
-      types:
+      types: !Clear
+        Blunt: -5
+        Piercing: -5
         Ballistic: -5
+        Slash: -5
+        Heat: -5
+        Cold: -5
+        Shock: -5
+    damageOnFail:
+      types: !Clear
+        Blunt: 5
+        Piercing: 5
+        Slash: 5
+        Asphyxiation: 15
   - type: MeleeWeapon
     angle: 0
