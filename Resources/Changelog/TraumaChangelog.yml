@@ -15370,3 +15370,257 @@ Entries:
   id: 1672
   time: '2026-10-01T22:06:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4846
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed traitors that started with an uplink implant not having access to
+      side jobs.
+  id: 1673
+  time: '2026-10-02T11:08:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4852
+- author: Endothermix
+  changes:
+  - type: Tweak
+    message: >-
+      Potassium Water and CLF3 bombs have had their explosive power
+      significantly reduced, go make real explosives.
+  id: 1674
+  time: '2026-10-02T14:20:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4847
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: All heretic armors now have pressure protection (but not free air).
+  id: 1675
+  time: '2026-10-02T19:04:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4857
+- author: JohnJJohn
+  changes:
+  - type: Fix
+    message: Fixed raptor chicks not staying tamed when they grow up
+  id: 1676
+  time: '2026-10-02T19:15:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4856
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: Nerfed Luxurium
+  id: 1677
+  time: '2026-10-02T19:25:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4826
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed truncheon having an awful item shape.
+  id: 1678
+  time: '2026-10-02T19:30:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4860
+- author: momoyawn
+  changes:
+  - type: Tweak
+    message: Less instant death from holy water
+  id: 1679
+  time: '2026-10-02T20:34:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4861
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed blob tile upgrading being free.
+  id: 1680
+  time: '2026-10-03T08:50:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4868
+- author: NoElkaTheGod
+  changes:
+  - type: Remove
+    message: Salvagers can no longer buy money for mining points.
+  - type: Add
+    message: Added new cargo bounties.
+  - type: Tweak
+    message: Bounties and mail now give more money.
+  - type: Tweak
+    message: >-
+      Tweaked mail loot pool, it now has less trash and more useful items.
+      Sometimes you can even find contraband, so open those letters!
+  id: 1681
+  time: '2026-10-03T22:43:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4854
+- author: Endothermix
+  changes:
+  - type: Remove
+    message: Removed disabler from sec lockers.
+  id: 1682
+  time: '2026-10-04T20:00:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4882
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: >-
+      Methylenedioxystraquinone (Strawberry Ice) now metabolises in the
+      bloodstream correctly.
+  - type: Tweak
+    message: >-
+      Methylenedioxystraquinone (Strawberry Ice) now has much more severe
+      withdrawal effects, up to a heart attack. Get the HOS addicted.
+  id: 1683
+  time: '2026-10-04T22:05:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4864
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed rainbow cannabis being gmod error for half its growth stages.
+  id: 1684
+  time: '2026-10-04T22:23:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4886
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Blood cultists are now unholy...
+  id: 1685
+  time: '2026-10-04T23:48:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4889
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed being able to walk through cult barrier rune's spawned barrier
+      serverside.
+  id: 1686
+  time: '2026-10-05T00:06:43.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4891
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed evac buttons being blocked while on blue alert.
+  id: 1687
+  time: '2026-10-05T00:09:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4892
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed new blood cult converts not getting halo or red eyes applied.
+  - type: Fix
+    message: Fixed purified soul shards not indicating that in their ghost role text.
+  id: 1688
+  time: '2026-10-05T12:30:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4901
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed issues with blood cult's pylon healing and range.
+  id: 1689
+  time: '2026-10-05T12:34:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4899
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Soul shards from ghost roles can no longer move around...
+  - type: Remove
+    message: Soul shards can no longer spawn shades.
+  id: 1690
+  time: '2026-10-05T12:37:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4900
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed slasher slop.
+  id: 1691
+  time: '2026-10-05T13:28:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4902
+- author: StarMade
+  changes:
+  - type: Tweak
+    message: >-
+      Advanced CQC Consecutive sleep now requires stamcrit, and deals a total 75
+      stamina damage on its own.
+  id: 1692
+  time: '2026-10-05T15:31:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4867
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: >-
+      Cosmic cult can now only place vacuous spires and vacuous chantries on the
+      station
+  id: 1693
+  time: '2026-10-06T11:26:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4918
+- author: gravest0ne
+  changes:
+  - type: Remove
+    message: Removed holy water lighting unholy antags on fire. Use Holy CLF3.
+  id: 1694
+  time: '2026-10-06T12:13:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4915
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Security and command now have a +50% bias to antag roll chances.
+  id: 1694
+  time: '2026-10-07T07:43:12.0000000+00:00'
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added lone abductor to the event scheduler
+  - type: Tweak
+    message: >-
+      Removed the major antagonist alert for lone abductors and midround
+      wraiths.
+  - type: Tweak
+    message: >-
+      Decreased the maximum time needed for midround wraiths to spawn to 20
+      minutes.
+  id: 1695
+  time: '2026-10-07T07:18:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4929
+- author: Hoodsie
+  changes:
+  - type: Remove
+    message: Removed milk from energy soda dispenser.
+  id: 1696
+  time: '2026-10-07T09:01:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4921
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Ritual daggers are now small instead of normal.
+  - type: Fix
+    message: Blood cult Constructs now take holy damage.
+  - type: Tweak
+    message: Lockers no longer send alerts if they get blown up by a nuke etc.
+  - type: Tweak
+    message: >-
+      Handheld genome scanner printouts are now labelled with mutation id or mob
+      name.
+  - type: Fix
+    message: Fixed not being able to have minions plant progtot bugs for you.
+  id: 1697
+  time: '2026-10-07T09:15:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4934
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: >-
+      Abductor teleport is no longer interrupted by dropping an item or changing
+      hands.
+  - type: Tweak
+    message: Abductor's teleport can now be interrupted by damage or movement.
+  id: 1698
+  time: '2026-10-07T09:48:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4936
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Siphon entropy is now instant and less metagameable
+  - type: Fix
+    message: Fixed cosmic cultists being unable to level up
+  id: 1699
+  time: '2026-10-07T12:45:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4937
+- author: Aineias1
+  changes:
+  - type: Remove
+    message: Removed bagel sec shuttle, now hope that pods wont do the same
+  id: 1700
+  time: '2026-10-07T19:16:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4938

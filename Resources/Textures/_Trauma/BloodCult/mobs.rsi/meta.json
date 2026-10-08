@@ -8,14 +8,6 @@
   },
   "states": [
     {
-      "name": "shade_cult",
-      "directions": 4
-    },
-    {
-      "name": "shade_holy",
-      "directions": 4
-    },
-    {
       "name": "artificer",
       "directions": 4
     },

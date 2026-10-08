@@ -28,7 +28,7 @@ public sealed partial class PylonComponent : Component
     /// How long to wait between healing cultists.
     /// </summary>
     [DataField]
-    public TimeSpan HealCooldown = TimeSpan.FromSeconds(20);
+    public TimeSpan HealCooldown = TimeSpan.FromSeconds(7.5);
 
     /// <summary>
     /// Tile to randomly convert everything nearby into.
