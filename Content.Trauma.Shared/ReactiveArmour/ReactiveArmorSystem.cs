@@ -50,7 +50,8 @@ public sealed partial class ReactiveArmorSystem : EntitySystem
         var target = user;
         var effects = ent.Comp.Effects;
 
-        if (_timing.CurTime < ent.Comp.LastEmpd + ent.Comp.EmpDuration){
+        if (_timing.CurTime < ent.Comp.LastEmpd + ent.Comp.EmpDuration)
+        {
             effects = ent.Comp.EmpEffects;
             if (!ent.Comp.ApplyEmpEffectOnUser)
                 target = ent.Owner;
