@@ -1,0 +1,25 @@
+﻿# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: Bible
+  components:
+  - type: EnchantingTool
+    userWhitelist:
+      components:
+      - BibleUser
+  - type: AlternatePrayable
+    requireBibleUser: false
+  - type: HolyIgniteOnMeleeHit
+    fireStacks: 2.0
+  - type: StatusEffectOnCollideGhost
+    whitelist:
+      tags:
+      - WeakToSalt
+    statusEffect: Corporeal
+    duration: 5
+  - type: Bible
+    damage:
+      types:
+        Ballistic: -5
+  - type: MeleeWeapon
+    angle: 0
