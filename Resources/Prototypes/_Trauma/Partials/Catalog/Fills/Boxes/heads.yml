@@ -1,0 +1,56 @@
+- type: entity
+  id: BoxCECircuitboards
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: EngineeringTechFabCircuitboard
+        - id: RoboticsConsoleCircuitboard
+        - id: StationAiFixerCircuitboard
+
+
+- type: entity
+  id: BoxCMOCircuitboards
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CloningPodMachineCircuitboard
+        - id: MedicalScannerMachineCircuitboard
+        - id: CloningConsoleComputerCircuitboard
+        - id: BiomassReclaimerMachineCircuitboard
+
+- type: entity
+  id: BoxHoPCircuitboards
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ServiceTechFabCircuitboard
+
+- type: entity
+  id: BoxQMCircuitboards
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: LavalandShuttleConsoleCircuitboard
+        - id: CargoTechFabCircuitboard
+
+- type: entity
+  parent: ToteBase
+  id: BoxRDCircuitboards
+  name: science circuit tote
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: XenobiologyBountyComputerCircuitboard
+        - id: ScienceTechFabCircuitboard # replaces circuit printer and protolathe
+        - !Remove id: RoboticsConsoleCircuitboard
+        - !Remove id: StationAiFixerCircuitboard

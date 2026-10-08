@@ -1,0 +1,5 @@
+- type: entity
+  id: WeaponEnergyTurretAIControlPanel
+  components:
+  - type: AccessReader
+    access: !Clear [["StationAi"], ["ChiefEngineer"]]
