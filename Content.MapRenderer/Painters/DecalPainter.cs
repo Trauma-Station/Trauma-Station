@@ -88,7 +88,8 @@ public sealed class DecalPainter
 
         image.Mutate(o => o.Rotate((float) -decal.Angle.Degrees));
         var coloredImage = new Image<Rgba32>(image.Width, image.Height);
-        Color color = decal.Color?.WithAlpha(byte.MaxValue).ConvertImgSharp() ?? Color.White; // remove the encoded color alpha here
+        // Trauma - wrap it in ScaledVector conversions
+        Color color = Color.FromScaledVector((decal.Color ?? Robust.Shared.Maths.Color.White).WithAlpha(byte.MaxValue).ConvertImgSharp().ToScaledVector4()); // remove the encoded color alpha here
         var alpha = decal.Color?.A ?? 1; // get the alpha separately so we can use it in DrawImage
         coloredImage.Mutate(o => o.BackgroundColor(color));
 
