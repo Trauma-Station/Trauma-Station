@@ -57,6 +57,6 @@ public sealed partial class ReactiveArmorSystem : EntitySystem
                 target = ent.Owner;
         }
 
-        _effects.ApplyEffects(user, effects);
+        _effects.ApplyEffects(target, effects);
     }
 }
