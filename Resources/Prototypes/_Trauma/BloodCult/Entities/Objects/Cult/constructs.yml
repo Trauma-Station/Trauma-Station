@@ -148,6 +148,8 @@
   - type: ActionGrant
     actions:
     - ActionJuggernautSummonBarrierRune
+    - ActionJuggernautShield
+    - ActionJuggernautGauntletEcho
 
 - type: entity
   parent: ConstructBase

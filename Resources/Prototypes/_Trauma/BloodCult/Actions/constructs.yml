@@ -22,7 +22,7 @@
   components:
   - type: Sprite
     layers:
-    - state: CultRuneRevive
+    - state: revive
   - type: WorldTargetAction
     event: !type:PlaceTileEntityEvent
       entity: CultRuneRevive
@@ -39,13 +39,14 @@
   description: Summons cult floor.
   components:
   - type: Sprite
-    sprite: /Textures/_Trauma/BloodCult/Tiles/cult_tile/cult.png
+    layers:
+    - state: create_cult_floor
   - type: Action
     checkCanInteract: false
     useDelay: 25
-  - type: WorldTargetAction
-    event: !type:ChangeTileReaction
-      newTileId: CultFloor
+  # - type: WorldTargetAction # cant use that
+  #   event: !type:ChangeTileReaction
+  #     newTileId: CultFloor
 
 - type: entity
   parent: BaseActionBloodCultSummonEntity
@@ -82,9 +83,11 @@
     checkCanInteract: false
     useDelay: 25
   - type: InstantAction
-    event: !type:SpawnRandomEntities
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:SpawnEntity
       entity: ConstructShell
-      number: 1
 
 - type: entity
   parent: BaseActionBloodCult
@@ -100,9 +103,11 @@
     checkCanInteract: false
     useDelay: 25
   - type: InstantAction
-    event: !type:SpawnRandomEntities
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:SpawnEntity
       entity: SoulShard
-      number: 1
 
 - type: entity
   parent: BaseActionBloodCult
@@ -135,7 +140,7 @@
     itemIconStyle: NoItem
   - type: Sprite
     layers:
-    - state: phaseshift
+    - state: phase_shift
   - type: InstantAction
     event: !type:ShadowJauntEvent
 
@@ -183,6 +188,9 @@
   name: Shield
   description: This spell creates a temporary forcefield to shield yourself and allies from incoming fire.
   components:
+  - type: Sprite
+    layers:
+    - state: summon_force_wall
   - type: Action
     checkCanInteract: false
     useDelay: 25
@@ -194,6 +202,9 @@
   name: Gauntlet Echo
   description: Channels energy into your gauntlet - firing its essence forward in a slow moving, yet devastating, attack.
   components:
+  - type: Sprite
+    layers:
+    - state: blood_barrage
   - type: Action
     checkCanInteract: false
     useDelay: 25

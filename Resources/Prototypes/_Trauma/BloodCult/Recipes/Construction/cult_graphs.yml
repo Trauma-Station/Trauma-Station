@@ -122,7 +122,6 @@
   - node: start
     edges:
     - to: dagger
-      conditions:
       completed:
       - !type:DamageEntity # will taht damage cultist or knife?
         damage:
@@ -132,6 +131,7 @@
       - tag: Knife
         amount: 1
         name: construction-graph-tag-knife
+      conditions:
       - !type:MinSolution
         solution: drink
         reagent:
