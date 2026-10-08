@@ -10,7 +10,6 @@
   - type: FTLSmashImmune
   - type: CosmicCultExamine
     cultistText: cosmic-examine-text-cultentity
-    othersText: cosmic-examine-text-entities
   - type: AntagImmune
   - type: Sprite
     drawdepth: Mobs
@@ -139,7 +138,7 @@
         Blunt: -0.5
         Slash: -0.5
         Piercing: -0.5
-        Ballistic: -0.5 # Trauma
+        Ballistic: -0.5
         Heat: -0.5
         Cold: -0.5
         Shock: -0.5
