@@ -9,6 +9,7 @@ using Content.Shared.DoAfter;
 using Content.Shared.Interaction;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
+using Content.Shared.Store;
 using Content.Shared.Store.Components;
 
 namespace Content.Goobstation.Server.NTR.Scan
@@ -89,7 +90,7 @@ namespace Content.Goobstation.Server.NTR.Scan
             }
             else
             {
-                var currency = new Dictionary<string, FixedPoint2>
+                var currency = new Dictionary<ProtoId<CurrencyPrototype>, FixedPoint2>
                 {
                     { "NTLoyaltyPoint", FixedPoint2.New(points) }
                 };

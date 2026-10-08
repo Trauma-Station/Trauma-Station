@@ -20,8 +20,10 @@ public static partial class PoolManager
         (TraumaCVars.DisablePathfinding.Name, "true"), // 5GB memory usage spike in some tests and potential deadlocking
         (TraumaCVars.DisableVisionEffects.Name, "true"), // they spawn entities a lot, similar to how audio entities which are ignored
         (TraumaCVars.StationTraitsEnabled.Name, "false"), // spawns game rules and tests dont like it
+        (TraumaCVars.AutomaticMapVote.Name, "false"), // apparently dummy sessions really don't like to vote?
         // </Trauma>
         (CCVars.DatabaseSynchronous.Name,     "true"),
+        (CCVars.DatabaseSnapshot.Name,        "true"),
         (CCVars.DatabaseSqliteDelay.Name,     "0"),
         (CCVars.HolidaysEnabled.Name,         "false"),
         (CCVars.GameMap.Name,                 TestMap),
@@ -43,5 +45,6 @@ public static partial class PoolManager
         (CCVars.InteractionRateLimitCount.Name, "9999999"),
         (CCVars.InteractionRateLimitPeriod.Name, "0.1"),
         (CCVars.MovementMobPushing.Name, "false"),
+        (CCVars.ResourceUploadingStoreDeletionDays.Name, "0"),
     };
 }

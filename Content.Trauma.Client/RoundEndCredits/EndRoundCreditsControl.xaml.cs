@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Client.GameTicking.Managers;
+using Content.Client.GameTicking;
 using Content.Shared.GameTicking;
 using Content.Shared.Roles;
 using Robust.Client.ResourceManagement;
@@ -11,8 +11,8 @@ namespace Content.Trauma.Client.RoundEndCredits;
 [GenerateTypedNameReferences]
 public sealed partial class EndRoundCreditsControl : ScrollContainer
 {
-    [Dependency] private IEntitySystemManager _entitySystem = default!;
-    private readonly ClientGameTicker _gameTicker;
+    [Dependency] private IEntityManager _ent = default!;
+    private ClientGameTicker _ticker;
 
     private static readonly ResPath Logo = new("/Textures/Logo/logo.png");
     private static readonly ResPath Pixellari = new("/Fonts/_Trauma/Pixellari.ttf");
@@ -27,15 +27,14 @@ public sealed partial class EndRoundCreditsControl : ScrollContainer
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-        _gameTicker = _entitySystem.GetEntitySystem<ClientGameTicker>();
+        _ticker = _ent.System<ClientGameTicker>();
     }
 
     public void Populate(RoundEndMessageEvent message, IResourceCache cache, IPrototypeManager proto, string shoutout, bool debug = false)
     {
-
         var stationName = "Unknown";
 
-        foreach (var (_, name) in _gameTicker.StationNames)
+        foreach (var (_, name) in _ticker.StationNames)
         {
             stationName = name;
             break;

@@ -162,7 +162,7 @@ public sealed partial class SharedAnimalAgeingSystem : EntitySystem
 
     public void CopyAndReplaceEntity(EntProtoId entToSpawn, EntityUid uid)
     {
-        if (!_proto.TryIndex<PolymorphPrototype>(Polymorph, out var proto))
+        if (!_proto.TryIndex(Polymorph, out var proto))
             return;
 
         var poly = proto.Configuration;

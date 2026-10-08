@@ -1,0 +1,246 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: sourcePort
+  id: Powered
+  name: signal-port-name-powered
+  description: signal-port-description-powered
+
+# Circuits
+
+- type: sourcePort
+  id: Circuit1
+  name: signal-port-name-circuit-1
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit2
+  name: signal-port-name-circuit-2
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit3
+  name: signal-port-name-circuit-3
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit4
+  name: signal-port-name-circuit-4
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit5
+  name: signal-port-name-circuit-5
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit6
+  name: signal-port-name-circuit-6
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit7
+  name: signal-port-name-circuit-7
+  description: signal-port-description-circuit-output
+
+- type: sourcePort
+  id: Circuit8
+  name: signal-port-name-circuit-8
+  description: signal-port-description-circuit-output
+
+# Plumbing
+
+- type: sourcePort
+  id: PlumbingOutput
+  name: signal-port-name-plumbing-output
+  description: signal-port-description-plumbing-output
+  color: &color_reagent "#a100a1"
+
+- type: sourcePort
+  id: PlumbingDispenser
+  name: signal-port-name-plumbing-dispenser
+  description: signal-port-description-plumbing-dispenser
+  color: *color_reagent
+
+# Robotic Arm
+
+- type: sourcePort
+  id: RoboticArmOutput
+  name: signal-port-name-output-machine
+  description: signal-port-description-output-machine
+  color: &color_item "#ff8000"
+
+- type: sourcePort
+  id: RoboticArmMoved
+  name: signal-port-name-item-moved
+  description: signal-port-description-item-moved
+
+- type: sourcePort
+  id: AutomationSlotFilter
+  name: signal-port-name-automation-slot-filter
+  description: signal-port-description-automation-slot-filter
+  color: *color_item
+
+# Reagent Grinder
+
+- type: sourcePort
+  id: AutomationSlotBeaker
+  name: signal-port-name-automation-slot-beaker
+  description: signal-port-description-automation-slot-beaker
+  color: *color_item
+
+- type: sourcePort
+  id: AutomationSlotInput
+  name: signal-port-name-automation-slot-input
+  description: signal-port-description-automation-slot-input
+  color: *color_item
+
+# Flatpacker
+
+- type: sourcePort
+  id: AutomationSlotBoard
+  name: signal-port-name-automation-slot-board
+  description: signal-port-description-automation-slot-board
+  color: *color_item
+
+# Disposal Unit
+
+- type: sourcePort
+  id: DisposalReady
+  name: signal-port-name-ready
+  description: signal-port-description-ready
+
+# Storage Bin
+
+- type: sourcePort
+  id: AutomationSlotStorage
+  name: signal-port-name-automation-slot-storage
+  description: signal-port-description-automation-slot-storage
+  color: *color_item
+
+- type: sourcePort
+  id: StorageInserted
+  name: signal-port-name-storage-inserted
+  description: signal-port-description-storage-inserted
+
+- type: sourcePort
+  id: StorageRemoved
+  name: signal-port-name-storage-removed
+  description: signal-port-description-storage-removed
+
+# Fax Machine
+
+- type: sourcePort
+  id: AutomationSlotPaper
+  name: signal-port-name-automation-slot-paper
+  description: signal-port-description-automation-slot-paper
+  color: *color_item
+
+# Constructor / Interactor
+
+- type: sourcePort
+  id: Started
+  name: signal-port-name-machine-started
+  description: signal-port-description-machine-started
+  defaultLinks: [ Off ] # for stopping conveyors
+
+- type: sourcePort
+  id: Completed
+  name: signal-port-name-machine-completed
+  description: signal-port-description-machine-completed
+  defaultLinks: [ Forward ] # for starting conveyors again
+
+- type: sourcePort
+  id: Failed
+  name: signal-port-name-machine-failed
+  description: signal-port-description-machine-failed
+
+# Interactor
+
+- type: sourcePort
+  id: AutomationSlotTool
+  name: signal-port-name-automation-slot-tool
+  description: signal-port-description-automation-slot-tool
+  color: *color_item
+
+# Autodoc
+
+- type: sourcePort
+  id: AutomationSlotAutodocHand
+  name: signal-port-name-automation-slot-autodoc-hand
+  description: signal-port-description-automation-slot-autodoc-hand
+  color: *color_item
+
+# Gas Canister
+
+- type: sourcePort
+  id: AutomationSlotGasTank
+  name: signal-port-name-automation-slot-gas-tank
+  description: signal-port-description-automation-slot-gas-tank
+  color: *color_item
+
+# ChemMaster
+
+- type: sourcePort
+  id: AutomationSlotBottles
+  name: signal-port-name-automation-slot-bottles
+  description: signal-port-description-automation-slot-bottles
+  color: *color_item
+
+# Radiation Collector
+
+- type: sourcePort
+  id: RadEmpty
+  name: signal-port-name-rad-empty
+  description: signal-port-description-rad-empty
+
+- type: sourcePort
+  id: RadLow
+  name: signal-port-name-rad-low
+  description: signal-port-description-rad-low
+
+- type: sourcePort
+  id: RadFull
+  name: signal-port-name-rad-full
+  description: signal-port-description-rad-full
+
+# Intercom
+
+- type: sourcePort
+  id: RadioMessage
+  name: signal-port-name-radio-message
+  description: signal-port-description-radio-message
+  color: &color_string "#0000dc"
+
+# Access Scanner
+
+- type: sourcePort
+  id: AccessActive
+  name: signal-port-name-access-active
+  description: signal-port-description-access-active
+
+- type: sourcePort
+  id: AccessName
+  name: signal-port-name-access-name
+  description: signal-port-description-access-name
+  color: *color_string
+
+- type: sourcePort
+  id: AccessJob
+  name: signal-port-name-access-job
+  description: signal-port-description-access-job
+  color: *color_string
+
+# Lathe
+
+- type: sourcePort
+  id: LatheCurrentRecipe
+  name: signal-port-name-lathe-current-recipe
+  description: signal-port-description-lathe-current-recipe
+  color: *color_string
+
+# Clock
+
+- type: sourcePort
+  id: Clock
+  name: signal-port-name-clock
+  description: signal-port-description-clock

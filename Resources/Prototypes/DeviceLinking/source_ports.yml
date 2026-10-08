@@ -47,6 +47,11 @@
   defaultLinks: [ DoorBolt ]
 
 - type: sourcePort
+  id: DoorBoltStatus
+  name: signal-port-name-doorboltstatus
+  description: signal-port-description-doorboltstatus
+
+- type: sourcePort
   id: DockStatus
   name: signal-port-name-dockstatus
   description: signal-port-description-dockstatus
@@ -76,6 +81,12 @@
   defaultLinks: [ ArtifactAnalyzerReceiver ]
 
 - type: sourcePort
+  id: TargetSource
+  name: signal-port-name-target-source
+  description: signal-port-description-target-source
+  defaultLinks: [ TargetReceiver ]
+
+- type: sourcePort
   id: Timer
   name: signal-port-name-timer-trigger
   description: signal-port-description-timer-trigger
@@ -91,7 +102,7 @@
   id: Output
   name: signal-port-name-logic-output
   description: signal-port-description-logic-output
-  defaultLinks: [ Input ]
+  defaultLinks: [ Input, Start ] # Trauma - added Start
 
 - type: sourcePort
   id: OutputHigh

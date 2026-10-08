@@ -8,9 +8,11 @@ using Content.Goobstation.Shared.Shadowling.Components;
 using Content.Shared.Actions;
 using Content.Shared.Bible.Components;
 using Content.Shared.Examine;
+using Content.Shared.Interaction.Events;
 using Content.Shared.Mindshield.Components;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
+using Content.Shared.Suicide;
 using Robust.Shared.Containers;
 using Robust.Shared.Timing;
 
@@ -124,6 +126,13 @@ public abstract partial class SharedPossessionSystem : EntitySystem
 
         args.Message = "already-possessed";
         args.Cancelled = true;
+    }
+
+    [SubscribeLocalEvent(before: [typeof(SharedSuicideSystem)])]
+    private void OnSuicideAttempt(Entity<PossessedComponent> ent, ref SuicideGhostEvent args)
+    {
+        // nice try
+        args.Handled = true;
     }
 
     [SubscribeLocalEvent]

@@ -6,46 +6,30 @@
   setPreference: false
   startingGear: CentcommGear
   icon: "JobIconNanotrasen"
-  supervisors: job-supervisors-centcom # Trauma - hos is below central command, not above them
-  requirements: # Trauma
-  - !type:AgeRequirement
-    requiredAge: 21
+  supervisors: job-supervisors-hos
   accessGroups:
   - AllAccess
   access:
-  - NanotrasenRepresentative # Trauma
   - CentralCommand
-  # <Trauma>
   special:
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipERT
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
-  # </Trauma>
+    implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
 
-- type: startingGear # Goobstation - Start - SolsticeOfTheWinter
+- type: startingGear
   id: CentcommGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitCentcomOfficial
-    shoes: ClothingShoesBootsJackFilled # Change this if you want, I don't really care.
-    head: ClothingHeadHatCentcomcap # Lets be real, the other hat looks like steaming ASS.
-    eyes: ClothingEyesGlassesCentComm # Goobstation
-    gloves: ClothingHandsGlovesHeavyGoldenTrim # Goobstation
-    back: ClothingBackpackSatchelLeather # Goobstation - Officials need bags too!
-    outerClothing: ClothingOuterArmorCentcommCarapace # Officials shouldn't use shitty armor, Nanotrasen is richer than that.
-    neck: ExecutiveIDCard # Executive Access!
+    shoes: ClothingShoesBootsCombatFilled
+    head: ClothingHeadHatCentcom
+    eyes: ClothingEyesGlassesCommand
+    gloves: ClothingHandsGlovesColorBlack
+    outerClothing: ClothingOuterArmorCentcommCarapace
     id: CentcomPDA
     ears: ClothingHeadsetAltCentCom
-    belt: ClothingBeltHolsterFilledCentComm # was N1984
+    belt: WeaponPistolN1984
     pocket1: BoxFolderCentComClipboardThreePapers
-    # pocket2: PenCentcom - Already has one in the PDA. This is redundant.
-  storage:
-    back:
-    - HandheldFaxOfficial # NTRs fax is huge, do you expect me to use some POOR person fax?
-    - BoxFolderCentComClipboard # Solely for holding and looking menacing.
-    - DeterrentCaseFilled
-# Goobstation - End
+    pocket2: PenCentcom
+
 
 - type: chameleonOutfit
   id: CentralCommandOfficialOutfit

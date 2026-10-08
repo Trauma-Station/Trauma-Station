@@ -1,7 +1,5 @@
-using Content.Shared.Random;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
 namespace Content.Shared.Weapons.Ranged.Components;
 
@@ -12,27 +10,18 @@ namespace Content.Shared.Weapons.Ranged.Components;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class BasicEntityAmmoProviderComponent : AmmoProviderComponent
 {
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("proto", customTypeSerializer:typeof(PrototypeIdSerializer<EntityPrototype>))]
-    public string? Proto; // Goob edit
-
-    // Goobstation
-    [DataField]
-    public ProtoId<WeightedRandomEntityPrototype>? Prototypes;
+    [DataField] // Trauma - not required, Prototypes exists
+    public EntProtoId? Proto; // Trauma - optional, null by default
 
     /// <summary>
     ///     Max capacity.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("capacity")]
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public int? Capacity = null;
 
     /// <summary>
     ///     Actual ammo left. Initialized to capacity unless they are non-null and differ.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("count")]
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public int? Count = null;
 }

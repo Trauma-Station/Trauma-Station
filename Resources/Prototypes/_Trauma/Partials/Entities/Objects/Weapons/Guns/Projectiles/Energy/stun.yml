@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: BulletDisabler
+  components:
+  - !Remove type: StunOnCollide # lol
+  - type: StaminaDamageOnCollide
+    damage: 22
+
+- type: entity
+  id: BulletDisablerSmgStunning
+  components:
+  - type: StaminaDamageOnCollide
+    damage: 13

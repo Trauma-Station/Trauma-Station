@@ -4,9 +4,6 @@
   id: Haycutters
   description: This kills the wire. Moo!
   components:
-  - type: Tag
-    tags:
-    - PlantSampleTaker
   - type: Sprite
     sprite: Objects/Tools/Cowtools/haycutters.rsi
     state: haycutters
@@ -25,6 +22,7 @@
     speedModifier: 0.05
   - type: Item
     sprite: Objects/Tools/Cowtools/haycutters.rsi
+  - type: BotanySampleTaker
 
 - type: entity
   name: moodriver
@@ -78,6 +76,10 @@
   id: Cowbar
   description: Cow your problems away. Moo!
   components:
+  # <Trauma>
+  - type: UseDelay # For insta prying
+    delay: 3
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Tools/Cowtools/cowbar.rsi
     state: cowbar
@@ -96,8 +98,6 @@
     delay: 10
   - type: Prying
     speedModifier: 0.05
-  - type: UseDelay # Goobstation - For insta prying
-    delay: 3
 
 - type: entity
   name: mooltitool

@@ -6,10 +6,14 @@
   parent: AirlockScience
   id: AirlockRobotics
   suffix: Robotics
-  # TODO: non-chem sprites
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Doors/robotics.rsi
 
 - type: entity
   parent: AirlockScienceGlass
   id: AirlockRoboticsGlass
   suffix: Robotics
-  # TODO: non-chem sprites
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Doors/robotics-glass.rsi

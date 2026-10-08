@@ -57,7 +57,7 @@
       weight: 0.05
     - id: EggSpiderFertilized
       weight: 0.05
-    - id: XenoEgg
+    - id: XenomorphEgg
       weight: 0.1
 
 - type: scrollPrayer

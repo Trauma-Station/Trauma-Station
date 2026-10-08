@@ -20,7 +20,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     		<ScrollContainer VerticalExpand="True" HorizontalExpand="True">
 		        <BoxContainer Name="TasksContainer" Orientation="Vertical"/>
 	        </ScrollContainer>
-	        <controls:HLine Margin="4 8" Thickness="1"/>
+	        <controls:Separator Margin="4 8"/>
 	        <BoxContainer Orientation="Horizontal" HorizontalExpand="True" Align="Center">
 	        	<Label Name="Ayylmao" Text="👽" Align="Right" Margin="4"/>
 		        <Label Text="{Loc 'abductor-task-window-footer'}" Align="Left" Margin="12"/>

@@ -30,11 +30,10 @@
   parent: [ LoneAbductorRule, BaseAntagGhostRoleRule ]
   id: LoneAbductorSpawn
   components:
-  - type: GhostroleAlert
   - type: StationEvent
     earliestStart: 15
     reoccurrenceDelay: 70
-    weight: 1
+    weight: 3
     minimumPlayers: 20 # They're nigh impossible to catch even with a full sec team
     duration: null
 

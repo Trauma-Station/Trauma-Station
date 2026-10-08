@@ -2,7 +2,6 @@
 
 - type: constructionGraph
   id: RevTurret
-  start: start
   graph:
   - node: start
     edges:
@@ -28,8 +27,6 @@
         icon:
           sprite: Structures/Piping/Atmospherics/pipe.rsi
           state: pipeStraight
-      - tool: Welding
-        doAfter: 1
   - node: barrel
     entity: RevUnfinishedTurretBarrel
     edges:
@@ -45,25 +42,25 @@
         icon:
           sprite: Objects/Misc/modular_receiver.rsi
           state: icon
-      - tool: Welding
+      - tool: Screwing
         doAfter: 1
     - to: SMG turret
       steps:
       - material: RevGunParts
         amount: 2
-      - tool: Welding
-        doAfter: 2
-      - material: RevBolt
+      - tool: Screwing
+        doAfter: 1
       - tag: ModularReceiver
         name: construction-graph-tag-modular-receiver
         icon:
           sprite: Objects/Misc/modular_receiver.rsi
           state: icon
-      - material: RevNut
       - tool: Anchoring
         doAfter: 2
       - material: RevBolt
+        amount: 2
       - material: RevNut
+        amount: 2
       - tool: Anchoring
         doAfter: 2
   - node: pistol turret

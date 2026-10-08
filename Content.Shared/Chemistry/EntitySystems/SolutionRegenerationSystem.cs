@@ -22,7 +22,7 @@ public sealed partial class SolutionRegenerationSystem : EntitySystem
     {
         ent.Comp.NextRegenTime = _timing.CurTime + ent.Comp.Duration;
 
-        Dirty(ent);
+        DirtyField(ent, ent.Comp, nameof(SolutionRegenerationComponent.NextRegenTime)); // Trauma - use field deltas
     }
 
     public override void Update(float frameTime)
@@ -39,7 +39,7 @@ public sealed partial class SolutionRegenerationSystem : EntitySystem
             // timer ignores if its full, it's just a fixed cycle
             regen.NextRegenTime += regen.Duration;
             // Needs to be networked and dirtied so that the client can reroll it during prediction
-            Dirty(uid, regen);
+            DirtyField(uid, regen, nameof(SolutionRegenerationComponent.NextRegenTime)); // Trauma - use field deltas
             var amount = FixedPoint2.Min(solution.Solution.AvailableVolume, regen.Generated.Volume);
             if (amount <= FixedPoint2.Zero)
                 continue;

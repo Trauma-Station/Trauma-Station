@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Custom item by NoElkaTheGod",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "bed"
+    },
+    {
+      "name": "rack"
+    },
+    {
+      "name": "flag"
+    },
+    {
+      "name": "poster"
+    },
+    {
+      "name": "sign-dir",
+      "directions": 4
+    },
+    {
+      "name": "sign-room"
+    },
+    {
+      "name": "sign-warning"
+    }
+  ]
+}

@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Electrocution;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Mech.Components;
 using Content.Shared.Mech.EntitySystems;
 using Content.Shared.Mech.Equipment.Components;
+using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
 using Content.Trauma.Common.Mech;
 using Robust.Shared.Containers;
@@ -32,10 +34,24 @@ public sealed partial class TraumaMechSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
+    private void OnAttemptMelee(Entity<MechEquipmentComponent> ent, ref AttemptMeleeEvent args)
+    {
+        if (ent.Comp.EquipmentOwner is not {} mech || !_mechQuery.HasComp(mech))
+            args.Cancelled = true;
+    }
+
+    [SubscribeLocalEvent]
     private void OnEntGotRemovedFromContainer(Entity<MechPilotComponent> ent, ref EntGotRemovedFromContainerMessage args)
     {
         // Fixes scram implants or teleports locking the pilot out of being able to move.
         _mech.TryEject(ent.Comp.Mech, pilot: ent.Owner);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnElectrocutionAttempt(Entity<MechPilotComponent> ent, ref ElectrocutionAttemptEvent args)
+    {
+        // mechs can insulate the pilot from shocks theyre made of conductive metal
+        RaiseLocalEvent(ent.Comp.Mech, args);
     }
 
     [SubscribeLocalEvent]

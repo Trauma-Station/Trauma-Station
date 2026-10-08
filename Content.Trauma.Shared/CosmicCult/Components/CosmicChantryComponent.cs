@@ -27,7 +27,7 @@ public sealed partial class CosmicChantryComponent : Component
 
     [DataField] public bool Completed;
 
-    [DataField] public SoundSpecifier ChantryAlarm = new SoundPathSpecifier("/Audio/_DV/CosmicCult/chantry_alarm.ogg");
+    [DataField] public SoundSpecifier ChantryAlarm = new SoundPathSpecifier("/Audio/Cosmic/chantry-alarm.ogg");
 
     [DataField] public SoundSpecifier BriefingSfx = new SoundPathSpecifier("/Audio/_DV/CosmicCult/antag_cosmic_AI_briefing.ogg");
 

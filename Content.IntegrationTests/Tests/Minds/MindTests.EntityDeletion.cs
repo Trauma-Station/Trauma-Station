@@ -1,15 +1,3 @@
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 ShadowCommander <10494922+ShadowCommander@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 ShadowCommander <shadowjjt@gmail.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Winkarst <74284083+Winkarst-cpu@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 #nullable enable
 using System.Linq;
 using Content.Server.GameTicking;
@@ -186,7 +174,7 @@ public sealed partial class MindTests
         EntityUid ghost = default!;
         await server.WaitAssertion(() =>
         {
-            ghost = entMan.SpawnEntity(GameTicker.ObserverPrototypeName, MapCoordinates.Nullspace);
+            ghost = entMan.SpawnEntity(ServerGameTicker.ObserverPrototypeName, MapCoordinates.Nullspace);
             mindSystem.Visit(mind.Id, ghost);
         });
 
@@ -235,7 +223,7 @@ public sealed partial class MindTests
         var ghost = await BecomeGhost(pair);
 
         // Player is a normal ghost (not admin ghost).
-        Assert.That(entMan.GetComponent<MetaDataComponent>(player.AttachedEntity!.Value).EntityPrototype?.ID, Is.Not.EqualTo(GameTicker.AdminObserverPrototypeName));
+        Assert.That(entMan.GetComponent<MetaDataComponent>(player.AttachedEntity!.Value).EntityPrototype?.ID, Is.Not.EqualTo(ServerGameTicker.AdminObserverPrototypeName));
 
         // Try to become an admin ghost
         await server.WaitAssertion(() => serverConsole.ExecuteCommand(player, "aghost"));
@@ -246,7 +234,7 @@ public sealed partial class MindTests
         {
             Assert.That(player.AttachedEntity, Is.Not.EqualTo(ghost), "Player is still attached to the old ghost");
             Assert.That(entMan.HasComponent<GhostComponent>(player.AttachedEntity), "Player did not become a new ghost");
-            Assert.That(entMan.GetComponent<MetaDataComponent>(player.AttachedEntity!.Value).EntityPrototype?.ID, Is.EqualTo(GameTicker.AdminObserverPrototypeName));
+            Assert.That(entMan.GetComponent<MetaDataComponent>(player.AttachedEntity!.Value).EntityPrototype?.ID, Is.EqualTo(ServerGameTicker.AdminObserverPrototypeName));
         });
 
         var mindId = player.ContentData()?.Mind;

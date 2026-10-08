@@ -316,7 +316,7 @@
   suffix: Mining
   components:
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Standard/mining.rsi
+    sprite: Structures/Doors/Airlocks/Standard/cargo-mining.rsi
     state: "assembly"
 
 - type: entity
@@ -325,7 +325,7 @@
   suffix: Mining, Glass
   components:
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/Glass/mining.rsi
+    sprite: Structures/Doors/Airlocks/Glass/cargo-mining.rsi
     state: "assembly"
 
 #Syndicate
@@ -373,5 +373,5 @@
   suffix: HighSec
   components:
   - type: Sprite
-    sprite: Structures/Doors/Airlocks/highsec/highsec.rsi
+    sprite: Structures/Doors/Airlocks/Standard/airlock-vault.rsi
     state: "assembly"

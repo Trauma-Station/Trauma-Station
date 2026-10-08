@@ -14,7 +14,8 @@ namespace Content.Client.UserInterface.Controls;
 /// <remarks>
 /// Colors for the different states need to be set in the stylesheet
 /// </remarks>
-public sealed partial class ConfirmButton : Button
+[Virtual] // Trauma - made virtual, removed sealed
+public partial class ConfirmButton : Button
 {
     [Dependency] private IGameTiming _gameTiming = default!;
 
@@ -161,6 +162,13 @@ public sealed partial class ConfirmButton : Button
 
     private void HandleOnPressed(ButtonEventArgs buttonEvent)
     {
+        // <Trauma> - make it behave like a normal button if it has 0 delay
+        if (ResetTime <= TimeSpan.Zero)
+        {
+            OnPressed?.Invoke(buttonEvent);
+            return;
+        }
+        // </Trauma>
         //Prevent accidental confirmations from double clicking
         if (IsConfirming && _nextCooldown > _gameTiming.CurTime)
             return;

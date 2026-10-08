@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: HeadOfSecurity
+  guides:
+  - Security
+  - SpaceLaw
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipCombatEducation
+    - SkillChipCombatHOS
+  - !type:AddComponentSpecial
+    components:
+    - type: Condemned # Nanotrasen owns your soul pal.
+      soulOwnedNotDevil: true
+    - type: SecurityStaff
+
+- type: startingGear
+  id: HoSGear
+  equipment:
+    gloves: !Remove # replaced with loadouts
+    pocket1: !Remove # no ballistics
+  storage:
+    back:
+    - !Remove MagazinePistol

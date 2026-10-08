@@ -13,7 +13,7 @@ namespace Content.Trauma.Shared.Heretic.Systems.Side;
 public sealed partial class EldritchSleepStatusEffectSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
-    [Dependency] private SharedBloodstreamSystem _bloodstream = default!;
+    [Dependency] private BloodstreamSystem _bloodstream = default!;
 
     public override void Initialize()
     {

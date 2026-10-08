@@ -168,8 +168,7 @@ public sealed partial class CosmicRiftSystem : EntitySystem
         _status.TrySetStatusEffectDuration(args.User, PressureImmunity);
         EnsureComp<SpecialLowTempImmunityComponent>(args.User);
         EnsureComp<CosmicNonRespiratingComponent>(args.User);
-        RemComp<HungerComponent>(args.User); // Eschew Metabolism is kill, rifts give the effect instead
-        RemComp<ThirstComponent>(args.User);
+        RemComp<SatiationComponent>(args.User); // Eschew Metabolism is kill, rifts give the effect instead
         _cult.AddEntropy(uid, rift.EntropyGranted);
         _popup.PopupCoordinates(
             Loc.GetString("cosmiccult-rift-absorb", ("NAME", Identity.Entity(args.User, EntityManager))),

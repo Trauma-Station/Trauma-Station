@@ -22,7 +22,7 @@ public sealed partial class InitialBodySystem : EntitySystem
         SubscribeLocalEvent<InitialBodyComponent, MapInitEvent>(OnMapInit,
             // <Trauma>
             before: [ typeof(TriggerSystem) ], // a few triggers depend on body being set up
-            after: [ typeof(SharedBloodstreamSystem) ]); // make sure bloodstream solutions are initialized for damage on body init etc
+            after: [ typeof(BloodstreamSystem) ]); // make sure bloodstream solutions are initialized for damage on body init etc
             // </Trauma>
     }
 

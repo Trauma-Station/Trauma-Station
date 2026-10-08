@@ -76,10 +76,27 @@ public sealed partial class BlobCoreComponent : Component
     #region Blob Ranges
 
     [DataField]
-    public float NodeRadiusLimit = 5f;
-
-    [DataField]
     public float TilesRadiusLimit = 9f;
+
+    #endregion
+
+    #region Damage popups
+
+    /// <summary>
+    /// Threshold to use large popups instead of medium for taking damage.
+    /// </summary>
+    [DataField]
+    public FixedPoint2 LargeDamageThreshold = 8;
+
+    /// <summary>
+    /// How long to wait between damage popups.
+    /// </summary>
+    [DataField]
+    public TimeSpan DamagePopupDelay = TimeSpan.FromSeconds(1.5);
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    [AutoPausedField, AutoNetworkedField]
+    public TimeSpan NextDamagePopup;
 
     #endregion
 

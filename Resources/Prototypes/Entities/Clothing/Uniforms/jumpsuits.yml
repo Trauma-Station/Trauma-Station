@@ -419,7 +419,7 @@
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitKimono
   name: kimono
-  description: Traditional chinese clothing.
+  description: Traditional Japanese clothing.
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/kimono.rsi

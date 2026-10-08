@@ -1,35 +1,40 @@
 using Content.Server.Power.Components;
 using Content.Server.Power.EntitySystems;
 using Content.Server.StationEvents.Components;
+using Content.Shared.Database;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Station.Components;
+using Content.Shared.Whitelist;
 using JetBrains.Annotations;
-using Robust.Shared.Random;
 
 namespace Content.Server.StationEvents.Events;
 
+/// <summary>
+/// Handler for events that turn off a handful of APCs on a station.
+/// </summary>
+/// <seealso cref="BreakerFlipRuleComponent"/>
 [UsedImplicitly]
 public sealed partial class BreakerFlipRule : StationEventSystem<BreakerFlipRuleComponent>
 {
     [Dependency] private ApcSystem _apcSystem = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
 
-    protected override void Added(EntityUid uid, BreakerFlipRuleComponent component, GameRuleComponent gameRule, GameRuleAddedEvent args)
+    protected override void Added(Entity<BreakerFlipRuleComponent, GameRuleComponent> ent, ref GameRuleAddedEvent args)
     {
-        if (!TryComp<StationEventComponent>(uid, out var stationEvent))
+        if (!TryComp<StationEventComponent>(ent, out var stationEvent))
             return;
 
         var str = Loc.GetString("station-event-breaker-flip-announcement", ("data", Loc.GetString($"random-sentience-event-data-{RobustRandom.Next(1, 6)}")));
         stationEvent.StartAnnouncement = str;
 
-        base.Added(uid, component, gameRule, args);
-
+        base.Added(ent, ref args);
     }
 
-    protected override void Started(EntityUid uid, BreakerFlipRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
+    protected override void Started(Entity<BreakerFlipRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
     {
-        base.Started(uid, component, gameRule, args);
+        base.Started(ent, ref args);
 
-        if (GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station
+        if (Station.GetRandomStationGrids() is not { } stationGrids) // Trauma - get grids instead of comparing station, blacklist is irrelevant
             return;
 
         var stationApcs = new List<Entity<ApcComponent>>();
@@ -50,7 +55,12 @@ public sealed partial class BreakerFlipRule : StationEventSystem<BreakerFlipRule
 
         for (var i = 0; i < toDisable; i++)
         {
-            _apcSystem.ApcToggleBreaker(stationApcs[i], stationApcs[i]);
+            var apc = stationApcs[i];
+            _apcSystem.ApcToggleBreaker(apc, apc);
+
+            var stateString = apc.Comp.MainBreakerEnabled ? "Enabled" : "Disabled";
+            AdminLogManager.Add(LogType.ItemConfigure, LogImpact.Medium,
+                $"Station event {ToPrettyString(ent):user} set the main breaker state of {ToPrettyString(apc):entity} to {stateString:state}");
         }
     }
 }

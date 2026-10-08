@@ -1,32 +1,18 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: vial of tickles
+  parent: BaseDemonBottle
   id: BottleOfTickles
-  parent: [BaseItem, BaseMagicalContraband]
+  name: vial of tickles
   description: A magically infused bottle of clown love, distilled from countless hugging attacks. Used in funny rituals to attract adorable creatures.
   components:
   - type: Sprite
-    sprite: _Goobstation/Wizard/Objects/vials.rsi
     state: vialtickles
   - type: Solution
-    id: liquid
     solution:
-      maxVol: 15
       reagents:
       - ReagentId: Laughter
         Quantity: 15
-  - type: ExaminableSolution
-    solution: liquid
-  - type: Item
-    size: Tiny
-  - type: DamageOnLand
-    damage:
-      types:
-        Blunt: 5
-  - type: Damageable
-  - type: Injurable
-    damageContainer: Inorganic
   - type: Destructible
     thresholds:
     - trigger:
@@ -51,16 +37,15 @@
         acts: [ "Destruction" ]
 
 - type: entity
-  name: vial of blood
+  parent: BaseDemonBottle
   id: BottleOfBlood
-  parent: BottleOfTickles
+  name: vial of blood
   description: A magically infused bottle of blood, distilled from countless murder victims. Used in unholy rituals to attract horrifying creatures.
   components:
   - type: Sprite
     state: vial
   - type: Solution
     solution:
-      maxVol: 15
       reagents:
       - ReagentId: Blood
         Quantity: 15

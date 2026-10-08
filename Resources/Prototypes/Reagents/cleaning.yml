@@ -11,13 +11,6 @@
   boilingPoint: 111.0
   meltingPoint: -5.0
   metabolisms:
-    # <Trauma>
-    Digestion:
-      effects:
-      - !type:DiseaseProgressChange
-        affectedType: Parasite
-        progressModifier: -0.15
-    # </Trauma>
     Bloodstream:
       effects:
       - !type:HealthChange

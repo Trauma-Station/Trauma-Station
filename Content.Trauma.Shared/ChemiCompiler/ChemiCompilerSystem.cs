@@ -135,13 +135,13 @@ public sealed partial class ChemiCompilerSystem : EntitySystem
         if (args.Reservoir < 1 || args.Reservoir > ChemiCompilerComponent.Reservoirs)
             return;
 
-        if (!_slots.TryGetSlot(ent, ent.Comp.SlotId(args.Reservoir), out var slot))
+        if (!_slots.TryGetSlot(ent.Owner, ent.Comp.SlotId(args.Reservoir), out var slot))
             return;
 
         if (slot.Item == null)
-            _slots.TryInsertFromHand(ent, slot, args.Actor);
+            _slots.TryInsertFromHand(ent.Owner, slot, user: args.Actor);
         else
-            _slots.TryEjectToHands(ent, slot, args.Actor, excludeUserAudio: true);
+            _slots.TryEjectToHands(ent.Owner, slot, user: args.Actor, excludeUserAudio: true);
     }
 
     private void OnHalt(Entity<ChemiCompilerComponent> ent, ref ChemiCompilerHaltMessage args)
@@ -153,12 +153,12 @@ public sealed partial class ChemiCompilerSystem : EntitySystem
     /// Stops a running program, giving the beakers back and telling the interface why it stopped.
     /// Does nothing if the machine wasn't running.
     /// </summary>
-    public void Halt(Entity<ChemiCompilerComponent> ent, string? reason = null)
+    public void Halt(Entity<ChemiCompilerComponent> ent, LocId? reason = null)
     {
         if (!TryComp<ActiveChemiCompilerComponent>(ent, out var active))
             return;
 
-        RemComp<ActiveChemiCompilerComponent>(ent);
+        RemComp(ent, active);
         SetReservoirsLocked(ent, false);
 
         _audio.PlayPvs(ent.Comp.IdleSound, ent);
@@ -198,7 +198,7 @@ public sealed partial class ChemiCompilerSystem : EntitySystem
         var reservoirs = new bool[ChemiCompilerComponent.Reservoirs];
         for (var i = 0; i < ChemiCompilerComponent.Reservoirs; i++)
         {
-            reservoirs[i] = _slots.GetItemOrNull(ent, ent.Comp.SlotId(i + 1)) != null;
+            reservoirs[i] = _slots.GetItemOrNull(ent.Owner, ent.Comp.SlotId(i + 1)) != null;
         }
 
         var state = new ChemiCompilerState(
@@ -215,9 +215,10 @@ public sealed partial class ChemiCompilerSystem : EntitySystem
 
     private void SetReservoirsLocked(Entity<ChemiCompilerComponent> ent, bool locked)
     {
+        var slots = Comp<ItemSlotsComponent>(ent);
         for (var i = 1; i <= ChemiCompilerComponent.Reservoirs; i++)
         {
-            _slots.SetLock(ent, ent.Comp.SlotId(i), locked);
+            _slots.SetLock((ent, slots), ent.Comp.SlotId(i), locked);
         }
     }
 

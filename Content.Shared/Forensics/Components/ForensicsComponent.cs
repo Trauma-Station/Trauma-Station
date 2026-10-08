@@ -1,42 +1,47 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.Forensics.Components // Goob/Einstein Engins - Shared Forensics Component
+namespace Content.Shared.Forensics.Components;
+
+/// <summary>
+/// Leaves evidence on entities for <see cref="ForensicScannerComponent"/> to find.
+/// </summary>
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
+public sealed partial class ForensicsComponent : Component
 {
-    [RegisterComponent, NetworkedComponent, AutoGenerateComponentState] // Einstein Engines - Network that shit
-    public sealed partial class ForensicsComponent : Component
-    {
-        [DataField, AutoNetworkedField] // Einstein Engines - Network that shit
-        public HashSet<string> Fingerprints = new();
+    /// <summary>
+    /// Leaves evidence of FingerPrints left by uncovered hands.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public HashSet<string> Fingerprints = [];
 
-        [DataField, AutoNetworkedField] // Einstein Engines - Network that shit
-        public HashSet<string> Fibers = new();
+    /// <summary>
+    /// Leaves evidence of Fibers left by gloves.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public HashSet<string> Fibers = [];
 
-        [DataField, AutoNetworkedField] // Einstein Engines - Network that shit
-        public HashSet<(string, TimeSpan)> DNAs = new(); // Goobstation
+    /// <summary>
+    /// Leaves evidence of DNA left by bodily fluids.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public HashSet<(string, TimeSpan)> DNAs = []; // Trauma - add TimeSpan
 
-        [DataField, AutoNetworkedField] // Einstein Engines - Scent Tracking
-        public string Scent = String.Empty;
+    /// <summary>
+    /// Leaves evidence of Residues left by cleaning products.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public HashSet<string> Residues = [];
 
-        [DataField, AutoNetworkedField] // Einstein Engines - Network that shit
-        public HashSet<string> Residues = new();
+    /// <summary>
+    /// How close you must be to wipe the prints/blood/etc. off of this entity
+    /// </summary>
+    [DataField]
+    public float CleanDistance = 1.5f;
 
-        /// <summary>
-        /// How close you must be to wipe the prints/blood/etc. off of this entity
-        /// </summary>
-        [DataField("cleanDistance")]
-        public float CleanDistance = 1.5f;
-
-        /// <summary>
-        /// Can the DNA be cleaned off of this entity?
-        /// e.g. you can wipe the DNA off of a knife, but not a cigarette
-        /// </summary>
-        [DataField("canDnaBeCleaned")]
-        public bool CanDnaBeCleaned = true;
-
-        /// <summary>
-        /// Moment in time next effect will be spawned - Einstein Engines
-        /// </summary>
-        [ViewVariables(VVAccess.ReadWrite)]
-        public TimeSpan TargetTime = TimeSpan.Zero;
-    }
+    /// <summary>
+    /// Can the DNA be cleaned off of this entity?
+    /// e.g. you can wipe the DNA off of a knife, but not a cigarette
+    /// </summary>
+    [DataField]
+    public bool CanDnaBeCleaned = true;
 }

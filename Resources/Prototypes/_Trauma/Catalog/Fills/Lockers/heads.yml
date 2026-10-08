@@ -29,8 +29,10 @@
     - id: CartridgeRocketSingularityBuster
     - id: CartridgeRocketSingularityBuster
     - id: WeaponLauncherSingularityBuster
-    - id: MachinePowerTransmissionLaserFlatpack
     - id: ArmoryOverrideKeyComponents
+    - id: Intellicard # Robotics is engi now
+    - id: FreeformLawboard
+    - id: MMI
 
 - type: entityTable
   id: LockerFillChiefMedicalOfficerTrauma
@@ -55,10 +57,8 @@
     - id: AnomalyLocator # added anomaly locator to (try) reduce the amount of anoms that crit
     - id: CigarCase # RD needs cigs for uhh... science...
       prob: 0.15
-    - id: ClothingBeltGeminiHoloProjector # Who better to do science with than yourself?
-    - id: MMI
-    - id: FreeformLawboard
     - id: ArmoryOverrideKeyComponents
+    - id: ClothingOuterArmorReactiveRD
 
 - type: entityTable
   id: LockerFillHeadOfSecurityTrauma

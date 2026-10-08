@@ -309,7 +309,7 @@ public sealed partial class PullingSystem
             _ => throw new ArgumentOutOfRangeException()
         };
 
-        pullable.Comp.GrabEscapeChance = Math.Clamp(puller.Comp.EscapeChances[stage] / escapeAttemptModifier, 0f, 1f);
+        pullable.Comp.GrabEscapeChance = Math.Clamp(puller.Comp.EscapeChances[stage] * escapeAttemptModifier, 0f, 1f);
 
         _alertsSystem.ShowAlert(puller.Owner, puller.Comp.PullingAlert, puller.Comp.PullingAlertSeverity[stage]);
         _alertsSystem.ShowAlert(pullable.Owner, pullable.Comp.PulledAlert, pullable.Comp.PulledAlertAlertSeverity[stage]);
@@ -483,4 +483,9 @@ public sealed partial class PullingSystem
         RaiseLocalEvent(uid, ref ev);
         return !ev.Cancelled;
     }
+
+    public EntityUid? GetPulledEntity(Entity<PullerComponent?> puller)
+        => Resolve(puller, ref puller.Comp, false)
+            ? puller.Comp.Pulling
+            : null;
 }

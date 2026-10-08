@@ -24,7 +24,11 @@ public sealed partial class EffectsOnMeleeHitSystem : EntitySystem
             return;
 
         if (args.HitEntities.Count == 0)
+        {
+            if (args.IsHit && ent.Comp.MissEffects is { } missEffects)
+                _effects.ApplyEffects(args.User, missEffects, user: args.User);
             return;
+        }
 
         var user = args.User;
         var targetEffects = ent.Comp.TargetEffects;

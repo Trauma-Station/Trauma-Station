@@ -1,13 +1,13 @@
 // <Trauma>
 using Content.Trauma.Common.Wizard.Components;
 // </Trauma>
-using Content.Server.Antag;
 using Content.Server.GameTicking;
-using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Zombies;
 using Content.Shared.Administration;
 using Content.Server.Clothing.Systems;
+using Content.Shared.Antag;
 using Content.Shared.Database;
+using Content.Shared.GameTicking.Rules.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind.Components;
 using Content.Shared.Roles;
@@ -23,7 +23,7 @@ public sealed partial class AdminVerbSystem
 {
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private ZombieSystem _zombie = default!;
-    [Dependency] private GameTicker _gameTicker = default!;
+    [Dependency] private ServerGameTicker _gameTicker = default!;
     [Dependency] private OutfitSystem _outfit = default!;
 
     private static readonly EntProtoId DefaultTraitorRule = "Traitor";
@@ -159,6 +159,23 @@ public sealed partial class AdminVerbSystem
         };
         args.Verbs.Add(thief);
 
+        /* Trauma - goob ling used instead
+        var changelingName = Loc.GetString("admin-verb-text-make-changeling");
+        Verb changeling = new()
+        {
+            Text = changelingName,
+            Category = VerbCategory.Antag,
+            Icon = new SpriteSpecifier.Rsi(new ResPath("/Textures/Objects/Weapons/Melee/armblade.rsi"), "icon"),
+            Act = () =>
+            {
+                _antag.ForceMakeAntag<ChangelingRuleComponent>(targetPlayer, DefaultChangelingRule);
+            },
+            Impact = LogImpact.High,
+            Message = string.Join(": ", changelingName, Loc.GetString("admin-verb-make-changeling")),
+        };
+        args.Verbs.Add(changeling);
+        */
+
         var paradoxCloneName = Loc.GetString("admin-verb-text-make-paradox-clone");
         Verb paradox = new()
         {
@@ -167,14 +184,15 @@ public sealed partial class AdminVerbSystem
             Icon = new SpriteSpecifier.Rsi(new("/Textures/Interface/Misc/job_icons.rsi"), "ParadoxClone"),
             Act = () =>
             {
-                var ruleEnt = _gameTicker.AddGameRule(ParadoxCloneRuleId);
+                if (_gameTicker.AddGameRule(ParadoxCloneRuleId) is not { } ruleEnt)
+                    return;
 
                 if (!TryComp<ParadoxCloneRuleComponent>(ruleEnt, out var paradoxCloneRuleComp))
                     return;
 
                 paradoxCloneRuleComp.OriginalBody = args.Target; // override the target player
 
-                _gameTicker.StartGameRule(ruleEnt);
+                _gameTicker.StartGameRule(ruleEnt.AsNullable());
             },
             Impact = LogImpact.High,
             Message = string.Join(": ", paradoxCloneName, Loc.GetString("admin-verb-make-paradox-clone")),

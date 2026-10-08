@@ -8,29 +8,20 @@
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Weapons/Melee/stasisbaton.rsi
-    layers:
-    - state: stunbaton_off
-      map: [ "enum.ToggleableVisuals.Layer" ]
-  - type: Stunbaton
-    energyPerUse: 10
+  - type: StaminaDamageOnHitRequiresCharge
+    requiredCharge: 10
+  - type: ItemToggleRequiresCharge
+    requiredCharge: 10
   - type: ItemToggle
-    predictable: false
-    soundActivate:
+    soundActivate: &sound
       path: /Audio/Weapons/eblademiss.ogg
       params:
         variation: 0.250
-    soundDeactivate:
-      path: /Audio/Weapons/eblademiss.ogg
-      params:
-        variation: 0.250
-    soundFailToActivate:
-      path: /Audio/Weapons/eblademiss.ogg
-      params:
-        variation: 0.250
+    soundDeactivate: *sound
+    soundFailToActivate: *sound
   - type: StaminaDamageOnHit
     damage: 75
     sound: /Audio/Weapons/egloves.ogg
-  - type: UseDelay
   - type: Item
     size: Small
   - type: BatterySelfRecharger

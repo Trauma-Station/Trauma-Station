@@ -49,7 +49,7 @@ public sealed partial class StealthSystem : SharedStealthSystem
             {
                 GetScreenTexture = true,
                 RaiseShaderEvent = true,
-                Before = ContentPostShaderIds.BeforeOutlines,
+                After = ContentPostShaderIds.BeforeOutlines, // Trauma - run after outlines instead of before
             });
         }
         else
@@ -57,15 +57,18 @@ public sealed partial class StealthSystem : SharedStealthSystem
             _sprite.RemovePostShader((uid, sprite), ContentPostShaderIds.Stealth);
         }
 
-        if (!enabled)
+        if (enabled)
+        {
+            component.HadOutline = RemCompDeferred<InteractionOutlineComponent>(uid);
+        }
+        else
         {
             if (component.HadOutline && !TerminatingOrDeleted(uid))
+            {
                 EnsureComp<InteractionOutlineComponent>(uid);
-            return;
+                component.HadOutline = false;
+            }
         }
-
-        if (HasComp<InteractionOutlineComponent>(uid))
-            component.HadOutline = true;
     }
 
     private void OnStartup(EntityUid uid, StealthComponent component, ComponentStartup args)

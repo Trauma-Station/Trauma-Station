@@ -205,12 +205,12 @@
   - type: Storage
     whitelist:
       tags:
-      - PlantSampleTaker
       - BotanyShovel
-      - BotanyHoe
       - BotanyHatchet
       - Dropper
       components:
+      - BotanyHoe
+      - BotanySampleTaker
       - HandLabeler
   - type: Construction
     node: "botany tools panel"

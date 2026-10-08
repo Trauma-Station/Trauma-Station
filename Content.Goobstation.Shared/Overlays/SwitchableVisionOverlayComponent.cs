@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 
 namespace Content.Goobstation.Shared.Overlays;
@@ -60,4 +61,7 @@ public sealed class SwitchableVisionOverlayComponentState : IComponentState
     public bool UseShader;
     public bool DrawOverlay;
     public float OverlayOpacity;
+    public EntityWhitelist? UserWhitelist;
+    public bool WhitelistCheckMind;
+    public bool WorksInHands;
 }

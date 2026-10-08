@@ -11,7 +11,8 @@
   metabolisms:
     Digestion:
       effects:
-      - !type:SatiateThirst
+      - !type:Satiate
+        satiationType: Thirst
       - !type:HealthChange
         damage:
           types:

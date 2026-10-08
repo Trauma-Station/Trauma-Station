@@ -5,20 +5,19 @@
   description: You wear this on your back and put items into it.
   suffix: Chameleon
   components:
-  - type: Tag
-    tags: [] # ignore "WhitelistChameleon" tag
-  - type: Sprite
-    sprite: Clothing/Back/Backpacks/backpack.rsi
-  - type: ChameleonClothing
-    slot: [back]
-    default: ClothingBackpack
-  - type: UserInterface
-    interfaces:
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
-      enum.ChameleonUiKey.Key:
-        type: ChameleonBoundUserInterface
-  - type: HideContrabandContent #Goobstation-Contraband detector
+    - type: Tag
+      tags: [] # ignore "WhitelistChameleon" tag
+    - type: Sprite
+      sprite: Clothing/Back/Backpacks/backpack.rsi
+    - type: ChameleonClothing
+      slot: [back]
+      default: ClothingBackpack
+    - type: UserInterface
+      interfaces:
+        enum.StorageUiKey.Key:
+          type: StorageBoundUserInterface
+        enum.ChameleonUiKey.Key:
+          type: ChameleonBoundUserInterface
 
 - type: entity
   parent: [SolutionTank, SolutionGinormous, Clothing, ClothingSlotBase]
@@ -73,12 +72,6 @@
   - type: ExaminableSolution
     solution: tank
     exactVolume: true
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Steel: 62
-      Glass: 250
-  - type: StaticPrice #Goobstation - Recycle update
-    price: 50
 
 - type: entity
   parent: ClothingBackpack
@@ -130,7 +123,7 @@
   parent: ClothingBackpack
   id: XenoborgMaterialBag
   name: silicon storage square
-  description: A knockoff version of a bluespace bag, can vacumn up select materials, unfit for use by humanoids due to harmful emissions.
+  description: A knockoff version of a bluespace bag, can vacuum up select materials, unfit for use by humanoids due to harmful emissions.
   components:
   - type: Sprite
     sprite: Objects/Specific/Robotics/silicon_storage_cube.rsi
@@ -148,6 +141,7 @@
         - ConstructionMaterial
         - RawMaterial
         - Ingot
+        - XenoborgCrystal
       components:
         - Circuitboard
         - Flatpack

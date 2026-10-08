@@ -323,7 +323,7 @@ public sealed partial class PullingSystem : EntitySystem
     private void OnRefreshMovespeed(EntityUid uid, PullerComponent component, RefreshMovementSpeedModifiersEvent args)
     {
         // <Trauma>
-		// skip this if ApplySpeedModifier is false
+        // skip this if ApplySpeedModifier is false
         if (!component.ApplySpeedModifier)
             return;
 
@@ -750,5 +750,22 @@ public sealed partial class PullingSystem : EntitySystem
 
         StopPulling(pullableUid, pullable);
         return true;
+    }
+
+    /// <summary>
+    /// Copies compatible datafields of <see cref="PullerComponent"/> onto the target entity.
+    /// </summary>
+    /// <param name="source">The entity who's component will be taken.</param>
+    /// <param name="target">The entity to apply it to.</param>
+    public void CopyPullerComponent(Entity<PullerComponent?> source, EntityUid target)
+    {
+        if (!Resolve(source, ref source.Comp))
+            return;
+
+        var targetComp = EnsureComp<PullerComponent>(target);
+        targetComp.ThrowCooldown = source.Comp.ThrowCooldown;
+        targetComp.NeedsHands = source.Comp.NeedsHands;
+        targetComp.PullingAlert = source.Comp.PullingAlert;
+        Dirty(target, targetComp);
     }
 }

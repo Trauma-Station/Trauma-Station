@@ -27,16 +27,19 @@
   id: ControlRodsAvg
   name: signal-port-name-nuclear-reactor-control-rods-avg
   description: signal-port-description-nuclear-reactor-control-rods-avg
+  color: &color_int "#00ff00"
 
 - type: sourcePort
   id: CasingTemperature
   name: signal-port-name-nuclear-reactor-casing-temp
   description: signal-port-description-nuclear-reactor-casing-temp
+  color: *color_int
 
 - type: sourcePort
   id: ReactorThermalPower
   name: signal-port-name-nuclear-reactor-thermal-power
   description: signal-port-description-nuclear-reactor-thermal-power
+  color: *color_int
 
 # Gas Turbine
 
@@ -44,6 +47,7 @@
   id: TurbineSpeed
   name: signal-port-name-gas-turbine-speed
   description: signal-port-description-gas-turbine-speed
+  color: *color_int
 
 - type: sourcePort
   id: TurbineSpeedHigh
@@ -59,11 +63,13 @@
   id: TurbineGenerated
   name: signal-port-name-gas-turbine-generated
   description: signal-port-description-gas-turbine-generated
+  color: *color_int
 
 - type: sourcePort
   id: TurbineSupply
   name: signal-port-name-gas-turbine-supply
   description: signal-port-description-gas-turbine-supply
+  color: *color_int
 
 - type: sourcePort
   id: GasTurbineDataSender

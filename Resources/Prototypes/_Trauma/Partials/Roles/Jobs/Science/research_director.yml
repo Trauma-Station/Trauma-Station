@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: ResearchDirector
+  antagAdvantage: 75
+  guides:
+  - Science
+  access:
+  - External
+  - Robotics
+  - Genetics
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipEchelonEducation
+  - !type:AddComponentSpecial
+    components:
+    - type: Condemned # Nanotrasen owns your soul pal.
+      soulOwnedNotDevil: true
+
+- type: startingGear
+  id: ResearchDirectorGear
+  equipment:
+    ears: ClothingHeadsetAltScience
+  storage:
+    back:
+    - TelescopicBaton

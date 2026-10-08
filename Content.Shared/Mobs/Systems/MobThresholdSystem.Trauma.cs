@@ -4,6 +4,7 @@ using Content.Shared.Body;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.FixedPoint;
+using Content.Shared.Mobs.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
@@ -36,6 +37,19 @@ public sealed partial class MobThresholdSystem
         return true;
     }
 
+    /// <summary>
+    /// Gets lowest state change threshold (softcrit/crit/dead)
+    /// </summary>
+    public FixedPoint2 GetLowestThreshold(Entity<MobThresholdsComponent?> target)
+    {
+        if (!TryGetThresholdForState(target, MobState.SoftCrit, out var threshold, target.Comp) &&
+            !TryGetThresholdForState(target, MobState.Critical, out threshold, target.Comp) &&
+            !TryGetThresholdForState(target, MobState.Dead, out threshold, target.Comp))
+            threshold = 0;
+
+        return threshold.Value;
+    }
+
     private Dictionary<ProtoId<OrganCategoryPrototype>, DamageSpecifier>? GetScaledPartsDamage(EntityUid target1, EntityUid target2)
     {
         // If the receiver is a simplemob, we don't care about any of this. Just grab the damage and go.
@@ -46,15 +60,8 @@ public sealed partial class MobThresholdSystem
         if (!_bodyQuery.TryComp(target1, out var oldBody))
             return null;
 
-        if (!TryGetThresholdForState(target1, MobState.SoftCrit, out var ent1DeadThreshold) &&
-            !TryGetThresholdForState(target1, MobState.Critical, out ent1DeadThreshold) &&
-            !TryGetThresholdForState(target1, MobState.Dead, out ent1DeadThreshold))
-            ent1DeadThreshold = 0;
-
-        if (!TryGetThresholdForState(target2, MobState.SoftCrit, out var ent2DeadThreshold) &&
-            !TryGetThresholdForState(target2, MobState.Critical, out ent2DeadThreshold) &&
-            !TryGetThresholdForState(target2, MobState.Dead, out ent2DeadThreshold))
-            ent2DeadThreshold = 0;
+        var ent1DeadThreshold = GetLowestThreshold(target1);
+        var ent2DeadThreshold = GetLowestThreshold(target2);
 
         Dictionary<ProtoId<OrganCategoryPrototype>, DamageSpecifier> organDamages = new();
         foreach (var organ in _body.GetOrgans((target1, oldBody)))
@@ -67,7 +74,7 @@ public sealed partial class MobThresholdSystem
             if (damage.GetTotal() <= 0)
                 continue;
 
-            var modifiedDamage = damage / ent1DeadThreshold.Value * ent2DeadThreshold.Value;
+            var modifiedDamage = damage * ent2DeadThreshold / ent1DeadThreshold;
             if (!organDamages.TryAdd(category, modifiedDamage))
                 organDamages[category] += modifiedDamage;
         }
@@ -95,5 +102,30 @@ public sealed partial class MobThresholdSystem
         }
 
         return result;
+    }
+
+    /// <summary>
+    /// Transfers scaled damage from target1 to target2
+    /// </summary>
+    public void TransferDamage(EntityUid target1, EntityUid target2)
+    {
+        if (!_damageQuery.TryComp(target2, out var damageComp) ||
+            !GetScaledDamage(target1, target2, out var damage, out var organDamages) ||
+            damage == null)
+            return;
+
+        if (_bodyQuery.TryComp(target2, out var body))
+        {
+            var organs = _body.GetOrgans((target2, body));
+            foreach (var organ in organs)
+            {
+                if (organ.Comp.Category is not { } category || organDamages == null || !organDamages.TryGetValue(category, out var organDamage))
+                    continue;
+
+                _damageable.SetDamage(organ.Owner, organDamage);
+            }
+        }
+
+        _damageable.SetDamage((target2, damageComp), damage);
     }
 }

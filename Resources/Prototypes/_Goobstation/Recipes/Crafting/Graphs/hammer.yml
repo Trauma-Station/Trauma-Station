@@ -17,19 +17,14 @@
     - to: hammer
       steps:
       - material: Screw
-        amount: 1
-        doAfter: 2
-      - tool: Screwing
-        doAfter: 1
-      - material: Screw
-        amount: 1
+        amount: 2
         doAfter: 2
       - tool: Screwing
         doAfter: 1
       - material: Steel
         amount: 2
         doAfter: 2
-      - tool: Welding
-        doAfter: 5
+      - tool: Screwing
+        doAfter: 1
   - node: hammer
     entity: MeleeHammer

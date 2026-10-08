@@ -595,7 +595,7 @@
       Brain:
       - type: OhioAccent
       - type: RatvarianLanguage
-      - type: Clumsy
+      #- type: Clumsy
     duration: 5
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/drill.rsi
@@ -620,7 +620,7 @@
       Brain:
       - type: OhioAccent
       - type: RatvarianLanguage
-      - type: Clumsy
+      #- type: Clumsy
   - type: Sprite
     sprite: _Shitmed/Objects/Specific/Medical/Surgery/hemostat.rsi
     state: hemostat

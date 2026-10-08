@@ -8,12 +8,6 @@ namespace Content.Goobstation.Shared.Religion;
 public sealed partial class WeakToHolyComponent : Component
 {
     /// <summary>
-    /// Is the entity currently standing on a rune?
-    /// </summary>
-    [ViewVariables]
-    public bool IsColliding;
-
-    /// <summary>
     /// Duration between each heal tick.
     /// </summary>
     [DataField]
@@ -24,19 +18,6 @@ public sealed partial class WeakToHolyComponent : Component
     /// </summary>
     [ViewVariables]
     public TimeSpan NextPassiveHealTick;
-
-
-    /// <summary>
-    /// How much the entity is healed by runes each tick.
-    /// </summary>
-    [DataField]
-    public DamageSpecifier HealAmount = new()
-    {
-        DamageDict =
-        {
-            ["Holy"] = -4,
-        },
-    };
 
     /// <summary>
     /// How much the entity is healed passively by each tick.

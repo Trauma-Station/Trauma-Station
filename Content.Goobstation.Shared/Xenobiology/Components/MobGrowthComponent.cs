@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Nutrition.Prototypes;
 using System.Linq;
 
 namespace Content.Goobstation.Shared.Xenobiology.Components;
@@ -13,8 +14,8 @@ public sealed partial class MobGrowthComponent : Component
     /// <summary>
     /// What hunger threshold must be reached to grow?
     /// </summary>
-    [DataField(required: true), AutoNetworkedField]
-    public float HungerRequired = 100f;
+    [DataField(required: true)]
+    public SatiationValue HungerRequired;
 
     /// <summary>
     /// How much hunger does growing consume?

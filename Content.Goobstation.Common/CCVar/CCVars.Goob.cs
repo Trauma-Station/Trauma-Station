@@ -350,12 +350,6 @@ public sealed partial class GoobCVars
         CVarDef.Create("misc.detailed_examine", true, CVar.CLIENT | CVar.ARCHIVE | CVar.REPLICATED);
 
     /// <summary>
-    /// Fire damage
-    /// </summary>
-    public static readonly CVarDef<int> FireStackHeat =
-        CVarDef.Create("misc.fire_stack_heat", 1500, CVar.SERVER);
-
-    /// <summary>
     /// Set to true to enable the dynamic hostname system.
     /// </summary>
     public static readonly CVarDef<bool> UseDynamicHostname =

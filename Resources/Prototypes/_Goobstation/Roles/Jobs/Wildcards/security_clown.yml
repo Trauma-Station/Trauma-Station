@@ -29,20 +29,17 @@
     - SkillChipCombatEducation
     - SkillChipClown
     - SkillChipUnarmed
+  - !type:ApplyStatusEffectSpecial
+    statusEffects:
+    - StatusEffectClumsyClown
   - !type:AddComponentSpecial
     components:
-    - type: Clumsy
-      gunShootFailDamage:
-        types: #literally just picked semi random valus. i tested this once and tweaked it.
-          Blunt: 5
-          Piercing: 4
-          Heat: 3
-      catchingFailDamage:
-        types:
-          Blunt: 1
     - type: SleepEmitSound
       snore: /Audio/Voice/Misc/silly_snore.ogg
       interval: 10
+    - type: SpeechFontOverride
+      font: LDFComicSans
+    - type: Clown
   - !type:AddImplantSpecial
     implants: [ SadTromboneImplant, MindShieldImplant ]
 

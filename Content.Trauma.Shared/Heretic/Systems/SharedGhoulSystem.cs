@@ -3,12 +3,11 @@
 using Content.Goobstation.Common.Magic;
 using Content.Medical.Common.Targeting;
 using Content.Medical.Shared.Body;
-using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
-using Content.Shared.Body.Components;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
+using Content.Shared.Examine;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC;
@@ -28,22 +27,35 @@ public abstract partial class SharedGhoulSystem : EntitySystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private DamageableSystem _dmg = default!;
 
-    [Dependency] private EntityQuery<BrainComponent> _brainQuery = default!;
-    [Dependency] private EntityQuery<WoundableComponent> _woundableQuery = default!;
-
     private static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnExamine(Entity<GhoulComponent> ent, ref ExaminedEvent args)
     {
-        base.Initialize();
+        if (ent.Comp.ExamineMessage == null)
+            return;
 
-        SubscribeLocalEvent<GhoulComponent, BeforeMindSwappedEvent>(OnBeforeMindSwap);
-
-        SubscribeLocalEvent<HereticMinionComponent, AttackAttemptEvent>(OnTryAttack);
+        args.PushMarkup(Loc.GetString(ent.Comp.ExamineMessage));
     }
 
-    public virtual void UnGhoulifyEntity(Entity<GhoulComponent> ent) { }
+    [SubscribeLocalEvent]
+    private void OnWeaponExamine(Entity<GhoulWeaponComponent> ent, ref ExaminedEvent args)
+    {
+        args.PushMarkup(Loc.GetString(ent.Comp.ExamineMessage));
+    }
 
+
+    [SubscribeLocalEvent]
+    private void OnBeforeMindSwap(Entity<GhoulComponent> ent, ref BeforeMindSwappedEvent args)
+    {
+        if (args.Cancelled)
+            return;
+
+        args.Cancelled = true;
+        args.Message = "ghoul";
+    }
+
+    [SubscribeLocalEvent]
     private void OnTryAttack(Entity<HereticMinionComponent> ent, ref AttackAttemptEvent args)
     {
         if (args.Target is not { } target)
@@ -54,15 +66,7 @@ public abstract partial class SharedGhoulSystem : EntitySystem
             args.Cancel();
     }
 
-
-    private void OnBeforeMindSwap(Entity<GhoulComponent> ent, ref BeforeMindSwappedEvent args)
-    {
-        if (args.Cancelled)
-            return;
-
-        args.Cancelled = true;
-        args.Message = "ghoul";
-    }
+    public virtual void UnGhoulifyEntity(Entity<GhoulComponent> ent) { }
 
     // Don't curse brain and torso
     private static readonly ProtoId<OrganCategoryPrototype>[] FragileBlacklist = [ "Brain", "Torso" ];
@@ -110,7 +114,7 @@ public abstract partial class SharedGhoulSystem : EntitySystem
         var dmg = new DamageSpecifier(ProtoMan.Index(Blunt), ent.Comp.TotalHealth * 1.2f);
         _dmg.ChangeDamage(ent.Owner, dmg, targetPart: TargetBodyPart.Vital, ignoreResistances: true, increaseOnly: true);
 
-        // Ghoul component should automatically be removed on death in most cases, or ghoul gets givved
+        // Ghoul component should automatically be removed on death in most cases, or ghoul gets gibbed
         if (TerminatingOrDeleted(ent) || !Resolve(ent, ref ent.Comp, false))
             return true;
 

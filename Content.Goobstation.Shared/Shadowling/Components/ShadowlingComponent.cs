@@ -24,7 +24,7 @@ public sealed partial class ShadowlingComponent : Component
     /// The status icon for Shadowlings
     /// </summary>
     [DataField]
-    public ProtoId<FactionIconPrototype> StatusIcon { get; set; } = "ShadowlingFaction";
+    public ProtoId<StatusIconPrototype> StatusIcon { get; set; } = "ShadowlingFaction";
 
     /// <summary>
     /// Phase Indicator. The Shadowlings have 4 phases currently, as seen at the bottom of this component.
@@ -39,7 +39,7 @@ public sealed partial class ShadowlingComponent : Component
     /// <summary>
     /// Indicates whether the shadowling is hatching, or not.
     /// </summary>
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool IsHatching;
 
     /// <summary>

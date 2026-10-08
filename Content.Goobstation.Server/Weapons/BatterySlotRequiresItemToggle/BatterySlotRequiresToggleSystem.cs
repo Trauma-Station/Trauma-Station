@@ -7,21 +7,15 @@ namespace Content.Goobstation.Server.Weapons.BatterySlotRequiresItemToggle;
 
 public sealed partial class BatterySlotRequiresToggleSystem : EntitySystem
 {
-    [Dependency] private ItemSlotsSystem _itemSlotsSystem = default!;
+    [Dependency] private ItemSlotsSystem _slots = default!;
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnToggled(Entity<BatterySlotRequiresToggleComponent> ent, ref ItemToggledEvent args)
     {
-        base.Initialize();
-
-        SubscribeLocalEvent<BatterySlotRequiresToggleComponent, ItemToggledEvent>(OnToggle);
-    }
-
-    private void OnToggle(Entity<BatterySlotRequiresToggleComponent> ent, ref ItemToggledEvent args)
-    {
-        if (!TryComp<ItemSlotsComponent>(ent, out var itemslots)
-            || !_itemSlotsSystem.TryGetSlot(ent, ent.Comp.ItemSlot, out var slot, itemslots))
+        if (!TryComp<ItemSlotsComponent>(ent, out var slots) ||
+            !_slots.TryGetSlot((ent, slots), ent.Comp.ItemSlot, out var slot))
             return;
 
-        _itemSlotsSystem.SetLock(ent, slot, args.Activated ^ ent.Comp.Inverted, itemslots);
+        _slots.SetLock((ent, slots), slot, args.Activated ^ ent.Comp.Inverted);
     }
 }

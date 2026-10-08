@@ -29,7 +29,7 @@
   icon: { sprite: /Textures/Objects/Storage/boxicons.rsi, state: vials }
   productEntity: ChemicalSynthesisKit
   cost:
-    Telecrystal: 3 # Trauma - was 3, 5x
+    Telecrystal: 15 # Trauma - was 3, 5x
   categories:
   - UplinkChemicals
 

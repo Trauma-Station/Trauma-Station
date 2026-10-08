@@ -57,7 +57,8 @@ public static class ServerPackaging
         "ru",
         "tr",
         "zh-Hans",
-        "zh-Hant"
+        "zh-Hant",
+        "server_config.toml" // RT config (use our Content-facing one)
     };
 
     public static async Task PackageServer(bool skipBuild, bool hybridAcz, bool logBuild, IPackageLogger logger, string configuration, List<string>? platforms = null)
@@ -97,30 +98,9 @@ public static class ServerPackaging
 
         if (!skipBuild)
         {
-            var startInfo = new ProcessStartInfo
-            {
-                FileName = "dotnet",
-                ArgumentList =
-                {
-                    "build",
-                    Path.Combine("Content.Trauma.Server", "Content.Trauma.Server.csproj"), // Trauma - Trauma.Server depends on everything
-                    "-c", configuration,
-                    "--nologo",
-                    "/v:m",
-                    $"/p:TargetOs={platform.TargetOs}",
-                    "/t:Rebuild",
-                    "/p:FullRelease=true",
-                    "/m"
-                }
-            };
-
-            if (logBuild)
-            {
-                startInfo.ArgumentList.Add($"/bl:{Path.Combine("release", $"server-{platform.Rid}.binlog")}");
-                startInfo.ArgumentList.Add("/p:ReportAnalyzer=true");
-            }
-
-            await ProcessHelpers.RunCheck(startInfo);
+            // <Trauma> - replaced copypaste with module helper method
+            await ModulePackaging.BuildModules("Server", configuration, logBuild, platform.TargetOs);
+            // </Trauma>
 
             await PublishClientServer(platform.Rid, platform.TargetOs, configuration);
         }
@@ -172,6 +152,12 @@ public static class ServerPackaging
         var passes = graph.AllPasses.ToList();
 
         pass.Dependencies.Add(new AssetPassDependency(graph.Output.Name));
+
+        // Include a TOML config file - include the ss14 one from Resources if possible, using the RT one as a fallback.
+        var toml = Path.Combine(contentDir, "Resources", "ConfigPresets", "server_config.toml");
+        var robustToml = Path.Combine("RobustToolbox", "bin", "Server", platform.Rid, "publish", "server_config.toml");
+        pass.InjectFileFromDisk("server_config.toml", File.Exists(toml) ? toml : robustToml);
+
         passes.Add(pass);
 
         AssetGraph.CalculateGraph(passes, logger);
@@ -182,9 +168,14 @@ public static class ServerPackaging
         // Additional assemblies that need to be copied such as EFCore.
         var sourcePath = Path.Combine(contentDir, "bin", "Content.Server");
 
-        var deps = DepsHandler.Load(Path.Combine(sourcePath, "Content.Trauma.Server.deps.json")); // Trauma
-
-        var contentAssemblies = GetContentAssemblyNamesToCopy(deps);
+        // <Trauma> - use helper for all modules not just Content.Server
+        var contentAssemblies = ModulePackaging.GetContentAssemblyNamesToCopy(sourcePath, "Server");
+        logger.Info($"{contentAssemblies.Count} assemblies packaged:");
+        foreach (var name in contentAssemblies)
+        {
+            logger.Info($"- {name}");
+        }
+        // </Trauma>
 
         await RobustSharedPackaging.DoResourceCopy(
             Path.Combine("RobustToolbox", "bin", "Server",
@@ -216,29 +207,7 @@ public static class ServerPackaging
         inputPassResources.InjectFinished();
     }
 
-    // This returns both content assemblies (e.g. Content.Server.dll) and dependencies (e.g. Npgsql)
-    private static IEnumerable<string> GetContentAssemblyNamesToCopy(DepsHandler deps)
-    {
-        return GetContentAssemblyNamesToCopy(deps, "Server"); // Trauma - use helper
-    }
-
-    /// <summary>
-    /// Trauma - made generic over side and public.
-    /// </summary>
-    public static IEnumerable<string> GetContentAssemblyNamesToCopy(DepsHandler deps, string side)
-    {
-        var depsContent = deps.RecursiveGetLibrariesFrom($"Content.Trauma.{side}").SelectMany(GetLibraryNames); // Trauma
-        var depsRobust = deps.RecursiveGetLibrariesFrom($"Robust.{side}").SelectMany(GetLibraryNames); // Trauma
-
-        var depsContentExclusive = depsContent.Except(depsRobust).ToHashSet();
-
-        // Remove .dll suffix and apply filtering.
-        var names = depsContentExclusive.Select(p => p[..^4]).Where(p => !ServerNotExtraAssemblies.Any(p.StartsWith));
-
-        return names;
-
-        IEnumerable<string> GetLibraryNames(string library) => deps.Libraries[library].GetDllNames();
-    }
+    // Trauma - replaced GetContentAssemblyNamesToCopy with ModulePackaging versions
 
     private readonly record struct PlatformReg(string Rid, string TargetOs, bool BuildByDefault);
 }

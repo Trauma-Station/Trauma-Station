@@ -1,23 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.GameTicking;
+using Content.Shared.GameTicking;
 
-namespace Content.Goobstation.Server.NTR
+namespace Content.Goobstation.Server.NTR;
+
+public sealed partial class EventTriggerSystem : EntitySystem
 {
-    public sealed partial class EventTriggerSystem : EntitySystem
+    [Dependency] private GameTicker _ticker = default!;
+
+    [SubscribeLocalEvent]
+    private void OnMapInit(EntityUid uid, EventTriggerComponent component, MapInitEvent args)
     {
-        [Dependency] private GameTicker _gt = default!;
-
-        public override void Initialize()
-        {
-            base.Initialize();
-            SubscribeLocalEvent<EventTriggerComponent, MapInitEvent>(OnMapInit);
-        }
-
-        private void OnMapInit(EntityUid uid, EventTriggerComponent component, MapInitEvent args)
-        {
-            if (!string.IsNullOrEmpty(component.EventId))
-                _gt.StartGameRule(component.EventId, out _);
-        }
+        if (!string.IsNullOrEmpty(component.EventId))
+            _ticker.StartGameRule(component.EventId, out _);
     }
 }

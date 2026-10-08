@@ -53,8 +53,9 @@
   - tasks:
     - !type:HTNPrimitiveTask
       preconditions:
-      - !type:HungryPrecondition
-        minHungerState: Okay
+      - !type:SatiationPrecondition
+        satiationType: Hunger
+        above: Okay
       operator: !type:UtilityOperator
         proto: NearbyEggs
 
@@ -86,8 +87,9 @@
   - tasks:
     - !type:HTNPrimitiveTask
       preconditions:
-      - !type:HungryPrecondition
-        minHungerState: Okay
+      - !type:SatiationPrecondition
+        satiationType: Hunger
+        above: Okay
       operator: !type:UtilityOperator
         proto: NearbyRaptorEggs
 

@@ -5,6 +5,11 @@
 - type: abductorTask
   id: InstallGland
   random: false # always given at the end
+  valid:
+  # some species have no heart slot
+  - !type:HasOrganSlot
+    organ: Heart
+    partType: Torso
   completed:
   - !type:HasOrgan
     organCategory: Heart

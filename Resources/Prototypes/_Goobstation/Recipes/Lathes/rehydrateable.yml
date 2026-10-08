@@ -6,7 +6,6 @@
   completetime: 30
   materials:
     Biomass: 70 # Cloning needs that amount
-    Plasma: 250
 
 - type: latheRecipe
   id: DionaCube
@@ -14,7 +13,6 @@
   completetime: 30
   materials:
     Biomass: 70
-    Plasma: 250
 
 - type: latheRecipe
   id: GingerbreadCube
@@ -22,7 +20,6 @@
   completetime: 30
   materials:
     Biomass: 70
-    Plasma: 250
 
 - type: latheRecipe
   id: MothCube
@@ -30,7 +27,6 @@
   completetime: 30
   materials:
     Biomass: 70
-    Plasma: 250
 
 - type: latheRecipe
   id: DwarfCube
@@ -38,7 +34,6 @@
   completetime: 30
   materials:
     Biomass: 70
-    Plasma: 250
 
 - type: latheRecipe
   id: ReptilianCube
@@ -46,7 +41,6 @@
   completetime: 30
   materials:
     Biomass: 70
-    Plasma: 250
 
 - type: latheRecipe
   id: SlimePersonCube
@@ -54,7 +48,6 @@
   completetime: 30
   materials:
     Biomass: 70
-    Plasma: 250
 
 - type: latheRecipe
   id: VoxCube
@@ -62,4 +55,3 @@
   completetime: 30
   materials:
     Biomass: 70
-    Plasma: 250

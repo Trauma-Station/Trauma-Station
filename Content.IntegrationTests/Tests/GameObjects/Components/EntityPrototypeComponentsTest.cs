@@ -1,14 +1,3 @@
-// SPDX-FileCopyrightText: 2021 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 TemporalOroboros <TemporalOroboros@gmail.com>
-// SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Ygg01 <y.laughing.man.y@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -59,6 +48,10 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
 
                 Assert.DoesNotThrow(() => yamlStream.Load(reader), "Error while parsing yaml file {0}", path);
 
+                // <Trauma> - wrap this in try catch for bad yml
+                try
+                {
+                // <Trauma>
                 foreach (var document in yamlStream.Documents)
                 {
                     var root = (YamlSequenceNode) document.RootNode;
@@ -83,7 +76,11 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
                         {
                             componentsValidated++;
 
-                            var componentType = component.GetNode("type").AsString();
+                            // <Trauma> - use TryGetNode for partials !Remove
+                            if (!component.TryGetNode("type", out var typeNode))
+                                continue;
+                            // </Trauma>
+                            var componentType = typeNode.AsString();
                             var clientAvailability = cComponentFactory.GetComponentAvailability(componentType);
                             var serverAvailability = sComponentFactory.GetComponentAvailability(componentType);
 
@@ -108,6 +105,13 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
                         }
                     }
                 }
+                // <Trauma>
+                }
+                catch (Exception e)
+                {
+                    Assert.Fail($"Caught exception while reading YML from {path}: {e}");
+                }
+                // </Trauma>
             }
 
             if (unknownComponentsClient.Count + unknownComponentsServer.Count + doubleIgnoredComponents.Count == 0)

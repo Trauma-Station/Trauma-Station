@@ -1,0 +1,19 @@
+- type: entity
+  parent: BaseBulletKinetic # Trauma - was BaseBullet
+  id: BulletAntiMateriel
+  categories: [ HideSpawnMenu ]
+  name: bullet (.60 anti-materiel)
+  components:
+  - type: Projectile
+    # <Trauma>
+    damage:
+      types:
+        Ballistic: 75 # was Ballistic
+        #Structural: 100
+      armorPenetration: 0.5
+    penetrationThreshold: 100 # was 601
+    #penetrationDamageTypeRequirement:
+    #- Structural
+    # </Trauma>
+  - type: StaminaDamageOnCollide
+    damage: 50 # Trauma - was 60

@@ -2,10 +2,10 @@
 
 using Content.IntegrationTests.Tests.Interaction;
 using Content.Medical.Shared.Abductor;
-using Content.Server.GameTicking;
-using Content.Server.GameTicking.Rules.Components;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
+using Content.Shared.GameTicking;
+using Content.Shared.GameTicking.Rules.Components;
 using Content.Shared.Movement.Components;
 using Content.Shared.Power.Components;
 using Robust.Shared.Map;
@@ -56,7 +56,7 @@ public sealed class AbductorTest : InteractionTest
         var shittle = EntityUid.Invalid;
         await Server.WaitPost(() =>
         {
-            rule = ticker.AddGameRule(LoneRule);
+            rule = ticker.AddGameRule(LoneRule)!.Value;
 
             // skipping ftl and just teleporting it to the "station" map, in space far away
             shittle = SEntMan.GetComponent<RuleGridsComponent>(rule).MapGrids[0];
@@ -82,8 +82,8 @@ public sealed class AbductorTest : InteractionTest
         // this isn't a test of pow3r, they prevent the UIs working and this is easy
         await Server.WaitPost(() =>
         {
-            SEntMan.RemoveComponent<ActivatableUIRequiresPowerComponent>(console);
-            SEntMan.RemoveComponent<ActivatableUIRequiresPowerComponent>(teleporter);
+            SRemComp<ActivatableUIRequiresPowerComponent>(console);
+            SRemComp<ActivatableUIRequiresPowerComponent>(teleporter);
         });
 
         // spawn our victim and a beacon for him
@@ -105,7 +105,7 @@ public sealed class AbductorTest : InteractionTest
         await RunTicks(3);
 
         // player is now controlling the eye, teleport
-        Assert.That(SEntMan.HasComponent<RelayInputMoverComponent>(SPlayer), "Abductor did not control an eye entity");
+        Assert.That(SHasComp<RelayInputMoverComponent>(SPlayer), "Abductor did not control an eye entity");
         var abilities = SEntMan.GetComponent<AbductorsAbilitiesComponent>(SPlayer);
         Assert.That(abilities.SendYourself != null, "Abductor did not get a send yourself action");
         // shitcode to mimic the action because non-instant actions api is bad

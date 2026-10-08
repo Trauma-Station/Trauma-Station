@@ -11,48 +11,32 @@
   - AllAccess
   access:
   - CentralCommand
-  # Goobstation
-  - NanotrasenRepresentative
-  # <Trauma>
   special:
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipERT
   - !type:AddImplantSpecial
-    implants: [ MindShieldImplant, FreedomImplant, BluespaceLifelineImplant, RadioImplantCentcomm, NutrimentPumpImplant, StypticStimulatorImplant, DeathRattleImplantCentcomm ]
-  # </Trauma>
+    implants: [ MindShieldImplant, DeathRattleImplantCentcomm ]
 
-- type: startingGear # Goobstation - Start - Sol
+- type: startingGear
   id: CBURNGear
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorBrown
     back: ClothingBackpackDuffelCBURN
     mask: ClothingMaskGasERT
-    neck: ExecutiveIDCard # Executive Access!
-    eyes: ClothingEyesGlassesMedSec # Better glasses
+    eyes: ClothingEyesGlassesSecurity
     ears: ClothingHeadsetAltCentCom
     gloves: ClothingHandsGlovesCombat
     outerClothing: ClothingOuterHardsuitCBURN
-    shoes: ClothingShoesBootsMagEmergencyResponseTeam # Goobstation
-    id: CBURNPDA # Todo - Replace it.
-    pocket1: InfectionScannerCburn # Goob
-    pocket2: WeaponShotgunSawn # Trauma - was WeaponLaserGun
-    belt: ClothingBeltSecurityFilled # No shotgun, no bandolier.
+    shoes: ClothingShoesBootsCombatFilled
+    id: CBURNPDA
+    pocket1: RadioHandheld
+    pocket2: WeaponLaserGun
+    belt: ClothingBeltBandolier
   storage:
     back:
-    - WeaponEnergyRifle # Trauma
-    - EnergyMagRifleLethal # Trauma
-    - EnergyMagRifleLethal # Trauma
-    - EnergyMagRifleLethal # Trauma
-    - EnergyMagRifleOverchargeLethal # Trauma
-    - EnergyMagRifleOverchargeLethal # Trauma
-    - BoxLethalshot
-    - AmbuzolPlusMedipen # Injectors are cooler.
-    - AmbuzolMedipen # Injectors are cooler.
-    - AmbuzolMedipen # Injectors are cooler.
-    - MedkitCombatFilled # Ah yes, let's send them in with ZERO meds. Good luck!
-    - CburnSpear # SPEAAR
-# Goobstation - End - Sol
+    - WeaponShotgunDoubleBarreled
+    - BoxShotgunIncendiary
+    - GrenadeFlashBang
+    - PillAmbuzolPlus
+    - PillAmbuzol
 
 - type: chameleonOutfit
   id: CBURNChameleonOutfit

@@ -40,7 +40,7 @@
   components:
   - type: KnowledgeGrantOnWear
     skills:
-      MartialArtCQC: 50
+      MartialArtCQC: 100
 
 - type: entity
   parent: SkillChipNukie
@@ -54,7 +54,7 @@
       # still trained with guns but not much else
       MeleeKnowledge: 28
       ShootingKnowledge: 28
-      MartialArtCQC: 28
+      MartialArtCQC: 50
 
 - type: entity
   parent: BaseSkillChipAPTR

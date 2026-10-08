@@ -1,0 +1,245 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entityTable
+  id: RandomDeliveryBasic # More letters less packages
+  table: !type:GroupSelector
+    children: !Clear
+    - !type:NestedSelector
+      tableId: RandomDeliveryLetterBasic
+      weight: 0.85
+    - !type:NestedSelector
+      tableId: RandomDeliveryPackageBasic
+      weight: 0.15
+
+- type: entityTable
+  id: LetterDeliveryRewards # More cool stuff but still a chance to get trolled
+  table: !type:GroupSelector
+    children: !Clear
+    - !type:NestedSelector
+      tableId: LetterCommonEntityTable
+      weight: 0.3
+    - !type:NestedSelector
+      tableId: LetterUncommonEntityTable
+      weight: 0.6
+    - !type:NestedSelector
+      tableId: LetterRareEntityTable
+      weight: 0.1
+
+- type: entityTable
+  id: PackageDeliveryRewards # More cool stuff but still a chance to get trolled
+  table: !type:GroupSelector
+    children: !Clear
+    - !type:NestedSelector
+      tableId: PackageCommonEntityTable
+      weight: 0.3
+    - !type:NestedSelector
+      tableId: PackageUncommonEntityTable
+      weight: 0.6
+    - !type:NestedSelector
+      tableId: PackageRareEntityTable
+      weight: 0.1
+
+- type: entityTable
+  id: LetterCommonEntityTable
+  table: !type:GroupSelector
+    children: !Clear
+    - !type:NestedSelector
+      weight: 4
+      tableId: SpamMailTable
+    - !type:NestedSelector
+      weight: 2
+      tableId: RandomBookTable
+    - !type:NestedSelector
+      weight: 2
+      tableId: RandomAllSodaTable
+    - id: Syringe # used or not, who knows
+    - id: FoodMealMint # a single mint...
+    - id: DelayedSmoke
+    - !type:NestedSelector
+      tableId: LetterVagueThreat
+    - !type:NestedSelector
+      tableId: LetterEMP
+    - !type:NestedSelector
+      tableId: LetterCigarettes
+
+- type: entityTable
+  id: LetterUncommonEntityTable
+  table: !type:GroupSelector
+    children: !Clear
+    - !type:NestedSelector
+      tableId: RandomSafePillTable
+    - !type:NestedSelector
+      tableId: RandomSafeSyringeTable
+    - !type:NestedSelector
+      tableId: UncommonLetterBundleTable
+    - id: SpaceCash100
+    - id: Joint
+    - id: ClothingHeadFishCap
+    - id: MysteryFigureBox
+      amount: 1,3
+    - !type:NestedSelector
+      tableId: BikeHornRandom
+    - !type:NestedSelector
+      tableId: LetterMaterialsRandom
+    - !type:NestedSelector
+      tableId: CritterRandom
+    - !type:NestedSelector
+      tableId: CookieRandom
+      rolls: 4
+    - !type:NestedSelector
+      tableId: MuffinRandom
+      rolls: 4
+
+- type: entityTable
+  id: LetterRareEntityTable
+  table: !type:GroupSelector
+    children: !Clear
+    - id: ResearchDisk5000
+    - id: JointRainbow
+    - id: StrangePill
+      amount: !type:RangeNumberSelector
+        range: 1, 3
+    - !type:GroupSelector
+      children:
+      - id: Brutepack
+      - id: Ointment
+      - id: Gauze
+      - id: Bloodpack
+    - id: SyndicateBusinessCard
+      weight: 0.5
+    - id: ClothingEyesGlassesSunglasses
+    - id: EmergencyMedipen
+      amount: 2
+    - !type:NestedSelector
+      tableId: KnifeRandom
+    - !type:NestedSelector
+      tableId: LetterLuxuryPen
+    - !type:NestedSelector
+      tableId: LetterPAI
+    - !type:NestedSelector
+      tableId: LetterFlowers
+    - !type:NestedSelector
+      tableId: LetterCigars
+    - !type:NestedSelector
+      tableId: DonkPocketsRandom
+    - !type:NestedSelector
+      tableId: JointRandom
+      rolls: 3
+    - id: SpaceCash1000
+    - id: ToySword
+    - id: MonkeyCube
+    - !type:GroupSelector # Coscult fluff items
+      children:
+      - id: CosmicCultMindSink # It's just a fancy posibrain
+      - id: MaterialCosmicCultEntropy1
+    - !type:GroupSelector # Gamer loot
+      weight: 2
+      children:
+      - id: SeismicCharge
+      - id: WeaponMakeshiftLaser
+      - id: Stunprod # It's so underrated I swear
+      - id: ThrowingStar
+      - id: Telecrystal10
+      - id: SyndicateSponge
+      - id: IDComputerCircuitboard
+      - id: EncryptionKeySecurity
+    - id: FaceHuggerToys # Trolled
+    - id: MobXenomorphFaceHugger # Gigatrolled
+      weight: 0.1
+
+- type: entityTable
+  id: PackageCommonEntityTable
+  table: !type:GroupSelector
+    children: !Clear
+    - !type:NestedSelector
+      tableId: FoodRandomCakeTable
+      weight: 2
+    - id: FoodBoxPizzaFilled
+    - id: FlashlightSeclite
+    - id: FoodBoxDonut
+    - !type:NestedSelector
+      tableId: PackageArtsCrafts
+    - !type:NestedSelector
+      tableId: PackageCheese
+
+- type: entityTable
+  id: PackageUncommonEntityTable
+  table: !type:GroupSelector
+    children: !Clear
+    - !type:NestedSelector
+      tableId: MaintFluffTable
+      weight: 0.4
+      rolls: !type:RangeNumberSelector
+        range: 1, 2
+    - !type:NestedSelector
+      tableId: AllPlushiesTable
+      weight: 0.4
+    - !type:NestedSelector
+      tableId: RandomAllAlcoholTable
+      weight: 0.2
+      rolls: !type:RangeNumberSelector
+        range: 2, 3
+    - !type:NestedSelector
+      tableId: PackageSignallerKit
+    - !type:NestedSelector
+      tableId: PackageHonkSupplement
+    - id: DrinkBottleOfNothingFull
+    - id: PlantBGoneSpray
+    - !type:NestedSelector
+      tableId: PackageSoaps
+    - !type:NestedSelector
+      tableId: PackageRestraints
+    # Costumes
+    - !type:NestedSelector
+      tableId: PackageCostumeMaid
+    - !type:NestedSelector
+      tableId: PackageCostumeWizard
+    - !type:NestedSelector
+      tableId: PackageCostumeNurse
+    - !type:NestedSelector
+      tableId: PackageCostumeTacticalMaid
+    - !type:NestedSelector
+      tableId: PackageCostumeNoir
+
+- type: entityTable # TODO: Add more variety!
+  id: PackageRareEntityTable
+  table: !type:GroupSelector
+    children: !Clear
+    - id: MedkitAdvancedFilled
+    - id: PipeBomb
+    - !type:NestedSelector
+      tableId: SmallCritterEntityTable
+    - !type:NestedSelector
+      tableId: AnimalMaskTable
+    - !type:NestedSelector
+      tableId: MaintWeaponTable
+      weight: 0.5
+    - !type:NestedSelector
+      tableId: SyndieMaintLoot
+      weight: 0.5
+    - id: TravelCamera
+    - id: ToyMansusGrasp
+    - id: GrenadeFlashBang
+      amount: 3 # free
+    - id: PlushieThrongler
+      weight: 0.1 # rare
+    - !type:NestedSelector
+      tableId: SwordRandom
+    - !type:NestedSelector
+      tableId: PackageWitchery
+    - !type:NestedSelector
+      tableId: PackageMutatedProduce
+    - !type:NestedSelector
+      tableId: InstrumentRandom
+    - !type:NestedSelector
+      tableId: PackagePowerTool
+    - !type:NestedSelector
+      tableId: BuildABuddyRandom
+    - !type:GroupSelector # Gamerer loot
+      children:
+      - id: CameraBug
+      - id: SyndicateMicrowaveFlatpack
+      - id: AccessConfigurator
+      - id: UnlitMolotov
+      - id: EmptyScroll
+        weight: 0.5

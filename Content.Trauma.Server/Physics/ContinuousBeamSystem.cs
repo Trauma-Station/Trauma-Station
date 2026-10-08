@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Medical.Common.Damage;
-using Content.Medical.Common.Targeting;
 using Content.Shared.Body;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
@@ -63,15 +61,15 @@ public sealed partial class ContinuousBeamSystem : SharedContinuousBeamSystem
         if (!ResolveBeamEndpointData(uid, gun, joint))
             return false;
 
-        var target = gun.CursorPosition!.Value;
+        var target = gun.ShootCoordinates!.Value;
         var endpoint = gun.Endpoint!.Value;
         var endpointXform = Transform(endpoint);
-        var pos = Xform.GetWorldPosition(endpointXform);
-        var dir = target.Position - pos;
+        var pos = Xform.WithEntityId(endpointXform.Coordinates, target.EntityId);
+        var dir = target.Position - pos.Position;
         var len = dir.Length();
 
-        var ourPos = Xform.GetWorldPosition(xform);
-        var newPos = pos + dir * gun.LaserSpeed / len;
+        var ourPos = Xform.WithEntityId(xform.Coordinates, target.EntityId).Position;
+        var newPos = pos.Position + dir * gun.LaserSpeed / len;
         var dir2 = newPos - ourPos;
         var len2 = dir2.Length();
 
@@ -79,21 +77,20 @@ public sealed partial class ContinuousBeamSystem : SharedContinuousBeamSystem
             return true;
 
         if (len <= gun.LaserSpeed)
-            Xform.SetMapCoordinates((endpoint, endpointXform), target);
+            Xform.SetCoordinates(endpoint, endpointXform, target);
         else
         {
             var maxRange = MathF.Min(gun.MaxRangeOverride ?? gun.MinMaxLaserRange.Y, gun.MinMaxLaserRange.Y);
             var minRange = MathF.Min(gun.MinMaxLaserRange.X, maxRange);
             var newLen = Math.Clamp(len2, minRange, maxRange);
 
-            Xform.SetMapCoordinates((endpoint, endpointXform),
-                new MapCoordinates(ourPos + dir2 * newLen / len2, xform.MapID));
+            Xform.SetCoordinates(endpoint, endpointXform, new EntityCoordinates(target.EntityId, ourPos + dir2 * newLen / len2));
         }
 
         if (_joint.BeamCollision(uid, endpoint, gun.Data, false) is { } result && result.Count > 0)
         {
             var min = result.MinBy(x => x.Distance).HitPos;
-            Xform.SetMapCoordinates((endpoint, endpointXform), new MapCoordinates(min, xform.MapID));
+            Xform.SetCoordinates(endpoint, endpointXform, Xform.ToCoordinates(target.EntityId, new MapCoordinates(min, endpointXform.MapID)));
         }
 
         return true;
@@ -126,11 +123,11 @@ public sealed partial class ContinuousBeamSystem : SharedContinuousBeamSystem
             if (beforeEv.Cancelled)
                 continue;
 
-            _dmg.TryChangeDamage(noob.Owner,
-                gun.Damage * _body.GetVitalBodyPartRatio(noob.Owner),
-                origin: uid,
-                targetPart: TargetBodyPart.All,
-                splitDamage: SplitDamageBehavior.SplitEnsureAll);
+            var damage = gun.Damage;
+            if (gun.LimbDamageCompensation)
+                damage *= _body.GetVitalBodyPartRatio(noob.Owner);
+
+            _dmg.TryChangeDamage(noob.Owner, damage, origin: uid, targetPart: gun.TargetPart, splitDamage: gun.SplitDamageBehavior);
 
             if (gun.Effects is { } effects)
                 _effects.ApplyEffects(noob, effects);

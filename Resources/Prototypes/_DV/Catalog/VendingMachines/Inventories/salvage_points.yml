@@ -50,8 +50,6 @@
     cost: 750
   - id: WeaponProtoKineticAccelerator
     cost: 750
-  - id: SpaceCash5000
-    cost: 750
   - id: SurvivalMedipen
     cost: 800
   - id: PKAUpgradeRange
@@ -112,13 +110,9 @@
     cost: 3000 #still costs more than just buying it with spesos you got from vendor but whatever
   - id: ShelterCapsuleLuxury
     cost: 3000
-  - id: SpaceCash20000
-    cost: 3000
   - id: ClothingEyesNightVisionGoggles
     cost: 3500
   - id: MiningDrillDiamond
     cost: 4000 #Mostly for flexing
-  - id: CrateCargoClarkeAssembly
-    cost: 12500 #TODO: Make modules real
   # TODO: luxury elite bar capsule for 10k
   # TODO: mining drone stuff

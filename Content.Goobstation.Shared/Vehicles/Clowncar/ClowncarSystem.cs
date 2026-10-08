@@ -11,12 +11,14 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Stunnable;
 using Content.Shared.Verbs;
 using Robust.Shared.Containers;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Vehicles.Clowncar;
 
 public sealed partial class ClowncarSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _blocker = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedChatSystem _chat = default!;
@@ -45,7 +47,7 @@ public sealed partial class ClowncarSystem : EntitySystem
     /// </summary>
     private void OnEntInserted(Entity<ClowncarComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        if (args.Container.ID != ent.Comp.Container)
+        if (args.Container.ID != ent.Comp.Container || _timing.ApplyingState)
             return;
 
         EnsureComp<StunnedComponent>(args.Entity);

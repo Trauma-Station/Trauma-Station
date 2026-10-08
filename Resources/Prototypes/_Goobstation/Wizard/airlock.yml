@@ -114,7 +114,6 @@
 # Construction
 - type: constructionGraph
   id: AirlockUranium
-  start: start
   graph:
   - node: start
     edges:

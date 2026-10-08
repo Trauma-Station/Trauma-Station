@@ -35,6 +35,18 @@ public sealed partial class OrganChipComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan LongDelay = TimeSpan.FromSeconds(8);
+
+    /// <summary>
+    /// Whether this chip can be pulled out by non-admins.
+    /// </summary>
+    [DataField]
+    public bool CanRemove = true;
+
+    /// <summary>
+    /// Whether this chip can be pulled out by yourself, unless you are an admin.
+    /// </summary>
+    [DataField]
+    public bool CanSelfRemove = true;
 }
 
 /// <summary>

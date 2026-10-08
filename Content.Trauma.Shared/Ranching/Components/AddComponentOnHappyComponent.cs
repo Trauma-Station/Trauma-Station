@@ -6,7 +6,7 @@ namespace Content.Trauma.Shared.Ranching.Components;
 public sealed partial class AddComponentOnHappyComponent : Component
 {
     [DataField]
-    public float HappinessRequired = 777f;
+    public float HappinessRequired = 200f;
 
     [DataField]
     public ComponentRegistry Components;

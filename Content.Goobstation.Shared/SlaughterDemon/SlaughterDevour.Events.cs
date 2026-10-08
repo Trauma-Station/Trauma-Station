@@ -1,32 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.DoAfter;
-using Robust.Shared.Map;
 
 namespace Content.Goobstation.Shared.SlaughterDemon;
 
 /// <summary>
-/// Triggers once an entity devours another entity
+/// Raised on the entity that gets devoured
 /// </summary>
 [ByRefEvent]
-public record struct SlaughterDevourEvent(
-    EntityUid pullingEnt,
-    EntityCoordinates PreviousCoordinates);
+public record struct SlaughterDevourAttemptEvent(EntityUid Devoured, EntityUid Devourer, bool Cancelled = false);
 
 /// <summary>
-///  Raised on the entity that gets devoured
-/// </summary>
-/// <param name="Devoured"></param>
-/// <param name="Devourer"></param>
-[ByRefEvent]
-public record struct SlaughterDevourAttemptEvent(
-    EntityUid Devoured,
-    EntityUid Devourer,
-    bool Handled = false,
-    bool Cancelled = false);
-
-/// <summary>
-/// Doafter for when an entity attempts to devour an entity
+/// Doafter for when a slaughter demon is trying to devour a mob.
 /// </summary>
 [Serializable, NetSerializable]
-public sealed partial class SlaughterDevourDoAfter : SimpleDoAfterEvent;
+public sealed partial class SlaughterDevourDoAfterEvent : SimpleDoAfterEvent;

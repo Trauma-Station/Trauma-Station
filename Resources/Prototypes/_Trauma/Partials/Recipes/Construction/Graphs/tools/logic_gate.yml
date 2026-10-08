@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: constructionGraph
+  id: LogicGate
+  graph:
+  - node: clock
+    entity: SignalClock
+    edges:
+    - to: empty
+      steps:
+      - tool: Prying
+        doAfter: 2
+      completed:
+      - !type:SpawnPrototype
+        prototype: SignalTimerElectronics
+      - !type:SpawnPrototype
+        prototype: CableApcStack1
+        amount: 3

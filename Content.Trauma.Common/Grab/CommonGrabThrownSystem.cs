@@ -26,5 +26,6 @@ public abstract partial class CommonGrabThrownSystem : EntitySystem
         Vector2 vector,
         float grabThrownSpeed,
         DamageSpecifier? damage = null,
-        bool drop = true);
+        bool drop = true,
+        bool knockdown = true);
 }

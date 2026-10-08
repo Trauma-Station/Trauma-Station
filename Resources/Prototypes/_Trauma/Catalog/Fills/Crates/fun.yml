@@ -11,3 +11,24 @@
       entity_storage: !type:NestedSelector
         tableId: SprayPaints
         rolls: 6,10 # 8 cans on average
+
+
+- type: entity
+  id: CrateWizardDemonology
+  name: Demonology Crate
+  description: A crate containing the demonic essentials!
+  parent: LavalandCrateNecropolis
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: BloodVialFull
+          amount: 4
+        - id: EnchantingScrollEmpty
+        - id: RitualDagger
+        - id: SheetSteel1
+          amount: 4
+        - id: SheetPaper
+        - !type:NestedSelector
+          tableId: RandomInkEnchant

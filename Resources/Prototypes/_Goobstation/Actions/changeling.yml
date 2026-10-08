@@ -123,6 +123,8 @@
   - type: Sprite
     layers:
     - state: stasis_enter
+  - type: ConfirmableAction
+    popup: suicide-regen-action-popup
   - type: InstantAction
     event: !type:EnterStasisEvent
   - type: ChangelingAction

@@ -88,9 +88,6 @@
     storedRotation: -90
   - type: LimitedCharges
     maxCharges: 6 # same as it was on a medium cell
-  - type: ContainerContainer
-    containers:
-      signs: !type:Container
   - type: PhysicalComposition
     materialComposition:
       Steel: 75
@@ -142,7 +139,7 @@
         swap: false
 
 - type: entity
-  parent: HolofanProjector # Trauma - use regular one
+  parent: [ BaseXenoborgContraband, HolofanProjector ] # Trauma - use regular one
   id: HoloprojectorXenoField
   name: Xenoborg deflector field projector
   description: An alien device, projecting fields that deflect projectiles.

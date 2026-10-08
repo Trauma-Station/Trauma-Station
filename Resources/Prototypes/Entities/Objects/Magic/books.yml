@@ -28,6 +28,12 @@
   suffix: Wizard
   description: A heavy tome containing complicated arcane formulae for preparing magic spells and conjuring supernatural equipment. Decades of study went into researching this collection of mystical secrets; now go use them to ruin someone's day.
   components:
+    # <Trauma>
+    - type: EnchantingTool
+    - type: GuideHelp
+      guides:
+      - Wizard
+    # </Trauma>
     - type: Sprite
       sprite: Objects/Misc/books.rsi
       layers:
@@ -40,60 +46,19 @@
         color: "#f7e19f"
     - type: UserInterface
       interfaces:
-        enum.StoreUiKey.Key:
-          type: StoreBoundUserInterface
+        # <Trauma>
         enum.RefundUiKey.Key:
           type: StoreRefundBoundUserInterface
+        # </Trauma>
+        enum.StoreUiKey.Key:
+          type: StoreBoundUserInterface
     - type: ActivatableUI
       key: enum.StoreUiKey.Key
-    - type: EnchantingTool # Goobstation
     - type: Store
       refundAllowed: true
       ownerOnly: true # Lesser minds cannot comprehend the arcane secrets within
       balance:
         WizCoin: 10 # prices are balanced around this 10 point maximum and how strong the spells are
-    - type: GuideHelp # Goobstation
-      guides:
-      - Wizard
-
-# Used for the Antag Planet
-- type: entity
-  id: WizardsGrimoireGhost
-  name: ghostly grimoire
-  description: A modified wizard grimoire that can by used by more than one person and has more wizcoins, but can't buy certain spells.
-  suffix: Wizard
-  parent: [ BaseItem, BaseMagicalContraband, GhostAntagSpellPreset ] # Goob edit
-  components:
-    - type: Sprite
-      sprite: Objects/Misc/books.rsi
-      layers:
-      - state: paper_blood
-      - state: cover_strong
-        color: "#645a5a"
-      - state: decor_wingette_flat
-        color: "#4d0303"
-      - state: icon_pentagramm
-        color: "#f7e19f"
-    - type: UserInterface
-      interfaces:
-        enum.StoreUiKey.Key:
-          type: StoreBoundUserInterface
-        enum.RefundUiKey.Key:
-          type: StoreRefundBoundUserInterface
-    - type: ActivatableUI
-      key: enum.StoreUiKey.Key
-    - type: Store
-      refundAllowed: true
-      ownerOnly: false
-      balance:
-        WizCoin: 50 #Increased currency for more use per book
-    - type: EnchantingTool # Goobstation
-    - type: GuideHelp # Goobstation
-      guides:
-      - Wizard
-    - type: Tag
-      tags:
-      - GrimoireGhost
 
 # No-refund version meant for manual spawning, so people can't abuse refund if they were given a tome. Not meant for wizard antag proper!
 - type: entity
