@@ -13,4 +13,10 @@ public sealed partial class BugComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId? TargetArea;
+
+    /// <summary>
+    /// The mind that this bug belongs to.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntityUid? Mind;
 }

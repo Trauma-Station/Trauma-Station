@@ -1,13 +1,3 @@
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2022 wrexbe <81056464+wrexbe@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 DrSmugleaf <DrSmugleaf@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2023 Pieter-Jan Briers <pieterjan.briers@gmail.com>
-// SPDX-FileCopyrightText: 2023 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2024 Nemanja <98561806+EmoGarbage404@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -98,7 +88,8 @@ public sealed class DecalPainter
 
         image.Mutate(o => o.Rotate((float) -decal.Angle.Degrees));
         var coloredImage = new Image<Rgba32>(image.Width, image.Height);
-        Color color = decal.Color?.WithAlpha(byte.MaxValue).ConvertImgSharp() ?? Color.White; // remove the encoded color alpha here
+        // Trauma - wrap it in ScaledVector conversions
+        Color color = Color.FromScaledVector((decal.Color ?? Robust.Shared.Maths.Color.White).WithAlpha(byte.MaxValue).ConvertImgSharp().ToScaledVector4()); // remove the encoded color alpha here
         var alpha = decal.Color?.A ?? 1; // get the alpha separately so we can use it in DrawImage
         coloredImage.Mutate(o => o.BackgroundColor(color));
 

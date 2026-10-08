@@ -179,7 +179,7 @@ namespace Content.Client.Clickable
                 for (var i = 0; i < pixelSpan.Length; i++)
                 {
                     Rgba32 rgba = default;
-                    pixelSpan[i].ToRgba32(ref rgba);
+                    rgba = pixelSpan[i].ToRgba32(); // Trauma - replaced ref rgba with return value
                     if (rgba.A >= threshByte)
                     {
                         data[i / 8] |= (byte) (1 << (i % 8));
