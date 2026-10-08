@@ -15,14 +15,7 @@ public sealed partial class MegafaunaActionsSystem : EntitySystem
     [Dependency] private SharedTransformSystem _xform = default!;
     [Dependency] private INetManager _net = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ActionsComponent, SpawnEntityActionEvent>(OnAttackAction);
-        SubscribeLocalEvent<ActionsComponent, ToggleTileMovementActionEvent>(OnTileMovement);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAttackAction(Entity<ActionsComponent> ent, ref SpawnEntityActionEvent args)
     {
         if (_net.IsClient // PredictedSpawn doesn't support spawning entities without initializing them yet...
@@ -51,6 +44,7 @@ public sealed partial class MegafaunaActionsSystem : EntitySystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnTileMovement(Entity<ActionsComponent> ent, ref ToggleTileMovementActionEvent args)
     {
         if (args.Handled)

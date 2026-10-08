@@ -66,3 +66,6 @@
             #silicon 3
             StationAi: [ 1, 1 ]
             Borg: [ 2, 2 ]
+
+
+            DClass: [ -1, -1 ] #Trauma

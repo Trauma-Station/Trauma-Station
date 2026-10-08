@@ -1,0 +1,47 @@
+- type: job
+  id: Librarian
+  name: job-name-librarian
+  description: job-description-librarian
+  playTimeTracker: JobLibrarian
+  startingGear: LibrarianGear
+  icon: "JobIconLibrarian"
+  supervisors: job-supervisors-hop
+  guides: [ Service ] # TODO: should have a more specific guidebook page instead of using the department itself
+  access:
+  - Library # Trauma - replaced Service
+  - Maintenance
+  # <Trauma>
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipLibrarian
+    - SkillChipLongBlade
+  # </Trauma>
+
+- type: startingGear
+  id: LibrarianGear
+  equipment:
+    shoes: ClothingShoesBootsLaceup
+    id: LibrarianPDA
+    ears: ClothingHeadsetService
+    pocket1: d20Dice
+    pocket2: HandLabeler # for making named bestsellers
+  storage:
+    back:
+    # <Trauma>
+    - PrintingPressFlatpack
+    - Multitool
+    - CaneSheathFilledLibrarian # mini update, removes the ignite. makes NT blade but slower.
+    # </Trauma>
+    - BookRandom
+
+- type: chameleonOutfit
+  id: LibrarianChameleonOutfit
+  job: Librarian
+  equipment:
+    head: ClothingHeadHatCanadaBeanie
+    eyes: ClothingEyesGlassesJamjar
+    mask: ClothingMaskGas
+    neck: ClothingNeckScarfStripedGreen
+    outerClothing: ClothingOuterWinterColorGreen
+    gloves: ClothingHandsGlovesColorBlack

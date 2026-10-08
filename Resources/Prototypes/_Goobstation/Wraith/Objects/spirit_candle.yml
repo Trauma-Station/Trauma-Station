@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: spirit candle
   parent: Candle
   id: SpiritCandle
+  name: spirit candle
   description: Feels vaguely ominous!
   components:
   - type: Item
@@ -45,7 +45,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 60
+        damage: 40
       behaviors:
       - !type:SpawnEntitiesBehavior
         spawn:
@@ -56,8 +56,6 @@
         acts: [ "Destruction" ]
   - type: GuideHelp
     guides: [ Chaplain ]
-
-
 
 # dummy entity for detecting
 # Note for future reader:

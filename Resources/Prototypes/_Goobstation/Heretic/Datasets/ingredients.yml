@@ -113,7 +113,7 @@
     name: heretic-ritual-ingredient-door
   - whitelist:
       tags:
-      - GlassShard
+      - AnyGlassShard
     name: heretic-ritual-ingredient-glass-shard
   - whitelist:
       tags:
@@ -144,7 +144,7 @@
   id: KnowledgeRitualHard
   ingredients:
   - whitelist:
-      components:
+      tags:
       - Stunbaton
     name: heretic-ritual-ingredient-stun-baton
   - whitelist:

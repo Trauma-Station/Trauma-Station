@@ -163,3 +163,9 @@
       proto: InstallHypoportNukie
     - !type:InstallOrganChip
       chip: SkillChipNukie
+
+- type: entity
+  parent: BaseGameRule
+  id: SpectatorStatistics
+  components:
+    - type: ObserverStatisticRule

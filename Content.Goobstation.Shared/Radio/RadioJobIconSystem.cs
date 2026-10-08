@@ -1,27 +1,36 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Common.Silicon;
 using Content.Shared.Access.Systems;
-using Content.Shared.PAI;
-using Content.Shared.Silicons.Borgs.Components;
 using Content.Shared.Silicons.StationAi;
 using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
+using Content.Shared.Whitelist;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Content.Goobstation.Shared.Radio;
 
 public sealed partial class RadioJobIconSystem : EntitySystem
 {
-    [Dependency] private AccessReaderSystem _accessReader = default!;
-    [Dependency] private SharedIdCardSystem _idCardSystem = default!;
-    [Dependency] private CommonSiliconSystem _silicon = default!;
+    [Dependency] private AccessReaderSystem _access = default!;
+    [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedIdCardSystem _idCard = default!;
 
     // These are static vars rather than being inlined so that the YAML linter can verify that they actually exist.
     private static readonly ProtoId<JobIconPrototype> JobIconAI = new("JobIconStationAi");
     private static readonly ProtoId<JobIconPrototype> JobIconBorg = new("JobIconBorg");
     private static readonly ProtoId<JobIconPrototype> JobIconNoID = new("JobIconNoId");
 
+    private static readonly EntityWhitelist BorgWhitelist = new()
+    {
+        Components =
+        [
+            "BorgChassis",
+            "BorgBrain",
+            // pAIs and Drones don't have radio access, but they can still get picked up by an intercom.
+            "PAI",
+            "Drone"
+        ]
+    };
 
     /// <summary>
     /// This handles getting the radio job icons that are displayed next to a players name when sending a message over radio.
@@ -60,10 +69,7 @@ public sealed partial class RadioJobIconSystem : EntitySystem
             jobName = Loc.GetString("job-name-station-ai");
             return true;
         }
-        if (HasComp<BorgChassisComponent>(ent)
-            || HasComp<BorgBrainComponent>(ent)
-            || HasComp<PAIComponent>(ent) // pAIs and Drones don't have radio access, but they can still get picked up by an intercom.
-            || _silicon.IsDrone(ent))
+        if (_whitelist.IsWhitelistPass(BorgWhitelist, ent))
         {
             jobIcon = JobIconBorg;
             jobName = Loc.GetString("job-name-borg");
@@ -79,7 +85,7 @@ public sealed partial class RadioJobIconSystem : EntitySystem
     {
         jobIcon = jobName = null;
         // Ideally this would only use `SharedIdCardSystem.TryFindIdCard()` rather than needing accessReader, but currently that doesn't check the offhand.
-        if (!_accessReader.FindAccessItemsInventory(ent, out var items))
+        if (!_access.FindAccessItemsInventory(ent, out var items))
         {
             return false;
         }
@@ -87,7 +93,7 @@ public sealed partial class RadioJobIconSystem : EntitySystem
         foreach (var item in items)
         {
             // Check if each item is an ID card, or if it's a PDA with an ID inside it.
-            if (_idCardSystem.TryGetIdCard(item, out var idCard))
+            if (_idCard.TryGetIdCard(item, out var idCard))
             {
                 jobIcon = idCard.Comp.JobIcon;
                 jobName = idCard.Comp.LocalizedJobTitle;

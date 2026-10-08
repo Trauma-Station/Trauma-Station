@@ -26,7 +26,7 @@
         - BorgChassis #dermal means skin. borgs dont have skin
     - type: MindcontrolImplant
 
-- type: factionIcon #  There are no statusicon for group for what is needed here. a new group is needed whit ShowToUid. Faction will do for now.
+- type: statusIcon #  There are no statusicon for group for what is needed here. a new group is needed whit ShowToUid. Faction will do for now.
   id: MindcontrolledFaction # All mindcontrolled can tell who else is mindcontrolled.
   isShaded: true
   priority: 11

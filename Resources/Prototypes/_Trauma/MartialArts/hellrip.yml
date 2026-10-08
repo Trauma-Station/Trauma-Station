@@ -7,11 +7,13 @@
   - Disarm
   userConditions:
   - !type:StandingCondition
+    failMessage: martial-arts-fail-prone
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Effects/demon_attack1.ogg
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 80
-  - !type:ModifyParalysis
-    time: 6
   - !type:HealthChange
     targetPart: Chest
     damage:
@@ -19,7 +21,7 @@
         Slash: 10
   - !type:StopPull
   - !type:GrabThrow
-  levelRequired: 10
+    speed: 25
 
 - type: combo
   id: HeadRip
@@ -28,12 +30,23 @@
   - Harm
   - Harm
   - Grab
+  userConditions:
+  - !type:StandingCondition
+    failMessage: martial-arts-fail-prone
   conditions:
   - !type:MobStateCondition
     mobstate: Dead
+    failMessage: martial-arts-fail-target-alive
   - !type:HasOrgan
     organCategory: Head
+    failMessage: martial-arts-fail-target-headless
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Effects/gib1.ogg
+  - !type:PlaySoundEffect
+    sound: /Audio/Effects/demon_attack1.ogg
   opponentEffects:
+  - !type:StopPull
   - !type:RelayOrgan
     category: Head
     effects:
@@ -42,7 +55,6 @@
         types:
           Slash: 100
     - !type:DetachOrgan
-  levelRequired: 10
 
 - type: combo
   id: TearDown
@@ -50,6 +62,11 @@
   - Harm
   - Disarm
   - Grab
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Effects/Fluids/blood1.ogg
+  - !type:PlaySoundEffect
+    sound: /Audio/Effects/demon_attack1.ogg
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 50
@@ -58,16 +75,24 @@
     damage:
       types:
         Slash: 60
-  levelRequired: 10
 
 - type: combo
   id: Slam
   attacks:
   - Disarm
   - Harm
+  conditions:
+  - !type:StandingCondition
+    failMessage: martial-arts-fail-target-down
+  userEffects:
+  - !type:PlaySoundEffect
+    sound: /Audio/Effects/metal_slam5.ogg
+  - !type:PlaySoundEffect
+    sound: /Audio/Effects/demon_attack1.ogg
+  - !type:SetStanding
+    force: true
   opponentEffects:
   - !type:TakeStaminaDamage
     amount: 100
-  - !type:ModifyParalysis
+  - !type:ModifyKnockdown
     time: 8
-  levelRequired: 10

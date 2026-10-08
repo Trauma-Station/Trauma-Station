@@ -1,29 +1,34 @@
 using Content.Server.StationEvents.Components;
 using Content.Shared.AlertLevel;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Station.Components;
 
 namespace Content.Server.StationEvents.Events;
 
+/// <summary>
+/// Handler for events setting the station alert level.
+/// </summary>
+/// <seealso cref="AlertLevelInterceptionRuleComponent"/>
 public sealed partial class AlertLevelInterceptionRule : StationEventSystem<AlertLevelInterceptionRuleComponent>
 {
     [Dependency] private AlertLevelSystem _alertLevel = default!;
 
-    protected override void Started(EntityUid uid, AlertLevelInterceptionRuleComponent component, GameRuleComponent gameRule,
-        GameRuleStartedEvent args)
+    protected override void Started(Entity<AlertLevelInterceptionRuleComponent, GameRuleComponent> ent,
+        ref GameRuleStartedEvent args)
     {
-        base.Started(uid, component, gameRule, args);
+        base.Started(ent, ref args);
 
-        if (!TryGetRandomStation(out var chosenStation))
+        if (!Station.TryGetRandomStation<StationEventEligibleComponent>(out var chosenStation))
             return;
 
-        if (!_alertLevel.TryGetLevel(chosenStation.Value, out var level)
-            || !_alertLevel.TryGetDefaultLevel(chosenStation.Value, out var defaultLevel)
-            || level != defaultLevel && !component.OverrideAlert) // Trauma - check OverrideAlert
+        if (!_alertLevel.TryGetLevel(chosenStation.Value.Owner, out var level)
+            || !_alertLevel.TryGetDefaultLevel(chosenStation.Value.Owner, out var defaultLevel)
+            || level != defaultLevel && !ent.Comp1.OverrideAlert) // Trauma - check OverrideAlert
             return;
 
-        _alertLevel.SetLevel(chosenStation.Value,
-            component.AlertLevel,
+        _alertLevel.SetLevel(chosenStation.Value.Owner,
+            ent.Comp1.AlertLevel,
             force: true,
-            locked: component.Locked); // Trauma
+            locked: ent.Comp1.Locked); // Trauma
     }
 }

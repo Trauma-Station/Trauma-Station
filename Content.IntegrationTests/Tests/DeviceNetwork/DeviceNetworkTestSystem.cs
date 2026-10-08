@@ -1,40 +1,71 @@
-// SPDX-FileCopyrightText: 2021 Julian Giebel <j.giebel@netrocks.info>
-// SPDX-FileCopyrightText: 2021 mirrorcult <notzombiedude@gmail.com>
-// SPDX-FileCopyrightText: 2022 Julian Giebel <juliangiebel@live.de>
-// SPDX-FileCopyrightText: 2022 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2022 mirrorcult <lunarautomaton6@gmail.com>
-// SPDX-FileCopyrightText: 2024 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-//
-// SPDX-License-Identifier: MIT
-
+#nullable enable
 using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
 using Robust.Shared.GameObjects;
 using Robust.Shared.Reflection;
 using Content.Shared.DeviceNetwork.Components;
+using Robust.Shared.Serialization.Manager.Attributes;
 
 namespace Content.IntegrationTests.Tests.DeviceNetwork;
 
 [Reflect(false)]
-public sealed class DeviceNetworkTestSystem : EntitySystem
+public sealed partial class DeviceNetworkTestSystem : EntitySystem
 {
-    public NetworkPayload LastPayload = default;
-
     public override void Initialize()
     {
         base.Initialize();
-
-        SubscribeLocalEvent<DeviceNetworkComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
+        SubscribeLocalEvent<DeviceNetworkComponent, DeviceNetworkPacketData>(OnBaselinePacketReceived);
+        SubscribeLocalEvent<DeviceNetworkComponent, DeviceNetworkPacketEvent<TestPayload>>(OnTypedPacketReceived);
+        SubscribeLocalEvent<DeviceNetworkComponent, DeviceNetworkPacketEvent<SecondTestPayload>>(OnTypedPacketReceived);
     }
+
+    public TestPayload LastPayload = default;
+    public SecondTestPayload LastPayloadSecond = default;
+    public TestPayloadClass LastPayloadClass = default!;
 
     public void SendBaselineTestEvent(EntityUid uid)
     {
-        RaiseLocalEvent(uid, new DeviceNetworkPacketEvent(0, "", 0, "", uid, new NetworkPayload()));
+        var ev = new DeviceNetworkPacketData(0, "", 0, "", uid, new TestPayloadClass());
+        RaiseLocalEvent(uid, ref ev);
     }
 
-    private void OnPacketReceived(EntityUid uid, DeviceNetworkComponent component, DeviceNetworkPacketEvent args)
+    private void OnBaselinePacketReceived(Entity<DeviceNetworkComponent> ent, ref DeviceNetworkPacketData args)
+    {
+        LastPayloadClass = (TestPayloadClass) args.Data;
+    }
+
+    private void OnTypedPacketReceived(Entity<DeviceNetworkComponent> ent, ref DeviceNetworkPacketEvent<TestPayload> args)
     {
         LastPayload = args.Data;
     }
+
+    private void OnTypedPacketReceived(Entity<DeviceNetworkComponent> ent, ref DeviceNetworkPacketEvent<SecondTestPayload> args)
+    {
+        LastPayloadSecond = args.Data;
+    }
+}
+
+[ByRefEvent]
+public record struct DeviceNetworkPacketData(
+    int NetId,
+    string? Address,
+    uint Frequency,
+    string SenderAddress,
+    EntityUid Sender,
+    INetworkPayload Data);
+
+public readonly partial record struct TestPayload(string TestString, int TestNumber, bool TestBool) : INetworkPayload;
+
+public readonly partial record struct SecondTestPayload(string TestString, int TestNumber, bool TestBool) : INetworkPayload;
+
+public sealed partial class TestPayloadClass : INetworkPayload
+{
+    [DataField]
+    public string TestString;
+
+    [DataField]
+    public int TestNumber;
+
+    [DataField]
+    public bool TestBool;
 }

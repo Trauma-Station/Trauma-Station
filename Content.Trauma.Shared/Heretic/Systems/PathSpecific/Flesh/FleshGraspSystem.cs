@@ -4,13 +4,13 @@ using System.Linq;
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Shared.Actions;
 using Content.Shared.Movement.Pulling.Systems;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Content.Trauma.Shared.Heretic.Ui;
-using Robust.Shared.Network;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Flesh;
 

@@ -2,6 +2,7 @@ using Content.Shared.Actions.Events;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Buckle.Components;
 using Content.Shared.CombatMode.Pacification;
+using Content.Shared.Cuffs;
 using Content.Shared.Damage.ForceSay;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Emoting;
@@ -147,18 +148,6 @@ public partial class MobStateSystem
     #region Event Subscribers
 
     [SubscribeLocalEvent]
-    private void OnAfterAutoHandleState(Entity<MobStateComponent> ent, ref AfterAutoHandleStateEvent args)
-    {
-        if (ent.Comp.LastReceivedState == ent.Comp.CurrentState)
-            return;
-
-        var ev = new MobStateChangedEvent(ent, ent.Comp, ent.Comp.LastReceivedState, ent.Comp.CurrentState);
-        OnStateChanged(ent, ent.Comp, ent.Comp.LastReceivedState, ent.Comp.CurrentState);
-        RaiseLocalEvent(ent, ev, true);
-        ent.Comp.LastReceivedState = ent.Comp.CurrentState;
-    }
-
-    [SubscribeLocalEvent]
     private void OnSleepAttempt(EntityUid target, MobStateComponent component, ref TryingToSleepEvent args)
     {
         if (IsDead(target, component))
@@ -237,21 +226,10 @@ public partial class MobStateSystem
     }
 
     [SubscribeLocalEvent]
-    private void OnMobStateActionAttempt(Entity<ActionRequireMobStateComponent> ent, ref ActionAttemptEvent args)
+    private void OnIncapCuffCheck(Entity<MobStateComponent> ent, ref CheckIncapacitatedCuffEvent args)
     {
-        if (_mobStateQuery.TryComp(args.User, out var mobState) &&
-            ent.Comp.States.Contains(mobState.CurrentState))
-        {
-            return;
-        }
-
-        if (ent.Comp.Popup is { } popup)
-        {
-            var states = string.Join(", ", ent.Comp.States.Order().Select(s => Loc.GetString($"mob-state-{s}")));
-            _popup.PopupEntity(Loc.GetString("mob-state-action-requires-state", ("states", states)), args.User, args.User, popup);
-        }
-
-        args.Cancelled = true;
+        if (IsIncapacitated(ent, ent.Comp))
+            args.Incapacitated = true;
     }
 
     #endregion

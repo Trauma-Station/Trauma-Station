@@ -1,0 +1,44 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: UplinkImplant
+  components:
+  - type: JobListingsImplant
+    action: ActionOpenSideJobsImplant
+
+- type: entity
+  abstract: true
+  id: BaseSubdermalImplant
+  components:
+  - type: SubdermalImplant
+    # copied from implanter, needed so polymorph doesnt fuck up
+    whitelist:
+      components:
+      - MobState # no chair microbomb
+    blacklist:
+      components:
+      - Guardian # no holoparasite macrobomb wombo combo
+      tags:
+      - Unimplantable
+
+- type: entity
+  id: TrackingImplant
+  components:
+  - type: MansusGraspBlockTrigger
+
+- type: entity
+  id: FreedomImplant
+  components:
+  - type: EntityEffectOnTrigger
+    targetUser: true
+    effects:
+    - !type:RelayPuller # stun whoever is pulling you
+      effect: !type:ModifyParalysis
+        time: 5
+    - !type:RemoveSnares # remove any snares
+
+- type: entity
+  id: ScramImplant
+  components:
+  - type: ScramOnTrigger
+    teleportRadius: 10,15

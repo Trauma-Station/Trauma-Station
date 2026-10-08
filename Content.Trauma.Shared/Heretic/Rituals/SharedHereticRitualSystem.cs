@@ -99,6 +99,10 @@ public abstract partial class SharedHereticRitualSystem : EntitySystem
         return (false, false);
     }
 
+    protected virtual void SpawnHereticInfluence(int amount = 1)
+    {
+    }
+
     private bool IsSacrificeTarget(Entity<HereticComponent> heretic, EntityUid target)
     {
         return heretic.Comp.SacrificeTargets.Any(x => x.Entity == GetNetEntity(target));

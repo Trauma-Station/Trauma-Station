@@ -1,0 +1,115 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: MarkerBase
+  id: BaseConditionalRandomHumanoidSpawner
+  name: Centcomm Agent
+  components:
+  - type: Sprite
+    layers:
+    - state: blue
+    - sprite: Mobs/Species/Human/parts.rsi
+      state: full
+
+# Leader if applicable
+- type: entity
+  parent: BaseConditionalRandomHumanoidSpawner
+  id: ErtRandomHumanoidSpawner1
+  components:
+  - type: GameRuleSpawner
+    fallback: SpawnERTLeaderEVA
+    toSpawn:
+      cburn: SpawnCBURNAgent
+      hecu: SpawnHecuSoldier
+
+# Medic spawns with ert security, otherwise use whatever else
+- type: entity
+  parent: BaseConditionalRandomHumanoidSpawner
+  id: ErtRandomHumanoidSpawner2
+  components:
+  - type: GameRuleSpawner
+    fallback: SpawnERTMedicalEVA
+    toSpawn:
+      cburn: SpawnCBURNAgent
+      hecu: SpawnHecuSoldier
+      ertjani: SpawnERTJanitorEVA
+      ertengi: SpawnERTEngineerEVA
+      ertchap: SpawnERTChaplainEVA
+
+# Specific humanoid based on gamerule
+- type: entity
+  parent: BaseConditionalRandomHumanoidSpawner
+  id: ErtRandomHumanoidSpawner3
+  components:
+  - type: GameRuleSpawner
+    toSpawn:
+      cburn: SpawnCBURNAgent
+      hecu: SpawnHecuSoldier
+      ertsec: SpawnERTSecurityEVA
+      ertjani: SpawnERTJanitorEVA
+      ertengi: SpawnERTEngineerEVA
+      ertchap: SpawnERTChaplainEVA
+      ertmed: SpawnERTMedicalEVA
+
+- type: entity
+  abstract: true
+  parent: MarkerBase
+  id: BaseConditionalItemSpawner
+  name: ERT gear spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+
+# Vending machine or whatever
+- type: entity
+  parent: BaseConditionalItemSpawner
+  id: ErtConditionalItemSpawner1
+  components:
+  - type: GameRuleSpawner
+    fallback: SpawnVendingMachineSec
+    toSpawn:
+      ertjani: SpawnCrateJanitorialCleanerGrenades
+      ertengi: SpawnVendingMachineEngivend
+      ertchap: SpawnCrematorium
+      ertmed: SpawnCrateChemistrySupplies
+
+- type: entity
+  parent: BaseConditionalItemSpawner
+  id: ErtConditionalItemSpawner2
+  components:
+  - type: GameRuleSpawner
+    fallback: SpawnGunSafeLaserRandom
+    toSpawn:
+      hecu: SpawnGunSafeBallisticRandom
+      ertjani: SpawnCrateJanitorialReplacementLights
+      ertengi: SpawnCrateEngineeringAMEControl
+      ertchap: SpawnAltarSpawner
+      ertmed: SpawnEnergyChemDispenser
+
+- type: entity
+  parent: BaseConditionalItemSpawner
+  id: ErtConditionalItemSpawner3
+  components:
+  - type: GameRuleSpawner
+    fallback: SpawnGunSafeBallisticRandom
+    toSpawn:
+      cburn: SpawnGunSafeLaserRandom
+      ertjani: SpawnCrateJanitorialMousetraps
+      ertengi: SpawnCrateEngineeringAMEShielding
+      ertchap: SpawnAltarSpawner
+      ertmed: SpawnChemMaster
+
+- type: entity
+  parent: BaseConditionalItemSpawner
+  id: ErtConditionalItemSpawner4
+  components:
+  - type: GameRuleSpawner
+    fallback: SpawnGunSafeTruncheon
+    toSpawn:
+      cburn: SpawnGunSafeCburnSpear
+      ertjani: SpawnCratePlantBGoneSpray
+      ertengi: SpawnCrateEngineeringAMEJar
+      ertchap: SpawnCrateHolySuppliesAdvanced
+      ertmed: SpawnGrinderSupplies

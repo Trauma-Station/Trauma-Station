@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: SecurityCadet
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipCombatEducation
+    - SkillChipLaser
+    - SkillChipNonLethal
+  - !type:AddComponentSpecial
+    components:
+    - type: SecurityStaff
+
+- type: startingGear
+  id: SecurityCadetGear
+  equipment:
+    shoes: ClothingShoesBootsJack # no extra knife
+    eyes: ClothingEyesGlassesSecurity
+    outerClothing: !Remove
+    ears: ClothingHeadsetAltSecurityRegular
+    pocket1: !Remove # no gun for cadet + its ballistic
+  storage:
+    back:
+    - !Remove MagazinePistol

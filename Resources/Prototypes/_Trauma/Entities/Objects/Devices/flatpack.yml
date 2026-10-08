@@ -19,3 +19,12 @@
   components:
   - type: Flatpack
     entity: CrewPrintingPress
+
+- type: entity
+  parent: BaseFlatpack
+  id: IncubatorFlatpack
+  name: incubator flatpack
+  description: A flatpack used for constructing a Incubator
+  components:
+  - type: Flatpack
+    entity: RanchIncubator

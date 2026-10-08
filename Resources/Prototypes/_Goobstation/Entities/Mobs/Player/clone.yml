@@ -1,60 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: cloningSettings
+  parent: FleshMimic
   id: Illusion
   components:
-  # general
-  - DetailExaminable
-  - Dna
-  - Fingerprint
-  - RandomSprite
-  - EncryptionKeyHolder
   - NpcFactionMember
-  # traits
-  - BlackAndWhiteOverlay
-  - LightweightDrunk
-  # job specific
-  - MindShield
-  # accents
-  - Accentless
-  - BackwardsAccent
-  - BarkAccent
-  - BleatingAccent
-  - DamagedSiliconAccent
-  - FrenchAccent
-  - FrontalLisp
-  - GermanAccent
-  - LizardAccent
-  - MobsterAccent
-  - MonkeyAccent
-  - MothAccent
-  - MumbleAccent
-  - OwOAccent
-  - ParrotAccent
-  - PirateAccent
-  # - ReplacementAccent
-  # Not supported at the moment because AddAccentClothingComponent will make it permanent when cloned.
-  # TODO: AddAccentClothingComponent should use an inventory relay event.
-  # Also ZombieComponent overwrites the old replacement accent, because you can only have one at a time.
-  - RussianAccent
-  - ScrambledAccent
-  - SkeletonAccent
-  - SlurredAccent
-  - SouthernAccent
-  - SpanishAccent
-  - StutteringAccent
-  - LanguageSpeaker
-  - ForeignerTrait
-  blacklist:
-    components:
-    - AttachedClothing # helmets, which are part of the suit
-    - HumanoidProfile # will cause problems for downstream felinids getting cloned as Urists
-    - Implanter # they will spawn full again, but you already get the implant. And we can't do item slot copying yet
-    - VirtualItem
-  forceCloning: true
-  copyInternalStorage: false
-  copyStorage: false
-  makeEquipmentUnremoveable: true
-  internalContentsUnremoveable: true
-  allowNonHumanoid: true
   copyEquipment: WITHOUT_POCKET

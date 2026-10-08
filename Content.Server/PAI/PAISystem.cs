@@ -40,7 +40,12 @@ public sealed partial class PAISystem : EntitySystem
         // Not checking for Handled because ToggleableGhostRoleSystem already marks it as such.
 
         if (!TryComp<MindContainerComponent>(uid, out var mind) || !mind.HasMind)
+        // <Trauma> - set the name now not later when the user might be deleted
+        {
             component.LastUser = args.User;
+            component.LastName = Loc.GetString("pai-system-pai-name", ("owner", args.User));
+        }
+        // </Trauma>
     }
 
     private void OnMindAdded(EntityUid uid, PAIComponent component, MindAddedMessage args)
@@ -49,7 +54,7 @@ public sealed partial class PAISystem : EntitySystem
             return;
 
         // Ownership tag
-        var val = Loc.GetString("pai-system-pai-name", ("owner", component.LastUser));
+        var val = component.LastName; // Trauma - use the saved name
 
         // TODO Identity? People shouldn't dox-themselves by carrying around a PAI.
         // But having the pda's name permanently be "old lady's PAI" is weird.

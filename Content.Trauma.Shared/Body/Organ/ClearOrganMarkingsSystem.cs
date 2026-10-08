@@ -14,11 +14,11 @@ public sealed partial class ClearOrganMarkingsSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<BodyComponent, ClearOrganMarkingsEvent>(_body.RelayEvent);
-        SubscribeLocalEvent<VisualOrganMarkingsComponent, BodyRelayedEvent<ClearOrganMarkingsEvent>>(OnClear);
     }
 
+    [SubscribeLocalEvent]
     private void OnClear(Entity<VisualOrganMarkingsComponent> ent, ref BodyRelayedEvent<ClearOrganMarkingsEvent> args)
     {
-        _visualBody.SetOrganMarkings(ent, new());
+        _visualBody.SetOrganMarkings(ent, new(), new());
     }
 }

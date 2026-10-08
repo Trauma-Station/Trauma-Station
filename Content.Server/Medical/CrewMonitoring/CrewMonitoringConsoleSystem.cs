@@ -1,13 +1,8 @@
 using System.Linq;
-using Content.Goobstation.Shared.CrewMonitoring;
-using Content.Server.DeviceNetwork;
-using Content.Server.DeviceNetwork.Systems;
-using Content.Shared.PowerCell;
-using Content.Shared.DeviceNetwork;
 using Content.Shared.DeviceNetwork.Events;
 using Content.Shared.Medical.CrewMonitoring;
-using Content.Shared.Medical.SuitSensor;
 using Content.Shared.Pinpointer;
+using Content.Shared.PowerCell;
 using Robust.Server.GameObjects;
 
 namespace Content.Server.Medical.CrewMonitoring;
@@ -21,7 +16,6 @@ public sealed partial class CrewMonitoringConsoleSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<CrewMonitoringConsoleComponent, ComponentRemove>(OnRemove);
-        SubscribeLocalEvent<CrewMonitoringConsoleComponent, DeviceNetworkPacketEvent>(OnPacketReceived);
         SubscribeLocalEvent<CrewMonitoringConsoleComponent, BoundUIOpenedEvent>(OnUIOpened);
     }
 
@@ -30,22 +24,11 @@ public sealed partial class CrewMonitoringConsoleSystem : EntitySystem
         component.ConnectedSensors.Clear();
     }
 
-    private void OnPacketReceived(EntityUid uid, CrewMonitoringConsoleComponent component, DeviceNetworkPacketEvent args)
+    [SubscribeLocalEvent]
+    private void OnSuitSensorBroadcast(Entity<CrewMonitoringConsoleComponent> ent, ref DeviceNetworkPacketEvent<BroadcastSuitSensorStatePayload> args)
     {
-        var payload = args.Data;
-
-        // Check command
-        if (!payload.TryGetValue(DeviceNetworkConstants.Command, out string? command))
-            return;
-
-        if (command != DeviceNetworkConstants.CmdUpdatedState)
-            return;
-
-        if (!payload.TryGetValue(SuitSensorConstants.NET_STATUS_COLLECTION, out Dictionary<string, SuitSensorStatus>? sensorStatus))
-            return;
-        component.ConnectedSensors = sensorStatus;
-
-        UpdateUserInterface(uid, component);
+        ent.Comp.ConnectedSensors = args.Data.SensorStatus;
+        UpdateUserInterface(ent, ent.Comp);
     }
 
     private void OnUIOpened(EntityUid uid, CrewMonitoringConsoleComponent component, BoundUIOpenedEvent args)
@@ -71,18 +54,7 @@ public sealed partial class CrewMonitoringConsoleSystem : EntitySystem
             EnsureComp<NavMapComponent>(xform.GridUid.Value);
 
         // Update all sensors info
-        // GoobStation - Start
-        var isCommandOnly = HasComp<CrewMonitorScanningComponent>(uid);
-
-        var filteredSensors = component.ConnectedSensors
-            .Where(pair => isCommandOnly
-                ? pair.Value.IsCommandTracker
-                : !pair.Value.IsCommandTracker)
-            .Select(pair => pair.Value)
-            .ToList();
-        _uiSystem.SetUiState(uid, CrewMonitoringUIKey.Key, new CrewMonitoringState(filteredSensors));
-        // GoobStation - End
-        //var allSensors = component.ConnectedSensors.Values.ToList();
-        //_uiSystem.SetUiState(uid, CrewMonitoringUIKey.Key, new CrewMonitoringState(allSensors));
+        var allSensors = component.ConnectedSensors.Values.ToList();
+        _uiSystem.SetUiState(uid, CrewMonitoringUIKey.Key, new CrewMonitoringState(allSensors));
     }
 }

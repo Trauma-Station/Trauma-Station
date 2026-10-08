@@ -24,19 +24,18 @@ public sealed partial class RoundEndCreditsSystem : EntitySystem
     private EndRoundCreditsControl? _creditsContainer;
     private BoxContainer? _exitContainer;
     private bool _showCredits = true;
-    private float _uiScale;
+    private float _uiScale = 1f;
     private bool Debug = false; // Set this to true if you want a bunch of dummy characters to spawn
 
     public override void Initialize()
     {
         base.Initialize();
-        SubscribeNetworkEvent<RoundEndMessageEvent>(OnRoundEnd);
-        SubscribeNetworkEvent<RoundRestartCleanupEvent>(OnRoundCleanup);
 
         Subs.CVar(_cfg, TraumaCVars.PlayMovieEndCredits, x => _showCredits = x, true);
         Subs.CVar(_cfg, CVars.DisplayUIScale, x => _uiScale = x, true);
     }
 
+    [SubscribeNetworkEvent]
     private void OnRoundCleanup(RoundRestartCleanupEvent ev)
     {
         if (!_showCredits)
@@ -45,6 +44,7 @@ public sealed partial class RoundEndCreditsSystem : EntitySystem
         CloseCredits();
     }
 
+    [SubscribeNetworkEvent]
     private void OnRoundEnd(RoundEndMessageEvent message)
     {
         if (!_showCredits)
@@ -55,8 +55,9 @@ public sealed partial class RoundEndCreditsSystem : EntitySystem
         if (patrons.Count != 0)
             shoutout = _random.Pick(patrons).Name;
 
+        var scale = _uiScale == 0f ? _ui.DefaultUIScale : _uiScale;
         var credits = new EndRoundCreditsControl();
-        credits.SetSize = _clyde.MainWindow.Size / _uiScale;
+        credits.SetSize = _clyde.MainWindow.Size / scale;
         credits.Populate(message, _cache, ProtoMan, shoutout, Debug);
 
         var rand = new RobustRandom();

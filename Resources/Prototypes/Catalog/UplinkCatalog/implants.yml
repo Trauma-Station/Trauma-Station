@@ -47,7 +47,7 @@
   icon: { sprite: /Textures/Mobs/Species/Human/parts.rsi, state: full }
   productEntity: DnaScramblerImplanter
   cost:
-    Telecrystal: 15 # Trauma - was 3, 5x
+    Telecrystal: 10 # Trauma - was 3, 5x and cheaper because theres 2+ guaranteed crew ways to do this
   categories:
     - UplinkImplants
 

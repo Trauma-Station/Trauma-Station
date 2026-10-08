@@ -44,7 +44,7 @@
       collection: ClowncarCrash
     whitelist:
       components:
-      - Clumsy # clown only
+      - Clown # clown only
   - type: UnpoweredFlashlight
   - type: PointLight
     enabled: false

@@ -2,7 +2,6 @@
 
 - type: constructionGraph
   id: GaussRifleGraph
-  start: start
   graph:
   - node: start
     edges:
@@ -158,7 +157,6 @@
 
 - type: constructionGraph
   id: GaussPistolGraph
-  start: start
   graph:
   - node: start
     edges:
@@ -299,7 +297,6 @@
 
 - type: constructionGraph
   id: GaussImprovMagazineGraph
-  start: start
   graph:
 
   - node: start
@@ -328,7 +325,6 @@
 
 - type: constructionGraph
   id: GaussImprovAmmoGraph
-  start: start
   graph:
 
   - node: start
@@ -370,7 +366,6 @@
 
 - type: constructionGraph
   id: NailBoard
-  start: start
   graph:
 
     - node: start
@@ -428,7 +423,6 @@
 
 - type: constructionGraph
   id: IEDSpear
-  start: start
   graph:
   - node: start
     edges:
@@ -452,7 +446,6 @@
 
 - type: constructionGraph
   id: PipebombSpear
-  start: start
   graph:
   - node: start
     edges:
@@ -478,7 +471,6 @@
 
 - type: constructionGraph
   id: PipeShank
-  start: start
   graph:
   - node: start
     edges:
@@ -506,7 +498,6 @@
 
 - type: constructionGraph
   id: WoodenSword
-  start: start
   graph:
   - node: start
     edges:
@@ -527,7 +518,6 @@
 
 - type: constructionGraph
   id: NailSword
-  start: start
   graph:
   - node: start
     edges:
@@ -585,7 +575,6 @@
 
 - type: constructionGraph
   id: ScrapSword
-  start: start
   graph:
   - node: start
     edges:
@@ -631,7 +620,6 @@
 
 - type: constructionGraph
   id: WeldedSword
-  start: start
   graph:
   - node: start
     edges:

@@ -30,10 +30,6 @@
       - WeldingMask
       - RemoteSignaller
       - UtilityKnife
-      - Hammer # Goobstation
-      - Nailgun # Goobstation
-      - MagazineNailgun # Goobstation
-      - HereticBladeLock # Goobstation
       components:
       - StationMap
       - SprayPainter
@@ -129,7 +125,6 @@
     maxItemSize: Large
     whitelist:
       tags:
-      - Keyring # Goobstation
       - Wrench
       - Bottle
       - Spray
@@ -211,10 +206,6 @@
   - type: Storage
     whitelist:
       tags:
-      # <Trauma>
-      - Tourniquet
-      - HandheldCrewMonitor
-      # </Trauma>
       - Wrench
       - Bottle
       - Spray
@@ -230,14 +221,6 @@
       - SurgeryTool
       - Dropper
       components:
-      # <Trauma>
-      - SurgeryTool
-      - Defibrillator
-      - SyringeGun
-      - GunApplySolution # syndicate dart gun
-      - SolutionCartridge
-      - MedicalPatch
-      # </Trauma>
       - Injector
       - Pill
       - HandLabeler
@@ -300,21 +283,19 @@
   - type: Storage
     whitelist:
       tags:
-      - PlantSampleTaker
       - BotanyShovel
-      - BotanyHoe
       - BotanyHatchet
       - PlantBGone
       - Bottle
       - Syringe
       - CigPack
       - Dropper
-      - PlantAnalyzer # Trauma
       components:
+      - BotanySampleTaker
+      - BotanyHoe
       - Seed
       - Smokable
       - HandLabeler
-      - PlantAnalyzer # Trauma
   - type: ItemMapper
     sprite: *BeltOverlay
     mapLayers:
@@ -324,7 +305,7 @@
           - BotanyHatchet
       hoe:
         whitelist:
-          tags:
+          components:
           - BotanyHoe
       secateurs: # We don't have secateurs and this looks similar enough.
         whitelist:
@@ -428,7 +409,7 @@
   - type: Clothing
     sprite: Clothing/Belt/security.rsi
   - type: ExplosionResistance
-    damageCoefficient: 0.5 # Goob - was 0.9
+    damageCoefficient: 0.9
   - type: Storage
     whitelist:
       tags:
@@ -440,15 +421,9 @@
       - MagazinePistol
       - MagazineMagnum
       - CombatKnife
-      - Truncheon
       - HandGrenade
-      # <Goob>
-      - BolaEnergy # Goobstation
-      - EnergySpeedloader # Goobstation
-      - MilitaryPowerCell # Goobstation
-      # </Goob>
-      components:
       - Stunbaton
+      components:
       - FlashOnTrigger
       - SmokeOnTrigger
       - Flash
@@ -458,7 +433,6 @@
       - DoorRemote
       - Whistle
       - BalloonPopper
-      - ScatteringGrenade # Goob
   - type: ItemMapper
     sprite: *BeltOverlay
     mapLayers:
@@ -468,7 +442,7 @@
           - FlashOnTrigger
       stunbaton:
         whitelist:
-          components:
+          tags:
           - Stunbaton
       tear_gas_grenade:
         whitelist:

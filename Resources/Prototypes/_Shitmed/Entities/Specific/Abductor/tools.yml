@@ -32,9 +32,9 @@
   - type: EmitSoundOnLand
     sound:
       path: /Audio/Items/wirecutter_drop.ogg
+  - type: BotanySampleTaker
   - type: Tag
     tags:
-    - PlantSampleTaker
     - Wirecutter
   - type: MeleeWeapon
     wideAnimationRotation: -90

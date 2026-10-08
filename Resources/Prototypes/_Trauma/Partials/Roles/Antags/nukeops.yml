@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antag
+  id: Nukeops
+  creditImage: /Textures/_Trauma/EndCredits/Antags/nukeops.png
+
+- type: antag
+  id: NukeopsMedic
+  dontShowInCredits: true
+
+- type: antag
+  id: NukeopsCommander
+  dontShowInCredits: true

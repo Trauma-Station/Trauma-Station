@@ -33,6 +33,7 @@
       flavors:
       - DeepFried
       - oily
+    - type: GlassChickenBlacklist
     componentsToRemoveObjects:
     - type: Storage
     - type: Tool
@@ -57,6 +58,8 @@
     - type: UserInterface
     - type: HealthAnalyzer
     - type: CablePlacer
+      cablePrototypeID: CableHV
+    - type: Store # infinite TC glitch
     componentsToRemove:
     - type: Perishable
   # -----------------

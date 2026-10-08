@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: BasePlant
+  components:
+  - type: PlantHarvestLimit
+    limit: 500 # if you make more than this time to automate the industrial grinder
+
+- type: entity
+  id: WheatPlants
+  components:
+  - type: PlantData
+    mutationPrototypes: [ SteelWheatPlants ]
+
+- type: entity
+  id: LemoonPlants
+  components:
+  - type: PlantData
+    mutationPrototypes: [ LemonadePlants ]
+
+- type: entity
+  id: RainbowCannabisPlants
+  components:
+  - type: Plant
+    growthStages: 3 # default 6 stages have no sprites for 4-6...

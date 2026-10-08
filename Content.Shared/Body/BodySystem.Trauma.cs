@@ -23,7 +23,9 @@ public sealed partial class BodySystem
     [Dependency] private CommonBodyPartSystem _part = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private OrganRelationSystem _relation = default!;
     [Dependency] private StandingStateSystem _standing = default!;
+    [Dependency] private EntityQuery<InternalChildOrganComponent> _internalQuery = default!;
 
     /// <summary>
     /// Body parts' organ categories.
@@ -68,6 +70,7 @@ public sealed partial class BodySystem
     // TODO: vital internal organs???
 
     private readonly HashSet<ProtoId<OrganCategoryPrototype>> _coveredParts = new();
+    private readonly List<EntityUid> _extremities = new();
 
     /// <summary>
     /// Tries to enable a given organ, letting systems run logic.
@@ -146,7 +149,7 @@ public sealed partial class BodySystem
     public List<Entity<OrganComponent>> GetExternalOrgans(Entity<BodyComponent?> body, bool logMissing = false)
     {
         var organs = GetOrgans(body, logMissing);
-        organs.RemoveAll(organ => HasComp<InternalChildOrganComponent>(organ));
+        organs.RemoveAll(organ => _internalQuery.HasComp(organ));
         return organs;
     }
 
@@ -513,7 +516,44 @@ public sealed partial class BodySystem
         return GetRandomBodyPart(target);
     }
 
+    /// <summary>
+    /// Gets a random bodypart that has no child parts, like a hand or an arm with no hand attached.
+    /// </summary>
+    public TargetBodyPart GetRandomExtremity(Entity<BodyComponent?> body)
+    {
+        if (!_bodyQuery.Resolve(body, ref body.Comp, false))
+            return TargetBodyPart.Chest;
+
+        _extremities.Clear();
+        foreach (var part in GetExternalOrgans(body))
+        {
+            if (IsExtremity(part))
+                _extremities.Add(part);
+        }
+
+        if (_extremities.Count == 0)
+            return TargetBodyPart.Chest; // should never happen...
+
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(body));
+        var picked = rand.Pick(_extremities);
+        return _part.GetTargetBodyPart(picked) ?? TargetBodyPart.Chest;
+    }
+
     #endregion
+
+    /// <summary>
+    /// Returns true if a bodypart has no child parts.
+    /// </summary>
+    public bool IsExtremity(EntityUid part)
+    {
+        foreach (var child in _relation.AllChildren(part))
+        {
+            if (!_internalQuery.HasComp(child))
+                return false;
+        }
+
+        return true;
+    }
 
     private bool IsDetached(EntityUid uid)
         => (MetaData(uid).Flags & MetaDataFlags.Detached) != 0;

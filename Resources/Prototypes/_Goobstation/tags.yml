@@ -21,9 +21,6 @@
   id: BindSoulAction
 
 - type: Tag
-  id: Bible
-
-- type: Tag
   id: Blobbernaut
 
 - type: Tag
@@ -67,9 +64,6 @@
 
 - type: Tag
   id: Chair
-
-- type: Tag
-  id: ClothingBeltGeminiHoloProjector
 
 - type: Tag
   id: Clarke
@@ -280,9 +274,6 @@
 
 - type: Tag
   id: HonkmotherMaw
-
-- type: Tag
-  id: HydroponicsToolClippers
 
 - type: Tag
   id: IgnoreBindSoul
@@ -517,9 +508,6 @@
 
 - type: Tag
   id: Steel
-
-- type: Tag
-  id: StunBaton # for heretic ritual
 
 - type: Tag
   id: SummonSimiansMaxLevelAction

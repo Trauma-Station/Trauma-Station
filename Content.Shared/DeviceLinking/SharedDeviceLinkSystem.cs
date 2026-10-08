@@ -17,13 +17,13 @@ public abstract partial class SharedDeviceLinkSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
 
-    [Dependency] private EntityQuery<DeviceLinkSinkComponent> _deviceLinkSinkQuery = default!;
-
-    public const string InvokedPort = "link_port";
+    [Dependency] protected EntityQuery<DeviceLinkSinkComponent> DeviceLinkSinkQuery = default!;
+    [Dependency] protected EntityQuery<DeviceLinkSourceComponent> DeviceLinkSourceQuery = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
+        base.Initialize();
         SubscribeLocalEvent<DeviceLinkSourceComponent, ComponentStartup>(OnSourceStartup);
         SubscribeLocalEvent<DeviceLinkSourceComponent, ComponentRemove>(OnSourceRemoved);
         SubscribeLocalEvent<DeviceLinkSinkComponent, ComponentRemove>(OnSinkRemoved);
@@ -85,7 +85,7 @@ public abstract partial class SharedDeviceLinkSystem : EntitySystem
     {
         foreach (var sinkUid in source.Comp.LinkedPorts.Keys)
         {
-            if (_deviceLinkSinkQuery.TryGetComponent(sinkUid, out var sink))
+            if (DeviceLinkSinkQuery.TryGetComponent(sinkUid, out var sink))
                 RemoveSinkFromSourceInternal(source, sinkUid, source, sink);
             else
                 Log.Error($"Device source {ToPrettyString(source)} links to invalid entity: {ToPrettyString(sinkUid)}");
@@ -565,32 +565,23 @@ public abstract partial class SharedDeviceLinkSystem : EntitySystem
     /// Sends a network payload directed at the sink entity.
     /// Just raises a <see cref="SignalReceivedEvent"/> without data if the source or the sink doesn't have a <see cref="DeviceNetworkComponent"/>
     /// </summary>
-    /// <param name="uid">The source uid that invokes the port</param>
+    /// <param name="ent">The source uid that invokes the port</param>
     /// <param name="port">The port to invoke</param>
-    /// <param name="data">Optional data to send along</param>
-    /// <param name="sourceComponent"></param>
-    public virtual void InvokePort(EntityUid uid, string port, NetworkPayload? data = null,
-        DeviceLinkSourceComponent? sourceComponent = null)
+    public virtual void InvokePort(Entity<DeviceLinkSourceComponent?> ent, string port)
     {
         // NOOP on client for the moment.
     }
 
     /// <summary>
-    /// Goobstation - moved out of server
-    /// Helper function that invokes a port with a high/low binary logic signal.
+    /// Sends a network payload directed at the sink entity.
+    /// Just raises a <see cref="SignalReceivedEvent"/> without data if the source or the sink doesn't have a <see cref="DeviceNetworkComponent"/>
     /// </summary>
-    public void SendSignal(EntityUid uid, string port, bool signal, DeviceLinkSourceComponent? comp = null)
+    /// <param name="ent">The source entity that invokes the port</param>
+    /// <param name="port">The port to invoke</param>
+    /// <param name="data">Optional data to send along</param>
+    public virtual void InvokePort<T>(Entity<DeviceLinkSourceComponent?> ent, string port, ref T data) where T : ISignalNetworkPayload
     {
-        if (!Resolve(uid, ref comp))
-            return;
-
-        var data = new NetworkPayload
-        {
-            [DeviceNetworkConstants.LogicState] = signal ? SignalState.High : SignalState.Low
-        };
-        InvokePort(uid, port, data, comp);
-
-        comp.LastSignals[port] = signal;
+        // NOOP on client for the moment.
     }
     #endregion
 

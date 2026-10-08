@@ -9,7 +9,7 @@ namespace Content.Server.NukeOps;
 /// Used with NukeOps game rule to send war declaration announcement
 /// </summary>
 [RegisterComponent, AutoGenerateComponentPause]
-[Access(typeof(WarDeclaratorSystem), typeof(NukeopsRuleSystem))]
+[Access(typeof(WarDeclaratorSystem), typeof(ServerNukeopsRuleSystem))]
 public sealed partial class WarDeclaratorComponent : Component
 {
     /// <summary>
@@ -66,4 +66,5 @@ public sealed partial class WarDeclaratorComponent : Component
 }
 
 [ByRefEvent]
-public record struct WarDeclaredEvent(WarConditionStatus? Status, Entity<WarDeclaratorComponent> DeclaratorEntity);
+public record struct WarDeclaredEvent(WarConditionStatus? Status, Entity<WarDeclaratorComponent> DeclaratorEntity,
+    EntityUid User); // Trauma

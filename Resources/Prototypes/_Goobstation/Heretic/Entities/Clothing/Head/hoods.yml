@@ -66,6 +66,8 @@
           Ballistic: 0.4
           Heat: 0.4
           Caustic: 0.4
+        flatReductions:
+          Ballistic: 3
       traumaDeductions:
         Dismemberment: 0.4
         OrganDamage: 0.4
@@ -87,6 +89,8 @@
           Ballistic: 0.7
           Heat: 0.7
           Caustic: 0.7
+        flatReductions:
+          Ballistic: 2
       traumaDeductions:
         Dismemberment: 0.2
         OrganDamage: 0.2

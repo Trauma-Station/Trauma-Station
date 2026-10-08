@@ -17,9 +17,11 @@ public sealed partial class OvertimeStaminaDamageComponent : Component
     /// <summary>
     ///     Total amount of stamina damage a person is about to get
     /// </summary>
-    [DataField] public float Amount = 10f;
+    [DataField]
+    public float Amount = 10f;
 
-    [ViewVariables(VVAccess.ReadWrite)] public float Damage = 10f;
+    [DataField]
+    public float Damage = 10f;
 
     /// <summary>
     ///     Divisor. How much damage should we add overtime.

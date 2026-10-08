@@ -89,32 +89,17 @@ public sealed partial class DivineInterventionSystem : EntitySystem
     /// Handles EntityTargetActionEvent spells.
     /// </summary>
     [SubscribeLocalEvent]
-    private void OnTouchSpellAttempt(BeforeCastTouchSpellEvent args)
+    private void OnTouchSpellAttempt(ref BeforeCastTouchSpellEvent args)
     {
-        if (args.Target is not { } target)
-            return;
-
+        var target = args.Target;
         if (ShouldDeny(target, out var denyingItem)
             && denyingItem != null
             && Exists(denyingItem.Value))
         {
-            args.Cancel();
+            args.Cancelled = true;
             if (args.DoEffects)
                 DenialEffects(denyingItem.Value, target);
         }
-    }
-
-    /// <summary>
-    /// Relays whether a spell denial took place - especially useful for working between Core & GoobMod
-    /// </summary>
-    [SubscribeLocalEvent]
-    private void OnTouchSpellDenied(EntityUid uid, DivineInterventionComponent comp, TouchSpellDenialRelayEvent args)
-    {
-        var ev = new BeforeCastTouchSpellEvent(uid);
-        RaiseLocalEvent(uid, ev, true);
-
-        if (ev.Cancelled)
-            args.Cancel();
     }
 
     /// <summary>
@@ -123,13 +108,10 @@ public sealed partial class DivineInterventionSystem : EntitySystem
     public bool TouchSpellDenied(EntityUid uid, bool doEffects = true)
     {
         var ev = new BeforeCastTouchSpellEvent(uid, doEffects);
-        RaiseLocalEvent(uid, ev, true);
+        RaiseLocalEvent(uid, ref ev, true);
 
         return ev.Cancelled;
     }
 
     #endregion
-
-
-
 }

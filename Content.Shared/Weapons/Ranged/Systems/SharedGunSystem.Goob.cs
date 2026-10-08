@@ -46,9 +46,12 @@ public abstract partial class SharedGunSystem
 
         // goida
         if (proto.TryGetComponent<ProjectileComponent>(out var p, Factory))
-            return p.IgnoreResistances ? 100 : (int)Math.Round(p.Damage.ArmorPenetration * 100);
+            return GetProjectilePenetration(p);
         if (proto.TryGetComponent<HitscanBasicDamageComponent>(out var hitscan, Factory))
             return (int)Math.Round(hitscan.Damage.ArmorPenetration * 100);
         return 0;
     }
+
+    public int GetProjectilePenetration(ProjectileComponent p)
+        => p.IgnoreResistances ? 100 : (int)Math.Round(p.Damage.ArmorPenetration * 100);
 }

@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Actions;
-using Content.Server.Station.Systems;
-using Content.Trauma.Shared.CosmicCult;
-using Content.Trauma.Shared.CosmicCult.Components;
 using Content.Server.Objectives.Systems;
+using Content.Shared.Actions;
+using Content.Shared.Station.Systems;
 using Content.Shared.Station.Components;
 using Content.Shared.Throwing;
+using Content.Trauma.Shared.CosmicCult;
+using Content.Trauma.Shared.CosmicCult.Components;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.CosmicCult.EntitySystems;
 
 public sealed partial class CosmicColossusSystem : SharedCosmicColossusSystem
 {
-    [Dependency] private ActionsSystem _actions = default!;
+    [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private StationSystem _station = default!;
     [Dependency] private ThrowingSystem _throw = default!;

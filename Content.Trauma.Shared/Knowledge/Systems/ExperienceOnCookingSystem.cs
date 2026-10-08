@@ -15,15 +15,21 @@ public sealed partial class ExperienceOnCookingSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<KnowledgeHolderComponent, CookedFoodEvent>(_knowledge.RelayActiveEvent);
-        SubscribeLocalEvent<ExperienceOnCookingComponent, CookedFoodEvent>(OnCookedFood);
     }
 
+    [SubscribeLocalEvent]
     private void OnCookedFood(Entity<ExperienceOnCookingComponent> ent, ref CookedFoodEvent args)
     {
+        // increase limit for each unique recipe made
+        if (ent.Comp.Cooked.Add(args.Result))
+        {
+            ent.Comp.Limit = ent.Comp.Cooked.Count;
+            Dirty(ent);
+        }
+
         // TODO: scale XP gain by the nutrition or something
         var xp = args.Count * ent.Comp.Scale;
-        // TODO: limit level by total unique foods you've made
-        var limit = 100;
+        var limit = Math.Min(100, ent.Comp.Limit);
         _knowledge.AddExperience(ent.Owner, args.User, xp, limit);
     }
 }

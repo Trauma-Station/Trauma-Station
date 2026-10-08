@@ -5,10 +5,6 @@
   description: A rooty tooty point and shooty.
   abstract: true
   components:
-  # <Trauma>
-  - type: WeaponClass
-    class: SMG
-  # </Trauma>
   - type: Sprite
   - type: Item
     size: Large
@@ -62,27 +58,6 @@
       gun_chamber: !type:ContainerSlot
   - type: StaticPrice
     price: 500
-  # Goobstation edit start
-  - type: EmitSoundOnPickup
-    sound:
-      collection: SMGPickUp
-  - type: EmitSoundOnDrop
-    sound:
-      collection: SMGDrop
-  - type: EmitSoundOnLand
-    sound:
-      collection: SMGDrop
-  # Goobstation edit end
-  - type: AltFireMelee
-    attackType: Heavy
-  - type: MeleeWeapon
-    damage:
-      types:
-       Blunt: 10 # lower melee damage for SMGs as they are lighter
-    angle: 0
-    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
-    soundHit:
-      collection: MetalThud # Goobstation ^
 
 - type: entity
   name: Atreides
@@ -122,16 +97,17 @@
       map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/SMGs/c20r.rsi
-#  - type: Wieldable # Goob - one-handed C20R - start
-#    unwieldOnUse: false
-#  - type: GunWieldBonus
-#    minAngle: -19
-#    maxAngle: -16
+  - type: Wieldable
+    unwieldOnUse: false
+  - type: GunWieldBonus
+    minAngle: -19
+    maxAngle: -12
   - type: Gun
-    minAngle: 4 # # Trauma - was 21
-    maxAngle: 36 # Trauma - was 32
+    minAngle: 21
+    maxAngle: 32
+    angleIncrease: 1.25
+    angleDecay: 20
     shotsPerBurst: 5
-    fireRate: 8
     availableModes:
     - Burst
     - FullAuto
@@ -145,9 +121,6 @@
     steps: 6
     zeroVisible: true
   - type: Appearance
-  - type: Item # Goobstation
-    shape:
-    - 0,0,2,1
   - type: StaticPrice
     price: 5000
 
@@ -212,10 +185,12 @@
       unwieldOnUse: false
     - type: GunWieldBonus
       minAngle: -19
-      maxAngle: -16
+      maxAngle: -14
     - type: Gun
       minAngle: 21
       maxAngle: 32
+      angleIncrease: 1.5
+      angleDecay: 16
       fireRate: 6
       burstFireRate: 18
       soundGunshot:
@@ -226,7 +201,7 @@
       - FullAuto
       - SemiAuto
       shotsPerBurst: 3
-      burstCooldown: 0.75 # Trauma, was 0.375
+      burstCooldown: 0.375
     - type: ItemSlots
       slots:
         gun_magazine:
@@ -252,10 +227,10 @@
     - type: Appearance
 
 - type: entity
-  name: WT550 autorifle # Goobstation
+  name: WT550
   parent: [BaseWeaponSubMachineGun, BaseSecurityContraband]
   id: WeaponSubMachineGunWt550
-  description: A truly unique firearm, the WT550 was designed by Nanotrasen's Small Arms Division as a compact, cheap, and mass produced submachine gun fully controllable with one hand. It contains an exotic internal recoil buffer and feeds from special top-mounted .35 magazines.
+  description: A truly unique firearm, the WT550 was designed by Nanotrasen's Small Arms Division as a compact submachine gun fully controllable with one hand. It contains an exotic internal recoil buffer and feeds from special top-mounted .35 magazines.
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/SMGs/wt550.rsi
@@ -274,15 +249,18 @@
     sprite: Objects/Weapons/Guns/SMGs/wt550.rsi
   - type: ChamberMagazineAmmoProvider
     boltClosed: null
-  - type: Gun # Goobstation - I am the one who nerfs the WT.
-    minAngle: 2
+  - type: Gun
+    fireRate: 5.5
+    minAngle: 1
     maxAngle: 16
-    fireRate: 4 # Trauma - was 5
-    burstFireRate: 8
-    angleIncrease: 3
-    angleDecay: 16
+    angleIncrease: 1.5
+    angleDecay: 12
     selectedMode: FullAuto
+    shotsPerBurst: 5
+    burstCooldown: 0.2
+    burstFireRate: 7
     availableModes:
+    - Burst
     - FullAuto
     - SemiAuto
   - type: ItemSlots
@@ -308,9 +286,6 @@
     steps: 6
     zeroVisible: true
   - type: Appearance
-  - type: Item
-    shape:
-    - 0,0,2,1
 
 - type: entity
   name: brown briefcase
@@ -333,14 +308,14 @@
           state: inhand-right
         - state: inhand-right-muzzle
   - type: Sprite
-    sprite: _Trauma/Objects/Weapons/Guns/SMGs/briefcase_brown.rsi # Trauma
+    sprite: Objects/Weapons/Guns/SMGs/briefcase.rsi
     layers:
     - sprite: Objects/Storage/Briefcases/briefcase_brown.rsi
       state: icon
     - state: icon-muzzle
       map: ["enum.GunVisualLayers.Base"]
   - type: Gun
-    fireRate: 6 # Trauma - was 9
+    fireRate: 9
     minAngle: 25
     maxAngle: 32
     availableModes:

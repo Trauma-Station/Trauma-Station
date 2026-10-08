@@ -1,0 +1,47 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: BaseMobCarp
+  components:
+  - type: AshStormImmune
+  - type: VentCrawler
+  - type: Fauna
+  - type: MobThresholds
+    thresholds: !Clear
+      0: Alive
+      25: Dead # 40 > 25 - 3 shots from phaser
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 4.5 # was 3.5, Can catch up to people
+  - !Remove type: ReplacementAccent
+  - type: LanguageSpeaker
+    speaks:
+    - Carptongue
+    understands:
+    - TauCetiBasic
+    - Carptongue
+
+- type: entity
+  id: MobCarpMagic
+  components:
+  - type: Damageable
+    damageModifierSet: MagicCarp
+
+- type: entity
+  id: MobCarpHolo
+  components:
+  - type: Damageable
+    damageModifierSet: HoloCarp
+
+- type: entity
+  id: MobCarpSalvage
+  components:
+  - !Remove type: MobThresholds
+
+- type: entity
+  id: MobShark
+  components:
+  - type: MobThresholds
+    thresholds: !Clear
+      0: Alive
+      150: Dead # was 100

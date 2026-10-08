@@ -43,33 +43,22 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
     [Dependency] private StandingStateSystem _standingState = default!;
     [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private EntityQuery<BeingCarriedComponent> _carriedQuery = default!;
+    [Dependency] private EntityQuery<CarryBlacklistComponent> _blacklistQuery = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<CarriableComponent, GetVerbsEvent<AlternativeVerb>>(AddCarryVerb);
-        SubscribeLocalEvent<CarryingComponent, GetVerbsEvent<InnateVerb>>(AddInsertCarriedVerb);
-        SubscribeLocalEvent<CarryingComponent, VirtualItemDeletedEvent>(OnVirtualItemDeleted);
-        SubscribeLocalEvent<CarryingComponent, BeforeThrowEvent>(OnThrow);
-        SubscribeLocalEvent<CarryingComponent, EntParentChangedMessage>(OnParentChanged);
-        SubscribeLocalEvent<CarryingComponent, MobStateChangedEvent>(OnMobStateChanged);
-        SubscribeLocalEvent<CarryingComponent, BeforePolymorphedEvent>(OnBeforePolymorphed);
-        SubscribeLocalEvent<BeingCarriedComponent, InteractionAttemptEvent>(OnInteractionAttempt);
-        SubscribeLocalEvent<BeingCarriedComponent, UpdateCanMoveEvent>(OnMoveAttempt);
-        SubscribeLocalEvent<BeingCarriedComponent, StandAttemptEvent>(OnStandAttempt);
-        SubscribeLocalEvent<BeingCarriedComponent, GettingInteractedWithAttemptEvent>(OnInteractedWith);
-        SubscribeLocalEvent<BeingCarriedComponent, PullAttemptEvent>(OnPullAttempt);
         SubscribeLocalEvent<BeingCarriedComponent, StartClimbEvent>(OnDrop);
         SubscribeLocalEvent<BeingCarriedComponent, BuckledEvent>(OnDrop);
         SubscribeLocalEvent<BeingCarriedComponent, UnbuckledEvent>(OnDrop);
         SubscribeLocalEvent<BeingCarriedComponent, StrappedEvent>(OnDrop);
         SubscribeLocalEvent<BeingCarriedComponent, UnstrappedEvent>(OnDrop);
         SubscribeLocalEvent<BeingCarriedComponent, EscapeInventoryEvent>(OnDrop);
-        SubscribeLocalEvent<CarriableComponent, CarryDoAfterEvent>(OnDoAfter);
-        SubscribeLocalEvent<BeingCarriedComponent, EntityTerminatingEvent>(OnDelete);
     }
 
+    [SubscribeLocalEvent]
     private void AddCarryVerb(Entity<CarriableComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
     {
         var user = args.User;
@@ -88,6 +77,7 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
         });
     }
 
+    [SubscribeLocalEvent]
     private void AddInsertCarriedVerb(Entity<CarryingComponent> ent, ref GetVerbsEvent<InnateVerb> args)
     {
         // If the person is carrying someone, and the carried person is a pseudo-item, and the target entity is a storage,
@@ -119,6 +109,7 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
     /// <summary>
     /// Since the carried entity is stored as 2 virtual items, when deleted we want to drop them.
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnVirtualItemDeleted(Entity<CarryingComponent> ent, ref VirtualItemDeletedEvent args)
     {
         // Goobstation - VirtualItemDeletedEvent is raised on both the blocking entity and the user,
@@ -133,6 +124,7 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
     /// Basically using virtual item passthrough to throw the carried person. A new age!
     /// Maybe other things besides throwing should use virt items like this...
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnThrow(Entity<CarryingComponent> ent, ref BeforeThrowEvent args)
     {
         if (!TryComp<VirtualItemComponent>(args.ItemUid, out var virtItem) || !HasComp<CarriableComponent>(virtItem.BlockingEntity))
@@ -144,6 +136,7 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
         args.ThrowSpeed = 5f;
     }
 
+    [SubscribeLocalEvent]
     private void OnParentChanged(Entity<CarryingComponent> ent, ref EntParentChangedMessage args)
     {
         var xform = Transform(ent);
@@ -157,11 +150,13 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
         DropCarried(ent, ent.Comp.Carried);
     }
 
+    [SubscribeLocalEvent]
     private void OnMobStateChanged(Entity<CarryingComponent> ent, ref MobStateChangedEvent args)
     {
         DropCarried(ent, ent.Comp.Carried);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforePolymorphed(Entity<CarryingComponent> ent, ref BeforePolymorphedEvent args)
     {
         if (HasComp<MindContainerComponent>(ent.Comp.Carried))
@@ -171,6 +166,7 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
     /// <summary>
     /// Only let the person being carried interact with their carrier and things on their person.
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnInteractionAttempt(Entity<BeingCarriedComponent> ent, ref InteractionAttemptEvent args)
     {
         if (args.Target is not { } target)
@@ -183,11 +179,13 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
             args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnMoveAttempt(Entity<BeingCarriedComponent> ent, ref UpdateCanMoveEvent args)
     {
         args.Cancel();
     }
 
+    [SubscribeLocalEvent]
     private void OnStandAttempt(Entity<BeingCarriedComponent> ent, ref StandAttemptEvent args)
     {
         args.Cancel();
@@ -199,6 +197,7 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
             args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnPullAttempt(Entity<BeingCarriedComponent> ent, ref PullAttemptEvent args)
     {
         args.Cancelled = true;
@@ -209,6 +208,7 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
         DropCarried(ent.Comp.Carrier, ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnDoAfter(Entity<CarriableComponent> ent, ref CarryDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
@@ -277,7 +277,7 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
             return false;
 
         // The second one means that carrier is a pseudo-item and is inside a bag.
-        if (HasComp<BeingCarriedComponent>(carrier) || HasComp<ItemComponent>(carrier))
+        if (_carriedQuery.HasComp(carrier) || HasComp<ItemComponent>(carrier))
             return false;
 
         Carry(carrier, toCarry);
@@ -314,17 +314,19 @@ public sealed partial class CarryingSystem : CommonCarryingSystem
         return
             !ev.Cancelled &&
             carrier != carried.Owner &&
+            !_blacklistQuery.HasComp(carrier) &&
             // can't carry multiple people, even if you have 4 hands it will break invariants when removing carryingcomponent for first carried person
             !HasComp<CarryingComponent>(carrier) &&
             // can't carry someone in a locker, buckled, etc
             HasComp<MapGridComponent>(Transform(carrier).ParentUid) &&
             // no tower of spacemen or stack overflow
-            !HasComp<BeingCarriedComponent>(carrier) &&
-            !HasComp<BeingCarriedComponent>(carried) &&
+            !_carriedQuery.HasComp(carrier) &&
+            !_carriedQuery.HasComp(carried) &&
             // finally check that there are enough free hands
             _hands.CountFreeHands(carrier) >= carried.Comp.FreeHandsRequired;
     }
 
+    [SubscribeLocalEvent]
     private void OnDelete(Entity<BeingCarriedComponent> ent, ref EntityTerminatingEvent args)
         => DropCarried(ent.Comp.Carrier, ent.Owner);
 

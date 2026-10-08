@@ -49,6 +49,7 @@
   - type: Tag
     tags:
     - SpellIgnoreForestAdmonitions
+    - MansusGraspAction
 
 - type: entity
   parent: BaseAction

@@ -151,9 +151,7 @@ public sealed partial class WeakToHolySystem : SharedWeakToHolySystem
             if (TerminatingOrDeleted(uid) || damage.DamageDict.GetValueOrDefault("Holy") <= 0)
                 continue;
 
-            // Rune healing vs passive healing
-            var healing = weakToHoly.IsColliding ? weakToHoly.HealAmount : weakToHoly.PassiveAmount;
-            _damageable.ChangeDamage(uid, healing, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
+            _damageable.ChangeDamage(uid, weakToHoly.PassiveAmount, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
         }
 
         if (_toUpdate.Count == 0)

@@ -6,12 +6,15 @@
   roleLoadout: [ RoleSurvivalNukieHonkops ]
   components:
   # clown
-  - type: Clumsy
+  - type: PermanentStatusEffects
+    statusEffects:
+    - StatusEffectClumsyClown
   - type: SleepEmitSound
     snore: /Audio/Voice/Misc/silly_snore.ogg
     interval: 10
   - type: SpeechFontOverride
     font: LDFComicSans
+  - type: Clown
   - type: RandomMetadata
     nameSegments:
     - NamesHonkopsPrefix

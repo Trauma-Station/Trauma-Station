@@ -5,13 +5,15 @@ using Content.Lavaland.Server.Procedural.Components;
 using Content.Lavaland.Shared.Shuttles;
 using Content.Lavaland.Shared.Shuttles.Components;
 using Content.Lavaland.Shared.Shuttles.Systems;
+using Content.Server.Cargo.Components;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Events;
 using Content.Server.Shuttles.Systems;
-using Content.Server.Station.Components;
-using Content.Server.Station.Systems;
+using Content.Shared.Cargo.Components;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
+using Content.Shared.Station.Components;
+using Content.Shared.Station.Systems;
 using Content.Shared.Timing;
 using Content.Shared.Whitelist;
 using Robust.Server.GameObjects;
@@ -20,9 +22,6 @@ using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Timer = Robust.Shared.Timing.Timer;
-using Content.Shared.Station.Components;
-using Content.Server.Cargo.Components;
-using Content.Shared.Cargo.Components;
 
 namespace Content.Lavaland.Server.Shuttles.Systems;
 

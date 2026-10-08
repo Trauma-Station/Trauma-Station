@@ -11,6 +11,7 @@
 - type: bark
   id: Alto
   name: Alto
+  volume: 1.7
   soundCollection:
     collection: AltoBark
 
@@ -18,14 +19,14 @@
 - type: soundCollection
   id: BaritoneBark
   files:
-    - /Audio/Voice/Talk/speak_1.ogg
-    - /Audio/Voice/Talk/speak_1_ask.ogg
-    - /Audio/Voice/Talk/speak_1_exclaim.ogg
+  - /Audio/Voice/Talk/speak_1.ogg
+  - /Audio/Voice/Talk/speak_1_ask.ogg
+  - /Audio/Voice/Talk/speak_1_exclaim.ogg
 
 - type: bark
   id: Baritone
   name: Baritone
-  volume: 1
+  volume: 1.3
   soundCollection:
     collection: BaritoneBark
 
@@ -33,9 +34,9 @@
 - type: soundCollection
   id: BassBark
   files:
-    - /Audio/Voice/Talk/speak_4.ogg
-    - /Audio/Voice/Talk/speak_4_ask.ogg
-    - /Audio/Voice/Talk/speak_4_exclaim.ogg
+  - /Audio/Voice/Talk/speak_4.ogg
+  - /Audio/Voice/Talk/speak_4_ask.ogg
+  - /Audio/Voice/Talk/speak_4_exclaim.ogg
 
 - type: bark
   id: Bass
@@ -55,7 +56,7 @@
 - type: bark
   id: Tenor
   name: Tenor
-  volume: 1
+  volume: 2
   soundCollection:
     collection: TenorBark
 
@@ -70,7 +71,7 @@
 - type: bark
   id: Arachnid
   name: Arachnid
-  volume: 1
+  volume: 1.3
   soundCollection:
     collection: ArachnidBark
   speciesWhitelist:
@@ -123,6 +124,7 @@
   id: Vox
   name: Vox
   volume: 0.5
+  frequency: 0.3
   soundCollection:
     collection: VoxBark
   speciesWhitelist:
@@ -200,8 +202,8 @@
 
 - type: bark
   id: Durk
-  name: Durk
-  volume: 1
+  name: French
+  volume: 0.6
   frequency: 0.9
   minPitch: 0.9
   maxPitch: 1.1
@@ -222,6 +224,7 @@
 - type: bark
   id: Aviu1
   name: Impudent
+  volume: 0.2
   frequency: 0.7
   soundCollection:
     collection: Aviu1Bark
@@ -239,6 +242,7 @@
 - type: bark
   id: Aviu2
   name: Strong
+  volume: 0.5
   frequency: 0.7
   soundCollection:
     collection: Aviu2Bark
@@ -256,6 +260,7 @@
 - type: bark
   id: Aviu3
   name: Alien
+  volume: 0.5
   frequency: 0.7
   soundCollection:
     collection: Aviu3Bark
@@ -273,6 +278,7 @@
 - type: bark
   id: Aviu4
   name: Ethereal
+  volume: 0.2
   frequency: 0.7
   soundCollection:
     collection: Aviu4Bark

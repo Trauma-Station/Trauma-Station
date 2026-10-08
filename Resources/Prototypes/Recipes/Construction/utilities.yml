@@ -16,8 +16,10 @@
   parent: BaseUtility
   id: BaseUtilityWallmount
   canBuildInImpassable: true
-  conditions:
-  - !type:WallmountCondition
+  # <Trauma> - its chuddy and theres no reason you cant have a battery on the floor
+  # conditions:
+  #- !type:WallmountCondition
+  # </Trauma>
 # endregion Base
 
 # region Surveillance

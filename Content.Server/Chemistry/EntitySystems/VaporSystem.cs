@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Goobstation.Shared.Chemistry;
-// </Trauma>
 using Content.Server.Chemistry.Components;
 using Content.Shared.Chemistry;
 using Content.Shared.Chemistry.Components;

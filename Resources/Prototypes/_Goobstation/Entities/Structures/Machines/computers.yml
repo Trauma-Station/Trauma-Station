@@ -25,17 +25,7 @@
     color: "#00BB00"
   - type: Computer
     board: VirologyComputerCircuitboard
-  # - type: ActivatableUI # TODO virology UI
-  #   key: enum.VirologyConsoleUIKey.Key
   - type: UserInterface
     interfaces:
-        # enum.VirologyConsoleUIKey.Key: # TODO virology UI
-        #   type: VirologyConsoleBoundUserInterface
         enum.WiresUiKey.Key:
           type: WiresBoundUserInterface
-  # - type: VirologyConsole # TODO virology UI
-  - type: DeviceNetwork
-    deviceNetId: Wireless
-    receiveFrequencyId: VirologyServer
-  - type: WirelessNetworkConnection
-    range: 1200

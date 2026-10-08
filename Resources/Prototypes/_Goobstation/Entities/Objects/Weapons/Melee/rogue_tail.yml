@@ -19,4 +19,4 @@
   - type: UseDelay
     delay: 1.5
   - type: StaticPrice
-    price: 50000
+    price: 5000

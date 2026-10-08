@@ -8,7 +8,6 @@ using Content.Server.Chat.Systems;
 using Content.Server.Mind;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
-using Content.Server.Station.Systems;
 using Content.Shared.Cargo.Components;
 using Content.Shared.Chat;
 using Content.Shared.Destructible;
@@ -16,6 +15,7 @@ using Content.Shared.Examine;
 using Content.Shared.Interaction;
 using Content.Shared.Mind;
 using Content.Shared.Stacks;
+using Content.Shared.Station.Systems;
 
 namespace Content.Goobstation.Server.Pirates.Siphon;
 

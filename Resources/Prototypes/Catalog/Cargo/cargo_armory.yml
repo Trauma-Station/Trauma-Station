@@ -1,33 +1,40 @@
 - type: cargoProduct
-  parent: BaseRedAlert # Trauma
   id: ArmorySmg
   icon:
     sprite: Objects/Weapons/Guns/SMGs/wt550.rsi
     state: icon
   product: CrateArmorySMG
-  cost: 15000 # Trauma, was 9000
+  cost: 9000
   category: cargoproduct-category-name-armory
   group: market
 
 - type: cargoProduct
-  parent: BaseRedAlert # Trauma
   id: ArmoryShotgun
   icon:
     sprite: Objects/Weapons/Guns/Shotguns/enforcer.rsi
     state: icon
   product: CrateArmoryShotgun
-  cost: 15000 # Trauma, was 9000
+  cost: 7000
   category: cargoproduct-category-name-armory
   group: market
 
 - type: cargoProduct
-  parent: BaseRedAlert # Trauma
+  id: ArmoryMosin
+  icon:
+    sprite: Objects/Weapons/Guns/Snipers/bolt_gun_wood.rsi
+    state: base
+  product: CrateArmoryMosin
+  cost: 3500
+  category: cargoproduct-category-name-armory
+  group: market
+
+- type: cargoProduct
   id: SecurityRiot
   icon:
     sprite: Clothing/OuterClothing/Armor/riot.rsi
     state: icon
   product: CrateSecurityRiot
-  cost: 12000 # Trauma, was 7500
+  cost: 7500
   category: cargoproduct-category-name-armory
   group: market
 
@@ -52,10 +59,9 @@
   group: market
 
 - type: cargoProduct
-  parent: BaseRedAlert # Trauma
   id: ArmoryLaser
   icon:
-    sprite: _Trauma/Objects/Weapons/Guns/Battery/laser.rsi # Trauma
+    sprite: Objects/Weapons/Guns/Battery/laser_gun.rsi
     state: icon
   product: CrateArmoryLaser
   cost: 4800
@@ -63,23 +69,21 @@
   group: market
 
 - type: cargoProduct
-  parent: BaseRedAlert # Trauma
   id: ArmoryPistol
   icon:
     sprite: Objects/Weapons/Guns/Pistols/mk58.rsi
     state: icon
   product: CrateArmoryPistols
-  cost: 10000 # Trauma, was 7000
+  cost: 5200
   category: cargoproduct-category-name-armory
   group: market
 
 - type: cargoProduct
-  parent: BaseRedAlert # Trauma
   id: ArmoryRifle
   icon:
     sprite: Objects/Weapons/Guns/Rifles/lecter.rsi
     state: icon
   product: CrateArmoryRifle
-  cost: 15000 # Trauma, was 8000
+  cost: 8000
   category: cargoproduct-category-name-armory
   group: market

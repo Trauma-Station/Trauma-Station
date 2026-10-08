@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: PackageDelivery
+  components:
+  - type: Delivery
+    baseSpesoReward: 2000
+    baseSpesoPenalty: 500
+
+- type: entity
+  id: LetterDelivery
+  components:
+  - type: Delivery
+    baseSpesoReward: 1000
+    baseSpesoPenalty: 250

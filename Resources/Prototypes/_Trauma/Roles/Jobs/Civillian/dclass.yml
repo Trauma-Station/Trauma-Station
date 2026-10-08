@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: DClass
+  name: job-name-d-class
+  description: job-description-dclass
+  playTimeTracker: JobDClass
+  startingGear: DClassGear
+  icon: "JobIconDClass"
+  supervisors: job-supervisors-everyone
+  access:
+  - Maintenance
+  guides:
+  - Civilian
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipTiderDampener
+    - SkillChipEducation
+  - !type:AddComponentSpecial
+    components:
+    - type: NpcFactionMember
+      factions:
+      - NanoTrasen
+      - Assistant
+
+- type: startingGear
+  id: DClassGear
+  equipment:
+    id: DClassPDA
+    ears: ClothingHeadsetGrey
+
+- type: chameleonOutfit
+  id: DClassChameleonOutfit
+  job: DClass
+  equipment:
+    head: ClothingHeadHatWelding
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskGas
+    ears: ClothingHeadsetGrey
+    neck: ClothingNeckMantle
+    outerClothing: ClothingOuterWinterColorOrange
+    gloves: ClothingHandsGlovesColorGray
+    shoes: ClothingShoesColorOrange
+    id: DClassPDA
+    back: ClothingBackpackElectropack

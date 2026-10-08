@@ -29,7 +29,7 @@ public sealed partial class SalvageExpeditionComponent : SharedSalvageExpedition
     /// <summary>
     /// Station whose mission this is.
     /// </summary>
-    [DataField("station")]
+    [DataField]
     public EntityUid Station;
 
     [ViewVariables] public bool Completed = false;

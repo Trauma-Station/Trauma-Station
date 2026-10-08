@@ -1,0 +1,56 @@
+- type: job
+  id: Janitor
+  name: job-name-janitor
+  description: job-description-janitor
+  playTimeTracker: JobJanitor
+  startingGear: JanitorGear
+  icon: "JobIconJanitor"
+  supervisors: job-supervisors-hop
+  guides: [ Janitorial ]
+  access:
+  #- Service # Trauma - janitor should not be cooking??
+  - Janitor
+  - Maintenance
+  special:
+  # <Trauma>
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipEducation
+    - SkillChipJanitor
+    - SkillChipThrowing
+  # </Trauma>
+  - !type:GiveItemOnHolidaySpecial
+    holiday: GarbageDay
+    prototype: WeaponRevolverInspector
+
+- type: startingGear
+  id: JanitorGear
+  equipment:
+    shoes: ClothingShoesGaloshes
+    id: JanitorPDA
+    ears: ClothingHeadsetService
+    belt: ClothingBeltJanitorFilled
+    pocket1: KeyRingJanitor # Goobstation
+
+- type: startingGear
+  id: JanitorMaidGear
+  equipment:
+    jumpsuit: ClothingUniformJumpskirtJanimaid
+    id: JanitorPDA
+    gloves: ClothingHandsGlovesJanitor
+    head: ClothingHeadHatCatEars
+    ears: ClothingHeadsetService
+    belt: ClothingBeltJanitorFilled
+    pocket1: KeyRingJanitor # Goobstation
+
+
+- type: chameleonOutfit
+  id: JanitorChameleonOutfit
+  job: Janitor
+  equipment:
+    head: ClothingHeadHatPurplesoft
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskGas
+    neck: ClothingNeckScarfStripedPurple
+    outerClothing: ClothingOuterWinterJani
+    gloves: ClothingHandsGlovesJanitor

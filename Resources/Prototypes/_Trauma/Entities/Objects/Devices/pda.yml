@@ -139,3 +139,25 @@
   - type: PdaBorderColor
     borderColor: "#4eb349"
     accentVColor: "#60c95b"
+
+- type: entity
+  parent: BasePDA
+  id: DClassPDA
+  name: D-Class PDA
+  description: Holding this generally revokes what few rights you would otherwise have.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Devices/pda.rsi
+    state: pda-dclass
+  - type: Icon
+    sprite: _Trauma/Objects/Devices/pda.rsi
+    state: pda-dclass
+  - type: Appearance
+    appearanceDataInit:
+      enum.PdaVisuals.PdaType: !type:String
+        pda-dclass
+  - type: Pda
+    id: DClassIDCard
+  - type: PdaBorderColor
+    borderColor: "#eb7732"
+    accentHColor: "#2e2e2e"

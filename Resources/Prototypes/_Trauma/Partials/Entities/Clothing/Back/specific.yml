@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: ClothingBackpackChameleon
+  components:
+  - type: HideContrabandContent
+
+- type: entity
+  id: ClothingBackpackWaterTank
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 62
+      Glass: 250
+  - type: StaticPrice
+    price: 50
+
+- type: entity
+  id: XenoborgMaterialBag
+  components:
+  - type: ItemToggle
+    soundActivate: &sound
+      collection: sparks
+      params:
+        variation: 0.250
+    soundDeactivate: *sound

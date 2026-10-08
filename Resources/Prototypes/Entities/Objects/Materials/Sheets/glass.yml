@@ -5,23 +5,10 @@
   name: glass
   description: A sheet of glass, used often on the station in various applications.
   components:
-  # <Trauma>
-  - type: BlindHealing
-    whitelist:
-      components:
-      - Silicon
-  - type: ReflectiveSurface
-  - type: Tag
-    tags:
-    - Sheet
-    - ConstructionMaterial
-    - DroneUsable
-    - SheetGlass
-  # </Trauma>
   - type: Sprite
-    sprite: _Trauma/Objects/Materials/Sheets/glass.rsi # Trauma
+    sprite: Objects/Materials/Sheets/glass.rsi
   - type: Item
-    sprite: _Trauma/Objects/Materials/Sheets/glass.rsi # Trauma
+    sprite: Objects/Materials/Sheets/glass.rsi
   - type: Damageable
     damageModifierSet: Glass
 

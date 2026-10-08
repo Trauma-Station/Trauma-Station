@@ -4,3 +4,4 @@ heretic-curse-window-cant-curse = Cannot curse this crewmember
 heretic-curse-provider-curse = Curse crewmember
 heretic-curse-provider-no-dna = Victim's blood or dna not found
 heretic-curse-provider-cursed = You have been cursed!
+heretic-curse-provider-far-away = Rune not close enough!

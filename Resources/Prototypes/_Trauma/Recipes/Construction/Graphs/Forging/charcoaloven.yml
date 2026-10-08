@@ -2,7 +2,6 @@
 
 - type: constructionGraph
   id: CharcoalOven
-  start: start
   graph:
   - node: start
     edges:

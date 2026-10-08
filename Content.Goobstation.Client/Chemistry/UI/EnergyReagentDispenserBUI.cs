@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Client.Guidebook.Components;
 using Content.Client.UserInterface.Controls;
 using Content.Goobstation.Shared.Chemistry;
 using Content.Shared.Containers.ItemSlots;
@@ -9,11 +8,10 @@ using JetBrains.Annotations;
 namespace Content.Goobstation.Client.Chemistry.UI;
 
 /// <summary>
-/// Initializes a <see cref="EnergyReagentDispenserWindow"/> and updates it when new server messages are received.
+/// Initializes a <see cref="EnergyReagentDispenserWindow"/>.
 /// </summary>
 [UsedImplicitly]
-public sealed class EnergyReagentDispenserBUI(EntityUid owner, Enum uiKey)
-    : BoundUserInterface(owner, uiKey)
+public sealed class EnergyReagentDispenserBUI(EntityUid owner, Enum key) : BoundUserInterface(owner, key)
 {
     [ViewVariables]
     private EnergyReagentDispenserWindow? _window;
@@ -27,29 +25,18 @@ public sealed class EnergyReagentDispenserBUI(EntityUid owner, Enum uiKey)
     {
         base.Open();
 
-        // Setup window layout/elements
+        // Setup window info
         _window = this.CreateWindow<EnergyReagentDispenserWindow>();
+        var comp = EntMan.GetComponent<EnergyReagentDispenserComponent>(Owner);
         _window.SetInfoFromEntity(EntMan, Owner);
+        _window.SetOwner(Owner, comp);
 
-        // Setup static button actions.
-        _window.EjectButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent(SharedEnergyReagentDispenser.OutputSlotName));
-        _window.ClearButton.OnPressed += _ => SendMessage(new EnergyReagentDispenserClearContainerSolutionMessage());
+        // Handle button actions.
+        _window.OnEjectBeaker += () => SendPredictedMessage(new ItemSlotButtonPressedEvent(comp.OutputSlotName));
+        _window.OnClearBeaker += () => SendPredictedMessage(new EnergyReagentDispenserClearContainerSolutionMessage());
 
-        _window.AmountGrid.OnButtonPressed += s => SendMessage(new EnergyReagentDispenserSetDispenseAmountMessage(int.Parse(s)));
+        _window.OnSetAmount += i => SendPredictedMessage(new EnergyReagentDispenserSetDispenseAmountMessage(i));
 
-        _window.OnDispenseReagentButtonPressed += (reagentId) => SendMessage(new EnergyReagentDispenserDispenseReagentMessage(reagentId));
-    }
-
-    /// <summary>
-    /// Update the UI each time new state data is sent from the server.
-    /// </summary>
-    protected override void UpdateState(BoundUserInterfaceState message)
-    {
-        base.UpdateState(message);
-
-        if (message is not EnergyReagentDispenserBoundUserInterfaceState state)
-            return;
-
-        _window?.UpdateState(state);
+        _window.OnDispenseReagent += id => SendPredictedMessage(new EnergyReagentDispenserDispenseReagentMessage(id));
     }
 }

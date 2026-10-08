@@ -14,7 +14,7 @@ public sealed partial class AutoImplantSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<AutoImplantComponent, MapInitEvent>(OnMapInit,
-            after: [ typeof(SharedBloodstreamSystem) ]); // Trauma - some implants need blood solution to be set up
+            after: [ typeof(BloodstreamSystem) ]); // Trauma - some implants need blood solution to be set up
     }
 
     private void OnMapInit(EntityUid uid, AutoImplantComponent comp, MapInitEvent args)

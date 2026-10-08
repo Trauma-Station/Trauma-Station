@@ -82,7 +82,7 @@ public sealed partial class StationXenobiologyBountyDatabaseSystem : EntitySyste
         if (!Resolve(uid, ref component))
             return false;
 
-        _nameIdentifier.GenerateUniqueName(uid, BountyNameIdentifierGroup, out var randomVal);
+        _nameIdentifier.GenerateUniqueNameModifier(BountyNameIdentifierGroup, out var randomVal);
         var newBounty = new XenobiologyBountyData(bounty, randomVal);
 
         if (component.Bounties.Any(bountyData => bountyData.Id == newBounty.Id))

@@ -246,6 +246,7 @@
   components:
   - type: Tag
     tags:
+    - Sugar
     - FoodSnack
     - ClothMade
 

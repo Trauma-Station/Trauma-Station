@@ -1,11 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.FixedPoint;
 using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Stacks;
-using Content.Shared.Store.Components;
-using Content.Shared.Timing;
+using Content.Shared.Timing.Components;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Components.Ghoul;
 using Content.Trauma.Shared.Heretic.Components.PathSpecific.Rust;
@@ -144,11 +142,7 @@ public abstract partial class SharedHereticRitualSystem
     private void OnUpdateKnowledge(Entity<HereticComponent> ent,
         ref HereticRitualEffectEvent<UpdateKnowledgeEffect> args)
     {
-        if (!TryComp(ent, out MindComponent? mind) ||
-            !TryComp(ent, out StoreComponent? store))
-            return;
-
-        _heretic.UpdateMindKnowledge((ent, ent, store, mind), null, args.Effect.Knowledge);
+        _heretic.UpdateMindKnowledge(ent.AsNullable(), null, args.Effect.Knowledge);
     }
 
     private void OnGhoulify(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<GhoulifyEffect> args)
@@ -260,7 +254,6 @@ public abstract partial class SharedHereticRitualSystem
     private void OnSacrifice(Entity<MindContainerComponent> ent, ref HereticRitualEffectEvent<SacrificeEffect> args)
     {
         if (!TryGetValue(args.Ritual, Mind, out EntityUid mind) ||
-            !TryComp(mind, out MindComponent? mindComp) || !TryComp(mind, out StoreComponent? store) ||
             !TryComp(mind, out HereticComponent? heretic))
             return;
 
@@ -311,20 +304,17 @@ public abstract partial class SharedHereticRitualSystem
             RaiseLocalEvent(mind, ref ev2);
         }
 
-        var dict = new Dictionary<string, FixedPoint2>()
+        _heretic.UpdateMindKnowledge((mind, heretic), null, new()
         {
             { SharedHereticSystem.Currency, knowledgeGain },
             { SharedHereticSystem.SideCurrency, sideknowledgeGain },
-        };
-
-        _heretic.UpdateMindKnowledge((mind, heretic, store, mindComp), null, dict);
+        });
 
         heretic.SacrificeTracker++;
         if (heretic.MaxSacrificeInfluenceSpawn < heretic.SacrificeTracker)
             return;
 
-        var influenceEv = new SpawnHereticInfluenceEvent();
-        RaiseLocalEvent(ref influenceEv);
+        SpawnHereticInfluence();
     }
 
     private void OnLookup(Entity<TransformComponent> ent, ref HereticRitualEffectEvent<LookupRitualEffect> args)

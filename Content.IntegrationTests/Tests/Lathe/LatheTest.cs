@@ -14,13 +14,16 @@ namespace Content.IntegrationTests.Tests.Lathe;
 [TestFixture]
 public sealed class LatheTest : GameTest
 {
+    [RunOnSide(Side.Server)] // Trauma
     [Test]
     public async Task TestLatheRecipeIngredientsFitLathe()
     {
         var pair = Pair;
         var server = pair.Server;
 
+        /* Trauma - don't need this anymore + it would deadlock from being a server sided test
         var mapData = await pair.CreateTestMap();
+        */
 
         var entMan = server.EntMan;
         var protoMan = server.ProtoMan;
@@ -29,16 +32,18 @@ public sealed class LatheTest : GameTest
         var whitelistSystem = server.System<EntityWhitelistSystem>();
         var latheSystem = server.System<SharedLatheSystem>();
 
+        /* Trauma - no reason to tick the game at all
         await server.WaitAssertion(() =>
         {
+        */
             // Find all the lathes
-            // <Trauma> - microptimisation, remove linq jesus christ
+            // <Trauma> - microptimisation, remove linq jesus christ. also get the physical comp from materials immediately not for EVERY FUCKING LATHE
             var latheName = compFactory.CompName<LatheComponent>();
             var materialName = compFactory.CompName<PhysicalCompositionComponent>();
             var storageName = compFactory.CompName<MaterialStorageComponent>();
             var emagName = compFactory.CompName<EmagLatheRecipesComponent>();
             var latheProtos = new List<EntityPrototype>();
-            var materialEntityProtos = new List<EntityPrototype>();
+            var materialEntityProtos = new List<(EntityPrototype, PhysicalCompositionComponent)>();
             foreach (var p in protoMan.EnumeratePrototypes<EntityPrototype>())
             {
                 if (pair.IsTestPrototype(p)) // Trauma - remove abstract check it doesnt see any
@@ -46,14 +51,15 @@ public sealed class LatheTest : GameTest
 
                 if (p.HasComp(latheName))
                     latheProtos.Add(p);
-                else if (p.HasComp(materialName))
-                    materialEntityProtos.Add(p);
+                else if (p.TryComp<PhysicalCompositionComponent>(materialName, out var material))
+                    materialEntityProtos.Add((p, material));
             }
             var compositionQuery = entMan.GetEntityQuery<PhysicalCompositionComponent>();
             // </Trauma>
 
+            /* Trauma - this isnt needed anymore and it was fucking test run time from physics contact updates
             // Spawn all of the above material EntityPrototypes - we need actual entities to do whitelist checks
-            var materialEntities = new List<EntityUid>(materialEntityProtos.Count); // Trauma - remove () from Count it's a list now
+            var materialEntities = new List<EntityUid>(materialEntityProtos.Count());
             foreach (var materialEntityProto in materialEntityProtos)
             {
                 materialEntities.Add(entMan.SpawnEntity(materialEntityProto.ID, mapData.GridCoords));
@@ -61,6 +67,7 @@ public sealed class LatheTest : GameTest
 
             Assert.Multiple(() =>
             {
+            */
                 // Check each lathe individually
                 foreach (var latheProto in latheProtos)
                 {
@@ -72,9 +79,9 @@ public sealed class LatheTest : GameTest
 
                     // Test which material-containing entities are accepted by this lathe
                     var acceptedMaterials = new HashSet<ProtoId<MaterialPrototype>>();
-                    foreach (var materialEntity in materialEntities)
+                    foreach (var (materialEntity, compositionComponent) in materialEntityProtos) // Trauma - use the protoypes instead of spawned ents, it also has the comp now
                     {
-                        Assert.That(compositionQuery.TryComp(materialEntity, out var compositionComponent)); // Trauma - use query from above
+                        //Assert.That(compositionQuery.TryComp(materialEntity, out var compositionComponent)); // Trauma - this is gotten once at the start
                         if (whitelistSystem.IsWhitelistFail(storageComp.Whitelist, materialEntity))
                             continue;
 
@@ -119,8 +126,10 @@ public sealed class LatheTest : GameTest
                             Assert.That(totalQuantity, Is.LessThanOrEqualTo(storageComp.StorageLimit), $"Lathe {latheProto.ID} has recipe {recipeId} which calls for {totalQuantity} units of materials but can only hold {storageComp.StorageLimit}");
                     }
                 }
+        /* Trauma
             });
         });
+        */
     }
 
     [Test]

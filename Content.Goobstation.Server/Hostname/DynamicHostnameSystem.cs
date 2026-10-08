@@ -6,7 +6,6 @@ using Content.Goobstation.Common.CCVar;
 using Content.Shared.Dataset;
 using Robust.Shared.Random;
 using Content.Shared.Random.Helpers;
-using Content.Goobstation.Common.JoinQueue;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Server.Hostname;
@@ -18,7 +17,6 @@ public sealed partial class DynamicHostnameSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _configuration = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private IJoinQueueManager _queue = default!;
     [Dependency] private IGameTiming _gameTiming = default!;
 
     private static readonly ProtoId<LocalizedDatasetPrototype> _messagesProto = "MessageOfTheDay";
@@ -62,9 +60,6 @@ public sealed partial class DynamicHostnameSystem : EntitySystem
     private void UpdateHostname()
     {
         var hostname = _originalHostname;
-
-        if (_queue.PlayerInQueueCount > 0)
-            hostname += " | Queue: " + _queue.PlayerInQueueCount + " players";
 
         if (_messages != null && _messages.Values.Count > 0)
             hostname += " | " + _random.Pick(_messages);

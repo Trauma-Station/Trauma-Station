@@ -17,7 +17,7 @@ public sealed partial class BodyRestoreSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<BodyComponent, RejuvenateEvent>(OnRejuvenate,
-            before: [ typeof(DamageableSystem), typeof(SharedBloodstreamSystem) ]);
+            before: [ typeof(DamageableSystem), typeof(BloodstreamSystem) ]);
     }
 
     private void OnRejuvenate(Entity<BodyComponent> ent, ref RejuvenateEvent args)

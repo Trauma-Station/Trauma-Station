@@ -10,7 +10,7 @@ namespace Content.IntegrationTests.Tests._Trauma;
 /// </summary>
 public sealed class EmptyScrollTest : GameTest
 {
-    public static readonly EntProtoId Human = "MobHuman";
+    private static readonly EntProtoId Human = "MobHuman";
 
     [SidedDependency(Side.Server)] private EmptyScrollSystem _scroll = default!;
 
@@ -19,18 +19,15 @@ public sealed class EmptyScrollTest : GameTest
     {
         var map = await Pair.CreateTestMap();
 
-        await Server.WaitAssertion(() =>
+        await Server.WaitPost(() =>
         {
-            Assert.Multiple(() =>
+            foreach (var prayer in _scroll.AllPrayers.Values)
             {
-                foreach (var prayer in _scroll.AllPrayers.Values)
-                {
-                    // spawn fresh urist every time incase he gets gibbed or whatever
-                    var urist = SEntMan.SpawnEntity(Human, map.GridCoords);
-                    _scroll.Pray(urist, prayer);
-                    SEntMan.DeleteEntity(urist);
-                }
-            });
+                // spawn fresh urist every time incase he gets gibbed or whatever
+                var urist = SSpawn(Human, map.GridCoords);
+                _scroll.Pray(urist, prayer);
+                SDel(urist);
+            }
         });
     }
 }

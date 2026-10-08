@@ -46,12 +46,11 @@ public abstract partial class SharedActiveMultihitSystem : EntitySystem
         if (Math.Abs(ent.Comp.NextDamageMultiplier - 1f) < 0.01f)
             return;
 
-        var modifierSet = new DamageModifierSet
+        var modifierSet = new DamageModifierSet();
+        foreach (var type in args.BaseDamage.DamageDict.Keys)
         {
-            Coefficients = args.BaseDamage.DamageDict
-                .Select(x => new KeyValuePair<string, float>(x.Key, ent.Comp.NextDamageMultiplier))
-                .ToDictionary(),
-        };
+            modifierSet.Coefficients[type] = ent.Comp.NextDamageMultiplier;
+        }
 
         args.ModifiersList.Add(modifierSet);
     }

@@ -34,6 +34,7 @@
           # Engineering
           ChiefEngineer: [ 1, 1 ]
           AtmosphericTechnician: [ 4, 4 ]
+          Roboticist: [ 2, 2 ]
           StationEngineer: [ 6, 6 ]
           TechnicalAssistant: [ 6, 6 ]
           # Medical
@@ -69,6 +70,7 @@
           Reporter: [ 1, 1 ]
           RadioHost: [ 1, 1 ]
           Lawyer: [ 3, 3 ]
+          DClass: [ -1, -1 ]
       - type: StationBlobConfig
         stageBegin: 40
         stageCritical: 450

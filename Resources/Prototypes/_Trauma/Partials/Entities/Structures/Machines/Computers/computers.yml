@@ -1,0 +1,28 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: ComputerComms
+  components:
+  - type: StationReportTarget # not given to aghost
+  - type: TraumaCommsConsole
+
+- type: entity
+  id: StationAiFixerComputer
+  components:
+  - type: AccessReader
+    access: !Clear
+    - [ "ChiefEngineer" ]
+
+- type: entity
+  id: StationAiUploadComputer
+  components:
+  - type: AccessReader
+    access: !Clear
+    - [ "ChiefEngineer" ]
+
+- type: entity
+  id: ComputerRoboticsControl
+  components:
+  - type: AccessReader
+    access: !Clear
+    - [ "ChiefEngineer" ]

@@ -63,7 +63,7 @@ public sealed partial class MindReadActionSystem : EntitySystem
 
         // nullrod protects from mind magic idk
         var ev = new BeforeCastTouchSpellEvent(target);
-        RaiseLocalEvent(target, ev);
+        RaiseLocalEvent(target, ref ev);
         if (ev.Cancelled)
         {
             _popup.PopupEntity(Loc.GetString("MutationMindReader-popup-mind-protected", ("target", identity)), user, user);

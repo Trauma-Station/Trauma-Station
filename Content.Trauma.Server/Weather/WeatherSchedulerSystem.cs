@@ -62,7 +62,7 @@ public sealed partial class WeatherSchedulerSystem : EntitySystem
                     ChatChannel.Radio,
                     msg,
                     msg,
-                    uid,
+                    EntityUid.Invalid,
                     false,
                     true,
                     null);

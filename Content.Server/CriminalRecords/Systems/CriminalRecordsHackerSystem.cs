@@ -17,7 +17,7 @@ public sealed partial class CriminalRecordsHackerSystem : SharedCriminalRecordsH
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private CriminalRecordsSystem _criminalRecords = default!;
     [Dependency] private IRobustRandom _random = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private StationRecordsSystem _records = default!;
     [Dependency] private PowerReceiverSystem _powerReceiverSystem = default!; // Goobstation - check power
     public override void Initialize()

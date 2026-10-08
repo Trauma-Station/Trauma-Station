@@ -15,17 +15,7 @@ public sealed partial class FlashbangSystem : EntitySystem
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private TagSystem _tag = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<FlashbangComponent, AreaFlashEvent>(OnFlash);
-        SubscribeLocalEvent<FlashSoundSuppressionComponent, InventoryRelayedEvent<GetFlashbangedEvent>>(
-            OnInventoryFlashbanged);
-        SubscribeLocalEvent<FlashSoundSuppressionComponent, GetFlashbangedEvent>(OnFlashbanged);
-        SubscribeLocalEvent<FlashSoundSuppressionComponent, ExaminedEvent>(OnExamined);
-    }
-
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<FlashSoundSuppressionComponent> ent, ref ExaminedEvent args)
     {
         if (HasComp<MobStateComponent>(ent))
@@ -39,17 +29,20 @@ public sealed partial class FlashbangSystem : EntitySystem
         args.PushMarkup(message);
     }
 
+    [SubscribeLocalEvent]
     private void OnFlashbanged(Entity<FlashSoundSuppressionComponent> ent, ref GetFlashbangedEvent args)
     {
         args.ProtectionRange = MathF.Min(args.ProtectionRange, ent.Comp.ProtectionRange);
     }
 
+    [SubscribeLocalEvent]
     private void OnInventoryFlashbanged(Entity<FlashSoundSuppressionComponent> ent,
         ref InventoryRelayedEvent<GetFlashbangedEvent> args)
     {
-        args.Args.ProtectionRange = MathF.Min(args.Args.ProtectionRange, ent.Comp.ProtectionRange);
+        OnFlashbanged(ent, ref args.Args);
     }
 
+    [SubscribeLocalEvent]
     private void OnFlash(Entity<FlashbangComponent> ent, ref AreaFlashEvent args)
     {
         var comp = ent.Comp;
@@ -62,7 +55,7 @@ public sealed partial class FlashbangSystem : EntitySystem
             && !HasComp<FlashVulnerableComponent>(args.Target))
         {
             var ev = new GetFlashbangedEvent(MathF.Max(args.Range, ent.Comp.MinProtectionRange + 1f));
-            RaiseLocalEvent(args.Target, ev);
+            RaiseLocalEvent(args.Target, ref ev);
 
             protectionRange = ev.ProtectionRange;
         }

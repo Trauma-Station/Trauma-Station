@@ -16,7 +16,7 @@
       - !type:Oxygenate
         conditions:
         - !type:MetabolizerTypeCondition
-          type: [ Human, Animal, Rat, Plant, Cybernetic ] # Goob - Cybernetic
+          type: [ Human, Animal, Rat, Plant, Arachnid, Cybernetic ] # Trauma - added Cybernetic
       # Convert Oxygen into CO2.
       - !type:ModifyLungGas
         conditions:
@@ -410,7 +410,6 @@
           type: [ Slime, Cybernetic ] # Goob - added Cybernetic
           inverted: true
         emote: Laugh
-        showInChat: true
         probability: 0.1
       - !type:Emote
         minScale: 0.2
@@ -419,7 +418,6 @@
           type: [ Slime, Cybernetic ] # Goob - added Cybernetic
           inverted: true
         emote: Scream
-        showInChat: true
         probability: 0.01
       - !type:PopupMessage
         minScale: 0.5

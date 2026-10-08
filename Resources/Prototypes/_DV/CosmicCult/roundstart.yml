@@ -19,7 +19,7 @@
     - !type:LinearAntagCount
       proto: CosmicCultist
       range:
-        min: 3
+        min: 5
         max: 8
       playerRatio: 7
   - type: AntagPlayerEffects

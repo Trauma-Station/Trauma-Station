@@ -15,3 +15,11 @@
   components:
   - type: NavMapBeacon
     defaultText: station-beacon-genetics
+
+- type: entity
+  parent: DefaultStationBeaconEngineering
+  id: DefaultStationBeaconReactor
+  suffix: Reactor
+  components:
+  - type: NavMapBeacon
+    defaultText: station-beacon-reactor

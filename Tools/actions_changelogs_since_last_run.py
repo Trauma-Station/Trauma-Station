@@ -68,11 +68,11 @@ def get_most_recent_workflow(
     sess: requests.Session, github_repository: str, github_run: str
 ) -> Any:
     workflow_run = get_current_run(sess, github_repository, github_run)
-    past_runs = get_past_runs(sess, workflow_run)
-    for run in past_runs:
-        return run
-
-    raise RuntimeError("Could not find a previous successful workflow run")
+    # <Trauma> - sort it to fix dogshit github api change
+    past_runs = list(get_past_runs(sess, workflow_run))
+    past_runs.sort(key=lambda r: r["created_at"], reverse=True)
+    return past_runs[0]
+    # </Trauma>
 
 
 def get_current_run(
@@ -89,12 +89,12 @@ def get_past_runs(sess: requests.Session, current_run: Any) -> Iterable[Any]:
     """
     Get all successful workflow runs before our current one.
     """
+    # Trauma - replaced serverside filter with clientside because apparently copilot cant figure out basic SQL
     params = {
-        "status": "success",
-        "created": f"<={current_run['created_at']}",
         "per_page": 100,
     }
     url = f"{current_run['workflow_url']}/runs"
+    now = current_run["created_at"]
 
     while url:
         resp = sess.get(url, params=params)
@@ -102,7 +102,7 @@ def get_past_runs(sess: requests.Session, current_run: Any) -> Iterable[Any]:
 
         for run in resp.json()["workflow_runs"]:
             # First past successful run that isn't our current run.
-            if run["id"] == current_run["id"]:
+            if run["id"] == current_run["id"] or run["status"] != "completed" or run["created_at"] >= now:
                 continue
 
             yield run
@@ -227,7 +227,8 @@ def changelog_entries_to_message_lines(entries: Iterable[ChangelogEntry]) -> lis
                 emoji = TYPES_TO_EMOJI.get(change["type"], "❓")
                 message = change["message"]
 
-                if "labels" in entry and EXPERIMENTAL_LABEL in entry["labels"]: # Trauma - check it exists first
+                labels = entry.get("labels") or []
+                if EXPERIMENTAL_LABEL in labels:
                     emoji = f"{emoji}{EXPERIMENTAL_EMOJI}"
 
                 message_lines.append(create_change_line(emoji, message, url))
@@ -305,8 +306,5 @@ def send_message_lines(message_lines: list[str]):
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as e:
-        print(f"Failed to publish changelog to Discord: {e}", file=sys.stderr)
-        exit(1)
+    # Trauma - removed try catch so it can actually be debugged idiots
+    main()

@@ -100,7 +100,7 @@
   productEntity: CrateSyndicateSurplusBundle
   discountCategory: null # WAY too free
   categories:
-  - DiscountedItems
+  - UplinkDisruption
   conditions:
   - !type:StoreHolidayCondition
     holiday: NeverForget

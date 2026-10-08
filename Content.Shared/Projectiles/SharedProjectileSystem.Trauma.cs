@@ -8,7 +8,6 @@ namespace Content.Shared.Projectiles;
 
 public abstract partial class SharedProjectileSystem
 {
-    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private TagSystem _tag = default!;
 
     private static readonly ProtoId<TagPrototype> GunCanAimShooterTag = "GunCanAimShooter";

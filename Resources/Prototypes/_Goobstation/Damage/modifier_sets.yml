@@ -8,6 +8,8 @@
     Slash: 0.9
     Piercing: 0.9
     Ballistic: 0.9
+    Shock: 1.5
+    Ion: 1.5
 
 - type: damageModifierSet
   id: SiliconProtected

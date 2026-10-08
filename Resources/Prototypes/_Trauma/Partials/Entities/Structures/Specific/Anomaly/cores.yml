@@ -1,0 +1,190 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: BaseAnomalyCore
+  components:
+  - type: MovedByPressure
+    enabled: false
+
+- type: entity
+  id: AnomalyCorePyroclastic
+  name: pyroclastic anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantFireAspect
+    - EnchantLavaforged
+
+- type: entity
+  id: AnomalyCoreGravity
+  name: gravity anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantKnockback
+
+- type: entity
+  id: AnomalyCoreIce
+  name: ice anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantProtFire
+
+- type: entity
+  id: AnomalyCoreFlesh
+  name: flesh anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantSharpness
+
+- type: entity
+  id: AnomalyCoreRock
+  name: rock anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantProtection
+    - EnchantUnbreaking
+
+- type: entity
+  id: AnomalyCoreLiquid
+  name: liquid anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantSlippery
+    - EnchantUnslippable
+
+- type: entity
+  id: AnomalyCoreBluespace
+  name: bluespace anomaly core
+  components:
+  - type: Tag
+    tags:
+    - AnomalyCoreBluespace
+
+- type: entity
+  id: AnomalyCoreElectricity
+  name: electricity anomaly core
+  components:
+  - type: Tag
+    tags:
+    - AnomalyCoreElectricity
+  - type: Enchanter
+    enchants:
+    - EnchantInsulated
+
+- type: entity
+  id: AnomalyCoreFlora
+  name: flora anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantThorns
+
+- type: entity
+  id: AnomalyCoreShadow
+  name: shadow anomaly core
+
+- type: entity
+  id: AnomalyCoreTech
+  name: tech anomaly core
+
+- type: entity
+  id: AnomalyCoreSanta
+  name: santa anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantFortune
+
+# Inert cores
+
+- type: entity
+  id: AnomalyCorePyroclasticInert
+  name: pyroclastic anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantFireAspect
+    - EnchantLavaforged
+
+- type: entity
+  id: AnomalyCoreGravityInert
+  name: gravity anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantKnockback
+
+- type: entity
+  id: AnomalyCoreIceInert
+  name: ice anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantProtFire
+
+- type: entity
+  id: AnomalyCoreFleshInert
+  name: flesh anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantSharpness
+
+- type: entity
+  id: AnomalyCoreRockInert
+  name: rock anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantProtection
+    - EnchantUnbreaking
+
+- type: entity
+  id: AnomalyCoreLiquidInert
+  name: liquid anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantSlippery
+    - EnchantUnslippable
+
+- type: entity
+  id: AnomalyCoreBluespaceInert
+  name: bluespace anomaly core
+
+- type: entity
+  id: AnomalyCoreElectricityInert
+  name: electricity anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantBudgetInsulated
+
+- type: entity
+  id: AnomalyCoreFloraInert
+  name: flora anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantThorns
+
+- type: entity
+  id: AnomalyCoreShadowInert
+  name: shadow anomaly core
+
+- type: entity
+  id: AnomalyCoreTechInert
+  name: tech anomaly core
+
+- type: entity
+  id: AnomalyCoreSantaInert
+  name: santa anomaly core
+  components:
+  - type: Enchanter
+    enchants:
+    - EnchantFortune

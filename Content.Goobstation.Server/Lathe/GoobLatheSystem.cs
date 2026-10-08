@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Lathe;
+using Content.Goobstation.Common.Lathe;
 using Content.Server.Lathe;
 using Content.Shared.Lathe;
 using Content.Shared.Materials;
@@ -14,13 +14,7 @@ public sealed partial class GoobLatheSystem : EntitySystem
 
     private Dictionary<string, int> _totalMaterials = new();
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<LatheComponent, LatheQueueResetMessage>(OnLatheQueueResetMessage);
-    }
-
+    [SubscribeLocalEvent]
     private void OnLatheQueueResetMessage(Entity<LatheComponent> ent, ref LatheQueueResetMessage args)
     {
         var (uid, comp) = ent;

@@ -18,7 +18,7 @@ public sealed partial class ProjectileComponent
     [DataField]
     public bool Penetrate;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public List<EntityUid> IgnoredEntities = new();
 
     [DataField]
