@@ -74,5 +74,4 @@ construction-graph-tag-bluespace-core = bluespace anomaly core
 construction-graph-tag-electric-core = electricity anomaly core
 
 # Cult
-construction-graph-tag-blood-30 = 30 units of blood
 construction-graph-tag-knife = a knife

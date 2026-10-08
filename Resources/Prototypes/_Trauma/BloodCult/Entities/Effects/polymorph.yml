@@ -1,0 +1,13 @@
+- type: polymorph
+  id: WraithJaunt
+  configuration:
+    entity: WraithJaunt
+    transferName: true
+    inventory: None
+    forced: true
+    revertOnDeath: true
+    revertOnCrit: true
+    allowRepeatedMorphs: false
+    duration: 6
+    showPopup: false
+    attachToGridOrMap: true

@@ -115,28 +115,19 @@
   - node: wall
     entity: WallCult
 
-- type: constructionGraph
+- type: constructionGraph # still broken
   id: CultDagger
   start: start
   graph:
   - node: start
     edges:
     - to: dagger
-      completed:
-      - !type:DamageEntity # will taht damage cultist or knife?
-        damage:
-          types:
-            Slash: 15
       steps:
       - tag: Knife
         amount: 1
         name: construction-graph-tag-knife
-      conditions:
-      - !type:MinSolution
-        solution: drink
-        reagent:
-          ReagentId: Blood
-        quantity: 30
-      #  name: construction-graph-tag-blood-30
+      - tag: DemonEssense
+        amount: 1
+        name: construction-graph-tag-demonsoul
   - node: dagger
     entity: RitualDagger

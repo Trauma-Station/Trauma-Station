@@ -22,7 +22,6 @@
     raiseOnAction: true
   - type: LimitedCharges
     maxCharges: 1 # single use by default
-  - type: CultSpell
   - type: Magic
     requiresSpeech: true
   - type: SpeakOnAction

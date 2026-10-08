@@ -17,6 +17,7 @@
       skills:
         EldritchKnowledge: 100
         LanguageEldritch: 100
+        MagicalLiteracyKnowledge: 50
     - !type:AddComponents
       components:
       - type: BloodCultMember
@@ -29,6 +30,7 @@
       skills:
       - EldritchKnowledge
       - LanguageEldritch
+      - MagicalLiteracyKnowledge # How else coul you get it?
       force: true
     - !type:RemoveComponents
       components:

@@ -17,8 +17,8 @@ public sealed partial class BloodCultistComponent : Component
     public HashSet<EntityUid> ActiveSpells = new();
 
     [DataField]
-    public int SpellsLimit = 3;
+    public Color? OriginalEyeColor;
 
     [DataField]
-    public Color? OriginalEyeColor;
+    public int SpellsLimit = 3;
 }

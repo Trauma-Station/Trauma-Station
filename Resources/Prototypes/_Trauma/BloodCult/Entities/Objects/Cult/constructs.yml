@@ -33,6 +33,7 @@
   - BaseMob
   - MobCombat
   - MobDamageable
+  - FlyingMobBase
   id: ConstructBase
   components:
   - type: Sprite
@@ -163,8 +164,7 @@
       map: [ "enum.ConstructVisualsState.Sprite" ]
     - state: glow_artificer_cult
       map: [ "enum.ConstructVisualsState.Glow" ]
-  - type: MovementIgnoreGravity
-  - type: GravityAffected
+  - type: ConstructHealer
   - type: MeleeWeapon
     animation: WeaponArcPunch
     damage:
@@ -318,3 +318,21 @@
         enum.ConstructVisualsState.Glow:
           True: { visible: false }
           False: { visible: true }
+
+- type: entity
+  parent: BaseMobJaunt
+  id: WraithJaunt
+  name: jaunt
+  components:
+  #- type: Sprite
+  #  sprite: Mobs/Ghosts/ghost_human.rsi
+  #  color: "#60f7eb"
+  #  layers:
+  #  - state: animated
+  #    shader: unshaded
+  #  noRot: true
+  #  overrideContainerOcclusion: true
+  #  drawdepth: Ghosts
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 5
+    baseWalkSpeed: 5

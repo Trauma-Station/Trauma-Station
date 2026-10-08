@@ -69,23 +69,6 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnCultSpellValidate(Entity<BloodCultistComponent> ent, ref ActionValidateEvent args)
-    {
-        if (args.Invalid || args.Input.EntityTarget is not { } netTarget)
-            return;
-
-        var target = GetEntity(netTarget);
-
-        // TODO: actual magic protection shit, show a popup
-        if (_mindShield.IsShielded(target))
-        {
-            var user = args.User;
-            _popup.PopupEntity("Mind protection blocks your magic!", user, user, PopupType.MediumCaution);
-            args.Invalid = true;
-        }
-    }
-
-    [SubscribeLocalEvent]
     private void OnActionRemoved(Entity<BloodCultistComponent> ent, ref ActionRemovedEvent args)
     {
         if (ent.Comp.ActiveSpells.Remove(args.Action))
@@ -103,26 +86,25 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         if (!TryComp<BloodCultistComponent>(user, out var _bloodCultistComponent))
             return;
 
-        /// Nothing bad is gonna happend if i just do this right? right?
-        var id = ent.Comp.AvailableActions[i];
-        // if (GetActiveSpell(_bloodCultistComponent, id) is { } action)
-        // {
-        //     _popup.PopupEntity("You forget your current spell", user, user);
-        //     _actions.RemoveAction(user, action);
-        //     return;
-        // }
-
-        // can't do blood magic in a robot or pai
+        // robot/pai/construct can't do blood magic
         if (!_bloodQuery.HasComp(user))
         {
             _popup.PopupEntity("You have no blood to channel the spell through!", user, user, PopupType.LargeCaution);
             return;
         }
-        // ToDo: disregard constructs
+
+        var id = ent.Comp.AvailableActions[i];
 
         var count = _bloodCultistComponent.ActiveSpells.Count;
         if (count >= _bloodCultistComponent.SpellsLimit)
         {
+            if (GetActiveSpell(_bloodCultistComponent, id) is { } action)
+            {
+                _popup.PopupEntity("You forget your current spell", user, user);
+                _actions.RemoveAction(user, action);
+                return;
+            }
+
             _popup.PopupEntity("You need to remove another spell first!", user, user, PopupType.MediumCaution);
             return;
         }

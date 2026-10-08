@@ -4,7 +4,6 @@
   abstract: true
   parent: BaseActionBloodCult
   id: BaseActionBloodCultSummonEntity
-  name: Summon Revive Rune
   components:
   - type: Action
     useDelay: 60
@@ -23,14 +22,24 @@
   - type: Sprite
     layers:
     - state: revive
-  - type: WorldTargetAction
-    event: !type:PlaceTileEntityEvent
+  # - type: WorldTargetAction # this is shit
+  #   event: !type:PlaceTileEntityEvent
+  #     entity: CultRuneRevive
+  #     length: 2
+  #     blockedCollisionMask:
+  #     - FullTileMask
+  #     blockedCollisionLayer:
+  #     - WallLayer
+  - type: Action # testing
+    useDelay: 60
+    raiseOnAction: true
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:SpawnRandomEntities
       entity: CultRuneRevive
-      length: 1
-      blockedCollisionMask:
-      - FullTileMask
-      blockedCollisionLayer:
-      - WallLayer
+      number: 1
 
 - type: entity
   parent: BaseActionBloodCult
@@ -60,11 +69,11 @@
     - state: full
   - type: Action
     checkCanInteract: false
-    useDelay: 25
+    useDelay: 30
   - type: WorldTargetAction
     event: !type:PlaceTileEntityEvent
       entity: WallCult
-      length: 1
+      length: 2
       blockedCollisionMask:
       - FullTileMask
       blockedCollisionLayer:
@@ -77,17 +86,18 @@
   description: This spell summons construct shell.
   components:
   - type: Sprite
-    sprite: _Trauma/BloodCult/Entities/Items/construct_shell.rsi
-    state: icon
+    layers:
+    - state: artificer
   - type: Action
-    checkCanInteract: false
-    useDelay: 25
+    raiseOnAction: true
+    useDelay: 60
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
     effects:
-    - !type:SpawnEntity
+    - !type:SpawnRandomEntities
       entity: ConstructShell
+      number: 1
 
 - type: entity
   parent: BaseActionBloodCult
@@ -96,18 +106,18 @@
   description: This spell reaches into Nar'Sie's realm, summoning one of the legendary fragments across time and space.
   components:
   - type: Sprite
-    sprite: _Trauma/BloodCult/Entities/Items/soul_stone.rsi
     layers:
-    - state: soul_stone
+    - state: create_soul_stone
   - type: Action
-    checkCanInteract: false
-    useDelay: 25
+    raiseOnAction: true
+    useDelay: 60
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
     effects:
-    - !type:SpawnEntity
+    - !type:SpawnRandomEntities
       entity: SoulShard
+      number: 1
 
 - type: entity
   parent: BaseActionBloodCult
@@ -116,12 +126,19 @@
   description: This spell fires, slow moving, magic projectile at nearby target.
   components:
   - type: Sprite
-    sprite: _Goobstation/Wizard/actions.rsi
     layers:
-    - state: missile
+    - state: blood_barrage
   - type: Action
     checkCanInteract: false
     useDelay: 25
+    raiseOnUser: true
+    sound: !type:SoundPathSpecifier
+      path: /Audio/_Goobstation/Wizard/magic_missile.ogg
+  - type: TargetAction
+    range: 60
+    checkCanAccess: false
+  - type: EntityTargetAction
+    canTargetSelf: false
   - type: WorldTargetAction
     event: !type:ProjectileSpellEvent
       prototype: ProjectileMagicMissileLesser
@@ -136,13 +153,15 @@
   components:
   - type: Action
     checkCanInteract: false
-    useDelay: 25
+    useDelay: 41 # 35 cooldown + 6 while active
     itemIconStyle: NoItem
   - type: Sprite
     layers:
     - state: phase_shift
   - type: InstantAction
-    event: !type:ShadowJauntEvent
+    event: !type:PolymorphSpellEvent
+      protoId: WraithJaunt
+      makeWizard: false # should combine all jaunt methods into one instead of this shit
 
 - type: entity
   parent: BaseActionBloodCultSummonEntity
@@ -156,7 +175,7 @@
   - type: WorldTargetAction
     event: !type:PlaceTileEntityEvent
       entity: CultRuneTeleport
-      length: 1
+      length: 2
       blockedCollisionMask:
       - FullTileMask
       blockedCollisionLayer:
@@ -176,7 +195,7 @@
   - type: WorldTargetAction
     event: !type:PlaceTileEntityEvent
       entity: CultRuneBarrier
-      length: 1
+      length: 2
       blockedCollisionMask:
       - FullTileMask
       blockedCollisionLayer:
@@ -192,9 +211,15 @@
     layers:
     - state: summon_force_wall
   - type: Action
+    raiseOnUser: true
     checkCanInteract: false
-    useDelay: 25
-    # ForceshieldSpellbladeEnchantmentComponent
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/forcewall.ogg
+    useDelay: 40
+  - type: InstantAction
+    event: !type:InstantSpawnSpellEvent
+      prototype: WallForceCult
+      posData: !type:TargetInFront
 
 - type: entity
   parent: BaseActionBloodCult
@@ -204,9 +229,21 @@
   components:
   - type: Sprite
     layers:
-    - state: blood_barrage
+    - state: cult_fist
   - type: Action
     checkCanInteract: false
-    useDelay: 25
+    useDelay: 35
+    raiseOnUser: true
+    sound: !type:SoundPathSpecifier
+      path: /Audio/_Goobstation/Wizard/magic_missile.ogg
+  - type: TargetAction
+    range: 60
+    checkCanAccess: false
+  - type: EntityTargetAction
+    canTargetSelf: false
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: ProjectileGauntletEcho
+      projectileSpeed: 20
 
 # harvester
