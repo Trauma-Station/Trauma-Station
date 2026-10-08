@@ -10,7 +10,7 @@
     sprite: _White/Structures/Furniture/resin_nest.rsi
     state: full
     noRot: true
-    drawdepth: OverMobs
+    drawdepth: Mobs
   - type: Icon
     sprite: _White/Structures/Furniture/resin_nest.rsi
     state: full
