@@ -242,7 +242,7 @@ namespace Content.MapRenderer
                                 {
                                     Method = WebpEncodingMethod.BestQuality,
                                     FileFormat = WebpFileFormatType.Lossless,
-                                    TransparentColorMode = WebpTransparentColorMode.Preserve
+                                    TransparentColorMode = TransparentColorMode.Preserve // Trauma - changed to TransparentColorMode
                                 };
 
                                 await grid.SaveAsync(savePath, encoder);
