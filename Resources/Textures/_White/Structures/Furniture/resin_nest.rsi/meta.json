@@ -9,38 +9,8 @@
     "states": [
         {
             "name": "full"
-        },
-        {
-            "name": "resin_nest0",
-            "directions": 4
-        },
-        {
-            "name": "resin_nest1",
-            "directions": 4
-        },
-        {
-            "name": "resin_nest2",
-            "directions": 4
-        },
-        {
-            "name": "resin_nest3",
-            "directions": 4
-        },
-        {
-            "name": "resin_nest4",
-            "directions": 4
-        },
-        {
-            "name": "resin_nest5",
-            "directions": 4
-        },
-        {
-            "name": "resin_nest6",
-            "directions": 4
-        },
-        {
-            "name": "resin_nest7",
-            "directions": 4
         }
+
+
     ]
 }
