@@ -15617,3 +15617,10 @@ Entries:
   id: 1699
   time: '2026-10-07T12:45:37.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4937
+- author: Aineias1
+  changes:
+  - type: Remove
+    message: Removed bagel sec shuttle, now hope that pods wont do the same
+  id: 1700
+  time: '2026-10-07T19:16:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4938
