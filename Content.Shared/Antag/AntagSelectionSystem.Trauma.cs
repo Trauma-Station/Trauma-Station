@@ -19,6 +19,7 @@ public abstract partial class AntagSelectionSystem
 {
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private EntityQuery<AntagSelectionComponent> _query = default!;
 
     public void UnequipOldGear(EntityUid player)
     {
@@ -85,7 +86,7 @@ public abstract partial class AntagSelectionSystem
     /// </summary>
     public bool IsPlayerAnyAntag(Entity<AntagSelectionComponent> rule, ICommonSession player)
     {
-        foreach (var players in rule.PreSelectedSessions.Values)
+        foreach (var players in rule.Comp.PreSelectedSessions.Values)
         {
             if (players.Contains(player))
                 return true;
