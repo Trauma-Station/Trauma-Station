@@ -28,6 +28,7 @@ namespace Content.Shared.PDA
             PdaIdInfoText pdaOwnerInfo,
             string? stationName,
             bool hasUplink = false,
+            // Trauma
             bool hasJobBoard = false,
             bool canPlayMusic = false,
             string? address = null)
@@ -38,6 +39,7 @@ namespace Content.Shared.PDA
             HasPai = hasPai;
             PdaOwnerInfo = pdaOwnerInfo;
             HasUplink = hasUplink;
+            // Trauma
             HasJobBoard = hasJobBoard;
             CanPlayMusic = canPlayMusic;
             StationName = stationName;
