@@ -52,12 +52,6 @@
     solution: ammo
   - type: ReagentTank
     tankType: Fuel
-    fuelWhitelist:
-      tags:
-        - EchionGun
-    fuelBlacklist:
-      tags:
-        - WeldingTool
   - type: Solution
     solution:
       maxVol: 150
@@ -99,6 +93,6 @@
     - type: SolutionRegeneration
       solution: ammo
       generated:
-          reagents:
-          - ReagentId: Echion
-            Quantity: 2.5
+        reagents:
+        - ReagentId: Echion
+          Quantity: 2.5

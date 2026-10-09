@@ -1,6 +1,3 @@
-// <Trauma>
-using Content.Shared.Chemistry.EntitySystems;
-// </Trauma>
 using Content.Shared.Chemistry.Components;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Events;
@@ -15,8 +12,6 @@ public partial class SharedGunSystem
         SubscribeLocalEvent<SolutionAmmoProviderComponent, TakeAmmoEvent>(OnSolutionTakeAmmo);
         SubscribeLocalEvent<SolutionAmmoProviderComponent, GetAmmoCountEvent>(OnSolutionAmmoCount);
     }
-
-    [Dependency] private SharedSolutionContainerSystem _solution = default!; // Trauma
 
     private void OnSolutionTakeAmmo(Entity<SolutionAmmoProviderComponent> ent, ref TakeAmmoEvent args)
     {
@@ -35,9 +30,9 @@ public partial class SharedGunSystem
         // <Trauma>
         // Replaced 20 year old shitcode with this so it actually consumes reagents when firing
         // Yes, it was just two lines all this time. No need to go through 5 different server systems
-        if (TryComp<SolutionComponent>(ent, out var solution))
+        if (_solution.TryGetSolution(ent.Owner, ent.Comp.SolutionId, out var solution, out _))
         {
-            _solution.RemoveEachReagent((ent.Owner, solution), ent.Comp.FireCost);
+            _solution.RemoveEachReagent(solution, ent.Comp.FireCost);
         }
         // </Trauma>
 

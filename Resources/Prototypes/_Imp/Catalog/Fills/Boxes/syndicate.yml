@@ -9,8 +9,8 @@
     - 0,0,3,1
   - type: StorageFill
     contents:
-      - id: CartridgeBazookaExp
-        amount: 4
+    - id: CartridgeBazookaExp
+      amount: 4
   - type: Sprite
     sprite: /Textures/_Impstation/Objects/Storage/boxes.rsi
     layers:
@@ -24,8 +24,8 @@
   components:
   - type: StorageFill
     contents:
-      - id: CartridgeBazookaInc
-        amount: 4
+    - id: CartridgeBazookaInc
+      amount: 4
   - type: Sprite
     sprite: /Textures/_Impstation/Objects/Storage/boxes.rsi
     layers:
@@ -39,8 +39,8 @@
   components:
   - type: StorageFill
     contents:
-      - id: CartridgeBazookaCon
-        amount: 4
+    - id: CartridgeBazookaCon
+      amount: 4
   - type: Sprite
     sprite: /Textures/_Impstation/Objects/Storage/boxes.rsi
     layers:
@@ -53,9 +53,9 @@
   components:
   - type: StorageFill
     contents:
-      - id: WeaponPlasmaAdder
-      - id: SkillChipPistol
-      - id: EchionCanister
+    - id: WeaponPlasmaAdder
+    - id: SkillChipPistol
+    - id: EchionCanister
 
 - type: entity
   parent: BriefcaseWeapon
@@ -64,7 +64,7 @@
   components:
   - type: StorageFill
     contents:
-      - id: WeaponPlasmaAkurra
-      - id: SkillChipRifle
-      - id: EchionCanister
-        amount: 4
+    - id: WeaponPlasmaAkurra
+    - id: SkillChipRifle
+    - id: EchionCanister
+      amount: 4

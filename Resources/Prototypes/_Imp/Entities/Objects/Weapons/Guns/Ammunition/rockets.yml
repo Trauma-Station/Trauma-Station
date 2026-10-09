@@ -1,12 +1,12 @@
 - type: entity
+  parent: [BaseItem, BaseSyndicateContraband]
   id: CartridgeBazookaExp
   name: Leviathan explosive rocket
-  parent: [BaseItem, BaseSyndicateContraband]
   description: Guaranteed to ruin someone's day.
   components:
   - type: Tag
     tags:
-      - CartridgeBazooka
+    - CartridgeBazooka
   - type: Item
     size: Small
   - type: CartridgeAmmo
@@ -20,14 +20,14 @@
     price: 20
 
 - type: entity
+  parent: CartridgeBazookaExp
   id: CartridgeBazookaCon
   name: Leviathan concussion rocket
-  parent: CartridgeBazookaExp
   description: Guaranteed to ruin someone's day.
   components:
   - type: Tag
     tags:
-      - CartridgeBazooka
+    - CartridgeBazooka
   - type: Item
     size: Small
   - type: CartridgeAmmo
@@ -41,14 +41,14 @@
     price: 20
 
 - type: entity
+  parent: CartridgeBazookaExp
   id: CartridgeBazookaInc
   name: Leviathan incendiary rocket
-  parent: CartridgeBazookaExp
   description: Guaranteed to ruin someone's day.
   components:
   - type: Tag
     tags:
-      - CartridgeBazooka
+    - CartridgeBazooka
   - type: Item
     size: Small
   - type: CartridgeAmmo

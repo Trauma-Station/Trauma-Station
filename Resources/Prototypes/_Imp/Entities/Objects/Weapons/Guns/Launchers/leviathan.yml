@@ -1,7 +1,7 @@
 - type: entity
-  name: Leviathan
   parent: [ BaseWeaponLauncher, BaseGunWieldable, BaseSyndicateContraband ]
   id: WeaponLauncherBazooka
+  name: Leviathan
   description: A symbol of hubris, arrogance, and an overwhelming lust for destruction. Uses rockets.
   components:
   - type: WeaponClass

@@ -7,7 +7,7 @@
   cost:
     Telecrystal: 15
   categories:
-    - UplinkWeaponry
+  - UplinkWeaponry
 
 - type: listing
   id: UplinkAkurraBundle
@@ -18,7 +18,7 @@
   cost:
     Telecrystal: 50
   categories:
-    - UplinkWeaponry
+  - UplinkWeaponry
 
 - type: listing
   id: uplinkFlamethrower
@@ -29,7 +29,7 @@
   cost:
     Telecrystal: 60
   categories:
-    - UplinkWeaponry
+  - UplinkWeaponry
 
 - type: listing
   id: uplinkLeviathan
@@ -40,7 +40,7 @@
   cost:
     Telecrystal: 100
   categories:
-    - UplinkWeaponry
+  - UplinkWeaponry
   conditions:
   - !type:StoreWhitelistCondition
     whitelist:
@@ -78,7 +78,7 @@
   cost:
     Telecrystal: 40
   categories:
-    - UplinkAmmo
+  - UplinkAmmo
 
 - type: listing
   id: UplinkIncendiaryRocketBundle
@@ -89,7 +89,7 @@
   cost:
     Telecrystal: 40
   categories:
-    - UplinkAmmo
+  - UplinkAmmo
 
 - type: listing
   id: UplinkConcussiveRocketBundle
@@ -100,4 +100,4 @@
   cost:
     Telecrystal: 40
   categories:
-    - UplinkAmmo
+  - UplinkAmmo

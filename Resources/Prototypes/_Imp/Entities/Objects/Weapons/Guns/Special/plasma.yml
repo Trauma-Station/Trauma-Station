@@ -1,8 +1,8 @@
 # This is some mildly questionable yml but it works and I don't feel like reorganizing it
 - type: entity
-  name: Adder
   parent: [BaseItem, BaseSyndicateContraband, SolutionGun ]
   id: WeaponPlasmaAdder
+  name: Adder
   description: The future of stellar warfare in the palm of your hand. Uses echion, produced from advanced synthesizers.
   components:
   - type: WeaponClass
@@ -77,16 +77,13 @@
     fuelReagent: Echion
   - type: ExaminableSolution
     solution: chamber
-  - type: Tag
-    tags:
-    - EchionGun
   - type: StaticPrice
     price: 100
 
 - type: entity
-  name: Akurra
   parent: [WeaponPlasmaAdder, BaseGunWieldable]
   id: WeaponPlasmaAkurra
+  name: Akurra
   description: A beautiful marriage of technology and malice in a single package. Uses echion, produced from advanced synthesizers.
   components:
   - type: WeaponClass
@@ -135,8 +132,5 @@
     solutionId: chamber
     proto: BulletPlasmaAkurra
     fireCost: 5
-  - type: Tag
-    tags:
-    - EchionGun
   - type: StaticPrice
     price: 100

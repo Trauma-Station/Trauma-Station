@@ -1,7 +1,7 @@
 - type: entity
-  name: adder plasma bolt
-  id: BulletPlasmaAdder
   parent: BaseBullet
+  id: BulletPlasmaAdder
+  name: adder plasma bolt
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -26,9 +26,9 @@
     forceSound: true
 
 - type: entity
-  name: akurra plasma bolt
-  id: BulletPlasmaAkurra
   parent: BulletPlasmaAdder
+  id: BulletPlasmaAkurra
+  name: akurra plasma bolt
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite

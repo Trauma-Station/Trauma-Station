@@ -10,12 +10,12 @@
     {
       "name": "base"
     },
-	{
-	  "name": "icon"
-	},
-	{
-	  "name": "mag-unshaded-1"
-	},
+	  {
+	    "name": "icon"
+	  },
+	  {
+	    "name": "mag-unshaded-1"
+	  },
     {
       "name": "inhand-left",
       "directions": 4
@@ -32,13 +32,13 @@
       "name": "wielded-inhand-right",
       "directions": 4
     },
-	{
-	  "name": "equipped-BACKPACK",
-	  "directions": 4
-	},
-	{
-	  "name": "equipped-SUITSTORAGE",
-	  "directions": 4
-	}
+	  {
+	    "name": "equipped-BACKPACK",
+	    "directions": 4
+	  },
+	  {
+	    "name": "equipped-SUITSTORAGE",
+	    "directions": 4
+	  }
   ]
 }

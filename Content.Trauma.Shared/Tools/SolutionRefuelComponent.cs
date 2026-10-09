@@ -12,24 +12,27 @@ namespace Content.Trauma.Shared.Tools;
 [AutoGenerateComponentState(true)]
 public sealed partial class SolutionRefuelComponent : Component
 {
+    /// <summary>
+    /// Name used for the popup ("The tank is already full)
+    /// </summary>
     [DataField, AutoNetworkedField]
     public string Name = "tank";
 
     /// <summary>
-    ///     Name of <see cref="FuelSolution"/>.
+    /// Name of the fuel solution.
     /// </summary>
     [DataField]
     public string FuelSolutionName = "Welder";
 
     /// <summary>
-    ///     Reagent that will be used as fuel.
+    /// Reagent that will be used as fuel.
     /// </summary>
     [DataField]
     public ProtoId<ReagentPrototype> FuelReagent = "WeldingFuel";
 
     /// <summary>
-    ///     Sound played when refilling the welder.
+    /// Sound played when refilling the welder.
     /// </summary>
     [DataField]
-    public SoundSpecifier WelderRefill = new SoundPathSpecifier("/Audio/Effects/refill.ogg");
+    public SoundSpecifier RefillSound = new SoundPathSpecifier("/Audio/Effects/refill.ogg");
 }

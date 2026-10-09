@@ -7,11 +7,11 @@
   - type: Sprite
     sprite: _Impstation/Objects/Weapons/Guns/Ammunition/Magazine/Special/echioncanister.rsi
     layers:
-      - state: canister
-        map: ["enum.GunVisualLayers.Base"]
-      - state: canister-1
-        map: ["enum.SolutionContainerLayers.Fill"]
-        shader: unshaded
+    - state: canister
+      map: ["enum.GunVisualLayers.Base"]
+    - state: canister-1
+      map: ["enum.SolutionContainerLayers.Fill"]
+      shader: unshaded
   - type: Appearance
   - type: Item
     size: Small
@@ -24,12 +24,6 @@
     solution: ammo
   - type: ReagentTank
     tankType: Fuel
-    fuelWhitelist:
-      tags:
-        - EchionGun
-    fuelBlacklist:
-      tags:
-        - WeldingTool
   - type: Solution
     solution:
       maxVol: 75

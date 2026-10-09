@@ -10,9 +10,9 @@
     {
       "name": "base"
     },
-	{
-	  "name": "icon"
-	},
+	  {
+	    "name": "icon"
+	  },
     {
       "name": "mag-unshaded-4"
     },
@@ -42,13 +42,13 @@
       "name": "inhand-right",
       "directions": 4
     },
-	{
-	  "name": "equipped-BELT",
-	  "directions": 4
-	},
-	{
-	  "name": "equipped-SUITSTORAGE",
-	  "directions": 4
-	}
+	  {
+	    "name": "equipped-BELT",
+	    "directions": 4
+	  },
+	  {
+	    "name": "equipped-SUITSTORAGE",
+	    "directions": 4
+	  }
   ]
 }

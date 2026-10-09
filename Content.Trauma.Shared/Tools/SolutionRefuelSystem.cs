@@ -5,7 +5,6 @@ using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Examine;
 using Content.Shared.FixedPoint;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
@@ -15,21 +14,20 @@ namespace Content.Trauma.Shared.Tools;
 
 public sealed partial class SolutionRefuelSystemSystem : EntitySystem
 {
-    [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private IGameTiming _timing = default!;
 
     private bool TryGetSolutionFuelAndCapacity(EntityUid uid, out FixedPoint2 fuel, out FixedPoint2 capacity)
     {
         fuel = default;
         capacity = default;
-        if (!TryComp<SolutionRefuelComponent>(uid, out var refuelable) ||
-            !TryComp<SolutionManagerComponent>(uid, out var solutionContainer))
+        if (!TryComp<SolutionRefuelComponent>(uid, out var refuelable))
             return false;
 
         if (!_solution.TryGetSolution(
-                (uid, solutionContainer),
+                uid,
                 refuelable.FuelSolutionName,
                 out _,
                 out var fuelSolution))
@@ -76,7 +74,7 @@ public sealed partial class SolutionRefuelSystemSystem : EntitySystem
             var drained = targetSolution.SplitSolutionWithOnly(trans, ent.Comp.FuelReagent);
             Dirty(target, targetComp.Value.Comp); // For some reason SplitSolutionWithOnly() doesn't dirty stuff properly
             _solution.TryAddSolution(solutionComp.Value, drained);
-            _audio.PlayPredicted(ent.Comp.WelderRefill, ent, user: args.User);
+            _audio.PlayPredicted(ent.Comp.RefillSound, ent, user: args.User);
             _popup.PopupClient(Loc.GetString("welder-component-after-interact-refueled-message"), ent, args.User);
         }
         else if (welderSolution.AvailableVolume <= 0)

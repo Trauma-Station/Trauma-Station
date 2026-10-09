@@ -10,12 +10,12 @@
     {
       "name": "concussion"
     },
-	{
-	  "name": "explosive"
-	},
-	{
-	  "name": "incendiary"
-	},
+	  {
+	    "name": "explosive"
+	  },
+	  {
+	    "name": "incendiary"
+	  },
     {
       "name": "concussionproj",
       "delays": [
@@ -41,7 +41,7 @@
           0.3,
           0.3
         ]
-       ]
-	}
+      ]
+	  }
   ]
 }

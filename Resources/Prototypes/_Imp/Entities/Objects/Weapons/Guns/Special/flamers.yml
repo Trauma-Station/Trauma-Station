@@ -1,7 +1,7 @@
 - type: entity
-  name: FG13 Xiuhcoatl
   parent: [WeaponPlasmaAdder, BaseGunWieldable] # I'm not even gonna question it bro
   id: WeaponFlamerXiuhcoatl
+  name: FG13 Xiuhcoatl
   description: Simple as it is deadly, the Xiuhcoatl fulfills a long-standing craving of the Gorlex Marauders for Nanotrasen Barbeque. Uses welding fuel.
   components:
   - type: WeaponClass
