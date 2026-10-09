@@ -26,8 +26,6 @@ public sealed partial class FuneralToolComponent : Component
     /// <summary>
     /// Which sound effect to play.
     /// </summary>
-    private static readonly ProtoId<SoundCollectionPrototype> DefaultBibleHealSound = "BibleHeal";
-
     [DataField]
-    public SoundSpecifier? SoundPath = new SoundCollectionSpecifier(DefaultBibleHealSound, AudioParams.Default.WithVolume(-4f));
+    public SoundSpecifier? SoundPath = new SoundCollectionSpecifier("BibleHeal", AudioParams.Default.WithVolume(-4f));
 }
