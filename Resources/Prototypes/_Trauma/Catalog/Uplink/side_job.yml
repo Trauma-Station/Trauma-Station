@@ -10,7 +10,7 @@
   cost:
     Telecrystal: 50
   categories:
-    - UplinkContractors
+  - UplinkContractors
   conditions:
   - !type:StoreWhitelistCondition
     blacklist:

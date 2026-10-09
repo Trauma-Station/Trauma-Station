@@ -1,7 +1,7 @@
 // <Trauma>
 using Content.Trauma.Common.CCVar;
-using Robust.Shared.Configuration;
 using Content.Trauma.Common.JobListings;
+using Robust.Shared.Configuration;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;

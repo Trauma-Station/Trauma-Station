@@ -77,5 +77,5 @@ public sealed partial class TraitorRuleComponent : Component
     /// The amount of TC traitors start with.
     /// </summary>
     [DataField]
-    public FixedPoint2 StartingBalance = 100;
+    public FixedPoint2 StartingBalance = 100; // Trauma - was 20, 5x
 }

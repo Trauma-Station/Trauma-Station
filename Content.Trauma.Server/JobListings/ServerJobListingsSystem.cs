@@ -5,9 +5,8 @@ using Content.Shared.Objectives.Components;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Traitor;
 using Content.Trauma.Shared.JobListings;
-using System.Linq;
-using Robust.Shared.Random;
 using Content.Trauma.Common.JobListings;
+using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.JobListings;
 
