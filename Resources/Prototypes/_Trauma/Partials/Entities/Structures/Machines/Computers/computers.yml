@@ -11,18 +11,53 @@
   components:
   - type: AccessReader
     access: !Clear
-    - [ "ChiefEngineer" ]
+    - [ "Command" ]
 
 - type: entity
   id: StationAiUploadComputer
   components:
   - type: AccessReader
     access: !Clear
-    - [ "ChiefEngineer" ]
+    - [ "Command" ]
 
 - type: entity
   id: ComputerRoboticsControl
   components:
   - type: AccessReader
     access: !Clear
-    - [ "ChiefEngineer" ]
+    - [ "Command" ]
+
+- type: entity
+  id: ComputerCargoOrdersEngineering
+  components:
+  - type: AccessReader
+    access: !Clear
+    - [ "Engineering" ]
+
+- type: entity
+  id: ComputerCargoOrdersMedical
+  components:
+  - type: AccessReader
+    access: !Clear
+    - [ "Medical" ]
+
+- type: entity
+  id: ComputerCargoOrdersScience
+  components:
+  - type: AccessReader
+    access: !Clear
+    - [ "Research" ]
+
+- type: entity
+  id: ComputerCargoOrdersSecurity
+  components:
+  - type: AccessReader
+    access: !Clear
+    - [ "Armory" ]
+
+- type: entity
+  id: ComputerCargoOrdersService
+  components:
+  - type: AccessReader
+    access: !Clear
+    - [ "Service" ]

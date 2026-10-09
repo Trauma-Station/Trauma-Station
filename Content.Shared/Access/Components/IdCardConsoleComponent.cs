@@ -51,8 +51,10 @@ public sealed partial class IdCardConsoleComponent : Component
         "Cargo",
         "Chapel",
         "Chemistry",
-        "ChiefEngineer",
-        "ChiefMedicalOfficer",
+        // <Trauma>
+        // "ChiefEngineer", // Trauma - Role is donzeo
+        // "ChiefMedicalOfficer", // Trauma - Role is GONE
+        // </Trauma>
         "Command",
         "Cryogenics",
         "Engineering",
@@ -67,13 +69,13 @@ public sealed partial class IdCardConsoleComponent : Component
         "Lawyer",
         "Maintenance",
         "Medical",
-        "Quartermaster",
+        // "Quartermaster", // Trauma - Role serves no purpose in life
         "Research",
         // <Trauma>
         "Robotics",
         "Genetics",
+        // "ResearchDirector", // Trauma - Role is [100% off!]
         // </Trauma>
-        "ResearchDirector",
         "Salvage",
         "Security",
         "Service",

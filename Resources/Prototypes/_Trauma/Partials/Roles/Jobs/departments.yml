@@ -3,6 +3,8 @@
 - type: department
   id: Cargo
   weight: 7
+  roles:
+  - !Remove Quartermaster
 
 - type: department
   id: Civilian
@@ -36,18 +38,24 @@
   - NanotrasenRepresentative
   - CommandMaid
   - HecuOperative
+  - !Remove ChiefEngineer
+  - !Remove ChiefMedicalOfficer
+  - !Remove ResearchDirector
+  - !Remove Quartermaster
 
 - type: department
   id: Engineering
   weight: 12
   roles:
   - Roboticist
+  - !Remove ChiefEngineer
 
 - type: department
   id: Medical
   weight: 10
   roles:
   - Virologist
+  - !Remove ChiefMedicalOfficer
 
 - type: department
   id: Security
@@ -60,6 +68,7 @@
   weight: 15
   roles:
   - Geneticist
+  - !Remove ResearchDirector
 
 - type: department
   id: Service

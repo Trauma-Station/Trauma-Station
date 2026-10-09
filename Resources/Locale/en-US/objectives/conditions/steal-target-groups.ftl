@@ -25,7 +25,7 @@ steal-target-groups-weapon-energy-magnum = energy magnum
 # Thief Collection
 steal-target-groups-figurines = figurine
 steal-target-groups-heads-cloaks = head's cloak
-steal-target-groups-heads-bedsheets = head's bedsheet
+steal-target-groups-heads-bedsheets = saferoom bedsheet
 steal-target-groups-stamps = stamp
 steal-target-groups-door-remotes = door remote
 steal-target-groups-encryption-keys = encryption key
@@ -70,7 +70,7 @@ steal-target-groups-plant-rd = "RD's potted plant"
 steal-target-groups-toilet-golden-dirty-water = golden toilet
 
 # Thief Animal
-steal-target-groups-animal-named-cat = CMO's Cat
+steal-target-groups-animal-named-cat = medical staff's cat
 
 steal-target-groups-animal-ian = Ian
 steal-target-groups-animal-mc-griff = McGriff
