@@ -9,11 +9,11 @@ namespace Content.Server.Ghost.Roles.Components;
 //[Access(typeof(GhostRoleSystem))] // Trauma - free AA
 public sealed partial class GhostRoleComponent : Component
 {
-    [DataField("name")] private string _roleName = "Unknown";
+    [DataField("name", required: true)] private LocId _roleName; // Trauma - required, use LocId
 
-    [DataField("description")] private string _roleDescription = "Unknown";
+    [DataField("description", required: true)] private LocId _roleDescription; // Trauma - required, use LocId
 
-    [DataField("rules")] private string _roleRules = "ghost-role-component-default-rules";
+    [DataField("rules")] private LocId _roleRules = "ghost-role-component-default-rules"; // Trauma - use LocId
 
     /// <summary>
     /// Whether the <see cref="MakeSentientCommand"/> should run on the mob.

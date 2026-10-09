@@ -2,10 +2,10 @@
 
 # Pod
 - type: entity
-  id: MobBlobPod
-  name: Blob pod
-  description: An ordinary person fighting opponents, not like a thing attached to a tile, zombifies corpses.
   parent: SimpleSpaceMobBase
+  id: MobBlobPod
+  name: Blob Drop
+  description: An ordinary blob fighter.
   categories: [ HideSpawnMenu ]
   components:
   - type: ZombieImmune
@@ -123,7 +123,7 @@
   parent: [ SimpleSpaceMobBase, MobNightVision ]
   id: MobBlobBlobbernaut
   name: Blobbernaut
-  description: Juggernaut, but blob! when the station crew shows full hatred of you, with the help of such strong men you can organize a blitzkriek if you tell them the plan in advance.
+  description: An elite blob fighter.
   categories: [ HideSpawnMenu ]
   components:
   - type: ZombieImmune
@@ -141,7 +141,7 @@
   - type: GhostRole
     name: ghost-role-information-blobbernaut-name
     description: ghost-role-information-blobbernaut-description
-    rules: You are an antagonist, defend your blob core!
+    rules: ghost-role-information-blobbernaut-rules
     mindRoles:
     - MindRoleGhostRoleTeamAntagonist
     raffle:
@@ -268,7 +268,7 @@
   - type: GhostRole
     name: ghost-role-information-blob-name
     description: ghost-role-information-blob-description
-    rules: You are an antagonist, destroy the station!
+    rules: ghost-role-information-blob-rules
     mindRoles:
     - MindRoleGhostRoleSoloAntagonist
   - type: GhostTakeoverAvailable
