@@ -32,7 +32,7 @@ public partial class SharedGunSystem
         // Yes, it was just two lines all this time. No need to go through 5 different server systems
         if (_solution.TryGetSolution(ent.Owner, ent.Comp.SolutionId, out var solution, out _))
         {
-            _solution.RemoveEachReagent(solution, ent.Comp.FireCost);
+            _solution.RemoveEachReagent(solution.Value, ent.Comp.FireCost);
         }
         // </Trauma>
 
