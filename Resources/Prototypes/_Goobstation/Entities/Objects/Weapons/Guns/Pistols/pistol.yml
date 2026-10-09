@@ -59,7 +59,7 @@
       - WeaponPistolDualetta
 
 - type: entity
-  parent: [ BaseItem, BaseSyndicateContraband ]
+  parent: [ BaseItem, BaseSyndicateContraband, BasePistolWhip ]
   id: WeaponPistolAnaconda
   name: Anaconda
   description: A heavy pistol capable of supplying itself with the ammo on the way using a built-in fabricator.

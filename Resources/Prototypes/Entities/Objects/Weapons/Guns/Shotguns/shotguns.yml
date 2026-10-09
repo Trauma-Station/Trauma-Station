@@ -15,16 +15,6 @@
   - type: EmitSoundOnLand
     sound:
       collection: ShotgunsDrop
-  - type: AltFireMelee
-    attackType: Heavy
-  - type: MeleeWeapon
-    damage:
-      types:
-       Blunt: 12
-    angle: 0
-    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
-    soundHit:
-      collection: MetalThud
   - type: WeaponClass
     class: Shotgun
   # </Trauma>
@@ -77,10 +67,6 @@
   id: WeaponShotgunBulldog
   description: An automatic magazine-fed shotgun for close-quarters combat. Kicks like a mule on steroids. Uses 12 Gauge shotgun shells. # Goob edit
   components:
-  # <Trauma>
-  - type: WeaponClass
-    class: Shotgun
-  # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Shotguns/bulldog.rsi
     layers:
@@ -102,7 +88,7 @@
     spentAmmoSprite: Interface/ItemStatus/Shotgun_Shells/spent.png
   - type: GunRequiresWield #remove when inaccuracy on spreads is fixed
   - type: Gun
-    fireRate: 1.5 # Trauma, was 2
+    fireRate: 2
     selectedMode: FullAuto
     availableModes:
     - FullAuto

@@ -3,6 +3,7 @@
 - type: entity
   abstract: true
   id: BaseWeaponPistol
+  parent: BasePistolWhip
   components:
   - type: WeaponClass
     class: Pistol
@@ -14,16 +15,6 @@
       collection: PistolsDrop
   - type: EmitSoundOnLand
     sound: *drop_sound
-  - type: AltFireMelee
-    attackType: Heavy
-  - type: MeleeWeapon
-    damage:
-      types:
-       Blunt: 8 # pistol whip
-    angle: 0
-    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
-    soundHit:
-      collection: MetalThud
 
 - type: entity
   id: WeaponPistolViper

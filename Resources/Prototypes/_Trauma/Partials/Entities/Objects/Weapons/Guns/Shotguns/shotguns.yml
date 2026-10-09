@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: BaseWeaponShotgun
+  parent: BaseStockHit
+
+- type: entity
+  id: WeaponShotgunBulldog
+  components:
+  - type: WeaponClass
+    class: Shotgun
+  - type: Gun
+    fireRate: 1.5
