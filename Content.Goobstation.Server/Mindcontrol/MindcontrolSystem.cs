@@ -52,11 +52,19 @@ public sealed partial class MindcontrolSystem : EntitySystem
 
     public void Start(EntityUid uid, MindcontrolledComponent component)
     {
+
         if (component.Master is not {} master ||
             _mindShield.IsShielded(uid) || // you somehow managed to implant someone with a mindshield.
             uid == master || // good job, you implanted yourself
             !_mind.TryGetMind(uid, out var mindId, out var mind)) // no mind, how can you mindcontrol with no mind?
             return;
+
+        // <Trauma> If mind has "MindControllableComponent," returns.
+        if (!CanControlMind(mindId))
+        {
+            return;
+        }
+        // </Trauma>
 
         _role.MindAddRole(mindId, MindRole, mind, silent: true);
 
@@ -113,5 +121,17 @@ public sealed partial class MindcontrolSystem : EntitySystem
                 briefing += "\n " + Loc.GetString("mindcontrol-briefing-get-master", ("master", metadata.EntityName)) + "\n";
         }
         return briefing;
+    }
+
+    /// <summary>
+    /// Determines if the given mind is allowed to be mind controlled
+    /// </summary>
+    /// <param name="mindId">ID of controlled mind</param>
+    /// <returns>False if not allowed</returns>
+    private bool CanControlMind(EntityUid mindId)
+    {
+        if (!TryComp<MindControlImmuneComponent>(mindId, out _))
+            Log.Warning("Has MindControlImmuneComponent");
+        return !TryComp<MindControlImmuneComponent>(mindId, out _);
     }
 }

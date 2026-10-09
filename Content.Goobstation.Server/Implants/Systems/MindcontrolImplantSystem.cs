@@ -3,6 +3,7 @@
 using Content.Goobstation.Server.Implants.Components;
 using Content.Goobstation.Server.Mindcontrol;
 using Content.Goobstation.Shared.Mindcontrol;
+using Content.Server.Mind;
 using Content.Shared.Implants;
 using Content.Trauma.Common.Implants;
 using Robust.Shared.Containers;
@@ -12,6 +13,7 @@ namespace Content.Goobstation.Server.Implants.Systems;
 public sealed partial class MindcontrolImplantSystem : EntitySystem
 {
     [Dependency] private MindcontrolSystem _mindcontrol = default!;
+    [Dependency] private MindSystem _mind = default!;
 
     public override void Initialize()
     {
