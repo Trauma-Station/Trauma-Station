@@ -21,7 +21,6 @@
   parent: VisitorHead
   components:
     - type: GhostRole
-      job: Captain # Trauma
       name: job-name-captain
       description: ghost-role-information-command-description
     - type: Loadout
@@ -33,7 +32,6 @@
   parent: VisitorHead
   components:
     - type: GhostRole
-      job: ChiefEngineer # Trauma
       name: job-name-ce
       description: ghost-role-information-command-description
     - type: Loadout
@@ -44,15 +42,7 @@
   id: VisitorCMO
   parent: VisitorHead
   components:
-    # <Trauma>
-    - type: SurgerySpeedModifier # TODO: move ts to skillchip
-      speedModifier: 2
-    - type: CPRTraining
-      reviveChance: 0.9 # excellent training and experience
-      inhaleChance: 1 # great kisser too
-    # </Trauma>
     - type: GhostRole
-      job: ChiefMedicalOfficer # Trauma
       name: job-name-cmo
       description: ghost-role-information-command-description
     - type: Loadout
@@ -64,7 +54,6 @@
   parent: VisitorHead
   components:
     - type: GhostRole
-      job: HeadOfPersonnel # Trauma
       name: job-name-hop
       description: ghost-role-information-command-description
     - type: Loadout
@@ -76,7 +65,6 @@
   parent: VisitorHead
   components:
     - type: GhostRole
-      job: HeadOfSecurity # Trauma
       name: job-name-hos
       description: ghost-role-information-command-description
     - type: Loadout
@@ -88,7 +76,6 @@
   parent: VisitorHead
   components:
     - type: GhostRole
-      job: ResearchDirector # Trauma
       name: job-name-rd
       description: ghost-role-information-command-description
     - type: Loadout
@@ -100,7 +87,6 @@
   parent: VisitorHead
   components:
     - type: GhostRole
-      job: Quartermaster # Trauma
       name: job-name-qm
       description: ghost-role-information-command-description
     - type: Loadout
@@ -126,7 +112,6 @@
   parent: VisitorSecurity
   components:
     - type: GhostRole
-      job: SecurityCadet # Trauma
       name: job-name-cadet
     - type: Loadout
       prototypes: [ VisitorSecurityCadet, VisitorSecurityCadetAlt ]
@@ -137,7 +122,6 @@
   parent: VisitorSecurity
   components:
     - type: GhostRole
-      job: SecurityOfficer # Trauma
       name: job-name-security
     - type: Loadout
       prototypes: [ VisitorSecurityOfficer, VisitorSecurityOfficerAlt ]
@@ -148,7 +132,6 @@
   parent: VisitorSecurity
   components:
     - type: GhostRole
-      job: Detective # Trauma
       name: job-name-detective
     - type: Loadout
       prototypes: [ VisitorDetective, VisitorDetectiveAlt ]
@@ -159,7 +142,6 @@
   parent: VisitorSecurity
   components:
     - type: GhostRole
-      job: Warden # Trauma
       name: job-name-warden
     - type: Loadout
       prototypes: [ VisitorWarden, VisitorWardenAlt ]
@@ -183,7 +165,6 @@
   parent: VisitorCargonian
   components:
     - type: GhostRole
-      job: CargoTechnician # Trauma
       name: job-name-cargotech
     - type: Loadout
       prototypes: [ VisitorCargoTech, VisitorCargoTechAlt ]
@@ -194,7 +175,6 @@
   parent: VisitorCargonian
   components:
     - type: GhostRole
-      job: SalvageSpecialist # Trauma
       name: job-name-salvagespec
     - type: Loadout
       prototypes: [ VisitorSalvageSpecialist, VisitorSalvageSpecialistAlt ]
@@ -218,7 +198,6 @@
   parent: VisitorEngineering
   components:
     - type: GhostRole
-      job: AtmosphericTechnician # Trauma
       name: job-name-atmostech
     - type: Loadout
       prototypes: [ VisitorAtmosTech, VisitorAtmosTechAlt ]
@@ -229,7 +208,6 @@
   parent: VisitorEngineering
   components:
     - type: GhostRole
-      job: TechnicalAssistant # Trauma
       name: job-name-technical-assistant
     - type: Loadout
       prototypes: [ VisitorTechnicalAssistant, VisitorTechnicalAssistantAlt ]
@@ -240,7 +218,6 @@
   parent: VisitorEngineering
   components:
     - type: GhostRole
-      job: StationEngineer # Trauma
       name: job-name-engineer
     - type: Loadout
       prototypes: [ VisitorEngineer, VisitorEngineerAlt ]
@@ -264,7 +241,6 @@
   parent: VisitorMedical
   components:
     - type: GhostRole
-      job: MedicalIntern # Trauma
       name: job-name-intern
     - type: Loadout
       prototypes: [ VisitorMedicalIntern, VisitorMedicalInternAlt ]
@@ -275,7 +251,6 @@
   parent: VisitorMedical
   components:
     - type: GhostRole
-      job: MedicalDoctor # Trauma
       name: job-name-doctor
     - type: Loadout
       prototypes: [ VisitorMedicalDoctor, VisitorMedicalDoctorAlt , VisitorScrubsPurple, VisitorScrubsGreen, VisitorScrubsBlue]
@@ -286,7 +261,6 @@
   parent: VisitorMedical
   components:
     - type: GhostRole
-      job: Paramedic # Trauma
       name: job-name-paramedic
     - type: Loadout
       prototypes: [ VisitorParamedic, VisitorParamedicAlt ]
@@ -297,7 +271,6 @@
   parent: VisitorMedical
   components:
     - type: GhostRole
-      job: Virologist # Trauma
       name: ghost-role-information-medical-virologist-name
     - type: Loadout
       prototypes: [ VisitorVirologist, VisitorVirologistAlt ]
@@ -308,7 +281,6 @@
   parent: VisitorMedical
   components:
     - type: GhostRole
-      job: Geneticist # Trauma
       name: ghost-role-information-medical-geneticist-name
     - type: Loadout
       prototypes: [ VisitorGeneticist, VisitorGeneticistAlt ]
@@ -319,7 +291,6 @@
   parent: VisitorMedical
   components:
     - type: GhostRole
-      job: Psychologist # Trauma
       name: job-name-psychologist
     - type: Loadout
       prototypes: [ VisitorPsychologist, VisitorPsychologistAlt ]
@@ -330,7 +301,6 @@
   parent: VisitorMedical
   components:
     - type: GhostRole
-      job: Chemist # Trauma
       name: job-name-chemist
     - type: Loadout
       prototypes: [ VisitorChemist, VisitorChemistAlt ]
@@ -364,7 +334,6 @@
   parent: VisitorScience
   components:
     - type: GhostRole
-      job: ResearchAssistant # Trauma
       name: job-name-research-assistant
     - type: Loadout
       prototypes: [ VisitorResearchAssistant, VisitorResearchAssistantAlt ]
@@ -375,7 +344,6 @@
   parent: VisitorScience
   components:
     - type: GhostRole
-      job: Scientist # Trauma
       name: job-name-scientist
     - type: Loadout
       prototypes: [ VisitorScientist, VisitorScientistAlt ]
@@ -399,7 +367,6 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
-      job: Bartender # Trauma
       name: job-name-bartender
     - type: Loadout
       prototypes: [ VisitorBartender, VisitorBartenderAlt ]
@@ -410,7 +377,6 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
-      job: Botanist # Trauma
       name: job-name-botanist
     - type: Loadout
       prototypes: [ VisitorBotanist, VisitorBotanistAlt ]
@@ -430,12 +396,8 @@
   id: VisitorChaplain
   parent: VisitorCivilian
   components:
-    # <Trauma>
-    - type: CurseImmune
-    # </Trauma>
     - type: BibleUser
     - type: GhostRole
-      job: Chaplain # Trauma
       name: job-name-chaplain
     - type: Loadout
       prototypes: [ VisitorChaplain, VisitorChaplainAlt ]
@@ -446,7 +408,6 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
-      job: Chef # Trauma
       name: job-name-chef
     - type: Loadout
       prototypes: [ VisitorChef, VisitorChefAlt ]
@@ -471,7 +432,6 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
-      job: Janitor # Trauma
       name: job-name-janitor
     - type: Loadout
       prototypes: [ VisitorJanitor, VisitorJanitorAlt ]
@@ -482,7 +442,6 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
-      job: Lawyer # Trauma
       name: job-name-lawyer
     - type: Loadout
       prototypes: [ VisitorLawyerAltA, VisitorLawyerAltB, VisitorLawyerAltC, VisitorLawyerAltD, VisitorLawyerAltE ]
@@ -490,7 +449,7 @@
 
 - type: randomHumanoidSettings
   id: VisitorLawyerCentcom
-  parent: VisitorLawyer # Trauma
+  parent: VisitorCivilian
   components:
     - type: GhostRole
       name: ghost-role-information-civilian-centcom-lawyer-name
@@ -504,7 +463,6 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
-      job: Librarian # Trauma
       name: job-name-librarian
     - type: Loadout
       prototypes: [ VisitorLibrarian, VisitorLibrarianAlt ]
@@ -515,7 +473,6 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
-      job: Musician # Trauma
       name: job-name-musician
     - type: Loadout
       prototypes: [ VisitorMusicianFancyAltA, VisitorMusicianFancyAltB, VisitorMusicianFancyAltC, VisitorMusicianFancyAltD, VisitorMusicianFancyAltE, VisitorMusicianFancyAltF, VisitorMusicianFancyAltG, VisitorMusicianFancyAltH, VisitorMusicianFancyAltI, VisitorMusicianRelaxedAltA, VisitorMusicianRelaxedAltB, VisitorMusicianRelaxedAltC, VisitorMusicianRelaxedAltD, VisitorMusicianRelaxedAltE, VisitorMusicianRelaxedAltF, VisitorMusicianMariachi ]
@@ -523,7 +480,7 @@
 
 - type: randomHumanoidSettings
   id: VisitorMusicianFancy
-  parent: VisitorMusician # Trauma
+  parent: VisitorCivilian
   components:
     - type: GhostRole
       name: job-name-musician
@@ -533,7 +490,7 @@
 
 - type: randomHumanoidSettings
   id: VisitorMusicianRelaxed
-  parent: VisitorMusician # Trauma
+  parent: VisitorCivilian
   components:
     - type: GhostRole
       name: job-name-musician
@@ -547,7 +504,6 @@
   components:
     - type: MimePowers
     - type: GhostRole
-      job: Mime # Trauma
       name: job-name-mime
     - type: Loadout
       prototypes: [ VisitorMime, VisitorMimeAlt ]
@@ -558,7 +514,6 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
-      job: Reporter # Trauma
       name: job-name-reporter
     - type: Loadout
       prototypes: [ VisitorReporter, VisitorReporterAlt ]
@@ -569,7 +524,6 @@
   parent: VisitorCivilian
   components:
     - type: GhostRole
-      job: ServiceWorker # Trauma
       name: job-name-serviceworker
     - type: Loadout
       prototypes: [ VisitorServiceWorker, VisitorServiceWorkerAlt ]
@@ -590,10 +544,6 @@
   parent: VisitorClown
   randomizeName: false
   components:
-    # <Trauma>
-    - type: GhostRole
-      job: Clown
-    # </Trauma>
     - type: Loadout
       prototypes: [ BananaClown ]
       roleLoadout: [ RoleSurvivalClown ]
@@ -614,7 +564,6 @@
   randomizeName: false
   components:
     - type: GhostRole
-      job: Captain # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
@@ -636,7 +585,6 @@
   randomizeName: false
   components:
     - type: GhostRole
-      job: ChiefEngineer # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
@@ -658,7 +606,6 @@
   randomizeName: false
   components:
     - type: GhostRole
-      job: ChiefMedicalOfficer # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
@@ -680,7 +627,6 @@
   randomizeName: false
   components:
     - type: GhostRole
-      job: HeadOfPersonnel # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
@@ -702,7 +648,6 @@
   randomizeName: false
   components:
     - type: GhostRole
-      job: HeadOfSecurity # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
@@ -724,7 +669,6 @@
   randomizeName: false
   components:
     - type: GhostRole
-      job: ResearchDirector # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
@@ -746,7 +690,6 @@
   randomizeName: false
   components:
     - type: GhostRole
-      job: Quartermaster # Trauma
       name: ghost-role-information-lost-challenge-commander-name
       description: ghost-role-information-lost-challenge-commander-description
       rules: ghost-role-information-lost-challenge-commander-rules
@@ -772,7 +715,6 @@
   randomizeName: false
   components:
     - type: GhostRole
-      job: CargoTechnician # Trauma
       name: ghost-role-information-lost-challenge-cargo-technican-name
       description: ghost-role-information-lost-challenge-cargo-technican-description
       rules: ghost-role-information-lost-disaster-challenge-cargo-technican-rules
@@ -804,13 +746,6 @@
   id: SyndieSoldierTeamLeader
   parent: EventHumanoid
   components:
-    # <Trauma>
-    - type: TriggerOnSpawn
-    - type: EntityEffectOnTrigger
-      effects:
-      - !type:InstallOrganChip
-        chip: SkillChipSyndieSoldierTeamLeader
-    # </Trauma>
     - type: NpcFactionMember
       factions:
       - Syndicate
@@ -831,13 +766,6 @@
   id: SyndieSoldier
   parent: EventHumanoid
   components:
-    # <Trauma>
-    - type: TriggerOnSpawn
-    - type: EntityEffectOnTrigger
-      effects:
-      - !type:InstallOrganChip
-        chip: SkillChipSyndieSoldier
-    # </Trauma>
     - type: NpcFactionMember
       factions:
       - Syndicate
@@ -858,20 +786,15 @@
   id: SyndieVisitor
   parent: EventHumanoid
   components:
-    # <Trauma>
-    - type: TriggerOnSpawn
-    - type: EntityEffectOnTrigger
-      effects:
-      - !type:InstallOrganChip
-        chip: SkillChipSyndieVisitor
-    # </Trauma>
     - type: NpcFactionMember
       factions:
       - Syndicate
     - type: GhostRole
       name: ghost-role-information-syndie-disaster-victim-name
       description: ghost-role-information-syndie-disaster-victim-description
-      rules: ghost-role-information-nonantagonist-rules
+      rules: ghost-role-information-freeagent-rules
+      mindRoles:
+      - MindRoleGhostRoleFreeAgent
       raffle:
         settings: short
     - type: Loadout
@@ -882,13 +805,6 @@
   id: PirateScooner
   parent: EventHumanoid
   components:
-    # <Trauma>
-    - type: TriggerOnSpawn
-    - type: EntityEffectOnTrigger
-      effects:
-      - !type:InstallOrganChip
-        chip: SkillChipPirateScooner
-    # </Trauma>
     - type: NpcFactionMember
       factions:
       - Syndicate
@@ -908,13 +824,6 @@
   id: PirateCaptainScooner
   parent: EventHumanoid
   components:
-    # <Trauma>
-    - type: TriggerOnSpawn
-    - type: EntityEffectOnTrigger
-      effects:
-      - !type:InstallOrganChip
-        chip: SkillChipPirateCaptainScooner
-    # </Trauma>
     - type: NpcFactionMember
       factions:
       - Syndicate
@@ -936,13 +845,6 @@
   id: VisitorBlackmarketeer
   parent: EventHumanoid
   components:
-    # <Trauma>
-    - type: TriggerOnSpawn
-    - type: EntityEffectOnTrigger
-      effects:
-      - !type:InstallOrganChip
-        chip: SkillChipBlackmarketeer
-    # </Trauma>
     - type: GhostRole
       name: ghost-role-information-blackmarketeer-name
       description: ghost-role-information-blackmarketeer-description
@@ -959,13 +861,6 @@
   id: Cossack
   parent: EventHumanoid
   components:
-    # <Trauma>
-    - type: TriggerOnSpawn
-    - type: EntityEffectOnTrigger
-      effects:
-      - !type:InstallOrganChip
-        chip: SkillChipCossack
-    # </Trauma>
     - type: RussianAccent
     - type: ScrambledAccent
     - type: SlurredAccent
