@@ -15573,3 +15573,54 @@ Entries:
   id: 1695
   time: '2026-10-07T07:18:44.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4929
+- author: Hoodsie
+  changes:
+  - type: Remove
+    message: Removed milk from energy soda dispenser.
+  id: 1696
+  time: '2026-10-07T09:01:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4921
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Ritual daggers are now small instead of normal.
+  - type: Fix
+    message: Blood cult Constructs now take holy damage.
+  - type: Tweak
+    message: Lockers no longer send alerts if they get blown up by a nuke etc.
+  - type: Tweak
+    message: >-
+      Handheld genome scanner printouts are now labelled with mutation id or mob
+      name.
+  - type: Fix
+    message: Fixed not being able to have minions plant progtot bugs for you.
+  id: 1697
+  time: '2026-10-07T09:15:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4934
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: >-
+      Abductor teleport is no longer interrupted by dropping an item or changing
+      hands.
+  - type: Tweak
+    message: Abductor's teleport can now be interrupted by damage or movement.
+  id: 1698
+  time: '2026-10-07T09:48:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4936
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Siphon entropy is now instant and less metagameable
+  - type: Fix
+    message: Fixed cosmic cultists being unable to level up
+  id: 1699
+  time: '2026-10-07T12:45:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4937
+- author: Aineias1
+  changes:
+  - type: Remove
+    message: Removed bagel sec shuttle, now hope that pods wont do the same
+  id: 1700
+  time: '2026-10-07T19:16:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4938

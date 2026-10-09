@@ -1,0 +1,130 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: BaseSign
+  abstract: true
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSign
+
+- type: entity
+  id: BaseSignDirectional
+  abstract: true
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicSignDirectional
+
+# Every single warning sign individually because they don't have a common parent. Ugh.
+- type: entity
+  id: SignCorrosives
+  components: &components
+  - type: CosmicCorruptible
+    convertTo: CosmicSignWarning
+
+- type: entity
+  id: SignCryogenics
+  components: *components
+
+- type: entity
+  id: SignDanger
+  components: *components
+
+- type: entity
+  id: SignExplosives
+  components: *components
+
+- type: entity
+  id: SignFlammable
+  components: *components
+
+- type: entity
+  id: SignLaser
+  components: *components
+
+- type: entity
+  id: SignMagnetics
+  components: *components
+
+- type: entity
+  id: SignMemetic
+  components: *components
+
+- type: entity
+  id: SignSecure
+  components: *components
+
+- type: entity
+  id: SignSecurearea
+  components: *components
+
+- type: entity
+  id: SignShock
+  components: *components
+
+- type: entity
+  id: SignOptical
+  components: *components
+
+- type: entity
+  id: SignOxidants
+  components: *components
+
+- type: entity
+  id: SignRadiation
+  components: *components
+
+- type: entity
+  id: SignSecureMedRed
+  components: *components
+
+- type: entity
+  id: SignSecureSmall
+  components: *components
+
+- type: entity
+  id: SignSecureSmallRed
+  components: *components
+
+- type: entity
+  id: SignBlankMed
+  components: *components
+
+- type: entity
+  id: SignMagneticsMed
+  components: *components
+
+- type: entity
+  id: SignDangerMed
+  components: *components
+
+- type: entity
+  id: ExplosivesSignMed
+  components: *components
+
+- type: entity
+  id: SignCryogenicsMed
+  components: *components
+
+- type: entity
+  id: SignElectricalMed
+  components: *components
+
+- type: entity
+  id: SignBiohazardMed
+  components: *components
+
+- type: entity
+  id: SignRadiationMed
+  components: *components
+
+- type: entity
+  id: SignFlammableMed
+  components: *components
+
+- type: entity
+  id: SignLaserMed
+  components: *components
+
+- type: entity
+  id: SignSecureMed
+  components: *components
