@@ -21,7 +21,7 @@ public static class ClientPackaging
         {
             // <Trauma> - replaced copypaste with module helper method
             await ModulePackaging.BuildModules("Client", configuration, logBuild,
-                extraFlags: [ "-p:DefineConstants=USE_ROBUST", "-p:NuGetAudit=false" ]); // audit is done by regular builds, RT being fucked is not my problem
+                extraFlags: [ "-p:ExtraDefineConstants=USE_ROBUST", "-p:NuGetAudit=false" ]); // audit is done by regular builds, RT being fucked is not my problem
             // </Trauma>
         }
 

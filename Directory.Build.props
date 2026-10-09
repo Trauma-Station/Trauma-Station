@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+  	<!-- W dogshit language/build system -->
+    <DefineConstants Condition="$(ExtraDefineConstants) != ''">
+      $(DefineConstants);$(ExtraDefineConstants)
+    </DefineConstants>
+  </PropertyGroup>
+</Project>
