@@ -7,6 +7,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Tools;
 
@@ -15,6 +16,7 @@ public sealed partial class SolutionRefuelSystemSystem : EntitySystem
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private bool TryGetSolutionFuelAndCapacity(EntityUid uid, out FixedPoint2 fuel, out FixedPoint2 capacity)
     {
@@ -56,9 +58,10 @@ public sealed partial class SolutionRefuelSystemSystem : EntitySystem
         if (args.Target is not { } target ||
             args.Handled ||
             !args.CanReach ||
+            !_timing.IsFirstTimePredicted ||
             !TryComp<ReagentTankComponent>(target, out var tank) ||
             tank.TankType != ReagentTankType.Fuel ||
-            !_solution.TryGetDrainableSolution(target, out _, out var targetSolution) ||
+            !_solution.TryGetDrainableSolution(target, out var targetComp, out var targetSolution) ||
             !_solution.TryGetSolution(ent.Owner, ent.Comp.FuelSolutionName, out var solutionComp, out var welderSolution))
             return;
 
@@ -69,25 +72,19 @@ public sealed partial class SolutionRefuelSystemSystem : EntitySystem
         if (trans > 0)
         {
             var drained = targetSolution.SplitSolutionWithOnly(trans, ent.Comp.FuelReagent);
+            Dirty(target, targetComp.Value.Comp); // For some reason SplitSolutionWithOnly() doesn't dirty stuff properly
             _solution.TryAddSolution(solutionComp.Value, drained);
             _audio.PlayPredicted(ent.Comp.WelderRefill, ent, user: args.User);
             _popup.PopupClient(Loc.GetString("welder-component-after-interact-refueled-message"), ent, args.User);
         }
         else if (welderSolution.AvailableVolume <= 0)
         {
-            _popup.PopupClient(Loc.GetString("solution-refuel-component-already-full", ("name", GetName(ent))), ent, args.User);
+            _popup.PopupClient(Loc.GetString("solution-refuel-component-already-full", ("name", ent.Comp.Name)), ent, args.User);
         }
         else
         {
-            _popup.PopupClient(Loc.GetString("welder-component-no-fuel-in-tank", ("owner", args.Target)), ent, args.User);
+            _popup.PopupClient(Loc.GetString("solution-refuel-component-no-fuel-in-tank", ("target", args.Target)), ent, args.User);
         }
 
-    }
-
-    private string GetName(Entity<SolutionRefuelComponent> ent)
-    {
-        if (ent.Comp.Name == null)
-            return Identity.Name(ent, EntityManager);
-        return Loc.GetString(ent.Comp.Name);
     }
 }

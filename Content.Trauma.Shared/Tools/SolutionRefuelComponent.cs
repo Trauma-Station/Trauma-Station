@@ -11,7 +11,7 @@ namespace Content.Trauma.Shared.Tools;
 public sealed partial class SolutionRefuelComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public string? Name;
+    public string Name = "tank";
 
     /// <summary>
     ///     Name of <see cref="FuelSolution"/>.
