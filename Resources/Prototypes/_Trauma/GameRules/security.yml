@@ -20,6 +20,7 @@
       - id: WraithMidround
       - id: ColossusSpawn
       - id: DragonSpawn
+        weight: 0.2
       - id: NinjaSpawn
         weight: 0.5 # even more antags!
       - id: LoneOpsSpawn
