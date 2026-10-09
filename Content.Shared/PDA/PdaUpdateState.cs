@@ -38,6 +38,7 @@ namespace Content.Shared.PDA
             HasPai = hasPai;
             PdaOwnerInfo = pdaOwnerInfo;
             HasUplink = hasUplink;
+            HasJobBoard = hasJobBoard;
             CanPlayMusic = canPlayMusic;
             StationName = stationName;
             Address = address;

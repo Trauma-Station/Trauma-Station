@@ -25,6 +25,7 @@ public abstract partial class JobListingsSystem : EntitySystem
     [Dependency] protected SharedHandsSystem Hands = default!;
     [Dependency] protected SharedMindSystem Mind = default!;
     [Dependency] protected SharedObjectivesSystem Objectives = default!;
+    [Dependency] private SharedPdaSystem _pda = default!;
     [Dependency] private SharedPvsOverrideSystem _pvsOverride = default!;
     [Dependency] protected SharedUserInterfaceSystem Ui = default!;
     [Dependency] private INetManager _net = default!;
@@ -368,6 +369,7 @@ public abstract partial class JobListingsSystem : EntitySystem
         foreach (var remote in jobListingsComp.Remotes)
         {
             RemComp<HiddenJobListingsComponent>(remote);
+            _pda.UpdatePdaUi(remote);
         }
     }
 
