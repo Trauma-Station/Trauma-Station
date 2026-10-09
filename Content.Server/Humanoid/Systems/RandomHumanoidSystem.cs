@@ -48,15 +48,9 @@ public sealed partial class RandomHumanoidSystem : EntitySystem
 
         _metaData.SetEntityName(humanoid, prototype.RandomizeName ? profile.Name : name);
 
-        if (prototype.Components != null)
-        {
-            foreach (var entry in prototype.Components.Values)
-            {
-                var comp = (Component)_serialization.CreateCopy(entry.Component, notNullableOverride: true);
-                RemComp(humanoid, comp.GetType());
-                AddComp(humanoid, comp);
-            }
-        }
+        // <Trauma> - replace null check + dogshit with AddComponents
+        EntityManager.AddComponents(humanoid, prototype.Components);
+        // </Trauma>
 
         EntityManager.InitializeAndStartEntity(humanoid);
 
