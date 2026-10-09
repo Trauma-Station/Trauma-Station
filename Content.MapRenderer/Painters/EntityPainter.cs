@@ -133,7 +133,11 @@ public sealed class EntityPainter
             }
 
             var colorMix = entity.Sprite.Color * layer.Color;
+#if USE_ROBUST
+            var imageColor = Color.FromRgba(colorMix.RByte, colorMix.GByte, colorMix.BByte, colorMix.AByte);
+#else
             var imageColor = Color.FromScaledVector(colorMix.RGBA); // Trauma - swap to existing method
+#endif
             var coloredImage = new Image<Rgba32>(image.Width, image.Height);
             coloredImage.Mutate(o => o.BackgroundColor(imageColor));
 
