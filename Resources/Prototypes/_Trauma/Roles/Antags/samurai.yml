@@ -1,9 +1,8 @@
 ﻿- type: antag
   id: Samurai
-  name: roles-antag-space-ninja-name
+  name: roles-antag-space-samurai-name
   antagonist: true
   setPreference: false
-  objective: roles-antag-space-ninja-objective
   guides: [ SpaceNinja ]
   tags:
   - OffStation
