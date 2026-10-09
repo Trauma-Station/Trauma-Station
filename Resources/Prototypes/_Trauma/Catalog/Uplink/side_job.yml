@@ -18,5 +18,9 @@
     blacklist:
       tags:
       - NukeOpsUplink
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
   - !type:ListingLimitedStockCondition
     stock: 1
