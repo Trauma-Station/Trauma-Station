@@ -81,7 +81,7 @@
     prob: 1
     name: ghost-role-information-blob-name
     description: ghost-role-information-blob-description
-    rules: You are an antagonist, destroy the station!
+    rules: ghost-role-information-blob-rules
     mindRoles:
     - MindRoleGhostRoleSoloAntagonist
     reregister: false
