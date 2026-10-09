@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.EntitySystems;
 // </Trauma>
 using Content.Shared.Chemistry.Components;
