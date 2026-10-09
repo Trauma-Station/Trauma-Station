@@ -18,7 +18,7 @@ public static class ModulePackaging
     /// <summary>
     /// Build every module for the server or client.
     /// </summary>
-    public static async Task BuildModules(string side, string configuration, bool logBuild, string? targetOs = null)
+    public static async Task BuildModules(string side, string configuration, bool logBuild, string[]? extraFlags = null)
     {
         var logArg = $"/bl:{Path.Combine("release", $"{side.ToLowerInvariant()}.binlog")}";
         foreach (var module in AllModules)
@@ -37,8 +37,13 @@ public static class ModulePackaging
                     "/m"
                 }
             };
-            if (targetOs != null)
-                startInfo.ArgumentList.Add($"/p:TargetOs={targetOs}");
+            if (extraFlags != null)
+            {
+                foreach (var flag in extraFlags)
+                {
+                    startInfo.ArgumentList.Add(flag);
+                }
+            }
 
             if (logBuild)
             {
