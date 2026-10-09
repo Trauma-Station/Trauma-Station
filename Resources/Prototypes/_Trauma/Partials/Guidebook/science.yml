@@ -5,3 +5,4 @@
   children:
   - Xenobiology
   - Genetics
+  - !Remove Robotics

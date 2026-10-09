@@ -9,7 +9,6 @@
         - id: RoboticsConsoleCircuitboard
         - id: StationAiFixerCircuitboard
 
-
 - type: entity
   id: BoxCMOCircuitboards
   components:

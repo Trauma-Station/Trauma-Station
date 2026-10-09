@@ -1,0 +1,6 @@
+- type: guideEntry
+  id: Engineering
+  children:
+  - Automation
+  - Circuits
+  - Robotics

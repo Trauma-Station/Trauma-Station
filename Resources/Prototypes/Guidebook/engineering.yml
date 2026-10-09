@@ -3,10 +3,6 @@
   name: guide-entry-engineering
   text: "/ServerInfo/Guidebook/Engineering/Engineering.xml"
   children:
-  # <Trauma>
-  - Automation
-  - Circuits
-  # </Trauma>
   - Atmospherics
   - Construction
   - Power
