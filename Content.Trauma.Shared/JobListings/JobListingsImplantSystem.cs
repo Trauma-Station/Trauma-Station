@@ -23,6 +23,18 @@ public sealed partial class JobListingsImplantSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
+    private void OnJobListingsHidden(Entity<JobListingsImplantComponent> ent, ref JobListingsHiddenEvent args)
+    {
+        _actions.SetEnabled(ent.Comp.StoredAction, false);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnJobListingsRevealed(Entity<JobListingsImplantComponent> ent, ref JobListingsRevealedEvent args)
+    {
+        _actions.SetEnabled(ent.Comp.StoredAction, true);
+    }
+
+    [SubscribeLocalEvent]
     private void OnImplantRemoved(Entity<JobListingsImplantComponent> ent, ref ImplantRemovedEvent args)
     {
         if (ent.Comp.StoredAction is not null)

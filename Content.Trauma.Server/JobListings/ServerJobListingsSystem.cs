@@ -5,7 +5,6 @@ using Content.Shared.Objectives.Components;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Traitor;
 using Content.Trauma.Shared.JobListings;
-using Content.Trauma.Common.JobListings;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.JobListings;
@@ -161,20 +160,21 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
     }
 
     [SubscribeLocalEvent]
-    private void OnUplinkAssigned(ref UplinkAssignedEvent args)
+    private void OnUplinkCreated(ref UplinkCreatedEvent args)
     {
         if (Mind.GetMind(args.User) is { } mind)
-            LinkUplink(args.Uplink, args.Host, mind);
+            InitUplink(args.Uplink, args.Host, mind);
     }
 
     [SubscribeLocalEvent]
-    private void OnUplinkLinked(ref UplinkLinkedEvent args)
+    private void OnUplinkRelinked(ref UplinkRelinkedEvent args)
     {
-        if (args.Mind is { } mind)
-            LinkUplink(args.Uplink, args.Host, mind);
+        if (!TryComp<JobListingsComponent>(args.Uplink, out var jobBoardComp))
+            return;
+        LinkRemote((args.Uplink, jobBoardComp), args.Host);
     }
 
-    private void LinkUplink(EntityUid uid, EntityUid host, EntityUid mind)
+    private void InitUplink(EntityUid uid, EntityUid host, EntityUid mind, bool startHidden = true)
     {
         if (!JobListingsQuery.TryComp(uid, out var comp))
             return;
@@ -183,11 +183,20 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
         comp.Mind = mind;
         DirtyField(uid, comp, nameof(JobListingsComponent.Mind));
         AddComp(mind, new JobListingsOwnerComponent { JobListings = uid });
+        if (MindQuery.TryComp(uid, out var mindComp))
+            PVSOverrideEntity(mindComp.OwnedEntity, uid);
+
+        // link remote
+        LinkRemote((uid, comp), host);
 
         // init job board
         FillSideJobs((uid, comp));
-        Link((uid, comp), host);
         SetRefreshTime((uid, comp));
-        AddComp(host, new HiddenJobListingsComponent()); // no such thing as a free lunch
+        if (startHidden)
+        {
+            var ev = new JobListingsHiddenEvent();
+            RaiseLocalEvent(host, ref ev);
+            AddComp(uid, new HiddenJobListingsComponent());
+        }
     }
 }

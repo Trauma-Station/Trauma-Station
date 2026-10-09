@@ -201,8 +201,6 @@ namespace Content.Server.PDA
             var address = GetDeviceNetAddress(uid);
             var hasInstrument = HasComp<InstrumentComponent>(uid);
             var showUplink = TryGetUnlockedStore(uid, out _);
-            // Trauma
-            var showJobBoard = showUplink && !HasComp<HiddenJobListingsComponent>(uid);
 
             pda.CurrentDate = ServerDate; // DeltaV - PDA date
             UpdateStationName(uid, pda);
@@ -233,7 +231,6 @@ namespace Content.Server.PDA
                 },
                 pda.StationName,
                 showUplink,
-                showJobBoard, // Trauma
                 hasInstrument,
                 address);
 
