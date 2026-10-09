@@ -1,7 +1,7 @@
 - type: entity
   name: adder plasma bolt
   id: BulletPlasmaAdder
-  parent: BulletLaser
+  parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite

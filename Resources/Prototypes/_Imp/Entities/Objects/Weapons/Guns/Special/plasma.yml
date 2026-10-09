@@ -49,7 +49,8 @@
     sprite: _Impstation/Objects/Weapons/Guns/Special/adder.rsi
     size: Small
     shape:
-    - 0,0,1,1
+    - 0,0,1,0
+    - 0,0,0,1
   - type: Gun # 10 heat per shot, 35 damage per second. Lower than a viper, but heat is better against armor.
     clumsyProof: false
     cameraRecoilScalar: 1
@@ -108,6 +109,8 @@
   - type: Item
     sprite: _Impstation/Objects/Weapons/Guns/Special/akurra.rsi
     size: Large
+    shape:
+    - 0,0,3,1
   - type: Gun
     clumsyProof: false
     cameraRecoilScalar: 1

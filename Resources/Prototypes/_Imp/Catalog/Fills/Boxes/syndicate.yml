@@ -59,7 +59,7 @@
 
 - type: entity
   parent: BriefcaseWeapon
-  id: AkkuraBox
+  id: AkurraBox
   name: secure akkura crate
   components:
   - type: StorageFill
