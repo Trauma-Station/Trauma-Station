@@ -13,8 +13,6 @@ namespace Content.Client.PDA
     [UsedImplicitly]
     public sealed class PdaBoundUserInterface : CartridgeLoaderBoundUserInterface
     {
-        public static Action<EntityUid, PdaMenu>? OnMenuChanged; // Trauma
-
         private readonly PdaSystem _pdaSystem;
 
         [ViewVariables]
@@ -96,8 +94,6 @@ namespace Content.Client.PDA
             _menu.BorderColor = borderColorComponent.BorderColor;
             _menu.AccentHColor = borderColorComponent.AccentHColor;
             _menu.AccentVColor = borderColorComponent.AccentVColor;
-
-            OnMenuChanged?.Invoke(Owner, _menu); // Trauma
         }
 
         protected override void UpdateState(BoundUserInterfaceState state)
@@ -114,7 +110,6 @@ namespace Content.Client.PDA
             }
 
             _menu.UpdateState(updateState);
-            OnMenuChanged?.Invoke(Owner, _menu); // Trauma
         }
 
         protected override void AttachCartridgeUI(Control cartridgeUIFragment, string? title)

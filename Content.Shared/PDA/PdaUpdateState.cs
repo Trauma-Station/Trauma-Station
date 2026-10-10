@@ -14,6 +14,7 @@ namespace Content.Shared.PDA
         public PdaIdInfoText PdaOwnerInfo;
         public string? StationName;
         public bool HasUplink;
+        public bool HasJobBoard;
         public bool CanPlayMusic;
         public string? Address;
 
@@ -26,6 +27,7 @@ namespace Content.Shared.PDA
             PdaIdInfoText pdaOwnerInfo,
             string? stationName,
             bool hasUplink = false,
+            bool hasJobBoard = false,
             bool canPlayMusic = false,
             string? address = null)
             : base(programs, activeUI)
@@ -35,6 +37,7 @@ namespace Content.Shared.PDA
             HasPai = hasPai;
             PdaOwnerInfo = pdaOwnerInfo;
             HasUplink = hasUplink;
+            HasJobBoard = hasJobBoard;
             CanPlayMusic = canPlayMusic;
             StationName = stationName;
             Address = address;

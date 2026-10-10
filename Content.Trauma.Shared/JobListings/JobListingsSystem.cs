@@ -15,7 +15,7 @@ namespace Content.Trauma.Shared.JobListings;
 /// <summary>
 /// System that manages the side-jobs for progressive traitor.
 /// </summary>
-public abstract partial class JobListingsSystem : EntitySystem
+public abstract partial class JobListingsSystem : CommonJobListingsSystem
 {
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected SharedContainerSystem Container = default!;
@@ -375,6 +375,13 @@ public abstract partial class JobListingsSystem : EntitySystem
     public bool IsJobBoardHidden(Entity<JobListingsComponent> uplink)
     {
         return _hiddenQuery.HasComp(uplink);
+    }
+
+    public override bool IsRemoteJobBoardHidden(EntityUid remote)
+    {
+        if (!RemoteQuery.TryComp(remote, out var remoteComp))
+            return false;
+        return IsJobBoardHidden((remote, remoteComp));
     }
 
     /// <summary>
