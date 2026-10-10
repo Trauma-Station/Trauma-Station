@@ -76,7 +76,6 @@
         volume: 4
   - type: PowerCellDraw
     drawRate: 6
-    useRate: 0
   - type: ToggleCellDraw
   - type: PowerCellSlot
     cellSlotId: cell_slot
@@ -91,7 +90,6 @@
   - type: ComponentToggler
     components:
     - type: SolutionRegeneration
-      solution: ammo
       generated:
         reagents:
         - ReagentId: Echion

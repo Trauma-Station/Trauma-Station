@@ -4,8 +4,8 @@
   name: reagent-name-echion
   desc: reagent-desc-echion
   physicalDesc: reagent-physical-desc-ionizing
-  contraband: Major
-  flavor: radiation
+  contrabandSeverity: Major
+  flavor: electrons
   color: "#83db2b"
   recognizable: true
   boilingPoint: -127.3
