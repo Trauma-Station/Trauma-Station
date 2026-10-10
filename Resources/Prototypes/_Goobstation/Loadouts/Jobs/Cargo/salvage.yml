@@ -19,21 +19,12 @@
   equipment:
     neck: ClothingNeckCloakSalvagerSupreme
 
-- type: startingGear
-  id: LostFrontierProspectorSuit
-  equipment:
-    jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
-    shoes: ClothingShoesBootsSalvage
-    id: SalvagePDA
-    back: ClothingBackpackSalvage
-    ears: ClothingHeadsetCargo
-
 - type: loadout
   id: SalvageEnvirosuit
   equipment:
     jumpsuit: ClothingUniformEnvirosuitSalvage
   effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
+  - !type:SpeciesLoadoutEffect
     species:
     - Plasmaman
 
@@ -42,7 +33,7 @@
   equipment:
     head: ClothingHeadEnvirohelmSalvage
   effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
+  - !type:SpeciesLoadoutEffect
     species:
     - Plasmaman
 
@@ -51,6 +42,6 @@
   equipment:
     gloves: ClothingHandsGlovesEnviroglovesSalvage
   effects:
-  - !type:SpeciesLoadoutEffect # Goobstation - EE Plasmeme Change.
+  - !type:SpeciesLoadoutEffect
     species:
     - Plasmaman

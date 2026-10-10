@@ -15624,3 +15624,10 @@ Entries:
   id: 1700
   time: '2026-10-07T19:16:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4938
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed nukie carp not being ghost roles.
+  id: 1701
+  time: '2026-10-09T22:06:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4971

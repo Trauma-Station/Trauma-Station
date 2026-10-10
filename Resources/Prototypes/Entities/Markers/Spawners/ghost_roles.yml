@@ -83,6 +83,7 @@
         state: narsian
 
 - type: entity
+  abstract: true # Trauma - this isnt even used
   categories: [ HideSpawnMenu, Spawner ]
   id: SpawnPointGhostNukeOperative
   name: ghost role spawn point
