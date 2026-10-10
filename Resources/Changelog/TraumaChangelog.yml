@@ -15681,3 +15681,10 @@ Entries:
   id: 1707
   time: '2026-10-10T23:38:21.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4966
+- author: NoElkaTheGod
+  changes:
+  - type: Add
+    message: Added a visual effect for being exposed to radiation.
+  id: 1708
+  time: '2026-10-10T23:55:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4898
