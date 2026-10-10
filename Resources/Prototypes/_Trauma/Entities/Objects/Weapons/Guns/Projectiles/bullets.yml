@@ -30,7 +30,7 @@
         Ballistic: 5
         Holy: 5
   - type: HolyIgniteOnCollide
-    fireStacks: 3.5
+    fireStacks: 4.5
 
 - type: entity
   id: BulletFaithHeal

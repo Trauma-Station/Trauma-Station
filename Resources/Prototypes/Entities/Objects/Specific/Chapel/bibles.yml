@@ -4,22 +4,6 @@
   parent: BaseStorageItem
   id: Bible
   components:
-  # <Trauma>
-  - type: EnchantingTool
-    userWhitelist:
-      components:
-      - BibleUser
-  - type: AlternatePrayable
-    requireBibleUser: false
-  - type: HolyIgniteOnMeleeHit # it makes holy water
-    fireStacks: 1.0
-  - type: StatusEffectOnCollideGhost
-    whitelist:
-      tags:
-      - WeakToSalt
-    statusEffect: Corporeal
-    duration: 5
-  # </Trauma>
   - type: UseDelay
     delay: 10.0
   - type: Bible
@@ -27,20 +11,20 @@
       types:
         Blunt: -5
         Piercing: -5
-        Ballistic: -5 # Trauma
         Slash: -5
         Heat: -5
         Cold: -5
         Shock: -5
     damageOnFail:
       types:
-        Blunt: 15 # Trauma - no slash and pierce
+        Blunt: 5
+        Piercing: 5
+        Slash: 5
         Asphyxiation: 15
     damageOnUntrainedUse: ## What a non-chaplain takes when attempting to heal someone
       types:
         Heat: 10
   - type: MeleeWeapon
-    angle: 0 # Trauma
     soundHit:
       collection: Punch
     damage:

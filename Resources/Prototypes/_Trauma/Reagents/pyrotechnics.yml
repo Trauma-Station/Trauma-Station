@@ -96,8 +96,7 @@
       methods: [ Touch ]
       effects:
       - !type:HolyIgnite
-        stacks: 6
-        conditions:
+        stacks: 7
     Flammable: # have to reset this because apparently it reset? idk either
       methods: [ Touch ]
       effects:
