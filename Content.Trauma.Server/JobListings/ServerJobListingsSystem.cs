@@ -171,6 +171,16 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
     {
         if (!TryComp<JobListingsComponent>(args.Uplink, out var jobBoardComp))
             return;
+
+        // if its an implant that is taken out and put back in again it will raise the event a second time
+        if (RemoteQuery.HasComp(args.Host))
+        {
+            // they still need visiblity updated though
+            var ev = new JobListingsVisibilityUpdatedEvent();
+            RaiseLocalEvent(args.Host, ref ev);
+            return;
+        }
+
         LinkRemote((args.Uplink, jobBoardComp), args.Host);
     }
 
@@ -183,7 +193,7 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
         comp.Mind = mind;
         DirtyField(uid, comp, nameof(JobListingsComponent.Mind));
         AddComp(mind, new JobListingsOwnerComponent { JobListings = uid });
-        if (MindQuery.TryComp(uid, out var mindComp))
+        if (MindQuery.TryComp(mind, out var mindComp))
             PVSOverrideEntity(mindComp.OwnedEntity, uid);
 
         // link remote
@@ -193,10 +203,6 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
         FillSideJobs((uid, comp));
         SetRefreshTime((uid, comp));
         if (startHidden)
-        {
-            var ev = new JobListingsHiddenEvent();
-            RaiseLocalEvent(host, ref ev);
-            AddComp(uid, new HiddenJobListingsComponent());
-        }
+            HideJobBoard((uid, comp));
     }
 }

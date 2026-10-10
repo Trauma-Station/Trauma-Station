@@ -15,10 +15,10 @@ public sealed partial class ClientJobListingsSystem : JobListingsSystem
 
     private void OnMenuCreated(EntityUid owner, PdaMenu menu)
     {
-        // if (!TryComp<RemoteJobListingsComponent>(owner, out var remoteComp))
-        //     return;
-        // if (IsJobBoardHidden((owner, remoteComp)))
-        //     menu.ShowJobListingsButton.Visible = false;
-        menu.ShowJobListingsButton.Visible = false;
+        if (!TryComp<RemoteJobListingsComponent>(owner, out var remoteComp))
+            return;
+        Log.Warning("menu created");
+        if (IsJobBoardHidden((owner, remoteComp)))
+            menu.ShowJobListingsButton.Visible = false;
     }
 }
