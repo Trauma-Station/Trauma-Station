@@ -17,7 +17,6 @@
     sprite: _Goobstation/Objects/Weapons/Melee/lollychop.rsi
     state: icon
   - type: MeleeWeapon
-    heavyStaminaCost: 15
     wideAnimationRotation: 135
     swingLeft: true
     attackRate: 0.75

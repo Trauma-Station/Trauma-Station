@@ -909,17 +909,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
             }
         }
 
-        // goob edit - stunmeta
-        if (TryComp<StaminaComponent>(user, out var stamina) && entities.Count != 0)
-        {
-            // <Trauma>
-            var staminaDamage = component.HeavyStaminaCost * entities.Count;
-            AdjustStaminaDamage(user, ref staminaDamage);
-            // </Trauma>
-            // make it not immediate to prevent annoying stamcrits
-            _stamina.TakeStaminaDamage(user, staminaDamage, stamina, visual: false, immediate: false);
-        }
-
         return true;
     }
 

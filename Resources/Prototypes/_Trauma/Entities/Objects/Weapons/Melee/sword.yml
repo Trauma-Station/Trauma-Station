@@ -76,7 +76,6 @@
   - type: MeleeWeapon
     wideAnimationRotation: -135
     attackRate: 0.1
-    heavyStaminaCost: 40
     angle: 80
     damage:
       types:

@@ -33,7 +33,6 @@
   components:
   # no class, easy for any chap to use
   - type: MeleeWeapon
-    heavyStaminaCost: 2.5
     attackRate: 1
     damage:
       types:
@@ -546,7 +545,6 @@
     sprite: _ShitChap/Objects/Weapons/Nullrod/divinechainsaw.rsi
     state: icon
   - type: MeleeWeapon
-    heavyStaminaCost: 15
     autoAttack: true
     angle: 0
     animationRotation: 90

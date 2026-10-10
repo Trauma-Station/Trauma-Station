@@ -28,7 +28,6 @@
     sprite: Objects/Weapons/Melee/fireaxe.rsi
     state: icon
   - type: MeleeWeapon
-    heavyStaminaCost: 15 # Trauma
     wideAnimationRotation: 135
     swingLeft: true
     attackRate: 0.75

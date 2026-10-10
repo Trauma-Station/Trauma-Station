@@ -207,7 +207,6 @@
     wideAnimationRotation: -135
     animation: WeaponArcCosmic
     attackRate: 1
-    heavyStaminaCost: 0 # This thing is challenging enough to use already, and you can't lightswing anyway
     damage:
       types:
         Slash: 12

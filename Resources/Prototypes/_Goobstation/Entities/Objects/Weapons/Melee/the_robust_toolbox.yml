@@ -9,7 +9,6 @@
   - type: WeaponClass
     class: Bludgeon
   - type: MeleeWeapon
-    heavyStaminaCost: 0
     damage:
       types:
         Blunt: 35

@@ -151,7 +151,6 @@
   - type: PolymorphOnTrigger
     polymorph: MimicToolbox
   - type: MeleeWeapon
-    heavyStaminaCost: 10
     damage:
       types:
         Blunt: 12

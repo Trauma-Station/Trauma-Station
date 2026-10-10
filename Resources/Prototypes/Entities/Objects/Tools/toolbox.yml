@@ -31,7 +31,6 @@
     shape:
     - 0,0,7,4
   - type: MeleeWeapon
-    heavyStaminaCost: 10 # goob edit
     damage:
       types:
         Blunt: 12
@@ -144,7 +143,6 @@
     - 0,0,7,3
   - type: MeleeWeapon
     flipAnimation: false # Horizontally symetrical sprites dont need this. neither does
-    heavyStaminaCost: 10 # goob edit
     damage:
       types:
         Blunt: 16

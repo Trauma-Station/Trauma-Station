@@ -31,7 +31,6 @@
     soundHit:
       collection: MetalThud
     animation: WeaponArcFist
-    heavyStaminaCost: 10
   - type: StaminaDamageOnHit
     damage: 10
   - type: FlashSoundSuppression

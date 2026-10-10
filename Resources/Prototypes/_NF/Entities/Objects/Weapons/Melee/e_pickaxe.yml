@@ -64,5 +64,4 @@
     damage:
       types:
         Blunt: 3
-    heavyStaminaCost: 5
     clickPartDamageMultiplier: 1

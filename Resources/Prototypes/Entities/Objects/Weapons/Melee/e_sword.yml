@@ -79,7 +79,6 @@
         Heat: 2
   - type: MeleeWeapon
     animationRotation: -45 # WWDP
-    heavyStaminaCost: 2.5 # goob edit
     wideAnimationRotation: -135
     attackRate: 1
     damage:
@@ -212,7 +211,6 @@
         map: [ "blade" ]
   - type: MeleeWeapon
     animationRotation: 135 # WWDP
-    heavyStaminaCost: 1 # goob edit
     wideAnimationRotation: 145
     attackRate: 1
     hidden: true
@@ -302,7 +300,6 @@
     color: white
     netsync: false
   - type: MeleeWeapon
-    heavyStaminaCost: 1 # goob edit
     wideAnimationRotation: 145
     attackRate: 1
     hidden: true
@@ -445,7 +442,6 @@
   - type: MeleeWeapon
     # <Trauma>
     clickDamageModifier: 1.1
-    heavyStaminaCost: 0
     # </Trauma>
     wideAnimationRotation: -135
     attackRate: 1 #Goob Station rebalance, was originally 1.5

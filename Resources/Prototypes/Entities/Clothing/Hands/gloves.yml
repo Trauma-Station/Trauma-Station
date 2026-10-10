@@ -492,7 +492,6 @@
       collection: Punch
     animation: WeaponArcFist
     mustBeEquippedToUse: true
-    heavyStaminaCost: 3 # goob edit
     canWideSwing: false # Trauma
   - type: Fiber
     fiberMaterial: fibers-leather

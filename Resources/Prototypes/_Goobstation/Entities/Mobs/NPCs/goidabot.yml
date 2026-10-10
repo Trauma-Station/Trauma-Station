@@ -19,7 +19,6 @@
     dataset: Goida
   - type: MeleeWeapon # same as a wielded baseball bat, only used with admin abuse
     animationRotation: -135
-    heavyStaminaCost: 15
     wideAnimationRotation: -135
     damage:
       types:

@@ -85,7 +85,6 @@
     animation: WeaponArcClaw
     range: 1.1 # Awful range
     mustBeEquippedToUse: true
-    heavyStaminaCost: 4 # No skill?
   - type: PressureDamageChange
     appliedModifier: 1.75
   - type: PressureEfficiency
