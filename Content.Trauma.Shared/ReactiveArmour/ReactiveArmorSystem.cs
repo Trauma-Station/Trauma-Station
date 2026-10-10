@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Timing;
-using Content.Shared.Inventory;
+using Content.Shared.Emp;
 using Content.Shared.EntityEffects;
+using Content.Shared.Inventory;
+using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Projectiles;
 using Content.Trauma.Shared.Projectiles;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.ReactiveArmor;
 
@@ -13,28 +15,48 @@ public sealed partial class ReactiveArmorSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
-    // there has to be a better way to do this then making 3 methods for differen types of attacks... also do we even need a methot for hitscans?
     [SubscribeLocalEvent]
-    private void OnHitMele(EntityUid uid, ReactiveArmorComponent comp, InventoryRelayedEvent<AttackedEvent> args)
+    private void OnHitMele(Entity<ReactiveArmorComponent> ent, ref InventoryRelayedEvent<AttackedEvent> args)
     {
-        CheckForCooldown(uid, comp, args.Owner);
+        CheckForCooldown(ent, args.Owner);
     }
 
     [SubscribeLocalEvent]
-    private void OnHitProjectile(EntityUid uid, ReactiveArmorComponent comp, InventoryRelayedEvent<GotHitByProjectileEvent> args)
+    private void OnHitProjectile(Entity<ReactiveArmorComponent> ent, ref InventoryRelayedEvent<GotHitByProjectileEvent> args)
     {
-        CheckForCooldown(uid, comp, args.Owner);
+        CheckForCooldown(ent, args.Owner);
     }
 
-    private void CheckForCooldown(EntityUid uid, ReactiveArmorComponent comp, EntityUid target)
+    [SubscribeLocalEvent]
+    private void OnEmpPulse(Entity<ReactiveArmorComponent> ent, ref EmpPulseEvent args)
     {
-        if (_timing.CurTime < comp.LastActivated + comp.ActivationDelay)
+        ent.Comp.LastEmpd = _timing.CurTime;
+        Dirty(ent.Owner, ent.Comp);
+
+        var userUid = Transform(ent.Owner).ParentUid;
+        _popup.PopupEntity(Loc.GetString(ent.Comp.EmpMessage), userUid, userUid);
+    }
+
+    private void CheckForCooldown(Entity<ReactiveArmorComponent> ent, EntityUid user)
+    {
+        if (_timing.CurTime < ent.Comp.LastActivated + ent.Comp.ActivationDelay)
             return;
 
-        comp.LastActivated = _timing.CurTime;
-        Dirty(uid, comp);
+        ent.Comp.LastActivated = _timing.CurTime;
+        Dirty(ent.Owner, ent.Comp);
 
-        _effects.ApplyEffects(target, comp.Effects);
+        var target = user;
+        var effects = ent.Comp.Effects;
+
+        if (_timing.CurTime < ent.Comp.LastEmpd + ent.Comp.EmpDuration)
+        {
+            effects = ent.Comp.EmpEffects;
+            if (!ent.Comp.ApplyEmpEffectOnUser)
+                target = ent.Owner;
+        }
+
+        _effects.ApplyEffects(target, effects);
     }
 }

@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entityEffect
+  id: TeleportArmor
+  effects:
+  - !type:PlaySoundEffect
+      sound:
+        path: /Audio/Effects/teleport_departure.ogg
+  - !type:Sparks
+  - !type:RandomTeleport
+    radius:
+      min: 6.0
+      max: 6.0
+  - !type:PlaySoundEffect
+      sound:
+        path: /Audio/Effects/teleport_arrival.ogg
+  - !type:Sparks
+
+- type: entityEffect
+  id: HallucinatingArmor
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectBlurryVision
+    time: 3
+  - !type:ModifyParalysis
+    time: 3.5
+
+- type: entityEffect
+  id: IncendiaryArmor
+  effects:
+  - !type:Flammable
+    multiplier: 3
+  - !type:Ignite
+
+- type: entityEffect
+  id: CryogenicArmor
+  effects:
+  - !type:AddComponents
+    components:
+    - type: IceCube
+      breakFreeDelay: 5
