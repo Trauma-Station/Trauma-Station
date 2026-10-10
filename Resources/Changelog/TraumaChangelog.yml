@@ -15631,3 +15631,37 @@ Entries:
   id: 1701
   time: '2026-10-09T22:06:01.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4971
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: >-
+      Removed rad collectors, have to use tesla on maps that haven't been
+      updated.
+  id: 1702
+  time: '2026-10-10T19:15:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4980
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Posibrains and MMIs can no longer snitch on the binary channel.
+  id: 1703
+  time: '2026-10-10T20:04:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4981
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Moved some more robotics-related stuff to engineering
+  id: 1704
+  time: '2026-10-10T20:17:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4946
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed soul shards not being able to use the cult hivemind.
+  - type: Fix
+    message: Fixed mimes being eligible for blood cult roundstart.
+  - type: Tweak
+    message: Cult constructs and soul shards now have a random adjective like mice.
+  id: 1705
+  time: '2026-10-10T20:23:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4982
