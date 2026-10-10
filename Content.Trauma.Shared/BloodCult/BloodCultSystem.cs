@@ -92,7 +92,7 @@ public abstract partial class BloodCultSystem : EntitySystem
     /// </summary>
     public Entity<BloodCultRuleComponent>? GetRule(EntityUid mob)
     {
-        if (_mcQuery.CompOrNull(mob)?.Mind is { } mind)
+        if (_mcQuery.CompOrNull(mob)?.Mind is { } mind && Exists(mind))
             return MindGetRule(mind);
 
         return _query.CompOrNull(mob)?.Rule is { } rule && _ruleQuery.TryComp(rule, out var ruleComp)
