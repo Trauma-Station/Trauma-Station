@@ -53,5 +53,5 @@
         children:
         - id: XenobiologyBountyComputerCircuitboard
         - id: ScienceTechFabCircuitboard # replaces circuit printer and protolathe
-        - !Remove id: RoboticsConsoleCircuitboard
-        - !Remove id: StationAiFixerCircuitboard
+        - !Remove id: RoboticsConsoleCircuitboard # Moved to CE
+        - !Remove id: StationAiFixerCircuitboard # Moved to CE
