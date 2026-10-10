@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: listing
+  id: UplinkJobRunnerKit
+  name: uplink-job-runner-kit-name
+  description: uplink-job-runner-kit-desc
+  icon:
+    sprite: Objects/Specific/Syndicate/telecrystal.rsi
+    state: telecrystal
+  raiseProductEventOnMind: true
+  productEvent: !type:RevealJobBoardEvent
+  cost:
+    Telecrystal: 50
+  categories:
+  - UplinkContractors
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
+  - !type:BuyerWhitelistCondition
+    blacklist:
+      components:
+      - SurplusBundle
+  - !type:ListingLimitedStockCondition
+    stock: 1

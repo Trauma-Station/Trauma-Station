@@ -2,6 +2,7 @@
 
 using Content.Shared.Actions;
 using Content.Shared.Implants;
+using Content.Shared.Implants.Components;
 using Content.Shared.Popups;
 
 namespace Content.Trauma.Shared.JobListings;
@@ -15,22 +16,40 @@ public sealed partial class JobListingsImplantSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private JobListingsSystem _jobs = default!;
 
-    [SubscribeLocalEvent]
-    private void OnImplantImplanted(Entity<JobListingsImplantComponent> ent, ref ImplantImplantedEvent args)
+    private void AddAction(Entity<JobListingsImplantComponent> ent)
     {
-        ent.Comp.StoredAction = _actions.AddAction(args.Implanted, ent.Comp.Action, ent);
+        if (!TryComp<SubdermalImplantComponent>(ent, out var implantComp) || implantComp.ImplantedEntity is not { } implanted)
+            return;
+        ent.Comp.StoredAction = _actions.AddAction(implanted, ent.Comp.Action, ent);
         Dirty(ent);
+    }
+
+    private void RemoveAction(Entity<JobListingsImplantComponent> ent)
+    {
+        if (ent.Comp.StoredAction is null)
+            return;
+
+        _actions.RemoveAction(ent.Comp.StoredAction);
+        ent.Comp.StoredAction = null;
+        Dirty(ent);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnJobListingsVisibilityUpdated(Entity<JobListingsImplantComponent> ent, ref JobListingsVisibilityUpdatedEvent args)
+    {
+        if (!TryComp<RemoteJobListingsComponent>(ent, out var remoteComp))
+            return;
+
+        if (_jobs.IsJobBoardHidden((ent, remoteComp)))
+            RemoveAction(ent);
+        else
+            AddAction(ent);
     }
 
     [SubscribeLocalEvent]
     private void OnImplantRemoved(Entity<JobListingsImplantComponent> ent, ref ImplantRemovedEvent args)
     {
-        if (ent.Comp.StoredAction is not null)
-        {
-            _actions.RemoveAction(ent.Comp.StoredAction);
-            ent.Comp.StoredAction = null;
-            Dirty(ent);
-        }
+        RemoveAction(ent);
     }
 
     [SubscribeLocalEvent]
@@ -48,4 +67,5 @@ public sealed partial class JobListingsImplantSystem : EntitySystem
 /// <summary>
 /// Raised on the implant when the action to open the job board is used.
 /// </summary>
+[DataDefinition]
 public sealed partial class OpenJobListingsImplantEvent : InstantActionEvent;

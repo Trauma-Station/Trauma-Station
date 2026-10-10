@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Trauma.Common.CCVar;
+using Content.Trauma.Common.JobListings;
 using Robust.Shared.Configuration;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
@@ -34,6 +35,7 @@ namespace Content.Server.PDA
 {
     public sealed partial class PdaSystem : SharedPdaSystem
     {
+        [Dependency] private CommonJobListingsSystem _jobs = default!; // Trauma
         [Dependency] private IConfigurationManager _config = default!; // DeltaV
         [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
         [Dependency] private InstrumentSystem _instrument = default!;
@@ -200,6 +202,7 @@ namespace Content.Server.PDA
             var address = GetDeviceNetAddress(uid);
             var hasInstrument = HasComp<InstrumentComponent>(uid);
             var showUplink = TryGetUnlockedStore(uid, out _);
+            var showJobBoard = showUplink && !_jobs.IsRemoteJobBoardHidden(uid); // Trauma
 
             pda.CurrentDate = ServerDate; // DeltaV - PDA date
             UpdateStationName(uid, pda);
@@ -230,6 +233,7 @@ namespace Content.Server.PDA
                 },
                 pda.StationName,
                 showUplink,
+                showJobBoard, // Trauma
                 hasInstrument,
                 address);
 

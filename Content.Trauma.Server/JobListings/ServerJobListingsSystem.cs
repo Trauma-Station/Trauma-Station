@@ -5,7 +5,6 @@ using Content.Shared.Objectives.Components;
 using Content.Shared.Random.Helpers;
 using Content.Trauma.Common.Traitor;
 using Content.Trauma.Shared.JobListings;
-using System.Linq;
 using Robust.Shared.Random;
 
 namespace Content.Trauma.Server.JobListings;
@@ -161,18 +160,31 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
     }
 
     [SubscribeLocalEvent]
-    private void OnUplinkAssigned(ref UplinkAssignedEvent args)
+    private void OnUplinkCreated(ref UplinkCreatedEvent args)
     {
-        LinkUplink(args.Uplink, args.Host, Mind.GetMind(args.User));
+        if (Mind.GetMind(args.User) is { } mind)
+            InitUplink(args.Uplink, args.Host, mind);
     }
 
     [SubscribeLocalEvent]
-    private void OnUplinkLinked(ref UplinkLinkedEvent args)
+    private void OnUplinkRelinked(ref UplinkRelinkedEvent args)
     {
-        LinkUplink(args.Uplink, args.Host, args.Mind);
+        if (!TryComp<JobListingsComponent>(args.Uplink, out var jobBoardComp))
+            return;
+
+        // if its an implant that is taken out and put back in again it will raise the event a second time
+        if (RemoteQuery.HasComp(args.Host))
+        {
+            // they still need visiblity updated though
+            var ev = new JobListingsVisibilityUpdatedEvent();
+            RaiseLocalEvent(args.Host, ref ev);
+            return;
+        }
+
+        LinkRemote((args.Uplink, jobBoardComp), args.Host);
     }
 
-    private void LinkUplink(EntityUid uid, EntityUid host, EntityUid? mind)
+    private void InitUplink(EntityUid uid, EntityUid host, EntityUid mind, bool startHidden = true)
     {
         if (!JobListingsQuery.TryComp(uid, out var comp))
             return;
@@ -180,10 +192,17 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
         // set mind
         comp.Mind = mind;
         DirtyField(uid, comp, nameof(JobListingsComponent.Mind));
+        AddComp(mind, new JobListingsOwnerComponent { JobListings = uid });
+        if (MindQuery.TryComp(mind, out var mindComp))
+            PVSOverrideEntity(mindComp.OwnedEntity, uid);
+
+        // link remote
+        LinkRemote((uid, comp), host);
 
         // init job board
         FillSideJobs((uid, comp));
-        Link((uid, comp), host);
         SetRefreshTime((uid, comp));
+        if (startHidden)
+            HideJobBoard((uid, comp));
     }
 }

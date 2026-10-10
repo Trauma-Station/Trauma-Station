@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mind;
 using Content.Shared.Objectives.Components;
@@ -17,13 +15,14 @@ namespace Content.Trauma.Shared.JobListings;
 /// <summary>
 /// System that manages the side-jobs for progressive traitor.
 /// </summary>
-public abstract partial class JobListingsSystem : EntitySystem
+public abstract partial class JobListingsSystem : CommonJobListingsSystem
 {
     [Dependency] protected IGameTiming Timing = default!;
     [Dependency] protected SharedContainerSystem Container = default!;
     [Dependency] protected SharedHandsSystem Hands = default!;
     [Dependency] protected SharedMindSystem Mind = default!;
     [Dependency] protected SharedObjectivesSystem Objectives = default!;
+    [Dependency] private SharedPdaSystem _pda = default!;
     [Dependency] private SharedPvsOverrideSystem _pvsOverride = default!;
     [Dependency] protected SharedUserInterfaceSystem Ui = default!;
     [Dependency] private INetManager _net = default!;
@@ -32,14 +31,18 @@ public abstract partial class JobListingsSystem : EntitySystem
     [Dependency] protected EntityQuery<SideJobComponent> SideJobQuery = default!;
     [Dependency] protected EntityQuery<MindComponent> MindQuery = default!;
     [Dependency] protected EntityQuery<ObjectiveComponent> ObjectiveQuery = default!;
-    [Dependency] private EntityQuery<JobListingsOwnerComponent> _ownqerQuery = default!;
-    [Dependency] private EntityQuery<RemoteJobListingsComponent> _remoteQuery = default!;
+    [Dependency] protected EntityQuery<RemoteJobListingsComponent> RemoteQuery = default!;
+    [Dependency] private EntityQuery<JobListingsOwnerComponent> _ownerQuery = default!;
+    [Dependency] private EntityQuery<HiddenJobListingsComponent> _hiddenQuery = default!;
 
     /// <summary>
     /// Accept an already assigned job.
     /// </summary>
     public bool AcceptSideJob(Entity<JobListingsComponent> jobBoard, EntityUid actor, EntityUid sideJob)
     {
+        if (IsJobBoardHidden(jobBoard))
+            return false;
+
         if (jobBoard.Comp.AcceptedSideJobs.Count >= jobBoard.Comp.MaximumAcceptedSideJobs ||
             !jobBoard.Comp.AvailableSideJobs.Contains(sideJob) ||
             !SideJobQuery.TryComp(sideJob, out var sideJobComp))
@@ -69,6 +72,8 @@ public abstract partial class JobListingsSystem : EntitySystem
     /// </summary>
     public void CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
     {
+        if (IsJobBoardHidden(jobBoard))
+            return;
         PredictedDel(sideJob);
     }
 
@@ -77,9 +82,9 @@ public abstract partial class JobListingsSystem : EntitySystem
     /// </summary>
     public void ClaimSideJob(Entity<JobListingsComponent> jobBoard, EntityUid actor, EntityUid sideJob)
     {
-        if (jobBoard.Comp.Mind is not { } mind)
+        if (IsJobBoardHidden(jobBoard))
             return;
-        if (!MindQuery.TryComp(mind, out var mindComp))
+        if (jobBoard.Comp.Mind is not { } mind || !MindQuery.TryComp(mind, out var mindComp))
             return;
         var progress = Objectives.GetProgress(sideJob, (mind, mindComp));
         if (progress < 0.999f)
@@ -178,6 +183,12 @@ public abstract partial class JobListingsSystem : EntitySystem
     /// </summary>
     public void OpenUi(EntityUid owner, EntityUid actor)
     {
+        if (!RemoteQuery.TryComp(owner, out var remoteComp))
+            return;
+
+        if (IsJobBoardHidden((owner, remoteComp)))
+            return;
+
         UpdateUi(owner, actor);
         Ui.TryToggleUi(owner, JobListingsUiKey.Key, actor);
     }
@@ -220,7 +231,7 @@ public abstract partial class JobListingsSystem : EntitySystem
     {
         if (mind.Comp.OwnedEntity is null)
             return;
-        if (!_ownqerQuery.TryComp(mind.Owner, out var jobListingsOwnerComp))
+        if (!_ownerQuery.TryComp(mind.Owner, out var jobListingsOwnerComp))
             return;
         var jobBoard = jobListingsOwnerComp.JobListings;
         if (!JobListingsQuery.TryComp(jobBoard, out var jobBoardComp))
@@ -234,7 +245,7 @@ public abstract partial class JobListingsSystem : EntitySystem
     /// </summary>
     public Entity<JobListingsComponent>? GetJobBoard(EntityUid owner)
     {
-        if (_remoteQuery.TryComp(owner, out var remote))
+        if (RemoteQuery.TryComp(owner, out var remote))
             owner = remote.JobListings;
 
         if (!JobListingsQuery.TryComp(owner, out var comp))
@@ -268,15 +279,14 @@ public abstract partial class JobListingsSystem : EntitySystem
     /// <summary>
     /// Link an entity with a ui (like a pda) to a job board.
     /// </summary>
-    public void Link(Entity<JobListingsComponent> jobBoard, EntityUid remote)
+    public void LinkRemote(Entity<JobListingsComponent> jobBoard, EntityUid remote)
     {
         AddComp(remote, new RemoteJobListingsComponent { JobListings = jobBoard.Owner });
         InitUi(remote);
         jobBoard.Comp.Remotes.Add(remote);
         DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.Remotes));
-
-        if (MindQuery.TryComp(jobBoard.Comp.Mind, out var mind))
-            PVSOverrideEntity(mind.OwnedEntity, jobBoard);
+        var ev = new JobListingsVisibilityUpdatedEvent();
+        RaiseLocalEvent(remote, ref ev);
     }
 
     /// <summary>
@@ -349,6 +359,70 @@ public abstract partial class JobListingsSystem : EntitySystem
         if (newLevel > oldLevel)
             jobBoard.Comp.BonusRefresh = true;
         DirtyFields(jobBoard.AsNullable(), null, nameof(JobListingsComponent.Reputation), nameof(JobListingsComponent.BonusRefresh));
+    }
+
+    /// <summary>
+    /// Sees if a uplink host (pda or implant) is hiding access to its job board.
+    /// </summary>
+    public bool IsJobBoardHidden(Entity<RemoteJobListingsComponent> host)
+    {
+        return _hiddenQuery.HasComp(host.Comp.JobListings);
+    }
+
+    /// <summary>
+    /// Directly checks an uplink to see if the job board should be hidden.
+    /// </summary>
+    public bool IsJobBoardHidden(Entity<JobListingsComponent> uplink)
+    {
+        return _hiddenQuery.HasComp(uplink);
+    }
+
+    public override bool IsRemoteJobBoardHidden(EntityUid remote)
+    {
+        if (!RemoteQuery.TryComp(remote, out var remoteComp))
+            return false;
+        return IsJobBoardHidden((remote, remoteComp));
+    }
+
+    /// <summary>
+    /// Hide a job board from being seen or accessed.
+    /// </summary>
+    public void HideJobBoard(Entity<JobListingsComponent> jobBoard)
+    {
+        AddComp(jobBoard, new HiddenJobListingsComponent());
+        foreach (var remote in jobBoard.Comp.Remotes)
+        {
+            var ev = new JobListingsVisibilityUpdatedEvent();
+            RaiseLocalEvent(remote, ref ev);
+            _pda.UpdatePdaUi(remote);
+        }
+    }
+
+    /// <summary>
+    /// Reveal a hidden job board.
+    /// The progtot job board is hidden by default and must be revealed via an uplink purchase.
+    /// </summary>
+    public void RevealJobBoard(Entity<MindComponent> mind)
+    {
+        if (!_ownerQuery.TryComp(mind, out var jobListingsOwnerComp))
+            return;
+        if (!JobListingsQuery.TryComp(jobListingsOwnerComp.JobListings, out var jobListingsComp))
+            return;
+        // reset refresh time so you don't get free refresh from when the job board was ticking down but not paid for
+        SetRefreshTime((jobListingsOwnerComp.JobListings, jobListingsComp));
+        RemComp<HiddenJobListingsComponent>(jobListingsOwnerComp.JobListings);
+        foreach (var remote in jobListingsComp.Remotes)
+        {
+            var ev = new JobListingsVisibilityUpdatedEvent();
+            RaiseLocalEvent(remote, ref ev);
+            _pda.UpdatePdaUi(remote);
+        }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnRevealJobBoard(Entity<MindComponent> ent, ref RevealJobBoardEvent args)
+    {
+        RevealJobBoard(ent);
     }
 
     [SubscribeLocalEvent]
@@ -436,3 +510,15 @@ public record struct SideJobToolSpawnedEvent(EntityUid Objective, EntityUid Mind
 /// </summary>
 [ByRefEvent]
 public record struct SideJobClaimedEvent(EntityUid SideJob);
+
+/// <summary>
+/// Raised on a mind to remove the <see cref="HiddenJobListingsComponent"/> from its associated job board.
+/// </summary>
+[DataDefinition]
+public sealed partial class RevealJobBoardEvent : EntityEventArgs;
+
+/// <summary>
+/// Raised on the job board's remotes when the job board is revealed or hidden.
+/// </summary>
+[ByRefEvent]
+public record struct JobListingsVisibilityUpdatedEvent;
