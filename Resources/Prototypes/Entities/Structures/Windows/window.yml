@@ -32,6 +32,10 @@
     - Window
   - type: Sprite
     drawdepth: WallTops
+    sprite: _Trauma/Structures/Windows/window.rsi
+  - type: Icon
+    sprite: _Trauma/Structures/Windows/window.rsi
+    state: full
   - type: Physics
     bodyType: Static
   - type: Fixtures
@@ -72,7 +76,7 @@
   - type: StaticPrice
     price: 100
   - type: BlockWeather
-
+# <Trauma>
 - type: entity
   parent: BaseWindowStructure
   id: Window
@@ -102,7 +106,7 @@
             max: 2
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-
+# </Trauma>
 - type: entity
   parent: Window
   id: TintedWindow

@@ -52,9 +52,9 @@
   suffix: Red
   components:
   - type: Sprite
-    sprite: Structures/Furniture/Carpets/red_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/red_carpet.rsi
   - type: Icon
-    sprite: Structures/Furniture/Carpets/red_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/red_carpet.rsi
   - type: Destructible
     thresholds:
     - trigger: *DamageTrigger10
@@ -72,9 +72,9 @@
   components:
   - type: Clickable
   - type: Sprite
-    sprite: Structures/Furniture/Carpets/black_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/black_carpet.rsi
   - type: Icon
-    sprite: Structures/Furniture/Carpets/black_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/black_carpet.rsi
   - type: Destructible
     thresholds:
     - trigger: *DamageTrigger10
@@ -90,9 +90,9 @@
   components:
   - type: Clickable
   - type: Sprite
-    sprite: Structures/Furniture/Carpets/pink_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/pink_carpet.rsi
   - type: Icon
-    sprite: Structures/Furniture/Carpets/pink_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/pink_carpet.rsi
   - type: Destructible
     thresholds:
     - trigger: *DamageTrigger10
@@ -108,9 +108,9 @@
   components:
   - type: Clickable
   - type: Sprite
-    sprite: Structures/Furniture/Carpets/blue_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/blue_carpet.rsi
   - type: Icon
-    sprite: Structures/Furniture/Carpets/blue_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/blue_carpet.rsi
   - type: Destructible
     thresholds:
     - trigger: *DamageTrigger10
@@ -126,9 +126,9 @@
   components:
   - type: Clickable
   - type: Sprite
-    sprite: Structures/Furniture/Carpets/green_carpet.rsi
+    sprite: _Trauma/Structures/Furniture/Carpets/green_carpet.rsi
   - type: Icon
-    sprite: Structures/Furniture/Carpets/green_carpet.rsi
+    sprite: _Trauma/Structures/Furniture/Carpets/green_carpet.rsi
   - type: Destructible
     thresholds:
     - trigger: *DamageTrigger10
@@ -144,9 +144,9 @@
   components:
   - type: Clickable
   - type: Sprite
-    sprite: Structures/Furniture/Carpets/orange_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/orange_carpet.rsi
   - type: Icon
-    sprite: Structures/Furniture/Carpets/orange_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/orange_carpet.rsi
   - type: Destructible
     thresholds:
     - trigger: *DamageTrigger10
@@ -162,9 +162,9 @@
   components:
   - type: Clickable
   - type: Sprite
-    sprite: Structures/Furniture/Carpets/skyblue_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/skyblue_carpet.rsi
   - type: Icon
-    sprite: Structures/Furniture/Carpets/skyblue_carpet.rsi
+    sprite: _Trauma/Structures/Furniture/Carpets/skyblue_carpet.rsi
   - type: Destructible
     thresholds:
     - trigger: *DamageTrigger10
@@ -180,9 +180,9 @@
   components:
   - type: Clickable
   - type: Sprite
-    sprite: Structures/Furniture/Carpets/purple_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/purple_carpet.rsi
   - type: Icon
-    sprite: Structures/Furniture/Carpets/purple_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/purple_carpet.rsi
   - type: Destructible
     thresholds:
     - trigger: *DamageTrigger10
@@ -198,9 +198,9 @@
   components:
   - type: Clickable
   - type: Sprite
-    sprite: Structures/Furniture/Carpets/cyan_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/cyan_carpet.rsi
   - type: Icon
-    sprite: Structures/Furniture/Carpets/cyan_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/cyan_carpet.rsi
   - type: Destructible
     thresholds:
     - trigger: *DamageTrigger10
@@ -216,9 +216,9 @@
   components:
   - type: Clickable
   - type: Sprite
-    sprite: Structures/Furniture/Carpets/white_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/white_carpet.rsi
   - type: Icon
-    sprite: Structures/Furniture/Carpets/white_carpet.rsi
+    sprite:  _Trauma/Structures/Furniture/Carpets/white_carpet.rsi
   - type: Destructible
     thresholds:
     - trigger: *DamageTrigger10
