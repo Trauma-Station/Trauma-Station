@@ -20,6 +20,8 @@
   - StorageBinCircuitboard
   - InteractorCircuitboard
   - CondenserMachineCircuitBoard
+  - ExosuitFabricatorMachineCircuitboard
+  - BorgChargerCircuitboard
 
 ## Dynamic
 
