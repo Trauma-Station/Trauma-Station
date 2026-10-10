@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: technology
+  id: AerBasicResearch
+  name: research-technology-aer-basic
+  icon:
+    sprite: _Trauma/Objects/Specific/Aer/aerScanner.rsi
+    state: icon
+  discipline: Experimental
+  tier: 1
+  cost: 5000
+  recipeUnlocks:
+  - AerSensorCircuitboard
+  - AerScanner
+  position: -3,-2
+  technologyPrerequisites:
+  - BasicAnomalousResearch
