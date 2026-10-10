@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+namespace Content.Trauma.Common.JobListings;
+
 /// <summary>
 /// The base type for the <see cref="JobListingsSystem"/>.
 /// </summary>

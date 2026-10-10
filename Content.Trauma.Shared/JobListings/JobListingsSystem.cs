@@ -408,6 +408,8 @@ public abstract partial class JobListingsSystem : CommonJobListingsSystem
             return;
         if (!JobListingsQuery.TryComp(jobListingsOwnerComp.JobListings, out var jobListingsComp))
             return;
+        // reset refresh time so you don't get free refresh from when the job board was ticking down but not paid for
+        SetRefreshTime((jobListingsOwnerComp.JobListings, jobListingsComp));
         RemComp<HiddenJobListingsComponent>(jobListingsOwnerComp.JobListings);
         foreach (var remote in jobListingsComp.Remotes)
         {
