@@ -15674,3 +15674,10 @@ Entries:
   id: 1706
   time: '2026-10-10T23:34:17.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4988
+- author: SpeltIncorrectyl
+  changes:
+  - type: Tweak
+    message: Reverted starting traitor tc to 100, you have to buy progtot for 50tc.
+  id: 1707
+  time: '2026-10-10T23:38:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4966
