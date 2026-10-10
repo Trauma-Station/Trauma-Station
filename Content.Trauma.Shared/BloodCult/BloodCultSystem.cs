@@ -32,6 +32,12 @@ public abstract partial class BloodCultSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnPlayerAttached(Entity<BloodCultMemberComponent> ent, ref PlayerAttachedEvent args)
     {
+        if (TerminatingOrDeleted(ent.Comp.Rule))
+        {
+            Log.Error($"{ToPrettyString(ent)} didn't have a valid rule set!");
+            return;
+        }
+
         _pvsOverride.AddSessionOverride(ent.Comp.Rule, args.Player);
     }
 
