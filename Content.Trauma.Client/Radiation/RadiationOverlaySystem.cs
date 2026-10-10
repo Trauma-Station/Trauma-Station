@@ -34,7 +34,7 @@ public sealed partial class RadiationOverlaySystem : EntitySystem
     {
         if (_lastValue == 0) return;
 
-        if (_timing.CurTime < _lastUpdate + _updateRate || !_disabled)
+        if (!_disabled && _timing.CurTime < _lastUpdate + _updateRate)
         {
             // If overlay is active, smoothly change the effect's intensity, because radiation system only updates once per second
             _overlay.Radiation += (_lastValue - _overlay.Radiation) * frameTime * 0.2f;
