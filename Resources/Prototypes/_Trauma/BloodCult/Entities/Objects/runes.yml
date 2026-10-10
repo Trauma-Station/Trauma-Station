@@ -24,6 +24,16 @@
   - type: InteractionOutline
   - type: Appearance
   - type: CultRuneDrawing # runes can be erased with a bible/dagger regardless of being finished
+  - type: Destructible # will it stop trowing damageble error??? I don't like this solution but the error annoys me
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 30
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/_Goobstation/Heretic/runebreak.ogg
 
 - type: entity
   abstract: true
@@ -35,10 +45,9 @@
   - type: BloodCultExamine
   - type: UseDelay
     delay: 5
-  # Spraying runes with holy water erases them, too cheese to have it for unfinished
   - type: Reactive
     reactions:
-    - reagents: [ Holywater ]
+    - reagents: [ Holywater, Water, SpaceCleaner ]
       methods: [ Touch ]
       effects:
       - !type:Delete
@@ -90,7 +99,13 @@
     invokePhrase: "Qu'laris ver'don, thal'sorin mik'thar!"
   - type: CultRuneEmpower
   - type: BloodCultExamine
-    text: "Allows cultists to prepare greater amounts of blood magic at far less of a cost."
+    text: "Allows cultists to prepare blood magic."
+  - type: ActivatableUI
+    key: enum.CultSpellsUiKey.Key
+  - type: UserInterface
+    interfaces:
+      enum.CultSpellsUiKey.Key:
+        type: CultSpellsBUI
 
 - type: entity
   parent: BaseCultRune

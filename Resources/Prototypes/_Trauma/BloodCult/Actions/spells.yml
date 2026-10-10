@@ -22,27 +22,11 @@
     raiseOnAction: true
   - type: LimitedCharges
     maxCharges: 1 # single use by default
-  - type: CultSpell
   - type: Magic
     requiresSpeech: true
   - type: SpeakOnAction
     chatType: Whisper
   - type: SelfRemovingAction
-
-- type: entity
-  parent: BaseActionBloodCult
-  id: ActionBloodCultSpells
-  name: Prepare Spell
-  description: Choose a single-use spell you can use at any time. Free to use, but takes 2 seconds to prepare.
-  components:
-  - type: Sprite
-    layers:
-    - state: blood_spells
-  - type: Action
-    raiseOnMind: true # the mind has BloodCultSpells
-  - type: InstantAction
-    event: !type:OpenUiActionEvent
-      key: enum.CultSpellsUiKey.Key
 
 - type: entity
   parent: BaseBloodCultSpell

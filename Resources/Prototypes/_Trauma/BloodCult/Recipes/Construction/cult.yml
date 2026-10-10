@@ -50,3 +50,10 @@
   id: CultGirder
   graph: CultGirder
   targetNode: girder
+
+- type: construction
+  parent: BaseBloodCultStructure
+  id: CultDagger
+  objectType: Item
+  graph: CultDagger
+  targetNode: dagger

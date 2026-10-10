@@ -45,6 +45,11 @@
     text: "You tap the barrier with your dagger and it vanishes."
   - type: Airtight
     noAirWhenFullyAirBlocked: false
+  - type: PreventCollide
+    whitelist:
+      components:
+      - BloodCultist
+      - Construct
 
 - type: entity
   parent: [ WallForce, BaseBloodContraband ]
@@ -62,3 +67,8 @@
   # TODO: maybe make animation sprite for it
   - type: GenericVisualizer
     visuals: {}
+  - type: PreventCollide
+    whitelist:
+      components:
+      - BloodCultist
+      - Construct

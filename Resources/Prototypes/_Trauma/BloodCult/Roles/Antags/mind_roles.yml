@@ -9,9 +9,6 @@
     roleType: TeamAntagonist
     exclusiveAntag: true
   - type: BloodCultistRole
-  - type: RoleActions
-    actions:
-    - ActionBloodCultSpells
   - type: RoleEffects
     added:
     - !type:AddFaction
@@ -20,6 +17,7 @@
       skills:
         EldritchKnowledge: 100
         LanguageEldritch: 100
+        MagicalLiteracyKnowledge: 50
     - !type:AddComponents
       components:
       - type: BloodCultMember
@@ -32,6 +30,7 @@
       skills:
       - EldritchKnowledge
       - LanguageEldritch
+      - MagicalLiteracyKnowledge # How else coul you get it?
       force: true
     - !type:RemoveComponents
       components:
@@ -50,10 +49,6 @@
   - type: RoleBriefing
     briefing: blood-cult-role-briefing-short
   - type: RoleEffects
-    mindAdded:
-    - !type:AddComponents
-      components:
-      - type: BloodCultSpells
     added:
     - !type:AddComponents
       components:

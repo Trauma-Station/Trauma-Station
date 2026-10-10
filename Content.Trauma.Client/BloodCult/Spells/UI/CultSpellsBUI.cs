@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Client.UserInterface.Controls;
-using Content.Trauma.Shared.BloodCult.Spells;
+using Content.Trauma.Shared.BloodCult.Runes.Empower;
 
 namespace Content.Trauma.Client.BloodCult.Spells.UI;
 
@@ -15,7 +15,7 @@ public sealed partial class CultSpellsBUI(EntityUid owner, Enum key) : BoundUser
     {
         base.Open();
 
-        if (!EntMan.TryGetComponent<BloodCultSpellsComponent>(Owner, out var comp))
+        if (!EntMan.TryGetComponent<CultRuneEmpowerComponent>(Owner, out var comp))
             return;
 
         _menu = this.CreateWindow<SimpleRadialMenu>();
@@ -23,7 +23,7 @@ public sealed partial class CultSpellsBUI(EntityUid owner, Enum key) : BoundUser
         _menu.OpenOverMouseScreenPosition();
     }
 
-    private List<RadialMenuOptionBase> GetButtons(BloodCultSpellsComponent comp)
+    private List<RadialMenuOptionBase> GetButtons(CultRuneEmpowerComponent comp)
     {
         var count = comp.AvailableActions.Count;
         var options = new List<RadialMenuOptionBase>(count);

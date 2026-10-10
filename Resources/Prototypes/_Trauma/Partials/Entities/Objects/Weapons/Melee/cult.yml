@@ -19,8 +19,22 @@
   - type: MeleeWeapon
     soundHit: &sound
       path: /Audio/Weapons/bladeslice.ogg
+    damage:
+      types:
+        Slash: 15
+      armorPenetration: 0.25
+  - type: Parry # You still need skill to parry with it
+  - type: Tool
+    qualities:
+      - Anchoring
+    useSound:
+      path: /Audio/Items/ratchet.ogg
   - type: Item
     size: Small # it's a knife
+  - type: Construction
+    graph: CultDagger
+    deconstructionTarget: null
+    node: dagger
   - !Remove type: Clothing # it has no equipped sprite W wizden
 
 - type: entity

@@ -13,6 +13,7 @@ using Content.Shared.Mindshield;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
+using Content.Trauma.Shared.BloodCult.Empower;
 using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Runes.Revive;
 using System.Linq;
@@ -63,12 +64,22 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
         }
 
         var invokers = args.Invokers.Count;
+        bool invokerEmpowered = false;
+        if (invokers == 1)
+        {
+            foreach (var (invokersUid, comp) in args.Invokers)
+            {
+                if (TryComp<BloodCultEmpoweredComponent>(invokersUid, out var invokerComp))
+                    invokerEmpowered = true;
+            }
+        }
+
         if (_mind.GetMind(target) == null ||
             target == rule.Comp.OfferingTarget ||
             HasComp<BibleUserComponent>(target) ||
             _mindShield.IsShielded(target))
         {
-            if (invokers < ent.Comp.AliveSacrificeInvokersAmount)
+            if (invokers < ent.Comp.AliveSacrificeInvokersAmount && !invokerEmpowered)
             {
                 args.Popup = $"You need {ent.Comp.AliveSacrificeInvokersAmount} invokers to sacrifice a body";
                 return;
@@ -78,7 +89,7 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
         }
         else
         {
-            if (invokers < ent.Comp.ConvertInvokersAmount)
+            if (invokers < ent.Comp.ConvertInvokersAmount && !invokerEmpowered)
             {
                 args.Popup = $"You need {ent.Comp.ConvertInvokersAmount} invokers to convert a being";
                 return;

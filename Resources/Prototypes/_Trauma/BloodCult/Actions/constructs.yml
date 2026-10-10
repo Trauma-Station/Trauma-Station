@@ -1,0 +1,249 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: BaseActionBloodCult
+  id: BaseActionBloodCultSummonEntity
+  components:
+  - type: Action
+    useDelay: 60
+  - type: TargetAction
+    range: 1
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Runes/regular.rsi
+
+# artificer
+- type: entity
+  parent: BaseActionBloodCultSummonEntity
+  id: ActionArtificerSummonReviveRune
+  name: Summon Revive Rune
+  description: Summons a revive rune to your location, as though it has been there all along...
+  components:
+  - type: Sprite
+    layers:
+    - state: revive
+  # - type: WorldTargetAction # this is shit
+  #   event: !type:PlaceTileEntityEvent
+  #     entity: CultRuneRevive
+  #     length: 2
+  #     blockedCollisionMask:
+  #     - FullTileMask
+  #     blockedCollisionLayer:
+  #     - WallLayer
+  - type: Action # testing
+    useDelay: 60
+    raiseOnAction: true
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:SpawnRandomEntities
+      entity: CultRuneRevive
+      number: 1
+
+- type: entity
+  parent: BaseActionBloodCult
+  id: ActionArtificerSummonCultFloor
+  name: This spell constructs a cult floor
+  description: Summons cult floor.
+  components:
+  - type: Sprite
+    layers:
+    - state: create_cult_floor
+  - type: Action
+    checkCanInteract: false
+    useDelay: 25
+  # - type: WorldTargetAction # cant use that
+  #   event: !type:ChangeTileReaction
+  #     newTileId: CultFloor
+
+- type: entity
+  parent: BaseActionBloodCultSummonEntity
+  id: ActionArtificerSummonCultWall
+  name: This spell constructs a cult wall
+  description: Summons cult wall.
+  components:
+  - type: Sprite
+    sprite: Structures/Walls/cult.rsi
+    layers:
+    - state: full
+  - type: Action
+    checkCanInteract: false
+    useDelay: 30
+  - type: WorldTargetAction
+    event: !type:PlaceTileEntityEvent
+      entity: WallCult
+      length: 2
+      blockedCollisionMask:
+      - FullTileMask
+      blockedCollisionLayer:
+      - WallLayer
+
+- type: entity
+  parent: BaseActionBloodCult
+  id: ActionArtificerGreaterConjuration
+  name: Greater Conjuration
+  description: This spell summons construct shell.
+  components:
+  - type: Sprite
+    layers:
+    - state: artificer
+  - type: Action
+    raiseOnAction: true
+    useDelay: 60
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:SpawnRandomEntities
+      entity: ConstructShell
+      number: 1
+
+- type: entity
+  parent: BaseActionBloodCult
+  id: ActionArtificerSummonSoulstone
+  name: Summon Soulstone
+  description: This spell reaches into Nar'Sie's realm, summoning one of the legendary fragments across time and space.
+  components:
+  - type: Sprite
+    layers:
+    - state: create_soul_stone
+  - type: Action
+    raiseOnAction: true
+    useDelay: 60
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:SpawnRandomEntities
+      entity: SoulShard
+      number: 1
+
+- type: entity
+  parent: BaseActionBloodCult
+  id: ActionArtificerLesserMagicMissile
+  name: Lesser Magic Missile
+  description: This spell fires, slow moving, magic projectile at nearby target.
+  components:
+  - type: Sprite
+    layers:
+    - state: blood_barrage
+  - type: Action
+    checkCanInteract: false
+    useDelay: 25
+    raiseOnUser: true
+    sound: !type:SoundPathSpecifier
+      path: /Audio/_Goobstation/Wizard/magic_missile.ogg
+  - type: TargetAction
+    range: 60
+    checkCanAccess: false
+  - type: EntityTargetAction
+    canTargetSelf: false
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: ProjectileMagicMissileLesser
+      projectileSpeed: 6
+
+# wraith
+- type: entity
+  parent: BaseActionBloodCult
+  id: ActionWraithJaunt
+  name: Phase Shift
+  description: A short range spell that allows you to pass unimpeded through walls.
+  components:
+  - type: Action
+    checkCanInteract: false
+    useDelay: 41 # 35 cooldown + 6 while active
+    itemIconStyle: NoItem
+  - type: Sprite
+    layers:
+    - state: phase_shift
+  - type: InstantAction
+    event: !type:PolymorphSpellEvent
+      protoId: WraithJaunt
+      makeWizard: false # should combine all jaunt methods into one instead of this shit
+
+- type: entity
+  parent: BaseActionBloodCultSummonEntity
+  id: ActionWraithSummonTeleportRune
+  name: Summon Teleport Rune
+  description: Summons a teleport rune to your location, as though it has been there all along...
+  components:
+  - type: Sprite
+    layers:
+    - state: teleport
+  - type: WorldTargetAction
+    event: !type:PlaceTileEntityEvent
+      entity: CultRuneTeleport
+      length: 2
+      blockedCollisionMask:
+      - FullTileMask
+      blockedCollisionLayer:
+      - WallLayer
+
+# juggernaut
+
+- type: entity
+  parent: BaseActionBloodCultSummonEntity
+  id: ActionJuggernautSummonBarrierRune
+  name: Summon Barrier Rune
+  description: Summons a barrier rune to your location, as though it has been there all along...
+  components:
+  - type: Sprite
+    layers:
+    - state: barrier
+  - type: WorldTargetAction
+    event: !type:PlaceTileEntityEvent
+      entity: CultRuneBarrier
+      length: 2
+      blockedCollisionMask:
+      - FullTileMask
+      blockedCollisionLayer:
+      - WallLayer
+
+- type: entity
+  parent: BaseActionBloodCult
+  id: ActionJuggernautShield
+  name: Shield
+  description: This spell creates a temporary forcefield to shield yourself and allies from incoming fire.
+  components:
+  - type: Sprite
+    layers:
+    - state: summon_force_wall
+  - type: Action
+    raiseOnUser: true
+    checkCanInteract: false
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/forcewall.ogg
+    useDelay: 40
+  - type: InstantAction
+    event: !type:InstantSpawnSpellEvent
+      prototype: WallForceCult
+      posData: !type:TargetInFront
+
+- type: entity
+  parent: BaseActionBloodCult
+  id: ActionJuggernautGauntletEcho
+  name: Gauntlet Echo
+  description: Channels energy into your gauntlet - firing its essence forward in a slow moving, yet devastating, attack.
+  components:
+  - type: Sprite
+    layers:
+    - state: cult_fist
+  - type: Action
+    checkCanInteract: false
+    useDelay: 35
+    raiseOnUser: true
+    sound: !type:SoundPathSpecifier
+      path: /Audio/_Goobstation/Wizard/magic_missile.ogg
+  - type: TargetAction
+    range: 60
+    checkCanAccess: false
+  - type: EntityTargetAction
+    canTargetSelf: false
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: ProjectileGauntletEcho
+      projectileSpeed: 20
+
+# harvester

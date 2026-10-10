@@ -23,7 +23,7 @@
         Slash: 0.6
         Piercing: 0.6
         Ballistic: 0.5
-        Heat: 0.7
+        Heat: 0.5
         Caustic: 0.2
         Radiation: 0.2
   - type: ExplosionResistance
@@ -72,14 +72,14 @@
   - type: ClothingSpeedModifier
     walkModifier: 1.25
     sprintModifier: 1.25
-  - type: Armor
-    modifiers: &flagellant_modifiers
-      coefficients:
-        Blunt: 1.4
-        Slash: 1.4
-        Piercing: 1.4
-        Ballistic: 1.4
-        Heat: 1.4
+  # - type: Armor # why does it makes you take 1.4 times more damage again?
+  #   modifiers: &flagellant_modifiers
+  #     coefficients:
+  #       Blunt: 1.4
+  #       Slash: 1.4
+  #       Piercing: 1.4
+  #       Ballistic: 1.4
+  #       Heat: 1.4
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodCultHoodTrue
@@ -100,13 +100,13 @@
     sprite: _Trauma/BloodCult/Entities/Clothes/Helmet/cult_hood.rsi
     equipSound: /Audio/Effects/rustle1.ogg
     unequipSound: /Audio/Effects/rustle2.ogg
-  - type: ClothingSpeedModifier
-    walkModifier: 1.25
-    sprintModifier: 1.25
-  - type: Armor
-    coverage:
-    - Head
-    modifiers: *flagellant_modifiers
+  # - type: ClothingSpeedModifier # what the fuck!? lets multiply speed by 1.25 and then by 1.25 again!????
+  #   walkModifier: 1.25
+  #   sprintModifier: 1.25
+  # - type: Armor
+  #   coverage:
+  #   - Head
+  #   modifiers: *flagellant_modifiers
 
 - type: entity
   parent: ClothingEyesBase

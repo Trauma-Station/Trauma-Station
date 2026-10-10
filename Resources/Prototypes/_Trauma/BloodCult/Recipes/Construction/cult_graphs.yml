@@ -114,3 +114,20 @@
         doAfter: 2
   - node: wall
     entity: WallCult
+
+- type: constructionGraph # still broken
+  id: CultDagger
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: dagger
+      steps:
+      - tag: Knife
+        amount: 1
+        name: construction-graph-tag-knife
+      - tag: DemonEssense
+        amount: 1
+        name: construction-graph-tag-demonsoul
+  - node: dagger
+    entity: RitualDagger
