@@ -11,6 +11,7 @@
   collisionMask: Impassable
   rotation: User
   fx: EffectRCDConstruct0
+  allowMultiDirection: true
 
 - type: rcd
   id: RadiatorInline
@@ -23,6 +24,7 @@
   collisionMask: Impassable
   rotation: User
   fx: EffectRCDConstruct0
+  allowMultiDirection: true
 
 - type: rcd
   id: RadiatorInlineBend
@@ -35,3 +37,4 @@
   collisionMask: Impassable
   rotation: User
   fx: EffectRCDConstruct0
+  allowMultiDirection: true

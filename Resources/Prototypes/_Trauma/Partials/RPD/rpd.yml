@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: rcd
+  id: PipeStraight
+  allowMultiDirection: true
+
+- type: rcd
+  id: PipeBend
+  allowMultiDirection: true
+
+- type: rcd
+  id: PressurePump
+  allowMultiDirection: true
+
+- type: rcd
+  id: VolumetricPump
+  allowMultiDirection: true
+
+- type: rcd
+  id: ManualValve
+  allowMultiDirection: true
+
+- type: rcd
+  id: SignalValve
+  allowMultiDirection: true
+
+- type: rcd
+  id: PressureValve
+  allowMultiDirection: true
+
+- type: rcd
+  id: VentScrubber
+  allowMultiDirection: true
+
+- type: rcd
+  id: VentGas
+  allowMultiDirection: true
+
+- type: rcd
+  id: DualPortVent
+  allowMultiDirection: true
+
+- type: rcd
+  id: VentPassive
+  allowMultiDirection: true
+
+- type: rcd
+  id: Radiator
+  allowMultiDirection: true
+
+- type: rcd
+  id: RadiatorBend
+  allowMultiDirection: true
