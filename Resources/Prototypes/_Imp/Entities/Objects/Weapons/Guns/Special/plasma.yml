@@ -1,0 +1,136 @@
+# This is some mildly questionable yml but it works and I don't feel like reorganizing it
+- type: entity
+  parent: [BaseItem, BaseSyndicateContraband, SolutionGun ]
+  id: WeaponPlasmaAdder
+  name: Adder
+  description: The future of stellar warfare in the palm of your hand. Uses echion, produced from advanced synthesizers.
+  components:
+  - type: WeaponClass
+    class: Pistol
+  - type: EmitSoundOnPickup
+    sound:
+      collection: LasersPickUp
+  - type: EmitSoundOnDrop
+    sound: &drop_sound
+      collection: LasersDrop
+  - type: EmitSoundOnLand
+    sound: *drop_sound
+  - type: AltFireMelee
+    attackType: Heavy
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 8
+    angle: 0
+    wideAnimationRotation: 90
+    soundHit:
+      collection: MetalThud
+  - type: Sprite
+    sprite: _Impstation/Objects/Weapons/Guns/Special/adder.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-unshaded-4
+        map: ["enum.GunVisualLayers.MagUnshaded"]
+        shader: unshaded
+  - type: Clothing
+    sprite: _Impstation/Objects/Weapons/Guns/Special/adder.rsi
+    quickEquip: false
+    slots:
+      - suitStorage
+      - Belt
+  - type: Appearance
+  - type: AmmoCounter
+  - type: MagazineVisuals
+    magState: mag
+    steps: 5
+    zeroVisible: true
+  - type: Item
+    sprite: _Impstation/Objects/Weapons/Guns/Special/adder.rsi
+    size: Small
+    shape:
+    - 0,0,1,0
+    - 0,0,0,1
+  - type: Gun # 10 heat per shot, 35 damage per second. Lower than a viper, but heat is better against armor.
+    clumsyProof: false
+    cameraRecoilScalar: 1
+    fireRate: 3
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/_Impstation/Weapons/Guns/Gunshots/akurra.ogg
+  - type: Solution
+    solution:
+      maxVol: 75
+      reagents:
+      - ReagentId: Echion
+        Quantity: 75
+  - type: SolutionAmmoProvider
+    solutionId: chamber
+    proto: BulletPlasmaAdder
+    fireCost: 6.25
+  - type: SolutionItemStatus
+    solution: chamber
+  - type: SolutionRefuel
+    fuelSolutionName: chamber
+    fuelReagent: Echion
+  - type: ExaminableSolution
+    solution: chamber
+  - type: StaticPrice
+    price: 100
+
+- type: entity
+  parent: [WeaponPlasmaAdder, BaseGunWieldable]
+  id: WeaponPlasmaAkurra
+  name: Akurra
+  description: A beautiful marriage of technology and malice in a single package. Uses echion, produced from advanced synthesizers.
+  components:
+  - type: WeaponClass
+    class: Rifle
+  - type: Sprite
+    sprite: _Impstation/Objects/Weapons/Guns/Special/akurra.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-unshaded-4
+        map: ["enum.GunVisualLayers.MagUnshaded"]
+        shader: unshaded
+  - type: Clothing
+    sprite: _Impstation/Objects/Weapons/Guns/Special/akurra.rsi
+    quickEquip: false
+    slots:
+      - suitStorage
+      - Belt
+  - type: Appearance
+  - type: Item
+    sprite: _Impstation/Objects/Weapons/Guns/Special/akurra.rsi
+    size: Large
+    shape:
+    - 0,0,3,1
+  - type: Gun
+    clumsyProof: false
+    cameraRecoilScalar: 1
+    fireRate: 6 # 72 heat DPS. Lower than c20, but again, better against armor.
+    selectedMode: FullAuto
+    availableModes:
+    - SemiAuto
+    - FullAuto
+    minAngle: 21
+    maxAngle: 39
+    angleIncrease: 2
+    angleDecay: 18
+    soundGunshot:
+      path: /Audio/_Impstation/Weapons/Guns/Gunshots/adder.ogg
+  - type: Solution
+    solution:
+      maxVol: 150
+      reagents:
+      - ReagentId: Echion
+        Quantity: 150
+  - type: SolutionAmmoProvider
+    solutionId: chamber
+    proto: BulletPlasmaAkurra
+    fireCost: 5
+  - type: StaticPrice
+    price: 100
