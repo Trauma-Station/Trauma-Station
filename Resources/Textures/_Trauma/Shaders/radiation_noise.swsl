@@ -1,0 +1,8 @@
+uniform highp float intensity;
+
+void fragment() {
+    highp vec2 random = zRandom(floor(UV * 1200.0) + sin(floor(TIME * 20.0)));
+    highp float value = mod(random.x + random.y, 1.0) * 200.0;
+
+    COLOR = vec4(1.0, 1.0, 1.0, 0.5) * step(value, intensity - 0.2);
+}

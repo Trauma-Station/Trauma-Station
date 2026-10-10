@@ -10,6 +10,11 @@
                     Text="{Loc 'ui-options-reduced-motion'}"
                     ToolTip="{Loc 'ui-options-reduced-motion-tooltip'}" />
                 <GridContainer Columns="2" HorizontalExpand="True" Margin="8 8 8 8">
+                    <!-- <Trauma> -->
+                    <CheckBox Name="DisableRadiationNoiseCheckBox"
+                        Text="{Loc 'ui-options-disable-radiation-static'}"
+                        ToolTip="{Loc 'ui-options-disable-radiation-static-tooltip'}" />
+                    <!-- </Trauma> -->
                     <CheckBox Name="DisableAiStaticCheckBox"
                         Text="{Loc 'ui-options-disable-ai-static'}"
                         ToolTip="{Loc 'ui-options-disable-ai-static-tooltip'}" />
