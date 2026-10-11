@@ -159,3 +159,14 @@
   suffix: Single
   components:
   - type: Stack
+
+- type: entity
+  parent: MaterialBSCrystal
+  id: MaterialBSCrystal10
+  suffix: 10
+  components:
+  - type: Stack
+    count: 10
+  - type: Tag
+    tags:
+    - RawMaterial

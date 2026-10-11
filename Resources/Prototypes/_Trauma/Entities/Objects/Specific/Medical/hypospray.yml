@@ -71,3 +71,17 @@
       reagents:
       - ReagentId: MuteToxin
         Quantity: 15
+
+- type: entity
+  name: syndicate cartridge autoinjector
+  parent: [ BaseCartridgeAutoinjector , BaseSyndicateContraband ]
+  id: SyndicateHypo
+  components:
+  - type: UseDelay
+    delay: 5
+  - type: Sprite
+    layers:
+      - state: syndicate-base
+      - state: cartridge1
+        map: ["enum.SolutionContainerLayers.Fill"]
+        visible: false

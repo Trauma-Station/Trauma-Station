@@ -68,20 +68,6 @@
         map: ["enum.SolutionContainerLayers.Fill"]
         visible: false
 
-- type: entity
-  name: syndicate cartridge autoinjector
-  parent: [ BaseCartridgeAutoinjector , BaseSyndicateContraband ]
-  id: SyndicateHypo
-  components:
-  - type: UseDelay
-    delay: 5
-  - type: Sprite
-    layers:
-      - state: syndicate-base
-      - state: cartridge1
-        map: ["enum.SolutionContainerLayers.Fill"]
-        visible: false
-
 # Autoinjector Cartridges
 
 - type: entity
@@ -247,7 +233,7 @@
 
 - type: entity
   name: sedative autoinjector cartridge
-  parent: [ BaseAutoinjectorCartridge , BaseSyndicateContraband ]
+  parent: [ BaseAutoinjectorCartridge , BaseMajorContraband ]
   description: Contains 4u of tirizene, 3u of impedrezene and 3u of haloperidol, used in a cartridge autoinjector.
   id: CartridgeTirizene
   components:
