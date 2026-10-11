@@ -19,7 +19,6 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: EngineeringTechFabCircuitboard # Trauma
         - id: CargoRequestEngineeringComputerCircuitboard
         - id: AlertsComputerCircuitboard
         - id: AtmosMonitoringComputerCircuitboard
@@ -35,12 +34,6 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        # <Trauma>
-        - id: CloningPodMachineCircuitboard
-        - id: MedicalScannerMachineCircuitboard
-        - id: CloningConsoleComputerCircuitboard
-        - id: BiomassReclaimerMachineCircuitboard
-        # </Trauma>
         - id: MedicalTechFabCircuitboard
         - id: CargoRequestMedicalComputerCircuitboard
 
@@ -53,7 +46,6 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: ServiceTechFabCircuitboard # Trauma
         - id: IDComputerCircuitboard
         - id: FundingAllocationComputerCircuitboard
         - id: CargoRequestServiceComputerCircuitboard
@@ -96,8 +88,6 @@
         - id: CargoRequestComputerCircuitboard
         - id: CargoSaleComputerCircuitboard
         - id: CargoShuttleConsoleCircuitboard
-        - id: LavalandShuttleConsoleCircuitboard # Goob - was SalvageMagnetMachineCircuitboard
-        - id: CargoTechFabCircuitboard # Goob
         - id: SalvageJobBoardComputerCircuitboard
         - id: MailTeleporterMachineCircuitboard
 
@@ -123,10 +113,6 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        # <Trauma>
-        - id: XenobiologyBountyComputerCircuitboard
-        - id: ScienceTechFabCircuitboard # replaces circuit printer and protolathe
-        # </Trauma>
         - id: ResearchComputerCircuitboard
         - id: CargoRequestScienceComputerCircuitboard
         - id: RoboticsConsoleCircuitboard

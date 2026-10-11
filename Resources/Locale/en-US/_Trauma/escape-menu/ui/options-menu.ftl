@@ -16,3 +16,6 @@ ui-options-mouse-wheel-targeting = Can change target part using mouse wheel
 ui-options-function-targeting-mod = Targeting cycle mod key (Mouse Wheel)
 ui-options-function-zoom-mod = Camera zoom mod key (Mouse Wheel)
 ui-options-function-rotate-mod = Rotate mod key (Mouse Wheel)
+
+ui-options-disable-radiation-static = Radiation noise
+ui-options-disable-radiation-static-tooltip = Removes the camera noise caused by radiation.

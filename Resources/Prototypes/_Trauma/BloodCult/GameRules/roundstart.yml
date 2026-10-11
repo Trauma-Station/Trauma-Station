@@ -1,8 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
   parent: BaseGameRule
-  id: BloodCult
+  id: BaseBloodCultRule
   components:
   - type: GameRule
     minPlayers: 30
@@ -12,6 +13,7 @@
     - AreaAiCore
     - AreaBar
     - AreaBotany
+    - AreaBridge
     - AreaBrig
     - AreaCargoBay
     - AreaChem
@@ -37,3 +39,14 @@
       playerRatio: 15
   - type: DynamicRuleCost
     cost: 150
+
+- type: entity
+  parent: [ BaseBloodCultRule, BaseRoundstartAntagRule ]
+  id: BloodCult
+
+- type: entity
+  parent: BaseBloodCultRule
+  id: BloodCultMidround
+  components:
+  - type: AntagSelection
+    selectionTime: RuleStarted

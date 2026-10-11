@@ -57,7 +57,7 @@
     layers:
     - state: firebeam
   - type: Action
-    useDelay: 30
+    useDelay: 8
     itemIconStyle: BigAction
     raiseOnUser: true
     sound: /Audio/Weapons/Guns/Gunshots/taser2.ogg
