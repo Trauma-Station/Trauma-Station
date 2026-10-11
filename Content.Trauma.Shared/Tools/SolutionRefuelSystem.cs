@@ -19,21 +19,19 @@ public sealed partial class SolutionRefuelSystemSystem : EntitySystem
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private IGameTiming _timing = default!;
 
-    private bool TryGetSolutionFuelAndCapacity(EntityUid uid, out FixedPoint2 fuel, out FixedPoint2 capacity)
+    private bool TryGetSolutionFuelAndCapacity(Entity<SolutionRefuelComponent> ent, out FixedPoint2 fuel, out FixedPoint2 capacity)
     {
         fuel = default;
         capacity = default;
-        if (!TryComp<SolutionRefuelComponent>(uid, out var refuelable))
-            return false;
 
         if (!_solution.TryGetSolution(
-                uid,
-                refuelable.FuelSolutionName,
+                ent,
+                ent.Comp.FuelSolutionName,
                 out _,
                 out var fuelSolution))
             return false;
 
-        fuel = fuelSolution.GetTotalPrototypeQuantity(refuelable.FuelReagent);
+        fuel = fuelSolution.GetTotalPrototypeQuantity(ent.Comp.FuelReagent);
         capacity = fuelSolution.MaxVolume;
         return true;
     }
