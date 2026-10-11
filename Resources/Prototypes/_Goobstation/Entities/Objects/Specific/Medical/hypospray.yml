@@ -5,6 +5,7 @@
 - type: entity
   parent: BaseHypospray
   id: BaseCartridgeAutoinjector
+  description: Used for rapid administration of medicine through designated cartridges.
   abstract: true
   components:
   - type: Item
@@ -41,7 +42,6 @@
 - type: entity
   name: security cartridge autoinjector
   parent: [ BaseCartridgeAutoinjector , BaseSecurityContraband ]
-  description: Used for rapid administration of medicine. Uses cartridges printable at the security techfab.
   id: SecHypo
   components:
   - type: Sprite
@@ -59,12 +59,25 @@
 - type: entity
   name: medical cartridge autoinjector
   parent: [ BaseCartridgeAutoinjector , BaseMedicalContraband ]
-  description: Used for rapid administration of medicine. Uses cartridges printable at the medical techfab.
   id: ParamedHypo
   components:
   - type: Sprite
     layers:
       - state: medical-base
+      - state: cartridge1
+        map: ["enum.SolutionContainerLayers.Fill"]
+        visible: false
+
+- type: entity
+  name: syndicate cartridge autoinjector
+  parent: [ BaseCartridgeAutoinjector , BaseSyndicateContraband ]
+  id: SyndicateHypo
+  components:
+  - type: UseDelay
+    delay: 5
+  - type: Sprite
+    layers:
+      - state: syndicate-base
       - state: cartridge1
         map: ["enum.SolutionContainerLayers.Fill"]
         visible: false
@@ -217,7 +230,7 @@
 
 - type: entity
   name: stimulant autoinjector cartridge
-  parent: [ BaseSyndicateContraband , BaseAutoinjectorCartridge ]
+  parent: [ BaseAutoinjectorCartridge , BaseMinorContraband]
   description: Contains 10u of ephedrine, used in a cartridge autoinjector.
   id: CartridgeEphedrine
   components:
@@ -234,7 +247,7 @@
 
 - type: entity
   name: sedative autoinjector cartridge
-  parent: [ BaseSyndicateContraband , BaseAutoinjectorCartridge ]
+  parent: [ BaseAutoinjectorCartridge , BaseSyndicateContraband ]
   description: Contains 4u of tirizene, 3u of impedrezene and 3u of haloperidol, used in a cartridge autoinjector.
   id: CartridgeTirizene
   components:

@@ -6,7 +6,8 @@
   id: BaseRevBullet
   completetime: 1.5
   materials:
-    Steel: 5
+    Steel: 10
+    Gunpowder: 70
 
 - type: latheRecipe
   abstract: true
@@ -36,6 +37,7 @@
   id: RevBuckShell
   materials:
     Steel: 20
+    Gunpowder: 50
   result: ShellShotgun
 
 - type: latheRecipe
@@ -44,6 +46,7 @@
   materials:
     Steel: 15
     Plastic: 5
+    Gunpowder: 50
   result: ShellShotgunSlug
 
 - type: latheRecipe
@@ -60,6 +63,7 @@
   result: CartridgeMagnum
   materials:
     Steel: 10
+    Gunpowder: 30
 
 - type: latheRecipe
   parent: BaseRevMagazine

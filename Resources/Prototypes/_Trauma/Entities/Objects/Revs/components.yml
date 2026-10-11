@@ -44,6 +44,14 @@
     node: gear
 
 - type: entity
+  parent: RevGear
+  id: RevGear5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
   parent: BaseRevComponent
   id: RevBolt
   name: pile of bolts
@@ -64,6 +72,14 @@
     node: bolt
 
 - type: entity
+  parent: RevBolt
+  id: RevBolt5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
+
+- type: entity
   parent: BaseRevComponent
   id: RevNut
   name: pile of nuts
@@ -82,6 +98,14 @@
     - nut_3
   - type: Construction
     node: nut
+
+- type: entity
+  parent: RevNut
+  id: RevNut5
+  suffix: 5
+  components:
+  - type: Stack
+    count: 5
 
 - type: entity
   parent: [ BaseItem, BaseRevMajorContraband ]

@@ -24,9 +24,9 @@
         doAfter: 1
       - tool: Hammering
         doAfter: 1
-      - material: Steel
-        amount: 4
       - tool: Welding
+        doAfter: 1
+      - tool: Anchoring
         doAfter: 1
     - to: bolt
       steps:
@@ -36,8 +36,6 @@
         doAfter: 1
       - tool: Cutting
         doAfter: 1
-      - material: Steel # extra steel welded to the top
-        amount: 2
       - tool: Hammering
         doAfter: 1
       - tool: Welding
@@ -59,8 +57,8 @@
       - tool: Anchoring
         doAfter: 1
   - node: gear
-    entity: RevGear
+    entity: RevGear5
   - node: bolt
-    entity: RevBolt
+    entity: RevBolt5
   - node: nut
-    entity: RevNut
+    entity: RevNut5

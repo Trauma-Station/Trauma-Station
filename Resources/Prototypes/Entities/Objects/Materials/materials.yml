@@ -188,6 +188,18 @@
   - type: Item
     heldPrefix: durathread
 
+# <Trauma>
+- type: entity
+  parent: MaterialDurathread
+  id: MaterialDurathread10
+  suffix: Single
+  components:
+  - type: Sprite
+    state: durathread
+  - type: Stack
+    count: 10
+# </Trauma>
+
 - type: entity
   parent: MaterialDurathread
   id: MaterialDurathread1
@@ -367,6 +379,16 @@
   - type: Enchanter # Goobstation
     enchants:
     - EnchantFortune
+
+# <Trauma>
+- type: entity
+  parent: MaterialDiamond
+  id: MaterialDiamond10
+  suffix: 10
+  components:
+  - type: Stack
+    count: 10
+# </Trauma>
 
 - type: entity
   parent: MaterialDiamond
@@ -705,6 +727,16 @@
   - type: Item
     heldPrefix: bones
 
+# <Trauma>
+- type: entity
+  parent: MaterialBones
+  id: MaterialBones10
+  suffix: 10
+  components:
+  - type: Stack
+    count: 10
+# </Trauma>
+
 - type: entity
   parent: MaterialBones
   id: MaterialBones1
@@ -728,7 +760,7 @@
   # </Trauma>
   - type: Stack
     stackType: Gunpowder
-    count: 1
+    count: 30
   - type: Sprite
     sprite: Objects/Misc/reagent_fillings.rsi
     state: powderpile

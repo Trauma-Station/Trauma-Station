@@ -117,8 +117,8 @@
 - type: latheRecipePack
   id: RevMedicalStatic
   recipes:
-  - MedicatedSuture
-  - RegenerativeMesh
+  # - MedicatedSuture
+  # - RegenerativeMesh
   - RevGauze
   - RevBrutepack
   - RevOintment

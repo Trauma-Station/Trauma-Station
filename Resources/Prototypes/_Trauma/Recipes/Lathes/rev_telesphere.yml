@@ -21,6 +21,8 @@
   id: RevCrystal
   parent: BaseRevsMaterials
   result: MaterialBSCrystal
+  materials:
+    Plasma: 3000
 
 - type: latheRecipe
   id: RevBones
@@ -75,7 +77,9 @@
 - type: latheRecipe
   id: RevDiamonds
   parent: BaseRevsMaterials
-  result: MaterialDiamond
+  materials:
+    Plasma: 3000
+  result: MaterialDiamond10
 
 - type: latheRecipe
   id: RevSilk
@@ -105,4 +109,6 @@
 - type: latheRecipe
   id: RevGunpowder
   parent: BaseRevsMaterials
-  result: MaterialGunpowder30
+  materials:
+    Plasma: 1000
+  result: MaterialGunpowder

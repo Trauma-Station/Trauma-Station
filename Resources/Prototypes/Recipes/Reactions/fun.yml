@@ -196,7 +196,7 @@
       amount: 2
   effects:
     - !type:SpawnEntity
-      entity: MaterialGunpowder
+      entity: MaterialGunpowder1 # Trauma
 
 - type: reaction
   id: SolidifyGold

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BaseBallBat
+  parent: [ BaseBallBat, BaseMajorContraband]
   id: BaseBallBatBarb
   name: barbwire baseball bat
   description: A robust baseball bat with barbed wire.
@@ -43,7 +43,7 @@
       sprite: _Trauma/Objects/Weapons/Melee/bat_barbwire.rsi
 
 - type: entity
-  parent: BaseBallBat
+  parent: [ BaseBallBat , BaseMajorContraband ]
   id: BaseBallBatNail
   name: nailed baseball bat
   description: A robust baseball bat with nails.
@@ -212,7 +212,7 @@
         acts: [ "Destruction" ]
 
 - type: entity
-  parent: [ BaseItem, BaseMinorContraband, SpearDurabilityWeak ]
+  parent: [ BaseItem, BaseMajorContraband, SpearDurabilityWeak ]
   id: SpearPipebomb
   name: pipe bomb spear
   description: Risky, but deadly.
@@ -550,7 +550,7 @@
     node: finish
 
 - type: entity
-  parent: [ BaseItem, BaseMinorContraband, WoodDurability ]
+  parent: [ BaseItem, BaseMajorContraband, WoodDurability ]
   id: SwordScrap
   name: scrap sword
   description: A wooden sword with jagged metal sticking out of it.
@@ -599,7 +599,7 @@
     node: unfinished
 
 - type: entity
-  parent: [ BaseItem, BaseMinorContraband, MetalToolDurability ]
+  parent: [ BaseItem, BaseMajorContraband, MetalToolDurability ]
   id: SwordWelded
   name: welded sword
   description: A sword made by welding two pieces of metal to a tang, a bit unwieldy.

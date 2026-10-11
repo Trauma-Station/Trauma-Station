@@ -8,8 +8,15 @@
   - MobDamageable
   - MobAtmosExposed
   - MobCombat
+  - MobBloodstream
+  - BaseMobAsteroid
   abstract: true
   components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 150
   - type: Reactive
     groups:
       Flammable: [ Touch ]
@@ -17,7 +24,7 @@
       Acidic: [ Touch, Ingestion, Eyes ]
   - type: Climbing
   - type: NameIdentifier
-    group: GenericNumber
+    group: GenericzNumber
   - type: StatusEffects
     allowed:
     - SlowedDown

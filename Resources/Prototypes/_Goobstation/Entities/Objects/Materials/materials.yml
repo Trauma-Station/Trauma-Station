@@ -66,6 +66,17 @@
 
 - type: entity
   parent: MaterialBSCrystal
+  id: MaterialBSCrystal10
+  suffix: 10
+  components:
+  - type: Stack
+    count: 10
+  - type: Tag
+    tags:
+    - RawMaterial
+
+- type: entity
+  parent: MaterialBSCrystal
   id: MaterialBSCrystal1
   suffix: Single
   components:

@@ -54,23 +54,23 @@
     Cloth: 50
     Plasma: 50
 
-- type: latheRecipe
-  abstract: true
-  parent: BaseRevMedical
-  id: BaseRevMedicalAdvanced
-  materials:
-    Cloth: 100
-    Plasma: 100
+# - type: latheRecipe
+#   abstract: true
+#   parent: BaseRevMedical
+#   id: BaseRevMedicalAdvanced
+#   materials:
+#     Cloth: 100
+#     Plasma: 100
 
-- type: latheRecipe
-  parent: BaseRevMedicalAdvanced
-  id: RegenerativeMesh
-  result: RegenerativeMesh
+# - type: latheRecipe
+#   parent: BaseRevMedicalAdvanced
+#   id: RegenerativeMesh
+#   result: RegenerativeMesh
 
-- type: latheRecipe
-  parent: BaseRevMedicalAdvanced
-  id: MedicatedSuture
-  result: MedicatedSuture
+# - type: latheRecipe
+#   parent: BaseRevMedicalAdvanced
+#   id: MedicatedSuture
+#   result: MedicatedSuture
 
 - type: latheRecipe
   parent: BaseRevMedical

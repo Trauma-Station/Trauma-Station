@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  name: tirizine autoinjectors cartridge box
+  parent: [ BoxCardboard , BaseSyndicateContraband ]
+  id: BoxTirizeneCartridges
+  description: A box with Tirizene cartridges.
+  components:
+  - type: StorageFill
+    contents:
+    - id: CartridgeTirizene
+      amount: 9
+  - type: Sprite
+    sprite: _Goobstation/Objects/Storage/boxes.rsi

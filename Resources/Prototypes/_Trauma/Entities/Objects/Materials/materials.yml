@@ -2,12 +2,21 @@
 
 - type: entity
   parent: MaterialGunpowder
-  id: MaterialGunpowder30
-  suffix: full
+  id: MaterialGunpowder1
+  suffix: single
   components:
   - type: Stack
     stackType: Gunpowder
-    count: 30
+    count: 1
+
+- type: entity
+  parent: MaterialGunpowder
+  id: MaterialGunpowder10
+  suffix: 10
+  components:
+  - type: Stack
+    stackType: Gunpowder
+    count: 10
 
 - type: entity
   parent: OreBase

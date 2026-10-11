@@ -21,7 +21,8 @@
     RiotBulletShield: 2
     RadioHandheldSecurity: 5
     # <Trauma>
-    BolaEnergy: 5 # was SecurityBola: 6
+    SecurityBola: 6 # Trauma - Bulkier and Risky option to lose
+    BolaEnergy: 5
     PepperSpray: 3
     SkillChipShield: 2
     SkillChipBludgeon: 2
