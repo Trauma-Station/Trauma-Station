@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleEgomaniac
+  name: Egomaniac
+  components:
+  - type: MindRole
+    antagPrototype: Egomaniac
+    exclusiveAntag: true
+    roleType: TeamAntagonist
+    subtype: roles-antag-egomaniac-name
+  - type: EgomaniacRole
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleEgotist
+  name: Egotist
+  components:
+  - type: MindRole
+    antagPrototype: Egotist
+    exclusiveAntag: true
+    roleType: TeamAntagonist
+    subtype: roles-antag-egotist-name
+  - type: EgotistRole

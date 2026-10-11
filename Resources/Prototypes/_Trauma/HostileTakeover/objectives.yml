@@ -1,0 +1,79 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: BaseObjective
+  id: BaseEgoObjective
+  components:
+  - type: Objective
+    difficulty: 1
+    icon:
+      sprite: _ShitChap/Objects/Weapons/Nullrod/atheist.rsi
+      state: icon
+
+- type: entity
+  parent: BaseEgoObjective
+  id: EgomaniacRuleObjective
+  name: Rule the station!
+  description: Ensure that your iron fist is the only one the station feels.
+  components:
+  - type: Objective
+    unique: true
+    issuer: Self
+  - type: RoleplayObjective
+  - type: NotJobRequirement
+    jobs: [ SecurityClown, Warden, Detective, SecurityOfficer, SecurityCadet ]
+
+
+- type: entity
+  parent: BaseEgoObjective
+  id: EgomaniacKillCapObjective
+  name: Kill the Captain
+  description: they are in the way of you
+  components:
+  - type: Objective
+    unique: true
+    issuer: Self
+  - type: RoleplayObjective
+  - type: NotJobRequirement
+    jobs: [ SecurityClown, Warden, Detective, SecurityOfficer, SecurityCadet ]
+
+- type: entity
+  parent: BaseEgoObjective
+  id: EgomaniacKillHOPObjective
+  name: Kill the Head of Personnel
+  description: they are also in the way of you
+  components:
+  - type: Objective
+    unique: true
+    issuer: Self
+  - type: RoleplayObjective # BaseKillRandomObjective use that whitelisted to captain, check the definition
+  - type: NotJobRequirement
+    jobs: [ SecurityClown, Warden, Detective, SecurityOfficer, SecurityCadet ]
+
+- type: entity
+  parent: BaseEgoObjective
+  id: EgotistAssistObjective
+  name: Assist the Head of Security
+  description: Enact the Head of Security's will and brutilize all who stand in the way of their Rise.
+  components:
+  - type: Objective
+    unique: true
+    issuer: Self
+  - type: RoleplayObjective
+  - type: NotJobRequirement
+    jobs: [ HeadOfSecurity ]
+
+
+#- type: entity
+#  parent: BaseSpyObjective
+#  id: SpyDieObjective
+#  name: Die a glorious death
+#  description: Die.
+#  components:
+#  - type: ObjectiveBlacklistRequirement
+#    blacklist:
+#      components:
+#      - EscapeShuttleCondition
+#      - StealCondition
+#  - type: DieCondition

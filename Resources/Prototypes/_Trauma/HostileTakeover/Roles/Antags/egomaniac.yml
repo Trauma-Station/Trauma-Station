@@ -1,0 +1,83 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antag
+  id: Egomaniac
+  name: roles-antag-egomaniac-name
+  antagonist: true
+  setPreference: true
+  objective: roles-antag-egomaniac-objective
+  #guides: [ HostileTakeover ] when made
+  #requirements:
+  #- !type:OverallPlaytimeRequirement # make into 5 HOS hours or summin
+  #  time: 1h
+
+- type: antag
+  id: Egotist
+  name: roles-antag-egotist-name
+  antagonist: true
+  setPreference: true  #try see if true lets it work?
+  objective: roles-antag-egotist-objective
+  #guides: [ HostileTakeover ] when made
+
+- type: antagSpecifier
+  abstract: true
+  #parent: RestrictedAntag
+  id: BaseEgo
+
+- type: antagSpecifier
+  parent: BaseEgo
+  id: Egomaniac
+  prefRoles:
+  - Egomaniac
+  briefing:
+    text: egomaniac-role-greeting
+    color: Red # check if right
+    sound: "/Audio/Ambience/Antag/headrev_start.ogg" # get new sound
+  #components:
+  #- type: Egomaniac
+  mindRoles:
+  - MindRoleEgomaniac
+  JobWhitelist:
+  - HeadOfSecurity
+
+- type: antagSpecifier
+  parent: BaseEgo
+  id: Egotist
+  briefing:
+    text: egotist-role-greeting
+    color: Red # check if right
+    sound: "/Audio/Ambience/Antag/headrev_start.ogg" # get new sound
+  #components:
+  #- type: Egotist
+  mindRoles:
+  - MindRoleEgotist
+  #jobBlacklist:
+  #- HeadOfSecurity
+  jobWhitelist:
+  - SecurityClown # check if right
+  - Warden
+  - Detective
+  - SecurityOfficer
+  - SecurityCadet
+
+- type: antagSmite
+  id: Egomaniac #  does egomtist half the time for some reason
+  antag: Egomaniac
+  rule: HostileTakeover
+  ruleComp: HostileTakeoverRule
+  icon:
+    #sprite: Objects\Weapons\Melee\stunbaton.rsi # change to baton or summin
+    #state: stunbaton_off
+    sprite: Objects/Weapons/Melee/cult_dagger.rsi
+    state: icon
+
+- type: antagSmite
+  id: Egotist # temp for testing, does egomaniac half the time for some reason
+  antag: Egotist
+  rule: HostileTakeover
+  ruleComp: HostileTakeoverRule
+  icon:
+    #sprite: Objects\Weapons\Melee\stunbaton.rsi # change to baton or summin
+    #state: stunbaton_off
+    sprite: Objects/Weapons/Melee/cult_dagger.rsi
+    state: icon

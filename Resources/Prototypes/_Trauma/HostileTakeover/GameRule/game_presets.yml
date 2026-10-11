@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: gamePreset
+  id: HostileTakeover
+  alias:
+  - hostiletakeover
+  - Egomaniac
+  - egomaniac
+  name: hostile-takeover-title
+  showInVote: false
+  description: hostile-takeover-description
+  rules:
+  - HostileTakeover
+  #- SubGamemodesRule
+  #- BasicStationEventScheduler
+  #- MeteorSwarmScheduler
+  #- SpaceTrafficControlEventScheduler
+  #- BasicRoundstartVariation

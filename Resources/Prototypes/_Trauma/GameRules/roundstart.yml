@@ -169,3 +169,23 @@
   id: SpectatorStatistics
   components:
     - type: ObserverStatisticRule
+
+- type: entity
+  parent: BaseGameRule
+  id: HostileTakeover
+  components:
+  - type: AntagSelection
+    selectionTime: RuleStarted # still don't work, try #JobsAssigned
+    #lateJoinAdditional: true
+    antags:
+    - !type:FixedAntagCount
+      proto: Egomaniac # had a d-class spawn as one?
+    - !type:FixedAntagCount
+      proto: Egotist #  none ever spawn for some reason
+      count: 20
+  - type: AntagObjectives # job whitelists ensure the correct obj are kept
+    objectives:
+    - EgomaniacRuleObjective
+    - EgomaniacKillCapObjective
+    - EgomaniacKillHOPObjective
+    - EgotistAssistObjective
