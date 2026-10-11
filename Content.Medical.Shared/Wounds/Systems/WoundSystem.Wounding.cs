@@ -319,10 +319,10 @@ public sealed partial class WoundSystem
         foreach (var wound in GetWoundableWounds(part))
         {
             if (Prototype(wound)?.ID is not { } woundId ||
-                id != woundId || wound.Comp.IsScar ||
-                ChangeWoundSeverity(wound, severity, part.Comp, user) == FixedPoint2.Zero)
+                id != woundId || wound.Comp.IsScar)
                 continue;
 
+            ChangeWoundSeverity(wound, severity, part.Comp, user);
             woundContinued = wound;
             return true;
         }
@@ -346,16 +346,17 @@ public sealed partial class WoundSystem
             return change;
 
         var old = wound.Comp.WoundSeverityPoint;
+        var overflow = severity - old;
 
         var upperLimit = woundable.IntegrityCap;
         severity = FixedPoint2.Clamp(severity, 0, upperLimit);
 
-        if (severity == old)
-            return change;
-
-        change = severity - old;
-        wound.Comp.WoundSeverityPoint = severity;
-        DirtyField(wound, wound.Comp, nameof(WoundComponent.WoundSeverityPoint));
+        if (severity != old)
+        {
+            change = severity - old;
+            wound.Comp.WoundSeverityPoint = severity;
+            DirtyField(wound, wound.Comp, nameof(WoundComponent.WoundSeverityPoint));
+        }
 
         if (severity > old &&
             wound.Comp.MangleSeverity != null &&
@@ -364,7 +365,7 @@ public sealed partial class WoundSystem
             _trauma.ApplyMangledTraumas((part, woundable), wound.Owner, severity, user);
         }
 
-        WoundSeverityChanged(wound, old);
+        WoundSeverityChanged(wound, old, overflow);
 
         CheckSeverityThresholds(wound, (part, woundable));
 
