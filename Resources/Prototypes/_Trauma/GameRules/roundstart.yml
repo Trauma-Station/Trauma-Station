@@ -7,29 +7,12 @@
   components:
   - type: SubGamemodes
     rules:
-    - id: SubSpies
-      prob: 0.3
     - id: Devil
       prob: 0.02
     - id: ShadowlingRoundstart
       prob: 0.02
     - id: WraithRoundstart
       prob: 0.02
-
-- type: entity
-  parent: BaseGameRule
-  id: SubGamemodesRuleNoSpy
-  components:
-  - type: SubGamemodes
-    rules:
-    - id: SubHeretic
-      prob: 0.2
-    - id: Devil
-      prob: 0.02
-    - id: ShadowlingRoundstart
-      prob: 0.02
-    - id: WraithRoundstart
-      prob: 0.1
 
 - type: entity
   parent: BaseGameRule
@@ -96,16 +79,16 @@
     balance:
       Telecrystal: 0
   - type: GameRule
-    minPlayers: 5
+    minPlayers: 15
   - type: AntagSelection
     agentName: spy-round-end-agent-name
     lateJoinAdditional: true
     antags:
     - !type:LinearAntagCount
-      playerRatio: 6
+      playerRatio: 7
       proto: Spy
       range:
-        min: 1
+        min: 2 # At least some competition
         max: 8
   # Get 3 random rp objectives and 1 real objective
   - type: AntagObjectives
