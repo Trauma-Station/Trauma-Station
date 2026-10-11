@@ -24,7 +24,7 @@
       Acidic: [ Touch, Ingestion, Eyes ]
   - type: Climbing
   - type: NameIdentifier
-    group: GenericzNumber
+    group: GenericNumber
   - type: StatusEffects
     allowed:
     - SlowedDown
