@@ -6,12 +6,13 @@
   components:
   - type: GhostroleAlert
   - type: StationEvent
-    weight: 1.5
+    weight: 2
     duration: null
-    minimumPlayers: 50
-    earliestStart: 50
+    minimumPlayers: 30
+    earliestStart: 30
     maxOccurrences: 1
   - type: AntagSelection
     antags:
     - !type:FixedAntagCount
       proto: Xenomorph
+      count: 2
