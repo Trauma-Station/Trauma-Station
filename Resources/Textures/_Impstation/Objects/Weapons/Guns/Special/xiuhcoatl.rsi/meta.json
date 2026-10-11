@@ -10,9 +10,9 @@
     {
       "name": "base"
     },
-	  {
-	    "name": "icon"
-	  },
+    {
+      "name": "icon"
+    },
     {
       "name": "mag-unshaded-4",
       "delays": [
@@ -20,7 +20,7 @@
           0.3,
           0.3
         ]
-       ]
+      ]
     },
     {
       "name": "mag-unshaded-3",
@@ -29,7 +29,7 @@
           0.3,
           0.3
         ]
-       ]
+      ]
     },
     {
       "name": "mag-unshaded-2",
@@ -38,7 +38,7 @@
           0.3,
           0.3
         ]
-       ]
+      ]
     },
     {
       "name": "mag-unshaded-1",
@@ -47,7 +47,7 @@
           0.3,
           0.3
         ]
-       ]
+      ]
     },
     {
       "name": "mag-unshaded-0"
@@ -68,13 +68,13 @@
       "name": "wielded-inhand-right",
       "directions": 4
     },
-	  {
-	    "name": "equipped-BACKPACK",
-	    "directions": 4
-	  },
-	  {
-	    "name": "equipped-SUITSTORAGE",
-	    "directions": 4
-	  }
+    {
+      "name": "equipped-BACKPACK",
+      "directions": 4
+    },
+    {
+      "name": "equipped-SUITSTORAGE",
+      "directions": 4
+    }
   ]
 }

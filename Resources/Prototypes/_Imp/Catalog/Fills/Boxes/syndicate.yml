@@ -7,10 +7,12 @@
   - type: Storage
     grid:
     - 0,0,3,1
-  - type: StorageFill
-    contents:
-    - id: CartridgeBazookaExp
-      amount: 4
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: CartridgeBazookaExp
+          amount: 4
   - type: Sprite
     sprite: /Textures/_Impstation/Objects/Storage/boxes.rsi
     layers:
@@ -22,10 +24,12 @@
   name: Leviathan rocket box (incendiary)
   description: 4 rockets filled with highly flammable fuel stored in a concerningly fragile container.
   components:
-  - type: StorageFill
-    contents:
-    - id: CartridgeBazookaInc
-      amount: 4
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: CartridgeBazookaIncendiary
+          amount: 4
   - type: Sprite
     sprite: /Textures/_Impstation/Objects/Storage/boxes.rsi
     layers:
@@ -37,10 +41,12 @@
   name: Leviathan rocket box (concussive)
   description: 4 tungsten projectiles stored in a flimsy container. It feels as if they'll tear out through the bottom.
   components:
-  - type: StorageFill
-    contents:
-    - id: CartridgeBazookaCon
-      amount: 4
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: CartridgeBazookaCon
+          amount: 4
   - type: Sprite
     sprite: /Textures/_Impstation/Objects/Storage/boxes.rsi
     layers:
@@ -51,20 +57,24 @@
   id: AdderBox
   name: secure adder crate
   components:
-  - type: StorageFill
-    contents:
-    - id: WeaponPlasmaAdder
-    - id: SkillChipPistol
-    - id: EchionCanister
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponPlasmaAdder
+        - id: SkillChipPistol
+        - id: EchionCanister
 
 - type: entity
   parent: BriefcaseWeapon
   id: AkurraBox
   name: secure akurra crate
   components:
-  - type: StorageFill
-    contents:
-    - id: WeaponPlasmaAkurra
-    - id: SkillChipRifle
-    - id: EchionCanister
-      amount: 4
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: WeaponPlasmaAkurra
+        - id: SkillChipRifle
+        - id: EchionCanister
+          amount: 4

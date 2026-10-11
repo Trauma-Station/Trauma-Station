@@ -42,7 +42,7 @@
 
 - type: entity
   parent: CartridgeBazookaExp
-  id: CartridgeBazookaInc
+  id: CartridgeBazookaIncendiary
   name: Leviathan incendiary rocket
   description: Guaranteed to ruin someone's day.
   components:
@@ -52,7 +52,7 @@
   - type: Item
     size: Small
   - type: CartridgeAmmo
-    proto: BulletBazookaInc
+    proto: BulletBazookaIncendiary
     deleteOnSpawn: true
   - type: Sprite
     sprite: _Impstation/Objects/Weapons/Guns/Projectiles/bazooka.rsi

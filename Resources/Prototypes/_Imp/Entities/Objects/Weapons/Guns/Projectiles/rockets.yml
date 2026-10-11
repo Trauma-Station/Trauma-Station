@@ -1,13 +1,13 @@
 - type: entity
+  parent: BaseBulletTrigger
   id: BulletBazookaExp
   name: rocket
-  parent: BaseBulletTrigger
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Impstation/Objects/Weapons/Guns/Projectiles/bazooka.rsi
     layers:
-      - state: explosiveproj
+    - state: explosiveproj
   - type: Projectile
     damage:
       types:
@@ -25,15 +25,15 @@
     energy: 0.5
 
 - type: entity
+  parent: BaseBullet
   id: BulletBazookaCon
   name: rocket
-  parent: BaseBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Impstation/Objects/Weapons/Guns/Projectiles/bazooka.rsi
     layers:
-      - state: concussionproj
+    - state: concussionproj
   - type: Projectile
     damage:
       types:
@@ -53,15 +53,15 @@
     energy: 0.5
 
 - type: entity
-  id: BulletBazookaInc
-  name: rocket
   parent: BaseBulletTrigger
+  id: BulletBazookaIncendiary
+  name: rocket
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
     sprite: _Impstation/Objects/Weapons/Guns/Projectiles/bazooka.rsi
     layers:
-      - state: incendiaryproj
+    - state: incendiaryproj
   - type: Projectile
     damage:
       types:
