@@ -872,9 +872,11 @@
         conditions:
         - !type:MobStateCondition # no healing in crit so that dedicated single damage type meds can still have a niche.
           mobstate: Alive
+        # <Trauma>
         - !type:ReagentCondition
           reagent: Tricordrazine
           max: 50
+        # </Trauma>
         damage:
           Brute: -1
           Burn: -1
