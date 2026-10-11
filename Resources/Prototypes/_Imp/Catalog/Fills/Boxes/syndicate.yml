@@ -15,7 +15,7 @@
   - type: Sprite
     sprite: /Textures/_Impstation/Objects/Storage/boxes.rsi
     layers:
-      - state: syndicaterocketbox
+    - state: syndicaterocketbox
 
 - type: entity
   parent: LeviathanExplosiveRocketBox
@@ -31,7 +31,7 @@
   - type: Sprite
     sprite: /Textures/_Impstation/Objects/Storage/boxes.rsi
     layers:
-      - state: syndicaterocketbox
+    - state: syndicaterocketbox
 
 - type: entity
   parent: LeviathanExplosiveRocketBox
@@ -42,12 +42,12 @@
   - type: EntityTableContainerFill
     containers:
       storagebase:
-      - id: CartridgeBazookaCon
+        id: CartridgeBazookaCon
         amount: 4
   - type: Sprite
     sprite: /Textures/_Impstation/Objects/Storage/boxes.rsi
     layers:
-      - state: syndicaterocketbox
+    - state: syndicaterocketbox
 
 - type: entity
   parent: BriefcaseWeaponSmall
