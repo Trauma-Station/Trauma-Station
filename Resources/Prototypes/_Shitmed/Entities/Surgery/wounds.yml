@@ -33,7 +33,7 @@
     - BoneDamage
     - VeinsDamage
     traumasChances:
-      Dismemberment: -2
+      Dismemberment: -0.3
       OrganDamage: 0.17
       BoneDamage: 0.8
       VeinsDamage: 0
@@ -46,9 +46,9 @@
   name: fracture
   components:
   - type: TraumaInflicter
-    minTraumaSeverityDelta: 0
+    severityThreshold: 0
     traumasChances:
-      Dismemberment: -1.5
+      Dismemberment: -0.2
       OrganDamage: 0.2
       BoneDamage: 0.9
       VeinsDamage: 0
@@ -77,7 +77,7 @@
     - BoneDamage
     - VeinsDamage
     traumasChances:
-      Dismemberment: -2
+      Dismemberment: -0.3
       OrganDamage: 0.08
       BoneDamage: 0.14
       VeinsDamage: -0.4 # goes through rather easy.
@@ -93,9 +93,9 @@
   name: puncture
   components:
   - type: TraumaInflicter
-    minTraumaSeverityDelta: 0
+    severityThreshold: 0
     traumasChances:
-      Dismemberment: -1.5
+      Dismemberment: -0.2
       OrganDamage: 0.12
       BoneDamage: 0.2
       VeinsDamage: -0.2
@@ -125,7 +125,7 @@
     - BoneDamage
     - VeinsDamage
     traumasChances:
-      Dismemberment: -2
+      Dismemberment: -0.3
       OrganDamage: 0.08
       BoneDamage: 0.14
       VeinsDamage: -0.4 # goes through rather easy.
@@ -153,7 +153,7 @@
     - Dismemberment # seems rather reasonable. Wear armour, guys
     - VeinsDamage
     traumasChances:
-      Dismemberment: 0.2
+      Dismemberment: 0.1
       OrganDamage: 0
       BoneDamage: 0
       VeinsDamage: 0.27
@@ -168,9 +168,9 @@
   name: laceration
   components:
   - type: TraumaInflicter
-    minTraumaSeverityDelta: 0
+    severityThreshold: 0
     traumasChances:
-      Dismemberment: 0.35
+      Dismemberment: 0.15
       OrganDamage: 0
       BoneDamage: 0
       VeinsDamage: 0.4
@@ -211,7 +211,7 @@
   name: burns
   components:
   - type: TraumaInflicter
-    minTraumaSeverityDelta: 0
+    severityThreshold: 0
     traumasChances:
       Dismemberment: 0
       OrganDamage: -0.1
