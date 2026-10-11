@@ -25,7 +25,7 @@ public sealed partial class SolutionRefuelSystemSystem : EntitySystem
         capacity = default;
 
         if (!_solution.TryGetSolution(
-                ent,
+                ent.Owner,
                 ent.Comp.FuelSolutionName,
                 out _,
                 out var fuelSolution))
@@ -40,7 +40,7 @@ public sealed partial class SolutionRefuelSystemSystem : EntitySystem
     private void SolutionRefuelExamine(Entity<SolutionRefuelComponent> ent, ref ExaminedEvent args)
     {
         if (!args.IsInDetailsRange ||
-            !TryGetSolutionFuelAndCapacity(ent.Owner, out var fuel, out var capacity))
+            !TryGetSolutionFuelAndCapacity(ent, out var fuel, out var capacity))
             return;
 
         args.PushMarkup(Loc.GetString("solution-refuel-component-on-examine-detailed-message",
