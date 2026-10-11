@@ -23,7 +23,7 @@ public sealed partial class AntagSummonerComponent : Component
     /// How much money to give <see cref="Account"/>.
     /// </summary>
     [DataField]
-    public int Reward = 10000;
+    public int Reward = 30000;
 
     /// <summary>
     /// The cargo account to give money to.
