@@ -1,6 +1,5 @@
-# Auto convert head of staff doors to department vault doors
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
-# QM
 - type: entity
   parent: HighSecDoor
   id: AirlockQuartermasterLocked
