@@ -38,7 +38,7 @@
 # Cargo
 - type: entity
   id: LockerQuarterMaster
-  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma - Add anti tamper
+  parent: GunSafe # Trauma - Convert to department safe
   name: quartermaster's locker
   components:
   - type: Appearance
@@ -95,7 +95,7 @@
 # CE
 - type: entity
   id: LockerChiefEngineer
-  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma - Add anti tamper
+  parent: GunSafe # Trauma - Convert to department safe
   name: chief engineer's locker
   components:
   - type: Appearance
@@ -284,7 +284,7 @@
 # CMO
 - type: entity
   id: LockerChiefMedicalOfficer
-  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma - Add anti tamper
+  parent: GunSafe # Trauma - Convert to department safe
   name: chief medical officer's locker
   components:
   - type: Appearance
@@ -298,7 +298,7 @@
 # Science
 - type: entity
   id: LockerResearchDirector
-  parent: [ LockerBase, AntiTamperHighPriority ] # Trauma - Add anti tamper
+  parent: GunSafe # Trauma - Convert to department safe
   name: research director's locker
   components:
   - type: Appearance

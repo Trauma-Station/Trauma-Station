@@ -1,0 +1,97 @@
+# Auto convert head of staff doors to department vault doors
+
+# QM
+- type: entity
+  parent: HighSecDoor
+  id: AirlockQuartermasterLocked
+  suffix: Cargo Saferoom, Locked
+  components:
+  - type: ContainerFill
+    containers: !Clear
+      board: [ DoorElectronicsCommand ]
+
+- type: entity
+  id: AirlockQuartermasterGlassLocked
+  suffix: Cargo Saferoom, Locked
+  components:
+  - type: ContainerFill
+    containers: !Clear
+      board: [ DoorElectronicsCommand ]
+
+- type: entity
+  id: AirlockMaintQuartermasterLocked
+  categories: [HideSpawnMenu]
+  components:
+  - !Remove type: Sprite
+
+# RD
+- type: entity
+  parent: HighSecDoor
+  id: AirlockResearchDirectorLocked
+  suffix: Research Saferoom, Locked
+  components:
+  - type: ContainerFill
+    containers: !Clear
+      board: [ DoorElectronicsCommand ]
+
+- type: entity
+  id: AirlockResearchDirectorGlassLocked
+  suffix: Research Saferoom, Locked
+  components:
+  - type: ContainerFill
+    containers: !Clear
+      board: [ DoorElectronicsCommand ]
+
+- type: entity
+  id: AirlockMaintResearchDirectorLocked
+  categories: [HideSpawnMenu]
+  components:
+  - !Remove type: Sprite
+
+# CE
+- type: entity
+  parent: HighSecDoor
+  id: AirlockChiefEngineerLocked
+  suffix: Engineering Saferoom, Locked
+  components:
+  - type: ContainerFill
+    containers: !Clear
+      board: [ DoorElectronicsCommand ]
+
+- type: entity
+  id: AirlockChiefEngineerGlassLocked
+  suffix: Engineering Saferoom, Locked
+  components:
+  - type: ContainerFill
+    containers: !Clear
+      board: [ DoorElectronicsCommand ]
+
+- type: entity
+  id: AirlockMaintChiefEngineerLocked
+  categories: [HideSpawnMenu]
+  components:
+  - !Remove type: Sprite
+
+# CMO
+- type: entity
+  parent: HighSecDoor
+  id: AirlockChiefMedicalOfficerLocked
+  suffix: Medical Saferoom, Locked
+  components:
+  - type: ContainerFill
+    containers: !Clear
+      board: [ DoorElectronicsCommand ]
+
+- type: entity
+  id: AirlockChiefMedicalOfficerGlassLocked
+  suffix: Medical Saferoom, Locked
+  components:
+  - type: ContainerFill
+    containers: !Clear
+      board: [ DoorElectronicsCommand ]
+
+- type: entity
+  id: AirlockMaintChiefMedicalOfficerLocked
+  categories: [HideSpawnMenu]
+  components:
+  - !Remove type: Sprite

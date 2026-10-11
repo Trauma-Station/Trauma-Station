@@ -1,0 +1,120 @@
+- type: entityTable
+  id: LockerFillCaptainNoLaser
+  table: !type:AllSelector
+    children:
+    - id: FreeformLawboard
+
+- type: entityTable
+  id: LockerFillHeadOfPersonnel
+  table: !type:AllSelector
+    children:
+    - id: BoxFolderQmClipboard
+
+- type: entityTable
+  id: LockerFillNanorep
+  table: !type:AllSelector
+    children:
+    - id: ClothingShoesBootsMagAdv
+
+- type: entityTable
+  id: LockerFillQuarterMaster
+  table: !type:AllSelector
+    children: !Clear
+    - !type:NestedSelector
+      tableId: LockerFillDepartmentSafe
+    - id: BoxSkillChipsCargo
+    - id: BoxEncryptionKeyCargo
+    - id: CigPackGreen
+      prob: 0.15
+    - id: BoxQMCircuitboards
+    - id: DoorRemoteCargo
+    - id: AstroNavCartridge
+    - id: PlushieLizardJobCargotechnician
+      prob: 0.02
+
+- type: entityTable
+  id: LockerFillChiefEngineerNoHardsuit
+  table: !type:AllSelector
+    children: !Clear
+    - !type:NestedSelector
+      tableId: LockerFillDepartmentSafe
+    - id: BoxSkillChipsEngi
+    - id: BoxEncryptionKeyEngineering
+    - id: CigarCase
+      prob: 0.15
+    - id: ClothingHandsGlovesColorYellow
+    - id: DoorRemoteEngineering
+    - id: BoxCECircuitboards
+    - id: RCD
+    - id: RCDAmmo
+    - id: RPD
+    - id: Intellicard
+    - id: PlushieLizardJobStationengineer
+      prob: 0.02
+
+- type: entityTable
+  id: FillChiefEngineerHardsuit
+  table: !type:AllSelector
+    children: !Clear
+    - id: ClothingMaskGasAtmos
+    - id: ClothingOuterSuitAtmosFire
+    - id: ClothingHeadHelmetAtmosFire
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled
+
+- type: entityTable
+  id: LockerFillChiefMedicalOfficerNoHardsuit
+  table: !type:AllSelector
+    children: !Clear
+    - !type:NestedSelector
+      tableId: LockerFillDepartmentSafe
+    - id: BoxSkillChipsMed
+    - id: ClothingBackpackDuffelSurgeryFilled
+    - id: ChemistryHotplateFlatPack
+    - id: Multitool
+    - id: DiseaseDiagnoserFlatPack
+    - id: VaccinatorFlatPack
+    - id: ClothingEyesHudMedical
+    - id: ClothingBeltMedicalFilled
+    - id: HandheldCrewMonitor
+    - id: MedTekCartridge
+    - id: DoorRemoteMedical
+    - id: BoxEncryptionKeyMedical
+    - id: BoxCMOCircuitboards
+    - id: PlushieLizardJobMedicaldoctor
+      prob: 0.02
+
+- type: entityTable
+  id: FillChiefMedicalOfficerHardsuit
+  table: !type:AllSelector
+    children: !Clear
+    - id: ClothingMaskBreathMedical
+    - id: UndeterminedVoidsuitParamedic
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled
+
+- type: entityTable
+  id: LockerFillResearchDirectorNoHardsuit
+  table: !type:AllSelector
+    children: !Clear
+    - !type:NestedSelector
+      tableId: LockerFillDepartmentSafe
+    - id: AnomalyLocator
+    - id: CigarCase
+      prob: 0.15
+    - id: BoxEncryptionKeyScience
+    - id: BoxRDCircuitboards
+    - id: ClothingBeltUtilityFilled
+    - id: DoorRemoteResearch
+    - id: PlushieLizardJobScientist
+      prob: 0.02
+
+- type: entityTable
+  id: FillResearchDirectorHardsuit
+  table: !type:AllSelector
+    children: !Clear
+    - id: ClothingMaskBreath
+    - id: ClothingOuterHardsuitEVA
+    - id: ClothingHeadHelmetEVA
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled

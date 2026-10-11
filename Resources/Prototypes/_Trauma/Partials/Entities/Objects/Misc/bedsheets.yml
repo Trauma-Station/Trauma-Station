@@ -1,0 +1,17 @@
+- type: entity
+  id: BedsheetCE
+  name: luxury engineering bedsheet
+
+- type: entity
+  id: BedsheetCMO
+  name: luxury medical bedsheet
+  description: It's a sterilized blanket that has a cross emblem. There's some cat fur on it.
+
+- type: entity
+  id: BedsheetQM
+  name: luxury cargo bedsheet
+  description: It's a thick blanket with an abstract box emblem. On second thought, it's probably mass-produced.
+
+- type: entity
+  id: BedsheetRD
+  name: luxury science bedsheet

@@ -239,3 +239,15 @@
       reagents:
       - ReagentId: Cocaine
         Quantity: 30
+
+- type: entity
+  parent: BaseChemistryVialFilled
+  id: VialWeldingFuel
+  name: welding fuel vial
+  suffix: welding fuel
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: WeldingFuel
+        Quantity: 30

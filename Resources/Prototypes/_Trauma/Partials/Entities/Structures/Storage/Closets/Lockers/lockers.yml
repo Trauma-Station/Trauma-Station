@@ -25,29 +25,46 @@
   - type: AntiTamper
     broadcastChannel: Security
 
+# Auto convert head lockers to department safes
 - type: entity
   id: LockerChiefMedicalOfficer
+  name: medical safe
   components:
   - type: AntiTamper
     broadcastChannel: Medical
+  - type: !Remove EntityStorageVisuals
+  - type: AccessReader
+    access: !Clear [["Medical"]]
 
 - type: entity
   id: LockerResearchDirector
+  name: research safe
   components:
   - type: AntiTamper
     broadcastChannel: Science
+  - type: !Remove EntityStorageVisuals
+  - type: AccessReader
+    access: !Clear [["Research"]]
 
 - type: entity
   id: LockerChiefEngineer
+  name: engineering safe
   components:
   - type: AntiTamper
     broadcastChannel: Engineering
+  - type: !Remove EntityStorageVisuals
+  - type: AccessReader
+    access: !Clear [["Engineering"]]
 
 - type: entity
   id: LockerQuarterMaster
+  name: cargo safe
   components:
   - type: AntiTamper
     broadcastChannel: Supply
+  - type: !Remove EntityStorageVisuals
+  - type: AccessReader
+    access: !Clear [["Cargo"]]
 
 - type: entity
   id: LockerRepresentative

@@ -1,0 +1,39 @@
+- type: entity
+  id: DresserChiefEngineerFilled
+  categories: [HideSpawnMenu]
+  parent: MarkerBase
+  suffix: JRPACMAN Spawner
+  components: !Clear
+  - type: ConditionalSpawner
+    prototypes:
+    - PortableGeneratorJrPacman
+
+- type: entity
+  id: DresserChiefMedicalOfficerFilled
+  categories: [HideSpawnMenu]
+  parent: MarkerBase
+  suffix: JRPACMAN Spawner
+  components: !Clear
+  - type: ConditionalSpawner
+    prototypes:
+    - PortableGeneratorJrPacman
+
+- type: entity
+  id: DresserQuarterMasterFilled
+  categories: [HideSpawnMenu]
+  parent: MarkerBase
+  suffix: JRPACMAN Spawner
+  components: !Clear
+  - type: ConditionalSpawner
+    prototypes:
+    - PortableGeneratorJrPacman
+
+- type: entity
+  id: DresserResearchDirectorFilled
+  categories: [HideSpawnMenu]
+  parent: MarkerBase
+  suffix: JRPACMAN Spawner
+  components: !Clear
+  - type: ConditionalSpawner
+    prototypes:
+    - PortableGeneratorJrPacman

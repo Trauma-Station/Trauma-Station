@@ -5,3 +5,34 @@
   components:
   - type: Label
     localizedLabel: holopad-engineering-robotics
+
+- type: entity
+  parent: Holopad
+  id: HolopadCommandCmo
+  suffix: Med Saferoom
+  components:
+  - type: Label
+    localizedLabel: Medical - Saferoom
+
+- type: entity
+  parent: Holopad
+  id: HolopadCommandQm
+  suffix: Cargo Saferoom
+  components:
+  - type: Label
+    localizedLabel: Cargo - Saferoom
+
+- type: entity
+  id: HolopadCommandCe
+  suffix: Engi Saferoom
+  components:
+  - type: Label
+    localizedLabel: Engineering - Saferoom
+
+- type: entity
+  parent: Holopad
+  id: HolopadCommandRd
+  suffix: Sci Saferoom
+  components:
+  - type: Label
+    localizedLabel: Science - Saferoom

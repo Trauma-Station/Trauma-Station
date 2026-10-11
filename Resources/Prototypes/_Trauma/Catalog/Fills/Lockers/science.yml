@@ -1,5 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+- type: entityTable
+  id: FillLockerScientist
+  table: !type:AllSelector
+    children:
+    - id: AnomalyLocator
+
 # Roboticist
 
 - type: entity
@@ -21,6 +27,7 @@
     - id: ClothingMaskSterile
     - id: ClothingOuterCoatRobo
     - id: ClothingOuterWinterRobo
+    - id: Intellicard
     - id: ClothingBeltUtilityFilled
     - id: ClothingEyesHudDiagnostic
 

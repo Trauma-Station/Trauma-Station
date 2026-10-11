@@ -3,3 +3,31 @@
 - type: entity
   parent: !Clear DefaultStationBeaconEngineering
   id: DefaultStationBeaconRobotics
+
+- type: entity
+  id: DefaultStationBeaconQMRoom
+  suffix: Cargo Saferoom
+  components:
+  - type: NavMapBeacon
+    defaultText: Cargo Saferoom
+
+- type: entity
+  id: DefaultStationBeaconCERoom
+  suffix: Engi Saferoom
+  components:
+  - type: NavMapBeacon
+    defaultText: Engi Saferoom
+
+- type: entity
+  id: DefaultStationBeaconRDRoom
+  suffix: Sci Saferoom
+  components:
+  - type: NavMapBeacon
+    defaultText: Sci Saferoom
+
+- type: entity
+  id: DefaultStationBeaconCMORoom
+  suffix: Med Saferoom
+  components:
+  - type: NavMapBeacon
+    defaultText: Med Saferoom
