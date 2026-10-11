@@ -12,7 +12,7 @@
   suffix: Med Saferoom
   components:
   - type: Label
-    localizedLabel: Medical - Saferoom
+    localizedLabel: holopad-medical-saferoom
 
 - type: entity
   parent: Holopad
@@ -20,14 +20,14 @@
   suffix: Cargo Saferoom
   components:
   - type: Label
-    localizedLabel: Cargo - Saferoom
+    localizedLabel: holopad-cargo-saferoom
 
 - type: entity
   id: HolopadCommandCe
   suffix: Engi Saferoom
   components:
   - type: Label
-    localizedLabel: Engineering - Saferoom
+    localizedLabel: holopad-engineering-saferoom
 
 - type: entity
   parent: Holopad
@@ -35,4 +35,4 @@
   suffix: Sci Saferoom
   components:
   - type: Label
-    localizedLabel: Science - Saferoom
+    localizedLabel: holopad-science-saferoom

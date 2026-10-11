@@ -9,25 +9,25 @@
   suffix: Cargo Saferoom
   components:
   - type: NavMapBeacon
-    defaultText: Cargo Saferoom
+    defaultText: station-beacon-cargo-saferoom
 
 - type: entity
   id: DefaultStationBeaconCERoom
   suffix: Engi Saferoom
   components:
   - type: NavMapBeacon
-    defaultText: Engi Saferoom
+    defaultText: station-beacon-engi-saferoom
 
 - type: entity
   id: DefaultStationBeaconRDRoom
   suffix: Sci Saferoom
   components:
   - type: NavMapBeacon
-    defaultText: Sci Saferoom
+    defaultText: station-beacon-science-saferoom
 
 - type: entity
   id: DefaultStationBeaconCMORoom
   suffix: Med Saferoom
   components:
   - type: NavMapBeacon
-    defaultText: Med Saferoom
+    defaultText: station-beacon-medbay-saferoom
