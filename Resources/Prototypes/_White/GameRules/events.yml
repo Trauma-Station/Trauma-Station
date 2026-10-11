@@ -6,7 +6,7 @@
   components:
   - type: GhostroleAlert
   - type: StationEvent
-    weight: 2
+    weight: 2.5
     duration: null
     minimumPlayers: 30
     earliestStart: 30
