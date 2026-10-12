@@ -118,7 +118,7 @@
     rules:
     - id: Thief
       prob: 0.5
-    - id: Changeling
+    - id: SubChangeling # Trauma - use sub version
       prob: 0.25
 
 - type: entity

@@ -7,7 +7,8 @@
   - HereticRoundstart
   - BlobGameMode
   - LoneAbductorSpawn
-  - Changeling
+  - !Remove Changeling
+  - ChangelingRuleRoundstart
   - Insurgency
   - CosmicCult
   - XenomorphsInfestationRoundstart
@@ -22,7 +23,8 @@
   - HereticRoundstart
   - BlobGameMode
   - LoneAbductorSpawn
-  - Changeling
+  - !Remove Changeling
+  - ChangelingRuleRoundstart
   - ShadowlingRoundstart
   - Insurgency
   - CosmicCult
