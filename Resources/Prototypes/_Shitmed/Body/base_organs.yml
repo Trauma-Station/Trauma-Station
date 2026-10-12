@@ -16,13 +16,13 @@
   - type: CoveredPart # for explosion damage and per-limb coverage
   - type: Woundable
     # numbers for an arm/leg since they're the most common and a reasonable default for strange parts
-    integrity: 80
-    integrityCap: 80
+    integrity: 120
+    integrityCap: 120
     thresholds:
-      Minor: 70
-      Moderate: 50
-      Severe: 25
-      Critical: 10
+      Minor: 100
+      Moderate: 75
+      Severe: 38
+      Critical: 15
       Mangled: 0
   - type: WoundableVisuals
     thresholds: [ 100, 70, 50, 30, 20, 10 ]
@@ -116,15 +116,6 @@
   - type: BodyPart
     partType: Leg
   - type: Leg
-  - type: Woundable
-    integrity: 80
-    integrityCap: 80
-    thresholds:
-      Minor: 70
-      Moderate: 50
-      Severe: 25
-      Critical: 10
-      Mangled: 0
 
 - type: entity
   abstract: true
@@ -134,15 +125,6 @@
   - type: BodyPart
     partType: Hand
     slots: []
-  - type: Woundable
-    integrity: 50
-    integrityCap: 50
-    thresholds:
-      Minor: 42
-      Moderate: 36
-      Severe: 26
-      Critical: 15
-      Mangled: 0
 
 - type: entity
   abstract: true
@@ -152,15 +134,6 @@
   - type: BodyPart
     partType: Foot
     slots: []
-  - type: Woundable
-    integrity: 60
-    integrityCap: 60
-    thresholds:
-      Minor: 50
-      Moderate: 40
-      Severe: 30
-      Critical: 18
-      Mangled: 0
 
 - type: entity
   abstract: true

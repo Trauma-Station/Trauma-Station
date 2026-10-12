@@ -21,6 +21,12 @@ public sealed partial class TraumaCVars
     public static readonly CVarDef<bool> NoVisionFilters =
         CVarDef.Create("accessibility.no_vision_filters", false, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    /// <summary>
+    /// Enables camera noise from radiation.
+    /// </summary>
+    public static readonly CVarDef<bool> NoRadiationNoise =
+        CVarDef.Create("accessibility.no_radiation_noise", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     #endregion
 
     #region AudioMuffle
