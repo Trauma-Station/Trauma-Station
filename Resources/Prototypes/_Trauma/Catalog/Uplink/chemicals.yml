@@ -9,3 +9,23 @@
     Telecrystal: 15
   categories:
   - UplinkChemicals
+
+- type: listing
+  id: UplinkBoxTirizeneCartridges
+  name: uplink-boxtirizene-name
+  description: uplink-uplinkboxTirizene-desc
+  productEntity: BoxTirizeneCartridges
+  cost:
+    Telecrystal: 5
+  categories:
+  - UplinkChemicals
+
+- type: listing
+  id: UplinkSyndicateHypo
+  name: uplink-SyndicateHypo-name
+  description: uplink-SyndicateHypo-desc
+  productEntity: SyndicateHypo
+  cost:
+    Telecrystal: 5
+  categories:
+  - UplinkChemicals
