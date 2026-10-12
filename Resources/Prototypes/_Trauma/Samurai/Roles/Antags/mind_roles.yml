@@ -6,7 +6,6 @@
   name: Samurai Role
   components:
   - type: MindRole
-    antagPrototype: Samurai
     subtype: Samurai
     exclusiveAntag: true
   - type: SamuraiRole

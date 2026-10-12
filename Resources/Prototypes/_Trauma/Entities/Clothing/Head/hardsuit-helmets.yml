@@ -19,7 +19,7 @@
   - type: Armor
     coverage: # Shitmed
     - Head
-    traumaDeductions: # having a suit on saves your limbs
+    traumaDeductions: # samurai is not being delimbed due to some bullshit.
       Dismemberment: 0
       OrganDamage: 0
       BoneDamage: 0

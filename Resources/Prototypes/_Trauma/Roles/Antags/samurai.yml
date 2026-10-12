@@ -27,7 +27,7 @@
     - Syndicate
   - type: AutoImplant
     implants:
-    - MacroBombImplant # Trauma - was DeathAcidifierImplant, bada bing
+    - MacroBombImplant
   - type: RandomMetadata
     nameSegments:
     - NamesNinjaTitle
@@ -43,7 +43,6 @@
     jumpsuit: ClothingUniformJumpsuitNinja
     back: ClothingBackpackSatchelNinja
     mask: ClothingMaskNinja
-    head: ClothingHeadHardsuitSamuraiArmor
     eyes: ClothingEyesVisorNinja
     gloves: ClothingHandsGlovesSpaceNinja
     outerClothing: ClothingOuterSamuraiArmor
@@ -56,7 +55,7 @@
   - JetpackBlackFilled
   - SamuraiEnergyPolearm
   storage:
-    back: # belt holds katana so satchel has the tools for sabotaging things
+    back:
     - Crowbar
     - Wrench
     - Screwdriver
@@ -65,5 +64,4 @@
     - Multitool
     - EmergencyMedipen
     - Flare
-    #- FoodSnackNutribrick # Trauma - rob chef instead chud
     - DrinkWaterBottleFull

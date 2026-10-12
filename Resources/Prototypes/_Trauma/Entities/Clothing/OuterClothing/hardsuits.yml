@@ -23,7 +23,7 @@
     - Foot
     - Tail
     - Wings
-    traumaDeductions:
+    traumaDeductions: # samurai is not being delimbed due to some bullshit.
       Dismemberment: 0
       OrganDamage: 0
       BoneDamage: 0
