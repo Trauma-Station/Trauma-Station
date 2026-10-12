@@ -21,6 +21,7 @@ using Content.Shared.Station.Components;
 using Content.Shared.Station.Systems;
 using Content.Shared.Timing.Systems;
 using Content.Trauma.Shared.Areas;
+using Content.Trauma.Shared.BloodCult;
 using Content.Trauma.Shared.BloodCult.Empower;
 using Content.Trauma.Shared.BloodCult.Examine;
 using Content.Trauma.Shared.BloodCult.Gamerule;
@@ -29,7 +30,6 @@ using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using System.Linq;
 
@@ -41,10 +41,10 @@ public sealed partial class CultRuneSystem : EntitySystem
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private BloodCultExamineSystem _cultExamine = default!;
+    [Dependency] private ChooseTargetArmSystem _chooseArm = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedChatSystem _chat = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -263,6 +263,8 @@ public sealed partial class CultRuneSystem : EntitySystem
                 checkRadioPrefix: false);
         }
 
+        Dirty(ent.Owner, ent.Comp); // will it fix double popups?
+
         return null;
     }
 
@@ -380,9 +382,7 @@ public sealed partial class CultRuneSystem : EntitySystem
             newDamage *= empowered.RuneDamageMultiplier;
         }
 
-        var targetArm = TargetBodyPart.LeftArm;
-        if(_random.Next(0, 2) == 1)
-            targetArm = TargetBodyPart.RightArm;
+        var targetArm = _chooseArm.ChooseArm();
 
         _damage.ChangeDamage(user, newDamage, increaseOnly: true, targetPart: targetArm, canMiss: false);
     }

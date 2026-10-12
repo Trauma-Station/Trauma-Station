@@ -59,8 +59,8 @@
 - type: entity
   parent: BaseActionBloodCult
   id: ActionArtificerSummonCultFloor
-  name: This spell constructs a cult floor
-  description: Summons cult floor.
+  name: Summons cult floor.
+  description: This spell constructs a cult floor
   components:
   - type: Sprite
     layers:
@@ -79,8 +79,8 @@
 - type: entity
   parent: BaseActionBloodCultSummonEntity
   id: ActionArtificerSummonCultWall
-  name: This spell constructs a cult wall
-  description: Summons cult wall.
+  name: Summons cult wall.
+  description: This spell constructs a cult wall
   components:
   - type: Sprite
     sprite: Structures/Walls/cult.rsi

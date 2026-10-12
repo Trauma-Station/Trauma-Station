@@ -64,13 +64,13 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
 
         if (_mind.GetMind(target) == null)
         {
-            args.Popup = $"{ToPrettyString(target)} is dead inside. They cannot be sacrificed.";
+            args.Popup = $"Victim is dead inside. They cannot be sacrificed."; // also plays twice on client
             return;
         }
 
         if (HasComp<BibleUserComponent>(target) || _mindShield.IsShielded(target)) // can alive heretics be sacreficed? if so then they should added here
         {
-            args.Popup = $"Some other powerful entity owns {ToPrettyString(target)}'s soul. They cannot be sacrificed alive.";
+            args.Popup = $"Some other powerful entity owns victim's soul. They cannot be sacrificed alive.";
             return;
         }
 
