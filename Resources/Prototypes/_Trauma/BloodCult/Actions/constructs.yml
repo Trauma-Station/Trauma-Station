@@ -43,7 +43,7 @@
   - type: Action
     checkCanInteract: false
     useDelay: 60
-    #startDelay: true
+    startDelay: true
     raiseOnAction: true
   - type: TargetAction
     checkCanAccess: true
