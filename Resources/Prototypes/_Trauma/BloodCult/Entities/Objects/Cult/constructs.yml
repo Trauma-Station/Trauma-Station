@@ -87,6 +87,8 @@
   - type: CombatMode
     canDisarm: false
   - type: MeleeWeapon
+    hidden: true
+    angle: 30
     animation: WeaponArcPunch
     damage:
       types:
