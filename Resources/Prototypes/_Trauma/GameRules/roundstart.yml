@@ -172,7 +172,7 @@
   - type: ObserverStatisticRule
 
 - type: entity
-  parent: Changeling
+  parent: BaseChangelingRule
   id: ChangelingRule
   components:
   - type: AntagSelection
@@ -181,7 +181,7 @@
       antag: Changeling
 
 - type: entity
-  parent: [ Changeling, BaseRoundstartAntagRule ]
+  parent: [ BaseChangelingRule, BaseRoundstartAntagRule ]
   id: ChangelingRuleRoundstart
   components:
   - type: AntagSelection
