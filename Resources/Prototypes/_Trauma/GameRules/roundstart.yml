@@ -178,7 +178,7 @@
   - type: AntagSelection
     antags:
     - !type:FixedAntagCount
-      antag: Changeling
+      proto: Changeling
 
 - type: entity
   parent: [ BaseChangelingRule, BaseRoundstartAntagRule ]
@@ -187,3 +187,10 @@
   - type: AntagSelection
     selectionTime: PrePlayerSpawn
     lateJoinAdditional: true
+    antags:
+    - !type:LinearAntagCount
+      proto: Changeling
+      playerRatio: 12
+      range:
+        min: 1
+        max: 4
