@@ -1,0 +1,23 @@
+- type: reagent
+  parent: BasePyrotechnic
+  id: Echion
+  name: reagent-name-echion
+  desc: reagent-desc-echion
+  physicalDesc: reagent-physical-desc-ionizing
+  contrabandSeverity: Major
+  flavor: electrons
+  color: "#83db2b"
+  recognizable: true
+  boilingPoint: -127.3
+  meltingPoint: -186.4
+  tileReactions:
+  - !type:FlammableTileReaction
+    temperatureMultiplier: 2
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 2
+            Heat: 3
