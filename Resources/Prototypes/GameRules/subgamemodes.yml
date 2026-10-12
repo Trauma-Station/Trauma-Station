@@ -43,6 +43,7 @@
     cancelPresetOnTooFewPlayers: false
   - type: AntagSelection
     agentName: changeling-round-end-agent-name
+    lateJoinAdditional: true
     selectionTime: PrePlayerSpawn
     antags:
     - !type:LinearAntagCount
@@ -59,6 +60,7 @@
       maxPicks: 1
     - groups: ChangelingObjectiveGroupKillDummy
       maxPicks: 1
+    maxDifficulty: 8
   - type: DynamicRuleCost
     cost: 75
 

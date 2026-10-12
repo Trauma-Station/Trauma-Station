@@ -29,6 +29,7 @@
     - EscapeIdentityObjective
   - type: AntagSelection
     selectionTime: RuleStarted # instead of pre spawn
+    lateJoinAdditional: false
     antags: !Clear
     - !type:LinearAntagCount
       proto: Changeling
