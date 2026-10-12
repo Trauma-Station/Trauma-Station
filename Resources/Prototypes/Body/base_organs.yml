@@ -146,13 +146,13 @@
     integrityCap: 100
     boneIntegrity: 100
   - type: Woundable
-    integrity: 80
-    integrityCap: 80
+    integrity: 200
+    integrityCap: 200
     thresholds:
-      Minor: 70
-      Moderate: 50
-      Severe: 25
-      Critical: 10
+      Minor: 180
+      Moderate: 120
+      Severe: 60
+      Critical: 30
       Mangled: 0
     damageOnAmputate: # This seemingly arbitrary spread is the result of the default head health (65) subtracted to 200 (death threshold).
       types:
@@ -160,7 +160,7 @@
         Asphyxiation: 45
         Slash: 45
     traumaDeductions:
-      Dismemberment: 0.5
+      Dismemberment: 0.8
   - type: WoundableVisuals
     bleedingOverlay: _Shitmed/Mobs/Effects/bleeding_damage.rsi
   - type: BrainSplatterer
