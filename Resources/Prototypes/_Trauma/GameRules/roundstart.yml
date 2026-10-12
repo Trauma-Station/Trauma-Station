@@ -30,8 +30,15 @@
 
 - type: entity
   parent: BaseGameRule
-  id: InsurgencyRule # no ship, for antag smite
+  id: InsurgencyRule # for antag smite
   components:
+  - type: RuleGrids
+  - type: LoadMapRule
+    gridPath: /Maps/_Trauma/Shuttles/insurgents.yml
+  - type: AntagLoadProfileRule
+    speciesOverride: Human
+    speciesOverrideBlacklist:
+    - Plasmaman # instantly dies
   - type: AntagObjectives
     objectives:
     - InsurgentEscapeObjective
@@ -48,13 +55,6 @@
   parent: [ InsurgencyRule, BaseRoundstartAntagRule ]
   id: BaseInsurgencyRule
   components:
-  - type: RuleGrids
-  - type: LoadMapRule
-    gridPath: /Maps/_Trauma/Shuttles/insurgents.yml
-  - type: AntagLoadProfileRule
-    speciesOverride: Human
-    speciesOverrideBlacklist:
-    - Plasmaman # instantly dies
   - type: AntagSelection
     antags:
     - !type:LinearAntagCount
