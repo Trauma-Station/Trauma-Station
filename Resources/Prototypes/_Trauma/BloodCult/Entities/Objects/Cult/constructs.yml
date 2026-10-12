@@ -341,3 +341,12 @@
           True: { visible: false }
           False: { visible: true }
   # ToDo: actions for purified
+
+- type: entity
+  parent: BaseMobJaunt
+  id: WraithJaunt
+  name: jaunt
+  components:
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 5
+    baseWalkSpeed: 5
