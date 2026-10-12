@@ -15715,3 +15715,10 @@ Entries:
   id: 1711
   time: '2026-10-12T21:12:40.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5020
+- author: NoElkaTheGod, DVDPlayerOfDiscordFame, iaada
+  changes:
+  - type: Add
+    message: Added 4 new weapons to the syndicate uplink.
+  id: 1712
+  time: '2026-10-12T21:41:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4964
