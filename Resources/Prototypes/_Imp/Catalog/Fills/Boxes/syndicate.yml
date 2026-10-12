@@ -13,7 +13,7 @@
         id: CartridgeBazookaExp
         amount: 4
   - type: Sprite
-    sprite: /Textures/_Impstation/Objects/Storage/boxes.rsi
+    sprite: _Impstation/Objects/Storage/boxes.rsi
     layers:
     - state: syndicaterocketbox
 
@@ -29,7 +29,7 @@
         id: CartridgeBazookaIncendiary
         amount: 4
   - type: Sprite
-    sprite: /Textures/_Impstation/Objects/Storage/boxes.rsi
+    sprite: _Impstation/Objects/Storage/boxes.rsi
     layers:
     - state: syndicaterocketbox
 
@@ -45,7 +45,7 @@
         id: CartridgeBazookaCon
         amount: 4
   - type: Sprite
-    sprite: /Textures/_Impstation/Objects/Storage/boxes.rsi
+    sprite: _Impstation/Objects/Storage/boxes.rsi
     layers:
     - state: syndicaterocketbox
 

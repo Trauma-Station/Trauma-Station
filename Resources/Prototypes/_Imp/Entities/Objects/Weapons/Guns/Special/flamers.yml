@@ -9,17 +9,17 @@
   - type: Sprite
     sprite: _Impstation/Objects/Weapons/Guns/Special/xiuhcoatl.rsi
     layers:
-      - state: base
-        map: ["enum.GunVisualLayers.Base"]
-      - state: mag-unshaded-4
-        map: ["enum.GunVisualLayers.MagUnshaded"]
-        shader: unshaded
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-unshaded-4
+      map: ["enum.GunVisualLayers.MagUnshaded"]
+      shader: unshaded
   - type: Clothing
     sprite: _Impstation/Objects/Weapons/Guns/Special/xiuhcoatl.rsi
     quickEquip: false
     slots:
-      - suitStorage
-      - Belt
+    - suitStorage
+    - Belt
   - type: Appearance
   - type: AmmoCounter
   - type: Item

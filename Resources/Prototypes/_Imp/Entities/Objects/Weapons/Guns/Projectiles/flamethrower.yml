@@ -1,7 +1,7 @@
 - type: entity
   parent: BaseBulletIncendiary
   id: BulletFlamethrower
-  name : flamethrower fireball
+  name: flamethrower fireball
   categories: [ HideSpawnMenu ]
   components:
   - type: TimedDespawn
