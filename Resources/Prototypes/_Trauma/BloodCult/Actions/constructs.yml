@@ -54,7 +54,7 @@
     whitelist:
       components:
       - Construct
-    event: !type:BloodCultArtificerHealEvent # this shit doesnt work yet
+    event: !type:BloodCultArtificerHealEvent
 
 - type: entity
   parent: BaseActionBloodCult
@@ -68,7 +68,7 @@
   - type: Action
     checkCanInteract: false
     raiseOnAction: true
-    useDelay: 15
+    useDelay: 5
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
