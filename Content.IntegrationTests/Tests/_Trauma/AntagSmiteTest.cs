@@ -16,7 +16,7 @@ public sealed class AntagSmiteTest : GameTest
         var factory = SEntMan.ComponentFactory;
         var antagName = factory.CompName<AntagSelectionComponent>();
         var failed = new List<string>();
-        foreach (var smite in SProtoMan.Index<AntagSmitePrototype>())
+        foreach (var smite in SProtoMan.EnumeratePrototypes<AntagSmitePrototype>())
         {
             var rule = SProtoMan.Index(smite.Rule);
             if (!rule.TryComp<AntagSelectionComponent>(antagName, out var antag))
