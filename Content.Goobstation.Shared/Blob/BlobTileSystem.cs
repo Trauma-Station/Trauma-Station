@@ -29,6 +29,7 @@ public sealed partial class BlobTileSystem : EntitySystem
 {
     [Dependency] private BlobCoreSystem _core = default!;
     [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
@@ -44,6 +45,8 @@ public sealed partial class BlobTileSystem : EntitySystem
     [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
 
     private static readonly ProtoId<NpcFactionPrototype> BlobFaction = "Blob";
+
+    private HashSet<Entity<BlobTileComponent>> _tiles = new();
 
     [SubscribeLocalEvent]
     private void OnGetVerbs(Entity<BlobTileComponent> ent, ref GetVerbsEvent<AlternativeVerb> args)
@@ -166,7 +169,7 @@ public sealed partial class BlobTileSystem : EntitySystem
         if (xform.GridUid is not { } gridUid || !_gridQuery.TryComp(gridUid, out var grid))
             return false;
 
-        if (_core.GetNearNode(xform.Coordinates, core.Comp.TilesRadiusLimit) is not { } node)
+        if (_core.GetNearNode(xform.Coordinates, core, core.Comp.TilesRadiusLimit) is not { } node)
             return false;
 
         var mobTile = _map.GetTileRef(gridUid, grid, xform.Coordinates);
@@ -196,15 +199,13 @@ public sealed partial class BlobTileSystem : EntitySystem
             if (!mobAdjacentTiles.Contains(innerTile.GridIndices))
                 continue;
 
-            var spawn = true;
+            var pos = _map.GridTileToWorld(gridUid, grid, innerTile.GridIndices);
+            _tiles.Clear();
+            _lookup.GetEntitiesInRange(pos, 0.35f, _tiles, LookupFlags.Dynamic | LookupFlags.StaticSundries);
+            // can't ever spawn a tile if there's another one there, even if it's unanchored
+            var spawn = _tiles.Count == 0;
             foreach (var uid in _map.GetAnchoredEntities(gridUid, grid, innerTile.GridIndices))
             {
-                if (_tileQuery.HasComp(uid))
-                {
-                    spawn = false;
-                    continue;
-                }
-
                 if (!_destructibleQuery.HasComp(uid))
                     continue;
 
@@ -239,7 +240,7 @@ public sealed partial class BlobTileSystem : EntitySystem
             !TryComp<BlobCoreComponent>(core, out var coreComp))
             return;
 
-        if (_core.GetNearNode(coords, coreComp.TilesRadiusLimit) is not { } node)
+        if (_core.GetNearNode(coords, core, coreComp.TilesRadiusLimit) is not { } node)
         {
             _popup.PopupEntity("There's no node nearby!", target, observer, PopupType.SmallCaution);
             return;
@@ -274,11 +275,12 @@ public sealed partial class BlobTileSystem : EntitySystem
             // client predicts this lunge either via interaction or node update loop
             RaiseLocalEvent(ev);
         }
-        else if (user != null)
+        else
         {
             // server tells clients about another player's interaction
             var filter = Filter.Pvs(from);
-            filter.RemovePlayerByAttachedEntity(user.Value);
+            if (user != null)
+                filter.RemovePlayerByAttachedEntity(user.Value);
             RaiseNetworkEvent(ev, filter);
         }
     }

@@ -10,13 +10,8 @@ public sealed partial class ServerAntagSelectionSystem
 
     public override Entity<AntagSelectionComponent>? ForceGetGameRuleEnt([ForbidLiteral] EntProtoId id, [ForbidLiteral] CompName comp)
     {
-        var type = Factory.GetRegistration(comp).Type;
-        var query = EntityManager.AllEntityQueryEnumerator(type);
-        while (query.MoveNext(out var uid, out _))
-        {
-            if (_query.TryComp(uid, out var ontag))
-                return (uid, ontag);
-        }
+        if (FindRule(comp) is { } existing)
+            return existing;
 
         if (GameTicker.AddGameRule(id) is not { } rule)
             return null;

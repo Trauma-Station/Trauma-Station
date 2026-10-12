@@ -32,6 +32,12 @@ public abstract partial class BloodCultSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnPlayerAttached(Entity<BloodCultMemberComponent> ent, ref PlayerAttachedEvent args)
     {
+        if (TerminatingOrDeleted(ent.Comp.Rule))
+        {
+            Log.Error($"{ToPrettyString(ent)} didn't have a valid rule set!");
+            return;
+        }
+
         _pvsOverride.AddSessionOverride(ent.Comp.Rule, args.Player);
     }
 
@@ -86,7 +92,7 @@ public abstract partial class BloodCultSystem : EntitySystem
     /// </summary>
     public Entity<BloodCultRuleComponent>? GetRule(EntityUid mob)
     {
-        if (_mcQuery.CompOrNull(mob)?.Mind is { } mind)
+        if (_mcQuery.CompOrNull(mob)?.Mind is { } mind && Exists(mind))
             return MindGetRule(mind);
 
         return _query.CompOrNull(mob)?.Rule is { } rule && _ruleQuery.TryComp(rule, out var ruleComp)

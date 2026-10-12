@@ -3,7 +3,6 @@
 using Content.Medical.Common.Body;
 using Content.Medical.Common.Healing;
 using Content.Medical.Common.Traumas;
-using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Body;
 using Content.Medical.Shared.Wounds;
 using Content.Shared.Armor;
@@ -15,7 +14,6 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Random.Helpers;
 using Robust.Shared.Containers;
 using Robust.Shared.Random;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Content.Medical.Shared.Traumas;
@@ -62,7 +60,7 @@ public partial class TraumaSystem
         // Overflow is only used when we are capping the wound, so we use it over the computed delta
         // which will be useless in this specific scenario.
         var delta = args.Overflow ?? args.NewSeverity - args.OldSeverity;
-        if (delta <= 0 || delta < wound.Comp.SeverityThreshold)
+        if (delta <= 0 || args.NewSeverity < wound.Comp.SeverityThreshold)
             return;
 
         var woundable = Comp<WoundableComponent>(part);
@@ -239,20 +237,20 @@ public partial class TraumaSystem
         if (!_woundableQuery.Resolve(part, ref part.Comp))
             return traumaList;
 
-        if (severity < wound.Comp.MinTraumaSeverityDelta)
-            return traumaList;
+        // Trauma chance is higher based on part integrity damage delta
+        var multiplier = MathF.Log(MathHelper.E + 0.1f * severity.Float());
 
         var target = (part, part.Comp);
         if (wound.Comp.AllowedTraumas.Contains(TraumaType.BoneDamage) &&
-            RandomBoneTraumaChance(target, wound))
+            RandomBoneTraumaChance(target, wound, multiplier))
             traumaList.Add(TraumaType.BoneDamage);
 
         if (wound.Comp.AllowedTraumas.Contains(TraumaType.Dismemberment) &&
-            RandomDismembermentTraumaChance(target, wound))
+            RandomDismembermentTraumaChance(target, wound, multiplier))
             traumaList.Add(TraumaType.Dismemberment);
 
         if (wound.Comp.AllowedTraumas.Contains(TraumaType.OrganDamage) &&
-            RandomOrganTraumaChance(target, wound))
+            RandomOrganTraumaChance(target, wound, multiplier))
             traumaList.Add(TraumaType.OrganDamage);
 
         return traumaList;
@@ -318,7 +316,7 @@ public partial class TraumaSystem
 
     #region Trauma Chance Randoming
 
-    public bool RandomBoneTraumaChance(Entity<WoundableComponent> target, Entity<TraumaInflicterComponent> woundInflicter)
+    public bool RandomBoneTraumaChance(Entity<WoundableComponent> target, Entity<TraumaInflicterComponent> woundInflicter, float multiplier)
     {
         if (_body.GetBody(target.Owner) is not {} body ||
             _part.GetPartType(target) is not {} partType)
@@ -345,15 +343,17 @@ public partial class TraumaSystem
         // We combine multiple parameters and do some math, to get the chance.
         // Even if we get 0.1 damage there's still a chance for injury to be applied, but with the extremely low chance.
         // The more damage, the bigger is the chance.
-        var chance = target.Comp.IntegrityCap / (target.Comp.Integrity + bone.BoneIntegrity)
+        var chance = (target.Comp.IntegrityCap / (target.Comp.Integrity + bone.BoneIntegrity)
              * _boneTraumaChanceMultipliers[target.Comp.WoundableSeverity]
-             - deduction.Float() + woundInflicter.Comp.TraumasChances[TraumaType.BoneDamage];
-        return _random.Prob(Math.Clamp((float) chance, 0f, 1f));
+             - deduction + woundInflicter.Comp.TraumasChances[TraumaType.BoneDamage]).Float() * multiplier;
+        chance = Math.Clamp(chance, 0f, 1f);
+        return SharedRandomExtensions.PredictedProb(_timing, (float) chance, GetNetEntity(target), GetNetEntity(woundInflicter));
     }
 
     public bool RandomOrganTraumaChance(
         Entity<WoundableComponent> target,
-        Entity<TraumaInflicterComponent> woundInflicter)
+        Entity<TraumaInflicterComponent> woundInflicter,
+        float multiplier)
     {
         if (_body.GetBody(target.Owner) is not {} body ||
             _part.GetPartType(target) is not {} partType)
@@ -385,19 +385,16 @@ public partial class TraumaSystem
         // so like, like, yeah, we don't want a disabler to induce some EVIL ASS organ damage with a 0,000001% chance and ruin your round
         // Very unlikely to happen if your woundables are in a good condition
 
-        var chance =
-            FixedPoint2.Clamp(
-                target.Comp.Integrity / target.Comp.IntegrityCap / totalIntegrity
-                - deduction + woundInflicter.Comp.TraumasChances[TraumaType.OrganDamage],
-                0,
-                1);
-
-        return _random.Prob((float) chance);
+        var chance = (target.Comp.Integrity / target.Comp.IntegrityCap / totalIntegrity -
+            deduction + woundInflicter.Comp.TraumasChances[TraumaType.OrganDamage]).Float() * multiplier;
+        chance = Math.Clamp(chance, 0f, 1f);
+        return SharedRandomExtensions.PredictedProb(_timing, (float) chance, GetNetEntity(target), GetNetEntity(woundInflicter));
     }
 
     public bool RandomDismembermentTraumaChance(
         Entity<WoundableComponent> target,
-        Entity<TraumaInflicterComponent> woundInflicter)
+        Entity<TraumaInflicterComponent> woundInflicter,
+        float multiplier)
     {
         // Can't sever if already severed
         if (_body.GetBody(target.Owner) is not {} body ||
@@ -419,10 +416,9 @@ public partial class TraumaSystem
             return false;
 
         // Healthy bones decrease the chance of your limb getting delimbed
-        var multiplier = 1f;
         if (_boneQuery.TryComp(target, out var bone))
         {
-            multiplier = bone.BoneSeverity switch
+            multiplier *= bone.BoneSeverity switch
             {
                 BoneSeverity.Normal => 0.3f, // decreases delimb change by 70%
                 BoneSeverity.Damaged => 0.6f, // 40%
@@ -432,12 +428,11 @@ public partial class TraumaSystem
             };
         }
 
-        // TODO SHITMED: this doesnt fucking work?
-        float chance = (1f - (MathF.Pow(target.Comp.Integrity.Float(), 1.3f) / target.Comp.IntegrityCap.Float() - 1f)) * multiplier
-            - deduction.Float() + woundInflicter.Comp.TraumasChances[TraumaType.Dismemberment].Float();
+        var chance = (1f - (MathF.Pow(target.Comp.Integrity.Float() / target.Comp.IntegrityCap.Float(), 0.5f) +
+            deduction - woundInflicter.Comp.TraumasChances[TraumaType.Dismemberment])).Float() * multiplier;
 
-        // TODO SHITMED: if above is fixed, predicted random
-        return _random.Prob(Math.Clamp(chance, 0f, 1f));
+        chance = Math.Clamp(chance, 0f, 1f);
+        return SharedRandomExtensions.PredictedProb(_timing, chance, GetNetEntity(target), GetNetEntity(woundInflicter));
     }
 
     public EntityUid AddTrauma(
