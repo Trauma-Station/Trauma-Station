@@ -28,7 +28,6 @@
     antags:
     - !type:FixedAntagCount
       proto: Heretic
-      count: 1
 
 - type: entity
   parent: [ BaseRoundstartAntagRule, BaseHereticRule ]

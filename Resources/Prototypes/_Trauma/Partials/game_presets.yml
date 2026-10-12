@@ -11,7 +11,7 @@
   - Insurgency
   - CosmicCult
   - XenomorphsInfestationRoundstart
-  - Spies
+  - SpyRuleRoundstart
 
 - type: gamePreset
   id: AllerAtOnce
@@ -27,7 +27,7 @@
   - Insurgency
   - CosmicCult
   - XenomorphsInfestationRoundstart
-  - Spies
+  - SpyRuleRoundstart
 
 - type: gamePreset
   id: Secret

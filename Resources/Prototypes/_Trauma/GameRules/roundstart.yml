@@ -56,8 +56,9 @@
       playerRatio: 10
 
 - type: entity
-  parent: BaseRoundstartAntagRule
-  id: Spies
+  abstract: true
+  parent: BaseGameRule
+  id: BaseSpyRule
   components:
   - type: AntagPlayerEffects
     effects:
@@ -82,14 +83,6 @@
     minPlayers: 15
   - type: AntagSelection
     agentName: spy-round-end-agent-name
-    lateJoinAdditional: true
-    antags:
-    - !type:LinearAntagCount
-      playerRatio: 7
-      proto: Spy
-      range:
-        min: 2 # At least some competition
-        max: 8
   # Get 3 random rp objectives and 1 real objective
   - type: AntagObjectives
     objectives:
@@ -101,6 +94,31 @@
     sets:
     - groups: SpyObjectiveGroups
       maxPicks: 1
+
+- type: entity
+  parent: [ BaseSpyRule, BaseRoundstartAntagRule ]
+  id: SpyRuleRoundstart
+  components:
+  - type: AntagSelection
+    lateJoinAdditional: true
+    antags:
+    - !type:LinearAntagCount
+      playerRatio: 7
+      proto: Spy
+      range:
+        min: 2 # At least some competition
+        max: 8
+
+- type: entity
+  parent: BaseSpyRule
+  id: SpyRule
+  components:
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: Spy
+
+# Insurgents
 
 - type: entity
   parent: BaseInsurgencyRule
@@ -151,4 +169,21 @@
   parent: BaseGameRule
   id: SpectatorStatistics
   components:
-    - type: ObserverStatisticRule
+  - type: ObserverStatisticRule
+
+- type: entity
+  parent: Changeling
+  id: ChangelingRule
+  components:
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      antag: Changeling
+
+- type: entity
+  parent: [ Changeling, BaseRoundstartAntagRule ]
+  id: ChangelingRuleRoundstart
+  components:
+  - type: AntagSelection
+    selectionTime: PrePlayerSpawn
+    lateJoinAdditional: true
