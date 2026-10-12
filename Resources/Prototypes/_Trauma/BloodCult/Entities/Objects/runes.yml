@@ -24,16 +24,6 @@
   - type: InteractionOutline
   - type: Appearance
   - type: CultRuneDrawing # runes can be erased with a bible/dagger regardless of being finished
-  - type: Destructible # will it stop trowing damageble error??? I don't like this solution but the error annoys me
-    thresholds:
-    - trigger: !type:DamageTrigger
-        damage: 30
-      behaviors:
-      - !type:DoActsBehavior
-        acts: ["Destruction"]
-      - !type:PlaySoundBehavior
-        sound:
-          path: /Audio/_Goobstation/Heretic/runebreak.ogg
 
 - type: entity
   abstract: true

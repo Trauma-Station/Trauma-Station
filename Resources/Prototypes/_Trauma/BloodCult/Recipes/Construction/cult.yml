@@ -65,6 +65,5 @@
 - type: construction
   parent: BaseBloodCultItem
   id: CultDagger
-  objectType: Item
   graph: CultDagger
   targetNode: dagger

@@ -40,7 +40,6 @@
   components:
   - type: Sprite
     sprite: _Trauma/BloodCult/mobs.rsi
-  - type: Evil
   - type: Appearance
   - type: DelayedVisuals
     key: enum.ConstructVisualsState.Transforming
@@ -72,7 +71,6 @@
         - FlyingMobMask
         layer:
         - FlyingMobLayer
-  - type: AlwaysTakeHoly # even for purified ones, be careful
   - type: Damageable
     damageModifierSet: ManifestedSpirit
   - type: Injurable
@@ -89,8 +87,11 @@
   - type: CombatMode
     canDisarm: false
   - type: MeleeWeapon
-    hidden: true
-    angle: 30
+    animation: WeaponArcPunch
+    damage:
+      types:
+        Blunt: 5
+        Structural: 60
   - type: TypingIndicator
     proto: guardian
   - type: Puller
@@ -114,17 +115,11 @@
     - DoorBumpOpener
 
 - type: entity
+  abstract: true
   parent: ConstructBase
-  id: ConstructJuggernaut
-  name: juggernaut
+  id: ConstructJuggernautBase
   description: A massive, armored construct built to spearhead attacks and soak up enemy fire.
   components:
-  - type: Sprite
-    layers:
-    - state: juggernaut
-      map: [ "enum.ConstructVisualsState.Sprite" ]
-    - state: glow_juggernaut_cult
-      map: [ "enum.ConstructVisualsState.Glow" ]
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -139,6 +134,39 @@
         Blunt: 25
     soundHit:
       path: /Audio/_Trauma/Weapons/Melee/breaching_hammer/club.ogg
+
+- type: entity
+  abstract: true
+  parent: ConstructBase
+  id: ConstructWraithBase
+  description: A wicked, clawed shell constructed to assassinate enemies and sow chaos behind enemy lines.
+  components:
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      65: Dead
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 5
+    baseSprintSpeed: 5
+  - type: MeleeWeapon
+    animation: WeaponArcSmash
+    damage:
+      types:
+        Structural: 40
+        Blunt: 20
+
+# BloodCult
+- type: entity
+  parent: ConstructJuggernautBase
+  id: ConstructJuggernaut
+  name: juggernaut
+  components:
+  - type: Sprite
+    layers:
+    - state: juggernaut
+      map: [ "enum.ConstructVisualsState.Sprite" ]
+    - state: glow_juggernaut_cult
+      map: [ "enum.ConstructVisualsState.Glow" ]
   - type: GenericVisualizer
     visuals:
       enum.ConstructVisualsState.Transforming:
@@ -153,6 +181,8 @@
     - ActionJuggernautSummonBarrierRune
     - ActionJuggernautShield
     - ActionJuggernautGauntletEcho
+  - type: AlwaysTakeHoly
+  - type: Evil
 
 - type: entity
   parent: ConstructBase
@@ -166,12 +196,6 @@
       map: [ "enum.ConstructVisualsState.Sprite" ]
     - state: glow_artificer_cult
       map: [ "enum.ConstructVisualsState.Glow" ]
-  - type: MeleeWeapon
-    animation: WeaponArcPunch
-    damage:
-      types:
-        Blunt: 5
-        Structural: 60
   - type: GenericVisualizer
     visuals:
       enum.ConstructVisualsState.Transforming:
@@ -190,9 +214,11 @@
     - ActionArtificerGreaterConjuration
     - ActionArtificerSummonSoulstone
     - ActionArtificerLesserMagicMissile
+  - type: AlwaysTakeHoly
+  - type: Evil
 
 - type: entity
-  parent: ConstructBase
+  parent: ConstructWraithBase
   id: ConstructWraith
   name: wraith
   description: A wicked, clawed shell constructed to assassinate enemies and sow chaos behind enemy lines.
@@ -203,19 +229,6 @@
       map: [ "enum.ConstructVisualsState.Sprite" ]
     - state: glow_wraith_cult
       map: [ "enum.ConstructVisualsState.Glow" ]
-  - type: MobThresholds
-    thresholds:
-      0: Alive
-      65: Dead
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 5
-    baseSprintSpeed: 5
-  - type: MeleeWeapon
-    animation: WeaponArcSmash
-    damage:
-      types:
-        Structural: 40
-        Blunt: 20
   - type: GenericVisualizer
     visuals:
       enum.ConstructVisualsState.Transforming:
@@ -229,6 +242,8 @@
     actions:
     - ActionWraithJaunt
     - ActionWraithSummonTeleportRune
+  - type: AlwaysTakeHoly
+  - type: Evil
 
 - type: entity
   parent: ConstructBase
@@ -255,10 +270,13 @@
       types:
         Structural: 40
         Blunt: 3
+  - type: AlwaysTakeHoly
+  - type: Evil
   # TODO: pass through cult walls, area conversion and shield spells
 
+# Crew alignet
 - type: entity
-  parent: ConstructJuggernaut
+  parent: ConstructJuggernautBase
   id: ConstructJuggernautHoly
   name: purified juggernaut
   components:
@@ -277,10 +295,10 @@
         enum.ConstructVisualsState.Glow:
           True: { visible: false }
           False: { visible: true }
-  - type: !Remove ActionGrant # ToDo: actions for purified
+  # ToDo: actions for purified
 
 - type: entity
-  parent: ConstructArtificer
+  parent: ConstructBase
   id: ConstructArtificerHoly
   name: purified artificer
   description: A bulbous construct dedicated to building and maintaining the holy armies.
@@ -300,10 +318,10 @@
         enum.ConstructVisualsState.Glow:
           True: { visible: false }
           False: { visible: true }
-  - type: !Remove ActionGrant # ToDo: actions for purified
+  # ToDo: actions for purified
 
 - type: entity
-  parent: ConstructWraith
+  parent: ConstructWraithBase
   id: ConstructWraithHoly
   name: purified wraith
   components:
@@ -322,4 +340,4 @@
         enum.ConstructVisualsState.Glow:
           True: { visible: false }
           False: { visible: true }
-  - type: !Remove ActionGrant # ToDo: actions for purified
+  # ToDo: actions for purified

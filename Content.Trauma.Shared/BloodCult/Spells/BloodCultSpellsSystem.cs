@@ -12,11 +12,12 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
-using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
+using Content.Shared.Mind;
 using Content.Shared.Mindshield;
 using Content.Shared.Popups;
+using Content.Shared.Rejuvenate;
 using Content.Shared.Speech.Muting;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
@@ -24,6 +25,7 @@ using Content.Trauma.Common.RadialSelector;
 using Content.Trauma.Shared.BloodCult;
 using Content.Trauma.Shared.BloodCult.Empower;
 using Content.Trauma.Shared.BloodCult.Runes.Empower;
+using Robust.Shared.Random;
 using System.Linq;
 
 namespace Content.Trauma.Shared.BloodCult.Spells;
@@ -34,12 +36,14 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
     [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private IRobustRandom _random = default!;
     [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedCuffableSystem _cuffable = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
@@ -136,20 +140,19 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         if (_actions.AddAction(user, args.ActionProtoId) is not { } action)
             return;
 
-        var damage = FixedPoint2.New(5); // ToDo: remove fucking magic number
-
         var damageSpec = new DamageSpecifier()
         {
             DamageDict = new()
             {
-                { Slash, damage }
+                { Slash, cultistComp.SpellCreatingDamage }
             },
         };
 
-        // ToDo: actually randomize this shit
-        // TargetBodyPart.LeftArm
-        // TargetBodyPart.RightArm
-        _damage.ChangeDamage(user, damageSpec, targetPart: TargetBodyPart.LeftArm, canMiss: false);
+        var targetArm = TargetBodyPart.LeftArm;
+        if(_random.Next(0, 2) == 1)
+            targetArm = TargetBodyPart.RightArm;
+
+        _damage.ChangeDamage(user, damageSpec, targetPart: targetArm, canMiss: false);
 
         _popup.PopupEntity($"Your wounds glow with power, you have prepared a {Name(action)} invocation!", user, user, PopupType.Medium);
         _actions.SetTemporary(action, true); // can't be temp in the prototype or AddAction will queue del it :D
@@ -195,6 +198,23 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         }
 
         ev.Handled = true;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnArtificerHeal(BloodCultArtificerHealEvent args)
+    {
+        if (args.Handled)
+            return;
+
+        var ev = new RejuvenateEvent(false, true);
+        RaiseLocalEvent(args.Target, ev);
+        if (_mind.TryGetMind(args.Target, out var mindId, out var mind))
+            _mind.UnVisit(mindId, mind);
+
+        _popup.PopupEntity($"You restore {ToPrettyString(args.Target)} to its intended form.", args.Performer, args.Performer); // Why does it plays twice and how can i stp it?
+        _popup.PopupEntity($"{ToPrettyString(args.Performer)} restores you.", args.Target, args.Target);
+
+        args.Handled = true;
     }
 
     #endregion

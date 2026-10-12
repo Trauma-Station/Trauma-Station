@@ -17,7 +17,7 @@
       skills:
         EldritchKnowledge: 100
         LanguageEldritch: 100
-        MagicalLiteracyKnowledge: 50
+        MagicalLiteracyKnowledge: 75 # minor summoning
     - !type:AddComponents
       components:
       - type: BloodCultMember

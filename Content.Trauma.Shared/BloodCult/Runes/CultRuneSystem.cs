@@ -30,6 +30,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
+using Robust.Shared.Random;
 using System.Linq;
 
 namespace Content.Trauma.Shared.BloodCult.Runes;
@@ -43,6 +44,7 @@ public sealed partial class CultRuneSystem : EntitySystem
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private IRobustRandom _random = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedChatSystem _chat = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -378,6 +380,10 @@ public sealed partial class CultRuneSystem : EntitySystem
             newDamage *= empowered.RuneDamageMultiplier;
         }
 
-        _damage.ChangeDamage(user, newDamage, increaseOnly: true, targetPart: TargetBodyPart.Arms, canMiss: false);
+        var targetArm = TargetBodyPart.LeftArm;
+        if(_random.Next(0, 2) == 1)
+            targetArm = TargetBodyPart.RightArm;
+
+        _damage.ChangeDamage(user, newDamage, increaseOnly: true, targetPart: targetArm, canMiss: false);
     }
 }

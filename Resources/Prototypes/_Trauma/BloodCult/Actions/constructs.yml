@@ -22,24 +22,14 @@
   - type: Sprite
     layers:
     - state: revive
-  # - type: WorldTargetAction # this is shit
-  #   event: !type:PlaceTileEntityEvent
-  #     entity: CultRuneRevive
-  #     length: 2
-  #     blockedCollisionMask:
-  #     - FullTileMask
-  #     blockedCollisionLayer:
-  #     - WallLayer
-  - type: Action # testing
-    useDelay: 60
-    raiseOnAction: true
-  - type: InstantAction
-    event: !type:EffectInstantActionEvent
-  - type: EffectAction # test this
-    effects:
-    - !type:SpawnRandomEntities
+  - type: WorldTargetAction # this shit is not stripped to grid
+    event: !type:PlaceTileEntityEvent
       entity: CultRuneRevive
-      number: 1
+      length: 2
+      blockedCollisionMask:
+      - FullTileMask
+      blockedCollisionLayer:
+      - WallLayer
 
 - type: entity
   parent: BaseActionBloodCult
@@ -53,7 +43,7 @@
   - type: Action
     checkCanInteract: false
     useDelay: 60
-    #startDelay: 60
+    #startDelay: true
     raiseOnAction: true
   - type: TargetAction
     checkCanAccess: true
@@ -120,7 +110,7 @@
   - type: Action
     raiseOnAction: true
     useDelay: 180
-    startDelay: 180
+    startDelay: true
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -141,7 +131,7 @@
   - type: Action
     raiseOnAction: true
     useDelay: 180
-    startDelay: 180
+    startDelay: true
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction

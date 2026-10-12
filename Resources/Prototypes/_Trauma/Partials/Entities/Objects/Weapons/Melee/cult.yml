@@ -23,7 +23,6 @@
       types:
         Slash: 12
       armorPenetration: 0.25
-  - type: Parry # You still need skill to parry with it
   - type: Tool
     qualities:
       - Anchoring

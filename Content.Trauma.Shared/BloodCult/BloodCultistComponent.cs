@@ -2,6 +2,7 @@
 
 using Content.Shared.Mind;
 using Content.Shared.StatusIcon;
+using Content.Shared.FixedPoint;
 
 namespace Content.Trauma.Shared.BloodCult;
 
@@ -21,4 +22,7 @@ public sealed partial class BloodCultistComponent : Component
 
     [DataField]
     public int SpellsLimit = 3;
+
+    [DataField]
+    public FixedPoint2 SpellCreatingDamage = 5;
 }
