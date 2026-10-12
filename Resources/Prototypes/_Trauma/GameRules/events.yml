@@ -392,3 +392,32 @@
     effects:
     - !type:NestedEffect
       proto: TraitorSkills
+
+- type: entity
+  parent: BaseAntagGhostRoleRule
+  id: SamuraiSpawn
+  components:
+  - type: StationEvent
+    weight: 6
+    duration: null
+    occursDuringRoundEnd: false
+    earliestStart: 30
+    reoccurrenceDelay: 20
+    minimumPlayers: 30
+  - type: SpaceSpawnRule
+  - type: AntagGhostCharacterRule # Trauma - use ghost character instead of AntagLoadProfileRule
+  - type: AntagObjectives
+    objectives:
+    - StealResearchObjective
+    - DoorjackObjective
+    - SpiderChargeObjective
+    - TerrorObjective
+    - MassArrestObjective
+    - NinjaSurviveObjective
+  - type: AntagSelection
+    agentName: samurai-round-end-agent-name
+    antags:
+    - !type:FixedAntagCount
+      proto: Samurai
+  - type: DynamicRuleCost
+    cost: 75

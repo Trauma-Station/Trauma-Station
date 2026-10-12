@@ -3,6 +3,7 @@
   name: roles-antag-space-samurai-name
   antagonist: true
   setPreference: false
+  objective: roles-antag-space-samurai-objective
   guides: [ SpaceNinja ]
   tags:
   - OffStation
@@ -36,7 +37,7 @@
   mindRoles:
   - MindRoleSamurai
 
-#Ninja Gear
+#Samurai Gear
 - type: startingGear
   id: SamuraiGear
   equipment:
