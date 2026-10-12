@@ -1,6 +1,5 @@
 ﻿
 - type: entity
-  abstract: true
   parent: [ ClothingHeadHardsuitInsulatedBase, BaseHighlyIllegalContraband ]
   id: ClothingHeadHardsuitSamuraiArmor
   name: samurai o-yoroi helmet
@@ -35,6 +34,7 @@
       flatReductions:
         Ballistic: 5
         Heat: 5
+  - type: SamuraiArmor
   - type: BreathMask
   - type: IdentityBlocker
   - type: IngestionBlocker

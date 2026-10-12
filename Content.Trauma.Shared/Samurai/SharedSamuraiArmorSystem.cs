@@ -2,6 +2,7 @@
 using Content.Shared.Actions;
 using Content.Shared.Clothing;
 using Content.Shared.Inventory.Events;
+using Content.Shared.Popups;
 
 namespace Content.Trauma.Shared.Samurai;
 
@@ -12,6 +13,7 @@ public abstract partial class SharedSamuraiArmorSystem : EntitySystem
 {
     [Dependency] private ActionContainerSystem _actionContainer = default!;
     [Dependency] private SharedSamuraiSystem _samurai = default!;
+    [Dependency] protected SharedPopupSystem Popup = default!;
 
     [SubscribeLocalEvent]
     private void OnEquipped(Entity<SamuraiArmorComponent> ent, ref ClothingGotEquippedEvent args)

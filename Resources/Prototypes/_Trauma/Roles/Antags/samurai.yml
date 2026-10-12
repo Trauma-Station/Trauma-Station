@@ -43,7 +43,6 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitNinja
     back: ClothingBackpackSatchelNinja
-    mask: ClothingMaskNinja
     eyes: ClothingEyesVisorNinja
     gloves: ClothingHandsGlovesSpaceNinja
     outerClothing: ClothingOuterSamuraiArmor
