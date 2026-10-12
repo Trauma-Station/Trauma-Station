@@ -5,29 +5,19 @@
   weights:
     TraitorObjectiveGroupSocial: !Remove
     TraitorObjectiveGroupSabotage: !Remove
+    TraitorObjectiveGroupState: !Remove
 
 - type: weightedRandom
   id: TraitorObjectiveGroupSteal
   weights:
     CMOCrewMonitorStealObjective: !Remove
-    ClipboardStealObjective: 1
-    KnuckleDustersStealObjective: 1
-    CaptainGunStealObjective: 0.5
-    CaptainJetpackStealObjective: 0.5
-    HandTeleporterStealObjective: 0.5
+    EnergyMagnumStealObjective: !Remove
     # TODO: add lawbringer steal obj ig
 
 - type: weightedRandom
   id: TraitorObjectiveGroupKill
   weights:
     PermaKillRandomPersonObjective: 0.5
-
-- type: weightedRandom
-  id: TraitorObjectiveGroupState
-  weights:
-    SkinPunPunObjective: 0.3
-    EscapeShuttleObjective: !Remove
-    DieObjective: !Remove
 
 - type: weightedRandom
   id: TraitorObjectiveGroupOther
