@@ -23,6 +23,7 @@
     - id: VoxRaidersMidround
     - id: TunnelClownMidround
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
+    - id: LoneAbductorSpawn
     - id: ParadoxCloneSpawn
     - id: MorphMidroundRule
 

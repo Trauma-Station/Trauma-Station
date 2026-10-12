@@ -4,6 +4,7 @@ using Content.Goobstation.Common.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Goobstation.Shared.Religion.Nullrod.Systems;
 using Content.Medical.Common.Damage;
+using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Robust.Shared.Timing;
 using Content.Shared.Hands;
@@ -140,8 +141,8 @@ public sealed partial class WeakToHolySystem : SharedWeakToHolySystem
         base.Update(frameTime);
 
         // Holy damage healing.
-        var query = EntityQueryEnumerator<WeakToHolyComponent>();
-        while (query.MoveNext(out var uid, out var weakToHoly))
+        var query = EntityQueryEnumerator<WeakToHolyComponent, DamageableComponent>();
+        while (query.MoveNext(out var uid, out var weakToHoly, out var damageable))
         {
             if (weakToHoly.NextPassiveHealTick > _timing.CurTime)
                 continue;
@@ -151,7 +152,7 @@ public sealed partial class WeakToHolySystem : SharedWeakToHolySystem
             if (TerminatingOrDeleted(uid) || damage.DamageDict.GetValueOrDefault("Holy") <= 0)
                 continue;
 
-            _damageable.ChangeDamage(uid, weakToHoly.PassiveAmount, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
+            _damageable.ChangeDamage((uid, damageable), weakToHoly.PassiveAmount, ignoreBlockers: true, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
         }
 
         if (_toUpdate.Count == 0)

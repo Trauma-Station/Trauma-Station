@@ -4,8 +4,8 @@
   id: SpyBountyPool
   weights:
     SpyBountiesEasy: 5
-    SpyBountiesMedium: 5
-    SpyBountiesHard: 2
+    SpyBountiesMedium: 4
+    SpyBountiesHard: 1
 
 - type: weightedRandom
   id: SpyBountiesEasy

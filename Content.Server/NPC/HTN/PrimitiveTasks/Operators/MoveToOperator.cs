@@ -172,7 +172,7 @@ public sealed partial class MoveToOperator : HTNOperator, IHtnConditionalShutdow
         // <Trauma> - better error than shitty mapcoords one
         if (_entManager.Deleted(targetCoordinates.EntityId))
         {
-            _log.GetSawmill("npc").Error($"{_entManager.ToPrettyString(uid)} tried to move towards invalid coordinates {targetCoordinates}");
+            _log.GetSawmill("npc").Error($"{_entManager.ToPrettyString(uid)} tried to move towards invalid coordinates {targetCoordinates} ({TargetKey})");
             return;
         }
         // </Trauma>

@@ -250,6 +250,8 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
     public virtual void LevelUp(Entity<CosmicCultComponent> ent)
     {
         ent.Comp.LevelUpAwaitingConfirmation = true;
+        DirtyFields(ent, ent.Comp, null,
+            nameof(CosmicCultComponent.LevelUpAwaitingConfirmation));
     }
 
     [SubscribeLocalEvent]

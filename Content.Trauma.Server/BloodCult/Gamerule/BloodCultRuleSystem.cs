@@ -87,9 +87,9 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         }
     }
 
-    protected override void Added(Entity<BloodCultRuleComponent, GameRuleComponent> ent, ref GameRuleAddedEvent args)
+    protected override void Started(Entity<BloodCultRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
     {
-        base.Added(ent, ref args);
+        base.Started(ent, ref args);
 
         if (!_station.TryGetRandomStation(out var station))
         {
@@ -98,14 +98,9 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
             return;
         }
 
-        ent.Comp1.Station = station.Value;
-    }
-
-    protected override void Started(Entity<BloodCultRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
-    {
-        base.Started(ent, ref args);
-
         var comp = ent.Comp1;
+        comp.Station = station.Value;
+
         PickTarget((ent, comp));
         if (comp.OfferingTarget == null)
         {

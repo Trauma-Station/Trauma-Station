@@ -341,7 +341,6 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
 
         var proto = ent.Comp.Prints[i].Proto;
         var item = PredictedSpawnAtPosition(proto, Transform(ent).Coordinates);
-        _transform.SetLocalRotation(item, 0); // chud engine
         _mutator.AddMutation(item, mutation);
         _audio.PlayPredicted(ent.Comp.PrintSound, ent, user);
 
