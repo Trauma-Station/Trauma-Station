@@ -78,7 +78,7 @@
   id: SyndicateHypo
   components:
   - type: UseDelay
-    delay: 5
+    delay: 20
   - type: Sprite
     layers:
       - state: syndicate-base
