@@ -54,7 +54,7 @@
 - type: antagSmite
   id: Heretic
   antag: Heretic
-  rule: HereticRoundstart
+  rule: HereticRule
   ruleComp: HereticRule
   icon:
     sprite: _Goobstation/Heretic/Blades/eldritch_blade.rsi
