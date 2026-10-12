@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsMorgue
+  suffix: Morgue, Locked
+  components:
+  - type: AccessReader
+    access: [["Medical"], ["Detective"], ["Chapel"], ["Kitchen"]]

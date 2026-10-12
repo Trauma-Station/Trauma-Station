@@ -169,7 +169,7 @@
   suffix: Morgue, Locked
   components:
   - type: AccessReader
-    access: [["Medical"], ["Detective"], ["Chapel"], ["Kitchen"]] # Trauma - Morgue access for chef
+    access: [["Medical"], ["Detective"], ["Chapel"]]
 
 - type: entity
   parent: DoorElectronics
