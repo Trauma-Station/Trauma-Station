@@ -126,7 +126,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      150: Dead
+      100: Dead
   - type: Damageable
     damageModifierSet: CultJuggernaut
   - type: MeleeWeapon
@@ -164,7 +164,6 @@
       map: [ "enum.ConstructVisualsState.Sprite" ]
     - state: glow_artificer_cult
       map: [ "enum.ConstructVisualsState.Glow" ]
-  - type: ConstructHealer
   - type: MeleeWeapon
     animation: WeaponArcPunch
     damage:
@@ -183,6 +182,7 @@
   - type: ActionGrant
     actions:
     - ActionArtificerSummonReviveRune
+    - ActionArtificerHeal
     - ActionArtificerSummonCultFloor
     - ActionArtificerSummonCultWall
     - ActionArtificerGreaterConjuration
@@ -275,6 +275,7 @@
         enum.ConstructVisualsState.Glow:
           True: { visible: false }
           False: { visible: true }
+  - type: !Remove ActionGrant # ToDo: actions for purified
 
 - type: entity
   parent: ConstructArtificer
@@ -297,6 +298,7 @@
         enum.ConstructVisualsState.Glow:
           True: { visible: false }
           False: { visible: true }
+  - type: !Remove ActionGrant # ToDo: actions for purified
 
 - type: entity
   parent: ConstructWraith
@@ -318,21 +320,4 @@
         enum.ConstructVisualsState.Glow:
           True: { visible: false }
           False: { visible: true }
-
-- type: entity
-  parent: BaseMobJaunt
-  id: WraithJaunt
-  name: jaunt
-  components:
-  #- type: Sprite
-  #  sprite: Mobs/Ghosts/ghost_human.rsi
-  #  color: "#60f7eb"
-  #  layers:
-  #  - state: animated
-  #    shader: unshaded
-  #  noRot: true
-  #  overrideContainerOcclusion: true
-  #  drawdepth: Ghosts
-  - type: MovementSpeedModifier
-    baseSprintSpeed: 5
-    baseWalkSpeed: 5
+  - type: !Remove ActionGrant # ToDo: actions for purified

@@ -47,7 +47,7 @@
     delay: 5
   - type: Reactive
     reactions:
-    - reagents: [ Holywater, Water, SpaceCleaner ]
+    - reagents: [ Holywater ]
       methods: [ Touch ]
       effects:
       - !type:Delete

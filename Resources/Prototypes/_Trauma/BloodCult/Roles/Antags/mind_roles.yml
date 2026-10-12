@@ -30,7 +30,7 @@
       skills:
       - EldritchKnowledge
       - LanguageEldritch
-      - MagicalLiteracyKnowledge # How else coul you get it?
+      #- MagicalLiteracyKnowledge # Do i even need to remove it?
       force: true
     - !type:RemoveComponents
       components:

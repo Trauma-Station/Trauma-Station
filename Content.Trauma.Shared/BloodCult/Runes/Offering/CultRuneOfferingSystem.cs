@@ -13,7 +13,6 @@ using Content.Shared.Mindshield;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
-using Content.Trauma.Shared.BloodCult.Empower;
 using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Runes.Revive;
 using System.Linq;
@@ -43,7 +42,10 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
     {
         var user = args.User;
         if (_cult.GetRule(user) is not { } rule)
+        {
+            args.Handled = true; // Is it nessasery to handle args?
             return;
+        }
 
         var targets = _cult.GetTargetsNearRune(ent, ent.Comp.OfferingRange);
         targets.RemoveWhere(uid => _cult.IsCultist(uid));
@@ -51,6 +53,7 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
         if (targets.Count == 0)
         {
             args.Popup = "There are no victims nearby";
+            args.Handled = true;
             return;
         }
 
@@ -63,46 +66,51 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
             return;
         }
 
-        var invokers = args.Invokers.Count;
-        bool invokerEmpowered = false;
-        if (invokers == 1)
+        if (_mind.GetMind(target) == null)
         {
-            foreach (var (invokersUid, comp) in args.Invokers)
-            {
-                if (TryComp<BloodCultEmpoweredComponent>(invokersUid, out var invokerComp))
-                    invokerEmpowered = true;
-            }
+            args.Popup = $"{ToPrettyString(target)} is dead inside. They cannot be sacreficed.";
+            args.Handled = true;
+            return;
         }
 
-        if (_mind.GetMind(target) == null ||
-            target == rule.Comp.OfferingTarget ||
-            HasComp<BibleUserComponent>(target) ||
-            _mindShield.IsShielded(target))
+        if (HasComp<BibleUserComponent>(target) || _mindShield.IsShielded(target)) // can alive heretics be sacreficed? if so then they should added here
         {
-            if (invokers < ent.Comp.AliveSacrificeInvokersAmount && !invokerEmpowered)
+            args.Popup = $"Some other powerfull entity owns {ToPrettyString(target)}'s soul. They cannot be sacreficed alive.";
+            args.Handled = true;
+            return;
+        }
+
+        var invokers = args.Invokers.Count;
+
+        if (target == rule.Comp.OfferingTarget)
+        {
+            if (invokers < ent.Comp.AliveSacrificeInvokersAmount)
             {
                 args.Popup = $"You need {ent.Comp.AliveSacrificeInvokersAmount} invokers to sacrifice a body";
+                args.Handled = true;
                 return;
             }
 
             Sacrifice(rule, target, user);
+            args.Handled = true;
+            return;
         }
-        else
+
+        if (invokers < ent.Comp.ConvertInvokersAmount)
         {
-            if (invokers < ent.Comp.ConvertInvokersAmount && !invokerEmpowered)
-            {
-                args.Popup = $"You need {ent.Comp.ConvertInvokersAmount} invokers to convert a being";
-                return;
-            }
-
-            if (!Convert(ent, rule, target, user))
-            {
-                args.Popup = "It no work!";
-                return;
-            }
+            args.Popup = $"You need {ent.Comp.ConvertInvokersAmount} invokers to convert a being";
+            args.Handled = true;
+            return;
         }
 
-        args.Handled = true;
+        if (!Convert(ent, rule, target, user))
+        {
+            args.Popup = "It no work!";
+            args.Handled = true;
+            return;
+        }
+
+        args.Handled = true; // is there even a point for that here?
     }
 
     private void Sacrifice(Entity<BloodCultRuleComponent> rule, EntityUid target, EntityUid user)

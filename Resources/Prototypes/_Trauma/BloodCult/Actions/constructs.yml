@@ -35,11 +35,36 @@
     raiseOnAction: true
   - type: InstantAction
     event: !type:EffectInstantActionEvent
-  - type: EffectAction
+  - type: EffectAction # test this
     effects:
     - !type:SpawnRandomEntities
       entity: CultRuneRevive
       number: 1
+
+- type: entity
+  parent: BaseActionBloodCult
+  id: ActionArtificerHeal
+  name: Rejuvinate Construct
+  description: Heals all damage done to fellow construct.
+  components:
+  - type: Sprite
+    layers:
+    - state: abyssal_gaze
+  - type: Action
+    checkCanInteract: false
+    useDelay: 60
+    #startDelay: 60
+    raiseOnAction: true
+  - type: TargetAction
+    checkCanAccess: true
+    interactOnMiss: false
+    range: 2
+  - type: EntityTargetAction
+    canTargetSelf: false
+    whitelist:
+      components:
+      - Construct
+    event: !type:BloodCultArtificerHealEvent # this shit doesnt work yet
 
 - type: entity
   parent: BaseActionBloodCult
@@ -52,10 +77,14 @@
     - state: create_cult_floor
   - type: Action
     checkCanInteract: false
-    useDelay: 25
-  # - type: WorldTargetAction # cant use that
-  #   event: !type:ChangeTileReaction
-  #     newTileId: CultFloor
+    raiseOnAction: true
+    useDelay: 15
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:SpawnTile
+      tile: CultFloor
 
 - type: entity
   parent: BaseActionBloodCultSummonEntity
@@ -90,7 +119,8 @@
     - state: artificer
   - type: Action
     raiseOnAction: true
-    useDelay: 60
+    useDelay: 180
+    startDelay: 180
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction
@@ -110,7 +140,8 @@
     - state: create_soul_stone
   - type: Action
     raiseOnAction: true
-    useDelay: 60
+    useDelay: 180
+    startDelay: 180
   - type: InstantAction
     event: !type:EffectInstantActionEvent
   - type: EffectAction

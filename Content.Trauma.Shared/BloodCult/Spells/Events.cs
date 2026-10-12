@@ -2,6 +2,7 @@
 
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
+using Content.Shared.Maps;
 using Content.Trauma.Common.Inventory;
 using Robust.Shared.Audio;
 
@@ -53,3 +54,5 @@ public sealed partial class TeleportActionDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
 public sealed partial class BloodRitesExtractDoAfterEvent : SimpleDoAfterEvent;
+
+public sealed partial class BloodCultArtificerHealEvent : EntityTargetActionEvent;

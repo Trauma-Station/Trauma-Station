@@ -2,6 +2,17 @@
 
 - type: construction
   abstract: true
+  id: BaseBloodCultItem
+  objectType: Item
+  category: construction-category-antagonist
+  entityWhitelist: # if skills are disabled, prevents randoms making cult shit
+    components:
+    - BloodCultist
+  theory:
+    EldritchKnowledge: 5
+
+- type: construction
+  abstract: true
   id: BaseBloodCultStructure
   objectType: Structure
   placementMode: SnapgridCenter
@@ -52,7 +63,7 @@
   targetNode: girder
 
 - type: construction
-  parent: BaseBloodCultStructure
+  parent: BaseBloodCultItem
   id: CultDagger
   objectType: Item
   graph: CultDagger

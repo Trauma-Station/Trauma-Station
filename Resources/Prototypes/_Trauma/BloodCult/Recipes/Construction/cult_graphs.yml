@@ -115,7 +115,7 @@
   - node: wall
     entity: WallCult
 
-- type: constructionGraph # still broken
+- type: constructionGraph
   id: CultDagger
   start: start
   graph:
@@ -126,7 +126,7 @@
       - tag: Knife
         amount: 1
         name: construction-graph-tag-knife
-      - tag: DemonEssense
+      - tag: DemonEssense  # if you lost your dagger and dont have access to empower rune -> go summon deamons. At this point you deserve to suffer
         amount: 1
         name: construction-graph-tag-demonsoul
   - node: dagger
