@@ -16,7 +16,7 @@
 
 - type: entity
   parent: BaseGameRule
-  id: Insurgency
+  id: InsurgencyRuleRandom
   components:
   - type: GameRule
     minPlayers: 5
@@ -29,24 +29,33 @@
         weight: 70
 
 - type: entity
+  parent: BaseGameRule
+  id: InsurgencyRule # no ship, for antag smite
+  components:
+  - type: AntagObjectives
+    objectives:
+    - InsurgentEscapeObjective
+    #- InsurgentAllSurviveObjective # TODO
+  - type: InsurgencyRule
+  - type: AntagSelection
+    agentName: insurgent-round-end-agent-name
+    antags:
+    - !type:FixedAntagCount
+      proto: Insurgent
+
+- type: entity
   abstract: true
-  parent: BaseRoundstartAntagRule
+  parent: [ InsurgencyRule, BaseRoundstartAntagRule ]
   id: BaseInsurgencyRule
   components:
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/insurgents.yml
-  - type: AntagObjectives
-    objectives:
-    - InsurgentEscapeObjective
-    #- InsurgentAllSurviveObjective # TODO
   - type: AntagLoadProfileRule
     speciesOverride: Human
     speciesOverrideBlacklist:
     - Plasmaman # instantly dies
-  - type: InsurgencyRule
   - type: AntagSelection
-    agentName: insurgent-round-end-agent-name
     antags:
     - !type:LinearAntagCount
       proto: Insurgent
