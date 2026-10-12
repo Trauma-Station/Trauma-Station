@@ -48,7 +48,6 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
-    [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
 
     private static readonly EntProtoId Muted = "StatusEffectMuted";
     private static readonly ProtoId<DamageTypePrototype> Slash = "Slash";
@@ -91,7 +90,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
             return;
 
         // robot/pai/construct can't do blood magic
-        if (!_bloodQuery.HasComp(user))
+        if (!TryComp<BloodstreamComponent>(user, out var bloodComp))
         {
             _popup.PopupEntity("You have no blood to channel the spell through!", user, user, PopupType.LargeCaution);
             return;
