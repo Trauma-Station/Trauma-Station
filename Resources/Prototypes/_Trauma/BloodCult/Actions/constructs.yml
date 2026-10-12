@@ -35,7 +35,7 @@
   parent: BaseActionBloodCult
   id: ActionArtificerHeal
   name: Rejuvinate Construct
-  description: Heals all damage done to fellow construct.
+  description: Heals all damage done to a fellow construct.
   components:
   - type: Sprite
     layers:

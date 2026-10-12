@@ -87,7 +87,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         if (i < 0 || i >= ent.Comp.AvailableActions.Count)
             return;
 
-        if (!TryComp<BloodCultistComponent>(user, out var _bloodCultistComponent))
+        if (!TryComp<BloodCultistComponent>(user, out var cultist))
             return;
 
         // robot/pai/construct can't do blood magic
@@ -99,10 +99,10 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
 
         var id = ent.Comp.AvailableActions[i];
 
-        var count = _bloodCultistComponent.ActiveSpells.Count;
-        if (count >= _bloodCultistComponent.SpellsLimit)
+        var count = cultist.ActiveSpells.Count;
+        if (count >= cultist.SpellsLimit)
         {
-            if (GetActiveSpell(_bloodCultistComponent, id) is { } action)
+            if (GetActiveSpell(cultist, id) is { } action)
             {
                 _popup.PopupEntity("You forget your current spell", user, user);
                 _actions.RemoveAction(user, action);

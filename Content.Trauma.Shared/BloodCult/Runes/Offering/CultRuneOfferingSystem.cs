@@ -42,10 +42,7 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
     {
         var user = args.User;
         if (_cult.GetRule(user) is not { } rule)
-        {
-            args.Handled = true; // Is it nessasery to handle args?
             return;
-        }
 
         var targets = _cult.GetTargetsNearRune(ent, ent.Comp.OfferingRange);
         targets.RemoveWhere(uid => _cult.IsCultist(uid));
@@ -53,7 +50,6 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
         if (targets.Count == 0)
         {
             args.Popup = "There are no victims nearby";
-            args.Handled = true;
             return;
         }
 
@@ -68,15 +64,13 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
 
         if (_mind.GetMind(target) == null)
         {
-            args.Popup = $"{ToPrettyString(target)} is dead inside. They cannot be sacreficed.";
-            args.Handled = true;
+            args.Popup = $"{ToPrettyString(target)} is dead inside. They cannot be sacrificed.";
             return;
         }
 
         if (HasComp<BibleUserComponent>(target) || _mindShield.IsShielded(target)) // can alive heretics be sacreficed? if so then they should added here
         {
-            args.Popup = $"Some other powerfull entity owns {ToPrettyString(target)}'s soul. They cannot be sacreficed alive.";
-            args.Handled = true;
+            args.Popup = $"Some other powerful entity owns {ToPrettyString(target)}'s soul. They cannot be sacrificed alive.";
             return;
         }
 
@@ -87,7 +81,6 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
             if (invokers < ent.Comp.AliveSacrificeInvokersAmount)
             {
                 args.Popup = $"You need {ent.Comp.AliveSacrificeInvokersAmount} invokers to sacrifice a body";
-                args.Handled = true;
                 return;
             }
 
@@ -99,18 +92,16 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
         if (invokers < ent.Comp.ConvertInvokersAmount)
         {
             args.Popup = $"You need {ent.Comp.ConvertInvokersAmount} invokers to convert a being";
-            args.Handled = true;
             return;
         }
 
         if (!Convert(ent, rule, target, user))
         {
             args.Popup = "It no work!";
-            args.Handled = true;
             return;
         }
 
-        args.Handled = true; // is there even a point for that here?
+        args.Handled = true;
     }
 
     private void Sacrifice(Entity<BloodCultRuleComponent> rule, EntityUid target, EntityUid user)

@@ -4,11 +4,10 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Maps;
 using Robust.Shared.Map;
 
-namespace Content.Goobstation.Shared.EntityEffects.Effects;
+namespace Content.Trauma.Shared.EntityEffects.Effects;
 
 /// <summary>
-/// Spawns a random number of entities at the target.
-/// <see cref="Number"/> is the inclusive maximum number of entities to spawn, the minimum is <see cref="Min"/>.
+/// Changes a tile on ent coordinates to a given one.
 /// </summary>
 public sealed partial class SpawnTile : EntityEffectBase<SpawnTile>
 {
@@ -25,10 +24,9 @@ public sealed partial class SpawnTileEffectSystem : EntityEffectSystem<Transform
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<SpawnTile> args)
     {
-        var xform = Transform(ent.Owner);
-        var mapCoords = _transform.GetMapCoordinates(ent.Owner, xform);
+        var mapCoords = _transform.GetMapCoordinates(ent.Owner, ent.Comp);
         if (!_map.TryFindGridAt(mapCoords, out var gridUid, out var gridComp) ||
-            !_map.TryGetTileRef(gridUid, gridComp, xform.Coordinates, out var tileRef) ||
+            !_map.TryGetTileRef(gridUid, gridComp, ent.Comp.Coordinates, out var tileRef) ||
             tileRef.Tile.IsEmpty)
         {
             return;
