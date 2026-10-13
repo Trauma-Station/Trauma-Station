@@ -17,7 +17,7 @@
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRule
-  - Changeling
+  - ChangelingRuleRoundstart
 
 # no subgamemodes for the mixed presets
 

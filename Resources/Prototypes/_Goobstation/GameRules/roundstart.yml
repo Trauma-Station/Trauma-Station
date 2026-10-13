@@ -19,7 +19,7 @@
       playerRatio: 15
 
 - type: entity
-  parent: Changeling
+  parent: ChangelingRuleRoundstart
   id: CalmLing # For Dual Antag Gamemodes
   components:
   - type: GameRule
