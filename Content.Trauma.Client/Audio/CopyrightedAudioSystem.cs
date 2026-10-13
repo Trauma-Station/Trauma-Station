@@ -68,8 +68,7 @@ public sealed partial class CopyrightedAudioSystem : EntitySystem
         _audio.SetState(uid, state, force: true, component: audio);
 
         // prevent server state trolling it (jukebox mostly)
-        // TODO: uncomment and remove DEBUG check if engine pr goidamerged
-#if DEBUG
+#if !USE_ROBUST
         EntityManager.SetComponentNetSync(uid, audio, !muted);
 #endif
         audio.NetSyncEnabled = !muted;

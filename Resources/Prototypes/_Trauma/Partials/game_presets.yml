@@ -7,11 +7,12 @@
   - HereticRoundstart
   - BlobGameMode
   - LoneAbductorSpawn
-  - Changeling
-  - Insurgency
+  - !Remove Changeling
+  - ChangelingRuleRoundstart
+  - InsurgencyRuleRandom
   - CosmicCult
   - XenomorphsInfestationRoundstart
-  - Spies
+  - SpyRuleRoundstart
 
 - type: gamePreset
   id: AllerAtOnce
@@ -22,17 +23,18 @@
   - HereticRoundstart
   - BlobGameMode
   - LoneAbductorSpawn
-  - Changeling
+  - !Remove Changeling
+  - ChangelingRuleRoundstart
   - ShadowlingRoundstart
-  - Insurgency
+  - InsurgencyRuleRandom
   - CosmicCult
   - XenomorphsInfestationRoundstart
-  - Spies
+  - SpyRuleRoundstart
 
 - type: gamePreset
   id: Secret
   rules:
-  - Insurgency
+  - InsurgencyRuleRandom
 
 - type: gamePreset
   id: Traitor

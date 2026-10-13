@@ -7,8 +7,6 @@
   components:
   - type: SubGamemodes
     rules:
-    - id: SubSpies
-      prob: 0.3
     - id: Devil
       prob: 0.02
     - id: ShadowlingRoundstart
@@ -18,22 +16,7 @@
 
 - type: entity
   parent: BaseGameRule
-  id: SubGamemodesRuleNoSpy
-  components:
-  - type: SubGamemodes
-    rules:
-    - id: SubHeretic
-      prob: 0.2
-    - id: Devil
-      prob: 0.02
-    - id: ShadowlingRoundstart
-      prob: 0.02
-    - id: WraithRoundstart
-      prob: 0.1
-
-- type: entity
-  parent: BaseGameRule
-  id: Insurgency
+  id: InsurgencyRuleRandom
   components:
   - type: GameRule
     minPlayers: 5
@@ -46,24 +29,33 @@
         weight: 70
 
 - type: entity
-  abstract: true
-  parent: BaseRoundstartAntagRule
-  id: BaseInsurgencyRule
+  parent: BaseGameRule
+  id: InsurgencyRule # for antag smite
   components:
   - type: RuleGrids
   - type: LoadMapRule
     gridPath: /Maps/_Trauma/Shuttles/insurgents.yml
-  - type: AntagObjectives
-    objectives:
-    - InsurgentEscapeObjective
-    #- InsurgentAllSurviveObjective # TODO
   - type: AntagLoadProfileRule
     speciesOverride: Human
     speciesOverrideBlacklist:
     - Plasmaman # instantly dies
+  - type: AntagObjectives
+    objectives:
+    - InsurgentEscapeObjective
+    #- InsurgentAllSurviveObjective # TODO
   - type: InsurgencyRule
   - type: AntagSelection
     agentName: insurgent-round-end-agent-name
+    antags:
+    - !type:FixedAntagCount
+      proto: Insurgent
+
+- type: entity
+  abstract: true
+  parent: [ InsurgencyRule, BaseRoundstartAntagRule ]
+  id: BaseInsurgencyRule
+  components:
+  - type: AntagSelection
     antags:
     - !type:LinearAntagCount
       proto: Insurgent
@@ -73,8 +65,9 @@
       playerRatio: 10
 
 - type: entity
-  parent: BaseRoundstartAntagRule
-  id: Spies
+  abstract: true
+  parent: BaseGameRule
+  id: BaseSpyRule
   components:
   - type: AntagPlayerEffects
     effects:
@@ -96,17 +89,9 @@
     balance:
       Telecrystal: 0
   - type: GameRule
-    minPlayers: 5
+    minPlayers: 15
   - type: AntagSelection
     agentName: spy-round-end-agent-name
-    lateJoinAdditional: true
-    antags:
-    - !type:LinearAntagCount
-      playerRatio: 6
-      proto: Spy
-      range:
-        min: 1
-        max: 8
   # Get 3 random rp objectives and 1 real objective
   - type: AntagObjectives
     objectives:
@@ -118,6 +103,31 @@
     sets:
     - groups: SpyObjectiveGroups
       maxPicks: 1
+
+- type: entity
+  parent: [ BaseSpyRule, BaseRoundstartAntagRule ]
+  id: SpyRuleRoundstart
+  components:
+  - type: AntagSelection
+    lateJoinAdditional: true
+    antags:
+    - !type:LinearAntagCount
+      playerRatio: 7
+      proto: Spy
+      range:
+        min: 2 # At least some competition
+        max: 8
+
+- type: entity
+  parent: BaseSpyRule
+  id: SpyRule
+  components:
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: Spy
+
+# Insurgents
 
 - type: entity
   parent: BaseInsurgencyRule
@@ -168,4 +178,28 @@
   parent: BaseGameRule
   id: SpectatorStatistics
   components:
-    - type: ObserverStatisticRule
+  - type: ObserverStatisticRule
+
+- type: entity
+  parent: BaseChangelingRule
+  id: ChangelingRule
+  components:
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: Changeling
+
+- type: entity
+  parent: [ BaseChangelingRule, BaseRoundstartAntagRule ]
+  id: ChangelingRuleRoundstart
+  components:
+  - type: AntagSelection
+    selectionTime: PrePlayerSpawn
+    lateJoinAdditional: true
+    antags:
+    - !type:LinearAntagCount
+      proto: Changeling
+      playerRatio: 12
+      range:
+        min: 1
+        max: 4
