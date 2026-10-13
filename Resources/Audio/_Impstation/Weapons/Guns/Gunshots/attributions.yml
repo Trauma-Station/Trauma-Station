@@ -1,0 +1,19 @@
+- files: ["adder"]
+  license: "CC-BY-4.0"
+  copyright: "made by Artninja on Freesound"
+  source: "https://freesound.org/people/Artninja/sounds/786134/"
+
+- files: ["akurra"]
+  license: "CC-BY-4.0"
+  copyright: "made by Artninja on Freesound and edited by DVD Player"
+  source: "https://freesound.org/people/Artninja/sounds/786134/"
+
+- files: ["flamethrower"]
+  license: "CC-BY-3.0"
+  copyright: "made by Red Eclipse on opengameart"
+  source: "https://opengameart.org/content/red-eclipse-sounds"
+
+- files: ["leviathan"]
+  license: "CC-BY-SA-3.0"
+  copyright: "Two sounds made by Q009 on opengameart layered together"
+  source: "https://opengameart.org/content/q009s-weapon-sounds"

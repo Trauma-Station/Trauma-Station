@@ -58,29 +58,28 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                 continue;
             }
 
-            check.TryAdd(stationUid.Value, 0);
+            check.TryAdd(stationUid, 0);
 
-            check[stationUid.Value] += comp.BlobTiles.Count;
+            check[stationUid] += comp.BlobTiles.Count;
         }
 
-        foreach (var (station, length) in check.AsParallel())
+        foreach (var (station, tiles) in check)
         {
-            CheckChangeStage(station, component, length);
+            CheckChangeStage(station, component, tiles);
         }
     }
 
-    private bool CheckBlobInStation(EntityUid blobCore, TransformComponent? xform, [NotNullWhen(true)] out EntityUid? stationUid)
+    private bool CheckBlobInStation(EntityUid blobCore, TransformComponent? xform, out EntityUid stationUid)
     {
-        var station = _station.GetOwningStation(blobCore, xform);
-        if (station == null || !HasComp<StationEventEligibleComponent>(station.Value))
+        if (_station.GetOwningStation(blobCore, xform) is not { } station)
         {
             _chatMan.SendAdminAlert(blobCore, Loc.GetString("blob-alert-out-off-station"));
             QueueDel(blobCore);
-            stationUid = null;
+            stationUid = EntityUid.Invalid;
             return false;
         }
 
-        stationUid = station.Value;
+        stationUid = station;
         return true;
     }
 
