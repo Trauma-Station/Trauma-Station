@@ -4,7 +4,7 @@
   id: TraitorObjectiveGroups
   weights:
     TraitorObjectiveGroupSteal: 0.6
-    TraitorObjectiveGroupSocial: 0.6
+    TraitorObjectiveGroupSocial: 0.4
     TraitorObjectiveGroupSabotage: !Remove
     TraitorObjectiveGroupOther: .05
 
