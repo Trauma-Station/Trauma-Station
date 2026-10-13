@@ -22,7 +22,9 @@
   - type: Gun
     fireRate: 0.5
   - type: Item
-    size: Huge
+    size: Large
+    shape:
+      null
     sprite: _Goobstation/Objects/Weapons/Guns/Launchers/riotlauncher.rsi
   - type: ItemSlots
     slots:
