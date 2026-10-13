@@ -39,11 +39,9 @@
       flatReductions:
         Ballistic: 5
         Heat: 5
+  - type: Unremoveable
   - type: ExplosionResistance
     damageCoefficient: 0.3
   - type: FireProtection
     reduction: .9
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
-      head: ClothingHeadHardsuitSamuraiArmor
   - type: SamuraiArmor

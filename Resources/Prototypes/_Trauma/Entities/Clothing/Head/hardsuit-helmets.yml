@@ -1,6 +1,6 @@
 ﻿
 - type: entity
-  parent: [ ClothingHeadHardsuitInsulatedBase, BaseHighlyIllegalContraband ]
+  parent: [ BaseItem, ClothingHeadHardsuitInsulatedBase, BaseHighlyIllegalContraband ]
   id: ClothingHeadHardsuitSamuraiArmor
   name: samurai o-yoroi helmet
   description: The helmet of the mighty yoroi regalia.
@@ -34,7 +34,7 @@
       flatReductions:
         Ballistic: 5
         Heat: 5
-  - type: SamuraiArmor
+  - type: Unremoveable
   - type: BreathMask
   - type: IdentityBlocker
   - type: IngestionBlocker

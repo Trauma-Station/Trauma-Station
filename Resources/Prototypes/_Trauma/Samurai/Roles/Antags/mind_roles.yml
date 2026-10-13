@@ -7,6 +7,6 @@
   components:
   - type: MindRole
     antagPrototype: Samurai
-    subtype: Samurai
+    subtype: role-subtype-samurai
     exclusiveAntag: true
   - type: SamuraiRole
