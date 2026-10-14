@@ -25,9 +25,9 @@
     - Tail
     - Wings
     traumaDeductions: # samurai is not being delimbed due to some bullshit.
-      Dismemberment: 0
-      OrganDamage: 0
-      BoneDamage: 0
+      Dismemberment: 1
+      OrganDamage: .6
+      BoneDamage: .6
       VeinsDamage: 0
     modifiers:
       coefficients:
@@ -45,3 +45,8 @@
   - type: FireProtection
     reduction: .9
   - type: SamuraiArmor
+  - type: ClothingAutoInject
+    autoInjectOnAbility: true
+    reagents:
+      Ichor: 15
+      Stimulants: 15
