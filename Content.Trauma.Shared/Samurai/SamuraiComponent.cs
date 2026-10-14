@@ -1,4 +1,6 @@
-﻿namespace Content.Trauma.Shared.Samurai;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+namespace Content.Trauma.Shared.Samurai;
 
 /// <summary>
 /// Component placed on a mob to make it a samurai, able to use armor and other abilities.

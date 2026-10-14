@@ -1,4 +1,6 @@
-﻿namespace Content.Trauma.Shared.Item;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+namespace Content.Trauma.Shared.Item;
 
 /// <summary>
 /// Raises a <see cref="BindItemEvent"/> on the wearer when this item is picked up.
