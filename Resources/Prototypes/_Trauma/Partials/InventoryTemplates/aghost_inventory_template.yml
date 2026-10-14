@@ -1,4 +1,6 @@
-﻿- type: inventoryTemplate
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: inventoryTemplate
   id: aghost
   slots: !Clear
   - name: back
