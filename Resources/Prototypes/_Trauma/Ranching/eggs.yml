@@ -145,9 +145,10 @@
     entity: MobChickPoultrygeist
   - type: EntityEffectOnEaten
     effects:
-    - !type:SpawnRandomEntities
-      entity: BaseMobShadowDemon
-      number: 2
+    - !type:SpawnEntity
+      entity: MobSpookyGhost1
+    - !type:SpawnEntity
+      entity: MobLivingCurse
 
 - type: entity
   parent: BaseRanchingEgg
@@ -247,7 +248,7 @@
     sprite: _Trauma/Objects/Misc/eggs.rsi
     state: egg-golden
   - type: StaticPrice
-    price: 5000
+    price: 25000
 
 - type: entity
   parent: BaseRanchingEgg
