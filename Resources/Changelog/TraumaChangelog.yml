@@ -15733,3 +15733,29 @@ Entries:
   id: 1713
   time: '2026-10-14T00:31:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5013
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added new ghosts and curses to poultrygeist egg, which is obtained from
+      poultrygeist chickens which require a black silkie chicken dying to old
+      age whilst being unhappy
+  - type: Remove
+    message: Removed shadow demon from poultrygeist egg
+  - type: Tweak
+    message: Increased the sell price of golden egg from 5000 spesos to 25000 spesos
+  - type: Tweak
+    message: Spooky ghost has been made spookier and now drops an ice anomaly core.
+  - type: Tweak
+    message: Living curses are now more dangerous
+  - type: Tweak
+    message: >-
+      Decreased the metabolism speed on fresium and increased the rate at which
+      it cools
+  - type: Fix
+    message: >-
+      Fixed mime eggs being unobtainable if a clown hen was too happy, now it is
+      properly obtained from mimanas
+  id: 1714
+  time: '2026-10-14T18:15:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5033
