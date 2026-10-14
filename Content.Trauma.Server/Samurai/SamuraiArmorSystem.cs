@@ -1,5 +1,6 @@
 ﻿using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
+using Content.Shared.Projectiles;
 using Content.Trauma.Shared.Samurai;
 
 namespace Content.Trauma.Server.Samurai;
@@ -10,7 +11,8 @@ namespace Content.Trauma.Server.Samurai;
 public sealed partial class SamuraiArmorSystem : SharedSamuraiArmorSystem
 {
     [Dependency] private SharedHandsSystem _hands = default!;
-    [Dependency] private SharedPopupSystem Popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedProjectileSystem _projectile = default!;
 
     [SubscribeLocalEvent]
     private void OnRecallEnergyPolearm(Entity<SamuraiArmorComponent> ent, ref RecallEnergyPolearmEvent args)
@@ -23,9 +25,12 @@ public sealed partial class SamuraiArmorSystem : SharedSamuraiArmorSystem
 
         var energyPolearm = samurai.EnergyPolearm.Value;
 
+        if (TryComp(energyPolearm, out EmbeddableProjectileComponent? embeddable) && embeddable.EmbeddedIntoUid != null)
+            _projectile.EmbedDetach(energyPolearm, embeddable);
+
         var message = _hands.TryPickupAnyHand(user, energyPolearm)
             ? "samurai-energy-polearm-recalled"
             : "samurai-recall-failed";
-        Popup.PopupEntity(Loc.GetString(message), user, user);
+        _popup.PopupEntity(Loc.GetString(message), user, user);
     }
 }

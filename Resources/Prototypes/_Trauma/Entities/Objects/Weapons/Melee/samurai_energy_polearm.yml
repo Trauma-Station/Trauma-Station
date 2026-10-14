@@ -47,7 +47,8 @@
         - type: ThrowingAngle
           angle: 225
         - type: EmbeddableProjectile
-          removalTime: 0
+          minimumSpeed: 2
+          removalTime: 2
         - type: DamageOtherOnHit
           damage:
             types:
