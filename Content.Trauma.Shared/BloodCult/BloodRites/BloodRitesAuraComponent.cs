@@ -31,7 +31,7 @@ public sealed partial class BloodRitesAuraComponent : Component
     /// How units of blood do we need to heal 1 point of damage
     /// </summary>
     [DataField]
-    public float HealRatio = 1f;
+    public float HealRatio = 2f;
 
     /// <summary>
     /// Ratio which is applied to calculate the <see cref="StoredBlood"/> amount to heal yourself.
