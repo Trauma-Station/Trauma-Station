@@ -32,7 +32,7 @@
     HeadOfPersonnel:
     - !type:DepartmentTimeRequirement
       department: Civilian
-      time: 5h
+      time: 2h
     - !type:DepartmentTimeRequirement
       department: Service
       time: 5h

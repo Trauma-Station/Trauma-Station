@@ -3,7 +3,7 @@
 - type: antagSmite
   id: Changeling
   antag: Changeling
-  rule: Changeling
+  rule: ChangelingRule
   ruleComp: ChangelingRule
   icon:
     sprite: _Goobstation/Changeling/changeling_abilities.rsi

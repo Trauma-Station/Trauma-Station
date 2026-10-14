@@ -10,6 +10,8 @@
     sprite: _Trauma/BloodCult/Entities/Items/construct_shell.rsi
     state: icon
   - type: ItemSlots
+  - type: NameIdentifier
+    group: AdjectivePrefix # TODO: make cult related dataset
   - type: ConstructShell
     shardSlot:
       ejectOnBreak: true

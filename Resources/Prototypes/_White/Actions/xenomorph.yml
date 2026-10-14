@@ -176,7 +176,7 @@
   name: Build a resin nest (50)
   components:
   - type: Sprite
-    sprite: _White/Structures/Windows/resin_membrane.rsi
+    sprite: _White/Structures/Furniture/resin_nest.rsi
     layers:
     - state: full
   - type: Action

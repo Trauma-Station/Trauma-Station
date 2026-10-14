@@ -51,6 +51,10 @@ public sealed partial class AntagVerbSystem : EntitySystem
 
     public void MakeAntag(ICommonSession player, AntagSmitePrototype smite)
     {
+        // don't cause any weird shit if they're already an antag for this rule
+        if (_antag.FindRule(smite.RuleComp) is { } rule && _antag.IsPlayerAnyAntag(rule, player))
+            return;
+
         _antag.ForceMakeAntag(player, smite.Rule, smite.RuleComp);
     }
 }

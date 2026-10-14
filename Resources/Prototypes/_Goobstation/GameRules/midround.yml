@@ -36,20 +36,6 @@
         max: 2
       playerRatio: 10
 
-# Midround Changelings
-- type: entity
-  parent: [ BaseMidroundAntagRule, Changeling ]
-  id: ChangelingMidround
-  components:
-  - type: AntagSelection
-    antags:
-    - !type:LinearAntagCount
-      proto: Changeling
-      range:
-        min: 1
-        max: 2
-      playerRatio: 10
-
 # Midround Heretics
 - type: entity
   parent: [ BaseMidroundAntagRule, BaseHereticRule ]

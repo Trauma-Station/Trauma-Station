@@ -14,7 +14,7 @@
   abstract: true
   parent: RestrictedAntag
   id: BaseBloodCult
-  jobBlacklist: [ Chaplain ]
+  jobBlacklist: [ Chaplain, Mime ] # mime can't use any spells/runes
   briefing:
     text: blood-cult-role-greeting
     color: Red
