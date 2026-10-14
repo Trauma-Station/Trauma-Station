@@ -148,6 +148,7 @@
   equipment:
     back: ClothingBackpackSatchelAdmin
     id: AdminPDA
+    belt: ClothingBeltUtilityEngineering
   storage:
     back:
     - GasAnalyzer
