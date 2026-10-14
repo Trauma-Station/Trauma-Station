@@ -130,4 +130,4 @@
   - type: NightVision
     relayOverlay: true
     lightingColor: "#dc143cee"
-    overlayColor: "#dc143c"
+    overlayColor: "#dc143c33"

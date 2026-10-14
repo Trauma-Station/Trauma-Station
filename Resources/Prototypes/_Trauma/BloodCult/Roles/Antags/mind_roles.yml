@@ -20,6 +20,11 @@
       skills:
         EldritchKnowledge: 100
         LanguageEldritch: 100
+    - !type:GrantTemporarySkills
+      skills:
+        KnowledgeWeaponsPolearm: 25
+        KnowledgeWeaponsLongBlade: 25
+        KnowledgeWeaponsShortBlade: 25
     - !type:AddComponents
       components:
       - type: BloodCultMember
@@ -33,6 +38,11 @@
       - EldritchKnowledge
       - LanguageEldritch
       force: true
+    - !type:RemoveTemporarySkills
+      skills:
+        KnowledgeWeaponsPolearm: 25
+        KnowledgeWeaponsLongBlade: 25
+        KnowledgeWeaponsShortBlade: 25
     - !type:RemoveComponents
       components:
       - type: BloodCultMember

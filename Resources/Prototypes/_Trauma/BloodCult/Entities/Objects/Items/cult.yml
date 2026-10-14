@@ -13,7 +13,7 @@
   - type: ShuttleCurse
 
 - type: entity
-  parent: [ BaseItem, BaseBloodContraband ]
+  parent: [ WhetstoneBase, BaseBloodContraband ]
   id: WhetstoneCult
   name: eldritch whetstone
   description: A block, empowered by dark magic. Sharp weapons will be enhanced when used on the stone.
@@ -22,22 +22,12 @@
     sprite: _Trauma/BloodCult/Entities/Items/whetstone_cult.rsi
     layers:
     - state: icon
-      map: [ "enum.GenericCultVisuals.Layer" ]
+  - type: Item
+    storedRotation: -90
   - type: CultItem
-  - type: Whetstone
-    whitelist:
-      components:
-      - Sharp
-    blacklist:
-      components:
-      - EnergySword
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.GenericCultVisuals.State:
-        enum.GenericCultVisuals.Layer:
-          True: { state: icon }
-          False: { state: icon_off }
+  - type: CustomDurabilityModifier
+    maxDurabilityStateModifiers:
+      Reinforced: 4, 1.3 # Either +4 damage or +30% damage, whichever is less
 
 - type: entity
   parent: [ BaseItem, BaseBloodContraband ]
