@@ -15759,3 +15759,12 @@ Entries:
   id: 1714
   time: '2026-10-14T18:15:45.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5033
+- author: Endothermix
+  changes:
+  - type: Tweak
+    message: The riot launcher safe is now unlocked on blue.
+  - type: Fix
+    message: The riot launcher is now sized correctly in backpacks.
+  id: 1715
+  time: '2026-10-14T18:22:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5026
