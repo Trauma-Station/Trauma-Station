@@ -49,10 +49,12 @@
   - type: MeleeWeapon
     altDisarm: false
     soundHit:
-      path: /Audio/Effects/demon_attack1.ogg
+      collection: ShadowDemonPunch
+    animation: WeaponArcShadowClaw
     damage:
       types:
         Caustic: 5
+        Cold: 5
   - type: Damageable
     damageModifierSet: AdvancedSpirit
   - type: Injurable
@@ -86,6 +88,16 @@
   parent: MobLivingCurse
   description: You have no idea what this is!
   components:
+  - type: MeleeWeapon
+    damage:
+      types:
+        Cold: 10
+  - type: SolutionManager
+    solutions:
+    - SolutionSpookyGhost
+  - type: MeleeChemicalInjector
+    solution: melee
+    transferAmount: 2
   - type: PointLight
     radius: 1.5
     energy: 5
@@ -105,17 +117,33 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      90: Dead
+      120: Dead
   - type: MovementSpeedModifier
-    baseWalkSpeed : 2
-    baseSprintSpeed : 2
+    baseWalkSpeed : 2.4
+    baseSprintSpeed : 2.4
   - type: Damageable
     damageModifierSet: ManifestedSpirit
   - type: Injurable
     damageContainer: ManifestedSpirit
   - type: SpawnLootOnDeath
     table:
-      id: DiamondOre1Unprocessed
+      id: AnomalyCoreIce
+
+- type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionSpookyGhost
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Fresium
+        Quantity: 2
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Fresium
+        Quantity: 30
 
 - type: entity
   parent: [ SimpleSpaceMobBase, BaseSlicingRefinable ]
