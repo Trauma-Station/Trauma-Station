@@ -23,8 +23,7 @@
     fireRate: 0.5
   - type: Item
     size: Large
-    shape:
-      null
+    shape: null # undoes flare gun's unique shape
     sprite: _Goobstation/Objects/Weapons/Guns/Launchers/riotlauncher.rsi
   - type: ItemSlots
     slots:
