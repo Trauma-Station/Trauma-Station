@@ -34,7 +34,6 @@
       flatReductions:
         Ballistic: 5
         Heat: 5
-  - type: Unremoveable
   - type: BreathMask
   - type: IdentityBlocker
   - type: IngestionBlocker

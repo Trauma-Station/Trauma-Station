@@ -174,7 +174,7 @@
     - MindRoleGhostRoleSoloAntagonist
 
 - type: entity
-  categories: [ Spawner ]
+  categories: [ HideSpawnMenu, Spawner ]
   parent: BaseAntagSpawner
   id: SpawnPointGhostSamurai
   components:

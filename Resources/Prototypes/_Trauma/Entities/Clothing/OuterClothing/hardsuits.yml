@@ -39,7 +39,6 @@
       flatReductions:
         Ballistic: 5
         Heat: 5
-  - type: Unremoveable
   - type: ExplosionResistance
     damageCoefficient: 0.3
   - type: FireProtection
