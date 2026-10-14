@@ -15722,3 +15722,14 @@ Entries:
   id: 1712
   time: '2026-10-12T21:41:11.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4964
+- author: StarMade
+  changes:
+  - type: Remove
+    message: Removed DAGD, mail fraud, and anom crit traitor objectives.
+  - type: Tweak
+    message: >-
+      Changed weights of remaining objectives to prioritize kill objectives and
+      survival obj. Reduced chance of ATS hijack as well.
+  id: 1713
+  time: '2026-10-14T00:31:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5013
