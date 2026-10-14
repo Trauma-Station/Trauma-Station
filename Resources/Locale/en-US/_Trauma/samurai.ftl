@@ -1,4 +1,4 @@
-﻿
+
 samurai-round-end-agent-name = samurai
 
 samurai-role-greeting =

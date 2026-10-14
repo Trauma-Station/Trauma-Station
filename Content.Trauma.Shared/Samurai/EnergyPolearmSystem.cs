@@ -1,4 +1,6 @@
-﻿using Content.Shared.Damage.Events;
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.Damage.Events;
 using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Timing.Components;
