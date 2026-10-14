@@ -53,8 +53,7 @@
     animation: WeaponArcShadowClaw
     damage:
       types:
-        Caustic: 5
-        Cold: 5
+        Caustic: 12
   - type: Damageable
     damageModifierSet: AdvancedSpirit
   - type: Injurable
@@ -62,8 +61,8 @@
   - type: AlwaysTakeHoly
   - type: NoSlip
   - type: MovementSpeedModifier
-    baseWalkSpeed : 1
-    baseSprintSpeed : 1
+    baseWalkSpeed : 1.3
+    baseSprintSpeed : 1.3
   - type: Reflect
     reflectProb: 1
     reflects:
