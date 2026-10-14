@@ -103,7 +103,6 @@
       components:
       - BloodCultist
   - type: TriggerOnThrowDoHit
-  - type: TriggerOnGotEquippedHand
   - type: EmitSoundOnTrigger
     sound:
       collection: GlassBreak

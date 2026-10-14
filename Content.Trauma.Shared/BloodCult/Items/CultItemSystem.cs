@@ -9,6 +9,7 @@ using Content.Shared.Stunnable;
 using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Blocking;
+using Content.Trauma.Common.Hands;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.BloodCult.Items;
@@ -33,13 +34,13 @@ public sealed partial class CultItemSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnBeforeThrow(Entity<CultItemComponent> item, ref BeforeThrowEvent args)
+    private void OnBeforeThrow(Entity<CultItemComponent> item, ref BeforeGettingThrownEvent args)
     {
-        if (CanUse(args.PlayerUid))
+        if (CanUse(args.User))
             return;
 
         args.Cancelled = true;
-        KnockdownAndDropItem(item, args.PlayerUid, "cult-item-component-throw-fail");
+        KnockdownAndDropItem(item, args.User, "cult-item-component-throw-fail");
     }
 
     [SubscribeLocalEvent]
