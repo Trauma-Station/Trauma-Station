@@ -1,10 +1,8 @@
-﻿
-
-namespace Content.Trauma.Shared.Samurai;
+﻿namespace Content.Trauma.Shared.Samurai;
 
 /// <summary>
-/// Component placed on a mob to make it a space ninja, able to use suit and glove powers.
-/// Contains ids of all ninja equipment.
+/// Component placed on a mob to make it a samurai, able to use armor and other abilities.
+/// Contains ids of all samurai equipment.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SamuraiComponent : Component

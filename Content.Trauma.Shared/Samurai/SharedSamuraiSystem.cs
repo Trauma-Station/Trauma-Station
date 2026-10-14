@@ -1,26 +1,21 @@
-﻿
-using System.Diagnostics.CodeAnalysis;
-using Content.Shared.Item;
+﻿using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Trauma.Shared.Item;
 
 namespace Content.Trauma.Shared.Samurai;
 
 /// <summary>
-///
+/// Provides shared Samurai API, stops guns from shooting.
 /// </summary>
-public abstract partial class SharedSamuraiSystem : EntitySystem
+public sealed partial class SamuraiSystem : EntitySystem
 {
-    [Dependency] protected SharedPopupSystem Popup = default!;
-
+    [Dependency] private SharedPopupSystem Popup = default!;
     [Dependency] public EntityQuery<SamuraiComponent> SamuraiQuery = default!;
 
     [SubscribeLocalEvent]
     private void OnBindItem(Entity<SamuraiComponent> ent, ref BindItemEvent args)
     {
-        if (ent.Comp.EnergyPolearm != null)
-            return;
-
         ent.Comp.EnergyPolearm = args.Item;
         Dirty(ent);
     }

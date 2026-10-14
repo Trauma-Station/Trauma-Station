@@ -1,11 +1,9 @@
-﻿
-
-using Content.Shared.Actions;
+﻿using Content.Shared.Actions;
 
 namespace Content.Trauma.Shared.Samurai;
 
 /// <summary>
-/// Component for Samurai abilities
+/// Component for Samurai armor abilities.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SamuraiArmorComponent : Component

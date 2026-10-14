@@ -1,25 +1,22 @@
-﻿
-using Content.Shared.Actions;
+﻿using Content.Shared.Actions;
 using Content.Shared.Clothing;
 using Content.Shared.Inventory.Events;
-using Content.Shared.Popups;
 
 namespace Content.Trauma.Shared.Samurai;
 
 /// <summary>
-///
+/// Handles quipping and unequipping, as well as some API functions.
 /// </summary>
 public abstract partial class SharedSamuraiArmorSystem : EntitySystem
 {
     [Dependency] private ActionContainerSystem _actionContainer = default!;
-    [Dependency] protected SharedPopupSystem Popup = default!;
-    [Dependency] protected SharedSamuraiSystem _samurai = default!;
+    [Dependency] protected SamuraiSystem Samurai = default!;
 
     [SubscribeLocalEvent]
     private void OnEquipped(Entity<SamuraiArmorComponent> ent, ref ClothingGotEquippedEvent args)
     {
         var user = args.Wearer;
-        if (_samurai.SamuraiQuery.TryComp(user, out var samurai))
+        if (Samurai.SamuraiQuery.TryComp(user, out var samurai))
             SamuraiEquipped(ent, (user, samurai));
     }
 
@@ -37,7 +34,7 @@ public abstract partial class SharedSamuraiArmorSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnGetItemActions(Entity<SamuraiArmorComponent> ent, ref GetItemActionsEvent args)
     {
-        if (!_samurai.IsSamurai(args.User))
+        if (!Samurai.IsSamurai(args.User))
             return;
 
         var comp = ent.Comp;
@@ -51,14 +48,14 @@ public abstract partial class SharedSamuraiArmorSystem : EntitySystem
     private void OnUnequipped(Entity<SamuraiArmorComponent> ent, ref GotUnequippedEvent args)
     {
         var user = args.EquipTarget;
-        if (_samurai.SamuraiQuery.TryComp(user, out var samurai))
+        if (Samurai.SamuraiQuery.TryComp(user, out var samurai))
             UserUnequippedSuit(ent, (user, samurai));
     }
 
     protected virtual void SamuraiEquipped(Entity<SamuraiArmorComponent> ent, Entity<SamuraiComponent> user)
     {
         // mark the user as wearing this suit, used when being attacked among other things
-        _samurai.AssignSuit(user, ent);
+        Samurai.AssignSuit(user, ent);
     }
 
     /// <summary>
@@ -68,6 +65,6 @@ public abstract partial class SharedSamuraiArmorSystem : EntitySystem
     protected virtual void UserUnequippedSuit(Entity<SamuraiArmorComponent> ent, Entity<SamuraiComponent> user)
     {
         // mark the user as not wearing a suit
-        _samurai.AssignSuit(user, null);
+        Samurai.AssignSuit(user, null);
     }
 }
