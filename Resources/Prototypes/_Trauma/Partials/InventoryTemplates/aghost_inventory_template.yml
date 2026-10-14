@@ -2,25 +2,7 @@
 
 - type: inventoryTemplate
   id: aghost
-  slots: !Clear
-  - name: back
-    slotTexture: back
-    slotFlags: BACK
-    slotGroup: SecondHotbar
-    stripTime: 6
-    uiWindowPos: 2,1
-    strippingWindowPos: 2,4
-    displayName: Back
-  - name: id
-    slotTexture: id
-    fullTextureName: template_small
-    slotFlags: IDCARD
-    slotGroup: SecondHotbar
-    stripTime: 6
-    uiWindowPos: 2,2
-    strippingWindowPos: 2,3
-    displayName: ID
-
+  slots:
   - name: pocket1
     slotTexture: pocket
     fullTextureName: template_small
@@ -84,9 +66,3 @@
     uiWindowPos: 0,2
     strippingWindowPos: 0,1
     displayName: Neck
-  - name: mask
-    slotTexture: mask
-    slotFlags: MASK
-    uiWindowPos: 0,1
-    strippingWindowPos: 1,1
-    displayName: Mask
