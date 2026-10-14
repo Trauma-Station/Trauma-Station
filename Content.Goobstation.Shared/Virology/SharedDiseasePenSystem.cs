@@ -66,9 +66,7 @@ public sealed partial class SharedDiseasePenSystem : EntitySystem
             return;
 
         immunity.ImmuneTo.Add(ent.Comp.Genotype.Value);
-        ent.Comp.Used = true;
 
         _audio.PlayPredicted(ent.Comp.InjectSound, args.User, args.User);
-        _appearance.SetData(ent, DiseasePenVisuals.Used, true);
     }
 }

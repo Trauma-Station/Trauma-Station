@@ -33,6 +33,7 @@
             # Engineering
             ChiefEngineer: [ 1, 1 ]
             AtmosphericTechnician: [ 3, 3 ]
+            Roboticist: [ 2, 2 ]
             StationEngineer: [ 4, 4 ]
             TechnicalAssistant: [ 3, 3 ]
             # Medical
@@ -46,7 +47,6 @@
             # Science
             ResearchDirector: [ 1, 1 ]
             Geneticist: [ 2, 2 ]
-            Roboticist: [ 2, 2 ]
             Scientist: [ 5, 5 ]
             ResearchAssistant: [ 3, 3 ]
             # Security

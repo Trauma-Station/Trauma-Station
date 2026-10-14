@@ -45,7 +45,6 @@
   components:
   - type: Tag
     tags:
-    - Hoe
     - Metal
   - type: Sprite
     state: fork

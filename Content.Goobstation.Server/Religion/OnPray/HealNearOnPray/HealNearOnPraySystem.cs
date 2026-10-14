@@ -49,17 +49,18 @@ public sealed partial class HealNearOnPraySystem : EntitySystem
             var ev = new DamageUnholyEvent(entity, args.User);
             RaiseLocalEvent(entity, ref ev);
 
+            var effect = ent.Comp.HealEffect;
             if (ev.ShouldTakeHoly)
             {
                 _damageable.ChangeDamage(entity.Owner, ent.Comp.Damage, targetPart: TargetBodyPart.All, splitDamage: SplitDamageBehavior.SplitEnsureAll);
-                Spawn(ent.Comp.DamageEffect, Transform(entity).Coordinates);
+                effect = ent.Comp.DamageEffect;
                 _audio.PlayPvs(ent.Comp.SizzleSoundPath, entity, new AudioParams(-2f, 1f, SharedAudioSystem.DefaultSoundRange, 1f, false, 0f)); //This should be safe to keep in the loop as this sound will never consistently play on multiple entities.
             }
             else
             {
                 _damageable.ChangeDamage(entity.Owner, ent.Comp.Healing, targetPart: TargetBodyPart.All, ignoreBlockers: true, splitDamage: SplitDamageBehavior.SplitEnsureAll);
-                Spawn(ent.Comp.HealEffect, Transform(entity).Coordinates);
             }
+            Spawn(effect, Transform(entity).Coordinates);
         }
 
         _audio.PlayPvs(ent.Comp.HealSoundPath, ent, new AudioParams(-2f, 1f, SharedAudioSystem.DefaultSoundRange, 1f, false, 0f)); //Played outside the loop once at the source of the damage to prevent repeated sound-stacking.

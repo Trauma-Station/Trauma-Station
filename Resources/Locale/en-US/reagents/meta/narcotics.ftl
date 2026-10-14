@@ -41,10 +41,12 @@ reagent-name-happiness = happiness
 reagent-desc-happiness = Fills you with ecstatic numbness and causes minor brain damage. Highly addictive. If overdosed causes sudden mood swings.
 
 reagent-name-Hydroxysomnolene = Hydroxysomnolene
-reagent-desc-Hydroxysomnolene = Byproduct of Methylenedioxystraquinone (aka Strawberry Ice) when metabolized. It binds to the newly vacant neuroreceptors in the brain after Methylenedioxystraquinone is flushed out of the system, causing slowness and drowsiness. The only ways to reduce its effects is to either wait it out, or take another hit of that strawberry goodness...
+# Trauma - added mention of poison and heart attack
+reagent-desc-Hydroxysomnolene = Byproduct of Methylenedioxystraquinone (aka Strawberry Ice) when metabolized. It binds to the newly vacant neuroreceptors in the brain after Methylenedioxystraquinone is flushed out of the system, causing slowness and drowsiness at low amounts, poison at higher amounts, and heart attacks if you go too far. The only ways to reduce its effects is to either wait it out, or take another hit of that strawberry goodness...
 
 reagent-name-StrawberryIce = Methylenedioxystraquinone
-reagent-desc-StrawberryIce = A special drug designed to be even stronger than Desoxyephedrine. Known as "Strawberry Ice" or "Girl Ice" given its color and flavor, it is incredibly addictive and comes with strong withdrawal symptoms. While the highs are higher and users report flying in rainbows through space while under its influence, near-eternal horrors await those who cease consuming it.
+# Trauma - added mention of heart attack
+reagent-desc-StrawberryIce = A special drug designed to be even stronger than Desoxyephedrine. Known as "Strawberry Ice" or "Girl Ice" given its color and flavor, it is incredibly addictive and comes with strong withdrawal symptoms. While the highs are higher and users report flying in rainbows through space while under its influence, near-eternal horrors and a heart attack await those who cease consuming it.
 
 reagent-name-nyctalon = nyctalon
 reagent-desc-nyctalon = An irradiated medicine derived from oculine, this drug stimulates the rod and cone cells of the user's retina, enabling excellent night vision. This comes at a consequence of mild radiation sickness.

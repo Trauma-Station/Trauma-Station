@@ -402,7 +402,7 @@
     - BalloonMelon
 
 - type: entity
-  parent: ProduceBase
+  parent: ProduceBaseRuminant
   id: SteelWheatBushel
   name: steel wheat bushel
   description: Sigh... steel wheat... a-grain? # metal grains

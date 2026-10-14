@@ -2,12 +2,15 @@
 
 using Content.Trauma.Shared.Genetics.Mutations;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Labels.EntitySystems;
 using Content.Shared.Paper;
 
 namespace Content.Trauma.Shared.Genetics.Console;
 
 public sealed partial class GeneticsConsoleSystem
 {
+    [Dependency] private LabelSystem _label = default!;
     [Dependency] private PaperSystem _paper = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
 
@@ -27,12 +30,23 @@ public sealed partial class GeneticsConsoleSystem
             return;
 
         var paper = PredictedSpawnAtPosition(ent.Comp.Paper, Transform(ent).Coordinates);
-        _transform.SetLocalRotation(paper, 0); // chud engine
 
-        var text = args.Index is {} index
-            ? (_genome.GetSequence(mob, index) is {} sequence ? GetSequenceText(sequence) : string.Empty)
-            : GetScanText(mob);
+        var label = string.Empty;
+        var text = string.Empty;
+        if (args.Index is { } index &&
+            _genome.GetSequence(mob, index) is { } sequence &&
+            _mutation.GetRoundData(sequence.Mutation) is { } data)
+        {
+            label = data.Number.ToString();
+            text = GetSequenceText(sequence, data);
+        }
+        else
+        {
+            label = Identity.Name(mob, EntityManager);
+            text = GetScanText(mob, label);
+        }
         _paper.SetContent(paper, text);
+        _label.Label(paper, label);
 
         _hands.TryPickupAnyHand(args.Actor, paper);
     }
@@ -48,27 +62,26 @@ public sealed partial class GeneticsConsoleSystem
         return true;
     }
 
-    private string GetScanText(EntityUid mob)
+    private string GetScanText(EntityUid mob, string name)
     {
         _sequences.Clear();
         _genome.AddSequenceStates(mob, _sequences);
         _builder.Clear();
         _builder.AppendLine(Loc.GetString("genetics-printout-title"));
-        _builder.AppendLine(Loc.GetString("genetics-printout-subject", ("name", Name(mob))));
+        _builder.AppendLine(Loc.GetString("genetics-printout-subject", ("name", name)));
         _builder.AppendLine(Loc.GetString("genetics-printout-sequences", ("count", _sequences.Count)));
+
         foreach (var s in _sequences)
         {
             var rarity = s.Rarity.RarityChar();
             _builder.AppendLine(Loc.GetString("genetics-printout-sequence", ("rarity", rarity), ("number", s.Number)));
         }
+
         return _builder.ToString();
     }
 
-    private string GetSequenceText(Sequence sequence)
+    private string GetSequenceText(Sequence sequence, MutationData data)
     {
-        if (_mutation.GetRoundData(sequence.Mutation) is not {} data)
-            return string.Empty;
-
         var rarity = _mutation.GetRarity(sequence.Mutation);
         _builder.Clear();
         _builder.AppendLine(Loc.GetString("genetics-printout-title"));

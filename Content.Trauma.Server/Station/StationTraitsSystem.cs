@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Text;
-using Content.Server.GameTicking;
-using Content.Server.GameTicking.Events;
 using Content.Shared.EntityEffects;
+using Content.Shared.GameTicking;
+using Content.Shared.GameTicking.Events;
 using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.Station;
 using Robust.Shared.Configuration;

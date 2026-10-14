@@ -3,6 +3,7 @@ using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Chat;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.GameTicking.Rules;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
@@ -23,7 +24,7 @@ public sealed partial class RespawnRuleSystem : GameRuleSystem<RespawnDeadRuleCo
     [Dependency] private IChatManager _chatManager = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private IPlayerManager _playerManager = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
@@ -53,6 +54,7 @@ public sealed partial class RespawnRuleSystem : GameRuleSystem<RespawnDeadRuleCo
 
                 if (session.GetMind() is { } mind && TryComp<MindComponent>(mind, out var mindComp) && mindComp.OwnedEntity.HasValue)
                     QueueDel(mindComp.OwnedEntity.Value);
+
                 GameTicker.MakeJoinGame(session, station, silent: true);
                 tracker.RespawnQueue.Remove(player);
             }
@@ -83,7 +85,7 @@ public sealed partial class RespawnRuleSystem : GameRuleSystem<RespawnDeadRuleCo
         var query = EntityQueryEnumerator<RespawnDeadRuleComponent, RespawnTrackerComponent, GameRuleComponent>();
         while (query.MoveNext(out var uid, out var respawnRule, out  var tracker, out var rule))
         {
-            if (!GameTicker.IsGameRuleActive(uid, rule))
+            if (!GameTicker.IsGameRuleActive((uid, rule)))
                 continue;
 
             if (respawnRule.AlwaysRespawnDead)
@@ -108,6 +110,7 @@ public sealed partial class RespawnRuleSystem : GameRuleSystem<RespawnDeadRuleCo
 
             if (respawnTracker.Comp.DeleteBody)
                 QueueDel(player);
+
             GameTicker.MakeJoinGame(player.Comp.PlayerSession, station, silent: true);
             return false;
         }

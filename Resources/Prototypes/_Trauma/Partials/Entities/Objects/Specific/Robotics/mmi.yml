@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: MMI
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - RobotTalk
+    understands:
+    - TauCetiBasic
+    - RobotTalk
+
+- type: entity
+  id: PositronicBrain
+  components:
+  - type: InternalChildOrgan
+  - type: ChildOrgan
+    parents: [ Torso ] # ipc stores its brain in the torso not head
+  - type: Organ
+    category: IPCBrain
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic # Added since posi brains should be able to talk to roboticists/scientists.
+    - RobotTalk
+    understands:
+    - TauCetiBasic # Added since posi brains should be able to understand TauCetiBasic (they can in a chassis)
+    - RobotTalk
+  - type: IntellicardableMind
+  - type: OrganChipContainer
+    limit: 3
+  - type: ContainerContainer
+    containers:
+      knowledge: !type:Container
+      organ_chips: !type:Container

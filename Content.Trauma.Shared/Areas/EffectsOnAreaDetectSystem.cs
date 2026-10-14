@@ -9,13 +9,7 @@ public sealed partial class EffectsOnAreaDetectSystem : EntitySystem
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<EffectsOnAreaDetectComponent, AreaDetectorChangedEvent>(OnChanged);
-    }
-
+    [SubscribeLocalEvent]
     private void OnChanged(Entity<EffectsOnAreaDetectComponent> ent, ref AreaDetectorChangedEvent args)
     {
         if (args.OldArea is { } oldArea &&

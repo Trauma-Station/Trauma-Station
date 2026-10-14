@@ -71,6 +71,7 @@ public sealed partial class NetworkConfiguratorLinkMenu : FancyWindow
         foreach (var source in _sources)
         {
             var button = CreateButton(ButtonPosition.Left, source.Name, source.Description, source.ID, i);
+            button.Modulate = source.Color; // Trauma
             ButtonContainerLeft.AddChild(button);
             _links.SourceButtons.Add(source.ID, button);
             i++;
@@ -83,6 +84,7 @@ public sealed partial class NetworkConfiguratorLinkMenu : FancyWindow
         foreach (var sink in _sinks)
         {
             var button = CreateButton(ButtonPosition.Right, sink.Name, sink.Description, sink.ID, i);
+            button.Modulate = sink.Color; // Trauma
             ButtonContainerRight.AddChild(button);
             _links.SinkButtons.Add(sink.ID, button);
             i++;

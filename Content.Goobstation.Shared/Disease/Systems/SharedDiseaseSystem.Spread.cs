@@ -16,7 +16,7 @@ public partial class SharedDiseaseSystem
         if (!Resolve(source, ref source.Comp))
             return null;
 
-        var ent = EntityManager.PredictedSpawn(BaseDisease);
+        var ent = PredictedSpawn(BaseDisease);
         var ev = new DiseaseCloneEvent((ent, Comp<DiseaseComponent>(ent)));
         RaiseLocalEvent(source, ref ev);
         return ent;
@@ -35,7 +35,7 @@ public partial class SharedDiseaseSystem
     /// </summary>
     public EntityUid? DoInfectionAttempt(EntityUid target, EntProtoId proto, float power, float chance, ProtoId<DiseaseSpreadPrototype> spreadType)
     {
-        var ent = EntityManager.PredictedSpawn(proto);
+        var ent = PredictedSpawn(proto);
         if (DoInfectionAttempt(target, ent, power, chance, spreadType, false))
             return ent;
 

@@ -1,9 +1,6 @@
 // <Trauma>
 using Content.Trauma.Common.Actions;
-using Content.Shared.Ghost.Components;
-using Content.Shared.Popups;
 using Content.Trauma.Common.Heretic;
-using Robust.Shared.Network;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -17,6 +14,7 @@ using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Mind;
+using Content.Shared.Popups;
 using Content.Shared.Rejuvenate;
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio.Systems;
@@ -29,10 +27,6 @@ namespace Content.Shared.Actions;
 
 public abstract partial class SharedActionsSystem : EntitySystem
 {
-    // <Trauma>
-    [Dependency] private INetManager _net = default!;
-    [Dependency] private SharedPopupSystem _popup = default!;
-    // </Trauma>
     [Dependency] protected IGameTiming GameTiming = default!;
     [Dependency] private ISharedAdminLogManager _adminLogger = default!;
     [Dependency] private ActionBlockerSystem _actionBlocker = default!;
@@ -44,6 +38,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
     [Dependency] private SharedInteractionSystem _interaction = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
 
     [Dependency] private EntityQuery<ActionComponent> _actionQuery = default!;
     [Dependency] private EntityQuery<ActionsComponent> _actionsQuery = default!;
@@ -286,7 +281,7 @@ public abstract partial class SharedActionsSystem : EntitySystem
     /// <param name="ev">The Request Perform Action Event</param>
     /// <param name="user">The user/performer of the action</param>
     /// <param name="skipDoActionRequest">Should this skip the initial doaction request?</param>
-    private bool TryPerformAction(RequestPerformActionEvent ev, EntityUid user, bool skipDoActionRequest = false)
+    private bool TryPerformAction(RequestPerformActionEvent ev, EntityUid user, bool skipDoActionRequest = false, bool showPopups = true)
     {
         if (!_actionsQuery.TryComp(user, out var component))
             return false;
@@ -317,11 +312,18 @@ public abstract partial class SharedActionsSystem : EntitySystem
         if (IsCooldownActive(action, curTime))
             return false;
 
+        var target = GetEntity(ev.EntityTarget);
+
         // check for action use prevention
-        var attemptEv = new ActionAttemptEvent(user);
+        var attemptEv = new ActionAttemptEvent(user, target);
         RaiseLocalEvent(action, ref attemptEv);
         if (attemptEv.Cancelled)
+        {
+            if (attemptEv.Reason != null && showPopups)
+                _popup.PopupEntity(attemptEv.Reason, user, user, attemptEv.Type);
+
             return false;
+        }
 
         // Validate request by checking action blockers and the like
         var provider = action.Comp.Container ?? user;
@@ -453,8 +455,6 @@ public abstract partial class SharedActionsSystem : EntitySystem
             ev.Target = target;
             ev.Entity = targetEntity;
         }
-
-        return;
     }
 
     public bool ValidateEntityTarget(EntityUid user, EntityUid target, Entity<EntityTargetActionComponent> ent)
@@ -619,12 +619,10 @@ public abstract partial class SharedActionsSystem : EntitySystem
         ev.Action = action;
 
         // TODO: This is where we'd add support for event lists
-        if (!action.Comp.RaiseOnUser && action.Comp.Container is {} container && !_mindQuery.HasComp(container))
+        if (!action.Comp.RaiseOnUser && action.Comp.Container is {} container && (!_mindQuery.HasComp(container) || action.Comp.RaiseOnMind)) // Trauma - check RaiseOnMind
             target = container;
-        // <Trauma>
         if (action.Comp.RaiseOnAction)
-            target = action.Owner;
-        // </Trauma>
+            target = action;
 
         RaiseLocalEvent(target, (object) ev, broadcast: true);
         handled = ev.Handled;
@@ -643,76 +641,13 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
         UpdateAction(action);
 
-        var performed = new ActionPerformedEvent(performer);
+        EntityUid? actionTarget = null;
+        if (actionEvent is EntityTargetActionEvent targetEv)
+            actionTarget = targetEv.Target;
+
+        var performed = new ActionPerformedEvent(performer, actionTarget);
         RaiseLocalEvent(action, ref performed);
-        return true;
-    }
-
-    /// <summary>
-    /// Goobstation
-    /// Performs an action WITH all condition checks.
-    /// </summary>
-    public bool TryPerformAction(EntityUid user, RequestPerformActionEvent ev)
-    {
-        if (!_actionsQuery.TryComp(user, out var component))
-            return false;
-
-        var actionEnt = GetEntity(ev.Action);
-        if (GetAction(actionEnt) is not {} action)
-            return false;
-
-        if (!CanPerformAction((user, component), action, ev))
-            return false;
-
-        // All checks passed. Perform the action!
-        return PerformAction((user, component), action);
-    }
-
-    /// <summary>
-    /// Goobstation
-    /// Runs all checks to see if user currently can perform some action.
-    /// </summary>
-    public bool CanPerformAction(Entity<ActionsComponent?> user, Entity<ActionComponent> action, RequestPerformActionEvent ev)
-    {
-        if (!Resolve(user.Owner, ref user.Comp, false)
-            || !TryComp(action, out MetaDataComponent? metaData))
-            return false;
-
-        var name = Name(action, metaData);
-
-        // Does the user actually have the requested action?
-        if (!user.Comp.Actions.Contains(action))
-        {
-            _adminLogger.Add(LogType.Action,
-                $"{ToPrettyString(user):user} attempted to perform an action that they do not have: {name}.");
-            return false;
-        }
-
-        DebugTools.Assert(action.Comp.AttachedEntity == user);
-        if (!action.Comp.Enabled)
-            return false;
-
-        var curTime = GameTiming.CurTime;
-        if (IsCooldownActive(action, curTime))
-            return false;
-
-        // check for action use prevention
-        // TODO: make code below use this event with a dedicated component
-        var attemptEv = new ActionAttemptEvent(user);
-        RaiseLocalEvent(action, ref attemptEv);
-        if (attemptEv.Cancelled)
-            return false;
-
-        // Validate request by checking action blockers and the like
-        var provider = action.Comp.Container ?? user;
-        var validateEv = new ActionValidateEvent()
-        {
-            Input = ev,
-            User = user,
-            Provider = provider
-        };
-        RaiseLocalEvent(action, ref validateEv);
-        return !validateEv.Invalid;
+        return true; // Trauma
     }
 
     #endregion
@@ -862,11 +797,10 @@ public abstract partial class SharedActionsSystem : EntitySystem
 
         performer.Comp ??= EnsureComp<ActionsComponent>(performer);
 
-        var ghost = HasComp<GhostComponent>(performer); // Goobstation
-
+        var ghost = _ghostQuery.HasComp(performer); // Trauma
         foreach (var actionId in container.Comp.Container.ContainedEntities)
         {
-            if (GetAction(actionId) is {} action && (!ghost || action.Comp.AllowGhostAction))
+            if (GetAction(actionId) is {} action && (!ghost || action.Comp.AllowGhostAction)) // Trauma - check ghost
                 AddActionDirect(performer, (action, action));
         }
     }
@@ -990,16 +924,6 @@ public abstract partial class SharedActionsSystem : EntitySystem
     {
         // See client-side system for UI code.
     }
-
-    // Goobstation start
-    public virtual void SaveActions(EntityUid performer)
-    {
-    }
-
-    public virtual void LoadActions(EntityUid performer)
-    {
-    }
-    // Goobstation end
 
     public bool ValidAction(Entity<ActionComponent> ent, bool canReach = true)
     {

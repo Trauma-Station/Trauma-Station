@@ -120,7 +120,7 @@
 - type: spyBounty
   parent: EasyBountyBase
   id: BorgCharger
-  departmentBlacklist: [Science]
+  departmentBlacklist: [Engineering]
   selector: !type:SpySpecificEntityBountySelectorEvent
     protos: [BorgCharger]
     queryComp: Charger

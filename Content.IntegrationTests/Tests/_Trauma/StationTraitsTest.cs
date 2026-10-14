@@ -2,6 +2,7 @@
 
 using Content.Server.GameTicking;
 using Content.Shared.CCVar;
+using Content.Shared.GameTicking;
 using Content.Trauma.Server.Station;
 
 namespace Content.IntegrationTests.Tests._Trauma;
@@ -16,7 +17,7 @@ public sealed class StationTraitsTest : GameTest
     {
         var server = Pair.Server;
         var traits = SEntMan.System<StationTraitsSystem>();
-        var ticker = SEntMan.System<GameTicker>();
+        var ticker = SEntMan.System<ServerGameTicker>();
 
         traits.ForceAllTraits();
 

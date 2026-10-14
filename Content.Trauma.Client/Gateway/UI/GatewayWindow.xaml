@@ -19,7 +19,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 	                     SetHeight="25"/>
 	        <Label Name="NextCloseText" Text="0" Margin="5"/>
 	    </BoxContainer>
-	    <controls:HLine Color="#404040" Thickness="2" Margin="0 5 0 5"/>
+	    <controls:Separator ColorOverride="#404040" Margin="0 5 0 5"/>
 	    <BoxContainer Name="Container" Orientation="Vertical" Margin="5 0 5 0"/>
     </BoxContainer>
 </controls:FancyWindow>

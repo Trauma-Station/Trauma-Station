@@ -2,7 +2,6 @@
 
 using Content.Shared.EntityEffects;
 using Content.Shared.StatusIcon;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
 
 namespace Content.Goobstation.Shared.Wraith.Curses;
 
@@ -36,18 +35,5 @@ public sealed partial class CursePrototype : IPrototype
     public float Update;
 
     [DataField]
-    public ProtoId<CurseStatusIconPrototype>? StatusIcon;
-}
-
-[Prototype]
-public sealed partial class CurseStatusIconPrototype : StatusIconPrototype, IInheritingPrototype
-{
-    /// <inheritdoc />
-    [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<CurseStatusIconPrototype>))]
-    public string[]? Parents { get; private set; }
-
-    /// <inheritdoc />
-    [NeverPushInheritance]
-    [AbstractDataField]
-    public bool Abstract { get; private set; }
+    public ProtoId<StatusIconPrototype>? StatusIcon;
 }

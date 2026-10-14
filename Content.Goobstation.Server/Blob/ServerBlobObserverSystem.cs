@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Server.Blob.GameTicking;
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
+using Content.Goobstation.Shared.GameTicking.Rules;
 using Content.Server.Chat.Managers;
-using Content.Server.GameTicking;
 using Content.Shared.Actions;
 using Content.Shared.Mind;
 using Content.Shared.Roles;
@@ -17,7 +16,6 @@ namespace Content.Goobstation.Server.Blob;
 
 public sealed partial class ServerBlobObserverSystem : BlobObserverSystem
 {
-    [Dependency] private GameTicker _ticker = default!;
     [Dependency] private IChatManager _chat = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
     [Dependency] private SharedMindSystem _mind = default!;
@@ -103,20 +101,6 @@ public sealed partial class ServerBlobObserverSystem : BlobObserverSystem
 
         _role.MindAddRole(mindId, core.Comp.MindRoleBlobPrototypeId.Id);
         SendBlobBriefing(mindId);
-
-        var ruleExists = false;
-        foreach (var rule in EntityQueryEnumerator<BlobRuleComponent>())
-        {
-            // TODO: check station or something
-            rule.Comp.Blobs.Add((mindId, mind));
-            ruleExists = true;
-        }
-
-        if (!ruleExists)
-        {
-            _ticker.StartGameRule(BlobRule, out var rule);
-            Comp<BlobRuleComponent>(rule).Blobs.Add((mindId, mind));
-        }
 
         _mind.TransferTo(mindId, observer, true, mind: mind);
 

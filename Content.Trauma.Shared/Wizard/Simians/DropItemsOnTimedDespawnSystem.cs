@@ -10,6 +10,8 @@ namespace Content.Trauma.Shared.Wizard.Simians;
 public sealed partial class DropItemsOnTimedDespawnSystem : EntitySystem
 {
     [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private EntityQuery<TimedDespawnComponent> _despawnQuery = default!;
+    [Dependency] private EntityQuery<FadingTimedDespawnComponent> _fadingQuery = default!;
 
     public override void Initialize()
     {
@@ -25,15 +27,12 @@ public sealed partial class DropItemsOnTimedDespawnSystem : EntitySystem
         if (!TryComp(uid, out HandsComponent? hands))
             return;
 
-        var despawnQuery = GetEntityQuery<TimedDespawnComponent>();
-        var fadingQuery = GetEntityQuery<FadingTimedDespawnComponent>();
-
         foreach (var hand in _hands.EnumerateHands((uid, hands)))
         {
             if (_hands.TryGetActiveItem((uid, hands), out var held))
                 continue;
 
-            if (!comp.DropDespawningItems && (fadingQuery.HasComp(held) || despawnQuery.HasComp(held)))
+            if (!comp.DropDespawningItems && (_fadingQuery.HasComp(held) || _despawnQuery.HasComp(held)))
                 continue;
 
             _hands.TryDrop((uid, hands), hand);

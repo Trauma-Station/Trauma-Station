@@ -107,41 +107,6 @@
       "name": "weed_dir15"
     },
     {
-      "name": "weedwall"
-    },
-    {
-      "name": "weedwall0",
-      "directions": 4
-    },
-    {
-      "name": "weedwall1",
-      "directions": 4
-    },
-    {
-      "name": "weedwall2",
-      "directions": 4
-    },
-    {
-      "name": "weedwall3",
-      "directions": 4
-    },
-    {
-      "name": "weedwall4",
-      "directions": 4
-    },
-    {
-      "name": "weedwall5",
-      "directions": 4
-    },
-    {
-      "name": "weedwall6",
-      "directions": 4
-    },
-    {
-      "name": "weedwall7",
-      "directions": 4
-    },
-    {
       "name": "weednode",
       "delays": [
         [
@@ -156,27 +121,6 @@
       ]
     },
     {
-      "name": "weedframe0"
-    },
-    {
-      "name": "weedframe1"
-    },
-    {
-      "name": "weedframe2"
-    },
-    {
-      "name": "weedframe3"
-    },
-    {
-      "name": "weedframe4"
-    },
-    {
-      "name": "weedframe8"
-    },
-    {
-      "name": "weedframe12"
-    },
-    {
       "name": "constructionnode",
       "delays": [
         [
@@ -189,75 +133,6 @@
           0.3
         ]
       ]
-    },
-    {
-      "name": "hive_weed0"
-    },
-    {
-      "name": "hive_weed1"
-    },
-    {
-      "name": "hive_weed2"
-    },
-    {
-      "name": "hive_weed3"
-    },
-    {
-      "name": "hive_weed4"
-    },
-    {
-      "name": "hive_weed5"
-    },
-    {
-      "name": "hive_weed6"
-    },
-    {
-      "name": "hive_weed7"
-    },
-    {
-      "name": "hive_weed8"
-    },
-    {
-      "name": "hive_weed9"
-    },
-    {
-      "name": "hive_weed10"
-    },
-    {
-      "name": "hive_weed11"
-    },
-    {
-      "name": "hive_weed12"
-    },
-    {
-      "name": "hive_weed13"
-    },
-    {
-      "name": "hive_weed14"
-    },
-    {
-      "name": "hive_weed15"
-    },
-    {
-      "name": "weedwindow0"
-    },
-    {
-      "name": "weedwindow1"
-    },
-    {
-      "name": "weedwindow2"
-    },
-    {
-      "name": "weedwindow3"
-    },
-    {
-      "name": "weedwindow4"
-    },
-    {
-      "name": "weedwindow8"
-    },
-    {
-      "name": "weedwindow12"
     },
     {
       "name": "human_1",

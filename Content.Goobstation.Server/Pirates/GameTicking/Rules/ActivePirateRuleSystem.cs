@@ -2,14 +2,14 @@
 
 using Content.Goobstation.Common.Pirates;
 using Content.Goobstation.Shared.Roles;
-using Content.Server.Antag;
-using Content.Server.GameTicking;
-using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
-using Content.Server.Roles;
+using Content.Shared.Antag;
+using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.GameTicking.Rules;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
+using Content.Shared.Roles;
 using Robust.Shared.Audio;
 
 namespace Content.Goobstation.Server.Pirates.GameTicking.Rules;
@@ -17,7 +17,7 @@ namespace Content.Goobstation.Server.Pirates.GameTicking.Rules;
 public sealed partial class ActivePirateRuleSystem : GameRuleSystem<ActivePirateRuleComponent>
 {
     [Dependency] private MindSystem _mind = default!;
-    [Dependency] private RoleSystem _role = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private NpcFactionSystem _npcFaction = default!;
 
@@ -45,14 +45,19 @@ public sealed partial class ActivePirateRuleSystem : GameRuleSystem<ActivePirate
         args.Briefing = briefingShort;
     }
 
-    protected override void AppendRoundEndText(EntityUid uid, ActivePirateRuleComponent component, GameRuleComponent gameRule, ref RoundEndTextAppendEvent args)
+    protected override void AppendRoundEndText(Entity<ActivePirateRuleComponent> ent, ref RoundEndTextAppendEvent args)
     {
-        if (component.BoundSiphon != null
-        && TryComp<ResourceSiphonComponent>(component.BoundSiphon, out var siphon)
-        && siphon.Active)
-            args.AddLine(Loc.GetString("pirate-roundend-append-siphon", ("num", siphon.Credits)));
+        base.AppendRoundEndText(ent, ref args);
 
-        args.AddLine(Loc.GetString("pirate-roundend-append", ("num", component.Credits)));
+        var (uid, comp) = ent;
+        if (comp.BoundSiphon != null &&
+            TryComp<ResourceSiphonComponent>(comp.BoundSiphon, out var siphon) &&
+            siphon.Active)
+        {
+            args.AddLine(Loc.GetString("pirate-roundend-append-siphon", ("num", siphon.Credits)));
+        }
+
+        args.AddLine(Loc.GetString("pirate-roundend-append", ("num", comp.Credits)));
 
         args.AddLine($"\n{Loc.GetString("pirate-roundend-list")}");
         var antags = _antag.GetAntagIdentifiers(uid);

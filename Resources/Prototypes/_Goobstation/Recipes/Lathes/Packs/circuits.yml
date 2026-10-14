@@ -17,9 +17,3 @@
   id: MedicalBoardsGoob
   recipes:
   - AutodocCircuitboard
-
-- type: latheRecipePack
-  id: EngineeringBoardsGoob
-  recipes:
-  - PlumbingPumpCircuitboard
-  - TelecomTransmitterCircuitboard

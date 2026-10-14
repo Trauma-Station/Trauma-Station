@@ -10,7 +10,6 @@ using Content.Shared.Power;
 using Content.Shared.Station.Components;
 using Robust.Shared.Audio;
 using Robust.Shared.Random;
-using Robust.Shared.Utility;
 
 namespace Content.Server.Cargo.Systems;
 
@@ -46,21 +45,19 @@ public sealed partial class CargoSystem
     }
     // </Trauma>
 
-    private bool TryGetLinkedConsole(Entity<CargoTelepadComponent> ent,
-        [NotNullWhen(true)] out Entity<CargoOrderConsoleComponent>? console)
+    private bool IsLinkedToConsole(
+        EntityUid uid,
+        EntityUid? approvingConsole
+    )
     {
-        console = null;
-        if (!TryComp<DeviceLinkSinkComponent>(ent, out var sinkComponent) ||
-            sinkComponent.LinkedSources.FirstOrNull() is not { } linked)
+        if (approvingConsole is null)
             return false;
 
-        if (!TryComp<CargoOrderConsoleComponent>(linked, out var consoleComp))
+        if (!TryComp<DeviceLinkSinkComponent>(uid, out var sinkComponent))
             return false;
 
-        console = (linked, consoleComp);
-        return true;
+        return sinkComponent.LinkedSources.Any(ent => ent == approvingConsole.Value);
     }
-
 
     private void UpdateTelepad(float frameTime)
     {
@@ -86,7 +83,7 @@ public sealed partial class CargoSystem
                 continue;
             }
 
-            if (comp.CurrentOrders.Count == 0) // Trauma - don't check for console bruh, it wasnt even used
+            if (comp.CurrentOrders.Count == 0)
             {
                 comp.Accumulator += comp.Delay;
                 continue;
@@ -134,19 +131,16 @@ public sealed partial class CargoSystem
 
         if (_station.GetOwningStation(ent) is not { } station)
         {
-            station = _random.Pick(_station.GetStations().Where(HasComp<StationCargoOrderDatabaseComponent>).ToList());
+            station = _random.Pick(_station.GetStations().Where(x => HasComp<StationCargoOrderDatabaseComponent>(x.Owner)).ToList());
         }
 
         if (!TryComp<StationCargoOrderDatabaseComponent>(station, out var db) ||
             !TryComp<StationDataComponent>(station, out var data))
             return;
 
-        if (!TryGetLinkedConsole(ent, out var console))
-            return;
-
         foreach (var order in ent.Comp.CurrentOrders)
         {
-            TryFulfillOrder((station, data), console.Value.Comp.Account, order, db);
+            TryFulfillOrder((station, data), order.Account, order, db);
         }
     }
 

@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Medical.Server.GameTicking.Rules.Components;
 using Content.Medical.Shared.Abductor;
+using Content.Medical.Shared.GameTicking.Rules;
 using Content.Medical.Shared.Roles;
 using Content.Medical.Shared.Surgery;
 using Content.Medical.Shared.Surgery.Steps;
 using Content.Server.Administration.Logs;
-using Content.Server.Antag;
+using Content.Shared.Antag;
 using Content.Shared.Database;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind;

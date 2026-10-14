@@ -30,10 +30,6 @@
       - WeldingMask
       - RemoteSignaller
       - UtilityKnife
-      - Hammer # Goobstation
-      - Nailgun # Goobstation
-      - MagazineNailgun # Goobstation
-      - HereticBladeLock # Goobstation
       components:
       - StationMap
       - SprayPainter
@@ -129,7 +125,6 @@
     maxItemSize: Large
     whitelist:
       tags:
-      - Keyring # Goobstation
       - Wrench
       - Bottle
       - Spray
@@ -211,10 +206,6 @@
   - type: Storage
     whitelist:
       tags:
-      # <Trauma>
-      - Tourniquet
-      - HandheldCrewMonitor
-      # </Trauma>
       - Wrench
       - Bottle
       - Spray
@@ -230,14 +221,6 @@
       - SurgeryTool
       - Dropper
       components:
-      # <Trauma>
-      - SurgeryTool
-      - Defibrillator
-      - SyringeGun
-      - GunApplySolution # syndicate dart gun
-      - SolutionCartridge
-      - MedicalPatch
-      # </Trauma>
       - Injector
       - Pill
       - HandLabeler
@@ -307,14 +290,12 @@
       - Syringe
       - CigPack
       - Dropper
-      - PlantAnalyzer # Trauma
       components:
       - BotanySampleTaker
       - BotanyHoe
       - Seed
       - Smokable
       - HandLabeler
-      - PlantAnalyzer # Trauma
   - type: ItemMapper
     sprite: *BeltOverlay
     mapLayers:
@@ -428,15 +409,10 @@
   - type: Clothing
     sprite: Clothing/Belt/security.rsi
   - type: ExplosionResistance
-    damageCoefficient: 0.5 # Goob - was 0.9
+    damageCoefficient: 0.9
   - type: Storage
     whitelist:
       tags:
-      # <Trauma>
-      - BolaEnergy
-      - EnergySpeedloader
-      - MilitaryPowerCell
-      # </Trauma>
       - CigPack
       - Taser
       - SecBeltEquip
@@ -445,13 +421,9 @@
       - MagazinePistol
       - MagazineMagnum
       - CombatKnife
-      - Truncheon
       - HandGrenade
       - Stunbaton
       components:
-      # <Trauma>
-      - ScatteringGrenade
-      # </Trauma>
       - FlashOnTrigger
       - SmokeOnTrigger
       - Flash

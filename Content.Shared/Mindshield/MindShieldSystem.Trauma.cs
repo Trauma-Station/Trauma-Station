@@ -8,7 +8,7 @@ public sealed partial class MindShieldSystem
     /// <summary>
     /// Status icon displayed in the sec HUD for broken mindshields.
     /// </summary>
-    public static ProtoId<SecurityIconPrototype> BrokenStatusIcon = "MindShieldBrokenIcon";
+    public static ProtoId<StatusIconPrototype> BrokenStatusIcon = "MindShieldBrokenIcon";
 
     public void GetMindshieldStatus(EntityUid entity, out bool isMindshielded, out bool isVisible)
     {

@@ -12,8 +12,6 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:AdjustTemperature
-        amount: 80000
       - !type:HealthChange
         conditions:
         - !type:TemperatureCondition

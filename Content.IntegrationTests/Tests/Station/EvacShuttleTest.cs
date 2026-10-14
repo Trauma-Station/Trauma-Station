@@ -4,6 +4,7 @@ using Content.Server.GameTicking;
 using Content.Server.Shuttles.Components;
 using Content.Server.Shuttles.Systems;
 using Content.Shared.CCVar;
+using Content.Shared.GameTicking;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Station.Components;
 using Robust.Shared.GameObjects;
@@ -30,7 +31,7 @@ public sealed class EvacShuttleTest : GameTest
         var pair = Pair;
         var server = pair.Server;
         var entMan = server.EntMan;
-        var ticker = server.System<GameTicker>();
+        var ticker = server.System<ServerGameTicker>();
 
         // Dummy ticker tests should not have centcomm
         Assert.That(entMan.Count<StationCentcommComponent>(), Is.Zero);
@@ -67,7 +68,7 @@ public sealed class EvacShuttleTest : GameTest
         var data = entMan.GetComponent<StationDataComponent>(station);
         var shuttleData = entMan.GetComponent<StationEmergencyShuttleComponent>(station);
 
-        var saltern = data.Grids.First(x => !entMan.HasComponent<Content.Lavaland.Server.Procedural.Components.LavalandStationComponent>(x)); // Lavaland change - ignore lavaland outpost
+        var saltern = data.Grids.Single();
         Assert.That(entMan.HasComponent<MapGridComponent>(saltern));
 
         var shuttle = shuttleData.EmergencyShuttle!.Value;

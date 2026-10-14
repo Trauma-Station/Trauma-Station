@@ -1,0 +1,69 @@
+<Document>
+  # Blood Cult
+  <Box>
+    <GuideEntityEmbed Entity="RitualDagger" Caption=""/>
+    <GuideEntityEmbed Entity="CultRuneDimensionalRending" Caption=""/>
+    <GuideEntityEmbed Entity="RitualDagger" Caption=""/>
+  </Box>
+
+  The [color=#dc143c]Geometer of Blood[/color], commonly known as the [color=#dc143c]Blood Cult[/color], seeks to summon their elder goddess [color=#dc143c][bold]Nar'Sie[/bold][/color] into this realm.
+
+  They practice a single magical branch: [color=#dc143c]Blood Magic[/color].
+
+  All cultists have an ability to carve a spell into their own flesh, which they can then perform at will.
+  Some spell invocations include summoning a spare ritual dagger, teleporting to special runes and placing victims in shadow shackles.
+
+  All cultists and their constructs have access to a collective mind, use [color=#dc143c]+c[/color] to communicate in it.
+
+  ## Goal
+
+  In order to summon [color=#dc143c]Nar'Sie[/color]'s dark avatar, the cult needs to invoke the [color=#dc143c]Rune of Dimensional Rending[/color].
+
+  This rune can only be drawn in a [bold]ritual site[/bold] explained below, after a special target has been sacrificed.
+
+  This target is shown in your objectives and is picked randomly when starting the cult.
+
+  In order to get strong enough to do this, and even invoke the rune, you will need at least 9 cult members.
+
+  Use the [color=#dc143c]Rune of Offering[/color] to convert or sacrifice crew, soulless ones will become a soul shard for use in constructs. Living converts will be healed a bit too incase you had to crit them.
+
+  ## Leader
+
+  One of the cultists is the [color=#dc143c]Leader[/color], who is in charge of commanding the other members.
+
+  Defer to the leader on important decisions like where to attack, where to build your main cult base or where to summon [color=#dc143c]Nar'Sie[/color].
+
+  ## Spells
+
+  Spells are obtained by carving your flesh with the [italic]Prepare Spell[/italic] ability.
+
+  They will require you to spill some blood, have a medibot on standby.
+
+  Usually you can only have 1 spell queued up, if you are empowered you can have [bold]4[/bold] instead, and they are much faster to prepare.
+
+  [bold]Using spells is very obvious, don't use them in public if you don't want to be revealed![/bold]
+
+  [textlink="See the full list of spells here" link="BloodCultSpells"/]
+
+  ## Runes
+
+  Runes are a more powerful magic that require spilling your blood then carving it into a unique eldritch symbol.
+
+  Some of the basic runes can be used solo, but the powerful runes will require multiple cultists nearby to help you invoke it.
+
+  [textlink="See the full list of runes here" link="BloodCultRunes"/]
+
+  The most important runes required for the cult to summon [color=#dc143c]Nar'Sie[/color] are:
+  - Offering, so you can grow your cult's numbers and sacrifice the target.
+  - Dimensional Rending, which brings Her into your dimension.
+
+  ## Ritual Sites
+
+  Ritual Sites are a randomly picked of areas on the station where the veil of reality is weakest.
+
+  You can see all available ritual sites in your objectives.
+
+  These sites are the only locations you can draw the runes of [color=#dc143c]Apocalypse[/color] and [color=#dc143c]Dimensional Rending[/color].
+
+  Once you draw these unique runes, that ritual site cannot be used for another rune. Choose wisely.
+</Document>

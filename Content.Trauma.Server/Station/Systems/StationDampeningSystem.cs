@@ -5,13 +5,9 @@ using Content.Trauma.Shared.Physics;
 
 namespace Content.Trauma.Server.Station.Systems;
 
-public sealed class StationDampeningSystem : EntitySystem
+public sealed partial class StationDampeningSystem : EntitySystem
 {
-    public override void Initialize()
-    {
-        SubscribeLocalEvent<StationPostInitEvent>(OnInitStation);
-    }
-
+    [SubscribeLocalEvent]
     private void OnInitStation(ref StationPostInitEvent ev)
     {
         foreach (var grid in ev.Station.Comp.Grids)

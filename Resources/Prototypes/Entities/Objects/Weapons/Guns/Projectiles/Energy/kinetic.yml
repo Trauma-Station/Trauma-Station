@@ -19,7 +19,7 @@
     damage:
       types:
         Blunt: 8 # Trauma - was 15
-        Structural: 11 # Trauma - was 15
+        Structural: 11 # Trauma - was 9
   # Short lifespan
   - type: TimedDespawn
     lifetime: 0.18 # Trauma - 5.5 -> 4 tiles

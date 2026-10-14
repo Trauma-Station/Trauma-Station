@@ -4,6 +4,7 @@ using Content.Client.Overlays;
 using Content.Goobstation.Shared.Disease;
 using Content.Goobstation.Shared.Disease.Components;
 using Content.Shared.Inventory.Events;
+using Content.Shared.StatusIcon;
 using Content.Shared.StatusIcon.Components;
 
 namespace Content.Goobstation.Client.Disease;
@@ -63,7 +64,7 @@ public sealed partial class ShowDiseaseIconsSystem : EquipmentHudSystem<ShowDise
             args.StatusIcons.Add(diseaseIcon);
     }
 
-    private DiseaseIconPrototype? DecideDiseaseIcon(Entity<DiseaseCarrierComponent> entity)
+    private StatusIconPrototype? DecideDiseaseIcon(Entity<DiseaseCarrierComponent> entity)
     {
         var carrier = entity.Comp;
         var total = 0f;
@@ -74,11 +75,11 @@ public sealed partial class ShowDiseaseIconsSystem : EquipmentHudSystem<ShowDise
 
             total += comp.InfectionProgress * comp.Complexity;
         }
-        if (total > (HighThreshold ?? int.MaxValue) && ProtoMan.TryIndex(carrier.HighIcon, out var highIcon))
+        if (total > (HighThreshold ?? int.MaxValue) && ProtoMan.Resolve(carrier.HighIcon, out var highIcon))
             return highIcon;
-        else if (total > (MediumThreshold ?? int.MaxValue) && ProtoMan.TryIndex(carrier.MediumIcon, out var medIcon))
+        else if (total > (MediumThreshold ?? int.MaxValue) && ProtoMan.Resolve(carrier.MediumIcon, out var medIcon))
             return medIcon;
-        else if (total > (LowThreshold ?? int.MaxValue) && ProtoMan.TryIndex(carrier.LowIcon, out var lowIcon))
+        else if (total > (LowThreshold ?? int.MaxValue) && ProtoMan.Resolve(carrier.LowIcon, out var lowIcon))
             return lowIcon;
 
         return null;

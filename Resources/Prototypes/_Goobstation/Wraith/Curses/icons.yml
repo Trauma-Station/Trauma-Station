@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-- type: curseStatusIcon
+- type: statusIcon
   id: BaseCurseStatusIcon
   abstract: true
   visibleToOwner: false
@@ -12,28 +12,28 @@
   offset: 0
   layer: Mod
 
-- type: curseStatusIcon
+- type: statusIcon
   parent: BaseCurseStatusIcon
   id: CurseWeaknessIcon
   icon:
     sprite: /Textures/_Goobstation/Wraith/UI/status.rsi
     state: weak_status
 
-- type: curseStatusIcon
+- type: statusIcon
   parent: BaseCurseStatusIcon
   id: CurseBlindnessIcon
   icon:
     sprite: /Textures/_Goobstation/Wraith/UI/status.rsi
     state: blind_status
 
-- type: curseStatusIcon
+- type: statusIcon
   parent: BaseCurseStatusIcon
   id: CurseBloodIcon
   icon:
     sprite: /Textures/_Goobstation/Wraith/UI/status.rsi
     state: blood_status
 
-- type: curseStatusIcon
+- type: statusIcon
   parent: BaseCurseStatusIcon
   id: CurseRotIcon
   icon:

@@ -47,9 +47,13 @@
     maxCharges: 3
   - type: AutoRecharge
     rechargeDuration: 10
-  - type: ActionRequiresEmptyHand
-    popupMessage: finger-guns-event-need-hand
-  - type: EntityEffectOnAction
+  - type: ActionRequirements
+    conditions:
+      Performer:
+      - !type:EmptyHandCondition
+    failPopup: finger-guns-event-need-hand
+  - type: EffectAction
+    onPerformed: true
     effects:
     - !type:Chat
       message: finger-guns-event-shoot

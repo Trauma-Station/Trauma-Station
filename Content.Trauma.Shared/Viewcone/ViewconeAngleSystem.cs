@@ -8,7 +8,9 @@ using Content.Shared.Movement.Components;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
 using Content.Shared.Wieldable.Components;
+using Content.Trauma.Common.CCVar;
 using Content.Trauma.Shared.Viewcone.Components;
+using Robust.Shared.Configuration;
 
 namespace Content.Trauma.Shared.Viewcone;
 
@@ -18,9 +20,12 @@ namespace Content.Trauma.Shared.Viewcone;
 public sealed partial class ViewconeAngleSystem : EntitySystem
 {
     [Dependency] private BodySystem _body = default!;
+    [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private EntityQuery<ViewconeComponent> _query = default!;
     [Dependency] private EntityQuery<WieldableComponent> _wieldableQuery = default!;
+
+    private bool _disabled;
 
     public override void Initialize()
     {
@@ -29,16 +34,17 @@ public sealed partial class ViewconeAngleSystem : EntitySystem
         SubscribeLocalEvent<BodyComponent, ModifyViewconeAngleEvent>(_body.RelayEvent);
         SubscribeLocalEvent<StatusEffectContainerComponent, ModifyViewconeAngleEvent>(_status.RelayEvent);
 
-        SubscribeLocalEvent<ViewconeModifierComponent, ExaminedEvent>(OnExamined);
         Subs.SubscribeWithRelay<ViewconeModifierComponent, ModifyViewconeAngleEvent>(OnModifyAngle, held: false);
-        SubscribeLocalEvent<ViewconeModifierComponent, StatusEffectRelayedEvent<ModifyViewconeAngleEvent>>(OnEffectModifyAngle);
-        SubscribeLocalEvent<ViewconeModifierComponent, BodyRelayedEvent<ModifyViewconeAngleEvent>>(OnOrganModifyAngle);
 
-        SubscribeLocalEvent<CursorOffsetRequiresWieldComponent, HeldRelayedEvent<ModifyViewconeAngleEvent>>(OnScopeModify);
+        Subs.CVar(_cfg, TraumaCVars.DisableVisionCones, x => _disabled = x, true);
     }
 
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<ViewconeModifierComponent> ent, ref ExaminedEvent args)
     {
+        if (_disabled)
+            return;
+
         var dir = ent.Comp.AngleModifier < 1f ? "decrease" : "increase";
         var loc = "viewcone-modifier-examine-" + dir;
 
@@ -52,6 +58,7 @@ public sealed partial class ViewconeAngleSystem : EntitySystem
         args.ModifyAngle(ent.Comp.AngleModifier);
     }
 
+    [SubscribeLocalEvent]
     private void OnEffectModifyAngle(Entity<ViewconeModifierComponent> ent, ref StatusEffectRelayedEvent<ModifyViewconeAngleEvent> args)
     {
         var ev = args.Args;
@@ -59,11 +66,13 @@ public sealed partial class ViewconeAngleSystem : EntitySystem
         args.Args = ev; // holy dogshit please never ever do this
     }
 
+    [SubscribeLocalEvent]
     private void OnOrganModifyAngle(Entity<ViewconeModifierComponent> ent, ref BodyRelayedEvent<ModifyViewconeAngleEvent> args)
     {
         args.Args.ModifyAngle(ent.Comp.AngleModifier);
     }
 
+    [SubscribeLocalEvent]
     private void OnScopeModify(Entity<CursorOffsetRequiresWieldComponent> ent, ref HeldRelayedEvent<ModifyViewconeAngleEvent> args)
     {
         if (_wieldableQuery.TryComp(ent, out var wieldable) && wieldable.Wielded)

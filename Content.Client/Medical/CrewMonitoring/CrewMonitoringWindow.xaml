@@ -56,7 +56,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
         <!-- Footer -->
         <BoxContainer Orientation="Vertical">
-            <PanelContainer StyleClasses="LowDivider" />
+            <controls:Separator StyleClasses="LowDivider"/>
             <BoxContainer Orientation="Horizontal" Margin="10 2 5 0" VerticalAlignment="Bottom">
                 <Label Text="{Loc crew-monitoring-ui-flavor-left-label}" StyleClasses="WindowFooterText" />
                 <Label Text="{Loc crew-monitoring-ui-flavor-right-label}" StyleClasses="WindowFooterText"

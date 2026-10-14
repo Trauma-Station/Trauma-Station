@@ -1,5 +1,6 @@
 // <Trauma>
 using Content.Trauma.Common.CCVar;
+using Content.Trauma.Common.JobListings;
 using Robust.Shared.Configuration;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;
@@ -38,7 +39,7 @@ namespace Content.Server.PDA
         [Dependency] private CartridgeLoaderSystem _cartridgeLoader = default!;
         [Dependency] private InstrumentSystem _instrument = default!;
         [Dependency] private RingerSystem _ringer = default!;
-        [Dependency] private StationSystem _station = default!;
+        [Dependency] private ServerStationSystem _station = default!;
         [Dependency] private StoreSystem _store = default!;
         [Dependency] private IChatManager _chatManager = default!;
         [Dependency] private UserInterfaceSystem _ui = default!;
@@ -145,13 +146,6 @@ namespace Content.Server.PDA
             UpdatePdaUi(uid, pda);
         }
 
-        public void SetOwner(EntityUid uid, PdaComponent pda, EntityUid owner, string ownerName)
-        {
-            pda.OwnerName = ownerName;
-            pda.PdaOwner = owner;
-            UpdatePdaUi(uid, pda);
-        }
-
         private void OnStationRenamed(StationRenamedEvent ev)
         {
             UpdateAllPdaUisOnStation();
@@ -207,6 +201,7 @@ namespace Content.Server.PDA
             var address = GetDeviceNetAddress(uid);
             var hasInstrument = HasComp<InstrumentComponent>(uid);
             var showUplink = TryGetUnlockedStore(uid, out _);
+            var showJobBoard = showUplink && HasComp<RemoteJobListingsComponent>(uid);
 
             pda.CurrentDate = ServerDate; // DeltaV - PDA date
             UpdateStationName(uid, pda);
@@ -237,6 +232,7 @@ namespace Content.Server.PDA
                 },
                 pda.StationName,
                 showUplink,
+                showJobBoard, // Trauma
                 hasInstrument,
                 address);
 
@@ -325,7 +321,8 @@ namespace Content.Server.PDA
         /// <summary>
         /// Returns the currently unlocked store, if there is one.
         /// </summary>
-        private bool TryGetUnlockedStore(EntityUid uid, [NotNullWhen(true)] out EntityUid? store)
+        // Trauma - made public for job listings
+        public bool TryGetUnlockedStore(EntityUid uid, [NotNullWhen(true)] out EntityUid? store)
         {
             store = null;
             if (!TryComp<RingerUplinkComponent>(uid, out var uplink) || !uplink.Unlocked)

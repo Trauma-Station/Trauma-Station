@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: MedicalDoctor
+  guides:
+  - MedicalDoctor
+  - Medicine
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipDoctor
+    - SkillChipEducation
+    - SkillChipSurgeon
+  - !type:AddComponentSpecial
+    components:
+    - type: SurgerySpeedModifier
+      speedModifier: 1.5
+    - type: CPRTraining
+      reviveChance: 0.45 # a bit better at chest compressions
+      inhaleChance: 0.75 # decent at mouth to mouth res.

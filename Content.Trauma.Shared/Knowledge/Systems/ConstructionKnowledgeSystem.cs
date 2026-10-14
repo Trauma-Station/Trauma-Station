@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Construction;
+using Content.Factory.Common.Construction;
 using Content.Shared.Construction.Prototypes;
 using Content.Shared.Popups;
 using Content.Trauma.Common.Construction;

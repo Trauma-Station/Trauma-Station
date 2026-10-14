@@ -5,16 +5,6 @@
   abstract: true
   components:
   - type: SubdermalImplant
-    # <Trauma> - copied from implanter, needed so polymorph doesnt fuck up
-    whitelist:
-      components:
-      - MobState # no chair microbomb
-    blacklist:
-      components:
-      - Guardian # no holoparasite macrobomb wombo combo
-      tags:
-      - Unimplantable
-    # </Trauma>
   - type: Tag
     tags:
     - SubdermalImplant
@@ -100,7 +90,6 @@
     - type: StationLimitedNetwork
     - type: WirelessNetworkConnection
       range: 500
-    - type: MansusGraspBlockTrigger # Goobstation
 
 #Traitor implants
 
@@ -144,13 +133,6 @@
   - type: TriggerOnActivateImplant
   - type: UncuffOnTrigger
     targetUser: true
-  - type: EntityEffectOnTrigger # Trauma - entity effect version of goob shitcode
-    targetUser: true
-    effects:
-    - !type:RelayPuller # stun whoever is pulling you
-      effect: !type:ModifyParalysis
-        time: 5
-    - !type:RemoveSnares # remove any snares
 
 - type: entity
   parent: BaseSubdermalImplant

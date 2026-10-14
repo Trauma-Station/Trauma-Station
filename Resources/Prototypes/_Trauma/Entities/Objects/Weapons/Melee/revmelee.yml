@@ -270,6 +270,7 @@
     sprite: _Trauma/Objects/Revs/torch.rsi
     state: icon
   - type: MeleeWeapon
+    range: 2
     animationRotation: -135
     damage:
       types:

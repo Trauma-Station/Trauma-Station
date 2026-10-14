@@ -3,9 +3,9 @@
 - type: weightedRandom
   id: AbductorVictimObjectiveGroups
   weights:
-    AbductorVictimObjectiveGroupHarmless: 0.75
-    AbductorVictimObjectiveGroupAnnoy: 0.20
-    AbductorVictimObjectiveGroupHarmful: 0.05
+    AbductorVictimObjectiveGroupHarmless: 0.45
+    AbductorVictimObjectiveGroupAnnoy: 0.35
+    AbductorVictimObjectiveGroupHarmful: 0.2
 
 - type: weightedRandom
   id: AbductorVictimObjectiveGroupHarmless

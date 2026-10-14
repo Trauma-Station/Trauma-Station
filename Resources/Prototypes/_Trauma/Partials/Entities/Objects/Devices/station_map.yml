@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: BaseHandheldStationMap
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 75
+      Plastic: 25

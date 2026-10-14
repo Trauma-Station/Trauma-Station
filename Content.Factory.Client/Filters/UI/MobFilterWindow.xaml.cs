@@ -1,0 +1,31 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Client.UserInterface.Controls;
+using Content.Factory.Shared.Filters;
+using Content.Shared.Mobs;
+
+namespace Content.Factory.Client.Filters.UI;
+
+[GenerateTypedNameReferences]
+public sealed partial class MobFilterWindow : FancyWindow
+{
+    public event Action<MobState>? OnToggle;
+
+    public MobFilterWindow()
+    {
+        RobustXamlLoader.Load(this);
+
+        AliveButton.OnPressed += _ => OnToggle?.Invoke(MobState.Alive);
+        DeadButton.OnPressed += _ => OnToggle?.Invoke(MobState.Dead);
+        CriticalButton.OnPressed += _ => OnToggle?.Invoke(MobState.Critical);
+        SoftCritButton.OnPressed += _ => OnToggle?.Invoke(MobState.SoftCrit);
+    }
+
+    public void SelectValues(HashSet<MobState> states)
+    {
+        AliveButton.Pressed = states.Contains(MobState.Alive);
+        DeadButton.Pressed = states.Contains(MobState.Dead);
+        CriticalButton.Pressed = states.Contains(MobState.Critical);
+        SoftCritButton.Pressed = states.Contains(MobState.SoftCrit);
+    }
+}

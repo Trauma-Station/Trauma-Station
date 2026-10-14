@@ -4,10 +4,6 @@
   id: Sledgehammer
   description: The perfect tool for wanton carnage.
   components:
-  # <Trauma>
-  - type: WeaponClass
-    class: Bludgeon
-  # <Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/sledgehammer.rsi
     state: icon
@@ -16,9 +12,7 @@
     damage:
       types:
         Blunt: 10
-        Structural: 10
-      woundSeverityMultipliers: #Goob
-        Blunt: 1.5
+        Structural: 6
     soundHit:
       collection: MetalThud
   - type: Wieldable
@@ -26,48 +20,36 @@
     damage:
       types:
         Blunt: 10
-        Structural: 10
+        Structural: 6
   - type: Item
     size: Large
 
 - type: entity
   id: Mjollnir
-  parent: [BaseItem, BaseMagicalContraband] # Trauma - Contraband marker
+  parent: [ BaseItem, BaseMagicalContraband ]
   name: Mjollnir
   description: A weapon worthy of a god, able to strike with the force of a lightning bolt. It crackles with barely contained energy.
   components:
-  # <Trauma>
-  - type: MeleeRequiresWield
-  - type: Boomerang
-    maxHops: 20
-  - type: WeaponClass
-    class: Bludgeon
-  - type: StaticPrice
-    price: 50000
-  # <Trauma>
   - type: Wieldable
-    useDelayOnWield: false # GoobStation Edit
+    useDelayOnWield: false
+  - type: MeleeRequiresWield
   - type: LandAtCursor
   - type: Sprite
-    sprite: _Goobstation/Objects/Weapons/Melee/mjollnir.rsi # GoobStation Edit
+    sprite: Objects/Weapons/Melee/mjollnir.rsi
     layers:
     - state: icon
-  # - type: UseDelay
-  #   delay: 5 # Goobstation
-  # - type: UseDelayOnMeleeHit
+  - type: UseDelay
+    delay: 10
+  - type: UseDelayOnMeleeHit
   - type: MeleeThrowOnHit
-    distance: 10 # Goobstation
     stunTime: 3
     activateOnThrown: true
   - type: MeleeWeapon
-    attackRate: 0.75 # Goobstation
     wideAnimationRotation: -135
     damage:
       types:
-        Blunt: 10 # GoobStation Edit
-        Structural: 10 # GoobStation Edit
-      woundSeverityMultipliers:
-        Blunt: 2
+        Blunt: 5
+        Structural: 5
     soundHit:
       path: /Audio/Effects/tesla_consume.ogg
       params:
@@ -75,15 +57,13 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Blunt: 20 # GoobStation Edit
-        Structural: 35 # GoobStation Edit
+        Blunt: 20
+        Structural: 55 # The mighty muscle wizard shatters windows in a single blow
   - type: DamageOtherOnHit
     damage:
       types:
         Blunt: 15
-        Structural: 15
-      woundSeverityMultipliers:
-        Blunt: 2
+        Structural: 45
   - type: Item
     size: Ginormous
     shape:
@@ -93,16 +73,10 @@
 
 - type: entity
   id: SingularityHammer
-  parent: [BaseItem, BaseMagicalContraband] # Trauma - Contraband marker
+  parent: [ BaseItem, BaseMagicalContraband ]
   name: Singularity Hammer
   description: The pinnacle of close combat technology, the hammer harnesses the power of a miniaturized singularity to deal crushing blows.
   components:
-  # <Trauma>
-  - type: WeaponClass
-    class: Bludgeon
-  - type: StaticPrice
-    price: 30000
-  # </Trauma>
   - type: Wieldable
     useDelayOnWield: false
   - type: MeleeRequiresWield
@@ -117,18 +91,14 @@
       components:
       - MobMover
       - Item
-  # - type: UseDelay
-  #   delay: 5
-  # - type: UseDelayOnMeleeHit
+  - type: UseDelay
+    delay: 10
+  - type: UseDelayOnMeleeHit
   - type: MeleeWeapon
-    attackRate: 0.75 # Goobstation
     wideAnimationRotation: -135
     damage:
       types:
         Blunt: 5
-        Structural: 5
-      woundSeverityMultipliers:
-        Blunt: 2
     soundHit:
       path: /Audio/Effects/radpulse5.ogg
       params:
@@ -136,8 +106,7 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Blunt: 25 # Goob edit
-        Structural: 35 # Goob edit
+        Blunt: 15
   - type: Item
     size: Ginormous
     shape:

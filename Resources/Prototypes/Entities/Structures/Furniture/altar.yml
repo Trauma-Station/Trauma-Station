@@ -84,7 +84,6 @@
     color: "#fbb1b1"
   - type: AltarSource
     rodProto: GodHand
-    effectProto: EffectSpark
     soundPath: /Audio/Effects/hallelujah.ogg
   - type: Construction
     graph: AltarsGraph
@@ -103,7 +102,6 @@
     state: druid
   - type: AltarSource
     rodProto: MonkStaff
-    effectProto: EffectSpark
     soundPath: /Audio/Effects/hallelujah.ogg
   - type: Construction
     graph: AltarsGraph
@@ -122,7 +120,6 @@
     state: toolbox
   - type: AltarSource
     rodProto: HolyChainsaw # Shitchap
-    effectProto: EffectSpark
     soundPath: /Audio/Effects/hallelujah.ogg
   - type: Construction
     graph: AltarsGraph
@@ -148,7 +145,6 @@
     color: "#fbceb1"
   - type: AltarSource
     rodProto: Rosary
-    effectProto: EffectSpark
     soundPath: /Audio/Effects/hallelujah.ogg
   - type: Construction
     graph: AltarsGraph
@@ -196,7 +192,6 @@
     node: TechnologyAltarNode
   - type: AltarSource
     rodProto: ClothingBeltHolsterFilledChaplain
-    effectProto: EffectSpark
     soundPath: /Audio/Effects/hallelujah.ogg
 
 - type: entity
@@ -256,7 +251,6 @@
     color: "#ff6347"
   - type: AltarSource
     rodProto: UristHand # Shitchap
-    effectProto: EffectSpark
     soundPath: /Audio/Effects/hallelujah.ogg
   - type: Construction
     graph: AltarsGraph
@@ -282,7 +276,6 @@
     color: "#fbceb1"
   - type: AltarSource
     rodProto: Bulwark # Shitchap
-    effectProto: EffectSpark
     soundPath: /Audio/Effects/hallelujah.ogg
   - type: Construction
     graph: AltarsGraph
@@ -339,7 +332,6 @@
     node: ConvertOrangeNode
   - type: AltarSource
     rodProto: WeaponPistolIradomini
-    effectProto: EffectSpark
   - type: Sprite
     sprite: Structures/Furniture/Altars/Gods/convertaltar.rsi
     layers:
@@ -384,7 +376,6 @@
     node: ConvertWhiteNode
   - type: AltarSource
     rodProto: WeaponPistolFaith
-    effectProto: EffectSpark
   # </Trauma>
   - type: Sprite
     sprite: Structures/Furniture/Altars/Gods/convertaltar.rsi
@@ -430,7 +421,6 @@
     node: HeavenAltarNode
   - type: AltarSource
     rodProto: HolyClaymore
-    effectProto: EffectSpark
     soundPath: /Audio/Effects/hallelujah.ogg
   # </Trauma>
   - type: Sprite
@@ -474,7 +464,6 @@
     sprite: Structures/Furniture/Altars/Cults/fangs.rsi
   - type: AltarSource
     rodProto: ArrythmicKnife # Shitchap
-    effectProto: EffectSpark
     soundPath: /Audio/Effects/hallelujah.ogg
   - type: Construction
     graph: AltarsGraph
@@ -494,5 +483,4 @@
     node: BananiumAltarNode
   - type: AltarSource
     rodProto: HonkmotherMaw # Shitchap
-    effectProto: EffectSpark
     soundPath: /Audio/Items/bikehorn.ogg

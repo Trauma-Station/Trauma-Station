@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.StatusIcon;
 
 namespace Content.Goobstation.Shared.Wraith.Curses;
 
@@ -22,12 +23,12 @@ public sealed partial class CurseHolderComponent : Component
     [ViewVariables, AutoNetworkedField]
     public Dictionary<ProtoId<CursePrototype>, TimeSpan> CurseUpdate = new();
 
-    [ViewVariables, AutoNetworkedField]
-    public List<ProtoId<CurseStatusIconPrototype>> CurseStatusIcons = new();
+    [DataField, AutoNetworkedField]
+    public List<ProtoId<StatusIconPrototype>> CurseStatusIcons = new();
 
     /// <summary>
     /// The entity that cursed us
     /// </summary>
-    [ViewVariables]
+    [DataField]
     public EntityUid? Curser;
 }

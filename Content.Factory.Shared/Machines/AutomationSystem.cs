@@ -1,0 +1,131 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Factory.Shared.Slots;
+using Content.Shared.Eye;
+using Content.Shared.Stealth;
+using Content.Shared.Stealth.Components;
+using Robust.Shared.Physics.Components;
+using Robust.Shared.Physics.Systems;
+
+namespace Content.Factory.Shared.Machines;
+
+public sealed partial class AutomationSystem : EntitySystem
+{
+    [Dependency] private SharedPhysicsSystem _physics = default!;
+    [Dependency] private SharedStealthSystem _stealth = default!;
+    [Dependency] private EntityQuery<AutomationSlotsComponent> _slotsQuery = default!;
+    [Dependency] private EntityQuery<StealthComponent> _stealthQuery = default!;
+    [Dependency] private EntityQuery<VisibilityComponent> _visibilityQuery = default!;
+
+    private CompName _slotsName;
+
+    public const short NormalMask = (short) VisibilityFlags.Normal;
+
+    private List<EntProtoId> _automatable = new();
+    /// <summary>
+    /// All entities with <see cref="AutomationSlotsComponent"/>, maintained on prototype reload.
+    /// </summary>
+    public IReadOnlyList<EntProtoId> Automatable => _automatable;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        _slotsName = Factory.CompName<AutomationSlotsComponent>();
+
+        CacheEntities();
+    }
+
+    [SubscribeLocalEvent]
+    private void OnInit(Entity<AutomationSlotsComponent> ent, ref ComponentInit args)
+    {
+        foreach (var slot in ent.Comp.Slots)
+        {
+            slot.Owner = ent;
+            slot.Initialize();
+        }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnMapInit(Entity<AutomationSlotsComponent> ent, ref MapInitEvent args)
+    {
+        foreach (var slot in ent.Comp.Slots)
+        {
+            slot.AddPorts();
+        }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnShutdown(Entity<AutomationSlotsComponent> ent, ref ComponentShutdown args)
+    {
+        // don't care if the entity is being deleted
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        foreach (var slot in ent.Comp.Slots)
+        {
+            slot.RemovePorts();
+        }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnAnchorChanged(Entity<PhysicsComponent> ent, ref AnchorStateChangedEvent args)
+    {
+        // force collision events so machines can react to objects getting unanchored
+        // should get reset after a tick due to collision wake
+        if (!args.Anchored && !args.Detaching)
+            _physics.WakeBody(ent);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)
+    {
+        if (!args.WasModified<EntityPrototype>())
+            return;
+
+        CacheEntities();
+    }
+
+    private void CacheEntities()
+    {
+        _automatable.Clear();
+        foreach (var proto in ProtoMan.EnumeratePrototypes<EntityPrototype>())
+        {
+            if (proto.HasComp(_slotsName))
+                _automatable.Add(proto.ID);
+        }
+
+        _automatable.Sort();
+    }
+
+    #region Public API
+
+    public AutomationSlot? GetSlot(Entity<AutomationSlotsComponent?> ent, string port, bool input)
+    {
+        // entity has no automation slots to begin with
+        if (!_slotsQuery.Resolve(ent, ref ent.Comp, false))
+            return null;
+
+        foreach (var slot in ent.Comp.Slots)
+        {
+            string? id = input ? slot.Input : slot.Output;
+            if (id == port)
+                return slot;
+        }
+
+        return null;
+    }
+
+    public bool HasSlot(Entity<AutomationSlotsComponent?> ent, string port, bool input)
+        => GetSlot(ent, port, input) != null;
+
+    /// <summary>
+    /// Returns true if an entity has normal visibility bit and not stealthed.
+    /// This is considered visible to machines.
+    /// </summary>
+    public bool CanMachineDetect(EntityUid uid)
+        => (!_visibilityQuery.TryComp(uid, out var visibility) || (visibility.Layer & NormalMask) == NormalMask) &&
+            (!_stealthQuery.TryComp(uid, out var stealth) || !stealth.Enabled || _stealth.GetVisibility(uid, stealth) > stealth.ExamineThreshold);
+
+    #endregion
+}

@@ -77,7 +77,7 @@
     children:
     - id: ClothingOuterWizard
     - id: ClothingHeadHatWizard
-    - id: ClothingShoesWizard
+    - id: ClothingShoesSandalsBrown
     - id: PonderingOrb
       prob: 0.3
     - id: RGBStaff

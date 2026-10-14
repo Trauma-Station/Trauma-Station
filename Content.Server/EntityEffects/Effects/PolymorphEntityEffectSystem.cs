@@ -8,16 +8,19 @@ namespace Content.Server.EntityEffects.Effects;
 /// Polymorphs this entity into another entity.
 /// </summary>
 /// <inheritdoc cref="EntityEffectSystem{T,TEffect}"/>
-public sealed partial class PolymorphEntityEffectSystem : EntityEffectSystem<PolymorphableComponent, Shared.EntityEffects.Effects.Polymorph>
+public sealed partial class PolymorphEntityEffectSystem : EntityEffectSystem<MetaDataComponent, Shared.EntityEffects.Effects.Polymorph>
 {
     [Dependency] private PolymorphSystem _polymorph = default!;
 
-    protected override void Effect(Entity<PolymorphableComponent> entity, ref EntityEffectEvent<Shared.EntityEffects.Effects.Polymorph> args)
+    protected override void Effect(Entity<MetaDataComponent> entity, ref EntityEffectEvent<Shared.EntityEffects.Effects.Polymorph> args)
     {
         // <Trauma>
         if (TerminatingOrDeleted(entity))
             return;
         // </Trauma>
+        if (!args.Effect.Force && !HasComp<PolymorphableComponent>(entity))
+            return;
+
         _polymorph.PolymorphEntity(entity, args.Effect.Prototype);
     }
 }

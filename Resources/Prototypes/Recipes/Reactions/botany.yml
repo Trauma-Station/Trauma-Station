@@ -22,6 +22,17 @@
     RobustHarvest: 1
 
 - type: reaction
+  id: MutagenicFertilizer
+  reactants:
+    EZNutrient:
+      amount: 1
+    UnstableMutagen:
+      amount: 1
+      catalyst: true
+  products:
+    MutagenicFertilizer: 1
+
+- type: reaction
   id: Sedin
   reactants:
     Cryoxadone:

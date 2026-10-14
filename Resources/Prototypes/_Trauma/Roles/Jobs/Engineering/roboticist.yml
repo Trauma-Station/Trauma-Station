@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: Roboticist
+  name: job-name-roboticist
+  description: job-description-roboticist
+  playTimeTracker: JobRoboticist
+  requirements:
+  - !type:DepartmentTimeRequirement
+    department: Engineering
+    time: 1.5h
+  startingGear: RoboticistGear
+  icon: "JobIconRoboticist"
+  supervisors: job-supervisors-ce
+  guides: [ Robotics ]
+  access: # No external for you, you're OP enough
+  - Engineering
+  - Maintenance
+  - Robotics
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipEducation
+
+- type: startingGear
+  id: RoboticistGear
+  equipment:
+    ears: ClothingHeadsetRobotics
+    eyes: ClothingEyesHudDiagnostic
+
+- type: chameleonOutfit
+  id: RoboticistChameleonOutfit
+  job: Roboticist
+  equipment:
+    head: ClothingHeadBandSkull
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskGas
+    outerClothing: ClothingOuterCoatRobo
+    gloves: ClothingHandsGlovesRobohands
+    ear: ClothingHeadsetRobotics
+    jumpsuit: ClothingUniformJumpsuitRoboticist
+    shoes: ClothingShoesColorBlack
+    id: RoboticistPDA

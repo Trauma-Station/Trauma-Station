@@ -13,6 +13,7 @@ using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Cuffs;
 using Content.Trauma.Common.Knockdown;
 using Content.Trauma.Common.Wizard;
+using Content.Trauma.Shared.MartialArts;
 
 namespace Content.Trauma.Shared.Wizard.Mutate;
 
@@ -57,6 +58,12 @@ public abstract partial class SharedHulkSystem : EntitySystem
 
         if (args.HitEntities.Count > 0)
             Roar(ent, 0.2f);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnComboAttempt(Entity<HulkComponent> ent, ref ComboAttemptEvent args)
+    {
+        args.Cancelled |= ent.Comp.MartialsBlocked;
     }
 
     private void OnSlipAttempt(Entity<HulkComponent> ent, ref SlipAttemptEvent args)

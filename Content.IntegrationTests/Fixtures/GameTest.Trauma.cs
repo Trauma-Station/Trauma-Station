@@ -11,12 +11,12 @@ public abstract partial class GameTest
     protected EntityUid CSpawn([ForbidLiteral] EntProtoId id, EntityCoordinates coords)
         => CEntMan.SpawnAtPosition(id, coords);
 
-    protected void SDel(EntityUid uid)
+    protected void SDel(EntityUid? uid)
     {
         SEntMan.DeleteEntity(uid);
     }
 
-    protected void CDel(EntityUid uid)
+    protected void CDel(EntityUid? uid)
     {
         CEntMan.DeleteEntity(uid);
     }

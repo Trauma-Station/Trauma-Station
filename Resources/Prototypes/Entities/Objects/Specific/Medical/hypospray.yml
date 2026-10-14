@@ -44,7 +44,7 @@
       maxVol: 10
 
 - type: entity
-  parent: [SolutionTool50, BaseHypospray, BaseGrandTheftContraband] # Trauma - SolutionToolSmall -> SolutionTool50
+  parent: [SolutionTool50, BaseHypospray, BaseGrandTheftContraband] # Trauma - Small -> 50
   id: Hypospray
   name: hypospray
   description: A sterile injector for rapid administration of drugs to patients.
@@ -74,7 +74,7 @@
     solutionName: hypospray
 
 - type: entity
-  parent: [BaseHypospray, BaseSyndicateContraband, SolutionTool50] # Trauma - added SolutionTool50, stronger than crew hypo
+  parent: [SolutionTool50, BaseHypospray, BaseSyndicateContraband] # Trauma - added SolutionTool50
   id: SyndiHypo
   name: gorlex hypospray
   description: A sterile injector for rapid administration of drugs. Reverse-engineered from Nanotrasen designs, Cybersun produces these in limited quantities for Gorlex Marauders' corpsmen.
@@ -181,9 +181,6 @@
   suffix: Admeme
   description: The ultimate application of bluespace technology and rapid chemical administration.
   components:
-  # <Trauma>
-  - type: IgnoreHypoport
-  # </Trauma>
   - type: Solution
     solution:
       maxVol: 3000 # Badmin abuse
@@ -220,7 +217,6 @@
     activeModeProtoId: HyposprayInjectMode
     allowedModes:
     - HyposprayInjectMode
-  - type: IgnoreHypoport # Trauma - medipens have a needle, they aren't actually hyposprays
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     changeColor: false
@@ -228,13 +224,10 @@
     solutionName: hypospray
   - type: PhysicalComposition
     materialComposition:
-      Plastic: 25
+      Plastic: 50
   - type: SpaceGarbage
   - type: StaticPrice
     price: 75 # These are limited supply items.
-  - type: Tag
-    tags:
-    - Medipen
   - type: TrashOnSolutionEmpty
     solution: hypospray
 
@@ -242,14 +235,8 @@
   parent: ChemicalMedipen
   id: EmergencyMedipen
   name: emergency medipen
-  description: A rapid and safe way to heal minor damage, stop bleeding, and stabilize patients for personnel without advanced medical knowledge. # goobstation
+  description: A single-dose, non-refillable medipen containing epinephrine and tranexamic acid, used to temporarily stabilize patients in critical condition and buy time for them to recieve proper medical treatment. Beware of overdose.
   components:
-  # <Trauma>
-  - type: Tag
-    tags:
-    - Medipen
-    - EmergencyMedipen
-  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Medical/medipen.rsi
     layers:
@@ -261,14 +248,9 @@
     emptySpriteName: medipen_empty
   - type: Solution
     solution:
-      maxVol: 15 # Trauma - you gotta set the maxVol if you change the amount of chemicals
       reagents:
       - ReagentId: Epinephrine
-        Quantity: 5 # Trauma - was 15
-      # <Trauma>
-      - ReagentId: Atropine
-        Quantity: 5
-      # </Trauma>
+        Quantity: 15
       - ReagentId: TranexamicAcid
         Quantity: 5
 
@@ -276,7 +258,7 @@
   parent: ChemicalMedipen
   id: AntiPoisonMedipen
   name: poison auto-injector
-  description: A rapid dose of anti-poison. Causes extreme stress when mixed with other medications. # Goob
+  description: A single-dose, non-refillable medipen containing stellibinin and epinephrine, used to quickly and easily treat poisoning.
   components:
   - type: Item
     inhandVisuals:
@@ -301,18 +283,17 @@
     emptySpriteName: penacid_empty
   - type: Solution
     solution:
-      maxVol: 15 # Trauma - you gotta set the maxVol if you change the amount of chemicals
       reagents:
-      # <Trauma> - replaced completely
-      - ReagentId: Monover
+      - ReagentId: Stellibinin
         Quantity: 15
-      # </Trauma>
+      - ReagentId: Epinephrine
+        Quantity: 5
 
 - type: entity
   parent: ChemicalMedipen
   id: BruteAutoInjector
   name: brute auto-injector
-  description: A rapid dose of bicaridine, salicylic acid, tranexamic acid, and tramadol, intended for combat applications. Usage of multiple highly recommended against. # goobstation # Goob
+  description: A single-dose, non-refillable medipen containing Polypryrylium and tranexamic acid, used to quickly and easily treat simple physical injuries. Commonly used as a combat medicine.
   components:
   - type: Item
     inhandVisuals:
@@ -338,14 +319,8 @@
   - type: Solution
     solution:
       reagents:
-      - ReagentId: Bicaridine
-        Quantity: 5 # Trauma - was 15
-      # <Trauma>
-      - ReagentId: SalicylicAcid
-        Quantity: 5
-      - ReagentId: Tramadol
-        Quantity: 5
-      # </Trauma>
+      - ReagentId: PolypyryliumOligomers
+        Quantity: 15
       - ReagentId: TranexamicAcid
         Quantity: 5
 
@@ -353,7 +328,7 @@
   parent: ChemicalMedipen
   id: BurnAutoInjector
   name: burn auto-injector
-  description: A rapid dose of oxandrolone, leporazine, and tramadol, intended for combat applications. # goobstation
+  description: A single-dose, non-refillable medipen containing dermaline and leporazine, used to quickly and easily treat non-chemical burns. Commonly used as a combat medicine.
   components:
   - type: Item
     inhandVisuals:
@@ -379,12 +354,8 @@
   - type: Solution
     solution:
       reagents:
-      # <Trauma> - replaced Dermaline
-      - ReagentId: Oxandrolone
-        Quantity: 5
-      - ReagentId: Tramadol
-        Quantity: 5
-      # </Trauma>
+      - ReagentId: Dermaline
+        Quantity: 10
       - ReagentId: Leporazine
         Quantity: 10
 
@@ -452,18 +423,19 @@
     emptySpriteName: punctpen_empty
   - type: Solution
     solution:
-      maxVol: 17 # Trauma - you gotta set the maxVol if you change the amount of chemicals
       reagents:
       - ReagentId: Puncturase
         Quantity: 12
       - ReagentId: TranexamicAcid
         Quantity: 5
+      - ReagentId: Nothing # Needed for visuals to work, idk what else to put here :P
+        Quantity: 3
 
 - type: entity
   parent: ChemicalMedipen
   id: PyraAutoInjector
   name: pyrazine auto-injector
-  description: A rapid dose of pyrazine and oxandrolone, intended for combat applications. # goobstation
+  description: A single-dose, non-refillable medipen containing pyrazine and dermaline, used to quickly and easily treat thermal burns. Commonly used as a combat medicine.
   components:
   - type: Item
     inhandVisuals:
@@ -491,7 +463,7 @@
       reagents:
       - ReagentId: Pyrazine
         Quantity: 10
-      - ReagentId: Oxandrolone # Trauma - was Dermaline
+      - ReagentId: Dermaline
         Quantity: 10
 
 - type: entity
@@ -532,15 +504,9 @@
 - type: entity
   parent: ChemicalMedipen
   id: SpaceMedipen
-  name: environmental stabilization medipen # goobstation
-  description: Contains a mix of chemicals that will temporarily protect you from low pressure environments, and stabilizes your body temperature. # goobstation
+  name: space medipen
+  description: A single-dose, non-refillable medipen containing barozine and leporazine, used to protect exposed flesh from the deadly effects of space.
   components:
-  # <Trauma>
-  - type: Tag
-    tags:
-    - Medipen
-    - SpaceMedipen
-  # </Trauma>
   - type: Item
     inhandVisuals:
       left:
@@ -602,10 +568,9 @@
       map: ["enum.SolutionContainerLayers.Fill"]
   - type: Solution
     solution:
-      maxVol: 10 # Trauma - you gotta set the maxVol if you change the amount of chemicals
       reagents:
       - ReagentId: Stimulants
-        Quantity: 10 # Trauma - was 30
+        Quantity: 30
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     changeColor: false
@@ -640,10 +605,9 @@
       map: ["enum.SolutionContainerLayers.Fill"]
   - type: Solution
     solution:
-      maxVol: 5 # Trauma - you gotta set the maxVol if you change the amount of chemicals
       reagents:
       - ReagentId: Stimulants
-        Quantity: 5 # Trauma - was 15
+        Quantity: 15
   - type: SolutionContainerVisuals
     maxFillLevels: 1
     changeColor: false
@@ -695,8 +659,8 @@
   components:
   - type: RefillableSolution
     solution: hypospray
-    #refillTime: 0.75 # Trauma - remove refill delay
-    #maxRefill: 5 # Trauma - remove refill delay
+    refillTime: 0.75
+    maxRefill: 5
   - type: ExaminableSolution
     solution: hypospray
     heldOnly: true # Allow examination only when held in hand.

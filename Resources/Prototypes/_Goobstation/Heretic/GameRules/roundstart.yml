@@ -21,6 +21,15 @@
       proto: HereticSkills
 
 - type: entity
+  parent: BaseHereticRule
+  id: HereticRule
+  components:
+  - type: AntagSelection
+    antags:
+    - !type:FixedAntagCount
+      proto: Heretic
+
+- type: entity
   parent: [ BaseRoundstartAntagRule, BaseHereticRule ]
   id: HereticRoundstart
   components:

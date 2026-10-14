@@ -89,12 +89,12 @@ def get_past_runs(sess: requests.Session, current_run: Any) -> Iterable[Any]:
     """
     Get all successful workflow runs before our current one.
     """
+    # Trauma - replaced serverside filter with clientside because apparently copilot cant figure out basic SQL
     params = {
-        "status": "success",
-        "created": f"<={current_run['created_at']}",
         "per_page": 100,
     }
     url = f"{current_run['workflow_url']}/runs"
+    now = current_run["created_at"]
 
     while url:
         resp = sess.get(url, params=params)
@@ -102,7 +102,7 @@ def get_past_runs(sess: requests.Session, current_run: Any) -> Iterable[Any]:
 
         for run in resp.json()["workflow_runs"]:
             # First past successful run that isn't our current run.
-            if run["id"] == current_run["id"]:
+            if run["id"] == current_run["id"] or run["status"] != "completed" or run["created_at"] >= now:
                 continue
 
             yield run
@@ -306,8 +306,5 @@ def send_message_lines(message_lines: list[str]):
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except Exception as e:
-        print(f"Failed to publish changelog to Discord: {e}", file=sys.stderr)
-        exit(1)
+    # Trauma - removed try catch so it can actually be debugged idiots
+    main()

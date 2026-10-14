@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseWallmount
+  parent: [ BaseWallmount, StructureHealthMachineWeak ]
   categories: [ HideSpawnMenu ]
   id: BaseAPC
   name: APC
@@ -148,8 +148,15 @@
     guides:
     - VoltageNetworks
     - Power
-  - type: BatteryDrinkerSource # EE IPCs
-    maxAmount: 10000
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.45,0.25,0.05"
+        density: 5
+        mask:
+        - FullTileMask
 
 # APC under construction
 - type: entity

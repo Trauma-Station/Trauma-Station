@@ -14,7 +14,7 @@ using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Repairable;
 using Content.Shared.Tools.Systems;
-using Content.Trauma.Common.DeviceLinking;
+using Content.Factory.Common.DeviceLinking;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
@@ -25,6 +25,7 @@ public abstract partial class TurbineSystem : EntitySystem
 {
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] protected SharedAudioSystem Audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedDeviceLinkSystem _device = default!;
     [Dependency] protected SharedPopupSystem Popup = default!;
     [Dependency] private SharedToolSystem _tool = default!;
@@ -39,6 +40,9 @@ public abstract partial class TurbineSystem : EntitySystem
     {
         _device.EnsureSourcePorts(ent.Owner, ent.Comp.SpeedPort, ent.Comp.SpeedHighPort, ent.Comp.SpeedLowPort);
         _device.EnsureSinkPorts(ent.Owner, ent.Comp.StatorLoadPort, ent.Comp.FlowRatePort);
+
+        ent.Comp.BladeSlot = _container.EnsureContainer<ContainerSlot>(ent.Owner, BladeContainer);
+        ent.Comp.StatorSlot = _container.EnsureContainer<ContainerSlot>(ent.Owner, StatorContainer);
     }
 
     [SubscribeLocalEvent]
@@ -169,34 +173,12 @@ public abstract partial class TurbineSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnPartInserted(Entity<TurbineComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        switch (args.Container.ID)
-        {
-            case BladeContainer:
-                ent.Comp.CurrentBlade = args.Entity;
-                break;
-            case StatorContainer:
-                ent.Comp.CurrentStator = args.Entity;
-                break;
-            default:
-                return;
-        }
         UpdatePartValues(ent);
     }
 
     [SubscribeLocalEvent]
     private void OnPartEjected(Entity<TurbineComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        switch (args.Container.ID)
-        {
-            case BladeContainer:
-                ent.Comp.CurrentBlade = null;
-                break;
-            case StatorContainer:
-                ent.Comp.CurrentStator = null;
-                break;
-            default:
-                return;
-        }
         UpdatePartValues(ent);
     }
 

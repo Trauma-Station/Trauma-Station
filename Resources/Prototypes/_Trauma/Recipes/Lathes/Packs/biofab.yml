@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: latheRecipePack
+  id: AbductorBiofabPartsStatic
+  recipes:
+  # Organs
+  - OrganRandomEye
+  - OrganRandomLung
+  - OrganRandomStomach
+  - OrganRandomAbductorGland
+  - LimbRandomHandRight
+  - LimbRandomArmRight
+  - LimbRandomHandLeft
+  - LimbRandomArmLeft
+  - LimbRandomFootLeft
+  - LimbRandomLegLeft
+  - LimbRandomFootRight
+  - LimbRandomLegRight

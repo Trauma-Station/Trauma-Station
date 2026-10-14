@@ -1,0 +1,69 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: BaseWeaponSubMachineGun
+  components:
+  - type: WeaponClass
+    class: SMG
+  - type: EmitSoundOnPickup
+    sound:
+      collection: SMGPickUp
+  - type: EmitSoundOnDrop
+    sound: &smg_drop
+      collection: SMGDrop
+  - type: EmitSoundOnLand
+    sound: *smg_drop
+  - type: AltFireMelee
+    attackType: Heavy
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 10 # lower melee damage for SMGs as they are lighter
+    angle: 0
+    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
+    soundHit:
+      collection: MetalThud
+
+- type: entity
+  id: WeaponSubMachineGunC20r
+  components:
+  - !Remove type: Wieldable # 1 handed c20r
+  - !Remove type: GunWieldBonus
+  - type: Gun
+    minAngle: 4 # was 21
+    maxAngle: 36 # was 32
+    fireRate: 8
+  - type: Item
+    shape:
+    - 0,0,2,1
+
+- type: entity
+  id: WeaponSubMachineGunDrozd
+  components:
+  - type: Gun
+    burstCooldown: 0.75
+
+- type: entity
+  id: WeaponSubMachineGunWt550
+  name: WT550 autorifle
+  description: A truly unique firearm, the WT550 was designed by Nanotrasen's Small Arms Division as a compact, cheap, and mass produced submachine gun fully controllable with one hand. It contains an exotic internal recoil buffer and feeds from special top-mounted 9mm magazines.
+  components:
+  - type: Gun
+    fireRate: 4 # was 5.5
+    minAngle: 2 # was 1
+    angleIncrease: 1.5 # was 3
+    angleDecay: 12 # was 16
+    availableModes:
+    - !Remove Burst
+  - type: Item
+    shape:
+    - 0,0,2,1
+
+- type: entity
+  id: WeaponSubMachineGunBriefcase
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/SMGs/briefcase_brown.rsi
+  - type: Gun
+    fireRate: 6 # was 9

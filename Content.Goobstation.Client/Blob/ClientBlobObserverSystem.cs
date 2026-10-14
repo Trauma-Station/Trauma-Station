@@ -24,11 +24,11 @@ public sealed partial class ClientBlobObserverSystem : BlobObserverSystem
         SubscribeLocalEvent<BlobbernautComponent, GetStatusIconsEvent>(OnShowBlobIcon);
     }
 
-    private static readonly ProtoId<FactionIconPrototype> BlobFaction = "BlobFaction";
+    private static readonly ProtoId<StatusIconPrototype> BlobFaction = "BlobFaction";
 
     private void OnShowBlobIcon<T>(Entity<T> ent, ref GetStatusIconsEvent args) where T : Component
     {
-        args.StatusIcons.Add(ProtoMan.Index<FactionIconPrototype>(BlobFaction));
+        args.StatusIcons.Add(ProtoMan.Index<StatusIconPrototype>(BlobFaction));
     }
 
     [SubscribeLocalEvent]

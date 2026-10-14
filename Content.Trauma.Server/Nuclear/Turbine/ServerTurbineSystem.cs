@@ -198,8 +198,6 @@ public sealed partial class ServerTurbineSystem : TurbineSystem
         SetRPM(ent, 0);
 
         QueueDel(ent.Comp.CurrentBlade);
-        ent.Comp.CurrentBlade = null;
-        DirtyField(ent, ent.Comp, nameof(TurbineComponent.CurrentBlade));
 
         UpdateAppearance(ent);
     }
@@ -259,11 +257,10 @@ public sealed partial class ServerTurbineSystem : TurbineSystem
 
         if (ent.Comp.RPM > ent.Comp.BestRPM / 6)
             TearApart(ent);
-        Del(ent.Comp.CurrentBlade);
-        if (_random.Prob(Math.Clamp(ratio - 1f, 0, 1)))
-        {
-            Del(ent.Comp.CurrentStator);
-        }
+        if (ent.Comp.CurrentBlade is { } blade)
+            Del(blade);
+        if (ent.Comp.CurrentStator is { } stator && _random.Prob(Math.Clamp(ratio - 1f, 0, 1)))
+            Del(stator);
         SetRuined(ent);
     }
 }

@@ -23,6 +23,7 @@
     - id: VoxRaidersMidround
     - id: TunnelClownMidround
     - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
+    - id: LoneAbductorSpawn
     - id: ParadoxCloneSpawn
     - id: MorphMidroundRule
 
@@ -34,7 +35,6 @@
     - id: DuoAbductorSpawn
     - id: BingleSpawn
     - id: XenomorphsInfestation
-    #- id: SlasherSpawn # TODO: when slasher is ready
     - id: ColossusSpawn
     - id: FugitiveSpawn
 

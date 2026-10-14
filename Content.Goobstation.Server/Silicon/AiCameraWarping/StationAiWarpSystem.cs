@@ -1,19 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Shared.Silicon.AiCameraWarping;
-using Content.Server.Station.Systems;
 using Content.Shared.Silicons.StationAi;
+using Content.Shared.Station.Systems;
 using Content.Shared.SurveillanceCamera.Components;
-using Robust.Server.GameObjects;
 using Robust.Shared.Player;
 
 namespace Content.Goobstation.Server.Silicon.AiCameraWarping;
 
 public sealed partial class StationAiWarpSystem : SharedStationAiWarpSystem
 {
-    [Dependency] private SharedStationAiSystem _stationAiSystem = default!;
-    [Dependency] private SharedTransformSystem _xformSystem = default!;
-    [Dependency] private UserInterfaceSystem _userInterface = default!;
+    [Dependency] private SharedStationAiSystem _ai = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     public override void Initialize()
     {
@@ -26,30 +25,30 @@ public sealed partial class StationAiWarpSystem : SharedStationAiWarpSystem
 
     private void OnUiRefreshRequested(Entity<StationAiHeldComponent> ent, ref CameraWarpRefreshActionMessage args)
     {
-        if (!_stationAiSystem.TryGetCore(ent.Owner, out var core))
+        if (!_ai.TryGetCore(ent.Owner, out var core))
             return;
 
         var cameras = GetCameras(core.Owner);
 
         var state = new CameraWarpBuiState(cameras);
-        _userInterface.SetUiState(ent.Owner, CamWarpUiKey.Key, state);
+        _ui.SetUiState(ent.Owner, CamWarpUiKey.Key, state);
     }
 
     private void ToggleCameraWarpScreen(Entity<StationAiHeldComponent> ent, ref ToggleCameraWarpScreenEvent args)
     {
         if (args.Handled || !TryComp<ActorComponent>(ent.Owner, out var actor))
             return;
-        if (!_stationAiSystem.TryGetCore(ent.Owner, out var core))
+        if (!_ai.TryGetCore(ent.Owner, out var core))
             return;
 
         args.Handled = true;
 
-        _userInterface.TryToggleUi(ent.Owner, CamWarpUiKey.Key, actor.PlayerSession);
+        _ui.TryToggleUi(ent.Owner, CamWarpUiKey.Key, actor.PlayerSession);
 
         var cameras = GetCameras(core.Owner);
 
         var state = new CameraWarpBuiState(cameras);
-        _userInterface.SetUiState(ent.Owner, CamWarpUiKey.Key, state);
+        _ui.SetUiState(ent.Owner, CamWarpUiKey.Key, state);
     }
 
     private List<CameraWarpData> GetCameras(EntityUid coreUid)
@@ -58,11 +57,11 @@ public sealed partial class StationAiWarpSystem : SharedStationAiWarpSystem
 
         var query = EntityQueryEnumerator<SurveillanceCameraComponent>();
 
-        var aiGrid = _xformSystem.GetGrid(coreUid);
+        var aiGrid = _transform.GetGrid(coreUid);
 
         while (query.MoveNext(out var queryUid, out var comp))
         {
-            if (_xformSystem.GetGrid(queryUid) != aiGrid || !comp.Active)
+            if (_transform.GetGrid(queryUid) != aiGrid || !comp.Active)
                 continue;
 
             var data = new CameraWarpData
@@ -90,13 +89,13 @@ public sealed partial class StationAiWarpSystem : SharedStationAiWarpSystem
         if (!TryComp<SurveillanceCameraComponent>(target, out var camera) || !camera.Active)
             return;
 
-        if (!_stationAiSystem.TryGetCore(ent.Owner, out var core) || core.Comp?.RemoteEntity == null)
+        if (!_ai.TryGetCore(ent.Owner, out var core) || core.Comp?.RemoteEntity == null)
             return;
 
         // The AI shouldn't be able to jump to cams on other stations/shuttles
-        if (_xformSystem.GetGrid(core.Owner) != _xformSystem.GetGrid(target))
+        if (_transform.GetGrid(core.Owner) != _transform.GetGrid(target))
             return;
 
-        _xformSystem.SetWorldPosition(core.Comp.RemoteEntity.Value, _xformSystem.GetWorldPosition(target));
+        _transform.SetWorldPosition(core.Comp.RemoteEntity.Value, _transform.GetWorldPosition(target));
     }
 }

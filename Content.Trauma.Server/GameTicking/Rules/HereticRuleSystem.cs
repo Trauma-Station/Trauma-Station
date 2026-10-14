@@ -1,25 +1,25 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Text;
-using Content.Server.Antag;
-using Content.Server.GameTicking;
-using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
 using Content.Server.Objectives;
 using Content.Server.Roles;
+using Content.Shared.Antag;
+using Content.Shared.GameTicking;
+using Content.Shared.GameTicking.Components;
+using Content.Shared.GameTicking.Rules;
 using Content.Shared.Mind;
 using Content.Shared.Roles;
-using Content.Shared.Station.Components;
+using Content.Shared.Station.Systems;
 using Content.Trauma.Server.Heretic.Components;
+using Content.Trauma.Server.Objectives.Components;
+using Content.Trauma.Shared.GameTicking.Rules;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
-using Content.Trauma.Server.Objectives.Components;
-using Content.Trauma.Shared.Roles;
-using Robust.Server.GameObjects;
-using Robust.Shared.Audio;
-using Content.Shared.GameTicking.Components;
-using Robust.Shared.Timing;
 using Content.Trauma.Shared.Heretic.Systems;
+using Content.Trauma.Shared.Roles;
+using Robust.Shared.Audio;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
@@ -31,24 +31,21 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private ObjectivesSystem _objective = default!;
-    [Dependency] private UserInterfaceSystem _ui = default!;
+    [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private StationSystem _station = default!;
     [Dependency] private GameTicker _ticker = default!;
 
-    public static readonly SoundSpecifier BriefingSound =
+    private static readonly SoundSpecifier BriefingSound =
         new SoundPathSpecifier("/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/heretic_gain.ogg");
 
-    public static readonly SoundSpecifier BriefingSoundIntense =
-        new SoundPathSpecifier("/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/heretic_gain_intense.ogg");
+    private static EntProtoId MindRole = "MindRoleHeretic";
+    private static EntProtoId RealityShift = "EldritchInfluence";
 
-    public static EntProtoId MindRole = "MindRoleHeretic";
-
-    public static EntProtoId RealityShift = "EldritchInfluence";
-
-    protected override void Started(EntityUid uid, HereticRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
+    protected override void Started(Entity<HereticRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
     {
-        base.Started(uid, component, gameRule, args);
+        base.Started(ent, ref args);
 
-        component.NextPassivePointUpdate = _timing.CurTime + component.PassivePointCooldown;
+        ent.Comp1.NextPassivePointUpdate = _timing.CurTime + ent.Comp1.PassivePointCooldown;
     }
 
     protected override void ActiveTick(EntityUid uid, HereticRuleComponent component, GameRuleComponent gameRule, float frameTime)
@@ -90,18 +87,14 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
 
     public void SpawnInfluence(int amount)
     {
-        if (amount <= 0)
-            return;
-
-        if (!TryGetRandomStation(out var station))
-            return;
-
-        if (GetStationMainGrid((station.Value, Comp<StationDataComponent>(station.Value))) is not { } grid)
+        if (amount <= 0 ||
+            !_station.TryGetRandomStation(out var station) ||
+            _station.GetStationMainGrid(station.Value) is not { } grid)
             return;
 
         for (var i = 0; i < amount; i++)
         {
-            if (TryFindTileOnGrid(grid, out _, out var coords))
+            if (_station.TryFindTileOnGrid(grid, out _, out var coords))
                 Spawn(RealityShift, coords);
         }
     }
@@ -167,7 +160,7 @@ public sealed partial class HereticRuleSystem : GameRuleSystem<HereticRuleCompon
     public void SpawnERTOnAscension()
     {
         var query = QueryActiveRules();
-        while (query.MoveNext(out _, out var rule, out _))
+        while (query.MoveNext(out _, out var rule, out _, out _))
         {
             if (rule.HasAHereticAscended)
                 continue;

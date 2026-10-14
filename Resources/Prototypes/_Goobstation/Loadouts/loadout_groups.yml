@@ -1084,22 +1084,21 @@
   loadouts:
   - RoboticistJumpsuit
   - RoboticistJumpskirt
-  - ResearchMJ
 
 - type: loadoutGroup
   id: RoboticistBackpack
   name: loadout-group-roboticist-backpack
   loadouts:
-  - ScientistBackpack
-  - ScientistSatchel
-  - ScientistDuffel
+  - StationEngineerBackpack
+  - StationEngineerSatchel
+  - StationEngineerDuffel
+  - StationEngineerMessenger
 
 - type: loadoutGroup
   id: RoboticistOuterClothing
   name: loadout-group-roboticist-outerclothing
   minLimit: 0
   loadouts:
-  - RegularLabCoat
   - RoboticistLabCoat
   - RoboticistWintercoat
 
@@ -1109,7 +1108,6 @@
   loadouts:
   - WhiteShoes
   - BlackShoes
-  - ScienceWinterBoots
 
 - type: loadoutGroup
   id: RoboticistGloves

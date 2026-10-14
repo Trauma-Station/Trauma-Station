@@ -9,6 +9,9 @@
   - !Remove ProtolatheMachineCircuitboard
   - !Remove AutolatheMachineCircuitboard
   - !Remove CircuitImprinterMachineCircuitboard
+  # Moved to EngineeringBoardsStatic
+  - !Remove ExosuitFabricatorMachineCircuitboard
+  - !Remove BorgChargerCircuitboard
 
 ## Dynamic
 
@@ -28,6 +31,7 @@
   id: ScienceWeapons
   recipes:
   - !Remove WeaponProtoKineticAccelerator # Moved to MiningWeapons
+  - ClothingOuterArmorReactiveUnfinished
 
 - type: latheRecipePack
   id: ScienceExplosives

@@ -122,7 +122,7 @@ public sealed partial class RanchingEggLayerSystem : EntitySystem
         SpawnNextToOrDrop(ent.Comp.EggSpawn, ent.Owner);
 
         _audio.PlayPvs(ent.Comp.EggLaySound, ent.Owner);
-        _popup.PopupClient(Loc.GetString("action-popup-lay-egg-user"), ent.Owner, ent.Owner);
+        _popup.PopupEntity(Loc.GetString("action-popup-lay-egg-user"), ent.Owner, ent.Owner);
         _popup.PopupEntity(Loc.GetString("action-popup-lay-egg-others", ("entity", ent.Owner)), ent.Owner, Filter.PvsExcept(ent.Owner), true);
 
         if (!TryComp<SatiationComponent>(ent.Owner, out var satiation))

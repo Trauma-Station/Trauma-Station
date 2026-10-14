@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: reaction
+  id: PotassiumExplosion
+  effects: !Clear
+  - !type:Explosion
+    explosionType: Default
+    intensityPerUnit: 0.1 # overall reduce the max boom to 120u and make it not delimb too much
+    maxTotalIntensity: 12
+    intensitySlope: 2
+    maxIntensity: 3
+
+- type: reaction
+  id: Smoke #Changed foam/smoke duration, check AreaReactionEntityEffectSystem.cs for more info, this still works, just not the same
+  priority: 10
+
+- type: reaction
+  id: Foam
+  priority: 10
+
+- type: reaction
+  id: IronMetalFoam
+  impact: High
+  priority: 10
+
+- type: reaction
+  id: AluminiumMetalFoam
+  impact: High
+  priority: 10
+
+- type: reaction
+  id: Stimulants
+  products:
+    Stimulants: 3
+
+- type: reaction
+  id: MuteToxin
+  products:
+    MuteToxin: 4
+
+- type: reaction
+  id: Ethyloxyephedrine
+  minTemp: 370
+
+- type: reaction
+  id: Nocturine
+  products:
+    Nocturine: 2
+
+- type: reaction
+  id: Tazinide
+  products:
+    Tazinide: 2

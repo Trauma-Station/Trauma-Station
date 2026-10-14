@@ -21,6 +21,12 @@ public sealed partial class TraumaCVars
     public static readonly CVarDef<bool> NoVisionFilters =
         CVarDef.Create("accessibility.no_vision_filters", false, CVar.CLIENTONLY | CVar.ARCHIVE);
 
+    /// <summary>
+    /// Enables camera noise from radiation.
+    /// </summary>
+    public static readonly CVarDef<bool> NoRadiationNoise =
+        CVarDef.Create("accessibility.no_radiation_noise", false, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     #endregion
 
     #region AudioMuffle
@@ -71,29 +77,6 @@ public sealed partial class TraumaCVars
     #endregion
 
     #region Skills
-
-    #endregion
-
-    #region Chat
-
-    /// <summary>
-    /// Whether to play a sound when a highlighted message is received.
-    /// </summary>
-    public static readonly CVarDef<bool> ChatHighlightSound =
-        CVarDef.Create("chat.highlight_sound", true, CVar.ARCHIVE | CVar.CLIENTONLY);
-
-    /// <summary>
-    /// Volume of the highlight sound when a highlighted message is received.
-    /// </summary>
-    public static readonly CVarDef<float> ChatHighlightVolume =
-        CVarDef.Create("chat.highlight_volume", 1f, CVar.ARCHIVE | CVar.CLIENTONLY);
-
-    /// <summary>
-    /// You get instantly banned if you say something matching this regex in any chat channel.
-    /// The regex is case insensitive.
-    /// </summary>
-    public static readonly CVarDef<string> GamerWordsRegex =
-        CVarDef.Create("chat.gamer_words_regex", string.Empty, CVar.SERVER);
 
     #endregion
 

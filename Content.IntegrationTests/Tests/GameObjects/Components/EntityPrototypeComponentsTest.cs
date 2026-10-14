@@ -48,6 +48,10 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
 
                 Assert.DoesNotThrow(() => yamlStream.Load(reader), "Error while parsing yaml file {0}", path);
 
+                // <Trauma> - wrap this in try catch for bad yml
+                try
+                {
+                // <Trauma>
                 foreach (var document in yamlStream.Documents)
                 {
                     var root = (YamlSequenceNode) document.RootNode;
@@ -101,6 +105,13 @@ namespace Content.IntegrationTests.Tests.GameObjects.Components
                         }
                     }
                 }
+                // <Trauma>
+                }
+                catch (Exception e)
+                {
+                    Assert.Fail($"Caught exception while reading YML from {path}: {e}");
+                }
+                // </Trauma>
             }
 
             if (unknownComponentsClient.Count + unknownComponentsServer.Count + doubleIgnoredComponents.Count == 0)

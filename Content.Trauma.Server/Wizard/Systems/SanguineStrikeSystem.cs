@@ -27,14 +27,7 @@ public sealed partial class SanguineStrikeSystem : SharedSanguineStrikeSystem
     [Dependency] private PuddleSystem _puddle = default!;
     [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
     [Dependency] private EntityQuery<SolutionManagerComponent> _solutionQuery = default!;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<SanguineStrikeComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<SanguineStrikeComponent, ComponentRemove>(OnRemove);
-    }
+    [Dependency] private EntityQuery<TrailComponent> _trailQuery = default!;
 
     public override void Update(float frameTime)
     {
@@ -50,6 +43,7 @@ public sealed partial class SanguineStrikeSystem : SharedSanguineStrikeSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnRemove(Entity<SanguineStrikeComponent> ent, ref ComponentRemove args)
     {
         var (uid, comp) = ent;
@@ -65,6 +59,7 @@ public sealed partial class SanguineStrikeSystem : SharedSanguineStrikeSystem
         RemComp<PointLightComponent>(uid);
     }
 
+    [SubscribeLocalEvent]
     private void OnInit(Entity<SanguineStrikeComponent> ent, ref ComponentInit args)
     {
         var (uid, comp) = ent;
@@ -87,13 +82,12 @@ public sealed partial class SanguineStrikeSystem : SharedSanguineStrikeSystem
 
         var xform = Transform(user);
 
-        var trailQuery = GetEntityQuery<TrailComponent>();
         foreach (var target in targets)
         {
             var ent = Spawn(particle, xform.Coordinates);
             _transform.SetParent(ent, Transform(ent), user, xform);
 
-            if (!trailQuery.TryComp(ent, out var comp))
+            if (!_trailQuery.TryComp(ent, out var comp))
                 continue;
 
             comp.SpawnEntityPosition = target;

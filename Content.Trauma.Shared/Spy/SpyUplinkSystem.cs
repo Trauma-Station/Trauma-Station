@@ -275,7 +275,7 @@ public sealed partial class SpyUplinkSystem : EntitySystem
         var listing = new ListingDataWithCostModifiers(proto);
         listing.AddCostModifier("spyuplink", listing.Cost.ToDictionary(x => x.Key, x => -x.Value));
         listing.PurchaseAmount =
-            CompOrNull<MindListingsComponent>(mind)?.Listings[rule.Id].FirstOrDefault(x => x.ID == listing.ID)?.PurchaseAmount ?? 0;
+            CompOrNull<MindListingsComponent>(mind)?.Listings.GetValueOrDefault(rule.Id)?.FirstOrDefault(x => x.ID == listing.ID)?.PurchaseAmount ?? 0;
         listing.PurchaseAmount++;
         var ev = new ListingPurchasedEvent(args.Actor, rule, listing);
         RaiseLocalEvent(mind, ref ev);

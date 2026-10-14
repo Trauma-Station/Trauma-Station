@@ -16,10 +16,11 @@ public sealed partial class RustSpreaderSystem : EntitySystem
 {
     [Dependency] private ITileDefinitionManager _tiles = default!;
     [Dependency] private IGameTiming _timing = default!;
-
     [Dependency] private HereticAbilitySystem _ability = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedTransformSystem _xform = default!;
+    [Dependency] private EntityQuery<DockingComponent> _dockQuery = default!;
+    [Dependency] private EntityQuery<MapGridComponent> _gridQuery = default!;
 
     private static readonly TimeSpan RustSpreadInterval = TimeSpan.FromSeconds(2);
     private TimeSpan _nextUpdate = TimeSpan.Zero;
@@ -61,10 +62,6 @@ public sealed partial class RustSpreaderSystem : EntitySystem
 
         _nextUpdate = now + RustSpreadInterval;
 
-        var gridQuery = GetEntityQuery<MapGridComponent>();
-        var dockQuery = GetEntityQuery<DockingComponent>();
-        var xformQuery = GetEntityQuery<TransformComponent>();
-
         var query = EntityQueryEnumerator<RustSpreaderComponent>();
         while (query.MoveNext(out var spreader))
         {
@@ -74,15 +71,15 @@ public sealed partial class RustSpreaderSystem : EntitySystem
             List<EntityUid> toRemove = new();
             foreach (var ent in spreader.AffectedDocks)
             {
-                if (!Exists(ent) || !dockQuery.TryGetComponent(ent, out var dock))
+                if (!Exists(ent) || !_dockQuery.TryComp(ent, out var dock))
                 {
                     toRemove.Add(ent);
                     continue;
                 }
 
                 if (!dock.Docked ||
-                    !xformQuery.TryGetComponent(dock.DockedWith, out var dockedXform) ||
-                    !gridQuery.TryComp(dockedXform.GridUid, out var dockedGrid))
+                    !TryComp(dock.DockedWith, out TransformComponent? dockedXform) ||
+                    !_gridQuery.TryComp(dockedXform.GridUid, out var dockedGrid))
                     continue;
 
                 var neighborPos = _map.CoordinatesToTile(dockedXform.GridUid.Value,
@@ -110,7 +107,7 @@ public sealed partial class RustSpreaderSystem : EntitySystem
 
                 var tile = spreader.TilesToRust.Dequeue();
 
-                if (!gridQuery.TryComp(tile.GridUid, out var mapGrid))
+                if (!_gridQuery.TryComp(tile.GridUid, out var mapGrid))
                     continue;
 
                 // In case tile has changed
@@ -121,7 +118,7 @@ public sealed partial class RustSpreaderSystem : EntitySystem
                 List<EntityUid> toRust = new();
                 while (ourEnts.MoveNext(out var ent))
                 {
-                    if (dockQuery.HasComp(ent.Value))
+                    if (_dockQuery.HasComp(ent.Value))
                         spreader.AffectedDocks.Add(ent.Value);
                     else
                         toRust.Add(ent.Value);

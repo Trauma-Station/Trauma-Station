@@ -20,7 +20,7 @@ public sealed partial class CosmicCultComponent : Component
     /// The status icon prototype displayed for cosmic cultists.
     /// </summary>
     [DataField]
-    public ProtoId<FactionIconPrototype> StatusIcon = "CosmicCultIcon";
+    public ProtoId<StatusIconPrototype> StatusIcon = "CosmicCultIcon";
     #endregion
 
     #region Ability Data
@@ -184,18 +184,6 @@ public sealed partial class CosmicCultComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool LevelUpAwaitingConfirmation;
-
-    /// <summary>
-    /// The probability that siphoning entropy while empowered will cause lights to flicker.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float FlickerProbability = 0.20f;
-
-    /// <summary>
-    /// The probability that siphoning entropy while empowered will cause lights to flicker.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float FlickerRange = 5f;
 
     /// <summary>
     /// The amount of Entropy the user is allowed to spend.

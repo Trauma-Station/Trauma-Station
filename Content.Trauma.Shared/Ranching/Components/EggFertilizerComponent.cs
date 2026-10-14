@@ -9,7 +9,7 @@ public sealed partial class EggFertilizerComponent : Component
     /// How long the doafter takes
     /// </summary>
     [DataField]
-    public TimeSpan DoAfter = TimeSpan.FromSeconds(15);
+    public TimeSpan DoAfter = TimeSpan.FromSeconds(10);
 
     /// <summary>
     /// If SpecialReplacement is not null the egg will hatch whatever entity SpecialReplacement is instead of the default one

@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: latheRecipe
+  parent: BaseGoldCircuitboardRecipe
+  id: RoboticArmCircuitboard
+  icon:
+    sprite: _Factory/Structures/Machines/robotic_arm.rsi
+    state: icon
+  result: RoboticArmCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: ConstructorCircuitboard
+  icon:
+    sprite: _Factory/Structures/Machines/constructor.rsi
+    state: icon
+  result: ConstructorCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: StorageBinCircuitboard
+  icon:
+    sprite: _Factory/Structures/Machines/storage_bin.rsi
+    state: icon
+  result: StorageBinCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: InteractorCircuitboard
+  icon:
+    sprite: _Factory/Structures/Machines/interactor.rsi
+    state: icon
+  result: InteractorCircuitboard
+
+- type: latheRecipe
+  parent: BaseCircuitboardRecipe
+  id: PlumbingPumpCircuitboard
+  result: PlumbingPumpCircuitboard
+  icon:
+    sprite: _Factory/Structures/Machines/Plumbing/liquid_pump.rsi
+    state: icon

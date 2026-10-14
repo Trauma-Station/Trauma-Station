@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: reaction
+  id: ChlorineTrifluoride
+  effects: !Clear
+  - !type:Explosion
+    explosionType: Default
+    maxIntensity: 4 # reduced delimbing on armoured people, lower max explosion, similar size
+    intensityPerUnit: 4
+    intensitySlope: 5
+    maxTotalIntensity: 80 #80u max

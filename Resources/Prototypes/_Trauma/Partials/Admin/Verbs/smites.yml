@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: adminVerb
+  id: AdminSmiteMaid
+  icon:
+    sprite: Clothing/Uniforms/Jumpskirt/janimaid.rsi
+    state: icon
+
+- type: adminVerb
+  id: AdminSmiteOmniAccent
+  effects:
+  - !type:AddComponents
+    components:
+    - type: GlorpAccent
+    - type: MedievalAccent
+    - type: OhioAccent
+    - type: PirateAccent
+    - type: DementiaAccent
+    - type: CavemanAccent

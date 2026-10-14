@@ -2,7 +2,7 @@
 
 using Content.Server.Chat.Systems;
 using Content.Server.Lathe.Components;
-using Content.Server.Station.Systems;
+using Content.Shared.Station.Systems;
 using Content.Shared.AlertLevel;
 using Content.Shared.Chat;
 using Content.Shared.Lathe;

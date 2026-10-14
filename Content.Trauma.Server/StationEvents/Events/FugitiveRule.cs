@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Antag;
 using Content.Server.Communications;
-using Content.Server.GameTicking;
 using Content.Server.StationEvents.Events;
+using Content.Shared.Antag;
 using Content.Shared.Forensics.Components;
+using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Ghost.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -83,7 +83,7 @@ public sealed partial class FugitiveRule : StationEventSystem<FugitiveRuleCompon
 
          var fugi = args.EntityUid;
          comp.Reports.Add(GenerateReport(fugi, comp).ToMarkup());
-         comp.Station ??= StationSystem.GetOwningStation(fugi);
+         comp.Station ??= Station.GetOwningStation(fugi);
 
          if (comp.NextAnnounce == null)
              comp.NextAnnounce = Timing.CurTime + comp.AnnounceDelay;

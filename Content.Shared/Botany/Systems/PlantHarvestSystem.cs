@@ -92,13 +92,12 @@ public sealed partial class PlantHarvestSystem : EntitySystem
     /// </summary>
     /// <returns>True if the harvest was handled, even if cancelled.</returns>
     [PublicAPI]
-    public bool TryHandleHarvest(EntityUid plant, EntityUid user,
-        EntityUid? tool = null) // Trauma
+    public bool TryHandleHarvest(EntityUid plant, EntityUid user, EntityUid? used = null)
     {
         if (!_holderQuery.TryComp(plant, out var holder) || !holder.ReadyForHarvest)
             return false;
 
-        var ev = new PlantHarvestAttemptEvent(user, plant, tool); // Trauma - added tool
+        var ev = new PlantHarvestAttemptEvent(user, plant, used);
         RaiseLocalEvent(plant, ref ev);
         if (ev.Cancelled)
             return true;

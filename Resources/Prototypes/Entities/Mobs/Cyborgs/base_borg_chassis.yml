@@ -39,6 +39,8 @@
       WallsKnowledge: 10
       InfrastructureKnowledge: 10
       ElectronicsKnowledge: 10
+  - type: TwistedConstructionTarget
+    replacementProto: ConstructShell
   # </Trauma>
   - type: Reactive
     groups:
@@ -606,10 +608,8 @@
   - type: Xenoborg
   - type: BypassLock
     bypassDelay: 15 # We don't want people to easily be able to remove xenoborg brains.
-  # <Trauma>
-  #- type: EmpResistance
-  #  strengthMultiplier: 0
-  # </Trauma>
+  - type: EmpResistance
+    strengthMultiplier: 0
 
 - type: entity
   abstract: true

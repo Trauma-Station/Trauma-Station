@@ -41,3 +41,10 @@
   completetime: 3
   materials:
     Biomass: 6
+
+- type: latheRecipe
+  id: BioGenFertilizedEgg
+  result: WhiteEgg
+  completetime: 10
+  materials:
+    Biomass: 30

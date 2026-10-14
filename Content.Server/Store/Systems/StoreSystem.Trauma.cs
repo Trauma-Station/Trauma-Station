@@ -11,7 +11,7 @@ namespace Content.Server.Store.Systems;
 public sealed partial class StoreSystem
 {
     [Dependency] private PolymorphSystem _polymorph = default!;
-    [Dependency] private SharedGameTicker _ticker = default!;
+    [Dependency] private GameTicker _ticker = default!;
 
     [SubscribeLocalEvent]
     private void OnPolymorphed(Entity<StoreComponent> ent, ref PolymorphedEvent args)

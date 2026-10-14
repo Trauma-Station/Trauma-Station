@@ -5,7 +5,7 @@ using Content.Shared.Emag.Systems;
 using Content.Shared.Examine;
 using Content.Shared.Lock;
 using Content.Shared.Popups;
-using Content.Shared.Station;
+using Content.Shared.Station.Systems;
 using System.Linq;
 
 namespace Content.Trauma.Shared.Lockers;
@@ -14,7 +14,7 @@ public sealed partial class StationAlertLevelLockSystem : EntitySystem
 {
     [Dependency] private AlertLevelSystem _level = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private StationSystem _station = default!;
     [Dependency] private EntityQuery<LockComponent> _lockQuery = default!;
 
     [SubscribeLocalEvent]

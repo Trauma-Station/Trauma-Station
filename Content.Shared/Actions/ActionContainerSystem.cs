@@ -118,7 +118,7 @@ public sealed partial class ActionContainerSystem : EntitySystem
             return false; // actions will be networked so dont have to do weird shit when resetting/applying state. the container can be null before ComponentInit is raised
 
         var clientside = IsClientSide(uid);
-        actionId = IsClientSide(uid) ? Spawn(actionPrototypeId) : EntityManager.PredictedSpawn(actionPrototypeId);
+        actionId = IsClientSide(uid) ? Spawn(actionPrototypeId) : PredictedSpawn(actionPrototypeId);
         if (!_query.TryComp(actionId, out action))
         {
             Log.Error($"Tried to add invalid action {ToPrettyString(actionId)} to {ToPrettyString(uid)}!");
@@ -352,6 +352,12 @@ public sealed partial class ActionContainerSystem : EntitySystem
 
     private void OnActionAdded(EntityUid uid, ActionsContainerComponent component, ActionAddedEvent args)
     {
+        // The results of the container change are already networked on their own; replaying the
+        // grant while applying a game state can run before the new mind's own container has
+        // initialized, throwing a NullReferenceException in AddActionDirect.
+        if (_timing.ApplyingState)
+            return;
+
         if (TryComp<MindComponent>(uid, out var mindComp) && mindComp.OwnedEntity != null && HasComp<ActionsContainerComponent>(mindComp.OwnedEntity.Value))
             _actions.GrantContainedAction(mindComp.OwnedEntity.Value, uid, args.Action);
     }

@@ -11,7 +11,7 @@ namespace Content.Trauma.Shared.Heretic.Components.PathSpecific.Cosmos;
 public sealed partial class StarGazerComponent : Component
 {
     [DataField]
-    public ProtoId<FactionIconPrototype> MasterIcon = "GhoulHereticMaster";
+    public ProtoId<StatusIconPrototype> MasterIcon = "GhoulHereticMaster";
 
     [DataField]
     public float MaxDistance = 20f;

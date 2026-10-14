@@ -41,7 +41,7 @@ public sealed partial class HealNearOnPrayComponent : Component
     /// Which effect to display on heal.
     /// </summary>
     [DataField]
-    public EntProtoId HealEffect = "EffectSpark";
+    public EntProtoId HealEffect = "EffectSparks";
 
     /// <summary>
     /// Which effect to display on damage.

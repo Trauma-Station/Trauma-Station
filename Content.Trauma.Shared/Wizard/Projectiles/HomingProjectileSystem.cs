@@ -15,17 +15,7 @@ public sealed partial class HomingProjectileSystem : EntitySystem
     [Dependency] private RotateToFaceSystem _rotate = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
     [Dependency] private IGameTiming _timing = default!;
-
-    private EntityQuery<TransformComponent> _xformQuery;
-    private EntityQuery<FrozenComponent> _frozenQuery;
-
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _xformQuery = GetEntityQuery<TransformComponent>();
-        _frozenQuery = GetEntityQuery<FrozenComponent>();
-    }
+    [Dependency] private EntityQuery<FrozenComponent> _frozenQuery = default!;
 
     public override void Update(float frameTime)
     {
@@ -45,7 +35,7 @@ public sealed partial class HomingProjectileSystem : EntitySystem
             if (_frozenQuery.HasComp(uid))
                 continue;
 
-            if (!_xformQuery.TryComp(homing.Target, out var targetXform))
+            if (!TryComp(homing.Target, out TransformComponent? targetXform))
                 continue;
 
             var goalAngle = (_transform.GetMapCoordinates(targetXform).Position -

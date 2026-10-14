@@ -1,5 +1,5 @@
 // <Trauma>
-using Content.Goobstation.Common.DoAfter;
+using Content.Factory.Common.DoAfter;
 using Content.Medical.Common.DoAfter;
 // </Trauma>
 using System.Diagnostics.CodeAnalysis;

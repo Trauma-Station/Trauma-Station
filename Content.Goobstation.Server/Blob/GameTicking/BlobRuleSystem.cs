@@ -4,20 +4,21 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Goobstation.Common.Blob;
 using Content.Goobstation.Shared.Blob.Components;
-using Content.Server.Antag;
+using Content.Goobstation.Shared.GameTicking.Rules;
 using Content.Server.Audio;
 using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
-using Content.Server.GameTicking;
-using Content.Server.GameTicking.Rules;
 using Content.Server.RoundEnd;
 using Content.Server.Shuttles.Systems;
-using Content.Server.Station.Components;
-using Content.Server.Station.Systems;
 using Content.Shared.AlertLevel;
+using Content.Shared.Antag;
 using Content.Shared.Audio;
 using Content.Shared.Destructible;
+using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.GameTicking.Rules;
+using Content.Shared.Station.Components;
+using Content.Shared.Station.Systems;
 using Content.Trauma.Common.GameTicking;
 using Robust.Shared.Player;
 
@@ -38,20 +39,6 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
     private static readonly ProtoId<AlertLevelPrototype> StationAlertCritical = "DeltaBlob";
     private static readonly ProtoId<AlertLevelPrototype> StationAlertDetected = "Red";
 
-    protected override void Started(EntityUid uid, BlobRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
-    {
-        var activeRules = QueryActiveRules();
-        while (activeRules.MoveNext(out var entityUid, out _, out _, out _))
-        {
-            if (uid == entityUid)
-                continue;
-
-            GameTicker.EndGameRule(uid, gameRule);
-            Log.Warning("blob is active!!! remove!");
-            break;
-        }
-    }
-
     protected override void ActiveTick(EntityUid uid, BlobRuleComponent component, GameRuleComponent gameRule, float frameTime)
     {
         component.Accumulator += frameTime;
@@ -71,29 +58,28 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                 continue;
             }
 
-            check.TryAdd(stationUid.Value, 0);
+            check.TryAdd(stationUid, 0);
 
-            check[stationUid.Value] += comp.BlobTiles.Count;
+            check[stationUid] += comp.BlobTiles.Count;
         }
 
-        foreach (var (station, length) in check.AsParallel())
+        foreach (var (station, tiles) in check)
         {
-            CheckChangeStage(station, component, length);
+            CheckChangeStage(station, component, tiles);
         }
     }
 
-    private bool CheckBlobInStation(EntityUid blobCore, TransformComponent? xform, [NotNullWhen(true)] out EntityUid? stationUid)
+    private bool CheckBlobInStation(EntityUid blobCore, TransformComponent? xform, out EntityUid stationUid)
     {
-        var station = _station.GetOwningStation(blobCore, xform);
-        if (station == null || !HasComp<StationEventEligibleComponent>(station.Value))
+        if (_station.GetOwningStation(blobCore, xform) is not { } station)
         {
             _chatMan.SendAdminAlert(blobCore, Loc.GetString("blob-alert-out-off-station"));
             QueueDel(blobCore);
-            stationUid = null;
+            stationUid = EntityUid.Invalid;
             return false;
         }
 
-        stationUid = station.Value;
+        stationUid = station;
         return true;
     }
 
@@ -146,14 +132,6 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                     _sound.DispatchStationEventMusic(stationUid, detectedAudio, StationEventMusicType.Blob, detectedAudio.Params);
 
                 _alertLevel.SetLevel(stationUid.Owner, StationAlertDetected, force: true);
-
-                RaiseLocalEvent(stationUid,
-                    new BlobChangeLevelEvent
-                    {
-                        Station = stationUid,
-                        Level = blobRuleComp.Stage
-                    },
-                    broadcast: true);
                 return;
             case BlobStage.Begin when blobTilesCount >= (stationUid.Comp?.StageCritical ?? StationBlobConfigComponent.DefaultStageCritical):
                 blobRuleComp.Stage = BlobStage.Critical;
@@ -175,28 +153,12 @@ public sealed partial class BlobRuleSystem : GameRuleSystem<BlobRuleComponent>
                 blobRuleComp.BlobCBurnCalled = true;
 
                 _alertLevel.SetLevel(stationUid.Owner, StationAlertCritical, true, true, true, true);
-
-                RaiseLocalEvent(stationUid,
-                    new BlobChangeLevelEvent
-                    {
-                        Station = stationUid,
-                        Level = blobRuleComp.Stage
-                    },
-                    broadcast: true);
                 return;
 
             case BlobStage.Critical when blobTilesCount >= (stationUid.Comp?.StageTheEnd ?? StationBlobConfigComponent.DefaultStageEnd):
                 blobRuleComp.Stage = BlobStage.TheEnd;
                 _roundEnd.EndRound();
                 _sound.StopStationEventMusic(stationUid, StationEventMusicType.Blob);
-
-                RaiseLocalEvent(stationUid,
-                    new BlobChangeLevelEvent
-                    {
-                        Station = stationUid,
-                        Level = blobRuleComp.Stage
-                    },
-                    broadcast: true);
                 return;
         }
     }

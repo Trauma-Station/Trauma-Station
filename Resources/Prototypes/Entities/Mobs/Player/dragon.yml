@@ -1,5 +1,5 @@
 - type: entity
-  parent: [ AppearanceDragon, SimpleSpaceMobBase, FlyingMobBase, BaseSlicingRefinable, MobNightVision, BaseMobDestructible ] # Trauma - added AppearanceDragon
+  parent: [ AppearanceDragon, SimpleSpaceMobBase, FlyingMobBase, BaseSlicingRefinable, MobNightVision, BaseMobIrradiated ] # Trauma - added AppearanceDragon
   id: BaseMobDragon
   suffix: ""
   name: space dragon
@@ -122,6 +122,13 @@
       0: Alive
       375: Critical # Trauma - Was 450
       400: Dead # Trauma - Was 500
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 600
+      behaviors:
+      - !type:GibBehavior
   - type: SlowOnDamage
     speedModifierThresholds:
       205: 0.7 # Trauma - Was 250

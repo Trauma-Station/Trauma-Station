@@ -126,7 +126,8 @@ public sealed partial class TargetingSystem : SharedTargetingSystem
         TargetChange?.Invoke(target);
     }
 
-    public void CycleTargeting(int delta)
+    // TODO: move the scroll logic here or something this is bad
+    public override void CycleTargeting(int delta)
     {
         if (_player.LocalEntity is not { } player || !TryComp(player, out TargetingComponent? targeting))
             return;

@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: Quartermaster
+  antagAdvantage: 75
+  guides:
+  - Cargo
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipEchelonEducation
+    - SkillChipUnarmed
+    - SkillChipMining
+  - !type:AddComponentSpecial
+    components:
+    - type: Condemned # Nanotrasen owns your soul pal.
+      soulOwnedNotDevil: true
+    - type: QuartermasterTraining
+
+- type: startingGear
+  id: QuartermasterGear
+  equipment:
+    ears: ClothingHeadsetAltCargo
+  storage:
+    back:
+    - TelescopicBaton

@@ -79,3 +79,29 @@
       projectileSpeed: 20
   - type: SpeakOnAction
     sentence: action-speech-spell-fireball-phoenix
+
+- type: entity
+  parent: BaseAction
+  id: ActionMagicMissileWizardChicken
+  name: Lesser Magic Missile
+  description: Fires a lesser magic missile towards the clicked location
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi
+    layers:
+    - state: missile
+  - type: Action
+    useDelay: 6
+    itemIconStyle: BigAction
+    raiseOnUser: true
+    sound: !type:SoundPathSpecifier
+      path: /Audio/_Goobstation/Wizard/magic_missile.ogg
+  - type: TargetAction
+    range: 60
+    checkCanAccess: false
+  - type: EntityTargetAction
+    canTargetSelf: false
+  - type: WorldTargetAction
+    event: !type:ProjectileSpellEvent
+      prototype: ProjectileMagicMissileLesser
+      projectileSpeed: 6

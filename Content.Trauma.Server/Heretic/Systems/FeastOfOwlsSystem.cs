@@ -1,9 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Antag;
 using Content.Server.Chat.Systems;
 using Content.Server.Jittering;
-using Content.Server.Popups;
+using Content.Shared.Antag;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
@@ -16,6 +15,7 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Messages;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Content.Trauma.Shared.Heretic.Systems;
+using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
 
@@ -32,20 +32,17 @@ public sealed partial class FeastOfOwlsSystem : EntitySystem
     [Dependency] private ChatSystem _chat = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private HereticSystem _heretic = default!;
-    [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private HereticRitualSystem _ritual = default!;
     [Dependency] private EntityQuery<VocalComponent> _vocalQuery = default!;
 
     private readonly ProtoId<TagPrototype> _feastOfOwlsTag = "RitualFeastOfOwls";
     private readonly ProtoId<TagPrototype> _ascensionTag = "RitualAscension";
 
-    public override void Initialize()
-    {
-        base.Initialize();
+    private static readonly SoundSpecifier BriefingSoundIntense =
+        new SoundPathSpecifier("/Audio/_Goobstation/Heretic/Ambience/Antag/Heretic/heretic_gain_intense.ogg");
 
-        SubscribeLocalEvent<HereticRitualRuneComponent, FeastOfOwlsMessage>(OnMessage);
-    }
-
+    [SubscribeLocalEvent]
     private void OnMessage(Entity<HereticRitualRuneComponent> ent, ref FeastOfOwlsMessage args)
     {
         if (!args.Accepted)
@@ -78,7 +75,7 @@ public sealed partial class FeastOfOwlsSystem : EntitySystem
         _antag.SendBriefing(user,
             Loc.GetString("feast-of-owls-briefing"),
             Color.Red,
-            HereticRuleSystem.BriefingSoundIntense);
+            BriefingSoundIntense);
 
         EnsureComp<FeastOfOwlsComponent>(user);
     }

@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Server.Blob.GameTicking;
 using Content.Goobstation.Server.Blob.Objectives;
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
+using Content.Goobstation.Shared.GameTicking.Rules;
 using Content.Server.RoundEnd;
 using Content.Shared.AlertLevel;
 using Content.Shared.GameTicking.Components;
-using Content.Shared.Station;
+using Content.Shared.Station.Systems;
 using Content.Shared.Objectives.Components;
 using Robust.Shared.CPUJob.JobQueues;
 using Robust.Shared.CPUJob.JobQueues.Queues;
@@ -22,7 +22,7 @@ public sealed partial class ServerBlobCoreSystem : BlobCoreSystem
     [Dependency] private AlertLevelSystem _alertLevel = default!;
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private RoundEndSystem _roundEnd = default!;
-    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private StationSystem _station = default!;
 
     private static readonly ProtoId<AlertLevelPrototype> GreenAlert = "Green";
 

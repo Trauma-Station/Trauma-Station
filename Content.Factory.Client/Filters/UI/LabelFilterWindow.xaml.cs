@@ -1,0 +1,32 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Client.UserInterface.Controls;
+using Content.Factory.Shared.Filters;
+
+namespace Content.Factory.Client.Filters.UI;
+
+[GenerateTypedNameReferences]
+public sealed partial class LabelFilterWindow : FancyWindow
+{
+    [Dependency] private EntityManager _entMan = default!;
+
+    public event Action<string>? OnSetLabel;
+
+    public LabelFilterWindow()
+    {
+        IoCManager.InjectDependencies(this);
+        RobustXamlLoader.Load(this);
+
+        LabelEdit.OnTextChanged += _ => OnSetLabel?.Invoke(LabelEdit.Text);
+    }
+
+    public void SetEntity(EntityUid uid)
+    {
+        if (!_entMan.TryGetComponent<LabelFilterComponent>(uid, out var comp))
+            return;
+
+        var max = comp.MaxLength;
+        LabelEdit.IsValid = label => label.Length < max;
+        LabelEdit.Text = comp.Label;
+    }
+}

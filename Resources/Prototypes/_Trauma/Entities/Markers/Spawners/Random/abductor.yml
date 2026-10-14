@@ -1,0 +1,305 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Organs Loot Tables
+
+- type: entityTable
+  id: RandomAbductorEyes
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      weight: 95
+      children:
+      - id: OrganArachnidEyes
+      - id: OrganDionaEyes
+      - id: OrganVoxEyes
+      - id: OrganAbductorEyes
+      - id: OrganPlasmamanEyes
+    - !type:GroupSelector
+      weight: 5
+      children:
+      - id: OrganXenomorphEyes
+      - id: OrganLaserEyes
+
+- type: entityTable
+  id: RandomAbductorLungs
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector
+      weight: 80
+      children:
+      - id: OrganVoxLungs
+      - id: OrganBananaMenLungs
+      - id: OrganSlimePersonLungs
+      - id: OrganDecapoidLungs
+      - id: OrganAbductorLungs
+      - id: OrganHumanLungs
+      - id: OrganPlasmamanLungs
+    - !type:GroupSelector
+      weight: 15
+      children:
+      - id: OrganCarpLungs
+      - id: OrganCyberneticLungs
+    - !type:GroupSelector
+      weight: 5
+      children:
+      - id: OrganDragonLungs
+
+- type: entityTable
+  id: RandomAbductorStomachs
+  table: !type:GroupSelector
+    children:
+    - id: OrganBananaMenStomach
+    - id: OrganAnimalStomachFast
+    - id: OrganArachnidStomach
+    - id: OrganMothStomach
+    - id: OrganReptilianStomach
+    - id: OrganVoxStomach
+    - id: OrganHumanStomach
+    - id: OrganPlasmamanStomach
+    - id: OrganRatKingStomach
+    - id: OrganXenomorphStomach
+
+# Limb Loot Tables
+
+- type: entityTable
+  id: RandomAbductorHandRight
+  table: !type:GroupSelector
+    children:
+    - id: OrganVulpkaninHandRight
+    - id: OrganShadowHandRight
+    - id: OrganSlimePersonHandRight
+    - id: OrganGingerbreadHandRight
+    - id: OrganBananaMenHandRight
+    - id: OrganVoxHandRight
+    - id: OrganAbductorHandRight
+    - id: OrganArachnidHandRight
+    - id: OrganShatteredHandRight
+    - id: OrganSkeletonPersonHandRight
+    - id: OrganVoxHandRight
+
+- type: entityTable
+  id: RandomAbductorArmRight
+  table: !type:GroupSelector
+    children:
+    - id: OrganVulpkaninArmRight
+    - id: OrganShadowArmRight
+    - id: OrganSlimePersonArmRight
+    - id: OrganGingerbreadArmRight
+    - id: OrganBananaMenArmRight
+    - id: OrganVoxArmRight
+    - id: OrganAbductorArmRight
+    - id: OrganArachnidArmRight
+    - id: OrganShatteredArmRight
+    - id: OrganSkeletonPersonArmRight
+    - id: OrganVoxArmRight
+
+- type: entityTable
+  id: RandomAbductorHandLeft
+  table: !type:GroupSelector
+    children:
+    - id: OrganVulpkaninHandLeft
+    - id: OrganShadowHandLeft
+    - id: OrganSlimePersonHandLeft
+    - id: OrganGingerbreadHandLeft
+    - id: OrganBananaMenHandLeft
+    - id: OrganVoxHandLeft
+    - id: OrganAbductorHandLeft
+    - id: OrganArachnidHandLeft
+    - id: OrganShatteredHandLeft
+    - id: OrganSkeletonPersonHandLeft
+    - id: OrganVoxHandLeft
+
+- type: entityTable
+  id: RandomAbductorArmLeft
+  table: !type:GroupSelector
+    children:
+    - id: OrganVulpkaninArmLeft
+    - id: OrganShadowArmLeft
+    - id: OrganSlimePersonArmLeft
+    - id: OrganGingerbreadArmLeft
+    - id: OrganBananaMenArmLeft
+    - id: OrganVoxArmLeft
+    - id: OrganAbductorArmLeft
+    - id: OrganArachnidArmLeft
+    - id: OrganShatteredArmLeft
+    - id: OrganSkeletonPersonArmLeft
+    - id: OrganVoxArmLeft
+
+- type: entityTable
+  id: RandomAbductorFootRight
+  table: !type:GroupSelector
+    children:
+      - id: OrganVulpkaninFootRight
+      - id: OrganShadowFootRight
+      - id: OrganSlimePersonFootRight
+      - id: OrganGingerbreadFootRight
+      - id: OrganBananaMenFootRight
+      - id: OrganVoxFootRight
+      - id: OrganAbductorFootRight
+      - id: OrganArachnidFootRight
+      - id: OrganShatteredFootRight
+      - id: OrganSkeletonPersonFootRight
+      - id: OrganVoxFootRight
+
+
+- type: entityTable
+  id: RandomAbductorLegRight
+  table: !type:GroupSelector
+    children:
+    - id: OrganVulpkaninLegRight
+    - id: OrganShadowLegRight
+    - id: OrganSlimePersonLegRight
+    - id: OrganGingerbreadLegRight
+    - id: OrganBananaMenLegRight
+    - id: OrganVoxLegRight
+    - id: OrganAbductorLegRight
+    - id: OrganArachnidLegRight
+    - id: OrganShatteredLegRight
+    - id: OrganSkeletonPersonLegRight
+    - id: OrganVoxLegRight
+
+- type: entityTable
+  id: RandomAbductorFootLeft
+  table: !type:GroupSelector
+    children:
+    - id: OrganVulpkaninFootLeft
+    - id: OrganShadowFootLeft
+    - id: OrganSlimePersonFootLeft
+    - id: OrganGingerbreadFootLeft
+    - id: OrganBananaMenFootLeft
+    - id: OrganVoxFootLeft
+    - id: OrganAbductorFootLeft
+    - id: OrganArachnidFootLeft
+    - id: OrganShatteredFootLeft
+    - id: OrganSkeletonPersonFootLeft
+    - id: OrganVoxFootLeft
+
+- type: entityTable
+  id: RandomAbductorLegLeft
+  table: !type:GroupSelector
+    children:
+    - id: OrganVulpkaninLegLeft
+    - id: OrganShadowLegLeft
+    - id: OrganSlimePersonLegLeft
+    - id: OrganGingerbreadLegLeft
+    - id: OrganBananaMenLegLeft
+    - id: OrganVoxLegLeft
+    - id: OrganAbductorLegLeft
+    - id: OrganArachnidLegLeft
+    - id: OrganShatteredLegLeft
+    - id: OrganSkeletonPersonLegLeft
+    - id: OrganVoxLegLeft
+
+# Organ Spawners
+
+- type: entity
+  parent: MarkerBase
+  id: RandomAbductorEyeSpawner
+  name: Random Eye Fabrication
+  description: A random set of eyes, quality not guaranteed
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomAbductorEyes
+
+- type: entity
+  parent: MarkerBase
+  id: RandomAbductorLungSpawner
+  name: Random Lung Fabrication
+  description: A random set of lungs, quality not guaranteed
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomAbductorLungs
+
+- type: entity
+  parent: MarkerBase
+  id: RandomAbductorStomachSpawner
+  name: Random Stomach Fabrication
+  description: A random stomach, quality not guaranteed
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomAbductorStomachs
+
+# Limb Spawners
+
+- type: entity
+  parent: MarkerBase
+  id: RandomAbductorRightHandSpawner
+  name: Random Right Hand Fabrication
+  description: A random right hand, quality not guaranteed
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomAbductorHandRight
+
+- type: entity
+  parent: MarkerBase
+  id: RandomAbductorRightArmSpawner
+  name: Random Right Arm Fabrication
+  description: A random right arm, quality not guaranteed
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomAbductorArmRight
+
+- type: entity
+  parent: MarkerBase
+  id: RandomAbductorLeftHandSpawner
+  name: Random Left Hand Fabrication
+  description: A random left hand, quality not guaranteed
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomAbductorHandLeft
+
+- type: entity
+  parent: MarkerBase
+  id: RandomAbductorLeftArmSpawner
+  name: Random Left Arm Fabrication
+  description: A random left arm, quality not guaranteed
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomAbductorArmLeft
+
+- type: entity
+  parent: MarkerBase
+  id: RandomAbductorRightFootSpawner
+  name: Random Right Foot Fabrication
+  description: A random right foot, quality not guaranteed
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomAbductorFootRight
+
+- type: entity
+  parent: MarkerBase
+  id: RandomAbductorRightLegSpawner
+  name: Random Right Leg Fabrication
+  description: A random right leg, quality not guaranteed
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomAbductorLegRight
+
+- type: entity
+  parent: MarkerBase
+  id: RandomAbductorLeftFootSpawner
+  name: Random Left Foot Fabrication
+  description: A random left foot, quality not guaranteed
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomAbductorFootLeft
+
+- type: entity
+  parent: MarkerBase
+  id: RandomAbductorLeftLegSpawner
+  name: Random Left Leg Fabrication
+  description: A random left leg, quality not guaranteed
+  components:
+  - type: EntityTableSpawner
+    table: !type:NestedSelector
+      tableId: RandomAbductorLegLeft

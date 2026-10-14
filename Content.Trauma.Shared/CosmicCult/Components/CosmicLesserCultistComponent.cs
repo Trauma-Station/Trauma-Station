@@ -13,7 +13,7 @@ public sealed partial class CosmicLesserCultistComponent : Component
     /// The status icon prototype displayed for cosmic cultists.
     /// </summary>
     [DataField]
-    public ProtoId<FactionIconPrototype> StatusIcon = "CosmicCultLesserIcon";
+    public ProtoId<StatusIconPrototype> StatusIcon = "CosmicCultLesserIcon";
 
     /// <summary>
     /// Whether or not this cultist was weak to holy before conversion.

@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: SalvageSpecialist
+  guides:
+  - Cargo
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipCombatEducation
+    - SkillChipMining
+    - SkillChipShortBlade
+  - !type:AddObjectiveSpecial
+    objectives:
+    - SalvageMineObjective
+
+- type: startingGear
+  id: SalvageSpecialistGear
+  storage:
+    back:
+    - MiningVoucher

@@ -9,7 +9,6 @@
   abstract: true
   components:
     - type: StationBankAccount
-      primaryCut: 0.9 # Trauma
     - type: StationCargoOrderDatabase
       orders:
         Cargo: [ ]
@@ -19,7 +18,6 @@
         Security: [ ]
         Service: [ ]
     - type: StationCargoBountyDatabase
-    - type: StationXenobiologyBountyDatabase # Goobstaton
 
 - type: entity
   id: BaseStationJobsSpawning

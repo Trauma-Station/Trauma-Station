@@ -9,13 +9,13 @@ namespace Content.Trauma.Shared.AnimalAgeing;
 public sealed partial class AnimalAgeingComponent : Component
 {
     [DataField]
-    public int AdultHoodYear = 10;
+    public int AdultHoodYear = 3;
 
     [DataField]
-    public int SeniorHoodYear = 30;
+    public int SeniorHoodYear = 35;
 
     [DataField]
-    public int DeathYear = 35;
+    public int DeathYear = 40;
 
     [DataField, AutoNetworkedField]
     public int YearsOld;

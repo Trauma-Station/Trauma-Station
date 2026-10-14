@@ -17,5 +17,5 @@ jobs:
         uses: eps1lon/actions-label-merge-conflict@v3.1.0
         with:
           dirtyLabel: "S: Merge Conflict"
-          repoToken: "${{ secrets.BOT_TOKEN }}"
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
           commentOnDirty: "This pull request has conflicts, please resolve those before we can evaluate the pull request."

@@ -3,10 +3,10 @@
 using Content.Goobstation.Common.Bingle;
 using Content.Goobstation.Shared.Bingle;
 using Content.Server.Chat.Systems;
-using Content.Server.GameTicking;
 using Content.Server.Pinpointer;
 using Content.Server.Stunnable;
 using Content.Shared.Destructible;
+using Content.Shared.GameTicking;
 using Content.Shared.Ghost.Roles.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.Maps;
@@ -245,7 +245,7 @@ public sealed partial class BinglePitSystem : EntitySystem
         _physics.ScaleFixtures(uid, component.HitBoxGrowthSize);
     }
 
-    private void OnRoundEndTextAppend(RoundEndTextAppendEvent ev)
+    private void OnRoundEndTextAppend(ref RoundEndTextAppendEvent ev)
     {
         var query = AllEntityQuery<BinglePitComponent>();
 

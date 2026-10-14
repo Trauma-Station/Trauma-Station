@@ -10,6 +10,7 @@
   startingGear: BartenderGear
   icon: "JobIconBartender"
   supervisors: job-supervisors-hop
+  guides: [ Bartender ]
   access:
   - Service
   - Maintenance
@@ -17,17 +18,6 @@
   extendedAccess:
   - Kitchen
   - Hydroponics
-  # <Trauma>
-  guides:
-  - Bartender
-  - Drinks
-  special:
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEducation
-    - SkillChipShotgun
-    - SkillChipUnarmed
-  # </Trauma>
 
 - type: startingGear
   id: BartenderGear

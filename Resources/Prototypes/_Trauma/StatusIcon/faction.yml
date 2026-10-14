@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-- type: factionIcon
+- type: statusIcon
   id: AbductorMindControl
   isShaded: true
   priority: 11
@@ -13,7 +13,7 @@
     sprite: /Textures/_Goobstation/Interface/Misc/job_icons.rsi
     state: Mindcontrolled
 
-- type: factionIcon
+- type: statusIcon
   id: RevolutionEnemy
   isShaded: true
   priority: 12

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Antag;
 using Content.Server.GameTicking.Rules;
 using Content.Server.Revolutionary.Components;
+using Content.Shared.Antag;
 using Content.Trauma.Shared.Revolutionary;
 using Robust.Shared.Player;
 
@@ -11,15 +11,9 @@ namespace Content.Trauma.Server.Revolutionary;
 public sealed partial class RevConversionSystem : EntitySystem
 {
     [Dependency] private AntagSelectionSystem _antag = default!;
-    [Dependency] private RevolutionaryRuleSystem _rev = default!;
+    [Dependency] private ServerRevolutionaryRuleSystem _rev = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<RevConvertedEvent>(OnRevConverted);
-    }
-
+    [SubscribeLocalEvent]
     private void OnRevConverted(ref RevConvertedEvent args)
     {
         if (TryComp<ActorComponent>(args.Target, out var actor))

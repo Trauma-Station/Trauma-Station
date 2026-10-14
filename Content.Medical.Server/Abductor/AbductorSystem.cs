@@ -9,8 +9,8 @@ using Content.Shared.Pinpointer;
 using Content.Shared.Inventory.VirtualItem;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Silicons.StationAi;
-using Content.Shared.Station;
 using Content.Shared.Station.Components;
+using Content.Shared.Station.Systems;
 using Content.Shared.UserInterface;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
@@ -28,7 +28,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
-    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private StationSystem _station = default!;
     [Dependency] private SharedVirtualItemSystem _virtualItem = default!;
 
     public override void Initialize()
@@ -142,16 +142,17 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         foreach (var station in stations)
         {
-            if (_station.GetLargestGrid(station) is not { } grid)
+            if (_station.GetLargestGrid(station.AsNullable()) is not { } grid)
                 return;
 
             if (!TryComp<NavMapComponent>(grid, out var navMap))
                 return;
 
-            result.Add(station.Id, new StationBeacons
+            var net = GetNetEntity(station);
+            result.Add(net.Id, new StationBeacons
             {
                 Name = Name(station),
-                StationId = station.Id,
+                StationId = net.Id,
                 Beacons = [.. navMap.Beacons.Values],
             });
         }

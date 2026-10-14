@@ -302,14 +302,6 @@
       - !type:Satiate
         satiationType: Thirst
         factor: 4
-      - !type:EvenHealthChange
-        conditions:
-        - !type:MetabolizerTypeCondition # Goob - milk heals plasmamen because skeleton
-          type: [ Plasmaman ]
-          inverted: true
-        damage:
-          Brute: -0.9
-          Burn: -0.9
 
 - type: reagent
   id: MilkGoat

@@ -22,7 +22,7 @@
 - type: antagSmite
   id: Spy
   antag: Spy
-  rule: Spies
+  rule: SpyRule
   ruleComp: SpyRule
   icon:
     sprite: _ShitChap/Objects/Weapons/Nullrod/atheist.rsi

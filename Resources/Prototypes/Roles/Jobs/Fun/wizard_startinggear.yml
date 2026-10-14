@@ -5,7 +5,7 @@
     jumpsuit: ClothingUniformJumpsuitColorDarkBlue
     head: ClothingHeadHatWizard
     outerClothing: ClothingOuterWizard
-    shoes: ClothingShoesWizard
+    shoes: ClothingShoesSandalsBrown
     id: WizardPDA
     ears: ClothingHeadsetAltWizard
     belt: ClothingBeltWand

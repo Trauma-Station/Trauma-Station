@@ -110,20 +110,13 @@
   description: This implant allows the user to access Binary and communicate with silicons (use +b).
   categories: [ HideSpawnMenu ]
   components:
-  - type: ImplantGrantCollectiveMind
-    collectiveMind: Binary
-
-- type: entity
-  parent: BaseSubdermalImplant
-  id: ShadowmindImplant
-  name: shadowmind implant
-  description: This implant allows the user to access Shadowmind channel (use +q).
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: SubdermalImplant
-    permanent: true
-  - type: ImplantGrantCollectiveMind
-    collectiveMind: Shadowmind
+  - type: ImplantEffects
+    added:
+    - !type:AddCollectiveMind
+      channel: Binary
+    removed:
+    - !type:RemoveCollectiveMind
+      channel: Binary
 
 # Admeme
 
@@ -178,31 +171,6 @@
     implantAction: ActionStopTimeFreeman
 
 # Antag Planet
-
-- type: entity
-  parent: BaseSubdermalImplant
-  id: AntagImplantChangeling
-  name: changeling implant
-  description: This implant allows the user to shift their bodies like a changeling
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: ComponentsImplant
-    added:
-    - type: Changeling
-    - type: ChangelingIdentity
-    - type: Store
-    # this shit is broken still CBF to fix it but you need to make it find or add a ling rule, then MakeChangeling it
-
-- type: entity
-  parent: BaseSubdermalImplant
-  id: AntagImplantSpaceNinja
-  name: ninja implant
-  description: This implant allows the user to gain the skills of a space ninja.
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: ComponentsImplant
-    added:
-    - type: SpaceNinja
 
 - type: entity
   parent: BaseSubdermalImplant

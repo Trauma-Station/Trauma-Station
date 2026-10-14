@@ -57,6 +57,10 @@ public sealed partial class ScreenSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnShuttleTimer(Entity<ScreenComponent> ent, ref DeviceNetworkPacketEvent<ScreenShuttlePayload> args)
     {
+        // <Trauma>
+        if (ent.Comp.IgnoreNetwork)
+            return;
+        // </Trauma>
         var payload = args.Data;
         var timerXform = Transform(ent);
 

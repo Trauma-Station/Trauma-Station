@@ -65,7 +65,7 @@ reagent-name-hephaestium = hephaestium
 reagent-desc-hephaestium = hephaestium, named after the greek god of stone Hephaestus, known to turn anything injected with it into stone.
 
 reagent-name-ageium = ageium
-reagent-desc-ageium = ageium, causes subjects injected with it to not age!
+reagent-desc-ageium = Ageium, causes subject to never age once injected with more then 5u, this will never revert
 
 reagent-name-holy-chlorine-trifluoride = Holy Chlorine Trifluoride
 reagent-desc-holy-chlorine-trifluoride = whose idea was this?

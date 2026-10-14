@@ -4,7 +4,7 @@ This is a fork of [SS14](https://github.com/space-wizards/space-station-14) call
 
 ## Links
 
-[Trauma Station Discord](https://discord.gg/7ZKs7HadK5) | [Trauma Station Wiki](https://wiki.traumastation.com/wiki/Main_Page) | [Devbus Discord Server](https://discord.gg/f3rJaCuK)
+[Trauma Station Discord](https://discord.traumastation.com) | [Trauma Station Wiki](https://wiki.traumastation.com/wiki/Main_Page) | [Devbus Discord Server](https://discord.gg/f3rJaCuK)
 
 ## Documentation/Wiki
 
@@ -14,7 +14,7 @@ SS14 Docs [docs site](https://docs.spacestation14.com/) has documentation on SS1
 
 ## Contributing
 
-We are happy to accept contributions from anybody. Get in [our Discord Server](https://discord.gg/7ZKs7HadK5) if you want to help. Feel free to check the [list of issues](https://github.com/Trauma-Station/Trauma-Station/issues) that need to be done and anybody can pick them up. Don't be afraid to ask for help either!
+We are happy to accept contributions from anybody. Get in [our Discord Server](https://discord.traumastation.com) if you want to help. Feel free to check the [list of issues](https://github.com/Trauma-Station/Trauma-Station/issues) that need to be done and anybody can pick them up. Don't be afraid to ask for help either!
 Please read the [Contribution Guidelines](/CONTRIBUTING.md) before opening a pull request.
 
 We are not accepting translations of the game on our repository.
@@ -35,6 +35,8 @@ Exceptions to this are simple tools like Rider's single-line completion feature.
 3. Compile the solution.
 
 [More detailed instructions on building the project.](https://docs.goobstation.com/en/general-development/setup.html)
+
+For advanced uses bear in mind we use a custom engine, [QuietToolbox](https://github.com/Trauma-Station/QuietToolbox).
 
 ## License
 

@@ -1,0 +1,52 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<Control xmlns="https://spacestation14.io">
+    <BoxContainer Margin="8,8,8,8" Orientation="Vertical">
+        <BoxContainer Orientation="Horizontal">
+            <Label Name="NameLabel" HorizontalExpand="True" />
+            <Button
+                Name="CancelButton"
+                StyleClasses="negative"
+                MinWidth="64"
+                HorizontalAlignment="Right"
+                Access="Public"
+                Text="{Loc job-listings-ui-cancel-button}"/>
+            <Button
+                Name="AcceptButton"
+                MinWidth="64"
+                HorizontalAlignment="Right"
+                Access="Public"
+                Text="{Loc job-listings-ui-accept-button}"/>
+            <Button
+                Name="ClaimButton"
+                MinWidth="64"
+                HorizontalAlignment="Right"
+                Access="Public"
+                Text="{Loc job-listings-ui-claim-button}"/>
+        </BoxContainer>
+        <PanelContainer StyleClasses="HighDivider" />
+        <BoxContainer HorizontalExpand="True" Orientation="Horizontal">
+            <TextureRect
+                Name="ListingTexture"
+                Margin="0,0,4,0"
+                MinSize="48 48"
+                Stretch="KeepAspectCentered" />
+            <Control MinWidth="5"/>
+            <BoxContainer Orientation="Vertical">
+                <RichTextLabel Name="DescriptionLabel" />
+                <RichTextLabel Name="RewardLabel" />
+                <BoxContainer Orientation="Horizontal">
+                    <RichTextLabel Name="ProgressLabel"/>
+                    <ProgressBar Name="ProgressBar"
+                                 HorizontalAlignment="Left"
+                                 MinValue="0"
+                                 MaxValue="1"
+                                 Margin="5 0 0 0"
+                                 SetSize="200 20"/>
+                </BoxContainer>
+            </BoxContainer>
+        </BoxContainer>
+    </BoxContainer>
+</Control>

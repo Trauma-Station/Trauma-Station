@@ -6,35 +6,16 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: Medical
-    time: 1h # Trauma was 2.5
+    time: 2.5h
   startingGear: ParamedicGear
   icon: "JobIconParamedic"
   supervisors: job-supervisors-cmo
+  guides: [ Medical ] # TODO: should have a more specific guidebook page instead of using the department itself
   access:
-  # <Trauma>
-  - External
-  # </Trauma>
   - Medical
   - Maintenance
   extendedAccess:
   - Chemistry
-  # <Trauma>
-  guides:
-  - MedicalDoctor
-  - Medical
-  - Medicine
-  special:
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipDoctor
-    - SkillChipEducation
-    - SkillChipSurgeon
-  - !type:AddComponentSpecial
-    components:
-    - type: CPRTraining
-      reviveChance: 0.6 # better at chest compressions
-      inhaleChance: 0.9 # very good at mouth to mouth res.
-  # </Trauma>
 
 - type: startingGear
   id: ParamedicGear

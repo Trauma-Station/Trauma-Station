@@ -14,7 +14,7 @@ using Content.Shared.NameIdentifier;
 using Content.Shared.PDA;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
-using Content.Shared.Station;
+using Content.Shared.Station.Systems;
 using Content.Trauma.Common.CartridgeLoader.Cartridges;
 using Content.Trauma.Common.NanoChat;
 using Content.Trauma.Shared.CartridgeLoader.Cartridges;
@@ -34,7 +34,7 @@ public sealed partial class NanoChatSystem : SharedNanoChatSystem
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private NameIdentifierSystem _name = default!;
     [Dependency] private NanoChatCartridgeSystem _cartridge = default!;
-    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private StationSystem _station = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     // Messages in notifications get cut off after this point

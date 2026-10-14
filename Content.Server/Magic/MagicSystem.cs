@@ -1,7 +1,7 @@
-// <Trauma>
-using Content.Shared.Chat;
-// </Trauma>
 using Content.Server.Chat.Systems;
+using Content.Server.GameTicking;
+using Content.Server.GameTicking.Rules.Components;
+using Content.Shared.GameTicking.Rules.Components;
 using Content.Shared.Magic;
 using Content.Shared.Magic.Events;
 using Content.Shared.Tag;
@@ -11,10 +11,5 @@ namespace Content.Server.Magic;
 
 public sealed class MagicSystem : SharedMagicSystem
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-    }
-
     // Trauma - goob removed everything here
 }
