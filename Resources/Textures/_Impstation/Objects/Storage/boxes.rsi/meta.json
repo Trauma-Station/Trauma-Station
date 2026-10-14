@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Internals box taken from https://github.com/tgstation/tgstation/blob/1f12377cea24b99a18cb35a36c188a2a6f0dcf88/icons/obj/storage/box.dmi, syndicaterocketbox and gunbox edits by DVD Player",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+    "states": [
+        {
+            "name": "syndicaterocketbox"
+        },
+        {
+            "name": "syndicategunbox"
+        }
+    ]
+}

@@ -53,7 +53,7 @@
       proto: AbductorAgent
 
 - type: entity
-  parent: Changeling
+  parent: ChangelingRuleRoundstart
   id: SubChangeling
   components:
   - type: AntagSelection

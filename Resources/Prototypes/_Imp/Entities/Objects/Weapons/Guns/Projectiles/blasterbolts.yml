@@ -1,0 +1,42 @@
+- type: entity
+  parent: BaseBullet
+  id: BulletPlasmaAdder
+  name: adder plasma bolt
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Impstation/Objects/Weapons/Guns/Projectiles/energybolts.rsi
+    layers:
+    - state: mediumsynd
+      shader: unshaded
+  - type: FlyBySound
+    sound:
+      collection: EnergyMiss
+      params:
+        volume: 5
+  - type: Reflective
+    reflective:
+    - NonEnergy
+  - type: Projectile
+    damage:
+      types:
+        Heat: 14
+    soundHit:
+      path: /Audio/Effects/lightburn.ogg
+    forceSound: true
+
+- type: entity
+  parent: BulletPlasmaAdder
+  id: BulletPlasmaAkurra
+  name: akurra plasma bolt
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Impstation/Objects/Weapons/Guns/Projectiles/energybolts.rsi
+    layers:
+    - state: lightsynd
+      shader: unshaded
+  - type: Projectile
+    damage:
+      types:
+        Heat: 12
