@@ -15688,3 +15688,48 @@ Entries:
   id: 1708
   time: '2026-10-10T23:55:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4898
+- author: Aviu
+  changes:
+  - type: Remove
+    message: Removed spy subgamemode.
+  - type: Tweak
+    message: Spy is locked behind higher pop, 15p.
+  id: 1709
+  time: '2026-10-11T18:05:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4997
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Explosions and delimbing in general is weaker now.
+  - type: Fix
+    message: Fix bone break sound playing multiple times on client.
+  id: 1710
+  time: '2026-10-11T18:08:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4996
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed floor goblin spawning a bunch of fake clientside tiles when popping
+      out of the floor.
+  id: 1711
+  time: '2026-10-12T21:12:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5020
+- author: NoElkaTheGod, DVDPlayerOfDiscordFame, iaada
+  changes:
+  - type: Add
+    message: Added 4 new weapons to the syndicate uplink.
+  id: 1712
+  time: '2026-10-12T21:41:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4964
+- author: StarMade
+  changes:
+  - type: Remove
+    message: Removed DAGD, mail fraud, and anom crit traitor objectives.
+  - type: Tweak
+    message: >-
+      Changed weights of remaining objectives to prioritize kill objectives and
+      survival obj. Reduced chance of ATS hijack as well.
+  id: 1713
+  time: '2026-10-14T00:31:46.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5013
