@@ -397,6 +397,10 @@
   parent: BaseAntagGhostRoleRule
   id: SamuraiSpawn
   components:
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: SamuraiSkills
   - type: StationEvent
     weight: 6
     duration: null
