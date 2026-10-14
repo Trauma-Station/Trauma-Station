@@ -7,6 +7,8 @@
   components:
   - type: SubGamemodes
     rules:
+    - id: Thief
+      prob: 0.5
     - id: Devil
       prob: 0.02
     - id: ShadowlingRoundstart
