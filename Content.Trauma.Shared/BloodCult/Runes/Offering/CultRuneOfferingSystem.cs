@@ -62,11 +62,21 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
             return;
         }
 
+        if (_mind.GetMind(target) == null)
+        {
+            args.Popup = $"Victim is dead inside. They cannot be sacrificed."; // also plays twice on client
+            return;
+        }
+
+        if (HasComp<BibleUserComponent>(target) || _mindShield.IsShielded(target)) // can alive heretics be sacreficed? if so then they should added here
+        {
+            args.Popup = $"Some other powerful entity owns victim's soul. They cannot be sacrificed alive.";
+            return;
+        }
+
         var invokers = args.Invokers.Count;
-        if (_mind.GetMind(target) == null ||
-            target == rule.Comp.OfferingTarget ||
-            HasComp<BibleUserComponent>(target) ||
-            _mindShield.IsShielded(target))
+
+        if (target == rule.Comp.OfferingTarget)
         {
             if (invokers < ent.Comp.AliveSacrificeInvokersAmount)
             {
@@ -75,20 +85,20 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
             }
 
             Sacrifice(rule, target, user);
+            args.Handled = true;
+            return;
         }
-        else
-        {
-            if (invokers < ent.Comp.ConvertInvokersAmount)
-            {
-                args.Popup = $"You need {ent.Comp.ConvertInvokersAmount} invokers to convert a being";
-                return;
-            }
 
-            if (!Convert(ent, rule, target, user))
-            {
-                args.Popup = "It no work!";
-                return;
-            }
+        if (invokers < ent.Comp.ConvertInvokersAmount)
+        {
+            args.Popup = $"You need {ent.Comp.ConvertInvokersAmount} invokers to convert a being";
+            return;
+        }
+
+        if (!Convert(ent, rule, target, user))
+        {
+            args.Popup = "It no work!";
+            return;
         }
 
         args.Handled = true;

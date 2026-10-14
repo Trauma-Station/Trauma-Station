@@ -21,6 +21,7 @@ using Content.Shared.Station.Components;
 using Content.Shared.Station.Systems;
 using Content.Shared.Timing.Systems;
 using Content.Trauma.Shared.Areas;
+using Content.Trauma.Shared.BloodCult;
 using Content.Trauma.Shared.BloodCult.Empower;
 using Content.Trauma.Shared.BloodCult.Examine;
 using Content.Trauma.Shared.BloodCult.Gamerule;
@@ -40,6 +41,7 @@ public sealed partial class CultRuneSystem : EntitySystem
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private BloodCultExamineSystem _cultExamine = default!;
+    [Dependency] private ChooseTargetArmSystem _chooseArm = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
@@ -261,6 +263,8 @@ public sealed partial class CultRuneSystem : EntitySystem
                 checkRadioPrefix: false);
         }
 
+        Dirty(ent.Owner, ent.Comp); // will it fix double popups?
+
         return null;
     }
 
@@ -378,6 +382,8 @@ public sealed partial class CultRuneSystem : EntitySystem
             newDamage *= empowered.RuneDamageMultiplier;
         }
 
-        _damage.ChangeDamage(user, newDamage, increaseOnly: true, targetPart: TargetBodyPart.Arms, canMiss: false);
+        var targetArm = _chooseArm.ChooseArm();
+
+        _damage.ChangeDamage(user, newDamage, increaseOnly: true, targetPart: targetArm, canMiss: false);
     }
 }

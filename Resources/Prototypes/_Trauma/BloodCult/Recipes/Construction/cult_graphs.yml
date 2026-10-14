@@ -114,3 +114,18 @@
         doAfter: 2
   - node: wall
     entity: WallCult
+
+- type: constructionGraph
+  id: CultDagger
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: dagger
+      steps:
+      - tag: Knife
+        name: construction-graph-tag-knife
+      - tag: DemonEssense  # if you lost your dagger and dont have access to empower rune -> go summon deamons. At this point you deserve to suffer
+        name: construction-graph-tag-demonsoul
+  - node: dagger
+    entity: RitualDagger

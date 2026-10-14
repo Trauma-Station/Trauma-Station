@@ -53,3 +53,5 @@ public sealed partial class TeleportActionDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
 public sealed partial class BloodRitesExtractDoAfterEvent : SimpleDoAfterEvent;
+
+public sealed partial class BloodCultArtificerHealEvent : EntityTargetActionEvent;

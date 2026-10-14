@@ -43,7 +43,7 @@ public sealed partial class BloodRitesAuraComponent : Component
     /// Time required to extract blood of something with bloodstream.
     /// </summary>
     [DataField]
-    public TimeSpan BloodExtractionTime = TimeSpan.FromSeconds(5);
+    public TimeSpan BloodExtractionTime = TimeSpan.FromSeconds(1);
 
     /// <summary>
     /// How much <see cref="StoredBlood"/> is consumed on healing a cultist.

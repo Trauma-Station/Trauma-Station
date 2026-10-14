@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: ProjectileGauntletEcho
+  parent: BaseBullet
+  name: gauntlet echo
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/projectiles.rsi
+    layers:
+    - state: cult_fist
+      shader: unshaded
+  - type: Reflective
+    reflective: Magic
+  - type: Projectile
+    soundHit:
+      path: /Audio/_Trauma/Weapons/Melee/breaching_hammer/club.ogg
+    damage:
+      types:
+        Blunt: 30
+  - type: ProjectileThrowOnHit
+    distance: 4
+    speed: 8

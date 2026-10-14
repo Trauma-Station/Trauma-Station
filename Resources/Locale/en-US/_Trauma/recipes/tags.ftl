@@ -72,3 +72,6 @@ construction-graph-tag-bible = any holy book
 # Reactive armour
 construction-graph-tag-bluespace-core = bluespace anomaly core
 construction-graph-tag-electric-core = electricity anomaly core
+
+# Cult
+construction-graph-tag-knife = a knife
