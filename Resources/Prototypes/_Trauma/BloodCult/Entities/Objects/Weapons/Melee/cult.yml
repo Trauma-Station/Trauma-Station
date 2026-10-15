@@ -66,7 +66,7 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 25
+        Piercing: 30
     angle: 0
     animation: WeaponArcThrust
     soundHit:
@@ -91,7 +91,7 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Piercing: 8
+        Piercing: 10
   - type: UseDelay
   - type: DisarmMalus
   - type: CultItem
@@ -253,8 +253,6 @@
       trueEffects:
       - !type:ModifyParalysis
         time: 16
-      - !type:SpawnEntity
-        entity: SanguineFlashEffect
       falseEffects:
       - !type:TakeStaminaDamage
         amount: 40
@@ -265,8 +263,6 @@
       - !type:ModifyStatusEffect
         effectProto: StatusEffectMuted
         time: 16
-      - !type:SpawnEntity
-        entity: SanguineFlashEffect
       - !type:AddComponents
         replaceExisting: true
         components:
@@ -277,6 +273,8 @@
           channel: Server
           message: "Stun mark applied! Stab them with a dagger, sword or blood spear to stun them fully!"
           color: red
+    - !type:SpawnEntity
+      entity: SanguineFlashEffect
   - type: MeleeWeapon
     clickAttackWhitelist:
       components:

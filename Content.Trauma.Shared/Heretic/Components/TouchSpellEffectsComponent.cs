@@ -6,7 +6,7 @@ using Content.Shared.EntityEffects;
 namespace Content.Trauma.Shared.Heretic.Components;
 
 /// <summary>
-/// Applies entity effects on touch spell use
+/// Applies entity effects to the target on touch spell use, if conditions pass
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class TouchSpellEffectsComponent : Component

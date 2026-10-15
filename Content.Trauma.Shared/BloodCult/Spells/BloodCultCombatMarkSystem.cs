@@ -13,11 +13,12 @@ public sealed partial class BloodCultTeleportSpellSystem : EntitySystem
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private EntityQuery<CultItemComponent> _cultItemQuery = default!;
 
     [SubscribeLocalEvent]
     private void OnMeleeHit(Entity<BloodCultCombatMarkComponent> ent, ref AttackedEvent args)
     {
-        if (!HasComp<CultItemComponent>(args.Used))
+        if (!_cultItemQuery.HasComp(args.Used))
             return;
 
         _effects.TryApplyEffect(ent, ent.Comp.Effect, user: args.User);
