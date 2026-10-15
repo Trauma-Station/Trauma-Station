@@ -16,6 +16,14 @@
   - Boxes
 
 - type: latheRecipe
+  abstract: true
+  parent: BaseBlueAlert
+  id: BaseAmmoRecipeBlue
+  categories:
+  - Ammo
+  completetime: 5
+
+- type: latheRecipe
   parent: BaseAmmoBoxRecipe
   id: BoxShotgunBreaching
   result: BoxShotgunBreaching
@@ -24,28 +32,28 @@
     Plasteel: 100
 
 - type: latheRecipe
-  parent: [ BaseAmmoRecipe, BaseBlueAlert ]
+  parent: BaseAmmoRecipeBlue
   id: MagazineBoxGaussgunBullet
   result: MagazineBoxGaussgunBullet
   materials:
     Steel: 500
 
 - type: latheRecipe
-  parent: [ BaseAmmoRecipe, BaseBlueAlert ]
+  parent: BaseAmmoRecipeBlue
   id: MagazineBoxGaussgunDisc
   result: MagazineBoxGaussgunDisc
   materials:
     Steel: 500
 
 - type: latheRecipe
-  parent: [ BaseAmmoRecipe, BaseBlueAlert ]
+  parent: BaseAmmoRecipeBlue
   id: MagazineBoxGaussgunShard
   result: MagazineBoxGaussgunShard
   materials:
     Steel: 500
 
 - type: latheRecipe
-  parent: [ BaseAmmoRecipe, BaseBlueAlert ]
+  parent: BaseAmmoRecipeBlue
   id: MagazineGaussgun
   result: MagazineGaussgun
   materials:
