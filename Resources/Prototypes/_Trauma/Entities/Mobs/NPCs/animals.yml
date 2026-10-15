@@ -228,8 +228,6 @@
   components:
   - type: GhostRole
     rules: ghost-role-information-antagonist-rules
-    mindRoles:
-    - MindRoleGhostRoleSoloAntagonist
   - type: Sprite
     sprite: _Trauma/Mobs/Animals/bunny.rsi
     layers:
