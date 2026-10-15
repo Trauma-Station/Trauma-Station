@@ -1,10 +1,53 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: weightedRandom
+  id: TraitorObjectiveGroups
+  weights:
+    TraitorObjectiveGroupSteal: 0.6
+    TraitorObjectiveGroupSocial: 0.4
+    TraitorObjectiveGroupSabotage: !Remove
+    TraitorObjectiveGroupOther: .05
+
+- type: weightedRandom
   id: TraitorObjectiveGroupSteal
   weights:
-    StealSupermatterSliverObjective: 0.5
-    LawbringerStealObjective: 0.5
-    ExecutiveBriefcaseStealObjective: 0.5
-    JusticeStealObjective: 0.5
-    TeleportArmorStealObjective: 1
+    CMOCrewMonitorStealObjective: !Remove
+    EnergyMagnumStealObjective: !Remove
+    # TODO: add lawbringer steal obj ig
+
+- type: weightedRandom
+  id: TraitorObjectiveGroupKill
+  weights:
+    PermaKillRandomPersonObjective: 0.5
+
+- type: weightedRandom
+  id: TraitorObjectiveGroupState
+  weights:
+    EscapeShuttleObjective: 1
+
+- type: weightedRandom
+  id: TraitorObjectiveGroupSocial
+  weights:
+    RandomTraitorTargetAliveObjective: 0.5
+
+- type: weightedRandom
+  id: TraitorObjectiveGroupOther
+  weights:
+    HijackTradeStationObjective: 1
+    MailFraudObjective: !Remove
+
+- type: weightedRandom
+  id: ThiefObjectiveGroupCollection
+  weights:
+    BatteryStealCollectionObjective: 0.2
+    OfficerHandgunsStealCollectionObjective: !Remove
+
+- type: weightedRandom
+  id: ThiefObjectiveGroupItem
+  weights:
+    ExpeditionsCircuitboardStealObjective: !Remove
+
+- type: weightedRandom
+  id: ThiefObjectiveGroupStructure
+  weights:
+    SodaDispenserStealObjective: 1

@@ -1,0 +1,96 @@
+- type: entity
+  parent: [ BaseItem, BaseSyndicateContraband, SolutionAmmo ]
+  id: EchionSynth
+  name: echion synthesizer
+  description: An exotic catalyst conveniently contained in a portable container. Fluctuates space-time on a microscopic scale when powered to generate echion.
+  components:
+  - type: Sprite
+    sprite: _Impstation/Objects/Specific/Syndicate/echionsynth.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: cap-1
+      visible: false
+      shader: unshaded
+      map: ["enum.SolutionContainerLayers.Fill"]
+    - state: core
+      visible: false
+      shader: unshaded
+      map: ["enum.ToggleableVisuals.Layer"]
+  - type: Appearance
+  - type: Item
+    size: Large
+    storedRotation: 90
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+  - type: ToggleableVisuals
+    spriteLayer: core
+    inhandVisuals:
+      left:
+      - state: inhand-left-core
+        shader: unshaded
+      right:
+      - state: inhand-right-core
+        shader: unshaded
+  - type: ItemTogglePointLight
+  - type: PointLight
+    enabled: false
+    netsync: false
+    radius: 1.5
+    energy: 1.5
+    color: "#83db2b"
+  - type: SolutionContainerVisuals
+    maxFillLevels: 4
+    fillBaseName: cap-
+  - type: SolutionItemStatus
+    solution: ammo
+  - type: ExaminableSolution
+    solution: ammo
+  - type: ReagentTank
+    tankType: Fuel
+  - type: Solution
+    solution:
+      maxVol: 150
+      reagents:
+      - ReagentId: Echion
+        Quantity: 150
+  - type: DrainableSolution
+    solution: ammo
+  - type: ItemToggle
+    soundActivate:
+      path: /Audio/_Impstation/Machines/echion_on.ogg
+      params:
+        volume: 5
+    soundDeactivate:
+      path: /Audio/_Impstation/Machines/echion_off.ogg
+      params:
+        volume: 5
+  - type: ItemToggleActiveSound
+    activeSound:
+      path: /Audio/_Impstation/Machines/echion.ogg
+      params:
+        volume: 4
+  - type: PowerCellDraw
+    drawRate: 6
+  - type: ToggleCellDraw
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ContainerContainer
+    containers:
+      cell_slot: !type:ContainerSlot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMedium
+  - type: ComponentToggler
+    components:
+    - type: SolutionRegeneration
+      generated:
+        reagents:
+        - ReagentId: Echion
+          Quantity: 2.5

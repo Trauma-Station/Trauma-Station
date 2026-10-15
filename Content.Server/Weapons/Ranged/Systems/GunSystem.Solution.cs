@@ -58,7 +58,8 @@ public sealed partial class GunSystem
 
         UpdateSolutionAppearance(ent);
     }
-
+    // Trauma - nuke ts
+    /*
     protected override (EntityUid Entity, IShootable) GetSolutionShot(Entity<SolutionAmmoProviderComponent> ent, EntityCoordinates position)
     {
         var (shot, shootable) = base.GetSolutionShot(ent, position);
@@ -69,4 +70,5 @@ public sealed partial class GunSystem
         _vapor.TryAddSolution(shot, solution.Value, ent.Comp.FireCost);
         return (shot, shootable);
     }
+    */
 }
