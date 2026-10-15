@@ -139,7 +139,7 @@
     lateJoinAdditional: true
     antags: !Clear
     - !type:LinearAntagCount
-      playerRatio:
+      playerRatio: 6
       proto: Traitor
       range:
         min: 1
