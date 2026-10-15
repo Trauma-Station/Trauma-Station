@@ -23,3 +23,27 @@
   - type: Tag
     tags:
     - DemonEssense
+
+- type: entity
+  parent: [BaseItem, BaseMagicalContraband]
+  id: PurifiedDemonSoulFragment
+  name: purified soul fragment
+  description: The purified soul of a demon, can be made into a magical ink by mixing it into a full blood vial.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Enchanting/purifieddemonsoul.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: _Trauma/Objects/Enchanting/purifieddemonsoul.rsi
+  - type: PointLight
+    enabled: true
+    radius: 2
+    energy: 1
+    color: "#b9f2ff"
+  - type: GuideHelp
+    guides:
+    - Enchanting
+  - type: Tag
+    tags:
+    - PurifiedDemonEssense

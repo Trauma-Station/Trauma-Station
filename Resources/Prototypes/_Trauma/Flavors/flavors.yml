@@ -24,3 +24,8 @@
   id: rich
   flavorType: Complex
   description: flavor-complex-rich
+
+- type: flavor
+  id: unholy
+  flavorType: Base
+  description: flavor-base-unholy

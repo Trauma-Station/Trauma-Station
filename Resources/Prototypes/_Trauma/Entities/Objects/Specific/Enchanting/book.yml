@@ -36,3 +36,7 @@
   - type: Construction
     graph: DefaceBible
     node: finish
+  - type: ReactionMixer
+    mixMessage: "bible-mixing-success"
+    reactionTypes:
+    - Unholy

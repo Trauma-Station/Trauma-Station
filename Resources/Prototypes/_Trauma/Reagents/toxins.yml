@@ -166,3 +166,43 @@
         - !type:ReagentCondition
           reagent: BatrachoToxin
           min: 10
+
+- type: reagent
+  id: Unholywater
+  name: reagent-name-unholywater
+  group: Toxins
+  desc: reagent-desc-unholywater
+  evaporationSpeed: 0.3
+  physicalDesc: reagent-physical-desc-unholy
+  flavor: unholy
+  color: "#996666"
+  metabolisms:
+    Digestion:
+      effects:
+      - !type:Satiate
+        satiationType: Thirst
+        factor: -3 # Don't.
+      - !type:HealthChange
+        conditions:
+        damage:
+          types:
+            Asphyxiation: 2
+            Piercing: 0.2
+            Ballistic: 0.2
+            Slash: 0.2
+            Blunt: 0.2
+            Poison: 0.2
+            Heat: 0.2
+            Shock: 0.2
+            Cold: 0.2
+  reactiveEffects:
+    Extinguish:
+      methods: [ Touch ]
+      effects:
+      - !type:Extinguish
+        holy: true
+  plantMetabolism:
+  - !type:PlantAdjustWater
+    amount: 1 # Still water
+  tileReactions:
+  - !type:ExtinguishTileReaction { }

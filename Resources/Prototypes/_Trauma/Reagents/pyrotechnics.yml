@@ -114,6 +114,100 @@
         type: Local
 
 - type: reagent
+  parent: WeldingFuel # still copy and pasting because parent on chems my beloathed
+  id: HolyOil
+  name: reagent-name-holy-oil
+  desc: reagent-desc-holy-oil
+  physicalDesc: reagent-physical-desc-oily
+  slipData:
+    requiredSlipSpeed: 3.5
+  flavor: bitter
+  flavorMinimum: 0.01
+  color: "#ffd16e"
+  recognizable: true
+  boilingPoint: -84.7 # Copy and paste ops
+  meltingPoint: -80.7
+  friction: 0.4
+  tileReactions:
+  - !type:SpillTileReaction
+  - !type:FlammableTileReaction {}
+  reactiveEffects:
+    Flammable:
+      methods: [ Touch ]
+      effects:
+      - !type:Flammable
+        multiplier: 0.1
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:Satiate
+        satiationType: Thirst
+        factor: 1
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [Vox]
+      - !type:HealthChange
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Vox ]
+          inverted: true
+        damage:
+          types:
+            Poison: 0.5 # Less, actually.
+      - !type:Flammable
+        multiplier: 0.4
+
+- type: reagent
+  parent: WeldingFuel # still copy and pasting because parent on chems my beloathed
+  id: UnholyOil
+  name: reagent-name-unholy-oil
+  desc: reagent-desc-unholy-oil
+  physicalDesc: reagent-physical-desc-oily
+  slipData:
+    requiredSlipSpeed: 3.5
+  flavor: unholy
+  flavorMinimum: 0.01
+  color: "#621800"
+  recognizable: true
+  boilingPoint: -50
+  meltingPoint: -40
+  friction: 0.4
+  tileReactions:
+  - !type:CreateEntityTileReaction
+    entity: MolotovFire
+    maxOnTileWhitelist:
+      tags: [ TraumaFire ]
+  - !type:FlammableTileReaction
+    temperatureMultiplier: 1.5
+  - !type:SpillTileReaction
+  reactiveEffects:
+    Flammable:
+      methods: [ Touch ]
+      effects:
+      - !type:Flammable
+        multiplier: 0.2
+      - !type:Ignite
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:Satiate
+        satiationType: Thirst
+        factor: 1
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [Vox]
+      - !type:HealthChange
+        conditions:
+        - !type:MetabolizerTypeCondition
+          type: [ Vox ]
+          inverted: true
+        damage:
+          types:
+            Poison: 0.5 # Less, actually.
+      - !type:Flammable
+        multiplier: 0.4
+
+- type: reagent
   id: Burnite
   name: reagent-name-burnite
   group: Pyrotechnic

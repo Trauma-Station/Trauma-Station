@@ -221,3 +221,14 @@
   theory:
     FabricationKnowledge: 0
   useQuality: false
+
+- type: construction
+  id: Molotov
+  graph: MolotovConstruction
+  targetNode: LitMolotov
+  category: construction-category-weapons
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 2

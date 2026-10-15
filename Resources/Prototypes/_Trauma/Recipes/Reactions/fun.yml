@@ -37,3 +37,57 @@
       amount: 1
   products:
     Crabon: 8
+
+- type: reaction
+  id: HolyUnholyWater
+  reactants:
+    Holywater:
+      amount: 1
+    Unholywater:
+      amount: 1
+  products:
+    Water: 2
+
+- type: reaction
+  id: HolyUnholyOil
+  reactants:
+    HolyOil:
+      amount: 1
+    UnholyOil:
+      amount: 1
+  products:
+    Oil: 3 # Don't ask.
+
+- type: reaction
+  id: Unliquid1
+  reactants:
+    HolyOil:
+      amount: 1
+    Unholywater:
+      amount: 1
+  products:
+    Unliquid: 2
+  effects:
+  - !type:Explosion
+    explosionType: Default
+    intensityPerUnit: 0.1
+    maxTotalIntensity: 12
+    intensitySlope: 2
+    maxIntensity: 3
+
+- type: reaction
+  id: Unliquid2
+  reactants:
+    UnholyOil:
+      amount: 1
+    Holywater:
+      amount: 1
+  products:
+    Unliquid: 2
+  effects:
+  - !type:Explosion
+    explosionType: Default
+    intensityPerUnit: 0.1
+    maxTotalIntensity: 12
+    intensitySlope: 2
+    maxIntensity: 3
