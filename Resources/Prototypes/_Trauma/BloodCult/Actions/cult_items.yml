@@ -3,7 +3,7 @@
 - type: entity
   parent: BaseAction
   id: ActionBloodSpearRecall
-  name: Recall spear
+  name: Bloody Bond
   description: Recalls your blood spear back to your hand.
   components:
   - type: Sprite
@@ -12,7 +12,9 @@
     - state: icon
     state: stun
   - type: Action
+    detachedItemAction: true
+    checkCanInteract: true
     itemIconStyle: BigAction
     useDelay: 30
   - type: InstantAction
-    event: !type:BloodSpearRecalledEvent
+    event: !type:RecallItemEvent

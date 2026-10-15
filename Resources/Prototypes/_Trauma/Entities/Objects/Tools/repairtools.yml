@@ -1,29 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
   parent: MaterialBase
-  id: Whetstone
-  name: whetstone
-  description: A whetstone, used to maintain bladed weapons.
-  suffix: full
+  id: WhetstoneBase
   components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Tools/whetstone.rsi
-    state: icon
-  - type: Appearance
-  - type: Stack
-    stackType: Whetstone
-    count: 5
   - type: Item
-    sprite: _Trauma/Objects/Tools/whetstone.rsi
-    storedOffset: 0,-1
-    storedRotation: 15
     size: Small
-    shape:
-    - 0,0,1,0
-  - type: Construction
-    graph: Whetstone
-    node: finish
+  - type: Appearance
   - type: Material
   - type: PhysicalComposition
     materialComposition:
@@ -37,6 +21,29 @@
     speedModifier: 0.5
     useSound:
       path: /Audio/_Trauma/Tools/whetstone.ogg
+
+- type: entity
+  parent: WhetstoneBase
+  id: Whetstone
+  name: whetstone
+  description: A whetstone, used to maintain bladed weapons.
+  suffix: full
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Tools/whetstone.rsi
+    state: icon
+  - type: Stack
+    stackType: Whetstone
+    count: 5
+  - type: Item
+    sprite: _Trauma/Objects/Tools/whetstone.rsi
+    storedOffset: 0,-1
+    storedRotation: 15
+    shape:
+    - 0,0,1,0
+  - type: Construction
+    graph: Whetstone
+    node: finish
 
 - type: entity
   parent: Whetstone

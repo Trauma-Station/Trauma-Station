@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
-using Content.Goobstation.Shared.Illusion;
+using Content.Trauma.Shared.Illusion;
 using Content.Server.Atmos.Components;
 using Content.Server.Body.Components;
 using Content.Server.Cloning;
@@ -9,13 +8,10 @@ using Content.Server.NPC;
 using Content.Server.NPC.HTN;
 using Content.Server.NPC.Systems;
 using Content.Server.Popups;
-using Content.Shared.Atmos.Components;
 using Content.Shared.Body.Components;
 using Content.Shared.Cloning;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Coordinates;
-using Content.Shared.Damage.Components;
-using Content.Shared.Damage.Systems;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.IdentityManagement;
@@ -29,21 +25,19 @@ using Content.Shared.Nutrition.AnimalHusbandry;
 using Content.Shared.Nutrition.Components;
 using Content.Shared.Popups;
 using Content.Shared.Temperature.Components;
-using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Melee.Events;
-using Content.Shared.Weapons.Ranged.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Random;
 using Robust.Shared.Spawners;
+using Content.Trauma.Shared.Parry;
 
-namespace Content.Goobstation.Server.Illusion;
+namespace Content.Trauma.Server.Illusion;
 
 public sealed partial class IllusionSystem : EntitySystem
 {
     [Dependency] private IRobustRandom _random = default!;
 
     [Dependency] private CloningSystem _cloning = default!;
-    [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private TransformSystem _xform = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private NPCSystem _npc = default!;
@@ -51,6 +45,9 @@ public sealed partial class IllusionSystem : EntitySystem
     [Dependency] private HTNSystem _htn = default!;
     [Dependency] private MobThresholdSystem _threshold = default!;
     [Dependency] private PopupSystem _popup = default!;
+    [Dependency] private EntityQuery<IllusionSpawnerComponent> _spawnerQuery = default!;
+    [Dependency] private EntityQuery<IllusionComponent> _illusionQuery = default!;
+    [Dependency] private EntityQuery<MobStateComponent> _mobStateQuery = default!;
 
     private static readonly ProtoId<CloningSettingsPrototype> Settings = "Illusion";
     private static readonly ProtoId<HTNCompoundPrototype> Compound = "IllusionCompound";
@@ -67,21 +64,23 @@ public sealed partial class IllusionSystem : EntitySystem
         typeof(BloodstreamComponent),
     ];
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnItemCopied(Entity<IllusionSpawnerComponent> ent, ref IllusionHeldItemCopiedEvent args)
     {
-        base.Initialize();
+        if (!_spawnerQuery.TryComp(args.OriginalItem, out var originalComp))
+            return;
 
-        SubscribeLocalEvent<IllusionOnMeleeHitComponent, MeleeHitEvent>(OnHit);
-
-        SubscribeLocalEvent<IllusionComponent, MobStateChangedEvent>(OnStateChanged);
-        SubscribeLocalEvent<IllusionComponent, TimedDespawnEvent>(OnDespawn);
+        ent.Comp.Chance = originalComp.Chance * originalComp.DegradationRateOnClone;
+        ent.Comp.HealthMultiplier = originalComp.HealthMultiplier * originalComp.DegradationRateOnClone;
     }
 
+    [SubscribeLocalEvent]
     private void OnDespawn(Entity<IllusionComponent> ent, ref TimedDespawnEvent args)
     {
         DeathPopup(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnStateChanged(Entity<IllusionComponent> ent, ref MobStateChangedEvent args)
     {
         if (args.NewMobState == MobState.Alive)
@@ -98,12 +97,35 @@ public sealed partial class IllusionSystem : EntitySystem
             PopupType.SmallCaution);
     }
 
-    private void OnHit(Entity<IllusionOnMeleeHitComponent> ent, ref MeleeHitEvent args)
+    [SubscribeLocalEvent]
+    private void OnParry(Entity<IllusionOnParryComponent> ent, ref ParriedWithEvent args)
     {
-        if (!args.IsHit || !ShouldSpawnIllusion(ent, args.User, args.HitEntities))
+        if (args.Attacker is not { } attacker)
             return;
 
-        SpawnIllusion(args.User, ent.Comp.Lifetime, ent.Comp.HealthMultiplier, args.HitEntities, ent.Comp.Components);
+        if (!_spawnerQuery.TryComp(ent, out var spawner))
+            return;
+
+        var list = new List<EntityUid>() { attacker };
+
+        if (!ShouldSpawnIllusion((ent, spawner), args.User, list))
+            return;
+
+        SpawnIllusion(args.User, spawner.Lifetime, spawner.HealthMultiplier, list, spawner.Components);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnHit(Entity<IllusionOnMeleeHitComponent> ent, ref MeleeHitEvent args)
+    {
+        if (!_spawnerQuery.TryComp(ent, out var spawner))
+            return;
+
+        var list = new List<EntityUid>(args.HitEntities);
+
+        if (!args.IsHit || !ShouldSpawnIllusion((ent, spawner), args.User, list))
+            return;
+
+        SpawnIllusion(args.User, spawner.Lifetime, spawner.HealthMultiplier, list, spawner.Components);
     }
 
     private void SpawnIllusion(EntityUid user,
@@ -115,25 +137,21 @@ public sealed partial class IllusionSystem : EntitySystem
         if (lifetime <= 0f || healthMultiplier <= 0f)
             return;
 
+        var hp = _threshold.GetLowestThreshold(user);
+
+        if (hp <= 0)
+            return;
+
+        var damage = _threshold.CheckVitalDamage(user);
+        var cloneHp = (hp - damage) * healthMultiplier;
+        if (cloneHp <= 0)
+            return;
+
         var xform = Transform(user);
         if (!_cloning.TryCloning(user, _xform.GetMapCoordinates(xform), Settings, out var clone))
             return;
 
-        if (TryComp(user, out DamageableComponent? damageable) &&
-            TryComp(user, out MobThresholdsComponent? thresholds) &&
-            (_threshold.TryGetThresholdForState(user, MobState.Critical, out var hp, thresholds) ||
-             _threshold.TryGetThresholdForState(user, MobState.Dead, out hp, thresholds)))
-        {
-            var damage = _damage.GetTotalDamage((user, damageable));
-            var totalHp = hp - damage;
-            if (totalHp <= 0)
-            {
-                QueueDel(clone.Value);
-                return;
-            }
-
-            _threshold.SetMobStateThreshold(clone.Value, totalHp.Value * healthMultiplier, MobState.Critical);
-        }
+        _threshold.SetMobStateThreshold(clone.Value, cloneHp, MobState.SoftCrit);
 
         EnsureComp<TimedDespawnComponent>(clone.Value).Lifetime = lifetime;
         EnsureComp<IllusionComponent>(clone.Value);
@@ -147,27 +165,18 @@ public sealed partial class IllusionSystem : EntitySystem
         {
             foreach (var held in _hands.EnumerateHeld((user, hands)))
             {
-                if (!HasComp<GunComponent>(held) && !HasComp<MeleeWeaponComponent>(held))
+                if (_cloning.CopyItem(held, xform.Coordinates, copyStorage: false) is not { } itemClone)
                     continue;
 
-                if (_cloning.CopyItem(held, xform.Coordinates, copyStorage: false) is not { } weaponClone)
-                    continue;
-
-                if (!_hands.TryPickup(clone.Value, weaponClone, null, false, false, false))
+                if (!_hands.TryPickupAnyHand(clone.Value, itemClone, checkActionBlocker: false, animateUser: false, animate: false))
                 {
-                    QueueDel(weaponClone);
+                    QueueDel(itemClone);
                     continue;
                 }
 
-                EnsureComp<UnremoveableComponent>(weaponClone);
-
-                if (!TryComp(weaponClone, out IllusionOnMeleeHitComponent? cloneIllusionOnHit) ||
-                    !TryComp(held, out IllusionOnMeleeHitComponent? illusionOnHit))
-                    continue;
-
-                cloneIllusionOnHit.Chance = illusionOnHit.Chance * illusionOnHit.DegradationRateOnClone;
-                cloneIllusionOnHit.HealthMultiplier =
-                    illusionOnHit.HealthMultiplier * illusionOnHit.DegradationRateOnClone;
+                EnsureComp<UnremoveableComponent>(itemClone);
+                var ev = new IllusionHeldItemCopiedEvent(held, itemClone);
+                RaiseLocalEvent(itemClone, ref ev);
             }
         }
 
@@ -184,11 +193,11 @@ public sealed partial class IllusionSystem : EntitySystem
         EntityManager.AddComponents(clone.Value, components);
     }
 
-    private bool ShouldSpawnIllusion(Entity<IllusionOnMeleeHitComponent> ent,
+    private bool ShouldSpawnIllusion(Entity<IllusionSpawnerComponent> ent,
         EntityUid user,
-        IReadOnlyList<EntityUid> hitMobs)
+        List<EntityUid> targets)
     {
-        if (hitMobs.Count == 0)
+        if (targets.Count == 0)
             return false;
 
         if (!_random.Prob(ent.Comp.Chance))
@@ -196,24 +205,21 @@ public sealed partial class IllusionSystem : EntitySystem
 
         if (ent.Comp.FactionWhitelist.Count > 0)
         {
-            if (!TryComp(user, out NpcFactionMemberComponent? factionComp))
+            if (!_npcFaction.IsMemberOfAny(user, ent.Comp.FactionWhitelist))
                 return false;
 
-            if (!factionComp.Factions.Any(x => ent.Comp.FactionWhitelist.Contains(x)))
-                return false;
+            targets.RemoveAll(x => _npcFaction.IsMemberOfAny(x, ent.Comp.FactionWhitelist));
         }
 
-        var mobStateQuery = GetEntityQuery<MobStateComponent>();
-        var illusionQuery = GetEntityQuery<IllusionComponent>();
-        foreach (var hit in hitMobs)
+        foreach (var target in targets)
         {
-            if (hit == user)
+            if (target == user)
                 continue;
 
-            if (illusionQuery.HasComp(hit))
+            if (_illusionQuery.HasComp(target))
                 continue;
 
-            if (!mobStateQuery.TryComp(hit, out var mobState))
+            if (!_mobStateQuery.TryComp(target, out var mobState))
                 continue;
 
             if (mobState.CurrentState is MobState.Alive or MobState.Critical)
