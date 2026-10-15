@@ -23,7 +23,7 @@
 - type: weightedRandom
   id: TraitorObjectiveGroupState
   weights:
-    EscapeShuttleObjective: 1
+    DieObjective: !Remove
 
 - type: weightedRandom
   id: TraitorObjectiveGroupSocial
