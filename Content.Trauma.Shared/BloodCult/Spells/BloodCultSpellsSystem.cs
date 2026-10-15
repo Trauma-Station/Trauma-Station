@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.Religion;
 using Content.Medical.Common.Targeting;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Actions;
-using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
 using Content.Shared.Body.Components;
-using Content.Shared.Clothing.Components;
 using Content.Shared.Cuffs;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Prototypes;
@@ -15,12 +14,9 @@ using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
-using Content.Shared.Mindshield;
 using Content.Shared.Popups;
-using Content.Shared.Speech.Muting;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
-using Content.Trauma.Common.RadialSelector;
 using Content.Trauma.Shared.BloodCult.Empower;
 using System.Linq;
 
@@ -29,15 +25,12 @@ namespace Content.Trauma.Shared.BloodCult.Spells;
 public sealed partial class BloodCultSpellsSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _blocker = default!;
-    [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private InventorySystem _inventory = default!;
-    [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedCuffableSystem _cuffable = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
-    [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
@@ -74,13 +67,9 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
 
         var target = GetEntity(netTarget);
 
-        // TODO: actual magic protection shit, show a popup
-        if (_mindShield.IsShielded(target))
-        {
-            var user = args.User;
-            _popup.PopupEntity("Mind protection blocks your magic!", user, user, PopupType.MediumCaution);
-            args.Invalid = true;
-        }
+        var ev = new BeforeCastTouchSpellEvent(target);
+        RaiseLocalEvent(target, ref ev, true);
+        args.Invalid = ev.Cancelled;
     }
 
     [SubscribeLocalEvent]
