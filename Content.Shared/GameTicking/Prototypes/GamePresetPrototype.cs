@@ -24,8 +24,8 @@ public sealed partial class GamePresetPrototype : IPrototype
     [DataField]
     public bool ShowInVote;
 
-    [DataField]
-    public int MinPlayers;
+    [DataField(required: true)]
+    public int? MinPlayers;
 
     [DataField]
     public int? MaxPlayers;
