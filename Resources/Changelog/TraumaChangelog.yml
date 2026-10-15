@@ -15768,3 +15768,41 @@ Entries:
   id: 1715
   time: '2026-10-14T18:22:56.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5026
+- author: Aviu
+  changes:
+  - type: Remove
+    message: Removed mindshields blocking blood cult spells.
+  - type: Add
+    message: Blood cult stun spell reworked, see guidebook for details.
+  - type: Add
+    message: >-
+      Blood rites drain blood easier, can now be used to make blood bolt barrage
+      spell/weapon and blood orb that stores blood and can be drained by blood
+      rites.
+  - type: Add
+    message: Gave blood cultists average skill for their weapons and shield.
+  - type: Fix
+    message: Fix being unable to recall blood spear.
+  - type: Fix
+    message: Fixed mirror shield name and missing inhand sprite.
+  - type: Add
+    message: >-
+      Mirror shield now spawns illusions of user when blocking/reflecting
+      attacks sometimes.
+  id: 1716
+  time: '2026-10-15T14:11:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5039
+- author: StarMade
+  changes:
+  - type: Fix
+    message: Evil bunny now actually solo antagonist.
+  id: 1717
+  time: '2026-10-15T19:40:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5049
+- author: StarMade
+  changes:
+  - type: Fix
+    message: Fixed truncheon in-storage sprite.
+  id: 1718
+  time: '2026-10-15T20:15:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5052

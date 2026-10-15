@@ -29,13 +29,13 @@ public sealed partial class ParryComponent : Component
     /// The minimum required level of skill to be able to reflect anything at all.
     /// </summary>
     [DataField]
-    public int ReflectMinSkill = 26;
+    public int ReflectMinSkill = 25;
 
     /// <summary>
     /// The minimum required level of skill to be able to parry anything at all.
     /// </summary>
     [DataField]
-    public int ParryMinSkill = 26;
+    public int ParryMinSkill = 25;
 
     [DataField]
     public Angle ReflectSpread = Angle.FromDegrees(140);

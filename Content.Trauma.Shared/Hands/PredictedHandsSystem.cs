@@ -23,6 +23,7 @@ using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Trauma.Common.Hands;
 
 namespace Content.Trauma.Shared.Hands;
 
@@ -152,6 +153,13 @@ public sealed partial class PredictedHandsSystem : EntitySystem
 
         if (direction == Vector2.Zero)
             return true;
+
+        // <Trauma>
+        var beforeThrownEv = new BeforeGettingThrownEvent(player);
+        RaiseLocalEvent(throwEnt.Value, ref beforeThrownEv);
+        if (beforeThrownEv.Cancelled)
+            return true;
+        // </Trauma>
 
         var length = direction.Length();
         var distance = Math.Clamp(length, minDistance, hands.ThrowRange);
