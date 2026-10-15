@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 
-namespace Content.Goobstation.Shared.Illusion;
+namespace Content.Trauma.Shared.Illusion;
 
 [RegisterComponent, NetworkedComponent]
 public sealed partial class IllusionComponent : Component
