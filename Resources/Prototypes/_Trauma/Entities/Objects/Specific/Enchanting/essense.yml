@@ -1,7 +1,29 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [BaseItem, BaseMagicalContraband]
+  parent: [ BaseItem, SolutionFood, SolutionTiny, BaseMagicalContraband ]
+  abstract: true
+  id: BaseSoulFragment
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Enchanting/demonsoul.rsi
+    state: icon
+  - type: Item
+    size: Small
+    sprite: _Trauma/Objects/Enchanting/demonsoul.rsi
+  - type: SolutionSpiker
+    sourceSolution: food
+    ignoreEmpty: true
+  - type: ScoopableSolution
+    solution: food
+  - type: Extractable
+    grindableSolutionName: food
+  - type: GuideHelp
+    guides:
+    - Enchanting
+
+- type: entity
+  parent: BaseSoulFragment
   id: DemonSoulFragment
   name: demonic soul fragment
   description: The soul of a demon, can be made into a magical ink by mixing it into a full blood vial.
@@ -12,20 +34,26 @@
   - type: Item
     size: Small
     sprite: _Trauma/Objects/Enchanting/demonsoul.rsi
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Ash
+        Quantity: 5
+      - ReagentId: UnholyOil
+        Quantity: 5
+      - ReagentId: LiquidSoul
+        Quantity: 5
   - type: PointLight
     enabled: true
     radius: 2
     energy: 1
     color: "#9a0000"
-  - type: GuideHelp
-    guides:
-    - Enchanting
   - type: Tag
     tags:
     - DemonEssense
 
 - type: entity
-  parent: [BaseItem, BaseMagicalContraband]
+  parent: BaseSoulFragment
   id: PurifiedDemonSoulFragment
   name: purified soul fragment
   description: The purified soul of a demon, can be made into a magical ink by mixing it into a full blood vial.
@@ -34,8 +62,16 @@
     sprite: _Trauma/Objects/Enchanting/purifieddemonsoul.rsi
     state: icon
   - type: Item
-    size: Small
     sprite: _Trauma/Objects/Enchanting/purifieddemonsoul.rsi
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Ash
+        Quantity: 5
+      - ReagentId: HolyOil
+        Quantity: 5
+      - ReagentId: LiquidSoul
+        Quantity: 5
   - type: PointLight
     enabled: true
     radius: 2

@@ -91,3 +91,55 @@
     maxTotalIntensity: 12
     intensitySlope: 2
     maxIntensity: 3
+
+- type: reaction
+  id: LiquidSoulSynthesis
+  reactants:
+    Cognizine:
+      amount: 15
+    Unliquid:
+      amount: 5
+    Ash:
+      amount: 7
+    Fat:
+      amount: 3
+    Blood: 
+      amount: 10
+    Wine:
+      amount: 2
+    Fluorine:
+      amount: 3
+  products:
+    LiquidSoul: 1
+
+- type: reaction
+  id: DemonSoulSolidification
+  reactants:
+    UnholyOil:
+      amount: 5
+    LiquidSoul:
+      amount: 5
+    Fat:
+      amount: 4
+    UniversalEnzyme: # It really is universal!
+      amount: 1
+      catalyst: true
+  effects:
+  - !type:SpawnEntity
+      entity: DemonSoulFragment
+
+- type: reaction
+  id: PureSoulSolidification
+  reactants:
+    HolyOil:
+      amount: 5
+    LiquidSoul:
+      amount: 5
+    Fat:
+      amount: 4
+    UniversalEnzyme:
+      amount: 1
+      catalyst: true
+  effects:
+  - !type:SpawnEntity
+      entity: PurifiedDemonSoulFragment

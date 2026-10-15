@@ -103,7 +103,7 @@
   id: ClearCorn
 
 - type: Tag
-  id: DemonEssense
+  id: DemonEssense # Demon soul fragment, enchanting stuff.
 
 - type: Tag
   id: DrillHead # for drills durability repair whitelist
@@ -242,7 +242,7 @@
   id: Placeholder
 
 - type: Tag
-  id: PurifiedDemonEssense
+  id: PurifiedDemonEssense # Purified demon essense, enchanting stuff*
 
 ## Q ##
 

@@ -15,12 +15,6 @@
   - type: Damageable
   - type: Injurable
     damageContainer: Inorganic
-  - type: Explosive
-    explosionType: Molotov
-    totalIntensity: 1
-    intensitySlope: 5
-    maxIntensity: 1
-    canCreateVacuum: false
   - type: Destructible
     thresholds:
     - trigger:

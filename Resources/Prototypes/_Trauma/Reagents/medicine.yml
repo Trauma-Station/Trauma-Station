@@ -99,15 +99,14 @@
   desc: reagent-desc-unliquid
   physicalDesc: reagent-physical-desc-unholy
   flavor: unholy
-  color: "#ff00ff"
+  color: purple
   worksOnTheDead: true # fix surgical fuckups i guess??? lmao
   metabolisms:
     Bloodstream:
-      metabolismRate: 0.05
       effects:
       - !type:HealthChange
           conditions:
           damage:
             types:
-              Ballistic: 1
-              Poison: -2
+              Ballistic: 5
+              Poison: -10

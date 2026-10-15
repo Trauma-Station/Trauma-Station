@@ -84,3 +84,9 @@ reagent-desc-unholywater = Water desecrated by an unholy ritual, it is unnatural
 
 reagent-name-unholy-oil = unholy oil
 reagent-desc-unholy-oil = Desecrated oil that can burn hot, and if you're (un)lucky, open a portal to hell!
+
+reagent-name-unliquid = unliquid
+reagent-desc-unliquid = The incomprehensible mess resulting from improper mixing of holy and unholy chemicals.
+
+reagent-name-liquid-soul = liquid soul
+reagent-desc-liquid-soul = A disgusting vicious ichor made from the soul of a corrupted spirt
