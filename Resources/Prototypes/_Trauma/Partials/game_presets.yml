@@ -46,6 +46,7 @@
 
 - type: gamePreset
   id: Nukeops
+  minPlayers: 20
   rules:
   - !Remove SubGamemodesRuleNoWizard
   - BasicAntagEventScheduler
@@ -53,6 +54,7 @@
 
 - type: gamePreset
   id: Revolutionary
+  minPlayers: 20
   rules:
   - !Remove SubGamemodesRuleNoWizard
   - SubGamemodesRule

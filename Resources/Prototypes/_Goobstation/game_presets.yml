@@ -137,6 +137,7 @@
   name: honkops-title
   description: honkops-description
   showInVote: false
+  minPlayers: 40
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler

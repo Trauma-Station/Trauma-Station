@@ -27,6 +27,7 @@
   name: heretics-title
   description: heretics-description
   showInVote: false
+  minPlayers: 15
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler
@@ -45,6 +46,7 @@
   name: shadowling-title
   description: shadowling-description
   showInVote: false
+  minPlayers: 35
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler
@@ -63,6 +65,7 @@
   name: spies-title
   description: spies-description
   showInVote: false
+  minPlayers: 15
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler

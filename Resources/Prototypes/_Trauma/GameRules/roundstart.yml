@@ -203,3 +203,13 @@
       range:
         min: 1
         max: 4
+
+- type: entity
+  abstract: true
+  parent: BaseTraitorRuleNoObjectives
+  id: BaseTraitorRule
+  components:
+  - type: AntagRandomObjectives
+    sets:
+    - groups: TraitorObjectiveGroups
+    maxDifficulty: 5
