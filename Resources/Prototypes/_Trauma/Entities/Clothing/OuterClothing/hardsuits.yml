@@ -1,0 +1,41 @@
+#ANTAG HARDSUITS
+#Freedom fighter hardsuit
+- type: entity
+  parent: [ClothingOuterHardsuitBase, BaseMajorContraband]
+  id: ClothingOuterHardsuitFreedomFighter
+  name: freedom fighter hardsuit
+  description: A modified spationaut hardsuit embedded with plasteel armor plating and a paint job that represents freedom from corporate governance.
+  components:
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+  - type: ModifyDelayedKnockdown
+    delayDelta: 3
+    knockdownTimeDelta: -3
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Hardsuits/freeman.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Hardsuits/freeman.rsi
+  - type: PressureProtection
+    highPressureMultiplier: 0.02
+    lowPressureMultiplier: 1000
+  - type: ClothingSpeedModifier
+    walkModifier: 0.8
+    sprintModifier: 0.8
+  - type: Armor
+    traumaDeductions:
+      Dismemberment: 0.3
+      OrganDamage: 0.3
+      BoneDamage: 0.3
+      VeinsDamage: 0
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.6
+        Ballistic: 0.6
+        Heat: 0.6
+        Radiation: 0.2
+      flatReductions:
+        Ballistic: 2
+  - type: ExplosionResistance
+    damageCoefficient: 0.4

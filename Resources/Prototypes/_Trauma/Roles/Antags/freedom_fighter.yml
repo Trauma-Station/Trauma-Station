@@ -27,7 +27,7 @@
   id: FreedomFighter
   equipment:
     jumpsuit: ClothingUniformJumpsuitTacticool
-    outerClothing: ClothingOuterHardsuitSpatio # Change this
+    outerClothing: ClothingOuterHardsuitFreedomFighter
     back: ClothingBackpackDuffelSalvage
     ears: ClothingHeadsetAltDefector
     gloves: ClothingHandsGlovesCombat
