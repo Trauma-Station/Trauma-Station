@@ -38,6 +38,7 @@
 
 - type: gamePreset
   id: Traitor
+  minPlayers: 15
   rules:
   - !Remove SubGamemodesRuleNoWizard
   - SubGamemodesRule
@@ -63,6 +64,7 @@
 
 - type: gamePreset
   id: Wizard
+  minPlayers: 10
   alias:
   - wiz
   rules:
@@ -72,6 +74,7 @@
 
 - type: gamePreset
   id: Xenoborgs
+  minPlayers: 35
   rules:
   - !Remove MeteorSwarmScheduler
   - !Remove SubGamemodesRuleNoWizardNoXenoborg
@@ -81,6 +84,7 @@
 
 - type: gamePreset
   id: Zombie
+  minPlayers: 20
   rules:
   - BasicAntagEventScheduler
   - ModerateAntagEventScheduler

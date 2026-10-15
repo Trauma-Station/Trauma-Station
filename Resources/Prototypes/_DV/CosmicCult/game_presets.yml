@@ -7,6 +7,7 @@
   name: cosmiccult-title
   description: cosmiccult-description
   showInVote: false
+  minPlayers: 25
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler

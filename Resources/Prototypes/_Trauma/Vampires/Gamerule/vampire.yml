@@ -54,6 +54,7 @@
   name: vampire-preset-title
   description: vampire-preset-description
   showInVote: false
+  minPlayers: 20
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler

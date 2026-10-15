@@ -9,6 +9,7 @@
   name: changeling-gamemode-title
   description: changeling-gamemode-description
   showInVote: false
+  minPlayers: 20
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler
@@ -120,6 +121,7 @@
   name: blob-title
   description: blob-description
   showInVote: false
+  minPlayers: 40
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler
