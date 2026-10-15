@@ -36,6 +36,8 @@
 - type: entity
   id: Truncheon
   components:
+  - type: Sprite
+    rotation: 90
   - type: WeaponClass
     class: Bludgeon
   - type: KnowledgeGrantOnWear
