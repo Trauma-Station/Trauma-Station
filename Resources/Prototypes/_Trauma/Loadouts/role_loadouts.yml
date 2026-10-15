@@ -52,3 +52,10 @@
   - DClassEnvirosuit
   - DClassEnvirogloves
   - ExclusiveItems
+
+- type: roleLoadout
+  id: RoleSurvivalAntagSmall
+  groups:
+  - SurvivalExtended
+  - GroupSpeciesBreathTool
+  - GroupPocketTankDouble

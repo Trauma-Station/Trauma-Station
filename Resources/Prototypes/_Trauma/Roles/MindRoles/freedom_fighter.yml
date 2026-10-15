@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseMindRoleAntag
+  id: MindRoleFreedomFighter
+  name: Freedom Fighter Role
+  components:
+  - type: MindRole
+    roleType: TeamAntagonist
+    subtype: role-subtype-freedom-fighter
+    exclusiveAntag: true
+    antagPrototype: FreedomFighter
+  - type: FreedomFighterRole
+  - type: RoleEffects
+    singleUse: true
+    added:
+    - !type:NestedEffect
+      proto: FreedomFighterSkills

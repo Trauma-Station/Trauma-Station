@@ -101,6 +101,18 @@
       FirstAidKnowledge: 25
 
 - type: entityEffect
+  id: FreedomFighterSkills
+  effects:
+  - !type:GrantSkills
+    skills:
+      MeleeKnowledge: 50
+      ShootingKnowledge: 50
+      WeaponsKnowledge: 50
+      ThrowingKnowledge: 50
+      FirstAidKnowledge: 50
+      LiteracyKnowledge: 35 # Media literacy, that is!
+
+- type: entityEffect
   id: SlaughterDemonSkills
   effects:
   - !type:GrantSkills

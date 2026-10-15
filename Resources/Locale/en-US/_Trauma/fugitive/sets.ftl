@@ -33,3 +33,26 @@ fugitive-set-communicator-description =
     Never get caught! Listen in on the station, on your hunters with this kit and potentially confuse them.
     Contains: station master encryption key, a freelancer encryption key, a syndicate encryption key,
     a chameleon voice mask and a chameleon headset.
+
+freedom-set-untouchable-description =
+    Not every mission goes flawlessly, always be prepared to rebound.
+    It's time to put those feds to shame.
+    Includes: Freedom implanter, storage implanter,
+    and a telescopic shield.
+
+freedom-set-treatment-description =
+    What is the hippocratic oath if not the oath of a hypocrite?
+    We are free to take whatever stimulants we want.
+    Includes: Three ephedrine syringes, three combat medipens,
+    and a compact defibrillator.
+
+freedom-set-squatting-description =
+    These tools will surely help you declare your place.
+    After all, property is a social construct.
+    Includes: Recharging holobarrier projector, jaws of life,
+    experimental welding tool, meson goggles, and crafting skill chip.
+
+freedom-set-terror-description =
+    Airlocks are a government psyop to make you think you can't
+    go wherever you want.
+    Includes: Three seismic charges and an EMP implanter.

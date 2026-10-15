@@ -27,3 +27,14 @@
     sprite: _Trauma/Clothing/Ears/Headsets/spacepol.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Ears/Headsets/spacepol.rsi
+
+- type: entity
+  parent: ClothingHeadsetAltFreelancer
+  id: ClothingHeadsetAltDefector
+  name: defector's over-ear headset
+  components:
+  - type: ContainerFill
+    containers:
+      key_slots:
+      - EncryptionKeyFreelance
+      - EncryptionKeyCommon

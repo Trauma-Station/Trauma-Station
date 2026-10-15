@@ -172,3 +172,22 @@
     rules: ghost-role-information-wraith-rules
     mindRoles:
     - MindRoleGhostRoleSoloAntagonist
+
+- type: entity
+  parent: BaseAntagSpawner
+  id: GhostRoleSpawnerFreedomFighter
+  name: freedom fighter ghost role spawner
+  components:
+  - type: GhostRole
+    name: roles-antag-freedom-fighter-name
+    description: roles-antag-freedom-fighter-objective
+    rules: ghost-role-information-rules-team-antagonist
+    mindRoles:
+    - MindRoleFreedomFighter
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+    - state: salvagespecialist
+    - sprite: Clothing/Mask/gas.rsi # Change this
+      state: icon

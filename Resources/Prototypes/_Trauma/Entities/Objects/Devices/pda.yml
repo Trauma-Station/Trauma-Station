@@ -161,3 +161,11 @@
   - type: PdaBorderColor
     borderColor: "#eb7732"
     accentHColor: "#2e2e2e"
+
+- type: entity
+  parent: ChameleonPDA
+  id: FreedomFighterPDA
+  name: freedom fighter PDA
+  components:
+  - type: Pda
+    id: FreedomFighterIDCardChameleon
