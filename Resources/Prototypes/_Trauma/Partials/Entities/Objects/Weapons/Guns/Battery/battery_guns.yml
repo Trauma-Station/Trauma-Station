@@ -36,9 +36,9 @@
   id: BaseWeaponPowerCell
   parent: BaseStockHit
   components:
-  - type: Cautery # Shitmed
+  - type: Cautery
     speed: 0.9
-  - type: SurgeryTool # Shitmed
+  - type: SurgeryTool
     endSound:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
   - type: AlwaysHot

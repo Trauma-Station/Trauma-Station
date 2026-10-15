@@ -2,8 +2,8 @@
 
 - type: entity
   abstract: true
-  id: BaseWeaponSubMachineGun
   parent: BaseStockHit
+  id: BaseWeaponSubMachineGun
   components:
   - type: WeaponClass
     class: SMG

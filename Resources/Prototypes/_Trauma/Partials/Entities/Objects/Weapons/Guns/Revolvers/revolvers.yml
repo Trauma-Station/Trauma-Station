@@ -32,8 +32,8 @@
   - type: RevolverAmmoProvider
     whitelist:
       tags:
-        - CartridgeMagnum
-        - SpeedLoaderMagnum
+      - CartridgeMagnum
+      - SpeedLoaderMagnum
     proto: CartridgeMagnumAP
     capacity: 7
     chambers: [ True, True, True, True, True, True, True ]
@@ -42,14 +42,6 @@
       path: /Audio/Weapons/Guns/MagOut/revolver_magout.ogg
     soundInsert:
       path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
-
-- type: entity
-  parent: WeaponRevolverMateba
-  id: WeaponRevolverMatebaAP # For deathsquad
-  suffix: armor-piercing
-  components:
-  - type: RevolverAmmoProvider
-    proto: CartridgeMagnumAP
 
 - type: entity
   id: WeaponRevolverPython
