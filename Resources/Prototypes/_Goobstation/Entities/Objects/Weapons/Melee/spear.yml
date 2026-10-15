@@ -102,6 +102,7 @@
   - type: StaticPrice
     price: 5000
   - type: IllusionOnMeleeHit
+  - type: IllusionSpawner
     factionWhitelist:
     - Assistant
     components:

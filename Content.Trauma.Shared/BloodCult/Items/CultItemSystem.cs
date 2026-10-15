@@ -6,10 +6,10 @@ using Content.Shared.Interaction;
 using Content.Shared.Inventory.Events;
 using Content.Shared.Popups;
 using Content.Shared.Stunnable;
-using Content.Shared.Throwing;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Blocking;
 using Content.Trauma.Common.Hands;
+using Content.Trauma.Shared.Illusion;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.BloodCult.Items;
@@ -22,6 +22,7 @@ public sealed partial class CultItemSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private EntityQuery<GhostComponent> _ghostQuery = default!;
+    [Dependency] private EntityQuery<IllusionComponent> _illusionQuery = default!;
 
     [SubscribeLocalEvent]
     private void OnActivate(Entity<CultItemComponent> item, ref ActivateInWorldEvent args)
@@ -81,5 +82,5 @@ public sealed partial class CultItemSystem : EntitySystem
     }
 
     private bool CanUse(EntityUid uid)
-        => _ghostQuery.HasComp(uid) || _cult.IsCultist(uid);
+        => _ghostQuery.HasComp(uid) || _illusionQuery.HasComp(uid) || _cult.IsCultist(uid);
 }

@@ -233,6 +233,9 @@
     targetBlacklist:
       components:
       - BloodCultMember
+    targetWhitelist:
+      components:
+      - MobState
   - type: BlockContextMenu
     whitelist:
       components:

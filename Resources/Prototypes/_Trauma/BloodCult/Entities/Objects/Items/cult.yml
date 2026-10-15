@@ -74,21 +74,21 @@
 - type: entity
   parent: [ BaseShield, BaseBloodContraband ]
   id: MirrorShieldCult
-  description: An infamous shield used by Nar'Sien sects to confuse and disorient their enemies. Its edges are weighted for use as a throwing weapon - capable of disabling multiple foes with preternatural accuracy.
+  name: mirror shield
+  description: An infamous shield used by Nar'Sien sects to confuse and disorient their enemies.
   components:
   - type: Sprite
     sprite: _Trauma/BloodCult/Entities/Items/mirror_shield.rsi
     state: icon
   - type: Item
+    sprite: _Trauma/BloodCult/Entities/Items/mirror_shield.rsi
+    heldPrefix: mirror
     size: Ginormous
   - type: CultItem
-  - type: StunOnCollide
-    blacklist:
-      components:
-      - BloodCultMember
   - type: Parry
-    parryExhaustionCost: 0.3
-    reflectExhaustionCost: 0.1
+    reflectExhaustionCost: 0.15
+    reflects:
+    - Energy
   - type: Blocking
     passiveBlockModifier:
       coefficients:
@@ -120,3 +120,17 @@
       - !type:PlaySoundBehavior
         sound:
           collection: GlassBreak
+  - type: IllusionOnParry
+  - type: IllusionSpawner
+    chance: 0.2
+    ignoreSameFactionTargets: true
+    factionWhitelist:
+    - BloodCult
+    components:
+    - type: NPCRetaliation
+      attackMemoryLength: 10
+    - type: GroupRetaliation
+      range: 8
+    - type: NpcFactionMember
+      factions:
+      - BloodCult
