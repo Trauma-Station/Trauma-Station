@@ -94,3 +94,11 @@
   rules:
   - BasicAntagEventScheduler
   - ModerateAntagEventScheduler
+
+- type: gamePreset
+  id: Deathmatch
+  minPlayers: 0
+
+- type: gamePreset
+  id: Sandbox
+  minPlayers: 0
