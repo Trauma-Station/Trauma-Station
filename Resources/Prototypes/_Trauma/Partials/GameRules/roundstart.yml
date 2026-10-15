@@ -4,7 +4,7 @@
   id: SubGamemodesRule
   components:
   - type: SubGamemodes
-    rules: !Clear
+    rules:
     - id: SubHeretic
       prob: 0.1
     - id: Devil
@@ -49,7 +49,7 @@
   id: SubGamemodesRuleNoXenoborg
   components:
   - type: SubGamemodes
-    rules: !Clear
+    rules:
     - id: SubHeretic
       prob: 0.2
     - id: Devil
