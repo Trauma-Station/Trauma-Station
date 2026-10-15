@@ -21,3 +21,21 @@
     radius: 2.0
     energy: 7.0
   - type: BloodBoilProjectile
+
+- type: entity
+  parent: BaseBullet
+  id: BloodBoltProjectile
+  name: blood bolt
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Items/arcane_barrage.rsi
+    state: bullet
+  - type: Projectile
+    damage:
+      types:
+        Ballistic: 16
+  - type: PreventCollide
+    whitelist:
+      components:
+      - BloodCultMember

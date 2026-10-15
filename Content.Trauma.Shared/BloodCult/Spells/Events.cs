@@ -2,8 +2,9 @@
 
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
+using Content.Shared.FixedPoint;
 using Content.Trauma.Common.Inventory;
-using Robust.Shared.Audio;
+using Content.Trauma.Shared.BloodCult.BloodRites;
 
 namespace Content.Trauma.Shared.BloodCult.Spells;
 
@@ -53,3 +54,15 @@ public sealed partial class TeleportActionDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
 public sealed partial class BloodRitesExtractDoAfterEvent : SimpleDoAfterEvent;
+
+/// <summary>
+/// Raised on an entity targeted by blood rites attempting to drain blood from it
+/// </summary>
+[ByRefEvent]
+public record struct BloodRitesDrainEvent(Entity<BloodRitesAuraComponent> Rites, EntityUid User, bool Handled = false);
+
+/// <summary>
+/// Raised on an item created by using blood rites spell
+/// </summary>
+[ByRefEvent]
+public readonly record struct BloodRitesItemCreatedEvent(FixedPoint2 Cost, FixedPoint2 RemainingBlood);
