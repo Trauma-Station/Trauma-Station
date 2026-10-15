@@ -15792,3 +15792,10 @@ Entries:
   id: 1716
   time: '2026-10-15T14:11:50.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5039
+- author: StarMade
+  changes:
+  - type: Fix
+    message: Evil bunny now actually solo antagonist.
+  id: 1717
+  time: '2026-10-15T19:40:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5049
