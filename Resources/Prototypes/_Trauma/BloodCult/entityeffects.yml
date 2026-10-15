@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entityEffect
+  id: CultCombatMarkTriggerEffect
+  effects:
+  - !type:TakeStaminaDamage
+    amount: 60
+    immediate: true
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectMuted
+    time: 16
+  - !type:PlaySoundEffect
+    sound:
+      path: /Audio/_Goobstation/Heretic/repulse.ogg
+    positional: false

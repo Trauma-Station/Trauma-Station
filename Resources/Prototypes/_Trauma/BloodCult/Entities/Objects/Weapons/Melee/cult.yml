@@ -1,22 +1,20 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseItem, BaseBloodContraband ]
+  parent: [ BaseSword, BaseBloodContraband ]
   id: EldritchLongsword
   name: eldritch longsword
   description: A sword humming with unholy energy. It glows with a dim red light.
   components:
-  - type: Sharp
   - type: Sprite
     sprite: _Trauma/BloodCult/Entities/Items/Weapons/cult_blade.rsi
     state: icon
   - type: MeleeWeapon
     wideAnimationRotation: -135
-    attackRate: 0.75
     range: 1.65
     damage:
       types:
-        Slash: 24
+        Slash: 20
     heavyStaminaCost: 10
     angle: 90
     soundHit:
@@ -24,8 +22,10 @@
   - type: Item
     size: Huge
   - type: Clothing
+    # TODO: sprite...
     slots:
     - back
+    - suitStorage
   - type: DisarmMalus
   - type: CultItem
   - type: PointLight
@@ -34,30 +34,31 @@
     softness: 1
 
 - type: entity
-  parent: [ BaseItem, BaseBloodContraband ]
+  parent: [ BaseItem, SolutionSpear, BaseBloodContraband ]
   id: BloodSpear
-  name: blood halberd
+  name: blood spear
   description: A sickening spear composed entirely of crystallized blood.
   components:
   - type: Sprite
     sprite: _Trauma/BloodCult/Entities/Items/Weapons/cult_spear.rsi
     state: icon
   - type: EmbeddableProjectile
-    offset: 0.15,0.15
+    offset: -0.15,0.0
   - type: ThrowingAngle
     angle: 225
+  - type: LandAtCursor
   - type: Fixtures
     fixtures:
       fix1:
         shape: !type:PolygonShape
           vertices:
-          - -0.20,-0.10
-          - -0.10,-0.20
+          - -0.08,-0.06
+          - -0.06,-0.08
           - 0.40,0.30
           - 0.30,0.40
         density: 20
         mask:
-        - BulletImpassable
+        - ItemMask
         restitution: 0.3
         friction: 0.2
   - type: Sharp
@@ -65,7 +66,7 @@
     wideAnimationRotation: -135
     damage:
       types:
-        Piercing: 36
+        Piercing: 30
     angle: 0
     animation: WeaponArcThrust
     soundHit:
@@ -75,7 +76,7 @@
   - type: DamageOtherOnHit
     damage:
       types:
-        Piercing: 40
+        Piercing: 30
   - type: Item
     sprite: _Trauma/BloodCult/Entities/Items/Weapons/cult_spear.rsi
     storedRotation: 44
@@ -90,11 +91,79 @@
   - type: IncreaseDamageOnWield
     damage:
       types:
-        Piercing: 8
+        Piercing: 10
   - type: UseDelay
   - type: DisarmMalus
   - type: CultItem
-  - type: BloodSpear
+  - type: WeaponClass
+    class: Polearm
+  - type: RecallableItem
+    actionId: ActionBloodSpearRecall
+    userWhitelist:
+      components:
+      - BloodCultist
+  - type: TriggerOnThrowDoHit
+  - type: EmitSoundOnTrigger
+    sound:
+      collection: GlassBreak
+    positional: true
+    predicted: false
+  - type: DeleteOnTrigger
+  - type: GenericTriggerCondition
+    checkUser: true
+    condition: !type:AllConditions
+      conditions:
+      - !type:ProtectedByNullRodCondition
+        inverted: true
+      - !type:WhitelistCondition
+        whitelist:
+          components:
+          - MobState
+        blacklist:
+          components:
+          - BloodCultMember
+  - type: EntityEffectOnTrigger
+    targetUser: true
+    effects:
+    - !type:ModifyParalysis
+      time: 4
+
+- type: entity
+  parent: [ BaseItem, BaseBloodContraband ]
+  id: BloodOrb
+  name: blood orb
+  description: A solid orb of crystalized blood, likely taken unwillingly. The orb can be used to transfer vitae between the faithful.
+  components:
+  - type: Item
+    size: Tiny
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Items/summoning_orb.rsi
+    state: icon
+  - type: PointLight
+    enabled: true
+    radius: 2
+    energy: 1
+    color: Red
+  - type: BloodOrb
+
+- type: entity
+  parent: [ ArcaneBarrage, BaseBloodContraband ]
+  id: BloodBoltBarrage
+  name: blood bolt barrage
+  description: A crackling orb of blood-red energy, straining for the chance to kill. Simply point at the target, and let it loose.
+  components:
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Items/arcane_barrage.rsi
+    state: icon
+  - type: PointLight
+    color: Red
+  - type: BasicEntityAmmoProvider
+    proto: BloodBoltProjectile
+    capacity: 25
+  - type: Gun
+    fireRate: 2
+    soundGunshot:
+      path: /Audio/_Goobstation/Wizard/wand_teleport.ogg
 
 - type: entity
   parent: [ BaseItem, BaseBloodContraband ]
@@ -109,12 +178,29 @@
     damage:
       types:
         Blunt: 0
-    heavyStaminaCost: 0
+    resetOnHandSelected: false
+    canWideSwing: false
+    canMiss: false
+    canBeParried: false
   - type: Unremoveable
+  - type: DeleteOnDropAttempt
+  - type: TouchSpell # Handles healing cultists/constructs
+    deleteOnInvoke: false
+    canUseOnSelf: true
+    speech: blood-cult-action-blood-rites
+    sound:
+      path: /Audio/_Trauma/BloodCult/rites.ogg
+      params:
+        volume: -3
+    targetWhitelist:
+      components:
+      - BloodCultMember
   - type: BloodRitesAura
     crafts:
+      BloodOrb: 50
       BloodSpear: 300
-      # TODO: blood beam, blood bolt barrage
+      BloodBoltBarrage: 500
+      # TODO: blood beam
   - type: UserInterface
     interfaces:
       enum.BloodRitesUiKey.Key:
@@ -123,3 +209,88 @@
     key: enum.BloodRitesUiKey.Key
     inHandsOnly: true
     requireActiveHand: false
+  - type: PointLight
+    enabled: true
+    radius: 2
+    energy: 1
+    color: Red
+  - type: UseDelay
+    delay: 0.5
+
+- type: entity
+  parent: [ BaseItem, BaseBloodContraband ]
+  id: StunningAura
+  name: stunning aura
+  description: Will knock down and mute a victim on contact. Strike them with a cult weapon to complete the invocation, stunning them and extending the mute.
+  components:
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Items/disintegrate.rsi
+    state: icon
+  - type: Unremoveable
+  - type: DeleteOnDropAttempt
+  - type: TouchSpell
+    speech: blood-cult-action-stun
+    targetBlacklist:
+      components:
+      - BloodCultMember
+    targetWhitelist:
+      components:
+      - MobState
+  - type: BlockContextMenu
+    whitelist:
+      components:
+      - MobState
+  - type: TouchSpellEffects
+    conditions:
+    - !type:WhitelistCondition
+      blacklist:
+        components:
+        - Stunned
+    effects:
+    - !type:IfElse
+      # Borgs get hardstunned, other mobs are knocked down and marked
+      condition: !type:WhitelistCondition
+        whitelist:
+          components:
+          - BorgChassis
+      trueEffects:
+      - !type:ModifyParalysis
+        time: 16
+      falseEffects:
+      - !type:TakeStaminaDamage
+        amount: 40
+        immediate: true
+      - !type:ModifyKnockdown
+        drop: true
+        time: 5
+      - !type:ModifyStatusEffect
+        effectProto: StatusEffectMuted
+        time: 16
+      - !type:AddComponents
+        replaceExisting: true
+        components:
+        - type: BloodCultCombatMark
+      - !type:RelayUser
+        effects:
+        - !type:ChatMessage
+          channel: Server
+          message: "Stun mark applied! Stab them with a dagger, sword or blood spear to stun them fully!"
+          color: red
+    - !type:SpawnEntity
+      entity: SanguineFlashEffect
+  - type: MeleeWeapon
+    clickAttackWhitelist:
+      components:
+      - MobState
+    resetOnHandSelected: false
+    canWideSwing: false
+    canMiss: false
+    canBeParried: false
+    damage:
+      types:
+        Heat: 0
+  - type: PointLight
+    enabled: true
+    radius: 2
+    energy: 1
+    color: Red

@@ -3,6 +3,8 @@
 using Content.Goobstation.Common.Religion;
 using Content.Shared.Actions;
 using Content.Shared.Chat;
+using Content.Shared.EntityConditions;
+using Content.Shared.EntityEffects;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
@@ -22,17 +24,22 @@ public sealed partial class TouchSpellSystem : EntitySystem
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
 
-    public override void Initialize()
+    [SubscribeLocalEvent]
+    private void OnEffects(Entity<TouchSpellEffectsComponent> ent, ref TouchSpellUsedEvent args)
     {
-        base.Initialize();
+        if (!_conditions.TryConditions(args.Target, ent.Comp.Conditions))
+            return;
 
-        SubscribeLocalEvent<TouchSpellComponent, AfterInteractEvent>(OnAfterInteract);
-        SubscribeLocalEvent<TouchSpellComponent, MeleeHitEvent>(OnMelee);
+        if (ent.Comp.Effects is { } effects)
+            _effects.ApplyEffects(args.Target, effects, user: args.User);
 
-        SubscribeLocalEvent<TouchSpellEvent>(OnTouchSpell);
+        args.Invoke = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnTouchSpell(TouchSpellEvent args)
     {
         var ev = new BeforeTouchSpellAbilityUsedEvent(args);
@@ -52,6 +59,7 @@ public sealed partial class TouchSpellSystem : EntitySystem
         RaiseLocalEvent(args.Action, ref ev2);
     }
 
+    [SubscribeLocalEvent]
     private void OnMelee(Entity<TouchSpellComponent> ent, ref MeleeHitEvent args)
     {
         if (!args.IsHit || args.HitEntities.Count == 0)
@@ -67,6 +75,7 @@ public sealed partial class TouchSpellSystem : EntitySystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnAfterInteract(Entity<TouchSpellComponent> ent, ref AfterInteractEvent args)
     {
         if (args is not { Handled: false, CanReach: true, Target: { } target })
@@ -159,7 +168,7 @@ public sealed partial class TouchSpellSystem : EntitySystem
             cooldownOverride ?? ent.Comp.Cooldown,
             predicted);
 
-        if (cooldownOverride != TimeSpan.Zero)
+        if (ent.Comp.DeleteOnInvoke && cooldownOverride != TimeSpan.Zero)
             PredictedQueueDel(ent);
     }
 
