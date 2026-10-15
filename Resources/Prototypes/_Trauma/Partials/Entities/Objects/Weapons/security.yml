@@ -37,7 +37,7 @@
   id: Truncheon
   components:
   - type: Sprite
-    rotation: 180
+    rotation: 90
   - type: WeaponClass
     class: Bludgeon
   - type: KnowledgeGrantOnWear
