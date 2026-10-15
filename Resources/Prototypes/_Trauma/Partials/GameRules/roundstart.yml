@@ -186,7 +186,7 @@
   id: Wizard
   components:
   - type: GameRule
-    minPlayers: 30 # Trauma - was 10
+    minPlayers: 30
 
 - type: entity
   abstract: true
@@ -197,7 +197,7 @@
 
 - type: entityTable
   id: BasicGameRulesTable
-  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+  table: !type:AllSelector
     children: !Clear
     - !type:NestedSelector
       tableId: BasicCalmEventsTable
@@ -210,7 +210,7 @@
 
 - type: entityTable
   id: DynamicGameRulesTable
-  table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
+  table: !type:AllSelector
     children:
     - !type:NestedSelector
       tableId: BasicCalmEventsTable
