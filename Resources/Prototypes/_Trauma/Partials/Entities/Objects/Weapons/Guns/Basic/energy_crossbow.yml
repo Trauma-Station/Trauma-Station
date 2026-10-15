@@ -2,8 +2,8 @@
 
 - type: entity
   abstract: true
-  id: WeaponEnergyCrossbowBase
   parent: BasePistolWhip
+  id: WeaponEnergyCrossbowBase
   components:
   - type: WeaponClass
     class: Pistol

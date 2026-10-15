@@ -26,7 +26,7 @@
   - type: MeleeWeapon
     damage:
       types:
-       Blunt: 8 # pistol whip
+        Blunt: 8 # pistol whip
     angle: 0
     wideAnimationRotation: 90
     soundHit:

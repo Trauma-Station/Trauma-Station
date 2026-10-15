@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: BaseWeaponBatteryNoAmmoCounter
   parent: BaseStockHit
+  id: BaseWeaponBatteryNoAmmoCounter
   components:
   - type: EmitSoundOnPickup
     sound:
@@ -25,16 +25,19 @@
     class: Laser
 
 - type: entity
-  id: BaseWeaponBatterySmall
+  abstract: true
   parent: [BaseWeaponBatterySmallNoAmmoCounter, BasePistolWhip]
+  id: BaseWeaponBatterySmall
+
 
 - type: entity
-  id: BaseWeaponPowerCellSmall
+  abstract: true
   parent: BasePistolWhip
+  id: BaseWeaponPowerCellSmall
 
 - type: entity
-  id: BaseWeaponPowerCell
   parent: BaseStockHit
+  id: BaseWeaponPowerCell
   components:
   - type: Cautery
     speed: 0.9

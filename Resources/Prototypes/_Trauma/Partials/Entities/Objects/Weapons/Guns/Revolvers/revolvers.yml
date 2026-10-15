@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: BasePistolWhip
   id: BaseWeaponRevolver
-  parent: [BasePistolWhip]
   components:
   - type: WeaponClass
     class: Pistol
