@@ -25,7 +25,7 @@ public sealed partial class GamePresetPrototype : IPrototype
     public bool ShowInVote;
 
     [DataField]
-    public int? MinPlayers = 15; // Trauma - set to a default minimum of 15 to resolve some of the gamemode bullshit.
+    public int MinPlayers;
 
     [DataField]
     public int? MaxPlayers;
