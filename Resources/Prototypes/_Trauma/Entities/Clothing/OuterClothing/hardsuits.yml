@@ -1,5 +1,5 @@
-#ANTAG HARDSUITS
-#Freedom fighter hardsuit
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: [ClothingOuterHardsuitBase, BaseMajorContraband]
   id: ClothingOuterHardsuitFreedomFighter
