@@ -42,9 +42,8 @@ public sealed partial class HolyFlammableSystem : EntitySystem
 
     public static readonly ProtoId<DamageTypePrototype> Holy = "Holy";
 
-    private const float InitialGrowthRate = 0.7f;
-    private const float IntermediateGrowthRate = 0.4f;
-    private const float LateGrowthRate = 20.0f;
+    private const float DamageMultiplier = 1.0f;
+    private const float DamagePerStack = 0.12f;
 
     public override void Initialize()
     {
@@ -305,13 +304,8 @@ public sealed partial class HolyFlammableSystem : EntitySystem
 
     public float DamageCurve(HolyFlammableComponent flammable)
     {
-        float x = flammable.FireStacks;
-        return x switch
-        {
-            < 5 => x * InitialGrowthRate,
-            >= 5 and <= 20 => InitialGrowthRate * 5 + IntermediateGrowthRate * (x - 5),
-            _ => InitialGrowthRate * 5 + IntermediateGrowthRate * (20 - 5) + LateGrowthRate + (x - 5),
-        };
+        var x = MathF.Min(flammable.FireStacks, flammable.MaximumFireStacks);
+        return DamageMultiplier + x * DamagePerStack;
     }
 
     public override void Update(float frameTime)
