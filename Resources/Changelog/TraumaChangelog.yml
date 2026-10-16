@@ -15806,3 +15806,14 @@ Entries:
   id: 1718
   time: '2026-10-15T20:15:55.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5052
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added an additional loot drop to space leviathans there is now a reason to
+      try to kill it.
+  - type: Tweak
+    message: Reduced the health of space leviathans from 4000 hp to 1500 hp.
+  id: 1719
+  time: '2026-10-16T07:14:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5054
