@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: latheRecipe
+  id: TeleporterChipBlank
+  materials: !Clear
+    Steel: 50
+    Plastic: 50
+    Silver: 25
