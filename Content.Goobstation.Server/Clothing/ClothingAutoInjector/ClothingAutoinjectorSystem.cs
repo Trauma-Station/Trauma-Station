@@ -72,9 +72,9 @@ public sealed partial class ClothingAutoinjectorSystem : EntitySystem
 
     private void OnInject(EntityUid uid, ClothingAutoInjectComponent comp, InventoryRelayedEvent<ClothingAutoInjectRelayedEvent> args)
     {
-        if (args.Args.NewState != MobState.Critical
-        || comp.NextAutoInjectTime > _timing.CurTime)
-        return;
+        if (comp.AutoInjectOnCrit && args.Args.NewState != MobState.Critical && args.Args.NewState != MobState.SoftCrit
+            || comp.NextAutoInjectTime > _timing.CurTime)
+            return;
 
         TryInjectReagents(args.Args.Target, comp.Reagents);
         _audio.PlayPvs(comp.InjectSound, args.Args.Target);
