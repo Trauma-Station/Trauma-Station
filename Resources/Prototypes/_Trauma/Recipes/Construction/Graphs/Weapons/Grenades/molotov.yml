@@ -1,0 +1,67 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: constructionGraph
+  id: MolotovConstruction
+  graph:
+  - node: start
+    edges:
+    - to: UnlitMolotov
+      steps:
+        - material: Cloth
+          amount: 1
+          doAfter: 1
+      completed:
+        - !type:AdminLog
+          message: "Construction"
+          impact: High
+  - node: UnlitMolotov
+    entity: UnlitMolotov
+    edges:
+    - to: LitMolotov
+      steps:
+        - tool: Ignition
+          doAfter: 0
+      conditions:
+      - !type:MinSolution
+        solution: drink
+        reagent:
+          ReagentId: WeldingFuel
+        quantity: 20
+    - to: LitHolyMolotov
+      steps:
+        - tool: Ignition
+          doAfter: 0
+      conditions:
+      - !type:MinSolution
+        solution: drink
+        reagent:
+          ReagentId: HolyOil
+        quantity: 20
+    - to: LitUnholyMolotov
+      steps:
+        - tool: Ignition
+          doAfter: 0
+      conditions:
+      - !type:MinSolution
+        solution: drink
+        reagent:
+          ReagentId: UnholyOil
+        quantity: 20
+    - to: LitGlitchMolotov
+      steps:
+        - tool: Ignition
+          doAfter: 0
+      conditions:
+      - !type:MinSolution
+        solution: drink
+        reagent:
+          ReagentId: Unliquid
+        quantity: 20
+  - node: LitMolotov
+    entity: Molotov
+  - node: LitHolyMolotov
+    entity: HolyMolotov
+  - node: LitUnholyMolotov
+    entity: UnholyMolotov
+  - node: LitGlitchMolotov
+    entity: GlitchMolotov

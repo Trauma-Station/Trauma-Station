@@ -86,15 +86,25 @@
     intensitySlope: 0.5 # very high detonation velocity
     maxTotalIntensity: 100
 
-# chaplain stuff
+# demonologist stuff
 
 - type: reaction
-  id: CLF3toHolyCLF3
+  id: WaterToUnholyWater
   impact: Low
   requiredMixerCategories:
-  - Holy
+  - Unholy
   reactants:
-    ChlorineTrifluoride:
+    Water:
       amount: 1
   products:
-    HolyChlorineTrifluoride: 1
+    Unholywater: 1
+
+- type: reaction
+  id: AlchemicalPrecursorBurn
+  minTemp: 450
+  reactants:
+    AlchemicalPrecursor:
+      amount: 1
+  products:
+    Ash: 0.1
+    LiquidSoul: 0.1

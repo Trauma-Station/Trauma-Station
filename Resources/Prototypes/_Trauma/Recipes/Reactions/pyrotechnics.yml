@@ -84,3 +84,49 @@
       amount: 30
   products:
     UnknownReagent: 30
+
+- type: reaction
+  id: HolyOil
+  reactants:
+    Holywater:
+      amount: 1
+    WeldingFuel:
+      amount: 1
+  products:
+    HolyOil: 2
+
+- type: reaction
+  id: UnholyOil
+  reactants:
+    Unholywater:
+      amount: 1
+    WeldingFuel:
+      amount: 1
+  products:
+    UnholyOil: 2
+
+- type: reaction
+  id: BurniteAlternate
+  reactants:
+    ChlorineTrifluoride:
+      amount: 5
+    UnholyOil:
+      amount: 5
+    LiquidSoul:
+      amount: 5
+      catalyst: true
+  products:
+    Burnite: 5
+
+- type: reaction
+  id: HolyCLF3
+  reactants:
+    ChlorineTrifluoride:
+      amount: 5
+    HolyOil:
+      amount: 5
+    LiquidSoul:
+      amount: 5
+      catalyst: true
+  products:
+    HolyChlorineTrifluoride: 5

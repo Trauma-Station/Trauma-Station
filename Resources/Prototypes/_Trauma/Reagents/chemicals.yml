@@ -194,3 +194,11 @@
   desc: reagent-desc-calcium-hydroxide
   physicalDesc: reagent-physical-desc-powdery
   color: white
+
+- type: reagent
+  id: AlchemicalPrecursor
+  name: reagent-name-alchemical-precursor
+  desc: reagent-desc-alchemical-precursor
+  physicalDesc: reagent-physical-desc-shiny
+  contrabandSeverity: Magical
+  color: "#b9f2ff"

@@ -91,3 +91,22 @@
   tileReactions:
   - !type:ExtinguishTileReaction { }
   - !type:SpillIfPuddlePresentTileReaction { }
+
+- type: reagent
+  id: Unliquid
+  name: reagent-name-unliquid
+  group: Medicine
+  desc: reagent-desc-unliquid
+  physicalDesc: reagent-physical-desc-unholy
+  flavor: unholy
+  color: purple
+  worksOnTheDead: true # fix surgical fuckups i guess??? lmao
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+          conditions:
+          damage:
+            types:
+              Ballistic: 5
+              Poison: -10

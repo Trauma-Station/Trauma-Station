@@ -221,3 +221,50 @@
   theory:
     FabricationKnowledge: 0
   useQuality: false
+
+- type: construction
+  id: Molotov
+  graph: MolotovConstruction
+  targetNode: LitMolotov
+  category: construction-category-weapons
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+  practical:
+    WeaponsKnowledge: 2
+
+- type: construction
+  id: HolyMolotov
+  graph: MolotovConstruction
+  targetNode: LitHolyMolotov
+  category: construction-category-demonology
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+    MagicalLiteracyKnowledge: 0 # Literally just put holy oil in molotov
+  practical:
+    WeaponsKnowledge: 2
+
+- type: construction
+  id: UnholyMolotov
+  graph: MolotovConstruction
+  targetNode: LitUnholyMolotov
+  category: construction-category-demonology
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+    MagicalLiteracyKnowledge: 0
+  practical:
+    WeaponsKnowledge: 2
+
+- type: construction
+  id: GlitchMolotov
+  graph: MolotovConstruction
+  targetNode: LitGlitchMolotov
+  category: construction-category-demonology
+  objectType: Item
+  theory:
+    FabricationKnowledge: 1
+    MagicalLiteracyKnowledge: 0
+  practical:
+    WeaponsKnowledge: 2
