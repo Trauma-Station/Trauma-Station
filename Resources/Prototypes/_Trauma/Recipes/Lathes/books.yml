@@ -21,6 +21,14 @@
   materials:
     Paper: 1000
 
+- type: latheRecipe
+  id: BaseMundaneHolyBookRecipe
+  abstract: true
+  completetime: 180
+  materials:
+    Paper: 1000
+    Silver: 100
+
 # Blueprints
 
 - type: latheRecipe
@@ -101,3 +109,10 @@
   id: BookSurvivalPrinted
   parent: BaseAdvancedBookRecipe
   result: BookSurvivalPrinted
+
+# Mundane Holy Texts
+
+- type: latheRecipe
+  id: BookBibleMundane
+  parent: BaseMundaneHolyBookRecipe
+  result: BibleMundane
