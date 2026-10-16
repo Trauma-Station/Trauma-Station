@@ -295,9 +295,9 @@ namespace Content.Server.Voting.Managers
             var maxCount = _cfg.GetCVar(TraumaCVars.MapVoteOptions);
             if (maps.Count > maxCount + 1 && maxCount > 0)
             {
-                var randomMap = _random.Pick(maps.Keys);
-                options.Options.Add(("Random", randomMap));
-                maps.Remove(randomMap);
+                var randomMap = _random.Pick(maps);
+                options.Options.Add(("Random", randomMap.Key));
+                maps.Remove(randomMap.Key);
                 while (maps.Count > maxCount)
                 {
                     maps.Remove(_random.Pick(maps.Keys));

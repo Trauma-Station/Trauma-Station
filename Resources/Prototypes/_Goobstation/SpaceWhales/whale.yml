@@ -96,14 +96,19 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      4000: Dead # todo maybe add some good loot in the future to make space salv go whale hunting
+      1500: Dead
   - type: Destructible
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 4000
+        damage: 1500
       behaviors:
       - !type:GibBehavior
+  - type: SpawnLootOnDeath
+    table: !type:AllSelector
+      children:
+      - id: FoodMeatDragon
+        rolls: 5, 8
   - type: ContentEye
     maxZoom: 1.5,1.5
     targetZoom: 1.5,1.5
@@ -146,7 +151,7 @@
     - !type:HealthChange
       damage:
         types:
-          Slash: 4000
+          Slash: 1500
 
 - type: entity
   parent: [MobSpaceLeviathanSegmentBase, FlyingMobBase]
