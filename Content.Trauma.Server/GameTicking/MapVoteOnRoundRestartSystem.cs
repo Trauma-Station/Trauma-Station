@@ -40,7 +40,7 @@ public sealed partial class MapVoteOnRoundRestartSystem : EntitySystem
             !_lobbyEnabled ||
             args.New != GameRunLevel.PreRoundLobby)
             return;
-        
+
         // If the server has just started, delay the vote.
         if (_timing.CurTime < TimeSpan.FromMinutes(2))
         {
