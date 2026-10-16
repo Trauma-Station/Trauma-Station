@@ -9,6 +9,7 @@
   name: insurgency-title
   description: insurgency-description
   showInVote: false
+  minPlayers: 15
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler

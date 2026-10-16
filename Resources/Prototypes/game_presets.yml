@@ -33,7 +33,6 @@
   name: all-at-once-title
   description: all-at-once-description
   showInVote: false
-  minPlayers: 60
   rules:
     - Nukeops
     - Traitor

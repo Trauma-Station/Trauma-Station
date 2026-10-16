@@ -22,6 +22,7 @@ public sealed class FailAndStartPresetTest : GameTest
   name: test-preset-title # Trauma - use loc
   description: test-preset-desc # Trauma - use non-empty loc
   showInVote: false
+  minPlayers: 0 # Trauma - field now required
   rules:
   - TestRule
 
@@ -32,6 +33,7 @@ public sealed class FailAndStartPresetTest : GameTest
   name: test-preset-10-title # Trauma - use loc
   description: test-preset-desc # Trauma - use non-empty loc
   showInVote: false
+  minPlayers: 0 # Trauma - field now required
   rules:
   - TestRuleTenPlayers
 

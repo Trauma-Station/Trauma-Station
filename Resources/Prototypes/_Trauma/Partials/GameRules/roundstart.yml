@@ -4,7 +4,7 @@
   id: SubGamemodesRule
   components:
   - type: SubGamemodes
-    rules:
+    rules: !Clear
     - id: SubHeretic
       prob: 0.1
     - id: Devil
@@ -19,16 +19,12 @@
       prob: 0.1
     - id: SubChangeling
       prob: 0.05
-    - !Remove id: Thief
-    - !Remove id: SubWizard
-    - !Remove id: SubXenoborgs
-    - !Remove id: Changeling
 
 - type: entity
   id: SubGamemodesRuleNoWizard
   components:
   - type: SubGamemodes
-    rules:
+    rules: !Clear
     - id: SubHeretic
       prob: 0.2
     - id: Devil
@@ -41,15 +37,12 @@
       prob: 0.02
     - id: SubChangeling
       prob: 0.5
-    - !Remove id: Thief
-    - !Remove id: SubXenoborgs
-    - !Remove id: Changeling
 
 - type: entity
   id: SubGamemodesRuleNoXenoborg
   components:
   - type: SubGamemodes
-    rules:
+    rules: !Clear
     - id: SubHeretic
       prob: 0.2
     - id: Devil
@@ -64,19 +57,14 @@
       prob: 0.2
     - id: SubChangeling
       prob: 0.05
-    - !Remove id: Thief
-    - !Remove id: SubWizard
-    - !Remove id: Changeling
 
 - type: entity
   id: SubGamemodesRuleNoWizardNoXenoborg
   components:
   - type: SubGamemodes
-    rules:
+    rules: !Clear
     - id: SubChangeling
       prob: 0.25
-    - !Remove id: Thief
-    - !Remove id: Changeling
 
 - type: entity
   id: BaseNukeopsRule
