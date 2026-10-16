@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: vendingMachineInventory
+  id: JaniDrobeInventory
+  contrabandInventory:
+    ClothingUniformJumpskirtJanimaid: 2
+    ClothingUniformJumpskirtJanimaidmini: 1
+  emaggedInventory:
+    ClothingHeadHatTacticalMaidHeadband: 2
+    ClothingUniformJumpskirtTacticalMaid: 2
+    ClothingHandsTacticalMaidGloves: 1
