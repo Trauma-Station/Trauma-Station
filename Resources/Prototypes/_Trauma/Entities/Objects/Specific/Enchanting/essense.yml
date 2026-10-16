@@ -26,7 +26,7 @@
   parent: BaseSoulFragment
   id: DemonSoulFragment
   name: demonic soul fragment
-  description: The soul of a demon, can be made into a magical ink by mixing it into a full blood vial.
+  description: The soul of a demon. It can be made into a magical ink by mixing it into a bottle.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Enchanting/demonsoul.rsi

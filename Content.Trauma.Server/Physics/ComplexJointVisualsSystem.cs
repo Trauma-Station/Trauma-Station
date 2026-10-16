@@ -4,13 +4,11 @@ using System.Linq;
 using Content.Trauma.Shared.Physics.ComplexJoint;
 using Robust.Server.GameObjects;
 using Robust.Shared.Physics;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.Physics;
 
 public sealed partial class ComplexJointVisualsSystem : SharedComplexJointVisualsSystem
 {
-    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private PhysicsSystem _physics = default!;
 
@@ -23,7 +21,7 @@ public sealed partial class ComplexJointVisualsSystem : SharedComplexJointVisual
     {
         base.Update(frameTime);
 
-        var now = _timing.CurTime;
+        var now = Timing.CurTime;
 
         if (now < _nextUpdate)
             return;
@@ -37,7 +35,8 @@ public sealed partial class ComplexJointVisualsSystem : SharedComplexJointVisual
 
             foreach (var (netEnt, data) in comp.Data)
             {
-                if (!TryGetEntity(netEnt, out var target) || TerminatingOrDeleted(target.Value) ||
+                var expired = data.Duration is { } duration && data.CreationTime is { } creationTime && duration < now - creationTime;
+                if (expired || !TryGetEntity(netEnt, out var target) || TerminatingOrDeleted(target.Value) ||
                     data.MaxRange is { } maxRange && !_transform.InRange(target.Value, uid, maxRange))
                 {
                     comp.Data.Remove(netEnt);

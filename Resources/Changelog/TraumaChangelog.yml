@@ -15733,3 +15733,148 @@ Entries:
   id: 1713
   time: '2026-10-14T00:31:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5013
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added new ghosts and curses to poultrygeist egg, which is obtained from
+      poultrygeist chickens which require a black silkie chicken dying to old
+      age whilst being unhappy
+  - type: Remove
+    message: Removed shadow demon from poultrygeist egg
+  - type: Tweak
+    message: Increased the sell price of golden egg from 5000 spesos to 25000 spesos
+  - type: Tweak
+    message: Spooky ghost has been made spookier and now drops an ice anomaly core.
+  - type: Tweak
+    message: Living curses are now more dangerous
+  - type: Tweak
+    message: >-
+      Decreased the metabolism speed on fresium and increased the rate at which
+      it cools
+  - type: Fix
+    message: >-
+      Fixed mime eggs being unobtainable if a clown hen was too happy, now it is
+      properly obtained from mimanas
+  id: 1714
+  time: '2026-10-14T18:15:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5033
+- author: Endothermix
+  changes:
+  - type: Tweak
+    message: The riot launcher safe is now unlocked on blue.
+  - type: Fix
+    message: The riot launcher is now sized correctly in backpacks.
+  id: 1715
+  time: '2026-10-14T18:22:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5026
+- author: Aviu
+  changes:
+  - type: Remove
+    message: Removed mindshields blocking blood cult spells.
+  - type: Add
+    message: Blood cult stun spell reworked, see guidebook for details.
+  - type: Add
+    message: >-
+      Blood rites drain blood easier, can now be used to make blood bolt barrage
+      spell/weapon and blood orb that stores blood and can be drained by blood
+      rites.
+  - type: Add
+    message: Gave blood cultists average skill for their weapons and shield.
+  - type: Fix
+    message: Fix being unable to recall blood spear.
+  - type: Fix
+    message: Fixed mirror shield name and missing inhand sprite.
+  - type: Add
+    message: >-
+      Mirror shield now spawns illusions of user when blocking/reflecting
+      attacks sometimes.
+  id: 1716
+  time: '2026-10-15T14:11:50.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5039
+- author: StarMade
+  changes:
+  - type: Fix
+    message: Evil bunny now actually solo antagonist.
+  id: 1717
+  time: '2026-10-15T19:40:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5049
+- author: StarMade
+  changes:
+  - type: Fix
+    message: Fixed truncheon in-storage sprite.
+  id: 1718
+  time: '2026-10-15T20:15:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5052
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added an additional loot drop to space leviathans there is now a reason to
+      try to kill it.
+  - type: Tweak
+    message: Reduced the health of space leviathans from 4000 hp to 1500 hp.
+  id: 1719
+  time: '2026-10-16T07:14:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5054
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Gauss ammo is now correctly available in the sec techfab on blue alert.
+  id: 1720
+  time: '2026-10-16T08:35:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5050
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Station teleporter control console now only requires research access
+      instead of command access
+  - type: Tweak
+    message: >-
+      Station teleporter boards now cost 1 bluespace crystal instead of 10
+      phoron glass
+  - type: Tweak
+    message: Teleporter chips now cost 0.25 silver instead of 0.25 phoron
+  id: 1721
+  time: '2026-10-16T08:37:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5043
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: >-
+      Fixed automatic map vote always forcing Reach after a server restart, it
+      now waits 1 minute to start the vote.
+  id: 1722
+  time: '2026-10-16T09:02:39.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5045
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lowpop rounds sometimes failing to start because of sub gamemodes.
+  id: 1723
+  time: '2026-10-16T09:06:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5059
+- author: ReestockMakes
+  changes:
+  - type: Tweak
+    message: >-
+      Chaplains are now legally allowed to be enchanters, and have new means to
+      do so.
+  - type: Tweak
+    message: >-
+      Chaplains can once again enchant at altars, everyone else still needs to
+      work for it.
+  - type: Tweak
+    message: Blood is no longer inherent to crafting magic ink.
+  - type: Add
+    message: >-
+      Holy ash can be obtained from cremation and used for enchanting. (See
+      chaplain guidebook entry.)
+  - type: Tweak
+    message: >-
+      You can no longer get a bible at an 83% discount by buying morgue
+      supplies.
+  id: 1724
+  time: '2026-10-16T20:47:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4653

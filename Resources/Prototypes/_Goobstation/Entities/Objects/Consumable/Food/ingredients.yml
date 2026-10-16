@@ -4,15 +4,15 @@
   parent: BaseFoodCondimentPacket
   id: FoodCondimentPacketProtein
   name: protein powder packet
-  description: Contains 10u of powdered protein. Mix with 20u of water
+  description: Contains 8.333333mL of powdered protein. Mix with 8.333333mL of water.
   components:
   - type: Solution
     solution:
       reagents:
       - ReagentId: Protein
-        Quantity: 9
+        Quantity: 0.9
       - ReagentId: Fentanyl
-        Quantity: 1
+        Quantity: 0.1
   - type: Icon
     state: packet-greygoo
   - type: Appearance
@@ -30,11 +30,11 @@
   components:
   - type: FlavorProfile
     flavors:
-      - creamy
-      - cheesy
+    - creamy
+    - cheesy
     ignoreReagents:
-      - Nutriment
-      - GastroToxin
+    - Nutriment
+    - GastroToxin
   - type: Sprite
     sprite: _Goobstation/Objects/Consumable/Food/freedom_cheese.rsi
     state: cheese_block
@@ -59,11 +59,11 @@
   components:
   - type: FlavorProfile
     flavors:
-      - creamy
-      - cheesy
+    - creamy
+    - cheesy
     ignoreReagents:
-      - Nutriment
-      - GastroToxin
+    - Nutriment
+    - GastroToxin
   - type: Sprite
     sprite: _Goobstation/Objects/Consumable/Food/freedom_cheese.rsi
     state: cheese_slice
