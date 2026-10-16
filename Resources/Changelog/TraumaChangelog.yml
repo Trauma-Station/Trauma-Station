@@ -15848,3 +15848,10 @@ Entries:
   id: 1722
   time: '2026-10-16T09:02:39.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5045
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed lowpop rounds sometimes failing to start because of sub gamemodes.
+  id: 1723
+  time: '2026-10-16T09:06:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5059
