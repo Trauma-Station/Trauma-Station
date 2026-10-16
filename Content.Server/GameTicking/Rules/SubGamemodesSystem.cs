@@ -20,8 +20,9 @@ public sealed partial class SubGamemodesSystem : GameRuleSystem<SubGamemodesComp
                 continue;
 
             // <Trauma> - being here is not ideal but entity spawn collection is shitcode
-            var rule = ProtoMan.Index(id);
-            if (GameTicker.ReadyPlayerCountEffective() < rule.MinPlayers)
+            var proto = ProtoMan.Index(id);
+            if (!proto.TryComp<GameRuleComponent>(out var rule, Factory) ||
+                GameTicker.ReadyPlayerCountEffective() < rule.MinPlayers)
                 continue;
             // </Trauma>
 
