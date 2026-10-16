@@ -15824,3 +15824,18 @@ Entries:
   id: 1720
   time: '2026-10-16T08:35:56.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5050
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: >-
+      Station teleporter control console now only requires research access
+      instead of command access
+  - type: Tweak
+    message: >-
+      Station teleporter boards now cost 1 bluespace crystal instead of 10
+      phoron glass
+  - type: Tweak
+    message: Teleporter chips now cost 0.25 silver instead of 0.25 phoron
+  id: 1721
+  time: '2026-10-16T08:37:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5043
