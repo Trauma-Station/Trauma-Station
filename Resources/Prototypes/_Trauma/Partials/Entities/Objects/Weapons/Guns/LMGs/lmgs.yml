@@ -3,3 +3,4 @@
 - type: entity
   parent: BaseStockHit
   id: BaseWeaponLightMachineGun
+  abstract: true
