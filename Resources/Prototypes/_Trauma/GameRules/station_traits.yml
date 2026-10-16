@@ -84,22 +84,22 @@
       min: 600
       max: 1500
 
-- type: entity
-  parent: BaseGameRule
-  id: CarpInfestationRule
-  components:
-  - type: RuleSchedulerLimit
-    limit: 8
-  - type: BasicStationEventScheduler
-    scheduledGameRules:
-      id: CarpMigrationRule
-    # 5-10 minutes in
-    minimumTimeUntilFirstEvent: 300
-    maximumSpanUntilFirstEvent: 300
-    # every 5-20 minutes after that
-    minMaxEventTiming:
-      min: 300
-      max: 1200
+#- type: entity
+#  parent: BaseGameRule
+#  id: CarpInfestationRule
+#  components:
+#  - type: RuleSchedulerLimit
+#    limit: 8
+#  - type: BasicStationEventScheduler
+#    scheduledGameRules:
+#      id: CarpMigrationRule
+#    # 5-10 minutes in
+#    minimumTimeUntilFirstEvent: 300
+#    maximumSpanUntilFirstEvent: 300
+#    # every 5-20 minutes after that
+#    minMaxEventTiming:
+#      min: 300
+#      max: 1200
 
 - type: entity
   parent: BaseGameRule
