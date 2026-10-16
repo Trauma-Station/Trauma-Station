@@ -6,6 +6,7 @@ using Content.Shared.GameTicking;
 using Content.Shared.Voting;
 using Content.Trauma.Common.CCVar;
 using Robust.Shared.Configuration;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Server.GameTicking;
 
@@ -16,15 +17,19 @@ public sealed partial class MapVoteOnRoundRestartSystem : EntitySystem
 {
     [Dependency] private IConfigurationManager _cfg = default!;
     [Dependency] private IVoteManager _vote = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
     private bool _voteEnabled;
     private bool _lobbyEnabled;
+    private TimeSpan _delayOnRestart;
+    private TimeSpan? _voteDelay;
 
     public override void Initialize()
     {
         base.Initialize();
 
         Subs.CVar(_cfg, TraumaCVars.AutomaticMapVote, value => _voteEnabled = value, true);
+        Subs.CVar(_cfg, TraumaCVars.AutoMapVoteDelay, value => _delayOnRestart = value, true);
         Subs.CVar(_cfg, CCVars.GameLobbyEnabled, value => _lobbyEnabled = value, true);
     }
 
@@ -35,6 +40,21 @@ public sealed partial class MapVoteOnRoundRestartSystem : EntitySystem
             !_lobbyEnabled ||
             args.New != GameRunLevel.PreRoundLobby)
             return;
+
+        // If the server has just started, delay the vote.
+        if (_timing.CurTime < TimeSpan.FromMinutes(2))
+        {
+            _voteDelay = _timing.CurTime + _delayOnRestart;
+            return;
+        }
         _vote.CreateStandardVote(null, StandardVoteType.Map);
+    }
+
+    public override void Update (float frameTime)
+    {
+        if (_voteDelay is not { } delay || _timing.CurTime < delay) return;
+
+        _vote.CreateStandardVote(null, StandardVoteType.Map);
+        _voteDelay = null;
     }
 }
