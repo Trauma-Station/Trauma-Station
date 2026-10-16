@@ -24,7 +24,7 @@ public sealed partial class GamePresetPrototype : IPrototype
     [DataField]
     public bool ShowInVote;
 
-    [DataField]
+    [DataField(required: true)] // Trauma - Required in order to solve gamemode dogshit
     public int? MinPlayers;
 
     [DataField]

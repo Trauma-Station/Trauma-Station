@@ -35,28 +35,14 @@
   components:
   - type: SubGamemodes
     rules:
-    # <Trauma>
-    #- id: Thief
-    #  prob: 0.5
-    #- id: SubWizard # not real
-    #  prob: 0.05
-    #- id: SubXenoborgs # no
-    #  prob: 0.05
-    - id: SubHeretic
-      prob: 0.1
-    - id: Devil
+    - id: Thief
+      prob: 0.5
+    - id: SubWizard
       prob: 0.05
-    - id: ShadowlingRoundstart
+    - id: SubXenoborgs
       prob: 0.05
-    - id: SubDuoAbductor
-      prob: 0.05
-    - id: WraithRoundstart
-      prob: 0.02
-    - id: SubVampire
-      prob: 0.1
-    - id: SubChangeling
-      prob: 0.05 # extinct predator species...
-    # </Trauma>
+    - id: Changeling
+      prob: 0.25
 
 - type: entity
   parent: BaseGameRule
@@ -64,24 +50,12 @@
   components:
   - type: SubGamemodes
     rules:
-    # <Trauma>
-    #- id: Thief
-    #  prob: 0.5
-    #- id: SubXenoborgs
-    #  prob: 0.05
-    - id: SubHeretic
-      prob: 0.2
-    - id: Devil
-      prob: 0.02
-    - id: ShadowlingRoundstart
-      prob: 0.02
-    - id: SubDuoAbductor
-      prob: 0.05
-    - id: WraithRoundstart
-      prob: 0.02
-    - id: SubChangeling
+    - id: Thief
       prob: 0.5
-    # </Trauma>
+    - id: SubXenoborgs
+      prob: 0.05
+    - id: Changeling
+      prob: 0.25
 
 - type: entity
   parent: BaseGameRule
@@ -89,26 +63,12 @@
   components:
   - type: SubGamemodes
     rules:
-    # <Trauma>
-    #- id: Thief
-    #  prob: 0.5
-    #- id: SubWizard # not real
-    #  prob: 0.05
-    - id: SubHeretic
-      prob: 0.2
-    - id: Devil
-      prob: 0.02
-    - id: ShadowlingRoundstart
-      prob: 0.02
-    - id: SubDuoAbductor
+    - id: Thief
+      prob: 0.5
+    - id: SubWizard
       prob: 0.05
-    - id: WraithRoundstart
-      prob: 0.02
-    - id: SubVampire
-      prob: 0.2
-    - id: SubChangeling
-      prob: 0.05
-    # </Trauma>
+    - id: Changeling
+      prob: 0.25
 
 - type: entity
   parent: BaseGameRule
@@ -118,7 +78,7 @@
     rules:
     - id: Thief
       prob: 0.5
-    - id: SubChangeling # Trauma - use sub version
+    - id: Changeling
       prob: 0.25
 
 - type: entity
@@ -175,9 +135,6 @@
   parent: BaseGameRule
   id: BaseNukeopsRule
   components:
-  # <Trauma>
-  - type: NewAntagOrEvac
-  # </Trauma>
   - type: RandomMetadata #this generates the random operation name cuz it's cool.
     nameSegments:
     - NamesOperationPrefix
@@ -186,7 +143,6 @@
   - type: NukeopsRule
   - type: RuleGrids
   - type: AntagSelection
-    agentName: nukeops-roundend-name # Goobstation
   - type: AntagLoadProfileRule
     speciesOverride: Human
     speciesOverrideBlacklist:
@@ -194,25 +150,15 @@
     #Once the issues are fixed the species should be removed from this list to be enabled.
     #Balance concerns are not a valid reason to disable a species, except for high-impact Nukie-specific exploits.
     #- Vox
-    - Plasmaman # EE
-  - type: AntagObjectives # Goobstation
-    objectives:
-    - NukeopsDetonateObjective
-  - type: AntagPlayerEffects # Trauma - nukies get nukie-locked hypoports and skillchip
-    effects:
-    - !type:NestedEffect
-      proto: InstallHypoportNukie
-    - !type:InstallOrganChip
-      chip: SkillChipNukie
 
 - type: entity
   parent: [ BaseNukeopsRule, BaseRoundstartAntagRule ]
   id: Nukeops
   components:
   - type: GameRule
-    minPlayers: 40 # Trauma, was 20
+    minPlayers: 20
   - type: LoadMapRule
-    mapPath: /Maps/_Trauma/Nonstations/nukieplanet.yml # Trauma
+    mapPath: /Maps/Nonstations/nukieplanet.yml
   - type: AntagSelection
     antags:
     - !type:FixedAntagCount
@@ -223,8 +169,7 @@
       proto: NukeopsOperative
       range:
         min: 1
-        max: 10 # Trauma - was 3
-      playerRatio: 16 # Trauma
+        max: 3
   - type: DynamicRuleCost
     cost: 200
 
@@ -233,30 +178,17 @@
   parent: BaseGameRule
   id: BaseTraitorRuleNoObjectives # Trauma - add NoObjectives, added objectives separately
   components:
-  # <Trauma>
-  - type: RoundEndJobListingsInfo
-  - type: AntagPlayerEffects
-    effects:
-    - !type:NestedEffect
-      proto: TraitorSkills
-  # </Trauma>
   - type: TraitorRule
   # TODO: codewords in yml
   # TODO: uplink in yml
-  - type: AntagSelection
-    agentName: traitor-round-end-agent-name
-  - type: DynamicRuleCost
-    cost: 100
-
-- type: entity
-  abstract: true
-  parent: BaseTraitorRuleNoObjectives
-  id: BaseTraitorRule
-  components:
   - type: AntagRandomObjectives
     sets:
     - groups: TraitorObjectiveGroups
     maxDifficulty: 5
+  - type: AntagSelection
+    agentName: traitor-round-end-agent-name
+  - type: DynamicRuleCost
+    cost: 100
 
 - type: entity
   parent: [ BaseTraitorRule, BaseRoundstartAntagRule ]
@@ -264,11 +196,13 @@
   components:
   - type: GameRule
     minPlayers: 5
+    delay:
+      min: 240
+      max: 420
   - type: AntagSelection
     lateJoinAdditional: true
     antags:
     - !type:LinearAntagCount
-      playerRatio: 6 # Trauma
       proto: Traitor
       range:
         min: 1
@@ -290,18 +224,15 @@
   id: Revolutionary
   parent: [BaseGameRule, BaseRoundstartAntagRule]
   components:
-  # <Trauma>
-  - type: MindshieldRemovingAntag # puts fake mindshields into headrevs that start with a real one
-  # </Trauma>
   - type: GameRule
-    minPlayers: 20 # Trauma - was 15
+    minPlayers: 15
   - type: RevolutionaryRule
   - type: AntagSelection
     selectionTime: PrePlayerSpawn
     antags:
     - !type:LinearAntagCount
       proto: HeadRev
-      playerRatio: 10 # Trauma - was 15
+      playerRatio: 15
       range:
         min: 1
         max: 3
@@ -325,21 +256,12 @@
   parent: BaseGameRule
   id: BaseWizardRule
   components:
-  # <Trauma>
-  - type: WizardRule
-  - type: GameRule
-    minPlayers: 30
-  - type: AntagPlayerEffects
-    effects:
-    - !type:NestedEffect
-      proto: WizardSkills
-  # </Trauma>
   - type: AntagObjectives
     objectives:
     - WizardSurviveObjective
-    #- WizardDemonstrateObjective # Trauma - no
+    - WizardDemonstrateObjective
   - type: LoadMapRule
-    mapPath: /Maps/_Goobstation/Nonstations/wizden.yml # Trauma
+    mapPath: /Maps/Nonstations/wizardsden.yml
   - type: RuleGrids
   - type: AntagSelection
     agentName: wizard-round-end-name
@@ -348,17 +270,13 @@
       proto: Wizard
   - type: AntagLoadProfileRule
     speciesOverride: Human
-    # <Trauma>
-    speciesOverrideBlacklist:
-    - Plasmaman
-    # </Trauma>
 
 - type: entity
   parent: [ BaseWizardRule, BaseRoundstartAntagRule ]
   id: Wizard
   components:
   - type: GameRule
-    minPlayers: 30 # Trauma - was 10
+    minPlayers: 10
   - type: DynamicRuleCost
     cost: 150
 
@@ -450,12 +368,10 @@
     children:
       - !type:NestedSelector
         tableId: BasicCalmEventsTable
-      # <Trauma> - antags moved to separate scheduler
-      #- !type:NestedSelector
-      #  tableId: BasicAntagEventsTable
-      #- !type:NestedSelector
-      #  tableId: ModerateAntagEventsTable
-      # </Trauma>
+      - !type:NestedSelector
+        tableId: BasicAntagEventsTable
+      - !type:NestedSelector
+        tableId: ModerateAntagEventsTable
       - !type:NestedSelector
         tableId: CargoGiftsTable
       - !type:NestedSelector
@@ -468,15 +384,9 @@
   table: !type:AllSelector # we need to pass a list of rules, since rules have further restrictions to consider via StationEventComp
     children:
     - !type:NestedSelector
-      tableId: BasicCalmEventsTable
-    - !type:NestedSelector
-      tableId: BasicAntagEventsTable
-    - !type:NestedSelector
       tableId: CargoGiftsTable
     - !type:NestedSelector
       tableId: CalmPestEventsTable
-    - !type:NestedSelector
-      tableId: SpicyPestEventsTable
 
 - type: entityTable
   id: SpaceTrafficControlTable
@@ -490,12 +400,6 @@
   - type: BasicStationEventScheduler
     scheduledGameRules: !type:NestedSelector
       tableId: BasicGameRulesTable
-# <Trauma> - These values should make midrounds less chaotic overall
-    minimumTimeUntilFirstEvent: 300 #5 min
-    minMaxEventTiming:
-      min: 300 # 5 min
-      max: 600 # 10 min
-#</Trauma>
 
 - type: entity
   id: DynamicStationEventScheduler # this isn't the dynamic mode, but rather the station event scheduler used for dynamic
@@ -550,7 +454,7 @@
     - id: SolarPanelDamageVariationPass
     - id: SolarPanelEmptyVariationPass
     - id: BasicDecalDirtVariationPass
-    #- id: BasicDecalGraffitiVariationPass # Trauma - looks shit
+    - id: BasicDecalGraffitiVariationPass
     - id: BasicDecalBurnsVariationPass
       prob: 0.50
       orGroup: monospaceDecals
