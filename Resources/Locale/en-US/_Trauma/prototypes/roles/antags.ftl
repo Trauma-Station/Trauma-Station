@@ -19,4 +19,9 @@ roles-antag-spy-objective = Steal things and complete your mission.
 
 spy-round-end-agent-name = spy
 
+roles-antag-freedom-fighter-name = Freedom fighter
+roles-antag-freedom-fighter-objective = Bring liberty to the station by any means necessary.
+
+freedom-fighter-round-end-agent-name = freedom fighter
+
 never-shown = !

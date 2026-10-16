@@ -9,3 +9,13 @@
     state: icon
   - type: PointLight
     color: "#57b8f0"
+
+- type: entity
+  parent: HolosignSecurity
+  id: HolosignFreeman
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Holo/freeman.rsi
+    state: icon
+  - type: PointLight
+    color: "#ffffff"

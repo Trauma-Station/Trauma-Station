@@ -1,0 +1,53 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antag
+  id: FreedomFighter
+  name: roles-antag-freedom-fighter-name
+  objective: roles-antag-freedom-fighter-objective
+  antagonist: true
+  setPreference: true
+  requirements:
+  - !type:OverallPlaytimeRequirement
+    time: 5h
+  guides: [ Insurgents ] # Change this
+
+- type: antagSpecifier
+  id: FreedomFighter
+  spawnerPrototype: GhostRoleSpawnerFreedomFighter
+  startingGear: FreedomFighter
+  unequipOldGear: true
+  prefRoles: [ GenericTeamAntagonist ]
+  mindRoles: [ MindRoleFreedomFighter ]
+  roleLoadout: [ RoleSurvivalAntagSmall ]
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: true
+
+- type: startingGear
+  id: FreedomFighter
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitTacticool
+    outerClothing: ClothingOuterHardsuitFreedomFighter
+    back: ClothingBackpackDuffel
+    ears: ClothingHeadsetAltDefector
+    gloves: ClothingHandsGlovesCombat
+    shoes: ClothingShoesBootsJack
+    belt: JetpackMiniFilled
+    id: FreedomFighterPDA
+    pocket2: SatchelFreedomFighter
+  storage:
+    back:
+    - Megaphone
+    - CrowbarOrange
+    - UndeterminedWeaponSalvageSpecialist # Change this
+    - ClothingHeadHelmetFreedomFighter
+    - ClothingNeckLGBTPin
+
+- type: antagSmite
+  id: FreedomFighter
+  antag: FreedomFighter
+  rule: FreedomFightersRule
+  ruleComp: FreedomFightersRule
+  icon:
+    sprite: _Trauma/Clothing/Head/Helmets/freemeow.rsi
+    state: icon

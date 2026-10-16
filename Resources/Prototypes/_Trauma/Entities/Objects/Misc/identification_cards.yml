@@ -80,3 +80,35 @@
       sprite: _Trauma/Objects/Misc/id_cards.rsi
   - type: PresetIdCard
     job: Rancher
+
+- type: entity
+  parent: IDCardStandard
+  id: FreedomFighterIDCard # base for agent ID
+  name: freedom fighter ID card
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      sprite: _Goobstation/Objects/Devices/makeshift_id.rsi
+    - state: idcentcom
+
+- type: entity
+  parent: [ AgentIDCard ]
+  id: FreedomFighterIDCardChameleon
+  name: freedom fighter ID card
+  suffix: Agent
+  components:
+  - type: Sprite
+    layers:
+    - state: icon
+      sprite: _Goobstation/Objects/Devices/makeshift_id.rsi
+    - state: idcentcom
+  - type: IdCard
+    jobTitle: roles-antag-freedom-fighter-name
+    jobIcon: JobIconFreedomFighter
+  - type: Access
+    tags:
+    - Maintenance
+  - type: ChameleonClothing
+    default: FreedomFighterIDCard

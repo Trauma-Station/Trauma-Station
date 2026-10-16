@@ -14,3 +14,22 @@
     state: icon
   - type: StaticPrice
     price: 50
+
+- type: entity
+  parent: [ Holoprojector, BaseMajorContraband ]
+  id: HoloprojectorFreeman
+  name: holobarrier projector
+  description: Creates a solid but fragile holographic barrier, hijacked to project freedom fighter propaganda.
+  components:
+  - type: HolosignProjector
+    signProto: HolosignFreeman
+    chargeUse: 90
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        startingItem: PowerCellMicroreactor
+  - type: Sprite
+    sprite: Objects/Devices/Holoprojectors/security.rsi
+    state: icon
+  - type: StaticPrice
+    price: 50

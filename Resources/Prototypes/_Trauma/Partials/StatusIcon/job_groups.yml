@@ -36,6 +36,11 @@
   - JobIconNanotrasenRepresentative
 
 - type: jobIconGroup
+  id: AntagonistIconGroup
+  icons:
+  - JobIconFreedomFighter
+
+- type: jobIconGroup
   id: MiscIconGroup
   icons:
   - JobIconDClass

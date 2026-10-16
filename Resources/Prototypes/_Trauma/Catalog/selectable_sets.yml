@@ -87,3 +87,60 @@
   - EncryptionKeySyndie
   - ClothingMaskGasVoiceChameleon
   - ClothingHeadsetChameleon
+
+# Freedom fighters
+
+- type: selectableSet
+  id: FreedomUntouchabilitySet
+  name: Untouchability Kit
+  description: freedom-set-untouchable-description
+  sprite:
+    sprite: Objects/Weapons/Melee/teleriot_shield.rsi
+    state: teleriot-on
+  content:
+  - FreedomImplanter
+  - StorageImplanter
+  - TelescopicShield
+
+- type: selectableSet
+  id: FreedomTreatmentSet
+  name: Treatment Kit
+  description: freedom-set-treatment-description
+  sprite:
+    sprite: Objects/Specific/Medical/defibsmall.rsi
+    state: icon
+  content:
+  - DefibrillatorCompact
+  - SyringeEphedrine
+  - SyringeEphedrine
+  - SyringeEphedrine
+  - CombatMedipen
+  - CombatMedipen
+  - CombatMedipen
+
+- type: selectableSet
+  id: FreedomSquattingSet
+  name: Squatting Kit
+  description: freedom-set-squatting-description
+  sprite:
+    sprite: Objects/Tools/welder_experimental.rsi
+    state: icon
+  content:
+  - HoloprojectorFreeman
+  - JawsOfLife
+  - WelderExperimental
+  - ClothingEyesGlassesMeson
+  - SkillChipDatabase
+
+- type: selectableSet
+  id: FreedomTerrorSet
+  name: Terror Kit
+  description: freedom-set-terror-description
+  sprite:
+    sprite: Objects/Weapons/Bombs/seismic.rsi
+    state: icon
+  content:
+  - EmpImplanter
+  - SeismicCharge
+  - SeismicCharge
+  - SeismicCharge

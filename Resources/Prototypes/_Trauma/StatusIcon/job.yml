@@ -33,3 +33,12 @@
     sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
     state: Rancher
   jobName: job-name-rancher
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconFreedomFighter
+  icon:
+    sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
+    state: FreedomFighter
+  jobName: job-name-freedom-fighter
+  isCrewJob: false

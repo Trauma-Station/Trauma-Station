@@ -7,6 +7,7 @@ role-subtype-spy = Spy
 role-subtype-blood-cultist = Blood Cultist
 role-subtype-construct = Construct
 role-subtype-purified-construct = P. Construct
+role-subtype-freedom-fighter = Freedom Fighter
 
 role-type-animal-name = Animal
 role-type-animal-color = #51dd26

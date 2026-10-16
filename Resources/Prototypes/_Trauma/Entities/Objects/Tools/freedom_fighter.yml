@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseItem, BaseSetSelector, BaseMinorContraband ]
+  id: SatchelFreedomFighter
+  name: undetermined freedom fighter satchel
+  description: Actions speak louder than words.
+  components:
+  - type: Sprite
+    sprite: Clothing/Back/Satchels/smuggler.rsi
+    state: folded
+  - type: Item
+    storedRotation: 90
+  - type: SetSelector
+    possibleSets:
+    - FreedomUntouchabilitySet
+    - FreedomTreatmentSet
+    - FreedomSquattingSet
+    - FreedomTerrorSet
+    spawnedStoragePrototype: ClothingBackpackSatchelSmugglerUnanchored
+    spawnedStorageContainer: storagebase
+    approveSound:
+      collection: storageRustle
+    maxSelectedSets: 2
