@@ -21,3 +21,14 @@
     state: cpu_science
   - type: ComputerBoard
     prototype: ComputerCircuitEditor
+
+- type: entity
+  parent: [ BaseComputerCircuitboard, BaseMajorContraband ]
+  id: FreemanStoreConsoleCircuitboard
+  name: freedom fighter computer board
+  description: "A special circuit board embedded with bluespace technology for instant delivery. Used to make a freedom fighter delivery computer.\n[color=red]There's only one circuit per squad, don't lose this![/color]"
+  components:
+  - type: Sprite
+    state: cpuboard_super
+  - type: ComputerBoard
+    prototype: ComputerFreemanStore

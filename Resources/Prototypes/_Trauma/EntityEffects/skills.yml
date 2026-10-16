@@ -110,7 +110,8 @@
       WeaponsKnowledge: 50
       ThrowingKnowledge: 50
       FirstAidKnowledge: 50
-      LiteracyKnowledge: 35 # Media literacy, that is!
+      ElectronicsKnowledge: 25 # To build the computer
+      LiteracyKnowledge: 50 # Media literacy, that is!
 
 - type: entityEffect
   id: SlaughterDemonSkills

@@ -109,3 +109,61 @@
   - type: IdentityBlocker
   - type: ViewconeModifier
     angleModifier: 0.5
+
+# Freedom fighter
+- type: entity
+  parent: [ ClothingHeadEVAHelmetBase, ClothingHeadHelmetArmoredBase, BaseMajorContraband ]
+  id: ClothingHeadHelmetFreedomFighter
+  name: freedom fighter helmet
+  description: An armored EVA helmet with wide ballistic goggles for maximum visibility.
+  components:
+  - type: FlashSoundSuppression
+  - type: ExplosionResistance
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Helmets/freeman.rsi
+  - type: Clothing
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET-unshaded
+        shader: unshaded
+      - state: equipped-HELMET
+  - type: Armor
+    coverage:
+    - Head
+    traumaDeductions:
+      Dismemberment: 0.3
+      OrganDamage: 0.3
+      BoneDamage: 0.3
+      VeinsDamage: 0
+    modifiers:
+      coefficients:
+        Blunt: 0.5
+        Slash: 0.5
+        Piercing: 0.6
+        Ballistic: 0.6
+        Heat: 0.6
+        Radiation: 0.7
+      flatReductions:
+        Ballistic: 2
+    showArmorOnExamine: true
+  - type: StaticPrice
+    price: 200
+  - type: FaceHuggerBlocker
+  - type: Tag
+    tags:
+    - GenderPin
+
+- type: entity
+  parent: ClothingHeadHelmetFreedomFighter
+  id: ClothingHeadHelmetFelinidSolidarity
+  name: felinid solidarity helmet
+  description: What kind of atrocious individual would equip such a despicable helmet?!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Helmets/freemeow.rsi
+  - type: Clothing
+    clothingVisuals:
+      head:
+      - state: equipped-HELMET-unshaded
+        shader: unshaded
+      - state: equipped-HELMET

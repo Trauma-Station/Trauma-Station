@@ -1,10 +1,10 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
+#ANTAG HARDSUITS
+#Freedom fighter hardsuit
 - type: entity
   parent: [ClothingOuterHardsuitBase, BaseMajorContraband]
   id: ClothingOuterHardsuitFreedomFighter
   name: freedom fighter hardsuit
-  description: A modified spationaut hardsuit embedded with plasteel armor plating and a paint job that represents freedom from corporate governance.
+  description: A modified spationaut hardsuit embedded with plasteel armor and a paint job that declares freedom from corporate governance. Corporate govenments everywhere are seething.
   components:
   - type: StaminaResistance
     damageCoefficient: 0.5

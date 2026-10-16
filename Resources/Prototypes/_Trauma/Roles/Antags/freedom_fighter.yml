@@ -28,19 +28,19 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitTacticool
     outerClothing: ClothingOuterHardsuitFreedomFighter
-    back: ClothingBackpackDuffelSalvage
+    back: ClothingBackpackDuffel
     ears: ClothingHeadsetAltDefector
     gloves: ClothingHandsGlovesCombat
     shoes: ClothingShoesBootsJack
     belt: JetpackMiniFilled
     id: FreedomFighterPDA
-    pocket1: SatchelFreedomFighter
+    pocket2: SatchelFreedomFighter
   storage:
     back:
     - Megaphone
     - CrowbarOrange
     - UndeterminedWeaponSalvageSpecialist # Change this
-    - ClothingHeadHelmetEVA # Change this
+    - ClothingHeadHelmetFreedomFighter
     - ClothingNeckLGBTPin
 
 - type: antagSmite
@@ -49,5 +49,5 @@
   rule: FreedomFightersRule
   ruleComp: FreedomFightersRule
   icon:
-    sprite: Clothing/Mask/gas.rsi # Change this
+    sprite: _Trauma/Clothing/Head/Helmets/freemeow.rsi
     state: icon
