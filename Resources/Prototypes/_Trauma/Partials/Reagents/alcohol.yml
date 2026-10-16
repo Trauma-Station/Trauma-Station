@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: reagent
+  id: Eggnog
+  metabolisms:
+    Digestion:
+      effects:
+      - !type:HealBoneDamage #The raw egg takes it straight to your bones!
+        amount: 0.5
