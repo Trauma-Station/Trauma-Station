@@ -38,7 +38,7 @@
   components:
   - type: Sprite
     layers:
-      - state: pda-security
+    - state: pda-security
   - type: Pda
     id: SpacePolIDCardChameleon
   - type: ChameleonClothing
