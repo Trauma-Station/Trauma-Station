@@ -446,9 +446,13 @@
   ### Taboo Violations
   Type 5 Special violations that consist of very dangerous yet high-value targets and threats. All perpetrators of Taboo Violations are to be brought to Central Command alive, and not be executed unless proven impossible to contain.
   <Table Columns="2">
-    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Magic</Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Unholy Magic</Box></ColorBox>
     <ColorBox Color="#23401a"><Box HorizontalAlignment="Left" Margin="4">
-      The act of practicing magic or usage of a magical item. Possession of magical contraband does not constitute a Type 5 Magic Violation.
+      The act of performing any magic that isn't directly associated with an approved faith or approved by a law-abiding chaplain. Possession of magical contraband does not constitute a Type 5 Unholy Magic Violation.
+    </Box></ColorBox>
+    <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Conjuring</Box></ColorBox>
+    <ColorBox Color="#23401a"><Box HorizontalAlignment="Left" Margin="4">
+      The act of aiding in or committing to the creation of magical contraband.
     </Box></ColorBox>
     <ColorBox Color="#000000"><Box HorizontalAlignment="Left" Margin="4">Possession of Psionic Capabilities</Box></ColorBox>
     <ColorBox Color="#23401a"><Box HorizontalAlignment="Left" Margin="4">

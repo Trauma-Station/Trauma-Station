@@ -15855,3 +15855,26 @@ Entries:
   id: 1723
   time: '2026-10-16T09:06:52.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5059
+- author: ReestockMakes
+  changes:
+  - type: Tweak
+    message: >-
+      Chaplains are now legally allowed to be enchanters, and have new means to
+      do so.
+  - type: Tweak
+    message: >-
+      Chaplains can once again enchant at altars, everyone else still needs to
+      work for it.
+  - type: Tweak
+    message: Blood is no longer inherent to crafting magic ink.
+  - type: Add
+    message: >-
+      Holy ash can be obtained from cremation and used for enchanting. (See
+      chaplain guidebook entry.)
+  - type: Tweak
+    message: >-
+      You can no longer get a bible at an 83% discount by buying morgue
+      supplies.
+  id: 1724
+  time: '2026-10-16T20:47:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4653
