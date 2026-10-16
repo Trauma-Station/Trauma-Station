@@ -15817,3 +15817,10 @@ Entries:
   id: 1719
   time: '2026-10-16T07:14:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5054
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Gauss ammo is now correctly available in the sec techfab on blue alert.
+  id: 1720
+  time: '2026-10-16T08:35:56.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5050
