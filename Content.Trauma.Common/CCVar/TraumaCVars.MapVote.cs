@@ -20,9 +20,8 @@ public sealed partial class TraumaCVars
         CVarDef.Create("trauma.automatic_map_vote", true, CVar.SERVER);
 
     /// <summary>
-    /// How many players must be connected to the server for the map vote to appear automatically.
-    /// Prevents 50 player Reach rounds after a server restart.
+    /// How much to delay the vote after a server restart, so we don't force 50 players to play on Reach.
     /// </summary>
-    public static readonly CVarDef<int> AutoMapVoteMinPlayers =
-        CVarDef.Create("trauma.automatic_map_vote_min_players", 5, CVar.SERVER);
+    public static readonly CVarDef<TimeSpan> AutoMapVoteDelay =
+        CVarDef.Create("trauma.automatic_map_vote_delay", TimeSpan.FromMinutes(1), CVar.SERVER);
 }
