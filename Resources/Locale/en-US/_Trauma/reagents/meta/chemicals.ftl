@@ -90,3 +90,6 @@ reagent-desc-unliquid = The incomprehensible mess resulting from improper mixing
 
 reagent-name-liquid-soul = liquid soul
 reagent-desc-liquid-soul = A disgusting vicious ichor made from the soul of a corrupted spirt
+
+reagent-name-alchemical-precursor = alchemical precursor
+reagent-desc-alchemical-precursor = a chemical often used in alchemy, known for being essentially required for some recipes.

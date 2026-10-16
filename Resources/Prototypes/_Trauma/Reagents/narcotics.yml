@@ -213,8 +213,10 @@
 - type: reagent
   id: LiquidSoul
   name: reagent-name-liquid-soul
+  group: Narcotics
   desc: reagent-desc-liquid-soul
   physicalDesc: reagent-physical-desc-shiny
+  contrabandSeverity: Magical
   color: "#b9f2ff"
   slipData:
     requiredSlipSpeed: 3.5

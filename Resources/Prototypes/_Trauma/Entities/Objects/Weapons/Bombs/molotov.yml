@@ -167,8 +167,8 @@
 - type: entity
   parent: BaseMolotov
   id: GlitchMolotov
-  name: unobtainium molotov
-  description: throwable explosive.
+  name: void molotov
+  description: throwable paradoxical explosive.
   components:
   - type: PointLight
     enabled: true

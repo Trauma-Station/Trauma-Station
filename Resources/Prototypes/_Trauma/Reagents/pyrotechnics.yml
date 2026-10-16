@@ -257,7 +257,7 @@
   group: Pyrotechnic
   desc: reagent-desc-unknown-reagent
   physicalDesc: reagent-physical-desc-blazing
-  contrabandSeverity: Major
+  contrabandSeverity: Magical
   color: "#ff00ff"
   tileReactions:
   - !type:CreateEntityTileReaction

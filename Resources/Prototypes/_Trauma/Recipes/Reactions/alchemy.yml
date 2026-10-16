@@ -1,0 +1,151 @@
+- type: reaction
+  id: HolyUnholyWater
+  reactants:
+    Holywater:
+      amount: 1
+    Unholywater:
+      amount: 1
+  products:
+    Water: 2
+
+- type: reaction
+  id: HolyUnholyOil
+  reactants:
+    HolyOil:
+      amount: 1
+    UnholyOil:
+      amount: 1
+  products:
+    Oil: 3 # Don't ask.
+
+- type: reaction
+  id: Unliquid1
+  reactants:
+    HolyOil:
+      amount: 1
+    Unholywater:
+      amount: 1
+  products:
+    Unliquid: 2
+  effects:
+  - !type:Explosion
+    explosionType: Default
+    intensityPerUnit: 0.1
+    maxTotalIntensity: 12
+    intensitySlope: 2
+    maxIntensity: 3
+
+- type: reaction
+  id: Unliquid2
+  reactants:
+    UnholyOil:
+      amount: 1
+    Holywater:
+      amount: 1
+  products:
+    Unliquid: 2
+  effects:
+  - !type:Explosion
+    explosionType: Default
+    intensityPerUnit: 0.1
+    maxTotalIntensity: 12
+    intensitySlope: 2
+    maxIntensity: 3
+
+- type: reaction
+  id: LiquidSoulSynthesis
+  reactants:
+    Cognizine:
+      amount: 15
+    Unliquid:
+      amount: 5
+    Ash:
+      amount: 7
+    Fat:
+      amount: 3
+    Blood:
+      amount: 10
+    Wine:
+      amount: 2
+    UnknownReagent:
+      amount: 3
+  products:
+    LiquidSoul: 1
+
+- type: reaction
+  id: DemonSoulSolidification
+  reactants:
+    UnholyOil:
+      amount: 5
+    LiquidSoul:
+      amount: 5
+    Fat:
+      amount: 4
+    UniversalEnzyme: # It really is universal!
+      amount: 1
+      catalyst: true
+  effects:
+  - !type:SpawnEntity
+    entity: DemonSoulFragment
+  - !type:AdjustSolutionThermalEnergy
+    delta: 50
+
+- type: reaction
+  id: PureSoulSolidification
+  reactants:
+    HolyOil:
+      amount: 5
+    LiquidSoul:
+      amount: 5
+    Fat:
+      amount: 4
+    UniversalEnzyme:
+      amount: 1
+      catalyst: true
+  effects:
+  - !type:SpawnEntity
+    entity: PurifiedDemonSoulFragment
+  - !type:AdjustSolutionThermalEnergy
+    delta: 50
+
+- type: reaction
+  id: AlchemicalPrecursorTemporary # todo: rng recipes in chem
+  reactants:
+    LiquidSoul: # should be a constant
+      amount: 5
+    NitratedSlurry:
+      amount: 0.5
+    Lead:
+      amount: 30
+    CopperBlood:
+      amount: 15
+  products:
+    AlchemicalPrecursor: 45
+
+- type: reaction
+  id: HolyCLF3Alchemy
+  reactants:
+    AlchemicalPrecursor:
+      amount: 30 # better have that batch ready
+    HolyOil:
+      amount: 15
+    Silver:
+      amount: 30
+      catalyst: true
+  products:
+    AlchemicalPrecursor: 25
+    HolyChlorineTrifluoride: 5
+
+- type: reaction
+  id: BurniteAlchemy
+  reactants:
+    AlchemicalPrecursor:
+      amount: 30 # better have that batch ready
+    UnholyOil:
+      amount: 15
+    Sulfur:
+      amount: 30
+      catalyst: true
+  products:
+    AlchemicalPrecursor: 25
+    Burnite: 5

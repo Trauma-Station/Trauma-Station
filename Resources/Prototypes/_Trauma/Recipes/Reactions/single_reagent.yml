@@ -98,3 +98,13 @@
       amount: 1
   products:
     Unholywater: 1
+
+- type: reaction
+  id: AlchemicalPrecursorBurn
+  minTemp: 450
+  reactants:
+    AlchemicalPrecursor:
+      amount: 1
+  products:
+    Ash: 0.1
+    LiquidSoul: 0.1
