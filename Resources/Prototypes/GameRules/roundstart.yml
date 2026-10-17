@@ -56,6 +56,8 @@
       prob: 0.1
     - id: SubChangeling
       prob: 0.05 # extinct predator species...
+    - id: FreedomFightersRuleRandom
+      prob: 0.08
     # </Trauma>
 
 - type: entity
@@ -81,6 +83,8 @@
       prob: 0.02
     - id: SubChangeling
       prob: 0.5
+    - id: FreedomFightersRuleRandom
+      prob: 0.08
     # </Trauma>
 
 - type: entity

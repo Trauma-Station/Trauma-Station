@@ -205,18 +205,11 @@
         max: 4
 
 - type: entity
-  parent: BaseGameRule
+  parent: [ BaseFreedomFightersRule, BaseRoundstartAntagRule ]
   id: FreedomFightersRuleRandom
   components:
   - type: GameRule
-    minPlayers: 10
-  - type: NestedRule
-    rules: !type:GroupSelector
-      children:
-      - id: InsurgencyShipVariantTide
-        weight: 30
-      - id: InsurgencyShipVariantInsurgents
-        weight: 70
+    minPlayers: 0
 
 - type: entity
   parent: BaseGameRule
@@ -250,5 +243,5 @@
       proto: FreedomFighter
       range:
         min: 1
-        max: 5
-      playerRatio: 10
+        max: 4
+      playerRatio: 1

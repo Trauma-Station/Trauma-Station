@@ -72,3 +72,21 @@
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRule
   - SpyRuleRoundstart
+
+- type: gamePreset
+  id: FreedomFighters
+  alias:
+  - freedom fighter
+  - freedom fighters
+  name: freedom-fighters-title
+  description: freedom-fighters-description
+  showInVote: false
+  rules:
+  - BasicRoundstartVariation
+  - BasicStationEventScheduler
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - SubGamemodesRule
+  - FreedomFightersRuleRandom

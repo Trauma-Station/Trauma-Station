@@ -8,7 +8,10 @@
   setPreference: true
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 5h
+    time: 5h 
+  - !type:DepartmentTimeRequirement
+    department: Security
+    time: 0h # Change this 2h
   guides: [ Insurgents ] # Change this
 
 - type: antagSpecifier
@@ -16,7 +19,7 @@
   spawnerPrototype: GhostRoleSpawnerFreedomFighter
   startingGear: FreedomFighter
   unequipOldGear: true
-  prefRoles: [ GenericTeamAntagonist ]
+  prefRoles: [ Insurgent ] # They only spawn with this setting, don't know why
   mindRoles: [ MindRoleFreedomFighter ]
   roleLoadout: [ RoleSurvivalAntagSmall ]
   components:

@@ -24,4 +24,7 @@ roles-antag-freedom-fighter-objective = Bring liberty to the station by any mean
 
 freedom-fighter-round-end-agent-name = freedom fighter
 
+freedom-fighters-title = Freedom fighters
+freedom-fighters-description = Together we're stronger! Together we're stronger.
+
 never-shown = !
