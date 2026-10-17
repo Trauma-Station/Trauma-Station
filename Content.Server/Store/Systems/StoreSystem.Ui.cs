@@ -127,7 +127,9 @@ public sealed partial class StoreSystem
         }
 
         // <Trauma>
-        OnPurchase(listing);
+        if (!TryUpdateRestockTime(listing))
+            return;
+
         if (Mind.TryGetMind(buyer, out var mindId, out _))
         {
             var ev = new ListingPurchasedEvent(buyer, uid, listing);
@@ -306,13 +308,6 @@ public sealed partial class StoreSystem
 
         UpdateUserInterface(buyer, uid, component);
         UpdateRefundUserInterface(uid, component); // Goobstation
-        if (listing.ResetRestockOnPurchase) // goobstation edit start
-        {
-            // making sure that you cant buy some stuff endlessly if they are not meant to
-            var restockDuration = listing.RestockAfterPurchase ?? listing.RestockTime; // Just use the value directly.
-            listing.RestockTime = _timing.CurTime.Subtract(_ticker.RoundStartTimeSpan) + restockDuration;
-        } // goob edit end
-
     }
 
     /// <summary>
