@@ -22,7 +22,7 @@ public sealed partial class PassiveDamageComponent : Component
     /// </summary>
     [DataField]
     public bool PauseWhenStored = false; // Trauma
-    
+
     /// <summary>
     /// Damage / Healing per interval dealt to the entity every interval
     /// </summary>

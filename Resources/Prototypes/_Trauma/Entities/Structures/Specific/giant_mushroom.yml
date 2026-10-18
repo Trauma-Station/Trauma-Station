@@ -1,4 +1,6 @@
-﻿- type: entity
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
   abstract: true
   id: BaseGiantMushroom
   parent: BaseStructure
@@ -64,7 +66,7 @@
       intervalSeconds: 40
       minimumEntitiesSpawned: 2
       maximumEntitiesSpawned: 5
-      
+
 - type: entity
   id: GiantMushroom
   parent: BaseGiantMushroom
@@ -84,7 +86,7 @@
             top1: Rainbow
             top2: Rainbow
             top3: Rainbow
-            
+
 - type: entity
   id: LesserMushroom
   parent: BaseGiantMushroom

@@ -1,4 +1,6 @@
-﻿- type: entity
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
   id: GiantSpore
   parent: [ BaseSimpleMob, FlyingMobBase ]
   name: giant spore
@@ -74,7 +76,7 @@
   - type: EntityTableSpawner
     table: !type:NestedSelector
       tableId: GiantSporeSpawnTable
-    
+
 - type: entityTable
   id: GiantSporeSpawnTable
   offset: 0.5

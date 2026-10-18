@@ -1,4 +1,6 @@
-﻿- type: gas
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: gas
   id: Fungalin
   name: gas-fungalin
   abbreviation: gas-fungalin-abbreviation

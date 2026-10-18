@@ -101,7 +101,7 @@
     amount: -15
   - !type:PlantAdjustHealth
     amount: 3
-    
+
 - type: reagent
   id: Fungalin
   name: reagent-name-fungalin
