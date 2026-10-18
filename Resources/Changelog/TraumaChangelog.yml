@@ -15885,3 +15885,12 @@ Entries:
   id: 1725
   time: '2026-10-17T23:40:00.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5066
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed getting infinite nukies by cancelling the battlecruiser side job.
+  - type: Fix
+    message: Fixed soul shards not being able to use blood cult collective mind.
+  id: 1726
+  time: '2026-10-18T11:18:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5075
