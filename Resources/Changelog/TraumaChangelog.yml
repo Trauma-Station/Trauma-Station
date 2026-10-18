@@ -15905,3 +15905,10 @@ Entries:
   id: 1727
   time: '2026-10-18T23:11:11.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5038
+- author: UnionsCap
+  changes:
+  - type: Tweak
+    message: Renamed languages affected by lore.
+  id: 1728
+  time: '2026-10-18T23:17:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5071
