@@ -2,28 +2,27 @@
 SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
-<Control xmlns="https://spacestation14.io">
+<Control xmlns="https://spacestation14.io"
+        xmlns:controls="using:Content.Client.UserInterface.Controls">
     <BoxContainer Margin="8,8,8,8" Orientation="Vertical">
         <BoxContainer Orientation="Horizontal">
             <Label Name="NameLabel" HorizontalExpand="True" />
-            <Button
+            <controls:ConfirmButton
                 Name="CancelButton"
                 StyleClasses="negative"
                 MinWidth="64"
                 HorizontalAlignment="Right"
-                Access="Public"
-                Text="{Loc job-listings-ui-cancel-button}"/>
+                Text="Cancel"
+                ConfirmationText="Sure?"/>
             <Button
                 Name="AcceptButton"
                 MinWidth="64"
                 HorizontalAlignment="Right"
-                Access="Public"
                 Text="{Loc job-listings-ui-accept-button}"/>
             <Button
                 Name="ClaimButton"
                 MinWidth="64"
                 HorizontalAlignment="Right"
-                Access="Public"
                 Text="{Loc job-listings-ui-claim-button}"/>
         </BoxContainer>
         <PanelContainer StyleClasses="HighDivider" />
