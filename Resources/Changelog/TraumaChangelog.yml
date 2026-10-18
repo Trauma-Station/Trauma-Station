@@ -15912,3 +15912,10 @@ Entries:
   id: 1728
   time: '2026-10-18T23:17:08.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5071
+- author: ClockworkRust
+  changes:
+  - type: Tweak
+    message: Weapon quality now impacts damage.
+  id: 1729
+  time: '2026-10-18T23:22:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5082
