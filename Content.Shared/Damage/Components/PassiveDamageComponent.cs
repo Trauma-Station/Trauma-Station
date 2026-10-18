@@ -18,6 +18,12 @@ public sealed partial class PassiveDamageComponent : Component
     public List<MobState>? AllowedStates; // Trauma - nullable, default to null
 
     /// <summary>
+    /// Disables the passive health change when the entity is inside a container
+    /// </summary>
+    [DataField]
+    public bool PauseWhenStored = false; // Trauma
+    
+    /// <summary>
     /// Damage / Healing per interval dealt to the entity every interval
     /// </summary>
     [DataField, AutoNetworkedField]

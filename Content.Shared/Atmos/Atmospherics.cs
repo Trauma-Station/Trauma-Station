@@ -224,7 +224,7 @@ namespace Content.Shared.Atmos
         /// <summary>
         ///     Total number of gases. Increase this if you want to add more!
         /// </summary>
-        public const int TotalNumberOfGases = 13; // Assmos - /tg/ gases
+        public const int TotalNumberOfGases = 14; // Assmos - /tg/ gases  // Trauma
 
         /// <summary>
         ///     This is the actual length of the gases arrays in mixtures.
@@ -418,5 +418,6 @@ namespace Content.Shared.Atmos
         Healium = 10, // Assmos - /tg/ gases
         Nitrium = 11, // Assmos - /tg/ gases
         Pluoxium = 12, // Assmos - /tg/ gases
+        Fungalin = 13 // Trauma
     }
 }
