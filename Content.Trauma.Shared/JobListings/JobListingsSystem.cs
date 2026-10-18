@@ -67,23 +67,30 @@ public abstract partial class JobListingsSystem : EntitySystem
     /// <summary>
     /// Cancel an already accepted job.
     /// </summary>
-    public void CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
+    public bool CancelSideJob(Entity<JobListingsComponent> jobBoard, EntityUid sideJob)
     {
+        if (!jobBoard.Comp.AcceptedSideJobs.Contains(sideJob) ||
+            !SideJobQuery.TryComp(sideJob, out var sideJobComp) ||
+            !sideJobComp.CanCancel)
+            return false;
+
         PredictedDel(sideJob);
+        return true;
     }
 
     /// <summary>
     /// Claim a completed job and retrieve the rewards.
     /// </summary>
-    public void ClaimSideJob(Entity<JobListingsComponent> jobBoard, EntityUid actor, EntityUid sideJob)
+    public bool ClaimSideJob(Entity<JobListingsComponent> jobBoard, EntityUid actor, EntityUid sideJob)
     {
-        if (jobBoard.Comp.Mind is not { } mind || !MindQuery.TryComp(mind, out var mindComp))
-            return;
+        if (!jobBoard.Comp.AcceptedSideJobs.Contains(sideJob) ||
+            jobBoard.Comp.Mind is not { } mind || !MindQuery.TryComp(mind, out var mindComp) ||
+            !SideJobQuery.TryComp(sideJob, out var sideJobComp))
+            return false;
+
         var progress = Objectives.GetProgress(sideJob, (mind, mindComp));
         if (progress < 0.999f)
-            return;
-        if (!SideJobQuery.TryComp(sideJob, out var sideJobComp))
-            return;
+            return false;
 
         if (sideJobComp.Reward is not null)
         {
@@ -101,6 +108,7 @@ public abstract partial class JobListingsSystem : EntitySystem
         jobBoard.Comp.JobsCompleted += 1;
         DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.JobsCompleted));
         PredictedDel(sideJob);
+        return true;
     }
 
     /// <summary>
@@ -378,27 +386,30 @@ public abstract partial class JobListingsSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnMessage(Entity<RemoteJobListingsComponent> ent, ref JobListingsAcceptJobMessage msg)
     {
-        if (GetJobBoard(ent.Owner) is not { } jobBoard)
+        if (GetJobBoard(ent.Owner) is not { } jobBoard ||
+            !AcceptSideJob(jobBoard, msg.Actor, GetEntity(msg.Job)))
             return;
-        AcceptSideJob(jobBoard, msg.Actor, GetEntity(msg.Job));
+
         UpdateUi(ent.Owner, msg.Actor);
     }
 
     [SubscribeLocalEvent]
     private void OnMessage(Entity<RemoteJobListingsComponent> ent, ref JobListingsClaimJobMessage msg)
     {
-        if (GetJobBoard(ent.Owner) is not { } jobBoard)
+        if (GetJobBoard(ent.Owner) is not { } jobBoard ||
+            !ClaimSideJob(jobBoard, msg.Actor, GetEntity(msg.Job)))
             return;
-        ClaimSideJob(jobBoard, msg.Actor, GetEntity(msg.Job));
+
         UpdateUi(ent.Owner, msg.Actor);
     }
 
     [SubscribeLocalEvent]
     private void OnMessage(Entity<RemoteJobListingsComponent> ent, ref JobListingsCancelJobMessage msg)
     {
-        if (GetJobBoard(ent.Owner) is not { } jobBoard)
+        if (GetJobBoard(ent.Owner) is not { } jobBoard ||
+            !CancelSideJob(jobBoard, GetEntity(msg.Job)))
             return;
-        CancelSideJob(jobBoard, GetEntity(msg.Job));
+
         UpdateUi(ent.Owner, msg.Actor);
     }
 
