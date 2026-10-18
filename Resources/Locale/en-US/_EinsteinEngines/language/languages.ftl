@@ -5,7 +5,7 @@ language-Psychomantic-name = Psychomantic
 language-Psychomantic-description = Pure meaning, free from the tyranny of primative words and gestures.
 
 language-Bubblish-name = Oob'Mola'R-ien
-language-Bubblish-description = The strange bubbling and popping of the Oob'Mola mimic human structure without any foundation. It is spoken by the remnants of the slime hivemind and the humanized descendants.
+language-Bubblish-description = The strange bubbling and popping of the Oob'Mola, mimic human structure without any foundation. It is spoken by the remnants of the slime hivemind and the humanized descendants.
 
 
 language-RootSpeak-name = Rootspeak
