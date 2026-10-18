@@ -9,6 +9,7 @@
   name: changeling-gamemode-title
   description: changeling-gamemode-description
   showInVote: false
+  minPlayers: 20
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler
@@ -29,6 +30,7 @@
   name: traitorling-title
   description: traitorling-description
   showInVote: false
+  minPlayers: 25
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler
@@ -48,6 +50,7 @@
   name: nukeops-title
   description: nukeops-description
   showInVote: false
+  minPlayers: 40
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler
@@ -66,6 +69,7 @@
   name: nukeops-title
   description: nukeops-description
   showInVote: false
+  minPlayers: 40
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler
@@ -85,6 +89,7 @@
   name: revtraitor-title
   description: revtraitor-description
   showInVote: false
+  minPlayers: 25
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler
@@ -103,6 +108,7 @@
   name: revling-title
   description: revling-description
   showInVote: false
+  minPlayers: 25
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler
@@ -120,6 +126,7 @@
   name: blob-title
   description: blob-description
   showInVote: false
+  minPlayers: 40
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler
@@ -137,6 +144,7 @@
   name: honkops-title
   description: honkops-description
   showInVote: false
+  minPlayers: 40
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler

@@ -2,6 +2,7 @@
 
 - type: gamePreset
   id: AllAtOnce
+  minPlayers: 60
   rules:
   - Thief
   - HereticRoundstart
@@ -16,6 +17,7 @@
 
 - type: gamePreset
   id: AllerAtOnce
+  minPlayers: 60
   rules:
   - BasicAntagEventScheduler
   - ModerateAntagEventScheduler
@@ -33,11 +35,13 @@
 
 - type: gamePreset
   id: Secret
+  minPlayers: 0
   rules:
   - InsurgencyRuleRandom
 
 - type: gamePreset
   id: Traitor
+  minPlayers: 15
   rules:
   - !Remove SubGamemodesRuleNoWizard
   - SubGamemodesRule
@@ -46,6 +50,7 @@
 
 - type: gamePreset
   id: Nukeops
+  minPlayers: 20
   rules:
   - !Remove SubGamemodesRuleNoWizard
   - BasicAntagEventScheduler
@@ -53,6 +58,7 @@
 
 - type: gamePreset
   id: Revolutionary
+  minPlayers: 20
   rules:
   - !Remove SubGamemodesRuleNoWizard
   - SubGamemodesRule
@@ -61,6 +67,7 @@
 
 - type: gamePreset
   id: Wizard
+  minPlayers: 10
   alias:
   - wiz
   rules:
@@ -70,6 +77,7 @@
 
 - type: gamePreset
   id: Xenoborgs
+  minPlayers: 35
   rules:
   - !Remove MeteorSwarmScheduler
   - !Remove SubGamemodesRuleNoWizardNoXenoborg
@@ -79,12 +87,46 @@
 
 - type: gamePreset
   id: Zombie
+  minPlayers: 20
   rules:
   - BasicAntagEventScheduler
   - ModerateAntagEventScheduler
 
 - type: gamePreset
   id: Zombieteors
+  minPlayers: 20
   rules:
   - BasicAntagEventScheduler
   - ModerateAntagEventScheduler
+
+- type: gamePreset
+  id: Deathmatch
+  minPlayers: 0
+
+- type: gamePreset
+  id: Sandbox
+  minPlayers: 0
+
+- type: gamePreset
+  id: Dynamic
+  minPlayers: 0
+
+- type: gamePreset
+  id: Extended
+  minPlayers: 0
+
+- type: gamePreset
+  id: Greenshift
+  minPlayers: 0
+
+- type: gamePreset
+  id: KesslerSyndrome
+  minPlayers: 0
+
+- type: gamePreset
+  id: Traitor
+  minPlayers: 15
+
+- type: gamePreset
+  id: Survival
+  minPlayers: 5

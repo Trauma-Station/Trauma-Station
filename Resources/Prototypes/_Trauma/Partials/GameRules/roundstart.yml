@@ -1,0 +1,223 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: SubGamemodesRule
+  components:
+  - type: SubGamemodes
+    rules: !Clear
+    - id: SubHeretic
+      prob: 0.1
+    - id: Devil
+      prob: 0.05
+    - id: ShadowlingRoundstart
+      prob: 0.05
+    - id: SubDuoAbductor
+      prob: 0.05
+    - id: WraithRoundstart
+      prob: 0.02
+    - id: SubVampire
+      prob: 0.1
+    - id: SubChangeling
+      prob: 0.05
+
+- type: entity
+  id: SubGamemodesRuleNoWizard
+  components:
+  - type: SubGamemodes
+    rules: !Clear
+    - id: SubHeretic
+      prob: 0.2
+    - id: Devil
+      prob: 0.02
+    - id: ShadowlingRoundstart
+      prob: 0.02
+    - id: SubDuoAbductor
+      prob: 0.05
+    - id: WraithRoundstart
+      prob: 0.02
+    - id: SubChangeling
+      prob: 0.5
+
+- type: entity
+  id: SubGamemodesRuleNoXenoborg
+  components:
+  - type: SubGamemodes
+    rules: !Clear
+    - id: SubHeretic
+      prob: 0.2
+    - id: Devil
+      prob: 0.02
+    - id: ShadowlingRoundstart
+      prob: 0.02
+    - id: SubDuoAbductor
+      prob: 0.05
+    - id: WraithRoundstart
+      prob: 0.02
+    - id: SubVampire
+      prob: 0.2
+    - id: SubChangeling
+      prob: 0.05
+
+- type: entity
+  id: SubGamemodesRuleNoWizardNoXenoborg
+  components:
+  - type: SubGamemodes
+    rules: !Clear
+    - id: SubChangeling
+      prob: 0.25
+
+- type: entity
+  id: BaseNukeopsRule
+  components:
+  - type: NewAntagOrEvac
+  - type: AntagSelection
+    agentName: nukeops-roundend-name
+  - type: AntagLoadProfileRule
+    speciesOverride: Human
+    speciesOverrideBlacklist:
+    - Plasmaman
+  - type: AntagObjectives
+    objectives:
+    - NukeopsDetonateObjective
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: InstallHypoportNukie
+    - !type:InstallOrganChip
+      chip: SkillChipNukie
+
+- type: entity
+  id: Nukeops
+  components:
+  - type: GameRule
+    minPlayers: 40
+  - type: LoadMapRule
+    mapPath: /Maps/_Trauma/Nonstations/nukieplanet.yml
+  - type: AntagSelection
+    antags: !Clear
+    - !type:FixedAntagCount
+      proto: NukeopsCommander
+    - !type:FixedAntagCount
+      proto: NukeopsMedic
+    - !type:LinearAntagCount
+      proto: NukeopsOperative
+      range:
+        min: 1
+        max: 10
+      playerRatio: 16
+
+- type: entity
+  abstract: true
+  id: BaseTraitorRuleNoObjectives
+  components:
+  - type: RoundEndJobListingsInfo
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: TraitorSkills
+  - !Remove type: AntagRandomObjectives
+
+- type: entity
+  id: Traitor
+  components:
+  - type: GameRule
+    minPlayers: 5
+    delay: !Clear
+  - type: AntagSelection
+    lateJoinAdditional: true
+    antags: !Clear
+    - !type:LinearAntagCount
+      playerRatio: 6
+      proto: Traitor
+      range:
+        min: 1
+        max: 8
+
+- type: entity
+  id: Revolutionary
+  components:
+  - type: MindshieldRemovingAntag # puts fake mindshields into headrevs that start with a real one
+  - type: GameRule
+    minPlayers: 20
+  - type: AntagSelection
+    selectionTime: PrePlayerSpawn
+    antags: !Clear
+    - !type:LinearAntagCount
+      proto: HeadRev
+      playerRatio: 10
+      range:
+        min: 1
+        max: 3
+
+- type: entity
+  abstract: true
+  id: BaseWizardRule
+  components:
+  - type: WizardRule
+  - type: GameRule
+    minPlayers: 30
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: WizardSkills
+  - type: AntagObjectives
+    objectives:
+    - WizardSurviveObjective
+    - !Remove WizardDemonstrateObjective
+  - type: LoadMapRule
+    mapPath: /Maps/_Goobstation/Nonstations/wizden.yml
+  - type: AntagLoadProfileRule
+    speciesOverrideBlacklist:
+    - Plasmaman
+
+- type: entity
+  id: Wizard
+  components:
+  - type: GameRule
+    minPlayers: 30
+
+- type: entity
+  abstract: true
+  id: BaseXenoborgsRule
+  components:
+  - type: DynamicRuleCost
+    cost: 200
+
+- type: entityTable
+  id: BasicGameRulesTable
+  table: !type:AllSelector
+    children: !Clear
+    - !type:NestedSelector
+      tableId: BasicCalmEventsTable
+    - !type:NestedSelector
+      tableId: CargoGiftsTable
+    - !type:NestedSelector
+      tableId: CalmPestEventsTable
+    - !type:NestedSelector
+      tableId: SpicyPestEventsTable
+
+- type: entityTable
+  id: DynamicGameRulesTable
+  table: !type:AllSelector
+    children:
+    - !type:NestedSelector
+      tableId: BasicCalmEventsTable
+    - !type:NestedSelector
+      tableId: BasicAntagEventsTable
+
+- type: entity
+  id: BasicStationEventScheduler
+  components:
+  - type: BasicStationEventScheduler
+    minimumTimeUntilFirstEvent: 300 #5 min
+    minMaxEventTiming:
+      min: 300 # 5 min
+      max: 600 # 10 min
+
+- type: entity
+  id: BasicRoundstartVariation
+  parent: BaseSilentGameRule
+  components:
+  - type: RoundstartStationVariationRule
+    rules:
+    - !Remove id: BasicDecalGraffitiVariationPass
