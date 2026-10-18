@@ -15878,3 +15878,10 @@ Entries:
   id: 1724
   time: '2026-10-16T20:47:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4653
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix being able to spambuy multiple reinforcements bypassing restock timer.
+  id: 1725
+  time: '2026-10-17T23:40:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5066
