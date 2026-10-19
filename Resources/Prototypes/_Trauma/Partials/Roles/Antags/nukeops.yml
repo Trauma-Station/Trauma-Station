@@ -11,3 +11,8 @@
 - type: antag
   id: NukeopsCommander
   dontShowInCredits: true
+
+- type: startingGear
+  id: SyndicateOperativeMedicFull
+  equipment:
+    eyes: ClothingEyesHudSyndicateAgent
