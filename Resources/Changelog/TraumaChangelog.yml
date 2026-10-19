@@ -15855,3 +15855,74 @@ Entries:
   id: 1723
   time: '2026-10-16T09:06:52.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5059
+- author: ReestockMakes
+  changes:
+  - type: Tweak
+    message: >-
+      Chaplains are now legally allowed to be enchanters, and have new means to
+      do so.
+  - type: Tweak
+    message: >-
+      Chaplains can once again enchant at altars, everyone else still needs to
+      work for it.
+  - type: Tweak
+    message: Blood is no longer inherent to crafting magic ink.
+  - type: Add
+    message: >-
+      Holy ash can be obtained from cremation and used for enchanting. (See
+      chaplain guidebook entry.)
+  - type: Tweak
+    message: >-
+      You can no longer get a bible at an 83% discount by buying morgue
+      supplies.
+  id: 1724
+  time: '2026-10-16T20:47:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4653
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix being able to spambuy multiple reinforcements bypassing restock timer.
+  id: 1725
+  time: '2026-10-17T23:40:00.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5066
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed getting infinite nukies by cancelling the battlecruiser side job.
+  - type: Fix
+    message: Fixed soul shards not being able to use blood cult collective mind.
+  id: 1726
+  time: '2026-10-18T11:18:41.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5075
+- author: NoElkaTheGod
+  changes:
+  - type: Remove
+    message: Removed roundstart blob. It can still appear as a midround antagonist.
+  - type: Tweak
+    message: >-
+      Traitors and revolutionaries are now rarer, other gamemodes are now more
+      common.
+  id: 1727
+  time: '2026-10-18T23:11:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5038
+- author: UnionsCap
+  changes:
+  - type: Tweak
+    message: Renamed languages affected by lore.
+  id: 1728
+  time: '2026-10-18T23:17:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5071
+- author: ClockworkRust
+  changes:
+  - type: Tweak
+    message: Weapon quality now impacts damage.
+  id: 1729
+  time: '2026-10-18T23:22:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5082
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Fixed a number of guns not being able to melee attack (over 30!)
+  id: 1730
+  time: '2026-10-19T11:25:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4906

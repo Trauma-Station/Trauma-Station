@@ -15,6 +15,7 @@
       map: [ "enum.SoulShardVisualState.Glow" ]
       visible: false
   - type: CollectiveMind
+    canUseInCrit: true # this counts as dead...
     defaultChannel: BloodCult
     channels:
     - BloodCult

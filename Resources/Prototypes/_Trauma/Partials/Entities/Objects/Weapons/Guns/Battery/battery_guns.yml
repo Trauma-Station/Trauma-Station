@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseStockHit
+  id: BaseWeaponBatteryNoAmmoCounter
+  abstract: true
+  components:
+  - type: EmitSoundOnPickup
+    sound:
+      collection: LasersPickUp
+  - type: EmitSoundOnDrop
+    sound:
+      collection: LasersDrop
+  - type: EmitSoundOnLand
+    sound:
+      collection: LasersDrop
+  - type: Cautery
+    speed: 0.9
+  - type: SurgeryTool
+    endSound:
+      path: /Audio/Weapons/Guns/Gunshots/laser.ogg
+  - type: AlwaysHot
+  - type: BatteryDrinkerSource
+    maxAmount: 180 # you probably don't want to drain your entire gun charging in battle
+  - type: WeaponClass
+    class: Laser
+
+- type: entity
+  abstract: true
+  parent: [BaseWeaponBatterySmallNoAmmoCounter, BasePistolWhip]
+  id: BaseWeaponBatterySmall
+
+
+- type: entity
+  abstract: true
+  parent: BasePistolWhip
+  id: BaseWeaponPowerCellSmall
+
+- type: entity
+  parent: BaseStockHit
+  id: BaseWeaponPowerCell
+  abstract: true
+  components:
+  - type: Cautery
+    speed: 0.9
+  - type: SurgeryTool
+    endSound:
+      path: /Audio/Weapons/Guns/Gunshots/laser.ogg
+  - type: AlwaysHot

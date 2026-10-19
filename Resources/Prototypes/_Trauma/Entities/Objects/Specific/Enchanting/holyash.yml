@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseItem
+  id: HolyAsh
+  name: holy ash
+  description: The byproduct of a consecrated cremation. It can be made into a magical ink by mixing it into a bottle.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Enchanting/holyash.rsi
+    state: icon
+  - type: Item
+    size: Tiny
+    sprite: _Trauma/Objects/Enchanting/holyash.rsi
+  - type: PointLight
+    enabled: true
+    radius: 2
+    energy: 3
+    color: "#f5f0b2"
+  - type: GuideHelp
+    guides:
+    - Enchanting
+  - type: Tag
+    tags:
+    - DemonEssense

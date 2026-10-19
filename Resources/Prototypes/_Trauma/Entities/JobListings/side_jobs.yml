@@ -180,6 +180,7 @@
       state: icon
   - type: SideJob
     tool: SyndicateBroadcastDevice
+    canCancel: false # no infinite nukies farming
   - type: StealCondition
     objectiveText: side-job-hack-comms-computer-name
     objectiveNoOwnerText: side-job-hack-comms-computer-name
