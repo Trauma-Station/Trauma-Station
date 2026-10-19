@@ -26,27 +26,8 @@
       damageModifierSet: Biological
     - type: Injurable
       damageContainer: Biological
-    - type: Destructible
-      thresholds:
-        - trigger:
-            !type:DamageTrigger
-            damage: 50
-          behaviors:
-            - !type:SpawnGasBehavior
-              gasMixture:
-                volume: 1000
-                moles:
-                  Fungalin: 25
-                temperature: 373.15
-            - !type:DoActsBehavior
-              acts: ["Destruction"]
     - type: AtmosDevice
       requireAnchored: false
-    - type: GasMiner
-      maxExternalPressure: 200
-      spawnAmount: 0.25
-      spawnGas: Fungalin
-      showExamineText: false
 
 - type: entity
   id: MomMushroom
@@ -66,6 +47,25 @@
       intervalSeconds: 40
       minimumEntitiesSpawned: 2
       maximumEntitiesSpawned: 5
+    - type: GasMiner
+      maxExternalPressure: 200
+      spawnAmount: 0.40
+      spawnGas: Fungalin
+      showExamineText: false
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 150
+          behaviors:
+            - !type:SpawnGasBehavior
+              gasMixture:
+                volume: 1000
+                moles:
+                  Fungalin: 50
+                temperature: 373.15
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
 
 - type: entity
   id: GiantMushroom
@@ -86,6 +86,25 @@
             top1: Rainbow
             top2: Rainbow
             top3: Rainbow
+    - type: GasMiner
+      maxExternalPressure: 200
+      spawnAmount: 0.25
+      spawnGas: Fungalin
+      showExamineText: false
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 50
+          behaviors:
+            - !type:SpawnGasBehavior
+              gasMixture:
+                volume: 1000
+                moles:
+                  Fungalin: 25
+                temperature: 373.15
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
 
 - type: entity
   id: LesserMushroom
@@ -106,6 +125,11 @@
             top1: Rainbow
             top2: Rainbow
             top3: Rainbow
+    - type: GasMiner
+      maxExternalPressure: 200
+      spawnAmount: 0.10
+      spawnGas: Fungalin
+      showExamineText: false
     - type: Destructible
       thresholds:
         - trigger:

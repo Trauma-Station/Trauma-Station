@@ -111,8 +111,6 @@
   flavor: tingly
   color: "#450631"
   plantMetabolism:
-    - !type:PlantMutateExudeGases
-      spawnGas: Fungalin
     - !type:PlantAdjustNutrition
       amount: -1
     - !type:PlantAdjustToxins
