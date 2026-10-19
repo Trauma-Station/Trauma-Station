@@ -15919,3 +15919,10 @@ Entries:
   id: 1729
   time: '2026-10-18T23:22:28.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5082
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Fixed a number of guns not being able to melee attack (over 30!)
+  id: 1730
+  time: '2026-10-19T11:25:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4906
