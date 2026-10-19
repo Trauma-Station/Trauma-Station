@@ -1,0 +1,57 @@
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: WeaponPrimeKineticAcceleratorBase
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Basic/prime_kinetic_bolter.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Guns/Basic/prime_kinetic_bolter.rsi
+    size: Large
+    shape:
+    - 0,0,3,1
+  - type: Gun
+    fireRate: 2.5
+    selectedMode: SemiAuto
+    minAngle: 1
+    maxAngle: 5
+    projectileSpeed: 25
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/kinetic_accel.ogg
+      params:
+        volume: -5
+  - type: AmmoCounter
+  - type: Appearance
+  - type: GenericVisualizer
+    visuals:
+      enum.AmmoVisuals.HasAmmo:
+        empty-icon:
+          True: { visible: False }
+          False: { visible: True }
+  - type: RechargeBasicEntityAmmo
+    rechargeCooldown: 2.5
+    rechargeSound:
+      path: /Audio/Weapons/Guns/MagIn/kinetic_reload.ogg
+      params:
+        volume: -5
+  - type: BasicEntityAmmoProvider
+    proto: BulletKineticPrime
+    capacity: 1
+    count: 1
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Guns/Basic/prime_kinetic_bolter.rsi
+    quickEquip: false
+    slots:
+    - suitStorage
+    - Belt
+  - type: UseDelay
+    delay: 1
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 250
+      Glass: 125
+      Silver: 25
+  - type: WeaponClass
+    class: Mining

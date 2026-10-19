@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: BulletKineticPrime
+  name: prime kinetic bolt
+  parent: BulletKinetic
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 16
+  - type: TimedDespawn
+    lifetime: 2 # So you can actually use it in a firefight
+  - type: ProjectileThrowOnHit
+    distance: 0.3
+    speed: 1
