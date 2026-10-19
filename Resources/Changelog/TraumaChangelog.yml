@@ -15894,3 +15894,28 @@ Entries:
   id: 1726
   time: '2026-10-18T11:18:41.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5075
+- author: NoElkaTheGod
+  changes:
+  - type: Remove
+    message: Removed roundstart blob. It can still appear as a midround antagonist.
+  - type: Tweak
+    message: >-
+      Traitors and revolutionaries are now rarer, other gamemodes are now more
+      common.
+  id: 1727
+  time: '2026-10-18T23:11:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5038
+- author: UnionsCap
+  changes:
+  - type: Tweak
+    message: Renamed languages affected by lore.
+  id: 1728
+  time: '2026-10-18T23:17:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5071
+- author: ClockworkRust
+  changes:
+  - type: Tweak
+    message: Weapon quality now impacts damage.
+  id: 1729
+  time: '2026-10-18T23:22:28.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5082
