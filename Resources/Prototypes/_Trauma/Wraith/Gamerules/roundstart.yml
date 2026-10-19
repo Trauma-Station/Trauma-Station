@@ -5,7 +5,7 @@
   id: WraithRoundstart
   components:
   - type: GameRule
-    minPlayers: 20
+    minPlayers: 35
   - type: AntagSpawner
     prototype: MobWraith
   - type: AntagRandomSpawn
