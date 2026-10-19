@@ -8,7 +8,7 @@
   setPreference: true
   requirements:
   - !type:OverallPlaytimeRequirement
-    time: 5h 
+    time: 5h
   - !type:DepartmentTimeRequirement
     department: Security
     time: 0h # Change this 2h
