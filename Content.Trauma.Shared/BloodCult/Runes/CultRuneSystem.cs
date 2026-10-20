@@ -235,7 +235,7 @@ public sealed partial class CultRuneSystem : EntitySystem
         if (!_useDelay.TryResetDelay(ent.Owner))
             return "The rune's magic is on cooldown!";
 
-        var cultists = _cult.GatherCultists(ent, ent.Comp.RuneActivationRange);
+        var cultists = _cult.GetRuneInvokers(ent, ent.Comp.RuneActivationRange);
         if (cultists.Count < ent.Comp.RequiredInvokers)
         {
             var diff = ent.Comp.RequiredInvokers - cultists.Count;
