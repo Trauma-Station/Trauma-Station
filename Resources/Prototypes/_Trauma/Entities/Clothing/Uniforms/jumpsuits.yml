@@ -142,8 +142,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitRingDocentSuit
-  name: ring critiquing suit
-  description: This plain white suit really brings out the animal in you.
+  name: critiquing suit
+  description: This white suit really brings out the animal in you!
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/ringdocent.rsi
@@ -153,8 +153,8 @@
 - type: entity
   parent: ClothingUniformBase
   id: ClothingUniformJumpsuitNightAwlsCapatino
-  name: night awls capatino suit
-  description: Maybe you should take a trip to the local library.
+  name: night owl suit
+  description: There's a library card stuffed in the back pocket.
   components:
   - type: Sprite
     sprite: Clothing/Uniforms/Jumpsuit/nightawlcapatino.rsi

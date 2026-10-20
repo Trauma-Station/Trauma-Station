@@ -18,26 +18,26 @@ public partial class TraumaSystem
         { BoneSeverity.Broken, 0 },
     };
 
-    private readonly Dictionary<WoundableSeverity, FixedPoint2> _boneTraumaChanceMultipliers = new()
+    private readonly Dictionary<WoundableSeverity, float> _boneTraumaChanceMultipliers = new()
     {
-        { WoundableSeverity.Healthy, 0 },
-        { WoundableSeverity.Minor, 0.01 },
-        { WoundableSeverity.Moderate, 0.04 },
-        { WoundableSeverity.Severe, 0.12 },
-        { WoundableSeverity.Critical, 0.21 },
-        { WoundableSeverity.Mangled, 0.21 },
-        { WoundableSeverity.Severed, 0 },
+        { WoundableSeverity.Healthy, 0f },
+        { WoundableSeverity.Minor, 0f },
+        { WoundableSeverity.Moderate, 0.03f },
+        { WoundableSeverity.Severe, 0.1f },
+        { WoundableSeverity.Critical, 0.16f },
+        { WoundableSeverity.Mangled, 0.21f },
+        { WoundableSeverity.Severed, 0f },
     };
 
-    private readonly Dictionary<WoundableSeverity, FixedPoint2> _boneDamageMultipliers = new()
+    private readonly Dictionary<WoundableSeverity, float> _organTraumaChanceMultipliers = new()
     {
-        { WoundableSeverity.Healthy, 0 },
-        { WoundableSeverity.Minor, 0.4 },
-        { WoundableSeverity.Moderate, 0.6 },
-        { WoundableSeverity.Severe, 0.9 },
-        { WoundableSeverity.Critical, 1.25 },
-        { WoundableSeverity.Mangled, 1.6 }, // Fun.
-        { WoundableSeverity.Severed, 0 },
+        { WoundableSeverity.Healthy, 0f },
+        { WoundableSeverity.Minor, 0f },
+        { WoundableSeverity.Moderate, 0.1f },
+        { WoundableSeverity.Severe, 0.4f },
+        { WoundableSeverity.Critical, 0.7f },
+        { WoundableSeverity.Mangled, 1f },
+        { WoundableSeverity.Severed, 0f },
     };
 
     #endregion
