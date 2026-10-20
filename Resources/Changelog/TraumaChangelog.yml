@@ -15926,3 +15926,22 @@ Entries:
   id: 1730
   time: '2026-10-19T11:25:20.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4906
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Cult pylons now heal constructs and cult structures like airlocks.
+  - type: Tweak
+    message: >-
+      Cult constructs can now be repaired by welding them or with the revive
+      rune.
+  - type: Fix
+    message: Fixed revive rune working on non-cultists.
+  - type: Fix
+    message: Fixed cult constructs not being attacked by AI turrets and what not.
+  - type: Tweak
+    message: >-
+      Cult offering rune no longer works on crit people, kill or heal them, or
+      use the stun spell instead...
+  id: 1731
+  time: '2026-10-20T10:46:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5111
