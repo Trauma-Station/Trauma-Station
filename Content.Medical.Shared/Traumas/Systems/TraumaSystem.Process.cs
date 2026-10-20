@@ -59,7 +59,7 @@ public partial class TraumaSystem
         // Overflow is only used when we are capping the wound, so we use it over the computed delta
         // which will be useless in this specific scenario.
         var delta = args.Overflow ?? args.NewSeverity - args.OldSeverity;
-        if (delta <= 0 || delta < wound.Comp.SeverityThreshold)
+        if (delta < wound.Comp.SeverityThreshold)
             return;
 
         var woundable = Comp<WoundableComponent>(part);
