@@ -116,12 +116,13 @@ public sealed partial class ConstructShellSystem : EntitySystem
             entries = ent.Comp.PurifiedConstructs;
         }
 
-        if (!entries.Any(entry => entry.Prototype == args.SelectedItem))
+        var id = args.SelectedItem;
+        if (!entries.Any(entry => entry.Prototype == id))
             return; // malf
 
         _ui.CloseUi(ent.Owner, RadialSelectorUiKey.Key);
         var coords = Transform(ent).Coordinates;
-        var construct = PredictedSpawnAtPosition(args.SelectedItem, coords);
+        var construct = PredictedSpawnAtPosition(id, coords);
         _cult.CopyMember(ent.Owner, construct);
         _mind.TransferTo(mindId, construct, mind: mind);
         // TODO: unvisit or something??? set this as original entity??

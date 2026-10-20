@@ -59,11 +59,15 @@ public sealed partial class TimedFactorySystem : EntitySystem
     private void OnPrototypeSelected(Entity<TimedFactoryComponent> ent, ref RadialSelectorSelectedMessage args)
     {
         var now = _timing.CurTime;
-        if (now < ent.Comp.NextProduce || !ent.Comp.Entries.Any(entry => entry.Prototype == args.SelectedItem))
+        if (now < ent.Comp.NextProduce)
             return;
 
+        var id = args.SelectedItem;
+        if (!ent.Comp.Entries.Any(entry => entry.Prototype == id))
+            return; // malf
+
         var user = args.Actor;
-        var product = PredictedSpawnAtPosition(args.SelectedItem, Transform(user).Coordinates);
+        var product = PredictedSpawnAtPosition(id, Transform(user).Coordinates);
         _hands.TryPickupAnyHand(user, product);
         ent.Comp.NextProduce = now + ent.Comp.Cooldown;
         Dirty(ent);
