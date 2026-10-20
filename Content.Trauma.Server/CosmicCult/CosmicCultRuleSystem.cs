@@ -55,6 +55,7 @@ using Robust.Shared.Enums;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using Content.Goobstation.Common.Conversion;
 
 namespace Content.Trauma.Server.CosmicCult;
 
@@ -476,6 +477,11 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         || _mindShield.IsShielded(uid)
         || HasComp<BibleUserComponent>(uid)
         || _rotting.IsRotten(uid))
+            return;
+
+        var ev = new BeforeConversionEvent();
+        RaiseLocalEvent(uid, ref ev);
+        if (ev.Blocked)
             return;
 
         _rejuvenate.PerformRejuvenate(uid);

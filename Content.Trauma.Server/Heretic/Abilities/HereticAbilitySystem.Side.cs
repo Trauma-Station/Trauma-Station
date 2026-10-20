@@ -1,11 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Medical.Shared.Wounds;
 using Content.Server.Polymorph.Components;
 using Content.Shared.Actions;
 using Content.Shared.Atmos;
-using Content.Shared.Body.Components;
-using Content.Shared.Damage.Components;
 using Content.Shared.Ghost.Components;
 using Content.Shared.Polymorph;
 using Content.Trauma.Shared.Heretic.Components;
@@ -16,9 +13,6 @@ namespace Content.Trauma.Server.Heretic.Abilities;
 
 public sealed partial class HereticAbilitySystem
 {
-    [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
-
-    private readonly List<EntityUid> _bloodStealTargets = new();
     private readonly HashSet<Entity<ReflectiveSurfaceComponent>> _mirrors = new();
 
     [SubscribeLocalEvent]
@@ -113,55 +107,5 @@ public sealed partial class HereticAbilitySystem
             return false;
 
         return true;
-    }
-
-    [SubscribeLocalEvent]
-    private void OnCleave(EventHereticCleave args)
-    {
-        if (!TryUseAbility(args))
-            return;
-
-        args.Handled = true;
-
-        if (!args.Target.IsValid())
-            return;
-
-        var coords = Transform(args.Target).Coordinates;
-        Spawn(args.Effect, coords);
-
-        var hasTargets = false;
-
-        TryComp(args.Performer, out DamageableComponent? damageable);
-
-        _bloodStealTargets.Clear();
-        foreach (var (target, _) in GetNearbyPeople(args.Performer, args.Range, null, coords))
-        {
-            if (target == args.Performer)
-                continue;
-
-            hasTargets = true;
-
-            var dmg = _dmg.ChangeDamage(target, args.Damage, true, origin: args.Performer);
-            if (damageable != null)
-                _lifesteal.LifeSteal((args.Performer, damageable), dmg.GetTotal());
-
-            if (!_bloodQuery.TryComp(target, out var blood))
-                continue;
-
-            _blood.TryModifyBleedAmount((target, blood), blood.MaxBleedAmount);
-            _bloodStealTargets.Add(target);
-        }
-
-        if (!hasTargets)
-            return;
-
-        foreach (var (_, woundable) in _body.GetOrgans<WoundableComponent>(args.Performer))
-        {
-            _container.EmptyContainer(woundable.Wounds);
-        }
-
-        _lifesteal.BloodSteal(args.Performer, _bloodStealTargets, args.BloodModifyAmount, null);
-
-        _aud.PlayPvs(args.Sound, args.Target);
     }
 }

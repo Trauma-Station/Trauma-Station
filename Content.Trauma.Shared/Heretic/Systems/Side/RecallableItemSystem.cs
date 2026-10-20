@@ -25,6 +25,7 @@ public sealed partial class RecallableItemSystem : EntitySystem
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedPvsOverrideSystem _pvsOverride = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private EntityQuery<RecallableItemComponent> _recallQuery = default!;
 
     public override void Initialize()
     {
@@ -71,14 +72,22 @@ public sealed partial class RecallableItemSystem : EntitySystem
 
             _actions.RemoveAction(args.User, act.AsNullable());
 
-            if (act.Comp.Container is not { } container || session == null)
+            if (act.Comp.Container is not { } container)
                 continue;
 
-            _pvsOverride.RemoveSessionOverride(container, session);
+            if (session != null)
+                _pvsOverride.RemoveSessionOverride(container, session);
+
+            if (!_recallQuery.TryComp(container, out var oldRecallable))
+                continue;
+
+            oldRecallable.User = null;
+            Dirty(container, oldRecallable);
         }
 
         _actions.AddAction(args.User, ref ent.Comp.Action, ent.Comp.ActionId, ent);
         ent.Comp.User = args.User;
+        Dirty(ent);
 
         if (session != null)
             _pvsOverride.AddSessionOverride(ent, session);
