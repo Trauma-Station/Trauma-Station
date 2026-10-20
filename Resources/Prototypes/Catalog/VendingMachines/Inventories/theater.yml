@@ -65,6 +65,8 @@
     ClothingUniformJumpsuitRoman: 3
     ClothingShoesBootsRoman: 3
     ClothingHeadHatLaurelWreath: 2
+    ClothingUniformJumpsuitNightAwlsCapatino: 2
+    ClothingUniformJumpsuitRingDocentSuit: 2
     ClothingCostumeAbductorHead: 1
     ClothingCostumeAbductor: 1
     ClothingHeadSanabi: 1
@@ -74,6 +76,7 @@
     ClothingOuterSuitPickle: 1
     ClothingHeadHatTinfoilHat: 2
     ClothingOuterSuitCsij: 1
+
     # </Trauma>
   contrabandInventory:
     ClothingHeadHatRichard: 1

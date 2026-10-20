@@ -138,3 +138,26 @@
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/rancher_jumpsuit.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/rancher_jumpsuit.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitRingDocentSuit
+  name: ring critiquing suit
+  description: This plain white suit really brings out the animal in you.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpsuit/ringdocent.rsi
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpsuit/ringdocent.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitNightAwlsCapatino
+  name: night awls capatino suit
+  description: Maybe you should take a trip to the local library.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpsuit/nightawlcapatino.rsi
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpsuit/nightawlcapatino.rsi
+
