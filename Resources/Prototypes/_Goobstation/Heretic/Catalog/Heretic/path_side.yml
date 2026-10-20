@@ -34,7 +34,7 @@
     SideKnowledgePoint: 1
   altCostCurrencyPriorities:
     KnowledgePoint: 0
-    SideKnowledgePoint: 2
+    SideKnowledgePoint: 1
   categories:
   - HereticPathSideT1
   conditions:
