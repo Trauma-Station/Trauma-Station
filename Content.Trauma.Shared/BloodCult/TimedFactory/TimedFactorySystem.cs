@@ -5,6 +5,7 @@ using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Content.Trauma.Common.RadialSelector;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Trauma.Shared.BloodCult.TimedFactory;
 
@@ -58,7 +59,7 @@ public sealed partial class TimedFactorySystem : EntitySystem
     private void OnPrototypeSelected(Entity<TimedFactoryComponent> ent, ref RadialSelectorSelectedMessage args)
     {
         var now = _timing.CurTime;
-        if (now < ent.Comp.NextProduce)
+        if (now < ent.Comp.NextProduce || !ent.Comp.Entries.Any(entry => entry.Prototype == args.SelectedItem))
             return;
 
         var user = args.Actor;
