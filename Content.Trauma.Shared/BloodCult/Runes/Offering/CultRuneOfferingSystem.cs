@@ -62,6 +62,12 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
             return;
         }
 
+        if (_mob.IsCritical(target))
+        {
+            args.Popup = "Bring them to the world of the living or the world of the dead...";
+            return;
+        }
+
         var invokers = args.Invokers.Count;
         if (_mind.GetMind(target) == null ||
             target == rule.Comp.OfferingTarget ||
