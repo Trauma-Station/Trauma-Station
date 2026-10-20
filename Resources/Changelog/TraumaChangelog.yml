@@ -15945,3 +15945,14 @@ Entries:
   id: 1731
   time: '2026-10-20T10:46:03.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5111
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed spacing and heat damage breaking bones.
+  - type: Tweak
+    message: Bone and organ damage are less common overall.
+  - type: Tweak
+    message: Explosions are a bit more likely to delimb.
+  id: 1732
+  time: '2026-10-20T20:43:29.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5114
