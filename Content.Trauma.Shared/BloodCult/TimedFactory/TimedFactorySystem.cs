@@ -5,6 +5,7 @@ using Content.Shared.Popups;
 using Content.Shared.UserInterface;
 using Content.Trauma.Common.RadialSelector;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Trauma.Shared.BloodCult.TimedFactory;
 
@@ -61,8 +62,12 @@ public sealed partial class TimedFactorySystem : EntitySystem
         if (now < ent.Comp.NextProduce)
             return;
 
+        var id = args.SelectedItem;
+        if (!ent.Comp.Entries.Any(entry => entry.Prototype == id))
+            return; // malf
+
         var user = args.Actor;
-        var product = PredictedSpawnAtPosition(args.SelectedItem, Transform(user).Coordinates);
+        var product = PredictedSpawnAtPosition(id, Transform(user).Coordinates);
         _hands.TryPickupAnyHand(user, product);
         ent.Comp.NextProduce = now + ent.Comp.Cooldown;
         Dirty(ent);
