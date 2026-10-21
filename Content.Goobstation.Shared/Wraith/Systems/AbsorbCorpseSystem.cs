@@ -80,7 +80,10 @@ public sealed partial class AbsorbCorpseSystem : EntitySystem
             BreakOnWeightlessMove = true,
         };
 
-        _doAfter.TryStartDoAfter(doAfterArgs);
+        if (!_doAfter.TryStartDoAfter(doAfterArgs))
+            return;
+
+        args.Handled = true;
     }
 
     private void OnAbsorbFinished(Entity<AbsorbCorpseComponent> ent, ref AbsorbCorpseDoAfterEvent args)
