@@ -52,7 +52,7 @@
       collection: Flesh_Stab
     damage:
       types:
-        Blunt: 10
+        Piercing: 10
         Slash: 5
         Structural: 30
     range: 2
