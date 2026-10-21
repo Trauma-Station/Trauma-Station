@@ -11,7 +11,7 @@
       proto: WraithMidround
   - type: AntagRandomSpawn
   - type: AntagSpawner
-    prototype: MobWraithMidround
+    prototype: MobWraith
   - type: StationEvent
     weight: 4
     earliestStart: 20
