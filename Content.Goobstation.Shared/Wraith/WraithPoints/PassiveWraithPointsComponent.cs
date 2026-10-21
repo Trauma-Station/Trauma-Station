@@ -15,7 +15,7 @@ public sealed partial class PassiveWraithPointsComponent : Component
     /// The rate at which the wraith regenerates WP.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public FixedPoint2 WpGeneration = 1;
+    public FixedPoint2 WpGeneration = 2;
 
     /// <summary>
     ///  The amount of WP that gets generated passively.

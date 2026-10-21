@@ -61,7 +61,7 @@
     - ActionPossessObject
     - ActionDecay
     - ActionCommand
-   # - ActionAnimateObject
+    - ActionAnimateObject
     - ActionWhisper
     - ActionBloodWriting
     - ActionSpook
