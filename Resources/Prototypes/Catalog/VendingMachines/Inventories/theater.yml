@@ -59,23 +59,6 @@
     ClothingShoesBootsCowboyWhite: 1
     ClothingHeadHatWizardFake: 1
     ClothingOuterWizardFake: 1
-    # <Trauma>
-    ClothingHeadHelmetRoman: 2
-    ClothingHeadHelmetRomanCenturion: 2
-    ClothingUniformJumpsuitRoman: 3
-    ClothingShoesBootsRoman: 3
-    ClothingHeadHatLaurelWreath: 2
-    ClothingCostumeAbductorHead: 1
-    ClothingCostumeAbductor: 1
-    ClothingHeadSanabi: 1
-    ClothingNeckCloakSanabi: 1
-    ClothingCostumeGingerbreadHead: 1
-    ClothingOuterSuitHotDog: 1
-    ClothingOuterSuitPickle: 1
-    ClothingHeadHatTinfoilHat: 2
-    ClothingOuterSuitCsij: 1
-
-    # </Trauma>
   contrabandInventory:
     ClothingHeadHatRichard: 1
     ClothingShoesBling: 1
@@ -87,19 +70,3 @@
     ClothingHeadHatCowboyBountyHunter: 1
     ToyFigurineBoxer: 1
     ToyFigurineMusician: 1
-    # <Trauma>
-    WeaponLauncherTaiwanPond: 1
-    GrenadeToy: 5
-    ClothingShoesResonant: 1
-    ClothingNeckCloakResonant: 1
-    ClothingUniformJumpsuitResonant: 1
-    ClothingHeadHatPirate: 2
-    ClothingOuterCoatPirate: 2
-    ClothingUniformJumpsuitPirate: 2
-    ClothingEyesEyepatch: 2
-  emaggedInventory:
-    ClothingOuterPonchoClassicRobust: 1
-    ClothingHeadHatCowboyBrownRobust: 1
-    MobJonkBot: 1
-    MobClownGoblin: 1
-    # </Trauma>
