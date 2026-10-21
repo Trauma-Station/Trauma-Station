@@ -84,7 +84,7 @@
     event: !type:BloodWritingEvent
 
 - type: entity
-  parent: BaseCorporealWraithAction
+  parent: BaseWraithAction
   id: ActionAbsorbCorpse
   name: Absorb corpse
   description: Steal life essence from a corpse. You cannot use this on a skeleton!
@@ -291,7 +291,7 @@
   parent: BaseWraithAction
   id: ActionWraithEvolve
   name: Evolve
-  description: Choose a form to evolve into once you have absorbed at least 3 souls.
+  description: Choose a form to evolve into.
   components:
   - type: Action
     useDelay: 0
