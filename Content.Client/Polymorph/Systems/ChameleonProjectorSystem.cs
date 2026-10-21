@@ -62,6 +62,7 @@ public sealed partial class ChameleonProjectorSystem : SharedChameleonProjectorS
 
         var dest = EnsureComp<SpriteComponent>(ent);
         _sprite.CopySprite(src, (ent.Owner, dest));
+        _sprite.ClearPostShaders((ent.Owner, dest)); // Trauma - fix blackscreen in some cases
     }
 
     private void OnStartup(Entity<ChameleonDisguisedComponent> ent, ref ComponentStartup args)

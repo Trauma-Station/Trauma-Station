@@ -202,6 +202,7 @@ public sealed class StaticSpriteView : Control
         var fakeSprite = EntMan.EnsureComponent<SpriteComponent>(fake);
         Entity = (fake, fakeSprite);
         _sprite.CopySprite((uid.Value, sprite), Entity.Value.AsNullable());
+        _sprite.ClearPostShaders(Entity.Value.AsNullable());
         if (ColorAlphaOverride is { } a)
             _sprite.SetColor(Entity.Value.AsNullable(), fakeSprite.Color.WithAlpha(a));
         _sprite.SetVisible(Entity.Value.AsNullable(), true);

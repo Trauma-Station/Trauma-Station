@@ -58,6 +58,7 @@ public sealed partial class EntityPickupAnimationSystem : EntitySystem
 
         var sprite = Comp<SpriteComponent>(animatableClone);
         _sprite.CopySprite((uid, sprite0), (animatableClone, sprite));
+        _sprite.ClearPostShaders((animatableClone, sprite)); // Trauma - fix blackscreen in some cases
         _sprite.SetVisible((animatableClone, sprite), true);
 
         var animations = Comp<AnimationPlayerComponent>(animatableClone);

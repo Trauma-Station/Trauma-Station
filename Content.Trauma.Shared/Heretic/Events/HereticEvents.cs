@@ -177,3 +177,7 @@ public record struct ShouldHideHereticAuraEvent(bool Hide) : IInventoryRelayEven
 
 [ByRefEvent]
 public record struct AimedRifleAimAttemptEvent(EntityUid Ent, EntityUid User, EntityUid Target, bool Cancelled = false);
+
+
+[ByRefEvent]
+public record struct GetItemOverlayEntityEvent(EntityUid? Result = null);

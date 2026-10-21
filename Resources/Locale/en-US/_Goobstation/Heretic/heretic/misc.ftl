@@ -74,6 +74,6 @@ lionhunter-rifle-examine-message =
 
 lionhunter-rifle-aim-message = taking aim...
 
-eldritch-paper-examine-message = You can see a drawing of [color=cyan]{THE($item)}[/color] on the paper.
-eldritch-paper-name-empty = eldritch paper
-eldritch-paper-name-full = eldritch paper ({$item})
+eldritch-paper-examine-message = You can see a drawing of [color=cyan]{THE($item)}[/color] on the card.
+eldritch-paper-name-empty = eldritch card
+eldritch-paper-name-full = eldritch card ({$item})

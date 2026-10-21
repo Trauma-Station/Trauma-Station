@@ -119,14 +119,14 @@
 - type: entity
   parent: [BasePaper, BaseMagicalContraband]
   id: EldritchPaper
-  name: eldritch paper
+  name: eldritch card
   description: Burn it to reveal the contents hidden behind the Veil of Mansus.
   components:
   - type: FaxableObject
   - type: Sprite
-    sprite: Objects/Misc/bureaucracy.rsi
+    sprite: _Goobstation/Heretic/Entities/card.rsi
     layers:
-    - state: paper
+    - state: tarot_blank
     postShaders:
     - id: Enchant
       prototype: Enchant
@@ -135,6 +135,12 @@
       - interaction-outline
       - target-outline
       - drag-drop-outline
+      after:
+      - ItemOverlay
+  - type: ItemOverlay
+    ratio: 0.375, 0.375
+  - type: Item
+    sprite: Objects/Misc/bureaucracy.rsi
   - type: EldritchPaper
   - type: ContainerContainer
     containers:
@@ -144,7 +150,7 @@
     thresholds:
     - trigger:
         !type:DamageTrigger
-        damage: 5
+        damage: 10
       behaviors:
       - !type:EmptyContainersBehaviour
         containers:

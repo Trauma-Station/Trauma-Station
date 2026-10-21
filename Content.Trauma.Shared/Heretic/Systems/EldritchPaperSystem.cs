@@ -12,7 +12,7 @@ using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public sealed partial class EldritchPaperConverterSystem : EntitySystem
+public sealed partial class EldritchPaperSystem : EntitySystem
 {
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
@@ -24,10 +24,15 @@ public sealed partial class EldritchPaperConverterSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
 
     [SubscribeLocalEvent]
+    public void OnItemOverlay(Entity<EldritchPaperComponent> ent, ref GetItemOverlayEntityEvent args)
+    {
+        args.Result = TryGetItem(ent);
+    }
+
+    [SubscribeLocalEvent]
     public void OnExamine(Entity<EldritchPaperComponent> ent, ref ExaminedEvent args)
     {
-        if (!_container.TryGetContainer(ent.Owner, ent.Comp.Slot, out var container) ||
-            container is not ContainerSlot slot || slot.ContainedEntity is not { } uid)
+        if (TryGetItem(ent) is not { } uid)
             return;
 
         args.PushMarkup(Loc.GetString("eldritch-paper-examine-message", ("item", uid)));
@@ -107,5 +112,13 @@ public sealed partial class EldritchPaperConverterSystem : EntitySystem
     private void PlaySound(Entity<EldritchPaperConverterComponent> ent, EntityUid user)
     {
         _audio.PlayPredicted(ent.Comp.ConvertSound, ent, user);
+    }
+
+    private EntityUid? TryGetItem(Entity<EldritchPaperComponent> ent)
+    {
+        if (!_container.TryGetContainer(ent.Owner, ent.Comp.Slot, out var container))
+            return null;
+
+        return (container as ContainerSlot)?.ContainedEntity;
     }
 }

@@ -33,5 +33,6 @@ public sealed partial class EntryPoint : GameServer
         "AnimatedEmotesBlacklist",
         "PredictedPhysicsEffect",
         "TimedClientDespawn",
+        "ItemOverlay",
     ];
 }
