@@ -10,8 +10,6 @@
     sprite: _Trauma/BloodCult/Entities/Items/construct_shell.rsi
     state: icon
   - type: ItemSlots
-  - type: NameIdentifier
-    group: AdjectivePrefix # TODO: make cult related dataset
   - type: ConstructShell
     shardSlot:
       ejectOnBreak: true
@@ -76,8 +74,12 @@
     damageModifierSet: ManifestedSpirit
   - type: Injurable
     damageContainer: ManifestedSpirit
+  - type: Repairable
+    damageValue: -10
+    doAfterDelay: 2 # 12s to repair from dead for base health
   - type: MindExaminable
   - type: MobThresholds
+    allowRevives: true # revive after beinng welded from dead
     thresholds:
       0: Alive
       60: Dead
@@ -85,6 +87,9 @@
     allowedStates:
     - Alive
     - Dead
+  - type: NpcFactionMember
+    factions:
+    - BloodCult
   - type: CombatMode
     canDisarm: false
   - type: MeleeWeapon

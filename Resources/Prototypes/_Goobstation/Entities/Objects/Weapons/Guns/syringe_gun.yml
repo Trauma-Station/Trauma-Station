@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  parent: BaseStorageItem
+  parent: [ BaseStorageItem, BasePistolWhip ]
   id: BaseSyringeGun
   components:
   - type: WeaponClass

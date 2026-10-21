@@ -8,6 +8,7 @@ using Content.Shared.Verbs;
 using Content.Trauma.Common.RadialSelector;
 using Content.Trauma.Shared.BloodCult.Constructs.SoulShard;
 using Robust.Shared.Containers;
+using System.Linq;
 
 namespace Content.Trauma.Shared.BloodCult.Constructs.Shell;
 
@@ -102,18 +103,30 @@ public sealed partial class ConstructShellSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnConstructSelected(Entity<ConstructShellComponent> shell, ref RadialSelectorSelectedMessage args)
+    private void OnConstructSelected(Entity<ConstructShellComponent> ent, ref RadialSelectorSelectedMessage args)
     {
         if (!_mind.TryGetMind(args.Actor, out var mindId, out var mind))
             return;
 
-        _ui.CloseUi(shell.Owner, RadialSelectorUiKey.Key);
-        var coords = Transform(shell).Coordinates;
-        var construct = PredictedSpawnAtPosition(args.SelectedItem, coords);
-        _cult.CopyMember(shell.Owner, construct);
+        var entries = ent.Comp.Constructs;
+        if (ent.Comp.ShardSlot.Item is { } shard &&
+            _shardQuery.TryComp(shard, out var soulShard) &&
+            soulShard.IsBlessed)
+        {
+            entries = ent.Comp.PurifiedConstructs;
+        }
+
+        var id = args.SelectedItem;
+        if (!entries.Any(entry => entry.Prototype == id))
+            return; // malf
+
+        _ui.CloseUi(ent.Owner, RadialSelectorUiKey.Key);
+        var coords = Transform(ent).Coordinates;
+        var construct = PredictedSpawnAtPosition(id, coords);
+        _cult.CopyMember(ent.Owner, construct);
         _mind.TransferTo(mindId, construct, mind: mind);
         // TODO: unvisit or something??? set this as original entity??
-        PredictedDel(shell.Owner);
+        PredictedDel(ent.Owner);
     }
 
     [SubscribeLocalEvent]

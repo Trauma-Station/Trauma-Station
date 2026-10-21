@@ -268,7 +268,7 @@
     lateJoinAdditional: true
     antags:
     - !type:LinearAntagCount
-      playerRatio: 6 # Trauma
+      playerRatio: 10
       proto: Traitor
       range:
         min: 1

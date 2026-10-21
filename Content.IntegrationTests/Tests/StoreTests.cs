@@ -132,6 +132,7 @@ public sealed class StoreTests : GameTest
                     Assert.That(plainDiscountedCost.Value, Is.GreaterThanOrEqualTo(discountDownTo.Value), "Expected discounted cost to be greater then DiscountDownTo value.");
                     Assert.That(plainDiscountedCost.Value, Is.LessThan(prototypeCost.Value), "Expected discounted cost to be lower then prototype cost.");
 
+                    discountedListingItem.RestockTime = TimeSpan.Zero; // Trauma - do not attempt to buy listings that are locked behind restock timer.
 
                     var buyMsg = new StoreBuyListingMessage(discountedListingItem.ID, null){Actor = human};
                     server.EntMan.EventBus.RaiseLocalEvent(storeEnt.Value, buyMsg);
