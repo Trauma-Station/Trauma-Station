@@ -32,7 +32,7 @@ public abstract partial class SharedStatusEffectOnCollideGhostSystem : EntitySys
             args.OtherEntity,
             ent.Comp.StatusEffect,
             ent.Comp.Duration,
-            refresh: true,
+            ent.Comp.Refresh,
             ent.Comp.Component);
 
         var ev = new StatusEffectOnCollideEvent(ent.Comp.Duration);
