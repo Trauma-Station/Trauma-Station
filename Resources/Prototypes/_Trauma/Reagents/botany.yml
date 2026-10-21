@@ -114,7 +114,7 @@
     - !type:PlantAdjustNutrition
       amount: -1
     - !type:PlantAdjustToxins
-      amount: 1
+      amount: 8
     - !type:PlantAdjustYield
       probability: 0.2
       amount: 1
@@ -129,6 +129,14 @@
             - !type:ReagentCondition
               reagent: Fungalin
               min: 0.25
+        - !type:ModifyStatusEffect
+          effectProto: StatusEffectSeeingRainbow
+          time: 10
+          type: Add
+          conditions:
+            - !type:ReagentCondition
+              reagent: Fungalin
+              min: 0.35
         - !type:Jitter
           probability: 0.8
           conditions:
