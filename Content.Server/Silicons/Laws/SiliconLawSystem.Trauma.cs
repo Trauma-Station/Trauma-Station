@@ -22,15 +22,12 @@ public sealed partial class SiliconLawSystem
     [Dependency] private ResearchSystem _research = default!;
     [Dependency] private RadioSystem _radio = default!;
 
-    public override void TriggerIonStorm(Entity<SiliconLawBoundComponent, IonStormTargetComponent> target)
+    public override void TriggerIonStorm(Entity<SiliconLawBoundComponent?, IonStormTargetComponent?> target)
     {
-        var lawBound = target.Comp1;
-        var ionStormTarget = target.Comp2;
-
-        if (!Resolve(target.Owner, ref lawBound) || !Resolve(target.Owner, ref ionStormTarget))
+        if (!Resolve(target.Owner, ref target.Comp1, ref target.Comp2))
             return;
 
-        _ionStorm.IonStormTarget((target.Owner, lawBound, ionStormTarget));
+        _ionStorm.IonStormTarget((target.Owner, target.Comp1, target.Comp2));
     }
 
     private void ApplyExperimentalLaws(Entity<SiliconLawUpdaterComponent> ent, Entity<ExperimentalLawProviderComponent, SiliconLawProviderComponent> experiment)
