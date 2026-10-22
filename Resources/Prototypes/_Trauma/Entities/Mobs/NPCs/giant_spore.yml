@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: GiantSpore
   parent: [ BaseSimpleMob, FlyingMobBase ]
+  id: GiantSpore
   name: giant spore
-  description: A giant yet delicate spore ready to burst into a similarly giant mushroom.
+  description: A giant yet delicate spore, ready to burst into a similarly giant mushroom.
   components:
     - type: Sprite
       sprite: _Trauma/Mobs/giant_spore.rsi
@@ -83,5 +83,5 @@
   table: !type:GroupSelector
     children:
     - id: GiantMushroom
-    - id: GiantMushroom
+      weight: 2
     - id: LesserMushroom

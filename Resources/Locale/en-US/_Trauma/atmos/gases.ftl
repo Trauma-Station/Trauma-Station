@@ -4,4 +4,4 @@ gas-healium-abbreviation = He₂
 gas-nitrium-abbreviation = Na
 gas-pluoxium-abbreviation = O₄
 gas-fungalin = Fungalin
-gas-fungalin-abbreviation = Fungalin
+gas-fungalin-abbreviation = Fn
