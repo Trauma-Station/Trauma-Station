@@ -34,9 +34,10 @@ public sealed partial class DecaySystem : EntitySystem
             return;
         }
 
-        if (HasComp<SiliconLawBoundComponent>(args.Target) && HasComp<IonStormTargetComponent>(args.Target))
+        if (TryComp<SiliconLawBoundComponent>(args.Target, out var lawBound) &&
+            TryComp<IonStormTargetComponent>(args.Target, out var ionStormTarget))
         {
-            _siliconLaw.TriggerIonStorm(args.Target);
+            _siliconLaw.TriggerIonStorm((args.Target, lawBound, ionStormTarget));
 
             _emag.TryEmagEffect(ent.Owner, ent.Owner, args.Target, ent.Comp.Emag);
 
