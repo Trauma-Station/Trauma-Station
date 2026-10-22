@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
 using Content.Trauma.Common.Silicons.Laws;
