@@ -13,7 +13,7 @@
   - type: ShuttleCurse
 
 - type: entity
-  parent: [ BaseItem, BaseBloodContraband ]
+  parent: [ WhetstoneBase, BaseBloodContraband ]
   id: WhetstoneCult
   name: eldritch whetstone
   description: A block, empowered by dark magic. Sharp weapons will be enhanced when used on the stone.
@@ -22,22 +22,12 @@
     sprite: _Trauma/BloodCult/Entities/Items/whetstone_cult.rsi
     layers:
     - state: icon
-      map: [ "enum.GenericCultVisuals.Layer" ]
+  - type: Item
+    storedRotation: -90
   - type: CultItem
-  - type: Whetstone
-    whitelist:
-      components:
-      - Sharp
-    blacklist:
-      components:
-      - EnergySword
-  - type: Appearance
-  - type: GenericVisualizer
-    visuals:
-      enum.GenericCultVisuals.State:
-        enum.GenericCultVisuals.Layer:
-          True: { state: icon }
-          False: { state: icon_off }
+  - type: CustomDurabilityModifier
+    maxDurabilityStateModifiers:
+      Reinforced: 4, 1.3 # Either +4 damage or +30% damage, whichever is less
 
 - type: entity
   parent: [ BaseItem, BaseBloodContraband ]
@@ -84,21 +74,21 @@
 - type: entity
   parent: [ BaseShield, BaseBloodContraband ]
   id: MirrorShieldCult
-  description: An infamous shield used by Nar'Sien sects to confuse and disorient their enemies. Its edges are weighted for use as a throwing weapon - capable of disabling multiple foes with preternatural accuracy.
+  name: mirror shield
+  description: An infamous shield used by Nar'Sien sects to confuse and disorient their enemies.
   components:
   - type: Sprite
     sprite: _Trauma/BloodCult/Entities/Items/mirror_shield.rsi
     state: icon
   - type: Item
+    sprite: _Trauma/BloodCult/Entities/Items/mirror_shield.rsi
+    heldPrefix: mirror
     size: Ginormous
   - type: CultItem
-  - type: StunOnCollide
-    blacklist:
-      components:
-      - BloodCultMember
   - type: Parry
-    parryExhaustionCost: 0.3
-    reflectExhaustionCost: 0.1
+    reflectExhaustionCost: 0.15
+    reflects:
+    - Energy
   - type: Blocking
     passiveBlockModifier:
       coefficients:
@@ -130,3 +120,17 @@
       - !type:PlaySoundBehavior
         sound:
           collection: GlassBreak
+  - type: IllusionOnParry
+  - type: IllusionSpawner
+    chance: 0.2
+    ignoreSameFactionTargets: true
+    factionWhitelist:
+    - BloodCult
+    components:
+    - type: NPCRetaliation
+      attackMemoryLength: 10
+    - type: GroupRetaliation
+      range: 8
+    - type: NpcFactionMember
+      factions:
+      - BloodCult

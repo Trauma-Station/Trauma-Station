@@ -170,9 +170,6 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
     /// <param name="jobBoardProto"></param>
     public void CreateJobBoard(Entity<MindComponent> mind, EntProtoId<JobListingsComponent> jobBoardProto)
     {
-        if (!UplinkQuery.TryComp(mind, out var uplinkComp))
-            return;
-
         // make job board
         var jobBoard = Spawn(jobBoardProto);
         PVSOverrideEntity(mind, jobBoard);
@@ -188,6 +185,9 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
         SetRefreshTime((jobBoard, jobBoardComp));
 
         // link pre-existing remotes
+        if (!UplinkQuery.TryComp(mind, out var uplinkComp))
+            return;
+
         foreach (var remote in uplinkComp.Remotes)
         {
             LinkRemote((jobBoard, jobBoardComp), remote);
@@ -202,8 +202,7 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
         if (Mind.GetMind(args.User) is not { } mind)
             return;
 
-        AddComp(mind, new UplinkOwnerComponent());
-        var ownerComp = UplinkQuery.Comp(mind);
+        var ownerComp = EnsureComp<UplinkOwnerComponent>(mind);
         ownerComp.Remotes.Add(args.Host);
         Dirty(mind, ownerComp);
     }
@@ -211,11 +210,10 @@ public sealed partial class ServerJobListingsSystem : JobListingsSystem
     [SubscribeLocalEvent]
     private void OnUplinkRelinked(ref UplinkRelinkedEvent args)
     {
-        if (!UplinkQuery.TryComp(args.Mind, out var uplinkComp))
-            return;
         if (HasComp<RemoteJobListingsComponent>(args.Host)) // this can be raised multiple times for the same implant if you keep removing and reinjected it
             return;
 
+        var uplinkComp = EnsureComp<UplinkOwnerComponent>(args.Mind);
         uplinkComp.Remotes.Add(args.Host);
         Dirty(args.Mind, uplinkComp);
 

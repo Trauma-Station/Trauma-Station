@@ -119,7 +119,7 @@
     node: finish
 
 - type: entity
-  parent: [ BaseMajorContraband, BaseWeaponGaussgun ]
+  parent: [ BaseMajorContraband, BaseWeaponGaussgun, BasePistolWhip ]
   id: WeaponGaussgunPistol
   name: gauss pistol
   description: A much ligher alternative to the gauss gun, but far more innacurate and only semiautomatic.

@@ -7,7 +7,7 @@
 
   Summons a grasp-like spell focus to your hand. It needs blood to cast spells, feed it from a living being's blood or a puddle on the ground.
 
-  It can also be used to heal cultists by hitting them.
+  It can also be used to heal cultists, constructs and yourself. Healing yourself is 2x less effective.
 
   <Box>
     <GuideEntityEmbed Entity="ActionBloodCultTwistedConstruction"/>
@@ -33,8 +33,9 @@
     <GuideEntityEmbed Entity="ActionBloodCultStun"/>
   </Box>
 
-  Stuns and mutes the target, giving you plenty of time to kidnap them and bring them to your cult's lair.
-
+  Knocks down, mutes and marks the victim. Keep hitting marked target with cult weapons until they are stunned.
+  Borgs get stunned for lengthy duration under the effect of this spell instead of getting marked.
+  [color=red]Important:[/color] Cannot be used via context menu, but it does work in [color=red]Combat Mode[/color], which only works on mobs and cannot miss.
 
   <Box>
     <GuideEntityEmbed Entity="ActionBloodCultTeleport"/>
