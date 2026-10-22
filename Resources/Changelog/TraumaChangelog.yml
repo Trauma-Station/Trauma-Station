@@ -15963,3 +15963,12 @@ Entries:
   id: 1733
   time: '2026-10-22T07:58:08.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5120
+- author: ReestockMakes
+  changes:
+  - type: Tweak
+    message: >-
+      Nuclear corpsman now has a medical visor to see their teammates' healths
+      with.
+  id: 1734
+  time: '2026-10-22T10:48:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5100
