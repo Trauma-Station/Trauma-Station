@@ -44,6 +44,7 @@
         - EntityStorage
         - MobState
         - EldritchPaper
+        - Unremoveable
   - type: ItemToggleSize
     activatedSize: Normal
   - type: ToggleAnimation
