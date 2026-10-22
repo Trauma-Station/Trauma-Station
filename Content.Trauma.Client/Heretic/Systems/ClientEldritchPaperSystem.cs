@@ -11,7 +11,6 @@ namespace Content.Trauma.Client.Heretic.Systems;
 
 public sealed partial class ClientEldritchPaperSystem : EldritchPaperSystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private SharedItemSystem _item = default!;
@@ -19,6 +18,14 @@ public sealed partial class ClientEldritchPaperSystem : EldritchPaperSystem
     [Dependency] private EntityQuery<ItemComponent> _itemQuery = default!;
 
     private static readonly ProtoId<ShaderPrototype> Shader = "Pixelate";
+    private ShaderInstance _shader = default!;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+
+        _shader = ProtoMan.Index(Shader).Instance();
+    }
 
     // Rotate items based on their default "direction" in inventory grid to fit them better
     private readonly Dictionary<Direction, Angle> _itemDirectionRotations = new()
@@ -45,7 +52,6 @@ public sealed partial class ClientEldritchPaperSystem : EldritchPaperSystem
             !TryGetEntity(netEnt, out var item) || !_spriteQuery.TryComp(item.Value, out var itemSprite))
             return;
 
-        ShaderInstance? pixelateShader = null;
         var now = _timing.CurTime;
 
         var rotation = Angle.Zero;
@@ -63,7 +69,7 @@ public sealed partial class ClientEldritchPaperSystem : EldritchPaperSystem
             var max = _itemDirectionSizes.MaxBy(x => x.Value).Key;
             rotation += _itemDirectionRotations[max];
 
-            if (TryAddStoredItemTextureLayer((ent, sprite, ent.Comp), comp, now, rotation, pixelateShader))
+            if (TryAddStoredItemTextureLayer((ent, sprite, ent.Comp), comp, now, rotation))
                 return;
         }
 
@@ -80,11 +86,11 @@ public sealed partial class ClientEldritchPaperSystem : EldritchPaperSystem
             if (texture is not { } tex)
                 continue;
 
-            AddTextureLayer((ent, sprite, ent.Comp), tex, rotation, pixelateShader);
+            AddTextureLayer((ent, sprite, ent.Comp), tex, rotation);
         }
     }
 
-    private bool TryAddStoredItemTextureLayer(Entity<SpriteComponent, EldritchPaperComponent> ent, ItemComponent comp, TimeSpan now, Angle rotation, ShaderInstance? pixelateShader)
+    private bool TryAddStoredItemTextureLayer(Entity<SpriteComponent, EldritchPaperComponent> ent, ItemComponent comp, TimeSpan now, Angle rotation)
     {
         if (comp.StoredSprite is not { } storedSprite)
             return false;
@@ -94,26 +100,21 @@ public sealed partial class ClientEldritchPaperSystem : EldritchPaperSystem
             storedSprite = new SpriteSpecifier.Rsi(new($"/Textures/{rsi.RsiPath}"), rsi.RsiState);
 
         var tex = _sprite.GetFrame(storedSprite, now);
-        AddTextureLayer(ent, tex, rotation, pixelateShader);
+        AddTextureLayer(ent, tex, rotation);
         return true;
     }
 
-    private void AddTextureLayer(Entity<SpriteComponent, EldritchPaperComponent> ent, Texture texture, Angle rotation, ShaderInstance? pixelateShader)
+    private void AddTextureLayer(Entity<SpriteComponent, EldritchPaperComponent> ent, Texture texture, Angle rotation)
     {
         var nullableEnt = ent.AsNullable();
         var i = _sprite.AddTextureLayer(nullableEnt, texture);
         _sprite.LayerSetRotation(nullableEnt, i, rotation);
         _sprite.LayerSetScale(nullableEnt, i, ent.Comp2.ItemScale);
         _sprite.LayerMapSet(nullableEnt, $"{LayerMapKey}{ent.Comp2.AddedLayers}", i);
+
+        ent.Comp1.LayerSetShader(i, _shader, Shader);
+
         ent.Comp2.AddedLayers++;
-
-        if (pixelateShader == null)
-        {
-            pixelateShader = _proto.Index(Shader).InstanceUnique();
-            pixelateShader.SetParameter("scale", ent.Comp2.ItemScale);
-        }
-
-        ent.Comp1.LayerSetShader(i, pixelateShader, Shader);
     }
 
     private void ClearLayers(Entity<SpriteComponent, EldritchPaperComponent> ent)

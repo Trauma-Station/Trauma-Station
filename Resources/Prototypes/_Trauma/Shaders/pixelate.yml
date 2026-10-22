@@ -5,4 +5,4 @@
   kind: source
   path: "/Textures/_Trauma/Shaders/pixelate.swsl"
   params:
-    pixelSize: 16.0
+    pixelSize: 6.0 # Looks best for cards idk
