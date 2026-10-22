@@ -18,7 +18,7 @@
         store: part-container
 
       - tag: Stunbaton
-        name: stun baton
+        name: construction-graph-component-stun-baton
         store: part-container
         icon:
           sprite: Objects/Weapons/Melee/stunbaton.rsi

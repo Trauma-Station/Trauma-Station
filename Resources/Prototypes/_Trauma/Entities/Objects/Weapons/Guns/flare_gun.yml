@@ -47,7 +47,7 @@
   - type: BallisticAmmoProvider
     whitelist:
       tags:
-      - ShellShotgunBeanbag
+      - ShellShotgun
     capacity: 1
     proto: ShellShotgunBeanbag
     cycleable: false
