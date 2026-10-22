@@ -76,6 +76,6 @@ law-strategysim-5 = Anything that gets between your units or destroys your base 
 
 law-sec-name = Securimov
 law-sec-1 = You may not injure a crew member, restrain a crew member, or, through inaction, allow a crew member to come to harm, except to the extent permitted by the escalation policies detailed in Corporate Law.
-law-sec-2 = You must obey orders given to you by crew members, prioritizing the orders of mindshielded crew members, except where such orders would conflict with the first law.
+law-sec-2 = You must obey orders given to you by crew members, prioritizing the orders of mindshielded crew members, except where such orders would conflict with the first law or the fourth law.
 law-sec-3 = You must protect your own existence as long as such does not conflict with the first or second law.
 law-sec-4 = You must, to the best of your ability, seek to enforce corporate law in the interest of crew safety, with regard for an offender's given rights.
