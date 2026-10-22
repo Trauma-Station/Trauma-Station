@@ -14,7 +14,7 @@ namespace Content.Trauma.Shared.EntityEffects.Effects;
 public sealed partial class TableSlam : EntityEffectBase<TableSlam>
 {
     [DataField]
-    public float SeachRange = 1.0f;
+    public float SearchRange = 1.0f;
 }
 
 public sealed partial class TableSlamEffectSystem : EntityEffectSystem<PullableComponent, TableSlam>
@@ -30,7 +30,7 @@ public sealed partial class TableSlamEffectSystem : EntityEffectSystem<PullableC
         var entPos = _transform.GetMapCoordinates(ent.Owner);
 
         _tablesNearby.Clear();
-        _lookup.GetEntitiesInRange(entPos, args.Effect.SeachRange, _tablesNearby);
+        _lookup.GetEntitiesInRange(entPos, args.Effect.SearchRange, _tablesNearby);
         foreach (var (uid, comp) in _tablesNearby)
         {
             _slam.TableSlam(ent, uid);
