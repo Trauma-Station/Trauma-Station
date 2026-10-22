@@ -1,0 +1,12 @@
+uniform highp float pixelSize;
+uniform highp vec2 scale;
+
+void fragment()
+{
+    highp vec2 ps = scale * pixelSize / SCREEN_PIXEL_SIZE;
+    highp vec2 uv = round(UV * ps) / ps;
+
+    highp vec4 sprite = zTexture(uv);
+
+    COLOR = sprite;
+}

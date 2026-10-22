@@ -251,7 +251,6 @@ public sealed partial class DragDropSystem : SharedDragDropSystem
             _dragShadow = EntityManager.SpawnEntity("dragshadow", mousePos);
             var dragSprite = Comp<SpriteComponent>(_dragShadow.Value);
             _sprite.CopySprite((_draggedEntity.Value, draggedSprite), (_dragShadow.Value, dragSprite));
-            _sprite.ClearPostShaders((_dragShadow.Value, draggedSprite)); // Trauma - fix blackscreen in some cases
             dragSprite.RenderOrder = EntityManager.CurrentTick.Value;
             _sprite.SetColor((_dragShadow.Value, dragSprite), dragSprite.Color.WithAlpha(0.7f));
             // keep it on top of everything

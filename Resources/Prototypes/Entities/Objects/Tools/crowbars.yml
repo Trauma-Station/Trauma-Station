@@ -89,7 +89,7 @@
   - type: Item
     storedSprite:
       state: red-storage
-      sprite: Objects/Tools/crowbar.rsi
+      sprite: /Textures/Objects/Tools/crowbar.rsi
     inhandVisuals:
       left:
       - state: inhand-left

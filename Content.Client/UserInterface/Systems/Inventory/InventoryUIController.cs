@@ -365,7 +365,6 @@ public sealed partial class InventoryUIController : UIController, IOnStateEntere
         }
 
         _sprite.CopySprite((held.Value, sprite), (hoverEntity, hoverSprite));
-        _sprite.ClearPostShaders((hoverEntity, hoverSprite)); // Trauma - fix blackscreen in some cases
         _sprite.SetColor((hoverEntity, hoverSprite), fits ? new Color(0, 255, 0, 127) : new Color(255, 0, 0, 127));
 
         control.HoverSpriteView.SetEntity(hoverEntity);

@@ -56,12 +56,7 @@ public sealed partial class MeleeWeaponSystem
         {
             if (user != weapon
                 && TryComp(weapon, out SpriteComponent? weaponSpriteComponent))
-            // <Trauma>
-            {
                 _sprite.CopySprite((weapon, weaponSpriteComponent), (animationUid, sprite));
-                _sprite.ClearPostShaders((animationUid, sprite)); // Trauma - fix blackscreen in some cases
-            }
-            // </Trauma>
 
             if (meleeWeaponComponent.SwingLeft)
                 angle *= -1;

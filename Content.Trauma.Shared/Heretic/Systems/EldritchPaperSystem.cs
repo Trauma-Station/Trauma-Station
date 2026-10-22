@@ -12,8 +12,10 @@ using Robust.Shared.Containers;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
-public sealed partial class EldritchPaperSystem : EntitySystem
+public abstract partial class EldritchPaperSystem : EntitySystem
 {
+    [Dependency] protected SharedAppearanceSystem Appearance = default!;
+
     [Dependency] private INetManager _net = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
@@ -22,12 +24,6 @@ public sealed partial class EldritchPaperSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
-
-    [SubscribeLocalEvent]
-    public void OnItemOverlay(Entity<EldritchPaperComponent> ent, ref GetItemOverlayEntityEvent args)
-    {
-        args.Result = TryGetItem(ent);
-    }
 
     [SubscribeLocalEvent]
     public void OnExamine(Entity<EldritchPaperComponent> ent, ref ExaminedEvent args)
@@ -51,6 +47,7 @@ public sealed partial class EldritchPaperSystem : EntitySystem
     public void OnInserted(Entity<EldritchPaperComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         _metaData.SetEntityName(ent, Loc.GetString("eldritch-paper-name-full", ("item", args.Entity)));
+        Appearance.SetData(ent, EldritchPaperVisuals.Item, GetNetEntity(args.Entity));
     }
 
     [SubscribeLocalEvent]
@@ -60,6 +57,7 @@ public sealed partial class EldritchPaperSystem : EntitySystem
             return;
 
         _metaData.SetEntityName(ent, Loc.GetString("eldritch-paper-name-empty"));
+        Appearance.RemoveData(ent, EldritchPaperVisuals.Item);
     }
 
     [SubscribeLocalEvent(before: new[] { typeof(SharedMansusGraspSystem) })]

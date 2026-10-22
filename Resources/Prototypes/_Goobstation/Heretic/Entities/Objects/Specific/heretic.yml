@@ -41,6 +41,7 @@
       blacklist: &paperBlacklist
         components:
         - Storage
+        - EntityStorage
         - MobState
         - EldritchPaper
   - type: ItemToggleSize
@@ -124,7 +125,7 @@
   components:
   - type: FaxableObject
   - type: Sprite
-    sprite: _Goobstation/Heretic/Entities/card.rsi
+    sprite: _Trauma/Heretic/Entities/card.rsi
     layers:
     - state: tarot_blank
     postShaders:
@@ -135,10 +136,6 @@
       - interaction-outline
       - target-outline
       - drag-drop-outline
-      after:
-      - ItemOverlay
-  - type: ItemOverlay
-    ratio: 0.375, 0.375
   - type: Item
     sprite: Objects/Misc/bureaucracy.rsi
   - type: EldritchPaper
