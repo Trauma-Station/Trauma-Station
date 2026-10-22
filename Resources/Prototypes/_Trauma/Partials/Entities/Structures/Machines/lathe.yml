@@ -4,6 +4,9 @@
   - type: Lathe
     dynamicPacks:
     - SecBorgLimbs
+  - type: EmagLatheRecipes
+    emagDynamicPacks:
+    - ArmoryModules
 
 - type: entity
   id: SecurityTechFab
