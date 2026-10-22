@@ -5,13 +5,11 @@ using Content.Shared.Item;
 using Content.Shared.Storage;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Systems;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Client.Heretic.Systems;
 
 public sealed partial class ClientEldritchPaperSystem : EldritchPaperSystem
 {
-    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private SharedItemSystem _item = default!;
     [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
@@ -52,8 +50,6 @@ public sealed partial class ClientEldritchPaperSystem : EldritchPaperSystem
             !TryGetEntity(netEnt, out var item) || !_spriteQuery.TryComp(item.Value, out var itemSprite))
             return;
 
-        var now = _timing.CurTime;
-
         var rotation = Angle.Zero;
         if (_itemQuery.TryComp(item.Value, out var comp))
         {
@@ -69,45 +65,56 @@ public sealed partial class ClientEldritchPaperSystem : EldritchPaperSystem
             var max = _itemDirectionSizes.MaxBy(x => x.Value).Key;
             rotation += _itemDirectionRotations[max];
 
-            if (TryAddStoredItemTextureLayer((ent, sprite, ent.Comp), comp, now, rotation))
+            if (TryAddStoredItemLayer((ent, sprite, ent.Comp), comp, rotation))
                 return;
         }
 
         foreach (var spriteLayer in itemSprite.AllLayers)
         {
-            if (spriteLayer is not SpriteComponent.Layer layer || !_sprite.IsVisible(layer))
+            if (!TryAddSpriteLayer((ent, sprite, ent.Comp), spriteLayer, rotation))
                 continue;
-
-            var texture = layer.Texture ??
-                (layer.ActualRsi?.Path is { } path && layer.State.Name is { } state
-                    ? _sprite.GetFrame(new SpriteSpecifier.Rsi(path, state), now, layer.Loop)
-                    : null);
-
-            if (texture is not { } tex)
-                continue;
-
-            AddTextureLayer((ent, sprite, ent.Comp), tex, rotation);
         }
     }
 
-    private bool TryAddStoredItemTextureLayer(Entity<SpriteComponent, EldritchPaperComponent> ent, ItemComponent comp, TimeSpan now, Angle rotation)
+    private bool TryAddSpriteLayer(Entity<SpriteComponent, EldritchPaperComponent> ent, ISpriteLayer spriteLayer, Angle rotation)
+    {
+        if (spriteLayer is not SpriteComponent.Layer layer || !_sprite.IsVisible(layer))
+            return false;
+
+        int? index = layer.RSI is { } rsi && layer.State is { } state
+            ? _sprite.AddRsiLayer(ent.AsNullable(), state, rsi)
+            : layer.Texture is { } tex
+                ? _sprite.AddTextureLayer(ent.AsNullable(), tex)
+                : null;
+
+        if (index is not { } i)
+            return false;
+
+        FinalizeLayer(ent, i, rotation);
+        return true;
+    }
+
+    private bool TryAddStoredItemLayer(Entity<SpriteComponent, EldritchPaperComponent> ent, ItemComponent comp, Angle rotation)
     {
         if (comp.StoredSprite is not { } storedSprite)
             return false;
 
-        // I LOVE GetFrame throwing for paths that don't start with /Textures
-        if (storedSprite is SpriteSpecifier.Rsi rsi && !rsi.RsiPath.CanonPath.StartsWith("/Textures"))
-            storedSprite = new SpriteSpecifier.Rsi(new($"/Textures/{rsi.RsiPath}"), rsi.RsiState);
+        int? index = storedSprite is SpriteSpecifier.Rsi rsi
+            ? _sprite.AddRsiLayer(ent.AsNullable(), rsi.RsiState, rsi.RsiPath)
+            : storedSprite is SpriteSpecifier.Texture texture
+                ? _sprite.AddTextureLayer(ent.AsNullable(), _sprite.GetTexture(texture))
+                : null;
 
-        var tex = _sprite.GetFrame(storedSprite, now);
-        AddTextureLayer(ent, tex, rotation);
+        if (index is not { } i)
+            return false;
+
+        FinalizeLayer(ent, i, rotation);
         return true;
     }
 
-    private void AddTextureLayer(Entity<SpriteComponent, EldritchPaperComponent> ent, Texture texture, Angle rotation)
+    private void FinalizeLayer(Entity<SpriteComponent, EldritchPaperComponent> ent, int i, Angle rotation)
     {
         var nullableEnt = ent.AsNullable();
-        var i = _sprite.AddTextureLayer(nullableEnt, texture);
         _sprite.LayerSetRotation(nullableEnt, i, rotation);
         _sprite.LayerSetScale(nullableEnt, i, ent.Comp2.ItemScale);
         _sprite.LayerMapSet(nullableEnt, $"{LayerMapKey}{ent.Comp2.AddedLayers}", i);
