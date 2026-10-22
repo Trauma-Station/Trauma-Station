@@ -15983,3 +15983,12 @@ Entries:
   id: 1735
   time: '2026-10-22T19:39:44.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5031
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed shadow cloak sprite popping in and out and revealing user.
+  - type: Fix
+    message: Fixed some species like dwarves having outline when stealthed.
+  id: 1736
+  time: '2026-10-22T19:40:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5124
