@@ -1,0 +1,10 @@
+- type: latheRecipePack
+  id: SecBorgLimbs
+  recipes:
+  - SecCyborgEndoskeleton
+  - LeftArmSecBorg
+  - RightArmSecBorg
+  - LeftLegSecBorg
+  - RightLegSecBorg
+  - LightHeadSecBorg
+  - TorsoSecBorg

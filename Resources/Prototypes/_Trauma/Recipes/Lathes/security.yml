@@ -26,3 +26,13 @@
   materials:
     Cloth: 3000
     Steel: 500
+
+- type: latheRecipe
+  parent: BaseGoldBorgModuleRecipe
+  id: BorgModuleLaserRifle
+  result: BorgModuleLaserRifle
+
+- type: latheRecipe
+  parent: BaseGoldBorgModuleRecipe
+  id: BorgModuleRiot
+  result: BorgModuleRiot

@@ -208,3 +208,127 @@
           - Organ
   - type: BorgModuleIcon
     icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: omnimed-surgery-module }
+
+- type: entity
+  id: BaseBorgModuleSecurity
+  parent: BaseBorgModule
+  abstract: true
+  components:
+  - type: BorgModule
+    borgFitTypes:
+    - borg-type-security
+  - type: Tag
+    tags:
+    - BorgModuleSecurity
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: base-icon-inhand-left
+        color: "#d46363"
+      - state: base-module-inhand-left
+        color: "#515151"
+      - state: base-part-inhand-left
+      - state: base-stripes-inhand-left
+        color: "#df5252"
+      right:
+      - state: base-icon-inhand-right
+        color: "#d46363"
+      - state: base-module-inhand-right
+        color: "#515151"
+      - state: base-part-inhand-right
+      - state: base-stripes-inhand-right
+        color: "#df5252"
+
+- type: entity
+  id: BaseBorgModuleArmory
+  parent: BaseBorgModuleSecurity
+  abstract: true
+  components:
+  - type: BorgModule
+    borgFitTypes:
+    - borg-type-combat
+  - type: Tag
+    tags:
+    - BorgModuleArmory
+
+- type: entity
+  parent: [ BaseBorgModuleSecurity, BaseProviderBorgModule ]
+  id: BorgModuleSecurity
+  name: security cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: security
+    - state: icon-sec-radio
+      sprite: _Trauma/Objects/Specific/Robotics/borgmodule.rsi
+  - type: ItemBorgModule
+    hands:
+    - item: RadioHandheldSecurity
+    - item: HoloprojectorSecurityBorg
+    - item: BookSpaceLaw
+  - type: BorgModuleIcon
+    icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: sec_radio }
+
+- type: entity
+  parent: [ BaseBorgModuleSecurity, BaseProviderBorgModule ]
+  id: BorgModuleArrest
+  name: arrest cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: security
+    - state: icon-stun-baton
+      sprite: _Trauma/Objects/Specific/Robotics/borgmodule.rsi
+  - type: ItemBorgModule
+    hands:
+    - item: StunbatonBorg
+    - item: WeaponLaserSidearmBorg
+    - item: FlashBorg
+    - item: Zipties
+      hand: &zipties_hand
+        emptyRepresentative: Zipties
+        emptyLabel: borg-slot-cuffs
+        whitelist:
+          components:
+          - Handcuff
+    - item: Zipties
+      hand: *zipties_hand
+  - type: BorgModuleIcon
+    icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: stun_baton }
+
+- type: entity
+  parent: [ BaseBorgModuleSecurity, BaseProviderBorgModule ]
+  id: BorgModuleRiot
+  name: riot cyborg module
+  components:
+  - type: Sprite
+    layers:
+    - state: security
+    - state: icon-truncheon
+      sprite: _Trauma/Objects/Specific/Robotics/borgmodule.rsi
+  - type: ItemBorgModule
+    hands:
+    - item: Truncheon
+    - item: WeaponPistolMk58C
+    - item: WeaponFlareGunSecurityC
+    - item: Zipties
+      hand: *zipties_hand
+    - item: Zipties
+      hand: *zipties_hand
+  - type: BorgModuleIcon
+    icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: truncheon }
+
+- type: entity
+  parent: [ BaseBorgModuleArmory, BaseProviderBorgModule ]
+  id: BorgModuleLaserRifle
+  name: laser rifle module
+  components:
+  - type: Sprite
+    layers:
+    - state: security
+    - state: icon-xenoborg-laser2
+  - type: ItemBorgModule
+    hands:
+    - item: WeaponLaserCarbineC
+  - type: BorgModuleIcon
+    icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: laser_rifle }

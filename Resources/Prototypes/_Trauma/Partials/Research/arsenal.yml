@@ -25,6 +25,7 @@
   - WeaponMechCombatFiredartLaser
   - PowerCellIonRevolver
   - WeaponLaserSidearm
+  - BorgModuleLaserRifle
   position: 7,0
   technologyPrerequisites:
   - WeaponLaserCellRevolverTech
@@ -78,6 +79,7 @@
   recipeUnlocks:
   - PolymerBaton
   - SpearTelescopic
+  - BorgModuleRiot
   position: 7,3
   technologyPrerequisites:
   - NonlethalAmmunition

@@ -1,0 +1,55 @@
+- type: entity
+  name: beanbag shell gun ROW
+  parent: BaseItem
+  id: WeaponFlareGunSecurityC
+  description: A Mk58 for use by cyborgs. Creates 12 Gauge beanbag shells on the fly from an internal fabricator, which slowly self-charges.
+  components:
+  - type: WeaponClass
+    class: Shotgun
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Shotguns/flaregun_security.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+  - type: Item
+    size: Small
+    sprite: Objects/Weapons/Guns/Shotguns/flaregun_security.rsi
+  - type: ItemSlots
+    slots:
+      gun_chamber:
+        name: Chamber
+        priority: 1
+        whitelist:
+          tags:
+            - ShellShotgun
+  - type: ChamberMagazineAmmoProvider
+    autoCycle: false
+    boltClosed: true
+    canRack: false
+    soundBoltClosed: /Audio/Weapons/Guns/Cock/revolver_cock.ogg
+    soundBoltOpened: /Audio/Weapons/Guns/Cock/revolver_cock.ogg
+    soundRack: /Audio/Weapons/Guns/Cock/revolver_cock.ogg
+  - type: Gun
+    fireRate: 0.5
+    selectedMode: SemiAuto
+    availableModes:
+      - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/flaregun.ogg
+  - type: Tag
+    tags:
+    - Sidearm
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - ShellShotgunBeanbag
+    capacity: 1
+    proto: ShellShotgunBeanbag
+    cycleable: false
+  - type: BallisticAmmoSelfRefiller
+    autoRefillRate: 2s
+    affectedByEmp: true
+  - type: AmmoCounter

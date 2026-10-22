@@ -1,0 +1,137 @@
+- type: entity
+  id: BaseBorgChassisSec
+  parent: [BaseBorgChassisNotIonStormable, BaseBorgTransponder]
+  abstract: true
+  components:
+  - type: BlockShuttleRecall
+  - type: RandomMetadata
+    nameSegments:
+    - NamesBorg
+  - type: NpcFactionMember
+    factions:
+    - NanoTrasen
+  - type: SiliconLawProvider
+    laws: SecurimovLawset
+  - type: Access
+    groups:
+    - AllAccess
+    tags:
+    - Borg
+  - type: AccessReader
+    access: [["Command"], ["Security"], ["Robotics"]]
+  - type: SlavedBorg
+    law: ObeyAI
+  - type: ShowJobIcons
+  - type: ShowCrewIcons
+  - type: ShowMindShieldIcons
+  - type: ShowCriminalRecordIcons
+  - type: StationAiVision
+    range: 3
+  - type: InteractionPopup
+    interactSuccessSound:
+      path: /Audio/Ambience/Objects/periodic_beep.ogg
+  - type: BypassLock
+    bypassDelay: 15
+  - type: Destructible
+    generateOverkillThreshold: false
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Machines/warning_buzzer.ogg
+          params:
+            volume: 5
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+      - !type:GibBehavior
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ScrapGlass:
+            min: 1
+            max: 1
+          SheetSteel:
+            min: 10
+            max: 20
+
+- type: entity
+  id: BorgChassisSecurity
+  parent: BaseBorgChassisSec
+  name: security cyborg
+  components:
+  - type: Sprite
+    sprite: _Trauma/Mobs/Silicon/chassis.rsi
+    layers:
+      - state: security
+      - state: security_e
+        map: ["enum.BorgVisualLayers.Light"]
+        shader: unshaded
+        visible: false
+      - state: security_l
+        shader: unshaded
+        map: ["light"]
+        visible: false
+  - type: BorgChassis
+    maxModules: 7 # +3 from default module count
+    moduleWhitelist:
+      tags:
+        - BorgModuleGeneric
+        - BorgModuleSecurity
+        - BorgModuleArmory
+    hasMindState: security_e
+    noMindState: security_e_r
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - BorgModulePrying
+      - BorgModuleFireExtinguisher
+      - BorgModuleSecurity
+      - BorgModuleArrest
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+  - type: BorgTransponder
+    sprite:
+      sprite: _Trauma/Mobs/Silicon/chassis.rsi
+      state: security
+    name: security cyborg
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Security
+    - Engineering
+    - Common
+  - type: ActiveRadio
+    channels:
+    - Security
+    - Engineering
+    - Common
+  - type: InteractionPopup
+    interactSuccessString: petting-success-generic-cyborg
+    interactFailureString: petting-failure-generic-cyborg
+
+- type: entity
+  id: BorgChassisSecurityFilled
+  parent: BorgChassisSecurity
+  suffix: filled
+  components:
+  - type: ContainerFill
+    containers:
+      borg_brain:
+      - PositronicBrain
+      borg_module:
+      - BorgModulePrying
+      - BorgModuleFireExtinguisher
+      - BorgModuleSecurity
+      - BorgModuleArrest
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        startingItem: PowerCellMedium

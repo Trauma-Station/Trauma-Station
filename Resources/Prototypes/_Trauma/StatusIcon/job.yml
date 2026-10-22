@@ -33,3 +33,11 @@
     sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
     state: Rancher
   jobName: job-name-rancher
+
+- type: jobIcon
+  parent: JobIcon
+  id: JobIconBorgSecurity
+  icon:
+    sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
+    state: BorgSecurity
+  jobName: job-name-borg-security

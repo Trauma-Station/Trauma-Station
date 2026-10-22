@@ -15,3 +15,43 @@
       path: /Audio/Items/appraiser.ogg
   - type: UseDelay
     delay: 1
+
+- type: entity
+  name: mk 58 ROW
+  parent: BaseItem
+  id: WeaponPistolMk58C
+  description: A Mk58 for use by cyborgs. Creates .35 pistol ammo on the fly from an internal ammo fabricator, which slowly self-charges.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Pistols/mk58.rsi
+    layers:
+    - state: base
+      map: ["enum.GunVisualLayers.Base"]
+    - state: mag-0
+      map: ["enum.GunVisualLayers.Mag"]
+  - type: Item
+    size: Small
+  - type: Gun
+    minAngle: 2
+    maxAngle: 17
+    angleIncrease: 2
+    angleDecay: 14
+    fireRate: 5
+    availableModes:
+    - SemiAuto
+    soundGunshot:
+      path: /Audio/Weapons/Guns/Gunshots/mk58.ogg
+  - type: ContainerContainer
+    containers:
+      ballistic-ammo: !type:Container
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - CartridgePistol
+    capacity: 12
+    proto: CartridgePistol
+    cycleable: false
+  - type: BallisticAmmoSelfRefiller
+    autoRefillRate: 5s
+    affectedByEmp: true
+  - type: AmmoCounter

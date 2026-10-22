@@ -24,3 +24,9 @@
   id: TraumaSecurityEquipmentStatic
   recipes:
   - ClothingOuterStraightjacket
+
+- type: latheRecipePack
+  id: ArmoryModules
+  recipes:
+  - BorgModuleRiot
+  - BorgModuleLaserRifle

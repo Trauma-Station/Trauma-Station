@@ -1,0 +1,13 @@
+- type: entity
+  id: ExosuitFabricator
+  components:
+  - type: Lathe
+    dynamicPacks:
+    - SecBorgLimbs
+
+- type: entity
+  id: SecurityTechFab
+  components:
+  - type: Lathe
+    dynamicPacks:
+    - ArmoryModules
