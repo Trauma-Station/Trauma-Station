@@ -6,15 +6,16 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Humanoid;
 using Content.Shared.Popups;
+using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
-using Content.Trauma.Common.Silicons.Laws;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
 public sealed partial class DecaySystem : EntitySystem
 {
+    [Dependency] private EmagSystem _emag = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedStaminaSystem _stamina = default!;
-    [Dependency] private EmagSystem _emag = default!;
+    [Dependency] private SharedSiliconLawSystem _siliconLaw = default!;
 
     public override void Initialize()
     {
@@ -36,8 +37,7 @@ public sealed partial class DecaySystem : EntitySystem
         if (HasComp<SiliconLawBoundComponent>(args.Target) &&
             HasComp<IonStormTargetComponent>(args.Target))
         {
-            var ev = new TriggerIonStormEvent();
-            RaiseLocalEvent(args.Target, ref ev);
+            _siliconLaw.TriggerIonStorm(args.Target);
 
             _emag.TryEmagEffect(ent.Owner, ent.Owner, args.Target, ent.Comp.Emag);
 

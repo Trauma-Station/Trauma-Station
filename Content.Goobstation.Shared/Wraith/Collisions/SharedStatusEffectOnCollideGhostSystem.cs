@@ -24,7 +24,6 @@ public abstract partial class SharedStatusEffectOnCollideGhostSystem : EntitySys
             && !_entityWhitelist.IsValid(whitelist, args.OtherEntity))
             return;
 
-        // Only refresh up to Duration
         if (_statusEffectsSystem.HasStatusEffect(args.OtherEntity, ent.Comp.StatusEffect))
             return;
 
