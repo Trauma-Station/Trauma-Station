@@ -15956,3 +15956,10 @@ Entries:
   id: 1732
   time: '2026-10-20T20:43:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5114
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Closet Skeletons have been given proper melee weapon skills
+  id: 1733
+  time: '2026-10-22T07:58:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5120
