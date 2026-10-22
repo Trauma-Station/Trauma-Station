@@ -40,7 +40,6 @@
   id: MobSkeletonCloset
   name: closet skeleton
   components:
-  # <Trauma>
   - type: GhostRole
     name: ghost-role-information-closet-skeleton-name
     description: ghost-role-information-closet-skeleton-description
