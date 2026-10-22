@@ -4,4 +4,4 @@ using Content.Trauma.Shared.Heretic.Systems;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
-public sealed partial class ClientEldritchPaperSystem : EldritchPaperSystem;
+public sealed partial class ServerEldritchPaperSystem : EldritchPaperSystem;
