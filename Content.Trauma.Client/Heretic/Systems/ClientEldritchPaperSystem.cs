@@ -71,8 +71,7 @@ public sealed partial class ClientEldritchPaperSystem : EldritchPaperSystem
 
         foreach (var spriteLayer in itemSprite.AllLayers)
         {
-            if (!TryAddSpriteLayer((ent, sprite, ent.Comp), spriteLayer, rotation))
-                continue;
+            TryAddSpriteLayer((ent, sprite, ent.Comp), spriteLayer, rotation);
         }
     }
 
@@ -81,7 +80,7 @@ public sealed partial class ClientEldritchPaperSystem : EldritchPaperSystem
         if (spriteLayer is not SpriteComponent.Layer layer || !_sprite.IsVisible(layer))
             return false;
 
-        int? index = layer.RSI is { } rsi && layer.State is { } state
+        int? index = layer.ActualRsi is { } rsi && layer.ActualState?.StateId is { } state
             ? _sprite.AddRsiLayer(ent.AsNullable(), state, rsi)
             : layer.Texture is { } tex
                 ? _sprite.AddTextureLayer(ent.AsNullable(), tex)
