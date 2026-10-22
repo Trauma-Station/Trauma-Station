@@ -206,7 +206,7 @@ public sealed partial class BlobTileSystem : EntitySystem
             var spawn = _tiles.Count == 0;
             foreach (var uid in _map.GetAnchoredEntities(gridUid, grid, innerTile.GridIndices))
             {
-                if (!_destructibleQuery.HasComp(uid))
+                if (_tileQuery.HasComp(uid) || !_destructibleQuery.HasComp(uid))
                     continue;
 
                 if (attack)

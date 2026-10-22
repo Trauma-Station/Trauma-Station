@@ -170,7 +170,7 @@
   noSpecialFoodRequiredChickens:
   - MobClownHen
   happinessRequired: 60
-  weight: 10
+  weight: 5
   foodTagsRequired:
   - Banana
 
