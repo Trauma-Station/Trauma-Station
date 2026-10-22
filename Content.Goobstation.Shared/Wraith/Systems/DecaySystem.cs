@@ -6,6 +6,8 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.Emag.Systems;
 using Content.Shared.Humanoid;
 using Content.Shared.Popups;
+using Content.Shared.Silicons.Laws.Components;
+using Content.Trauma.Common.Silicons.Laws;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
 public sealed partial class DecaySystem : EntitySystem
@@ -27,6 +29,18 @@ public sealed partial class DecaySystem : EntitySystem
         {
             _stamina.TakeOvertimeStaminaDamage(args.Target, ent.Comp.StaminaDamageAmount);
             _popup.PopupEntity(Loc.GetString("wraith-decay-human-alert"), args.Target, args.Target);
+            args.Handled = true;
+            return;
+        }
+
+        if (HasComp<SiliconLawBoundComponent>(args.Target) &&
+            HasComp<IonStormTargetComponent>(args.Target))
+        {
+            var ev = new TriggerIonStormEvent();
+            RaiseLocalEvent(args.Target, ref ev);
+
+            _emag.TryEmagEffect(ent.Owner, ent.Owner, args.Target, ent.Comp.Emag);
+
             args.Handled = true;
             return;
         }

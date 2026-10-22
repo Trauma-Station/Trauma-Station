@@ -84,7 +84,7 @@
     event: !type:BloodWritingEvent
 
 - type: entity
-  parent: BaseWraithAction
+  parent: BaseCorporealWraithAction
   id: ActionAbsorbCorpse
   name: Absorb corpse
   description: Steal life essence from a corpse. You cannot use this on a skeleton!
