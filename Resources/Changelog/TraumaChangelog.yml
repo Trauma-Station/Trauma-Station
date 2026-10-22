@@ -15972,3 +15972,14 @@ Entries:
   id: 1734
   time: '2026-10-22T10:48:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5100
+- author: Graves
+  changes:
+  - type: Add
+    message: >-
+      Added thief, a new low-stakes antag with freeform objectives and quick
+      hands!
+  - type: Tweak
+    message: Tweaked some subgamemodes to allow for more variety
+  id: 1735
+  time: '2026-10-22T19:39:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5031
