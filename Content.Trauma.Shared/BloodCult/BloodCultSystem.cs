@@ -151,16 +151,26 @@ public abstract partial class BloodCultSystem : EntitySystem
     }
 
     /// <summary>
-    /// Gets all cultists/construct players near a rune.
+    /// Gets all cultists/construct players near a rune that are able to invoke a rune.
     /// The hashset returned is reused between calls, do not store it.
     /// </summary>
-    public HashSet<Entity<BloodCultMemberComponent>> GatherCultists(EntityUid rune, float range)
+    public HashSet<Entity<BloodCultMemberComponent>> GetRuneInvokers(EntityUid rune, float range)
+    {
+        var cultists = GetCultistsNearRune(rune, range);
+        // have to be awake and able to speak to invoke a rune
+        _cultists.RemoveWhere(uid => !_actorQuery.HasComp(uid) || !_blocker.CanConsciouslyPerformAction(uid) || !_blocker.CanSpeak(uid));
+        return _cultists;
+    }
+
+    /// <summary>
+    /// Gets all cultists/construct players near a rune including dead, ssd, etc.
+    /// The hashset returned is reused between calls, do not store it.
+    /// </summary>
+    public HashSet<Entity<BloodCultMemberComponent>> GetCultistsNearRune(EntityUid rune, float range)
     {
         var pos = Transform(rune).Coordinates;
         _cultists.Clear();
         _lookup.GetEntitiesInRange(pos, range, _cultists);
-        // have to be awake and able to speak to invoke a rune
-        _cultists.RemoveWhere(uid => !_actorQuery.HasComp(uid) || !_blocker.CanConsciouslyPerformAction(uid) || !_blocker.CanSpeak(uid));
         return _cultists;
     }
 

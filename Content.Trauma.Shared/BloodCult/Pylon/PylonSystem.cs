@@ -40,7 +40,7 @@ public sealed partial class PylonSystem : EntitySystem
 
     private const float PylonLookupRange = 10;
 
-    private HashSet<Entity<BloodCultistComponent>> _targets = new();
+    private HashSet<Entity<BloodCultMemberComponent>> _targets = new();
     private HashSet<Entity<ActivePylonComponent>> _pylons = new();
 
     public override void Update(float frameTime)

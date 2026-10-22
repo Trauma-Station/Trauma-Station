@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseItem, BaseRevMajorContraband ]
+  parent: [ BaseItem, BaseRevMajorContraband, BaseStockHit ]
   id: WeaponFlamethrower
   name: flamethrower
   description: A flamethrower, draws its fuel from the backpack tank.

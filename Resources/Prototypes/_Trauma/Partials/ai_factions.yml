@@ -6,6 +6,7 @@
   - !Remove Wizard
   - Heretic
   - Blob
+  - BloodCult
   - Shadowling
   - Insurgent
   friendly:
@@ -20,6 +21,7 @@
   - Changeling
   - Heretic
   - Blob
+  - BloodCult
   - Shadowling
   - PirateFaction
   - Wraith
@@ -47,6 +49,7 @@
   - !Remove Wizard
   - Heretic
   - Blob
+  - BloodCult
   - PirateFaction
   - Lavafauna
   - Insurgent
@@ -62,6 +65,7 @@
   - Changeling
   - Heretic
   - Blob
+  - BloodCult
   - PirateFaction
   - Shadowling
   - Wraith
@@ -75,6 +79,7 @@
   - !Remove Wizard
   - Heretic
   - Blob
+  - BloodCult
   - PirateFaction
   - Wraith
   - Lavafauna
@@ -104,6 +109,7 @@
   - Changeling
   - Heretic
   - Blob
+  - BloodCult
   - Shadowling
   - Wizard
   - PirateFaction
@@ -122,6 +128,7 @@
   - Changeling
   - Heretic
   - Blob
+  - BloodCult
   - Shadowling
   - PirateFaction
   - Wraith
@@ -142,5 +149,6 @@
   - Heretic
   - PirateFaction
   - Blob
+  - BloodCult
   - Shadowling
   - Insurgent

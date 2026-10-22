@@ -4,19 +4,6 @@
   name: admin observer
   categories: [ HideSpawnMenu ]
   components:
-  # <Trauma>
-  - type: SupermatterImmune
-  - type: Speech
-    speechVerb: HolierThanThou
-  - type: Eye
-    visMask:
-      - Ghost
-      - Normal
-      - CosmicCultMonument
-      - Abductor
-  - type: Emagged # so cargo orders aren't announced and can bypass alert levels
-    emagType: All
-  # </Trauma>
   - type: ContentEye
     maxZoom: 8.916104, 8.916104
   - type: Tag
