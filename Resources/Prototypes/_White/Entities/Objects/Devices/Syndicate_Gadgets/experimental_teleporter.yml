@@ -4,7 +4,7 @@
   id: ExperimentalSyndicateTeleporter
   parent: [BaseItem, BaseSyndicateContraband]
   name: experimental Syndicate teleporter
-  description: A self-recharging device that teleports the user forward. In case of teleportation into a wall, uses emergency teleportation. Or gibs the user if it's out of charges.
+  description: A self-recharging device that teleports the user forward. Now equipped with safeguards against teleporting into walls!
   components:
   - type: Sprite
     sprite: /Textures/_White/Objects/Devices/experimentalsyndicateteleporter.rsi
