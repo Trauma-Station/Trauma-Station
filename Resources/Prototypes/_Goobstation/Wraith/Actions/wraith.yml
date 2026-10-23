@@ -137,7 +137,7 @@
     wpConsume: 20
 
 - type: entity
-  parent: BaseWraithAction
+  parent: BaseCorporealWraithAction
   id: ActionDecay
   name: Decay
   description: Cause a human to lose stamina, or an object to malfunction.
@@ -545,7 +545,7 @@
   - type: InstantAction
     event: !type:SummonPlagueRatEvent
   - type: ActionWraithPoints
-    wpConsume: 60
+    wpConsume: 100
 
 - type: entity
   parent: BaseWraithAction
