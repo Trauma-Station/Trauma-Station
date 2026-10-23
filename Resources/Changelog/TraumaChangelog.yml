@@ -15956,3 +15956,39 @@ Entries:
   id: 1732
   time: '2026-10-20T20:43:29.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5114
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Closet Skeletons have been given proper melee weapon skills
+  id: 1733
+  time: '2026-10-22T07:58:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5120
+- author: ReestockMakes
+  changes:
+  - type: Tweak
+    message: >-
+      Nuclear corpsman now has a medical visor to see their teammates' healths
+      with.
+  id: 1734
+  time: '2026-10-22T10:48:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5100
+- author: Graves
+  changes:
+  - type: Add
+    message: >-
+      Added thief, a new low-stakes antag with freeform objectives and quick
+      hands!
+  - type: Tweak
+    message: Tweaked some subgamemodes to allow for more variety
+  id: 1735
+  time: '2026-10-22T19:39:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5031
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed shadow cloak sprite popping in and out and revealing user.
+  - type: Fix
+    message: Fixed some species like dwarves having outline when stealthed.
+  id: 1736
+  time: '2026-10-22T19:40:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5124
