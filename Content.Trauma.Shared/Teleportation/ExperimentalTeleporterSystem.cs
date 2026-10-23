@@ -1,28 +1,27 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Charges.Systems;
 using Content.Shared.Coordinates.Helpers;
-using Content.Shared.Gibbing;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Maps;
 using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Tag;
+using Content.Shared.Timing.Systems;
 using Content.Shared.Wall;
 using Content.Trauma.Shared.Standing;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Teleportation;
 
 public sealed partial class ExperimentalTeleporterSystem : EntitySystem
 {
-    [Dependency] private GibbingSystem _gibbing = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private SharedChargesSystem _charges = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
@@ -30,35 +29,18 @@ public sealed partial class ExperimentalTeleporterSystem : EntitySystem
     [Dependency] private TelefragSystem _telefrag = default!;
     [Dependency] private TeleportSystem _teleport = default!;
     [Dependency] private TurfSystem _turf = default!;
+
     [Dependency] private EntityQuery<WallComponent> _wallQuery = default!;
 
     public static readonly ProtoId<TagPrototype> DirectionalTag = "Directional";
 
-    private List<EntityUid> _gibQueue = new();
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        SubscribeLocalEvent<ExperimentalTeleporterComponent, UseInHandEvent>(OnUse);
-    }
-
-    public override void Update(float frameTime)
-    {
-        base.Initialize();
-
-        foreach (var uid in _gibQueue)
-        {
-            _gibbing.Gib(uid);
-        }
-        _gibQueue.Clear();
-    }
-
+    [SubscribeLocalEvent]
     private void OnUse(Entity<ExperimentalTeleporterComponent> ent, ref UseInHandEvent args)
     {
         var user = args.User;
-        if (_charges.IsEmpty(ent.Owner)
+        if (_delay.IsDelayed(ent.Owner)
             || (_container.IsEntityInContainer(user)
-                && !_container.TryRemoveFromContainer(user)))
+            && !_container.TryRemoveFromContainer(user)))
             return;
 
         var xform = Transform(user);
@@ -66,53 +48,30 @@ public sealed partial class ExperimentalTeleporterSystem : EntitySystem
         var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         var range = rand.Next(ent.Comp.MinTeleportRange, ent.Comp.MaxTeleportRange);
         var offset = xform.LocalRotation.ToWorldVec().Normalized();
-        var direction = xform.LocalRotation.GetDir().ToVec();
+        var direction = xform.LocalRotation.ToVec();
         var newOffset = offset + direction * range;
 
         var coords = xform.Coordinates.Offset(newOffset).SnapToGrid(EntityManager);
 
-        Teleport(user, ent, coords, oldCoords);
+        // Delay is applied even if the teleport failed
+        _delay.TryResetDelay(ent.Owner);
 
-        if (!TryCheckWall(coords)
-            || EmergencyTeleportation((user, xform), ent, rand, oldCoords, newOffset))
+        if (TryCheckWall(coords)
+            || !_teleport.Teleport(user, coords, ent.Comp.TeleportSound, user))
+        {
+            _popup.PopupEntity("Teleportation failed!", ent, user, PopupType.MediumCaution);
+            _audio.PlayPredicted(ent.Comp.FailSound, oldCoords, user);
             return;
-
-        // has to be defered because of interaction system's expectations that the user isn't being deleted
-        _popup.PopupEntity("Teleporter malfunction", ent, user, PopupType.LargeCaution);
-        _gibQueue.Add(user);
-    }
-
-    private bool EmergencyTeleportation(Entity<TransformComponent> user, Entity<ExperimentalTeleporterComponent> ent, IRobustRandom rand, EntityCoordinates oldCoords, Vector2 offset)
-    {
-        if (_charges.IsEmpty(ent.Owner))
-            return false;
-
-        _popup.PopupEntity("Emergency teleport saved your life!", ent, user, PopupType.LargeCaution);
-        var newOffset = offset + RandomEmergencyOffset(ent, rand, offset);
-        var coords = user.Comp.Coordinates.Offset(newOffset).SnapToGrid(EntityManager);
-
-        Teleport(user, ent, coords, oldCoords);
-
-        return !TryCheckWall(coords);
-    }
-
-    private void Teleport(EntityUid user, Entity<ExperimentalTeleporterComponent> ent, EntityCoordinates coords, EntityCoordinates oldCoords)
-    {
-        var sound = ent.Comp.TeleportSound;
-        if (!_teleport.Teleport(user, coords, sound, user))
-            return;
+        }
 
         _telefrag.DoTelefrag(user, coords, TimeSpan.Zero);
-        SpawnEffects(ent.Comp, coords, oldCoords);
-        _charges.TryUseCharge(ent.Owner);
-    }
-
-    private void SpawnEffects(ExperimentalTeleporterComponent comp, EntityCoordinates coords, EntityCoordinates oldCoords)
-    {
         PredictedSpawnAtPosition(comp.TeleportInEffect, coords);
         PredictedSpawnAtPosition(comp.TeleportOutEffect, oldCoords);
     }
 
+    /// <summary>
+    /// Returns true if there is a wall at the given coordinates
+    /// </summary>
     private bool TryCheckWall(EntityCoordinates coords)
     {
         if (!_turf.TryGetTileRef(coords, out var tile)
@@ -127,15 +86,5 @@ public sealed partial class ExperimentalTeleporterSystem : EntitySystem
         }
 
         return false;
-    }
-
-    private Vector2 RandomEmergencyOffset(Entity<ExperimentalTeleporterComponent> ent, IRobustRandom rand, Vector2 offset)
-    {
-        if (ent.Comp.RandomRotations.Count == 0)
-            return Vector2.Zero;
-
-        var length = ent.Comp.EmergencyLength;
-        var rotation = rand.Pick(ent.Comp.RandomRotations);
-        return rotation.RotateVec(offset.Normalized() * length);
     }
 }

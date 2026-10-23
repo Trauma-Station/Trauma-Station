@@ -11,7 +11,5 @@
     layers:
     - state: icon
   - type: ExperimentalTeleporter
-  - type: LimitedCharges
-    maxCharges: 4
-  - type: AutoRecharge
-    rechargeDuration: 10
+  - type: UseDelay
+    delay: 15

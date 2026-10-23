@@ -8,16 +8,10 @@ namespace Content.Trauma.Shared.Teleportation;
 public sealed partial class ExperimentalTeleporterComponent : Component
 {
     [DataField]
-    public int MinTeleportRange = 3;
+    public int MinTeleportRange = 6;
 
     [DataField]
     public int MaxTeleportRange = 8;
-
-    [DataField]
-    public int EmergencyLength = 4;
-
-    [DataField]
-    public List<Angle> RandomRotations = new() { Angle.FromDegrees(90), Angle.FromDegrees(-90) };
 
     [DataField]
     public EntProtoId TeleportInEffect = "ExperimentalTeleporterInEffect";
@@ -27,4 +21,7 @@ public sealed partial class ExperimentalTeleporterComponent : Component
 
     [DataField]
     public SoundSpecifier? TeleportSound = new SoundPathSpecifier("/Audio/_White/Object/Devices/experimentalsyndicateteleport.ogg");
+
+    [DataField]
+    public SoundSpecifier? FailSound = new SoundPathSpecifier("/Audio/Effects/gateway_off.ogg"); // Go my asset reuse
 }
