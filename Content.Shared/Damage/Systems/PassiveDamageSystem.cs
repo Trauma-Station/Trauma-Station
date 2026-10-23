@@ -53,7 +53,7 @@ public sealed partial class PassiveDamageSystem : EntitySystem
             // Make sure they're up for a damage tick
             if (comp.NextDamage > curTime)
                 continue;
-            
+
             if (comp.PauseWhenStored && _container.TryGetContainingContainer(uid, out _)) // Trauma - Prevents damage if PauseWhenContained bool is true and entity is inside a container
                 return;
 
