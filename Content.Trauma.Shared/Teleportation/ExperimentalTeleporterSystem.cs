@@ -58,7 +58,7 @@ public sealed partial class ExperimentalTeleporterSystem : EntitySystem
         if (TryCheckWall(coords)
             || !_teleport.Teleport(user, coords, ent.Comp.TeleportSound, user))
         {
-            _popup.PopupEntity("Teleportation failed!", ent, user, PopupType.MediumCaution);
+            _popup.PopupPredicted("Teleportation failed!", ent, user, PopupType.MediumCaution);
             _audio.PlayPredicted(ent.Comp.FailSound, oldCoords, user);
             return;
         }
