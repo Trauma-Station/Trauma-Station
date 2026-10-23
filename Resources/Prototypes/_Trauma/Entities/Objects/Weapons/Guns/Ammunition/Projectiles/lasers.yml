@@ -1,0 +1,10 @@
+- type: entity
+  parent: BulletLaser
+  id: BulletLaserSpreadMini
+  categories: [ HideSpawnMenu ]
+  name: lethal laser barrage
+  components:
+  - type: ProjectileSpread
+    proto: BulletLaser
+    count: 3
+    spread: 20

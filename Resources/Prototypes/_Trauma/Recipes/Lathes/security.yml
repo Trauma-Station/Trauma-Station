@@ -29,10 +29,5 @@
 
 - type: latheRecipe
   parent: BaseGoldBorgModuleRecipe
-  id: BorgModuleLaserRifle
-  result: BorgModuleLaserRifle
-
-- type: latheRecipe
-  parent: BaseGoldBorgModuleRecipe
-  id: BorgModuleRiot
-  result: BorgModuleRiot
+  id: BorgModuleEnergyShotgun
+  result: BorgModuleEnergyShotgun

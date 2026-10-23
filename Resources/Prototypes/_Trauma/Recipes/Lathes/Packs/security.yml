@@ -28,5 +28,4 @@
 - type: latheRecipePack
   id: ArmoryModules
   recipes:
-  - BorgModuleRiot
-  - BorgModuleLaserRifle
+  - BorgModuleEnergyShotgun

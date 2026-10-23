@@ -1,0 +1,10 @@
+- type: entity
+  parent: BulletDisablerSmgStunning
+  id: BulletDisablerSmgSpreadMini
+  categories: [ HideSpawnMenu ]
+  name: disabling laser barrage
+  components:
+  - type: ProjectileSpread
+    proto: BulletDisablerSmgStunning
+    count: 3
+    spread: 12

@@ -240,18 +240,6 @@
         color: "#df5252"
 
 - type: entity
-  id: BaseBorgModuleArmory
-  parent: BaseBorgModuleSecurity
-  abstract: true
-  components:
-  - type: BorgModule
-    borgFitTypes:
-    - borg-type-combat
-  - type: Tag
-    tags:
-    - BorgModuleArmory
-
-- type: entity
   parent: [ BaseBorgModuleSecurity, BaseProviderBorgModule ]
   id: BorgModuleSecurity
   name: security cyborg module
@@ -300,6 +288,7 @@
   parent: [ BaseBorgModuleSecurity, BaseProviderBorgModule ]
   id: BorgModuleRiot
   name: riot cyborg module
+  suffix: DO NOT MAP
   components:
   - type: Sprite
     layers:
@@ -319,9 +308,30 @@
     icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: truncheon }
 
 - type: entity
-  parent: [ BaseBorgModuleArmory, BaseProviderBorgModule ]
+  parent: [ BaseBorgModuleSecurity, BaseProviderBorgModule ]
+  id: BorgModuleEnergyShotgun
+  name: mini energy shotgun module
+  components:
+  - type: Sprite
+    layers:
+    - state: security
+    - state: icon-xenoborg-laser2
+  - type: ItemBorgModule
+    hands:
+    - item: WeaponEnergyShotgunMiniC
+    - item: FlashBorg
+    - item: Zipties
+      hand: *zipties_hand
+    - item: Zipties
+      hand: *zipties_hand
+  - type: BorgModuleIcon
+    icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: energy_shotgun }
+
+- type: entity
+  parent: [ BaseBorgModuleSecurity, BaseProviderBorgModule ]
   id: BorgModuleLaserRifle
   name: laser rifle module
+  suffix: admeme
   components:
   - type: Sprite
     layers:
