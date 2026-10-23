@@ -47,9 +47,8 @@ public sealed partial class ExperimentalTeleporterSystem : EntitySystem
         var oldCoords = xform.Coordinates.SnapToGrid(EntityManager);
         var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
         var range = rand.Next(ent.Comp.MinTeleportRange, ent.Comp.MaxTeleportRange);
-        var offset = xform.LocalRotation.ToWorldVec().Normalized();
-        var direction = xform.LocalRotation.ToVec();
-        var newOffset = offset + direction * range;
+        var direction = xform.LocalRotation.ToVec().Normalized();
+        var newOffset = direction * range;
 
         var coords = xform.Coordinates.Offset(newOffset).SnapToGrid(EntityManager);
 
