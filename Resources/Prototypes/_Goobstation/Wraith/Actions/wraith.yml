@@ -538,14 +538,12 @@
   description: Attempt to breach the veil between worlds to allow a plague rat to enter this realm.
   components:
   - type: Action
-    useDelay: 150
+    useDelay: 240
   - type: Sprite
     layers:
     - state: summon_rats
   - type: InstantAction
     event: !type:SummonPlagueRatEvent
-  - type: ActionWraithPoints
-    wpConsume: 100
 
 - type: entity
   parent: BaseWraithAction
