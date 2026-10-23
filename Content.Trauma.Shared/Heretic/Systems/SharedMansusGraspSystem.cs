@@ -191,7 +191,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         return MathHelper.Lerp(ent.Comp.MinRange, ent.Comp.MaxRange, blend);
     }
 
-    public TimeSpan CalculateAreaGraspCooldown(float baseCooldown, int hitCount, float range, float multiplier = 2f)
+    public TimeSpan CalculateAreaGraspCooldown(float baseCooldown, int hitCount, float range, float multiplier = 1f)
     {
         var cd = baseCooldown *
                  (1f + multiplier * MathF.Pow(range, 0.8f) * (1f - 1f / (MathF.Pow(hitCount, 0.8f) + 1f)));
@@ -489,7 +489,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
             args.User)
         {
             BreakOnDamage = true,
-            BreakOnHandChange = true,
+            NeedHand = true,
             BreakOnMove = true,
             CancelDuplicate = false,
             MultiplyDelay = false,

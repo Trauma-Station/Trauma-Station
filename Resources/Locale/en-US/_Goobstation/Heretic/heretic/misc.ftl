@@ -73,3 +73,7 @@ lionhunter-rifle-examine-message =
     Only special hunter's ammunition has this effect.
 
 lionhunter-rifle-aim-message = taking aim...
+
+eldritch-paper-examine-message = You can see a drawing of [color=cyan]{THE($item)}[/color] on the card.
+eldritch-paper-name-empty = eldritch card
+eldritch-paper-name-full = eldritch card ({$item})

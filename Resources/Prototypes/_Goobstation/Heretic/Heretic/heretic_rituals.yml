@@ -2780,7 +2780,6 @@
             components:
             - HandOrgan
           name: heretic-ritual-ingredient-hand
-          amount: 2
         - whitelist:
             components:
             - Eyes
@@ -2806,7 +2805,7 @@
     sprite: _Goobstation/Heretic/eldritch_mobs.rsi
     state: ash_walker
   - type: HereticRitual
-    limit: 2
+    limit: 3
     effects:
     - !type:LookupRitualEffect
       applyOn: Platform
