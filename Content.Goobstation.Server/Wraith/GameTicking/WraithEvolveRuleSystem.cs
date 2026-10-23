@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Rules;
 using Content.Goobstation.Shared.Wraith.GameTicking.Components;
