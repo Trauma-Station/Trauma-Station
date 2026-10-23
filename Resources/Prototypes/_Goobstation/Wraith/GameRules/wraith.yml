@@ -4,6 +4,7 @@
   parent: BaseAntagGhostRoleRule
   id: WraithMidround
   components:
+  - type: GhostroleAlert
   - type: AntagSelection
     agentName: wraith-round-end-agent-name
     antags:

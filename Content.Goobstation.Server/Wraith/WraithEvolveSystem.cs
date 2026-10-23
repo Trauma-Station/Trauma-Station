@@ -6,6 +6,7 @@ using Content.Server.Actions;
 using Content.Server.Mind;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
+using Content.Shared.GameTicking;
 using Content.Shared.Popups;
 using Content.Trauma.Common.RadialSelector;
 using Robust.Server.GameObjects;
@@ -24,6 +25,7 @@ public sealed partial class WraithEvolveSystem : EntitySystem
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private SharedPopupSystem _popups = default!;
     [Dependency] private ISharedAdminLogManager _admin = default!;
+    [Dependency] private GameTicker _ticker = default!;
 
     private CompName _wraithName;
 
@@ -83,6 +85,8 @@ public sealed partial class WraithEvolveSystem : EntitySystem
 
         _mind.TransferTo(mindUid, newForm, mind: mind);
         _mind.UnVisit(mindUid, mind);
+
+        _ticker.StartGameRule("SpawnERTChaplain");
 
         CopyComps(uid, newForm);
 

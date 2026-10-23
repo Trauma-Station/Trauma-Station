@@ -544,6 +544,8 @@
     - state: summon_rats
   - type: InstantAction
     event: !type:SummonPlagueRatEvent
+  - type: ActionWraithPoints
+    wpConsume: 60
 
 - type: entity
   parent: BaseWraithAction

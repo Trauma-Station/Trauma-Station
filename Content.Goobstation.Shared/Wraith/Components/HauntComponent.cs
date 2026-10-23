@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.FixedPoint;
-using Content.Shared.StatusEffect;
 
 namespace Content.Goobstation.Shared.Wraith.Components;
 
@@ -31,7 +30,7 @@ public sealed partial class HauntComponent : Component
     public TimeSpan NextHauntWpRegenUpdate = TimeSpan.Zero;
 
     /// <summary>
-    /// How much the Wp regeneration gets boosted per witness.
+    /// How long the Wraith remains corporeal while haunting.
     /// </summary>
     [DataField]
     public TimeSpan HauntCorporealDuration = TimeSpan.FromSeconds(30);
@@ -69,6 +68,9 @@ public sealed partial class HauntComponent : Component
     [ViewVariables, AutoNetworkedField]
     public TimeSpan WitnessNextUpdate;
 
-    [ViewVariables]
-    public FixedPoint2 OriginalWpRegen;
+    /// <summary>
+    /// Total WP regeneration added by Haunt
+    /// </summary>
+    [ViewVariables, AutoNetworkedField]
+    public FixedPoint2 HauntWpRegenApplied;
 }
