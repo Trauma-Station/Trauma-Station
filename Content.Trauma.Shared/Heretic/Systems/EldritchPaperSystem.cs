@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Common.Chemistry;
 using Content.Shared.Destructible;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
@@ -24,6 +25,14 @@ public abstract partial class EldritchPaperSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+
+    [SubscribeLocalEvent]
+    public void OnBeforeReact(Entity<EldritchPaperComponent> ent, ref BeforeSolutionReactEvent args)
+    {
+        // Don't burn paper by splashing flammable reagents while it's inside a container
+        if (_container.IsEntityInContainer(ent))
+            args.Cancel();
+    }
 
     [SubscribeLocalEvent]
     public void OnExamine(Entity<EldritchPaperComponent> ent, ref ExaminedEvent args)

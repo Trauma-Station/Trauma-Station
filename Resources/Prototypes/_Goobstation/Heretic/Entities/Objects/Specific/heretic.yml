@@ -125,6 +125,8 @@
   description: Burn it to reveal the contents hidden behind the Veil of Mansus.
   components:
   - type: FaxableObject
+  - type: FaxSlip
+    slipChance: 1
   - type: Sprite
     sprite: _Trauma/Heretic/Entities/card.rsi
     layers:
@@ -155,6 +157,9 @@
         - item
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: ExplosionResistance
+    worn: false
+    damageCoefficient: 0
 
 - type: entity
   parent: [ BaseItem, BaseMagicalContraband ]
