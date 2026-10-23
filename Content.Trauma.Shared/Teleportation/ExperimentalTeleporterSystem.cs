@@ -65,8 +65,8 @@ public sealed partial class ExperimentalTeleporterSystem : EntitySystem
         }
 
         _telefrag.DoTelefrag(user, coords, TimeSpan.Zero);
-        PredictedSpawnAtPosition(comp.TeleportInEffect, coords);
-        PredictedSpawnAtPosition(comp.TeleportOutEffect, oldCoords);
+        PredictedSpawnAtPosition(ent.Comp.TeleportInEffect, coords);
+        PredictedSpawnAtPosition(ent.Comp.TeleportOutEffect, oldCoords);
     }
 
     /// <summary>
