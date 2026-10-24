@@ -111,4 +111,24 @@ public abstract partial class SharedMeleeWeaponSystem
         source = ev.User;
         return ev.Handled;
     }
+
+    public void ResetMeleeCooldown(Entity<MeleeWeaponComponent?> ent, EntityUid user)
+    {
+        if (!Resolve(ent, ref ent.Comp, false))
+            return;
+
+        var attackRate = GetAttackRate(ent, user, ent.Comp);
+        if (attackRate.Equals(0f))
+            return;
+
+        var curTime = Timing.CurTime;
+        var minimum = curTime + TimeSpan.FromSeconds(1 / attackRate);
+
+        if (minimum < ent.Comp.NextAttack)
+            return;
+
+        ent.Comp.NextAttack = minimum;
+        ResetUndamagedSwingsCount(ent!);
+        DirtyField(ent, nameof(MeleeWeaponComponent.NextAttack));
+    }
 }

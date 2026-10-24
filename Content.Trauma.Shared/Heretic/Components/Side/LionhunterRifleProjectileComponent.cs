@@ -16,6 +16,12 @@ public sealed partial class LionhunterRifleProjectileComponent : Component
     public ComponentRegistry ComponentsOnEmpower;
 
     /// <summary>
+    /// Damage multiplier if empowered
+    /// </summary>
+    [DataField]
+    public float EmpowerDamageMultiplier = 1.5f;
+
+    /// <summary>
     /// Knockdown time for target if empowered
     /// </summary>
     [DataField]

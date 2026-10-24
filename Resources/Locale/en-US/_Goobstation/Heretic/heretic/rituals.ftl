@@ -26,6 +26,7 @@ heretic-ritual-basic-codex-desc =
 
     Allows you to transmute a book, any pen, and flesh organ or body part to create a Codex Cicatrix.
     The Codex Cicatrix can be used for gaining more power from influences. It can also be used to enchant items, draw and remove transmutation runes, and as a spell focus in a pinch.
+    Use Codex Cicatrix on an item to convert it into eldritch card. Eldritch cards are easy to store (codex itself can hold 4) and can be reverted by burning the card.
 
 heretic-ritual-basic-reminiscence = Reminiscence
 heretic-ritual-basic-reminiscence-desc = Transmute a chair to instantly return one of your lost blades.

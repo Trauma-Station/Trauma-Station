@@ -38,7 +38,6 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
 {
     #region Dependencies
 
-    [Dependency] private StoreSystem _store = default!;
     [Dependency] private HandsSystem _hands = default!;
     [Dependency] private PolymorphSystem _poly = default!;
     [Dependency] private MobStateSystem _mobstate = default!;
@@ -52,15 +51,12 @@ public sealed partial class HereticAbilitySystem : SharedHereticAbilitySystem
     [Dependency] private SharedStunSystem _stun = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private StationSystem _station = default!;
-    [Dependency] private BloodstreamSystem _blood = default!;
     [Dependency] private ActionsSystem _actions = default!;
     [Dependency] private NpcFactionSystem _npcFaction = default!;
     [Dependency] private CloningSystem _cloning = default!;
     [Dependency] private SharedWeatherSystem _weather = default!;
     [Dependency] private AtmosphereSystem _atmos = default!;
     [Dependency] private ActionContainerSystem _actionContainer = default!;
-    [Dependency] private SharedSanguineStrikeSystem _lifesteal = default!;
-    [Dependency] private ContainerSystem _container = default!;
     [Dependency] private BladeArenaSystem _arena = default!;
     [Dependency] private HereticSystem _heretic = default!;
 
