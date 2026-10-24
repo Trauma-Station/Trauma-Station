@@ -101,3 +101,64 @@
     amount: -15
   - !type:PlantAdjustHealth
     amount: 3
+
+- type: reagent
+  id: Fungalin
+  name: reagent-name-fungalin
+  group: Botanical
+  desc: reagent-desc-fungalin
+  physicalDesc: reagent-physical-desc-soothing
+  flavor: tingly
+  color: "#450631"
+  plantMetabolism:
+    - !type:PlantAdjustNutrition
+      amount: -1
+    - !type:PlantAdjustToxins
+      amount: 8
+    - !type:PlantAdjustYield
+      probability: 0.2
+      amount: 1
+  metabolisms:
+    Respiration:
+      effects:
+        - !type:Emote
+          emote: Cough
+          showInChat: true
+          probability: 0.8
+          conditions:
+            - !type:ReagentCondition
+              reagent: Fungalin
+              min: 0.25
+        - !type:ModifyStatusEffect
+          effectProto: StatusEffectSeeingRainbow
+          time: 10
+          type: Add
+          conditions:
+            - !type:ReagentCondition
+              reagent: Fungalin
+              min: 0.35
+        - !type:Jitter
+          probability: 0.8
+          conditions:
+            - !type:ReagentCondition
+              reagent: Fungalin
+              min: 0.50
+        - !type:SpawnEntity
+          entity: GiantSpore
+          predicted: false
+          probability: 0.05
+          conditions:
+            - !type:ReagentCondition
+              reagent: Fungalin
+              min: 0.7
+        - !type:PopupMessage
+          type: Local
+          visualType: Large
+          messages:
+            - "fungalin-effect-lungs-movement"
+            - "fungalin-effect-lungs-itch"
+          probability: 0.2
+          conditions:
+            - !type:ReagentCondition
+              reagent: Fungalin
+              min: 0.7

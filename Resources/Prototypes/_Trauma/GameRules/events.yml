@@ -11,6 +11,7 @@
     - id: FloorGoblinMidRound
     - id: ClownGoblinMigration
     - id: RadiationStormRule
+    - id: GiantMushroomSpawnHorde
 
 - type: entityTable
   id: BasicAntagEventsTrauma
@@ -265,6 +266,24 @@
       rolls: 4, 8
       children:
       - id: MobSpiderCrabSea
+
+- type: entity
+  parent: BaseStationEventShortDelay
+  id: GiantMushroomSpawnHorde
+  components:
+    - type: StationEvent
+      startAnnouncement: giant-mushroom-spawn-event
+      startAudio:
+        path: /Audio/Announcements/attention.ogg
+      earliestStart: 10
+      minimumPlayers: 15
+      weight: 3
+      duration: 5
+      maxDuration: 20
+    - type: VentHordeRule
+      table: !type:GroupSelector
+        children:
+          - id: MomMushroom
 
 - type: entity
   parent: BaseAntagGhostRoleRule
