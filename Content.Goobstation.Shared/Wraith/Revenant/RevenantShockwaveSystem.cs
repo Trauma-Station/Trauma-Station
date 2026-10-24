@@ -43,6 +43,9 @@ public sealed partial class RevenantShockwaveSystem : EntitySystem
         _lookup.GetEntitiesInRange(coords, ent.Comp.SearchRange, _targets);
         foreach (var entity in _targets)
         {
+            if (entity.Owner == ent.Owner)
+                continue;
+
             if (_whitelist.IsWhitelistPass(ent.Comp.StructureWhitelist, entity))
             {
                 _damageable.ChangeDamage(entity.AsNullable(), damage, true, origin: ent.Owner);
