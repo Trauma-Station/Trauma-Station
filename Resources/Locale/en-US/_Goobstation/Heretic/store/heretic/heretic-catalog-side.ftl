@@ -121,8 +121,8 @@ knowledge-path-side-t2-morbus-desc =
     It speaks of needles to peel the skin of the world back and leaving it to fester. And it speaks to me by name.
 
     Allows you to to combine a codex cicatrix, and a body into a Codex Morbus.
-    It draws runes and siphons essences faster.
-    Alt-Click on a rune with open codex to curse crewmembers, the target's blood or DNA (blood has greater effect) is required to be on the rune for a curse to take effect (Best combined with Phylactery Of Damnation).
+    It draws runes, converts items into papers and siphons essences faster. It also can store more papers inside.
+    Alt-Click on a rune with open codex to curse crewmembers, the puddle of target's blood or DNA (blood has greater effect) is required to be on the rune for a curse to take effect (Best combined with Phylactery Of Damnation).
 
 knowledge-path-side-t2-greaves-name = Greaves Of The Prophet
 knowledge-path-side-t2-greaves-desc =
@@ -191,6 +191,15 @@ knowledge-path-side-t2-rustgrenade-desc =
     Transmute a modular grenade casing, a rag and two pieces of trash to create the cursed grenade filled with Eldritch Rust.
     Upon detonation, it releases a huge cloud that blinds organics, rusts affected turfs and obliterates silicons and mechs.
 
+knowledge-path-side-t2-medal-name = Sharp Medal
+knowledge-path-side-t2-medal-desc =
+    They say that the craftsman who forged this charm did not use ordinary fuel,
+    but his own fingers, which he threw into the forge one by one.
+    The Sharp Medal remembers this and demands more.
+
+    Transmute a hand, eyes and a knife to create the Sharp Medal.
+    The Sharp Medal allows you to throw your blades akin to boomerangs, and also functions as a focus.
+
 ## T3
 knowledge-path-side-t3-grasp-name = Mind Grasp
 knowledge-path-side-t3-grasp-desc =
@@ -238,19 +247,10 @@ knowledge-path-side-t3-admonitions-desc =
     Forest Admonitions is harder to reveal by damage compared to Cloak Of Shadow, but it has longer cooldown as well.
     While active, you also spread pale fog around your position, which muffles sounds, debuffs heathens and disables shadow cloak for other heretics.
 
-knowledge-path-side-t3-medal-name = Sharp Medal
-knowledge-path-side-t3-medal-desc =
-    They say that the blacksmith who forged this charm did not use ordinary fuel,
-    but his own fingers, which he threw into the forge one by one.
-    The Sharp Medal remembers this and demands more.
-
-    Transmute 2 hands, eyes and a knife to create the Sharp Medal.
-    The Sharp Medal allows you to throw your blades akin to boomerangs, and also functions as a focus.
-
 knowledge-path-side-t3-ash-spirit-name = Ashen Ritual
 knowledge-path-side-t3-ash-spirit-desc =
     I combined my principle of hunger with my desire for destruction. The Marshal knew my name, and the Nightwatcher gazed on.
 
     Allows you to transmute a Bonfire and a book to create an Ash Spirit.
     Ash Spirits have a long range jaunt and the ability to melt the foes at range.
-    You can only create two at a time.
+    You can only create three at a time.

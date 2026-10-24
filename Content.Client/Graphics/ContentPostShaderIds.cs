@@ -18,7 +18,7 @@ public static class ContentPostShaderIds
 
     public static readonly string[] AfterBaseEffects =
     {
-        Stealth,
+        // Stealth, // Trauma - fix stealth/outline shader order
         FloorOcclusion,
         Holopad,
     };

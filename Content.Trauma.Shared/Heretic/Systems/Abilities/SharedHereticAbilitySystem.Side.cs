@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Common.Weapons.DelayedKnockdown;
+using Content.Medical.Common.Targeting;
+using Content.Medical.Shared.Wounds;
+using Content.Shared.Body.Components;
 using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage.Components;
@@ -16,6 +19,9 @@ namespace Content.Trauma.Shared.Heretic.Systems.Abilities;
 
 public abstract partial class SharedHereticAbilitySystem
 {
+    [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
+
+    private readonly List<EntityUid> _bloodStealTargets = new();
     private static readonly ProtoId<StatusEffectPrototype> Pacified = "Pacified";
 
     [SubscribeLocalEvent]
@@ -104,5 +110,65 @@ public abstract partial class SharedHereticAbilitySystem
     {
         _emp.EmpPulse(Transform(ev.Performer).Coordinates, ev.Range, ev.EnergyConsumption, ev.Duration, ev.Performer);
         ev.Handled = true;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnCleave(EventHereticCleave args)
+    {
+        if (!TryUseAbility(args, false))
+            return;
+
+        if (!args.Target.IsValid())
+            return;
+
+        var coords = Transform(args.Target).Coordinates;
+
+        if (!Examine.InRangeUnOccluded(args.Performer, coords))
+        {
+            Popup.PopupEntity(Loc.GetString("heretic-ability-fail-cant-see"), args.Performer, args.Performer);
+            return;
+        }
+
+        args.Handled = true;
+
+        PredictedSpawnAtPosition(args.Effect, coords);
+
+        var hasTargets = false;
+
+        TryComp(args.Performer, out DamageableComponent? damageable);
+
+        _bloodStealTargets.Clear();
+        foreach (var (target, _) in GetNearbyPeople(args.Performer, args.Range, null, coords))
+        {
+            if (target == args.Performer)
+                continue;
+
+            hasTargets = true;
+
+            var dmg = _dmg.ChangeDamage(target, args.Damage, true, origin: args.Performer, targetPart: TargetBodyPart.Vital);
+            if (damageable != null)
+                _lifesteal.LifeSteal((args.Performer, damageable), dmg.GetTotal());
+
+            if (!_bloodQuery.TryComp(target, out var blood))
+                continue;
+
+            _blood.TryModifyBleedAmount((target, blood), blood.MaxBleedAmount);
+            _bloodStealTargets.Add(target);
+        }
+
+        if (!hasTargets)
+            return;
+
+        _lifesteal.BloodSteal(args.Performer, _bloodStealTargets, args.BloodModifyAmount, null);
+        _audio.PlayPredicted(args.Sound, args.Target, args.Performer);
+
+        // Prevent WoundSystem from throwing on client
+        if (_net.IsClient)
+            return;
+
+        foreach (var (_, woundable) in _body.GetOrgans<WoundableComponent>(args.Performer))
+        {
+            _container.EmptyContainer(woundable.Wounds);
+        }
     }
 }

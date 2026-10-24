@@ -46,7 +46,7 @@
     - ActionDarkWhisper
     - ActionCommand
     - ActionAbsorbCorpse
-    # - ActionAnimateObject
+    - ActionAnimateObject
     - ActionWhisper
     - ActionBloodWriting
     - ActionSpook

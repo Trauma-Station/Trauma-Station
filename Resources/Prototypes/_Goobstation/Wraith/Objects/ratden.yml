@@ -29,7 +29,7 @@
     prototypes:
     - MobMadRat
     intervalSeconds: 30
-    maximumEntitiesSpawned: 2
+    maximumEntitiesSpawned: 5
   - type: Transform
     anchored: True
   - type: InteractionOutline

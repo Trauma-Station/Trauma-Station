@@ -6,6 +6,7 @@ using Content.Goobstation.Shared.Wraith.WraithPoints;
 using Content.Shared.Interaction;
 using Robust.Shared.Timing;
 using Content.Shared.Actions;
+using Content.Shared.FixedPoint;
 using Content.Shared.Flash;
 using Content.Shared.Humanoid;
 using Content.Shared.Mobs.Systems;
@@ -44,12 +45,7 @@ public sealed partial class HauntSystem : EntitySystem
         while (query.MoveNext(out var uid, out var haunt))
         {
             if (now >= haunt.NextHauntWpRegenUpdate && haunt.WpBoostActive)
-            {
-                // reset
-                _points.SetWpRate(haunt.OriginalWpRegen, uid);
-                haunt.WpBoostActive = false;
-                Dirty(uid, haunt);
-            }
+                RemoveHauntWpBoost((uid, haunt));
 
             if (!haunt.Active)
                 continue;
@@ -80,6 +76,7 @@ public sealed partial class HauntSystem : EntitySystem
                     // TODO: check vision cone too
                     EnsureComp<HauntedComponent>(entity);
                     _points.AdjustWpGenerationRate(haunt.HauntWpRegenPerWitness, uid);
+                    haunt.HauntWpRegenApplied += haunt.HauntWpRegenPerWitness;
                 }
 
                 haunt.WitnessNextUpdate = now + haunt.WitnessUpdate;
@@ -88,15 +85,27 @@ public sealed partial class HauntSystem : EntitySystem
         }
     }
 
+    /// <summary>
+    /// Removes the temporary WP regeneration added by Haunt
+    /// </summary>
+    private void RemoveHauntWpBoost(Entity<HauntComponent> ent)
+    {
+        if (ent.Comp.HauntWpRegenApplied != FixedPoint2.Zero)
+            _points.AdjustWpGenerationRate(-ent.Comp.HauntWpRegenApplied, ent.Owner);
+
+        ent.Comp.HauntWpRegenApplied = FixedPoint2.Zero;
+        ent.Comp.WpBoostActive = false;
+        Dirty(ent);
+    }
+
     [SubscribeLocalEvent]
     private void OnHaunt(Entity<HauntComponent> ent, ref HauntEvent args)
     {
         if (ent.Comp.Active)
         {
             _statusEffectsOld.TryRemoveStatusEffect(ent.Owner, CorporealEffect);
-            _points.SetWpRate(ent.Comp.OriginalWpRegen, ent.Owner);
+            RemoveHauntWpBoost(ent);
             ent.Comp.Active = false;
-            ent.Comp.WpBoostActive = false;
             args.Handled = true;
             Dirty(ent);
 
@@ -104,8 +113,8 @@ public sealed partial class HauntSystem : EntitySystem
         }
 
         _popup.PopupEntity(Loc.GetString("wraith-haunt-show"), ent.Owner, ent.Owner, PopupType.MediumCaution);
-        // flash people nearby
 
+        // flash people nearby
         _targets.Clear();
         _lookup.GetEntitiesInRange(Transform(ent.Owner).Coordinates, 3f, _targets);
         foreach (var entity in _targets)
@@ -116,11 +125,10 @@ public sealed partial class HauntSystem : EntitySystem
         // we don't have corporeal so add it
         _statusEffectsOld.TryAddStatusEffect<CorporealComponent>(ent.Owner, CorporealEffect, ent.Comp.HauntCorporealDuration, true);
 
-        // set original rate for resetting it after boost
-        ent.Comp.OriginalWpRegen = _points.GetCurrentWpRate(ent.Owner);
-
         var now = _timing.CurTime;
-        // activate the haunt timer and start tracking people
+
+        // Start a fresh temporary boost for this activation.
+        ent.Comp.HauntWpRegenApplied = FixedPoint2.Zero;
         ent.Comp.Active = true;
         ent.Comp.NextHauntUpdate = now + ent.Comp.HauntDuration;
         ent.Comp.WitnessNextUpdate = now + ent.Comp.WitnessUpdate;

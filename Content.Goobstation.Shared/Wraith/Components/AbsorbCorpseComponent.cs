@@ -25,7 +25,7 @@ public sealed partial class AbsorbCorpseComponent : Component
     /// How much to add to the generation rate of WP of the entity
     /// </summary>
     [DataField]
-    public FixedPoint2 WpPassiveAdd = 0.4;
+    public FixedPoint2 WpPassiveAdd = 0.6;
 
     /// <summary>
     /// If the target has this much of X chem in their body, it hurts the wraith.

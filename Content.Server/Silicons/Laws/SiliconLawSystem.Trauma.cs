@@ -8,7 +8,6 @@ using Content.Shared.Random.Helpers;
 using Content.Shared.Research.Components;
 using Content.Shared.Silicons.Laws;
 using Content.Shared.Silicons.Laws.Components;
-using Content.Shared.Silicons.StationAi;
 using Robust.Shared.Random;
 using Robust.Shared.Prototypes;
 using System.Linq;
@@ -19,8 +18,17 @@ public sealed partial class SiliconLawSystem
 {
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private IonLawSystem _ionLaw = default!;
+    [Dependency] private IonStormSystem _ionStorm = default!;
     [Dependency] private ResearchSystem _research = default!;
     [Dependency] private RadioSystem _radio = default!;
+
+    public override void TriggerIonStorm(Entity<SiliconLawBoundComponent?, IonStormTargetComponent?> target)
+    {
+        if (!Resolve(target.Owner, ref target.Comp1, ref target.Comp2))
+            return;
+
+        _ionStorm.IonStormTarget((target.Owner, target.Comp1, target.Comp2));
+    }
 
     private void ApplyExperimentalLaws(Entity<SiliconLawUpdaterComponent> ent, Entity<ExperimentalLawProviderComponent, SiliconLawProviderComponent> experiment)
     {

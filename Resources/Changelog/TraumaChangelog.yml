@@ -15972,3 +15972,86 @@ Entries:
   id: 1734
   time: '2026-10-22T10:48:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5100
+- author: Graves
+  changes:
+  - type: Add
+    message: >-
+      Added thief, a new low-stakes antag with freeform objectives and quick
+      hands!
+  - type: Tweak
+    message: Tweaked some subgamemodes to allow for more variety
+  id: 1735
+  time: '2026-10-22T19:39:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5031
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed shadow cloak sprite popping in and out and revealing user.
+  - type: Fix
+    message: Fixed some species like dwarves having outline when stealthed.
+  id: 1736
+  time: '2026-10-22T19:40:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5124
+- author: Aviu
+  changes:
+  - type: Add
+    message: >-
+      Added new codex cicatrix/morbus behavior - they can now compress most
+      items into cards and store these cards.
+  - type: Tweak
+    message: Sharp medal is t2 side now.
+  - type: Tweak
+    message: Crimson Cleave damage buffed but it cannot go through walls anymore.
+  - type: Tweak
+    message: Lionhunter rifle empowered shot damage multiplier 1 -> 1.5.
+  - type: Tweak
+    message: Reduced mind (aoe) grasp cooldown after use.
+  - type: Tweak
+    message: Ash spirit limit 2 -> 3.
+  - type: Tweak
+    message: Heretics get extra side point roundstart.
+  - type: Fix
+    message: Fixed void cloak being shown when viewing verbs on the user.
+  - type: Fix
+    message: Fixed coscult being able to convert heretics.
+  id: 1737
+  time: '2026-10-23T21:07:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5115
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to hide items inside potted plants.
+  - type: Fix
+    message: Fixed doxa saying it needs to be under 273K instead of 213K.
+  id: 1738
+  time: '2026-10-24T13:13:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5136
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Revenant no longer stuns itself with the shockwave
+  - type: Tweak
+    message: Wraith and its minions are now strong (Multiple Balance changes)
+  - type: Tweak
+    message: Midround Wraith is the same as Roundstart Wraith
+  - type: Tweak
+    message: Evolving as Wraith now spawns an ERT Chaplain shuttle
+  - type: Tweak
+    message: Wraith Points now carry over on Evolve
+  - type: Tweak
+    message: You need more corpses to evolve as wraith now
+  - type: Fix
+    message: You can no longer get caught by salt for longer than the set duration
+  - type: Fix
+    message: >-
+      Fixed Wraith Absorb not having a cooldown and the cooldown not increasing
+      per asborb
+  - type: Fix
+    message: Fixed Decay not emagging borgs, law change chance depends on the chassis
+  - type: Fix
+    message: Fixed WP boost gain from absorbing corpses not working
+  - type: Fix
+    message: Fixed some wraith mobs getting stuck due to being fat
+  id: 1739
+  time: '2026-10-24T18:15:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5117

@@ -23,7 +23,7 @@ public sealed partial class SummonRotHulkComponent : Component
     /// The minimum amount of trash needed to spawn a hulk
     /// </summary>
     [DataField]
-    public int MinTrash = 10;
+    public int MinTrash = 5;
 
     /// <summary>
     /// The maximum amount of trash needed to spawn a hulk
@@ -35,11 +35,11 @@ public sealed partial class SummonRotHulkComponent : Component
     /// The amount of trash needed to spawn a buffed hulk
     /// </summary>
     [DataField]
-    public int BuffThreshold = 30;
+    public int BuffThreshold = 20;
 
     /// <summary>
     /// The search radius of this ability
     /// </summary>
     [DataField]
-    public float SearchRadius = 3f;
+    public float SearchRadius = 5f;
 }

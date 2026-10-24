@@ -228,7 +228,7 @@
         - !type:HealthChange
           conditions:
           - !type:TemperatureCondition
-            max: 273.15
+            max: 213 # Trauma - was 273.15
           scaleByTemperature: *cryo_scaling # Trauma
           damage:
             types:
@@ -1405,7 +1405,7 @@
       - !type:EvenHealthChange
         conditions:
         - !type:TemperatureCondition
-          max: 273.15
+          max: 213 # Trauma - was 273.15
         scaleByTemperature: *cryo_scaling # Trauma
         damage:
           Brute: -4.5 # Trauma - Was 3
@@ -1430,11 +1430,8 @@
       - !type:EvenHealthChange
         conditions:
         - !type:TemperatureCondition
-          max: 213.0 # Trauma - was 273.15
-        scaleByTemperature: # Trauma
-          min: 100.0
-          max: 213.0
-          scale: 1.6
+          max: 213 # Trauma - was 273.15
+        scaleByTemperature: *cryo_scaling # Trauma
         damage:
           Burn: -10 # Trauma - was -6
 
