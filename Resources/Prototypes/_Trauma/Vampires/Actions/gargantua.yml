@@ -220,6 +220,7 @@
   description: Click to leap towards a target, and once landing, conjure an arena!
   components:
   - type: Action
+    useDelay: 60
     sound:
       path: /Audio/_Trauma/Vampires/Actions/vampire_duel.ogg
   - type: Sprite
@@ -247,5 +248,5 @@
     - !type:ModifyStatusEffect
       effectProto: StatusEffectVampireGladiator
       time: null
-  #- type: VampireCostAction
-  #  bloodCost: 150
+  - type: VampireCostAction
+    bloodCost: 150
