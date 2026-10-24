@@ -24,7 +24,6 @@
         - SecurityIconHostile
         - SecurityIconEliminated
         - SecurityIconBrutalize
-        - SecurityIconDemote
         targetFoundSound: !type:SoundCollectionSpecifier
           collection: Ed209TargetFound
 
