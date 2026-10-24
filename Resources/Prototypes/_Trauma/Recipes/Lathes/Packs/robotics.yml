@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: latheRecipePack
+  id: SecBorgLimbs
+  recipes:
+  - SecCyborgEndoskeleton
+  - LeftArmSecBorg
+  - RightArmSecBorg
+  - LeftLegSecBorg
+  - RightLegSecBorg
+  - LightHeadSecBorg
+  - TorsoSecBorg
