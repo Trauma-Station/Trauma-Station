@@ -78,12 +78,3 @@
     - !type:HTNPrimitiveTask
       operator: !type:MeleeOperator
         targetKey: Target
-        continuePreconditions:
-        - !type:TargetIsSecbotThreatPrecondition
-          targetKey: Target
-          criminalStatuses:
-          - SecurityIconWanted
-          - SecurityIconHostile
-          - SecurityIconEliminated
-          - SecurityIconBrutalize
-          - SecurityIconDemote
