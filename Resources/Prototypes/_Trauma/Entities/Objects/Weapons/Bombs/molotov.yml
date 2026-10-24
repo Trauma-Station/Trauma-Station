@@ -1,0 +1,191 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ DrinkBaseMaterialGlass, SolutionNormal, DrinkBase ] # Construction graphs my beloathed.
+  id: UnlitMolotov
+  name: Unlit molotov
+  description: Soon to be a throwable fiery explosive.
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Weapons/Bombs/Molotov.rsi
+    layers:
+    - state: unlit
+  - type: Construction
+    graph: MolotovConstruction
+    node: UnlitMolotov
+  - type: Damageable
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MaterialCloth1:
+            min: 1
+            max: 1
+          BrokenBottle: # fuck it guaranteed bottle why not
+            min: 1
+            max: 1
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BaseMolotov
+  name: molotov
+  description: Throwable fiery explosive
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Weapons/Bombs/Molotov.rsi
+    layers:
+    - state: lit
+  - type: Item
+    sprite: _Goobstation/Objects/Weapons/Bombs/Molotov.rsi
+  - type: Explosive
+    explosionType: Molotov
+    totalIntensity: 1
+    intensitySlope: 5
+    maxIntensity: 1
+    canCreateVacuum: false
+  - type: PointLight
+    enabled: true
+    color: "#E25822"
+    radius: 2.0
+    energy: 1.0
+  - type: Appearance
+  - type: AnimationPlayer
+  - type: Damageable
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: Flammable
+    fireSpread: true
+    alwaysCombustible: true
+    damage:
+      types:
+        Heat: 1
+  - type: FireVisuals
+    sprite: Effects/fire.rsi
+    normalState: fire
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:ExplodeBehavior
+  - type: DamageOnLand
+    damage:
+      types:
+        Blunt: 15
+  - type: PassiveDamage # autostarttimer and timertrigger didnt work, this does
+    damage:
+      types:
+        Heat: 2
+  - type: Construction
+    graph: MolotovConstruction
+    node: LitMolotov
+  - type: LandAtCursor
+
+- type: entity
+  parent: BaseMolotov
+  id: Molotov
+  components:
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:ExplodeBehavior
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MolotovFire:
+            min: 1
+            max: 1
+
+- type: entity
+  parent: BaseMolotov
+  id: HolyMolotov
+  name: holy molotov
+  description: throwable holy explosive.
+  components:
+  - type: PointLight
+    enabled: true
+    color: blue
+    radius: 2.0
+    energy: 1.0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:ExplodeBehavior
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MolotovHolyFire:
+            min: 1
+            max: 1
+
+- type: entity
+  parent: BaseMolotov
+  id: UnholyMolotov
+  name: unholy molotov
+  description: throwable unholy explosive.
+  components:
+  - type: PointLight
+    enabled: true
+    color: red
+    radius: 2.0
+    energy: 1.0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:ExplodeBehavior
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MolotovHellFire:
+            min: 1
+            max: 1
+
+- type: entity
+  parent: BaseMolotov
+  id: GlitchMolotov
+  name: void molotov
+  description: throwable paradoxical explosive.
+  components:
+  - type: PointLight
+    enabled: true
+    color: purple
+    radius: 2.0
+    energy: 1.0
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 15
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:ExplodeBehavior
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          MolotovGlitchFire:
+            min: 1
+            max: 1

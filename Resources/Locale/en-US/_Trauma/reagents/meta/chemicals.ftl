@@ -70,8 +70,26 @@ reagent-desc-ageium = Ageium, causes subject to never age once injected with mor
 reagent-name-holy-chlorine-trifluoride = Holy Chlorine Trifluoride
 reagent-desc-holy-chlorine-trifluoride = whose idea was this?
 
+reagent-name-holy-oil = holy oil
+reagent-desc-holy-oil = A sacred oil often used by chaplains for blessings, though drinking it isn't recommended.
+
 reagent-name-burnite = burnite
 reagent-desc-burnite = A highly volatile flaming chemical that's typically only made by accidentally opening a portal to hell. Luckily, this isn't an easy feat to do.
 
 reagent-name-unknown-reagent = unobtainium
 reagent-desc-unknown-reagent = An incredibly difficult chemical to come across, known to have very volatile effects whether it be spilled or put into plants
+
+reagent-name-unholywater = unholy water
+reagent-desc-unholywater = Water desecrated by an unholy ritual, it is unnaturally toxic to the living.
+
+reagent-name-unholy-oil = unholy oil
+reagent-desc-unholy-oil = Desecrated oil that can burn hot, and if you're (un)lucky, open a portal to hell!
+
+reagent-name-unliquid = unliquid
+reagent-desc-unliquid = The incomprehensible mess resulting from improper mixing of holy and unholy chemicals.
+
+reagent-name-liquid-soul = liquid soul
+reagent-desc-liquid-soul = A disgusting vicious ichor made from the soul of a corrupted spirt
+
+reagent-name-alchemical-precursor = alchemical precursor
+reagent-desc-alchemical-precursor = a chemical often used in alchemy, known for being essentially required for some recipes.

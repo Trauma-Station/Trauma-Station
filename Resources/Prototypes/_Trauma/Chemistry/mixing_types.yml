@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: mixingCategory
+  id: Unholy
+  verbText: mixing-verb-unholy
+  icon:
+    sprite: _Trauma/Objects/Enchanting/book.rsi
+    state: icon

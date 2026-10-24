@@ -1,17 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: construction
-  id: Molotov
-  graph: MolotovConstruction
-  targetNode: LitMolotov
-  category: construction-category-weapons
-  objectType: Item
-  theory:
-    FabricationKnowledge: 1
-  practical:
-    WeaponsKnowledge: 2
-
-- type: construction
   name: recipes-wooden-wand-name
   id: woodenWand
   graph: WoodenWand

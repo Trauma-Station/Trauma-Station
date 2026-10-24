@@ -1,6 +1,60 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  id: MolotovFire # This was initially in goob files despite being trauma content
+  name: fire
+  description: It is burning
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: TimedDespawn
+    lifetime: 10
+  - type: IgnitionSource
+    temperature: 400
+    ignited: true
+  - type: StepTrigger
+    requiredTriggeredSpeed: 0
+    intersectRatio: 0.1
+    triggerGroups:
+      types:
+        - Lava
+  - type: TileEntityEffect
+    effects:
+    - !type:Flammable
+      multiplier: 3.75
+      multiplierOnExisting: 0.75
+    - !type:Ignite
+  - type: AlwaysHot
+  - type: PointLight
+    radius: 5
+    energy: 3
+    color: "#ff790c"
+  - type: Sprite
+    sprite: _Trauma/Effects/floorfire.rsi
+    layers:
+    - state: floorfire
+  - type: Transform
+    anchored: true
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+          - SlipLayer
+        mask:
+          - ItemMask
+        density: 1000
+        hard: false
+  - type: Tag
+    tags:
+    - HideContextMenu # Unintended in advanced
+    - TraumaFire
+
+- type: entity
   parent: MolotovFire
   id: MolotovHellFire
   name: hellfire
