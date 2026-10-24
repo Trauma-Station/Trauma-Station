@@ -10,6 +10,7 @@
   - type: RoleRequirement
     roles:
     - NinjaRole
+    - SamuraiRole
 
 - type: entity
   parent: [BaseNinjaObjective, BaseCounterObjective]
