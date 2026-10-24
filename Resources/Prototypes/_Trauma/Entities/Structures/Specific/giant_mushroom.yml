@@ -23,7 +23,6 @@
             - MidImpassable
             - LowImpassable
     - type: Damageable
-      damageModifierSet: Biological
     - type: Injurable
       damageContainer: Biological
     - type: AtmosDevice

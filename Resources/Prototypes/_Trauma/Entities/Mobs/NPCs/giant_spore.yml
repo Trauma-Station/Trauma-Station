@@ -79,7 +79,6 @@
 
 - type: entityTable
   id: GiantSporeSpawnTable
-  offset: 0.5
   table: !type:GroupSelector
     children:
     - id: GiantMushroom
