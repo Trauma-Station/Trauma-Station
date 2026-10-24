@@ -16017,3 +16017,12 @@ Entries:
   id: 1737
   time: '2026-10-23T21:07:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5115
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to hide items inside potted plants.
+  - type: Fix
+    message: Fixed doxa saying it needs to be under 273K instead of 213K.
+  id: 1738
+  time: '2026-10-24T13:13:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5136
