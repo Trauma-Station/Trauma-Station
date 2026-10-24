@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Server.Wraith.GameTicking;
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
+using Content.Goobstation.Shared.Wraith.WraithPoints;
 using Content.Server.Actions;
 using Content.Server.Mind;
 using Content.Shared.Administration.Logs;
@@ -24,6 +26,8 @@ public sealed partial class WraithEvolveSystem : EntitySystem
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private SharedPopupSystem _popups = default!;
     [Dependency] private ISharedAdminLogManager _admin = default!;
+    [Dependency] private WraithEvolveRuleSystem _wraithEvolveRule = default!;
+    [Dependency] private WraithPointsSystem _wraithPoints = default!;
 
     private CompName _wraithName;
 
@@ -75,6 +79,14 @@ public sealed partial class WraithEvolveSystem : EntitySystem
             || !_mind.TryGetMind(uid, out var mindUid, out var mind))
             return;
 
+        // Preserve progression before the new form initializes its components
+        var currentWp = _wraithPoints.GetCurrentWp(uid);
+        var passiveWpRate = _wraithPoints.GetCurrentWpRate(uid);
+
+        // Haunt's generation bonus is temporary, so do not transfer it
+        if (TryComp<HauntComponent>(uid, out var haunt))
+            passiveWpRate -= haunt.HauntWpRegenApplied;
+
         var coordinates = _transformSystem.GetMoverCoordinates(uid);
         var newForm = Spawn(evolve, coordinates);
 
@@ -84,7 +96,16 @@ public sealed partial class WraithEvolveSystem : EntitySystem
         _mind.TransferTo(mindUid, newForm, mind: mind);
         _mind.UnVisit(mindUid, mind);
 
+        _wraithEvolveRule.SpawnERTChaplain();
+
         CopyComps(uid, newForm);
+
+        // Restore progression after the new form has initialized
+        if (HasComp<WraithPointsComponent>(newForm))
+            _wraithPoints.ChangeWraithPoints(currentWp, newForm);
+
+        if (HasComp<PassiveWraithPointsComponent>(newForm))
+            _wraithPoints.SetWpRate(passiveWpRate, newForm);
 
         _admin.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(ent.Owner)} evolved to {ToPrettyString(newForm)} as a Wraith");
 
