@@ -34,7 +34,7 @@ public sealed partial class TableSlamEffectSystem : EntityEffectSystem<PullableC
         foreach (var (uid, comp) in _tablesNearby)
         {
             _slam.TableSlam(ent, uid);
-            break;
+            break; // breaks to only slam on 1 table
         }
     }
 }
