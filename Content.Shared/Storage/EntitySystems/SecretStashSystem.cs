@@ -118,12 +118,22 @@ public sealed partial class SecretStashSystem : EntitySystem
         {
             var smallerSize = _item.GetSizeSmaller(stashItem.Size);
             if (smallerSize == null)
+            // <Trauma> - log and user feedback
+            {
+                Log.Error($"Secret stash {ToPrettyString(entity)} has no maxItemSize and is Tiny itself!");
+                _popupSystem.PopupEntity("That stash can't fit anything!?", entity, userUid);
                 return false;
+            }
+            // </Trauma>
 
             maxItemSize = smallerSize.ID;
         }
         else
         {
+            // <Trauma>
+            Log.Error($"Secret stash {ToPrettyString(entity)} has no maxItemSize and was not an item itself!");
+            _popupSystem.PopupEntity("That stash can't fit anything!?", entity, userUid);
+            // </Trauma>
             return false;
         }
 
