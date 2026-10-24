@@ -42,8 +42,8 @@
 - type: entity
   parent: BaseAction
   id: ActionReturnToShip
-  name: return
-  description: return to the ship.
+  name: Return
+  description: Return to the ship.
   components:
   - type: Sprite
     sprite: _Shitmed/Interface/Actions/actions_abductor.rsi
