@@ -286,29 +286,6 @@
 
 - type: entity
   parent: [ BaseBorgModuleSecurity, BaseProviderBorgModule ]
-  id: BorgModuleRiot
-  name: riot cyborg module
-  suffix: DO NOT MAP
-  components:
-  - type: Sprite
-    layers:
-    - state: security
-    - state: icon-truncheon
-      sprite: _Trauma/Objects/Specific/Robotics/borgmodule.rsi
-  - type: ItemBorgModule
-    hands:
-    - item: Truncheon
-    - item: WeaponPistolMk58C
-    - item: WeaponFlareGunSecurityC
-    - item: Zipties
-      hand: *zipties_hand
-    - item: Zipties
-      hand: *zipties_hand
-  - type: BorgModuleIcon
-    icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: truncheon }
-
-- type: entity
-  parent: [ BaseBorgModuleSecurity, BaseProviderBorgModule ]
   id: BorgModuleEnergyShotgun
   name: mini energy shotgun module
   components:
