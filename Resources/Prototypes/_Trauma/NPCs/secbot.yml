@@ -32,7 +32,12 @@
       operator: !type:PickCriminalTargetOperator
         targetKey: Target
         targetMoveKey: TargetCoordinates
-        criminalStatus: SecurityIconHostile
+        criminalStatuses:
+        - SecurityIconWanted
+        - SecurityIconHostile
+        - SecurityIconEliminated
+        - SecurityIconBrutalize
+        - SecurityIconDemote
         targetFoundSound: !type:SoundCollectionSpecifier
           collection: BeepskyTargetFound
 
@@ -73,3 +78,12 @@
     - !type:HTNPrimitiveTask
       operator: !type:MeleeOperator
         targetKey: Target
+        continuePreconditions:
+        - !type:TargetIsSecbotThreatPrecondition
+          targetKey: Target
+          criminalStatuses:
+          - SecurityIconWanted
+          - SecurityIconHostile
+          - SecurityIconEliminated
+          - SecurityIconBrutalize
+          - SecurityIconDemote
