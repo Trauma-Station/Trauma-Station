@@ -5,6 +5,7 @@ using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Doors.Components;
 using Content.Shared.Doors.Systems;
+using Content.Shared.Atmos.Components; // check for pipe layers
 // </Trauma>
 using Content.Shared.Administration.Logs;
 using Content.Shared.Charges.Systems;
@@ -524,6 +525,15 @@ public sealed partial class RCDSystem : EntitySystem
                     if (entDirection != direction)
                         isIdentical = false;
                 }
+
+                // <Trauma> - check for pipe layers
+                if (HasComp<AtmosPipeLayersComponent>(ent))
+                {
+                    var entPipeLayer = Comp<AtmosPipeLayersComponent>(ent).CurrentPipeLayer;
+                    if (entPipeLayer != AtmosPipeLayer.Primary)
+                        isIdentical = false;
+                }
+                // </Trauma>
 
                 if (isIdentical)
                 {
