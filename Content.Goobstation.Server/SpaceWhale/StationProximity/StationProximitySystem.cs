@@ -183,7 +183,7 @@ public sealed partial class StationProximitySystem : EntitySystem
             ent,
             PopupType.LargeCaution);
 
-        _audio.PlayPvs(new SoundPathSpecifier("/Audio/_Goobstation/Ambience/SpaceWhale/leviathan-appear.ogg"),
+        _audio.PlayEntity(new SoundPathSpecifier("/Audio/_Goobstation/Ambience/SpaceWhale/leviathan-appear.ogg"),
             ent,
             ent,
             AudioParams.Default.WithVolume(1f));
