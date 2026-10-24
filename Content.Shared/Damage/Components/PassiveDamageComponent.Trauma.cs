@@ -11,10 +11,10 @@ public sealed partial class PassiveDamageComponent
     /// </summary>
     [DataField]
     public SplitDamageBehavior SplitBehavior = SplitDamageBehavior.Split;
-    
+
     /// <summary>
     /// Disables the passive health change when the entity is inside a container
     /// </summary>
     [DataField]
-    public bool PauseWhenStored = false; 
+    public bool PauseWhenStored = false;
 }
