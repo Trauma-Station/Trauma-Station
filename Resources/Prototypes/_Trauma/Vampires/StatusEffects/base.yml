@@ -37,6 +37,8 @@
         Airloss: -5
         Genetic: -5
         Metaphysical: -5
+    - !type:HealBoneDamage
+      amount: 5
 
 - type: entity
   parent: MobStatusEffectBase
