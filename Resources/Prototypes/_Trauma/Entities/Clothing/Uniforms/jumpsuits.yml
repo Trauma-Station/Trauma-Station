@@ -138,3 +138,25 @@
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/rancher_jumpsuit.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/rancher_jumpsuit.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitCritiqueSuit
+  name: critiquing suit
+  description: This white suit really brings out the animal in you!
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpsuit/critiquesuit.rsi
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpsuit/critiquesuit.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitNightOwl
+  name: night owl suit
+  description: There's a library card stuffed in the back pocket.
+  components:
+  - type: Sprite
+    sprite: Clothing/Uniforms/Jumpsuit/nightowl.rsi
+  - type: Clothing
+    sprite: Clothing/Uniforms/Jumpsuit/nightowl.rsi
