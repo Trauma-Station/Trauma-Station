@@ -5,7 +5,7 @@ using Content.Trauma.Common.RadialSelector;
 namespace Content.Goobstation.Shared.Wraith.Components;
 
 [RegisterComponent, NetworkedComponent]
-public sealed partial class WraithEvolveComponent : Component
+public sealed partial class EvolveComponent : Component
 {
     /// <summary>
     /// Used in UI. The evolutions that you can choose from.

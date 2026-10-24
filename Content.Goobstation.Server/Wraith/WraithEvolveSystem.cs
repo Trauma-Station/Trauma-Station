@@ -40,15 +40,15 @@ public sealed partial class WraithEvolveSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnMapInit(Entity<WraithEvolveComponent> ent, ref MapInitEvent args) =>
+    private void OnMapInit(Entity<EvolveComponent> ent, ref MapInitEvent args) =>
         _actions.AddAction(ent.Owner, ref ent.Comp.ActionEnt, ent.Comp.ActionId);
 
     [SubscribeLocalEvent]
-    private void OnShutdown(Entity<WraithEvolveComponent> ent, ref ComponentShutdown args) =>
+    private void OnShutdown(Entity<EvolveComponent> ent, ref ComponentShutdown args) =>
         _actions.RemoveAction(ent.Owner, ent.Comp.ActionEnt);
 
     [SubscribeLocalEvent]
-    private void OnWraithEvolve(Entity<WraithEvolveComponent> ent, ref WraithEvolveEvent args)
+    private void OnWraithEvolve(Entity<EvolveComponent> ent, ref WraithEvolveEvent args)
     {
         var ev = new WraithEvolveAttemptEvent(ent.Comp.CorpsesRequired);
         RaiseLocalEvent(ent, ref ev);
@@ -63,14 +63,14 @@ public sealed partial class WraithEvolveSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnWraithEvolveRecieved(Entity<WraithEvolveComponent> ent, ref RadialSelectorSelectedMessage args)
+    private void OnWraithEvolveRecieved(Entity<EvolveComponent> ent, ref RadialSelectorSelectedMessage args)
     {
         Evolve(ent, args.SelectedItem);
 
         _ui.CloseUi(ent.Owner, RadialSelectorUiKey.Key, args.Actor);
     }
 
-    private void Evolve(Entity<WraithEvolveComponent> ent, string? evolve)
+    private void Evolve(Entity<EvolveComponent> ent, string? evolve)
     {
         var uid = ent.Owner;
         if (evolve == null
@@ -109,7 +109,7 @@ public sealed partial class WraithEvolveSystem : EntitySystem
 
         _admin.Add(LogType.Action, LogImpact.High, $"{ToPrettyString(ent.Owner)} evolved to {ToPrettyString(newForm)} as a Wraith");
 
-        RemComp<WraithEvolveComponent>(newForm);
+        RemComp<EvolveComponent>(newForm);
         Del(uid);
     }
 
