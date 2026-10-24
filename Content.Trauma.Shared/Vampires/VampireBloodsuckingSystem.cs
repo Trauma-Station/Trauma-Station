@@ -93,8 +93,9 @@ public sealed partial class VampireBloodsuckingSystem : EntitySystem
         var bloodToRemove = FixedPoint2.Min(ent.Comp.BloodToRemove, sol.Volume);
         var bloodInt = (int) bloodToRemove;
 
-        _bloodstream.TryModifyBloodLevel(bloodEnt, bloodToRemove);
-        _bloodstream.TryModifyBleedAmount(bloodEnt, bloodEnt.bloodstream.MaxBleedAmount * 0.6f);
+        // since wizden #43412 added double volume blood, so multiply by 2
+        _bloodstream.TryModifyBloodLevel(bloodEnt, bloodToRemove * 2f);
+        _bloodstream.TryModifyBleedAmount(bloodEnt, bloodEnt.bloodstream.MaxBleedAmount * 0.8f);
 
         var user = ent.Owner;
         if (_satiationQuery.TryComp(user, out var satiation))
