@@ -43,7 +43,9 @@ using Content.Trauma.Shared.Heretic.Events;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Cosmos;
 using Content.Trauma.Shared.Heretic.Systems.PathSpecific.Void;
 using Content.Trauma.Shared.Wizard.FadingTimedDespawn;
+using Content.Trauma.Shared.Wizard.SanguineStrike;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Containers;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Random;
@@ -94,6 +96,8 @@ public abstract partial class SharedHereticAbilitySystem : EntitySystem
     [Dependency] private TraumaSystem _trauma = default!;
     [Dependency] private SharedGhoulSystem _ghoul = default!;
     [Dependency] private SharedFadingTimedDespawnSystem _fadeDespawn = default!;
+    [Dependency] private SharedSanguineStrikeSystem _lifesteal = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
 
     [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
 

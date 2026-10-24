@@ -459,6 +459,29 @@
     stage: 4
 
 - type: listing
+  id: HereticSideT2SharpMedal
+  name: knowledge-path-side-t2-medal-name
+  description: knowledge-path-side-t2-medal-desc
+  icon: { sprite: _Goobstation/Heretic/Entities/sharp_medal.rsi, state: icon }
+  raiseProductEventOnMind: true
+  productEvent: !type:EventHereticAddKnowledge
+    knowledge:
+    - SharpMedal
+  cost:
+    KnowledgePoint: 1
+    SideKnowledgePoint: 1
+  altCostCurrencyPriorities:
+    KnowledgePoint: 0
+    SideKnowledgePoint: 1
+  categories:
+  - HereticPathSideT2
+  conditions:
+  - !type:ListingLimitedStockCondition
+    stock: 1
+  - !type:HereticPathCondition
+    stage: 4
+
+- type: listing
   id: HereticSideT3Grasp
   name: knowledge-path-side-t3-grasp-name
   description: knowledge-path-side-t3-grasp-desc
@@ -559,29 +582,6 @@
   productEvent: !type:EventHereticAddKnowledge
     knowledge:
     - ForestAdmonitions
-  cost:
-    KnowledgePoint: 2
-    SideKnowledgePoint: 2
-  altCostCurrencyPriorities:
-    KnowledgePoint: 0
-    SideKnowledgePoint: 1
-  categories:
-  - HereticPathSideT3
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
-  - !type:HereticPathCondition
-    stage: 6
-
-- type: listing
-  id: HereticSideT3SharpMedal
-  name: knowledge-path-side-t3-medal-name
-  description: knowledge-path-side-t3-medal-desc
-  icon: { sprite: _Goobstation/Heretic/Entities/sharp_medal.rsi, state: icon }
-  raiseProductEventOnMind: true
-  productEvent: !type:EventHereticAddKnowledge
-    knowledge:
-    - SharpMedal
   cost:
     KnowledgePoint: 2
     SideKnowledgePoint: 2
