@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: BaseBorgChassisSec
-  parent: [BaseBorgChassisNotIonStormable, BaseBorgTransponder]
   abstract: true
+  parent: [BaseBorgChassisNotIonStormable, BaseBorgTransponder]
+  id: BaseBorgChassisSec
   components:
   - type: BlockShuttleRecall
   - type: RandomMetadata
@@ -64,29 +64,30 @@
             max: 20
 
 - type: entity
-  id: BorgChassisSecurity
   parent: BaseBorgChassisSec
+  id: BorgChassisSecurity
   name: security cyborg
   components:
+  - type: IonStormTarget # Cause it's nonlethal now
   - type: Sprite
     sprite: _Trauma/Mobs/Silicon/chassis.rsi
     layers:
-      - state: security
-      - state: security_e
-        map: ["enum.BorgVisualLayers.Light"]
-        shader: unshaded
-        visible: false
-      - state: security_l
-        shader: unshaded
-        map: ["light"]
-        visible: false
+    - state: security
+    - state: security_e
+      map: ["enum.BorgVisualLayers.Light"]
+      shader: unshaded
+      visible: false
+    - state: security_l
+      shader: unshaded
+      map: ["light"]
+      visible: false
   - type: BorgChassis
     maxModules: 7 # +3 from default module count
     moduleWhitelist:
       tags:
-        - BorgModuleGeneric
-        - BorgModuleSecurity
-        - BorgModuleArmory
+      - BorgModuleGeneric
+      - BorgModuleSecurity
+      - BorgModuleArmory
     hasMindState: security_e
     noMindState: security_e_r
   - type: ContainerFill
