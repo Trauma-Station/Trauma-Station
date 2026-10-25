@@ -169,6 +169,9 @@ public sealed partial class ClientGameTicker : GameTicker
     [SubscribeNetworkEvent]
     private void JoinGame(TickerJoinGameEvent message)
     {
+        if (GoobJoinGameAttempt()) // Goob
+            return; // Goob
+
         _stateManager.RequestStateChange<GameplayState>();
     }
 

@@ -107,6 +107,9 @@ public sealed partial class GoobCVars
     public static readonly CVarDef<float> PlayerRageQuitTimeThreshold =
         CVarDef.Create("ragequit.threshold", 30f, CVar.SERVERONLY);
 
+    public static readonly CVarDef<bool> RoundIntroEnabled =
+        CVarDef.Create("game.round_intro", true, CVar.CLIENTONLY | CVar.ARCHIVE);
+
     /// <summary>
     ///     Log ragequits to a discord webhook, set to empty to disable.
     /// </summary>
