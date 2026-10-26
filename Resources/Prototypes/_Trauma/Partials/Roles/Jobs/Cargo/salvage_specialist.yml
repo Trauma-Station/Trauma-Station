@@ -17,7 +17,7 @@
 - type: startingGear
   id: SalvageSpecialistGear
   equipment:
-    !Remove jumpsuit: ClothingUniformJumpsuitSalvageSpecialist
+    jumpsuit: !Remove ClothingUniformJumpsuitSalvageSpecialist
   storage:
     back:
     - MiningVoucher
