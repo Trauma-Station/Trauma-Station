@@ -4,7 +4,6 @@ using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Revenant;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Database;
-using Content.Shared.Destructible;
 using Content.Shared.Magic.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
@@ -52,9 +51,9 @@ public sealed partial class WraithPossessedSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnDestructionAttempt(Entity<WraithPossessedComponent> ent, ref DestructionAttemptEvent args)
+    private void OnComponentShutdown(Entity<WraithPossessedComponent> ent, ref ComponentShutdown args)
     {
-        ReturnBack(ent);
+        ReturnMind(ent);
     }
 
     [SubscribeLocalEvent]
@@ -131,7 +130,10 @@ public sealed partial class WraithPossessedSystem : EntitySystem
     private void ReturnBack(Entity<WraithPossessedComponent> ent)
     {
         RemCompDeferred(ent, ent.Comp);
+    }
 
+    private void ReturnMind(Entity<WraithPossessedComponent> ent)
+    {
         if (ent.Comp.Possessor is not { } user || ent.Comp.PossessorMind is not { } mind)
             return;
 

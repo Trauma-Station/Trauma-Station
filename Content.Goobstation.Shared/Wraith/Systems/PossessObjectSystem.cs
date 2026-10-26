@@ -4,7 +4,6 @@ using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Shared.Mind;
 using Content.Shared.Popups;
-using Content.Shared.Revenant.Components;
 using Robust.Shared.Audio.Systems;
 
 namespace Content.Goobstation.Shared.Wraith.Systems;
@@ -26,6 +25,8 @@ public sealed partial class PossessObjectSystem : EntitySystem
 
     private void OnPossess(Entity<PossessObjectComponent> ent, ref PossessObjectEvent args)
     {
+        if (Transform(args.Target).Anchored)
+            return;
 
         if (!_mind.TryGetMind(args.Performer, out var mindId, out _))
             return;
@@ -45,6 +46,9 @@ public sealed partial class PossessObjectSystem : EntitySystem
 
     private void OnChangeComponents(PossessObjectEvent args)
     {
+        if (Transform(args.Target).Anchored)
+            return;
+
         var target = args.Target;
 
         args.Handled = true;
