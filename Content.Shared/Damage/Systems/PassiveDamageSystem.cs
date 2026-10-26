@@ -10,9 +10,9 @@ namespace Content.Shared.Damage.Systems;
 
 public sealed partial class PassiveDamageSystem : EntitySystem
 {
+    [Dependency] private SharedContainerSystem _container = default!; // Trauma
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private IGameTiming _timing = default!;
-    [Dependency] private SharedContainerSystem _container = default!; // Trauma
 
     #region Subscriptions
 

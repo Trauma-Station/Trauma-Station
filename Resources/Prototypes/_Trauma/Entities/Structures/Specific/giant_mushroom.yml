@@ -2,8 +2,8 @@
 
 - type: entity
   abstract: true
-  id: BaseGiantMushroom
   parent: BaseStructure
+  id: BaseGiantMushroom
   components:
   - type: Sprite
     noRot: true
@@ -17,8 +17,8 @@
     requireAnchored: false
 
 - type: entity
-  id: MomMushroom
   parent: BaseGiantMushroom
+  id: MomMushroom
   name: mom mushroom
   description: An enormous mushroom releasing spores into the air. How did this fit inside a vent?
   components:
@@ -36,10 +36,10 @@
           radius: 0.5
         density: 60
         mask:
-          - MachineMask
+        - MachineMask
         layer:
-          - MidImpassable
-          - LowImpassable
+        - MidImpassable
+        - LowImpassable
   - type: TimedSpawner
     prototypes:
     - GiantSpore
@@ -67,8 +67,8 @@
         acts: [ "Destruction" ]
 
 - type: entity
-  id: GiantMushroom
   parent: BaseGiantMushroom
+  id: GiantMushroom
   name: giant mushroom
   description: A giant mushroom, you really shouldn't be breathing close to it.
   components:
@@ -94,10 +94,10 @@
           radius: 0.3
         density: 60
         mask:
-          - MachineMask
+        - MachineMask
         layer:
-          - MidImpassable
-          - LowImpassable
+        - MidImpassable
+        - LowImpassable
   - type: GasMiner
     maxExternalPressure: 200
     spawnAmount: 0.25
@@ -119,8 +119,8 @@
         acts: [ "Destruction" ]
 
 - type: entity
-  id: LesserMushroom
   parent: BaseGiantMushroom
+  id: LesserMushroom
   name: lesser mushroom
   description: A lesser giant mushroom, you really shouldn't be breathing close to it.
   components:
@@ -145,10 +145,10 @@
           radius: 0.2
         density: 60
         mask:
-          - MachineMask
+        - MachineMask
         layer:
-          - MidImpassable
-          - LowImpassable
+        - MidImpassable
+        - LowImpassable
   - type: GasMiner
     maxExternalPressure: 200
     spawnAmount: 0.10
