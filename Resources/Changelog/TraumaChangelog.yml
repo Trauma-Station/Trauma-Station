@@ -16055,3 +16055,10 @@ Entries:
   id: 1739
   time: '2026-10-24T18:15:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5117
+- author: NoElkaTheGod
+  changes:
+  - type: Remove
+    message: Removed carp migration, it wasn't working anyway.
+  id: 1740
+  time: '2026-10-26T17:51:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4974
