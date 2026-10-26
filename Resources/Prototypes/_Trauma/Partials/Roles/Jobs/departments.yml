@@ -81,6 +81,7 @@
 - type: department
   id: Silicon
   weight: -15
+  primary: true
   roles:
   - BorgSecurity
 
