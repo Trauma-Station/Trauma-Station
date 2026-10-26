@@ -92,7 +92,7 @@
   - type: Action
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wraith/wraithsoulsucc1.ogg
-    useDelay: 45
+    useDelay: 30
     itemIconStyle: BigAction
   - type: Sprite
     layers:
@@ -125,7 +125,7 @@
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wraith/wraithspook1.ogg
     itemIconStyle: BigAction
-    useDelay: 30
+    useDelay: 20
   - type: Sprite
     layers:
     - state: spook
@@ -145,7 +145,7 @@
   - type: Action
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wraith/wraithstaminadrain.ogg
-    useDelay: 60
+    useDelay: 40
     itemIconStyle: BigAction
   - type: Sprite
     layers:
@@ -168,7 +168,7 @@
   description: Command a few objects to hurl themselves at the target location.
   components:
   - type: Action
-    useDelay: 40
+    useDelay: 30
     itemIconStyle: BigAction
   - type: Sprite
     layers:
@@ -193,7 +193,7 @@
   - type: Action
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wraith/wraithlivingobject.ogg
-    useDelay: 60
+    useDelay: 45
   - type: Sprite
     layers:
     - state: anim_object
@@ -267,7 +267,7 @@
         thresholds:
         - trigger:
             !type:DamageTrigger
-            damage: 30
+            damage: 50
           behaviors:
           - !type:DoActsBehavior
             acts: ["Destruction"]
@@ -291,7 +291,7 @@
   parent: BaseWraithAction
   id: ActionWraithEvolve
   name: Evolve
-  description: Choose a form to evolve into once you have absorbed at least 3 souls.
+  description: Choose a form to evolve into.
   components:
   - type: Action
     useDelay: 0
@@ -343,7 +343,7 @@
   - type: Action
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wraith/wraithportal.ogg
-    useDelay: 180
+    useDelay: 150
   - type: Sprite
     layers:
     - state: open_portal
@@ -359,7 +359,7 @@
   description: Attempt to breach the veil between worlds to allow a lesser void creature to enter this realm.
   components:
   - type: Action
-    useDelay: 150
+    useDelay: 120
   - type: Sprite
     layers:
     - state: summon_creature
@@ -538,7 +538,7 @@
   description: Attempt to breach the veil between worlds to allow a plague rat to enter this realm.
   components:
   - type: Action
-    useDelay: 150
+    useDelay: 240
   - type: Sprite
     layers:
     - state: summon_rats

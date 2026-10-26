@@ -1,18 +1,17 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Changeling.Components;
 using Content.Goobstation.Shared.Wraith.Components;
 using Content.Goobstation.Shared.Wraith.Events;
 using Content.Goobstation.Shared.Wraith.WraithPoints;
 using Content.Shared.Administration.Logs;
 using Content.Shared.Atmos.Rotting;
-using Content.Shared.Body;
 using Content.Shared.Body.Components;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Database;
 using Content.Shared.DoAfter;
+using Content.Shared.Mind;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
@@ -22,16 +21,17 @@ namespace Content.Goobstation.Shared.Wraith.Systems;
 
 public sealed partial class AbsorbCorpseSystem : EntitySystem
 {
-    [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private MobStateSystem _mobState = default!;
-    [Dependency] private WraithPointsSystem _wraithPoints = default!;
-    [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private SharedRottingSystem _rotting = default!;
     [Dependency] private DamageableSystem _damageable = default!;
+    [Dependency] private ISharedAdminLogManager _admin = default!;
+    [Dependency] private MobStateSystem _mobState = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private SharedMindSystem _mind = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private SharedRottingSystem _rotting = default!;
     [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private TagSystem _tag = default!;
-    [Dependency] private ISharedAdminLogManager _admin = default!;
-    [Dependency] private SharedDoAfterSystem _doAfter = default!;
+    [Dependency] private WraithPointsSystem _wraithPoints = default!;
 
     private EntityQuery<WraithAbsorbableComponent> _absorbableQuery;
 
@@ -41,7 +41,6 @@ public sealed partial class AbsorbCorpseSystem : EntitySystem
 
         SubscribeLocalEvent<AbsorbCorpseComponent, AbsorbCorpseEvent>(OnAbsorb);
         SubscribeLocalEvent<PlaguebringerComponent, AbsorbCorpseAttemptEvent>(OnPlaguebringerAttempt);
-
         SubscribeLocalEvent<AbsorbCorpseComponent, AbsorbCorpseDoAfterEvent>(OnAbsorbFinished);
 
         _absorbableQuery = GetEntityQuery<WraithAbsorbableComponent>();
@@ -80,7 +79,10 @@ public sealed partial class AbsorbCorpseSystem : EntitySystem
             BreakOnWeightlessMove = true,
         };
 
-        _doAfter.TryStartDoAfter(doAfterArgs);
+        if (!_doAfter.TryStartDoAfter(doAfterArgs))
+            return;
+
+        args.Handled = true;
     }
 
     private void OnAbsorbFinished(Entity<AbsorbCorpseComponent> ent, ref AbsorbCorpseDoAfterEvent args)
@@ -122,7 +124,11 @@ public sealed partial class AbsorbCorpseSystem : EntitySystem
         PredictedSpawnAtPosition(ent.Comp.SmokeProto, Transform(target).Coordinates); //Part 2 TO DO: Port nice smoke visuals from Goonstation instead of spawning this generic smoke.
         _audio.PlayPredicted(ent.Comp.AbsorbSound, ent.Owner, user);
 
-        _wraithPoints.AdjustWpGenerationRate(ent.Comp.WpPassiveAdd, ent.Owner);
+        var wpTarget = ent.Owner;
+        if (_mind.TryGetMind(ent.Owner, out _, out var mind) && mind.OwnedEntity is { } owned)
+            wpTarget = owned;
+
+        _wraithPoints.AdjustWpGenerationRate(ent.Comp.WpPassiveAdd, wpTarget);
 
         // apply rot
         // EnsureComp<RottingComponent>(target); // TODO Removed until someone figures out how to make it partially rot instead of instant full rot
@@ -153,9 +159,12 @@ public sealed partial class AbsorbCorpseSystem : EntitySystem
 
         if (toxinDamage >= 60 || perish.Stage > 2)
         {
-            _wraithPoints.AdjustWraithPoints(150, ent.Owner);
-            _wraithPoints.AdjustWpGenerationRate(0.2, ent.Owner);
+            var wpTarget = ent.Owner;
+            if (_mind.TryGetMind(ent.Owner, out _, out var mind) && mind.OwnedEntity is { } owned)
+                wpTarget = owned;
 
+            _wraithPoints.AdjustWraithPoints(150, wpTarget);
+            _wraithPoints.AdjustWpGenerationRate(0.2, wpTarget);
             _popup.PopupEntity(Loc.GetString("wraith-absorb-rotbonus"), ent.Owner, ent.Owner, PopupType.Medium);
 
         }

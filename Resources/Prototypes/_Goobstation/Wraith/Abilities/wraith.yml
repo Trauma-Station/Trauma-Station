@@ -49,7 +49,7 @@
     searchRange: 7
     stunDuration: 1 # reduced stun duration from 5 to 1
   - type: Evolve
-    corpsesRequired: 4
+    corpsesRequired: 6
     availableEvolutions:
     - prototype: MobWraithHarbinger
     - prototype: MobWraithPlague
@@ -61,7 +61,7 @@
     - ActionPossessObject
     - ActionDecay
     - ActionCommand
-   # - ActionAnimateObject
+    - ActionAnimateObject
     - ActionWhisper
     - ActionBloodWriting
     - ActionSpook

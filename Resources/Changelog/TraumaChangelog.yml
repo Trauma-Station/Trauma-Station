@@ -16017,3 +16017,48 @@ Entries:
   id: 1737
   time: '2026-10-23T21:07:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5115
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed not being able to hide items inside potted plants.
+  - type: Fix
+    message: Fixed doxa saying it needs to be under 273K instead of 213K.
+  id: 1738
+  time: '2026-10-24T13:13:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5136
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Revenant no longer stuns itself with the shockwave
+  - type: Tweak
+    message: Wraith and its minions are now strong (Multiple Balance changes)
+  - type: Tweak
+    message: Midround Wraith is the same as Roundstart Wraith
+  - type: Tweak
+    message: Evolving as Wraith now spawns an ERT Chaplain shuttle
+  - type: Tweak
+    message: Wraith Points now carry over on Evolve
+  - type: Tweak
+    message: You need more corpses to evolve as wraith now
+  - type: Fix
+    message: You can no longer get caught by salt for longer than the set duration
+  - type: Fix
+    message: >-
+      Fixed Wraith Absorb not having a cooldown and the cooldown not increasing
+      per asborb
+  - type: Fix
+    message: Fixed Decay not emagging borgs, law change chance depends on the chassis
+  - type: Fix
+    message: Fixed WP boost gain from absorbing corpses not working
+  - type: Fix
+    message: Fixed some wraith mobs getting stuck due to being fat
+  id: 1739
+  time: '2026-10-24T18:15:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5117
+- author: NoElkaTheGod
+  changes:
+  - type: Remove
+    message: Removed carp migration, it wasn't working anyway.
+  id: 1740
+  time: '2026-10-26T17:51:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4974

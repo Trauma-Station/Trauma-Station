@@ -4,6 +4,7 @@
   parent: BaseAntagGhostRoleRule
   id: WraithMidround
   components:
+  - type: GhostroleAlert
   - type: AntagSelection
     agentName: wraith-round-end-agent-name
     antags:
@@ -11,7 +12,7 @@
       proto: WraithMidround
   - type: AntagRandomSpawn
   - type: AntagSpawner
-    prototype: MobWraithMidround
+    prototype: MobWraith
   - type: StationEvent
     weight: 4
     earliestStart: 20
