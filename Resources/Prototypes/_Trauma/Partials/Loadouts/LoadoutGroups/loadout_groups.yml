@@ -11,3 +11,8 @@
   loadouts: !Clear
   - LatexGloves
   - PurpleGloves
+- type: loadoutGroup
+  id: ScientistGloves
+  loadouts: !Clear
+  - LatexGloves
+  - PurpleGloves
