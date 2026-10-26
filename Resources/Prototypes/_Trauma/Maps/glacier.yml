@@ -1,0 +1,25 @@
+- type: gameMap
+  id: Glacier
+  mapName: Glacier
+  mapPath: /Maps/_Trauma/glacier.yml
+  maxRandomOffset: 0
+  randomRotation: false
+  minPlayers: 15
+  maxPlayers: 70
+  stations:
+    Glacier:
+      stationProto: StandardNanotrasenStation
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: '{0} Glacier Station {1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: 'NY'
+      - type: StationEmergencyShuttle
+        emergencyShuttlePath: /Maps/Shuttles/emergency_box.yml
+      - type: StationPlanetSpawner
+        planet: GlacierSurface
+        gridPath: Maps/_Trauma/Nonstations/glacier_surface_outpost.yml
+      - type: StationJobs
+        availableJobs:
+          Captain: [ 1, 1 ]

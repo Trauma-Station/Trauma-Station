@@ -8,3 +8,123 @@
   variants: 2
   itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
   tileRipResistance: 175
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorDirtIndoors
+  name: tiles-steel-floor
+  variants: 2
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorDirtNew
+  name: tiles-steel-floor
+  variants: 2
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorGrassDarkIndoors
+  name: tiles-steel-floor
+  variants: 2
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorMS13MetalGrate
+  name: tiles-steel-floor
+  variants: 2
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorMS13MetalTile
+  name: tiles-steel-floor
+  variants: 2
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorMS13TileLongBlue
+  name: tiles-steel-floor
+  variants: 2
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorMS13WoodCommon
+  name: tiles-steel-floor
+  variants: 2
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorMS13WoodFancy
+  name: tiles-steel-floor
+  variants: 2
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorMS13WoodFancyDamaged
+  name: tiles-steel-floor
+  variants: 2
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorMetalGreen
+  name: tiles-steel-floor
+  variants: 2
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorMetalGreyDark
+  name: tiles-steel-floor
+  variants: 2
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorMetalPurple
+  name: tiles-steel-floor
+  variants: 2
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorMetalTeal
+  name: tiles-steel-floor
+  variants: 2
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorMetalWhite
+  name: tiles-steel-floor
+  variants: 2
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175
+
+- type: tile
+  parent: BaseStationTile
+  id: FloorWoodMaple
+  name: tiles-steel-floor
+  variants: 2
+  itemDrop: FloorTileItemSteel #Same case as FloorSteelDamaged, make it null when possible
+  tileRipResistance: 175
