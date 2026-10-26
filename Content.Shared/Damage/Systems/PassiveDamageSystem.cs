@@ -1,7 +1,7 @@
 // <Trauma>
 using Robust.Shared.Containers;
-// <Trauma>
-using Content.Medical.Common.Targeting; // Shitmed Change
+using Content.Medical.Common.Targeting;
+// </Trauma>
 using Content.Shared.Damage.Components;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Timing;
@@ -54,8 +54,10 @@ public sealed partial class PassiveDamageSystem : EntitySystem
             if (comp.NextDamage > curTime)
                 continue;
 
-            if (comp.PauseWhenStored && _container.TryGetContainingContainer(uid, out _)) // Trauma - Prevents damage if PauseWhenContained bool is true and entity is inside a container
+            // <Trauma>
+            if (comp.PauseWhenStored && _container.TryGetContainingContainer(uid, out _)) // Prevents damage if PauseWhenContained bool is true and entity is inside a container
                 return;
+            // </Trauma>
 
             // Set the next time they can take damage
             comp.NextDamage = curTime + TimeSpan.FromSeconds(1f);
