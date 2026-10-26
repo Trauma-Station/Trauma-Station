@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.EntityConditions;
 using Content.Shared.Whitelist;
 
 namespace Content.Trauma.Shared.Multihit;
@@ -20,7 +21,7 @@ public sealed partial class MultihitComponent : Component
     public EntityWhitelist? MultihitWhitelist;
 
     [DataField]
-    public List<BaseMultihitUserConditionEvent> Conditions = new();
+    public EntityCondition[]? UserConditions;
 
     [DataField]
     public bool RequireAllConditions;

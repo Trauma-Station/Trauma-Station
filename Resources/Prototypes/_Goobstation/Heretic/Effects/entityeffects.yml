@@ -220,6 +220,13 @@
     effectProto: StatusEffectProjectileImmunity
     time: 0.5
 
+- type: entityEffect
+  id: UnboltAndToggleDoor
+  conditions:
+  effects:
+  - !type:SetBoltsDown
+  - !type:ToggleDoorState
+
 - type: entityCondition
   id: CosmicFieldNearby
   condition: !type:AnyNearbyCondition
