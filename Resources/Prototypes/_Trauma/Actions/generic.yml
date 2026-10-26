@@ -1,0 +1,24 @@
+- type: entity
+  parent: BaseAction
+  id: ActionFullBright
+  name: Fullbright
+  description: Activates X-Ray Vision.
+  components:
+  - type: Sprite
+    layers:
+    - texture: Interface/VerbIcons/vv.svg.192dpi.png
+  - type: Action
+    raiseOnAction: true
+  - type: InstantAction
+    event: !type:EffectToggleActionEvent
+  - type: ToggleEffectAction
+    onToggle:
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectFullBright
+      time: null
+      type: Add
+    offToggle:
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectFullBright
+      time: null
+      type: Remove
