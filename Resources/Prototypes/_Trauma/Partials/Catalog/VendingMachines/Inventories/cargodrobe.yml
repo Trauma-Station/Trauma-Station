@@ -1,0 +1,4 @@
+- type: vendingMachineInventory
+  id: CargoDrobeInventory
+  startingInventory:
+    ClothingShoesBootsWork: 3

@@ -181,3 +181,14 @@
   maxLimit: 1
   loadouts:
   - BlackEnvirogloves
+
+# Salvage Specialist
+
+- type: loadoutGroup
+  id: SalvageSpecialistJumpsuit
+  name: loadout-group-salvage-specialist-jumpsuit
+  loadouts:
+  - SalvageSpecialistJumpsuit
+  - SalvageSpecialistJumpskirt
+  - SalvageSpecialistJumpsuitCasual
+  - SalvageSpecialistJumpsuitMilitary

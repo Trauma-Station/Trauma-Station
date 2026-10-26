@@ -1,0 +1,13 @@
+- type: entity
+  parent: [ClothingShoesBaseButcherable, BaseEngineeringCargoContraband]
+  id: ClothingShoesBootsWork
+  components:
+  - type: SlowdownResistance
+    reduction: 0.1
+
+- type: entity
+  parent: [ClothingShoesBaseButcherable, BaseCargoContraband]
+  id: ClothingShoesBootsSalvage
+  components:
+  - type: SlowdownResistance
+    reduction: 0.1

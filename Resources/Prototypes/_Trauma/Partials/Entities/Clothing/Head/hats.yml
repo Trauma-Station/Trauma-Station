@@ -1,0 +1,9 @@
+- type: entity
+  parent: [ ClothingHeadHatArmoredBeret, ClothingHeadBase, BaseCentcommContraband ]
+  id: ClothingHeadHatCentcom
+  name: CentComm hardhat
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Hats/centcom.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Hats/centcom.rsi
