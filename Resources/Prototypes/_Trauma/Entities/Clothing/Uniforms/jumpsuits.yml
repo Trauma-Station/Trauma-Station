@@ -138,3 +138,14 @@
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/rancher_jumpsuit.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/rancher_jumpsuit.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitSalvageAlt
+  name: salvage specialist jumpsuit
+  description: As if this won't be covered up 24/7 by a hardsuit.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/salvage_alt.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/salvage_alt.rsi

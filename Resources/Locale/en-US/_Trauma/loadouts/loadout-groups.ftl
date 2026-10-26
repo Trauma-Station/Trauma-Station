@@ -27,3 +27,6 @@ loadout-group-dclass-neck = Neck
 loadout-group-dclass-envirohelm = D-Class Envirohelm
 loadout-group-dclass-envirosuit = D-Class envirosuit
 loadout-group-dclass-envirogloves = D-Class envirogloves
+
+# Cargo
+loadout-group-salvage-specialist-jumpsuit = Salvage Specialist jumpsuit

@@ -1,0 +1,4 @@
+- type: vendingMachineInventory
+  id: CentDrobeInventory
+  startingInventory:
+    ClothingUniformJumpskirtCentcomOfficial: 3
