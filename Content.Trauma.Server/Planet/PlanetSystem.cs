@@ -54,8 +54,8 @@ public sealed partial class PlanetSystem : EntitySystem
     public EntityUid? LoadPlanet(ProtoId<PlanetPrototype> id, ResPath path)
     {
         var map = SpawnPlanet(id, runMapInit: false);
-        //var mapId = Comp<MapComponent>(map).MapId;
-        if (!_mapLoader.TryLoadMap(path, out _, out var grids))
+        var mapId = Comp<MapComponent>(map).MapId;
+        if (!_mapLoader.TryLoadGrid(mapId, path, out var grid, offset: new Vector2(150, 150))) // Added Offset due to the new Weather Effect System requiring that no grid is on 0,0
         {
             Log.Error($"Failed to load planet grid {path} for planet {id}!");
             Del(map);
@@ -63,12 +63,9 @@ public sealed partial class PlanetSystem : EntitySystem
         }
 
         // don't want rocks spawning inside the base
-        foreach (var gridUid in grids)
-        {
-            _setTiles.Clear();
-            var aabb = Comp<MapGridComponent>(gridUid).LocalAABB;
-            _biome.ReserveTiles(map, aabb.Enlarged(0.2f), _setTiles);
-        }
+        _setTiles.Clear();
+        var aabb = Comp<MapGridComponent>(grid.Value).LocalAABB;
+        _biome.ReserveTiles(map, aabb.Enlarged(0.2f), _setTiles);
 
         _map.InitializeMap(map);
         return map;
