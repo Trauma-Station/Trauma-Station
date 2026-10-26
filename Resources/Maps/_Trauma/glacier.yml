@@ -111,7 +111,7 @@ entities:
       mapPaused: True
     - type: GridTree
     - type: Parallax
-      parallax: Sky
+      parallax: Snow
     - type: MapAtmosphere
       space: False
       mixture:
