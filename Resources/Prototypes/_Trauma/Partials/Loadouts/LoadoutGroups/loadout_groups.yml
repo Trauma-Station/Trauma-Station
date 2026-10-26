@@ -1,4 +1,12 @@
 - type: loadoutGroup
+  id: ScientistOuterClothing
+  loadouts: !Clear
+  - RegularLabCoat
+  - ScienceLabCoat
+  - ScienceWintercoat
+  - SeniorResearcherLabCoat
+
+- type: loadoutGroup
   id: ScientistGloves
   loadouts: !Clear
   - LatexGloves
