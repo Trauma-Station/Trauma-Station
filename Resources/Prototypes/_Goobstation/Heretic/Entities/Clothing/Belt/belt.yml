@@ -12,7 +12,7 @@
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/Belt/curio.rsi
   - type: Storage
-    maxItemSize: Normal
+    maxItemSize: Ginormous
     grid:
     - 0,0,9,4
   - type: ExplosionResistance

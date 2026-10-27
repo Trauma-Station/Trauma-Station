@@ -185,8 +185,8 @@
     multihitWhitelist:
       tags:
       - HereticBladeBlade
-    conditions:
-    - !type:MultihitUserHereticEvent
+    userConditions:
+    - !type:HereticStageCondition
       requiredPath: Blade
       minPathStage: 7
   - type: Appearance
