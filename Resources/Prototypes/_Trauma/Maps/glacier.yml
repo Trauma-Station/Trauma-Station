@@ -20,6 +20,9 @@
       - type: StationPlanetSpawner
         planet: GlacierSurface
         gridPath: Maps/_Trauma/Nonstations/glacier_surface_outpost.yml
+      - type: StationBiome
+        biome: Snow
+        mapLightColor: Orange
       - type: StationJobs
         availableJobs:
           Captain: [ 1, 1 ]
