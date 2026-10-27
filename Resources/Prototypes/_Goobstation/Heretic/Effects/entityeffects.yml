@@ -222,7 +222,6 @@
 
 - type: entityEffect
   id: UnboltAndToggleDoor
-  conditions:
   effects:
   - !type:SetBoltsDown
   - !type:ToggleDoorState

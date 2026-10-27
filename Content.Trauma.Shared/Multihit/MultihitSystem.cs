@@ -183,6 +183,9 @@ public sealed partial class MultihitSystem : EntitySystem
         var attackIndex = 1;
         foreach (var held in _hands.EnumerateHeld(user))
         {
+            if (ent.Comp.MaxFollowUpAttacks > 0 && attackIndex > ent.Comp.MaxFollowUpAttacks)
+                break;
+
             if (!TryMultihitAttack(held))
                 continue;
 
