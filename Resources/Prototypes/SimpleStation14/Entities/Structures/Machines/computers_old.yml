@@ -1,0 +1,475 @@
+- type: entity
+  parent: ComputerAlert
+  id: ComputerAlertDesktop
+  name: alerts computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerEmergencyShuttle
+  id: ComputerEmergencyShuttleDesktop
+  name: emergency shuttle computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerShuttle
+  id: ComputerShuttleDesktop
+  name: shuttle computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerShuttleSyndie
+  id: ComputerShuttleSyndieDesktop
+  name: syndicate shuttle computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerShuttleCargo
+  id: ComputerShuttleCargoDesktop
+  name: cargo shuttle computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerIFF
+  id: ComputerIFFDesktop
+  name: IFF computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerPowerMonitoring
+  id: ComputerPowerMonitoringDesktop
+  name: power monitoring computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerMedicalRecords
+  id: ComputerMedicalRecordsDesktop
+  name: medical records computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerCriminalRecords
+  id: ComputerCriminalRecordsDesktop
+  name: criminal records computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerStationRecords
+  id: ComputerStationRecordsDesktop
+  name: station records computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerCrewMonitoring
+  id: ComputerCrewMonitoringDesktop
+  name: crew monitoring computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerResearchAndDevelopment
+  id: ComputerResearchAndDevelopmentDesktop
+  name: R&D computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerAnalysisConsole
+  id: ComputerAnalysisConsoleDesktop
+  name: analysis computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerId
+  id: ComputerIdDesktop
+  name: ID card computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: computerBodyScanner
+  id: computerBodyScannerDesktop
+  name: body scanner computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerComms
+  id: ComputerCommsDesktop
+  name: communications computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: SyndicateComputerComms
+  id: SyndicateComputerCommsDesktop
+  name: syndicate communications computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerSolarControl
+  id: ComputerSolarControlDesktop
+  name: solar control computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerRadar
+  id: ComputerRadarDesktop
+  name: mass scanner computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerCloningConsole
+  id: ComputerCloningConsoleDesktop
+  name: cloning computer computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerSurveillanceCameraMonitor
+  id: ComputerSurveillanceCameraMonitorDesktop
+  name: camera monitor
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerSurveillanceWirelessCameraMonitor
+  id: ComputerSurveillanceWirelessCameraMonitorDesktop
+  name: wireless camera monitor
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerIFFSyndicate
+  id: ComputerIFFSyndicateDesktop
+  name: IFF computer
+  suffix: Syndicate
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerShuttleCargo
+  id: ComputerCargoShuttleDesktop
+  name: cargo shuttle computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
+
+- type: entity
+  parent: ComputerCargoOrders
+  id: ComputerCargoOrdersDesktop
+  name: cargo request computer
+  components:
+  - type: Fixtures
+    fixtures:
+    - shape:
+        !type:PhysShapeAabb
+        bounds: "-0.08,-0.35,0.15,0.25"
+      mask:
+      - TabletopMachineMask
+      layer:
+      - TabletopMachineLayer
+  - type: Sprite
+    sprite: SimpleStation14/Structures/Machines/computers_old.rsi
+    drawdepth: SmallObjects
+    offset: 0, 0.1
