@@ -210,8 +210,8 @@
     icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: omnimed-surgery-module }
 
 - type: entity
-  id: BaseBorgModuleSecurity
   parent: BaseBorgModule
+  id: BaseBorgModuleSecurity
   abstract: true
   components:
   - type: BorgModule

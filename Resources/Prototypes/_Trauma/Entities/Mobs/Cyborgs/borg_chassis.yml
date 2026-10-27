@@ -121,8 +121,8 @@
     interactFailureString: petting-failure-generic-cyborg
 
 - type: entity
-  id: BorgChassisSecurityFilled
   parent: BorgChassisSecurity
+  id: BorgChassisSecurityFilled
   suffix: filled
   components:
   - type: ContainerFill

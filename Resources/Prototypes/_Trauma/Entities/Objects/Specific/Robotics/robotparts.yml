@@ -101,37 +101,11 @@
 # Security cyborg
 
 - type: entity
+  parent: CyborgEndoskeleton
   id: SecCyborgEndoskeleton
   name: security cyborg endoskeleton
   description: A frame that security cyborgs are built on. Do not jumpscare me, endoskeleton!
   components:
-  - type: TwistedConstructionTarget
-    replacementProto: ConstructShell
-    doAfterDelay: 5
-  - type: Clickable
-  - type: InteractionOutline
-  - type: Physics
-    bodyType: Dynamic
-    fixedRotation: false
-  - type: Fixtures
-    fixtures:
-      fix1:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.25,-0.25,0.25,0.25"
-        density: 100
-        mask:
-        - MobMask
-        layer:
-        - MobLayer
-        restitution: 0.3
-        friction: 0.2
-  - type: Sprite
-    noRot: true
-    drawdepth: Items
-    sprite: Objects/Specific/Robotics/cyborg_parts.rsi
-    state: robo_suit
-  - type: Appearance
   - type: ItemMapper
     sprite: _Trauma/Objects/Specific/Robotics/cyborg_parts.rsi
     mapLayers:
@@ -159,10 +133,6 @@
         whitelist:
           tags:
           - SecBorgTorso
-  - type: ContainerContainer
-    containers:
-      part-container: !type:Container
-      cell_slot: !type:Container
   - type: PartAssembly
     parts:
       generic:
@@ -172,22 +142,10 @@
       - SecBorgRLeg
       - SecBorgHead
       - SecBorgTorso
-  - type: Construction
-    graph: SecCyborg
-    node: start
-    defaultTarget: cyborg
-    containers:
-    - part-container
-    - cell_slot
-  - type: Pullable
-  - type: GuideHelp
-    guides:
-    - Cyborgs
-    - Robotics
 
 - type: entity
-  id: LeftArmSecBorg
   parent: PartSilicon
+  id: LeftArmSecBorg
   name: security cyborg left arm
   components:
   - type: Sprite
@@ -202,8 +160,8 @@
     heldPrefix: borg-arm
 
 - type: entity
-  id: RightArmSecBorg
   parent: PartSilicon
+  id: RightArmSecBorg
   name: security cyborg right arm
   components:
   - type: Sprite
@@ -218,8 +176,8 @@
     heldPrefix: borg-arm
 
 - type: entity
-  id: LeftLegSecBorg
   parent: PartSilicon
+  id: LeftLegSecBorg
   name: security cyborg left leg
   components:
   - type: Sprite
@@ -234,8 +192,8 @@
     heldPrefix: borg-leg
 
 - type: entity
-  id: RightLegSecBorg
   parent: PartSilicon
+  id: RightLegSecBorg
   name: security cyborg right leg
   components:
   - type: Sprite
@@ -250,8 +208,8 @@
     heldPrefix: borg-leg
 
 - type: entity
-  id: LightHeadSecBorg
   parent: PartSilicon
+  id: LightHeadSecBorg
   name: security cyborg head
   components:
   - type: Sprite
@@ -265,8 +223,8 @@
     heldPrefix: borg-head
 
 - type: entity
-  id: TorsoSecBorg
   parent: PartSilicon
+  id: TorsoSecBorg
   name: security cyborg torso
   components:
   - type: Sprite
