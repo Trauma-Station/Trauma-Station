@@ -16107,3 +16107,22 @@ Entries:
   id: 1743
   time: '2026-10-27T09:59:14.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5156
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix raw prophets not being able to give mansus link access.
+  - type: Fix
+    message: Fix ghoul mice being able to lay eggs.
+  - type: Fix
+    message: Fix jaunts not being muted.
+  - type: Fix
+    message: >-
+      Fix shields or heretic protective blades playing sound block multiple
+      times if you damage their user.
+  - type: Tweak
+    message: Wounded soldier damage/wounding against non-heretics reduced.
+  - type: Tweak
+    message: Wounded soldier status effect damage to heretic cannot be blocked.
+  id: 1744
+  time: '2026-10-27T14:36:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5165
