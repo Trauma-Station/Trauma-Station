@@ -142,6 +142,8 @@
       - SecBorgRLeg
       - SecBorgHead
       - SecBorgTorso
+  - type: Construction
+    graph: SecCyborg
 
 - type: entity
   parent: PartSilicon
