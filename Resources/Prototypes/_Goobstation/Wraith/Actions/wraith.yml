@@ -194,6 +194,7 @@
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wraith/wraithlivingobject.ogg
     useDelay: 45
+    itemIconStyle: BigAction
   - type: Sprite
     layers:
     - state: anim_object
