@@ -1,0 +1,122 @@
+- type: entity
+  name: metal grate floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMetalGrate
+  components:
+  - type: Sprite
+    state: wood
+  - type: Item
+    heldPrefix: wood
+  - type: FloorTile
+    outputs: [ FloorMS13MetalGrate ]
+  - type: Stack
+    stackType: FloorTileMetalGrate
+
+- type: entity
+  name: metal floor
+  parent: FloorTileItemBase
+  id: FloorTileItemMetalMS13
+  components:
+  - type: Sprite
+    state: wood
+  - type: Item
+    heldPrefix: wood
+  - type: FloorTile
+    outputs: [ FloorMS13MetalTile ]
+  - type: Stack
+    stackType: FloorTileMetalMS13
+
+- type: entity
+  name: maple floor
+  parent: FloorTileItemBase
+  id: FloorTileItemWoodMaple
+  components:
+  - type: Sprite
+    state: wood
+  - type: Item
+    heldPrefix: wood
+  - type: FloorTile
+    outputs:
+    - FloorWoodMaple
+  - type: Stack
+    stackType: FloorTileWoodMaple
+
+- type: entity
+  name: metal floor green
+  parent: FloorTileItemBase
+  id: FloorTileItemMetalGreen
+  components:
+  - type: Sprite
+    state: steel
+  - type: Item
+    heldPrefix: steel
+  - type: FloorTile
+    outputs:
+    - Plating
+    - FloorMetalGreen
+  - type: Stack
+    stackType: FloorTileMetalGreen
+
+- type: entity
+  name: metal floor grey dark
+  parent: FloorTileItemBase
+  id: FloorTileItemMetalGreyDark
+  components:
+  - type: Sprite
+    state: steel
+  - type: Item
+    heldPrefix: steel
+  - type: FloorTile
+    outputs:
+    - Plating
+    - FloorMetalGreyDark
+  - type: Stack
+    stackType: FloorTileMetalGreyDark
+
+- type: entity
+  name: metal floor purple
+  parent: FloorTileItemBase
+  id: FloorTileItemMetalPurple
+  components:
+  - type: Sprite
+    state: steel
+  - type: Item
+    heldPrefix: steel
+  - type: FloorTile
+    outputs:
+    - Plating
+    - FloorMetalPurple
+  - type: Stack
+    stackType: FloorTileMetalPurple
+
+- type: entity
+  name: metal floor teal
+  parent: FloorTileItemBase
+  id: FloorTileItemMetalTeal
+  components:
+  - type: Sprite
+    state: steel
+  - type: Item
+    heldPrefix: steel
+  - type: FloorTile
+    outputs:
+    - Plating
+    - FloorMetalTeal
+  - type: Stack
+    stackType: FloorTileMetalTeal
+
+- type: entity
+  name: metal floor white
+  parent: FloorTileItemBase
+  id: FloorTileItemMetalWhite
+  components:
+  - type: Sprite
+    state: steel
+  - type: Item
+    heldPrefix: steel
+  - type: FloorTile
+    outputs:
+    - Plating
+    - FloorMetalWhite
+  - type: Stack
+    stackType: FloorTileMetalWhite

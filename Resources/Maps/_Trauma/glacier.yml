@@ -11228,7 +11228,7 @@ entities:
     - type: GravityShake
       shakeTimes: 10
     - type: NavMap
-    - type: ImplicitRoof
+    - type: Roof
   - uid: 17520
     components:
     - type: MetaData
