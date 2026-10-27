@@ -250,7 +250,7 @@
         splitDamage: Split
         damage:
           types:
-            Slash: 32
+            Slash: 24
           woundSeverityMultipliers:
             Slash: 5
           partDamageVariation: 2
@@ -275,7 +275,7 @@
         ignoreResistances: false
         damage:
           types:
-            Slash: 12
+            Slash: 9
           woundSeverityMultipliers:
             Slash: 5
           partDamageVariation: 2
