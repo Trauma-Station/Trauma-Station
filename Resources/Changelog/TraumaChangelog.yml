@@ -16086,3 +16086,24 @@ Entries:
   id: 1742
   time: '2026-10-27T08:29:52.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5163
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix being able to turn parcel wrapped objects into cards with codex.
+  - type: Tweak
+    message: >-
+      Dual wielding damage gets reduced even more the longer your attack chain
+      is. If you use less than 3 hands, nothing changes.
+  - type: Tweak
+    message: Dual wielding hammer and nail as engineer is stronger now.
+  - type: Tweak
+    message: Eldritch coin first unbolts doors before trying to open/close them.
+  - type: Tweak
+    message: Mask of madness fear effect applies quicker.
+  - type: Tweak
+    message: >-
+      You are once again able to store items up to ginormous size in
+      unfathomable curio.
+  id: 1743
+  time: '2026-10-27T09:59:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5156
