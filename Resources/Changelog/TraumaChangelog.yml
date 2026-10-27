@@ -16126,3 +16126,16 @@ Entries:
   id: 1744
   time: '2026-10-27T14:36:47.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5165
+- author: LuminalGPT
+  changes:
+  - type: Fix
+    message: >-
+      Vampires now rejuv. when they teleport to their lair, and their lair heals
+      their bones now
+  - type: Fix
+    message: Fixed a vampire ascension action not taking blood
+  - type: Tweak
+    message: Vampire bloodsucking is 2x deadlier
+  id: 1745
+  time: '2026-10-27T15:37:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5140
