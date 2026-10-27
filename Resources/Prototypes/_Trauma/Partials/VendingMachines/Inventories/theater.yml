@@ -3,8 +3,7 @@
 - type: vendingMachineInventory
   id: AutoDrobeInventory
   startingInventory:
-    ClothingUniformJumpsuitNightAwlsCapatino: 2
-    ClothingUniformJumpsuitRingDocentSuit: 2
+    ClothingUniformJumpsuitNightOwl: 2
     ClothingHeadHelmetRoman: 2
     ClothingHeadHelmetRomanCenturion: 2
     ClothingUniformJumpsuitRoman: 3
