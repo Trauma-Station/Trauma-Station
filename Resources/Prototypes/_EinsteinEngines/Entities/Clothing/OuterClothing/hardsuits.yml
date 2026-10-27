@@ -133,7 +133,7 @@
         Blunt: 0.45
         Slash: 0.45
         Ballistic: 0.45
-        Heat: 0.45
+        Heat: 0.60
         Radiation: 0.1
       flatReductions: # This is done so shotguns are worse against armor
         Ballistic: 3
