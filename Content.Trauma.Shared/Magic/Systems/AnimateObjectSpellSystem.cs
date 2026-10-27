@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Magic.Events;
 using Content.Shared.Popups;
 using Content.Trauma.Shared.Magic.Events;
@@ -42,5 +44,3 @@ public sealed partial class AnimateObjectSpellSystem : EntitySystem
         RaiseLocalEvent(componentEvent);
     }
 }
-
-
