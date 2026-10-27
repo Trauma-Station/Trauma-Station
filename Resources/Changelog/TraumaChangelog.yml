@@ -16062,3 +16062,20 @@ Entries:
   id: 1740
   time: '2026-10-26T17:51:16.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4974
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: THE SPIRE is now truly infinite food wise
+  - type: Tweak
+    message: Reduced resistances on combat, medical and riot hardsuits
+  - type: Tweak
+    message: >-
+      Reduced the movement penalty on the medical and riot hardsuits to
+      compensate
+  - type: Fix
+    message: Fixed the spire selling for 300k spesos
+  - type: Fix
+    message: Fixed riot combat hardsuit not having pierce resistance
+  id: 1741
+  time: '2026-10-27T06:40:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5158
