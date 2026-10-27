@@ -16079,3 +16079,10 @@ Entries:
   id: 1741
   time: '2026-10-27T06:40:03.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5158
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: The Hulk mutation now costs 4x the biomass to print injectors for.
+  id: 1742
+  time: '2026-10-27T08:29:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5163
