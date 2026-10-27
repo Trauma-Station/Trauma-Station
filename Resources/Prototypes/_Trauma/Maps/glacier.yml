@@ -17,9 +17,6 @@
           prefixCreator: 'NY'
       - type: StationEmergencyShuttle
         emergencyShuttlePath: /Maps/Shuttles/emergency_box.yml
-      - type: StationPlanetSpawner
-        planet: GlacierSurface
-        gridPath: Maps/_Trauma/Nonstations/glacier_surface_outpost.yml
       - type: StationBiome
         biome: Snow
         mapLightColor: Orange
