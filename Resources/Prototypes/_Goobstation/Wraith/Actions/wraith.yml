@@ -185,7 +185,7 @@
     wpConsume: 70
 
 - type: entity
-  parent: [ BaseWraithAction, ActionAnimateSpell ]
+  parent: BaseWraithAction
   id: ActionAnimateObject
   name: Animate object
   description: Animate an inanimate object to attack nearby humans.
@@ -199,6 +199,73 @@
     - state: anim_object
   - type: ActionWraithPoints
     wpConsume: 200
+  - type: TargetAction
+    interactOnMiss: false
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - Animateable
+    blacklist:
+      components:
+      - MindContainer
+      - NukeDisk
+      - GravityGenerator
+      - AnomalyGenerator
+      - TegGenerator
+      - TegCirculator
+      - XenoArtifact
+      - MaterialReclaimer
+      - StationAlertLevelLock
+    event: !type:AnimateObjectSpellEvent
+      toAdd:
+      - type: Animate
+      - type: MindContainer
+      - type: InputMover
+      - type: MobMover
+      - type: MovementSpeedModifier
+      - type: HTN
+        rootTask:
+          task: SimpleHostileCompound
+      - type: CombatMode
+      - type: MeleeWeapon
+        animation: WeaponArcPunch
+        wideAnimation: WeaponArcPunch
+        altDisarm: false
+        soundHit: /Audio/Weapons/smash.ogg
+        range: 1.2
+        angle: 0.0
+        damage:
+          types:
+            Blunt: 10
+      - type: NpcFactionMember
+        factions:
+        - Wraith
+      - type: NoSlip
+      - type: MovementAlwaysTouching
+      - type: CanMoveInAir
+      - type: Damageable
+        damageModifierSet: ManifestedSpirit
+      - type: Injurable
+        damageContainer: ManifestedSpirit
+      - type: Destructible
+        thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 50
+          behaviors:
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+          - !type:PlaySoundBehavior
+            sound:
+              collection: MetalBreak
+      - type: Hands
+      - type: CanEscapeInventory
+      - type: MobCollision
+      toRemove:
+      - RequireProjectileTarget
+      - BlockMovement
+      - Item
+      - MeleeRequiresWield
 
 - type: entity
   parent: BaseWraithAction
