@@ -344,9 +344,8 @@ public sealed partial class DamageableSystem
 
     public TargetBodyPart ChooseTargetArm(EntityUid uid)
     {
-        var netEnt = GetNetEntity(uid);
         var targetArm = TargetBodyPart.LeftArm;
-        if (PredictedProb(_timing, .5f, uid))
+        if (SharedRandomExtensions.PredictedProb(_timing, .5f, GetNetEntity(uid)))
             targetArm = TargetBodyPart.RightArm;
 
         return targetArm;

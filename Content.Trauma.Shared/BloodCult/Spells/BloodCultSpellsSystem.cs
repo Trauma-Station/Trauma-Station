@@ -165,7 +165,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
             },
         };
 
-        var targetArm = _damage.ChooseTargetArm();
+        var targetArm = _damage.ChooseTargetArm(user);
         _damage.ChangeDamage(user, damageSpec, targetPart: targetArm, canMiss: false);
 
         _popup.PopupEntity($"Your wounds glow with power, you have prepared a {Name(action)} invocation!", user, user, PopupType.Medium);
