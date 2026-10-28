@@ -79,9 +79,9 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
             Dirty(ent);
     }
 
-    private int GetLimit(EntityUid user)
+    private int GetLimit(EntityUid user, BloodCultSpellsComponent Comp)
     {
-        var limit = 1;
+        var limit = comp.SpellsLimit;
         if (TryComp<BloodCultEmpoweredComponent>(user, out var empowered))
             limit += empowered.ExtraSpells;
         return limit;
@@ -95,14 +95,6 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         if (i < 0 || i >= ent.Comp.AvailableActions.Count)
             return;
 
-        var id = ent.Comp.AvailableActions[i];
-        if (GetActiveSpell(ent, id) is { } action)
-        {
-            _popup.PopupEntity("You forget your current spell", user, user);
-            _actions.RemoveAction(user, action);
-            return;
-        }
-
         // can't do blood magic in a robot or pai
         if (!_bloodQuery.HasComp(user))
         {
@@ -113,6 +105,20 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         var time = ent.Comp.SpellCreationTime;
         if (HasComp<BloodCultEmpoweredComponent>(user))
             time *= 0.4;
+
+        var id = ent.Comp.AvailableActions[i];
+        var count = ent.Comp.ActiveSpells.Count;
+        if (count >= cultist.SpellsLimit)
+        {
+            if (GetActiveSpell(cultist, id) is { } action)
+            {
+                _popup.PopupEntity("You forget your current spell", user, user);
+                _actions.RemoveAction(user, action);
+                return;
+            }
+
+            _popup.PopupEntity("You need to remove another spell first!", user, user, PopupType.MediumCaution);
+        }
 
         _popup.PopupEntity("You begin to carve unnatural symbols into your flesh!", user, user, PopupType.MediumCaution);
 
@@ -136,24 +142,11 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
             return;
 
         var user = args.User;
-        var count = ent.Comp.ActiveSpells.Count;
-        if (count >= GetLimit(args.User))
-        {
-            if (count != 1)
-            {
-                _popup.PopupEntity("You need to remove another spell first!", user, user, PopupType.MediumCaution);
-                return;
-            }
-
-            // just swap the spell if unempowered, where 1 is the limit
-            var old = ent.Comp.ActiveSpells.First();
-            _actions.RemoveAction(user, old);
-        }
 
         if (_actions.AddAction(user, args.ActionProtoId, container: ent) is not { } action)
             return;
 
-        var damage = FixedPoint2.New(20);
+        var damage = ent.Comp.SpellCreatingDamage;
         if (HasComp<BloodCultEmpoweredComponent>(user))
             damage /= 5;
 
