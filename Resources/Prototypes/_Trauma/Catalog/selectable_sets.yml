@@ -91,12 +91,12 @@
 # Thief
 
 - type: selectableSet
-  id : ThiefChemistSet
+  id: ThiefChemistSet
   name: selectable-set-thief-chemist-name
   description: selectable-set-thief-chemist-description
   sprite:
     entity: VestineChemistryVial
-  content :
+  content:
   - VestineChemistryVial
   - VestineChemistryVial
   - VestineChemistryVial
@@ -106,12 +106,12 @@
   - BluespaceChemistryVial
 
 - type: selectableSet
-  id : ThiefEscapistSet
+  id: ThiefEscapistSet
   name: selectable-set-thief-escapist-name
   description: selectable-set-thief-escapist-description
   sprite:
     entity: ExperimentalSyndicateTeleporter
-  content :
+  content:
   - ExperimentalSyndicateTeleporter
   - SmokeImplanter
   - FreedomImplanter
@@ -119,12 +119,12 @@
   - ClothingEyesThermalVisionGoggles
 
 - type: selectableSet
-  id : ThiefTinkererSet
+  id: ThiefTinkererSet
   name: selectable-set-thief-tinkerer-name
   description: selectable-set-thief-tinkerer-description
   sprite:
     entity: AccessConfiguratorSyndicate
-  content :
+  content:
   - AccessConfiguratorSyndicate
   - DoorRemoteSyndicate
   - AgentIDCard
