@@ -1,0 +1,11 @@
+# Paramedic
+
+- type: entityTable
+  id: FillParamedicHardsuit
+  table: !type:AllSelector
+    children:
+    - id: ClothingMaskBreathMedical
+    - id: UndeterminedVoidsuitParamedic
+    - id: JetpackBlueFilled
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled
