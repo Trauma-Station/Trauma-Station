@@ -79,14 +79,6 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
             Dirty(ent);
     }
 
-    private int GetLimit(EntityUid user, BloodCultSpellsComponent Comp)
-    {
-        var limit = comp.SpellsLimit;
-        if (TryComp<BloodCultEmpoweredComponent>(user, out var empowered))
-            limit += empowered.ExtraSpells;
-        return limit;
-    }
-
     [SubscribeLocalEvent]
     private void OnSpellSelected(Entity<BloodCultSpellsComponent> ent, ref CultSpellSelectedMessage args)
     {
@@ -103,14 +95,18 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         }
 
         var time = ent.Comp.SpellCreationTime;
+        var limit = ent.Comp.SpellsLimit;
         if (TryComp<BloodCultEmpoweredComponent>(user, out var empowered))
+        {
             time *= empowered.SpellCreationTimeMultiplier;
+            limit += empowered.ExtraSpells;
+        }
 
         var id = ent.Comp.AvailableActions[i];
         var count = ent.Comp.ActiveSpells.Count;
-        if (count >= cultist.SpellsLimit)
+        if (count >= limit)
         {
-            if (GetActiveSpell(cultist, id) is { } action)
+            if (GetActiveSpell(ent.Comp, id) is { } action)
             {
                 _popup.PopupEntity("You forget your current spell", user, user);
                 _actions.RemoveAction(user, action);
