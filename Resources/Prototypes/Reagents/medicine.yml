@@ -1226,7 +1226,7 @@
         - !type:WhitelistCondition
           whitelist:
             components:
-            - BloodCultMember
+            - BloodCultist
         components:
         - type: BloodCultDeconvert
       - !type:RemoveComponents
