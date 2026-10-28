@@ -32,7 +32,7 @@ public sealed partial class QueuedMultihitAttack
     public NetEntity? Target;
 
     [DataField]
-    public Vector2? Direction;
+    public bool IsHeavyAttack;
 }
 
 [Serializable, NetSerializable]

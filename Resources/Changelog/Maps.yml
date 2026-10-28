@@ -451,3 +451,10 @@ Entries:
   id: 48
   time: '2026-09-27T14:56:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4773
+- author: RatherUncreative
+  changes:
+  - type: Tweak
+    message: 'Origin: Added morgue door to maintenance for Detective/Chaplain use'
+  id: 49
+  time: '2026-10-25T15:25:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5142
