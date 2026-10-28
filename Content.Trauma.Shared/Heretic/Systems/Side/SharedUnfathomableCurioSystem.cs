@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Damage;
 using Content.Shared.Damage.Systems;
 using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Heretic.Components.Side;
@@ -52,7 +53,7 @@ public sealed partial class SharedUnfathomableCurioSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnTakeDamage(Entity<UnfathomableCurioShieldComponent> ent, ref BeforeDamageChangedEvent args)
     {
-        if (args.Cancelled || args.Damage.GetTotal() < 5)
+        if (args.Cancelled || args.Damage.GetTotal() < 5 || args.Damage.HasFlag(DamageSpecifier.DamageFlags.NoParry))
             return;
 
         if (!ent.Comp.Active)
