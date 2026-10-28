@@ -341,13 +341,4 @@ public sealed partial class DamageableSystem
                 return damage;
         }
     }
-
-    public TargetBodyPart ChooseTargetArm(EntityUid uid)
-    {
-        var targetArm = TargetBodyPart.LeftArm;
-        if (SharedRandomExtensions.PredictedProb(_timing, .5f, GetNetEntity(uid)))
-            targetArm = TargetBodyPart.RightArm;
-
-        return targetArm;
-    }
 }

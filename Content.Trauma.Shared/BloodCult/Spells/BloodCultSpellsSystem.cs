@@ -15,6 +15,7 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
+using Content.Shared.Random.Helpers;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Trauma.Shared.BloodCult.Empower;
@@ -165,7 +166,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
             },
         };
 
-        var targetArm = _damage.ChooseTargetArm(user);
+        var targetArm = ChooseTargetArm(user);
         _damage.ChangeDamage(user, damageSpec, targetPart: targetArm, canMiss: false);
 
         _popup.PopupEntity($"Your wounds glow with power, you have prepared a {Name(action)} invocation!", user, user, PopupType.Medium);
@@ -227,6 +228,16 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         }
 
         return null;
+    }
+
+
+    public TargetBodyPart ChooseTargetArm(EntityUid uid)
+    {
+        var targetArm = TargetBodyPart.LeftArm;
+        if (SharedRandomExtensions.PredictedProb(_timing, .5f, GetNetEntity(uid)))
+            targetArm = TargetBodyPart.RightArm;
+
+        return targetArm;
     }
 
     #endregion
