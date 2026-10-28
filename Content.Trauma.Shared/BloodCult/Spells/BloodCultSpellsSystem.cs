@@ -106,7 +106,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         var count = ent.Comp.ActiveSpells.Count;
         if (count >= limit)
         {
-            if (GetActiveSpell(ent.Comp, id) is { } action)
+            if (GetActiveSpell(ent, id) is { } action)
             {
                 _popup.PopupEntity("You forget your current spell", user, user);
                 _actions.RemoveAction(user, action);
