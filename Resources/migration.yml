@@ -1451,7 +1451,7 @@ WarpPointSalvage: null
 WarpPointSalvageDock: null
 WarpPointSecurity: null
 WarpPointTEG: null
-WeaponDisablerSelfCharge: WeaponDisablerAdvanced # TODO: investigate, maybe make regular disabler
+WeaponDisablerSelfCharge: WeaponLaserSidearm
 WindoorSecureClerkLocked: null
 WindoorSecureLibraryLocked: WindoorLibraryLocked
 WindowTintedReinforcedDirectional: null
