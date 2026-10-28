@@ -31,7 +31,7 @@ selectable-set-thief-sleeper-name = Sleeper Kit
 selectable-set-thief-sleeper-description =
     Until we close our eyes for good, use your illegal prescriptions
     to keep others asleep.
-    Includes: Sleepy nitrous oxide tank, three nocturine bottles,
+    Includes: Sleepy nitrous oxide tank, two nocturine bottles,
     a syringe pistol, an empty syringe, and a hypopen.
 
 selectable-set-thief-communicator-name = Communicator Kit
