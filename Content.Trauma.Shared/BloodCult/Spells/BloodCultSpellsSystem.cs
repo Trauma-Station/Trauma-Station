@@ -164,7 +164,9 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
                 { Slash, damage }
             },
         };
-        _damage.ChangeDamage(user, damageSpec, targetPart: TargetBodyPart.Arms, canMiss: false);
+
+        var targetArm = _damage.ChooseTargetArm();
+        _damage.ChangeDamage(user, damageSpec, targetPart: targetArm, canMiss: false);
 
         _popup.PopupEntity($"Your wounds glow with power, you have prepared a {Name(action)} invocation!", user, user, PopupType.Medium);
         _actions.SetTemporary(action, true); // can't be temp in the prototype or AddAction will queue del it :D

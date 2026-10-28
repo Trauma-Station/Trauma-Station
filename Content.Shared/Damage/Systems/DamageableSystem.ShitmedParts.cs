@@ -341,4 +341,14 @@ public sealed partial class DamageableSystem
                 return damage;
         }
     }
+
+    public TargetBodyPart ChooseTargetArm(EntityUid uid)
+    {
+        var netEnt = GetNetEntity(uid);
+        var targetArm = TargetBodyPart.LeftArm;
+        if (PredictedProb(_timing, .5f, uid))
+            targetArm = TargetBodyPart.RightArm;
+
+        return targetArm;
+    }
 }
