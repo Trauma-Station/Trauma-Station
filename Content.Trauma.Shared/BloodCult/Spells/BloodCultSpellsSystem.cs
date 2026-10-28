@@ -19,6 +19,7 @@ using Content.Shared.Random.Helpers;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Trauma.Shared.BloodCult.Empower;
+using Robust.Shared.Timing;
 using System.Linq;
 
 namespace Content.Trauma.Shared.BloodCult.Spells;
@@ -27,6 +28,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedCuffableSystem _cuffable = default!;

@@ -379,7 +379,7 @@ public sealed partial class CultRuneSystem : EntitySystem
             newDamage *= empowered.RuneDamageMultiplier;
         }
 
-        var targetArm = ChooseTargetArm(user);
+        var targetArm = BloodCultSpellsSystem.ChooseTargetArm(user);
         _damage.ChangeDamage(user, newDamage, increaseOnly: true, targetPart: targetArm, canMiss: false);
     }
 }
