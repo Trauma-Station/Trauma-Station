@@ -17,6 +17,12 @@ public sealed partial class BloodCultEmpoweredComponent : Component
     [DataField]
     public float RuneDamageMultiplier = 0.5f;
 
+    [DataField]
+    public float SpellCreationDamageMultiplier = 0.2f;
+
+    [DataField]
+    public float SpellCreationTimeMultiplier = 0.4f;
+
     /// <summary>
     ///     Changes the drawing time of runes.
     /// </summary>

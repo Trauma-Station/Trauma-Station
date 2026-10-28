@@ -103,8 +103,8 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         }
 
         var time = ent.Comp.SpellCreationTime;
-        if (HasComp<BloodCultEmpoweredComponent>(user))
-            time *= 0.4;
+        if (TryComp<BloodCultEmpoweredComponent>(user, out var empowered))
+            time *= empowered.SpellCreationTimeMultiplier;
 
         var id = ent.Comp.AvailableActions[i];
         var count = ent.Comp.ActiveSpells.Count;
@@ -147,8 +147,8 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
             return;
 
         var damage = ent.Comp.SpellCreatingDamage;
-        if (HasComp<BloodCultEmpoweredComponent>(user))
-            damage /= 5;
+        if (TryComp<BloodCultEmpoweredComponent>(user, out var empowered))
+            damage *= empowered.SpellCreationDamageMultiplier;
 
         var damageSpec = new DamageSpecifier()
         {
