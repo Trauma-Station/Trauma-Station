@@ -8,11 +8,13 @@ namespace Content.Trauma.Client.Genetics.UI;
 [GenerateTypedNameReferences]
 public sealed partial class GeneticStorage : BoxContainer
 {
-    [Dependency] private IEntityManager _entMan = default!;
+    [Dependency] private IEntityManager _ent = default!;
     [Dependency] private IPrototypeManager _proto = default!;
 
     public event Action<uint>? OnPrint;
 
+    private GeneticsConsoleComponent _comp = default!;
+    private CompName _costName;
     private EntProtoId<MutationComponent>? _diskMutation;
     private bool _cooldown;
     private List<Button> _buttons = new();
@@ -21,17 +23,37 @@ public sealed partial class GeneticStorage : BoxContainer
     {
         IoCManager.InjectDependencies(this);
         RobustXamlLoader.Load(this);
+
+        _costName = _ent.ComponentFactory.CompName<MutationCostComponent>();
     }
 
     public void SetConsole(GeneticsConsoleComponent comp)
     {
+        _comp = comp;
+        RebuildPrintButtons();
+    }
+
+    private int GetCostMultiplier()
+    {
+        if (_diskMutation is not { } id ||
+            !_proto.Resolve(id, out var proto) ||
+            !proto.TryComp<MutationCostComponent>(_costName, out var cost))
+            return 1;
+
+        return cost.BiomassMultiplier;
+    }
+
+    private void RebuildPrintButtons()
+    {
         _buttons.Clear();
         PrintButtons.RemoveAllChildren();
-        for (var i = 0; i < comp.Prints.Count; i++)
+        var multiplier = GetCostMultiplier();
+        var disabled = _cooldown || _diskMutation == null;
+        for (var i = 0; i < _comp.Prints.Count; i++)
         {
             var index = (uint) i;
-            var cost = comp.Prints[i].Cost;
-            var proto = comp.Prints[i].Proto;
+            var cost = _comp.Prints[i].Cost * multiplier;
+            var proto = _comp.Prints[i].Proto;
             var button = new Button()
             {
                 Text = Loc.GetString("genetics-console-print-item", ("item", _proto.Index(proto).Name), ("cost", cost)),
@@ -39,7 +61,7 @@ public sealed partial class GeneticStorage : BoxContainer
                 Margin = new Thickness(4),
                 HorizontalExpand = true
             };
-            button.Disabled = true;
+            button.Disabled = disabled;
             button.OnPressed += _ => OnPrint?.Invoke(index);
             _buttons.Add(button);
             PrintButtons.AddChild(button);
@@ -48,7 +70,7 @@ public sealed partial class GeneticStorage : BoxContainer
 
     public void UpdateDisk(Entity<GeneticsDiskComponent>? disk)
     {
-        DiskName.Text = _entMan.GetComponentOrNull<MetaDataComponent>(disk)?.EntityName
+        DiskName.Text = _ent.GetComponentOrNull<MetaDataComponent>(disk)?.EntityName
             ?? Loc.GetString("genetics-console-no-disk");
     }
 
@@ -59,6 +81,7 @@ public sealed partial class GeneticStorage : BoxContainer
             ? proto.Name
             : Loc.GetString("genetics-console-disk-empty");
         UpdateCooldowns(_cooldown);
+        RebuildPrintButtons();
     }
 
     public void UpdateCooldowns(bool cooldown)
