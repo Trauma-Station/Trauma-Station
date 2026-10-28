@@ -41,6 +41,7 @@ public sealed partial class CultRuneSystem : EntitySystem
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private BloodCultExamineSystem _cultExamine = default!;
+    [Dependency] private BloodCultSpellsSystem _cultSpells = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private IGameTiming _timing = default!;
@@ -379,7 +380,7 @@ public sealed partial class CultRuneSystem : EntitySystem
             newDamage *= empowered.RuneDamageMultiplier;
         }
 
-        var targetArm = BloodCultSpellsSystem.ChooseTargetArm(user);
+        var targetArm = _cultSpells.ChooseTargetArm(user);
         _damage.ChangeDamage(user, newDamage, increaseOnly: true, targetPart: targetArm, canMiss: false);
     }
 }
