@@ -27,7 +27,7 @@
   - type: EffectAction
     effects:
     - !type:SpawnSnappedToGrid
-      prototype: CultRuneRevive
+      entity: CultRuneRevive
 
 - type: entity
   parent: BaseActionBloodCult
@@ -178,7 +178,7 @@
   - type: EffectAction
     effects:
     - !type:SpawnSnappedToGrid
-      prototype: CultRuneTeleport
+      entity: CultRuneTeleport
 
 # juggernaut
 
@@ -195,7 +195,7 @@
   - type: EffectAction
     effects:
     - !type:SpawnSnappedToGrid
-      prototype: CultRuneBarrier
+      entity: CultRuneBarrier
 
 - type: entity
   parent: BaseActionBloodCult
