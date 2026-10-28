@@ -92,6 +92,9 @@
     sprite: _Trauma/BloodCult/Entities/Clothes/Helmet/cult_hood.rsi
     equipSound: /Audio/Effects/rustle1.ogg
     unequipSound: /Audio/Effects/rustle2.ogg
+  - type: ClothingSpeedModifier
+    walkModifier: 1.25
+    sprintModifier: 1.25
 
 - type: entity
   parent: ClothingEyesBase
