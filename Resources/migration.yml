@@ -1428,7 +1428,7 @@ SpawnPointProsecutor: null
 SpawnPointSecurityBorg: null
 SpawnPointSurgeon: null
 SuitStorageSecDeltaV: SuitStorageSec
-GunSafeAdvancedLaser: GunSafeCarbine
+GunSafeAdvancedLaser: GunSafeLaserCarbine
 ToiletDirtyWaterFilledPerma: ToiletDirtyWaterFilled
 ToyFigurinePrisoner: ToyFigurineGriffin
 TrialTimer: null
