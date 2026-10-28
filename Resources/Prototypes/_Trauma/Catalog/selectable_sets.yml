@@ -95,7 +95,7 @@
   name: selectable-set-thief-chemist-name
   description: selectable-set-thief-chemist-description
   sprite:
-    entity: VestineChemistryVial
+    sprite: _Goobstation/Objects/Weapons/Guns/Cannons/dart_gun.rsi
     state: icon
   content:
   - VestineChemistryVial
@@ -111,7 +111,7 @@
   name: selectable-set-thief-escapist-name
   description: selectable-set-thief-escapist-description
   sprite:
-    entity: ExperimentalSyndicateTeleporter
+    sprite: /Textures/_White/Objects/Devices/experimentalsyndicateteleporter.rsi
     state: icon
   content:
   - ExperimentalSyndicateTeleporter
@@ -125,7 +125,7 @@
   name: selectable-set-thief-tinkerer-name
   description: selectable-set-thief-tinkerer-description
   sprite:
-    entity: AccessConfiguratorSyndicate
+    sprite: _Trauma/Objects/Tools/syndie_access_configurator.rsi
     state: icon
   content:
   - AccessConfiguratorSyndicate
