@@ -1313,7 +1313,7 @@ BoxReamWhite: null
 CleanadeGrenadeBox: BoxCleanerGrenades
 ClothingHeadAreopagite: null
 ClothingHeadCourierFlipped: ClothingHeadMailCarrier
-ClothingHeadHatBeretLogi: nClothingHeadHatBeretQM
+ClothingHeadHatBeretLogi: ClothingHeadHatBeretQM
 ClothingHeadHoodBrown: null
 ClothingHeadTechPriest: null
 ClothingOuterChiefJustice: null
@@ -1371,7 +1371,7 @@ LockerParamedicFilledHardsuit: SuitStorageParamedic
 LockerPsychologistFilled: LockerMedicalFilled # TODO: Port Psychologist shit or make yml stuff
 LockerQuarterMasterFilledHardsuit: SuitStorageQM
 LockerSurgeonFilled: LockerMedicalFilled # TODO: Port Surgeon shit or make yml stuff
-LogisticsTechFab: CargoTechfab
+LogisticsTechFab: CargoTechFab
 N14ChairArmchair: ComfyChair # TODO: Port
 N14ChairOfficeErgonomic: SpawnVehicleChairOfficeDark # TODO: Port
 N14FloraTreeBald: null
