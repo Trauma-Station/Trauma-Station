@@ -96,3 +96,19 @@
       storagebase:
         id: CigPackMixed
         amount: 3
+
+- type: entity
+  id: CigCartonKoa
+  parent: CigCartonGreen
+  name: Koa's King Sized
+  description: A king sized carton of premium smokes.
+  components:
+  - type: Sprite
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/koa.rsi
+  - type: Item
+    sprite: Objects/Consumable/Smokeables/Cigarettes/Cartons/koa.rsi
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: CigPackKoa
+        amount: 5
