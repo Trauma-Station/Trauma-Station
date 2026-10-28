@@ -6,9 +6,8 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Popups;
 using Content.Shared.Roles;
-using Content.Shared.Roles.Components;
+using Content.Shared.Timing.Systems;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Player;
 
 namespace Content.Trauma.Shared.BloodCult.Constructs.SoulShard;
 
@@ -21,29 +20,35 @@ public abstract partial class SoulShardSystem : EntitySystem
     [Dependency] private SharedPointLightSystem _light = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedRoleSystem _role = default!;
-    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private UseDelaySystem _delay = default!;
 
-    private static readonly EntProtoId ConstructRole = "MindRoleBloodCultConstruct";
     private static readonly EntProtoId PurifiedRole = "MindRolePurifiedConstruct";
 
     [SubscribeLocalEvent]
-    private void OnInteractUsing(Entity<SoulShardComponent> shard, ref InteractUsingEvent args)
+    private void OnInteractUsing(Entity<SoulShardComponent> shard, ref AfterInteractUsingEvent args)
     {
-        if (shard.Comp.IsBlessed || !TryComp(args.Used, out BibleComponent? bible))
+        var user = args.User;
+
+        if (shard.Comp.IsBlessed || !args.CanReach || args.Handled ||
+            !TryComp(args.Used, out BibleComponent? bible) || !HasComp<BibleUserComponent>(user) ||
+            !_delay.TryResetDelay(args.Used))
             return;
 
-        var user = args.User;
-        _popup.PopupEntity(Loc.GetString("bible-sizzle"), user, user);
+        args.Handled = true;
+
+        _popup.PopupEntity("Soul shard is purified in a beam of holy light.", shard, PopupType.Medium);
         _audio.PlayPredicted(bible.HealSoundPath, user, user);
         _appearance.SetData(shard.Owner, SoulShardVisualState.Blessed, true);
         _light.SetColor(shard.Owner, shard.Comp.BlessedLightColor);
         shard.Comp.IsBlessed = true;
+        shard.Comp.CultRule = null;
         Dirty(shard);
 
         // life is gem
         _cult.DeconvertConstruct(shard.Owner);
-        if (_mind.GetMind(shard.Owner) is { } mind)
+        if (_mind.GetMind(shard.Owner) is { } mind && mind != EntityUid.Invalid)
         {
+            _mind.ClearObjectives(mind);
             _role.MindClearRoles(mind);
             _role.MindAddRole(mind, PurifiedRole);
         }
@@ -56,17 +61,12 @@ public abstract partial class SoulShardSystem : EntitySystem
     {
         var mind = args.Mind.AsNullable();
         _role.MindClearRoles(mind);
-        _role.MindAddRole(mind, shard.Comp.IsBlessed ? PurifiedRole : ConstructRole);
         UpdateGlowVisuals(shard, true);
-    }
 
-    [SubscribeLocalEvent]
-    private void OnPlayerAttached(Entity<SoulShardComponent> shard, ref PlayerAttachedEvent args)
-    {
-        if (_cult.GetRule(shard.Owner) is not { } rule)
-            return;
-
-        _cult.ConvertConstruct(rule, shard.Owner);
+        if (shard.Comp.IsBlessed)
+            _role.MindAddRole(mind, PurifiedRole);
+        else if (shard.Comp.CultRule is { } rule)
+            _cult.ConvertConstruct(rule, shard.Owner);
     }
 
     [SubscribeLocalEvent]

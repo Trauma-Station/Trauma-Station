@@ -36,6 +36,7 @@
   parent: BaseBloodCult
   id: BloodCultConstruct
   startingGear: null
+  allowNonHumans: true
   mindRoles: [ MindRoleBloodCultConstruct ]
 
 - type: startingGear

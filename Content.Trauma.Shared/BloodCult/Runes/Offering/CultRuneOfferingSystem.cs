@@ -13,6 +13,7 @@ using Content.Shared.Mindshield;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
+using Content.Trauma.Shared.BloodCult.Constructs.SoulShard;
 using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Runes.Revive;
 using System.Linq;
@@ -114,6 +115,9 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
             return;
 
         var shard = PredictedSpawnAtPosition(SoulShard, pos);
+        if (TryComp(shard, out SoulShardComponent? comp))
+            comp.CultRule = rule;
+
         _mind.TransferTo(mindId, shard, mind: mind);
         _mind.UnVisit(mindId);
 

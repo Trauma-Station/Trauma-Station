@@ -1,11 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Common.Religion;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Bible.Components;
 using Content.Shared.Chat;
-using Content.Shared.Chemistry.Components;
-using Content.Shared.Chemistry.Components.SolutionManager;
 using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Construction.EntitySystems;
 using Content.Shared.Coordinates.Helpers;
@@ -14,7 +11,6 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Interaction;
-using Content.Shared.Maps;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
 using Content.Shared.Station.Components;
@@ -24,13 +20,10 @@ using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.BloodCult.Empower;
 using Content.Trauma.Shared.BloodCult.Examine;
 using Content.Trauma.Shared.BloodCult.Gamerule;
-using Content.Trauma.Shared.BloodCult.Runes;
-using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Timing;
-using System.Linq;
 
 namespace Content.Trauma.Shared.BloodCult.Runes;
 
@@ -48,7 +41,6 @@ public sealed partial class CultRuneSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
-    [Dependency] private SharedSolutionContainerSystem _solution = default!;
     [Dependency] private StationSystem _station = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private UseDelaySystem _useDelay = default!;
@@ -83,21 +75,38 @@ public sealed partial class CultRuneSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
+    private void OnDrawingInteract(Entity<CultRuneDrawingComponent> ent, ref AfterInteractUsingEvent args)
+    {
+        if (args.CanReach && args.Handled && BibleClearRune(ent, args.User, args.Used))
+            args.Handled = true;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnRuneInteract(Entity<CultRuneComponent> ent, ref AfterInteractUsingEvent args)
+    {
+        if (args.CanReach && !args.Handled && BibleClearRune(ent, args.User, args.Used))
+            args.Handled = true;
+    }
+
+    private bool BibleClearRune(EntityUid ent, EntityUid user, EntityUid item)
+    {
+        if (!TryComp<BibleComponent>(item, out var bible) || !HasComp<BibleUserComponent>(user) ||
+            !_useDelay.TryResetDelay(item))
+            return false;
+
+        EraseRune(ent, user);
+        _audio.PlayPredicted(bible.HealSoundPath, user, user);
+        return true;
+    }
+
+    [SubscribeLocalEvent]
     private void OnInteractUsing(Entity<CultRuneDrawingComponent> ent, ref InteractUsingEvent args)
     {
         if (args.Handled)
             return;
 
-        // Logic for bible erasing
         var user = args.User;
         var item = args.Used;
-        if (TryComp<BibleComponent>(item, out var bible) && HasComp<BibleUserComponent>(user))
-        {
-            EraseRune(ent, user);
-            _audio.PlayPredicted(bible.HealSoundPath, user, user);
-            args.Handled = true;
-            return;
-        }
 
         if (!TryComp<RuneDrawerComponent>(item, out var runeDrawer))
             return;

@@ -3,6 +3,7 @@
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
+using Content.Shared.Inventory;
 using Content.Trauma.Common.Inventory;
 using Content.Trauma.Shared.BloodCult.BloodRites;
 
@@ -66,3 +67,9 @@ public record struct BloodRitesDrainEvent(Entity<BloodRitesAuraComponent> Rites,
 /// </summary>
 [ByRefEvent]
 public readonly record struct BloodRitesItemCreatedEvent(FixedPoint2 Cost, FixedPoint2 RemainingBlood);
+
+/// <summary>
+/// Relayed to stomach, purges holy water when user is hit using ritual dagger
+/// </summary>
+[ByRefEvent]
+public readonly record struct PurgeStomachHolywaterEvent;
