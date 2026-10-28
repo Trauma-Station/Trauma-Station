@@ -11,6 +11,7 @@ using Content.Shared.Mind;
 using Content.Shared.Roles;
 using Content.Shared.Station.Components;
 using Content.Trauma.Shared.BloodCult;
+using Content.Trauma.Shared.BloodCult.Constructs.SoulShard;
 using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Runes;
 using Robust.Shared.Map;
@@ -176,6 +177,10 @@ public sealed class BloodCultTest : InteractionTest
 
             Assert.That(_antag.GetAntagIdentifiers(antag).Count() - _antag.GetAssignedAntagCount(antag, ConstructSpecifier), Is.EqualTo(3), "Sacrifice should not have converted");
 
+            var shard = GetFirst<SoulShardComponent>();
+
+            SDel(_mind.GetMind(shard));
+            SDel(shard);
             foreach (var mob in mobs)
             {
                 SDel(_mind.GetMind(mob));
