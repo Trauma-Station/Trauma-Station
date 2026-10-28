@@ -252,7 +252,7 @@
           types:
             Slash: 32
           woundSeverityMultipliers:
-            Slash: 5
+            Slash: 3
           partDamageVariation: 2
       - !type:Emote
         emote: Scream
@@ -275,9 +275,9 @@
         ignoreResistances: false
         damage:
           types:
-            Slash: 12
+            Slash: 10
           woundSeverityMultipliers:
-            Slash: 5
+            Slash: 3
           partDamageVariation: 2
       - !type:Emote
         conditions:

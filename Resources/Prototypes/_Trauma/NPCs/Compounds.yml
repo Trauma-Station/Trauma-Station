@@ -19,7 +19,11 @@
       operator: !type:PickCriminalTargetOperator
         targetKey: Target
         targetMoveKey: TargetCoordinates
-        criminalStatus: SecurityIconHostile
+        criminalStatuses:
+        - SecurityIconWanted
+        - SecurityIconHostile
+        - SecurityIconEliminated
+        - SecurityIconBrutalize
         targetFoundSound: !type:SoundCollectionSpecifier
           collection: Ed209TargetFound
 
