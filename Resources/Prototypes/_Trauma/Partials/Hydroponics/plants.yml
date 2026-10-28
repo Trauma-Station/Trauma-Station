@@ -24,3 +24,13 @@
   components:
   - type: Plant
     growthStages: 3 # default 6 stages have no sprites for 4-6...
+
+- type: entity
+  id: TowercapPlants
+  components:
+  - type: PlantData
+    noun: seeds-noun-spores
+    name: seeds-towercap-name
+    packetPrototype: TowercapSeeds
+    productPrototypes: [ Log ]
+    mutationPrototypes: [ SteelcapPlants, PlasticcapPlants ]
