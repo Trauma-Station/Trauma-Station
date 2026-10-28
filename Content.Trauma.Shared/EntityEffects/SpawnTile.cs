@@ -4,7 +4,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Maps;
 using Robust.Shared.Map;
 
-namespace Content.Trauma.Shared.EntityEffects.Effects;
+namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
 /// Changes a tile on ent coordinates to a given one.

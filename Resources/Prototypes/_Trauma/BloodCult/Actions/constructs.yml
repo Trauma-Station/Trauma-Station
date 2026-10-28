@@ -6,9 +6,10 @@
   id: BaseActionBloodCultSpawnEnt
   components:
   - type: Action
-    useDelay: 60
+    useDelay: 180
     checkCanInteract: false
     raiseOnAction: true
+    startDelay: true
   - type: InstantAction
     event: !type:EffectInstantActionEvent
 
@@ -65,8 +66,7 @@
     - state: create_cult_floor
   - type: Action
     useDelay: 5
-    checkCanInteract: false
-    raiseOnAction: true
+    startDelay: false
   - type: EffectAction
     effects:
     - !type:SpawnTile
@@ -102,10 +102,6 @@
     sprite: _Trauma/BloodCult/actionsTG.rsi
     layers:
     - state: artificer
-  - type: Action
-    useDelay: 180
-    raiseOnAction: true
-    startDelay: true
   - type: EffectAction
     effects:
     - !type:SpawnEntity
@@ -120,10 +116,6 @@
   - type: Sprite
     layers:
     - state: create_soul_stone
-  - type: Action
-    useDelay: 180
-    raiseOnAction: true
-    startDelay: true
   - type: EffectAction
     effects:
     - !type:SpawnEntity
@@ -223,6 +215,7 @@
   - type: InstantAction
     event: !type:InstantSpawnSpellEvent
       prototype: WallForceCult
+      preventCollideWithCaster: false
       posData: !type:TargetInFront
 
 - type: entity
@@ -249,6 +242,6 @@
   - type: WorldTargetAction
     event: !type:ProjectileSpellEvent
       prototype: ProjectileGauntletEcho
-      projectileSpeed: 20
+      projectileSpeed: 6
 
 # harvester

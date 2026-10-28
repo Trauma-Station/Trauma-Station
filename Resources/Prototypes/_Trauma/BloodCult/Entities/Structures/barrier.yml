@@ -48,8 +48,7 @@
   - type: PreventCollide
     whitelist:
       components:
-      - BloodCultist
-      - Construct
+      - BloodCultMember
 
 - type: entity
   parent: [ WallForce, BaseBloodContraband ]
@@ -67,8 +66,3 @@
   # TODO: maybe make animation sprite for it
   - type: GenericVisualizer
     visuals: {}
-  - type: PreventCollide
-    whitelist:
-      components:
-      - BloodCultist
-      - Construct
