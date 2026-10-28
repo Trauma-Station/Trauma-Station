@@ -43,6 +43,7 @@ selectable-set-syndicate-door-kicker-description =
     syndicate encryption key, and two C-4.
 
 # Thief
+
 selectable-set-thief-chemist-name = Chemist Kit
 selectable-set-thief-chemist-description =
     You've acquired plenty of nefarious equipment,
