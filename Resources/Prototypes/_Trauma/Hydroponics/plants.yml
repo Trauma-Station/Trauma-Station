@@ -338,13 +338,11 @@
 - type: entity
   parent: SteelcapPlants
   id: PlasticcapPlants
-  categories: [HideSpawnMenu]
   name: plastic cap
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/plasticcap.rsi
   - type: PlantData
-    noun: seeds-noun-spores
     name: seeds-plasticcap-name
     packetPrototype: PlasticcapSeeds
     productPrototypes: [ PlasticLog ]

@@ -429,7 +429,7 @@
   parent: [ProduceBase, BaseSlicingRefinable]
   id: PlasticLog
   name: plastic-cap log
-  description: Plastic mushroom, not even micro this time.
+  description: Plastic mushroom, not even micro this time. Ages 3 and up.
   components:
   - type: PhysicalComposition
     materialComposition:
@@ -443,7 +443,7 @@
   - type: MeleeWeapon
     damage:
       types:
-        Blunt: 6
+        Blunt: 1
   - type: Produce
     plantId: PlasticcapPlants
   - type: ToolRefinable

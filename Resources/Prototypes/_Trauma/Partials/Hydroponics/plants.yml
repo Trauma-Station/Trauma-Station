@@ -29,8 +29,4 @@
   id: TowercapPlants
   components:
   - type: PlantData
-    noun: seeds-noun-spores
-    name: seeds-towercap-name
-    packetPrototype: TowercapSeeds
-    productPrototypes: [ Log ]
-    mutationPrototypes: [ SteelcapPlants, PlasticcapPlants ]
+    mutationPrototypes: [ PlasticcapPlants ]
