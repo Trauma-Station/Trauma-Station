@@ -17407,11 +17407,6 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: -64.5,-30.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 20205
-      configurators:
-      - invalid
 - proto: AltarConvertRed
   entities:
   - uid: 934
@@ -94342,21 +94337,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -61.5,-26.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 20205
-      configurators:
-      - invalid
   - uid: 5376
     components:
     - type: Transform
       parent: 2
       pos: -62.5,-26.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 20205
-      configurators:
-      - invalid
   - uid: 8435
     components:
     - type: Transform
@@ -96184,21 +96169,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -61.5,-35.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 20205
-      configurators:
-      - invalid
   - uid: 20446
     components:
     - type: Transform
       parent: 2
       pos: -69.5,-31.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 20205
-      configurators:
-      - invalid
 - proto: Fireplace
   entities:
   - uid: 15723
@@ -129316,11 +129291,6 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: -60.5,-31.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 20205
-      configurators:
-      - invalid
     - type: AtmosPipeColor
       color: '#0055CCFF'
   - uid: 20067
@@ -130380,11 +130350,6 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: -65.5,-33.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 20205
-      configurators:
-      - invalid
     - type: AtmosPipeColor
       color: '#0055CCFF'
   - uid: 20206
@@ -131243,11 +131208,6 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: -60.5,-29.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 20205
-      configurators:
-      - invalid
     - type: AtmosPipeColor
       color: '#FF1212FF'
   - uid: 20077
@@ -131256,11 +131216,6 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: -63.5,-33.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 20205
-      configurators:
-      - invalid
     - type: AtmosPipeColor
       color: '#FF1212FF'
   - uid: 20309
@@ -142796,9 +142751,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -57.653404,-25.398897
-    - type: NetworkConfigurator
-      devices:
-        'UID: 31532': invalid
   - uid: 22242
     components:
     - type: Transform
@@ -143022,9 +142974,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -60.5,-13.5
-    - type: DeviceNetwork
-      configurators:
-      - invalid
     - type: DeviceLinkSource
       linkedPorts:
         8346:
