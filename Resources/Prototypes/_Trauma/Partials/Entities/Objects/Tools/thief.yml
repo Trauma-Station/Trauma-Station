@@ -1,0 +1,18 @@
+﻿# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: ToolboxThief
+  components:
+  - type: SetSelector
+    possibleSets: !Clear
+      - ThiefAnatomySet
+      - ThiefBreacherSet
+      - ThiefChameleonSet
+      - ThiefSyndieSet
+      - ThiefSleeperSet
+      - ThiefCommunicatorSet
+      - ThiefSmugglerSet
+      - ThiefChemistSet
+      - ThiefEscapistSet
+      - ThiefTinkererSet
+    maxSelectedSets: 2

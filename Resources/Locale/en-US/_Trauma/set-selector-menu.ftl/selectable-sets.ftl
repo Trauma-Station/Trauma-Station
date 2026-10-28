@@ -41,3 +41,26 @@ selectable-set-syndicate-door-kicker-description =
     syndicate operative pda, web vest, chest rig, syndicate gas mask,
     syndicate jaws of death, 'bojevic' combat shotgun, shell box,
     syndicate encryption key, and two C-4.
+
+# Thief
+selectable-set-thief-chemist-name = Chemist Kit
+selectable-set-thief-chemist-description =
+    You've acquired plenty of nefarious equipment,
+    Now you just need to put it to use.
+    Includes: Three vials of vestine, an interdyne dart gun,
+    one bluespace beaker, and finally 2 bluespace vials.
+
+selectable-set-thief-escapist-name = Escapist Kit
+selectable-set-thief-escapist-description =
+    The perfect set of tools to escape any situation
+    with a bit of risk attached of course...
+    Includes: An experimental syndicate teleporter, smoke implanter,
+    freedom implanter, no slip shoes, and thermal vision goggles.
+
+selectable-set-thief-tinkerer-name = Tinkerer Kit
+selectable-set-thief-tinkerer-description =
+    You've learned to adapt and mold the environment to your liking
+    with the various tools provided.
+    Includes: A cybersun access configurator, a syndicate door remote, an agent id,
+    an RCD, insulated gloves, a camera bug,
+    and finally a crafting database skill chip.
