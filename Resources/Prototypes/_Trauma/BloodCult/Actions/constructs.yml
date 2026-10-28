@@ -26,8 +26,8 @@
     - state: revive
   - type: EffectAction
     effects:
-    - !type:SpawnEntity
-      entity: CultRuneRevive
+    - !type:SpawnSnappedToGrid
+      prototype: CultRuneRevive
 
 - type: entity
   parent: BaseActionBloodCult
@@ -177,8 +177,8 @@
     - state: teleport
   - type: EffectAction
     effects:
-    - !type:SpawnEntity
-      entity: CultRuneTeleport
+    - !type:SpawnSnappedToGrid
+      prototype: CultRuneTeleport
 
 # juggernaut
 
@@ -194,8 +194,8 @@
     - state: barrier
   - type: EffectAction
     effects:
-    - !type:SpawnEntity
-      entity: CultRuneBarrier
+    - !type:SpawnSnappedToGrid
+      prototype: CultRuneBarrier
 
 - type: entity
   parent: BaseActionBloodCult

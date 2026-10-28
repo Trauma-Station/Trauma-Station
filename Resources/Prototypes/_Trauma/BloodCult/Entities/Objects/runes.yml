@@ -31,8 +31,6 @@
   id: BaseCultRune
   description: An intricate, eldritch smearing and carving of blood. Who knows what it could be for?
   components:
-  - type: Transform
-    anchored: true
   - type: CultRune
   - type: BloodCultExamine
   - type: UseDelay
