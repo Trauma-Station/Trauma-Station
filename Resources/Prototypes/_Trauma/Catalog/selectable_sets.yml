@@ -96,6 +96,7 @@
   description: selectable-set-thief-chemist-description
   sprite:
     entity: VestineChemistryVial
+    state: icon
   content:
   - VestineChemistryVial
   - VestineChemistryVial
@@ -111,6 +112,7 @@
   description: selectable-set-thief-escapist-description
   sprite:
     entity: ExperimentalSyndicateTeleporter
+    state: icon
   content:
   - ExperimentalSyndicateTeleporter
   - SmokeImplanter
@@ -124,6 +126,7 @@
   description: selectable-set-thief-tinkerer-description
   sprite:
     entity: AccessConfiguratorSyndicate
+    state: icon
   content:
   - AccessConfiguratorSyndicate
   - DoorRemoteSyndicate
