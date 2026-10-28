@@ -16153,3 +16153,10 @@ Entries:
   id: 1747
   time: '2026-10-28T18:20:06.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5177
+- author: yglop
+  changes:
+  - type: Tweak
+    message: Wearing cult robe will not force you to take 40% more damage.
+  id: 1748
+  time: '2026-10-28T18:21:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5178
