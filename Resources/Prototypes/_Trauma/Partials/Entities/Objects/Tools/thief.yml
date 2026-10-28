@@ -4,15 +4,7 @@
   id: ToolboxThief
   components:
   - type: SetSelector
-    possibleSets: !Clear
-      - ThiefAnatomySet
-      - ThiefBreacherSet
-      - ThiefChameleonSet
-      - ThiefSyndieSet
-      - ThiefSleeperSet
-      - ThiefCommunicatorSet
-      - ThiefSmugglerSet
-      - ThiefChemistSet
-      - ThiefEscapistSet
-      - ThiefTinkererSet
-    maxSelectedSets: 2
+    possibleSets:
+    - ThiefChemistSet
+    - ThiefEscapistSet
+    - ThiefTinkererSet
