@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Wraith.WraithPoints;
 using Content.Shared.Actions.Events;
 using Content.Shared.Magic.Events;
 using Content.Shared.Popups;
