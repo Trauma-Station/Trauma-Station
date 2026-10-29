@@ -204,7 +204,8 @@
   - type: ActionRequirements
     conditions:
       Target:
-      - !type:UnanchoredCondition
+      - !type:AnchoredCondition
+        inverted: true
     failPopup: animate-object-event-anchored
   - type: TargetAction
     interactOnMiss: false
