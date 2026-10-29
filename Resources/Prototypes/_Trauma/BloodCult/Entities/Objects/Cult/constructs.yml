@@ -224,10 +224,13 @@
     - ActionArtificerLesserMagicMissile
   - type: AlwaysTakeHoly
   - type: Evil
-  - type: ArtificerHealComponent
+  - type: ArtificerHeal
     damage:
       types:
-        Brute: -5
+        Blunt: -1
+        Slash: -1
+        Piercing: -1
+        Ballistic: -1
 
 - type: entity
   parent: ConstructWraithBase
