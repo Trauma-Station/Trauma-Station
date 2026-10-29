@@ -19,5 +19,5 @@
   components:
   - type: Objective
     icon:
-      sprite: _White/Mobs/Aliens/Xenomorphs/larva.rsi
+      sprite: _Trauma/Mobs/Xenos/larva.rsi
       state: xenomorph
