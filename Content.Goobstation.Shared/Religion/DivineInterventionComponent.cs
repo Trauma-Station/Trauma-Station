@@ -33,7 +33,7 @@ public sealed partial class DivineInterventionComponent : Component
     public SlotFlags ValidSpellDenialSlots = SlotFlags.NONE;
 
     /// <summary>
-    /// True if it is consumable like holymelon.
+    /// True if it is consumable, like holymelon.
     /// </summary>
     [DataField]
     public bool SingleUse = false;
