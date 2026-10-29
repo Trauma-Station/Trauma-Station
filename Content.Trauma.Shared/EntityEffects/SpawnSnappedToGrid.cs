@@ -7,7 +7,7 @@ using Content.Shared.EntityEffects.Effects.EntitySpawning;
 namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
-/// Effect that spawns ent snapped to grid. Nessasery for cult rune spawning.
+/// Effect that spawns ent snapped to grid.
 /// </summary>
 public sealed partial class SpawnSnappedToGrid : BaseSpawnEntityEntityEffect<SpawnSnappedToGrid>;
 
