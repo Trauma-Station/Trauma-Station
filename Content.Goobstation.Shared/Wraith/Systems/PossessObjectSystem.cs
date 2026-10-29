@@ -15,18 +15,14 @@ public sealed partial class PossessObjectSystem : EntitySystem
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private WraithPossessedSystem _possessed = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<PossessObjectComponent, PossessObjectEvent>(OnPossess);
-        SubscribeLocalEvent<PossessObjectEvent>(OnChangeComponents);
-    }
-
+    [SubscribeLocalEvent]
     private void OnPossess(Entity<PossessObjectComponent> ent, ref PossessObjectEvent args)
     {
         if (Transform(args.Target).Anchored)
+        {
+            _popup.PopupEntity("You cannot possess an anchored object!", args.Performer, args.Performer);
             return;
+        }
 
         if (!_mind.TryGetMind(args.Performer, out var mindId, out _))
             return;
@@ -44,6 +40,7 @@ public sealed partial class PossessObjectSystem : EntitySystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnChangeComponents(PossessObjectEvent args)
     {
         if (Transform(args.Target).Anchored)

@@ -53,7 +53,7 @@ public sealed partial class WraithPossessedSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnComponentShutdown(Entity<WraithPossessedComponent> ent, ref ComponentShutdown args)
     {
-        ReturnMind(ent);
+        ReturnBack(ent);
     }
 
     [SubscribeLocalEvent]
@@ -133,10 +133,7 @@ public sealed partial class WraithPossessedSystem : EntitySystem
             return;
 
         RemCompDeferred(ent, ent.Comp);
-    }
 
-    private void ReturnMind(Entity<WraithPossessedComponent> ent)
-    {
         if (ent.Comp.Possessor is not { } user || ent.Comp.PossessorMind is not { } mind)
             return;
 

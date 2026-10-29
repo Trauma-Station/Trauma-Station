@@ -201,6 +201,11 @@
     - state: anim_object
   - type: ActionWraithPoints
     wpConsume: 200
+  - type: ActionRequirements
+    conditions:
+      Target:
+      - !type:UnanchoredCondition
+    failPopup: animate-object-event-anchored
   - type: TargetAction
     interactOnMiss: false
   - type: EntityTargetAction
