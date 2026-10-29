@@ -15,9 +15,11 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
+using Content.Shared.Random.Helpers;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Trauma.Shared.BloodCult.Empower;
+using Robust.Shared.Timing;
 using System.Linq;
 
 namespace Content.Trauma.Shared.BloodCult.Spells;
@@ -26,6 +28,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedCuffableSystem _cuffable = default!;
@@ -153,7 +156,9 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
                 { Slash, damage }
             },
         };
-        _damage.ChangeDamage(user, damageSpec, targetPart: TargetBodyPart.Arms, canMiss: false);
+
+        var targetArm = ChooseTargetArm(user);
+        _damage.ChangeDamage(user, damageSpec, targetPart: targetArm, canMiss: false);
 
         _popup.PopupEntity($"Your wounds glow with power, you have prepared a {Name(action)} invocation!", user, user, PopupType.Medium);
         _actions.SetTemporary(action, true); // can't be temp in the prototype or AddAction will queue del it :D
@@ -214,6 +219,16 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         }
 
         return null;
+    }
+
+
+    public TargetBodyPart ChooseTargetArm(EntityUid uid)
+    {
+        var targetArm = TargetBodyPart.LeftArm;
+        if (SharedRandomExtensions.PredictedProb(_timing, .5f, GetNetEntity(uid)))
+            targetArm = TargetBodyPart.RightArm;
+
+        return targetArm;
     }
 
     #endregion
