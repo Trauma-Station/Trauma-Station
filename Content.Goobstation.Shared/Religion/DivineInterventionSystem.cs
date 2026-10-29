@@ -2,6 +2,8 @@
 
 using Content.Goobstation.Common.Religion;
 using Content.Trauma.Shared.CosmicCult;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Fluids;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
@@ -18,6 +20,7 @@ public sealed partial class DivineInterventionSystem : EntitySystem
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
+    [Dependency] private SharedPuddleSystem _puddle = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private INetManager _net = default!;
     [Dependency] private EntityQuery<DivineInterventionComponent> _divineQuery = default!;
@@ -81,6 +84,14 @@ public sealed partial class DivineInterventionSystem : EntitySystem
         _popupSystem.PopupEntity(Loc.GetString(comp.DenialString), ent, PopupType.MediumCaution);
         _audio.PlayPvs(comp.DenialSound, ent);
         Spawn(comp.EffectProto, Transform(ent).Coordinates);
+
+        if (comp.SingleUse)
+        {
+            if (TryComp<SolutionComponent>(uid, out var solution))
+                _puddle.TrySpillAt(uid, solution.Solution, out var _);
+
+            PredictedDel(uid);
+        }
     }
     #endregion
 

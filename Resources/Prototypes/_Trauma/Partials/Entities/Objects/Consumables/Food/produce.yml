@@ -1,6 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  id: FoodProduceBase
+  components:
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Blunt: 2.5 # ow minimum
+
+- type: entity
   id: RiceBushel
   components:
   - type: Tag
@@ -15,14 +23,6 @@
     tags:
     - Fruit
     - Mimana
-
-- type: entity
-  id: FoodProduceBase
-  components:
-  - type: DamageOtherOnHit
-    damage:
-      types:
-        Blunt: 2.5 # ow minimum
 
 - type: entity
   id: Log
@@ -128,7 +128,7 @@
       types:
         Blunt: 5 # ow
 
-- type: entity]
+- type: entity
   id: FoodPineapple
   components:
   - type: DamageOtherOnHit
@@ -247,7 +247,8 @@
       types:
         Blunt: 15 # PVZ Parity
         Holy: 10 # really good against devils and... *checks notes* ...devils
-  - type: DivineIntervention # anti magic
+  - type: DivineIntervention # anti magic, valid only while in hand
+    singleUse: true
 
 - type: entity
   id: FoodPeaPod
