@@ -8,7 +8,7 @@
   components:
   - type: Sprite
     layers:
-    - texture: Interface/VerbIcons/vv.svg.192dpi.png
+    - texture: Interface/VerbIcons/light.svg.192dpi.png
   - type: Action
     raiseOnAction: true
   - type: InstantAction
