@@ -199,10 +199,6 @@
       reagents:
       - ReagentId: Heroin
         Quantity: 2
-      - ReagentId: Nutriment
-        Quantity: 5
-      - ReagentId: Bicaridine
-        Quantity: 10
   - type: Tag
     tags:
     - Poppy
@@ -261,6 +257,7 @@
 - type: entity
   id: FoodWorldPeas
   components:
+  - type: !Remove Solution
   - type: Solution
     solution:
       reagents:
