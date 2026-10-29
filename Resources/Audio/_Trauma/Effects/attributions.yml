@@ -23,3 +23,9 @@
   license: "CC-BY-3.0"
   copyright: "Created by NoElkaTheGod from a combination of Space Station 14 sounds"
   source: "https://github.com/space-wizards/space-station-14"
+
+- files:
+  - metal_pipe_falling.ogg
+  license: "CC-BY-3.0"
+  copyright: "Created by metal pipe, air and probably concrete surface"
+  source: "https://youtu.be/iDLmYZ5HqgM"
