@@ -11,7 +11,8 @@ public record struct BeforeHarmfulActionEvent(
     HarmfulActionType Type,
     EntityUid? Used = null,
     bool CanRiposte = true,
-    bool Cancelled = false)
+    bool Cancelled = false,
+    bool ShouldParry = true)
     : IInventoryRelayEvent
 {
     public SlotFlags TargetSlots => SlotFlags.WITHOUT_POCKET;

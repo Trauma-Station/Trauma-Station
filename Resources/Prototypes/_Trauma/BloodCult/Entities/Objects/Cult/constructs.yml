@@ -216,7 +216,7 @@
   - type: ActionGrant
     actions:
     - ActionArtificerSummonReviveRune
-    - ActionArtificerHeal
+    #- ActionArtificerHeal
     - ActionArtificerSummonCultFloor
     - ActionArtificerSummonCultWall
     - ActionArtificerGreaterConjuration
@@ -224,6 +224,10 @@
     - ActionArtificerLesserMagicMissile
   - type: AlwaysTakeHoly
   - type: Evil
+  - type: ArtificerHealComponent
+    damage:
+      types:
+        Brute: -5
 
 - type: entity
   parent: ConstructWraithBase

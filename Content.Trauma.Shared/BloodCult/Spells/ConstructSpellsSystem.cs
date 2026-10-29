@@ -18,7 +18,7 @@ public sealed partial class ConstructSpellsSystem : EntitySystem
             return;
 
         var ev = new RejuvenateEvent(false, false);
-        RaiseLocalEvent(target, ev);
+        RaiseLocalEvent(args.Target, ev);
 
         if (_mind.TryGetMind(args.Target, out var mindId, out var mind))
             _mind.UnVisit(mindId, mind);
