@@ -403,13 +403,3 @@
       - ReagentId: Blackpepper
         Quantity: 10
 
-- type: entity
-  id: CigaretteKoa
-  parent: SoakedCigarette
-  name: Cigarette
-  components:
-  - type: Solution
-    solution:
-      reagents:
-      - ReagentId: Nicotine
-        Quantity: 10
