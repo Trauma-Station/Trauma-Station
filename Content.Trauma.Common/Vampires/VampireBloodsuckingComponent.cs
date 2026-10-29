@@ -20,7 +20,7 @@ public sealed partial class VampireBloodsuckingComponent : Component
     ///  How much blood will we remove from the target?
     /// </summary>
     [DataField]
-    public int BloodToRemove = 25;
+    public int BloodToRemove = 50;
 
     /// <summary>
     /// A hashset of consumed victims.
