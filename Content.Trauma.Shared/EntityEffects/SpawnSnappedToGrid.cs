@@ -15,7 +15,7 @@ public sealed partial class SpawnSnappedToGridEntityEffectSystem : EntityEffectS
 {
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<SpawnSnappedToGrid> args)
     {
-        var pos = Transform(ent.Owner).Coordinates.SnapToGrid(EntityManager);
+        var pos = ent.Comp.Coordinates.SnapToGrid(EntityManager);
         PredictedSpawnAtPosition(args.Effect.Entity, pos);
     }
 }
