@@ -30,32 +30,6 @@
       entity: CultRuneRevive
 
 - type: entity
-  parent: BaseActionBloodCult
-  id: ActionArtificerHeal
-  name: Rejuvenate Construct
-  description: Heals all damage done to a fellow construct.
-  components:
-  - type: Sprite
-    sprite: _Trauma/BloodCult/actionsTG.rsi
-    layers:
-    - state: abyssal_gaze
-  - type: Action
-    useDelay: 60
-    checkCanInteract: false
-    startDelay: true
-    raiseOnAction: true
-  - type: TargetAction
-    checkCanAccess: true
-    interactOnMiss: false
-    range: 2
-  - type: EntityTargetAction
-    canTargetSelf: false
-    whitelist:
-      components:
-      - Construct
-    event: !type:BloodCultArtificerHealEvent
-
-- type: entity
   parent: BaseActionBloodCultSpawnEnt
   id: ActionArtificerSummonCultFloor
   name: Summon cult floor

@@ -216,7 +216,6 @@
   - type: ActionGrant
     actions:
     - ActionArtificerSummonReviveRune
-    #- ActionArtificerHeal
     - ActionArtificerSummonCultFloor
     - ActionArtificerSummonCultWall
     - ActionArtificerGreaterConjuration

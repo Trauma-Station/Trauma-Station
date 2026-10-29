@@ -66,5 +66,3 @@ public record struct BloodRitesDrainEvent(Entity<BloodRitesAuraComponent> Rites,
 /// </summary>
 [ByRefEvent]
 public readonly record struct BloodRitesItemCreatedEvent(FixedPoint2 Cost, FixedPoint2 RemainingBlood);
-
-public sealed partial class BloodCultArtificerHealEvent : EntityTargetActionEvent;
