@@ -16160,3 +16160,10 @@ Entries:
   id: 1748
   time: '2026-10-28T18:21:20.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5178
+- author: yglop
+  changes:
+  - type: Fix
+    message: Cultist spell creation and rune drawing will not target both arms.
+  id: 1749
+  time: '2026-10-29T07:20:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5179
