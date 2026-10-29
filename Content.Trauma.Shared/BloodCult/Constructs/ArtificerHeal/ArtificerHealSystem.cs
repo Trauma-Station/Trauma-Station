@@ -26,7 +26,7 @@ public sealed partial class ArtificerHealSystem : EntitySystem
         {
             _damageable.TryChangeDamage(ent.Owner, artificer.Damage, true, false);
 
-            _popup.PopupEntity($"You partially this construct to its intended form.", args.Performer, args.Performer);
+            _popup.PopupEntity($"You partially this construct to its intended form.", ent.Owner, args.User);
 
             args.ShouldParry = false;
             args.Cancelled = true;
