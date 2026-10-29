@@ -129,6 +129,9 @@ public sealed partial class WraithPossessedSystem : EntitySystem
 
     private void ReturnBack(Entity<WraithPossessedComponent> ent)
     {
+        if (ent.Comp.LifeStage < ComponentLifeStage.Stopping)
+            return;
+
         RemCompDeferred(ent, ent.Comp);
     }
 
