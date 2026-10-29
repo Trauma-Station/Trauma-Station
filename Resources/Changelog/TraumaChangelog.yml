@@ -16139,3 +16139,31 @@ Entries:
   id: 1745
   time: '2026-10-27T15:37:05.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5140
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: BZ is no longer the single strongest poison in the entire game.
+  id: 1746
+  time: '2026-10-28T18:18:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5182
+- author: yglop
+  changes:
+  - type: Tweak
+    message: Blood cultist can get more that one instance of the same spell.
+  id: 1747
+  time: '2026-10-28T18:20:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5177
+- author: yglop
+  changes:
+  - type: Tweak
+    message: Wearing cult robe will not force you to take 40% more damage.
+  id: 1748
+  time: '2026-10-28T18:21:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5178
+- author: yglop
+  changes:
+  - type: Fix
+    message: Cultist spell creation and rune drawing will not target both arms.
+  id: 1749
+  time: '2026-10-29T07:20:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5179
