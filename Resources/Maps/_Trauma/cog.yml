@@ -4,8 +4,8 @@ meta:
   engineVersion: 291.0.0
   forkId: ""
   forkVersion: ""
-  time: 10/27/2026 22:13:32
-  entityCount: 32024
+  time: 10/29/2026 19:10:52
+  entityCount: 32029
 maps:
 - 1
 grids:
@@ -9332,10 +9332,6 @@ entities:
         - temperature: 293.15
           volume: 2500
           moles:
-            Nitrogen: 103.92799
-        - temperature: 293.15
-          volume: 2500
-          moles:
             Oxygen: 6666.982
         - temperature: 293.15
           volume: 2500
@@ -9345,6 +9341,10 @@ entities:
           volume: 2500
           moles:
             Plasma: 6666.982
+        - temperature: 293.15
+          volume: 2500
+          moles:
+            Nitrogen: 103.92799
         tiles:
           0,0:
             0: 26215
@@ -10224,7 +10224,7 @@ entities:
             0: 61133
           8,-8:
             0: 61747
-            4: 136
+            7: 136
           8,-7:
             0: 4095
           8,-6:
@@ -10244,11 +10244,11 @@ entities:
             0: 4369
             2: 50244
           6,-3:
-            5: 48
-            6: 12288
+            4: 48
+            5: 12288
             2: 34952
           6,-2:
-            7: 48
+            6: 48
             1: 12288
             2: 34952
           6,-1:
@@ -10388,16 +10388,16 @@ entities:
             0: 44943
           8,-9:
             0: 12799
-            4: 32768
+            7: 32768
           9,-8:
-            4: 375
+            7: 375
             0: 28672
           9,-7:
             0: 1919
           9,-6:
             0: 61182
           9,-9:
-            4: 28672
+            7: 28672
             0: 255
           9,-5:
             0: 3822
@@ -97343,7 +97343,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 58.5,-0.5
-    - type: DeviceNetwork
   - uid: 15941
     components:
     - type: Transform
@@ -147204,6 +147203,12 @@ entities:
         10047:
         - - NuclearReactorDataSender
           - NuclearReactorDataReceiver
+        10653:
+        - - CasingTemperature
+          - Text
+        10654:
+        - - ReactorThermalPower
+          - Text
 - proto: NuclearReactorMonitor
   entities:
   - uid: 10047
@@ -164755,6 +164760,63 @@ entities:
         1467:
         - - Pressed
           - Toggle
+- proto: SignalScreen
+  entities:
+  - uid: 10653
+    components:
+    - type: MetaData
+      name: signal screen (Temperature)
+    - type: Transform
+      parent: 2
+      pos: 56.5,4.5
+    - type: Label
+      currentLabel: Temperature
+    - type: NameModifier
+      baseName: signal screen
+  - uid: 10654
+    components:
+    - type: MetaData
+      name: signal screen (Thermal power)
+    - type: Transform
+      parent: 2
+      pos: 56.5,6.5
+    - type: Label
+      currentLabel: Thermal power
+    - type: NameModifier
+      baseName: signal screen
+  - uid: 10655
+    components:
+    - type: MetaData
+      name: signal screen (RPM)
+    - type: Transform
+      parent: 2
+      pos: 57.5,-0.5
+    - type: Label
+      currentLabel: RPM
+    - type: NameModifier
+      baseName: signal screen
+  - uid: 10656
+    components:
+    - type: MetaData
+      name: signal screen (Power produced)
+    - type: Transform
+      parent: 2
+      pos: 59.5,-0.5
+    - type: Label
+      currentLabel: Power produced
+    - type: NameModifier
+      baseName: signal screen
+  - uid: 10657
+    components:
+    - type: MetaData
+      name: signal screen (Power supplied)
+    - type: Transform
+      parent: 2
+      pos: 56.5,1.5
+    - type: Label
+      currentLabel: Power supplied
+    - type: NameModifier
+      baseName: signal screen
 - proto: SignalSwitch
   entities:
   - uid: 10652
@@ -176681,6 +176743,15 @@ entities:
         9196:
         - - GasTurbineDataSender
           - GasTurbineDataReceiver
+        10656:
+        - - TurbineGenerated
+          - Text
+        10655:
+        - - TurbineSpeed
+          - Text
+        10657:
+        - - TurbineSupply
+          - Text
 - proto: TurnstileGenpopEnter
   entities:
   - uid: 27836

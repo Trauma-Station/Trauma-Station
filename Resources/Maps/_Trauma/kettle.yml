@@ -4,8 +4,8 @@ meta:
   engineVersion: 291.0.0
   forkId: ""
   forkVersion: ""
-  time: 10/27/2026 22:28:19
-  entityCount: 26457
+  time: 10/29/2026 19:25:06
+  entityCount: 26471
 maps:
 - 1
 grids:
@@ -12317,7 +12317,7 @@ entities:
       pos: -19.5,46.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -5233.471
+      secondsUntilStateChange: -5428.111
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -12691,7 +12691,7 @@ entities:
       pos: -29.5,54.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -3860.4058
+      secondsUntilStateChange: -4055.0457
     - type: DeviceLinkSink
       invokeCounter: 1
     - type: DeviceLinkSource
@@ -39930,6 +39930,51 @@ entities:
     - type: Transform
       parent: 2
       pos: -29.5,54.5
+  - uid: 8618
+    components:
+    - type: Transform
+      parent: 2
+      pos: -21.5,48.5
+  - uid: 8619
+    components:
+    - type: Transform
+      parent: 2
+      pos: -21.5,49.5
+  - uid: 8620
+    components:
+    - type: Transform
+      parent: 2
+      pos: -21.5,50.5
+  - uid: 8621
+    components:
+    - type: Transform
+      parent: 2
+      pos: -21.5,51.5
+  - uid: 8639
+    components:
+    - type: Transform
+      parent: 2
+      pos: -21.5,52.5
+  - uid: 8640
+    components:
+    - type: Transform
+      parent: 2
+      pos: -21.5,53.5
+  - uid: 8641
+    components:
+    - type: Transform
+      parent: 2
+      pos: -21.5,54.5
+  - uid: 8642
+    components:
+    - type: Transform
+      parent: 2
+      pos: -21.5,55.5
+  - uid: 8740
+    components:
+    - type: Transform
+      parent: 2
+      pos: -21.5,56.5
   - uid: 12652
     components:
     - type: Transform
@@ -117430,6 +117475,12 @@ entities:
         8588:
         - - NuclearReactorDataSender
           - NuclearReactorDataReceiver
+        8614:
+        - - CasingTemperature
+          - Text
+        8613:
+        - - ReactorThermalPower
+          - Text
 - proto: NuclearReactorMonitor
   entities:
   - uid: 8587
@@ -135203,6 +135254,63 @@ entities:
         473:
         - - Pressed
           - Open
+- proto: SignalScreen
+  entities:
+  - uid: 8613
+    components:
+    - type: MetaData
+      name: signal screen (Thermal power)
+    - type: Transform
+      parent: 2
+      pos: -27.5,46.5
+    - type: Label
+      currentLabel: Thermal power
+    - type: NameModifier
+      baseName: signal screen
+  - uid: 8614
+    components:
+    - type: MetaData
+      name: signal screen (Temperature)
+    - type: Transform
+      parent: 2
+      pos: -23.5,46.5
+    - type: Label
+      currentLabel: Temperature
+    - type: NameModifier
+      baseName: signal screen
+  - uid: 8615
+    components:
+    - type: MetaData
+      name: signal screen (Power produced)
+    - type: Transform
+      parent: 2
+      pos: -21.5,50.5
+    - type: Label
+      currentLabel: Power produced
+    - type: NameModifier
+      baseName: signal screen
+  - uid: 8616
+    components:
+    - type: MetaData
+      name: signal screen (RPM)
+    - type: Transform
+      parent: 2
+      pos: -21.5,52.5
+    - type: Label
+      currentLabel: RPM
+    - type: NameModifier
+      baseName: signal screen
+  - uid: 8617
+    components:
+    - type: MetaData
+      name: signal screen (Power supplied)
+    - type: Transform
+      parent: 2
+      pos: -21.5,54.5
+    - type: Label
+      currentLabel: Power supplied
+    - type: NameModifier
+      baseName: signal screen
 - proto: SignalSwitchDirectional
   entities:
   - uid: 8136
@@ -145385,6 +145493,15 @@ entities:
         8589:
         - - GasTurbineDataSender
           - GasTurbineDataReceiver
+        8615:
+        - - TurbineGenerated
+          - Text
+        8616:
+        - - TurbineSpeed
+          - Text
+        8617:
+        - - TurbineSupply
+          - Text
     - type: Turbine
       flowRate: 1000
 - proto: TwoWayLever
