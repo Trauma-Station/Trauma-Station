@@ -26,4 +26,3 @@ public sealed partial class AnimateObjectSpellSystem : EntitySystem
         _popup.PopupEntity("You can't animate an anchored object!", args.User, args.User);
     }
 }
-
