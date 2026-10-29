@@ -82,9 +82,9 @@
   id: Window
   components:
   - type: Sprite
-    sprite: Structures/Windows/window.rsi
+    sprite: _Trauma/Structures/Windows/window.rsi
   - type: Icon
-    sprite: Structures/Windows/window.rsi
+    sprite: _Trauma/Structures/Windows/window.rsi
     state: full
   - type: Damageable
     damageModifierSet: Glass
