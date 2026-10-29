@@ -6,9 +6,9 @@ using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind.Components;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Roles;
 using Content.Trauma.Shared.BloodCult.Components;
-using Content.Trauma.Shared.BloodCult.Constructs;
 using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Spells;
 using Content.Trauma.Shared.Roles;
@@ -29,7 +29,7 @@ public abstract partial class BloodCultSystem : EntitySystem
 
     private HashSet<Entity<BloodCultMemberComponent>> _cultists = new();
     private HashSet<Entity<HumanoidProfileComponent>> _targets = new();
-    private HashSet<Entity<ConstructComponent>> _constructs = new();
+    private HashSet<Entity<MobStateComponent>> _mobs = new();
 
     [SubscribeLocalEvent]
     private void OnPlayerAttached(Entity<BloodCultMemberComponent> ent, ref PlayerAttachedEvent args)
@@ -196,12 +196,12 @@ public abstract partial class BloodCultSystem : EntitySystem
     /// <summary>
     /// Gets all constructs near a rune.
     /// </summary>
-    public HashSet<Entity<ConstructComponent>> GetConstructsNearRune(EntityUid rune, float range)
+    public HashSet<Entity<MobStateComponent>> GetMobsNearRune(EntityUid rune, float range)
     {
         var pos = Transform(rune).Coordinates;
-        _constructs.Clear();
-        _lookup.GetEntitiesInRange(pos, range, _constructs);
-        return _constructs;
+        _mobs.Clear();
+        _lookup.GetEntitiesInRange(pos, range, _mobs);
+        return _mobs;
     }
 
     /// <summary>

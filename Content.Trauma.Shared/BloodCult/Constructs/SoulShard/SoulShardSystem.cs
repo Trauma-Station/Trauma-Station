@@ -8,6 +8,7 @@ using Content.Shared.Popups;
 using Content.Shared.Roles;
 using Content.Shared.Timing.Systems;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Map;
 
 namespace Content.Trauma.Shared.BloodCult.Constructs.SoulShard;
 
@@ -21,8 +22,10 @@ public abstract partial class SoulShardSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private UseDelaySystem _delay = default!;
+    [Dependency] private EntityQuery<SoulShardComponent> _shardQuery = default!;
 
     private static readonly EntProtoId PurifiedRole = "MindRolePurifiedConstruct";
+    private static readonly EntProtoId SoulShard = "SoulShard";
 
     [SubscribeLocalEvent]
     private void OnInteractUsing(Entity<SoulShardComponent> shard, ref AfterInteractUsingEvent args)
@@ -84,5 +87,13 @@ public abstract partial class SoulShardSystem : EntitySystem
     protected virtual void PurifyGhostRole(EntityUid uid)
     {
         // W ghost role comp still being in server
+    }
+
+    public EntityUid SpawnShard(EntityCoordinates coords, EntityUid rule)
+    {
+        var shard = PredictedSpawnAtPosition(SoulShard, coords);
+        if (_shardQuery.TryComp(shard, out var comp))
+            comp.CultRule = rule;
+        return shard;
     }
 }

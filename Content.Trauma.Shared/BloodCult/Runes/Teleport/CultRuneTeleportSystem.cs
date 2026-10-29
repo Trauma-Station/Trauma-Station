@@ -65,19 +65,12 @@ public sealed partial class CultRuneTeleportSystem : EntitySystem
         if (!HasComp<CultRuneTeleportComponent>(dest))
             return;
 
-        var targets = _cult.GetTargetsNearRune(ent, ent.Comp.TeleportGatherRange);
-        // Constructs not included in targets because they aren't humanoid...
-        var constructs = _cult.GetConstructsNearRune(ent, ent.Comp.TeleportGatherRange);
+        var targets = _cult.GetMobsNearRune(ent, ent.Comp.TeleportGatherRange);
         var coords = Transform(dest).Coordinates;
 
         foreach (var target in targets)
         {
             // sounds played separately to avoid spam with multiple targets
-            _teleport.Teleport(target, coords, user: user);
-        }
-
-        foreach (var target in constructs)
-        {
             _teleport.Teleport(target, coords, user: user);
         }
 

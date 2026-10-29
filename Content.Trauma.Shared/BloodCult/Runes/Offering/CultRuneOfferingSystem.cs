@@ -4,7 +4,6 @@ using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Bible.Components;
 using Content.Shared.Cuffs;
-using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Gibbing;
 using Content.Shared.Hands.EntitySystems;
@@ -23,6 +22,7 @@ namespace Content.Trauma.Shared.BloodCult.Runes.Offering;
 public sealed partial class CultRuneOfferingSystem : EntitySystem
 {
     [Dependency] private BloodCultSystem _cult = default!;
+    [Dependency] private SoulShardSystem _shard = default!;
     [Dependency] private CultRuneReviveSystem _runeRevive = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private GibbingSystem _gibbing = default!;
@@ -36,7 +36,6 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
 
     private static readonly EntProtoId Dagger = "RitualDagger";
     private static readonly EntProtoId Muted = "StatusEffectMuted";
-    private static readonly EntProtoId SoulShard = "SoulShard";
 
     [SubscribeLocalEvent]
     private void OnOfferingRuneInvoked(Entity<CultRuneOfferingComponent> ent, ref RuneInvokeEvent args)
@@ -114,10 +113,7 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
         if (!hasMind)
             return;
 
-        var shard = PredictedSpawnAtPosition(SoulShard, pos);
-        if (TryComp(shard, out SoulShardComponent? comp))
-            comp.CultRule = rule;
-
+        var shard = _shard.SpawnShard(pos, rule);
         _mind.TransferTo(mindId, shard, mind: mind);
         _mind.UnVisit(mindId);
 
