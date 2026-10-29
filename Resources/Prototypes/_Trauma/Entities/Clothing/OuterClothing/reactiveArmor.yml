@@ -348,16 +348,14 @@
     effects:
     - !type:NestedEffect
       proto: TeleportArmor
-    - !type:SpawnRandomEntities
+    - !type:SpawnSnappedToGrid
       entity: Table
-      number: 1
     - !type:TableSlam
     empEffects:
     - !type:NestedEffect
       proto: TeleportArmor
-    - !type:SpawnRandomEntities
+    - !type:SpawnSnappedToGrid
       entity: TableGlass
-      number: 1
     - !type:TableSlam
     empMessage: reactive-armor-emp-table
   - type: Construction
