@@ -190,7 +190,6 @@
   name: Animate object
   description: Animate an inanimate object to attack nearby humans.
   components:
-  - type: AnimateObjectAction
   - type: Action
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wraith/wraithlivingobject.ogg
