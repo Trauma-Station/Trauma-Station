@@ -286,6 +286,7 @@
         Blunt: 3
   - type: AlwaysTakeHoly
   - type: Evil
+  # TODO: pass through cult walls, area conversion and shield spells
 
 # Crew alignet
 - type: entity

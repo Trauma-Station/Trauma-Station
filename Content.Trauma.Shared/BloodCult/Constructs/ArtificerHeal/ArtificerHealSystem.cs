@@ -9,7 +9,7 @@ using Content.Trauma.Common.Weapons;
 namespace Content.Trauma.Shared.BloodCult.Constructs.ArtificerHeal;
 
 /// <summary>
-/// Tracks constructs in the blood cult gamerule.
+/// Heals constructs when they are attacked by artificer.
 /// </summary>
 public sealed partial class ArtificerHealSystem : EntitySystem
 {
@@ -26,11 +26,9 @@ public sealed partial class ArtificerHealSystem : EntitySystem
         {
             _damageable.TryChangeDamage(ent.Owner, artificer.Damage, true, false);
 
-            _popup.PopupEntity($"You partially this construct to its intended form.", ent.Owner, args.User);
+            _popup.PopupEntity($"You partially restore this construct to its intended form.", ent.Owner, args.User);
 
-            args.ShouldParry = false;
             args.Cancelled = true;
         }
     }
-
 }

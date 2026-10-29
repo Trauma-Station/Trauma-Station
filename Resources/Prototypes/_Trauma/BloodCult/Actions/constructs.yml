@@ -105,7 +105,7 @@
     layers:
     - state: blood_barrage
   - type: Action
-    useDelay: 25
+    useDelay: 15
     checkCanInteract: false
     raiseOnUser: true
     sound: !type:SoundPathSpecifier

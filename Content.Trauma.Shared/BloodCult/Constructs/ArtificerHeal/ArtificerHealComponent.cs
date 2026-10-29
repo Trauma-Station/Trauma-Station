@@ -5,7 +5,7 @@ using Content.Shared.Damage;
 namespace Content.Trauma.Shared.BloodCult.Constructs.ArtificerHeal;
 
 /// <summary>
-/// Marker component for the cult rule to track its constructs.
+/// Stores what damage types artificer should heal.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ArtificerHealComponent : Component

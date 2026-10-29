@@ -637,9 +637,6 @@ public abstract partial class SharedMeleeWeaponSystem : EntitySystem
         RaiseLocalEvent(target.Value, ref beforeEvent);
         if (beforeEvent.Cancelled)
         {
-            if (!beforeEvent.ShouldParry)
-                return;
-
             DoLungeAnimation(user, weapon, component.Angle, TransformSystem.ToMapCoordinates(target.Value.ToCoordinates()), rangeEv.Range, component.Animation, component.AnimationRotation, component.FlipAnimation, source);
             return;
         }
