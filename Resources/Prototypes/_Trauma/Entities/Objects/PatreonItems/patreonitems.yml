@@ -457,19 +457,8 @@
   - type: EntityTableContainerFill
     containers:
       storagebase:
-        id: KoaCigarette
+        id: Cigarette
         amount: 20
   - type: Storage
     grid:
     - 0,0,4,3
-
-- type: entity
-  parent: SoakedCigarette
-  id: KoaCigarette
-  name: Cigarette
-  components:
-  - type: Solution
-    solution:
-      reagents:
-      - ReagentId: Nicotine
-        Quantity: 10
