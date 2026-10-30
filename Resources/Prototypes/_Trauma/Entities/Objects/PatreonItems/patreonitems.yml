@@ -427,3 +427,38 @@
     sprite: _Trauma/Objects/Patreon/dino.rsi
   - type: Clothing
     sprite: _Trauma/Objects/Patreon/dino.rsi
+
+- type: entity
+  parent: CigCartonGreen
+  id: PatreonElk77420
+  name: Koa's King Sized
+  description: A king sized carton of premium smokes.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/elk77420carton.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Patreon/elk77420carton.rsi
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: KoaCigs
+        amount: 5
+
+- type: entity
+  parent: CigPackBase
+  id: KoaCigs
+  name: Koa's King Sized
+  description: Made with love for those hardworking Engineers and Atmos Techs.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Patreon/elk77420pack.rsi
+  - type: Item
+    sprite: _Trauma/Objects/Patreon/elk77420pack.rsi
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: Cigarette
+        amount: 20
+  - type: Storage
+    grid:
+    - 0,0,4,3

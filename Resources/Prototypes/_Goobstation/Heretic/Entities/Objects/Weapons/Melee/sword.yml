@@ -42,8 +42,8 @@
     multihitWhitelist:
       tags:
       - HereticBlade
-    conditions:
-    - !type:MultihitUserHereticEvent
+    userConditions:
+    - !type:HereticStageCondition
   - type: Parry
     parryMinSkill: 40
     soundOnParry:

@@ -133,14 +133,20 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         }
 
         var shooter = comp.Shooter;
+
+        var targetEv = new GotHitByProjectileEvent(uid, shooter);
+        RaiseLocalEvent(target, ref targetEv);
+        if (targetEv.Cancelled)
+        {
+            AfterProjectileHit(null, FixedPoint2.Zero);
+            return;
+        }
+
         var damageEv = new BeforeProjectileHitEvent(comp.Damage, target, shooter);
         RaiseLocalEvent(uid, ref damageEv);
         var dmg = damageEv.Damage * _damageable.UniversalProjectileDamageModifier;
         var ev = new ProjectileHitEvent(dmg, target, shooter);
         RaiseLocalEvent(uid, ref ev);
-
-        var targetEv = new GotHitByProjectileEvent(uid);
-        RaiseLocalEvent(target, ref targetEv);
 
         var otherName = ToPrettyString(target);
         var damageRequired = _destructible.DestroyedAt(target);
@@ -171,36 +177,43 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
                 $"Projectile {ToPrettyString(uid):projectile} shot by {shotByString} hit {otherName:target} and dealt {damage:damage} damage");
         }
 
-        if (TryPenetrate((uid, comp), target, damage, damageRequired))
-        {
-            comp.ProjectileSpent = false;
-            comp.IgnoredEntities.Add(target);
-            Dirty(ent);
-        }
-        else if (!comp.ProjectileSpent)
-        {
-            comp.ProjectileSpent = true;
-            Dirty(ent);
-        }
+        AfterProjectileHit(damage, damageRequired);
 
-        if (!Deleted(target))
+        return;
+
+        void AfterProjectileHit(DamageSpecifier? dmg, FixedPoint2 dmgRequired)
         {
-            _gun.PlayImpactSound(target, damage, comp.SoundHit, comp.ForceSound);
+            if (TryPenetrate((uid, comp), target, dmg, dmgRequired))
+            {
+                comp.ProjectileSpent = false;
+                comp.IgnoredEntities.Add(target);
+                Dirty(ent);
+            }
+            else if (!comp.ProjectileSpent)
+            {
+                comp.ProjectileSpent = true;
+                Dirty(ent);
+            }
 
-            if (!ourBody.LinearVelocity.IsLengthZero() && _timing.IsFirstTimePredicted)
-                _recoil.KickCamera(target, ourBody.LinearVelocity.Normalized());
-        }
+            if (!Deleted(target))
+            {
+                _gun.PlayImpactSound(target, dmg, comp.SoundHit, comp.ForceSound);
 
-        if (comp.DeleteOnCollide && comp.ProjectileSpent)
-            PredictedQueueDel(uid);
+                if (!ourBody.LinearVelocity.IsLengthZero() && _timing.IsFirstTimePredicted)
+                    _recoil.KickCamera(target, ourBody.LinearVelocity.Normalized());
+            }
 
-        if (comp.ImpactEffect != null && TryComp(uid, out TransformComponent? xform) && _timing.IsFirstTimePredicted)
-        {
-            RaiseLocalEvent(new ImpactEffectEvent(comp.ImpactEffect, GetNetCoordinates(xform.Coordinates)));
+            if (comp.DeleteOnCollide && comp.ProjectileSpent)
+                PredictedQueueDel(uid);
+
+            if (comp.ImpactEffect != null && TryComp(uid, out TransformComponent? xform) && _timing.IsFirstTimePredicted)
+            {
+                RaiseLocalEvent(new ImpactEffectEvent(comp.ImpactEffect, GetNetCoordinates(xform.Coordinates)));
+            }
         }
     }
 
-    private bool TryPenetrate(Entity<ProjectileComponent> projectile, EntityUid target, DamageSpecifier damage, FixedPoint2 damageRequired)
+    private bool TryPenetrate(Entity<ProjectileComponent> projectile, EntityUid target, DamageSpecifier? damage, FixedPoint2 damageRequired)
     {
         var comp = projectile.Comp;
 
@@ -220,6 +233,9 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
             return true;
         }
         // </Goob>
+
+        if (damage == null)
+            return false;
 
         if (damage.GetTotal() <= FixedPoint2.Zero)
             return false;
