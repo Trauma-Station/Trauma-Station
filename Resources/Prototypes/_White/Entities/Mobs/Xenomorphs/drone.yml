@@ -1,14 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphDrone, BaseXenoTailed ]
+  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphDrone]
   id: BaseMobXenomorphDrone
   name: xenomorph drone
   description: A specialized individual designed to build and maintain a hive. Less aggressive than other xenomorph forms, but still deadly when approached.
   abstract: true
   components:
   - type: Sprite
-    sprite: _White/Mobs/Aliens/Xenomorphs/drone.rsi
+    sprite: _Trauma/Mobs/Xenos/drone.rsi
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: xenomorph
