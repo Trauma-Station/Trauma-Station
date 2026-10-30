@@ -1,0 +1,23 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "elk77420 (Github)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "icon"
+        },
+        {
+            "name": "open"
+        },
+        {
+            "name": "closed"
+        },
+        {
+            "name": "trash"
+        }
+    ]
+}

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.ReactiveArmor;
@@ -16,6 +17,9 @@ public sealed partial class ReactiveArmorComponent : Component
 
     [DataField(required: true)]
     public EntityEffect[] EmpEffects = default!;
+
+    [DataField]
+    public EntityCondition[]? TargetConditions;
 
     [DataField]
     public TimeSpan ActivationDelay = TimeSpan.FromSeconds(10);
