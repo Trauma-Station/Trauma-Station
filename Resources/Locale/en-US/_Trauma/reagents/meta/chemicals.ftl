@@ -80,4 +80,7 @@ reagent-name-citric-acid = citric acid
 reagent-desc-citric-acid = It occurs naturally in citrus fruits. Often used for rust removal.
 
 reagent-name-bluespace-melange = bluespace melange
-reagent-desc-bluespace-melange = A potent drug that creates impression of its user teleporting, when actually the reality itself is shifting around them.
+reagent-desc-bluespace-melange = A weak drug that creates impression of its user teleporting, when actually the reality itself is shifting around them.
+
+reagent-name-bluespace-salt = bluespace salt
+reagent-desc-bluespace-salt = A potent drug that creates impression of its user teleporting, when actually the reality itself is shifting around them.

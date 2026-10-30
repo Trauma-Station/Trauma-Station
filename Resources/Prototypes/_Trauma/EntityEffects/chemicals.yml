@@ -11,19 +11,59 @@
     effectProto: StatusEffectSeeingRainbow
     type: Add
     time: 5
-  - !type:ModifyStatusEffect
-    effectProto: StatusEffectAdrenaline
-    time: 1
-  - !type:TakeStaminaDamage
-    amount: -5
     immediate: true
   - !type:PlaySoundEffect
       sound:
         path: /Audio/Effects/teleport_departure.ogg
   - !type:RandomTeleport
     radius:
-      min: 1.0
+      min: 1.5
       max: 3.0
   - !type:PlaySoundEffect
       sound:
         path: /Audio/Effects/teleport_arrival.ogg
+
+- type: entityEffect
+  id: BluespaceSalt
+  effects:
+  - effect: !type:Speak
+    id: TourettesSwearing
+  - !type:HealthChange
+    damage:
+      types:
+        Genetic: 1 # should be heart damage
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectSeeingRainbow
+    type: Add
+    time: 5
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectAdrenaline
+    time: 5
+  - !type:RemoveComponents
+    components:
+    - type: DelayedKnockdown
+    guidebookText: entity-effect-guidebook-remove-delayed-knockdown
+  - !type:TakeStaminaDamage
+    amount: -10
+    immediate: true
+  - !type:MovementSpeedModifier
+    walkSpeedModifier: 1.1
+    sprintSpeedModifier: 1.1
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectStimulantsStamina
+    time: 3
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectStunned
+    time: 3
+    type: Remove
+  - !type:ModifyKnockdown
+    time: 3
+    type: Remove
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectForcedSleeping
+    time: 3
+    type: Remove
+  - !type:RandomTeleport # No sound for evil chemical
+    radius:
+      min: 1.5
+      max: 2.0
