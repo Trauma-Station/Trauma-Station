@@ -281,7 +281,7 @@
     duration: 5
     maxDuration: 20
   - type: VentHordeRule
-    table: 
+    table:
       id: MomMushroom
 
 - type: entity
