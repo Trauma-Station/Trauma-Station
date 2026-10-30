@@ -16,7 +16,6 @@ public sealed partial class ConstructSystem : EntitySystem
     {
         var rule = args.Rule;
         rule.Comp.Constructs.Add(ent);
-        DirtyField(rule, rule.Comp, nameof(BloodCultRuleComponent.Constructs));
     }
 
     [SubscribeLocalEvent]
@@ -26,6 +25,5 @@ public sealed partial class ConstructSystem : EntitySystem
             return;
 
         rule.Comp.Constructs.Remove(ent);
-        DirtyField(rule, rule.Comp, nameof(BloodCultRuleComponent.Constructs));
     }
 }

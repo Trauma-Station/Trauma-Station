@@ -8,57 +8,57 @@
     - to: teleport
       steps:
       - tag: AnomalyCoreBluespace
-        name: construction-graph-tag-bluespace-core
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: tesla
       steps:
       - tag: AnomalyCoreElectricity
-        name: construction-graph-tag-electric-core
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: incendiary
       steps:
       - tag: AnomalyCorePyroclastic
-        name: construction-graph-tag-pytoplastic-core
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: repulsive
       steps:
       - tag: AnomalyCoreGravity
-        name: construction-graph-tag-gravity-core
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: cryogenic
       steps:
       - tag: AnomalyCoreIce
-        name: construction-graph-tag-ice-core
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: aberration
       steps:
       - tag: AnomalyCoreFlesh
-        name: construction-graph-tag-flesh-core
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: rock
       steps:
       - tag: AnomalyCoreRock
-        name: construction-graph-tag-rock-core
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: healing
       steps:
       - tag: AnomalyCoreLiquid
-        name: construction-graph-tag-liquid-core
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: hallucinating
       steps:
       - tag: AnomalyCoreFlora
-        name: construction-graph-tag-flora-core
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: stealth
       steps:
       - tag: AnomalyCoreShadow
-        name: construction-graph-tag-shadow-core
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: table
       steps:
       - tag: AnomalyCoreTech
-        name: construction-graph-tag-tech-core
+        name: construction-graph-tag-any-core
         doAfter: 1
   - node: teleport
     entity: ClothingOuterArmorReactiveTeleport

@@ -13,3 +13,47 @@
     sound:
       path: /Audio/_Goobstation/Heretic/repulse.ogg
     positional: false
+
+- type: entityEffect
+  id: BloodCultDeconversionSeizure
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: StatusEffectForcedSleeping
+    time: 5
+  - !type:WeightedRandomEffect
+    children:
+    - effect: !type:ChatMessage
+        channel: Server
+        message: "Your blood is your bond - you are nothing without it"
+        color: red
+    - effect: !type:ChatMessage
+        channel: Server
+        message: "Do not forget your place"
+        color: red
+    - effect: !type:ChatMessage
+        channel: Server
+        message: "All that power, and you still fail?"
+        color: red
+    - effect: !type:ChatMessage
+        channel: Server
+        message: "If you cannot scour this poison, I shall scour your meager life!"
+        color: red
+
+- type: entityEffect
+  id: BloodCultDeconversionStart
+  effects:
+  - !type:Emote
+    emote: Scream
+  - !type:ModifyParalysis
+    time: 2
+
+- type: entityEffect
+  id: BloodCultDeconversionProgress
+  effects:
+  - !type:Jitter
+  - !type:Speak
+    probability: 0.1
+    id: DeconversionSpeech
+  - !type:NestedEffect
+    probability: 0.02
+    proto: BloodCultDeconversionSeizure
