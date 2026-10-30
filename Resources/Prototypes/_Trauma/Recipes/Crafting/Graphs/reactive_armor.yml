@@ -13,42 +13,52 @@
     - to: tesla
       steps:
       - tag: AnomalyCoreElectricity
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: incendiary
       steps:
       - tag: AnomalyCorePyroclastic
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: repulsive
       steps:
       - tag: AnomalyCoreGravity
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: cryogenic
       steps:
       - tag: AnomalyCoreIce
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: aberration
       steps:
       - tag: AnomalyCoreFlesh
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: rock
       steps:
       - tag: AnomalyCoreRock
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: healing
       steps:
       - tag: AnomalyCoreLiquid
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: hallucinating
       steps:
       - tag: AnomalyCoreFlora
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: stealth
       steps:
       - tag: AnomalyCoreShadow
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: table
       steps:
       - tag: AnomalyCoreTech
+        name: construction-graph-tag-any-core
         doAfter: 1
   - node: teleport
     entity: ClothingOuterArmorReactiveTeleport
