@@ -16211,3 +16211,10 @@ Entries:
   id: 1753
   time: '2026-10-30T12:31:45.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5197
+- author: yglop
+  changes:
+  - type: Fix
+    message: Misleading reactive armor shell construction step description.
+  id: 1754
+  time: '2026-10-30T16:28:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5199
