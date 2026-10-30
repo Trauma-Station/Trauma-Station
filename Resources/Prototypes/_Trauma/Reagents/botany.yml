@@ -150,7 +150,7 @@
           mobstate: Alive
         - !type:ReagentCondition
           reagent: BluespaceMelange
-          min: 15
+          min: 6
     Bloodstream:
       effects:
       - !type:NestedEffect
@@ -160,4 +160,4 @@
           mobstate: Alive
         - !type:ReagentCondition
           reagent: BluespaceMelange
-          min: 15
+          min: 6

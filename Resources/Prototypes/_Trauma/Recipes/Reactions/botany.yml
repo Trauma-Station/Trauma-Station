@@ -66,7 +66,7 @@
     messages: [ "phlogiston-plasma-created" ]
     type: Pvs
   products:
-    Hydroxide: 2
+    Hydrogen: 2
     Iron: 1
 
 - type: reaction

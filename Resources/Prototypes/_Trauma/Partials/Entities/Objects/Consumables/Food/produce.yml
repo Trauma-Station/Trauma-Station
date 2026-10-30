@@ -19,7 +19,7 @@
 - type: entity
   id: FoodLemon
   components:
-  - type: !Remove Solution
+  - !Remove type: Solution
   - type: Solution
     solution:
       reagents:
@@ -35,7 +35,7 @@
 - type: entity
   id: FoodLime
   components:
-  - type: !Remove Solution
+  - !Remove type: Solution
   - type: Solution
     solution:
       reagents:
@@ -51,7 +51,7 @@
 - type: entity
   id: FoodOrange
   components:
-  - type: !Remove Solution
+  - !Remove type: Solution
   - type: Solution
     solution:
       reagents:
