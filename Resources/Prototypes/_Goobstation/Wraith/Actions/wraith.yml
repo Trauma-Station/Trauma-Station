@@ -125,7 +125,7 @@
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wraith/wraithspook1.ogg
     itemIconStyle: BigAction
-    useDelay: 20
+    useDelay: 5
   - type: Sprite
     layers:
     - state: spook
@@ -145,7 +145,7 @@
   - type: Action
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wraith/wraithstaminadrain.ogg
-    useDelay: 40
+    useDelay: 25
     itemIconStyle: BigAction
   - type: Sprite
     layers:
@@ -281,7 +281,7 @@
   description: Possess and control an everyday object. Freakout level high.
   components:
   - type: ActionWraithPoints
-    wpConsume: 666
+    wpConsume: 450
   - type: Action
     itemIconStyle: BigAction
     useDelay: 150
@@ -341,7 +341,7 @@
         thresholds:
         - trigger:
             !type:DamageTrigger
-            damage: 50
+            damage: 100
           behaviors:
           - !type:DoActsBehavior
             acts: ["Destruction"]
