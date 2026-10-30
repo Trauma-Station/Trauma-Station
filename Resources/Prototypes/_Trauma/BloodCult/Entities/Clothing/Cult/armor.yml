@@ -30,6 +30,11 @@
     damageCoefficient: 0.5
   - type: TemperatureProtection
     coefficient: 0.001
+  - type: ModifyDelayedKnockdown
+    delayDelta: 3
+    knockdownTimeDelta: -3
+  - type: StaminaResistance
+    damageCoefficient: 0.5
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHelmetCultArmor

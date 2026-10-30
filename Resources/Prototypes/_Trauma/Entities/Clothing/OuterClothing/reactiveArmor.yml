@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  parent: [ ClothingOuterArmorBase, BaseScienceContraband ]
+  parent: [ ClothingOuterBaseMedium, AllowSuitStorageClothing, BaseSecurityScienceCommandContraband ]
   id: ClothingOuterArmorReactiveBase
   components:
   - type: Sprite
@@ -40,7 +40,7 @@
     empMessage: reactive-armor-emp-teleport
 
 - type: entity
-  parent: ClothingOuterArmorBase
+  parent: ClothingOuterArmorReactiveBase
   id: ClothingOuterArmorReactiveUnfinished
   name: reactive armor shell
   suffix: empty
@@ -289,21 +289,31 @@
     - !type:PlaySoundEffect
       sound: &hallucinating_sound
         collection: Curse
-    - !type:RelayNearby
-      compName: Body
-      range: 8
-      effect: !type:NestedEffect
-        proto: HallucinatingArmor
+    - !type:SpawnIllusion
     empEffects:
     - !type:PlaySoundEffect
       sound: *hallucinating_sound
-    - !type:NestedEffect
-      proto: HallucinatingArmor
+    - !type:SpawnIllusion
+      targetIsUser: true # Wearer will be targeted by illusions
     empMessage: reactive-armor-emp-hallucinating
+    targetConditions:
+    - !type:WhitelistCondition
+      blacklist:
+        components:
+        - Illusion # Armor does nothing if worn by illusion
   - type: Construction
     graph: ArmorReactive
     deconstructionTarget: null
     node: hallucinating
+  - type: IllusionSpawner
+    chance: 1.0
+    healthMultiplier: 0.6
+    degradationRateOnClone: 0 # Just in case but blacklist should prevent armor working on illusions
+    canTargetUser: true # If you hit yourself you will be targeted
+    components:
+    - type: NpcFactionMember
+      factions:
+      - SimpleNeutral # Will only attack manually aggro'd targets
 
 - type: entity
   parent: ClothingOuterArmorReactiveBase
