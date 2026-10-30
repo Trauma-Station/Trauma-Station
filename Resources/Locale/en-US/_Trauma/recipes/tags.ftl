@@ -72,15 +72,3 @@ construction-graph-tag-bottle = an empty bottle
 
 # Anomaly cores
 construction-graph-tag-any-core = any anomaly core
-construction-graph-tag-bluespace-core = bluespace anomaly core
-construction-graph-tag-electric-core = electricity anomaly core
-construction-graph-tag-pytoplastic-core = pyroclastic anomaly core
-construction-graph-tag-gravity-core = gravity anomaly core
-construction-graph-tag-ice-core = ice anomaly core
-construction-graph-tag-flesh-core = flesh anomaly core
-construction-graph-tag-rock-core = rock anomaly core
-construction-graph-tag-liquid-core = liquid anomaly core
-construction-graph-tag-flora-core = flora anomaly core
-construction-graph-tag-shadow-core = shadow anomaly core
-construction-graph-tag-tech-core = tech anomaly core
-construction-graph-tag-santa-core = santa anomaly core
