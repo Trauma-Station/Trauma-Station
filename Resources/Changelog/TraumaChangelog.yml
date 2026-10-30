@@ -16241,3 +16241,20 @@ Entries:
   id: 1755
   time: '2026-10-30T16:59:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5151
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix bible not working.
+  - type: Fix
+    message: Fix constructs not having status icons/objectives/proper roles.
+  - type: Fix
+    message: Constructs can now use teleport rune.
+  - type: Tweak
+    message: Cult door can no longer be opened by touching it.
+  - type: Add
+    message: >-
+      Blood cultists can now be deconverted by drinking holy water, hitting
+      cultists with ritual dagger reverses the effect and purges holy water.
+  id: 1756
+  time: '2026-10-30T17:15:21.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5183
