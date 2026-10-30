@@ -16180,3 +16180,10 @@ Entries:
   id: 1750
   time: '2026-10-29T09:16:13.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4816
+- author: Wizard25671
+  changes:
+  - type: Fix
+    message: Fixed true nar'sien hardened armor not having proper stun resistances
+  id: 1751
+  time: '2026-10-30T11:33:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5200
