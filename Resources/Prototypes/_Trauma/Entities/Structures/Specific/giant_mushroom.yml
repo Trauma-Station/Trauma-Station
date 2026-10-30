@@ -15,6 +15,11 @@
     damageContainer: Biological
   - type: AtmosDevice
     requireAnchored: false
+  - type: GasMiner
+    maxExternalPressure: 200
+    spawnAmount: 0.25
+    spawnGas: Fungalin
+    showExamineText: false
 
 - type: entity
   parent: BaseGiantMushroom
@@ -46,11 +51,6 @@
     intervalSeconds: 40
     minimumEntitiesSpawned: 2
     maximumEntitiesSpawned: 5
-  - type: GasMiner
-    maxExternalPressure: 200
-    spawnAmount: 0.40
-    spawnGas: Fungalin
-    showExamineText: false
   - type: Destructible
     thresholds:
     - trigger:
@@ -98,11 +98,6 @@
         layer:
         - MidImpassable
         - LowImpassable
-  - type: GasMiner
-    maxExternalPressure: 200
-    spawnAmount: 0.25
-    spawnGas: Fungalin
-    showExamineText: false
   - type: Destructible
     thresholds:
     - trigger:
@@ -149,11 +144,6 @@
         layer:
         - MidImpassable
         - LowImpassable
-  - type: GasMiner
-    maxExternalPressure: 200
-    spawnAmount: 0.10
-    spawnGas: Fungalin
-    showExamineText: false
   - type: Destructible
     thresholds:
     - trigger:

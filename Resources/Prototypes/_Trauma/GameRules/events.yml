@@ -281,9 +281,8 @@
     duration: 5
     maxDuration: 20
   - type: VentHordeRule
-    table: !type:GroupSelector
-      children:
-      - id: MomMushroom
+    table: 
+      id: MomMushroom
 
 - type: entity
   parent: BaseAntagGhostRoleRule

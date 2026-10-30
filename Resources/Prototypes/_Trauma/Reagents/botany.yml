@@ -145,7 +145,6 @@
           min: 0.50
       - !type:SpawnEntity
         entity: GiantSpore
-        predicted: false
         probability: 0.05
         conditions:
         - !type:ReagentCondition
