@@ -499,6 +499,14 @@
   - type: ChildOrgan
     parents: [ Head ]
   - type: Eyes
+  - type: InternalChildOrgan
+    # Synced with BindableComponent values
+    intCap: 9
+    integrity: 9
+    integrityThresholds:
+      Normal: 9
+      Damaged: 6
+      Destroyed: 0
   # </Shitmed>
   - type: GibbableOrgan
   - type: Organ
