@@ -101,3 +101,63 @@
     amount: -15
   - !type:PlantAdjustHealth
     amount: 3
+
+- type: reagent
+  id: CitricAcid
+  name: reagent-name-citric-acid
+  group: Botanical
+  desc: reagent-desc-citric-acid
+  physicalDesc: reagent-physical-desc-powdery
+  flavor: acid
+  color: White
+  boilingPoint: 583
+  meltingPoint: 429
+  metabolisms:
+    Bloodstream:
+      metabolismRate: 0.5
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Caustic: 2
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Alive
+        - !type:ReagentCondition
+          reagent: CitricAcid
+          min: 5
+  tileReactions:
+  - !type:ChangeTileReaction # Unrusts tile
+    newTileId: Plating
+    oldTileId: PlatingRust
+    effect: null
+
+- type: reagent
+  id: BluespaceMelange
+  name: reagent-name-bluespace-melange
+  group: Botanical
+  desc: reagent-desc-bluespace-melange
+  physicalDesc: reagent-physical-desc-powdery
+  flavor: strange
+  color: "#273189"
+  metabolisms:
+    Digestion:
+      effects:
+      - !type:NestedEffect
+        proto: BluespaceMelange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Alive
+        - !type:ReagentCondition
+          reagent: BluespaceMelange
+          min: 15
+    Bloodstream:
+      effects:
+      - !type:NestedEffect
+        proto: BluespaceMelange
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Alive
+        - !type:ReagentCondition
+          reagent: BluespaceMelange
+          min: 15

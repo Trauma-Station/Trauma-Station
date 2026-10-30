@@ -15,3 +15,51 @@
     tags:
     - Fruit
     - Mimana
+
+- type: entity
+  id: FoodLemon
+  components:
+  - type: !Remove Solution
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 5
+      - ReagentId: Vitamin
+        Quantity: 5
+      - ReagentId: Water
+        Quantity: 4.4
+      - ReagentId: CitricAcid
+        Quantity: 0.6
+
+- type: entity
+  id: FoodLime
+  components:
+  - type: !Remove Solution
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 5
+      - ReagentId: Vitamin
+        Quantity: 5
+      - ReagentId: Water
+        Quantity: 4.5
+      - ReagentId: CitricAcid
+        Quantity: 0.5
+
+- type: entity
+  id: FoodOrange
+  components:
+  - type: !Remove Solution
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 5
+      - ReagentId: Vitamin
+        Quantity: 5
+      - ReagentId: Water
+        Quantity: 4.9
+      - ReagentId: CitricAcid
+        Quantity: 0.1

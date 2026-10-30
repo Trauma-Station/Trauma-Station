@@ -35,7 +35,7 @@
     Desoxyephedrine:
       amount: 1
   products:
-      ReaperDelight: 2
+    ReaperDelight: 2
 
 - type: reaction
   id: Stellarium
@@ -48,3 +48,37 @@
       amount: 1
   products:
     Stellarium: 3
+
+- type: reaction
+  id: BluespaceMelangeCleansing
+  priority: 20
+  reactants:
+    BluespaceMelange:
+      amount: 5
+    TranexamicAcid:
+      amount: 1
+  effects:
+  - !type:CreateGas
+    gas: Plasma
+    moles: 1
+  - !type:PopupMessage
+    visualType: LargeCaution
+    messages: [ "phlogiston-plasma-created" ]
+    type: Pvs
+  products:
+    Hydroxide: 2
+    Iron: 1
+
+- type: reaction
+  id: BluespaceCrystal
+  minTemp: 447
+  reactants:
+    BluespaceMelange:
+      amount: 10
+    CitricAcid:
+      amount: 1
+    Iron:
+      amount: 2
+  effects:
+  - !type:SpawnEntity
+    entity: MaterialBSCrystal1

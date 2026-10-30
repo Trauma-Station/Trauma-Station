@@ -63,6 +63,11 @@
     tags:
     - Ore
     - Ingot
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: BluespaceMelange
+        Quantity: 10
 
 - type: entity
   parent: MaterialBSCrystal

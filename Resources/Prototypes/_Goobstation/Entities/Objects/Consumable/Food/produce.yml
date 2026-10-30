@@ -52,7 +52,7 @@
       reagents:
       - ReagentId: Nutriment
         Quantity: 3
-      - ReagentId: Singulo
+      - ReagentId: BluespaceMelange
         Quantity: 5
   - type: Sprite
     sprite: _Goobstation/Objects/Specific/Hydroponics/bluespace_tomato.rsi
@@ -64,7 +64,7 @@
     grindableSolutionName: food
     juiceSolution:
       reagents:
-      - ReagentId: Singulo
+      - ReagentId: BluespaceMelange
         Quantity: 5
   - type: Destructible
     thresholds:
