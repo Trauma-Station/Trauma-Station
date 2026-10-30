@@ -9,6 +9,7 @@
 
   It can also be used to heal cultists, constructs and yourself. Healing yourself is 2x less effective.
 
+
   <Box>
     <GuideEntityEmbed Entity="ActionBloodCultTwistedConstruction"/>
   </Box>
@@ -34,8 +35,11 @@
   </Box>
 
   Knocks down, mutes and marks the victim. Keep hitting marked target with cult weapons until they are stunned.
+
   Borgs get stunned for lengthy duration under the effect of this spell instead of getting marked.
+
   [color=red]Important:[/color] Cannot be used via context menu, but it does work in [color=red]Combat Mode[/color], which only works on mobs and cannot miss.
+
 
   <Box>
     <GuideEntityEmbed Entity="ActionBloodCultTeleport"/>
