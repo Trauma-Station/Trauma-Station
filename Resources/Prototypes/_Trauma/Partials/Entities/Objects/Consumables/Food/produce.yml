@@ -21,7 +21,6 @@
   components:
   - type: Tag
     tags:
-    - Fruit
     - Mimana
 
 - type: entity
@@ -33,7 +32,7 @@
   - type: StaticPrice
     price: 50
   - type: ToolRefinable
-    refineResult:
+    refineResult: !Clear
     - id: MaterialWoodPlank1
       amount: 5 # was 2
 
@@ -46,7 +45,7 @@
   - type: StaticPrice
     price: 75
   - type: ToolRefinable
-    refineResult:
+    refineResult: !Clear
     - id: SheetSteel1
       amount: 5 # was 1
 
@@ -59,10 +58,10 @@
     - 1,0,1,1
     storedRotation: 90
   - type: MeleeWeapon
-    damage:
+    damage: !Clear
       types:
         Caustic: 1 # was 8 Heat 8 Caustic
-  - type: !Remove Destructible # replaced by durability
+  - !Remove type: Destructible # replaced by durability
 
 - type: entity
   id: FoodBanana
@@ -100,25 +99,16 @@
   - type: Tag
     tags:
     - RotHulkTrash
-    - Recyclable
-    - Trash
-    - BananaPeel
-    - Ruminant
-    - WhitelistChameleon
-    - HamsterWearable
 
 - type: entity
   id: TrashBananiumPeel
   components:
   - type: Sprite
-    sprite: &trauma_materials _Trauma/Objects/Materials/materials.rsi # Trauma
-    state: peel
+    sprite: &trauma_materials _Trauma/Objects/Materials/materials.rsi
   - type: Item
-    sprite: *trauma_materials # Trauma
-    heldPrefix: peel
+    sprite: *trauma_materials
   - type: Clothing
-    sprite: *trauma_materials # Trauma
-    equippedPrefix: peel
+    sprite: *trauma_materials
 
 - type: entity
   id: FoodCabbage
@@ -143,8 +133,6 @@
   - type: Tag
     tags:
     - Tomato
-    - Fruit
-    - Vegetable
 
 - type: entity
   id: FoodEggplant
@@ -152,8 +140,6 @@
   - type: Tag
     tags:
     - EggPlant
-    - Fruit
-    - Vegetable
 
 - type: entity
   id: FoodApple
@@ -165,7 +151,6 @@
   - type: Tag
     tags:
     - Apple
-    - Fruit
 
 - type: entity
   id: FoodGoldenApple
@@ -182,7 +167,6 @@
   - type: Tag
     tags:
     - Chili
-    - Vegetable
 
 - type: entity
   id: FoodChillyPepper
@@ -202,7 +186,6 @@
   - type: Tag
     tags:
     - Poppy
-    - Flower
 
 - type: entity
   id: FoodGlasstle
@@ -211,8 +194,8 @@
     materialComposition:
       Glass: 500 # 5 sheets, same as from welding it
   - type: ToolRefinable
-    refineResult:
-    - id: SheetGlass5 # Trauma - 5x so its not a total waste of time making it
+    refineResult: !Clear
+    - id: SheetGlass5 # 5x so its not a total waste of time making it
 
 - type: entity
   id: FoodGatfruit
@@ -238,6 +221,8 @@
 - type: entity
   id: FoodHolymelon
   components:
+  - type: Item
+    size: Large
   - type: DamageOtherOnHit
     damage:
       types:
@@ -252,20 +237,15 @@
   - type: Tag
     tags:
     - Peas
-    - Vegetable
 
 - type: entity
   id: FoodWorldPeas
   components:
-  - type: !Remove Solution
   - type: Solution
     solution:
       reagents:
-      - ReagentId: Happiness
-        Quantity: 5
-      - ReagentId: Nutriment
-        Quantity: 5
-      - ReagentId: Tilenol # was Pax
+      - !Remove ReagentID: Pax
+      - ReagentId: Tilenol
         Quantity: 5
 
 - type: entity
@@ -278,7 +258,6 @@
   id: TrashCherryPit
   components:
   - type: Sprite
-    sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi # Trauma
-    state: pit
+    sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi
   - type: Item
-    sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi # Trauma
+    sprite: _Goobstation/Objects/Specific/Hydroponics/cherry.rsi
