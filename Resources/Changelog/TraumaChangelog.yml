@@ -16187,3 +16187,10 @@ Entries:
   id: 1751
   time: '2026-10-30T11:33:04.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5200
+- author: assripper.
+  changes:
+  - type: Add
+    message: Xenos now have better sprites
+  id: 1752
+  time: '2026-10-30T12:13:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5190
