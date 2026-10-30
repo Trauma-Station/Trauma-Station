@@ -10,7 +10,7 @@
   - type: Stamina
     baseCritThreshold: 500
   - type: Sprite
-    sprite: _White/Mobs/Aliens/Xenomorphs/praetorian.rsi
+    sprite: _Trauma/Mobs/Xenos/praetorian.rsi
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: xenomorph

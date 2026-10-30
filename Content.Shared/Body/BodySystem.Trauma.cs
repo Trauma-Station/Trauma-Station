@@ -184,7 +184,13 @@ public sealed partial class BodySystem
         int vital = 0;
         foreach (var organ in organs)
         {
-            if (GetCategory(organ) is not {} category || !BodyParts.Contains(category))
+            if (GetCategory(organ) is not {} category)
+            {
+                Log.Error($"Body {ToPrettyString(body)} has non-organ {ToPrettyString(organ)} inside the organ container!");
+                continue;
+            }
+
+            if (!BodyParts.Contains(category))
                 continue;
 
             total++;

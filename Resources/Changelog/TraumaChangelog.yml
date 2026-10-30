@@ -16062,3 +16062,152 @@ Entries:
   id: 1740
   time: '2026-10-26T17:51:16.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4974
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: THE SPIRE is now truly infinite food wise
+  - type: Tweak
+    message: Reduced resistances on combat, medical and riot hardsuits
+  - type: Tweak
+    message: >-
+      Reduced the movement penalty on the medical and riot hardsuits to
+      compensate
+  - type: Fix
+    message: Fixed the spire selling for 300k spesos
+  - type: Fix
+    message: Fixed riot combat hardsuit not having pierce resistance
+  id: 1741
+  time: '2026-10-27T06:40:03.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5158
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: The Hulk mutation now costs 4x the biomass to print injectors for.
+  id: 1742
+  time: '2026-10-27T08:29:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5163
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix being able to turn parcel wrapped objects into cards with codex.
+  - type: Tweak
+    message: >-
+      Dual wielding damage gets reduced even more the longer your attack chain
+      is. If you use less than 3 hands, nothing changes.
+  - type: Tweak
+    message: Dual wielding hammer and nail as engineer is stronger now.
+  - type: Tweak
+    message: Eldritch coin first unbolts doors before trying to open/close them.
+  - type: Tweak
+    message: Mask of madness fear effect applies quicker.
+  - type: Tweak
+    message: >-
+      You are once again able to store items up to ginormous size in
+      unfathomable curio.
+  id: 1743
+  time: '2026-10-27T09:59:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5156
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix raw prophets not being able to give mansus link access.
+  - type: Fix
+    message: Fix ghoul mice being able to lay eggs.
+  - type: Fix
+    message: Fix jaunts not being muted.
+  - type: Fix
+    message: >-
+      Fix shields or heretic protective blades playing sound block multiple
+      times if you damage their user.
+  - type: Tweak
+    message: Wounded soldier damage/wounding against non-heretics reduced.
+  - type: Tweak
+    message: Wounded soldier status effect damage to heretic cannot be blocked.
+  id: 1744
+  time: '2026-10-27T14:36:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5165
+- author: LuminalGPT
+  changes:
+  - type: Fix
+    message: >-
+      Vampires now rejuv. when they teleport to their lair, and their lair heals
+      their bones now
+  - type: Fix
+    message: Fixed a vampire ascension action not taking blood
+  - type: Tweak
+    message: Vampire bloodsucking is 2x deadlier
+  id: 1745
+  time: '2026-10-27T15:37:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5140
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: BZ is no longer the single strongest poison in the entire game.
+  id: 1746
+  time: '2026-10-28T18:18:44.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5182
+- author: yglop
+  changes:
+  - type: Tweak
+    message: Blood cultist can get more that one instance of the same spell.
+  id: 1747
+  time: '2026-10-28T18:20:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5177
+- author: yglop
+  changes:
+  - type: Tweak
+    message: Wearing cult robe will not force you to take 40% more damage.
+  id: 1748
+  time: '2026-10-28T18:21:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5178
+- author: yglop
+  changes:
+  - type: Fix
+    message: Cultist spell creation and rune drawing will not target both arms.
+  id: 1749
+  time: '2026-10-29T07:20:16.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5179
+- author: yglop
+  changes:
+  - type: Add
+    message: More reactive armor variants.
+  - type: Add
+    message: Emp'd behavior for all reactive armor's.
+  - type: Tweak
+    message: Reactive teleport armor's teleportation range reduced from 10 to 6.
+  - type: Fix
+    message: Glass table will actually damage those slammed on it.
+  id: 1750
+  time: '2026-10-29T09:16:13.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/4816
+- author: Wizard25671
+  changes:
+  - type: Fix
+    message: Fixed true nar'sien hardened armor not having proper stun resistances
+  id: 1751
+  time: '2026-10-30T11:33:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5200
+- author: assripper.
+  changes:
+  - type: Add
+    message: Xenos now have better sprites
+  id: 1752
+  time: '2026-10-30T12:13:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5190
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Removed armor values from reactive armor.
+  - type: Add
+    message: >-
+      Reactive armor now blocks the attack in addition to core-based effects,
+      unless EMPd.
+  - type: Tweak
+    message: >-
+      Hallucination reactive armor now spawns illusion of the wearer instead of
+      old effect.
+  - type: Tweak
+    message: Reactive armor is now sec/command/sci restricted contraband.
+  id: 1753
+  time: '2026-10-30T12:31:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5197
