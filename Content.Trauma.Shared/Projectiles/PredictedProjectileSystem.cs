@@ -138,7 +138,7 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         RaiseLocalEvent(target, ref targetEv);
         if (targetEv.Cancelled)
         {
-            AfterProjectileHit(new DamageSpecifier(), FixedPoint2.Zero);
+            AfterProjectileHit(null, FixedPoint2.Zero);
             return;
         }
 
@@ -181,7 +181,7 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
 
         return;
 
-        void AfterProjectileHit(DamageSpecifier dmg, FixedPoint2 dmgRequired)
+        void AfterProjectileHit(DamageSpecifier? dmg, FixedPoint2 dmgRequired)
         {
             if (TryPenetrate((uid, comp), target, dmg, dmgRequired))
             {
@@ -213,7 +213,7 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
         }
     }
 
-    private bool TryPenetrate(Entity<ProjectileComponent> projectile, EntityUid target, DamageSpecifier damage, FixedPoint2 damageRequired)
+    private bool TryPenetrate(Entity<ProjectileComponent> projectile, EntityUid target, DamageSpecifier? damage, FixedPoint2 damageRequired)
     {
         var comp = projectile.Comp;
 
@@ -233,6 +233,9 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
             return true;
         }
         // </Goob>
+
+        if (damage == null)
+            return false;
 
         if (damage.GetTotal() <= FixedPoint2.Zero)
             return false;
