@@ -42,3 +42,29 @@
     - state: green
     - state: rancher
       sprite: _Trauma/Markers/jobs.rsi
+
+# Wildcards
+
+- type: entity
+  parent: SpawnPointJobBase
+  id: SpawnPointBoxer
+  name: boxer
+  components:
+  - type: SpawnPoint
+    job_id: Boxer
+  - type: Sprite
+    layers:
+    - state: green
+    - state: boxer
+
+- type: entity
+  parent: SpawnPointJobBase
+  id: SpawnPointZookeeper
+  name: zookeeper
+  components:
+  - type: SpawnPoint
+    job_id: Zookeeper
+  - type: Sprite
+    layers:
+    - state: green
+    - state: zookeeper
