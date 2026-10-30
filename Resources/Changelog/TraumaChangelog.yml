@@ -16180,3 +16180,34 @@ Entries:
   id: 1750
   time: '2026-10-29T09:16:13.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4816
+- author: Wizard25671
+  changes:
+  - type: Fix
+    message: Fixed true nar'sien hardened armor not having proper stun resistances
+  id: 1751
+  time: '2026-10-30T11:33:04.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5200
+- author: assripper.
+  changes:
+  - type: Add
+    message: Xenos now have better sprites
+  id: 1752
+  time: '2026-10-30T12:13:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5190
+- author: Aviu
+  changes:
+  - type: Tweak
+    message: Removed armor values from reactive armor.
+  - type: Add
+    message: >-
+      Reactive armor now blocks the attack in addition to core-based effects,
+      unless EMPd.
+  - type: Tweak
+    message: >-
+      Hallucination reactive armor now spawns illusion of the wearer instead of
+      old effect.
+  - type: Tweak
+    message: Reactive armor is now sec/command/sci restricted contraband.
+  id: 1753
+  time: '2026-10-30T12:31:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5197
