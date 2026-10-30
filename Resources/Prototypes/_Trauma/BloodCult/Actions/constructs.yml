@@ -117,7 +117,7 @@
     canTargetSelf: false
   - type: WorldTargetAction
     event: !type:ProjectileSpellEvent
-      prototype: ProjectileMagicMissileLesser
+      prototype: ProjectileMagicMissile
       projectileSpeed: 6
 
 # wraith
