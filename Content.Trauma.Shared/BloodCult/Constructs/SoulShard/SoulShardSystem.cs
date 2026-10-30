@@ -49,7 +49,7 @@ public abstract partial class SoulShardSystem : EntitySystem
 
         // life is gem
         _cult.DeconvertConstruct(shard.Owner);
-        if (_mind.GetMind(shard.Owner) is { } mind && mind != EntityUid.Invalid)
+        if (_mind.GetMind(shard.Owner) is { } mind && mind.Valid)
         {
             _mind.ClearObjectives(mind);
             _role.MindClearRoles(mind);

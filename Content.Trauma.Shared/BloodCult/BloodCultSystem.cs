@@ -115,7 +115,7 @@ public abstract partial class BloodCultSystem : EntitySystem
         => MindGetRole(mind) != null;
 
     public Entity<BloodCultistRoleComponent>? GetRole(EntityUid uid)
-        => _mcQuery.CompOrNull(uid)?.Mind is {} mind && mind != EntityUid.Invalid ? MindGetRole(mind) : null;
+        => _mcQuery.CompOrNull(uid)?.Mind is {} mind && mind.Valid ? MindGetRole(mind) : null;
 
     public Entity<BloodCultistRoleComponent>? MindGetRole(EntityUid mind)
         => Role.MindHasRole<BloodCultistRoleComponent>(mind, out var role)
