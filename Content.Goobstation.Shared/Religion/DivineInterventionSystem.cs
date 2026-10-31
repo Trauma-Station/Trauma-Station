@@ -67,10 +67,9 @@ public sealed partial class DivineInterventionSystem : EntitySystem
 
         args.Cancelled = true;
         if (args.PlayEffects && denyingItem is { } item)
-        {
             DenialEffects(item, args.Target);
-            HandleSingleUse(item);
-        }
+
+        HandleSingleUse(denyingItem.Value);
     }
 
     /// <summary>
