@@ -92,7 +92,7 @@
     - state: create_soul_stone
   - type: EffectAction
     effects:
-    - !type:SpawnShard
+    - !type:SpawnBloodCultShard
 
 - type: entity
   parent: BaseActionBloodCult
