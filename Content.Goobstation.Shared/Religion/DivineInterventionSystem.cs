@@ -2,6 +2,7 @@
 
 using Content.Goobstation.Common.Religion;
 using Content.Trauma.Shared.CosmicCult;
+using Content.Shared.Destructible;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
@@ -17,6 +18,7 @@ public sealed partial class DivineInterventionSystem : EntitySystem
 {
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedDestructibleSystem _destructible = default!;
     [Dependency] private SharedPopupSystem _popupSystem = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private INetManager _net = default!;
@@ -60,11 +62,29 @@ public sealed partial class DivineInterventionSystem : EntitySystem
     [SubscribeLocalEvent]
     public void OnCosmicAbilityAttempt(ref CosmicAbilityAttemptEvent args)
     {
-        if (!ShouldDeny(args.Target, out var denyingItem))
+        if (ShouldDeny(args.Target, out var denyingItem)
+            && denyingItem != null
+            && Exists(denyingItem.Value))
+        {
+            args.Cancelled = true;
+            if (args.PlayEffects)
+                DenialEffects(denyingItem.Value, args.Target);
+
+
+            HandleSingleUse(denyingItem.Value);
+        }
+    }
+
+    /// <summary>
+    /// Handles SingleUse items
+    /// </summary>
+    public void HandleSingleUse(EntityUid uid, DivineInterventionComponent? comp = null)
+    {
+        if (!Resolve(uid, ref comp))
             return;
 
-        args.Cancelled = true;
-        if (args.PlayEffects && denyingItem is { } item) DenialEffects(item, args.Target);
+        if (comp.SingleUse)
+            _destructible.DestroyEntity(uid);
     }
 
     #region Flavour
@@ -99,6 +119,8 @@ public sealed partial class DivineInterventionSystem : EntitySystem
             args.Cancelled = true;
             if (args.DoEffects)
                 DenialEffects(denyingItem.Value, target);
+
+            HandleSingleUse(denyingItem.Value);
         }
     }
 
