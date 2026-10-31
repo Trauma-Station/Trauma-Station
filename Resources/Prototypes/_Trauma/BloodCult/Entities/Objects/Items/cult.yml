@@ -120,17 +120,3 @@
       - !type:PlaySoundBehavior
         sound:
           collection: GlassBreak
-  - type: IllusionOnParry
-  - type: IllusionSpawner
-    chance: 0.2
-    ignoreSameFactionTargets: true
-    factionWhitelist:
-    - BloodCult
-    components:
-    - type: NPCRetaliation
-      attackMemoryLength: 10
-    - type: GroupRetaliation
-      range: 8
-    - type: NpcFactionMember
-      factions:
-      - BloodCult
