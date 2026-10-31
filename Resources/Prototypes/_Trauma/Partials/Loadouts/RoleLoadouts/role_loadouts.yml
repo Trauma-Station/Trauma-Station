@@ -2,19 +2,5 @@
 
 - type: roleLoadout
   id: JobSalvageSpecialist
-  groups: !Clear
-  - ExclusiveItems
-  - SalvageEnvirogloves
-  - SalvageEnvirosuit
-  - SalvageEnvirohelm
-  - GroupSpeciesBreathTool
-  - Trinkets
-  - Survival
-  - AssistiveItems
-  - GroupTankHarness
-  - Glasses
-  - SalvageSpecialistShoes
-  - SalvageSpecialistOuterClothing
-  - CargoTechnicianBackpack
-  - SalvageSpecialistNeck
-  - SalvageSpecialistJumpsuit
+  groups:
+  - !Remove SalvageSpecialistBackpack

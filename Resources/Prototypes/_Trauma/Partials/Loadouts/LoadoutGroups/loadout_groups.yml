@@ -2,14 +2,11 @@
 
 - type: loadoutGroup
   id: ScientistOuterClothing
-  loadouts: !Clear
-  - RegularLabCoat
-  - ScienceLabCoat
-  - ScienceWintercoat
-  - SeniorResearcherLabCoat
+  loadouts:
+  - !Remove RoboticistLabCoat
+  - !Remove RoboticistWintercoat
 
 - type: loadoutGroup
   id: ScientistGloves
-  loadouts: !Clear
-  - LatexGloves
-  - PurpleGloves
+  loadouts:
+  - !Remove RobohandsGloves
