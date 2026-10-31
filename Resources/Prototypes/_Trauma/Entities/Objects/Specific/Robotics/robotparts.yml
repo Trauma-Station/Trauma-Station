@@ -97,3 +97,144 @@
   - type: GuideHelp
     guides:
     - Robotics
+
+# Security cyborg
+
+- type: entity
+  parent: CyborgEndoskeleton
+  id: SecCyborgEndoskeleton
+  name: security cyborg endoskeleton
+  description: A frame that security cyborgs are built on. Do not jumpscare me, endoskeleton!
+  components:
+  - type: ItemMapper
+    sprite: _Trauma/Objects/Specific/Robotics/cyborg_parts.rsi
+    mapLayers:
+      security_l_arm+o:
+        whitelist:
+          tags:
+          - SecBorgLArm
+      security_r_arm+o:
+        whitelist:
+          tags:
+          - SecBorgRArm
+      security_l_leg+o:
+        whitelist:
+          tags:
+          - SecBorgLLeg
+      security_r_leg+o:
+        whitelist:
+          tags:
+          - SecBorgRLeg
+      security_head+o:
+        whitelist:
+          tags:
+          - SecBorgHead
+      security_chest+o:
+        whitelist:
+          tags:
+          - SecBorgTorso
+  - type: PartAssembly
+    parts:
+      generic:
+      - SecBorgLArm
+      - SecBorgRArm
+      - SecBorgLLeg
+      - SecBorgRLeg
+      - SecBorgHead
+      - SecBorgTorso
+  - type: Construction
+    graph: SecCyborg
+
+- type: entity
+  parent: PartSilicon
+  id: LeftArmSecBorg
+  name: security cyborg left arm
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Robotics/cyborg_parts.rsi
+    state: security_l_arm
+  - type: Tag
+    tags:
+    - Trash
+    - BorgArm
+    - SecBorgLArm
+  - type: Item
+    heldPrefix: borg-arm
+
+- type: entity
+  parent: PartSilicon
+  id: RightArmSecBorg
+  name: security cyborg right arm
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Robotics/cyborg_parts.rsi
+    state: security_r_arm
+  - type: Tag
+    tags:
+    - Trash
+    - BorgArm
+    - SecBorgRArm
+  - type: Item
+    heldPrefix: borg-arm
+
+- type: entity
+  parent: PartSilicon
+  id: LeftLegSecBorg
+  name: security cyborg left leg
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Robotics/cyborg_parts.rsi
+    state: security_l_leg
+  - type: Tag
+    tags:
+    - Trash
+    - BorgLeg
+    - SecBorgLLeg
+  - type: Item
+    heldPrefix: borg-leg
+
+- type: entity
+  parent: PartSilicon
+  id: RightLegSecBorg
+  name: security cyborg right leg
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Robotics/cyborg_parts.rsi
+    state: security_r_leg
+  - type: Tag
+    tags:
+    - Trash
+    - BorgLeg
+    - SecBorgRLeg
+  - type: Item
+    heldPrefix: borg-leg
+
+- type: entity
+  parent: PartSilicon
+  id: LightHeadSecBorg
+  name: security cyborg head
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Robotics/cyborg_parts.rsi
+    state: security_head
+  - type: Tag
+    tags:
+    - Trash
+    - SecBorgHead
+  - type: Item
+    heldPrefix: borg-head
+
+- type: entity
+  parent: PartSilicon
+  id: TorsoSecBorg
+  name: security cyborg torso
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Robotics/cyborg_parts.rsi
+    state: security_chest
+  - type: Tag
+    tags:
+    - Trash
+    - SecBorgTorso
+  - type: Item
+    heldPrefix: borg-chest

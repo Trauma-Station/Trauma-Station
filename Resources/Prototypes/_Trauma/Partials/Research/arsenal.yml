@@ -87,6 +87,7 @@
   position: 8,0
   recipeUnlocks:
   - WeaponMechCombatSolarisLaser
+  - BorgModuleEnergyShotgun
   technologyPrerequisites:
   - WeaponizedLaserManipulation
 

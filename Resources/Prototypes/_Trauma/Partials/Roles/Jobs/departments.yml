@@ -54,6 +54,7 @@
   roles:
   - Brigmedic
   - SecurityClown
+  - BorgSecurity
 
 - type: department
   id: Science
@@ -80,6 +81,9 @@
 - type: department
   id: Silicon
   weight: -15
+  primary: false
+  roles:
+  - BorgSecurity
 
 - type: department
   id: Specific

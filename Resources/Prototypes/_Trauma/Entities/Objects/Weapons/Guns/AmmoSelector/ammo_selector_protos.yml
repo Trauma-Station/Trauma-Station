@@ -27,3 +27,21 @@
   - ChangeWeaponFireCost
   soundGunshot:
     path: /Audio/Weapons/Guns/Gunshots/taser2.ogg
+
+- type: selectableAmmo
+  id: BulletLaserSpreadMini
+  desc: Mini laser spread.
+  icon:
+    sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/selectable_ammo.rsi
+    state: heavylaser-narrow
+  protoId: BulletLaserSpreadMini
+  fireCost: 30
+
+- type: selectableAmmo
+  id: BulletDisablerSmgSpreadMini
+  desc: Disabler bolt spread.
+  icon:
+    sprite: Objects/Weapons/Guns/Projectiles/projectiles_tg.rsi
+    state: omnilaser
+  protoId: BulletDisablerSmgSpreadMini
+  fireCost: 30
