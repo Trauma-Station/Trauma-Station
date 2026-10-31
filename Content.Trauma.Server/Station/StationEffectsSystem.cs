@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Server.Station.Events;
 using Content.Server.Station.Systems;
 using Content.Shared.EntityEffects;

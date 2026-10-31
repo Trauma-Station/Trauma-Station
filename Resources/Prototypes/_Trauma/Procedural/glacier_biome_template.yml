@@ -1,4 +1,5 @@
-# The world of Glacier (WIP)
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: biomeTemplate
   id: Glacier
   layers:
