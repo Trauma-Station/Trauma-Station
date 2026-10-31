@@ -29,7 +29,7 @@
   id: UplinkReinforcementRadioSyndicateCyborgAssault
   name: uplink-reinforcement-radio-cyborg-assault-name-trauma
   cost:
-    Telecrystal: 200
+    Telecrystal: 250
   conditions:
   - !type:StoreWhitelistCondition
     blacklist:
