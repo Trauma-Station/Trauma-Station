@@ -10,6 +10,7 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Shared.Weapons.Ranged.Events;
+using Content.Trauma.Common.Weapons;
 using Content.Trauma.Common.Wizard.Projectile;
 using Robust.Shared.Timing;
 
@@ -23,19 +24,7 @@ public abstract partial class SharedBerserkerImplantSystem : EntitySystem
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedJitteringSystem _jitter = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ActivateBerserkerImplantActionEvent>(OnActivate);
-
-        SubscribeLocalEvent<BerserkerImplantActiveComponent, DamageModifyEvent>(OnDamageModify);
-        SubscribeLocalEvent<BerserkerImplantActiveComponent, BeforeDamageChangedEvent>(OnBeforeDamageChanged);
-        SubscribeLocalEvent<BerserkerImplantActiveComponent, BeforeStaminaDamageEvent>(OnStaminaDamageModify);
-        SubscribeLocalEvent<BerserkerImplantActiveComponent, GetUserMeleeDamageEvent>(OnGetMeleeDamage);
-        SubscribeLocalEvent<BerserkerImplantActiveComponent, ShotAttemptedEvent>(OnShotAttempted);
-    }
-
+    [SubscribeLocalEvent]
     private void OnActivate(ActivateBerserkerImplantActionEvent args)
     {
         if (args.Handled)
@@ -65,6 +54,7 @@ public abstract partial class SharedBerserkerImplantSystem : EntitySystem
         _jitter.DoJitter(uid, TimeSpan.FromSeconds(3), true);
     }
 
+    [SubscribeLocalEvent]
     private void OnDamageModify(Entity<BerserkerImplantActiveComponent> ent, ref DamageModifyEvent args)
     {
         if (!args.Damage.AnyPositive())
@@ -73,6 +63,7 @@ public abstract partial class SharedBerserkerImplantSystem : EntitySystem
         args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, ent.Comp.DamageModifier);
     }
 
+    [SubscribeLocalEvent]
     private void OnBeforeDamageChanged(Entity<BerserkerImplantActiveComponent> ent, ref BeforeDamageChangedEvent args)
     {
         if (!args.Damage.AnyPositive())
@@ -96,16 +87,19 @@ public abstract partial class SharedBerserkerImplantSystem : EntitySystem
             ent.Comp.DelayedDamage += args.Damage;
     }
 
+    [SubscribeLocalEvent]
     private void OnStaminaDamageModify(Entity<BerserkerImplantActiveComponent> ent, ref BeforeStaminaDamageEvent args)
     {
         args.Value *= ent.Comp.StunModifier;
     }
 
+    [SubscribeLocalEvent]
     private void OnGetMeleeDamage(Entity<BerserkerImplantActiveComponent> ent, ref GetUserMeleeDamageEvent args)
     {
         args.Damage *= ent.Comp.SelfDamageModifier;
     }
 
+    [SubscribeLocalEvent]
     private void OnShotAttempted(Entity<BerserkerImplantActiveComponent> ent, ref ShotAttemptedEvent args)
     {
         args.Cancel();
