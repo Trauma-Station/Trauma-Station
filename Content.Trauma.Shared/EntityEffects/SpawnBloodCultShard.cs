@@ -5,7 +5,7 @@ using Content.Trauma.Shared.BloodCult;
 using Content.Trauma.Shared.BloodCult.Constructs.SoulShard;
 using Content.Trauma.Shared.EntityEffects;
 
-namespace Content.Trauma.Server.EntityEffects;
+namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
 /// Spawns cult shard
