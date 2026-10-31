@@ -7,3 +7,7 @@
   id: ClothingHandsGlovesRobohands
   components:
   - type: Insulated
+
+- type: entity
+  id: ClothingHandsGlovesSpaceNinja
+  name: spider clan gloves
