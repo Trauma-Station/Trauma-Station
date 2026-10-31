@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: entity
   parent: Poweredlight
   id: PoweredLightColoredFrostyBlue
@@ -26,4 +28,3 @@
     softness: 1
     offset: "0, -0.5"
     color: "#FF6666"
-
