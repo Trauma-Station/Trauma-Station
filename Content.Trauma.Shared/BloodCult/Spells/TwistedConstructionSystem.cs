@@ -5,8 +5,8 @@ using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Stacks;
 using Content.Trauma.Shared.BloodCult.Components;
+using Content.Trauma.Shared.BloodCult.Constructs.SoulShard;
 using Content.Trauma.Shared.BloodCult.Gamerule;
-using Content.Trauma.Shared.BloodCult.Spells;
 using Robust.Shared.Containers;
 using Robust.Shared.Map;
 
@@ -15,6 +15,7 @@ namespace Content.Trauma.Shared.BloodCult.Spells;
 public sealed partial class TwistedConstructionSystem : EntitySystem
 {
     [Dependency] private BloodCultSystem _cult = default!;
+    [Dependency] private SoulShardSystem _shard = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedMindSystem _mind = default!;
@@ -22,8 +23,6 @@ public sealed partial class TwistedConstructionSystem : EntitySystem
     [Dependency] private SharedStackSystem _stack = default!;
     [Dependency] private EntityQuery<StackComponent> _stackQuery = default!;
     [Dependency] private EntityQuery<TwistedConstructionTargetComponent> _query = default!;
-
-    private static readonly EntProtoId SoulShard = "SoulShard";
 
     [SubscribeLocalEvent]
     private void OnTwistedConstruction(BloodCultTwistedConstructionEvent args)
@@ -78,8 +77,7 @@ public sealed partial class TwistedConstructionSystem : EntitySystem
             return;
 
         // borg law 2 hold still
-        var shard = PredictedSpawnAtPosition(SoulShard, args.Position);
-        _cult.SetCultRule(shard, args.Rule);
+        var shard = _shard.SpawnShard(args.Position, args.Rule);
         _mind.TransferTo(mind, shard);
 
         // for constructs, put the soul shard in so it can immediately become one

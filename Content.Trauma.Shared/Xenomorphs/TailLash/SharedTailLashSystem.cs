@@ -88,11 +88,11 @@ public sealed partial class SharedTailLashSystem : EntitySystem
 
         _interaction.DoContactInteraction(uid, uid);
 
-        var hitEntities = results.Where(result => _interaction.InRangeUnobstructed(uid, result, range: range)).ToList();
-        var hitEvent = new MeleeHitEvent(hitEntities, uid, uid, component.TailDamage, null, args.Target);
-        RaiseLocalEvent(uid, hitEvent);
+        results.RemoveWhere(result => !_interaction.InRangeUnobstructed(uid, result, range: range));
+        var hitEvent = new MeleeHitEvent(results, uid, uid, component.TailDamage, null, args.Target);
+        RaiseLocalEvent(uid, hitEvent, true);
 
-        foreach (var hit in hitEntities)
+        foreach (var hit in results)
         {
             _interaction.DoContactInteraction(uid, hit);
 

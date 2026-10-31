@@ -17,7 +17,6 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Door
-    bumpOpen: true
     occludes: false
     crushDamage:
       types:
@@ -45,10 +44,9 @@
     deconstructable: false
   - type: RunedDoor
   - type: Repulse
-  - type: RepulseOnCollide
+    impulse: 1000
   - type: PlacementReplacement
     key: walls
   - type: Construction
     graph: CultDoor
     node: door
-  # TODO: only open to cultists

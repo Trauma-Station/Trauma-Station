@@ -15,25 +15,14 @@ public abstract partial class SharedAbductorSystem : EntitySystem
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] protected IGameTiming Timing = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        InitializeGizmo();
-        InitializeVest();
-
-        SubscribeLocalEvent<AbductorScientistComponent, InteractionAttemptEvent>(OnInteractAttempt);
-        SubscribeLocalEvent<AbductorExperimentatorComponent, EntInsertedIntoContainerMessage>(OnInsertedContainer);
-        SubscribeLocalEvent<AbductorExperimentatorComponent, EntRemovedFromContainerMessage>(OnRemovedContainer);
-        SubscribeLocalEvent<AbductorOrganComponent, OrganRemoveAttemptEvent>(OnOrganRemoveAttempt);
-    }
-
+    [SubscribeLocalEvent]
     private void OnInteractAttempt(Entity<AbductorScientistComponent> ent, ref InteractionAttemptEvent args)
     {
         // can't touch anything while viewing the station
         args.Cancelled |= HasComp<StationAiOverlayComponent>(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnRemovedContainer(Entity<AbductorExperimentatorComponent> ent, ref EntRemovedFromContainerMessage args)
     {
         if (args.Container.ID != ent.Comp.ContainerId)
@@ -54,6 +43,7 @@ public abstract partial class SharedAbductorSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnInsertedContainer(Entity<AbductorExperimentatorComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
         if (args.Container.ID != ent.Comp.ContainerId)
@@ -75,6 +65,7 @@ public abstract partial class SharedAbductorSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnOrganRemoveAttempt(Entity<AbductorOrganComponent> ent, ref OrganRemoveAttemptEvent args)
     {
         // can never remove abductor glands chud

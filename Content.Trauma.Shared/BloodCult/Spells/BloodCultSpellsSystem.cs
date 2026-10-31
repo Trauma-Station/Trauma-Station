@@ -18,6 +18,7 @@ using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
+using Content.Trauma.Shared.BloodCult.Deconvert;
 using Content.Trauma.Shared.BloodCult.Empower;
 using Robust.Shared.Timing;
 using System.Linq;
@@ -65,7 +66,17 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnCultSpellValidate(Entity<CultSpellComponent> ent, ref ActionValidateEvent args)
     {
-        if (ent.Comp.BypassProtection || args.Invalid || args.Input.EntityTarget is not { } netTarget)
+        if (args.Invalid)
+            return;
+
+        if (HasComp<BloodCultDeconvertComponent>(args.User))
+        {
+            args.Invalid = true;
+            _popup.PopupEntity("Your blood magic falters as holy water scours your body!", args.User, args.User, PopupType.MediumCaution);
+            return;
+        }
+
+        if (ent.Comp.BypassProtection || args.Input.EntityTarget is not { } netTarget)
             return;
 
         var target = GetEntity(netTarget);
@@ -76,8 +87,23 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
+    private void OnShutdown(Entity<BloodCultSpellsComponent> ent, ref ComponentShutdown args)
+    {
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        foreach (var spell in ent.Comp.ActiveSpells)
+        {
+            _actions.RemoveAction(spell);
+        }
+    }
+
+    [SubscribeLocalEvent]
     private void OnActionRemoved(Entity<BloodCultSpellsComponent> ent, ref ActionRemovedEvent args)
     {
+        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
+            return;
+
         if (ent.Comp.ActiveSpells.Remove(args.Action))
             Dirty(ent);
     }
