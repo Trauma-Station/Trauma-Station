@@ -45,6 +45,10 @@
     text: "You tap the barrier with your dagger and it vanishes."
   - type: Airtight
     noAirWhenFullyAirBlocked: false
+  - type: PreventCollide
+    whitelist:
+      components:
+      - BloodCultMember
 
 - type: entity
   parent: [ WallForce, BaseBloodContraband ]
