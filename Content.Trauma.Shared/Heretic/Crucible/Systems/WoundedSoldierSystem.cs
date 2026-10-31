@@ -63,6 +63,7 @@ public sealed partial class WoundedSoldierSystem : EntitySystem
         args.Damage = DamageSpecifier.ApplyModifierSet(args.Damage, GetResistances(ratio));
     }
 
+    // TODO: make this event not be broadcast
     private void OnHit(MeleeHitEvent args)
     {
         var user = args.User;

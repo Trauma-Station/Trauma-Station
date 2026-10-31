@@ -1,18 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Weapons.Melee.Events;
+using Content.Trauma.Common.Weapons;
 
 namespace Content.Trauma.Shared.Genetics.Abilities;
 
-public sealed class StrengthMutationSystem : EntitySystem
+public sealed partial class StrengthMutationSystem : EntitySystem
 {
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<StrengthMutationComponent, GetUserMeleeDamageEvent>(OnGetMeleeDamage);
-    }
-
+    [SubscribeLocalEvent]
     private void OnGetMeleeDamage(Entity<StrengthMutationComponent> ent, ref GetUserMeleeDamageEvent args)
     {
         args.Damage *= ent.Comp.MeleeModifier;
