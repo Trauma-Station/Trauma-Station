@@ -17,9 +17,9 @@
   - type: MeleeWeapon
     angle: 0 # git gud
   - type: StaminaDamageOnHit
-    lightAttackDamageMultiplier: 4
+    lightAttackDamageMultiplier: 2
     damage: 15 # more overtime damage instead
-    overtime: 40
+    overtime: 30
   - !Remove type: StaminaDamageOnCollide
   - type: UseDelay
     delays:
