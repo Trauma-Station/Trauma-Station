@@ -6,7 +6,7 @@
   description: uplink-black-jetpack-desc
   productEntity: JetpackBlackFilled
   cost:
-    Telecrystal: 7 # Trauma - was 1, 5x and a bit more expensive
+    Telecrystal: 6 # Trauma - was 1, 5x bit more expensive SLIGHTLY
   categories:
   - UplinkWearables
 
@@ -78,7 +78,7 @@
   icon: { sprite: /Textures/Clothing/OuterClothing/Suits/eva_syndicate.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateEVABundle
   cost:
-    Telecrystal: 5 # Trauma - was 1, 5x
+    Telecrystal: 6 # Trauma - was 1, 5x
   categories:
   - UplinkWearables
 
