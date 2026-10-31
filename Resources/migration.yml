@@ -186,27 +186,165 @@ WallXenoResinThick: WallResin
 CrateEngineeringSingularityCollector: null
 RadiationCollector: null
 RadiationCollectorFlatpack: null
+
+# 2026-10-24 - Glacier
+AirlockChiefJusticeLocked: null
+AirlockClerkGlassLocked: null
+AirlockCorpsmanLocked: AirlockSecurityGlass
+AirlockExternalGlassShuttleGlacierFilled: null # kill
+AirlockJusticeGlass: null
+AirlockProsecutorGlassLocked: null
+AirlockSurgeryGlassLocked: AirlockMedicalGlassLocked
+Autoclave: null
+BookSalvageEpistemicsRandom: null
+BoxRandomDonk: DonkpocketBoxSpawner
+BoxReamClassic: null
+BoxReamWhite: null
+CleanadeGrenadeBox: BoxCleanerGrenades
+ClothingHeadAreopagite: null
+ClothingHeadCourierFlipped: ClothingHeadMailCarrier
+ClothingHeadHatBeretLogi: ClothingHeadHatBeretQM
+ClothingHeadHoodBrown: null
+ClothingHeadTechPriest: null
+ClothingOuterChiefJustice: null
+ClothingOuterCoatHyenhSweater: null
+ClothingOuterCoatLeatherJacket: null
+ClothingOuterCoatLettermanBlue: null
+ClothingOuterCoatLettermanRed: null
+ClothingOuterDenimJacket: null
+ClothingOuterRobeBrown: null
+ClothingOuterRobeTechPriest: null
+ClothingOuterSuitAreopagite: null
+ClothingOuterVestFlakPress: ClothingOuterVestPress
+ClothingOuterWinterCoatMantis: null
+ClothingOuterWinterMystagogue: ClothingOuterWinterRD
+ClothingShoesBootsWinterRobo: null
+ClothingUniformSkirtCourier: ClothingUniformSkirtMailCarrier
+ComputerCargoOrdersJustice: null
+ComputerShuttleMiningGlacier: null
+CrateHydroCoJuice: null
+DeepFryerMachineCircuitboard: DeepFryerCircuitboard
+DefaultStationBeaconChiefJustice: null
+DefaultStationBeaconJustice: null
+DefaultStationBeaconProber: null
+DefaultStationBeaconProsecutor: null
+DisplayCase: null
+DresserCaptainFilledDV: DresserCaptainFilled
+DresserChiefEngineerFilledDV: DresserChiefEngineerFilled
+DresserChiefMedicalOfficerFilledDV: DresserChiefMedicalOfficerFilled
+DresserHeadOfPersonnelFilledDV: DresserHeadOfPersonnelFilled
+DresserHeadOfSecurityFilledDV: DresserHeadOfSecurityFilled
+DresserQuarterMasterFilledDV: DresserQuarterMasterFilled
+DresserResearchDirectorFilledDV: DresserResearchDirectorFilled
+DresserWardenFilledDV: DresserWardenFilled
+EpistemicsTechFab: ScienceTechFab
+FoodMealPoachedPears: null
+FoodMothMothmallow: null
+FoodMothMothmallowSlice: null
+GavelBlock: null
+HolopadCargoMail: null
+HolopadEpistemicsMantis: null
+HolopadEpistemicsOracle: null
+HolopadJusticeCJ: null
+HolopadJusticeClerk: null
+HolopadJusticeProsecutor: null
+HolopadSecurityCorpsman: null
+HolopadSecurityPermaBotany: null
+HolopadSecurityPermaKitchen: null
+IntercomPrsion: null
+LeftFootHuman: OrganHumanFootLeft
+LockableButtonRobotics: null
+LockerChiefJusticeFilled: null
+LockerClerkFilled: null
+LockerParamedicFilledHardsuit: SuitStorageParamedic
+LockerPsychologistFilled: LockerMedicalFilled # TODO: Port Psychologist shit or make yml stuff
+LockerQuarterMasterFilledHardsuit: SuitStorageQM
+LockerSurgeonFilled: LockerMedicalFilled # TODO: Port Surgeon shit or make yml stuff
+LogisticsTechFab: CargoTechFab
+N14ChairArmchair: ComfyChair # TODO: Port
+N14ChairOfficeErgonomic: SpawnVehicleChairOfficeDark # TODO: Port
+N14FloraTreeBald: null
+N14TableMetalGrate: TableStone # TODO: Port
+OilJarCorn: null
+OilJarOlive: null
+PaperStickyNoteStackFilledPink: null
+PillCanisterGranibitulari: null
+PillCanisterNeurozenium: null
+PillCanisterSerenitol: null
+PillCanisterSoretizone: null
+PlushieChitinid: null
+PlushieFelinid: null
+PlushieFeroxi: null
+PosterLegitMoreBread: RandomPosterAny
+PosterMapGlacier: SignMapGlacier
+PuddleRandomAll: null
+PuddleRandomBlood: null
+RailingCornerDeltaVWood: RailingCorner
+RailingCornerSmallDeltaV: RailingCornerSmall
+RailingCornerDeltaV: RailingCorner
+RailingDeltaV: Railing
+RailingDeltaVWood: Railing
+RandomBox: null
+RandomItem: null
+ReinforcedSurveillanceCameraAI: null
+ReinforcedSurveillanceCameraCommand: null
+RifleSafeSpawner: GunSafeRifleLecter
+RightHandHuman: OrganHumanHandRight
+RightLegSkeleton: OrganSkeletonPersonLegRight
+SecureCabinetEpistemics: SecureCabinetResearch
+SecureCabinetLO: SecureCabinetQM
+SecureCabinetLogistics: SecureCabinetCargo
+SentientSmileCore: null
+ShotgunSafeSpawner: GunSafeShotguns
+SignDirectionaCourt: SignDirectionalCourt
+SpawnMobCMOPetSilvia: SpawnMobCatException
+SpawnMobJusticePet: SpawnMobGorilla # TODO: replace once we find out what goes there
+SpawnMobSecDogLaika: SpawnMobShiva
+SpawnPointCargoAssistant: null
+SpawnPointChiefJustice: null
+SpawnPointClerk: null
+SpawnPointProsecutor: null
+SpawnPointSecurityBorg: null
+SpawnPointSurgeon: null
+SuitStorageSecDeltaV: SuitStorageSec
+GunSafeAdvancedLaser: GunSafeLaserCarbine
+ToiletDirtyWaterFilledPerma: ToiletDirtyWaterFilled
+TrialTimer: null
+UniformJabroni: null
+WeaponDisablerSelfCharge: WeaponLaserSidearm
+WindoorSecureClerkLocked: null
+WindoorSecureLibraryLocked: WindoorLibraryLocked
+WindowTintedReinforcedDirectional: null
+AirlockReporterGlassLocked: AirlockJournalismGlassLocked
+AirlockReporterLocked: AirlockJournalismLocked
+AirlockMaintReporterLocked: AirlockMaintJournalismLocked
 # </Trauma>
 
-AirlockBoxerGlassLocked: AirlockServiceGlassLocked
-AirlockClownGlassLocked: AirlockServiceGlassLocked
-AirlockClownLocked: AirlockServiceGlassLocked
+# <Trauma>
+# AirlockBoxerGlassLocked: AirlockServiceGlassLocked
+# AirlockClownGlassLocked: AirlockServiceGlassLocked
+# AirlockClownLocked: AirlockServiceGlassLocked
+# </Trauma>
 AirlockCorpsmanGlassLocked: AirlockServiceGlassLocked
 AirlockExternalGlassShuttleShipyard: AirlockExternalGlassLocked
 AirlockMailGlassLocked: AirlockCargoGlassLocked
 AirlockMaintMailLocked: AirlockMaintCargoLocked
-AirlockMaintMimeLocked: AirlockMaintTheatreLocked
-AirlockMaintPsychologistLocked: AirlockMaintMedLocked
-AirlockMaintReporterLocked: AirlockServiceLocked
-AirlockMaintZookeeperLocked: AirlockServiceLocked
+# <Trauma>
+# AirlockMaintMimeLocked: AirlockMaintTheatreLocked
+# AirlockMaintPsychologistLocked: AirlockMaintMedLocked
+# AirlockMaintReporterLocked: AirlockServiceLocked
+# AirlockMaintZookeeperLocked: AirlockServiceLocked
+# </Trauma>
 AirlockMantisGlassLocked: null
 AirlockMantisLocked: null
-AirlockMimeGlassLocked: AirlockTheatreGlassLocked
-AirlockMusicianGlassLocked: AirlockTheatreGlassLocked
-AirlockPsychologistLocked: AirlockMedicalLocked
-AirlockReporterGlassLocked: AirlockServiceGlassLocked
-AirlockZookeeperGlassLocked: AirlockServiceGlassLocked
-AirlockZookeeperLocked: AirlockServiceLocked
+# <Trauma>
+# AirlockMimeGlassLocked: AirlockTheatreGlassLocked
+# AirlockMusicianGlassLocked: AirlockTheatreGlassLocked
+# AirlockPsychologistLocked: AirlockMedicalLocked
+# AirlockReporterGlassLocked: AirlockServiceGlassLocked
+# AirlockZookeeperGlassLocked: AirlockServiceGlassLocked
+# AirlockZookeeperLocked: AirlockServiceLocked
+# </Trauma>
 AlwaysPoweredLightPostSmallRed: null
 AsteroidAltRock: AsteroidRock
 BoardGameSpawner: null
@@ -329,22 +467,24 @@ VendingMachineCourierDrobe: null
 VendingMachineMNKDrobe: null
 VendingMachineRepDrobe: null
 WallPaper: null
-WarpPointAI: null
-WarpPointArrivals: null
-WarpPointAtmos: null
-WarpPointBar: null
-WarpPointCryo: null
-WarpPointDetective: null
-WarpPointDisposals: null
-WarpPointEpistemics: null
-WarpPointHOP: null
-WarpPointJanitor: null
-WarpPointKitchen: null
-WarpPointLawyer: null
-WarpPointLibrary: null
-WarpPointMorgue: null
-WarpPointReporter: null
-WarpPointSingulo: null
+# <Trauma> - Why was this nulled
+# WarpPointAI: null
+# WarpPointArrivals: null
+# WarpPointAtmos: null
+# WarpPointBar: null
+# WarpPointCryo: null
+# WarpPointDetective: null
+# WarpPointDisposals: null
+# WarpPointEpistemics: null
+# WarpPointHOP: null
+# WarpPointJanitor: null
+# WarpPointKitchen: null
+# WarpPointLawyer: null
+# WarpPointLibrary: null
+# WarpPointMorgue: null
+# WarpPointReporter: null
+# WarpPointSingulo: null
+# </Trauma>
 WashingMachine: null
 WashingMachineBroken: null
 WashingMachineFilledClothes: null
@@ -356,12 +496,12 @@ HoloprojectorEngineering: null
 ClothingOuterWinterCoatPlaid: null
 ClothingOuterWinterCoatLong: null
 ClothingHandsGlovesColorYellowUnsulated: null
-AirlockMusicianLocked: null
-AirlockMimeLocked: null
+# AirlockMusicianLocked: null Trauma
+# AirlockMimeLocked: null Trauma
 DoorElectronicsParamedic: null
 AirlockExternalGlassSalvageLocked: AirlockExternalGlassCargoLocked
 AirlockExternalGlassShuttleEscapeSub: AirlockExternalGlassCargoLocked
-AirlockParamedicLocked: AirlockMedicalLocked
+# AirlockParamedicLocked: AirlockMedicalLocked Trauma
 FoodMothBakedCheesePlatter: null
 PlushieMothBartender: PlushieMoth
 
@@ -513,7 +653,7 @@ TransmitterSubspaceStockPart: null
 ClothingHeadHatHoodRad: null
 
 # 2024-01-12
-SpaceMedipen: null
+# SpaceMedipen: null Trauma
 
 # 2024-01-18
 ClothingHeadHelmetVoidParamed: null
@@ -1136,9 +1276,9 @@ SpeedLoaderPistolPractice: null
 # 2025-12-05
 GlowstickBase: GlowstickGreen
 
-# 2025-12-06
-SpawnPointZookeeper: null
-SpawnPointBoxer: null
+# 2025-12-06 # Trauma - Return of Zookeeper and Boxer
+# SpawnPointZookeeper: null
+# SpawnPointBoxer: null
 
 # 2025-12-07
 FigureSpawner: MechFigurineSpawner50
@@ -1292,166 +1432,3 @@ AsimovCircuitBoard: CrewsimovCircuitBoard
 ClothingShoesTourist: ClothingShoesSandalsBlack
 ClothingShoesWizard: ClothingShoesSandalsBrown
 
-# 2026-10-24
-AirlockChiefJusticeLocked: null
-AirlockClerkGlassLocked: null
-AirlockCorpsmanLocked: AirlockSecurityGlass
-AirlockExternalGlassShuttleGlacierFilled: null # kill
-AirlockJusticeGlass: null
-AirlockMaintSecurityLawyerLocked: AirlockMaintSecLocked
-AirlockParamedicGlassLocked: AirlockParamedicGlassLocked
-AirlockProsecutorGlassLocked: null
-AirlockSurgeryGlassLocked: AirlockMedicalGlassLocked
-AirSensorUnset: null
-Autoclave: null
-BlastDoorUnlinkedEngineering: null
-BlastDoorUnlinkedRobotics: null
-BookSalvageEpistemicsRandom: null
-BoxRandomDonk: DonkpocketBoxSpawner
-BoxReamClassic: null
-BoxReamWhite: null
-CleanadeGrenadeBox: BoxCleanerGrenades
-ClothingHeadAreopagite: null
-ClothingHeadCourierFlipped: ClothingHeadMailCarrier
-ClothingHeadHatBeretLogi: ClothingHeadHatBeretQM
-ClothingHeadHoodBrown: null
-ClothingHeadTechPriest: null
-ClothingOuterChiefJustice: null
-ClothingOuterCoatHyenhSweater: null
-ClothingOuterCoatLeatherJacket: null
-ClothingOuterCoatLettermanBlue: null
-ClothingOuterCoatLettermanRed: null
-ClothingOuterDenimJacket: null
-ClothingOuterRobeBrown: null
-ClothingOuterRobeTechPriest: null
-ClothingOuterSuitAreopagite: null
-ClothingOuterVestFlakPress: ClothingOuterVestPress
-ClothingOuterWinterCoatMantis: null
-ClothingOuterWinterMystagogue: ClothingOuterWinterRD
-ClothingShoesBootsWinterRobo: null
-ClothingUniformSkirtCourier: ClothingUniformSkirtMailCarrier
-ComputerCargoOrdersJustice: null
-ComputerShuttleMiningGlacier: null
-CrashCartFilled: null
-CrateHydroCoJuice: null
-DeepFryerMachineCircuitboard: null
-DefaultStationBeaconChiefJustice: null
-DefaultStationBeaconJustice: null
-DefaultStationBeaconProber: null
-DefaultStationBeaconProsecutor: null
-DisplayCase: null
-DresserCaptainFilledDV: DresserCaptainFilled
-DresserChiefEngineerFilledDV: DresserChiefEngineerFilled
-DresserChiefMedicalOfficerFilledDV: DresserChiefMedicalOfficerFilled
-DresserHeadOfPersonnelFilledDV: DresserHeadOfPersonnelFilled
-DresserHeadOfSecurityFilledDV: DresserHeadOfSecurityFilled
-DresserQuarterMasterFilledDV: DresserQuarterMasterFilled
-DresserResearchDirectorFilledDV: DresserResearchDirectorFilled
-DresserWardenFilledDV: DresserWardenFilled
-EpistemicsTechFab: ScienceTechFab
-FoodMealPoachedPears: null
-FoodMothMothmallow: null
-FoodMothMothmallowSlice: null
-GavelBlock: null
-HolopadCargoMail: null
-HolopadEpistemicsMantis: null
-HolopadEpistemicsOracle: null
-HolopadJusticeCJ: null
-HolopadJusticeClerk: null
-HolopadJusticeProsecutor: null
-HolopadSecurityCorpsman: null
-HolopadSecurityPermaBotany: null
-HolopadSecurityPermaKitchen: null
-IntercomPrsion: null
-LeftFootHuman: OrganHumanFootLeft
-LockableButtonRobotics: null
-LockerChiefJusticeFilled: null
-LockerClerkFilled: null
-LockerParamedicFilledHardsuit: SuitStorageParamedic
-LockerPsychologistFilled: LockerMedicalFilled # TODO: Port Psychologist shit or make yml stuff
-LockerQuarterMasterFilledHardsuit: SuitStorageQM
-LockerSurgeonFilled: LockerMedicalFilled # TODO: Port Surgeon shit or make yml stuff
-LogisticsTechFab: CargoTechFab
-N14ChairArmchair: ComfyChair # TODO: Port
-N14ChairOfficeErgonomic: SpawnVehicleChairOfficeDark # TODO: Port
-N14FloraTreeBald: null
-N14TableMetalGrate: TableStone # TODO: Port
-OilJarCorn: null
-OilJarOlive: null
-PaperStickyNoteStackFilledPink: null
-PillCanisterGranibitulari: null
-PillCanisterNeurozenium: null
-PillCanisterSerenitol: null
-PillCanisterSoretizone: null
-PlushieChitinid: null
-PlushieFelinid: null
-PlushieFeroxi: null
-PosterLegitMoreBread: null
-PosterMapGlacier: null
-PoweredLightColoredFrostyBlue: null
-PoweredLightPostSmallRed: null
-PuddleRandomAll: null
-PuddleRandomBlood: null
-RailingCornerDeltaVWood: RailingCorner
-RailingCornerSmallDeltaV: RailingCornerSmall
-RailingCornerDeltaV: RailingCorner
-RailingDeltaV: Railing
-RailingDeltaVWood: Railing
-RandomBox: null
-RandomItem: null
-RandomRockSpawner: null
-RandomSolarPanelState: null
-ReinforcedSurveillanceCameraAI: null
-ReinforcedSurveillanceCameraCommand: null
-RifleSafeSpawner: GunSafeRifleLecter
-RightHandHuman: OrganHumanHandRight
-RightLegSkeleton: OrganSkeletonPersonLegRight
-SalvageSeedSpawnerLow: null
-SecureCabinetCE: filingCabinetDrawerRandom
-SecureCabinetEpistemics: filingCabinetDrawerRandom
-SecureCabinetHoP: filingCabinetDrawerRandom
-SecureCabinetHoS: filingCabinetDrawerRandom
-SecureCabinetLO: filingCabinetDrawerRandom
-SecureCabinetLogistics: filingCabinetDrawerRandom
-SecureCabinetPsychologist: filingCabinetDrawerRandom
-SentientSmileCore: null
-ShotgunSafeSpawner: GunSafeShotguns
-SignDirectionaCourt: null
-SignDisposalProper: null
-SpawnMobCMOPetSilvia: SpawnMobCatException
-SpawnMobJusticePet: SpawnMobGorilla # TODO: lol
-SpawnMobSecDogLaika: SpawnMobShiva
-SpawnPointCargoAssistant: null
-SpawnPointChiefJustice: null
-SpawnPointClerk: null
-SpawnPointProsecutor: null
-SpawnPointSecurityBorg: null
-SpawnPointSurgeon: null
-SuitStorageSecDeltaV: SuitStorageSec
-GunSafeAdvancedLaser: GunSafeLaserCarbine
-ToiletDirtyWaterFilledPerma: ToiletDirtyWaterFilled
-ToyFigurinePrisoner: ToyFigurineGriffin
-TrialTimer: null
-UniformJabroni: null
-VendingMachineChefvendUnlocked: VendingMachineChefvend
-WallClosetL3Janitor: null # TODO: Port
-WallClosetL3Virology: null # TODO: Port
-WallLockerJanitor: null # TODO: Port
-WarpPointArcade: null
-WarpPointBridge: null
-WarpPointCourt: null
-WarpPointDorms: null
-WarpPointEngineering: null
-WarpPointEvac: null
-WarpPointJustice: null
-WarpPointLogistics: null
-WarpPointMedical: null
-WarpPointPerma: null
-WarpPointSalvage: null
-WarpPointSalvageDock: null
-WarpPointSecurity: null
-WarpPointTEG: null
-WeaponDisablerSelfCharge: WeaponLaserSidearm
-WindoorSecureClerkLocked: null
-WindoorSecureLibraryLocked: WindoorLibraryLocked
-WindowTintedReinforcedDirectional: null

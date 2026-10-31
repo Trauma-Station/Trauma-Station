@@ -1,0 +1,9 @@
+- type: entity
+  parent: BaseWallCloset
+  id: WallClosetL3
+  name: level 3 biohazard wall closet
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: bio
+    stateDoorClosed: bio_door
+    stateDoorOpen: bio_open

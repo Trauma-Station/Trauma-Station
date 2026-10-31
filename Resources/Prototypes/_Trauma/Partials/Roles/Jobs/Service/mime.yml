@@ -1,0 +1,8 @@
+- type: job
+  id: Mime
+  access:
+  - Mime
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipEducation

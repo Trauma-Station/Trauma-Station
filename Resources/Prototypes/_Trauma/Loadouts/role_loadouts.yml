@@ -52,3 +52,34 @@
   - DClassEnvirosuit
   - DClassEnvirogloves
   - ExclusiveItems
+
+- type: roleLoadout
+  id: JobBoxer
+  groups:
+  - GroupTankHarness
+  - BoxerJumpsuit
+  - BoxerGloves
+  - BoxerMask
+  - CommonBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - BoxerEnvirohelm
+  - BoxerEnvirosuit
+  - BoxerEnvirogloves
+
+- type: roleLoadout
+  id: JobZookeeper
+  groups:
+  - GroupTankHarness
+  - CommonBackpack
+  - Glasses
+  - Survival
+  - Trinkets
+  - GroupSpeciesBreathTool
+  - ZookeeperHead
+  - ZookeeperJumpsuit
+  - ZookeeperEnvirohelm
+  - ZookeeperEnvirosuit
+  - ZookeeperEnvirogloves

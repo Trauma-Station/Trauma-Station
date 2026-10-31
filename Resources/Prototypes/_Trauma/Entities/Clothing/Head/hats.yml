@@ -59,3 +59,43 @@
     - CorgiWearable
     - HamsterWearable
     - WhitelistChameleon
+
+# Wrestling masks
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatWrestlingMaskLuchaRed
+  name: red lucha libre mask
+  description: The luchador never removes his mask.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Hats/wrestlermaskluchared.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Hats/wrestlermaskluchared.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatWrestlingMaskLuchaBlue
+  name: blue lucha libre mask
+  description: Don't touch the mask.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Hats/wrestlermaskluchablue.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Hats/wrestlermaskluchablue.rsi
+  - type: HideLayerClothing
+    slots:
+    - Hair
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatSodaJerkCap
+  name: soda jerk cap
+  description: I was a wimp before the soda jerk.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Hats/sodajerkcap.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Hats/sodajerkcap.rsi

@@ -1,0 +1,41 @@
+- type: job
+  id: Boxer
+  name: job-name-boxer
+  description: job-description-boxer
+  playTimeTracker: JobBoxer
+  startingGear: BoxerGear
+  icon: "JobIconBoxer"
+  supervisors: job-supervisors-hop
+  access:
+  - Service
+  - Maintenance
+  - Theatre
+  - Boxer
+  guides:
+  - Civilian
+  special:
+  - !type:GiveItemOnHolidaySpecial
+    holiday: BoxingDay
+    prototype: UndeterminedSelectorBoxingRiggedRadial
+
+- type: startingGear
+  id: BoxerGear
+  equipment:
+    id: BoxerPDA
+    ears: ClothingHeadsetService
+    belt: ClothingBeltChampion
+  storage:
+    back:
+    - MedkitBrute
+
+- type: chameleonOutfit
+  id: BoxerChameleonOutfit
+  job: Boxer
+  equipment:
+    head: ClothingHeadHatSkub
+    eyes: ClothingEyesGlassesCheapSunglasses
+    mask: ClothingMaskBreath
+    outerClothing: ClothingOuterSkub
+    jumpsuit: UniformShortsRedWithTop
+    neck: ClothingNeckScarfStripedRed
+    gloves: ClothingHandsGlovesBoxingRed

@@ -1,0 +1,12 @@
+- type: entity
+  abstract: true
+  parent: [ ClothingHandsGlovesBoxingBase, ClothingHandsGlovesEnviroglovesBase ]
+  id: ClothingHandsGlovesEnviroglovesBoxingBase
+  components:
+  - type: Tag
+    tags:
+    - Kangaroo
+    - ClothMade
+    - Recyclable
+    - WhitelistChameleon
+    - PlasmamanSafe

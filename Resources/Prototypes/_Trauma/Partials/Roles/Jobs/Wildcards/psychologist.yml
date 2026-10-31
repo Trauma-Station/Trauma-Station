@@ -1,0 +1,9 @@
+- type: job
+  id: Psychologist
+  access:
+  - Psychologist
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipEducation
+    - SkillChipChemist

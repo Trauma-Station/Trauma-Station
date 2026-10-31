@@ -11,3 +11,9 @@
 
 - type: playTimeTracker
   id: JobDClass
+
+- type: playTimeTracker
+  id: JobBoxer
+
+- type: playTimeTracker
+  id: JobZookeeper

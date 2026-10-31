@@ -134,6 +134,7 @@
   conditions:
   - !type:BuyerJobCondition # We can't use BuyerDepartmentCondition here since Chef can also get this
     whitelist:
+    - Zookeeper
     - Scientist
     - ResearchDirector
     - Chef

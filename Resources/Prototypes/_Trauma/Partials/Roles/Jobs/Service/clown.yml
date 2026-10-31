@@ -1,0 +1,19 @@
+- type: job
+  id: Clown
+  access:
+  - Clown
+  specials:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipEducation
+    - SkillChipNonLethal
+    - SkillChipClown
+  - !type:ApplyStatusEffectSpecial
+    statusEffects:
+    - StatusEffectClumsyClown
+  - !type:AddComponentSpecial
+    components:
+    - !Remove type: PermanentStatusEffects
+    - type: SpeechFontOverride # ss13 parity
+      font: LDFComicSans
+    - type: Clown

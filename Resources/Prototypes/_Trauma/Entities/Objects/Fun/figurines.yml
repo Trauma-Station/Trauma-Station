@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseFigurine
+  id: ToyFigurinePrisoner
+  name: prisoner figure
+  description: A figurine depicting a prisoner. They look quite beat up.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Fun/figurines.rsi
+  - type: SpeakOnTrigger
+    pack: FigurinesPrisoner

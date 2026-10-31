@@ -1,0 +1,20 @@
+
+- type: entity
+  parent: BaseSignDirectional
+  id: SignDirectionalCourt
+  name: court room sign
+  description:  A direction sign, pointing out which way the court room is.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Wallmounts/signs.rsi
+    state: direction_court
+
+- type: entity
+  parent: BaseSign
+  id: SignDisposalProper
+  name: disposal sign
+  description: A sign indicating a disposal area.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Wallmounts/signs.rsi
+    state: disposals_proper
