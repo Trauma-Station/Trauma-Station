@@ -62,14 +62,17 @@ public sealed partial class DivineInterventionSystem : EntitySystem
     [SubscribeLocalEvent]
     public void OnCosmicAbilityAttempt(ref CosmicAbilityAttemptEvent args)
     {
-        if (!ShouldDeny(args.Target, out var denyingItem))
-            return;
+        if (ShouldDeny(args.Target, out var denyingItem)
+            && denyingItem != null
+            && Exists(denyingItem.Value))
+        {
+            args.Cancelled = true;
+            if (args.PlayEffects)
+                DenialEffects(denyingItem.Value, args.Target);
 
-        args.Cancelled = true;
-        if (args.PlayEffects && denyingItem is { } item)
-            DenialEffects(item, args.Target);
 
-        HandleSingleUse(denyingItem.Value);
+            HandleSingleUse(denyingItem.Value);
+        }
     }
 
     /// <summary>
