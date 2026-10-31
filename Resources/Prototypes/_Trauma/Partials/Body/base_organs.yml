@@ -1,0 +1,324 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: OrganBase
+  components:
+  - type: Damageable
+  - type: Injurable
+    damageContainer: Biological
+  - type: Destructible # applies to both organs and parts, if your heart gets 400 damage it should probably go splat anyway
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Piercing
+        damage: 600 # needs to be blown clean off by a shotgun
+      behaviors:
+      - !type:GibBehavior
+    - trigger: !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 400 # we'll assume the bones are all broken by now
+      behaviors:
+      - !type:GibBehavior
+
+- type: entity
+  id: OrganBaseOrganic
+  parent: !Clear
+  - OrganBaseFleshy
+  - SolutionFood
+  - SolutionTiny
+
+- type: entity
+  parent: !Clear
+  - OrganBase
+  - OrganBaseParent
+  - OrganBaseExternal
+  id: OrganBaseTorso
+  components:
+  - type: BodyPart
+    partType: Torso
+    slots:
+    # parts
+    - Head
+    - ArmLeft
+    - ArmRight
+    - LegLeft
+    - LegRight
+    # organs
+    - Appendix
+    - Lungs
+    - Heart
+    - Stomach
+    - Liver
+    - Kidneys
+  - type: BodyPartCavity
+    whitelist: # any tiny or small item, thats it
+      sizes:
+      - Tiny
+      - Small
+  - type: UnremoveableOrgan # root part lol
+  - type: Woundable
+    canRemove: false # root part
+    integrity: 200
+    integrityCap: 200
+    thresholds:
+      Minor: 180
+      Moderate: 120
+      Severe: 60
+      Critical: 30
+      Mangled: 0
+  - type: WoundableVisuals
+    bleedingOverlay: _Shitmed/Mobs/Effects/bleeding_damage.rsi
+  - type: VisualOrganMarkings
+    markingData:
+      layers:
+      - !Remove Tail # Moved to specific Tail part
+
+- type: entity
+  id: OrganBaseHead
+  components:
+  - type: BodyPart
+    partType: Head
+    slots:
+    - Brain
+    - Eyes
+    - Tongue
+    - Ears
+  - type: ChildOrgan
+    parents: [ Torso ]
+  - type: Bone
+    integrityCap: 100
+    boneIntegrity: 100
+  - type: Woundable
+    integrity: 200
+    integrityCap: 200
+    thresholds:
+      Minor: 180
+      Moderate: 120
+      Severe: 60
+      Critical: 30
+      Mangled: 0
+    damageOnAmputate: # This seemingly arbitrary spread is the result of the default head health (65) subtracted to 200 (death threshold).
+      types:
+        Bloodloss: 45
+        Asphyxiation: 45
+        Slash: 45
+    traumaDeductions:
+      Dismemberment: 0.8
+  - type: WoundableVisuals
+    bleedingOverlay: _Shitmed/Mobs/Effects/bleeding_damage.rsi
+  - type: BrainSplatterer
+  - type: BadFood
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 20
+      - ReagentId: GreyMatter
+        Quantity: 10
+  - type: VisualOrganMarkings
+    markingData:
+      layers:
+      - Face # Where the fuck else would it go
+
+- type: entity
+  parent: !Clear
+  - OrganBaseArm
+  - OrganBase
+  - OrganBaseParent
+  - OrganBaseChildExternal
+  id: OrganBaseArmLeft
+  components:
+  - type: BodyPart
+    symmetry: Left
+    slots:
+    - HandLeft
+
+- type: entity
+  parent: !Clear
+  - OrganBaseArm
+  - OrganBase
+  - OrganBaseParent
+  - OrganBaseChildExternal
+  id: OrganBaseArmRight
+  components:
+  - type: BodyPart
+    symmetry: Right
+    slots:
+    - HandRight
+
+- type: entity
+  parent: !Clear
+  - OrganBaseHand
+  - OrganBase
+  - OrganBaseChildExternal
+  id: OrganBaseHandLeft
+  components:
+  - type: BodyPart
+    symmetry: Left
+  - type: ChildOrgan
+    parents: [ ArmLeft ]
+
+- type: entity
+  parent: !Clear
+  - OrganBaseHand
+  - OrganBase
+  - OrganBaseChildExternal
+  id: OrganBaseHandRight
+  components:
+  - type: BodyPart
+    symmetry: Right
+  - type: ChildOrgan
+    parents: [ ArmRight ]
+
+- type: entity
+  parent: !Clear
+  - OrganBaseLeg
+  - OrganBase
+  - OrganBaseParent
+  - OrganBaseChildExternal
+  id: OrganBaseLegLeft
+  components:
+  - type: BodyPart
+    symmetry: Left
+    slots:
+    - FootLeft
+
+- type: entity
+  parent: !Clear
+  - OrganBaseLeg
+  - OrganBase
+  - OrganBaseParent
+  - OrganBaseChildExternal
+  id: OrganBaseLegRight
+  components:
+  - type: BodyPart
+    symmetry: Right
+    slots:
+    - FootRight
+
+- type: entity
+  parent: !Clear
+  - OrganBaseFoot
+  - OrganBase
+  - OrganBaseChildExternal
+  id: OrganBaseFootLeft
+  components:
+  - type: BodyPart
+    symmetry: Left
+  - type: ChildOrgan
+    parents: [ LegLeft ]
+
+- type: entity
+  parent: !Clear
+  - OrganBaseFoot
+  - OrganBase
+  - OrganBaseChildExternal
+  id: OrganBaseFootRight
+  components:
+  - type: BodyPart
+    symmetry: Right
+  - type: ChildOrgan
+    parents: [ LegRight ]
+
+- type: entity
+  parent: !Clear
+  - BaseKnowledgeContainer # Brain stores knowledge for mobs
+  - OrganBase
+  - OrganBaseChildInternal
+  id: OrganBaseBrain
+  components:
+  - type: InternalChildOrgan
+    intCap: 28
+    integrity: 28
+    integrityThresholds:
+      Normal: 28
+      Damaged: 16
+      Destroyed: 0
+  - type: ChildOrgan
+    parents: [ Head ]
+  - type: OrganChipContainer
+    limit: 3
+  - type: ContainerContainer
+    containers:
+      knowledge: !type:Container
+      organ_chips: !type:Container
+
+- type: entity
+  id: OrganBaseEyes
+  components:
+  - type: ChildOrgan
+    parents: [ Head ]
+  - type: Eyes
+  - type: InternalChildOrgan
+    # Synced with BlindableComponent values
+    intCap: 9
+    integrity: 9
+    integrityThresholds:
+      Normal: 9
+      Damaged: 6
+      Destroyed: 0
+
+- type: entity
+  id: OrganBaseTongue
+  components:
+  - type: ChildOrgan
+    parents: [ Head ]
+
+- type: entity
+  id: OrganBaseAppendix
+  components:
+  - type: ChildOrgan
+    parents: [ Torso ]
+
+- type: entity
+  id: OrganBaseEars
+  components:
+  - type: ChildOrgan
+    parents: [ Head ]
+  # TODO SHITMED: removing ears makes you permanently deaf
+
+- type: entity
+  id: OrganBaseLungs
+  components:
+  - type: ChildOrgan
+    parents: [ Torso ]
+
+- type: entity
+  id: OrganBaseHeart
+  components:
+  - type: ChildOrgan
+    parents: [ Torso ]
+  - type: Heart
+
+- type: entity
+  id: OrganBaseStomach
+  components:
+  - type: ChildOrgan
+    parents: [ Torso ]
+
+- type: entity
+  id: OrganBaseLiver
+  components:
+  - type: ChildOrgan
+    parents: [ Torso ]
+  - type: Liver
+
+- type: entity
+  id: OrganBaseKidneys
+  components:
+  - type: ChildOrgan
+    parents: [ Torso ]
+
+- type: entity
+  parent: OrganBase
+  id: OrganBaseParent
+  components:
+  # This is very likely fucked
+  - !Remove type: DetachableOrgan
+
+- type: entity
+  parent: OrganBaseExternal
+  id: OrganBaseChildExternal
+
+- type: entity
+  parent: OrganBase
+  id: OrganBaseChildInternal

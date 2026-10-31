@@ -136,9 +136,11 @@ public partial class TraumaSystem
 
         if (ent.Comp.IntegrityModifiers.Count > 0)
             ent.Comp.OrganIntegrity = FixedPoint2.Clamp(ent.Comp.IntegrityModifiers
-                .Aggregate(FixedPoint2.Zero, (current, modifier) => current + modifier.Value),
+                .Aggregate(ent.Comp.IntegrityCap, (current, modifier) => current - modifier.Value),
                 0,
                 ent.Comp.IntegrityCap);
+        else
+            ent.Comp.OrganIntegrity = ent.Comp.IntegrityCap;
 
         if (oldIntegrity == ent.Comp.OrganIntegrity)
             return;

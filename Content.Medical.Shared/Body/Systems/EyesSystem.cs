@@ -38,7 +38,7 @@ public sealed partial class EyesSystem : EntitySystem
             organ.OrganIntegrity <= 0) // eyes should be disabled for blinding
             return;
 
-        _blindable.SetEyeDamage((body, blindable), (int) organ.OrganIntegrity);
+        _blindable.SetEyeDamage((body, blindable), (int) (organ.IntegrityCap - organ.OrganIntegrity));
     }
 
     private void OnOrganEnabled(Entity<EyesComponent> ent, ref OrganEnabledEvent args)
