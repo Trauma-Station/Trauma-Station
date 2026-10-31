@@ -216,7 +216,7 @@
     - EternalDarkness
 
 - type: entity
-  parent: ActionToggleFov
+  parent: ActionFullBright
   id: ActionUmbralSight
   name: Umbral Sight
   description: Gain X-ray vision.
