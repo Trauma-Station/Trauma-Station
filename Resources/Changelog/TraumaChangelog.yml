@@ -16258,3 +16258,12 @@ Entries:
   id: 1756
   time: '2026-10-30T17:15:21.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5183
+- author: Aviu
+  changes:
+  - type: Remove
+    message: Removed mirror shield illusions.
+  - type: Tweak
+    message: Blood cult can convert crit people again.
+  id: 1757
+  time: '2026-10-31T11:52:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5218
