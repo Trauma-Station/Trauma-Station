@@ -20,8 +20,13 @@
       - type: StationEmergencyShuttle
         emergencyShuttlePath: /Maps/Shuttles/emergency_box.yml
       - type: StationBiome
-        biome: Snow
+        biome: Glacier
         mapLightColor: Orange
+      - type: StationEffects
+        effects:
+        - !type:ModifyStatusEffect
+          effectProto: WeatherSchedulerGlacier # Permanent snowstorms
+          time: null
       - type: StationJobs
         availableJobs:
           Captain: [ 1, 1 ]
