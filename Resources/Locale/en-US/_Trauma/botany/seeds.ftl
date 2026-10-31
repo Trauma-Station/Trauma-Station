@@ -10,3 +10,4 @@ seeds-magicmush-name = magic mushrooms
 seeds-synthmeat-name = synthmeat
 seeds-balloonmelon-name = melon balloon
 seeds-steelwheat-name = steel wheat
+seeds-plasticcap-name = plastic cap
