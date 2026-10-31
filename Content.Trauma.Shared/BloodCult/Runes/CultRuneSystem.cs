@@ -161,19 +161,27 @@ public sealed partial class CultRuneSystem : EntitySystem
         }
 
         var user = args.User;
-        if (_cult.GetRule(user) is not { } rule)
+        var pos = Transform(ent).Coordinates;
+
+        if (!TrySpawnRune(user, pos, rune))
             return;
 
         _audio.PlayPredicted(ent.Comp.EndDrawingSound, user, user);
-        var pos = Transform(ent).Coordinates;
+
+        PredictedDel(ent.Owner);
+    }
+
+    private bool TrySpawnRune(EntityUid user, EntityCoordinates pos, EntProtoId rune)
+    {
+        if (_cult.GetRule(user) is not { } rule)
+            return false;
         var uid = PredictedSpawnAtPosition(rune.Prototype, pos);
 
         var ev = new RunePlacedEvent(user, rune, rule);
         RaiseLocalEvent(uid, ref ev);
 
         _cult.SetCultRule(uid, rule);
-
-        PredictedDel(ent.Owner);
+        return true;
     }
 
     [SubscribeLocalEvent]

@@ -18,12 +18,8 @@ public sealed partial class SpawnCultRuneEntityEffectSystem : EntityEffectSystem
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<SpawnCultRune> args)
     {
-        if (_cult.GetRule(ent.Owner) is not { } rule)
-            return;
-
         var pos = ent.Comp.Coordinates.SnapToGrid(EntityManager);
-        var rune = PredictedSpawnAtPosition(args.Effect.Entity, pos);
 
-        _cult.SetCultRule(rune, rule);
+        _cult.TrySpawnRune(ent.Owner, pos, rune);
     }
 }

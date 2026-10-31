@@ -24,9 +24,8 @@ public sealed partial class ArtificerHealSystem : EntitySystem
 
         if (TryComp<ArtificerHealComponent>(args.User, out var artificer))
         {
-            _damageable.TryChangeDamage(ent.Owner, artificer.Damage, true, false);
-
-            _popup.PopupEntity($"You partially restore this construct to its intended form.", ent.Owner, args.User);
+            if (_damageable.TryChangeDamage(ent.Owner, artificer.Damage, true, false))
+                _popup.PopupEntity("You partially restore this construct to its intended form.", ent.Owner, args.User);
 
             args.Cancelled = true;
         }
