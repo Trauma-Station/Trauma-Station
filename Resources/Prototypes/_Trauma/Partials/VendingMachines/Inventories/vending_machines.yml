@@ -2,7 +2,24 @@
 
 - type: vendingMachineInventory
   id: MiningDrobeInventory
+  startingInventory: !Clear
+    ClothingBackpackCargo: 2
+    ClothingBackpackSatchelCargo: 2
+    ClothingBackpackDuffelCargo: 2
+    ClothingBackpackMessengerCargo: 2
+    ClothingUniformJumpsuitSalvageAlt: 3
+    ClothingUniformJumpskirtSalvageAlt: 3
+    ClothingUniformJumpsuitSalvageSpecialist: 3
+    ClothingShoesBootsSalvage: 3
+    ClothingHeadsetMining: 4
+    ClothingOuterWinterMiner: 2
   contrabandInventory:
+    ClothingBackpackSalvage: 2
+    ClothingBackpackSatchelSalvage: 2
+    ClothingBackpackDuffelSalvage: 2
+    ClothingBackpackMessengerSalvage: 2
+    ClothingUniformJumpsuitShaftMiner: 3
+    ClothingHandsGlovesColorBlack: 3
     FoodBoxDonkpocketCarp: 1
     ClothingUniformJumpsuitMilitarySalvageSpecialist: 1
     SalvageExpeditionsComputerCircuitboard: 0 # It is actually impossible to get this wihout changing variables and it only exists to taunt salvs

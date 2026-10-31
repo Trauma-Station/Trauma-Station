@@ -16,6 +16,8 @@
 
 - type: startingGear
   id: SalvageSpecialistGear
+  equipment:
+    jumpsuit: !Remove ClothingUniformJumpsuitSalvageSpecialist # Now uses loadout
   storage:
     back:
     - MiningVoucher

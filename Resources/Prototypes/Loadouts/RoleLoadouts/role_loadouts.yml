@@ -358,7 +358,9 @@
   id: JobSalvageSpecialist
   groups:
   - GroupTankHarness
+  - SalvageSpecialistJumpsuit # Trauma - Not using partials so that it doesn't go to the bottom of the
   - SalvageSpecialistNeck # Goobstation
+  - CargoTechnicianBackpack # Trauma
   - SalvageSpecialistBackpack
   - SalvageSpecialistOuterClothing
   - SalvageSpecialistShoes

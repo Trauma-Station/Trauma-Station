@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: loadoutGroup
+  id: ScientistOuterClothing
+  loadouts:
+  - !Remove RoboticistLabCoat
+  - !Remove RoboticistWintercoat
+
+- type: loadoutGroup
+  id: ScientistGloves
+  loadouts:
+  - !Remove RobohandsGloves
