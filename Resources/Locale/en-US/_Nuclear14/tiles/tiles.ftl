@@ -1,0 +1,15 @@
+tiles-dirt-indoors = dirt indoors
+tiles-dirt-new = dirt
+tiles-dark-grass-floor-indoors = dark grass floor indoors
+tiles-metal-grate = metal grate
+tiles-metal-ms13 = metal
+tiles-metal-green-ms13 = metal green
+tiles-metal-grey-dark-ms13 = metal grey dark
+tiles-metal-purple-ms13 = metal purple
+tiles-metal-teal-ms13 = metal teal
+tiles-metal-white-ms13 = metal white
+tiles-blue-long-ms13 = blue tile long
+tiles-wood-common-ms13 = wood common floor
+tiles-wood-fancy-ms13 = wood fancy floor
+tiles-wood-fancy-damaged-ms13 = wood fancy damaged floor
+tiles-wood-mapple-ms13 = wood mapple floor

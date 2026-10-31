@@ -23,15 +23,16 @@
   - Theatre
   - External
   - Cryogenics
+  - Clown
   special:
   - !type:OrganChipsSpecial
     chips:
     - SkillChipCombatEducation
     - SkillChipClown
     - SkillChipUnarmed
-  - !type:ApplyStatusEffectSpecial
-    statusEffects:
-    - StatusEffectClumsyClown
+  #- !type:ApplyStatusEffectSpecial
+  #  statusEffects:
+  #  - StatusEffectClumsyClown
   - !type:AddComponentSpecial
     components:
     - type: SleepEmitSound

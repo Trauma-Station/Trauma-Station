@@ -138,3 +138,61 @@
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/rancher_jumpsuit.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/rancher_jumpsuit.rsi
+
+# Wrestling gear
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitWrestlerCostumeGreen
+  name: plain wrestler leotard
+  description: When you wanta show off your muscles, but don't wanta show off too much skin.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/wrestlercostumegreen.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/wrestlercostumegreen.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitWrestlerCostumeRed
+  name: bold wrestler trunks
+  description: OOHHH YEAH, SNAP INTO A SUS JERKY, BROTHER!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/wrestlercostumered.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/wrestlercostumered.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitWrestlerCostumeYellow
+  name: striped wrestler leotard
+  description: Punching tiger, hidden dragon.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/wrestlercostumeyellow.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/wrestlercostumeyellow.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitWrestlerCostumeBlue
+  name: glamorous wrestler leotard
+  description: Power, Technique, and Beauty! Master the basics!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/wrestlercostumeblue.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/wrestlercostumeblue.rsi
+
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformJumpsuitSodaJerk
+  name: soda jerk jumpsuit
+  description: Now I'm a jerk, and now everyone loves me!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/sodajerk.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/sodajerk.rsi

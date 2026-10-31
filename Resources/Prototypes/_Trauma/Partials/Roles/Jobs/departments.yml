@@ -84,3 +84,6 @@
 - type: department
   id: Specific
   weight: 0
+  roles:
+  - Boxer
+  - Zookeeper

@@ -107,3 +107,25 @@
       duration:
         min: 10
         max: 10
+
+- type: entity
+  parent: BaseWeatherScheduler
+  id: WeatherSchedulerGlacier
+  components:
+  - type: WeatherScheduler
+    stages:
+    - weather: WeatherSnowfallLight
+      message: snow-weather-light
+      duration: # 10-15 mins
+        min: 600
+        max: 900
+    - weather: WeatherSnowfallMedium
+      message: snow-weather-medium
+      duration: # 5-7 mins
+        min: 300
+        max: 420
+    - weather: WeatherSnowfallHeavy
+      message: snow-weather-heavy
+      duration: # 6-8 mins
+        min: 360
+        max: 480

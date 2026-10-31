@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseWallLocker
+  id: WallLockerJanitor
+  name: janitor wall locker
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: jani
+    stateDoorClosed: jani_door
+    stateDoorOpen: jani_open
+  - type: AccessReader
+    access: [["Janitor"]]
+
+- type: entity
+  parent: WallClosetL3
+  id: WallClosetL3Janitor
+  name: level 3 biohazard wall closet
+  components:
+  - type: EntityStorageVisuals
+    stateBaseClosed: bio_jani
+    stateDoorClosed: bio_jani_door
+    stateDoorOpen: bio_jani_open

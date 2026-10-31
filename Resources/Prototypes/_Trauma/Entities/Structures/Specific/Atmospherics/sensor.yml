@@ -1,0 +1,51 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: AirSensor
+  id: AirSensorGray
+  suffix: Gray
+  components:
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: Structures/Specific/Atmospherics/sensor.rsi
+
+- type: entity
+  parent: AirSensorAssembly
+  id: AirSensorGrayAssembly
+  suffix: Gray
+  components:
+  - type: Sprite
+    drawdepth: FloorObjects
+    sprite: Structures/Specific/Atmospherics/sensor.rsi
+    layers:
+    - state: gsensor0
+
+
+# Put this in a burn chamber or something you don't want to have show up as dangerous
+- type: entity
+  parent: [ AirSensor, BaseUnsetSensor ]
+  id: AirSensorUnset
+
+- type: entity
+  parent: [ AirSensorGray, BaseUnsetSensor ]
+  id: AirSensorGrayUnset
+  suffix: Unset, Gray
+
+- type: entity
+  abstract: true
+  id: BaseUnsetSensor
+  suffix: Unset
+  components:
+  - type: AtmosMonitor
+    temperatureThresholdId: ignore
+    pressureThresholdId: ignore
+    gasThresholdPrototypes:
+      Oxygen: ignore
+      Nitrogen: ignore
+      CarbonDioxide: ignore
+      Plasma: ignore
+      Tritium: ignore
+      WaterVapor: ignore
+      Ammonia: ignore
+      NitrousOxide: ignore
+      Frezon: ignore

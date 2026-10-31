@@ -12,13 +12,6 @@
   - Maintenance
   extendedAccess:
   - Chemistry
-  # <Trauma>
-  special:
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEducation
-    - SkillChipChemist
-  # </Trauma>
 
 - type: startingGear
   id: PsychologistGear

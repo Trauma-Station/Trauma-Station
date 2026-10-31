@@ -7,3 +7,11 @@
   components:
   - type: AccessReader
     access: []
+
+- type: entity
+  parent: VendingMachineChefvend
+  id: VendingMachineChefvendUnlocked
+  suffix: Unlocked
+  components:
+  - type: AccessReader
+    access: []
