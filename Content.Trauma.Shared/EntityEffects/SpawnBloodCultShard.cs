@@ -16,11 +16,11 @@ public sealed partial class SpawnBloodCultShardEntityEffectSystem : EntityEffect
     [Dependency] private BloodCultSystem _cult = default!;
     [Dependency] private SoulShardSystem _shard = default!;
 
-    protected override void Effect(Entity<TransformComponent> entity, ref EntityEffectEvent<SpawnBloodCultShard> args)
+    protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<SpawnBloodCultShard> args)
     {
         if (_cult.GetRule(ent.Owner) is not { } rule)
             return;
 
-        _shard.SpawnShard(entity.Comp.Coordinates, rule);
+        _shard.SpawnShard(ent.Comp.Coordinates, rule);
     }
 }

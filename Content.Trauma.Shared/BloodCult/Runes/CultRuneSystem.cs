@@ -171,7 +171,7 @@ public sealed partial class CultRuneSystem : EntitySystem
         PredictedDel(ent.Owner);
     }
 
-    private bool TrySpawnRune(EntityUid user, EntityCoordinates pos, EntProtoId rune)
+    public bool TrySpawnRune(EntityUid user, EntityCoordinates pos, BloodRunePrototype rune)
     {
         if (_cult.GetRule(user) is not { } rule)
             return false;

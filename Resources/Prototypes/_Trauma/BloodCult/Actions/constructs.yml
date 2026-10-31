@@ -27,7 +27,7 @@
   - type: EffectAction
     effects:
     - !type:SpawnCultRune
-      entity: CultRuneRevive
+      rune: CultRuneRevive
 
 - type: entity
   parent: BaseActionBloodCultSpawnEnt
@@ -151,7 +151,7 @@
   - type: EffectAction
     effects:
     - !type:SpawnCultRune
-      entity: CultRuneTeleport
+      rune: CultRuneTeleport
 
 # juggernaut
 
@@ -168,7 +168,7 @@
   - type: EffectAction
     effects:
     - !type:SpawnCultRune
-      entity: CultRuneBarrier
+      rune: CultRuneBarrier
 
 - type: entity
   parent: BaseActionBloodCult
