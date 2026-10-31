@@ -17,7 +17,7 @@
 
 - type: reaction
   id: BluespaceSaltCleansingMultiver
-  reaction:
+  reactants:
     BluespaceSalt:
       amount: 3
     Multiver:
@@ -32,7 +32,7 @@
 
 - type: reaction
   id: BluespaceSaltCleansingGenecide
-  reaction:
+  reactants:
     BluespaceSalt:
       amount: 3
     Genecide:

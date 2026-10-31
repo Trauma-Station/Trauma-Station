@@ -26,12 +26,12 @@
 - type: entityEffect
   id: BluespaceSalt
   effects:
-  - effect: !type:Speak
+  - !type:Speak
     id: TourettesSwearing
   - !type:HealthChange
     damage:
       types:
-        Genetic: 1 # should be heart damage
+        Cellular: 1 # should be heart damage
   - !type:ModifyStatusEffect
     effectProto: StatusEffectSeeingRainbow
     type: Add

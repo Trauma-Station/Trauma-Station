@@ -213,7 +213,7 @@
 - type: reagent
   id: BluespaceSalt
   name: reagent-name-bluespace-salt
-  group: Botanical
+  group: Narcotics
   desc: reagent-desc-bluespace-salt
   physicalDesc: reagent-physical-desc-translucent
   flavor: bitter

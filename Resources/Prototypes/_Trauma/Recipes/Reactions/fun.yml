@@ -37,3 +37,15 @@
       amount: 1
   products:
     Crabon: 8
+
+- type: reaction
+  id: StabilizedBluespaceCrystal
+  minTemp: 447
+  reactants:
+    BluespaceMelange:
+      amount: 10
+    ChloralHydrate: # placeholder
+      amount: 1
+  effects:
+  - !type:SpawnEntity
+    entity: StabilizedBSCrystal

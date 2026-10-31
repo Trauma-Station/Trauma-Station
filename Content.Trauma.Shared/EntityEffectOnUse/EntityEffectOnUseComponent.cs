@@ -10,9 +10,9 @@ namespace Content.Trauma.Shared.EntityEffectOnUse;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class EntityEffectOnUseComponent : Component
 {
-    [DataField(required: true)]
-    public EntityEffect[] Effects = default!;
+    [DataField]
+    public EntityEffect[]? EffectsToUser;
 
     [DataField]
-    public bool ApplyToUser = false;
+    public EntityEffect[]? EffectsToUsed;
 }
