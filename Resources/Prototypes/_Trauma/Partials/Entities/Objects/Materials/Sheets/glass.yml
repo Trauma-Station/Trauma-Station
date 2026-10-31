@@ -23,11 +23,12 @@
   id: SheetGlass
   components:
   - type: EntityEffectOnUse
-    effects:
+    effectsToUser:
     - !type:PlaySoundEffect
         sound:
           collection: GlassBreak
     - !type:SpawnRandomEntities
       entity: ShardGlass
       number: 1
-  - type: ReduceStackSizeOnUse
+    # effectsToUsed:
+  - type: ReduceStackSizeOnUse # ToDo: remove and make it an effect

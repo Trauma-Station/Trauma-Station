@@ -1,0 +1,52 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseItem
+  id: StabilizedBSCrystal
+  name: stabilized bluespace crystal
+  components:
+  - type: Sprite
+    sprite: _Goobstation/Objects/Materials/materials.rsi
+    state: bluespace_crystal
+    layers:
+    - state: bluespace_crystal
+      map: ["base"]
+  - type: Appearance
+  - type: Item
+    heldPrefix: bluespace_crystal
+  - type: InitPos
+  - type: EntityEffectOnUse
+    effectsToUser:
+    - !type:PlaySoundEffect
+        sound:
+          path: /Audio/Effects/teleport_departure.ogg
+    - !type:Sparks
+    - !type:InitPosTeleport
+    - !type:PlaySoundEffect
+        sound:
+          path: /Audio/Effects/teleport_arrival.ogg
+    - !type:Sparks
+    effectsToUsed:
+    - !type:Delete
+      queued: true
+  # interferes with bluespace portals. does nothing inside containers etc for simplicity and not being annoying
+  - type: PortalTransitEffects
+    effects:
+    - !type:Explosion
+      explosionType: Cryo
+      maxIntensity: 3
+    - !type:Delete
+      queued: true
+    sourceEffects: &deleteEffects
+    - !type:Delete
+      conditions:
+      - !type:WhitelistCondition
+        blacklist:
+          components:
+          - PocketDimension # dont delete the dimension pot one
+    destEffects: *deleteEffects
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: BluespaceMelange
+        Quantity: 10

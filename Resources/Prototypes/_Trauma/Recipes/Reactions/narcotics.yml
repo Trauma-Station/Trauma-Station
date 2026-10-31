@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: reaction
+  id: BluespaceSalt
+  reactants:
+    BluespaceMelange:
+      amount: 1
+    Saltpeter:
+      amount: 1
+    MindbreakerToxin:
+      amount: 1
+    FluorosulfuricAcid:
+      amount: 1
+  products:
+    BluespaceSalt: 3
+    SulfuricAcid: 1
+
+- type: reaction
+  id: BluespaceSaltCleansingMultiver
+  reactants:
+    BluespaceSalt:
+      amount: 3
+    Multiver:
+      amount: 1
+  effects:
+  - !type:Explosion
+    explosionType: Default
+    maxIntensity: 0.4
+    intensityPerUnit: 0.2
+    intensitySlope: 1
+    maxTotalIntensity: 0.4
+
+- type: reaction
+  id: BluespaceSaltCleansingGenecide
+  reactants:
+    BluespaceSalt:
+      amount: 3
+    Genecide:
+      amount: 1
+  effects:
+  - !type:Explosion
+    explosionType: Default
+    maxIntensity: 0.4
+    intensityPerUnit: 0.2
+    intensitySlope: 1
+    maxTotalIntensity: 0.4

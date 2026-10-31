@@ -75,3 +75,12 @@ reagent-desc-burnite = A highly volatile flaming chemical that's typically only 
 
 reagent-name-unknown-reagent = unobtainium
 reagent-desc-unknown-reagent = An incredibly difficult chemical to come across, known to have very volatile effects whether it be spilled or put into plants
+
+reagent-name-citric-acid = citric acid
+reagent-desc-citric-acid = It occurs naturally in citrus fruits. Often used for rust removal.
+
+reagent-name-bluespace-melange = bluespace melange
+reagent-desc-bluespace-melange = A weak drug that creates impression of its user teleporting, when actually the reality itself is shifting around them.
+
+reagent-name-bluespace-salt = bluespace salt
+reagent-desc-bluespace-salt = A potent drug that creates impression of its user teleporting, when actually the reality itself is shifting around them.

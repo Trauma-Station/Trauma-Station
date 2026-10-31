@@ -209,3 +209,20 @@
       - !type:MovementSpeedModifier
         walkSpeedModifier: 1.05
         sprintSpeedModifier: 1.05
+
+- type: reagent
+  id: BluespaceSalt
+  name: reagent-name-bluespace-salt
+  group: Narcotics
+  desc: reagent-desc-bluespace-salt
+  physicalDesc: reagent-physical-desc-translucent
+  flavor: bitter
+  color: "#4b82d0"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:NestedEffect
+        proto: BluespaceSalt
+        conditions:
+        - !type:MobStateCondition
+          mobstate: Alive
