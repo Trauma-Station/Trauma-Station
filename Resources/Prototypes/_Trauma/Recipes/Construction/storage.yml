@@ -11,3 +11,8 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+  theory:
+    FurnitureKnowledge: 0
+    ElectronicsKnowledge: 0
+  practical:
+    MetalworkingKnowledge: 2
