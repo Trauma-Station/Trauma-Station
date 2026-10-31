@@ -15,9 +15,11 @@ using Content.Shared.FixedPoint;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Popups;
+using Content.Shared.Random.Helpers;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
 using Content.Trauma.Shared.BloodCult.Empower;
+using Robust.Shared.Timing;
 using System.Linq;
 
 namespace Content.Trauma.Shared.BloodCult.Spells;
@@ -26,6 +28,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
 {
     [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private DamageableSystem _damage = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
     [Dependency] private SharedCuffableSystem _cuffable = default!;
@@ -79,14 +82,6 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
             Dirty(ent);
     }
 
-    private int GetLimit(EntityUid user)
-    {
-        var limit = 1;
-        if (TryComp<BloodCultEmpoweredComponent>(user, out var empowered))
-            limit += empowered.ExtraSpells;
-        return limit;
-    }
-
     [SubscribeLocalEvent]
     private void OnSpellSelected(Entity<BloodCultSpellsComponent> ent, ref CultSpellSelectedMessage args)
     {
@@ -94,14 +89,6 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         var i = args.Index;
         if (i < 0 || i >= ent.Comp.AvailableActions.Count)
             return;
-
-        var id = ent.Comp.AvailableActions[i];
-        if (GetActiveSpell(ent, id) is { } action)
-        {
-            _popup.PopupEntity("You forget your current spell", user, user);
-            _actions.RemoveAction(user, action);
-            return;
-        }
 
         // can't do blood magic in a robot or pai
         if (!_bloodQuery.HasComp(user))
@@ -111,8 +98,26 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         }
 
         var time = ent.Comp.SpellCreationTime;
-        if (HasComp<BloodCultEmpoweredComponent>(user))
-            time *= 0.4;
+        var limit = ent.Comp.SpellsLimit;
+        if (TryComp<BloodCultEmpoweredComponent>(user, out var empowered))
+        {
+            time *= empowered.SpellCreationTimeMultiplier;
+            limit += empowered.ExtraSpells;
+        }
+
+        var id = ent.Comp.AvailableActions[i];
+        var count = ent.Comp.ActiveSpells.Count;
+        if (count >= limit)
+        {
+            if (GetActiveSpell(ent, id) is { } action)
+            {
+                _popup.PopupEntity("You forget your current spell", user, user);
+                _actions.RemoveAction(user, action);
+                return;
+            }
+
+            _popup.PopupEntity("You need to remove another spell first!", user, user, PopupType.MediumCaution);
+        }
 
         _popup.PopupEntity("You begin to carve unnatural symbols into your flesh!", user, user, PopupType.MediumCaution);
 
@@ -136,26 +141,13 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
             return;
 
         var user = args.User;
-        var count = ent.Comp.ActiveSpells.Count;
-        if (count >= GetLimit(args.User))
-        {
-            if (count != 1)
-            {
-                _popup.PopupEntity("You need to remove another spell first!", user, user, PopupType.MediumCaution);
-                return;
-            }
-
-            // just swap the spell if unempowered, where 1 is the limit
-            var old = ent.Comp.ActiveSpells.First();
-            _actions.RemoveAction(user, old);
-        }
 
         if (_actions.AddAction(user, args.ActionProtoId, container: ent) is not { } action)
             return;
 
-        var damage = FixedPoint2.New(20);
-        if (HasComp<BloodCultEmpoweredComponent>(user))
-            damage /= 5;
+        var damage = ent.Comp.SpellCreatingDamage;
+        if (TryComp<BloodCultEmpoweredComponent>(user, out var empowered))
+            damage *= empowered.SpellCreationDamageMultiplier;
 
         var damageSpec = new DamageSpecifier()
         {
@@ -164,7 +156,9 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
                 { Slash, damage }
             },
         };
-        _damage.ChangeDamage(user, damageSpec, targetPart: TargetBodyPart.Arms, canMiss: false);
+
+        var targetArm = ChooseTargetArm(user);
+        _damage.ChangeDamage(user, damageSpec, targetPart: targetArm, canMiss: false);
 
         _popup.PopupEntity($"Your wounds glow with power, you have prepared a {Name(action)} invocation!", user, user, PopupType.Medium);
         _actions.SetTemporary(action, true); // can't be temp in the prototype or AddAction will queue del it :D
@@ -225,6 +219,16 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         }
 
         return null;
+    }
+
+
+    public TargetBodyPart ChooseTargetArm(EntityUid uid)
+    {
+        var targetArm = TargetBodyPart.LeftArm;
+        if (SharedRandomExtensions.PredictedProb(_timing, .5f, GetNetEntity(uid)))
+            targetArm = TargetBodyPart.RightArm;
+
+        return targetArm;
     }
 
     #endregion

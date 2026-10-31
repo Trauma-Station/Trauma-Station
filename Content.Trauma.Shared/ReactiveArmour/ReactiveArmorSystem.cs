@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Robust.Shared.Timing;
-using Content.Shared.Inventory;
+using Content.Shared.Emp;
+using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
-using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.Inventory;
+using Content.Shared.Popups;
 using Content.Trauma.Common.Projectiles;
-using Content.Trauma.Shared.Projectiles;
+using Content.Trauma.Common.Weapons;
+using Content.Trauma.Shared.EntityEffects;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.ReactiveArmor;
 
@@ -13,28 +16,67 @@ public sealed partial class ReactiveArmorSystem : EntitySystem
 {
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
-
-    // there has to be a better way to do this then making 3 methods for differen types of attacks... also do we even need a methot for hitscans?
-    [SubscribeLocalEvent]
-    private void OnHitMele(EntityUid uid, ReactiveArmorComponent comp, InventoryRelayedEvent<AttackedEvent> args)
-    {
-        CheckForCooldown(uid, comp, args.Owner);
-    }
+    [Dependency] private SharedEntityConditionsSystem _conditions = default!;
+    [Dependency] private SharedPopupSystem _popup = default!;
+    [Dependency] private EffectDataSystem _data = default!;
 
     [SubscribeLocalEvent]
-    private void OnHitProjectile(EntityUid uid, ReactiveArmorComponent comp, InventoryRelayedEvent<GotHitByProjectileEvent> args)
+    private void OnHitMele(Entity<ReactiveArmorComponent> ent, ref InventoryRelayedEvent<BeforeHarmfulActionEvent> args)
     {
-        CheckForCooldown(uid, comp, args.Owner);
-    }
-
-    private void CheckForCooldown(EntityUid uid, ReactiveArmorComponent comp, EntityUid target)
-    {
-        if (_timing.CurTime < comp.LastActivated + comp.ActivationDelay)
+        if (args.Args.Cancelled || !args.Args.CanRiposte || args.Args.Type != HarmfulActionType.Harm)
             return;
 
-        comp.LastActivated = _timing.CurTime;
-        Dirty(uid, comp);
+        if (TryBlock(ent, args.Args.Target, args.Args.User))
+            args.Args.Cancelled = true;
+    }
 
-        _effects.ApplyEffects(target, comp.Effects);
+    [SubscribeLocalEvent]
+    private void OnHitProjectile(Entity<ReactiveArmorComponent> ent, ref InventoryRelayedEvent<GotHitByProjectileEvent> args)
+    {
+        if (args.Args.Cancelled)
+            return;
+
+        if (TryBlock(ent, args.Owner, args.Args.Shooter))
+            args.Args.Cancelled = true;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnEmpPulse(Entity<ReactiveArmorComponent> ent, ref EmpPulseEvent args)
+    {
+        ent.Comp.LastEmpd = _timing.CurTime;
+        Dirty(ent.Owner, ent.Comp);
+
+        var userUid = Transform(ent.Owner).ParentUid;
+        _popup.PopupEntity(Loc.GetString(ent.Comp.EmpMessage), userUid, userUid);
+    }
+
+    private bool TryBlock(Entity<ReactiveArmorComponent> ent, EntityUid target, EntityUid? user)
+    {
+        var now = _timing.CurTime;
+
+        if (now < ent.Comp.LastActivated + ent.Comp.ActivationDelay)
+            return false;
+
+        if (!_conditions.TryConditions(target, ent.Comp.TargetConditions))
+            return false;
+
+        ent.Comp.LastActivated = now;
+        Dirty(ent.Owner, ent.Comp);
+
+        var effects = ent.Comp.Effects;
+        var result = true;
+
+        if (now < ent.Comp.LastEmpd + ent.Comp.EmpDuration)
+        {
+            effects = ent.Comp.EmpEffects;
+            result = false;
+            if (!ent.Comp.ApplyEmpEffectOnUser)
+                target = ent.Owner;
+        }
+
+        _data.SetTool(target, ent.Owner);
+        _effects.ApplyEffects(target, effects, user: user);
+        _data.ClearTool(target);
+        return result;
     }
 }

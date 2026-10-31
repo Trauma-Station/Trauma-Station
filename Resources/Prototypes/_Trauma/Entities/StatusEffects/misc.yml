@@ -9,8 +9,11 @@
   id: StatusEffectMutedGhoul
 
 - type: entity
-  parent: StatusEffectMuted
+  # Not parenting from StatusEffectMuted because it only applies for mobs
+  parent: StatusEffectBase
   id: StatusEffectMutedJaunt
+  components:
+  - type: MutedStatusEffect
 
 - type: entity
   parent: StatusEffectMuted

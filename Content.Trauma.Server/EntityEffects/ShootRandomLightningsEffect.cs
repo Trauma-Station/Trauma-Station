@@ -2,9 +2,9 @@
 
 using Content.Server.Lightning;
 using Content.Shared.EntityEffects;
-using Content.Trauma.Shared.EntityEffects.Effects;
+using Content.Trauma.Shared.EntityEffects;
 
-namespace Content.Trauma.Server.EntityEffects.Effects;
+namespace Content.Trauma.Server.EntityEffects;
 
 /// <summary>
 /// Effect that shoot lightnings(like from tesla) from the target entity
