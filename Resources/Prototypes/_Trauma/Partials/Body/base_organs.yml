@@ -21,13 +21,15 @@
 
 - type: entity
   id: OrganBaseOrganic
-  parent:
-  - !Remove OrganBase
-  - !Index:0 OrganBaseFleshy
+  parent: !Clear
+  - OrganBaseFleshy
+  - SolutionFood
+  - SolutionTiny
 
 - type: entity
-  parent:
-  - !Remove OrganBaseChildExternal
+  parent: !Clear
+  - OrganBase
+  - OrganBaseParent
   - OrganBaseExternal
   id: OrganBaseTorso
   components:
@@ -118,8 +120,11 @@
       - Face # Where the fuck else would it go
 
 - type: entity
-  parent:
-  - !Index:0 OrganBaseArm
+  parent: !Clear
+  - OrganBaseArm
+  - OrganBase
+  - OrganBaseParent
+  - OrganBaseChildExternal
   id: OrganBaseArmLeft
   components:
   - type: BodyPart
@@ -128,8 +133,11 @@
     - HandLeft
 
 - type: entity
-  parent:
-  - !Index:0 OrganBaseArm
+  parent: !Clear
+  - OrganBaseArm
+  - OrganBase
+  - OrganBaseParent
+  - OrganBaseChildExternal
   id: OrganBaseArmRight
   components:
   - type: BodyPart
@@ -138,8 +146,10 @@
     - HandRight
 
 - type: entity
-  parent:
-  - !Index:0 OrganBaseHand
+  parent: !Clear
+  - OrganBaseHand
+  - OrganBase
+  - OrganBaseChildExternal
   id: OrganBaseHandLeft
   components:
   - type: BodyPart
@@ -148,8 +158,10 @@
     parents: [ ArmLeft ]
 
 - type: entity
-  parent:
-  - !Index:0 OrganBaseHand
+  parent: !Clear
+  - OrganBaseHand
+  - OrganBase
+  - OrganBaseChildExternal
   id: OrganBaseHandRight
   components:
   - type: BodyPart
@@ -158,8 +170,11 @@
     parents: [ ArmRight ]
 
 - type: entity
-  parent:
-  - !Index:0 OrganBaseLeg
+  parent: !Clear
+  - OrganBaseLeg
+  - OrganBase
+  - OrganBaseParent
+  - OrganBaseChildExternal
   id: OrganBaseLegLeft
   components:
   - type: BodyPart
@@ -168,8 +183,11 @@
     - FootLeft
 
 - type: entity
-  parent:
-  - !Index:0 OrganBaseLeg
+  parent: !Clear
+  - OrganBaseLeg
+  - OrganBase
+  - OrganBaseParent
+  - OrganBaseChildExternal
   id: OrganBaseLegRight
   components:
   - type: BodyPart
@@ -178,8 +196,10 @@
     - FootRight
 
 - type: entity
-  parent:
-  - !Index:0 OrganBaseFoot
+  parent: !Clear
+  - OrganBaseFoot
+  - OrganBase
+  - OrganBaseChildExternal
   id: OrganBaseFootLeft
   components:
   - type: BodyPart
@@ -188,8 +208,10 @@
     parents: [ LegLeft ]
 
 - type: entity
-  parent:
-  - !Index:0 OrganBaseFoot
+  parent: !Clear
+  - OrganBaseFoot
+  - OrganBase
+  - OrganBaseChildExternal
   id: OrganBaseFootRight
   components:
   - type: BodyPart
@@ -198,8 +220,10 @@
     parents: [ LegRight ]
 
 - type: entity
-  parent:
-  - !Index:0 BaseKnowledgeContainer # Brain stores knowledge for mobs
+  parent: !Clear
+  - BaseKnowledgeContainer # Brain stores knowledge for mobs
+  - OrganBase
+  - OrganBaseChildInternal
   id: OrganBaseBrain
   components:
   - type: InternalChildOrgan
