@@ -67,7 +67,8 @@
     bleedingOverlay: _Shitmed/Mobs/Effects/bleeding_damage.rsi
   - type: VisualOrganMarkings
     markingData:
-    - !Remove Tail # Moved to specific Tail part
+      layers:
+      - !Remove Tail # Moved to specific Tail part
 
 - type: entity
   id: OrganBaseHead
