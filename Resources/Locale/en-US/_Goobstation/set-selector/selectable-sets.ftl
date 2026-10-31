@@ -10,7 +10,7 @@ selectable-set-thief-breacher-name = Breacher Kit
 selectable-set-thief-breacher-description =
     What's that sound? A lil' C4 knockin' at their door.
     No obstacle can stop you!
-    Includes: Two C4, a multitool, remote signaller, jaws of life,
+    Includes: Two C4, a multitool, an advanced remote signaller, jaws of death,
     advanced welder, engineering goggles, and insulated gloves.
 
 selectable-set-thief-chameleon-name = Chameleon Kit
@@ -24,7 +24,7 @@ selectable-set-thief-syndie-name = Syndie Kit
 selectable-set-thief-syndie-description =
     Trinkets from a disavowed past, or stolen from a careless agent?
     You've made some connections. Whiskey, echo...
-    Includes: An Emag, Access Breaker, Interdyne cigs, a Syndicate codeword,
+    Includes: An Emag, Syndicate Soap, Interdyne cigs, a Syndicate codeword,
     a Radio Jammer, a novelty lighter box and some strange red crystals.
 
 selectable-set-thief-sleeper-name = Sleeper Kit
@@ -32,14 +32,15 @@ selectable-set-thief-sleeper-description =
     Until we close our eyes for good, use your illegal prescriptions
     to keep others asleep.
     Includes: Sleepy nitrous oxide tank, two nocturine bottles,
-    and a hypopen.
+    a syringe pistol, an empty syringe, and a hypopen.
 
 selectable-set-thief-communicator-name = Communicator Kit
 selectable-set-thief-communicator-description =
     Money is power, and secrets are money. Use your silver tongue
     and wealth to subvert the station.
     Includes: Master key for all station channels, a CyberSun pen,
-    voice chameleon mask, and 20k spesos inside a briefcase.
+    voice chameleon mask, a binary implanter,
+    and 20k spesos inside a briefcase.
 
 selectable-set-thief-smuggler-name = Smuggler Kit
 selectable-set-thief-smuggler-description =

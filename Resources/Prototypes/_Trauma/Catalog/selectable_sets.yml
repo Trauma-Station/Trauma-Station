@@ -87,3 +87,51 @@
   - EncryptionKeySyndie
   - ClothingMaskGasVoiceChameleon
   - ClothingHeadsetChameleon
+
+# Thief
+
+- type: selectableSet
+  id: ThiefChemistSet
+  name: selectable-set-thief-chemist-name
+  description: selectable-set-thief-chemist-description
+  sprite:
+    sprite: _Goobstation/Objects/Weapons/Guns/Cannons/dart_gun.rsi
+    state: icon
+  content:
+  - VestineChemistryVial
+  - VestineChemistryVial
+  - VestineChemistryVial
+  - DartGun
+  - BluespaceBeaker
+  - BluespaceChemistryVial
+  - BluespaceChemistryVial
+
+- type: selectableSet
+  id: ThiefEscapistSet
+  name: selectable-set-thief-escapist-name
+  description: selectable-set-thief-escapist-description
+  sprite:
+    sprite: /Textures/_White/Objects/Devices/experimentalsyndicateteleporter.rsi
+    state: icon
+  content:
+  - ExperimentalSyndicateTeleporter
+  - SmokeImplanter
+  - FreedomImplanter
+  - ClothingShoesChameleonNoSlips
+  - ClothingEyesThermalVisionGoggles
+
+- type: selectableSet
+  id: ThiefTinkererSet
+  name: selectable-set-thief-tinkerer-name
+  description: selectable-set-thief-tinkerer-description
+  sprite:
+    sprite: _Trauma/Objects/Tools/syndie_access_configurator.rsi
+    state: icon
+  content:
+  - AccessConfiguratorSyndicate
+  - DoorRemoteSyndicate
+  - AgentIDCard
+  - ClothingHandsGlovesColorYellow
+  - RCD
+  - CameraBug
+  - SkillChipDatabase
