@@ -65,7 +65,7 @@ public sealed partial class CultRuneTeleportSystem : EntitySystem
         if (!HasComp<CultRuneTeleportComponent>(dest))
             return;
 
-        var targets = _cult.GetTargetsNearRune(ent, ent.Comp.TeleportGatherRange);
+        var targets = _cult.GetMobsNearRune(ent, ent.Comp.TeleportGatherRange);
         var coords = Transform(dest).Coordinates;
 
         foreach (var target in targets)

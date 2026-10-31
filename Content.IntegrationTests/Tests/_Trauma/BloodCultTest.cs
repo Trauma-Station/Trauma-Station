@@ -11,6 +11,7 @@ using Content.Shared.Mind;
 using Content.Shared.Roles;
 using Content.Shared.Station.Components;
 using Content.Trauma.Shared.BloodCult;
+using Content.Trauma.Shared.BloodCult.Constructs.SoulShard;
 using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Runes;
 using Robust.Shared.Map;
@@ -28,6 +29,7 @@ public sealed class BloodCultTest : InteractionTest
     private static readonly EntProtoId TestStation = "TestStation";
     private static readonly EntProtoId Urist = "MobHuman";
     private static readonly ProtoId<AntagSpecifierPrototype> CultistSpecifier = "BloodCultist";
+    private static readonly ProtoId<AntagSpecifierPrototype> ConstructSpecifier = "BloodCultConstruct";
 
     protected override string PlayerPrototype => Urist; // needs bloodstream and stuff
 
@@ -173,8 +175,12 @@ public sealed class BloodCultTest : InteractionTest
 
             Assert.That(rule.TargetSacrificed, "Gamerule didn't recgonize the target being sacrificedn");
 
-            Assert.That(_antag.GetAntagIdentifiers(antag).Count(), Is.EqualTo(3), "Sacrifice should not have converted");
+            Assert.That(_antag.GetAntagIdentifiers(antag).Count() - _antag.GetAssignedAntagCount(antag, ConstructSpecifier), Is.EqualTo(3), "Sacrifice should not have converted");
 
+            var shard = GetFirst<SoulShardComponent>();
+
+            SDel(_mind.GetMind(shard));
+            SDel(shard);
             foreach (var mob in mobs)
             {
                 SDel(_mind.GetMind(mob));

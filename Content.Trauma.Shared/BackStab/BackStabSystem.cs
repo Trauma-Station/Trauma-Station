@@ -8,7 +8,7 @@ using Content.Shared.Standing;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
-using Robust.Shared.Maths;
+using System.Linq;
 
 namespace Content.Trauma.Shared.BackStab;
 
@@ -25,20 +25,13 @@ public sealed partial class BackStabSystem : EntitySystem
 
     public static ProtoId<DamageTypePrototype> Slash = "Slash";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<BackStabComponent, MeleeHitEvent>(HandleHit);
-    }
-
-    private void HandleHit(Entity<BackStabComponent> ent, ref MeleeHitEvent args)
+    [SubscribeLocalEvent]
+    private void OnMeleeHit(Entity<BackStabComponent> ent, ref MeleeHitEvent args)
     {
         if (ent.Comp.DamageMultiplier < 1f || !args.IsHit || args.HitEntities.Count != 1)
             return;
 
-        var target = args.HitEntities[0];
-
+        var target = args.HitEntities.First();
         if (!TryBackstab(target, args.User, ent.Comp.Tolerance))
             return;
 

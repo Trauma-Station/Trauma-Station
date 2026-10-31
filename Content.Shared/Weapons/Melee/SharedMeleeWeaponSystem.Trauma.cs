@@ -45,11 +45,11 @@ public abstract partial class SharedMeleeWeaponSystem
         Subs.CVar(_cfg, GoobCVars.ShoveSpeed, x => _shoveSpeed = x, true);
     }
 
-    public bool AttemptHeavyAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, List<EntityUid> targets, EntityCoordinates coordinates)
+    public bool AttemptHeavyAttack(EntityUid user, EntityUid weaponUid, MeleeWeaponComponent weapon, HashSet<EntityUid> targets, EntityCoordinates coordinates)
         => AttemptAttack(user,
             weaponUid,
             weapon,
-            new HeavyAttackEvent(GetNetEntity(weaponUid), GetNetEntityList(targets), GetNetCoordinates(coordinates)),
+            new HeavyAttackEvent(GetNetEntity(weaponUid), GetNetEntitySet(targets), GetNetCoordinates(coordinates)),
             null);
 
     private float CalculateShoveStaminaDamage(EntityUid disarmer, EntityUid disarmed)

@@ -11,6 +11,7 @@ using Content.Shared.Tag;
 using Content.Shared.Weapons.Melee.Events;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
+using System.Linq;
 
 namespace Content.Medical.Shared.Abductor;
 
@@ -24,20 +25,12 @@ public abstract partial class SharedAbductorSystem
 
     private static readonly ProtoId<TagPrototype> Abductor = "Abductor";
 
-    private void InitializeGizmo()
-    {
-        SubscribeLocalEvent<AbductorGizmoComponent, AfterInteractEvent>(OnGizmoInteract);
-        SubscribeLocalEvent<AbductorGizmoComponent, MeleeHitEvent>(OnGizmoHitInteract);
-
-        SubscribeLocalEvent<AbductorGizmoComponent, AbductorGizmoMarkDoAfterEvent>(OnGizmoDoAfter);
-        SubscribeLocalEvent<AbductorGizmoComponent, ActivateInWorldEvent>(OnGizmoToggleMode);
-    }
-
+    [SubscribeLocalEvent]
     private void OnGizmoHitInteract(Entity<AbductorGizmoComponent> ent, ref MeleeHitEvent args)
     {
         if (args.HitEntities.Count != 1)
             return;
-        var target = args.HitEntities[0];
+        var target = args.HitEntities.First();
         if (!HasComp<SurgeryTargetComponent>(target))
             return;
         if (ent.Comp.BrainwashMode)
@@ -48,6 +41,7 @@ public abstract partial class SharedAbductorSystem
         GizmoUse(ent, target, args.User);
     }
 
+    [SubscribeLocalEvent]
     private void OnGizmoInteract(Entity<AbductorGizmoComponent> ent, ref AfterInteractEvent args)
     {
         if (args.Handled || args.Target is not {} target)
@@ -114,6 +108,7 @@ public abstract partial class SharedAbductorSystem
 
     }
 
+    [SubscribeLocalEvent]
     private void OnGizmoDoAfter(Entity<AbductorGizmoComponent> ent, ref AbductorGizmoMarkDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled || args.Target is not {} target)
@@ -127,6 +122,7 @@ public abstract partial class SharedAbductorSystem
         args.Handled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnGizmoToggleMode(Entity<AbductorGizmoComponent> ent, ref ActivateInWorldEvent args)
     {
         if (args.Handled)

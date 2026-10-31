@@ -6,6 +6,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Server.Abductor;
 using Content.Trauma.Shared.Heretic.Components.Side;
+using System.Linq;
 
 namespace Content.Trauma.Server.Heretic.Systems;
 
@@ -20,7 +21,7 @@ public sealed partial class EnvyKnifeSystem : EntitySystem
         if (!args.IsHit || args.HitEntities.Count == 0)
             return;
 
-        var victim = args.HitEntities[0];
+        var victim = args.HitEntities.First();
         if (victim == args.User || !HasComp<HumanoidProfileComponent>(args.User) ||
             HasComp<AbductorDisguiseStateComponent>(victim) ||
             !TryComp(victim, out HumanoidProfileComponent? profileComp) ||
