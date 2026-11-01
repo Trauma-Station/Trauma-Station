@@ -4,40 +4,24 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Goobstation.Common.Medical;
 using Content.Medical.Common.Body;
-using Content.Medical.Common.CCVar;
 using Content.Medical.Common.Damage;
 using Content.Medical.Common.DoAfter;
 using Content.Medical.Common.Healing;
-using Content.Medical.Common.Targeting;
-using Content.Medical.Common.Traumas;
 using Content.Medical.Common.Wounds;
 using Content.Medical.Shared.Body;
-using Content.Medical.Shared.Targeting;
 using Content.Medical.Shared.Traumas;
-using Content.Medical.Shared.Wounds;
 using Content.Shared.Body;
-using Content.Shared.Coordinates;
-using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
-using Content.Shared.Gibbing;
-using Content.Shared.Humanoid;
-using Content.Shared.Inventory;
-using Content.Shared.Popups;
 using Content.Shared.Random.Helpers;
-using Content.Shared.Standing;
-using Robust.Shared.Audio;
 using Robust.Shared.Containers;
-using Robust.Shared.Random;
 
 namespace Content.Medical.Shared.Wounds;
 
 public sealed partial class WoundSystem
 {
     [Dependency] private BodyStatusSystem _bodyStatus = default!;
-    [Dependency] private GibbingSystem _gibbing = default!;
 
     private const string WoundContainerId = "Wounds";
     public static readonly ProtoId<DamageTypePrototype> Blunt = "Blunt";
@@ -154,15 +138,19 @@ public sealed partial class WoundSystem
             return;
 
         // Create or update wounds based on damage changes
+        // If damage is positive create wounds based on damage changed to prevent wounds being created even if no damage being dealt
+        // If we TRIED to heal, use unmodified damage dict so it actually heals wounds even if there is no damage
+        var dmg = args.Damage.AnyPositive() ? args.ModifiedDamage : args.Damage;
+
         var part = ent.AsNullable();
-        foreach (var (damageType, damageValue) in args.ModifiedDamage.DamageDict)
+        foreach (var (damageType, damageValue) in dmg.DamageDict)
         {
             if (damageValue == 0)
                 continue; // Only create wounds for damage or healing
 
             if (damageValue < 0)
             {
-                TryHealWoundsOfType(part, -damageValue, damageType, out var healed, ignoreBlockers: args.IgnoreBlockers);
+                TryHealWoundsOfType(part, -damageValue, damageType, out _, ignoreBlockers: args.IgnoreBlockers);
             }
             else
             {

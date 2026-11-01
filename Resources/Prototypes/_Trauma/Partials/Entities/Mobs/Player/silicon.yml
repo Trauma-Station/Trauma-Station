@@ -58,6 +58,7 @@
     containers:
       borg_module:
       - BorgModuleStickyGrenadeLauncher
+      - BorgModuleOperative
 
 - type: entity
   id: PlayerBorgSyndicateSaboteurBattery

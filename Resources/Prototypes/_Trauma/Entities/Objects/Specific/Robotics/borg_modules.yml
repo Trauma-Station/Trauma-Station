@@ -86,6 +86,8 @@
           - PillCanister
     - item: ChemistryEmptyBottle01
       hand: *small_container_hand
+    - item: ChemistryEmptyBottle01
+      hand: *small_container_hand
   - type: BorgModuleIcon
     icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: dart }
 
