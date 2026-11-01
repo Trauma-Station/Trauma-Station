@@ -19,10 +19,9 @@
 - type: entity
   id: FoodLemon
   components:
-  - !Remove type: Solution
   - type: Solution
     solution:
-      reagents:
+      reagents: !Clear
       - ReagentId: Nutriment
         Quantity: 5
       - ReagentId: Vitamin
@@ -35,10 +34,9 @@
 - type: entity
   id: FoodLime
   components:
-  - !Remove type: Solution
   - type: Solution
     solution:
-      reagents:
+      reagents: !Clear
       - ReagentId: Nutriment
         Quantity: 5
       - ReagentId: Vitamin
@@ -51,10 +49,9 @@
 - type: entity
   id: FoodOrange
   components:
-  - !Remove type: Solution
   - type: Solution
     solution:
-      reagents:
+      reagents: !Clear
       - ReagentId: Nutriment
         Quantity: 5
       - ReagentId: Vitamin

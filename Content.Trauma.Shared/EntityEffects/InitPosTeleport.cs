@@ -4,24 +4,51 @@ using Content.Trauma.Shared.InitPos;
 using Content.Trauma.Shared.Teleportation.Systems;
 using Content.Shared.EntityEffects;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Hands.Components;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Teleportation;
 
-public sealed partial class InitPosTeleport : EntityEffectBase<InitPosTeleport>;
+/// <summary>
+/// Teleports user of an item with InitPosComponent to items initial position.
+/// </summary>
+public sealed partial class InitPosTeleport : EntityEffectBase<InitPosTeleport>
+{
+    /// <summary>
+    /// Spawns one way portal.
+    /// </summary>
+    [DataField]
+    public EntProtoId SpawnPortal;
+}
 
-public sealed partial class InitPosTeleportEffectSystem : EntityEffectSystem<TransformComponent, InitPosTeleport>
+public sealed partial class InitPosTeleportEffectSystem : EntityEffectSystem<HandsComponent, InitPosTeleport>
 {
     [Dependency] private TeleportSystem _teleport = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
 
-    protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<InitPosTeleport> args)
+    protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<InitPosTeleport> args)
     {
-        Log.Info($"start");
-        var handEntity = _hands.GetActiveItemOrSelf(ent.Owner);
-        Log.Info($"{handEntity}");
-        if (!TryComp<InitPosComponent>(handEntity, out var pos))
+        var handEntity = _hands.GetActiveItemOrSelf((ent.Owner, ent.Comp));
+
+        if (!TryComp<InitPosComponent>(handEntity, out var destination))
             return;
-        Log.Info($"{pos}");
-        _teleport.Teleport(ent.Owner, pos.Coordinates, user: args.User); // how the fuck can i relay the event???
+
+        var oldPos = Transform(ent).Coordinates;
+
+        _teleport.Teleport(ent.Owner, destination.Coordinates, user: args.User);
+
+        if (args.Effect.SpawnPortal != "")
+        {
+            var portal = PredictedSpawnAtPosition(args.Effect.SpawnPortal, oldPos);
+
+            if (!TryComp<OneWayPortalComponent>(portal, out var comp))
+            {
+                PredictedDel(portal);
+                return;
+            }
+
+            comp.Destination = destination.Coordinates;
+            Dirty(portal, comp);
+        }
     }
 }

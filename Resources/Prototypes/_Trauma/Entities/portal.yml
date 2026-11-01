@@ -1,0 +1,48 @@
+- type: entity
+  id: OneWayPortal
+  name: bluespace rift
+  description: Looks unstable.
+  components:
+  - type: Transform
+    anchored: True
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+  - type: Sprite
+    sprite: /Textures/Effects/portal.rsi
+    state: portal-artifact
+    color: "#273189"
+  - type: Fixtures
+    fixtures:
+      portalFixture:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.48,0.25,0.48"
+        mask:
+        - FullTileMask
+        - GhostImpassable
+        layer:
+        - WallLayer
+        hard: false
+  - type: PointLight
+    color: "#273189"
+    radius: 3
+    energy: 1
+    netsync: false
+  - type: AmbientSound
+    range: 6
+    volume: -3
+    sound:
+      path: /Audio/Ambience/anomaly_scary.ogg
+  - type: OneWayPortal
+  - type: TimedDespawn
+    lifetime: 1
+
+- type: entity
+  parent: OneWayPortal
+  id: OneWayPortal3Seconds
+  name: bluespace rift
+  components:
+  - type: TimedDespawn
+    lifetime: 3

@@ -23,6 +23,7 @@
           path: /Audio/Effects/teleport_departure.ogg
     - !type:Sparks
     - !type:InitPosTeleport
+      spawnPortal: OneWayPortal3Seconds
     - !type:PlaySoundEffect
         sound:
           path: /Audio/Effects/teleport_arrival.ogg

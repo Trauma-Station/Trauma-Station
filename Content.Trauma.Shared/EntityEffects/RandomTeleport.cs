@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Teleportation.Systems;
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.EntityEffects;
+using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -19,6 +21,12 @@ public sealed partial class RandomTeleport : EntityEffectBase<RandomTeleport>
     /// </summary>
     [DataField]
     public int TeleportAttempts = 10;
+
+    /// <summary>
+    /// Spawns one way portal.
+    /// </summary>
+    [DataField]
+    public EntProtoId SpawnPortal;
 }
 
 public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<TransformComponent, RandomTeleport>
@@ -27,6 +35,21 @@ public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<Tran
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<RandomTeleport> args)
     {
-        _teleport.RandomTeleport(ent, args.Effect.Radius, args.Effect.TeleportAttempts, user: args.User);
+        var newPos = _teleport.RandomTeleport(ent, args.Effect.Radius, args.Effect.TeleportAttempts, user: args.User);
+
+        var oldPos = Transform(ent).Coordinates; // no, it can't just use `ent.Comp.Coordinates` because it needs to store old, unpdatable position
+
+        if (args.Effect.SpawnPortal != "")
+        {
+            var portal = PredictedSpawnAtPosition(args.Effect.SpawnPortal, oldPos);
+
+            if (!TryComp<OneWayPortalComponent>(portal, out var comp))
+            {
+                PredictedDel(portal);
+                return;
+            }
+            comp.Destination = newPos;
+            Dirty(portal, comp);
+        }
     }
 }

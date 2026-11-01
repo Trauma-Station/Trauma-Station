@@ -43,7 +43,7 @@ public sealed partial class RandomTeleportSystem : EntitySystem
             _audio.PlayPredicted(rtp.Comp.DepartureSound, oldCoords, predicted ? user : null);
         _sparks.DoSparks(oldCoords, user, source: rtp); // different source entity from below so they use different rng seeds
 
-        finalWorldPos = RandomTeleport(target, rtp.Comp.Radius, rtp.Comp.TeleportAttempts, rtp.Comp.ForceSafeTeleport, rtp.Comp.TeleportPulled);
+        finalWorldPos = RandomTeleport(target, rtp.Comp.Radius, rtp.Comp.TeleportAttempts, rtp.Comp.ForceSafeTeleport, rtp.Comp.TeleportPulled).Position;
 
         var newCoords = Transform(target).Coordinates;
         if (sound)
@@ -62,7 +62,7 @@ public sealed partial class RandomTeleportSystem : EntitySystem
         return rand.NextAngle().ToVec() * distance;
     }
 
-    public Vector2 RandomTeleport(EntityUid uid, MinMax radius, int triesBase = 10, bool forceSafe = true, bool pulled = true, EntityUid? user = null, bool predicted = true)
+    public EntityCoordinates RandomTeleport(EntityUid uid, MinMax radius, int triesBase = 10, bool forceSafe = true, bool pulled = true, EntityUid? user = null, bool predicted = true)
     {
         var seed = SharedRandomExtensions.HashCodeCombine((int) _timing.CurTick.Value, GetNetEntity(uid).Id);
         IRobustRandom rand = new RobustRandom();
@@ -124,6 +124,6 @@ public sealed partial class RandomTeleportSystem : EntitySystem
 
         var newPos = _xform.ToCoordinates(targetCoords);
         _teleport.Teleport(uid, newPos, user, predicted, pulled);
-        return newPos.Position;
+        return newPos;
     }
 }

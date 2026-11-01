@@ -44,8 +44,8 @@
   reactants:
     BluespaceMelange:
       amount: 30
-    ChloralHydrate: # placeholder
-      amount: 1
+    ChloralHydrate: # ToDo: create an acrual recipie. While i'am thinking about it you can look at the rest of the code, or, maybe sujest your own.
+      amount: 10000
   effects:
   - !type:SpawnEntity
     entity: StabilizedBSCrystal
