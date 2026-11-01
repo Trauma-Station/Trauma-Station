@@ -1,10 +1,8 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Actions;
 using Content.Shared.Actions.Events;
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Actions;
 
