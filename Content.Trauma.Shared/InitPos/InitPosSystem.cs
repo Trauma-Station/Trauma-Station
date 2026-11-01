@@ -9,16 +9,8 @@ public sealed partial class InitPosSystem : EntitySystem
     [Dependency] private SharedTransformSystem _transform = default!;
 
     [SubscribeLocalEvent]
-    private void OnStartup(Entity<InitPosComponent> ent, ref MapInitEvent args)
+    private void Startup(Entity<InitPosComponent> ent, ref ComponentStartup args)
     {
-        var coords = _transform.GetMapCoordinates(ent.Owner); // holy shitcode
-        Log.Info($"{coords}");
-        Log.Info($"{coords.MapId}");
-        Log.Info($"{coords.Position}");
-        var cd = _transform.ToCoordinates(coords);
-        Log.Info($"{cd}");
-        Log.Info($"{cd.Position}");
-
-        ent.Comp.Coordinates = cd;
+        ent.Comp.Coordinates = _transform.GetMoverCoordinates(ent.Owner);
     }
 }

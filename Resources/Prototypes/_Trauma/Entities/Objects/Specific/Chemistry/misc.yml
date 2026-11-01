@@ -28,8 +28,7 @@
           path: /Audio/Effects/teleport_arrival.ogg
     - !type:Sparks
     effectsToUsed:
-    - !type:Delete
-      queued: true
+    - !type:DeleteEntity
   # interferes with bluespace portals. does nothing inside containers etc for simplicity and not being annoying
   - type: PortalTransitEffects
     effects:

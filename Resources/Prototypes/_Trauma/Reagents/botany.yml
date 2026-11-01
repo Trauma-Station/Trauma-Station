@@ -144,20 +144,20 @@
     Digestion:
       effects:
       - !type:NestedEffect
-        proto: BluespaceMelange
+        proto: BluespaceMelange # should cause stomac damage
         conditions:
         - !type:MobStateCondition
           mobstate: Alive
         - !type:ReagentCondition
           reagent: BluespaceMelange
-          min: 6
+          min: 15 # 1.5 crystal worth
     Bloodstream:
       effects:
       - !type:NestedEffect
-        proto: BluespaceMelange
+        proto: BluespaceMelange # should cause liver damage
         conditions:
         - !type:MobStateCondition
           mobstate: Alive
         - !type:ReagentCondition
           reagent: BluespaceMelange
-          min: 6
+          min: 15

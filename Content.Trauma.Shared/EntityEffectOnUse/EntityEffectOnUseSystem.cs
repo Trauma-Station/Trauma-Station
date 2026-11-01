@@ -12,10 +12,15 @@ public sealed partial class EntityEffectOnUseSystem : EntitySystem
     [SubscribeLocalEvent]
     private void EffectsOnUse(Entity<EntityEffectOnUseComponent> ent, ref UseInHandEvent args)
     {
+        if (args.Handled)
+            return;
+
         if (ent.Comp.EffectsToUser != null)
             _effects.ApplyEffects(args.User, ent.Comp.EffectsToUser);
 
-        if (ent.Comp.EffectsToUsed != null)
-            _effects.ApplyEffects(args.User, ent.Comp.EffectsToUsed);
+        if (ent.Comp.EffectsToUsed != null) // whe cant we have nice things?
+            _effects.ApplyEffects(ent.Owner, ent.Comp.EffectsToUsed);
+
+        args.Handled = true;
     }
 }
