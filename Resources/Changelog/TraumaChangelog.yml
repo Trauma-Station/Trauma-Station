@@ -16258,3 +16258,81 @@ Entries:
   id: 1756
   time: '2026-10-30T17:15:21.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5183
+- author: Aviu
+  changes:
+  - type: Remove
+    message: Removed mirror shield illusions.
+  - type: Tweak
+    message: Blood cult can convert crit people again.
+  id: 1757
+  time: '2026-10-31T11:52:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5218
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Syndicate Assault Cyborg now gets an operative cyborg module
+  - type: Tweak
+    message: Syndicate Medical Cyborg now gets a weapon cyborg module
+  - type: Tweak
+    message: >-
+      Syndicate Medical Cyborg now gets an extra empty bottle in the dartgun
+      module
+  - type: Tweak
+    message: Lowered the Syndicate Medical Cyborg's price 300 -> 150
+  - type: Tweak
+    message: Lowered the Syndicate Saboteur Cyborg's price 300 -> 150
+  - type: Tweak
+    message: Lowered the Syndicate Assault Cyborg's price 375 -> 250
+  - type: Fix
+    message: Fixed the Syndicate Medical Cyborg not being sterile
+  - type: Fix
+    message: >-
+      Fixed the Syndicate Medical Cyborg not being able to do surgery over
+      clothing
+  id: 1758
+  time: '2026-11-01T01:36:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5223
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fix unhealable bone/organ damage.
+  - type: Fix
+    message: Wounds now properly heal even if total damage is 0.
+  - type: Fix
+    message: Fix trying to heal organs on one part healing organs on all parts.
+  - type: Fix
+    message: Fix organ damage being calculated wrong.
+  - type: Remove
+    message: Heat and shock damage no longer damages organs.
+  id: 1759
+  time: '2026-11-01T01:41:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5211
+- author: Jacob-House
+  changes:
+  - type: Remove
+    message: Blackout station trait can no longer roll.
+  id: 1760
+  time: '2026-11-01T13:39:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5220
+- author: yglop
+  changes:
+  - type: Add
+    message: Actions for blood cult constructs.
+  - type: Add
+    message: >-
+      Blood cult Artificer can heal some damage to other constructs by attacking
+      them.
+  - type: Tweak
+    message: Blood cult Wraith is now faster.
+  - type: Tweak
+    message: Blood cult constructs can maneuver in space.
+  id: 1761
+  time: '2026-11-01T15:13:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5181
+- author: LordZirconium
+  changes:
+  - type: Add
+    message: Every station now has a reactor.
+  id: 1762
+  time: '2026-11-01T20:09:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5174

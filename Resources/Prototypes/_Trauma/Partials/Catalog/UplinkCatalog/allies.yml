@@ -1,0 +1,90 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: listing
+  id: UplinkHoloparaKit
+  cost:
+    Telecrystal: 50
+
+- type: listing
+  id: UplinkReinforcementRadioSyndicate
+  cost:
+    Telecrystal: 55
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      components:
+      - SpyRule
+      tags:
+      - ContravendUplink
+
+- type: listing
+  id: UplinkReinforcementRadioSyndicateNukeops
+  cost:
+    Telecrystal: 125
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - ContravendUplink
+
+- type: listing
+  id: UplinkReinforcementRadioSyndicateCyborgAssault
+  name: uplink-reinforcement-radio-cyborg-assault-name-trauma
+  cost:
+    Telecrystal: 250
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - ContravendUplink
+    whitelist:
+      components:
+      - SpyRule
+
+- type: listing
+  id: UplinkReinforcementRadioSyndicateAncestor
+  name: uplink-reinforcement-radio-ancestor-name-trauma
+  cost:
+    Telecrystal: 25
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - ContravendUplink
+
+- type: listing
+  id: UplinkReinforcementRadioSyndicateAncestorNukeops
+  name: uplink-reinforcement-radio-ancestor-name-trauma
+  cost:
+    Telecrystal: 40
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - ContravendUplink
+
+- type: listing
+  id: UplinkCarpDehydrated
+  cost:
+    Telecrystal: 5
+
+- type: listing
+  id: UplinkMobCatMicrobomb
+  cost:
+    Telecrystal: 25
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - ContravendUplink
+
+- type: listing
+  id: UplinkSyndicatePersonalAI
+  name: uplink-syndicate-pai-name-trauma
+  cost:
+    Telecrystal: 5
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - ContravendUplink
