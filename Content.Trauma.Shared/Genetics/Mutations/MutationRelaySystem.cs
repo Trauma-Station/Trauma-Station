@@ -8,6 +8,7 @@ using Content.Shared.Speech;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Movement;
 using Content.Trauma.Common.Speech;
+using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Viewcone;
 
 namespace Content.Trauma.Shared.Genetics.Mutations;

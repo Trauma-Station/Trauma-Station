@@ -164,6 +164,7 @@
     fireRate: 2
     soundGunshot:
       path: /Audio/_Goobstation/Wizard/wand_teleport.ogg
+  - type: CultItem
 
 - type: entity
   parent: [ BaseItem, BaseBloodContraband ]
@@ -216,6 +217,7 @@
     color: Red
   - type: UseDelay
     delay: 0.5
+  - type: CultItem
 
 - type: entity
   parent: [ BaseItem, BaseBloodContraband ]
@@ -294,3 +296,4 @@
     radius: 2
     energy: 1
     color: Red
+  - type: CultItem

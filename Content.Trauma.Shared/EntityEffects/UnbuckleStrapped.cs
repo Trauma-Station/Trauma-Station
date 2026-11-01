@@ -4,7 +4,7 @@ using Content.Shared.Buckle;
 using Content.Shared.Buckle.Components;
 using Content.Shared.EntityEffects;
 
-namespace Content.Trauma.Shared.EntityEffects.Effects;
+namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
 /// Unbuckles everything buckled to the target entity.

@@ -103,12 +103,15 @@
   - type: ContainerContainer
     containers:
       actions: !type:Container
-  - type: Hands
+  - type: ComplexInteraction
+  - type: StatusIcon
+    bounds: -0.5,-0.5,0.5,0.5
   - type: IsDeadIC
   - type: ShowHealthBars
     damageContainers:
     - Biological
     - Inorganic
+    - ManifestedSpirit
   - type: ShowHealthIcons
     damageContainers:
     - Biological

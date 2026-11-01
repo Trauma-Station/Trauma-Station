@@ -3,6 +3,7 @@
 using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 using Content.Shared.Weapons.Melee.Events;
+using System.Linq;
 
 namespace Content.Trauma.Shared.Weapons.Melee;
 
@@ -11,13 +12,7 @@ public sealed partial class EffectsOnMeleeHitSystem : EntitySystem
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
     [Dependency] private SharedEntityConditionsSystem _conditions = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<EffectsOnMeleeHitComponent, MeleeHitEvent>(OnHit);
-    }
-
+    [SubscribeLocalEvent]
     private void OnHit(Entity<EffectsOnMeleeHitComponent> ent, ref MeleeHitEvent args)
     {
         if (TerminatingOrDeleted(ent))
@@ -36,7 +31,7 @@ public sealed partial class EffectsOnMeleeHitSystem : EntitySystem
 
         if (!ent.Comp.EffectForEveryHit)
         {
-            var target = args.HitEntities[0];
+            var target = args.HitEntities.First();
             if (ent.Comp.TargetConditions is { } targetConds && !_conditions.TryConditions(target, targetConds, user))
                 return;
 

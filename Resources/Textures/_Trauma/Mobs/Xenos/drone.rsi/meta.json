@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from cmss13 at https://github.com/cmss13-devs/cmss13/blob/7d5979ff7085049a4f61cc46e7804e63f97d8143/icons/mob/xenos/castes/tier_1/drone.dmi",
+  "size": {
+    "x": 48,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "xenomorph",
+      "directions": 4
+    },
+    {
+      "name": "xenomorph_dead"
+    },
+    {
+      "name": "xenomorph_unconscious"
+    }
+  ]
+}

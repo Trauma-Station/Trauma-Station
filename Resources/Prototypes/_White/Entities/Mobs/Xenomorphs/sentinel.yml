@@ -1,14 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphSentinel, BaseXenoTailed ]
+  parent: [ BaseMobXenomorphAdult, AppearanceXenomorphSentinel]
   id: BaseMobXenomorphSentinel
   name: xenomorph sentinel
   description: A specialized specimen designed to hit targets at a distance. Particularly dangerous in narrow corridors and confined spaces.
   abstract: true
   components:
   - type: Sprite
-    sprite: _White/Mobs/Aliens/Xenomorphs/sentinel.rsi
+    sprite: _Trauma/Mobs/Xenos/sentinel.rsi
     layers:
     - map: ["enum.DamageStateVisualLayers.Base"]
       state: xenomorph

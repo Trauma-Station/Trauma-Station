@@ -133,7 +133,7 @@ public sealed partial class MultihitSystem : EntitySystem
                 weapon.Range,
                 xform.MapID,
                 user)
-            .ToList();
+            .ToHashSet();
 
         var inCombat = _combatMode.IsInCombatMode(user);
         if (!inCombat)
@@ -166,7 +166,7 @@ public sealed partial class MultihitSystem : EntitySystem
             if (hitEntities.Count == 0)
                 return;
 
-            if (hitEntities[0] == user)
+            if (hitEntities.First() == user)
                 return;
         }
 
@@ -225,7 +225,7 @@ public sealed partial class MultihitSystem : EntitySystem
                 AttackTime = curTime + delay,
                 // Damage multiplier gets lower the longer your attack chain is
                 DamageMultiplier = multiplier < 1f ? MathF.Pow(multiplier, attackIndex) : multiplier,
-                Target = hitEntities.Count == 0 ? null : GetNetEntity(hitEntities[0]),
+                Target = hitEntities.Count == 0 ? null : GetNetEntity(hitEntities.First()),
                 IsHeavyAttack = direction != null,
             };
 

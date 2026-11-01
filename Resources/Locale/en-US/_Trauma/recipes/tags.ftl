@@ -70,6 +70,5 @@ construction-graph-tag-magic-ink-catalyst = an enchanted catalyst
 construction-graph-tag-bible = any holy book
 construction-graph-tag-bottle = an empty bottle
 
-# Reactive armour
-construction-graph-tag-bluespace-core = bluespace anomaly core
-construction-graph-tag-electric-core = electricity anomaly core
+# Anomaly cores
+construction-graph-tag-any-core = any anomaly core

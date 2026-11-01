@@ -30,6 +30,11 @@
     damageCoefficient: 0.5
   - type: TemperatureProtection
     coefficient: 0.001
+  - type: ModifyDelayedKnockdown
+    delayDelta: 3
+    knockdownTimeDelta: -3
+  - type: StaminaResistance
+    damageCoefficient: 0.5
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHelmetCultArmor
@@ -61,7 +66,7 @@
   parent: [ ClothingOuterRobesCult, BaseBloodContraband ]
   id: ClothingOuterRobesCultTrue
   name: flagellant's robe
-  description: Blood-soaked robes infused with dark magic; allows the user to move at inhuman speeds, but at the cost of increased damage.
+  description: Blood-soaked robes infused with dark magic; allows the user to move at inhuman speeds.
   components:
   - type: Sprite
     sprite: _Trauma/BloodCult/Entities/Clothes/Outer/cult_robe.rsi
@@ -72,14 +77,6 @@
   - type: ClothingSpeedModifier
     walkModifier: 1.25
     sprintModifier: 1.25
-  - type: Armor
-    modifiers: &flagellant_modifiers
-      coefficients:
-        Blunt: 1.4
-        Slash: 1.4
-        Piercing: 1.4
-        Ballistic: 1.4
-        Heat: 1.4
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHatHoodCultHoodTrue
@@ -103,10 +100,6 @@
   - type: ClothingSpeedModifier
     walkModifier: 1.25
     sprintModifier: 1.25
-  - type: Armor
-    coverage:
-    - Head
-    modifiers: *flagellant_modifiers
 
 - type: entity
   parent: ClothingEyesBase
