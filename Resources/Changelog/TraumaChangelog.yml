@@ -16307,3 +16307,10 @@ Entries:
   id: 1759
   time: '2026-11-01T01:41:01.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5211
+- author: Jacob-House
+  changes:
+  - type: Remove
+    message: Blackout station trait can no longer roll.
+  id: 1760
+  time: '2026-11-01T13:39:59.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5220
