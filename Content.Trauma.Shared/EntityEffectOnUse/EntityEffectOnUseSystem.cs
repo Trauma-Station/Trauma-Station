@@ -18,7 +18,7 @@ public sealed partial class EntityEffectOnUseSystem : EntitySystem
         if (ent.Comp.EffectsToUser != null)
             _effects.ApplyEffects(args.User, ent.Comp.EffectsToUser);
 
-        if (ent.Comp.EffectsToUsed != null) // whe cant we have nice things?
+        if (ent.Comp.EffectsToUsed != null)
             _effects.ApplyEffects(ent.Owner, ent.Comp.EffectsToUsed);
 
         args.Handled = true;
