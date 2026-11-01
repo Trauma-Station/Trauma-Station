@@ -15,11 +15,11 @@ public sealed partial class ReduceStackSize : EntityEffectBase<ReduceStackSize>
     public int Amount = 1;
 }
 
-public sealed partial class ReduceStackSizeSystem : EntityEffectSystem<PhysicalComposition, ReduceStackSize>
+public sealed partial class ReduceStackSizeSystem : EntityEffectSystem<PhysicalCompositionComponent, ReduceStackSize>
 {
     [Dependency] private SharedStackSystem _stack = default!;
 
-    protected override void Effect(Entity<PhysicalComposition> ent, ref EntityEffectEvent<ReduceStackSize> args)
+    protected override void Effect(Entity<PhysicalCompositionComponent> ent, ref EntityEffectEvent<ReduceStackSize> args)
     {
         if (TryComp<StackComponent>(ent, out var stack))
         {

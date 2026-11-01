@@ -13,6 +13,7 @@
       map: ["base"]
   - type: Appearance
   - type: Item
+    size: Tiny
     heldPrefix: bluespace_crystal
   - type: InitPos
   - type: EntityEffectOnUse
@@ -49,4 +50,4 @@
     solution:
       reagents:
       - ReagentId: BluespaceMelange
-        Quantity: 10
+        Quantity: 30

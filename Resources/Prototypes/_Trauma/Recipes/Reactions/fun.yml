@@ -43,7 +43,7 @@
   minTemp: 447
   reactants:
     BluespaceMelange:
-      amount: 10
+      amount: 30
     ChloralHydrate: # placeholder
       amount: 1
   effects:
