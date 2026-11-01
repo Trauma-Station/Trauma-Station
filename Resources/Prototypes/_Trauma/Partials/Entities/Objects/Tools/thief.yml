@@ -3,10 +3,10 @@
 - type: entity
   parent: [ BaseItem, BaseMinorContraband, BaseSetSelector ]
   id: ToolboxThief
-  components: !Clear
-  - type: Sprite
-    sprite: Objects/Tools/Toolboxes/toolbox_thief.rsi
-    state: icon
+  components:
+  - !Remove type: ActivatableUI
+  - !Remove type: UserInterface
+  - !Remove type: ThiefUndeterminedBackpack
   - type: SetSelector
     possibleSets:
     - ThiefAnatomySet
@@ -23,12 +23,8 @@
 
 - type: entity
   id: SatchelThief
-  components: !Clear
-  - type: Sprite
-    sprite: Clothing/Back/Satchels/smuggler.rsi
-    state: folded
-  - type: Item
-    storedRotation: 90
+  components:
+  - !Remove type: ThiefUndeterminedBackpack
   - type: SetSelector
     spawnedStoragePrototype: ClothingBackpackSatchelSmugglerUnanchored
     spawnedStorageContainer: storagebase
