@@ -13,7 +13,6 @@
   - CosmicCult
   - XenomorphsInfestationRoundstart
   - SpyRuleRoundstart
-  - BloodCult
 
 - type: gamePreset
   id: AllerAtOnce
@@ -31,7 +30,6 @@
   - CosmicCult
   - XenomorphsInfestationRoundstart
   - SpyRuleRoundstart
-  - BloodCult
 
 - type: gamePreset
   id: Secret
