@@ -1,0 +1,37 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.EntityEffects;
+using Content.Shared.Materials;
+using Content.Shared.Stacks;
+
+namespace Content.Trauma.Shared.EntityEffects;
+
+/// <summary>
+/// Reduses stack count by set amount, if there just one item in stuck left - deletes it
+/// </summary>
+public sealed partial class ReduceStackSize : EntityEffectBase<ReduceStackSize>
+{
+    [DataField]
+    public int Amount = 1;
+}
+
+public sealed partial class ReduceStackSizeSystem : EntityEffectSystem<PhysicalComposition, ReduceStackSize>
+{
+    [Dependency] private SharedStackSystem _stack = default!;
+
+    protected override void Effect(Entity<PhysicalComposition> ent, ref EntityEffectEvent<ReduceStackSize> args)
+    {
+        if (TryComp<StackComponent>(ent, out var stack))
+        {
+            var amount = args.Effect.Amount;
+            if (stack.Count < args.Effect.Amount)
+                amount = stack.Count;
+
+            _stack.ReduceCount((ent.Owner, stack), amount);
+            return;
+        }
+
+        // It's consumed on use and it's not a stack so delete it
+        PredictedQueueDel(ent);
+    }
+}
