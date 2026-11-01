@@ -40,12 +40,16 @@
 
 - type: reaction
   id: StabilizedBluespaceCrystal
-  minTemp: 447
+  minTemp: 623
   reactants:
     BluespaceMelange:
       amount: 30
-    ChloralHydrate: # ToDo: create an acrual recipie. While i'am thinking about it you can look at the rest of the code, or, maybe sujest your own.
-      amount: 10000
+    SodiumCarbonate:
+      amount: 5
+    PhosphoricAcid:
+      amount: 30
+  products:
+    PhosphoricAcid: 20
   effects:
   - !type:SpawnEntity
     entity: StabilizedBSCrystal

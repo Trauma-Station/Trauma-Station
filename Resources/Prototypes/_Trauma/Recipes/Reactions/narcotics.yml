@@ -4,8 +4,8 @@
   id: BluespaceSalt
   reactants:
     BluespaceMelange:
-      amount: 1
-    Saltpeter:
+      amount: 2
+    Diphenylmethylamine:
       amount: 1
     MindbreakerToxin:
       amount: 1
