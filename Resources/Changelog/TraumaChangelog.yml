@@ -16314,3 +16314,18 @@ Entries:
   id: 1760
   time: '2026-11-01T13:39:59.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5220
+- author: yglop
+  changes:
+  - type: Add
+    message: Actions for blood cult constructs.
+  - type: Add
+    message: >-
+      Blood cult Artificer can heal some damage to other constructs by attacking
+      them.
+  - type: Tweak
+    message: Blood cult Wraith is now faster.
+  - type: Tweak
+    message: Blood cult constructs can maneuver in space.
+  id: 1761
+  time: '2026-11-01T15:13:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5181
