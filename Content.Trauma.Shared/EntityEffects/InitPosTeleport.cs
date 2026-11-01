@@ -18,7 +18,7 @@ public sealed partial class InitPosTeleport : EntityEffectBase<InitPosTeleport>
     /// Spawns one way portal.
     /// </summary>
     [DataField]
-    public EntProtoId SpawnPortal;
+    public EntProtoId SpawnPortal = "";
 }
 
 public sealed partial class InitPosTeleportEffectSystem : EntityEffectSystem<HandsComponent, InitPosTeleport>

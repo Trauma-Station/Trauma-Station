@@ -26,7 +26,7 @@ public sealed partial class RandomTeleport : EntityEffectBase<RandomTeleport>
     /// Spawns one way portal.
     /// </summary>
     [DataField]
-    public EntProtoId SpawnPortal;
+    public EntProtoId SpawnPortal = "";
 }
 
 public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<TransformComponent, RandomTeleport>
