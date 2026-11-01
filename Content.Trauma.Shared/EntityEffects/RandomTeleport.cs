@@ -26,7 +26,7 @@ public sealed partial class RandomTeleport : EntityEffectBase<RandomTeleport>
     /// Spawns one way portal.
     /// </summary>
     [DataField]
-    public EntProtoId SpawnPortal = "";
+    public EntProtoId? SpawnPortal = default;
 }
 
 public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<TransformComponent, RandomTeleport>
@@ -39,7 +39,7 @@ public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<Tran
 
         var oldPos = Transform(ent).Coordinates; // no, it can't just use `ent.Comp.Coordinates` because it needs to store old, unpdatable position
 
-        if (args.Effect.SpawnPortal != "")
+        if (args.Effect.SpawnPortal != default)
         {
             var portal = PredictedSpawnAtPosition(args.Effect.SpawnPortal, oldPos);
 

@@ -11,7 +11,6 @@
     effectProto: StatusEffectSeeingRainbow
     type: Add
     time: 5
-    immediate: true
   - !type:PlaySoundEffect
       sound:
         path: /Audio/Effects/teleport_departure.ogg

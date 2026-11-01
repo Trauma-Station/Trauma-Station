@@ -18,7 +18,7 @@ public sealed partial class InitPosTeleport : EntityEffectBase<InitPosTeleport>
     /// Spawns one way portal.
     /// </summary>
     [DataField]
-    public EntProtoId SpawnPortal = "";
+    public EntProtoId? SpawnPortal = default;
 }
 
 public sealed partial class InitPosTeleportEffectSystem : EntityEffectSystem<HandsComponent, InitPosTeleport>
@@ -37,7 +37,7 @@ public sealed partial class InitPosTeleportEffectSystem : EntityEffectSystem<Han
 
         _teleport.Teleport(ent.Owner, destination.Coordinates, user: args.User);
 
-        if (args.Effect.SpawnPortal != "")
+        if (args.Effect.SpawnPortal != default)
         {
             var portal = PredictedSpawnAtPosition(args.Effect.SpawnPortal, oldPos);
 
