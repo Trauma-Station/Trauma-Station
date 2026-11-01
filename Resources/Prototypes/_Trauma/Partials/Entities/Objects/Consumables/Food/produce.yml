@@ -51,6 +51,7 @@
 
 - type: entity
   id: DeathNettle
+  parent: !Clear [ProduceBase, BaseMajorContraband, DeathNettleDurability]
   components:
   - type: Item
     shape:
@@ -241,9 +242,8 @@
 - type: entity
   id: FoodWorldPeas
   components:
-  - !Remove type: Solution
   - type: Solution
-    solution:
+    solution: !Clear
       reagents:
       - ReagentId: Happiness
         Quantity: 5

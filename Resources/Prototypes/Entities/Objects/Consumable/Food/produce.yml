@@ -262,7 +262,7 @@
     grindableSolutionName: food
 
 - type: entity
-  parent: [ ProduceBase, BaseMajorContraband, DeathNettleDurability ] # Trauma - added DeathNettleDurability
+  parent: [ ProduceBase, BaseMajorContraband ]
   id: DeathNettle
   name: death nettle
   description: This nettle's out for blood.
