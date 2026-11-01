@@ -1,0 +1,14 @@
+{
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from TG station at https://github.com/tgstation/tgstation/blob/0a32812982bfeaa7cf7b0094c09ec49fd82de91c/icons/mob/actions/actions_cult.dmi",
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "cult_fist"
+        }
+    ]
+}
