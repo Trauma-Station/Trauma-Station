@@ -70,7 +70,6 @@ public sealed partial class DivineInterventionSystem : EntitySystem
             if (args.PlayEffects)
                 DenialEffects(denyingItem.Value, args.Target);
 
-
             HandleSingleUse(denyingItem.Value);
         }
     }
