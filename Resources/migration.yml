@@ -498,8 +498,8 @@ WashingMachineFilledClothes: null
 # WeaponShotgunKammererNonLethal: null
 # WindoorSecureMailLocked: null
 # WindoorSecureParamedicLocked: null
-# SpawnPointMailCarrier: null
 # </Trauma>
+SpawnPointMailCarrier: null
 HoloprojectorEngineering: null
 ClothingOuterWinterCoatPlaid: null
 ClothingOuterWinterCoatLong: null
