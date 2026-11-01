@@ -181,7 +181,7 @@
 
 # Service
 - type: entity
-  parent: AirlockBoxerLocked
+  parent: AirlockServiceGlassLocked
   id: AirlockBoxerGlassLocked
   suffix: Boxer, Locked
   components:
@@ -225,7 +225,7 @@
       board: [ DoorElectronicsService ]
 
 - type: entity
-  parent: AirlockGlass
+  parent: AirlockServiceGlassLocked
   id: AirlockLibraryGlassLocked
   suffix: Library, Locked
   components:
@@ -234,7 +234,7 @@
       board: [ DoorElectronicsLibrary ]
 
 - type: entity
-  parent: Airlock
+  parent: AirlockServiceLocked
   id: AirlockLibraryLocked
   suffix: Library, Locked
   components:

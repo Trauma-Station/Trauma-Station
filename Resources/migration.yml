@@ -364,19 +364,23 @@ ClothingUniformTShirtKhakiPants: null
 ComputerShipyard: null
 CourierBag: null
 CryogenicSleepUnitSpawnerPrisoner: null
-DefaultStationBeaconBoxing: null
+#DefaultStationBeaconBoxing: null Trauma
 DefaultStationBeaconCameraServerRoom: null
-DefaultStationBeaconConferenceRoom: null
+#DefaultStationBeaconConferenceRoom: null Trauma
 DefaultStationBeaconCorpsman: null
-DefaultStationBeaconEngiOutpost: null
-DefaultStationBeaconExam: null
-DefaultStationBeaconJanitorsOffice: null
-DefaultStationBeaconMailroom: null
+# <Trauma>
+#DefaultStationBeaconEngiOutpost: null
+#DefaultStationBeaconExam: null
+#DefaultStationBeaconJanitorsOffice: null
+#DefaultStationBeaconMailroom: null
+# </Trauma>
 DefaultStationBeaconMantis: null
 DefaultStationBeaconMetempsychosis: null
-DefaultStationBeaconPark: null
-DefaultStationBeaconPsychologist: null
-DefaultStationBeaconVirology: null
+# <Trauma>
+#DefaultStationBeaconPark: null
+#DefaultStationBeaconPsychologist: null
+#DefaultStationBeaconVirology: null
+# </Trauma>
 DrinkBubbleTeaGlass: null
 FishLabeler: null
 FoodLollipop: null
@@ -447,7 +451,7 @@ SpareIdCabinetFilled: null
 SpawnMobArcticFoxSiobhan: null
 SpawnMobFerret: null
 SpawnMobMothroach: null
-SpawnPointCourier: null
+# SpawnPointCourier: null Trauma
 SpawnPointForensicMantis: null
 SpawnPointLocationMidRoundAntag: null
 SpawnPointMartialArtist: null
@@ -456,16 +460,18 @@ SpawnPointPrisoner: null
 SpawnPointPrisonGuard: null
 SpeedLoaderSpecialPractice: null
 SuitStorageCorpsman: null
-SuitStorageParamedic: null
+# SuitStorageParamedic: null Trauma
 TableWoodReinforced: TableWood
 tatamimat: null
 ToyRenault: null
 ToySiobhan: null
-VendingMachineBoozeUnlocked: null
-VendingMachineBoxingDrobe: null
-VendingMachineCourierDrobe: null
+# <Trauma>
+# VendingMachineBoozeUnlocked: null
+# VendingMachineBoxingDrobe: null
+# VendingMachineCourierDrobe: null
+# </Trauma>
 VendingMachineMNKDrobe: null
-VendingMachineRepDrobe: null
+# VendingMachineRepDrobe: null Trauma
 WallPaper: null
 # <Trauma> - Why was this nulled
 # WarpPointAI: null
@@ -488,16 +494,20 @@ WallPaper: null
 WashingMachine: null
 WashingMachineBroken: null
 WashingMachineFilledClothes: null
-WeaponShotgunKammererNonLethal: null
-WindoorSecureMailLocked: null
-WindoorSecureParamedicLocked: null
-SpawnPointMailCarrier: null
+# <Trauma>
+# WeaponShotgunKammererNonLethal: null
+# WindoorSecureMailLocked: null
+# WindoorSecureParamedicLocked: null
+# SpawnPointMailCarrier: null
+# </Trauma>
 HoloprojectorEngineering: null
 ClothingOuterWinterCoatPlaid: null
 ClothingOuterWinterCoatLong: null
 ClothingHandsGlovesColorYellowUnsulated: null
-# AirlockMusicianLocked: null Trauma
-# AirlockMimeLocked: null Trauma
+# <Trauma>
+# AirlockMusicianLocked: null
+# AirlockMimeLocked: null
+# </Trauma>
 DoorElectronicsParamedic: null
 AirlockExternalGlassSalvageLocked: AirlockExternalGlassCargoLocked
 AirlockExternalGlassShuttleEscapeSub: AirlockExternalGlassCargoLocked
