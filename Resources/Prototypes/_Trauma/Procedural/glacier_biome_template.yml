@@ -3,15 +3,9 @@
 - type: biomeTemplate
   id: Glacier
   layers:
+  # Default biome
   - !type:BiomeMetaLayer
     template: SnowGlacier
-    threshold: -0.5
-    noise:
-      frequency: 0.003
-      noiseType: OpenSimplex2
-      fractalType: FBm
-      octaves: 2
-      lacunarity: 2
 
 # A basic snowy biome with trees, but without lava
 # Some fauna, here and there and possibly small ruins
@@ -103,7 +97,7 @@
   - !type:BiomeEntityLayer
     allowedTiles:
     - FloorSnow
-    threshold: -0.30
+    threshold: -0.1 # so it's not everywhere
     noise:
       seed: 0
       noiseType: Cellular
@@ -118,9 +112,5 @@
   - !type:BiomeDummyLayer
     id: Loot
   - !type:BiomeTileLayer
-    threshold: -0.7
+    threshold: -1
     tile: FloorSnow
-    noise:
-      seed: 0
-      frequency: 0.02
-      fractalType: None

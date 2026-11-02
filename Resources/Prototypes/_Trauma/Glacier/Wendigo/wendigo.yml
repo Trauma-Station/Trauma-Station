@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: MobWendigo
-  name: wendigo
+  id: MobLeshy
+  name: Leshy
   description: A chud.
   components:
   # Basic stuff
@@ -133,7 +133,6 @@
     conditions:
     - !type:ActionAvailableCondition
       actionId: ActionWendigoTeleport
-    # todo: check if we are in a middle of a doafter here so it doesn't cancel
 
 - type: megafaunaSelector
   id: ActionWendigoHeavyStomp
@@ -145,4 +144,3 @@
     conditions:
     - !type:ActionAvailableCondition
       actionId: ActionWendigoHeavyStomp
-    # todo: check if we are in a middle of a doafter here so it doesn't cancel
