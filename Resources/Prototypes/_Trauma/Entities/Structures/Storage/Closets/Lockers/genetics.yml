@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: LockerScientist
+  id: LockerGeneticist
+  name: geneticist's locker
+  components:
+  # TODO: unique sprite
+  - type: AccessReader
+    access: [["Genetics"]]
