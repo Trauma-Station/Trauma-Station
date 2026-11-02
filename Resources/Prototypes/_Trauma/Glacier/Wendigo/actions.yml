@@ -12,19 +12,22 @@
   - type: Sprite
     layers:
     - state: seismic_stomp # todo: change
+  - type: EntityTargetAction
+    event: !type:HandleTargetActionEvent
+  - type: TargetAction
+    range: 30
   - type: DoAfterArgs
     delay: 5
-  - type: InstantAction
-    event: !type:EffectInstantActionEvent
-  - type: EffectAction
+  - type: ActionRequirements
     effects:
-    - !type:RelayNearby
-      compName: StatusEffects
-      range: 5
-      effect: !type:NestedEffect
-        proto: WendigoStomp
-    - !type:SpawnParticles
-      particleProto: VampireStompShockwave # todo replace
+      Performer:
+      - !type:RelayNearby
+        compName: StatusEffects
+        range: 5
+        effect: !type:NestedEffect
+          proto: WendigoStomp
+      - !type:SpawnParticles
+        particleProto: VampireStompShockwave # todo replace
 
 - type: entity
   parent: BaseAction
@@ -65,10 +68,13 @@
   id: ActionWendigoHeavyStompII
   name: Heavy Stomp (Phase II)
   components:
-  - type: EffectAction
+  - type: ActionRequirements
     effects:
-    - !type:RelayNearby
-      compName: StatusEffects
-      range: 10
-      effect: !type:NestedEffect
-        proto: WendigoStomp
+      Performer:
+      - !type:RelayNearby
+        compName: StatusEffects
+        range: 10
+        effect: !type:NestedEffect
+          proto: WendigoStomp
+      - !type:SpawnParticles
+        particleProto: VampireStompShockwave # todo replace
