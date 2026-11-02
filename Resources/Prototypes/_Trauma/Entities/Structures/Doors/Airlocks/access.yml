@@ -2,6 +2,24 @@
 
 # Cargo / Salvage
 - type: entity
+  parent: AirlockCargoGlassLocked
+  id: AirlockCourierGlassLocked
+  suffix: Courier, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCourier ]
+
+- type: entity
+  parent: AirlockCargoLocked
+  id: AirlockCourierLocked
+  suffix: Courier, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsCourier ]
+
+- type: entity
   parent: AirlockExternal
   id: AirlockExternalSalvageLocked
   suffix: External, Salvage, Locked

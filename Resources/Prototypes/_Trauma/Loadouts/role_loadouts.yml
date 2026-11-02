@@ -83,3 +83,20 @@
   - ZookeeperEnvirohelm
   - ZookeeperEnvirosuit
   - ZookeeperEnvirogloves
+
+- type: roleLoadout
+  id: JobCourier
+  groups:
+  - CourierHead
+  - CourierJumpsuit
+  - CourierShoes
+  - CourierBackpack
+  - CourierPDA
+  - Glasses
+  - Survival
+  - Trinkets
+  - Animals
+  - GroupSpeciesBreathTool
+  - CourierEnvirohelm
+  - CourierEnvirosuit
+  - CourierEnvirogloves

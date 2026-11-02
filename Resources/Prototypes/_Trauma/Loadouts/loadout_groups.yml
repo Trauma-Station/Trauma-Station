@@ -286,3 +286,65 @@
   maxLimit: 1
   loadouts:
   - ZookeeperEnvirogloves
+
+# Courier
+
+- type: loadoutGroup
+  id: CourierHead
+  name: loadout-group-courier-head
+  minLimit: 0
+  loadouts:
+  - CourierHead
+  - CourierHeadFlipped
+
+- type: loadoutGroup
+  id: CourierJumpsuit
+  name: loadout-group-courier-jumpsuit
+  loadouts:
+  - CourierJumpsuit
+  - CourierJumpskirt
+
+- type: loadoutGroup
+  id: CourierBackpack
+  name: loadout-group-courier-backpack
+  loadouts:
+  - MailCarrierMessenger
+  - CourierMessenger
+
+- type: loadoutGroup
+  id: CourierShoes
+  name: loadout-group-courier-shoes
+  loadouts:
+  - BrownShoes
+  - BlackShoes
+  - CargoWinterBoots
+
+- type: loadoutGroup
+  id: CourierPDA
+  name: loadout-group-courier-id
+  loadouts:
+  - CourierPDA
+
+- type: loadoutGroup
+  id: CourierEnvirohelm
+  name: loadout-group-courier-envirohelm
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - CourierEnvirohelm
+
+- type: loadoutGroup
+  id: CourierEnvirosuit
+  name: loadout-group-courier-envirosuit
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - CourierEnvirosuit
+
+- type: loadoutGroup
+  id: CourierEnvirogloves
+  name: loadout-group-cargo-technician-envirogloves
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - CourierEnvirogloves

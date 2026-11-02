@@ -813,7 +813,6 @@
   minLimit: 0
   loadouts:
   - CargoTechnicianHead
-  - CargoTechnicianHeadMail # Goob/DeltaV - Mail
 
 - type: loadoutGroup
   id: CargoTechnicianJumpsuit
@@ -821,8 +820,6 @@
   loadouts:
   - CargoTechnicianJumpsuit
   - CargoTechnicianJumpskirt
-  - CargoTechnicianJumpsuitMail # Goob/DeltaV - Mail
-  - CargoTechnicianJumpskirtMail # Goob/DeltaV - Mail
   - CargoTechMJ # goob
 
 - type: loadoutGroup
@@ -840,7 +837,6 @@
   minLimit: 0
   loadouts:
   - CargoTechnicianWintercoat
-  - CargoTechnicianWintercoatMail # Goob/DeltaV - Mail
 
 - type: loadoutGroup
   id: CargoTechnicianShoes
@@ -854,7 +850,6 @@
   name: loadout-group-cargo-technician-id
   loadouts:
   - CargoTechnicianPDA
-  - SeniorCourierPDA
 
 #- type: loadoutGroup
 #  id: CargoTechnicianJobTrinkets

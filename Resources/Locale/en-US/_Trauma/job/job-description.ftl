@@ -14,3 +14,5 @@ job-description-dclass = Serve the crew under the iron fist of Nanotrasen, at th
 job-description-boxer = Fight your way to the top! Challenge the head of personnel and get brigged when you win.
 
 job-description-zookeeper = Put on a joyful display of cute animals and space carps for all the crew to see.
+
+job-description-courier = Deliver mail and other packages from and to cargo. Avoid dogs.

@@ -79,3 +79,11 @@
   components:
   - type: AccessReader
     access: [["Zookeeper"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsCourier
+  suffix: Courier, Locked
+  components:
+  - type: AccessReader
+    access: [["Mail"]]

@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  name: courier bag
+  id: CourierBag
+  parent: MailBag
+  description: Keeps your parcels safe.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Belt/courierbag.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Trauma/Clothing/Belt/courierbag.rsi
+    quickEquip: false
+    slots: [belt]

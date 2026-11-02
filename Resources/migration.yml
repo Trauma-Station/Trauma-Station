@@ -202,7 +202,6 @@ BoxReamClassic: null
 BoxReamWhite: null
 CleanadeGrenadeBox: BoxCleanerGrenades
 ClothingHeadAreopagite: null
-ClothingHeadCourierFlipped: ClothingHeadMailCarrier
 ClothingHeadHatBeretLogi: ClothingHeadHatBeretQM
 ClothingHeadHoodBrown: null
 ClothingHeadTechPriest: null
@@ -219,7 +218,6 @@ ClothingOuterVestFlakPress: ClothingOuterVestPress
 ClothingOuterWinterCoatMantis: null
 ClothingOuterWinterMystagogue: ClothingOuterWinterRD
 ClothingShoesBootsWinterRobo: null
-ClothingUniformSkirtCourier: ClothingUniformSkirtMailCarrier
 ComputerCargoOrdersJustice: null
 ComputerShuttleMiningGlacier: null
 CrateHydroCoJuice: null
@@ -354,7 +352,7 @@ BoxMaintenanceLightbulb: BoxLightMixed
 BoxPDAPrisoner: BoxPDA
 ClothingBeltMartialBlack: null
 ClothingCostumeArcDress: null
-ClothingHeadCourier: null
+# ClothingHeadCourier: null Trauma
 ClothingHeadHatFedoraBlack: null
 ClothingHeadHatFedoraChoc: null
 ClothingHeadHatFezMantis: null
@@ -362,7 +360,7 @@ ClothingHeadPrisonGuard: null
 ClothingUniformMartialGi: null
 ClothingUniformTShirtKhakiPants: null
 ComputerShipyard: null
-CourierBag: null
+# CourierBag: null Trauma
 CryogenicSleepUnitSpawnerPrisoner: null
 #DefaultStationBeaconBoxing: null Trauma
 DefaultStationBeaconCameraServerRoom: null
