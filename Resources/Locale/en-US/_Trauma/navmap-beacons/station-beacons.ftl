@@ -2,3 +2,4 @@ station-beacon-xenobio = Xenobiology
 station-beacon-genetics = Genetics
 station-beacon-reactor = Reactor
 station-beacon-mail = Mail
+station-beacon-virology = Virology
