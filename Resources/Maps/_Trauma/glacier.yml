@@ -4,8 +4,8 @@ meta:
   engineVersion: 291.0.0
   forkId: ""
   forkVersion: ""
-  time: 11/02/2026 04:23:08
-  entityCount: 20616
+  time: 11/02/2026 12:36:04
+  entityCount: 20643
 maps:
 - 1
 grids:
@@ -526,11 +526,11 @@ entities:
         4,-2:
           data: BAQEBAQEBAQEBAQEBAQAAAQEBAQEBAQEBAQEBAQEAAAEBAQEBAQEBAQEBAQEBAAABAQEBAQEBAQEBAAEBAQAAEBAQEBAQEBAQAAEBAQEBABAQEBAQEBAQEAAAAQEBAQAQEBAQEBAQEBAQEAEBAQEAEBAQEBAQEBAQEBABAQEBABAQEBAQEBAQEBABwQEBAQAQEBAQEBAQEBAQEAEBAQEAARAQEBAQEBAQEBABAQEBAAEQEBAQEBAQEAAAAQEBAAAQUFBQUFAQEBAAAAHBAQAAEFBQUFBBwdAAAAABAQEAABBQUFBQQAAAAAAADsHOwAAQUFBQUEAAAAAAAA7OzsAAA==
         3,-1:
-          data: AEBAQEBAQAQEBAQEBARBQQBAQEBAQEAEBwQEBAQEQUFAQEAHQEBADQ0NDQ0NDUFBDQ0NDQ0NDQ0NDQ0NDQ0AAA0NDQ0NDQ0NDQ0NDQ0NAABCB0JCQkINDQ0NDQ0NDQAAQkJCQkJCBAQEBAQEBAAAAEJCQkJCQgQEBAQEAAAAAABCQkJCQgQEBAQEAAAAAAAAQkJCQkIEBAQEBAAAAAAAAEJCQkIEBAQEBAAAAAAAAAAEBAQEBAQEBAAAAAAAAAAABAQEBAQEBAQAAAAAAAAAAAQEBAQEBAQAAAAAAAAAAAAEBAQEBAQEBAAAAAAAAAAABAQEBAQEBAQAAAAAAAAAAA==
+          data: AEBAQEBAQAQEBAQEBARBQQBAQEBAQEAEBwQEBAQEQUFAQEAHQEBADQ0NDQ0NDUFBDQ0NDQ0NDQ0NDQ0NDQ0AAA0NDQ0NDQ0NDQ0NDQ0NAABCB0JCQkINDQ0NDQ0NDQAAQkJCQkJCBAQHBAQEBAAAAEJCQkJCQgQEBAQEAAAAAABCQkJCQgQEBAQEAAAAAAAAQkJCQkIEBAQEBAAAAAAAAEJCQkIEBAQEBAAAAAAAAAA7BAQEBAQEBAAAAAAAAAAABwQEBAQEBAQAAAAAAAAAADsEBAQEBAQAAAAAAAAAAAAHBAQEBAQEBAAAAAAAAAAABAQEBAQEBAQAAAAAAAAAAA==
         2,-1:
-          data: NDQ0NAcHNAAAAAAAAAAAADQ0NAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALwcHLy8vLwAAAAAAAAAAAC8vLy8vLy8vAAAAAAAAAAAvLy8vLy8vLwAAAAAAAAAALy8vLy8vLy8EBAQAAAAAAAAALy8vLy8vBAQEBAcABwQEBC8vBy8vLwQEBAQNDQ0EBAcEBAQEBAQEBAQHDQ0NBAQEBAQEBAQEBAQEQw0NDQcEBAQEBAQEBAQEBA==
+          data: NDQ0NAcHNAAAAAAAAAAAADQ0NAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALwcHLy8vLwAAAAAAAAAAAC8vLy8vLy8vAAAAAAAAAAAvLy8vLy8vLwAAAAAAAAAALy8vLy8vLy8EBAQAAAAAAAAALy8vLy8vBDs7BAcABwQEBC8vBy8vLwQ7OwQNDQ0EBAcEBAQEBAQEOzsHDQ0NBAQEBAQEBAQEBAQEQw0NDQcEBAQEBAQEBAQEBA==
         2,0:
-          data: Qw0NDUhISEgEBAQEBAQEBEMNDQ1ISEhISEhISEhISEhDDQ0NSEhISEhISEhISEhIQw0NDQ0HSEhISEhISEhISEMNDQ0NB0hISEhISEhISEhDDQ0NDUhISEhISEhISEhIQw0NDUlJSUlJSUlISEhISEMNDQ1JSUlJSUlJSkpKSkpDDQ0NB0lJSUlJB0pKSkpKAA0NDQdJSUlJSUlKSkpKSg0NDQ1JSUlJB0lJSkpKSkoNDQ0NSkpKSkpKSkpKSkpKDQ0NDUpKSkpKSkpKSkpKSgYNDQ0NSkoARAdEREREREQHDQ0NDUpKREREREREREREBg0NDQ1KSkRERERERERERA==
+          data: Qw0NDUpKSkoEBAQEBAQEBEMNDQ1KSkpKSkpKSkpKSkpDDQ0NSkpKSkpKSkpKSkpKQw0NDQ0HSkpKSkpKSkpKSkMNDQ0NB0pKSkpKSkpKSkpDDQ0NDUpKSkpKSkpKSkpKQw0NDUhISEhKSkpKSkpKSkMNDQ1ISEhISEhISkpKSkpDDQ0NB0hISEhIB0pKSkpKAA0NDQdISEhISEhKSkpKSg0NDQ1ISEhIB0hISkpKSkoNDQ0NSklJSUlKSkpKSkpKDQ0NDUpJSUlJSkpKSkpKSgYNDQ0NSUlJRAdEREREREQHDQ0NDUlJREREREREREREBg0NDQ1JSURERERERERERA==
         1,-1:
           data: JwQEBAQEBAQEBAQ0NDQ0NDU1BDU1NTU1BAQENDQ0NDQ1NTU1NTU1NQQEBAQAAAAANTU1NTU1NTUEBAQEAAAAADU1NTU1NTU1BAQEAAAAAAA1NTU1NTU1NTUEBwAAAAAANTU1NTU1NTU1BAAAAAAAADU1NTU1NTU1NQQEBAAAAAA1NTU1NTU1NTUEBAQEAAAANTU1NTU1NTU1BAQEBAQEADU1NTY2NjY2NjY2BAQEBAQHKCg2NjY2NjY2NgQEBAQEKCgoNjY2NjY2NjYEBAQEBCgoKAc2NjY2NjY2NgAEBAQoKCg2NjY2NjY2NjYHBAQEKCgoNjY2NjY2NjY2NkMHQw==
         1,-2:
@@ -630,7 +630,7 @@ entities:
         5,0:
           data: AAAAAAAAAAAAAAAAAAAAAEVFRUVFRUUAAAAAAAAAAABFRUVFRUVFRUVFRUVFAAAARUVFRUVFRUVFRUVFAAAAAEVFRUVFB0VFRUVFRQAAAABFRUVFRQdFRUVFRUVFAAAARUVFRUVFRUUPAA9FAAAAAEVFRUVFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
         3,0:
-          data: BAQEBAQEBAQAAAAAAAAAAEgHSA8PDw8PAAAAAAAAAABISEgADw8PDwAAAAAAAAAASEhIBw8PDw8AAAAAAAAAAEhISA8PDw8PAAAAAAAAAABISEgHDw8PDwAAAAAAAAAASEhIDw8PDw8AAAAAAAAAAEpKSkZGRkYAAAAAAAAAAABKSkpGRkZGRgAAAAAAAAAASkpKRkZGRkYAAAAAAAAAAEpKSkZGRkZGAAAAAAAAAABKSkoHRkZGAAAAAAAAAAAARAdEREZGRgAAAAAAAAAAAERERERGRkYAAAAAAAAAAABERERERkZGAAAAAAAAAAAARERERAAAAAAAAAAAAAAAAA==
+          data: BAQEBAQEBAQAAAAAAAAAAEoHSg8PDw8PAAAAAAAAAABKSkoADw8PDwAAAAAAAAAASkpKBw8PDw8AAAAAAAAAAEpKSg8PDw8PAAAAAAAAAABKSkoHDw8PDwAAAAAAAAAASkpKDw8PDw8AAAAAAAAAAEpKSkZGRkYAAAAAAAAAAABKSkpGRkZGRgAAAAAAAAAASkpKRkZGRkYAAAAAAAAAAEpKSkZGRkZGAAAAAAAAAABKSkoHRkZGAAAAAAAAAAAARAdEREZGRgAAAAAAAAAAAERERERGRkYAAAAAAAAAAABERERERkZGAAAAAAAAAAAARERERAAAAAAAAAAAAAAAAA==
         5,-3:
           data: RwAAAAAAAAAAAAAAAAAAR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0cAAAAAAAAAAAAAAAAAAEcAAAAAAAAAAAAAAAAAAEdHAAAAAAAAAAAAAAAAAABHRwAAAAAAAAAAAAAAAAAAR0cAAAAAAAAAAAAAAAAAAEdHAAAAAAAAAAAAAAAAAABHRwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
         6,-3:
@@ -9673,6 +9673,11 @@ entities:
           moles:
             Oxygen: 21.824879
             Nitrogen: 82.10312
+        - temperature: 293.14667
+          volume: 2500
+          moles:
+            Oxygen: 21.824879
+            Nitrogen: 82.10312
         - temperature: 293.15
           volume: 2500
           moles:
@@ -10157,7 +10162,8 @@ entities:
             0: 255
             4: 61440
           5,9:
-            0: 3838
+            0: 2814
+            6: 1024
           5,10:
             0: 61438
           5,11:
@@ -10304,7 +10310,8 @@ entities:
           8,12:
             0: 4095
           9,9:
-            0: 16368
+            0: 8176
+            5: 8192
           9,10:
             0: 46072
           9,11:
@@ -10758,7 +10765,8 @@ entities:
           -12,5:
             0: 65534
           -12,6:
-            0: 61183
+            0: 28415
+            5: 32768
           -13,5:
             0: 58468
             4: 2
@@ -10974,7 +10982,7 @@ entities:
             0: 65520
           -8,11:
             0: 1527
-            6: 512
+            7: 512
           -9,11:
             0: 3295
           -8,12:
@@ -11044,7 +11052,7 @@ entities:
             0: 12544
           12,-8:
             0: 32636
-            7: 128
+            8: 128
             5: 32768
           12,-7:
             0: 62800
@@ -13504,7 +13512,7 @@ entities:
   - uid: 60
     components:
     - type: MetaData
-      name: Chem
+      name: Chemistry
     - type: Transform
       parent: 2
       pos: 19.5,-2.5
@@ -13548,6 +13556,17 @@ entities:
       pos: -12.5,12.5
     - type: AccessReader
       accessListsOriginal: []
+- proto: AirlockClownLocked
+  entities:
+  - uid: 4020
+    components:
+    - type: MetaData
+      name: Clown Cave
+    - type: Transform
+      parent: 2
+      pos: -22.5,-8.5
+    - type: StepTriggerCleanup
+      stepTrigger: 14591
 - proto: AirlockCommandGlassLocked
   entities:
   - uid: 64
@@ -13825,6 +13844,8 @@ entities:
       pos: -70.5,12.5
   - uid: 18349
     components:
+    - type: MetaData
+      name: Security Substation
     - type: Transform
       parent: 2
       pos: -30.5,37.5
@@ -14060,7 +14081,7 @@ entities:
         DoorBoltStatus: False
     - type: Door
       state: Opening
-      secondsUntilStateChange: -56220.973
+      secondsUntilStateChange: -59833.105
   - uid: 6482
     components:
     - type: MetaData
@@ -14306,6 +14327,8 @@ entities:
       pos: -56.5,-11.5
   - uid: 146
     components:
+    - type: MetaData
+      name: Tyrant Dock
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -14400,7 +14423,7 @@ entities:
   - uid: 382
     components:
     - type: MetaData
-      name: Reporter's Office
+      name: Reporter Office
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -14408,7 +14431,7 @@ entities:
   - uid: 449
     components:
     - type: MetaData
-      name: Radio Host's Office
+      name: Radio Host Office
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -15015,8 +15038,10 @@ entities:
       accessListsOriginal: []
 - proto: AirlockMimeLocked
   entities:
-  - uid: 12017
+  - uid: 235
     components:
+    - type: MetaData
+      name: Mime Room
     - type: Transform
       parent: 2
       pos: -21.5,-3.5
@@ -15164,7 +15189,7 @@ entities:
         DoorBoltStatus: False
     - type: Door
       state: Opening
-      secondsUntilStateChange: -14936.376
+      secondsUntilStateChange: -18548.51
   - uid: 214
     components:
     - type: MetaData
@@ -15345,15 +15370,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 78.5,-9.5
-  - uid: 235
-    components:
-    - type: MetaData
-      name: Clown Cave
-    - type: Transform
-      parent: 2
-      pos: -22.5,-8.5
-    - type: StepTriggerCleanup
-      stepTrigger: 14591
   - uid: 9728
     components:
     - type: MetaData
@@ -57988,6 +58004,18 @@ entities:
       pos: 66.5,-7.5
     - type: Fixtures
       fixtures: {}
+  - uid: 19784
+    components:
+    - type: Transform
+      parent: 2
+      pos: -44.5,28.5
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+          ents:
+          - 19785
+          showEnts: False
+          occludes: True
 - proto: ClosetWallFireFilledRandom
   entities:
   - uid: 17369
@@ -58187,6 +58215,16 @@ entities:
     - type: Transform
       parent: 2
       pos: -44.901314,23.869892
+- proto: ClothingHandsGlovesColorYellow
+  entities:
+  - uid: 19785
+    components:
+    - type: Transform
+      parent: 19784
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+      storage: 19784
 - proto: ClothingHandsGlovesConducting
   entities:
   - uid: 6139
@@ -59801,6 +59839,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -22.272648,-11.595665
+- proto: CrashCart
+  entities:
+  - uid: 19766
+    components:
+    - type: Transform
+      parent: 2
+      pos: 18.5,-20.5
 - proto: CrashCartFilled
   entities:
   - uid: 19731
@@ -60837,11 +60882,15 @@ entities:
   entities:
   - uid: 2171
     components:
+    - type: MetaData
+      name: Observation Deck
     - type: Transform
       parent: 2
       pos: 80.5,-11.5
   - uid: 4013
     components:
+    - type: MetaData
+      name: Tyrant
     - type: Transform
       parent: 2
       pos: -62.5,-9.5
@@ -60849,29 +60898,42 @@ entities:
       text: Tyrant
   - uid: 11132
     components:
+    - type: MetaData
+      name: Tyrant Dock
     - type: Transform
       parent: 2
       pos: -52.5,-11.5
     - type: NavMapBeacon
       text: Tyrant Dock
+  - uid: 12017
+    components:
+    - type: MetaData
+      name: Christmas Room
+    - type: Transform
+      parent: 2
+      pos: -34.5,-27.5
+  - uid: 13057
+    components:
+    - type: MetaData
+      name: Virology
+    - type: Transform
+      parent: 2
+      pos: 6.5,-18.5
   - uid: 13645
     components:
+    - type: MetaData
+      name: Dorms Sauna
     - type: Transform
       parent: 2
       pos: 63.5,-25.5
     - type: NavMapBeacon
       text: Sauna
-  - uid: 16454
-    components:
-    - type: Transform
-      parent: 2
-      pos: -34.5,-19.5
-    - type: NavMapBeacon
-      text: Shipyard Dock
 - proto: DefaultStationBeaconAISatellite
   entities:
   - uid: 13628
     components:
+    - type: MetaData
+      name: AI Satellite
     - type: Transform
       parent: 2
       pos: 38.5,60.5
@@ -60879,6 +60941,8 @@ entities:
   entities:
   - uid: 15034
     components:
+    - type: MetaData
+      name: AME
     - type: Transform
       parent: 2
       pos: 14.5,48.5
@@ -60886,18 +60950,26 @@ entities:
   entities:
   - uid: 5823
     components:
+    - type: MetaData
+      name: Anomaly Generator
     - type: Transform
       parent: 2
       pos: 39.5,-26.5
-- proto: DefaultStationBeaconArrivals
+- proto: DefaultStationBeaconArmory
   entities:
-  - uid: 4020
+  - uid: 19852
     components:
+    - type: MetaData
+      name: Armory
     - type: Transform
       parent: 2
-      pos: 55.5,27.5
+      pos: -16.5,26.5
+- proto: DefaultStationBeaconArrivals
+  entities:
   - uid: 5803
     components:
+    - type: MetaData
+      name: Arrivals
     - type: Transform
       parent: 2
       pos: 60.5,48.5
@@ -60905,6 +60977,8 @@ entities:
   entities:
   - uid: 14128
     components:
+    - type: MetaData
+      name: Artifact Lab
     - type: Transform
       parent: 2
       pos: 33.5,-30.5
@@ -60912,6 +60986,8 @@ entities:
   entities:
   - uid: 7947
     components:
+    - type: MetaData
+      name: Atmospherics
     - type: Transform
       parent: 2
       pos: -6.5,45.5
@@ -60919,6 +60995,8 @@ entities:
   entities:
   - uid: 6072
     components:
+    - type: MetaData
+      name: Bar
     - type: Transform
       parent: 2
       pos: 15.5,23.5
@@ -60926,6 +61004,8 @@ entities:
   entities:
   - uid: 16171
     components:
+    - type: MetaData
+      name: Botany
     - type: Transform
       parent: 2
       pos: 27.5,5.5
@@ -60933,13 +61013,26 @@ entities:
   entities:
   - uid: 3280
     components:
+    - type: MetaData
+      name: Bridge
     - type: Transform
       parent: 2
       pos: 35.5,49.5
+- proto: DefaultStationBeaconBrigMed
+  entities:
+  - uid: 19786
+    components:
+    - type: MetaData
+      name: Brig Med
+    - type: Transform
+      parent: 2
+      pos: -0.5,21.5
 - proto: DefaultStationBeaconCaptainsQuarters
   entities:
   - uid: 13528
     components:
+    - type: MetaData
+      name: Captain Quarters
     - type: Transform
       parent: 2
       pos: 41.5,44.5
@@ -60947,6 +61040,8 @@ entities:
   entities:
   - uid: 5762
     components:
+    - type: MetaData
+      name: Cargo
     - type: Transform
       parent: 2
       pos: 43.5,4.5
@@ -60954,6 +61049,8 @@ entities:
   entities:
   - uid: 6107
     components:
+    - type: MetaData
+      name: Cargo Reception
     - type: Transform
       parent: 2
       pos: 38.5,12.5
@@ -60961,13 +61058,26 @@ entities:
   entities:
   - uid: 14835
     components:
+    - type: MetaData
+      name: CE Room
     - type: Transform
       parent: 2
       pos: 9.5,42.5
+- proto: DefaultStationBeaconChapel
+  entities:
+  - uid: 19762
+    components:
+    - type: MetaData
+      name: Chapel
+    - type: Transform
+      parent: 2
+      pos: 31.5,-17.5
 - proto: DefaultStationBeaconChemistry
   entities:
   - uid: 761
     components:
+    - type: MetaData
+      name: Chemistry
     - type: Transform
       parent: 2
       pos: 22.5,-1.5
@@ -60975,6 +61085,8 @@ entities:
   entities:
   - uid: 7491
     components:
+    - type: MetaData
+      name: CMO Room
     - type: Transform
       parent: 2
       pos: -11.5,13.5
@@ -60982,6 +61094,8 @@ entities:
   entities:
   - uid: 16809
     components:
+    - type: MetaData
+      name: Courtroom
     - type: Transform
       parent: 2
       pos: -65.5,21.5
@@ -60989,6 +61103,8 @@ entities:
   entities:
   - uid: 13179
     components:
+    - type: MetaData
+      name: Cryonics
     - type: Transform
       parent: 2
       pos: -2.5,-12.5
@@ -60996,6 +61112,8 @@ entities:
   entities:
   - uid: 14700
     components:
+    - type: MetaData
+      name: Cryosleep
     - type: Transform
       parent: 2
       pos: 50.5,-8.5
@@ -61003,6 +61121,8 @@ entities:
   entities:
   - uid: 10523
     components:
+    - type: MetaData
+      name: Detective
     - type: Transform
       parent: 2
       pos: -22.5,48.5
@@ -61010,6 +61130,8 @@ entities:
   entities:
   - uid: 6334
     components:
+    - type: MetaData
+      name: Disposals
     - type: Transform
       parent: 2
       pos: 40.5,-1.5
@@ -61017,6 +61139,8 @@ entities:
   entities:
   - uid: 12305
     components:
+    - type: MetaData
+      name: Dorms
     - type: Transform
       parent: 2
       pos: 71.5,-23.5
@@ -61024,6 +61148,8 @@ entities:
   entities:
   - uid: 15253
     components:
+    - type: MetaData
+      name: Engineering
     - type: Transform
       parent: 2
       pos: 16.5,39.5
@@ -61031,13 +61157,26 @@ entities:
   entities:
   - uid: 4014
     components:
+    - type: MetaData
+      name: Evac
     - type: Transform
       parent: 2
       pos: 64.5,36.5
+- proto: DefaultStationBeaconGenetics
+  entities:
+  - uid: 19837
+    components:
+    - type: MetaData
+      name: Genetics
+    - type: Transform
+      parent: 2
+      pos: 50.5,-30.5
 - proto: DefaultStationBeaconGravGen
   entities:
   - uid: 3227
     components:
+    - type: MetaData
+      name: Robotics
     - type: Transform
       parent: 2
       pos: 27.5,54.5
@@ -61045,18 +61184,33 @@ entities:
   entities:
   - uid: 16120
     components:
+    - type: MetaData
+      name: HOP Office
     - type: Transform
       parent: 2
       pos: 29.5,21.5
+- proto: DefaultStationBeaconHOSRoom
+  entities:
+  - uid: 19831
+    components:
+    - type: MetaData
+      name: HOS Room
+    - type: Transform
+      parent: 2
+      pos: -13.5,34.5
 - proto: DefaultStationBeaconJanitorsCloset
   entities:
   - uid: 13134
     components:
+    - type: MetaData
+      name: Janitor Closet 2
     - type: Transform
       parent: 2
       pos: 41.5,-6.5
   - uid: 16243
     components:
+    - type: MetaData
+      name: Janitor Closet 1
     - type: Transform
       parent: 2
       pos: -8.5,1.5
@@ -61064,6 +61218,8 @@ entities:
   entities:
   - uid: 6069
     components:
+    - type: MetaData
+      name: Kitchen
     - type: Transform
       parent: 2
       pos: 9.5,15.5
@@ -61071,6 +61227,8 @@ entities:
   entities:
   - uid: 5883
     components:
+    - type: MetaData
+      name: Library
     - type: Transform
       parent: 2
       pos: -28.5,5.5
@@ -61078,6 +61236,8 @@ entities:
   entities:
   - uid: 19337
     components:
+    - type: MetaData
+      name: Med Bay
     - type: Transform
       parent: 2
       pos: 17.5,-11.5
@@ -61085,6 +61245,8 @@ entities:
   entities:
   - uid: 19338
     components:
+    - type: MetaData
+      name: Medical Lobby
     - type: Transform
       parent: 2
       pos: 13.5,-0.5
@@ -61092,6 +61254,8 @@ entities:
   entities:
   - uid: 5261
     components:
+    - type: MetaData
+      name: Morgue
     - type: Transform
       parent: 2
       pos: 12.5,-18.5
@@ -61099,6 +61263,8 @@ entities:
   entities:
   - uid: 9290
     components:
+    - type: MetaData
+      name: Perma Brig
     - type: Transform
       parent: 2
       pos: -30.5,19.5
@@ -61106,13 +61272,26 @@ entities:
   entities:
   - uid: 13928
     components:
+    - type: MetaData
+      name: QM Room
     - type: Transform
       parent: 2
       pos: 52.5,11.5
+- proto: DefaultStationBeaconRadioStation
+  entities:
+  - uid: 12295
+    components:
+    - type: MetaData
+      name: Radio Station
+    - type: Transform
+      parent: 2
+      pos: 65.5,-15.5
 - proto: DefaultStationBeaconRDRoom
   entities:
   - uid: 12701
     components:
+    - type: MetaData
+      name: RD Room
     - type: Transform
       parent: 2
       pos: 24.5,-31.5
@@ -61120,25 +61299,24 @@ entities:
   entities:
   - uid: 13644
     components:
+    - type: MetaData
+      name: Reporter Office
     - type: Transform
       parent: 2
       pos: 67.5,-8.5
-- proto: DefaultStationBeaconRobotics
-  entities:
-  - uid: 13057
-    components:
-    - type: Transform
-      parent: 2
-      pos: 45.5,-22.5
 - proto: DefaultStationBeaconSalvage
   entities:
   - uid: 5971
     components:
+    - type: MetaData
+      name: Salvage Bay
     - type: Transform
       parent: 2
       pos: 74.5,4.5
   - uid: 15395
     components:
+    - type: MetaData
+      name: Salvage
     - type: Transform
       parent: 2
       pos: 89.5,4.5
@@ -61148,6 +61326,8 @@ entities:
   entities:
   - uid: 10226
     components:
+    - type: MetaData
+      name: Science
     - type: Transform
       parent: 2
       pos: 29.5,-24.5
@@ -61155,6 +61335,8 @@ entities:
   entities:
   - uid: 17426
     components:
+    - type: MetaData
+      name: Security
     - type: Transform
       parent: 2
       pos: -4.5,27.5
@@ -61162,6 +61344,8 @@ entities:
   entities:
   - uid: 14138
     components:
+    - type: MetaData
+      name: Security Checkpoint
     - type: Transform
       parent: 2
       pos: 44.5,32.5
@@ -61169,6 +61353,8 @@ entities:
   entities:
   - uid: 16242
     components:
+    - type: MetaData
+      name: Service
     - type: Transform
       parent: 2
       pos: -18.5,0.5
@@ -61176,6 +61362,8 @@ entities:
   entities:
   - uid: 10109
     components:
+    - type: MetaData
+      name: North Solars
     - type: Transform
       parent: 2
       pos: -8.5,67.5
@@ -61183,6 +61371,8 @@ entities:
   entities:
   - uid: 20588
     components:
+    - type: MetaData
+      name: South Solars
     - type: Transform
       parent: 2
       pos: 77.5,-45.5
@@ -61190,6 +61380,8 @@ entities:
   entities:
   - uid: 12250
     components:
+    - type: MetaData
+      name: Surgery
     - type: Transform
       parent: 2
       pos: -7.5,-4.5
@@ -61197,6 +61389,8 @@ entities:
   entities:
   - uid: 4135
     components:
+    - type: MetaData
+      name: TEG
     - type: Transform
       parent: 2
       pos: -4.5,57.5
@@ -61204,11 +61398,15 @@ entities:
   entities:
   - uid: 15288
     components:
+    - type: MetaData
+      name: Mime
     - type: Transform
       parent: 2
       pos: -23.5,-3.5
   - uid: 15290
     components:
+    - type: MetaData
+      name: Clown
     - type: Transform
       parent: 2
       pos: -23.5,-11.5
@@ -61218,6 +61416,8 @@ entities:
   entities:
   - uid: 4433
     components:
+    - type: MetaData
+      name: Vault
     - type: Transform
       parent: 2
       pos: 36.5,38.5
@@ -61225,9 +61425,20 @@ entities:
   entities:
   - uid: 17428
     components:
+    - type: MetaData
+      name: Warden Office
     - type: Transform
       parent: 2
       pos: -14.5,21.5
+- proto: DefaultStationBeaconXenobio
+  entities:
+  - uid: 19782
+    components:
+    - type: MetaData
+      name: Xenobio
+    - type: Transform
+      parent: 2
+      pos: 43.5,-38.5
 - proto: DefibrillatorCabinetFilled
   entities:
   - uid: 7256
@@ -67465,6 +67676,8 @@ entities:
       name: Reporter's Office
   - uid: 7239
     components:
+    - type: MetaData
+      name: RD
     - type: Transform
       parent: 2
       pos: 23.5,-31.5
@@ -67472,6 +67685,8 @@ entities:
       name: Mystagogue
   - uid: 7240
     components:
+    - type: MetaData
+      name: Cargo
     - type: Transform
       parent: 2
       pos: 45.5,10.5
@@ -67479,6 +67694,8 @@ entities:
       name: Logistics
   - uid: 7241
     components:
+    - type: MetaData
+      name: CE
     - type: Transform
       parent: 2
       pos: 7.5,41.5
@@ -67530,6 +67747,8 @@ entities:
       name: Epistemics
   - uid: 12826
     components:
+    - type: MetaData
+      name: NTR
     - type: Transform
       parent: 2
       pos: 28.5,44.5
@@ -70831,6 +71050,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -34.415737,23.506119
+- proto: FoodRoastedMonkey
+  entities:
+  - uid: 19841
+    components:
+    - type: Transform
+      parent: 2
+      pos: 60.446587,-46.786644
 - proto: FoodShakerPepper
   entities:
   - uid: 7569
@@ -92766,6 +92992,15 @@ entities:
     - type: Transform
       parent: 2
       pos: -55.5,30.5
+- proto: GhostWarpPoint
+  entities:
+  - uid: 19838
+    components:
+    - type: MetaData
+      name: Hideaway
+    - type: Transform
+      parent: 2
+      pos: -32.5,44.5
 - proto: GlassBoxLaserFilled
   entities:
   - uid: 3281
@@ -96143,6 +96378,39 @@ entities:
     - type: Transform
       parent: 2
       pos: 31.5,75.5
+- proto: GunSafeJudo
+  entities:
+  - uid: 19845
+    components:
+    - type: Transform
+      parent: 2
+      pos: -14.5,24.5
+- proto: GunSafeLaserCarbine
+  entities:
+  - uid: 19846
+    components:
+    - type: Transform
+      parent: 2
+      pos: -14.5,28.5
+  - uid: 19848
+    components:
+    - type: Transform
+      parent: 2
+      pos: -16.5,28.5
+- proto: GunSafeLauncherNonLethal
+  entities:
+  - uid: 19850
+    components:
+    - type: Transform
+      parent: 2
+      pos: -16.5,24.5
+- proto: GunSafeMelee
+  entities:
+  - uid: 19847
+    components:
+    - type: Transform
+      parent: 2
+      pos: -15.5,24.5
 - proto: GunSafePhaser
   entities:
   - uid: 10773
@@ -96150,6 +96418,48 @@ entities:
     - type: Transform
       parent: 2
       pos: -19.5,28.5
+- proto: GunSafeRifleLecter
+  entities:
+  - uid: 19844
+    components:
+    - type: Transform
+      parent: 2
+      pos: -11.5,25.5
+- proto: GunSafeShotgunEnforcer
+  entities:
+  - uid: 19839
+    components:
+    - type: Transform
+      parent: 2
+      pos: -11.5,28.5
+- proto: GunSafeShotgunKammerer
+  entities:
+  - uid: 19849
+    components:
+    - type: Transform
+      parent: 2
+      pos: -15.5,28.5
+- proto: GunSafeSubMachineGunDrozd
+  entities:
+  - uid: 19843
+    components:
+    - type: Transform
+      parent: 2
+      pos: -11.5,26.5
+- proto: GunSafeSubMachineGunWt550
+  entities:
+  - uid: 19842
+    components:
+    - type: Transform
+      parent: 2
+      pos: -11.5,27.5
+- proto: GunSafeSurplusBallistics
+  entities:
+  - uid: 19851
+    components:
+    - type: Transform
+      parent: 2
+      pos: -20.5,26.5
 - proto: Gyroscope
   entities:
   - uid: 10043
@@ -98125,8 +98435,9 @@ entities:
       containers:
         entity_storage: !type:Container
           ents:
-          - 12230
+          - 16253
           - 12568
+          - 12230
           showEnts: False
           occludes: True
         paper_label: !type:ContainerSlot
@@ -101062,13 +101373,6 @@ entities:
       fixtures: {}
 - proto: PosterContrabandMissingGloves
   entities:
-  - uid: 12295
-    components:
-    - type: Transform
-      parent: 2
-      pos: -44.5,28.5
-    - type: Fixtures
-      fixtures: {}
   - uid: 12296
     components:
     - type: Transform
@@ -101076,6 +101380,11 @@ entities:
       pos: -50.5,-10.5
     - type: Fixtures
       fixtures: {}
+  - uid: 16454
+    components:
+    - type: Transform
+      parent: 2
+      pos: -44.5,28.5
 - proto: PosterContrabandNuclearDeviceInformational
   entities:
   - uid: 12297
@@ -101501,7 +101810,9 @@ entities:
     components:
     - type: Transform
       parent: 2
-      pos: 24.5,-32.5
+      pos: 24.5,-30.5
+    - type: Pullable
+      prevFixedRotation: True
 - proto: PowerCellHyper
   entities:
   - uid: 12370
@@ -103897,6 +104208,21 @@ entities:
     - type: Transform
       parent: 2
       pos: -37.990063,-25.699778
+  - uid: 19763
+    components:
+    - type: Transform
+      parent: 2
+      pos: 25.294785,32.720345
+  - uid: 19764
+    components:
+    - type: Transform
+      parent: 2
+      pos: 25.685583,32.686188
+  - uid: 19765
+    components:
+    - type: Transform
+      parent: 2
+      pos: 25.911537,32.701813
 - proto: PsychBed
   entities:
   - uid: 10673
@@ -111579,6 +111905,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -14.5,33.5
+- proto: SecureCabinetRD
+  entities:
+  - uid: 19783
+    components:
+    - type: Transform
+      parent: 2
+      pos: 24.5,-32.5
 - proto: SecureCabinetResearch
   entities:
   - uid: 13048
@@ -112056,6 +112389,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -33.55467,13.551344
+- proto: ShotGunCabinetFilled
+  entities:
+  - uid: 19840
+    components:
+    - type: Transform
+      parent: 2
+      pos: -14.5,23.5
 - proto: Shovel
   entities:
   - uid: 13589
@@ -116016,6 +116356,8 @@ entities:
       pos: 76.5,-15.5
   - uid: 15125
     components:
+    - type: MetaData
+      name: security substation
     - type: Transform
       parent: 2
       pos: -28.5,38.5
@@ -116704,7 +117046,7 @@ entities:
   - uid: 11913
     components:
     - type: MetaData
-      name: Medbay
+      name: Med Bay
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -116784,7 +117126,7 @@ entities:
   - uid: 14123
     components:
     - type: MetaData
-      name: Chem
+      name: Chemistry
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -116940,7 +117282,7 @@ entities:
   - uid: 14134
     components:
     - type: MetaData
-      name: Anomaly
+      name: Anomaly Generator
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -117408,7 +117750,7 @@ entities:
   - uid: 14135
     components:
     - type: MetaData
-      name: Cargo Bay
+      name: Cargo Middle
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -117421,7 +117763,7 @@ entities:
   - uid: 17968
     components:
     - type: MetaData
-      name: Cargo South
+      name: Cargo Bay
     - type: Transform
       parent: 2
       pos: 40.5,2.5
@@ -117511,6 +117853,18 @@ entities:
     - type: Transform
       parent: 2
       pos: 65.5,-9.5
+- proto: SwordWood
+  entities:
+  - uid: 16253
+    components:
+    - type: MetaData
+      name: captain's sabre
+    - type: Transform
+      parent: 10229
+    - type: Physics
+      canCollide: False
+    - type: InsideEntityStorage
+      storage: 10229
 - proto: SyringeEphedrine
   entities:
   - uid: 9275
@@ -131700,15 +132054,6 @@ entities:
       pos: -11.5,47.5
     - type: Fixtures
       fixtures: {}
-- proto: WarpPoint
-  entities:
-  - uid: 16253
-    components:
-    - type: Transform
-      parent: 2
-      pos: 14.5,25.5
-    - type: WarpPoint
-      location: Bar
 - proto: WaterCooler
   entities:
   - uid: 6241

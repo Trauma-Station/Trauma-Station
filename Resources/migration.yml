@@ -463,32 +463,30 @@ TableWoodReinforced: TableWood
 tatamimat: null
 ToyRenault: null
 ToySiobhan: null
+VendingMachineBoozeUnlocked:
 # <Trauma>
-# VendingMachineBoozeUnlocked: null
 # VendingMachineBoxingDrobe: null
 # VendingMachineCourierDrobe: null
 # </Trauma>
 VendingMachineMNKDrobe: null
 # VendingMachineRepDrobe: null Trauma
 WallPaper: null
-# <Trauma> - Why was this nulled
-# WarpPointAI: null
-# WarpPointArrivals: null
-# WarpPointAtmos: null
-# WarpPointBar: null
-# WarpPointCryo: null
-# WarpPointDetective: null
-# WarpPointDisposals: null
-# WarpPointEpistemics: null
-# WarpPointHOP: null
-# WarpPointJanitor: null
-# WarpPointKitchen: null
-# WarpPointLawyer: null
-# WarpPointLibrary: null
-# WarpPointMorgue: null
-# WarpPointReporter: null
-# WarpPointSingulo: null
-# </Trauma>
+WarpPointAI: null
+WarpPointArrivals: null
+WarpPointAtmos: null
+WarpPointBar: null
+WarpPointCryo: null
+WarpPointDetective: null
+WarpPointDisposals: null
+WarpPointEpistemics: null
+WarpPointHOP: null
+WarpPointJanitor: null
+WarpPointKitchen: null
+WarpPointLawyer: null
+WarpPointLibrary: null
+WarpPointMorgue: null
+WarpPointReporter: null
+WarpPointSingulo: null
 WashingMachine: null
 WashingMachineBroken: null
 WashingMachineFilledClothes: null
