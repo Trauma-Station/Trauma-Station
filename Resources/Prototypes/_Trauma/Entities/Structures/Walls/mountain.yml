@@ -1,0 +1,138 @@
+- type: entity
+  abstract: true
+  parent: BaseWall
+  id: BaseAltRock
+  name: asteroid rock
+  description: A rocky asteroid.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Walls/asteroid_rock.rsi
+    state: full
+  - type: Icon
+    sprite: _Trauma/Structures/Walls/asteroid_rock.rsi
+    state: full
+  - type: Tag
+    tags:
+    - Wall
+    - Natural
+  - type: MiningScannerViewable
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Rock
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 150
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/break_stone.ogg
+          params:
+            volume: -6
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        density: 2000
+        mask:
+        - FullTileMask
+        layer:
+        - WallLayer
+  - type: IconSmooth
+    key: walls
+    base: rock_
+
+- type: entity
+  parent: BaseAltRock
+  id: AsteroidAltRock
+  suffix: Low Yield, Standard Value
+  components:
+  - type: OreVein
+    oreChance: 0.2
+    oreRarityPrototypeId: RandomOreDistributionStandard
+
+- type: entity
+  parent: AsteroidAltRock
+  id: AsteroidAltRockMining
+  suffix: High Yield, Standard Value
+  components:
+  - type: OreVein
+    oreChance: 0.33
+    oreRarityPrototypeId: RandomOreDistributionStandard
+
+- type: entity
+  parent: AsteroidAltRock
+  id: AsteroidRockOreCrab
+  suffix: Ore Crab
+  components:
+  - type: OreVein
+    oreChance: 0.33
+    oreRarityPrototypeId: OreCrab
+
+- type: entity
+  parent: BaseAltRock
+  id: MountainRock
+  name: mountain rock
+  suffix: Un-mineable
+  description: A craggy mountain wall.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Walls/mountain_rock.rsi
+    state: full
+    drawdepth: Walls
+  - type: Icon
+    sprite: _Trauma/Structures/Walls/mountain_rock.rsi
+    state: full
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: MountainRock
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 1500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/break_stone.ogg
+          params:
+            volume: -6
+
+- type: entity
+  parent: MountainRock
+  id: MountainRockMining
+  suffix: Low Yield, High Value
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Walls/mountain_rock_ore.rsi
+    state: full
+    drawdepth: Walls
+  - type: Icon
+    sprite: _Trauma/Structures/Walls/mountain_rock_ore.rsi
+    state: full
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 300
+      behaviors:
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+      - !type:PlaySoundBehavior
+        sound:
+          path: /Audio/Effects/break_stone.ogg
+          params:
+            volume: -6
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: Rock
+  - type: OreVein
+    oreChance: 0.20
+    oreRarityPrototypeId: RandomOreDistributionHigh

@@ -16670,7 +16670,7 @@ entities:
     - type: Transform
       parent: 2
       pos: 15.292008,25.39704
-- proto: AsteroidRock
+- proto: MountainRock
   entities:
   - uid: 325
     components:
@@ -21492,7 +21492,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -28.5,51.5
-- proto: AsteroidRockMining
+- proto: MountainRockMining
   entities:
   - uid: 11014
     components:
