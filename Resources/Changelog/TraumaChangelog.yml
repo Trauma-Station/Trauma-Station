@@ -16336,3 +16336,10 @@ Entries:
   id: 1762
   time: '2026-11-01T20:09:55.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5174
+- author: Aviu
+  changes:
+  - type: Add
+    message: Blood cult can roll naturally.
+  id: 1763
+  time: '2026-11-02T02:22:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5214
