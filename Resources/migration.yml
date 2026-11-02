@@ -362,23 +362,21 @@ ClothingUniformTShirtKhakiPants: null
 ComputerShipyard: null
 # CourierBag: null Trauma
 CryogenicSleepUnitSpawnerPrisoner: null
-#DefaultStationBeaconBoxing: null Trauma
+# DefaultStationBeaconBoxing: null Trauma
 DefaultStationBeaconCameraServerRoom: null
-#DefaultStationBeaconConferenceRoom: null Trauma
+DefaultStationBeaconConferenceRoom: null Trauma
 DefaultStationBeaconCorpsman: null
+DefaultStationBeaconEngiOutpost: null
+DefaultStationBeaconExam: null
 # <Trauma>
-#DefaultStationBeaconEngiOutpost: null
-#DefaultStationBeaconExam: null
-#DefaultStationBeaconJanitorsOffice: null
-#DefaultStationBeaconMailroom: null
+# DefaultStationBeaconJanitorsOffice: null
+# DefaultStationBeaconMailroom: null
 # </Trauma>
 DefaultStationBeaconMantis: null
 DefaultStationBeaconMetempsychosis: null
-# <Trauma>
-#DefaultStationBeaconPark: null
-#DefaultStationBeaconPsychologist: null
-#DefaultStationBeaconVirology: null
-# </Trauma>
+DefaultStationBeaconPark: null
+DefaultStationBeaconPsychologist: null
+# DefaultStationBeaconVirology: null Trauma
 DrinkBubbleTeaGlass: null
 FishLabeler: null
 FoodLollipop: null
