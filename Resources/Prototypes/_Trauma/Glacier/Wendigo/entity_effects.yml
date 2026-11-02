@@ -1,0 +1,15 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entityEffect
+  id: WendigoStomp
+  effects:
+  - !type:ModifyKnockdown
+    time: 6
+  - !type:ThrowRandomly
+    distance: 8
+  - !type:HealthChange
+    ignoreResistances: true
+    splitDamage: Split
+    damage:
+      types:
+        Blunt: 20

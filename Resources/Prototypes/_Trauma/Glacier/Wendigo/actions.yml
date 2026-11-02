@@ -1,0 +1,74 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseAction
+  id: ActionWendigoHeavyStomp
+  name: Heavy Stomp (Phase I)
+  description: You stomp the ground, sending out a shockwave that knocks people back.
+  components:
+  - type: Action
+    useDelay: 10
+    raiseOnAction: true
+  - type: Sprite
+    layers:
+    - state: seismic_stomp # todo: change
+  - type: DoAfterArgs
+    delay: 5
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
+  - type: EffectAction
+    effects:
+    - !type:RelayNearby
+      compName: StatusEffects
+      range: 5
+      effect: !type:NestedEffect
+        proto: WendigoStomp
+    - !type:SpawnParticles
+      particleProto: VampireStompShockwave # todo replace
+
+- type: entity
+  parent: BaseAction
+  id: ActionWendigoTeleport
+  name: Teleport
+  description: You teleport to a random tile from your target.
+  components:
+  - type: Action
+    useDelay: 10
+    raiseOnAction: true
+    itemIconStyle: BigAction
+    checkCanInteract: false
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/blink.ogg # todo replace
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi # todo replace
+    layers:
+    - state: blink
+  - type: TargetAction
+    interactOnMiss: false
+    range: 2
+  - type: EntityTargetAction
+    event: !type:HandleTargetActionEvent
+    whitelist:
+      components:
+      - Body
+  - type: ActionRequirements
+    effects:
+      Performer:
+      - !type:RandomTeleport
+        radius:
+          min: 4.0
+          max: 4.0
+
+# Phase II abilities
+- type: entity
+  parent: ActionWendigoHeavyStomp
+  id: ActionWendigoHeavyStompII
+  name: Heavy Stomp (Phase II)
+  components:
+  - type: EffectAction
+    effects:
+    - !type:RelayNearby
+      compName: StatusEffects
+      range: 10
+      effect: !type:NestedEffect
+        proto: WendigoStomp
