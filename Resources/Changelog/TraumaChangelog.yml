@@ -16350,3 +16350,10 @@ Entries:
   id: 1764
   time: '2026-11-02T06:47:42.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5162
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Heretic armor hood now lets you use an air tank
+  id: 1765
+  time: '2026-11-02T17:21:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5235
