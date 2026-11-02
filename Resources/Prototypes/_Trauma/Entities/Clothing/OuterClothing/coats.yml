@@ -51,3 +51,17 @@
   - type: ToggleableClothing
     clothingPrototypes:
       head: ClothingHeadHelmetCsij
+
+- type: entity
+  parent: ClothingOuterStorageBase
+  id: ClothingOuterCourierDuster
+  name: courier duster
+  description: Makes you feel nuclear.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Coats/courierduster.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Coats/courierduster.rsi
+  - type: TemperatureProtection
+    heatingCoefficient: 0.1
+    coolingCoefficient: 0.1

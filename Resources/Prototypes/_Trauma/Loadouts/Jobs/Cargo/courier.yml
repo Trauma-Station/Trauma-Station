@@ -1,0 +1,74 @@
+# Head
+- type: loadout
+  id: CourierHead
+  equipment:
+    head: ClothingHeadCourier
+
+- type: loadout
+  id: CourierHeadFlipped
+  equipment:
+    head: ClothingHeadCourierFlipped
+
+# Jumpsuit
+- type: loadout
+  id: CourierJumpsuit
+  equipment:
+    jumpsuit: ClothingUniformCourier
+  groupBy: "jumpsuit"
+
+- type: loadout
+  id: CourierJumpskirt
+  equipment:
+    jumpsuit: ClothingUniformSkirtCourier
+  groupBy: "jumpskirt"
+
+# Back
+- type: loadout
+  id: CourierMessenger
+  equipment:
+    back: ClothingBackpackMessengerCourier
+  groupBy: "messenger"
+
+# PDA
+- type: loadout
+  id: CourierPDA
+  equipment:
+    id: CourierPDA
+
+- type: loadout
+  id: CourierPDAAlt
+  equipment:
+    id: CourierPDAAlt
+
+- type: loadout
+  id: CargoPDA
+  equipment:
+    id: CargoPDA
+
+#Plasmaman Drip
+- type: loadout
+  id: CourierEnvirohelm
+  equipment:
+    head: ClothingHeadEnvirohelmCourier
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman
+
+- type: loadout
+  id: CourierEnvirosuit
+  equipment:
+    jumpsuit: ClothingUniformEnvirosuitCourier
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman
+
+- type: loadout
+  id: CourierEnvirogloves
+  equipment:
+    gloves: ClothingHandsGlovesEnviroglovesCourier
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman

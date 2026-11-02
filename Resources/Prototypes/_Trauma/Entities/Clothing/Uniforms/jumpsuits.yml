@@ -196,3 +196,14 @@
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/sodajerk.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Uniforms/Jumpsuit/sodajerk.rsi
+
+- type: entity
+  parent: ClothingUniformBase
+  id: ClothingUniformCourier
+  name: courier jumpsuit
+  description: Makes you feel like a wanderer.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/courier.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Uniforms/Jumpsuit/courier.rsi

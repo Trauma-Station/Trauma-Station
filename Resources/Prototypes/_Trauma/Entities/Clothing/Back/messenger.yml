@@ -1,0 +1,8 @@
+- type: entity
+  parent: ClothingBackpackMessengerBase
+  id: ClothingBackpackMessengerCourier
+  name: courier messenger bag
+  description: A robust bag for transportation of letters and parcels.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Back/Messenger/courier.rsi

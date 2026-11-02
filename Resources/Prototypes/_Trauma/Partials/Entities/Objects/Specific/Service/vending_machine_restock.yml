@@ -1,0 +1,8 @@
+- type: entity
+  id: VendingMachineRestockClothes
+  components:
+  - type: VendingMachineRestock
+    canRestock:
+    - BoxingDrobeInventory
+    - CourierDrobeInventory
+    - RepDrobeInventory
