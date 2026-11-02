@@ -33,14 +33,6 @@
     defaultText: station-beacon-virology
 
 - type: entity
-  parent: DefaultStationBeaconService
-  id: DefaultStationBeaconJanitorsOffice
-  suffix: Janitor
-  components:
-  - type: NavMapBeacon
-    defaultText: station-beacon-janitor
-
-- type: entity
   parent: DefaultStationBeaconSupply
   id: DefaultStationBeaconMailroom
   suffix: Mail

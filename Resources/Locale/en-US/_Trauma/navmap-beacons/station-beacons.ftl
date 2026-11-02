@@ -1,5 +1,4 @@
 station-beacon-xenobio = Xenobiology
 station-beacon-genetics = Genetics
 station-beacon-reactor = Reactor
-station-beacon-janitor = Janitor
 station-beacon-mail = Mail

@@ -35,14 +35,6 @@
 
 - type: entity
   parent: Holopad
-  id: HolopadServiceJanitor
-  suffix: Janitor
-  components:
-  - type: Label
-    localizedLabel: station-beacon-janitor
-
-- type: entity
-  parent: Holopad
   id: HolopadCargoMailroom
   suffix: Mailroom
   components:
