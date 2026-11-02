@@ -8,8 +8,8 @@
   - type: Sprite
     layers:
     - state: red
-    - sprite: _DV/Structures/Walls/asteroid_rock.rsi
-      state: full
+    - sprite: Structures/Walls/rock.rsi
+      state: rock_asteroid
   - type: EntityTableSpawner
     table: !type:NestedSelector
       tableId: RandomRockTable

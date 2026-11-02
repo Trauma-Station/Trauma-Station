@@ -16,17 +16,17 @@
 
 # Cargo
 - type: entity
-  id: SpawnPointCourier
   parent: SpawnPointJobBase
-  name: courier
+  id: SpawnPointCourier
+  name: courier spawn point
   components:
   - type: SpawnPoint
     job_id: Courier
   - type: Sprite
-    sprite: _Trauma/Markers/jobs.rsi
     layers:
     - state: green
     - state: courier
+      sprite: _Trauma/Markers/jobs.rsi
 
 # Science
 
@@ -55,14 +55,14 @@
     layers:
     - state: green
     - state: rancher
-      sprite: _Trauma/Markers/jobs.rsi
+      sprite: _Trauma/Markers/jobs32x48.rsi
 
 # Wildcards
 
 - type: entity
   parent: SpawnPointJobBase
   id: SpawnPointBoxer
-  name: boxer
+  name: boxer spawn point
   components:
   - type: SpawnPoint
     job_id: Boxer
@@ -74,7 +74,7 @@
 - type: entity
   parent: SpawnPointJobBase
   id: SpawnPointZookeeper
-  name: zookeeper
+  name: zookeeper spawn point
   components:
   - type: SpawnPoint
     job_id: Zookeeper

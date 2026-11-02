@@ -8,7 +8,7 @@
   components:
   - type: Sprite
     layers:
-    - sprite: Structures/Power/Generation/solar_panel.rsi
+    - sprite: _Trauma/Structures/Power/Generation/solar_panel.rsi
       state: random_solar
   - type: EntityTableSpawner
     offset: 0
