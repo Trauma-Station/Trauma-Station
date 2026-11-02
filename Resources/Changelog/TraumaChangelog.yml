@@ -16343,3 +16343,10 @@ Entries:
   id: 1763
   time: '2026-11-02T02:22:47.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5214
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: Eggnog heals bones.
+  id: 1764
+  time: '2026-11-02T06:47:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5162
