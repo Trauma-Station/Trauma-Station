@@ -48,8 +48,8 @@
     damageContainer: Inorganic
   - type: NoSlip
   - type: MovementSpeedModifier
-    baseWalkSpeed: 1.5
-    baseSprintSpeed: 1.5
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 4.0
   - type: MobThresholds
     thresholds:
       0: Alive
