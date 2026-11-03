@@ -120,3 +120,13 @@
     plantId: SteelWheatPlants
   - type: Sprite
     sprite: _Trauma/Objects/Specific/Hydroponics/steel_wheat.rsi
+
+- type: entity
+  parent: SeedBase
+  id: PlasticcapSeeds
+  name: packet of plastic cap spores
+  components:
+  - type: Seed
+    plantId: PlasticcapPlants
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/plasticcap.rsi

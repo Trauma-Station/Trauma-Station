@@ -21,6 +21,8 @@
   - type: Item
     size: Small
   - type: EmptyScroll
+  - type: GlassChickenBlacklist
+    replacement: ScrollFullRandom # get fucked
 
 - type: entity
   parent: Paper

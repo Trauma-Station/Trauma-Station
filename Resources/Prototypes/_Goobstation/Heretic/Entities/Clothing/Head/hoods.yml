@@ -29,6 +29,7 @@
     highPressureMultiplier: 0.1
     lowPressureMultiplier: 1000
   - type: IdentityBlocker
+  - type: BreathMask
 
 - type: entity
   parent: [ ArmorHereticRust, ClothingHeadHatHoodHeretic ]

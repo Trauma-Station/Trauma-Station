@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: reaction
+  id: Polyethylene
+  quantized: true
+  minTemp: 453 # ~180C
+  reactants:
+    Oxygen:
+      amount: 15
+      # open top beaker is not airtight so this isn't a catalyst, some oxygen is lost
+    Ethylene:
+      amount: 10
+  products:
+    Oxygen: 13
+  effects:
+  - !type:AdjustSolutionThermalEnergy
+    delta: 1500 # about 0.5MJ per sheet, I hope this is in kJ because literally nothing heat capacity related states its units :)
+  - !type:SpawnEntity
+    entity: SheetPlastic1
+    number: 5 # 83.33333333333333333mL of ethylene -> 0.5L of LDPE, waow

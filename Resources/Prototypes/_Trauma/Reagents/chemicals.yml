@@ -194,3 +194,28 @@
   desc: reagent-desc-calcium-hydroxide
   physicalDesc: reagent-physical-desc-powdery
   color: white
+
+- type: reagent
+  id: Ethylene
+  name: reagent-name-ethylene
+  desc: reagent-desc-ethylene
+  physicalDesc: reagent-physical-desc-gaseous
+  color: white # colourless gas
+  flavor: sweet
+  boilingPoint: 169.5 # -103.7 C
+  meltingPoint: 104.0 # -169.2 C
+  # TODO: autoignition at 816K
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Asphyxiation: 1.5 # yummy
+  reactiveEffects:
+    Flammable:
+      methods: [ Touch ]
+      effects:
+      # fire diamond flammability 4...
+      - !type:Flammable
+        multiplier: 0.3

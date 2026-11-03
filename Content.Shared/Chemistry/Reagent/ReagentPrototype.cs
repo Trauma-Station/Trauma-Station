@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Shared.EntityConditions;
 using Content.Trauma.Common.Reagents;
 // </Trauma>
 using System.Collections.Frozen;
@@ -39,7 +38,7 @@ namespace Content.Shared.Chemistry.Reagent
         public string LocalizedName => Loc.GetString(Name);
 
         [DataField]
-        public ProtoId<ReagentGroupPrototype> Group { get; private set; } = "Unknown"; // Trauma - Added protoid
+        public ProtoId<ReagentGroupPrototype> Group { get; private set; } = "Unknown"; // Trauma - use ProtoId
 
         [ParentDataField(typeof(AbstractPrototypeIdArraySerializer<ReagentPrototype>))]
         public string[]? Parents { get; private set; }
@@ -128,14 +127,6 @@ namespace Content.Shared.Chemistry.Reagent
         [DataField]
         public bool MetamorphicChangeColor { get; private set; } = true;
 
-        // Goobstation
-        /// <summary>
-        /// If false, reagent will be put back into the puddle after slip on puddle.
-        /// </summary>
-        [DataField]
-        public bool SticksToSkin = true;
-
-
         /// <summary>
         /// If not null, makes something slippery. Also defines slippery interactions like stun time and launch mult.
         /// </summary>
@@ -180,12 +171,6 @@ namespace Content.Shared.Chemistry.Reagent
         /// </summary>
         [DataField]
         public bool WorksOnTheDead;
-
-        /// <summary>
-        /// Shitmed - Should this reagent only work on unconscious entities?
-        /// </summary>
-        [DataField]
-        public bool? WorksOnUnconscious;
 
         [DataField, AlwaysPushInheritance]
         public ReagentMetabolisms? Metabolisms;
@@ -309,12 +294,6 @@ namespace Content.Shared.Chemistry.Reagent
         [DataField]
         public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2>? Metabolites;
 
-        /// <summary>
-        /// Trauma - Group conditions that apply before individual effects.
-        /// </summary>
-        [DataField]
-        public EntityCondition[] Conditions = [];
-
         public string EntityEffectFormat => "guidebook-reagent-effect-description";
 
         public ReagentEffectsGuideEntry MakeGuideEntry(IPrototypeManager prototype, IEntitySystemManager entSys, ReagentPrototype proto)
@@ -327,24 +306,24 @@ namespace Content.Shared.Chemistry.Reagent
     [Serializable, NetSerializable]
     public struct ReagentEffectsGuideEntry
     {
+        /// <summary>
+        /// Trauma - Description of metabolism group conditions, if it has any
+        /// </summary>
+        public string[] GroupConditions;
+
         public FixedPoint2 MetabolismRate;
 
         public string[] EffectDescriptions;
 
         public Dictionary<ProtoId<ReagentPrototype>, FixedPoint2>? Metabolites;
 
-        /// <summary>
-        /// Trauma - Description of metabolism group conditions, if it has any
-        /// </summary>
-        public string[] GroupConditions;
-
-        // Trauma - added groupConditions
-        public ReagentEffectsGuideEntry(FixedPoint2 metabolismRate, string[] effectDescriptions, Dictionary<ProtoId<ReagentPrototype>, FixedPoint2>? metabolites, string[] groupConditions)
+        public ReagentEffectsGuideEntry(FixedPoint2 metabolismRate, string[] effectDescriptions, Dictionary<ProtoId<ReagentPrototype>, FixedPoint2>? metabolites,
+            string[] groupConditions) // Trauma
         {
+            GroupConditions = groupConditions; // Trauma
             MetabolismRate = metabolismRate;
             EffectDescriptions = effectDescriptions;
             Metabolites = metabolites;
-            GroupConditions = groupConditions; // Trauma
         }
     }
 
