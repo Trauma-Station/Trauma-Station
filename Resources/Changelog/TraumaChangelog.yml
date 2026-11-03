@@ -16386,3 +16386,10 @@ Entries:
   id: 1768
   time: '2026-11-03T08:36:30.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5084
+- author: yglop
+  changes:
+  - type: Add
+    message: Plastic tower caps mutation.
+  id: 1769
+  time: '2026-11-03T11:24:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5176
