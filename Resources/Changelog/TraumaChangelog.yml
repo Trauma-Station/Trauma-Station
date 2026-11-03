@@ -16427,3 +16427,17 @@ Entries:
   id: 1773
   time: '2026-11-03T17:27:27.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5249
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added 3 new thieving kits for thiefs to use with it including Tinkerer,
+      Escapist, Chemist
+  - type: Tweak
+    message: >-
+      Tweaked the contents of the following thieving kits: Breacher, Syndie,
+      Sleeper, and Communicator. All of them received buffs except for syndie
+      kit which got a minor tweak
+  id: 1774
+  time: '2026-11-03T20:15:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5175
