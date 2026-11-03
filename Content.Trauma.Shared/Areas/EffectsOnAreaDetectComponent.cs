@@ -6,6 +6,7 @@ namespace Content.Trauma.Shared.Areas;
 
 /// <summary>
 /// Component that runs entity effects when you enter/exit an area.
+/// On client it does nothing when applying server state, only direct movement prediction.
 ///
 /// Requires <see cref="AreaDetectorComponent"/> to work.
 /// </summary>
