@@ -17,7 +17,7 @@
     soundHit:
       path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
   - type: Sprite
-    sprite: _Trauma/BloodCult/Entities/Items/arcane_barrage.rsi
+    sprite: _Trauma/BloodCult/Entities/Items/arcane_barrage.rsi # looks ok for this boss idc
     state: bullet
   - type: Physics
   - type: Fixtures

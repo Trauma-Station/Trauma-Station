@@ -1,0 +1,196 @@
+- type: entity
+  abstract: true
+  parent: BaseAction
+  id: BaseFrostMinerAction
+  components:
+  - type: Action
+    useDelay: 5
+    raiseOnAction: true
+    checkCanInteract: false
+  - type: EntityTargetAction
+    event: !type:ActionProjectileAdvancedEvent
+  - type: TargetAction
+    range: 15
+    interactOnMiss: false
+
+# First we bullet, then we hell. This is... bullet hell!
+- type: entity
+  parent: BaseFrostMinerAction
+  id: ActionFrostOrbsEasy
+  name: Frost Orbs (Easy)
+  description: Shoots out eight frost orbs that home in after a second, and detonate after ten seconds, exploding into five ice blast projectiles.
+  components:
+  - type: ActionProjectileAdvanced
+    projectilePatterns:
+    - projProto: ProjectileFrostMinerOrb
+      angle: 360
+      amount: 6
+      speed: 0.5
+
+- type: entity
+  parent: BaseFrostMinerAction
+  id: ActionFrostOrbsHard
+  name: Frost Orbs (Hard)
+  description: Shoots out sixteen frost orbs that home in after a second, and detonate after ten seconds, exploding into five ice blast projectiles.
+  components:
+  - type: ActionProjectileAdvanced
+    projectilePatterns:
+    - projProto: ProjectileFrostMinerOrb
+      angle: 360
+      amount: 16
+      speed: 0.5
+
+- type: entity
+  parent: BaseFrostMinerAction
+  id: ActionSnowballMachineGunEasy
+  name: Snowball Machine Gun (Easy)
+  description: Shoots out sixty snowballs at its target, each of which deal 5 brute damage, in a 45 degree spread.
+  components:
+  - type: ActionProjectileAdvanced
+    projectilePatterns:
+    - projProto: ProjectileIceBlastLow
+      angle: 45
+      amount: 20
+      speed: 15
+    - projProto: ProjectileIceBlastLow
+      angle: 45
+      amount: 20
+      speed: 15
+    - projProto: ProjectileIceBlastLow
+      angle: 45
+      amount: 20
+      speed: 15
+
+- type: entity
+  parent: BaseFrostMinerAction
+  id: ActionSnowballMachineGunHard
+  name: Snowball Machine Gun (Hard)
+  description: Shoots out forty snowballs at the target, and five waves of nine evenly distributed ice blasts in a 360 degree spread.
+  components:
+  - type: ActionProjectileAdvanced
+    projectilePatterns:
+    # good luck sonion o7
+    - projProto: ProjectileIceBlastLow
+      angle: 5
+      amount: 5
+      speed: 10
+    - projProto: ProjectileIceBlastLow
+      angle: 5
+      amount: 5
+      speed: 10
+    - projProto: ProjectileIceBlastLow
+      angle: 5
+      amount: 5
+      speed: 10
+    - projProto: ProjectileIceBlastLow
+      angle: 5
+      amount: 5
+      speed: 10
+    - projProto: ProjectileIceBlastLow
+      angle: 5
+      amount: 5
+      speed: 10
+    - projProto: ProjectileIceBlastLow
+      angle: 5
+      amount: 5
+      speed: 10
+    - projProto: ProjectileIceBlastLow
+      angle: 5
+      amount: 5
+      speed: 10
+    - projProto: ProjectileIceBlastLow
+      angle: 5
+      amount: 5
+      speed: 10
+    # Five Waves of ts, in 2 seconds
+    - projProto: ProjectileIceBlast
+      angle: 360
+      amount: 9
+      speed: 15
+      delay: 0.4
+    - projProto: ProjectileIceBlast
+      angle: 360
+      amount: 9
+      speed: 15
+      delay: 0.4
+    - projProto: ProjectileIceBlast
+      angle: 360
+      amount: 9
+      speed: 15
+      delay: 0.4
+    - projProto: ProjectileIceBlast
+      angle: 360
+      amount: 9
+      speed: 15
+      delay: 0.4
+    - projProto: ProjectileIceBlast
+      angle: 360
+      amount: 9
+      speed: 15
+      delay: 0.4
+
+- type: entity
+  parent: BaseFrostMinerAction
+  id: ActionIceShotgunEasy
+  name: Ice Shotgun (Easy)
+  description: Shoots out sixty snowballs at its target, each of which deal 5 brute damage, in a 45 degree spread.
+  components:
+  - type: ActionProjectileAdvanced
+    projectilePatterns:
+    - projProto: ProjectileIceBlast
+      angle: 80
+      amount: 5
+      speed: 10
+      delay: 0.2
+    - projProto: ProjectileIceBlast
+      angle: 60
+      amount: 4
+      speed: 10
+      delay: 0.2
+    - projProto: ProjectileIceBlast
+      angle: 80
+      amount: 5
+      speed: 10
+      delay: 0.2
+    - projProto: ProjectileIceBlast
+      angle: 60
+      amount: 4
+      speed: 10
+      delay: 0.2
+    - projProto: ProjectileIceBlast
+      angle: 80
+      amount: 5
+      speed: 5
+
+- type: entity
+  parent: BaseFrostMinerAction
+  id: ActionIceShotgunHard
+  name: Ice Shotgun (Hard)
+  description: Shoots out sixty snowballs at its target, each of which deal 5 brute damage, in a 45 degree spread.
+  components:
+  - type: ActionProjectileAdvanced
+    projectilePatterns:
+    - projProto: ProjectileIceBlast
+      angle: 360
+      amount: 12
+      speed: 10
+      delay: 0.2
+    - projProto: ProjectileIceBlast
+      angle: 60
+      amount: 5
+      speed: 10
+      delay: 0.2
+    - projProto: ProjectileIceBlast
+      angle: 360
+      amount: 12
+      speed: 10
+      delay: 0.2
+    - projProto: ProjectileIceBlast
+      angle: 60
+      amount: 5
+      speed: 10
+      delay: 0.2
+    - projProto: ProjectileIceBlast
+      angle: 360
+      amount: 12
+      speed: 10

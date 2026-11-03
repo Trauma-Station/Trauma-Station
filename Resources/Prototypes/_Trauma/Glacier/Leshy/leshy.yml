@@ -1,6 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# The yaml is wendigo cause im lazy
 - type: entity
   id: MobLeshy
   name: Leshy
@@ -15,7 +14,7 @@
         shape:
           !type:PhysShapeAabb
           bounds: "-0.35,-0.6,0.35,0.6"
-        density: 10000 # 10 tons. Can't really push this thing
+        density: 10000
         mask:
         - MobMask
         layer:
@@ -81,18 +80,20 @@
     - ActionWendigoHeavyStomp
     - ActionWendigoHeavyStompII
     - ActionWendigoProjectileSpread
+    - ActionWendigoProjectileSpreadII
     - ActionWendigoProjectileSpreadShotgun
+    - ActionWendigoProjectileSpreadShotgunII
   - type: Fauna
   - type: Anger
     totalHp: 2500
   - type: Aggressive
-    forgiveRange: 100 # fuck you
-  - type: MobPhases
+    forgiveRange: 25
+  - type: MobPhases # todo: this should use percentage values instead of literal values, since bosses scale with HP per player...
     phaseThresholds:
       0:    1
       1250: 2
   - type: BossMusic
-    soundId: Hierophant # todo change
+    soundId: Leshy
   - type: TileMovement
   - type: SpawnLootOnDeath
     table: !type:AllSelector
@@ -111,7 +112,7 @@
           time: null
         - !type:MegafaunaActionDelay
           actionDelay: 0.5
-  - type: MegafaunaShutdown
+  - type: MegafaunaShutdownEffects
     effects:
     # In case we reached phase 2, reset the stuff to the defaults
     - !type:MovementSpeedModifier
@@ -120,13 +121,21 @@
       type: Set
     - !type:MegafaunaActionDelay
       actionDelay: 2
+  - type: MegafaunaStartupEffects
+    effects:
+    # Scare the shit out of the players :tf:
+    - !type:PlaySoundEffect
+      sound:
+        path: /Audio/_Trauma/Glacier/Leshy/leshy_roar.ogg
+        params:
+          volume: 10
   - type: MegafaunaAi
     actionDelay: 2
     selector:
       id: Wendigo
   - type: AngerPlayerScaling
     angerScale: 1.1
-    hpScale: 1.2
+    hpScale: 1.1
   - type: MegafaunaAnchor
   - type: MegafaunaGodmode
   - type: MegafaunaRejuvenate

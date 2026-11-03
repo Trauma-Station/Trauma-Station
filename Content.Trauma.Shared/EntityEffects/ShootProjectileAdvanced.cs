@@ -74,13 +74,11 @@ public sealed partial class ShootProjectileAdvancedEffectSystem : EntityEffectSy
         if (spread)
         {
             var segmentAngle =  fullAngle/ amount;
-            var shootCount = 0;
             for (var i = 0; i < amount; i++)
             {
-                var angleMin = segmentAngle * shootCount;
-                var angleMax = segmentAngle * (shootCount + 1);
+                var angleMin = segmentAngle * i;
+                var angleMax = segmentAngle * (i + 1);
                 var angle = Angle.FromDegrees(rand.Next(angleMin, angleMax));
-                shootCount++;
 
                 var direction = angle.ToVec().Normalized();
                 var proj = PredictedSpawnAtPosition(effect.Projectile, entity.Comp.Coordinates);
