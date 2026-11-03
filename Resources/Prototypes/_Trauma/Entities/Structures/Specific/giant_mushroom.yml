@@ -32,7 +32,12 @@
     layers:
     - state: base
     - state: top
+      map: [ "random" ]
       shader: unshaded
+  - type: RandomSprite
+    available:
+    - random:
+        top: Rainbow
   - type: Fixtures
     fixtures:
       fix1:
