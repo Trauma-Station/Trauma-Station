@@ -12,11 +12,10 @@ using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Whitelist;
-using Content.Trauma.Shared.Funeral.Components;
 using Content.Trauma.Shared.Chemistry;
 using Robust.Shared.Audio.Systems;
 
-namespace Content.Trauma.Shared.Funeral.Systems;
+namespace Content.Trauma.Shared.Funeral;
 
 /// <summary>
 /// Handles marking corpses for funerals with a funeral tool.
@@ -66,15 +65,15 @@ public sealed partial class FuneralAddSystem : EntitySystem
             return;
         }
 
-        // check target was not made via cube
-        if (HasComp<CubeBornComponent>(target))
+        // check target was not made via cube or is an NPC / unidentified corpse
+        if (HasComp<CubeBornComponent>(target) || !TryComp<MindContainerComponent>(target, out var mind) || !mind.HadMind)
         {
             _popup.PopupEntity("Can't consecrate an individual with no history.", user, user, PopupType.SmallCaution);
             return;
         }
 
         // check target's soul moved on
-        if (TryComp<MindContainerComponent>(target, out var mind) && mind.HasMind)
+        if (mind.HasMind)
         {
             _popup.PopupEntity("Can't consecrate because the soul is still present.", user, user, PopupType.SmallCaution);
             return;
