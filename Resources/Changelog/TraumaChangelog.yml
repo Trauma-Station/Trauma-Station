@@ -16420,3 +16420,10 @@ Entries:
   id: 1772
   time: '2026-11-03T16:36:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5184
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Nerfed healing of ibuprofen to 3.33 brute/s from 6.66
+  id: 1773
+  time: '2026-11-03T17:27:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5249
