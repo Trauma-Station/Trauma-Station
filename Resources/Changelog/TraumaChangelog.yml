@@ -16404,3 +16404,10 @@ Entries:
   id: 1770
   time: '2026-11-03T12:49:32.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5243
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed betty slop
+  id: 1771
+  time: '2026-11-03T15:14:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5246
