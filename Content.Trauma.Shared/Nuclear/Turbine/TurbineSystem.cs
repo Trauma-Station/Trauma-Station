@@ -210,10 +210,21 @@ public abstract partial class TurbineSystem : EntitySystem
             ent.Comp.BladeHealthMax = (int)Math.Max(1, 5 * blade.Hardness);
             ent.Comp.BladeHealth = ent.Comp.BladeHealthMax;
         }
+        else
+        {
+            ent.Comp.TurbineMass = 200; // low but not 0 to avoid divide by 0
+            ent.Comp.BladeHealth = 0;
+            ent.Comp.BladeHealthMax = 1;
+        }
+        DirtyFields(ent.AsNullable(), null, nameof(TurbineComponent.BladeHealth), nameof(TurbineComponent.BladeHealthMax));
 
         if (_propsQuery.TryComp(ent.Comp.CurrentStator, out var stator))
         {
             ent.Comp.PowerMultiplier = (float)Math.Max(0.2, 0.2 * stator.ElectricalConductivity);
+        }
+        else
+        {
+            ent.Comp.PowerMultiplier = 0f;
         }
     }
 
