@@ -51,6 +51,7 @@ using Content.Shared.IdentityManagement;
 using Content.Shared.Light.EntitySystems;
 using Content.Shared.Medical;
 using Content.Shared.Mind;
+using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Components;
