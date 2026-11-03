@@ -16411,3 +16411,12 @@ Entries:
   id: 1771
   time: '2026-11-03T15:14:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5246
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Reduced the stamina damage on stun prod from 100 to 60
+  - type: Fix
+    message: Fixed stun baton doing 80 stamina damage per hit now it only does 55 on M1
+  id: 1772
+  time: '2026-11-03T16:36:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5184
