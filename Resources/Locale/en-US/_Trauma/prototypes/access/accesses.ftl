@@ -1,5 +1,10 @@
-id-card-access-level-revolutionary = Revolutionary
+id-card-access-level-boxer = Boxer
+id-card-access-level-clown = Clown
 id-card-access-level-genetics = Genetics
 id-card-access-level-library = Library
-id-card-access-level-psychologist = Psychologist
 id-card-access-level-mail = Mail
+id-card-access-level-mime = Mime
+id-card-access-level-musician = Musician
+id-card-access-level-psychologist = Psychologist
+id-card-access-level-revolutionary = Revolutionary
+id-card-access-level-zookeeper = Zookeeper
