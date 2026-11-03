@@ -154,7 +154,8 @@
   name: xenomorph-title
   description: xenomorph-description
   showInVote: false
-  minPlayers: 40
+  # TODO: Fix minPlayers so this can be reenabled.
+  # minPlayers: 40
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler
