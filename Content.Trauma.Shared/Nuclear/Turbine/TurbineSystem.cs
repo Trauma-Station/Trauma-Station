@@ -213,7 +213,7 @@ public abstract partial class TurbineSystem : EntitySystem
         else
         {
             ent.Comp.TurbineMass = 200; // low but not 0 to avoid divide by 0
-            ent.Comp.BladeHealth = 0;
+            ent.Comp.BladeHealth = 1;
             ent.Comp.BladeHealthMax = 1;
         }
         DirtyFields(ent.AsNullable(), null, nameof(TurbineComponent.BladeHealth), nameof(TurbineComponent.BladeHealthMax));
