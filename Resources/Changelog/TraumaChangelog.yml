@@ -16357,3 +16357,14 @@ Entries:
   id: 1765
   time: '2026-11-02T17:21:48.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5235
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Empty scrolls can no longer be duped by glass chickens.
+  - type: Tweak
+    message: You can no longer consecrate NPC humanoid corpses, only players.
+  - type: Fix
+    message: Fixed some laser types not working for the artifact trigger.
+  id: 1766
+  time: '2026-11-03T08:08:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5238
