@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Lavaland.Shared.Megafauna;
 using Content.Lavaland.Shared.Megafauna.Selectors;
 using Content.Shared.EntityEffects;
