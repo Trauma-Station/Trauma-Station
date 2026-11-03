@@ -637,7 +637,7 @@
       effects:
       - !type:EvenHealthChange
         damage:
-          Brute: -1
+          Brute: -0.5
       - !type:AdjustTemperature # 1/10 of lepo
         conditions:
         - !type:TemperatureCondition
