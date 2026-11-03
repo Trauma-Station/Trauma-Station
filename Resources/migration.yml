@@ -255,9 +255,8 @@ LockableButtonRobotics: null
 LockerChiefJusticeFilled: null
 LockerClerkFilled: null
 LockerParamedicFilledHardsuit: SuitStorageParamedic
-LockerPsychologistFilled: LockerMedicalFilled # TODO: Port Psychologist shit or make yml stuff
 LockerQuarterMasterFilledHardsuit: SuitStorageQM
-LockerSurgeonFilled: LockerMedicalFilled # TODO: Port Surgeon shit or make yml stuff
+LockerSurgeonFilled: LockerMedicalFilled
 LogisticsTechFab: CargoTechFab
 N14ChairArmchair: ComfyChair # TODO: Port
 N14ChairOfficeErgonomic: SpawnVehicleChairOfficeDark # TODO: Port

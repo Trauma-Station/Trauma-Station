@@ -1,0 +1,6 @@
+- type: entity
+  parent: LockerBase
+  id: LockerBaseTrauma
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Storage/closet.rsi
