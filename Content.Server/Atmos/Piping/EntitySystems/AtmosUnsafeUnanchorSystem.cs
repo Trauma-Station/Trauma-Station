@@ -83,6 +83,11 @@ namespace Content.Server.Atmos.Piping.EntitySystems
 
             if (_atmosphere.GetContainingMixture(uid, true, true) is not { } environment)
                 environment = GasMixture.SpaceGas;
+            // <Trauma> - don't leak above crazy pressures so you can't have infinite pressure
+            // they don't take in air anyway so its not physically accurate who cares
+            if (environment.Pressure > 90 * Atmospherics.OneAtmosphere)
+                return;
+            // </Trauma>
 
             var buffer = new GasMixture();
 

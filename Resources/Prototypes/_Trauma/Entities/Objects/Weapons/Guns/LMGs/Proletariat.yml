@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseItem, BaseRevMajorContraband ]
+  parent: [ BaseItem, BaseRevMajorContraband, BaseStockHit ]
   id: WeaponLightMachineGunProletariat
   name: Proletariat
   description: An ancient LMG named for the classes it was used to oppress, until that class got ahold of it. Takes .22 short turret mags.
@@ -81,16 +81,6 @@
   - type: EmitSoundOnLand
     sound:
       collection: SMGDrop
-  - type: AltFireMelee
-    attackType: Heavy
-  - type: MeleeWeapon
-    damage:
-      types:
-       Blunt: 10
-    angle: 0
-    wideAnimationRotation: 90
-    soundHit:
-      collection: MetalThud
   - type: MagazineVisuals
     magState: mag
     steps: 1

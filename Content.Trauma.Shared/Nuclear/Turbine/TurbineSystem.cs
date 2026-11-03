@@ -23,8 +23,10 @@ namespace Content.Trauma.Shared.Nuclear.Turbine;
 
 public abstract partial class TurbineSystem : EntitySystem
 {
+    [Dependency] private NuclearMachineSystem _machine = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] protected SharedAudioSystem Audio = default!;
+    [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedDeviceLinkSystem _device = default!;
     [Dependency] protected SharedPopupSystem Popup = default!;
     [Dependency] private SharedToolSystem _tool = default!;
@@ -39,6 +41,9 @@ public abstract partial class TurbineSystem : EntitySystem
     {
         _device.EnsureSourcePorts(ent.Owner, ent.Comp.SpeedPort, ent.Comp.SpeedHighPort, ent.Comp.SpeedLowPort);
         _device.EnsureSinkPorts(ent.Owner, ent.Comp.StatorLoadPort, ent.Comp.FlowRatePort);
+
+        ent.Comp.BladeSlot = _container.EnsureContainer<ContainerSlot>(ent.Owner, BladeContainer);
+        ent.Comp.StatorSlot = _container.EnsureContainer<ContainerSlot>(ent.Owner, StatorContainer);
     }
 
     [SubscribeLocalEvent]
@@ -153,6 +158,21 @@ public abstract partial class TurbineSystem : EntitySystem
         Popup.PopupEntity(Loc.GetString("turbine-repair", ("target", ent), ("tool", args.Used!)), ent, args.User);
         _damage.ClearAllDamage(ent.Owner);
     }
+    #endregion
+
+    [SubscribeLocalEvent]
+    private void OnChangeFlowRate(Entity<TurbineComponent> ent, ref TurbineChangeFlowRateMessage args)
+    {
+        if (SetFlowRate(ent, args.FlowRate))
+            _machine.QueueLog(ent, args.Actor, args.Monitor);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnChangeStatorLoad(Entity<TurbineComponent> ent, ref TurbineChangeStatorLoadMessage args)
+    {
+        if (SetStatorLoad(ent, args.StatorLoad))
+            _machine.QueueLog(ent, args.Actor, args.Monitor);
+    }
 
     [SubscribeLocalEvent]
     private void OnEjectAttempt(EntityUid uid, TurbineComponent comp, ref ItemSlotEjectAttemptEvent args)
@@ -169,34 +189,12 @@ public abstract partial class TurbineSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnPartInserted(Entity<TurbineComponent> ent, ref EntInsertedIntoContainerMessage args)
     {
-        switch (args.Container.ID)
-        {
-            case BladeContainer:
-                ent.Comp.CurrentBlade = args.Entity;
-                break;
-            case StatorContainer:
-                ent.Comp.CurrentStator = args.Entity;
-                break;
-            default:
-                return;
-        }
         UpdatePartValues(ent);
     }
 
     [SubscribeLocalEvent]
     private void OnPartEjected(Entity<TurbineComponent> ent, ref EntRemovedFromContainerMessage args)
     {
-        switch (args.Container.ID)
-        {
-            case BladeContainer:
-                ent.Comp.CurrentBlade = null;
-                break;
-            case StatorContainer:
-                ent.Comp.CurrentStator = null;
-                break;
-            default:
-                return;
-        }
         UpdatePartValues(ent);
     }
 
@@ -228,10 +226,21 @@ public abstract partial class TurbineSystem : EntitySystem
             ent.Comp.BladeHealthMax = (int)Math.Max(1, 5 * blade.Hardness);
             ent.Comp.BladeHealth = ent.Comp.BladeHealthMax;
         }
+        else
+        {
+            ent.Comp.TurbineMass = 200; // low but not 0 to avoid divide by 0
+            ent.Comp.BladeHealth = 1;
+            ent.Comp.BladeHealthMax = 1;
+        }
+        DirtyFields(ent.AsNullable(), null, nameof(TurbineComponent.BladeHealth), nameof(TurbineComponent.BladeHealthMax));
 
         if (_propsQuery.TryComp(ent.Comp.CurrentStator, out var stator))
         {
             ent.Comp.PowerMultiplier = (float)Math.Max(0.2, 0.2 * stator.ElectricalConductivity);
+        }
+        else
+        {
+            ent.Comp.PowerMultiplier = 0f;
         }
     }
 
@@ -265,8 +274,6 @@ public abstract partial class TurbineSystem : EntitySystem
 
         UpdateAppearance(uid, comp);
     }
-
-    #endregion
 
     public bool AdjustStatorLoad(Entity<TurbineComponent> ent, float change)
         => SetStatorLoad(ent, ent.Comp.StatorLoad + change);

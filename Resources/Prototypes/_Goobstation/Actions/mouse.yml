@@ -11,6 +11,8 @@
     layers:
     - state: cheesewedge
   - type: Action
+    itemIconStyle: NoItem
+    raiseOnUser: true # the action doesnt support having the logic... yet
     useDelay: 1
     sound: !type:SoundPathSpecifier
       path: /Audio/Effects/pop.ogg

@@ -142,6 +142,8 @@
     - id: PosterLegitTyrone
     #- id: PosterLegitHelio # Trauma - Cull scurret references ingame.
     - id: PosterLegitBotanyFear
+    - id: PosterLegitRaptor
+    - id: PosterLegitVulture
 
 - type: entity
   parent: MarkerBase

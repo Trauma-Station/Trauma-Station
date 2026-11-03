@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
+using Content.Shared.EntityConditions;
 using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.ReactiveArmor;
@@ -15,8 +16,26 @@ public sealed partial class ReactiveArmorComponent : Component
     public EntityEffect[] Effects = default!;
 
     [DataField(required: true)]
-    public TimeSpan ActivationDelay;
+    public EntityEffect[] EmpEffects = default!;
+
+    [DataField]
+    public EntityCondition[]? TargetConditions;
+
+    [DataField]
+    public TimeSpan ActivationDelay = TimeSpan.FromSeconds(10);
+
+    [DataField]
+    public TimeSpan EmpDuration = TimeSpan.FromSeconds(15);
 
     [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField, AutoNetworkedField]
     public TimeSpan LastActivated = default;
+
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField, AutoNetworkedField]
+    public TimeSpan LastEmpd;
+
+    [DataField]
+    public LocId EmpMessage;
+
+    [DataField]
+    public bool ApplyEmpEffectOnUser = true;
 }

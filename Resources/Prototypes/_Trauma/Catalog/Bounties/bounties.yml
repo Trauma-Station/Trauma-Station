@@ -1,0 +1,82 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: cargoBounty
+  id: BountyNuclearFuel
+  reward: 12000
+  description: bounty-description-nuclear-fuel
+  entries:
+  - name: bounty-item-nuclear-fuel
+    amount: 4
+    whitelist:
+      components:
+      - ReactorFuelRod
+
+- type: cargoBounty
+  id: BountyBloodVial
+  reward: 4000
+  description: bounty-description-blood-vial
+  entries:
+  - name: bounty-item-blood-vial
+    amount: 2
+    whitelist:
+      tags:
+      - BloodVial
+
+- type: cargoBounty
+  id: BountyMagicInk
+  reward: 20000
+  description: bounty-description-magic-ink
+  entries:
+  - name: bounty-item-magic-ink
+    amount: 1
+    whitelist:
+      components:
+      - EnchantAdder
+
+- type: cargoBounty
+  id: BountySlimeExtract
+  reward: 5000
+  description: bounty-description-slime-extract
+  entries:
+  - name: bounty-item-slime-extract
+    amount: 5
+    whitelist:
+      components:
+      - SlimeExtract
+
+- type: cargoBounty
+  id: BountyInsuls
+  reward: 6000
+  description: bounty-description-insuls
+  entries:
+  - name: bounty-item-insuls
+    amount: 5
+    whitelist:
+      components:
+      - Insulated
+
+- type: cargoBounty
+  id: BountyRanchingHen
+  reward: 4000
+  description: bounty-description-ranching-hen
+  entries:
+  - name: bounty-item-ranching-hen
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - AliveMob
+      - RanchingEggLayer
+
+- type: cargoBounty
+  id: BountyRanchingRooster
+  reward: 3000
+  description: bounty-description-ranching-rooster
+  entries:
+  - name: bounty-item-ranching-rooster
+    amount: 1
+    whitelist:
+      requireAll: true
+      components:
+      - AliveMob
+      - EggFertilizer

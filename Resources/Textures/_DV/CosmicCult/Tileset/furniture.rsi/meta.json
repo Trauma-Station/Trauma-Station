@@ -12,6 +12,22 @@
     },
     {
       "name": "rack"
+    },
+    {
+      "name": "flag"
+    },
+    {
+      "name": "poster"
+    },
+    {
+      "name": "sign-dir",
+      "directions": 4
+    },
+    {
+      "name": "sign-room"
+    },
+    {
+      "name": "sign-warning"
     }
   ]
 }

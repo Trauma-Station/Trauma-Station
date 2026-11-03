@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Rending taken from Paradise Station 13, apocalpyse taken from Taken from TG station 13, both edited by @kilath (discord 493110710377906196). unfinished created by @deltaendas (github)",
+    "size": {
+        "x": 96,
+        "y": 96
+    },
+    "states": [
+    	{
+    		"name": "apocalypse"
+    	},
+        {
+            "name": "rending"
+        },
+        {
+            "name": "rending_animated",
+            "delays": [
+                [
+                    0.50,
+                    0.07,
+                    0.07,
+                    0.07,
+                    0.07,
+                    0.07,
+                    0.07,
+                    0.07
+                ]
+            ]
+        },
+        {
+            "name": "unfinished"
+        }
+    ]
+}

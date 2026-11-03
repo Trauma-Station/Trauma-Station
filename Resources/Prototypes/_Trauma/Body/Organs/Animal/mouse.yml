@@ -30,7 +30,7 @@
       delay: 60
       delayMax: 120
       satiationUsage: 20
-      minimumSatiation: 60
+      minimumSatiation: 30
       automaticForPlayers: false
 
 - type: entity

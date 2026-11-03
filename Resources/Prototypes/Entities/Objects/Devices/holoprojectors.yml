@@ -139,7 +139,7 @@
         swap: false
 
 - type: entity
-  parent: HolofanProjector # Trauma - use regular one
+  parent: [ BaseXenoborgContraband, HolofanProjector ] # Trauma - use regular one
   id: HoloprojectorXenoField
   name: Xenoborg deflector field projector
   description: An alien device, projecting fields that deflect projectiles.

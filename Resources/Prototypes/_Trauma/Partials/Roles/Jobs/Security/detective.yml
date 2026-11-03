@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: Detective
+  guides:
+  - Security
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipCombatEducation
+    - SkillChipPistol
+    - SkillChipBludgeon
+  - !type:AddComponentSpecial
+    components:
+    - type: SecurityStaff
+
+- type: startingGear
+  id: DetectiveGear
+  equipment:
+    ears: ClothingHeadsetAltSecurityRegular
+  storage:
+    back:
+    - ClothingMaskGasSecurity

@@ -44,7 +44,7 @@ public sealed partial class CloakSystem : EntitySystem
     private void OnCloak(Entity<CloakComponent> ent, ref CloakEvent args)
     {
         var stealth = EnsureComp<StealthComponent>(ent.Owner);
-        _stealth.SetVisibility(ent.Owner, 0.3f, stealth);
+        _stealth.SetVisibility(ent.Owner, 0f, stealth);
 
         _popup.PopupEntity(Loc.GetString("wraith-voidhound-cloak-slip"), ent.Owner, ent.Owner);
         ent.Comp.IsActive = true;

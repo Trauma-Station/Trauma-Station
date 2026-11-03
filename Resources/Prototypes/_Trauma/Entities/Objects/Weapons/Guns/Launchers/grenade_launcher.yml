@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BaseItem
+  parent: [ BaseItem, BaseStockHit ]
   id: LauncherStickyGrenadeRegenerating
   name: sticky grenade launcher
   description: A self-reloading launcher that fires sticky grenades. They embed into whatever they hit and explode after 3 seconds.

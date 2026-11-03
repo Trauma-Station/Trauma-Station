@@ -14,6 +14,7 @@ using Content.Shared.Storage.EntitySystems;
 using Content.Shared.Strip;
 using Content.Shared.Strip.Components;
 using Content.Shared.Verbs;
+using Content.Trauma.Common.Heretic;
 using Content.Trauma.Common.Storage;
 using Content.Trauma.Shared.Strip.Components;
 using Content.Trauma.Shared.Strip.Events;
@@ -30,6 +31,7 @@ public sealed partial class TraumaStrippingSystem
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] private ItemSlotsSystem _slots = default!;
     [Dependency] private EntityQuery<StorageComponent> _storageQuery = default!;
+    [Dependency] private EntityQuery<StripMenuInvisibleComponent> _stripInvisibleQuery = default!;
     [Dependency] private EntityQuery<CuffableComponent> _cuffableQuery = default!;
     [Dependency] private EntityQuery<ItemSlotsComponent> _slotsQuery = default!;
     [Dependency] private EntityQuery<QuickDrawableComponent> _quickDrawableQuery = default!;
@@ -60,6 +62,9 @@ public sealed partial class TraumaStrippingSystem
         var enumerator = _inventory.GetSlotEnumerator(args.Target);
         while (enumerator.NextItem(out var slotEntity, out var slotDef))
         {
+            if (_stripInvisibleQuery.HasComp(slotEntity))
+                continue;
+
             if (_storageQuery.HasComp(slotEntity))
             {
                 var capturedSlotName = slotDef.Name;

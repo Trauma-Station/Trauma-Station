@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: vendingMachineInventory
+  id: RoboDrobeInventory
+  startingInventory:
+    ClothingBackpackDuffelEngineering: 2
+    ClothingBackpackSatchelEngineering: 2
+    ClothingBackpackEngineering: 2
+    ClothingBackpackMessengerEngineering: 2
+  contrabandInventory:
+    ClothingHeadHatCardborg: 1
+    ClothingOuterCardborg: 1
+  emaggedInventory:
+    BorgModuleAdvancedTool: 1

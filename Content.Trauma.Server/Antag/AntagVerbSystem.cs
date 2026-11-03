@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Administration.Systems;
-using Content.Server.Antag;
+using Content.Shared.Antag;
 using Content.Shared.Database;
 using Content.Shared.Verbs;
 using Content.Shared.Whitelist;
@@ -51,6 +51,10 @@ public sealed partial class AntagVerbSystem : EntitySystem
 
     public void MakeAntag(ICommonSession player, AntagSmitePrototype smite)
     {
+        // don't cause any weird shit if they're already an antag for this rule
+        if (_antag.FindRule(smite.RuleComp) is { } rule && _antag.IsPlayerAnyAntag(rule, player))
+            return;
+
         _antag.ForceMakeAntag(player, smite.Rule, smite.RuleComp);
     }
 }

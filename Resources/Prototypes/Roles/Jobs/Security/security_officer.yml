@@ -6,13 +6,11 @@
   requirements:
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 2.5h
+      time: 4h
   startingGear: SecurityOfficerGear
   icon: "JobIconSecurityOfficer"
   supervisors: job-supervisors-hos
-  guides: # Trauma
-  - Security
-  - CorporateJudo
+  guides: [ Security ] # TODO: should have a more specific guidebook page instead of using the department itself
   access:
   - Security
   - Brig
@@ -20,16 +18,6 @@
   - External
   - Cryogenics
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipCombatEducation
-    - SkillChipLaser
-    - SkillChipNonLethal
-  - !type:AddComponentSpecial
-    components:
-    - type: SecurityStaff
-  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
 
@@ -37,12 +25,12 @@
   id: SecurityOfficerGear
   equipment:
     eyes: ClothingEyesGlassesSecurity
-    ears: ClothingHeadsetAltSecurityRegular # Goobstation
-    pocket1: WeaponLaserSidearm # Trauma
+    ears: ClothingHeadsetSecurity
+    pocket1: WeaponPistolMk58
   storage:
     back:
     - Flash
-#    - MagazinePistol - Trauma
+    - MagazinePistol
 
 - type: chameleonOutfit
   id: SecurityOfficerChameleonOutfit

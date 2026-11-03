@@ -191,8 +191,10 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:AdjustTemperature
-        amount: 80000 # Heats you up as it metabolizes necessitating constant cooling.
+      # <Trauma>
+      #- !type:AdjustTemperature
+      #  amount: 60000 # Heats you up as it metabolizes necessitating constant cooling.
+      # </Trauma>
       - !type:EvenHealthChange
         conditions:
         - !type:TemperatureCondition
@@ -226,7 +228,7 @@
         - !type:HealthChange
           conditions:
           - !type:TemperatureCondition
-            max: 273.15
+            max: 213 # Trauma - was 273.15
           scaleByTemperature: *cryo_scaling # Trauma
           damage:
             types:
@@ -1216,6 +1218,17 @@
     Digestion:
       effects:
       # <Trauma>
+      - !type:AddComponents
+        conditions:
+        - !type:ReagentCondition
+          reagent: Holywater
+          min: 15
+        - !type:WhitelistCondition
+          whitelist:
+            components:
+            - BloodCultist
+        components:
+        - type: BloodCultDeconvert
       - !type:RemoveComponents
         conditions:
         - !type:ReagentCondition
@@ -1258,12 +1271,6 @@
       effects:
       - !type:Extinguish
         holy: true # Trauma - don't let it extinguish its own holy fire
-    Acidic: # Trauma
-      methods: [ Touch ]
-      effects:
-      - !type:HolyIgnite
-        stacks: 3
-        conditions:
 #    Acidic:  # Goobstation - Removing holy water damage on touch pending rework.
 #      methods: [ Touch ]
 #      effects:
@@ -1377,12 +1384,16 @@
   metabolisms:
     Bloodstream:
       effects:
+        # <Trauma>
+        #- !type:AdjustTemperature
+        # amount: 80000
+        # </Trauma>
         - !type:ReduceRotting
           seconds: 10 # Goob - Reduce effectiveness in exchange for easier recipe
           conditions:
           #Patient must be dead and in a cryo tube (or something cold)
           - !type:TemperatureCondition
-            max: 150.0
+            max: 213 # Trauma - was 273.15
           - !type:MobStateCondition
             mobstate: Dead
 
@@ -1398,19 +1409,21 @@
   metabolisms:
     Bloodstream:
       effects:
-      - !type:AdjustTemperature
-        amount: 80000 # Heats you up as it metabolizes necessitating constant cooling.
+      # <Trauma>
+      #- !type:AdjustTemperature
+      #  amount: 60000 # Heats you up as it metabolizes necessitating constant cooling.
+      # </Trauma>
       - !type:EvenHealthChange
         conditions:
         - !type:TemperatureCondition
-          max: 273.15
+          max: 213 # Trauma - was 273.15
         scaleByTemperature: *cryo_scaling # Trauma
         damage:
           Brute: -4.5 # Trauma - Was 3
           Burn: -4.5 # Trauma - Was 3
 
 - type: reagent
-  id : Aloxadone
+  id: Aloxadone
   name: reagent-name-aloxadone
   group: Medicine
   desc: reagent-desc-aloxadone
@@ -1421,16 +1434,17 @@
   metabolisms:
     Bloodstream:
       effects:
+      # <Trauma>
+      #- !type:AdjustTemperature
+      #  amount: 80000
+      # </Trauma>
       - !type:EvenHealthChange
         conditions:
         - !type:TemperatureCondition
-          max: 213.0
-        scaleByTemperature: # Shitmed Change
-          min: 100.0
-          max: 213.0
-          scale: 1.6
+          max: 213 # Trauma - was 273.15
+        scaleByTemperature: *cryo_scaling # Trauma
         damage:
-          Burn: -10 # Goob - was -4.5
+          Burn: -10 # Trauma - was -6
 
 - type: reagent
   id : Mannitol # currently this is just a way to create psicodine

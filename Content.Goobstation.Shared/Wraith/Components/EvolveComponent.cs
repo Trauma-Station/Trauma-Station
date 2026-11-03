@@ -17,7 +17,7 @@ public sealed partial class EvolveComponent : Component
     /// The corpses required from AbsorbCorpse in order to evolve
     /// </summary>
     [DataField]
-    public int CorpsesRequired = 3;
+    public int CorpsesRequired = 6;
 
     [DataField]
     public EntityUid? ActionEnt;

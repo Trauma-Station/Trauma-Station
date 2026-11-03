@@ -53,7 +53,8 @@ public partial class TraumaSystem
         };
 
         // TODO SHITMED: predict bone damage!!?!
-        _audio.PlayPvs(bone.Comp.BoneBreakSound, body, bone.Comp.BoneBreakSound.Params.WithVolume(volumeFloat));
+        if (_net.IsServer)
+            _audio.PlayPvs(bone.Comp.BoneBreakSound, body, bone.Comp.BoneBreakSound.Params.WithVolume(volumeFloat));
     }
 
     [SubscribeLocalEvent]

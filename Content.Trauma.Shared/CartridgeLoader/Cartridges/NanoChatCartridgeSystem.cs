@@ -7,7 +7,7 @@ using Content.Shared.CartridgeLoader;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.PDA;
-using Content.Shared.Station;
+using Content.Shared.Station.Systems;
 using Content.Trauma.Common.CartridgeLoader.Cartridges;
 using Content.Trauma.Common.Chat;
 using Content.Trauma.Common.NanoChat;
@@ -24,7 +24,7 @@ public sealed partial class NanoChatCartridgeSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedNanoChatSystem _nanoChat = default!;
-    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private StationSystem _station = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
 
     private int _maxNameLength;

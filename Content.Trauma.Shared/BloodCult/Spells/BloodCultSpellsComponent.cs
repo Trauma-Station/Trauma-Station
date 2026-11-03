@@ -1,0 +1,52 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Shared.FixedPoint;
+
+namespace Content.Trauma.Shared.BloodCult.Spells;
+
+/// <summary>
+/// Mind component that holds spells for cultists.
+/// </summary>
+[RegisterComponent, NetworkedComponent]
+[AutoGenerateComponentState]
+public sealed partial class BloodCultSpellsComponent : Component
+{
+    [DataField]
+    public TimeSpan SpellCreationTime = TimeSpan.FromSeconds(10);
+
+    [DataField]
+    public FixedPoint2 SpellCreatingDamage = 20;
+
+    [DataField]
+    public int SpellsLimit = 1; // if not empowered
+
+    [DataField, AutoNetworkedField]
+    public HashSet<EntityUid> ActiveSpells = new();
+
+    /// <summary>
+    /// Actions that you can create.
+    /// </summary>
+    [DataField]
+    public List<EntProtoId> AvailableActions = new()
+    {
+        "ActionBloodCultStun",
+        "ActionBloodCultTeleport",
+        "ActionBloodCultEmp",
+        "ActionBloodCultShadowShackles",
+        "ActionBloodCultTwistedConstruction",
+        "ActionBloodCultSummonRitualDagger",
+        "ActionBloodCultBloodRites"
+    };
+}
+
+[Serializable, NetSerializable]
+public enum CultSpellsUiKey : byte
+{
+    Key
+}
+
+[Serializable, NetSerializable]
+public sealed partial class CultSpellSelectedMessage(int index) : BoundUserInterfaceMessage
+{
+    public readonly int Index = index;
+}

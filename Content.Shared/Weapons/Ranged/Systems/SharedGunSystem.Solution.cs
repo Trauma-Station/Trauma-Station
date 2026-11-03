@@ -27,6 +27,15 @@ public partial class SharedGunSystem
             ent.Comp.Shots--;
         }
 
+        // <Trauma>
+        // Replaced 20 year old shitcode with this so it actually consumes reagents when firing
+        // Yes, it was just two lines all this time. No need to go through 5 different server systems
+        if (_solution.TryGetSolution(ent.Owner, ent.Comp.SolutionId, out var solution, out _))
+        {
+            _solution.RemoveEachReagent(solution.Value, ent.Comp.FireCost);
+        }
+        // </Trauma>
+
         UpdateSolutionShots(ent);
         UpdateSolutionAppearance(ent);
     }
@@ -47,6 +56,7 @@ public partial class SharedGunSystem
 
     protected void UpdateSolutionAppearance(Entity<SolutionAmmoProviderComponent> ent)
     {
+        if (!Timing.IsFirstTimePredicted) return; // Trauma - fix visual mispredict
         if (!TryComp<AppearanceComponent>(ent, out var appearance))
             return;
 

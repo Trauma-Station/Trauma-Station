@@ -35,6 +35,24 @@ public sealed partial class ChatFilterPrototype : IPrototype
     public bool Block = true;
 
     /// <summary>
+    /// Disables the filter without having to remove the prototype.
+    /// </summary>
+    [DataField]
+    public bool Disabled;
+
+    /// <summary>
+    /// Whether this filter applies to chat messages and such.
+    /// </summary>
+    [DataField]
+    public bool ApplyToChat = true;
+
+    /// <summary>
+    /// Whether this filter applies to names.
+    /// </summary>
+    [DataField]
+    public bool ApplyToName;
+
+    /// <summary>
     /// The first line of the ban reason to show for an automated permaban.
     /// This is also used for the webhook message, which doesn't get the offending message added.
     /// </summary>

@@ -2,14 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Content.IntegrationTests.Fixtures.Attributes;
 using Content.IntegrationTests.Utility;
-using Content.Server.Antag;
-using Content.Server.Antag.Components;
 using Content.Server.GameTicking;
-using Content.Server.GameTicking.Presets;
 using Content.Server.Shuttles.Components;
 using Content.Shared.Antag;
+using Content.Shared.Antag.Components;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
+using Content.Shared.GameTicking.Prototypes;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 
@@ -29,7 +28,7 @@ public sealed class AllGamePresetsStartTest : AntagTest
     // Tests that all game modes can start given ideal circumstances.
     [Explicit] // Trauma - doesnt work for maints spawn rules since whatever test map it uses is empty and has no areas
     [Test]
-    [TestOf(typeof(GameTicker)), TestOf(typeof(AntagSelectionSystem)), TestOf(typeof(AntagSelectionComponent))]
+    [TestOf(typeof(ServerGameTicker)), TestOf(typeof(AntagSelectionSystem)), TestOf(typeof(AntagSelectionComponent))]
     [TestCaseSource(nameof(_gamePresets))]
     [Description("Ensures all Game Presets are able to start and assign all antags correctly without spawning anyone in nullspace.")]
     [EnsureCVar(Side.Server, typeof(CCVars), nameof(CCVars.GameTickerIgnoredPresets), GameTicker.DummyGameRule)]

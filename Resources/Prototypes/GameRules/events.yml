@@ -287,7 +287,7 @@
       components:
       - BorgBrain # No copying the AI or borgs.
       - BorgChassis
-      - AntagImmune # No copying people who are immune to antags. (Gemini Hologram, etc)
+      - AntagImmune # No copying people who are immune to antags.
     # </Trauma>
     objectiveBlacklist:
       tags:

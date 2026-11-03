@@ -1,11 +1,14 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Physics.ComplexJoint;
 
 public abstract partial class SharedComplexJointVisualsSystem : EntitySystem
 {
+    [Dependency] protected IGameTiming Timing = default!;
+
     public void ClearBeamJoints(Entity<ComplexJointVisualsComponent?> ent, string excludedId, EntityUid? target = null)
     {
         if (!Resolve(ent, ref ent.Comp, false))
@@ -27,6 +30,7 @@ public abstract partial class SharedComplexJointVisualsSystem : EntitySystem
     /// </summary>
     public void CreateJoint(EntityUid uidA, EntityUid uidB, ComplexJointVisualsData data)
     {
+        data.CreationTime = Timing.CurTime;
         var beam = EnsureComp<ComplexJointVisualsComponent>(uidB);
         beam.Data[GetNetEntity(uidA)] = data;
         Dirty(uidB, beam);

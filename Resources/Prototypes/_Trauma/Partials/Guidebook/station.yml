@@ -1,0 +1,23 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: guideEntry
+  id: SS14
+  children:
+  - !Remove SpaceLaw # moved under sec
+  - CounterAttack
+  - Tackle
+  - MartialArts
+  - Forging
+  - Fishing
+
+- type: guideEntry
+  id: SpaceLaw
+  priority: 1
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/SpaceLaw/SpaceLaw.xml"
+  children:
+  - SpaceLawRightsCharter
+
+- type: guideEntry
+  id: SpaceLawCrimeList
+  priority: 5
+  text: "/ServerInfo/_Trauma/Guidebook/ServerRules/SpaceLaw/SLCrimeList.xml"

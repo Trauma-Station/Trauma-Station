@@ -94,7 +94,7 @@ public abstract partial class BlobPodSystem : EntitySystem
 
         var chem = ProtoMan.Index(core.CurrentChem);
         if (chem.PodDeathEffects is { } effects)
-            _effects.ApplyEffects(ent, effects, predicted: false); // predicted destruction when
+            _effects.TryApplyEffects(ent, effects, predicted: false); // predicted destruction when
     }
 
     public virtual bool NpcStartZombify(Entity<BlobPodComponent> ent, EntityUid target)

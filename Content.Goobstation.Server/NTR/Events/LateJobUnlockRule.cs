@@ -1,39 +1,35 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Server.Chat.Managers;
-using Content.Server.Station.Components;
 using Content.Server.Station.Systems;
 using Content.Server.StationEvents.Events;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.Roles;
+using Content.Shared.Station.Components;
 
 namespace Content.Goobstation.Server.NTR.Events;
 
 public sealed partial class LateJobUnlockRule : StationEventSystem<LateJobUnlockRuleComponent>
 {
-    [Dependency] private StationJobsSystem _stationJobs = default!;
-    [Dependency] private IPrototypeManager _prototype = default!;
-    [Dependency] private StationSystem _station = default!;
-    [Dependency] private IChatManager _chat = default!;
+    [Dependency] private ServerStationJobsSystem _stationJobs = default!;
 
-    protected override void Started(EntityUid uid, LateJobUnlockRuleComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
+    protected override void Started(Entity<LateJobUnlockRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
     {
-        base.Started(uid, component, gameRule, args);
+        base.Started(ent, ref args);
 
-        foreach (var station in _station.GetStationsSet())
+        var comp = ent.Comp1;
+        foreach (var station in Station.GetStationsSet())
         {
             if (!HasComp<StationJobsComponent>(station))
-            {
-                _chat.SendAdminAlert($"Station {_station.GetOwningStation(station)} has no jobs component. Skipping job unlocks.");
                 continue;
-            }
 
-            foreach (var (jobProtoId, slotCount) in component.JobsToAdd)
+            foreach (var (jobProtoId, slotCount) in comp.JobsToAdd)
             {
                 var jobId = jobProtoId.ToString();
 
-                if (!_prototype.HasIndex(jobProtoId))
+                if (!ProtoMan.HasIndex<JobPrototype>(jobProtoId))
                 {
-                    _chat.SendAdminAlert($"Job prototype '{jobId}' not found for station {_station.GetOwningStation(station)}");
+                    Log.Error($"Job prototype '{jobId}' not found for station {ToPrettyString(station)}");
                     continue;
                 }
 

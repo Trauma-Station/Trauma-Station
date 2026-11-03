@@ -3,8 +3,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <BoxContainer xmlns="https://spacestation14.io"
-              xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
-              xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls;assembly=Content.Client"
+              xmlns:gfx="using:Robust.Client.Graphics"
+              xmlns:controls="using:Content.Client.UserInterface.Controls"
               Margin="5 5"
               HorizontalExpand="True"
               Visible="True">
@@ -13,7 +13,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <BoxContainer Orientation="Vertical" VerticalAlignment="Center">
                 <CheckBox Name="GroupCheckbox" HorizontalAlignment="Center"/>
             </BoxContainer>
-            <customControls:VSeparator Margin="0 0 10 0"/>
+            <controls:Separator Margin="0 0 10 0" Orientation="Vertical"/>
             <BoxContainer Orientation="Vertical" HorizontalExpand="True">
                 <BoxContainer Orientation="Horizontal" HorizontalExpand="True">
                     <TextureRect Name="JobIcon" VerticalAlignment="Center" TextureScale="2 2"/>

@@ -18,13 +18,16 @@
         <controls:HSpacer Spacing="12" />
 
         <PanelContainer StyleClasses="BackgroundPanelDark">
-            <widgets:ShuttleControls Name="ShuttleControls" Margin="0 12 0 12"/>
-            <!-- Trauma - Show unlock time for locked alert level -->
-            <BoxContainer Name="UnlockContainer" Margin="0 2" HorizontalAlignment="Center">
-                <controls:StripeBack>
-                    <Label Name="UnlockLabel" Margin="8 4"/>
-                </controls:StripeBack>
+            <!-- <Trauma> - add level unlock and wrap ShuttleControls in a container so they can't overlap -->
+            <BoxContainer Orientation="Vertical">
+                <widgets:ShuttleControls Name="ShuttleControls" Margin="0 12 0 12"/>
+                <BoxContainer Name="UnlockContainer" Margin="0 2" HorizontalAlignment="Center">
+                    <controls:StripeBack>
+                        <Label Name="UnlockLabel" Margin="8 4"/>
+                    </controls:StripeBack>
+                </BoxContainer>
             </BoxContainer>
+            <!-- </Trauma> -->
         </PanelContainer>
     </BoxContainer>
 </comms:CommunicationsConsoleMenu>

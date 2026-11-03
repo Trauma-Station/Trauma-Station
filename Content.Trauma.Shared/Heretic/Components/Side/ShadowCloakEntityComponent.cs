@@ -40,9 +40,9 @@ public sealed partial class ShadowCloakEntityComponent : Component
     public FixedPoint2 DamageBeforeReveal = 25;
 
     [DataField]
-    public float RevealDamageMultiplier = 1f;
+    public float RevealChanceMultiplier = 0.01f;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public FixedPoint2 SustainedDamage = 0f;
 
     [DataField]
@@ -53,4 +53,11 @@ public sealed partial class ShadowCloakEntityComponent : Component
 
     [DataField]
     public FixedPoint2 SustainedDamageReductionRate = 1;
+
+    [DataField]
+    public List<string> ShadersToCopy = new()
+    {
+        "SecondSkin",
+        "Aura",
+    };
 }

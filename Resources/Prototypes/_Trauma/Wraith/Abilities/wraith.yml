@@ -46,10 +46,10 @@
     - ActionDarkWhisper
     - ActionCommand
     - ActionAbsorbCorpse
-    # - ActionAnimateObject
+    - ActionAnimateObject
     - ActionWhisper
     - ActionBloodWriting
     - ActionSpook
     - ActionToggleGhosts
-    - ActionToggleLighting
+    - ActionFullBright
     - ActionDefile

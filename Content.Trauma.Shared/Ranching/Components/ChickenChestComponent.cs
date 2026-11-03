@@ -3,7 +3,7 @@
 namespace Content.Trauma.Shared.Ranching.Components;
 
 /// <summary>
-/// IYKYK
+/// first we mine then we craft
 /// </summary>
 [RegisterComponent, NetworkedComponent]
 public sealed partial class ChickenChestComponent : Component;

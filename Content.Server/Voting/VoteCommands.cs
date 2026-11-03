@@ -116,7 +116,7 @@ namespace Content.Server.Voting
 
             var voteLogId = await _dbManager.CustomVoteLogAdd(
                 title,
-                GameTicker.GetRoundId(_esm),
+                ServerGameTicker.GetRoundId(_esm),
                 shell.Player?.UserId,
                 [..options.Options.Select(x => x.text)]);
 

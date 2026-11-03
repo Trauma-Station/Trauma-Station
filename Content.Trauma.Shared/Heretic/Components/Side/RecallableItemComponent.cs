@@ -5,7 +5,10 @@ using Content.Shared.Whitelist;
 
 namespace Content.Trauma.Shared.Heretic.Components.Side;
 
-[RegisterComponent, NetworkedComponent]
+/// <summary>
+/// Adds "recall item" action to user when they pick up item with this component
+/// </summary>
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class RecallableItemComponent : Component
 {
     [DataField(required: true)]
@@ -14,7 +17,7 @@ public sealed partial class RecallableItemComponent : Component
     [DataField]
     public EntityUid? Action;
 
-    [DataField]
+    [DataField, AutoNetworkedField]
     public EntityUid? User;
 
     [DataField]

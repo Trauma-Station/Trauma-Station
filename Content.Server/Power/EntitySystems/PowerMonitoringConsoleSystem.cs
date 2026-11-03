@@ -239,7 +239,7 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
     private void OnPowerGridCheckStarted(ref GameRuleStartedEvent ev)
     {
-        if (!TryComp<PowerGridCheckRuleComponent>(ev.RuleEntity, out var rule))
+        if (!TryComp<PowerGridCheckRuleComponent>(ev.Rule, out var rule))
             return;
 
         var query = AllEntityQuery<PowerMonitoringConsoleComponent, TransformComponent>();
@@ -255,7 +255,7 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
     private void OnPowerGridCheckEnded(ref GameRuleEndedEvent ev)
     {
-        if (!TryComp<PowerGridCheckRuleComponent>(ev.RuleEntity, out var rule))
+        if (!TryComp<PowerGridCheckRuleComponent>(ev.Rule, out var rule))
             return;
 
         var query = AllEntityQuery<PowerMonitoringConsoleComponent, TransformComponent>();
@@ -857,6 +857,10 @@ internal sealed partial class PowerMonitoringConsoleSystem : SharedPowerMonitori
 
     private void UpdateCollectionMasterMetaData(EntityUid master, int childCount)
     {
+        // <Trauma> - shitfix throwing in update
+        if (TerminatingOrDeleted(master))
+            return;
+        // </Trauma>
         var netEntity = GetNetEntity(master);
         var xform = Transform(master);
 

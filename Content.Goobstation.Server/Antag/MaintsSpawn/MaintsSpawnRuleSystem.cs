@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.Antag;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.StationEvents.Components;
 using Content.Server.StationEvents.Events;
+using Content.Shared.Antag;
 using Content.Shared.GameTicking.Components;
 using Robust.Shared.Map;
 
@@ -14,23 +14,12 @@ public sealed partial class MaintsSpawnRule : StationEventSystem<MaintsSpawnRule
     [Dependency] private AtmosphereSystem _atmos = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<MaintsSpawnRuleComponent, AntagSelectLocationEvent>(OnSelectLocation);
-    }
-
-    protected override void Added(EntityUid uid, MaintsSpawnRuleComponent component, GameRuleComponent gameRule, GameRuleAddedEvent args)
-    {
-        base.Added(uid, component, gameRule, args);
-    }
-
+    [SubscribeLocalEvent]
     private void OnSelectLocation(Entity<MaintsSpawnRuleComponent> ent, ref AntagSelectLocationEvent args)
     {
         var comp = Comp<GameRuleComponent>(args.GameRule);
 
-        if (GetRandomStationGrids() is not { } stationGrids)
+        if (Station.GetRandomStationGrids() is not { } stationGrids)
         {
             ForceEndSelf(ent, comp);
             return;

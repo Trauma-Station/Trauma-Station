@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: Lawyer
+  access:
+  - !Remove Service # piss off
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipEducation
+  # Everyone knows lawyers are soulless.
+  - !type:AddComponentSpecial
+    components:
+    - type: Condemned
+      soulOwnedNotDevil: true
+    - type: Lawyer

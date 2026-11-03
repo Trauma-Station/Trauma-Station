@@ -48,10 +48,10 @@ using Content.Shared.Forensics.Components;
 using Content.Shared.Guardian.Components;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Implants;
 using Content.Shared.Light.EntitySystems;
 using Content.Shared.Medical;
 using Content.Shared.Mind;
+using Content.Shared.Mindshield.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Pulling.Components;
@@ -113,7 +113,6 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
     [Dependency] private StunSystem _stun = default!;
     [Dependency] private ExplosionSystem _explosionSystem = default!;
     [Dependency] private ChangelingRuleSystem _changelingRuleSystem = default!;
-    [Dependency] private SharedSubdermalImplantSystem _subdermalImplant = default!;
     [Dependency] private EntityQuery<ChangelingIdentityComponent> _lingQuery = default!;
 
     public override void Initialize()
@@ -518,7 +517,8 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
             Name = Name(target),
             DNA = dna.DNA ?? Loc.GetString("forensics-dna-unknown"),
             Profile = profile,
-            Mutations = _mutation.GetMutatableData(target)
+            Mutations = _mutation.GetMutatableData(target),
+            MindShielded = _mindShield.IsShielded(target)
         };
 
         if (fingerprint.Fingerprint != null)
@@ -592,6 +592,19 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
             var message = Loc.GetString("changeling-transform-finish", ("target", data.Name));
             Popup.PopupEntity(message, newEnt, newEnt);
             _mutation.LoadMutatableData(newEnt, data.Mutations);
+
+            if (data.MindShielded)
+            {
+                // no action, it's tied to transform
+                var fake = EnsureComp<FakeMindShieldComponent>(newEnt);
+                fake.IsEnabled = true;
+                Dirty(newEnt, fake);
+            }
+            else
+            {
+                RemComp<FakeMindShieldComponent>(newEnt);
+            }
+            _mindShield.RefreshMindshieldStatus(newEnt);
         }
 
         // otherwise we can only transform once
@@ -616,9 +629,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
             return false;
         }
 
-        var data = comp.SelectedForm;
-
-        if (data == null)
+        if (comp.SelectedForm is not { } data)
         {
             Popup.PopupEntity(Loc.GetString("changeling-transform-fail-self"), target, target);
             return false;
@@ -631,7 +642,10 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         var locName = Identity.Entity(target, EntityManager);
         EntityUid? newUid = null;
-        if (sting) newUid = TransformEntity(target, data: data, persistentDna: persistentDna);
+        if (sting)
+        {
+            newUid = TransformEntity(target, data: data, persistentDna: persistentDna);
+        }
         else
         {
             comp.IsInLesserForm = false;
@@ -641,7 +655,7 @@ public sealed partial class ChangelingSystem : SharedChangelingSystem
 
         if (newUid != null)
         {
-            PlayMeatySound((EntityUid) newUid, comp);
+            PlayMeatySound(newUid.Value, comp);
         }
 
         return true;

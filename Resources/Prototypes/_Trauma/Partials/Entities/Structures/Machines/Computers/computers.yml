@@ -5,3 +5,31 @@
   components:
   - type: StationReportTarget # not given to aghost
   - type: TraumaCommsConsole
+
+- type: entity
+  id: StationAiFixerComputer
+  components:
+  - type: AccessReader
+    access: !Clear
+    - [ "ChiefEngineer" ]
+
+- type: entity
+  id: StationAiUploadComputer
+  components:
+  - type: AccessReader
+    access: !Clear
+    - [ "ChiefEngineer" ]
+
+- type: entity
+  id: ComputerRoboticsControl
+  components:
+  - type: AccessReader
+    access: !Clear
+    - [ "ChiefEngineer" ]
+
+- type: entity
+  id: ComputerStationTeleportersControl
+  components:
+  - type: AccessReader
+    access: !Clear
+    - [ "Research" ]

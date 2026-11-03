@@ -26,7 +26,7 @@ public sealed partial class VoidPortalComponent : Component
     /// Set to <= 0 to disable the cap.
     /// </summary>
     [DataField]
-    public int MaxPower = 30;
+    public int MaxPower = 80;
 
     /// <summary>
     /// Base amount of power gained each wave.
@@ -78,7 +78,7 @@ public sealed partial class VoidPortalComponent : Component
     /// How many entities summoned by the portal can exist at any given time.
     /// </summary>
     [DataField]
-    public int MaxEntitiesAlive = 5;
+    public int MaxEntitiesAlive = 10;
 
     /// <summary>
     /// The range of the WP regeneration boost for the wraith, so long as it stays near the portal.

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.StatusIcon;
+using Content.Shared.StatusIcon;
 
 namespace Content.Trauma.Shared.Xenomorphs.Infection;
 
@@ -8,12 +8,12 @@ namespace Content.Trauma.Shared.Xenomorphs.Infection;
 [AutoGenerateComponentState(true, fieldDeltas: true)]
 public sealed partial class XenomorphInfectedComponent : Component
 {
-    [AutoNetworkedField, ViewVariables]
-    public Dictionary<int, ProtoId<InfectionIconPrototype>> InfectedIcons = new();
+    [DataField, AutoNetworkedField]
+    public Dictionary<int, ProtoId<StatusIconPrototype>> InfectedIcons = new();
 
-    [ViewVariables]
+    [DataField]
     public EntityUid Infection;
 
-    [AutoNetworkedField, ViewVariables]
+    [DataField, AutoNetworkedField]
     public int GrowthStage;
 }

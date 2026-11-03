@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.GameTicking.Rules;
 using Content.Shared.EntityEffects;
+using Content.Shared.GameTicking;
 using Content.Trauma.Server.Spawners.Components;
 
 namespace Content.Trauma.Server.Spawners.Systems;

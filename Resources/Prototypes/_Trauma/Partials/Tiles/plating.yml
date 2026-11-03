@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: tile
+  id: Lattice
+  sprite: /Textures/_Trauma/Tiles/lattice.png
+  deconstructTimeMultiplier: 1
+  variants: 1

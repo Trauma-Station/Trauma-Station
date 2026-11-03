@@ -5,18 +5,29 @@ namespace Content.IntegrationTests.Fixtures;
 
 public abstract partial class GameTest
 {
+    protected EntityUid SGetEntity(NetEntity ent)
+        => SEntMan.GetEntity(ent);
+
+    protected EntityUid? SGetEntity(NetEntity? ent)
+        => SEntMan.GetEntity(ent);
+
     protected EntityUid SSpawn([ForbidLiteral] EntProtoId id, EntityCoordinates coords)
         => SEntMan.SpawnAtPosition(id, coords);
 
     protected EntityUid CSpawn([ForbidLiteral] EntProtoId id, EntityCoordinates coords)
         => CEntMan.SpawnAtPosition(id, coords);
 
-    protected void SDel(EntityUid uid)
+    protected void SDel(EntityUid? uid)
     {
         SEntMan.DeleteEntity(uid);
     }
 
-    protected void CDel(EntityUid uid)
+    protected void SDel(NetEntity? ent)
+    {
+        SEntMan.DeleteEntity(SGetEntity(ent));
+    }
+
+    protected void CDel(EntityUid? uid)
     {
         CEntMan.DeleteEntity(uid);
     }

@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseItem, BaseSyndicateContraband ]
+  id: SyndicateBug
+  name: syndicate bug
+  description: A rather conspicious listening device used to spy on important people.
+  components:
+  - type: Item
+    size: Normal
+  - type: Sprite
+    sprite: _Trauma/Objects/Syndicate/syndicate_bug.rsi
+    layers:
+    - state: icon
+  - type: Anchorable
+    delay: 5
+  - type: Bug

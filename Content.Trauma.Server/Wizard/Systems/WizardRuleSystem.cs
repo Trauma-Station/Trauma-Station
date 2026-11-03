@@ -2,19 +2,17 @@
 
 using System.Linq;
 using Content.Server.Administration.Logs;
-using Content.Server.Antag;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Chat.Managers;
-using Content.Server.GameTicking;
-using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
-using Content.Server.Roles;
-using Content.Server.Station.Systems;
+using Content.Shared.Antag;
 using Content.Shared.Atmos;
 using Content.Shared.Chat;
 using Content.Shared.Cloning.Events;
 using Content.Shared.Database;
+using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.GameTicking.Rules;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
@@ -23,8 +21,10 @@ using Content.Shared.NPC.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Parallax;
+using Content.Shared.Roles;
 using Content.Shared.Roles.Components;
 using Content.Shared.Station.Components;
+using Content.Shared.Station.Systems;
 using Content.Trauma.Common.Wizard.Components;
 using Content.Trauma.Server.Wizard.Components;
 using Content.Trauma.Shared.Roles;
@@ -41,7 +41,7 @@ public sealed partial class WizardRuleSystem : GameRuleSystem<WizardRuleComponen
     [Dependency] private StationSystem _station = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private MindSystem _mind = default!;
-    [Dependency] private RoleSystem _role = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private GameTicker _gameTicker = default!;
     [Dependency] private IRobustRandom _random = default!;
     [Dependency] private AtmosphereSystem _atmos = default!;
@@ -216,9 +216,9 @@ public sealed partial class WizardRuleSystem : GameRuleSystem<WizardRuleComponen
             return;
 
         var endQuery = EntityQueryEnumerator<RuleOnWizardDeathRuleComponent, GameRuleComponent>();
-        while (endQuery.MoveNext(out var uid, out var ruleOnDeath, out var gameRule))
+        while (endQuery.MoveNext(out var uid, out var ruleOnDeath, out var rule))
         {
-            _gameTicker.EndGameRule(uid, gameRule);
+            _gameTicker.EndGameRule((uid, rule));
             _gameTicker.StartGameRule(ruleOnDeath.Rule);
         }
     }
@@ -241,15 +241,13 @@ public sealed partial class WizardRuleSystem : GameRuleSystem<WizardRuleComponen
         return grids.Count == 0 ? null : _random.Pick(grids);
     }
 
-    protected override void Started(EntityUid uid,
-        WizardRuleComponent component,
-        GameRuleComponent gameRule,
-        GameRuleStartedEvent args)
+    protected override void Started(Entity<WizardRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
     {
         var stations = GetWizardTargetStations().ToList();
         if (stations.Count == 0)
             return;
-        component.TargetStation = _random.Pick(stations);
+
+        ent.Comp1.TargetStation = _random.Pick(stations);
     }
 
     private void OnWizardGetBriefing(Entity<WizardRoleComponent> ent, ref GetBriefingEvent args)

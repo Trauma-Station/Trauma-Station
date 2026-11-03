@@ -462,7 +462,7 @@ public abstract partial class SharedDoorSystem : EntitySystem
         if (Paused(uid))
             return false;
 
-        var ev = new BeforeDoorClosedEvent(door.PerformCollisionCheck, partial);
+        var ev = new BeforeDoorClosedEvent(door.PerformCollisionCheck, partial, user); // Trauma - pass user
         RaiseLocalEvent(uid, ev);
         if (ev.Cancelled)
             return false;

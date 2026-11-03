@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseCraftingKnowledge # for crafting blood cult stuff
+  id: EldritchKnowledge
+  name: Eldritch Wisdom
+  components:
+  - type: Knowledge
+    color: "#dc143c"
+    costs: null # antag only chud

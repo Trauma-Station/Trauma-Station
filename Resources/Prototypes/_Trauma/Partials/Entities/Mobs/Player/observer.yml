@@ -1,0 +1,74 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: Incorporeal
+  components:
+  - type: Viewcone
+    baseConeAngle: 36000 # observers wraiths etc can see everything basically no matter what
+  - type: MovementSpeedModifier
+    backwardsAngle: 360 # ghosts can moonwalk
+
+- type: entity
+  abstract: true
+  id: MobObserverBase
+  components:
+  - type: GhostColor
+  - type: CollectiveMind
+    hearAll: true
+    seeAllNames: true
+  - type: Speech
+    speechVerb: Dead
+  - type: LanguageSpeaker
+  - type: UniversalLanguageSpeaker
+  - type: UserInterface
+    interfaces:
+      enum.RevivalContractUiKey.Key:
+        type: RevivalContractBoundUserInterface
+        requireInputValidation: false
+  - type: Eye
+    visMask:
+    - CosmicCultMonument
+    - Abductor
+    - Ghost
+    - Normal
+
+- type: entity
+  id: MobObserver
+  components:
+  - type: UserInterface
+    interfaces:
+      enum.RadarConsoleUiKey.Key:
+        type: RadarConsoleBoundUserInterface
+  - type: IntrinsicUI
+    uis:
+      enum.RadarConsoleUiKey.Key:
+        toggleAction: ActionGhostShowRadar
+  - type: RadarConsole
+    followEntity: true
+
+# Actions
+
+- type: entity
+  id: ActionGhostBoo
+  components:
+  - type: Action
+    useDelay: 30 # was 120
+
+- type: entity
+  id: ActionToggleLighting
+  components:
+  - type: Action
+    raiseOnUser: true
+
+- type: entity
+  id: ActionToggleFov
+  components:
+  - type: Action
+    raiseOnUser: true
+
+- type: entity
+  id: ActionToggleGhosts
+  components:
+  - type: Action
+    raiseOnUser: true

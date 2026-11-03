@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Client.Stylesheets;
+using Content.Client.Resources;
 using Content.Client.UserInterface.Controls;
 using Content.Shared.Humanoid;
 using Content.Trauma.Shared.Abductor;
@@ -29,7 +29,7 @@ public sealed partial class AbductorTaskWindow : FancyWindow
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        Ayylmao.FontOverride = _cache.NotoStack2ElectricBoogaloo("/Fonts/NotoSansDisplay/NotoSansDisplay-Bold.ttf", 40);
+        Ayylmao.FontOverride = _cache.GetFont("/Fonts/NotoSansDisplay/NotoSansDisplay-Bold.ttf", 40);
 
         ScanButton.OnPressed += _ => OnScan?.Invoke();
     }

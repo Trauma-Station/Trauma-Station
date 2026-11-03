@@ -2,7 +2,7 @@
 
 using Content.Goobstation.Common.CCVar;
 using Content.Server.Discord;
-using Content.Server.GameTicking;
+using Content.Shared.GameTicking;
 
 namespace Content.Goobstation.Server.PlayerListener;
 
@@ -10,6 +10,7 @@ public sealed partial class RageQuitNotifySystem
 {
     [Dependency] private DiscordWebhook _discord = default!;
     [Dependency] private GameTicker _ticker = default!;
+
     private WebhookData? _webhook;
 
     private void InitializeDiscord()

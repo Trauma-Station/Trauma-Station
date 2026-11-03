@@ -12,10 +12,10 @@
       proto: WraithMidround
   - type: AntagRandomSpawn
   - type: AntagSpawner
-    prototype: MobWraithMidround
+    prototype: MobWraith
   - type: StationEvent
     weight: 4
-    earliestStart: 40
+    earliestStart: 20
     minimumPlayers: 30
     duration: null
     maxOccurrences: 1

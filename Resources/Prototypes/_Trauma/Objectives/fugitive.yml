@@ -258,18 +258,6 @@
 
 - type: entity
   parent: BaseHunterStealObjective
-  id: HunterStealGeminiProjectorObjective
-  components:
-  - type: Objective
-    difficulty: 3.5
-  - type: NotJobRequirement
-    jobs: [ ResearchDirector ]
-  - type: StealCondition
-    stealGroup: ClothingBeltGeminiHoloProjector
-    descriptionText: objective-condition-steal-gemini-projector-description
-
-- type: entity
-  parent: BaseHunterStealObjective
   id: HunterStealFlippoLighterObjective
   components:
   - type: NotJobRequirement

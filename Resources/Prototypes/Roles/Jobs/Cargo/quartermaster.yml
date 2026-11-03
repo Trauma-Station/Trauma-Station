@@ -16,10 +16,7 @@
   startingGear: QuartermasterGear
   icon: "JobIconQuarterMaster"
   supervisors: job-supervisors-captain
-  antagAdvantage: 75 # Trauma
-  guides: # Trauma
-  - Cargo
-  - Command
+  guides: [ Command ] # TODO: should have a more specific guidebook page instead of using the department itself
   access:
   - Cargo
   - Salvage
@@ -30,35 +27,22 @@
   - Brig
   - Cryogenics
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEchelonEducation
-    - SkillChipUnarmed
-    - SkillChipMining
-  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
-      # <Trauma>
-      - type: Condemned # Nanotrasen owns your soul pal.
-        soulOwnedNotDevil: true
-      # </Trauma>
       - type: CommandStaff
-      - type: QuartermasterTraining
 
 - type: startingGear
   id: QuartermasterGear
   equipment:
     id: QuartermasterPDA
-    ears: ClothingHeadsetAltCargo # Goobstation
+    ears: ClothingHeadsetQM
     belt: BoxFolderClipboardThreePapers
     pocket1: AppraisalTool
   storage:
     back:
     - Flash
-    - TelescopicBaton # Goobstation
 
 - type: chameleonOutfit
   id: QuartermasterChameleonOutfit

@@ -2,11 +2,10 @@
 
 using Content.Medical.Common.Targeting;
 using Content.Medical.Shared.Wounds;
-using Content.Server.Antag;
 using Content.Server.Atmos.Components;
 using Content.Server.Chat.Managers;
 using Content.Server.Hands.Systems;
-using Content.Server.Roles;
+using Content.Shared.Antag;
 using Content.Shared.Body;
 using Content.Shared.Chat;
 using Content.Shared.Damage.Components;
@@ -16,6 +15,7 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Maps;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
+using Content.Shared.Roles;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Tag;
 using Content.Shared.Wall;
@@ -57,7 +57,7 @@ public sealed partial class BladeArenaSystem : SharedBladeArenaSystem
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private BodySystem _body = default!;
     [Dependency] private ContainerSystem _container = default!;
-    [Dependency] private RoleSystem _role = default!;
+    [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private SharedMindSystem _mind = default!;
     [Dependency] private AntagSelectionSystem _antag = default!;
     [Dependency] private HereticSystem _heretic = default!;

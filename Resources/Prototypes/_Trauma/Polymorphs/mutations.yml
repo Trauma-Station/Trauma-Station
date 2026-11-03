@@ -104,7 +104,7 @@
 - type: polymorph
   id: Slime
   configuration:
-    entity: MobAdultSlimes
+    entity: MobAdultSlimesBlue
     forced: false
     inventory: Drop
     transferName: true

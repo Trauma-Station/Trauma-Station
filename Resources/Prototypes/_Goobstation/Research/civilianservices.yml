@@ -39,7 +39,7 @@
   name: research-technology-rescue
   icon:
     sprite: Objects/Specific/Medical/handheldcrewmonitor.rsi
-    state: scanner
+    state: icon
   discipline: CivilianServices
   tier: 1
   cost: 7500

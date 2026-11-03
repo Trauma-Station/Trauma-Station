@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: reagent
+  id: Milk
+  metabolisms:
+    Digestion:
+      effects:
+      - !type:EvenHealthChange
+        conditions:
+        - !type:MetabolizerTypeCondition # basically skelly
+          type: [ Plasmaman ]
+        damage:
+          Brute: -0.9
+          Burn: -0.9

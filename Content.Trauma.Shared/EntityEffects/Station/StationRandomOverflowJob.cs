@@ -15,7 +15,4 @@ public sealed partial class StationRandomOverflowJob : EntityEffectBase<StationR
     /// </summary>
     [DataField]
     public HashSet<ProtoId<JobPrototype>> IgnoredJobs = new();
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager proto, IEntitySystemManager entSys)
-        => null;
 }

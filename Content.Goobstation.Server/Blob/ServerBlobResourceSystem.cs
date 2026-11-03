@@ -2,7 +2,7 @@
 
 using Content.Goobstation.Shared.Blob;
 using Content.Goobstation.Shared.Blob.Components;
-using Content.Server.GameTicking;
+using Content.Shared.GameTicking;
 
 namespace Content.Goobstation.Server.Blob;
 
@@ -12,7 +12,7 @@ public sealed partial class ServerBlobResourceSystem : BlobResourceSystem
     /// On round end makes all the blobs resource nodes generate 100 points each pulse.
     /// </summary>
     [SubscribeLocalEvent]
-    private void OnRoundEnd(RoundEndTextAppendEvent args)
+    private void OnRoundEnd(ref RoundEndTextAppendEvent args)
     {
         var query = EntityQueryEnumerator<BlobResourceComponent>();
         foreach (var ent in query)

@@ -25,6 +25,7 @@ public sealed partial class RecallableItemSystem : EntitySystem
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
     [Dependency] private SharedPvsOverrideSystem _pvsOverride = default!;
     [Dependency] private ISharedPlayerManager _player = default!;
+    [Dependency] private EntityQuery<RecallableItemComponent> _recallQuery = default!;
 
     public override void Initialize()
     {
@@ -71,14 +72,22 @@ public sealed partial class RecallableItemSystem : EntitySystem
 
             _actions.RemoveAction(args.User, act.AsNullable());
 
-            if (act.Comp.Container is not { } container || session == null)
+            if (act.Comp.Container is not { } container)
                 continue;
 
-            _pvsOverride.RemoveSessionOverride(container, session);
+            if (session != null)
+                _pvsOverride.RemoveSessionOverride(container, session);
+
+            if (!_recallQuery.TryComp(container, out var oldRecallable))
+                continue;
+
+            oldRecallable.User = null;
+            Dirty(container, oldRecallable);
         }
 
         _actions.AddAction(args.User, ref ent.Comp.Action, ent.Comp.ActionId, ent);
         ent.Comp.User = args.User;
+        Dirty(ent);
 
         if (session != null)
             _pvsOverride.AddSessionOverride(ent, session);
@@ -97,15 +106,27 @@ public sealed partial class RecallableItemSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnRecall(RecallItemEvent args)
     {
-        if (!Exists(args.Action.Comp.Container))
-            return;
-
         var user = args.Performer;
+
+        if (args.Action.Comp.Container is not { } item || !Exists(item) ||
+            !_recallQuery.TryComp(item, out var recallComp))
+        {
+            _actions.RemoveAction(user, args.Action.AsNullable());
+            return;
+        }
+
+        if (!ShouldAddAction(recallComp, user))
+        {
+            _actions.RemoveAction(user, args.Action.AsNullable());
+            if (_player.TryGetSessionByEntity(user, out var session))
+                _pvsOverride.RemoveSessionOverride(item, session);
+            recallComp.User = null;
+            Dirty(item, recallComp);
+            return;
+        }
 
         if (!TryComp(user, out HandsComponent? hands))
             return;
-
-        var item = args.Action.Comp.Container.Value;
 
         if (!TryComp(item, out ItemComponent? itemComp) || _hands.IsHolding((user, hands), item) ||
             !_hands.TryGetEmptyHand((user, hands), out var hand))

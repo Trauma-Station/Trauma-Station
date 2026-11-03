@@ -3,7 +3,7 @@
 using Content.Shared.EntityEffects;
 using Content.Trauma.Shared.Buckle;
 
-namespace Content.Trauma.Shared.EntityEffects.Effects;
+namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
 /// Locks or unlocks the target entity's <see cref="StrapLockComponent"/>.

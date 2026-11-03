@@ -145,9 +145,10 @@
     entity: MobChickPoultrygeist
   - type: EntityEffectOnEaten
     effects:
-    - !type:SpawnRandomEntities
-      entity: BaseMobShadowDemon
-      number: 2
+    - !type:SpawnEntity
+      entity: MobSpookyGhost1
+    - !type:SpawnEntity
+      entity: MobLivingCurse
 
 - type: entity
   parent: BaseRanchingEgg
@@ -247,10 +248,10 @@
     sprite: _Trauma/Objects/Misc/eggs.rsi
     state: egg-golden
   - type: StaticPrice
-    price: 5000
+    price: 25000
 
 - type: entity
-  parent: WaterBalloonBase
+  parent: BaseRanchingEgg
   id: ClownEgg
   name: egg?
   suffix: Clown
@@ -258,6 +259,19 @@
   components:
   - type: Sprite
     state: egg-honk
+  - type: TimedReplace
+    entity: MobChickClown
+  - type: EntityEffectOnEaten
+    effects:
+    - !type:PopupMessage
+      visualType: MediumCaution
+      type: Local
+      messages:
+      - clown-egg-popup
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectClumsyClown
+      time: 60
+      type: Add
 
 - type: entity
   parent: BaseRanchingEgg
@@ -268,6 +282,17 @@
     state: egg-cluwne
   - type: TimedReplace
     entity: MobChickCluwne
+  - type: EntityEffectOnEaten
+    effects:
+    - !type:PopupMessage
+      visualType: MediumCaution
+      type: Local
+      messages:
+      - cluwne-egg-popup
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectClumsyCluwne
+      time: 120
+      type: Add
 
 - type: entity
   parent: [BaseChickenCold, BaseRanchingEgg]
@@ -317,7 +342,7 @@
     entity: MobChickOnagadori
 
 - type: entity
-  parent: BaseRanchingEgg
+  parent: [BaseRanchingEgg, BaseMagicalContraband]
   id: WizardEgg
   suffix: Wizard
   components:
@@ -325,6 +350,12 @@
     state: egg-wizard
   - type: TimedReplace
     entity: MobChickWizard
+  - type: EntityEffectOnEaten
+    effects:
+    - !type:ModifyStatusEffect
+      effectProto: StatusEffectWizardChickenPower
+      time: 60
+      type: Add
 
 - type: entity
   parent: BaseRanchingEgg
@@ -443,9 +474,14 @@
     entity: MobChickKnight
   - type: EntityEffectOnEaten
     effects:
+    - !type:PopupMessage
+      visualType: MediumCaution
+      type: Local
+      messages:
+      - knight-egg-popup
     - !type:ModifyStatusEffect
       effectProto: StatusEffectDamageModKnightEgg
-      time: 30
+      time: 60
       type: Add
 
 - type: entity
@@ -512,7 +548,7 @@
       type: Add
 
 - type: entity
-  parent: BaseRanchingEgg
+  parent: [BaseRanchingEgg, BaseMagicalContraband]
   id: PhoenixEgg
   suffix: Phoenix
   components:
@@ -532,7 +568,7 @@
       type: Add
 
 - type: entity
-  parent: BaseRanchingEgg
+  parent: [BaseRanchingEgg, BaseMagicalContraband]
   id: DragonEgg
   suffix: Dragon Chicken
   components:

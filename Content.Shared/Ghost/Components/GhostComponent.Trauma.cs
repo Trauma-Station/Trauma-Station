@@ -4,6 +4,6 @@ namespace Content.Shared.Ghost.Components;
 
 public sealed partial class GhostComponent
 {
-    [DataField]
+    [DataField, AutoNetworkedField]
     public bool CanTakeGhostRoles = true;
 }

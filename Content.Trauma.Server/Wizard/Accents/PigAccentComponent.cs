@@ -9,7 +9,6 @@ public sealed partial class PigAccentComponent : AnimalAccentComponent
     {
         "accent-words-pig-1",
         "accent-words-pig-2",
-        "accent-words-pig-3",
-        "accent-words-pig-4",
+        "accent-words-pig-3"
     };
 }

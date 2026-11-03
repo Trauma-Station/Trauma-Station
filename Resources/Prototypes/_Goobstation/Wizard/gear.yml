@@ -6,7 +6,7 @@
     jumpsuit: ClothingUniformJumpsuitColorDarkBlue
     head: ClothingHeadHatWizardReal
     outerClothing: ClothingOuterWizardReal
-    shoes: ClothingShoesWizard
+    shoes: ClothingShoesSandalsBrown
     back: ClothingBackpack
     belt: ScrollTeleport
     gloves: ClothingHandsGlovesWizard
@@ -20,7 +20,7 @@
     jumpsuit: ClothingUniformJumpsuitColorBlack
     head: ClothingHeadHatBlackwizardReal
     outerClothing: ClothingOuterWizardBlackReal
-    shoes: ClothingShoesWizard
+    shoes: ClothingShoesSandalsBrown
     gloves: ClothingHandsGlovesWizard
     back: ClothingBackpack
     pocket1: CrowbarWizard
@@ -40,7 +40,7 @@
     jumpsuit: ClothingUniformJumpsuitColorDarkBlue
     head: ClothingHeadHatWizardReal
     outerClothing: ClothingOuterWizardReal
-    shoes: ClothingShoesWizard
+    shoes: ClothingShoesSandalsBrown
     back: ClothingBackpack
     belt: ScrollTeleportApprentice
     gloves: ClothingHandsGlovesWizard
@@ -53,7 +53,7 @@
     jumpsuit: ClothingUniformJumpsuitColorRed
     head: ClothingHeadHatRedwizardReal
     outerClothing: ClothingOuterWizardRedReal
-    shoes: ClothingShoesWizard
+    shoes: ClothingShoesSandalsBrown
     back: ClothingBackpack
     belt: ScrollTeleportApprentice
     gloves: ClothingHandsGlovesWizard
@@ -66,7 +66,7 @@
     jumpsuit: ClothingUniformJumpsuitColorPurple
     head: ClothingHeadHatVioletwizardReal
     outerClothing: ClothingOuterWizardVioletReal
-    shoes: ClothingShoesWizard
+    shoes: ClothingShoesSandalsBrown
     back: ClothingBackpack
     belt: ScrollTeleportApprentice
     gloves: ClothingHandsGlovesWizard
@@ -79,7 +79,7 @@
     jumpsuit: ClothingUniformJumpsuitColorBlack
     head: ClothingHeadHatBlackwizardReal
     outerClothing: ClothingOuterWizardBlackReal
-    shoes: ClothingShoesWizard
+    shoes: ClothingShoesSandalsBrown
     back: ClothingBackpack
     belt: ScrollTeleportApprentice
     gloves: ClothingHandsGlovesWizard
@@ -92,7 +92,7 @@
     jumpsuit: ClothingUniformJumpsuitColorYellow
     head: ClothingHeadHatYellowwizardReal
     outerClothing: ClothingOuterWizardYellowReal
-    shoes: ClothingShoesWizard
+    shoes: ClothingShoesSandalsBrown
     back: ClothingBackpack
     belt: ScrollTeleportApprentice
     gloves: ClothingHandsGlovesWizard
@@ -104,7 +104,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorDarkBlue
     outerClothing: ClothingOuterVestTank
-    shoes: ClothingShoesWizard
+    shoes: ClothingShoesSandalsBrown
     back: ClothingBackpack
     belt: ScrollTeleportApprentice
     gloves: ClothingHandsGlovesWizard
@@ -117,7 +117,7 @@
     jumpsuit: ClothingUniformJumpsuitColorPurple
     head: ClothingHeadHatPsyReal
     outerClothing: ClothingOuterWizardPsyReal
-    shoes: ClothingShoesWizard
+    shoes: ClothingShoesSandalsBrown
     back: ClothingBackpack
     belt: ScrollTeleportApprentice
     gloves: ClothingHandsGlovesWizard

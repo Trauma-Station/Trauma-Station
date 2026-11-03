@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: Warden
+  guides:
+  - SpaceLaw
+  - KravMaga
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipCombatEducation
+    - SkillChipLaser
+  - !type:AddComponentSpecial
+    components:
+    - type: SecurityStaff
+
+- type: startingGear
+  id: WardenGear
+  equipment:
+    ears: ClothingHeadsetAltWarden
+    pocket1: WeaponLaserSidearm
+  storage:
+    back:
+    - !Remove MagazinePistol
+    - ClothingMaskGasSecurity

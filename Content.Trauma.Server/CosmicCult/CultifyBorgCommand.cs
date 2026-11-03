@@ -2,13 +2,13 @@
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using Content.Trauma.Server.CosmicCult.Abilities;
 using Content.Server.Administration;
-using Content.Server.Antag;
-using Content.Trauma.Shared.CosmicCult.Components;
+using Content.Shared.Antag;
 using Content.Shared.Administration;
 using Content.Shared.Mind;
 using Content.Shared.Silicons.Borgs.Components;
+using Content.Trauma.Server.CosmicCult.Abilities;
+using Content.Trauma.Shared.CosmicCult.Components;
 using Robust.Shared.Console;
 using Robust.Shared.Containers;
 using Robust.Shared.Player;

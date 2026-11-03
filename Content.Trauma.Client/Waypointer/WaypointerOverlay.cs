@@ -2,10 +2,10 @@
 
 using System.Linq;
 using Content.Client.Shuttles.Systems;
-using Content.Client.Station;
 using Content.Shared.CombatMode;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Station.Components;
+using Content.Shared.Station.Systems;
 using Content.Shared.Whitelist;
 using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Waypointer;
@@ -40,7 +40,7 @@ public sealed partial class WaypointerOverlay : Overlay
     private readonly EntityWhitelistSystem _whitelist;
 
     // This is used to check if a prototype is tracking the station grid.
-    private readonly string _stationCompName = "StationData";
+    private readonly CompName _stationCompName;
     // Caching the Uid for the station grid.
     private EntityUid? _mainStationGrid;
     public override OverlaySpace Space => OverlaySpace.WorldSpace;
@@ -48,6 +48,8 @@ public sealed partial class WaypointerOverlay : Overlay
     internal WaypointerOverlay()
     {
         IoCManager.InjectDependencies(this);
+
+        _stationCompName = CompName.Get<StationDataComponent>(_entity.ComponentFactory);
 
         _combatMode = _entity.System<SharedCombatModeSystem>();
         _physics = _entity.System<SharedPhysicsSystem>();

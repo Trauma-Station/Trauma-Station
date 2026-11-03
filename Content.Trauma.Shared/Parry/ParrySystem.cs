@@ -170,6 +170,7 @@ public sealed partial class ParrySystem : EntitySystem
         }
 
         PlayAudioAndPopup(reflector.Comp.SoundOnReflect, user, shooter);
+        RaiseSuccessEvent(reflector, user, shooter);
 
         return true;
     }
@@ -193,6 +194,7 @@ public sealed partial class ParrySystem : EntitySystem
         }
 
         PlayAudioAndPopup(reflector.Comp.SoundOnReflect, user, shooter);
+        RaiseSuccessEvent(reflector, user, shooter);
 
         var angle = reflector.Comp.ReflectSpread;
         var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(reflector));
@@ -220,6 +222,7 @@ public sealed partial class ParrySystem : EntitySystem
             return false;
 
         PlayAudioAndPopup(reflector.Comp.SoundOnParry, user, attacker);
+        RaiseSuccessEvent(reflector, user, attacker);
 
         _adminLogger.Add(LogType.MeleeHit, LogImpact.Medium, $"{user} parried a melee strike from {attacker}");
 
@@ -335,6 +338,12 @@ public sealed partial class ParrySystem : EntitySystem
     {
         _popup.PopupEntity(Loc.GetString("reflect-shot"), user, shooter);
         _audio.PlayPredicted(sound, user, shooter);
+    }
+
+    private void RaiseSuccessEvent(EntityUid item, EntityUid user, EntityUid? attacker)
+    {
+        var ev = new ParriedWithEvent(user, attacker);
+        RaiseLocalEvent(item, ref ev);
     }
 
     private void UpdateAlert(Entity<ParryExhaustionComponent> ent)

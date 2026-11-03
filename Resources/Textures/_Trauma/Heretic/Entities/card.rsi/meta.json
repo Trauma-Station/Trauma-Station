@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from Paradise Station at https://github.com/ParadiseSS13/Paradise/blob/c1a0d1dd735641fea8792de08110454001f967b5/icons/obj/playing_cards.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "tarot_blank"
+        }
+    ]
+}

@@ -7,7 +7,7 @@
     Slash: 1.5
     Piercing: 0.80
     Cold: 0
-    Heat: 1.5
+    Heat: 2.0
     Poison: 0
 
 - type: damageModifierSet

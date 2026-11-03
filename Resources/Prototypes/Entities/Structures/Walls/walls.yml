@@ -264,7 +264,13 @@
   parent: BaseWall
   id: WallCult
   name: cult wall
+  description: Keeps the cult in and the crew out.
   components:
+  # <Trauma>
+  - type: Construction
+    graph: CultGirder
+    node: wall
+  # </Trauma>
   - type: Sprite
     sprite: Structures/Walls/cult.rsi
   - type: Icon
@@ -541,6 +547,9 @@
     damageContainer: StructuralInorganic
   - type: RadiationBlocker
     resistance: 10 # Trauma - was 5
+  - type: Tag
+    tags:
+    - SmeltingImmune
 
 - type: entity
   parent: WallPlastitaniumIndestructible
@@ -588,6 +597,10 @@
     damageContainer: StructuralInorganic
   - type: RadiationBlocker
     resistance: 10 # Trauma - was 5
+  - type: Tag
+    tags:
+    - Diagonal
+    - SmeltingImmune
 
 - type: entity
   parent: WallPlastitaniumDiagonalIndestructible

@@ -12,7 +12,7 @@ public sealed partial class RevolutionEnemyComponent : Component
     /// The status icon prototype displayed for revolutionaries
     /// </summary>
     [DataField]
-    public ProtoId<FactionIconPrototype> StatusIcon = "RevolutionEnemy";
+    public ProtoId<StatusIconPrototype> StatusIcon = "RevolutionEnemy";
 
     /// <summary>
     /// Sound that plays when you are chosen as Rev. (Placeholder until I find something cool I guess)

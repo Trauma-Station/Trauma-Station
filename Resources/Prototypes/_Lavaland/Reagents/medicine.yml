@@ -72,23 +72,54 @@
   metabolisms:
     Bloodstream:
       effects:
-      # Healing done only between 0-50kpa, poisoning has different damage
-      - !type:EvenHealthChange
+      # In Lavaland Pressure, Reduce Bleeding
+      - !type:ModifyBleed
+        amount: -1.5
         conditions:
         - !type:PressureCondition
-            min: 0
-            max: 50
+          min: 30
+          max: 50
+          worksOnLavaland: true
+      # In Lavaland Pressure, Restore Blood
+      - !type:ModifyBloodLevel
+        amount: 1.5
+        conditions:
+        - !type:PressureCondition
+          min: 30
+          max: 50
+          worksOnLavaland: true
+      # In Lavaland Pressure, heals Tox/Brut/Brn/Air
+      - !type:EvenHealthChange
         damage:
           Toxin: -2
           Brute: -6
           Burn: -6
-          Airloss: -6
-      # Improper pressure effects below
+          Airloss: -2
+        conditions:
+        - !type:PressureCondition
+          min: 30
+          max: 50
+          worksOnLavaland: true
+      # In Lavaland Pressure, Severe OD if using more than one injection
+      - !type:HealthChange
+        conditions:
+        - !type:ReagentCondition
+          reagent: Luxurium
+          min: 16
+        - !type:PressureCondition
+          min: 30
+          max: 50
+          worksOnLavaland: true
+        damage:
+          types:
+            Poison: 5
+            Cold: 5
+      # Improper Pressure Effects Below
       - !type:HealthChange
         conditions:
         - !type:PressureCondition
           inverted: true
-          min: 0
+          min: 30
           max: 50
         damage:
           types:
@@ -101,7 +132,7 @@
         conditions:
         - !type:PressureCondition # five billion pressure conditions :joel:
           inverted: true
-          min: 0
+          min: 30
           max: 50
         emote: Scream
         probability: 0.1
@@ -109,7 +140,7 @@
         conditions:
         - !type:PressureCondition
           inverted: true
-          min: 0
+          min: 30
           max: 50
 
 - type: reagent

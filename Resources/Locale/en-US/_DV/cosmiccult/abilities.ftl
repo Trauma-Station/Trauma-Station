@@ -22,6 +22,9 @@ cosmicability-monument-spawn-error-station = Invalid location! The Monument must
 cosmicability-monument-spawn-error-intersection = Too crowded! The Monument requires an empty 3x1 area to be beckoned.
 cosmicability-monument-spawn-error-space = Too close to space! The Monument must be be at least {$DISTANCE}m away.
 
+cosmicability-chantry-spawn-error-grid = Invalid location! The vacuous chantry must be beckoned upon a stable surface.
+cosmicability-chantry-spawn-error-station = Invalid location! The vacuous chantry must be beckoned upon the station.
+
 cosmicability-chantry-active = You cannot start a chantry ritual while one is already active!
 
 cosmicability-ingress-bolted = The airlock's bolts prevent it from being forced!

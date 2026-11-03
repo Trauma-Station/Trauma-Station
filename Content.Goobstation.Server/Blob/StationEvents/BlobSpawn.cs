@@ -20,14 +20,11 @@ public sealed partial class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComp
 
     public static readonly EntProtoId BlobRule = "BlobRule";
 
-    protected override void Started(EntityUid uid,
-        BlobSpawnRuleComponent component,
-        GameRuleComponent gameRule,
-        GameRuleStartedEvent args)
+    protected override void Started(Entity<BlobSpawnRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
     {
-        base.Started(uid, component, gameRule, args);
+        base.Started(ent, ref args);
 
-        if (GetRandomStationGrids() is not { } stationGrids)
+        if (Station.GetRandomStationGrids() is not { } stationGrids)
             return;
 
         var locations = EntityQueryEnumerator<VentCritterSpawnLocationComponent, TransformComponent>();
@@ -44,14 +41,15 @@ public sealed partial class BlobSpawnRule : StationEventSystem<BlobSpawnRuleComp
             return;
         }
 
+        var comp = ent.Comp1;
         var playerPool = _playerSystem.Sessions.ToList();
-        var numBlobs = MathHelper.Clamp(playerPool.Count / component.PlayersPerCarrierBlob, 1, component.MaxCarrierBlob);
+        var numBlobs = MathHelper.Clamp(playerPool.Count / comp.PlayersPerCarrierBlob, 1, comp.MaxCarrierBlob);
 
         for (var i = 0; i < numBlobs; i++)
         {
             var coords = _random.Pick(validLocations);
             Sawmill.Info($"Creating carrier blob at {coords}");
-            Spawn(component.CarrierBlobProto, coords);
+            Spawn(comp.CarrierBlobProto, coords);
         }
 
         // start blob rule incase it isn't, for the sweet greentext

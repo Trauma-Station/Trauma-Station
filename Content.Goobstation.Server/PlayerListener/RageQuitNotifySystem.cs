@@ -2,8 +2,8 @@
 
 using Content.Goobstation.Common.CCVar;
 using Content.Server.Chat.Managers;
-using Content.Server.GameTicking.Events;
 using Content.Shared.Chat;
+using Content.Shared.GameTicking.Events;
 using Content.Shared.Mobs;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map;

@@ -3,7 +3,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 -->
 
 <BoxContainer xmlns="https://spacestation14.io"
-              xmlns:customControls="clr-namespace:Content.Client.Administration.UI.CustomControls;assembly=Content.Client"
+              xmlns:controls="using:Content.Client.UserInterface.Controls"
               Margin="10 10 10 0"
               HorizontalExpand="True">
     <PanelContainer StyleClasses="AngleRect" HorizontalExpand="True">
@@ -19,7 +19,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                     <RichTextLabel Name="IdLabel" HorizontalAlignment="Right" />
                 </BoxContainer>
             </BoxContainer>
-            <customControls:HSeparator Margin="5 10 5 10"/>
+            <controls:Separator Margin="5 10 5 10" Orientation="Horizontal"/>
             <RichTextLabel Name="NoticeLabel" />
         </BoxContainer>
     </PanelContainer>

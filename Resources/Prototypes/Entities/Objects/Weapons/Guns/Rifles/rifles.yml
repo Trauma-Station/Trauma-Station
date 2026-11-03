@@ -56,16 +56,6 @@
       gun_chamber: !type:ContainerSlot
   - type: StaticPrice
     price: 500
-  - type: AltFireMelee
-    attackType: Heavy
-  - type: MeleeWeapon
-    damage:
-      types:
-       Blunt: 12
-    angle: 0
-    wideAnimationRotation: 90 # -90 if it takes bayonets (hits with muzzle) 90 if not (hits with butt)
-    soundHit:
-      collection: MetalThud # Goobstation ^
   # Goobstation edit start
   - type: EmitSoundOnPickup
     sound:
@@ -91,7 +81,12 @@
         map: ["enum.GunVisualLayers.Base"]
       - state: mag-0
         map: ["enum.GunVisualLayers.Mag"]
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -16
   - type: Gun
+    angleIncrease: 1.5
+    angleDecay: 9.5
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
   - type: ChamberMagazineAmmoProvider
@@ -141,8 +136,12 @@
         map: ["enum.GunVisualLayers.Mag"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/lecter.rsi
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -18
   - type: Gun
-    fireRate: 5
+    angleIncrease: 1
+    angleDecay: 9.5
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/ltrifle.ogg
   - type: ItemSlots
@@ -219,6 +218,8 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/estoc.rsi
   - type: Gun
+    minAngle: 21
+    maxAngle: 32
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/estocshot.ogg
     shotsPerBurst: 3

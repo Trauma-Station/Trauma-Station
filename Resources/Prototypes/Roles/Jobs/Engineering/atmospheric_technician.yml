@@ -6,32 +6,20 @@
   requirements:
   - !type:DepartmentTimeRequirement
     department: Engineering
-    time: 1h # Trauma was 2.5
+    time: 2.5h
   startingGear: AtmosphericTechnicianGear
   icon: "JobIconAtmosphericTechnician"
   supervisors: job-supervisors-ce
-  guides: # goobstation
-  - Atmospherics
+  guides: [ Atmospherics ]
   access:
   - Maintenance
   - Engineering
   - External
   - Atmospherics
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEducation
-    - SkillChipDatabase
-    - SkillChipBludgeon
-  - !type:AddComponentSpecial
-    components:
-    - type: EngineeringStaff
-  # </Trauma>
   - !type:GiveItemOnHolidaySpecial
     holiday: FirefighterDay
     prototype: FireAxe
-
 
 - type: startingGear
   id: AtmosphericTechnicianGear

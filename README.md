@@ -36,6 +36,8 @@ Exceptions to this are simple tools like Rider's single-line completion feature.
 
 [More detailed instructions on building the project.](https://docs.goobstation.com/en/general-development/setup.html)
 
+For advanced uses bear in mind we use a custom engine, [QuietToolbox](https://github.com/Trauma-Station/QuietToolbox).
+
 ## License
 
 All code in this codebase is released under the AGPL-3.0-or-later license. Some files were taken from other repositories and sublicensed from their original licenses. You can review the complete texts of these licenses in the LICENSES/ directory.

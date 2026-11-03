@@ -3,6 +3,11 @@
 - type: polymorph
   id: ChickenRanchMorph
   configuration:
+    componentsToTransfer:
+    - component: LanguageKnowledge
+    - component: LanguageSpeaker
+    - component: Grammar
+    - component: NpcFactionMember
     forced: true
     transferName: false
     revertOnCrit: false

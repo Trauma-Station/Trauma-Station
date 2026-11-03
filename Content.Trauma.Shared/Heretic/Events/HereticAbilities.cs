@@ -35,6 +35,9 @@ public sealed partial class HereticActionComponent : Component
 public sealed partial class EldritchInfluenceDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]
+public sealed partial class EldritchPaperDoAfterEvent : SimpleDoAfterEvent;
+
+[Serializable, NetSerializable]
 public sealed partial class DrawRitualRuneDoAfterEvent : DoAfterEvent
 {
     public NetCoordinates Coords;
@@ -437,10 +440,10 @@ public sealed partial class EventHereticCleave : EntityTargetActionEvent
     {
         DamageDict =
         {
-            { "Blunt", 4f },
-            { "Slash", 4f },
-            { "Piercing", 4f },
-            { "Bloodloss", 3f },
+            { "Blunt", 5f },
+            { "Slash", 5f },
+            { "Piercing", 5f },
+            { "Bloodloss", 5f },
         },
     };
 

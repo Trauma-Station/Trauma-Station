@@ -10,9 +10,7 @@
   startingGear: DetectiveGear
   icon: "JobIconDetective"
   supervisors: job-supervisors-hos
-  guides: # Trauma
-  - Forensics
-  - Security
+  guides: [ Forensics ] # Todo: should have a more specific guidebook page, since there's a bit more to detective than just forensics itself
   access:
   - Security
   - Brig
@@ -21,16 +19,6 @@
   - Cryogenics
   - External
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipCombatEducation
-    - SkillChipPistol
-    - SkillChipBludgeon
-  - !type:AddComponentSpecial
-    components:
-    - type: SecurityStaff
-  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
 
@@ -39,15 +27,13 @@
   equipment:
     eyes: ClothingEyesGlassesSecurity
     id: DetectivePDA
-    #gloves: ClothingHandsGlovesForensic - Goobstation, moved to loadouts
-    ears: ClothingHeadsetAltSecurityRegular # Goobstation
+    ears: ClothingHeadsetSecurity
     belt: ClothingBeltHolsterFilled
   storage:
     back:
     - Flash
     - ForensicPad
     - ForensicScanner
-    - ClothingMaskGasSecurity # Goobstation
 
 - type: chameleonOutfit
   id: DetectiveChameleonOutfit

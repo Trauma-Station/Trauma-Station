@@ -1,16 +1,4 @@
-<!--
-SPDX-FileCopyrightText: 2022 Moony <moonheart08@users.noreply.github.com>
-SPDX-FileCopyrightText: 2023 Visne <39844191+Visne@users.noreply.github.com>
-SPDX-FileCopyrightText: 2024 Aiden <aiden@djkraz.com>
-SPDX-FileCopyrightText: 2024 MetalSage <74924875+MetalSage@users.noreply.github.com>
-SPDX-FileCopyrightText: 2024 Repo <47093363+Titian3@users.noreply.github.com>
-SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-
-SPDX-License-Identifier: AGPL-3.0-or-later
--->
-
 <Control xmlns="https://spacestation14.io"
-         xmlns:cc="clr-namespace:Content.Client.Administration.UI.CustomControls"
          xmlns:ot="clr-namespace:Content.Client.Administration.UI.Tabs.ObjectsTab"
          xmlns:co="clr-namespace:Content.Client.UserInterface.Controls">
     <BoxContainer Orientation="Vertical">
@@ -21,10 +9,10 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                       SizeFlagsStretchRatio="1" />
             <Button Name="RefreshListButton" Text="{Loc object-tab-refresh-button}" ToggleMode="False" />
         </BoxContainer>
-        <cc:HSeparator />
+        <co:Separator StyleClasses="LowDivider" MinWidth="2" />
         <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
             <ot:ObjectsTabHeader Name="ListHeader" />
-            <cc:HSeparator />
+            <co:Separator StyleClasses="LowDivider" MinWidth="2" />
             <co:SearchListContainer Name="SearchList" Access="Public" VerticalExpand="True" />
         </BoxContainer>
     </BoxContainer>

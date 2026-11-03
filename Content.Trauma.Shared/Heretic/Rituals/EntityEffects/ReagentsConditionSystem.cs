@@ -8,23 +8,6 @@ using Content.Shared.Fluids.Components;
 
 namespace Content.Trauma.Shared.Heretic.Rituals.EntityEffects;
 
-public sealed partial class ReagentsEntityConditionSystem : EntityConditionSystem<PuddleComponent, ReagentsCondition>
-{
-    [Dependency] private SharedSolutionContainerSystem _sol = default!;
-
-
-    protected override void Condition(Entity<PuddleComponent> entity,
-        ref EntityConditionEvent<ReagentsCondition> args)
-    {
-        if (!_sol.TryGetSolution(entity.Owner, entity.Comp.SolutionName, out _, out var sol))
-            return;
-
-        var quant = sol.GetTotalPrototypeQuantity(args.Condition.Reagents);
-
-        args.Result = quant > args.Condition.Min && quant < args.Condition.Max;
-    }
-}
-
 public sealed partial class ReagentsCondition : EntityConditionBase<ReagentsCondition>
 {
     [DataField]
@@ -55,5 +38,21 @@ public sealed partial class ReagentsCondition : EntityConditionBase<ReagentsCond
             ("reagent", reagentProto.LocalizedName),
             ("max", Max == FixedPoint2.MaxValue ? int.MaxValue : Max.Float()),
             ("min", Min.Float()));
+    }
+}
+
+public sealed partial class ReagentsEntityConditionSystem : EntityConditionSystem<PuddleComponent, ReagentsCondition>
+{
+    [Dependency] private SharedSolutionContainerSystem _sol = default!;
+
+    protected override void Condition(Entity<PuddleComponent> entity,
+        ref EntityConditionEvent<ReagentsCondition> args)
+    {
+        if (!_sol.TryGetSolution(entity.Owner, entity.Comp.SolutionName, out _, out var sol))
+            return;
+
+        var quant = sol.GetTotalPrototypeQuantity(args.Condition.Reagents);
+
+        args.Result = quant > args.Condition.Min && quant < args.Condition.Max;
     }
 }

@@ -352,10 +352,15 @@
     state: icon
   - type: Solution
     solution:
-      maxVol: 99999
+      maxVol: 300
       reagents:
       - ReagentId: Protein
-        Quantity: 99999
+        Quantity: 300
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Protein
+        Quantity: 100
   - type: FlavorProfile
     flavors:
     - meaty

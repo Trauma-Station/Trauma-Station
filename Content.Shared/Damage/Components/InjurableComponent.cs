@@ -29,7 +29,7 @@ public sealed partial class InjurableComponent : Component
     public List<ProtoId<DamageGroupPrototype>> PainDamageGroups = new() { "Brute", "Burn" };
 
     [DataField]
-    public Dictionary<MobState, ProtoId<HealthIconPrototype>> HealthIcons = new()
+    public Dictionary<MobState, ProtoId<StatusIconPrototype>> HealthIcons = new()
     {
         { MobState.Alive, "HealthIconFine" },
         { MobState.SoftCrit, "HealthIconCritical" }, // Trauma
@@ -38,5 +38,5 @@ public sealed partial class InjurableComponent : Component
     };
 
     [DataField]
-    public ProtoId<HealthIconPrototype> RottingIcon = "HealthIconRotting";
+    public ProtoId<StatusIconPrototype> RottingIcon = "HealthIconRotting";
 }

@@ -11,7 +11,7 @@ namespace Content.Server.Store.Systems;
 public sealed partial class StoreSystem
 {
     [Dependency] private PolymorphSystem _polymorph = default!;
-    [Dependency] private SharedGameTicker _ticker = default!;
+    [Dependency] private GameTicker _ticker = default!;
 
     [SubscribeLocalEvent]
     private void OnPolymorphed(Entity<StoreComponent> ent, ref PolymorphedEvent args)
@@ -22,22 +22,19 @@ public sealed partial class StoreSystem
         _polymorph.CopyPolymorphComponent<StoreComponent>(ent, args.NewEntity);
     }
 
-    private void OnPurchase(ListingData listing)
+    private bool TryUpdateRestockTime(ListingData listing)
     {
-        if (!ProtoMan.Resolve<ListingPrototype>(listing.ID, out var prototype))
-            return;
+        var stationTime = _timing.CurTime.Subtract(_ticker.RoundStartTimeSpan);
 
-        // updating restocktime
-        var now = _timing.CurTime.Subtract(_ticker.RoundStartTimeSpan);
-        if (prototype.ResetRestockOnPurchase)
-        {
-            var restockDuration = prototype.RestockTime;
-            listing.RestockTime = now + restockDuration;
-        }
+        if (listing.RestockTime > stationTime)
+            return false;
+
         if (listing.ResetRestockOnPurchase)
         {
             var restockDuration = listing.RestockAfterPurchase ?? listing.RestockTime;
-            listing.RestockTime = now + restockDuration;
+            listing.RestockTime = stationTime + restockDuration;
         }
+
+        return true;
     }
 }

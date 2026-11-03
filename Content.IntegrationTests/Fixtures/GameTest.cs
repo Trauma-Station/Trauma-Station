@@ -247,10 +247,10 @@ public abstract partial class GameTest
             // And other teardown logic will go here. Eventually.
 
         }
-        catch (Exception)
+        catch (Exception e) // Trauma - don't discard the error
         {
             _pairDestroyed = true;
-            Assert.Fail();
+            Assert.Fail($"Exception was thrown while tearing down: {e}"); // Trauma - include the fucking error!!!!
             throw;
         }
         finally

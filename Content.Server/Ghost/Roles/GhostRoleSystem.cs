@@ -236,14 +236,14 @@ public sealed partial class GhostRoleSystem : EntitySystem
             // the raffle is over! find someone to take over the ghost role
             if (!TryComp(entityUid, out GhostRoleComponent? ghostRole))
             {
-                Log.Warning($"Ghost role raffle finished on {entityUid} but {nameof(GhostRoleComponent)} is missing");
+                Log.Error($"Ghost role raffle finished on {entityUid} but {nameof(GhostRoleComponent)} is missing"); // Trauma - changed to error
                 RemoveRaffleAndUpdateEui(entityUid, raffle);
                 continue;
             }
 
             if (ghostRole.RaffleConfig is null)
             {
-                Log.Warning($"Ghost role raffle finished on {entityUid} but RaffleConfig became null");
+                Log.Error($"Ghost role raffle finished on {entityUid} but RaffleConfig became null"); // Trauma - changed to error
                 RemoveRaffleAndUpdateEui(entityUid, raffle);
                 continue;
             }
@@ -264,7 +264,7 @@ public sealed partial class GhostRoleSystem : EntitySystem
 
             if (!foundWinner)
             {
-                Log.Warning($"Ghost role raffle for {entityUid} ({ghostRole.RoleName}) finished without " +
+                Log.Error($"Ghost role raffle for {entityUid} ({ghostRole.RoleName}) finished without " + // Trauma - changed to error
                             $"{ghostRole.RaffleConfig?.Decider} finding a winner");
             }
 

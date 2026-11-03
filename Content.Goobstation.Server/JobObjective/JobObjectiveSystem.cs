@@ -2,11 +2,10 @@
 
 using System.Linq;
 using Content.Goobstation.Shared.JobObjective;
-using Content.Server.GameTicking;
-using Content.Server.GameTicking.Events;
 using Content.Server.Mind;
 using Content.Server.Objectives;
 using Content.Shared.GameTicking;
+using Content.Shared.GameTicking.Events;
 using Content.Shared.Mind;
 using Robust.Shared.Map;
 
@@ -23,16 +22,7 @@ public sealed partial class JobObjectiveSystem : EntitySystem
     private readonly List<QueuedObjective> _queuedObjectives = [];
     private EntityUid? _jobObjectiveRule;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<PlayerSpawnCompleteEvent>(OnSpawnComplete);
-        SubscribeLocalEvent<JobObjectiveRuleComponent, ObjectivesTextGetInfoEvent>(OnObjectivesTextGetInfo);
-        SubscribeLocalEvent<RoundStartingEvent>(OnRoundStarting);
-        SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundEnding);
-    }
-
+    [SubscribeLocalEvent]
     private void OnRoundStarting(RoundStartingEvent ev)
     {
         _queuedObjectives.Clear();
@@ -40,6 +30,7 @@ public sealed partial class JobObjectiveSystem : EntitySystem
         _ticker.StartGameRule(_jobObjectiveRule.Value);
     }
 
+    [SubscribeLocalEvent]
     private void OnRoundEnding(RoundRestartCleanupEvent ev)
     {
         _queuedObjectives.Clear();
@@ -56,6 +47,7 @@ public sealed partial class JobObjectiveSystem : EntitySystem
         _queuedObjectives.Add(new QueuedObjective(mob, objectives));
     }
 
+    [SubscribeLocalEvent]
     private void OnSpawnComplete(PlayerSpawnCompleteEvent ev)
     {
         if (!_mind.TryGetMind(ev.Mob, out var mind, out var comp))
@@ -72,6 +64,7 @@ public sealed partial class JobObjectiveSystem : EntitySystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnObjectivesTextGetInfo(Entity<JobObjectiveRuleComponent> rule, ref ObjectivesTextGetInfoEvent args)
     {
         args.AgentName = Loc.GetString("job-objectives-round-end-crew-name");

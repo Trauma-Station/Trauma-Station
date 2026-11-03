@@ -28,6 +28,7 @@ public sealed partial class VentCrawlerTubeSystem : EntitySystem
     [Dependency] private SharedMoverController _mover = default!;
     [Dependency] private ServerInventorySystem _inventory = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private EntityQuery<VentCrawlerHolderComponent> _holderQuery = default!;
 
     public override void Initialize()
     {
@@ -173,10 +174,9 @@ public sealed partial class VentCrawlerTubeSystem : EntitySystem
         if (tube.Contents is null)
             return; //runtime error on map load with prospector shuttle 4 some reason
 
-        var query = GetEntityQuery<VentCrawlerHolderComponent>();
         foreach (var entity in tube.Contents.ContainedEntities.ToArray())
         {
-            if (query.TryGetComponent(entity, out var holder))
+            if (_holderQuery.TryGetComponent(entity, out var holder))
             {
                 var Exitev = new VentCrawlingExitEvent();
                 RaiseLocalEvent(entity, ref Exitev);

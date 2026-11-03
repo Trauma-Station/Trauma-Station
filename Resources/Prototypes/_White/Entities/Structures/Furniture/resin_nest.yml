@@ -10,12 +10,10 @@
     sprite: _White/Structures/Furniture/resin_nest.rsi
     state: full
     noRot: true
+    drawdepth: Mobs
   - type: Icon
     sprite: _White/Structures/Furniture/resin_nest.rsi
     state: full
-  - type: IconSmooth
-    key: full
-    base: resin_nest
   - type: Fixtures
     fixtures:
       fix1:
@@ -70,9 +68,9 @@
   - type: SpaceImmunityOnBuckle
   - type: BlockHandsOnBuckle
   - type: Strap
-    position: Down
-    rotation: -90
+    position: Stand
     selfUnBuckleDelay: 120
+    modifyBuckleDrawDepth: false
   - type: Transform
     anchored: true
     noRot: true

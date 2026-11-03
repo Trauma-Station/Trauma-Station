@@ -1,6 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: objectiveIssuer
+  id: BloodCult
+  name: objective-issuer-blood-cult
+
+- type: objectiveIssuer
   id: Xenos
   name: objective-issuer-xenomorph-hive
 
@@ -75,7 +79,3 @@
 - type: objectiveIssuer
   id: Self # not to be cofused with SELF
   name: objective-issuer-self
-
-- type: objectiveIssuer
-  id: Slasher
-  name: objective-issuer-slasher

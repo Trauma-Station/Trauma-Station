@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: SecurityOfficer
+  guides:
+  - CorporateJudo
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipCombatEducation
+    - SkillChipLaser
+    - SkillChipNonLethal
+  - !type:AddComponentSpecial
+    components:
+    - type: SecurityStaff
+
+- type: startingGear
+  id: SecurityOfficerGear
+  equipment:
+    ears: ClothingHeadsetAltSecurityRegular
+    pocket1: WeaponLaserSidearm
+  storage:
+    back:
+    - !Remove MagazinePistol

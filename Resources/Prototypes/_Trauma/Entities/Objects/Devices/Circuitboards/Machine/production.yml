@@ -33,3 +33,14 @@
       GlassBeaker:
         amount: 2
         defaultPrototype: Beaker
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: AbductorBiofabMachineBoard
+  name: abductor biofab machine board
+  description: A machine printed circuit board for a abductor biofab.
+  components:
+  - type: MachineBoard
+    prototype: AbductorBiofabricator
+    stackRequirements:
+      Manipulator: 4

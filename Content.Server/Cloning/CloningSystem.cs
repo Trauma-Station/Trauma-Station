@@ -1,6 +1,5 @@
 // <Trauma>
 using Content.Goobstation.Common.Cloning;
-using Content.Goobstation.Shared.CloneProjector.Clone;
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Goobstation.Shared.Clothing.Systems;
 using Content.Shared.Clothing.Components;
@@ -332,14 +331,16 @@ public sealed partial class CloningSystem : SharedCloningSystem
         RaiseLocalEvent(original, ref ev);
 
         // if the original has items inside its storage, copy those as well
-        if (TryComp<StorageComponent>(original, out var originalStorage) && TryComp<StorageComponent>(spawned, out var spawnedStorage)) // Goob edit
+        if (TryComp<StorageComponent>(original, out var originalStorage) && TryComp<StorageComponent>(spawned, out var spawnedStorage))
         {
             // remove all items that spawned with the entity inside its storage
             // this ignores other containers, but this should be good enough for our purposes
             _container.CleanContainer(spawnedStorage.Container);
 
-            if (!copyStorage) // Goobstation
+            // <Trauma>
+            if (!copyStorage)
                 return spawned;
+            // </Trauma>
 
             // recursively replace them
             // surely no one will ever create two items that contain each other causing an infinite loop, right?

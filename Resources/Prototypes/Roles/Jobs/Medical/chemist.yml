@@ -10,31 +10,17 @@
   startingGear: ChemistGear
   icon: "JobIconChemist"
   supervisors: job-supervisors-cmo
+  guides: [ Chemist ]
   access:
   - Medical
   - Chemistry
   - Maintenance
-  # <Trauma>
-  guides:
-  - Chemist
-  - Chemicals
-  special:
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEducation
-    - SkillChipChemist
-  - !type:AddComponentSpecial
-    components:
-    - type: SurgerySpeedModifier
-      speedModifier: 1.25
-  # </Trauma>
 
 - type: startingGear
   id: ChemistGear
   equipment:
     id: ChemistryPDA
     ears: ClothingHeadsetMedical
-    belt: ChemBagFilled # Goob
 
 - type: chameleonOutfit
   id: ChemistChameleonOutfit

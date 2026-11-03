@@ -14,6 +14,7 @@ using Content.Shared.Damage.Systems;
 using Content.Shared.FixedPoint;
 using Content.Shared.Mind.Components;
 using Content.Shared.StatusEffectNew;
+using Content.Shared.Temperature.Components;
 using Content.Shared.Temperature.Systems;
 using Content.Trauma.Server.Heretic.Abilities;
 using Content.Trauma.Shared.Heretic.Components;
@@ -43,6 +44,7 @@ public sealed partial class LeechingWalkSystem : EntitySystem
     [Dependency] private EntityQuery<GhoulComponent> _ghoulQuery = default!;
     [Dependency] private EntityQuery<BodyComponent> _bodyQuery = default!;
     [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
+    [Dependency] private EntityQuery<TemperatureComponent> _tempQuery = default!;
 
     private static readonly TimeSpan UpdateDelay = TimeSpan.FromSeconds(1);
     private TimeSpan _nextUpdate = TimeSpan.Zero;
@@ -122,7 +124,8 @@ public sealed partial class LeechingWalkSystem : EntitySystem
             if (_bloodQuery.TryComp(uid, out var blood))
                 _blood.FlushChemicals((uid, blood), leech.ChemPurgeRate * multiplier, leech.ExcludedReagents);
 
-            _temp.SetTemperature(uid, leech.TargetTemperature);
+            if (_tempQuery.TryComp(uid, out var temp))
+                _temp.SetTemperature((uid, temp), leech.TargetTemperature);
 
             if (_staminaQuery.TryComp(uid, out var stamina) && stamina.StaminaDamage > 0)
             {

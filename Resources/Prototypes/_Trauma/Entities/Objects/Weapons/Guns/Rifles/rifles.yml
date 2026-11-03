@@ -51,3 +51,19 @@
     steps: 1
     zeroVisible: true
   - type: Appearance
+
+- type: entity
+  abstract: true
+  parent: BaseItem
+  id: BaseStockHit
+  components:
+  - type: AltFireMelee
+    attackType: Heavy
+  - type: MeleeWeapon
+    damage:
+      types:
+       Blunt: 12 # stock hit
+    angle: 0
+    wideAnimationRotation: 90
+    soundHit:
+      collection: MetalThud

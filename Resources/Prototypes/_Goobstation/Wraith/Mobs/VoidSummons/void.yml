@@ -41,7 +41,10 @@
     sprite: _Goobstation/Wraith/Mobs/skeletoncommander.rsi
     layers:
       - state: skeleton_commander
-  - type: MeleeWeapon #TO DO: Increase attack range of this fella. Parity and what not.
+  - type: MeleeThrowOnHit
+    distance: 1
+    speed: 5
+  - type: MeleeWeapon
     altDisarm: false
     angle: 0
     animation: WeaponArcSlash
@@ -49,8 +52,10 @@
       collection: Flesh_Stab
     damage:
       types:
-        Blunt: 7
+        Piercing: 10
         Slash: 5
+        Structural: 30
+    range: 2
   - type: MobState
   - type: Fixtures
     fixtures:
@@ -88,7 +93,7 @@
     thresholds:
       - trigger:
           !type:DamageTrigger
-          damage: 50
+          damage: 75
         behaviors:
           - !type:DoActsBehavior
             acts: [ "Destruction" ]
@@ -142,16 +147,13 @@
       collection: Flesh_Stab
     damage:
       types:
-        Slash: 4 #Very weak damage, but makes target sleep on attack. I'm not sure if our balance fits with Goon's balance, because 4 damage is pathetically weak, but this creature might be only for kidnapping.
-  - type: Solution
-    id: melee
-    solution:
-      reagents:
-      - ReagentId: Nocturine
-        Quantity: 100
+        Slash: 6 #Very weak damage, but makes target sleep on attack. I'm not sure if our balance fits with Goon's balance, because 4 damage is pathetically weak, but this creature might be only for kidnapping.
+  - type: SolutionManager
+    solutions:
+    - SolutionVoidSpiker
   - type: MeleeChemicalInjector
     solution: melee
-    transferAmount: 1
+    transferAmount: 2.5
   - type: TentacleHook
   - type: SpikerLash
   - type: SpikerShuffle
@@ -198,6 +200,22 @@
     speedModifier: 2.5
 
 - type: entity
+  parent: [SolutionWeapon, SolutionTiny]
+  id: SolutionVoidSpiker
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nocturine
+        Quantity: 30
+  - type: SolutionRegeneration
+    generated:
+      reagents:
+      - ReagentId: Nocturine
+        Quantity: 1
+
+- type: entity
   parent: [ MobCorgiNarsi, MobNightVision ]
   id: MobVoidHound
   name: voidhound
@@ -228,6 +246,7 @@
       Dead:
         Base: dead_voidHound
   - type: MeleeWeapon
+    attackRate: 1.5
     altDisarm: false
     animation: WeaponArcBite
     damage:

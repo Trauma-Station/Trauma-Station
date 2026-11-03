@@ -3,6 +3,11 @@
   name: cyborg endoskeleton
   description: A frame that cyborgs are built on. Significantly less spooky than expected.
   components:
+  # <Trauma>
+  - type: TwistedConstructionTarget
+    replacementProto: ConstructShell
+    doAfterDelay: 5
+  # </Trauma>
   - type: Clickable
   - type: InteractionOutline
   - type: Physics

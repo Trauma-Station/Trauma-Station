@@ -19,14 +19,15 @@ public sealed partial class CarpMigrationRule : StationEventSystem<CarpMigration
 
     private List<Entity<TransformComponent>> _areas = new();
 
-    protected override void Started(EntityUid uid, CarpMigrationRuleComponent comp, GameRuleComponent gameRule, GameRuleStartedEvent args)
+    protected override void Started(Entity<CarpMigrationRuleComponent, GameRuleComponent> ent, ref GameRuleStartedEvent args)
     {
-        base.Started(uid, comp, gameRule, args);
+        base.Started(ent, ref args);
 
+        var (uid, comp, rule) = ent;
         if (CompOrNull<SpaceSpawnRuleComponent>(uid)?.Coords is not {} spawnPos)
         {
             Log.Error($"Event {ToPrettyString(uid)} had no SpaceSpawnRule or picked location!");
-            ForceEndSelf(uid, gameRule);
+            ForceEndSelf((uid, rule));
             return;
         }
 
@@ -35,7 +36,7 @@ public sealed partial class CarpMigrationRule : StationEventSystem<CarpMigration
         _area.AddOpenAreas<CarpMigrationTargetComponent>(spawnPos.MapId, _areas, _ => true);
         if (_areas.Count == 0)
         {
-            ForceEndSelf(uid, gameRule);
+            ForceEndSelf((uid, rule));
             return;
         }
         var target = RobustRandom.Pick(_areas).Comp.Coordinates;

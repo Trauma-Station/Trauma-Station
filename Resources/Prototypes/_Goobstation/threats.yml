@@ -8,7 +8,6 @@
     ShuttleInstigator: 0.8
     VoxRaiders: 0.8
     GreyTide: 0.65
-    #TODO When Slasher is ready Slasher: 0.6 # Goobstation
     Blob: 0.5
     Dragon: 0.3
     SlaughterDemon: 0.3
@@ -56,9 +55,3 @@
   id: Wraith
   announcement: terror-wraith
   rule: WraithMidround
-
-# TODO When Slasher is Ready
-#- type: ninjaHackingThreat
-#  id: Slasher
-#  announcement: terror-slasher
-#  rule: SlasherSpawn

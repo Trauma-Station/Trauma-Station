@@ -1,0 +1,42 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: jobIconGroup
+  id: ServiceIconGroup
+  icons:
+  # moved to civilian/entertainer
+  - !Remove JobIconChaplain
+  - !Remove JobIconJanitor
+  - !Remove JobIconLawyer
+  - !Remove JobIconLibrarian
+  - !Remove JobIconReporter
+  - !Remove JobIconBoxer
+  - !Remove JobIconZookeeper
+  - !Remove JobIconTramDriver
+
+- type: jobIconGroup
+  id: TheatreIconGroup
+  icons:
+  - JobIconBoxer
+  - JobIconRadioHost
+
+- type: jobIconGroup
+  id: CivilianIconGroup
+  icons:
+  - JobIconChaplain
+  - JobIconJanitor
+  - JobIconLawyer
+  - JobIconLibrarian
+  - JobIconReporter
+  - JobIconZookeeper
+  - JobIconTramDriver
+
+- type: jobIconGroup
+  id: CentCommIconGroup
+  icons:
+  - JobIconNanotrasenRepresentative
+
+- type: jobIconGroup
+  id: MiscIconGroup
+  icons:
+  - JobIconDClass
+  - JobIconSpacePol

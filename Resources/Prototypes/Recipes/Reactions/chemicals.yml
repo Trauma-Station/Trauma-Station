@@ -136,7 +136,7 @@
 
 - type: reaction
   id: Smoke
-  priority: 10 # Trauma
+  priority: -10
   impact: High
   conserveEnergy: false
   reactants:
@@ -148,14 +148,14 @@
       amount: 1
   effects:
     - !type:AreaReactionEffect
-      duration: 10 # Trauma - Changed foam/smoke duration, check AreaReactionEntityEffectSystem.cs for more info, this still works, just not the same
+      duration: 10
       prototypeId: Smoke
       sound:
         path: /Audio/Effects/smoke.ogg
 
 - type: reaction
   id: Foam
-  priority: 10 # Trauma
+  priority: -10
   impact: High
   conserveEnergy: false
   reactants:
@@ -173,7 +173,7 @@
 - type: reaction
   id: IronMetalFoam
   impact: High
-  priority: 10 # Trauma
+  priority: -10
   conserveEnergy: false
   reactants:
     Iron:
@@ -192,7 +192,7 @@
 - type: reaction
   id: AluminiumMetalFoam
   impact: High
-  priority: 10 # Trauma
+  priority: -10
   conserveEnergy: false
   reactants:
     Aluminium:
@@ -343,7 +343,7 @@
     Oxygen:
       amount: 2
   products:
-    Stimulants: 3 # Goobstation edit
+    Stimulants: 2
 
 - type: reaction
   id: StrawberryIce
@@ -388,7 +388,7 @@
     SpaceGlue:
       amount: 2
   products:
-    MuteToxin: 4 #goob edit
+    MuteToxin: 2
 
 - type: reaction
   id: ChloralHydrate
@@ -440,7 +440,6 @@
 - type: reaction
   id: Ethyloxyephedrine
   impact: Medium
-  minTemp: 370    #Goobstation edit
   reactants:
     Desoxyephedrine:
       amount: 1
@@ -543,7 +542,7 @@
     Vestine:
       amount: 1
   products:
-    Nocturine: 2 #goob edit
+    Nocturine: 1
 
 - type: reaction
   id: Tazinide
@@ -554,7 +553,7 @@
     Vestine:
       amount: 1
   products:
-    Tazinide: 2 #goob edit
+    Tazinide: 1
 
 - type: reaction
   id: ArtifactGlue

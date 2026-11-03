@@ -217,30 +217,6 @@
   - type: Implanter
     implant: NaniteMenderImplant
 
-# Antag Planet
-
-- type: entity
-  abstract: true
-  id: BaseAntagImplantOnlyImplanter
-  parent: BaseImplantOnlyImplanterCentcomm
-  name: antag implanter
-
-- type: entity
-  id: AntagImplanterChangeling
-  suffix: Changeling
-  parent: BaseAntagImplantOnlyImplanter
-  components:
-  - type: Implanter
-    implant: AntagImplantChangeling
-
-- type: entity
-  id: AntagImplanterSpaceNinja
-  suffix: Space Ninja
-  parent: BaseAntagImplantOnlyImplanter
-  components:
-  - type: Implanter
-    implant: AntagImplantSpaceNinja
-
 # Xeno
 
 - type: entity

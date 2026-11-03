@@ -5,7 +5,7 @@ using Content.Shared.Administration.Logs;
 using Content.Shared.Cargo;
 using Content.Shared.Database;
 using Content.Shared.Popups;
-using Content.Shared.Station;
+using Content.Shared.Station.Systems;
 using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Antag;
@@ -17,7 +17,7 @@ public abstract partial class SharedAntagSummonerSystem : EntitySystem
     [Dependency] private ISharedAdminLogManager _adminLog = default!;
     [Dependency] private SharedCargoSystem _cargo = default!;
     [Dependency] protected SharedPopupSystem Popup = default!;
-    [Dependency] private SharedStationSystem _station = default!;
+    [Dependency] private StationSystem _station = default!;
 
     public override void Initialize()
     {

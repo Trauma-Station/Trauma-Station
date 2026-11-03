@@ -152,7 +152,7 @@
         tableId: FillGunSafeJudoT1
 
 - type: entity
-  parent: BaseTraumaGunSafe
+  parent: GunSafeEmptyBlue
   id: GunSafeRiotLauncher
   name: riot launcher safe
   components:

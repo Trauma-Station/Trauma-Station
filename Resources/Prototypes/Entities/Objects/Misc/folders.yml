@@ -531,6 +531,10 @@
   - type: CargoOrderConsole
     ignoreAccess: true # Trauma
     removeLimitAccess: [ "Quartermaster" ]
+  - type: DeviceLinkSource
+    range: 200
+    ports:
+    - OrderSender
   - type: ActivatableUI
     verbText: qm-clipboard-computer-verb-text
     key: enum.CargoConsoleUiKey.Orders

@@ -10,6 +10,7 @@
   startingGear: ChefGear
   icon: "JobIconChef"
   supervisors: job-supervisors-hop
+  guides: [ Chef ]
   access:
   - Service
   - Maintenance
@@ -17,18 +18,6 @@
   extendedAccess:
   - Hydroponics
   - Bar
-  # <Trauma>
-  guides:
-  - Chef
-  - FoodRecipes
-  - CQC
-  special:
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEducation
-    - SkillChipShortBlade
-    - SkillChipChef
-  # </Trauma>
 
 - type: startingGear
   id: ChefGear
@@ -37,9 +26,9 @@
     id: ChefPDA
     ears: ClothingHeadsetService
     belt: ClothingBeltChefFilled
-  storage:
-    back:
-    - IngredientsBeacon # Trauma
+  #storage:
+    #back:
+    #- Stuff
 
 - type: chameleonOutfit
   id: ChefChameleonOutfit

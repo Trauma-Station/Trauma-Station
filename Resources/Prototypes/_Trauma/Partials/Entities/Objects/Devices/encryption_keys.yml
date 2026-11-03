@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ EncryptionKey, BaseEngineeringContraband ]
+  id: EncryptionKeyRobo
+  components:
+  - type: EncryptionKey
+    channels: !Clear
+    - Engineering
+    defaultChannel: Engineering

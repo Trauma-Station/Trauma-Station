@@ -10,6 +10,7 @@ using Content.Shared.Maps;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Physics;
 using Content.Shared.Popups;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Stealth;
 using Content.Shared.Stealth.Components;
 using Content.Trauma.Common.VentCrawling;
@@ -21,22 +22,21 @@ using Robust.Shared.Physics;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Physics.Systems;
 using Robust.Shared.Player;
-using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.FloorGoblin;
 
 public abstract partial class SharedCrawlUnderFloorSystem : EntitySystem
 {
+    [Dependency] private IGameTiming _timing = default!;
+    [Dependency] private ITileDefinitionManager _tileManager = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedMapSystem _map = default!;
-    [Dependency] private ITileDefinitionManager _tileManager = default!;
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private SharedPhysicsSystem _physics = default!;
-    [Dependency] private INetManager _net = default!;
     [Dependency] private SharedActionsSystem _actionsSystem = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
-    [Dependency] private IRobustRandom _random = default!;
     [Dependency] private TileSystem _tile = default!;
     [Dependency] private SharedStealthSystem _stealth = default!;
 
@@ -59,23 +59,14 @@ public abstract partial class SharedCrawlUnderFloorSystem : EntitySystem
             _actionsSystem.AddAction(uid, ref component.ToggleHideAction, component.ActionProto);
         component.WasOnSubfloor = IsOnSubfloor(uid);
 
-        if (!_net.IsClient)
-        {
-            EnableSneakMode(uid, component);
-            SetStealth(uid, !IsOnSubfloor(uid)); // We use stealth component for allowing medhuds and such to be hidden, terrible solution, couldn't think of anything better.
-        }
+        EnableSneakMode(uid, component);
+        SetStealth(uid, !IsOnSubfloor(uid)); // We use stealth component for allowing medhuds and such to be hidden, terrible solution, couldn't think of anything better.
     }
 
     private void OnAbilityToggle(EntityUid uid, CrawlUnderFloorComponent component, ToggleFloorCrawlingEvent args)
     {
         if (args.Handled)
             return;
-
-        if (_net.IsClient)
-        {
-            args.Handled = true;
-            return;
-        }
 
         if (TryComp<VentCrawlerComponent>(uid, out var vent) && vent.InTube)
         {
@@ -171,11 +162,11 @@ public abstract partial class SharedCrawlUnderFloorSystem : EntitySystem
         }
     }
 
-    protected void PlayDuendeSound(EntityUid uid, float probability = 0.3f)
+    private void PlayDuendeSound(EntityUid uid, float probability = 0.3f)
     {
-        if (_random.Prob(probability))
+        if (SharedRandomExtensions.PredictedProb(_timing, probability, GetNetEntity(uid)))
         {
-            _audio.PlayPvs(new SoundCollectionSpecifier("DuendeSounds"), uid);
+            _audio.PlayPredicted(new SoundCollectionSpecifier("DuendeSounds"), uid, uid);
         }
     }
 
@@ -252,8 +243,6 @@ public abstract partial class SharedCrawlUnderFloorSystem : EntitySystem
 
     private void HandleCrawlTransition(EntityUid uid, bool wasOnSubfloor, bool isOnSubfloor, CrawlUnderFloorComponent comp, bool causedByTileChange)
     {
-        if (!_net.IsServer)
-            return;
         if (!comp.Enabled)
             return;
         if (wasOnSubfloor == isOnSubfloor)
@@ -348,8 +337,6 @@ public abstract partial class SharedCrawlUnderFloorSystem : EntitySystem
             }
         }
     }
-
-
 
     private void RefreshCrawlSubfloorState(EntityUid uid, CrawlUnderFloorComponent comp, bool causedByTileChange)
     {

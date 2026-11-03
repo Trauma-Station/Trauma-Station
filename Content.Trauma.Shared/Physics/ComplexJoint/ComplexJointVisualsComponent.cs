@@ -35,6 +35,8 @@ public sealed partial class ComplexJointVisualsData(
 
     public TimeSpan? CreationTime;
 
+    public TimeSpan? Duration;
+
     public Vector2 Scale = Vector2.One;
 
     public float? MaxRange = maxRange;

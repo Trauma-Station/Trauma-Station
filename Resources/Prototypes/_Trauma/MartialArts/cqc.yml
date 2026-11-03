@@ -257,11 +257,15 @@
   - !type:ModifyStatusEffect
     effectProto: StatusEffectForcedSleeping
     time: 7
+    conditions:
+    - !type:StaminaCritical
   - !type:HealthChange
     targetPart: Chest
     damage:
       types:
         Blunt: 30
+  - !type:TakeStaminaDamage
+    amount: 45
   - !type:ModifyKnockdown
     time: 5
     drop: true

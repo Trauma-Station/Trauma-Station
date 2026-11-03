@@ -81,3 +81,11 @@
   components:
   - type: Contraband
     allowedJobs: [ Botanist ]
+
+- type: entity
+  abstract: true
+  id: BaseBloodContraband
+  components:
+  - type: Contraband
+    severity: Magical
+  # no points for scanning lol

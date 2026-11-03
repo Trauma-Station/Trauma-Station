@@ -1,6 +1,6 @@
 // <Trauma>
-using Content.Server.GameTicking;
-using Content.Server.GameTicking.Rules.Components;
+using Content.Shared.GameTicking;
+using Content.Shared.GameTicking.Rules.Components;
 // </Trauma>
 using Content.Server.Audio;
 using Content.Server.Chat.Systems;
@@ -31,6 +31,9 @@ namespace Content.Server.Nuke;
 
 public sealed partial class NukeSystem : EntitySystem
 {
+    // <Trauma>
+    [Dependency] private GameTicker _ticker = default!;
+    // </Trauma>
     [Dependency] private AlertLevelSystem _alertLevel = default!;
     [Dependency] private ChatSystem _chatSystem = default!;
     [Dependency] private ExplosionSystem _explosions = default!;
@@ -44,10 +47,9 @@ public sealed partial class NukeSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedMapSystem _map = default!;
-    [Dependency] private StationSystem _station = default!;
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private UserInterfaceSystem _ui = default!;
     [Dependency] private AppearanceSystem _appearance = default!;
-    [Dependency] private GameTicker _gameTicker = default!; // Goobstation
     [Dependency] private TurfSystem _turf = default!;
     [Dependency] private IGameTiming _timing = default!;
 
@@ -526,8 +528,9 @@ public sealed partial class NukeSystem : EntitySystem
         _selectedNukeSong = _audio.ResolveSound(component.ArmMusic);
 
         // Goobstation start
+        // TODO: make this an event jesus christ
         // If it's honkops, we use a different soundcollection!
-        var activeRules = _gameTicker.GetActiveGameRules();
+        var activeRules = _ticker.GetActiveGameRules();
 
         foreach (var rule in activeRules)
         {

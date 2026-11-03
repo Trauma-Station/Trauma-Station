@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: MedicalIntern
+  guides:
+  - MedicalDoctor
+  - Cloning
+  - Medicine
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipDoctor
+    - SkillChipEducation
+    - SkillChipSurgeon
+  - !type:AddComponentSpecial
+    components:
+    - type: SurgerySpeedModifier
+      speedModifier: 1.25

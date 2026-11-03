@@ -93,8 +93,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                FontColorOverride="DarkGray" />
                         <Label Name="PersonDna" />
                     </BoxContainer>
-                    <PanelContainer StyleClasses="LowDivider"
-                                    Margin="0 5 0 5" />
+                    <controls:Separator StyleClasses="LowDivider"
+                                    Margin="0 5 0 5"/>
                     <BoxContainer Orientation="Horizontal"
                                   Margin="0 5 0 5">
                         <Label Name="StatusLabel"
@@ -128,7 +128,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
         </BoxContainer>
         <!-- Footer -->
         <BoxContainer Orientation="Vertical">
-            <PanelContainer StyleClasses="LowDivider" />
+            <controls:Separator StyleClasses="LowDivider"/>
             <BoxContainer Orientation="Horizontal"
                           Margin="10 2 5 0"
                           VerticalAlignment="Bottom">

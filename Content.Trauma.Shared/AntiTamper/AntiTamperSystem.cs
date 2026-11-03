@@ -4,6 +4,7 @@ using Content.Shared.Chat;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Destructible;
 using Content.Shared.Examine;
+using Content.Shared.FixedPoint;
 using Content.Shared.Radio.EntitySystems;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Timing;
@@ -17,8 +18,9 @@ public sealed partial class AntiTamperSystem : EntitySystem
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedChatSystem _chat = default!;
     [Dependency] private SharedRadioSystem _radio = default!;
-
     [Dependency] private EntityQuery<DestructibleComponent> _destructibleQuery = default!;
+
+    private static readonly FixedPoint2 OverkillThreshold = FixedPoint2.New(200);
 
     [SubscribeLocalEvent]
     private void OnExamine(Entity<AntiTamperComponent> ent, ref ExaminedEvent args)
@@ -32,7 +34,10 @@ public sealed partial class AntiTamperSystem : EntitySystem
     private void OnDamage(Entity<AntiTamperComponent> ent, ref DamageDealtEvent args)
     {
         if (!_destructibleQuery.TryComp(ent, out var destructible))
-            return; // i mean dont relaly care if it cant be destroyed anywaysssss
+            return; // i mean dont really care if it cant be destroyed anyways
+
+        if (args.Damage.GetTotal() > OverkillThreshold)
+            return; // avoid spam in a nuke
 
         var comp = ent.Comp;
         var ded = destructible.IsBroken; // Will be destroyed very shortly, but not yet

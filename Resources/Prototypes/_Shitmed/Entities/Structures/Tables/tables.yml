@@ -10,6 +10,8 @@
     sprite: _Shitmed/Structures/Tables/abductor_table.rsi
   - type: Icon
     sprite: _Shitmed/Structures/Tables/abductor_table.rsi
+  - type: OperatingTable
+    speedModifier: 2
   - type: FootstepModifier
     footstepSoundCollection:
       collection: FootstepFloor

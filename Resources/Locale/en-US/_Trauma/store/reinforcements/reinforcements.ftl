@@ -94,7 +94,7 @@ reinforcement-janitor-name = Hire Janitor
 reinforcement-janitor-desc = Hire a janitor to keep the station clean and free of slippery hazards. Minimum arrival time of three minutes.
 
 reinforcement-lawyer-name = Hire Lawyer
-reinforcement-lawyer-desc = Hire a lawyer to defend crew rights and weaponize space law. Minimum arrival time of three minutes.
+reinforcement-lawyer-desc = Hire a lawyer to defend crew rights and weaponize corporate law. Minimum arrival time of three minutes.
 
 reinforcement-clown-name = Hire Clown
 reinforcement-clown-desc = Hire a clown to entertain the crew and spread chaos. Minimum arrival time of three minutes.

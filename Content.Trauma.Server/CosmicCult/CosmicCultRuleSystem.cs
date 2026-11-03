@@ -1,28 +1,27 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Goobstation.Common.Conversion;
 using Content.Goobstation.Shared.Religion;
 using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Server.Actions;
-using Content.Server.Antag;
 using Content.Server.Atmos.Rotting;
 using Content.Server.Audio;
 using Content.Server.Chat.Systems;
 using Content.Server.Communications;
 using Content.Server.Cuffs;
 using Content.Server.EUI;
-using Content.Server.GameTicking;
-using Content.Server.GameTicking.Rules;
 using Content.Server.Ghost;
 using Content.Server.RoundEnd;
-using Content.Server.Shuttles.Systems;
 using Content.Shared.Administration.Systems;
+using Content.Shared.Antag;
 using Content.Shared.Audio;
-using Content.Shared.Atmos.Components;
 using Content.Shared.Bible.Components;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Eye;
+using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.GameTicking.Rules;
 using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
 using Content.Shared.Light.Components;
@@ -35,6 +34,8 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Movement.Systems;
 using Content.Shared.Radio.Components;
 using Content.Shared.Roles;
+using Content.Shared.RoundEnd;
+using Content.Shared.Station.Systems;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Zombies;
 using Content.Trauma.Server.CosmicCult.Components;
@@ -81,6 +82,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
     [Dependency] private MindShieldSystem _mindShield = default!;
     [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
+    [Dependency] private StationSystem _station = default!;
     [Dependency] private StatusEffectsSystem _status = default!;
     [Dependency] private RottingSystem _rotting = default!;
     [Dependency] private RejuvenateSystem _rejuvenate = default!;
@@ -130,7 +132,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
     /// </summary>
     public void SpawnRift()
     {
-        if (TryFindRandomTile(out var _, out var _, out var _, out var coords))
+        if (_station.TryFindRandomTile(out var _, out var _, out var _, out var coords))
         {
             Spawn("CosmicMalignRift", coords);
         }
@@ -270,11 +272,11 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         var query = QueryActiveRules();
         _sound.StopStationEventMusic(ent, StationEventMusicType.CosmicCult);
 
-        while (query.MoveNext(out _, out _, out var cultRule, out _))
+        while (query.MoveNext(out _, out var rule, out _, out _))
         {
-            cultRule.WinType = WinType.CultWin; // There's no coming back from this. Cult wins this round
+            rule.WinType = CosmicWinType.CultWin; // There's no coming back from this. Cult wins this round
             _roundEnd.EndRound(); //Woo game over yeaaaah
-            foreach (var cultist in cultRule.Cultists)
+            foreach (var cultist in rule.Cultists)
             {
                 if (!TryComp(cultist, out MobStateComponent? state)
                     || state.CurrentState == MobState.Dead
@@ -288,7 +290,7 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
                 _gibbing.Gib(cultist); // you don't need that body anymore
             }
 
-            QueueDel(cultRule.MonumentInGame); // The monument doesn't need to stick around postround! Into the bin with you.
+            QueueDel(rule.MonumentInGame); // The monument doesn't need to stick around postround! Into the bin with you.
         }
     }
 
@@ -320,20 +322,20 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
             return;
 
         var query = QueryActiveRules(); // Everyone is dead or captured, call evac
-        while (query.MoveNext(out _, out _, out var ruleComp, out _))
+        while (query.MoveNext(out _, out var rule, out _, out _))
         {
             _sound.StopStationEventMusic(ent, StationEventMusicType.CosmicCult);
 
-            QueueDel(ruleComp.MonumentInGame);
+            QueueDel(rule.MonumentInGame);
 
-            _roundEnd.DoRoundEndBehavior(ruleComp.RoundEndBehavior,
-                ruleComp.EvacShuttleTime,
-                ruleComp.RoundEndTextSender,
-                ruleComp.RoundEndTextShuttleCall,
-                ruleComp.RoundEndTextAnnouncement);
+            _roundEnd.DoRoundEndBehavior(rule.RoundEndBehavior,
+                rule.EvacShuttleTime,
+                rule.RoundEndTextSender,
+                rule.RoundEndTextShuttleCall,
+                rule.RoundEndTextAnnouncement);
 
-            ruleComp.RoundEndBehavior = RoundEndBehavior.Nothing; // prevent this being called multiple times.
-            ruleComp.RiftStop = true; // rifts can stop spawning now.
+            rule.RoundEndBehavior = RoundEndBehavior.Nothing; // prevent this being called multiple times.
+            rule.RiftStop = true; // rifts can stop spawning now.
         }
     }
 
@@ -350,18 +352,16 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         }
     }
 
-    protected override void AppendRoundEndText(EntityUid uid,
-        CosmicCultRuleComponent component,
-        GameRuleComponent gameRule,
-        ref RoundEndTextAppendEvent args)
+    protected override void AppendRoundEndText(Entity<CosmicCultRuleComponent> ent, ref RoundEndTextAppendEvent args)
     {
-        var ftlKey = component.WinType.ToString().ToLower();
+        var (uid, comp) = ent;
+        var ftlKey = comp.WinType.ToString().ToLower();
         var winType = Loc.GetString($"cosmiccult-roundend-{ftlKey}");
         var summaryText = Loc.GetString($"cosmiccult-summary-{ftlKey}");
         args.AddLine(winType);
         args.AddLine(summaryText);
-        args.AddLine(Loc.GetString("cosmiccult-roundend-cultist-count", ("initialCount", component.InitialCult)));
-        args.AddLine(Loc.GetString("cosmiccult-roundend-entropy-count", ("count", component.EntropySiphoned)));
+        args.AddLine(Loc.GetString("cosmiccult-roundend-cultist-count", ("initialCount", comp.InitialCult)));
+        args.AddLine(Loc.GetString("cosmiccult-roundend-entropy-count", ("count", comp.EntropySiphoned)));
         args.AddLine(Loc.GetString("cosmiccult-roundend-list-start"));
 
         var antags = _antag.GetAntagIdentifiers(uid);
@@ -474,6 +474,11 @@ public sealed partial class CosmicCultRuleSystem : GameRuleSystem<CosmicCultRule
         || _mindShield.IsShielded(uid)
         || HasComp<BibleUserComponent>(uid)
         || _rotting.IsRotten(uid))
+            return;
+
+        var ev = new BeforeConversionEvent();
+        RaiseLocalEvent(uid, ref ev);
+        if (ev.Blocked)
             return;
 
         _rejuvenate.PerformRejuvenate(uid);

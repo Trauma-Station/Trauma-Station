@@ -143,7 +143,7 @@ public abstract partial class SharedProjectileSystem : EntitySystem
 
     public void EmbedDetach(EntityUid uid, EmbeddableProjectileComponent? component, EntityUid? user = null)
     {
-        if (!Resolve(uid, ref component))
+        if (!Resolve(uid, ref component) || _timing.ApplyingState) // Trauma - skip if applying state, everything is networked anyway
             return;
 
         if (component.EmbeddedIntoUid == null)

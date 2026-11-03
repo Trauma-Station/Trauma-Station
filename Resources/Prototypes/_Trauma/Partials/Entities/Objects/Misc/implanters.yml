@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: BaseImplanter
+  components:
+  - type: Implanter
+    deimplantWhitelist:
+    - MindcontrolImplant
+    - NutrimentPumpImplant
+    - SmokeImplant
+    - BinaryImplant
+  - type: PhysicalComposition
+    materialComposition:
+      Steel: 125
+      Glass: 125

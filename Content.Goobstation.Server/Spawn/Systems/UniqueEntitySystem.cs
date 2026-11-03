@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Goobstation.Server.Spawn.Components;
-using Content.Server.Station.Systems;
+using Content.Shared.Station.Systems;
 
 namespace Content.Goobstation.Server.Spawn.Systems;
 
@@ -9,14 +9,8 @@ public sealed partial class UniqueEntitySystem : EntitySystem
 {
     [Dependency] private StationSystem _station = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<UniqueEntityCheckerComponent, ComponentInit>(OnComponentInit);
-    }
-
-    public void OnComponentInit(Entity<UniqueEntityCheckerComponent> checker, ref ComponentInit args)
+    [SubscribeLocalEvent]
+    private void OnInit(Entity<UniqueEntityCheckerComponent> checker, ref ComponentInit args)
     {
         var comp = checker.Comp;
 

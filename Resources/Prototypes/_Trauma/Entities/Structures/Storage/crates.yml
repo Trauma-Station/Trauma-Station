@@ -5,5 +5,9 @@
   id: CrateRoboticsSecure
   name: secure robotics crate
   components:
+  - type: Icon
+    sprite: _Trauma/Structures/Storage/Crates/robocrate_secure.rsi
+  - type: Sprite
+    sprite: _Trauma/Structures/Storage/Crates/robocrate_secure.rsi
   - type: AccessReader
     access: [["Robotics"]]

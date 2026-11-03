@@ -1,0 +1,30 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseItem, BaseSyndicateContraband ]
+  id: SyndicateScanalyzer
+  name: syndicate scanalyzer
+  description: A fiendish device that reverse engineers the schematics for cutting edge technology.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Syndicate/syndicate_scanalyzer.rsi
+    layers:
+    - state: icon
+  - type: Scanalyzer
+    scanDuration: 15 #15 seconds
+
+- type: entity
+  parent: SyndicateScanalyzer
+  id: SyndicateBroadcastDevice
+  name: syndicate broadcast device
+  description: A device capable of speaking through communications computer. Who will listen?
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Syndicate/syndicate_broadcast_device.rsi
+    state: icon
+  - type: Scanalyzer
+    stealTarget: CommsComputer
+  - type: ScanalyzerRequiresPower
+  - type: TriggerOnScan
+  - type: AddGameRuleOnTrigger
+    gameRule: SyndicateBattlecruiserRule

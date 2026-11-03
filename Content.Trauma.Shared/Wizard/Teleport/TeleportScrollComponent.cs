@@ -7,26 +7,19 @@ namespace Content.Trauma.Shared.Wizard.Teleport;
 public sealed partial class TeleportScrollComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public int UsesLeft = 4;
+    public int UsesLeft = 4; // TODO: what the FUCK is limited charges
 }
 
 [Serializable, NetSerializable]
-public sealed class WizardTeleportLocationSelectedMessage(NetEntity location, string locationName, NetEntity? action)
-    : BoundUserInterfaceMessage
+public sealed class WizardTeleportLocationSelectedMessage(NetEntity location) : BoundUserInterfaceMessage
 {
     public NetEntity Location = location;
-
-    public string LocationName = locationName;
-
-    public NetEntity? Action = action;
 }
 
 [Serializable, NetSerializable]
-public sealed class WizardTeleportState(List<WizardWarp> warps, NetEntity? action) : BoundUserInterfaceState
+public sealed class WizardTeleportState(List<WizardWarp> warps) : BoundUserInterfaceState
 {
     public List<WizardWarp> Warps = warps;
-
-    public NetEntity? Action = action;
 }
 
 [Serializable, NetSerializable]

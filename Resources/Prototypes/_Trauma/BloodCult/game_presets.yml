@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: gamePreset
+  id: BloodCult
+  alias:
+  - bloodcult
+  name: blood-cult-title
+  showInVote: false
+  description: blood-cult-description
+  rules:
+  # No SubGamemodesRule because round ends when cultists die
+  - BloodCult
+  - BasicStationEventScheduler
+  - MeteorSwarmScheduler
+  - SpaceTrafficControlEventScheduler
+  - BasicRoundstartVariation
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler

@@ -6,7 +6,7 @@
   requirements:
     - !type:RoleTimeRequirement
       role: JobWarden
-      time: 1h
+      time: 3h
     - !type:RoleTimeRequirement
       role: JobDetective
       time: 1h # knowing how to use the tools is important
@@ -19,10 +19,7 @@
   startingGear: HoSGear
   icon: "JobIconHeadOfSecurity"
   supervisors: job-supervisors-captain
-  guides: # Trauma
-  - Security
-  - SpaceLaw
-  - Command
+  guides: [ Command ] # TODO: should have a more specific guidebook page instead of using the department itself
   access:
   - HeadOfSecurity
   - Command
@@ -36,21 +33,10 @@
   - GenpopEnter
   - GenpopLeave
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipCombatEducation
-    - SkillChipCombatHOS
-  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
-      # <Trauma>
-      - type: Condemned # Nanotrasen owns your soul pal.
-        soulOwnedNotDevil: true
-      - type: SecurityStaff
-      # </Trauma>
       - type: CommandStaff
 
 - type: startingGear
@@ -58,13 +44,13 @@
   equipment:
     eyes: ClothingEyesGlassesSecurity
     id: HoSPDA
-    #gloves: ClothingHandsGlovesCombat - Goobstation, moved to loadouts
+    gloves: ClothingHandsGlovesCombat
     ears: ClothingHeadsetAltSecurity
-#    pocket1: WeaponPistolMk58 - Trauma
+    pocket1: WeaponPistolMk58
   storage:
     back:
     - Flash
-#    - MagazinePistol - Trauma
+    - MagazinePistol
 
 - type: chameleonOutfit
   id: HeadOfSecurityChameleonOutfit

@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Shared.Random.Helpers;
+// </Trauma>
 using System.Linq;
 using System.Numerics;
 using Content.Shared.CCVar;
@@ -314,7 +317,10 @@ public sealed partial class TileSystem : EntitySystem
         if (spawnItem && tileDef.ItemDropPrototypeName != null)
         {
             //Actually spawn the relevant tile item at the right position and give it some random offset.
-            SpawnAttachedTo(tileDef.ItemDropPrototypeName, coordinates, rotation: _robustRandom.NextAngle());
+            // <Trauma> - use predicted spawn and rng
+            var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(gridUid));
+            PredictedSpawnAttachedTo(tileDef.ItemDropPrototypeName, coordinates, rotation: rand.NextAngle());
+            // </Trauma>
         }
 
         //Destroy any decals on the tile

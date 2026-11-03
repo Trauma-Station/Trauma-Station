@@ -46,6 +46,8 @@
   name: Rift Waypointer
   trackedComponents:
   - type: DragonRift
+    spawn: # dummy
+      id: MobCarpDragon
   workOnGrid: true
   color: Red
   maxRange: 50

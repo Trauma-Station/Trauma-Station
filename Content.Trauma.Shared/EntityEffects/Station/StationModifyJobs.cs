@@ -23,7 +23,4 @@ public sealed partial class StationModifyJobs : EntityEffectBase<StationModifyJo
     /// </summary>
     [DataField]
     public Dictionary<ProtoId<JobPrototype>, int> Set = new();
-
-    public override string? EntityEffectGuidebookText(IPrototypeManager proto, IEntitySystemManager entSys)
-        => null;
 }

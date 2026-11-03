@@ -6,15 +6,14 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 10h
-    # - !type:DepartmentTimeRequirement
-    #   department: Security
-    #   time: 5h
-    #   inverted: true # stop playing intern if you're good at security!
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 10h
+      inverted: true # stop playing intern if you're good at security!
   startingGear: SecurityCadetGear
   icon: "JobIconSecurityCadet"
   supervisors: job-supervisors-security
-  guides: # Trauma
-  - Security
+  guides: [ Security ] # TODO: should have a more specific guidebook page instead of using the department itself
   access:
   - Security
   - Brig
@@ -22,34 +21,23 @@
   - External
   - Cryogenics
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipCombatEducation
-    - SkillChipLaser
-    - SkillChipNonLethal
-  - !type:AddComponentSpecial
-    components:
-    - type: SecurityStaff
-  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
 
 - type: startingGear
   id: SecurityCadetGear
   equipment:
-    eyes: ClothingEyesGlassesSecurity #Goobstation
-    shoes: ClothingShoesBootsJack # Goobstation edit
-    #outerClothing: ClothingOuterArmorBasic # Goobstation
+    shoes: ClothingShoesBootsJackFilled
+    outerClothing: ClothingOuterArmorBasic
     id: SecurityCadetPDA
-    ears: ClothingHeadsetAltSecurityRegular # Goobstation
+    ears: ClothingHeadsetSecurity
     belt: ClothingBeltSecurityFilled
-    #pocket1: WeaponDisabler #Goobstation (Disablers in belts)
+    pocket1: WeaponPistolMk58
     pocket2: BookSecurity
   storage:
     back:
     - Flash
-    #- MagazinePistol # Trauma - no
+    - MagazinePistol
 
 - type: chameleonOutfit
   id: SecurityCadetChameleonOutfit

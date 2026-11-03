@@ -11,6 +11,5 @@
   - type: MachineBoard
     prototype: RanchIncubator
     stackRequirements:
-      Manipulator: 1
       Steel: 2
       Cable: 4

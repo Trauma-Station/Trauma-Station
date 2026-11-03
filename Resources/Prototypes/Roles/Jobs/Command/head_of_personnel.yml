@@ -19,21 +19,11 @@
     - !type:DepartmentTimeRequirement
       department: Command
       time: 2.5h
-  # <Trauma>
-  guides:
-  - Command
-  - Writing
-  # </Trauma>
   startingGear: HoPGear
   icon: "JobIconHeadOfPersonnel"
   supervisors: job-supervisors-captain
+  guides: [ Command ] # TODO: should have a more specific guidebook page instead of using the department itself
   access:
-  # <Trauma>
-  - Journalism
-  - Library
-  - Robotics
-  - Genetics
-  # </Trauma>
   - Command
   - HeadOfPersonnel
   - Bar
@@ -63,35 +53,24 @@
   - GenpopEnter
   - GenpopLeave
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEchelonEducation
-    - SkillChipLaser
-  # </Trauma>
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
-      # <Trauma>
-      - type: Condemned # Nanotrasen owns your soul pal.
-        soulOwnedNotDevil: true
-      # </Trauma>
       - type: CommandStaff
 
 - type: startingGear
   id: HoPGear
   equipment:
     shoes: ClothingShoesColorBrown
-    #id: HoPPDA # Trauma - moved to loadouts
-    #gloves: ClothingHandsGlovesHop
+    id: HoPPDA
+    gloves: ClothingHandsGlovesHop
     ears: ClothingHeadsetAltCommand
     belt: BoxFolderClipboardThreePapers
     eyes: ClothingEyesHudCommand
   storage:
     back:
     - Flash
-    - TelescopicBaton # Goobstation
 
 - type: chameleonOutfit
   id: HeadOfPersonnelChameleonOutfit

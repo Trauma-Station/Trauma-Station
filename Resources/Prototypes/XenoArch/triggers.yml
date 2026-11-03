@@ -468,7 +468,7 @@
 - type: entity
   parent: BaseXenoArtifactTrigger
   id: TriggerAttackParticleAnomaly
-  name: Anomaly-Effecting particles
+  name: Anomaly-Affecting particles
   components:
   - type: XATInteractAttack
     whitelist:

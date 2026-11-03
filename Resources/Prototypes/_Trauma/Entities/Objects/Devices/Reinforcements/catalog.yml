@@ -323,7 +323,7 @@
   cost:
     Spesos: 1500
   categories:
-  - ScienceHoP
+  - EngineeringHoP
   restockTime: 0
   resetRestockOnPurchase: true
   restockAfterPurchase: 60

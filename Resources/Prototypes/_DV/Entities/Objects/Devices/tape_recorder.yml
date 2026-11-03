@@ -4,7 +4,7 @@
   parent: BaseItem
   id: TapeRecorder
   name: tape recorder
-  description: Anything said into this device can and will be used against you in a court of space law.
+  description: Anything said into this device can and will be used against you in a court of corporate law.
   components:
   - type: Sprite
     sprite: _DV/Objects/Devices/tape_recorder.rsi

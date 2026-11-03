@@ -60,6 +60,10 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
         var doAfter = new DoAfterArgs(EntityManager, ev.Performer, TimeSpan.FromSeconds(3), new AbductorReturnDoAfterEvent(), ev.Performer)
         {
             MultiplyDelay = false,
+            BreakOnHandChange = false,
+            BreakOnDropItem = false,
+            BreakOnMove = true,
+            BreakOnDamage = true
         };
         if (!_doAfter.TryStartDoAfter(doAfter))
         {
@@ -69,7 +73,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         AddTeleportationEffect(user, TeleportationEffectEntityShort);
 
-        if (comp.SpawnPosition is {} pos)
+        if (comp.SpawnPosition is { } pos)
         {
             var effect = Spawn(TeleportationEffectShort, pos);
             _audio.PlayPvs(TeleportSound, effect);
@@ -85,7 +89,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
 
         _color.RaiseEffect(Color.FromHex("#BA0099"), new List<EntityUid>(1) { ent }, Filter.Pvs(ent, entityManager: EntityManager));
         StopPulls(ent);
-        if (ent.Comp.SpawnPosition is {} pos)
+        if (ent.Comp.SpawnPosition is { } pos)
             _xform.SetCoordinates(ent, pos);
         OnCameraExit(ent);
     }
@@ -126,7 +130,7 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
     {
         var user = ent.Owner;
 
-        if (ent.Comp.Console is not {} consoleUid)
+        if (ent.Comp.Console is not { } consoleUid)
         {
             ev.Handled = true;
             return;

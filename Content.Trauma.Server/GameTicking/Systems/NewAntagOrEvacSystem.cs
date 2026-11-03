@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Server.GameTicking;
 using Content.Server.RoundEnd;
+using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Mind;
 using Content.Trauma.Common.GameTicking;
-using Content.Trauma.Server.GameTicking.Rules.Components;
+using Content.Trauma.Shared.GameTicking.Rules;
 
 namespace Content.Trauma.Server.GameTicking.Systems;
 

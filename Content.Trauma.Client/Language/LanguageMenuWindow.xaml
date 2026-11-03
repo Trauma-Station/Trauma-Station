@@ -11,7 +11,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
             <Label Name="CurrentLanguageLabel" Access="Public" Text="Current Language:" HorizontalExpand="True"></Label>
         </PanelContainer>
 
-        <ui:HLine></ui:HLine>
+        <ui:Separator/>
 
         <ScrollContainer HorizontalExpand="True" VerticalExpand="True" HScrollEnabled="False" VScrollEnabled="True" MinHeight="50">
             <BoxContainer Name="OptionsList" Access="Public" HorizontalExpand="True" SeparationOverride="2" Orientation="Vertical">

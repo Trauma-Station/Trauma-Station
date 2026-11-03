@@ -939,18 +939,6 @@
     - FoamingAgent
     - BuzzochloricBees
     - RobustHarvest
-    # Goobstation - Start
-    - Triclor
-    - Cyanide
-    - Genecide
-    - NitricAcid
-    - Heroin
-    - Microplastics
-    - Bungotoxin
-    - WeldingFuel
-    - ChloralHydrate
-    - Allicin
-    - Phenol
     usefulChemicals:
     - Cryptobiolin
     - Dylovene
@@ -966,18 +954,6 @@
     - Tricordrazine
     - Artifexium
     - Ethylredoxrazine
-    # Goobstation - Start
-    - Probital
-    - Tirimol
-    - Multiver
-    - Immurin
-    - Devirate
-    - Probital
-    - Mitotrophin
-    - Monover
-    - Ibuprofen
-    - Formaldehyde
-    - Morphine
     funChemicals:
     - Desoxyephedrine
     - Ephedrine
@@ -996,12 +972,6 @@
     - Honk
     - Carpetium
     - JuiceThatMakesYouWeh
-    # Goobstation - Start
-    - CatDrugs
-    - MouseBites
-    - Copium
-    - Nostalgia
-    - Profanol
   - type: Edible
     edible: Drink
     solution: anomaly

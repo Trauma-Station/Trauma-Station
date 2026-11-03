@@ -23,6 +23,7 @@ public sealed partial class ThunderstrikeSystem : EntitySystem
     private static readonly EntProtoId Ash = "Ash";
     private const string Sound = "/Audio/_Goobstation/Effects/Smites/Thunderstrike/thunderstrike.ogg";
     private const string God = "/Textures/_Goobstation/For he does not need no fucking rsi.png";
+    private static readonly SpriteSpecifier.Texture Sprite = new(new(God));
 
     public void Smite(Entity<TransformComponent?> ent, bool kill = true, bool predicted = false, EntityUid? user = null)
     {
@@ -33,15 +34,15 @@ public sealed partial class ThunderstrikeSystem : EntitySystem
 
         _electrocution.TryDoElectrocution(ent, null, 250, TimeSpan.FromSeconds(1), false, ignoreInsulation: true);
 
-        if (!kill || !_player.TryGetSessionByEntity(ent, out var sesh))
+        if (!kill)
             return;
 
-        var text = new SpriteSpecifier.Texture(new ResPath(God));
-        _jumpscare.Jumpscare(text, sesh);
+        if (_player.TryGetSessionByEntity(ent, out var sesh))
+            _jumpscare.Jumpscare(Sprite, sesh);
 
         PredictedQueueDel(ent);
         PredictedSpawnAtPosition(Ash, ent.Comp.Coordinates);
-        _popup.PopupEntity(Loc.GetString("admin-smite-turned-ash-other", ("name", ent)), ent, PopupType.LargeCaution);
+        _popup.PopupEntity(Loc.GetString("admin-smite-turned-ash-other", ("entity", ent)), ent, PopupType.LargeCaution);
     }
 
     public void CreateLighting(EntityCoordinates coordinates, int energy = 125, int radius = 15, bool predicted = false, EntityUid? user = null)

@@ -1,22 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Supermatter.Components;
 using Content.Goobstation.Shared.Supermatter.Systems;
 
 namespace Content.Goobstation.Client.Supermatter.Systems;
 
-public sealed partial class SupermatterSystem : SharedSupermatterSystem
-{
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<SupermatterComponent, ComponentHandleState>(HandleSupermatterState);
-    }
-
-    private void HandleSupermatterState(EntityUid uid, SupermatterComponent comp, ref ComponentHandleState args)
-    {
-        if (args.Current is not SupermatterComponentState state)
-            return;
-    }
-}
+public sealed partial class SupermatterSystem : SharedSupermatterSystem;

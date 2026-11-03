@@ -27,7 +27,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                                VerticalAlignment="Center" />
             </BoxContainer>
         </Control>
-        <PanelContainer StyleClasses="LowDivider" />
+        <controls:Separator StyleClasses="LowDivider"/>
         <Control Access="Public" Name="ContentsContainer" StyleClasses="WindowContentsContainer" RectClipContent="True" VerticalExpand="true" />
     </BoxContainer>
 </controls:FancyWindow>

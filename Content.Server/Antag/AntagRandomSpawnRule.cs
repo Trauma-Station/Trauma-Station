@@ -1,16 +1,18 @@
 // <Trauma>
-using Content.Server.Station.Components;
 using Content.Shared.Station.Components;
 using Robust.Shared.Map.Components;
 // </Trauma>
 using Content.Server.Antag.Components;
+using Content.Server.Station.Systems;
+using Content.Shared.Antag;
 using Content.Shared.GameTicking.Components;
-using Content.Server.GameTicking.Rules;
+using Content.Shared.GameTicking.Rules;
 
 namespace Content.Server.Antag;
 
 public sealed partial class AntagRandomSpawnSystem : GameRuleSystem<AntagRandomSpawnComponent>
 {
+    [Dependency] private ServerStationSystem _station = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
 
     public override void Initialize()
@@ -20,15 +22,15 @@ public sealed partial class AntagRandomSpawnSystem : GameRuleSystem<AntagRandomS
         SubscribeLocalEvent<AntagRandomSpawnComponent, AntagSelectLocationEvent>(OnSelectLocation);
     }
 
-    protected override void Added(EntityUid uid, AntagRandomSpawnComponent comp, GameRuleComponent gameRule, GameRuleAddedEvent args)
+    protected override void Added(Entity<AntagRandomSpawnComponent, GameRuleComponent> rule, ref GameRuleAddedEvent args)
     {
-        base.Added(uid, comp, gameRule, args);
+        base.Added(rule, ref args);
 
         // we have to select this here because AntagSelectLocationEvent is raised twice because MakeAntag is called twice
         // once when a ghost role spawner is created and once when someone takes the ghost role
 
-        if (TryFindRandomTile(out _, out _, out _, out var coords))
-            comp.Coords = coords;
+        if (_station.TryFindRandomTile(out _, out _, out _, out var coords))
+            rule.Comp1.Coords = coords;
     }
 
     private void OnSelectLocation(Entity<AntagRandomSpawnComponent> ent, ref AntagSelectLocationEvent args)
@@ -36,7 +38,7 @@ public sealed partial class AntagRandomSpawnSystem : GameRuleSystem<AntagRandomS
         if (ent.Comp.Coords != null)
             args.Coordinates.Add(_transform.ToMapCoordinates(ent.Comp.Coords.Value));
         // <Trauma> if nothing was pre-selected, try again now to avoid nullspace.
-        else if (TryFindRandomTile(out _, out _, out _, out var coords))
+        else if (_station.TryFindRandomTile(out _, out _, out _, out var coords))
         {
             args.Coordinates.Add(_transform.ToMapCoordinates(coords));
         }
@@ -47,12 +49,12 @@ public sealed partial class AntagRandomSpawnSystem : GameRuleSystem<AntagRandomS
             var grids = new List<string>();
             foreach (var station in AllEntityQuery<StationEventEligibleComponent, StationDataComponent>())
             {
-                var mainGrid = GetStationMainGrid((station, station.Comp2));
+                var mainGrid = _station.GetStationMainGrid((station, station.Comp2));
                 stations.Add($"- {ToPrettyString(station)}: Main grid {ToPrettyString(mainGrid)}");
                 foreach (var grid in station.Comp2.OwnedGrids)
                 {
                     var gridComp = Comp<MapGridComponent>(grid);
-                    var count = Map.GetFilledTileCount((grid, gridComp));
+                    var count = _map.GetFilledTileCount((grid, gridComp));
                     grids.Add($"- {ToPrettyString(grid)} @ {Transform(grid).Coordinates} with {count} filled tiles");
                 }
             }

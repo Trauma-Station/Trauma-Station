@@ -280,7 +280,10 @@ namespace Content.Server.Cargo.Systems
                 order.SetApproverData(_identity.GetIdentityShortInfo(player, uid));
             }
 
-            var ev = new FulfillCargoOrderEvent((station.Value, stationData), order, (uid, component));
+            order.ApprovingConsole = GetNetEntity(uid);
+            order.Approved = true;
+
+            var ev = new FulfillCargoOrderEvent((station.Value, stationData), order);
             RaiseLocalEvent(dest, ref ev); // Trauma - raise it on the destination
             ev.FulfillmentEntity ??= station.Value;
 
@@ -293,17 +296,19 @@ namespace Content.Server.Cargo.Systems
                     _popup.PopupCursor(Loc.GetString("cargo-console-unfulfilled"), args.Actor);
                     PlayDenySound(uid, component);
                     order.Approver = null;
+                    order.ApprovingConsole = null;
+                    order.Approved = false;
                     return;
                 }
             }
 
-            // GoobStation - cooldown on Cargo Orders (specifically gamba)
+            // <Trauma>
             if (product.Cooldown > TimeSpan.Zero)
             {
                 orderDatabase.ProductCooldownTime[product.ID] = _timing.CurTime + product.Cooldown;
             }
+            // </Trauma>
 
-            order.Approved = true;
             _audio.PlayPvs(ApproveSound, uid);
 
             if (!emagged)

@@ -10,7 +10,7 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 	<BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
 		<!-- First Informational panel -->
 		<Label Name="Description" Margin="5 5"/>
-		<controls:HLine Color="#404040" Thickness="2" Margin="0 5"/>
+		<controls:Separator ColorOverride="#404040" Margin="0 5"/>
 		<Label Name="SelectedSets" Text="{Loc 'set-selector-window-selected'}" Margin="5 5"/>
 
 		<!-- Second sets panel -->

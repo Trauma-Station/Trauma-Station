@@ -1,14 +1,15 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Goobstation.Shared.GameTicking.Rules;
 using Content.Goobstation.Shared.Roles;
 using Content.Goobstation.Shared.Shadowling;
 using Content.Goobstation.Shared.Shadowling.Components;
-using Content.Server.Antag;
-using Content.Server.GameTicking;
-using Content.Server.GameTicking.Rules;
 using Content.Server.Mind;
 using Content.Server.Roles;
+using Content.Shared.Antag;
+using Content.Shared.GameTicking;
 using Content.Shared.GameTicking.Components;
+using Content.Shared.GameTicking.Rules;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
@@ -50,7 +51,7 @@ public sealed partial class ShadowlingRuleSystem : GameRuleSystem<ShadowlingRule
     private void OnDeath(ShadowlingDeathEvent args)
     {
         var rulesQuery = QueryActiveRules();
-        while (rulesQuery.MoveNext(out _, out var shadowling, out _))
+        while (rulesQuery.MoveNext(out _, out var rule, out _, out _))
         {
             var shadowlingCount = 0;
             var shadowlingDead = 0;
@@ -64,7 +65,7 @@ public sealed partial class ShadowlingRuleSystem : GameRuleSystem<ShadowlingRule
             }
 
             if (shadowlingCount == shadowlingDead)
-                shadowling.WinCondition = ShadowlingWinCondition.Failure;
+                rule.WinCondition = ShadowlingWinCondition.Failure;
         }
     }
 
@@ -72,9 +73,10 @@ public sealed partial class ShadowlingRuleSystem : GameRuleSystem<ShadowlingRule
     {
         _ticker.StartGameRule(DeathSquad);
         var rulesQuery = QueryActiveRules();
-        while (rulesQuery.MoveNext(out _, out var shadowling, out _))
+        // TODO: only make the ascending one win bruh
+        while (rulesQuery.MoveNext(out _, out var rule, out _, out _))
         {
-            shadowling.WinCondition = ShadowlingWinCondition.Win;
+            rule.WinCondition = ShadowlingWinCondition.Win;
             return;
         }
     }
@@ -110,20 +112,16 @@ public sealed partial class ShadowlingRuleSystem : GameRuleSystem<ShadowlingRule
         return true;
     }
 
-    protected override void AppendRoundEndText(
-        EntityUid uid,
-        ShadowlingRuleComponent component,
-        GameRuleComponent gamerule,
-        ref RoundEndTextAppendEvent args
-    )
+    protected override void AppendRoundEndText(Entity<ShadowlingRuleComponent> ent, ref RoundEndTextAppendEvent args)
     {
-        base.AppendRoundEndText(uid, component, gamerule, ref args);
-        var winText = Loc.GetString($"shadowling-condition-{component.WinCondition.ToString().ToLower()}");
+        base.AppendRoundEndText(ent, ref args);
+
+        var winText = Loc.GetString($"shadowling-condition-{ent.Comp.WinCondition.ToString().ToLower()}");
         args.AddLine(winText);
 
         args.AddLine(Loc.GetString("shadowling-list-start"));
 
-        var sessionData = _antag.GetAntagIdentifiers(uid);
+        var sessionData = _antag.GetAntagIdentifiers(ent.Owner);
         foreach (var (_, data, name) in sessionData)
         {
             var listing = Loc.GetString("shadowling-list-name", ("name", name), ("user", data.UserName));

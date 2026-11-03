@@ -2,11 +2,11 @@
 
 using System.Text;
 using Content.Goobstation.Shared.Changeling.Components;
-using Content.Server.Antag;
-using Content.Server.GameTicking.Rules;
-using Content.Server.GameTicking.Rules.Components;
 using Content.Server.Mind;
 using Content.Server.Objectives;
+using Content.Shared.Antag;
+using Content.Shared.GameTicking.Rules;
+using Content.Shared.GameTicking.Rules.Components;
 using Content.Shared.NPC.Prototypes;
 using Content.Shared.NPC.Systems;
 using Content.Shared.Roles;

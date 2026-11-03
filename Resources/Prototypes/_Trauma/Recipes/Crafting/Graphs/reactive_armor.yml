@@ -8,18 +8,77 @@
     - to: teleport
       steps:
       - tag: AnomalyCoreBluespace
-        name: construction-graph-tag-bluespace-core
-        doAfter: 1
-      - tool: Screwing
+        name: construction-graph-tag-any-core
         doAfter: 1
     - to: tesla
       steps:
       - tag: AnomalyCoreElectricity
-        name: construction-graph-tag-electric-core
+        name: construction-graph-tag-any-core
         doAfter: 1
-      - tool: Screwing
+    - to: incendiary
+      steps:
+      - tag: AnomalyCorePyroclastic
+        name: construction-graph-tag-any-core
+        doAfter: 1
+    - to: repulsive
+      steps:
+      - tag: AnomalyCoreGravity
+        name: construction-graph-tag-any-core
+        doAfter: 1
+    - to: cryogenic
+      steps:
+      - tag: AnomalyCoreIce
+        name: construction-graph-tag-any-core
+        doAfter: 1
+    - to: aberration
+      steps:
+      - tag: AnomalyCoreFlesh
+        name: construction-graph-tag-any-core
+        doAfter: 1
+    - to: rock
+      steps:
+      - tag: AnomalyCoreRock
+        name: construction-graph-tag-any-core
+        doAfter: 1
+    - to: healing
+      steps:
+      - tag: AnomalyCoreLiquid
+        name: construction-graph-tag-any-core
+        doAfter: 1
+    - to: hallucinating
+      steps:
+      - tag: AnomalyCoreFlora
+        name: construction-graph-tag-any-core
+        doAfter: 1
+    - to: stealth
+      steps:
+      - tag: AnomalyCoreShadow
+        name: construction-graph-tag-any-core
+        doAfter: 1
+    - to: table
+      steps:
+      - tag: AnomalyCoreTech
+        name: construction-graph-tag-any-core
         doAfter: 1
   - node: teleport
     entity: ClothingOuterArmorReactiveTeleport
   - node: tesla
     entity: ClothingOuterArmorReactiveTesla
+  - node: incendiary
+    entity: ClothingOuterArmorReactiveIncendiary
+  - node: repulsive
+    entity: ClothingOuterArmorReactiveRepulsive
+  - node: cryogenic
+    entity: ClothingOuterArmorReactiveCryogenic
+  - node: aberration
+    entity: ClothingOuterArmorReactiveAberration
+  - node: rock
+    entity: ClothingOuterArmorReactiveRock
+  - node: healing
+    entity: ClothingOuterArmorReactiveHealing
+  - node: hallucinating
+    entity: ClothingOuterArmorReactiveHallucinating
+  - node: stealth
+    entity: ClothingOuterArmorReactiveStealth
+  - node: table
+    entity: ClothingOuterArmorReactiveTable

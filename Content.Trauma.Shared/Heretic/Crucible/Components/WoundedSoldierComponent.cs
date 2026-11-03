@@ -23,6 +23,7 @@ public sealed partial class WoundedSoldierComponent : Component
         {
             { "Heat", 10 },
         },
+        Flags = DamageSpecifier.DamageFlags.NoParry,
     };
 
     [DataField]

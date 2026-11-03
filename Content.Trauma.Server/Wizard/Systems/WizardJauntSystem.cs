@@ -4,16 +4,16 @@ using Content.Server.Polymorph.Components;
 using Content.Shared.Polymorph;
 using Content.Trauma.Common.Wizard.Projectile;
 using Content.Trauma.Server.Wizard.Components;
-using Robust.Server.Audio;
-using Robust.Server.GameObjects;
+using Robust.Shared.Audio.Systems;
 using Robust.Shared.Player;
 
 namespace Content.Trauma.Server.Wizard.Systems;
 
 public sealed partial class WizardJauntSystem : EntitySystem
 {
-    [Dependency] private TransformSystem _transform = default!;
-    [Dependency] private AudioSystem _audio = default!;
+    [Dependency] private SharedAudioSystem _audio = default!;
+    [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private EntityQuery<TrailComponent> _trailQuery = default!;
 
     public override void Initialize()
     {
@@ -26,14 +26,13 @@ public sealed partial class WizardJauntSystem : EntitySystem
     {
         base.Update(frameTime);
 
-        var trailQuery = GetEntityQuery<TrailComponent>();
-
         var query = EntityQueryEnumerator<WizardJauntComponent, PolymorphedEntityComponent, TransformComponent>();
         while (query.MoveNext(out var uid, out var jaunt, out var polymorphed, out var xform))
         {
             if (jaunt.JauntEndEffectEntity is { } endEffect)
             {
-                _transform.SetMapCoordinates(endEffect, _transform.GetMapCoordinates(xform));
+                if (!TerminatingOrDeleted(endEffect))
+                    _transform.SetMapCoordinates(endEffect, _transform.GetMapCoordinates(xform));
                 continue;
             }
 
@@ -48,7 +47,7 @@ public sealed partial class WizardJauntSystem : EntitySystem
             _audio.PlayEntity(jaunt.JauntEndSound, Filter.Pvs(ent), ent, true);
             jaunt.JauntEndEffectEntity = ent;
 
-            if (!trailQuery.TryComp(ent, out var trail))
+            if (!_trailQuery.TryComp(ent, out var trail))
                 continue;
 
             trail.RenderedEntity = polymorphed.Parent;

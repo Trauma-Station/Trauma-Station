@@ -18,7 +18,7 @@ namespace Content.Goobstation.Shared.Religion.Nullrod;
         /// Which effect to display.
         /// </summary>
         [DataField]
-        public EntProtoId EffectProto = "EffectSpark";
+        public EntProtoId EffectProto = "EffectSparks";
 
         /// <summary>
         /// Which sound effect to play.

@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Server.Objectives;
-using Content.Server.GameTicking.Rules;
 using Content.Server.Nuke;
 using Content.Shared.Station.Components;
 using Content.Shared.GameTicking;
@@ -14,7 +12,7 @@ public sealed partial class DetonateNukeObjectiveSystem : EntitySystem
 {
     private bool _stationNuked;
 
-    [SubscribeLocalEvent(before: [typeof(XenomorphsRuleSystem), typeof(NukeopsRuleSystem)])]
+    [SubscribeLocalEvent]
     private void OnNuke(NukeExplodedEvent ev)
     {
         if (HasComp<BecomesStationComponent>(ev.OwningStation))

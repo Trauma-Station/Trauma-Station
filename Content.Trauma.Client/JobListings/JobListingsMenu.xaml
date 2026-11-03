@@ -1,0 +1,79 @@
+<!--
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+
+<controls:FancyWindow
+    xmlns="https://spacestation14.io"
+    xmlns:controls="using:Content.Client.UserInterface.Controls"
+    xmlns:gfx="using:Robust.Client.Graphics"
+    Title="{Loc 'job-listings-ui-default-title'}"
+    MinSize="812 512"
+    SetSize="812 512">
+    <BoxContainer Orientation="Vertical" Margin="5,5,5,5">
+        <BoxContainer Orientation="Vertical" VerticalExpand="True">
+            <BoxContainer Margin="4,4,4,4" Orientation="Vertical">
+                <Label Name="ReputationInfo"/>
+                <Label Name="ReputationText"/>
+            </BoxContainer>
+            <ScrollContainer
+                HScrollEnabled="False"
+                HorizontalExpand="True"
+                VerticalExpand="True">
+                <BoxContainer Orientation="Vertical">
+                    <BoxContainer Orientation="Vertical" VerticalAlignment="Top">
+                        <Label
+                            Name="AcceptedJobListingsLabel"
+                            Text="{Loc job-listings-ui-accepted-label}"/>
+                        <PanelContainer VerticalAlignment="Top" MinSize="0 40">
+                            <PanelContainer.PanelOverride>
+                                <gfx:StyleBoxFlat BackgroundColor="#000000FF" />
+                            </PanelContainer.PanelOverride>
+                            <RichTextLabel
+                                Name="AcceptedJobListingsNote"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Text="{Loc job-listings-ui-no-accepted-note}"/>
+                            <BoxContainer
+                                Name="AcceptedJobListingsContainer"
+                                Orientation="Vertical"
+                                VerticalAlignment="Top">
+                                <!--  Listings are added here by code  -->
+                            </BoxContainer>
+                        </PanelContainer>
+                    </BoxContainer>
+
+                    <BoxContainer Orientation="Horizontal" VerticalAlignment="Top" Margin="0 10 10 10">
+                        <Label Name="RefreshTimerLabel"/>
+                        <ProgressBar Name="RefreshTimerProgressBar"
+                            HorizontalExpand="True"
+                            HorizontalAlignment="Stretch"
+                            Margin="5 0 5 0"/>
+                        <Button Name="RefreshButton" HorizontalAlignment="Right" Text="{Loc job-listings-ui-refresh-button}" StyleClasses="OpenBoth"/>
+                    </BoxContainer>
+
+                    <BoxContainer Orientation="Vertical" VerticalAlignment="Top">
+                        <Label
+                            Name="AvailableJobListingsLabel"
+                            Text="{Loc job-listings-ui-available-label}"/>
+                        <PanelContainer VerticalAlignment="Top" MinSize="0 40">
+                            <PanelContainer.PanelOverride>
+                                <gfx:StyleBoxFlat BackgroundColor="#000000FF" />
+                            </PanelContainer.PanelOverride>
+                                <RichTextLabel
+                                    Name="AvailableJobListingsNote"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Text="{Loc job-listings-ui-no-available-note}"/>
+                                <BoxContainer
+                                    Name="AvailableJobListingsContainer"
+                                    Orientation="Vertical"
+                                    VerticalAlignment="Top">
+                                    <!--  Listings are added here by code  -->
+                                </BoxContainer>
+                        </PanelContainer>
+                    </BoxContainer>
+                </BoxContainer>
+            </ScrollContainer>
+        </BoxContainer>
+    </BoxContainer>
+</controls:FancyWindow>

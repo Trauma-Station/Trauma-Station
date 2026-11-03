@@ -1,0 +1,27 @@
+- type: entity
+  parent: CrateSyndicate
+  id: CrateLeviathan
+  name: leviathan bundle
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: SkillChipHeavy
+        - id: WeaponLauncherBazooka
+        - id: CartridgeBazookaExp
+          amount: 2
+
+- type: entity
+  parent: CrateSyndicate
+  id: CrateXiuhcoatl
+  name: Xiuhcoatl bundle
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:AllSelector
+        children:
+        - id: SkillChipHeavy
+        - id: WeaponFlamerXiuhcoatl

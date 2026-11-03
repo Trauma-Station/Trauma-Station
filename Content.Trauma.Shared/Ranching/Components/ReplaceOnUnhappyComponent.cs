@@ -6,7 +6,7 @@ namespace Content.Trauma.Shared.Ranching.Components;
 public sealed partial class ReplaceOnUnhappyComponent : Component
 {
     [DataField]
-    public float HappinessRequired = -777f;
+    public float HappinessRequired = -50f;
 
     [DataField(required:true)]
     public EntProtoId Ent;

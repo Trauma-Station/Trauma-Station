@@ -74,4 +74,7 @@ public sealed partial class HulkComponent : Component
         "hulk-roar-4",
         "hulk-roar-5",
     };
+
+    [DataField]
+    public bool MartialsBlocked = true;
 }

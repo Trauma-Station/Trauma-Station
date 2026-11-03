@@ -5,10 +5,6 @@
   description: A rooty tooty point and shooty.
   abstract: true
   components:
-  # <Trauma>
-  - type: WeaponClass
-    class: Pistol
-  # </Trauma>
   - type: Sprite
     state: icon
   - type: Item
@@ -29,7 +25,7 @@
   - type: AmmoCounter
   - type: Gun
     selectedMode: SemiAuto
-    fireRate: 2 # Goobstation
+    fireRate: 1.5
     availableModes:
     - SemiAuto
     soundGunshot:
@@ -54,16 +50,6 @@
       path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
   - type: StaticPrice
     price: 500
-  - type: EmitSoundOnPickup
-    sound:
-      collection: RevolversPickUp
-  - type: EmitSoundOnDrop
-    sound:
-      collection: RevolversDrop
-  - type: EmitSoundOnLand
-    sound:
-      collection: RevolversDrop
-  # Goobstation edit end
 
 - type: entity
   name: Deckard
@@ -80,7 +66,7 @@
       map: ["enum.GunVisualLayers.MagUnshaded"]
       shader: unshaded
   - type: Gun
-    fireRate: 2.5 # Goobstation
+    fireRate: 2
   - type: RevolverAmmoProvider
     capacity: 5
     chambers: [ True, True, True, True, True ]
@@ -125,22 +111,9 @@
   - type: Item
     storedOffset: 0,-3
   - type: Gun
-    fireRate: 4 # Goob edit
+    fireRate: 3
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/mateba.ogg
-  - type: RevolverAmmoProvider
-    whitelist:
-      tags:
-        - CartridgeMagnum
-        - SpeedLoaderMagnum
-    proto: CartridgeMagnumAP # Goobstation - Deathsquad revamp
-    capacity: 7 # Goobstation - Deathsquad revamp
-    chambers: [ True, True, True, True, True, True, True ] # Goobstation - Deathsquad revamp
-    ammoSlots: [ null, null, null, null, null, null, null ] # Goobstation - Deathsquad revamp
-    soundEject:
-      path: /Audio/Weapons/Guns/MagOut/revolver_magout.ogg
-    soundInsert:
-      path: /Audio/Weapons/Guns/MagIn/revolver_magin.ogg
 
 - type: entity
   parent: WeaponRevolverMateba
@@ -164,7 +137,7 @@
     storedOffset: 0,-2
   - type: Gun
     selectedMode: SemiAuto
-    fireRate: 2 # Trauma, was 3
+    fireRate: 3
     availableModes:
     - SemiAuto
     soundGunshot:

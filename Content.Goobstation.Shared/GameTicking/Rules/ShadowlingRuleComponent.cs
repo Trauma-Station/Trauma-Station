@@ -1,0 +1,23 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+namespace Content.Goobstation.Shared.GameTicking.Rules;
+
+[RegisterComponent]
+public sealed partial class ShadowlingRuleComponent : Component
+{
+    [DataField]
+    public ShadowlingWinCondition WinCondition = ShadowlingWinCondition.Draw;
+}
+
+/// <summary>
+/// The winning conditions of the shadowling.
+/// Draw happens when both sides are alive. The default option.
+/// Win happens when a Shadowling ascends.
+/// Failure happens when all Shadowlings die.
+/// </summary>
+public enum ShadowlingWinCondition : byte
+{
+    Draw,
+    Win,
+    Failure
+}

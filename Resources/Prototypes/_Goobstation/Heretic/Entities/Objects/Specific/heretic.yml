@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseItem, BaseMagicalContraband ]
+  parent: [ BaseStorageItem, BaseMagicalContraband ]
   id: CodexCicatrix
   suffix: MagicItem
   name: codex cicatrix
@@ -25,14 +25,27 @@
     size: Small
     sprite: _Goobstation/Heretic/book.rsi
   - type: UseDelay
-    delay: 2.0
+    delay: 0.5 # Should be like 2 for animations but fuckass interaction system resets default delay on every activation including storage interactions
   - type: Appearance
   - type: ItemToggle
+    onActivate: false
   - type: ComponentToggler
     components:
     - type: HereticMagicItem
     - type: EldritchInfluenceDrainer
     - type: EnchantingTool
+    - type: EldritchPaperConverter
+      whitelist: &paperWhitelist
+        components:
+        - Item
+      blacklist: &paperBlacklist
+        components:
+        - Storage
+        - EntityStorage
+        - MobState
+        - EldritchPaper
+        - Unremoveable
+        - WrappedParcel
   - type: ItemToggleSize
     activatedSize: Normal
   - type: ToggleAnimation
@@ -42,6 +55,15 @@
     - CodexCicatrix
     - AnchorHereticStructure
   - type: TransmutationRuneScriber
+  - type: Storage
+    grid:
+    - 0,0,1,1
+    maxItemSize: Small
+    whitelist:
+      tags:
+      - Paper
+      components:
+      - EldritchPaper
 
 - type: entity
   parent: CodexCicatrix
@@ -60,6 +82,10 @@
     - type: EldritchInfluenceDrainer
       time: 2.5
     - type: EnchantingTool
+    - type: EldritchPaperConverter
+      doAfterTime: 0.5
+      whitelist: *paperWhitelist
+      blacklist: *paperBlacklist
   - type: ToggleAnimation
     toggleOnTime: 1.0
     toggleOffTime: 1.9
@@ -89,6 +115,56 @@
     interfaces:
       enum.HereticCurseUiKey.Key:
         type: CurseBoundUserInterface
+  - type: Storage
+    grid:
+    - 0,0,2,1
+
+- type: entity
+  parent: [BasePaper, BaseMagicalContraband]
+  id: EldritchPaper
+  name: eldritch card
+  description: Burn it to reveal the contents hidden behind the Veil of Mansus.
+  components:
+  - type: FaxableObject
+  - type: FaxSlip
+    slipChance: 1
+  - type: Sprite
+    sprite: _Trauma/Heretic/Entities/card.rsi
+    layers:
+    - state: tarot_blank
+    postShaders:
+    - id: Enchant
+      prototype: Enchant
+      mutable: false
+      before:
+      - interaction-outline
+      - target-outline
+      - drag-drop-outline
+  - type: Item
+    sprite: Objects/Misc/bureaucracy.rsi
+  - type: EldritchPaper
+  - type: ContainerContainer
+    containers:
+      item: !type:ContainerSlot
+  - type: Destructible
+    # Less hp and doesn't spawn ash, empty the container instead
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 10
+      behaviors:
+      - !type:EmptyContainersBehaviour
+        containers:
+        - item
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: ExplosionResistance
+    worn: false
+    damageCoefficient: 0
+  - type: Tag
+    tags:
+    - HereticItem
+    - ParcelWrapBlacklist
 
 - type: entity
   parent: [ BaseItem, BaseMagicalContraband ]
@@ -444,7 +520,8 @@
         compName: Door
         range: 5
         flags: Static
-        effect: !type:ToggleDoorState
+        effect: !type:NestedEffect
+          proto: UnboltAndToggleDoor
     - name: eldritch-coin-side-blade
       spriteState: blade
       userEffects:

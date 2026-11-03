@@ -5,9 +5,6 @@ using Content.Shared.DoAfter;
 namespace Content.Trauma.Shared.CosmicCult;
 
 [Serializable, NetSerializable]
-public sealed partial class CosmicSiphonDoAfterEvent : SimpleDoAfterEvent;
-
-[Serializable, NetSerializable]
 public sealed partial class CosmicBlankDoAfterEvent : SimpleDoAfterEvent;
 
 [Serializable, NetSerializable]

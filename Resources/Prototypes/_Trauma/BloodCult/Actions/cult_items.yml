@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BaseAction
+  id: ActionBloodSpearRecall
+  name: Bloody Bond
+  description: Recalls your blood spear back to your hand.
+  components:
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Items/Weapons/cult_spear.rsi
+    layers:
+    - state: icon
+    state: stun
+  - type: Action
+    detachedItemAction: true
+    checkCanInteract: true
+    itemIconStyle: BigAction
+    useDelay: 30
+  - type: InstantAction
+    event: !type:RecallItemEvent

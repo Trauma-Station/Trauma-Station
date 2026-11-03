@@ -10,20 +10,10 @@
   startingGear: ScientistGear
   icon: "JobIconScientist"
   supervisors: job-supervisors-rd
+  guides: [ Science ] # TODO: should have a more specific guidebook page instead of using the department itself
   access:
   - Research
   - Maintenance
-  # <Trauma>
-  extendedAccess:
-  - Robotics
-  - Genetics
-  guides:
-  - Science
-  special:
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEducation
-  # </Trauma>
 
 - type: startingGear
   id: ScientistGear

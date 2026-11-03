@@ -194,7 +194,7 @@
     emoteSounds: null
     speechSounds: null
     damageBeforeReveal: 35
-    revealDamageMultiplier: 1.5
+    revealChanceMultiplier: 0.0075
     sustainedDamageReductionRate: 1.5
     revealCooldown: 90
     forceRevealCooldown: 180
