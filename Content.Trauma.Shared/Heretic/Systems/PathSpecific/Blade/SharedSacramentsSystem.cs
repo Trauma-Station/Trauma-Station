@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Medical.Common.Targeting;
+using Content.Shared.Damage;
 using Content.Shared.Damage.Events;
 using Content.Shared.Damage.Systems;
 using Content.Shared.IdentityManagement;
@@ -89,10 +90,10 @@ public abstract partial class SharedSacramentsSystem : EntitySystem
         if (args.Origin is not { } origin)
             return;
 
-        _dmg.ChangeDamage(origin,
-            args.Damage * ent.Comp.DamageReturnRatio,
-            targetPart: TargetBodyPart.Vital,
-            canMiss: false);
+        var dmg = args.Damage * ent.Comp.DamageReturnRatio;
+        dmg.Flags |= DamageSpecifier.DamageFlags.NoParry;
+
+        _dmg.ChangeDamage(origin, dmg, targetPart: TargetBodyPart.Vital, canMiss: false);
     }
 
     protected virtual void Pulse(EntityUid ent) { }

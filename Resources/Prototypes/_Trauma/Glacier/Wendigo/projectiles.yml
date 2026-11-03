@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: ProjectileLeshyDeathBolt
+  name: death bolt
+  parent: BaseBullet
+  components:
+  - type: PointLight
+    color: Purple
+    radius: 2.0
+    energy: 5.0
+  - type: Projectile
+    ignoreResistances: true
+    damage:
+      types:
+        Heat: 25
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Items/arcane_barrage.rsi
+    state: bullet
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - BulletImpassable

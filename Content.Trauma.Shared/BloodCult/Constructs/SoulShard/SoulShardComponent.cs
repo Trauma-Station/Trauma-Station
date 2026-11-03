@@ -11,4 +11,11 @@ public sealed partial class SoulShardComponent : Component
 
     [DataField]
     public Color BlessedLightColor = Color.LightCyan;
+
+    /// <summary>
+    /// Cult rule assigned on shard creation
+    /// If blessed this is null
+    /// </summary>
+    [DataField]
+    public EntityUid? CultRule;
 }

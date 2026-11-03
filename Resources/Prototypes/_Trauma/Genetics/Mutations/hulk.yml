@@ -12,6 +12,8 @@
     rarity: Mythical
     conflicts:
     - MutationOrk
+  - type: MutationCost
+    biomassMultiplier: 4 # harder to spam it
   - type: ComponentMutation
     added:
     - type: Hulk

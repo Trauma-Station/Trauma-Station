@@ -14,14 +14,7 @@ public abstract partial class SharedAbductorSystem
 {
     [Dependency] private ClothingSystem _clothing = default!;
 
-    private void InitializeVest()
-    {
-        SubscribeLocalEvent<AbductorVestComponent, AfterInteractEvent>(OnVestInteract);
-        SubscribeLocalEvent<AbductorVestComponent, ItemSwitchedEvent>(OnItemSwitch);
-        SubscribeLocalEvent<AbductorVestComponent, GotUnequippedEvent>(OnUnequipped);
-        SubscribeLocalEvent<AbductorVestComponent, GotEquippedEvent>(OnEquipped);
-    }
-
+    [SubscribeLocalEvent]
     private void OnEquipped(Entity<AbductorVestComponent> ent, ref GotEquippedEvent args)
     {
         if (TryComp<ClothingComponent>(ent, out var clothingComponent))
@@ -30,8 +23,10 @@ public abstract partial class SharedAbductorSystem
 
     private void OnUnequipped(Entity<AbductorVestComponent> ent, ref GotUnequippedEvent args)
     {
+        // TODO: unset the fucking prefix!?
     }
 
+    [SubscribeLocalEvent]
     private void OnItemSwitch(EntityUid uid, AbductorVestComponent component, ref ItemSwitchedEvent args)
     {
         if (Enum.TryParse<AbductorArmorModeType>(args.State, ignoreCase: true, out var state))
@@ -49,6 +44,7 @@ public abstract partial class SharedAbductorSystem
         }
     }
 
+    [SubscribeLocalEvent]
     private void OnVestInteract(Entity<AbductorVestComponent> ent, ref AfterInteractEvent args)
     {
         if (args.Target is not {} target ||

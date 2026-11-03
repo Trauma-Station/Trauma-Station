@@ -190,14 +190,12 @@
   - type: TraumaInflicter
     severityThreshold: 17
     allowedTraumas:
-    - OrganDamage
     - VeinsDamage
     allowArmourDeduction:
-    - OrganDamage
     - VeinsDamage
     traumasChances:
       Dismemberment: 0
-      OrganDamage: -0.12
+      OrganDamage: 0
       BoneDamage: 0
       VeinsDamage: 0.34
   - type: BleedRemover
@@ -212,7 +210,7 @@
     severityThreshold: 0
     traumasChances:
       Dismemberment: 0
-      OrganDamage: -0.1
+      OrganDamage: 0
       BoneDamage: 0
       VeinsDamage: 0.45
 
@@ -278,7 +276,6 @@
   - type: TraumaInflicter
     severityThreshold: 9
     allowedTraumas:
-    - OrganDamage
     - VeinsDamage
     traumasChances:
       Dismemberment: 0

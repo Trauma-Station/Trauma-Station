@@ -45,6 +45,7 @@
         - MobState
         - EldritchPaper
         - Unremoveable
+        - WrappedParcel
   - type: ItemToggleSize
     activatedSize: Normal
   - type: ToggleAnimation
@@ -160,6 +161,10 @@
   - type: ExplosionResistance
     worn: false
     damageCoefficient: 0
+  - type: Tag
+    tags:
+    - HereticItem
+    - ParcelWrapBlacklist
 
 - type: entity
   parent: [ BaseItem, BaseMagicalContraband ]
@@ -515,7 +520,8 @@
         compName: Door
         range: 5
         flags: Static
-        effect: !type:ToggleDoorState
+        effect: !type:NestedEffect
+          proto: UnboltAndToggleDoor
     - name: eldritch-coin-side-blade
       spriteState: blade
       userEffects:

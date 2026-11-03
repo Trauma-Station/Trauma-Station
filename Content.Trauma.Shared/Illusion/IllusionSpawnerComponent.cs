@@ -51,4 +51,16 @@ public sealed partial class IllusionSpawnerComponent : Component
     /// </summary>
     [DataField]
     public ComponentRegistry Components = new();
+
+    /// <summary>
+    /// If true, user can be attacked by illusions if they trigger illusion spawn
+    /// </summary>
+    [DataField]
+    public bool CanTargetUser;
+
+    /// <summary>
+    /// If true, will spawn illusions even if there are no targets specified
+    /// </summary>
+    [DataField]
+    public bool IgnoreTargets;
 }

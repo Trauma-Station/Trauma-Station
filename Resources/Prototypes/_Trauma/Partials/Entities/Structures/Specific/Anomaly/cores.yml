@@ -10,6 +10,10 @@
   id: AnomalyCorePyroclastic
   name: pyroclastic anomaly core
   components:
+  - type: Tag
+    tags:
+    - AnomalyCorePyroclastic
+    - ForceableFollow
   - type: Enchanter
     enchants:
     - EnchantFireAspect
@@ -19,6 +23,10 @@
   id: AnomalyCoreGravity
   name: gravity anomaly core
   components:
+  - type: Tag
+    tags:
+    - AnomalyCoreGravity
+    - ForceableFollow
   - type: Enchanter
     enchants:
     - EnchantKnockback
@@ -27,6 +35,10 @@
   id: AnomalyCoreIce
   name: ice anomaly core
   components:
+  - type: Tag
+    tags:
+    - AnomalyCoreIce
+    - ForceableFollow
   - type: Enchanter
     enchants:
     - EnchantProtFire
@@ -35,6 +47,10 @@
   id: AnomalyCoreFlesh
   name: flesh anomaly core
   components:
+  - type: Tag
+    tags:
+    - AnomalyCoreFlesh
+    - ForceableFollow
   - type: Enchanter
     enchants:
     - EnchantSharpness
@@ -43,6 +59,10 @@
   id: AnomalyCoreRock
   name: rock anomaly core
   components:
+  - type: Tag
+    tags:
+    - AnomalyCoreRock
+    - ForceableFollow
   - type: Enchanter
     enchants:
     - EnchantProtection
@@ -52,6 +72,10 @@
   id: AnomalyCoreLiquid
   name: liquid anomaly core
   components:
+  - type: Tag
+    tags:
+    - AnomalyCoreLiquid
+    - ForceableFollow
   - type: Enchanter
     enchants:
     - EnchantSlippery
@@ -64,6 +88,7 @@
   - type: Tag
     tags:
     - AnomalyCoreBluespace
+    - ForceableFollow
 
 - type: entity
   id: AnomalyCoreElectricity
@@ -72,6 +97,7 @@
   - type: Tag
     tags:
     - AnomalyCoreElectricity
+    - ForceableFollow
   - type: Enchanter
     enchants:
     - EnchantInsulated
@@ -80,6 +106,10 @@
   id: AnomalyCoreFlora
   name: flora anomaly core
   components:
+  - type: Tag
+    tags:
+    - AnomalyCoreFlora
+    - ForceableFollow
   - type: Enchanter
     enchants:
     - EnchantThorns
@@ -87,10 +117,20 @@
 - type: entity
   id: AnomalyCoreShadow
   name: shadow anomaly core
+  components:
+  - type: Tag
+    tags:
+    - AnomalyCoreShadow
+    - ForceableFollow
 
 - type: entity
   id: AnomalyCoreTech
   name: tech anomaly core
+  components:
+  - type: Tag
+    tags:
+    - AnomalyCoreTech
+    - ForceableFollow
 
 - type: entity
   id: AnomalyCoreSanta

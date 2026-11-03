@@ -11,19 +11,6 @@
     rule: AnomalyStormRule
 
 - type: stationTrait
-  id: Blackout
-  group: Negative
-  name: "Blackout"
-  report: "Station lights seem to be damaged, be safe when starting your shift today."
-  mapEffects:
-  # TODO: change it to overload lighting channel on APCs if anyone ever implements channels (lol)
-  - !type:StationQueryEffects
-    compName: PoweredLight
-    effects:
-    - !type:DestroyLightBulb
-      probability: 0.6
-
-- type: stationTrait
   id: BotLanguages
   group: Negative
   chance: 0.8
@@ -59,15 +46,15 @@
           - Machine
           - VendingMachine
 
-- type: stationTrait
-  id: CarpInfestation
-  group: Negative
-  minPlayers: 15
-  name: "Carp infestation"
-  report: "Dangerous fauna is present in the area of this station."
-  effects:
-  - !type:StartGameRule
-    rule: CarpInfestationRule
+#- type: stationTrait
+#  id: CarpInfestation
+#  group: Negative
+#  minPlayers: 15
+#  name: "Carp infestation"
+#  report: "Dangerous fauna is present in the area of this station."
+#  effects:
+#  - !type:StartGameRule
+#    rule: CarpInfestationRule
 
 - type: stationTrait
   id: EmptyMaint

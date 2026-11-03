@@ -106,15 +106,27 @@ public sealed partial class RecallableItemSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnRecall(RecallItemEvent args)
     {
-        if (!Exists(args.Action.Comp.Container))
-            return;
-
         var user = args.Performer;
+
+        if (args.Action.Comp.Container is not { } item || !Exists(item) ||
+            !_recallQuery.TryComp(item, out var recallComp))
+        {
+            _actions.RemoveAction(user, args.Action.AsNullable());
+            return;
+        }
+
+        if (!ShouldAddAction(recallComp, user))
+        {
+            _actions.RemoveAction(user, args.Action.AsNullable());
+            if (_player.TryGetSessionByEntity(user, out var session))
+                _pvsOverride.RemoveSessionOverride(item, session);
+            recallComp.User = null;
+            Dirty(item, recallComp);
+            return;
+        }
 
         if (!TryComp(user, out HandsComponent? hands))
             return;
-
-        var item = args.Action.Comp.Container.Value;
 
         if (!TryComp(item, out ItemComponent? itemComp) || _hands.IsHolding((user, hands), item) ||
             !_hands.TryGetEmptyHand((user, hands), out var hand))

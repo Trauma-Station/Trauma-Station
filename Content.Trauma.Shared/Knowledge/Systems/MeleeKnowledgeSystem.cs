@@ -3,6 +3,7 @@
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.Knowledge;
 using Content.Trauma.Common.Knowledge.Components;
+using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.Knowledge.Components;
 using Content.Trauma.Shared.MartialArts.Components;
 

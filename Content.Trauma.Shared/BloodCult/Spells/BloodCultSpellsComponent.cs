@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.FixedPoint;
+
 namespace Content.Trauma.Shared.BloodCult.Spells;
 
 /// <summary>
@@ -11,6 +13,12 @@ public sealed partial class BloodCultSpellsComponent : Component
 {
     [DataField]
     public TimeSpan SpellCreationTime = TimeSpan.FromSeconds(10);
+
+    [DataField]
+    public FixedPoint2 SpellCreatingDamage = 20;
+
+    [DataField]
+    public int SpellsLimit = 1; // if not empowered
 
     [DataField, AutoNetworkedField]
     public HashSet<EntityUid> ActiveSpells = new();

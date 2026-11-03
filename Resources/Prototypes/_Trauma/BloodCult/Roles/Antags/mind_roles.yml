@@ -9,9 +9,6 @@
     roleType: TeamAntagonist
     exclusiveAntag: true
   - type: BloodCultistRole
-  - type: RoleActions
-    actions:
-    - ActionBloodCultSpells
   - type: RoleEffects
     added:
     - !type:AddFaction
@@ -44,6 +41,8 @@
     - !type:RemoveComponents
       components:
       - type: BloodCultMember
+      - type: BloodCultist
+      - type: BloodCultLeader
     - !type:RemoveCollectiveMind
       channel: BloodCult
 
@@ -57,9 +56,16 @@
     antagPrototype: BloodCultist
   - type: RoleBriefing
     briefing: blood-cult-role-briefing-short
+  - type: RoleActions
+    actions:
+    - ActionBloodCultSpells
   - type: RoleEffects
     mindAdded:
     - !type:AddComponents
+      components:
+      - type: BloodCultSpells
+    mindRemoved:
+    - !type:RemoveComponents
       components:
       - type: BloodCultSpells
     added:
@@ -87,6 +93,11 @@
     subtype: role-subtype-construct
   - type: RoleBriefing
     briefing: blood-cult-role-briefing-construct
+  - type: RoleEffects
+    added:
+    - !type:GrantSkills
+      skills:
+        LanguageTauCetiBasic: 100
 
 - type: entity
   parent: BaseMindRole
@@ -97,3 +108,8 @@
     subtype: role-subtype-purified-construct
   - type: RoleBriefing
     briefing: blood-cult-role-briefing-purified-construct
+  - type: RoleEffects
+    added:
+    - !type:GrantSkills
+      skills:
+        LanguageTauCetiBasic: 100

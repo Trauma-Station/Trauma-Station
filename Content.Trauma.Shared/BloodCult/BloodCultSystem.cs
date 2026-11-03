@@ -6,6 +6,7 @@ using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind.Components;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Roles;
 using Content.Trauma.Shared.BloodCult.Components;
 using Content.Trauma.Shared.BloodCult.Gamerule;
@@ -17,10 +18,10 @@ namespace Content.Trauma.Shared.BloodCult;
 
 public abstract partial class BloodCultSystem : EntitySystem
 {
+    [Dependency] protected SharedRoleSystem Role = default!;
     [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedPvsOverrideSystem _pvsOverride = default!;
-    [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
     [Dependency] private EntityQuery<BloodCultMemberComponent> _query = default!;
     [Dependency] private EntityQuery<BloodCultRuleComponent> _ruleQuery = default!;
@@ -28,6 +29,7 @@ public abstract partial class BloodCultSystem : EntitySystem
 
     private HashSet<Entity<BloodCultMemberComponent>> _cultists = new();
     private HashSet<Entity<HumanoidProfileComponent>> _targets = new();
+    private HashSet<Entity<MobStateComponent>> _mobs = new();
 
     [SubscribeLocalEvent]
     private void OnPlayerAttached(Entity<BloodCultMemberComponent> ent, ref PlayerAttachedEvent args)
@@ -113,10 +115,10 @@ public abstract partial class BloodCultSystem : EntitySystem
         => MindGetRole(mind) != null;
 
     public Entity<BloodCultistRoleComponent>? GetRole(EntityUid uid)
-        => _mcQuery.CompOrNull(uid)?.Mind is {} mind ? MindGetRole(mind) : null;
+        => _mcQuery.CompOrNull(uid)?.Mind is {} mind && mind.Valid ? MindGetRole(mind) : null;
 
     public Entity<BloodCultistRoleComponent>? MindGetRole(EntityUid mind)
-        => _role.MindHasRole<BloodCultistRoleComponent>(mind, out var role)
+        => Role.MindHasRole<BloodCultistRoleComponent>(mind, out var role)
             ? (role.Value.Owner, role.Value.Comp2)
             : null;
 
@@ -141,6 +143,10 @@ public abstract partial class BloodCultSystem : EntitySystem
 
     public virtual bool Convert(EntityUid rule, EntityUid target)
         => false;
+
+    public virtual void Deconvert(EntityUid target)
+    {
+    }
 
     public virtual void ConvertConstruct(EntityUid rule, EntityUid target)
     {
@@ -188,6 +194,17 @@ public abstract partial class BloodCultSystem : EntitySystem
     }
 
     /// <summary>
+    /// Gets all constructs near a rune.
+    /// </summary>
+    public HashSet<Entity<MobStateComponent>> GetMobsNearRune(EntityUid rune, float range)
+    {
+        var pos = Transform(rune).Coordinates;
+        _mobs.Clear();
+        _lookup.GetEntitiesInRange(pos, range, _mobs);
+        return _mobs;
+    }
+
+    /// <summary>
     /// Set a cultist's gamerule and network it to them.
     /// </summary>
     public void SetCultRule(EntityUid mob, EntityUid rule)
@@ -223,8 +240,7 @@ public abstract partial class BloodCultSystem : EntitySystem
             return;
 
         dest.Comp ??= EnsureComp<BloodCultMemberComponent>(dest);
-        dest.Comp.Rule = src.Comp.Rule;
-        Dirty(dest, dest.Comp);
+        SetCultRule(dest, src.Comp.Rule);
     }
 }
 

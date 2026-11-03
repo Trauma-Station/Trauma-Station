@@ -10,8 +10,6 @@
     useDelay: 10
     raiseOnAction: true
   - type: Sprite
-    layers:
-    - state: seismic_stomp # todo: change
   - type: EntityTargetAction
     event: !type:HandleTargetActionEvent
   - type: TargetAction
@@ -62,6 +60,54 @@
           min: 4.0
           max: 4.0
 
+# Projectile Variants
+- type: entity
+  parent: BaseAction
+  id: ActionWendigoProjectileSpread
+  name: Projectile Spread (360)
+  components:
+  - type: Action
+    useDelay: 0
+    raiseOnAction: true
+    itemIconStyle: BigAction
+    checkCanInteract: false
+  - type: TargetAction
+    interactOnMiss: false
+    range: 30
+  - type: Sprite
+    sprite: _Goobstation/Wizard/actions.rsi # todo replace
+    layers:
+    - state: blink
+  - type: EntityTargetAction
+    event: !type:HandleTargetActionEvent
+  - type: ActionRequirements
+    effects:
+      Performer:
+      - !type:ShootProjectileAdvanced
+        projectile: ProjectileLeshyDeathBolt
+        amount: 10
+        speed: 10
+        spread: true
+        fullAngle: 360
+
+- type: entity
+  parent: ActionWendigoProjectileSpread
+  id: ActionWendigoProjectileSpreadShotgun
+  name: Projectile Spread (Shotgun)
+  components:
+  - type: EntityTargetAction
+    event: !type:HandleTargetActionEvent
+  - type: ActionRequirements
+    effects:
+      Performer:
+      - !type:ShootProjectileAdvanced
+        projectile: ProjectileLeshyDeathBolt
+        amount: 10
+        spreadAngles:
+          min: 1
+          max: 2
+        speed: 15
+
 # Phase II abilities
 - type: entity
   parent: ActionWendigoHeavyStomp
@@ -77,4 +123,27 @@
         effect: !type:NestedEffect
           proto: WendigoStomp
       - !type:SpawnParticles
-        particleProto: VampireStompShockwave # todo replace
+        particleProto: VampireStomp # doesn't matter
+
+# Polymorph to Polar Bear
+- type: entity
+  parent: BaseActionPolymorph
+  id: ActionPolymorphPolarBear
+  name: Polar Bear Polymorph
+  description: Polymorphs you into a Polar bear.
+  components:
+  - type: Sprite
+    sprite: Mobs/Animals/bear.rsi
+    state: bear
+  - type: InstantAction
+    event: !type:PolymorphActionEvent
+      protoId: PolarBearPolymorph
+
+- type: polymorph
+  id: PolarBearPolymorph
+  configuration:
+    entity: MobBearSpace
+    transferName: true
+    inventory: None
+    revertOnDeath: true
+    revertOnCrit: true

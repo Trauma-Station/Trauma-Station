@@ -108,12 +108,14 @@ public sealed partial class ConstructShellSystem : EntitySystem
         if (!_mind.TryGetMind(args.Actor, out var mindId, out var mind))
             return;
 
+        var blessed = false;
         var entries = ent.Comp.Constructs;
         if (ent.Comp.ShardSlot.Item is { } shard &&
             _shardQuery.TryComp(shard, out var soulShard) &&
             soulShard.IsBlessed)
         {
             entries = ent.Comp.PurifiedConstructs;
+            blessed = true;
         }
 
         var id = args.SelectedItem;
@@ -123,7 +125,8 @@ public sealed partial class ConstructShellSystem : EntitySystem
         _ui.CloseUi(ent.Owner, RadialSelectorUiKey.Key);
         var coords = Transform(ent).Coordinates;
         var construct = PredictedSpawnAtPosition(id, coords);
-        _cult.CopyMember(ent.Owner, construct);
+        if (!blessed)
+            _cult.CopyMember(args.Actor, construct);
         _mind.TransferTo(mindId, construct, mind: mind);
         // TODO: unvisit or something??? set this as original entity??
         PredictedDel(ent.Owner);

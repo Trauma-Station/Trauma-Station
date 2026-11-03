@@ -8,9 +8,13 @@ using Content.Shared.CombatMode.Pacification;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Events;
+using Content.Shared.DoAfter;
 using Content.Shared.Ensnaring.Components;
+using Content.Shared.Mind.Components;
+using Content.Shared.Popups;
 using Content.Shared.StatusEffect;
 using Content.Shared.Stunnable;
+using Content.Trauma.Common.CollectiveMind;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Content.Trauma.Shared.Heretic.Components.StatusEffects;
 using Content.Trauma.Shared.Heretic.Events;
@@ -170,5 +174,64 @@ public abstract partial class SharedHereticAbilitySystem
         {
             _container.EmptyContainer(woundable.Wounds);
         }
+    }
+
+    [SubscribeLocalEvent]
+    private void OnMansusLink(EventHereticMansusLink args)
+    {
+        if (!TryUseAbility(args, false))
+            return;
+
+        var ent = args.Performer;
+        var target = args.Target;
+        if (!HasComp<MindContainerComponent>(target))
+        {
+            Popup.PopupEntity(Loc.GetString("heretic-manselink-fail-nomind"), ent, ent);
+            return;
+        }
+
+        if (TryComp<CollectiveMindComponent>(target, out var mind) && mind.Channels.Contains(MansusLinkMind))
+        {
+            Popup.PopupEntity(Loc.GetString("heretic-manselink-fail-exists"), ent, ent);
+            return;
+        }
+
+        args.Handled = true;
+
+        var dargs = new DoAfterArgs(EntityManager,
+            ent,
+            5f,
+            new HereticMansusLinkDoAfter(),
+            eventTarget: target,
+            target: target)
+        {
+            BreakOnDamage = true,
+            BreakOnMove = true,
+            MultiplyDelay = false
+        };
+
+        Popup.PopupEntity(Loc.GetString("heretic-manselink-start"), ent, ent);
+        Popup.PopupEntity(Loc.GetString("heretic-manselink-start-target"), target, target, PopupType.MediumCaution);
+        DoAfter.TryStartDoAfter(dargs);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnMansusLinkDoafter(Entity<MindContainerComponent> ent, ref HereticMansusLinkDoAfter args)
+    {
+        if (args.Cancelled || args.Handled)
+            return;
+
+        args.Handled = true;
+
+        EnsureComp<CollectiveMindComponent>(ent).Channels.Add(MansusLinkMind);
+
+        _flash.Flash(ent,
+            null,
+            null,
+            TimeSpan.FromSeconds(2f),
+            0f,
+            false,
+            true,
+            stunDuration: TimeSpan.FromSeconds(1f));
     }
 }
