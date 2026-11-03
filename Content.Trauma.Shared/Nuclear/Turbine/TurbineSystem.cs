@@ -274,8 +274,6 @@ public abstract partial class TurbineSystem : EntitySystem
         UpdateAppearance(uid, comp);
     }
 
-    #endregion
-
     public bool AdjustStatorLoad(Entity<TurbineComponent> ent, float change)
         => SetStatorLoad(ent, ent.Comp.StatorLoad + change);
 
