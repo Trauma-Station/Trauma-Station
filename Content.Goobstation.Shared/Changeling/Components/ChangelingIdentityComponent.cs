@@ -193,25 +193,25 @@ public sealed partial class ChangelingIdentityComponent : Component
 public sealed partial class TransformData
 {
     /// <summary>
-    ///     Entity's name.
+    /// Entity's name.
     /// </summary>
     [DataField]
     public string Name;
 
     /// <summary>
-    ///     Entity's fingerprint, if it exists.
+    /// Entity's fingerprint, if it exists.
     /// </summary>
     [DataField]
     public string? Fingerprint;
 
     /// <summary>
-    ///     Entity's DNA.
+    /// Entity's DNA.
     /// </summary>
     [DataField("dna")]
     public string DNA;
 
     /// <summary>
-    ///     Entity's humanoid appearance component.
+    /// Entity's humanoid appearance component.
     /// </summary>
     [DataField]
     public HumanoidCharacterProfile Profile;
@@ -221,4 +221,10 @@ public sealed partial class TransformData
     /// </summary>
     [DataField]
     public MutatableData Mutations;
+
+    /// <summary>
+    /// Whether the target was originally mindshielded, controls the fake mindshield.
+    /// </summary>
+    [DataField]
+    public bool MindShielded;
 }
