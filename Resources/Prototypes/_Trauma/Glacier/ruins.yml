@@ -1,0 +1,13 @@
+# This couldn't have a more generic name, huh
+- type: lavalandRuinPool
+  id: GlacierRuins
+  gridRuins:
+    HunterCabin: 5
+  dungeonRuins:
+    CommonRuin5x5: 40
+
+- type: lavalandGridRuin
+  id: HunterCabin
+  name: glacier-hunter-cabin
+  path: /Maps/_Trauma/Glacier/hunter_cabin.yml
+  priority: 1
