@@ -5,6 +5,7 @@ using Content.Server.Atmos.EntitySystems;
 using Content.Server.GameTicking;
 using Content.Server.Parallax;
 using Content.Shared.EntityEffects;
+using Content.Shared.Maps;
 using Content.Shared.Parallax.Biomes;
 using Content.Shared.Salvage;
 using Content.Trauma.Shared.Planet;
@@ -45,6 +46,10 @@ public sealed partial class StationPlanetSystem : EntitySystem
         // Required for any planet map where you want to hold many players
         var optimize = EnsureComp<BiomeOptimizeComponent>(map);
         optimize.LoadArea = loadBox;
+
+        // Setup all the ruins, if we have a pool defined
+        if (proto.RuinPool is { } ruinPool && ProtoMan.Resolve(ruinPool, out var ruinPoolPrototype))
+            SetupRuins(ruinPoolPrototype, map, args.Map);
 
         if (!_biomeQuery.TryComp(map, out var biomeComp))
             return;

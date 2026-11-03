@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Lavaland.Shared.Procedural.Prototypes;
 using Content.Shared.Atmos;
 using Content.Shared.EntityEffects;
 using Content.Shared.Parallax.Biomes;
@@ -45,6 +46,9 @@ public sealed partial class PlanetPrototype : IPrototype
     /// </summary>
     [DataField(required: true)]
     public GasMixture Atmosphere = new();
+
+    [DataField]
+    public ProtoId<LavalandRuinPoolPrototype>? RuinPool;
 
     /// <summary>
     /// Biome layers to add to the map, i.e. ores.

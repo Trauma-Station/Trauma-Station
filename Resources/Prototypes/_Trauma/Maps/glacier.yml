@@ -29,6 +29,7 @@
 - type: planet
   id: Glacier
   biome: Glacier
+  ruinPool: GlacierRuins
   atmosphere:
     volume: 2500
     temperature: 180 # -93, extreme cold
@@ -49,3 +50,11 @@
   - !type:ModifyStatusEffect
     effectProto: WeatherSchedulerGlacier # Permanent snowstorms
     time: null
+
+# This couldn't have a more generic name, huh
+- type: lavalandRuinPool
+  id: GlacierRuins
+  gridRuins:
+    Temple: 1
+  dungeonRuins:
+    CommonRuin5x5: 40
