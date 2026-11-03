@@ -154,7 +154,8 @@
   name: xenomorph-title
   description: xenomorph-description
   showInVote: false
-  minPlayers: 40
+  # TODO: actually fix minPlayers, making it so gamePresets that use it actually roll instead of never rolling
+  # minPlayers: 40
   rules:
   - BasicRoundstartVariation
   - BasicStationEventScheduler
