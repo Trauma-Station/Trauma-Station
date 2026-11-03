@@ -1,7 +1,7 @@
 - type: entity
-  name: metal grate floor
   parent: FloorTileItemBase
   id: FloorTileItemMetalGrate
+  name: metal grate floor
   components:
   - type: Sprite
     state: wood
@@ -13,9 +13,9 @@
     stackType: FloorTileMetalGrate
 
 - type: entity
-  name: metal floor
   parent: FloorTileItemBase
   id: FloorTileItemMetalMS13
+  name: metal floor
   components:
   - type: Sprite
     state: wood
@@ -27,9 +27,9 @@
     stackType: FloorTileMetalMS13
 
 - type: entity
-  name: maple floor
   parent: FloorTileItemBase
   id: FloorTileItemWoodMaple
+  name: maple floor
   components:
   - type: Sprite
     state: wood
@@ -42,9 +42,9 @@
     stackType: FloorTileWoodMaple
 
 - type: entity
-  name: metal floor green
   parent: FloorTileItemBase
   id: FloorTileItemMetalGreen
+  name: metal floor green
   components:
   - type: Sprite
     state: steel
@@ -58,9 +58,9 @@
     stackType: FloorTileMetalGreen
 
 - type: entity
-  name: metal floor grey dark
   parent: FloorTileItemBase
   id: FloorTileItemMetalGreyDark
+  name: metal floor grey dark
   components:
   - type: Sprite
     state: steel
@@ -74,9 +74,9 @@
     stackType: FloorTileMetalGreyDark
 
 - type: entity
-  name: metal floor purple
   parent: FloorTileItemBase
   id: FloorTileItemMetalPurple
+  name: metal floor purple
   components:
   - type: Sprite
     state: steel
@@ -90,9 +90,9 @@
     stackType: FloorTileMetalPurple
 
 - type: entity
-  name: metal floor teal
   parent: FloorTileItemBase
   id: FloorTileItemMetalTeal
+  name: metal floor teal
   components:
   - type: Sprite
     state: steel
@@ -106,9 +106,9 @@
     stackType: FloorTileMetalTeal
 
 - type: entity
-  name: metal floor white
   parent: FloorTileItemBase
   id: FloorTileItemMetalWhite
+  name: metal floor white
   components:
   - type: Sprite
     state: steel
