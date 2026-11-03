@@ -157,6 +157,21 @@ public abstract partial class TurbineSystem : EntitySystem
         Popup.PopupEntity(Loc.GetString("turbine-repair", ("target", ent), ("tool", args.Used!)), ent, args.User);
         _damage.ClearAllDamage(ent.Owner);
     }
+    #endregion
+
+    [SubscribeLocalEvent]
+    private void OnChangeFlowRate(Entity<TurbineComponent> ent, ref TurbineChangeFlowRateMessage args)
+    {
+        if (SetFlowRate(ent, args.FlowRate))
+            _machine.QueueLog(ent, args.Actor, args.Monitor);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnChangeStatorLoad(Entity<TurbineComponent> ent, ref TurbineChangeStatorLoadMessage args)
+    {
+        if (SetStatorLoad(ent, args.StatorLoad))
+            _machine.QueueLog(ent, args.Actor, args.Monitor);
+    }
 
     [SubscribeLocalEvent]
     private void OnEjectAttempt(EntityUid uid, TurbineComponent comp, ref ItemSlotEjectAttemptEvent args)
