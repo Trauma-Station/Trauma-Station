@@ -4,7 +4,7 @@ using Content.Trauma.Shared.Teleportation.Systems;
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.EntityEffects;
 
-namespace Content.Trauma.Shared.EntityEffects.Effects;
+namespace Content.Trauma.Shared.EntityEffects;
 
 public sealed partial class RandomTeleport : EntityEffectBase<RandomTeleport>
 {

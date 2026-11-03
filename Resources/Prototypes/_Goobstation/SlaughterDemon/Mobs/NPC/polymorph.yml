@@ -3,20 +3,19 @@
 # no demonic whisper on this one
 - type: entity
   abstract: true
-  parent: [ Incorporeal, BaseMob ]
+  parent: BaseMobJaunt
   id: BasePolymorphBloodCrawlJaunt
   name: Unknown
   description: You can't figure out what that is.
   components:
+  - type: Actions
+  - type: ActionsContainer
   - type: Sprite
     sprite: Structures/Specific/Anomalies/Cores/flesh_core.rsi
     state: core
   - type: MovementSpeedModifier
     baseSprintSpeed: 12
     baseWalkSpeed: 8
-  - type: Input
-    context: "ghost"
-  - type: NoSlip
   - type: BloodCrawl
     isCrawling: true
     blood:
@@ -24,18 +23,10 @@
     - AmmoniaBlood
     - InsectBlood
     - CopperBlood
-  - type: Visibility
-    layer: 2
-  - type: Spectral
   - type: Eye
-    drawFov: false
     visMask:
     - Normal
     - Ghost
-  - type: MindContainer
-  - type: MindExaminable
-  - type: IsDeadIC
-    dead: false
 
 - type: entity
   parent: BasePolymorphBloodCrawlJaunt

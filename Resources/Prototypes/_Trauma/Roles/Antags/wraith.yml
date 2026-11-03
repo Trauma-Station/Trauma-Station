@@ -27,7 +27,7 @@
     - NamesWraithTitle
     nameFormat: name-format-wraith
   - type: Banishment
-    lives: 0
+    lives: 1
     popup: wraith-banishment
 
 - type: antagSpecifier

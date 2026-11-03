@@ -58,7 +58,7 @@ public sealed partial class AbsorbCorpseComponent : Component
     /// How long the doafter of absorbing the corpse is
     /// </summary>
     [DataField]
-    public TimeSpan AbsorbDoAfter = TimeSpan.FromSeconds(8);
+    public TimeSpan AbsorbDoAfter = TimeSpan.FromSeconds(6);
 
     [ViewVariables]
     public ProtoId<TagPrototype> Tag = "VimPilot";

@@ -38,18 +38,13 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
     [Dependency] private EntityQuery<MaterialStorageComponent> _materialQuery = default!;
 
     private StringBuilder _builder = new();
+    private CompName _costName;
 
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<GeneticsConsoleComponent, MapInitEvent>(OnMapInit);
-        SubscribeLocalEvent<GeneticsConsoleComponent, GetMaterialWhitelistEvent>(OnGetMaterialWhitelist);
-        SubscribeLocalEvent<GeneticsConsoleComponent, ExaminedEvent>(OnExamined);
-        SubscribeLocalEvent<GeneticsConsoleComponent, SequenceDoAfterEvent>(OnSequenceDoAfter);
-        SubscribeLocalEvent<GeneticsConsoleComponent, DoAfterAttemptEvent<SequenceDoAfterEvent>>(OnSequenceCheck);
-        SubscribeLocalEvent<GeneticsConsoleComponent, CombineDoAfterEvent>(OnCombineDoAfter);
-        SubscribeLocalEvent<GeneticsConsoleComponent, DoAfterAttemptEvent<CombineDoAfterEvent>>(OnCombineCheck);
+        _costName = Factory.CompName<MutationCostComponent>();
 
         Subs.BuiEvents<GeneticsConsoleComponent>(GeneticsConsoleUiKey.Key, subs =>
         {
@@ -68,6 +63,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         InitializeScanner();
     }
 
+    [SubscribeLocalEvent]
     private void OnMapInit(Entity<GeneticsConsoleComponent> ent, ref MapInitEvent args)
     {
         // prevent reconstruct cheesing
@@ -80,11 +76,13 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         _material.UpdateMaterialWhitelist(ent.Owner);
     }
 
+    [SubscribeLocalEvent]
     private void OnGetMaterialWhitelist(Entity<GeneticsConsoleComponent> ent, ref GetMaterialWhitelistEvent args)
     {
         args.Whitelist.Add(ent.Comp.Biomass);
     }
 
+    [SubscribeLocalEvent]
     private void OnExamined(Entity<GeneticsConsoleComponent> ent, ref ExaminedEvent args)
     {
         if (!_materialQuery.TryComp(ent, out var storage))
@@ -171,6 +169,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         UpdateUI(ent.Owner);
     }
 
+    [SubscribeLocalEvent]
     private void OnSequenceDoAfter(Entity<GeneticsConsoleComponent> ent, ref SequenceDoAfterEvent args)
     {
         SetBusy(ent.Owner, false);
@@ -203,6 +202,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
             : "sequence-failed");
     }
 
+    [SubscribeLocalEvent]
     private void OnSequenceCheck(Entity<GeneticsConsoleComponent> ent, ref DoAfterAttemptEvent<SequenceDoAfterEvent> args)
     {
         var mob = GetEntity(args.Event.Mob);
@@ -256,6 +256,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         Speak(ent, "combining");
     }
 
+    [SubscribeLocalEvent]
     private void OnCombineDoAfter(Entity<GeneticsConsoleComponent> ent, ref CombineDoAfterEvent args)
     {
         SetBusy(ent.Owner, false);
@@ -311,6 +312,7 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         UpdateUI(ent.Owner);
     }
 
+    [SubscribeLocalEvent]
     private void OnCombineCheck(Entity<GeneticsConsoleComponent> ent, ref DoAfterAttemptEvent<CombineDoAfterEvent> args)
     {
         var mob = GetEntity(args.Event.Mob);
@@ -325,11 +327,15 @@ public sealed partial class GeneticsConsoleSystem : EntitySystem
         if (now < ent.Comp.NextPrint ||
             i >= ent.Comp.Prints.Count ||
             _disk.GetDisk(ent.Owner) is not {} disk ||
-            disk.Comp.Mutation is not {} mutation)
+            disk.Comp.Mutation is not {} mutation ||
+            !ProtoMan.Resolve(mutation, out var mutationProto))
             return;
 
         var user = args.Actor;
         var cost = ent.Comp.Prints[i].Cost;
+        if (mutationProto.TryComp<MutationCostComponent>(_costName, out var costComp))
+            cost *= costComp.BiomassMultiplier;
+
         if (!TryUseBiomass(ent, cost))
         {
             _popup.PopupEntity(Loc.GetString("genetics-console-missing-biomass"), ent, user);

@@ -16,7 +16,7 @@
   id: BasicAntagEventsTrauma
   table: !type:AllSelector
     children:
-    - id: CarpMigrationRule
+    #- id: CarpMigrationRule
     # TOOD: remove these if they fucking suck lmao
     - id: SingulothKnightsMidround
     - id: MimeAssassinMidround

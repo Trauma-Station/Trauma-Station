@@ -3,6 +3,7 @@
 using Content.Shared.Movement.Systems;
 using Content.Shared.Weapons.Melee.Events;
 using Content.Trauma.Common.MartialArts;
+using Content.Trauma.Common.Weapons;
 using Content.Trauma.Shared.MartialArts.Components;
 
 namespace Content.Trauma.Shared.MartialArts;

@@ -16,6 +16,7 @@ using Content.Trauma.Shared.Heretic.Components.PathSpecific.Blade;
 using Content.Trauma.Shared.Heretic.Rituals;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using System.Linq;
 
 namespace Content.Trauma.Shared.Heretic.Systems.PathSpecific.Blade;
 
@@ -78,7 +79,7 @@ public sealed partial class InfusedItemSystem : EntitySystem
         if (!args.IsHit || args.HitEntities.Count == 0 || args.Direction != null)
             return;
 
-        ApplyInfusionEffects(ent, args.User, args.HitEntities[0]);
+        ApplyInfusionEffects(ent, args.User, args.HitEntities.First());
     }
 
     private void ApplyInfusionEffects(Entity<MansusInfusedComponent> ent, EntityUid user, EntityUid target)

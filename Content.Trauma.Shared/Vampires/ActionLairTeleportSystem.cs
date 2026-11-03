@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.Administration.Systems;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Shared.Storage.EntitySystems;
@@ -15,6 +16,7 @@ public sealed partial class ActionLairTeleportSystem : EntitySystem
     [Dependency] private TeleportSystem _teleport = default!;
     [Dependency] private SharedContainerSystem _container = default!;
     [Dependency] private SharedEntityStorageSystem _storage = default!;
+    [Dependency] private RejuvenateSystem _rejuvenate = default!;
 
     public override void Initialize()
     {
@@ -51,6 +53,7 @@ public sealed partial class ActionLairTeleportSystem : EntitySystem
             _container.Insert(user, store);
         }
 
+        _rejuvenate.PerformRejuvenate(user);
         args.Handled = true;
     }
 

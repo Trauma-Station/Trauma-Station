@@ -4,7 +4,6 @@ using Content.Medical.Common.Damage;
 using Content.Medical.Common.Targeting;
 using Content.Shared.Bible.Components;
 using Content.Shared.Cuffs;
-using Content.Shared.Cuffs.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Gibbing;
 using Content.Shared.Hands.EntitySystems;
@@ -13,6 +12,7 @@ using Content.Shared.Mindshield;
 using Content.Shared.Mobs.Systems;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.Stunnable;
+using Content.Trauma.Shared.BloodCult.Constructs.SoulShard;
 using Content.Trauma.Shared.BloodCult.Gamerule;
 using Content.Trauma.Shared.BloodCult.Runes.Revive;
 using System.Linq;
@@ -22,6 +22,7 @@ namespace Content.Trauma.Shared.BloodCult.Runes.Offering;
 public sealed partial class CultRuneOfferingSystem : EntitySystem
 {
     [Dependency] private BloodCultSystem _cult = default!;
+    [Dependency] private SoulShardSystem _shard = default!;
     [Dependency] private CultRuneReviveSystem _runeRevive = default!;
     [Dependency] private DamageableSystem _damage = default!;
     [Dependency] private GibbingSystem _gibbing = default!;
@@ -35,7 +36,6 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
 
     private static readonly EntProtoId Dagger = "RitualDagger";
     private static readonly EntProtoId Muted = "StatusEffectMuted";
-    private static readonly EntProtoId SoulShard = "SoulShard";
 
     [SubscribeLocalEvent]
     private void OnOfferingRuneInvoked(Entity<CultRuneOfferingComponent> ent, ref RuneInvokeEvent args)
@@ -59,12 +59,6 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
         {
             Sacrifice(rule, target, user);
             args.Handled = true;
-            return;
-        }
-
-        if (_mob.IsCritical(target))
-        {
-            args.Popup = "Bring them to the world of the living or the world of the dead...";
             return;
         }
 
@@ -113,7 +107,7 @@ public sealed partial class CultRuneOfferingSystem : EntitySystem
         if (!hasMind)
             return;
 
-        var shard = PredictedSpawnAtPosition(SoulShard, pos);
+        var shard = _shard.SpawnShard(pos, rule);
         _mind.TransferTo(mindId, shard, mind: mind);
         _mind.UnVisit(mindId);
 

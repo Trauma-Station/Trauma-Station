@@ -14,6 +14,7 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using System.Linq;
 
 namespace Content.Trauma.Shared.Heretic.Systems;
 
@@ -67,7 +68,7 @@ public sealed partial class TouchSpellSystem : EntitySystem
 
         if (args.HitEntities.Count == 1)
         {
-            args.Handled = TryUseTouchSpell(ent, args.User, args.HitEntities[0]);
+            args.Handled = TryUseTouchSpell(ent, args.User, args.HitEntities.First());
             return;
         }
 

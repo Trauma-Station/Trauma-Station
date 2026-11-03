@@ -40,8 +40,6 @@ public sealed partial class FuneralAddSystem : EntitySystem
         if (!args.CanReach || args.Target == user || args.Target is not { } target)
             return;
 
-        args.Handled = true;
-
         // check target is dead and humanoid
         if (!HasComp<MobStateComponent>(target) || !HasComp<HumanoidProfileComponent>(target)
         || !_mobState.IsDead(target))
@@ -90,6 +88,8 @@ public sealed partial class FuneralAddSystem : EntitySystem
             _popup.PopupEntity("Next, embalm the corpse with 15u formaldehyde.", user, user, PopupType.Small);
             return;
         }
+
+        args.Handled = true;
 
         // fancy schmancy
         PredictedSpawnAtPosition(ent.Comp.EffectProto, Transform(target).Coordinates);

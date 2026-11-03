@@ -451,3 +451,23 @@ Entries:
   id: 48
   time: '2026-09-27T14:56:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/4773
+- author: RatherUncreative
+  changes:
+  - type: Tweak
+    message: 'Origin: Added morgue door to maintenance for Detective/Chaplain use'
+  id: 49
+  time: '2026-10-25T15:25:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5142
+- author: LordZirconium
+  changes:
+  - type: Add
+    message: Added reactors to Cog, Kettle and Origin stations.
+  - type: Remove
+    message: Removed previous main engines from Cog, Kettle and Origin.
+  - type: Add
+    message: >-
+      Engineering shuttle building area on Origin station, right below the
+      reactor storage room.
+  id: 50
+  time: '2026-11-01T20:09:55.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5174

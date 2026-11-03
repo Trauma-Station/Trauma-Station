@@ -7,7 +7,7 @@
   icon: { sprite: /Textures/Objects/Misc/guardian_info.rsi, state: icon }
   productEntity: BoxHoloparasite
   cost:
-    Telecrystal: 50 # Trauma - was 12, 5x and cheaper, make ghostroles
+    Telecrystal: 12
   categories:
   - UplinkAllies
   conditions:
@@ -23,18 +23,13 @@
   productEntity: ReinforcementRadioSyndicate
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-urist }
   cost:
-    Telecrystal: 55 # Trauma - was 11, 5x
+    Telecrystal: 11
   categories:
   - UplinkAllies
   conditions:
     - !type:StoreWhitelistCondition
       blacklist:
-        # <Trauma>
-        components:
-        - SpyRule
-        # </Trauma>
         tags:
-          - ContravendUplink # Trauma
           - NukeOpsUplink
 
 - type: listing
@@ -44,79 +39,59 @@
   productEntity: ReinforcementRadioSyndicateNukeops
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-nukeop }
   cost:
-    Telecrystal: 125 # Trauma - was 30, 5x and cheaper, make ghostroles
+    Telecrystal: 30
   categories:
   - UplinkAllies
   conditions:
     - !type:StoreWhitelistCondition
-      # <Trauma>
-      blacklist:
-        tags:
-        - ContravendUplink
-      # </Trauma>
       whitelist:
         tags:
           - NukeOpsUplink
 
 - type: listing
   id: UplinkReinforcementRadioSyndicateCyborgAssault
-  name: uplink-reinforcement-radio-cyborg-assault-name-trauma # Trauma
+  name: uplink-reinforcement-radio-cyborg-assault-name
   description: uplink-reinforcement-radio-cyborg-assault-desc
   productEntity: ReinforcementRadioSyndicateCyborgAssault
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-borg-assault }
   cost:
-    Telecrystal: 375 # Trauma - was 65, 5x and more due to its power
+    Telecrystal: 65
   categories:
     - UplinkAllies
   conditions:
     - !type:StoreWhitelistCondition
-      # <Trauma>
-      blacklist:
-        tags:
-        - ContravendUplink
-      # </Trauma>
       whitelist:
-        # <Trauma>
-        components:
-        - SpyRule
-        # </Trauma>
         tags:
           - NukeOpsUplink
 
 - type: listing
   id: UplinkReinforcementRadioSyndicateAncestor
-  name: uplink-reinforcement-radio-ancestor-name-trauma # Trauma
+  name: uplink-reinforcement-radio-ancestor-name
   description: uplink-reinforcement-radio-ancestor-desc
   productEntity: ReinforcementRadioSyndicateAncestor
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-ancestor }
   cost:
-    Telecrystal: 25 # Trauma - was 6, 5x and cheaper for ghostroles
+    Telecrystal: 6
   categories:
   - UplinkAllies
   conditions:
     - !type:StoreWhitelistCondition
       blacklist:
         tags:
-          - ContravendUplink # Trauma
           - NukeOpsUplink
 
 - type: listing
   id: UplinkReinforcementRadioSyndicateAncestorNukeops # Version for Nukeops that spawns a syndicate monkey with the NukeOperative component.
-  name: uplink-reinforcement-radio-ancestor-name-trauma # Trauma
+  name: uplink-reinforcement-radio-ancestor-name
   description: uplink-reinforcement-radio-ancestor-desc
   productEntity: ReinforcementRadioSyndicateAncestorNukeops
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-ancestor }
   cost:
-    Telecrystal: 40 # Trauma - was 6, 5x and more expensive since nukies can easily arm the monkey
+    Telecrystal: 6
   categories:
   - UplinkAllies
   conditions:
     - !type:StoreWhitelistCondition
-      # <Trauma>
-      blacklist:
-        tags:
-        - ContravendUplink
-      # </Trauma>
       whitelist:
         tags:
           - NukeOpsUplink
@@ -127,7 +102,7 @@
   description: uplink-carp-dehydrated-desc
   productEntity: DehydratedSpaceCarp
   cost:
-    Telecrystal: 5 # Trauma - was 1, 5x
+    Telecrystal: 1
   categories:
   - UplinkAllies
   conditions:
@@ -142,34 +117,21 @@
   description: uplink-mobcat-microbomb-desc
   icon: { sprite: Objects/Devices/communication.rsi, state: old-radio-syndicat }
   productEntity: ReinforcementRadioSyndicateSyndiCat
-  # <Trauma>
   cost:
-    Telecrystal: 25 # was 6, 5x and cheaper
-  conditions:
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - ContravendUplink
-  # </Trauma>
+    Telecrystal: 6
   categories:
     - UplinkAllies
 
 - type: listing
   id: UplinkSyndicatePersonalAI
-  name: uplink-syndicate-pai-name-trauma # Trauma
+  name: uplink-syndicate-pai-name
   description: uplink-syndicate-pai-desc
   icon: { sprite: /Textures/Objects/Fun/pai.rsi, state: syndicate-icon-pai-off }
   productEntity: SyndicatePersonalAI
   cost:
-    Telecrystal: 5 # Trauma - was 1, 5x
+    Telecrystal: 1
   categories:
     - UplinkAllies
   conditions:
-  # <Trauma>
-  - !type:StoreWhitelistCondition
-    blacklist:
-      tags:
-      - ContravendUplink
-  # </Trauma>
   - !type:ListingLimitedStockCondition
     stock: 1
