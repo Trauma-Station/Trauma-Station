@@ -17,4 +17,4 @@
     delta: 1500 # about 0.5MJ per sheet, I hope this is in kJ because literally nothing heat capacity related states its units :)
   - !type:SpawnEntity
     entity: SheetPlastic1
-    amount: 5 # 83.33333333333333333mL of ethylene -> 0.5L of LDPE, waow
+    number: 5 # 83.33333333333333333mL of ethylene -> 0.5L of LDPE, waow
