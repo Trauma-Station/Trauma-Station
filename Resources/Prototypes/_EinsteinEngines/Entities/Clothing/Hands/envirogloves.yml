@@ -183,7 +183,6 @@
   - type: Fiber
   - type: Insulated
     fiberColor: fibers-orange
-  - type: Insulated
 
 - type: entity
   parent: ClothingHandsGlovesEnviroglovesBase
