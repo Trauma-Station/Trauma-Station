@@ -116971,6 +116971,11 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: -10.5,9.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: CMO Office
+      setupAvailableNetworks:
+      - SurveillanceCameraCommand
   - uid: 13081
     components:
     - type: MetaData
@@ -116978,17 +116983,22 @@ entities:
     - type: Transform
       parent: 2
       pos: -9.5,13.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: CMO Room
+      setupAvailableNetworks:
+      - SurveillanceCameraCommand
   - uid: 14090
     components:
     - type: MetaData
-      name: HOS Room
+      name: HOS Office
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
       pos: -14.5,34.5
     - type: SurveillanceCamera
       nameSet: True
-      id: HoS's Office
+      id: HOS Office
       setupAvailableNetworks:
       - SurveillanceCameraCommand
   - uid: 14091
@@ -117001,7 +117011,7 @@ entities:
       pos: 30.5,22.5
     - type: SurveillanceCamera
       nameSet: True
-      id: HoP's Office
+      id: HOP Office
       setupAvailableNetworks:
       - SurveillanceCameraCommand
   - uid: 14092
@@ -117018,6 +117028,8 @@ entities:
       - SurveillanceCameraCommand
   - uid: 14093
     components:
+    - type: MetaData
+      name: Bridge
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -117030,13 +117042,13 @@ entities:
   - uid: 14094
     components:
     - type: MetaData
-      name: Captain Quarters
+      name: Captain Office
     - type: Transform
       parent: 2
       pos: 42.5,42.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Captain's Office
+      id: Captain Office
       setupAvailableNetworks:
       - SurveillanceCameraCommand
   - uid: 14095
@@ -117055,33 +117067,33 @@ entities:
   - uid: 14101
     components:
     - type: MetaData
-      name: CE Room
+      name: CE Office
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
       pos: 8.5,40.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Chief Engineer's Office
+      id: CE Office
       setupAvailableNetworks:
       - SurveillanceCameraCommand
   - uid: 14109
     components:
     - type: MetaData
-      name: RD Room
+      name: RD Office
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
       pos: 25.5,-32.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Mysta's Room
+      id: RD Office
       setupAvailableNetworks:
       - SurveillanceCameraCommand
   - uid: 17962
     components:
     - type: MetaData
-      name: Bridge Outside
+      name: Bridge Courtyard
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -117094,14 +117106,14 @@ entities:
   - uid: 17969
     components:
     - type: MetaData
-      name: QM Room
+      name: QM Office
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
       pos: 52.5,13.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Logistics Officer's Quarters
+      id: QM Office
       setupAvailableNetworks:
       - SurveillanceCameraCommand
   - uid: 19069
@@ -117111,10 +117123,17 @@ entities:
     - type: Transform
       parent: 2
       pos: 36.5,73.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: AI Outside
+      setupAvailableNetworks:
+      - SurveillanceCameraCommand
 - proto: SurveillanceCameraEngineering
   entities:
   - uid: 5352
     components:
+    - type: MetaData
+      name: TEG Room
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -117126,6 +117145,8 @@ entities:
       - SurveillanceCameraEngineering
   - uid: 5353
     components:
+    - type: MetaData
+      name: Oxygen Production
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -117137,6 +117158,8 @@ entities:
       - SurveillanceCameraEngineering
   - uid: 14096
     components:
+    - type: MetaData
+      name: Atmospherics Lobby
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -117148,6 +117171,8 @@ entities:
       - SurveillanceCameraEngineering
   - uid: 14100
     components:
+    - type: MetaData
+      name: AME Room
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -117159,6 +117184,8 @@ entities:
       - SurveillanceCameraEngineering
   - uid: 14102
     components:
+    - type: MetaData
+      name: Engineering Dorm
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -117182,6 +117209,8 @@ entities:
       - SurveillanceCameraEngineering
   - uid: 14104
     components:
+    - type: MetaData
+      name: Atmospherics Lower Courtyard
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -117193,6 +117222,8 @@ entities:
       - SurveillanceCameraEngineering
   - uid: 14105
     components:
+    - type: MetaData
+      name: Atmospheric Upper Courtyard
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -117204,6 +117235,8 @@ entities:
       - SurveillanceCameraEngineering
   - uid: 14156
     components:
+    - type: MetaData
+      name: Atmos Walkway
     - type: Transform
       parent: 2
       pos: 10.5,56.5
@@ -117214,6 +117247,8 @@ entities:
       - SurveillanceCameraEngineering
   - uid: 17964
     components:
+    - type: MetaData
+      name: Telecoms
     - type: Transform
       parent: 2
       pos: 9.5,51.5
@@ -117224,6 +117259,8 @@ entities:
       - SurveillanceCameraEngineering
   - uid: 17966
     components:
+    - type: MetaData
+      name: Solar Control
     - type: Transform
       parent: 2
       pos: -4.5,66.5
@@ -117234,6 +117271,8 @@ entities:
       - SurveillanceCameraEngineering
   - uid: 17967
     components:
+    - type: MetaData
+      name: TEG Exterior
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -117247,6 +117286,8 @@ entities:
   entities:
   - uid: 8670
     components:
+    - type: MetaData
+      name: Public Garden
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -117259,7 +117300,7 @@ entities:
   - uid: 11090
     components:
     - type: MetaData
-      name: Central Hall South East
+      name: Disposals Hallway
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -117279,7 +117320,7 @@ entities:
       pos: -38.5,15.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Eastern Dock
+      id: West Docks Perma
       setupAvailableNetworks:
       - SurveillanceCameraGeneral
   - uid: 12430
@@ -117305,13 +117346,13 @@ entities:
       pos: -57.5,11.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Western Dock
+      id: Law Entrance
       setupAvailableNetworks:
       - SurveillanceCameraGeneral
   - uid: 12555
     components:
     - type: MetaData
-      name: West Docks
+      name: Snowy Park
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -117329,6 +117370,11 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: 9.5,5.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Medical Entrance
+      setupAvailableNetworks:
+      - SurveillanceCameraGeneral
   - uid: 13240
     components:
     - type: MetaData
@@ -117339,11 +117385,13 @@ entities:
       pos: 35.5,10.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Logistics Front
+      id: Cargo Entrance
       setupAvailableNetworks:
       - SurveillanceCameraGeneral
   - uid: 14106
     components:
+    - type: MetaData
+      name: Arrivals
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -117353,6 +117401,8 @@ entities:
       id: Arrivals
   - uid: 14107
     components:
+    - type: MetaData
+      name: Medical Front
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -117364,6 +117414,8 @@ entities:
       - SurveillanceCameraMedical
   - uid: 14108
     components:
+    - type: MetaData
+      name: Clothing Kiosk
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -117373,6 +117425,8 @@ entities:
       id: Clothing Kiosk
   - uid: 14110
     components:
+    - type: MetaData
+      name: Southeast Balcony
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -117384,6 +117438,8 @@ entities:
       - SurveillanceCameraGeneral
   - uid: 14111
     components:
+    - type: MetaData
+      name: Dorms
     - type: Transform
       parent: 2
       pos: 70.5,-26.5
@@ -117394,6 +117450,8 @@ entities:
       - SurveillanceCameraGeneral
   - uid: 14112
     components:
+    - type: MetaData
+      name: Security Front
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -117406,19 +117464,19 @@ entities:
   - uid: 14113
     components:
     - type: MetaData
-      name: Chapel Entrance
+      name: Science Entrance
     - type: Transform
       parent: 2
       pos: 34.5,-13.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Epistemics Front
+      id: Science Entrance
       setupAvailableNetworks:
       - SurveillanceCameraGeneral
   - uid: 14115
     components:
     - type: MetaData
-      name: Evac
+      name: Evacuation
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -117431,19 +117489,19 @@ entities:
   - uid: 17953
     components:
     - type: MetaData
-      name: Cryogenics Entrance
+      name: Cryosleep Entrance
     - type: Transform
       parent: 2
       pos: 49.5,-12.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Cryosleep
+      id: Cryosleep Entrance
       setupAvailableNetworks:
       - SurveillanceCameraGeneral
   - uid: 17959
     components:
     - type: MetaData
-      name: Central Hall West
+      name: Central Hall
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -117456,7 +117514,7 @@ entities:
   - uid: 17960
     components:
     - type: MetaData
-      name: Central Hall South West
+      name: Botany Hall
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -117476,11 +117534,13 @@ entities:
       pos: 32.5,35.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Tool Room
+      id: Tools Entrance
       setupAvailableNetworks:
       - SurveillanceCameraGeneral
   - uid: 19734
     components:
+    - type: MetaData
+      name: Outside Psych Hallway
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -117493,7 +117553,7 @@ entities:
   - uid: 19735
     components:
     - type: MetaData
-      name: Service Room Entrance
+      name: Outside CMO Hallway
     - type: Transform
       parent: 2
       pos: -15.5,3.5
@@ -117505,20 +117565,22 @@ entities:
   - uid: 19753
     components:
     - type: MetaData
-      name: Southeast Hallway
+      name: Reporter Hallway
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
       pos: 59.5,-11.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Reporter hallway
+      id: Reporter Hallway
       setupAvailableNetworks:
       - SurveillanceCameraGeneral
 - proto: SurveillanceCameraMedical
   entities:
   - uid: 4448
     components:
+    - type: MetaData
+      name: Morgue
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -117530,6 +117592,8 @@ entities:
       - SurveillanceCameraMedical
   - uid: 7132
     components:
+    - type: MetaData
+      name: Observation 2
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -117549,7 +117613,7 @@ entities:
       pos: 19.5,-6.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Medical Stasis
+      id: Med Bay
       setupAvailableNetworks:
       - SurveillanceCameraMedical
   - uid: 13344
@@ -117560,6 +117624,11 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: -3.5,11.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Psychologist Office
+      setupAvailableNetworks:
+      - SurveillanceCameraMedical
   - uid: 13373
     components:
     - type: MetaData
@@ -117568,6 +117637,11 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: -2.5,16.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Psychologist Room
+      setupAvailableNetworks:
+      - SurveillanceCameraMedical
   - uid: 14117
     components:
     - type: MetaData
@@ -117577,7 +117651,7 @@ entities:
       pos: 1.5,-4.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Outdoor Courtyard
+      id: Medical Locked Entrance
       setupAvailableNetworks:
       - SurveillanceCameraMedical
   - uid: 14118
@@ -117590,7 +117664,7 @@ entities:
       pos: -3.5,-7.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Genetics
+      id: Cloning
       setupAvailableNetworks:
       - SurveillanceCameraMedical
   - uid: 14119
@@ -117603,7 +117677,7 @@ entities:
       pos: -6.5,-3.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Operating Room
+      id: Surgery
       setupAvailableNetworks:
       - SurveillanceCameraMedical
   - uid: 14121
@@ -117616,7 +117690,7 @@ entities:
       pos: 11.5,-0.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Lobby
+      id: Medical Entrance Lobby
       setupAvailableNetworks:
       - SurveillanceCameraMedical
   - uid: 14123
@@ -117629,11 +117703,13 @@ entities:
       pos: 20.5,-0.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Chemistry Lab
+      id: Chemistry
       setupAvailableNetworks:
       - SurveillanceCameraMedical
   - uid: 14536
     components:
+    - type: MetaData
+      name: Observation 1
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -117645,6 +117721,8 @@ entities:
       - SurveillanceCameraMedical
   - uid: 14565
     components:
+    - type: MetaData
+      name: Medical Breakroom
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -117727,7 +117805,7 @@ entities:
       pos: 27.5,-37.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Forensic Mantis' Office
+      id: Science Breakroom
       setupAvailableNetworks:
       - SurveillanceCameraScience
   - uid: 12943
@@ -117737,6 +117815,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 42.5,-40.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Xenobio
+      setupAvailableNetworks:
+      - SurveillanceCameraScience
   - uid: 12944
     components:
     - type: MetaData
@@ -117744,6 +117827,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 44.5,-48.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Xenobio South
+      setupAvailableNetworks:
+      - SurveillanceCameraScience
   - uid: 12945
     components:
     - type: MetaData
@@ -117751,15 +117839,22 @@ entities:
     - type: Transform
       parent: 2
       pos: 48.5,-31.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Genetics
+      setupAvailableNetworks:
+      - SurveillanceCameraScience
   - uid: 13938
     components:
+    - type: MetaData
+      name: Science Side Entrance
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
       pos: 42.5,-23.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Robotics
+      id: Science Side Entrance
       setupAvailableNetworks:
       - SurveillanceCameraScience
   - uid: 14133
@@ -117772,7 +117867,7 @@ entities:
       pos: 35.5,-21.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Lathes
+      id: Science Lobby
       setupAvailableNetworks:
       - SurveillanceCameraScience
   - uid: 14134
@@ -117785,7 +117880,7 @@ entities:
       pos: 40.5,-27.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Lockers
+      id: Anomaly Generator
       setupAvailableNetworks:
       - SurveillanceCameraScience
   - uid: 14136
@@ -117798,11 +117893,13 @@ entities:
       pos: 26.5,-24.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Epistemics West
+      id: Science West
       setupAvailableNetworks:
       - SurveillanceCameraScience
   - uid: 17971
     components:
+    - type: MetaData
+      name: Artifact Lab
     - type: Transform
       parent: 2
       pos: 34.5,-32.5
@@ -117821,6 +117918,11 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: -61.5,20.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Court Right
+      setupAvailableNetworks:
+      - SurveillanceCameraSecurity
   - uid: 14139
     components:
     - type: MetaData
@@ -117832,8 +117934,12 @@ entities:
     - type: SurveillanceCamera
       nameSet: True
       id: Arrivals Checkpoint
+      setupAvailableNetworks:
+      - SurveillanceCameraSecurity
   - uid: 14143
     components:
+    - type: MetaData
+      name: Lobby
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -117845,6 +117951,8 @@ entities:
       - SurveillanceCameraSecurity
   - uid: 14144
     components:
+    - type: MetaData
+      name: Bedrooms
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -117872,6 +117980,11 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: -20.5,48.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Detective
+      setupAvailableNetworks:
+      - SurveillanceCameraSecurity
   - uid: 16329
     components:
     - type: MetaData
@@ -117882,20 +117995,20 @@ entities:
       pos: -25.5,17.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Genpop Entrance
+      id: Gen Pop Entrance
       setupAvailableNetworks:
       - SurveillanceCameraSecurity
   - uid: 16336
     components:
     - type: MetaData
-      name: Gen Pop DnD
+      name: Gen Pop Library
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
       pos: -36.5,16.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Genpop Library
+      id: Gen Pop Library
       setupAvailableNetworks:
       - SurveillanceCameraSecurity
   - uid: 16342
@@ -117908,7 +118021,7 @@ entities:
       pos: -38.5,18.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Genpop Freezer
+      id: Gen Pop Freezer
       setupAvailableNetworks:
       - SurveillanceCameraSecurity
   - uid: 16343
@@ -117921,7 +118034,7 @@ entities:
       pos: -39.5,23.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Genpop Kitchen
+      id: Gen Pop Kitchen
       setupAvailableNetworks:
       - SurveillanceCameraSecurity
   - uid: 16351
@@ -117934,35 +118047,39 @@ entities:
       pos: -37.5,29.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Genpop Botany
+      id: Gen Pop Botany
       setupAvailableNetworks:
       - SurveillanceCameraSecurity
   - uid: 16363
     components:
     - type: MetaData
-      name: Gen Pop Bathroom Entrance
+      name: Gen Pop Main Room
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
       pos: -28.5,26.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Genpop Main room
+      id: Gen Pop Main Room
       setupAvailableNetworks:
       - SurveillanceCameraSecurity
   - uid: 16364
     components:
+    - type: MetaData
+      name: Gen Pop Lockers
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
       pos: -18.5,10.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Genpop Lockers
+      id: Gen Pop Lockers
       setupAvailableNetworks:
       - SurveillanceCameraSecurity
   - uid: 16370
     components:
+    - type: MetaData
+      name: Warden Hallway
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -117974,6 +118091,8 @@ entities:
       - SurveillanceCameraSecurity
   - uid: 16372
     components:
+    - type: MetaData
+      name: Security Breakroom
     - type: Transform
       parent: 2
       pos: -6.5,17.5
@@ -118005,7 +118124,7 @@ entities:
       pos: -2.5,21.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Brigmed
+      id: Brig Med
       setupAvailableNetworks:
       - SurveillanceCameraSecurity
   - uid: 16695
@@ -118018,11 +118137,13 @@ entities:
       pos: -68.5,21.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Courtroom
+      id: Court Left
       setupAvailableNetworks:
       - SurveillanceCameraSecurity
   - uid: 17464
     components:
+    - type: MetaData
+      name: Security Maintenance Casing
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -118036,9 +118157,16 @@ entities:
   entities:
   - uid: 4794
     components:
+    - type: MetaData
+      name: Lawyer Office
     - type: Transform
       parent: 2
       pos: -64.5,7.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Lawyer Office
+      setupAvailableNetworks:
+      - SurveillanceCameraService
   - uid: 9174
     components:
     - type: MetaData
@@ -118046,10 +118174,15 @@ entities:
     - type: Transform
       parent: 2
       pos: 26.5,14.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Ranching
+      setupAvailableNetworks:
+      - SurveillanceCameraService
   - uid: 11089
     components:
     - type: MetaData
-      name: Janitor Closet 2
+      name: East Janitor Closet
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
@@ -118079,6 +118212,11 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: -68.5,10.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Lawyer Office
+      setupAvailableNetworks:
+      - SurveillanceCameraService
   - uid: 12959
     components:
     - type: MetaData
@@ -118086,6 +118224,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -28.5,8.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Library
+      setupAvailableNetworks:
+      - SurveillanceCameraService
   - uid: 12961
     components:
     - type: MetaData
@@ -118093,6 +118236,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -28.5,0.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Library Office
+      setupAvailableNetworks:
+      - SurveillanceCameraService
   - uid: 13014
     components:
     - type: MetaData
@@ -118101,14 +118249,24 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: 65.5,-17.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Radio Host Office
+      setupAvailableNetworks:
+      - SurveillanceCameraService
   - uid: 13018
     components:
     - type: MetaData
-      name: Janitor Closet 1
+      name: West Janitor Closet
     - type: Transform
       parent: 2
       rot: 3.141592653589793 rad
       pos: -8.5,2.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: West Janitor Closet
+      setupAvailableNetworks:
+      - SurveillanceCameraService
   - uid: 13019
     components:
     - type: MetaData
@@ -118116,6 +118274,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -61.5,8.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Lawyer Breakroom
+      setupAvailableNetworks:
+      - SurveillanceCameraService
   - uid: 13467
     components:
     - type: MetaData
@@ -118123,6 +118286,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 30.5,-19.5
+    - type: SurveillanceCamera
+      nameSet: True
+      id: Chapel
+      setupAvailableNetworks:
+      - SurveillanceCameraService
   - uid: 14153
     components:
     - type: MetaData
@@ -118158,18 +118326,20 @@ entities:
       pos: 28.5,3.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Hydroponics
+      id: Botany
       setupAvailableNetworks:
       - SurveillanceCameraService
   - uid: 14157
     components:
+    - type: MetaData
+      name: Musician Room
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
       pos: 55.5,41.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Musician's Room
+      id: Musician Room
       setupAvailableNetworks:
       - SurveillanceCameraService
   - uid: 14158
@@ -118187,6 +118357,8 @@ entities:
       - SurveillanceCameraService
   - uid: 17463
     components:
+    - type: MetaData
+      name: Security Hallway Entrance
     - type: Transform
       parent: 2
       rot: 1.5707963267948966 rad
@@ -118206,7 +118378,7 @@ entities:
       pos: 69.5,-9.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Reporter's Office
+      id: Reporter Office
       setupAvailableNetworks:
       - SurveillanceCameraService
   - uid: 18030
@@ -118225,7 +118397,7 @@ entities:
   - uid: 18031
     components:
     - type: MetaData
-      name: Surgery Watching
+      name: Service Courtyard
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
@@ -118252,14 +118424,14 @@ entities:
   - uid: 14135
     components:
     - type: MetaData
-      name: Cargo Middle
+      name: Cargo
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
       pos: 43.5,10.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Logistics
+      id: Cargo
       setupAvailableNetworks:
       - SurveillanceCameraSupply
   - uid: 17968
@@ -118271,11 +118443,13 @@ entities:
       pos: 40.5,2.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Cargobay
+      id: Cargo Bay
       setupAvailableNetworks:
       - SurveillanceCameraSupply
   - uid: 17970
     components:
+    - type: MetaData
+      name: Cargo Shuttle Dock
     - type: Transform
       parent: 2
       pos: 52.5,2.5
@@ -118300,7 +118474,7 @@ entities:
   - uid: 19750
     components:
     - type: MetaData
-      name: Salvage Locker Room
+      name: Salvage Room
     - type: Transform
       parent: 2
       pos: 79.5,2.5
@@ -118319,11 +118493,13 @@ entities:
       pos: 68.5,6.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Salvage Dock
+      id: Salvage Bay
       setupAvailableNetworks:
       - SurveillanceCameraSupply
   - uid: 19752
     components:
+    - type: MetaData
+      name: Salvage Magnet
     - type: Transform
       parent: 2
       rot: -1.5707963267948966 rad
