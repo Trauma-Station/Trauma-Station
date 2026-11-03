@@ -3,7 +3,7 @@
 using Content.Shared.Whitelist;
 using Robust.Shared.Audio;
 
-namespace Content.Trauma.Shared.Funeral.Components;
+namespace Content.Trauma.Shared.Funeral;
 
 /// <summary>
 /// Component for bibles to let them check the funeral progress of an entity, and marks them to turn to holy ash when cremated if successful. <see cref="FuneralComponent"/>

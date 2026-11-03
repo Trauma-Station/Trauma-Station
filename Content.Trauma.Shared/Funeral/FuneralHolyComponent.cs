@@ -6,4 +6,8 @@ namespace Content.Trauma.Shared.Funeral;
 /// Component marking entities to turn to holy ash when cremated.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class FuneralHolyComponent : Component;
+public sealed partial class FuneralHolyComponent : Component
+{
+    [DataField]
+    public EntProtoId AshReplacement = "HolyAsh";
+}

@@ -10,18 +10,16 @@ namespace Content.Trauma.Shared.Funeral;
 /// </summary>
 public sealed partial class FuneralCrematoriumSystem : EntitySystem
 {
-    [Dependency] private EntityQuery<FuneralHolyComponent> _compQuery = default!;
-
-    private static readonly EntProtoId HolyAsh = "HolyAsh";
+    [Dependency] private EntityQuery<FuneralHolyComponent> _holyQuery = default!;
 
     [SubscribeLocalEvent]
     private void OnCremationOutput(Entity<CrematoriumComponent> ent, ref CremationOutputEvent args)
     {
         foreach (var entity in args.Contents)
         {
-            if (_compQuery.HasComp(entity))
+            if (_holyQuery.TryComp(entity, out var holy))
             {
-                args.OutputPrototype = HolyAsh;
+                args.OutputPrototype = holy.AshReplacement;
                 return;
             }
         }
