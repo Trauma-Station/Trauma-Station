@@ -102,7 +102,7 @@ public sealed class ClumsyStatusTest : InteractionTest
         await RunSeconds(1.5f); // Trauma - was 0.5s, pistols can pistol whip so its melee was preventing firing so soon after picking it up
         await AttemptShoot(Target);
         // <Trauma>
-        SDel(gun);
+        await Delete(gun);
         AssertDeleted(gun);
         // </Trauma>
 
