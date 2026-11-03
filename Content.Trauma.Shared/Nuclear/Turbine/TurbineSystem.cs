@@ -23,6 +23,7 @@ namespace Content.Trauma.Shared.Nuclear.Turbine;
 
 public abstract partial class TurbineSystem : EntitySystem
 {
+    [Dependency] private NuclearMachineSystem _machine = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] protected SharedAudioSystem Audio = default!;
     [Dependency] private SharedContainerSystem _container = default!;
