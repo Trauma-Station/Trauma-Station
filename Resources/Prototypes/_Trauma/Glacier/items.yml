@@ -1,0 +1,37 @@
+- type: entity
+  parent: BaseItem
+  id: LeshySkull
+  name: Leshy Skull
+  description: The skull of Leshy!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Glacier/artifacts.rsi
+    state: wendigo_skull
+
+- type: entity
+  parent: BaseItem
+  id: LeshyHorn
+  name: Leshy Skull
+  description: The horn of Leshy!
+  components:
+  - type: Sprite
+    sprite: _Trauma/Glacier/artifacts.rsi
+    state: wendigo_horn
+
+- type: entity
+  parent: BaseDemonBottle
+  id: LeshyBlood
+  name: Leshy Blood
+  description: A vial containing ominous blood...
+  components:
+  - type: Sprite
+    state: vial
+  - type: Edible
+    edible: Drink
+    solution: drink
+  - type: Solution
+    id: drink
+    solution:
+      reagents:
+      - ReagentId: LeshyBlood
+        Quantity: 5

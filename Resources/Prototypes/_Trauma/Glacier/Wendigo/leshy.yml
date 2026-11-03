@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# The yaml is wendigo cause im lazy
 - type: entity
   id: MobLeshy
   name: Leshy
-  description: A chud.
+  description: A mythical beast, roaming the frozen woods, endlessly and aimlessly.
   components:
   # Basic stuff
   - type: Physics
@@ -78,11 +79,14 @@
     actions:
     - ActionWendigoTeleport
     - ActionWendigoHeavyStomp
+    - ActionWendigoHeavyStompII
+    - ActionWendigoProjectileSpread
+    - ActionWendigoProjectileSpreadShotgun
   - type: Fauna
   - type: Anger
     totalHp: 2500
   - type: Aggressive
-    forgiveRange: 25
+    forgiveRange: 100 # fuck you
   - type: MobPhases
     phaseThresholds:
       0:    1
@@ -90,15 +94,34 @@
   - type: BossMusic
     soundId: Hierophant # todo change
   - type: TileMovement
- # - type: DamageSquareImmunity
   - type: SpawnLootOnDeath
     table: !type:AllSelector
       children:
-      - id: LavalandHierophantClub # todo change (wendigo skull)
-      - id: CrusherUpgradeMainMarker # todo change (wendigo bottle)
+      - id: LeshySkull
+      - id: LeshyHorn
+      - id: LeshyBlood
     deleteOnDeath: true
+  - type: MegafaunaPhasesEffects
+    phaseEffects:
+        # Moves faster, uses actions faster
+        2:
+        - !type:MovementSpeedModifier
+          walkSpeedModifier: 1.5
+          sprintSpeedModifier: 1.5
+          time: null
+        - !type:MegafaunaActionDelay
+          actionDelay: 0.5
+  - type: MegafaunaShutdown
+    effects:
+    # In case we reached phase 2, reset the stuff to the defaults
+    - !type:MovementSpeedModifier
+      walkSpeedModifier: 1.0
+      sprintSpeedModifier: 1.0
+      type: Set
+    - !type:MegafaunaActionDelay
+      actionDelay: 2
   - type: MegafaunaAi
-    actionDelay: 0.5
+    actionDelay: 2
     selector:
       id: Wendigo
   - type: AngerPlayerScaling
@@ -107,40 +130,3 @@
   - type: MegafaunaAnchor
   - type: MegafaunaGodmode
   - type: MegafaunaRejuvenate
-
-- type: megafaunaSelector
-  id: Wendigo
-  selector: !type:AllMegafaunaSelector
-    children:
-    - id: PickTargetSimple
-    - id: WendigoActions
-
-# Actions
-- type: megafaunaSelector
-  id: WendigoActions
-  selector: !type:GroupMegafaunaSelector
-    children:
-    - id: ActionWendigoTeleport
-    - id: ActionWendigoHeavyStomp
-
-- type: megafaunaSelector
-  id: ActionWendigoTeleport
-  selector: !type:PerformActionSelector
-    delay: !type:AngerNumberSelector
-      range: 0.1,0.5
-      inverse: true
-    actionId: ActionWendigoTeleport
-    conditions:
-    - !type:ActionAvailableCondition
-      actionId: ActionWendigoTeleport
-
-- type: megafaunaSelector
-  id: ActionWendigoHeavyStomp
-  selector: !type:PerformActionSelector
-    delay: !type:AngerNumberSelector
-      range: 1.0,4.0
-      inverse: true
-    actionId: ActionWendigoHeavyStomp
-    conditions:
-    - !type:ActionAvailableCondition
-      actionId: ActionWendigoHeavyStomp

@@ -1,0 +1,16 @@
+- type: reagent
+  id: LeshyBlood
+  name: reagent-name-leshy-blood
+  desc: reagent-desc-leshy-blood
+  physicalDesc: reagent-physical-desc-acidic
+  flavor: bitter
+  color: "#4E0E04"
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:AddActions
+        conditions:
+        - !type:HasActionCondition
+          action: ActionPolymorphPolarBear
+          inverted: true
+        actions: [ ActionPolymorphPolarBear ]

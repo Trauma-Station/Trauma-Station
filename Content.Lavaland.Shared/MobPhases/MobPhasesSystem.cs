@@ -47,6 +47,9 @@ public sealed partial class MobPhasesSystem : EntitySystem
                 continue;
 
             ent.Comp1.CurrentPhase = phase;
+
+            var ev = new MobPhaseChangedEvent(ent.Comp1.CurrentPhase);
+            RaiseLocalEvent(ent, ref ev);
             break;
         }
     }
@@ -97,3 +100,9 @@ public sealed partial class MobPhasesSystem : EntitySystem
         ent.Comp.PhaseThresholds[damage] = phase;
     }
 }
+
+/// <summary>
+/// Raised when a new phase is set
+/// </summary>
+[ByRefEvent]
+public record struct MobPhaseChangedEvent(int Phase);

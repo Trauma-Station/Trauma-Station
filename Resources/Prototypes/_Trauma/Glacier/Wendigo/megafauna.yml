@@ -1,0 +1,105 @@
+- type: megafaunaSelector
+  id: Wendigo
+  selector: !type:AllMegafaunaSelector
+    children:
+    - id: PickTargetSimple
+    - id: WendigoActions
+
+# Actions
+#
+# Note: shockwave scream is not accurate but it's gonna be ultra-shitcode to implement so, and I'm not getting paid, so wyci
+- type: megafaunaSelector
+  id: WendigoActions
+  selector: !type:GroupMegafaunaSelector
+    children:
+    - id: ActionWendigoTeleport
+      weight: 0.2
+    - id: WendigoHeavyStomp
+      weight: 0.4
+    - id: WendigoHeavyStompII
+      weight: 0.4
+    - id: ActionWendigoProjectileSpread
+      weight: 0.1
+    - id: ActionWendigoProjectileSpreadShotgun
+      weight: 0.3
+
+- type: megafaunaSelector
+  id: ActionWendigoTeleport
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 0.1,0.5
+      inverse: true
+    actionId: ActionWendigoTeleport
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionWendigoTeleport
+
+- type: megafaunaSelector
+  id: WendigoHeavyStomp
+  selector: !type:AllMegafaunaSelector
+    children:
+    - id: ActionWendigoHeavyStomp
+    - id: SmokeParticles
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionWendigoHeavyStomp
+    - !type:PhaseMegafaunaCondition
+      phases: [ 1 ]
+
+- type: megafaunaSelector
+  id: WendigoHeavyStompII
+  selector: !type:AllMegafaunaSelector
+    children:
+    - id: ActionWendigoHeavyStompII
+    - id: SmokeParticles
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionWendigoHeavyStompII
+    - !type:PhaseMegafaunaCondition
+      phases: [ 2 ]
+
+- type: megafaunaSelector
+  id: ActionWendigoHeavyStomp
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionWendigoHeavyStomp
+
+- type: megafaunaSelector
+  id: ActionWendigoHeavyStompII
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionWendigoHeavyStompII
+
+- type: megafaunaSelector
+  id: SmokeParticles
+  selector: !type:EntityEffectSelector
+    effects:
+    - !type:SpawnParticles
+      particleProto: SfGibMist
+      attached: true
+
+- type: megafaunaSelector
+  id: ActionWendigoProjectileSpread
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionWendigoProjectileSpread
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionWendigoProjectileSpread
+
+- type: megafaunaSelector
+  id: ActionWendigoProjectileSpreadShotgun
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionWendigoProjectileSpreadShotgun
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionWendigoProjectileSpreadShotgun

@@ -75,3 +75,6 @@ reagent-desc-burnite = A highly volatile flaming chemical that's typically only 
 
 reagent-name-unknown-reagent = unobtainium
 reagent-desc-unknown-reagent = An incredibly difficult chemical to come across, known to have very volatile effects whether it be spilled or put into plants
+
+reagent-name-leshy-blood = leshy blood
+reagent-desc-leshy-blood = Blood of the mythical being, Leshy.
