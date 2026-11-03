@@ -16393,3 +16393,14 @@ Entries:
   id: 1769
   time: '2026-11-03T11:24:08.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5176
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Reworked how chem can make plastic, now it's a 2-stage process with a new
+      chemical Ethylene.
+  - type: Tweak
+    message: Ethylene plastic processing gives 5x the sheets per batch.
+  id: 1770
+  time: '2026-11-03T12:49:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5243
