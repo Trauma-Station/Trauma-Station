@@ -16368,3 +16368,12 @@ Entries:
   id: 1766
   time: '2026-11-03T08:08:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5238
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Changeling fake mindshield no longer uses the implant, it fakes it
+      innately.
+  id: 1767
+  time: '2026-11-03T08:33:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5239
