@@ -1,0 +1,123 @@
+- type: megafaunaSelector
+  id: DemonicFrostMiner
+  selector: !type:AllMegafaunaSelector
+    children:
+    - id: PickTargetSimple
+    - id: DemonicFrostMinerActions        # Phase 1/2 Abilities
+    - id: DemonicFrostMinerActionsEnraged # Phase 3 Abilities
+
+- type: megafaunaSelector
+  id: DemonicFrostMinerActions
+  selector: !type:GroupMegafaunaSelector
+    children:
+    - id: DemonicFrostMinerEasy
+      weight: 0.8
+    - id: DemonicFrostMinerHard
+      weight: 0.2
+    conditions:
+    - !type:PhaseMegafaunaCondition
+      phases: [ 1, 2, 3 ]
+
+- type: megafaunaSelector
+  id: DemonicFrostMinerActionsEnraged
+  selector: !type:GroupMegafaunaSelector
+    children:
+    - id: DemonicFrostMinerEasy
+      weight: 0.4
+    - id: DemonicFrostMinerHard
+      weight: 0.6
+    conditions:
+    - !type:PhaseMegafaunaCondition
+      phases: [ 4 ]
+
+# Actions | Easy/Hard
+- type: megafaunaSelector
+  id: DemonicFrostMinerEasy
+  selector: !type:GroupMegafaunaSelector
+    children:
+    - id: ActionFrostOrbsEasy
+      weight: 0.4
+    - id: ActionSnowballMachineGunEasy
+      weight: 0.4
+    - id: ActionIceShotgunEasy
+      weight: 0.2
+
+- type: megafaunaSelector
+  id: DemonicFrostMinerHard
+  selector: !type:GroupMegafaunaSelector
+    children:
+    - id: ActionFrostOrbsHard
+      weight: 0.4
+    - id: ActionSnowballMachineGunHard
+      weight: 0.4
+    - id: ActionIceShotgunHard
+      weight: 0.2
+
+# Action | Easy
+- type: megafaunaSelector
+  id: ActionFrostOrbsEasy
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionFrostOrbsEasy
+  conditions:
+  - !type:ActionAvailableCondition
+    actionId: ActionFrostOrbsEasy
+
+- type: megafaunaSelector
+  id: ActionSnowballMachineGunEasy
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionSnowballMachineGunEasy
+  conditions:
+  - !type:ActionAvailableCondition
+    actionId: ActionSnowballMachineGunEasy
+
+- type: megafaunaSelector
+  id: ActionIceShotgunEasy
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionIceShotgunEasy
+  conditions:
+  - !type:ActionAvailableCondition
+    actionId: ActionIceShotgunEasy
+
+# Actions | Hard
+- type: megafaunaSelector
+  id: ActionFrostOrbsHard
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionFrostOrbsHard
+  conditions:
+  - !type:ActionAvailableCondition
+    actionId: ActionFrostOrbsHard
+
+- type: megafaunaSelector
+  id: ActionSnowballMachineGunHard
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionSnowballMachineGunHard
+  conditions:
+  - !type:ActionAvailableCondition
+    actionId: ActionSnowballMachineGunHard
+
+- type: megafaunaSelector
+  id: ActionIceShotgunHard
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionIceShotgunHard
+  conditions:
+  - !type:ActionAvailableCondition
+    actionId: ActionIceShotgunHard
+

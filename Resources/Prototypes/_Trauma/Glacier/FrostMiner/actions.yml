@@ -4,13 +4,13 @@
   id: BaseFrostMinerAction
   components:
   - type: Action
-    useDelay: 5
+    useDelay: 8
     raiseOnAction: true
     checkCanInteract: false
   - type: EntityTargetAction
     event: !type:ActionProjectileAdvancedEvent
   - type: TargetAction
-    range: 15
+    range: 30
     interactOnMiss: false
 
 # First we bullet, then we hell. This is... bullet hell!
@@ -51,15 +51,15 @@
     - projProto: ProjectileIceBlastLow
       angle: 45
       amount: 20
-      speed: 15
+      speed: 8
     - projProto: ProjectileIceBlastLow
       angle: 45
       amount: 20
-      speed: 15
+      speed: 8
     - projProto: ProjectileIceBlastLow
       angle: 45
       amount: 20
-      speed: 15
+      speed: 8
 
 - type: entity
   parent: BaseFrostMinerAction
@@ -73,60 +73,60 @@
     - projProto: ProjectileIceBlastLow
       angle: 5
       amount: 5
-      speed: 10
+      speed: 8
     - projProto: ProjectileIceBlastLow
       angle: 5
       amount: 5
-      speed: 10
+      speed: 8
     - projProto: ProjectileIceBlastLow
       angle: 5
       amount: 5
-      speed: 10
+      speed: 8
     - projProto: ProjectileIceBlastLow
       angle: 5
       amount: 5
-      speed: 10
+      speed: 8
     - projProto: ProjectileIceBlastLow
       angle: 5
       amount: 5
-      speed: 10
+      speed: 8
     - projProto: ProjectileIceBlastLow
       angle: 5
       amount: 5
-      speed: 10
+      speed: 8
     - projProto: ProjectileIceBlastLow
       angle: 5
       amount: 5
-      speed: 10
+      speed: 8
     - projProto: ProjectileIceBlastLow
       angle: 5
       amount: 5
-      speed: 10
+      speed: 8
     # Five Waves of ts, in 2 seconds
     - projProto: ProjectileIceBlast
       angle: 360
       amount: 9
-      speed: 15
+      speed: 8
       delay: 0.4
     - projProto: ProjectileIceBlast
       angle: 360
       amount: 9
-      speed: 15
+      speed: 8
       delay: 0.4
     - projProto: ProjectileIceBlast
       angle: 360
       amount: 9
-      speed: 15
+      speed: 8
       delay: 0.4
     - projProto: ProjectileIceBlast
       angle: 360
       amount: 9
-      speed: 15
+      speed: 8
       delay: 0.4
     - projProto: ProjectileIceBlast
       angle: 360
       amount: 9
-      speed: 15
+      speed: 8
       delay: 0.4
 
 - type: entity
@@ -140,27 +140,27 @@
     - projProto: ProjectileIceBlast
       angle: 80
       amount: 5
-      speed: 10
+      speed: 8
       delay: 0.2
     - projProto: ProjectileIceBlast
       angle: 60
       amount: 4
-      speed: 10
+      speed: 8
       delay: 0.2
     - projProto: ProjectileIceBlast
       angle: 80
       amount: 5
-      speed: 10
+      speed: 8
       delay: 0.2
     - projProto: ProjectileIceBlast
       angle: 60
       amount: 4
-      speed: 10
+      speed: 8
       delay: 0.2
     - projProto: ProjectileIceBlast
       angle: 80
       amount: 5
-      speed: 5
+      speed: 8
 
 - type: entity
   parent: BaseFrostMinerAction
@@ -173,24 +173,24 @@
     - projProto: ProjectileIceBlast
       angle: 360
       amount: 12
-      speed: 10
+      speed: 8
       delay: 0.2
     - projProto: ProjectileIceBlast
       angle: 60
       amount: 5
-      speed: 10
+      speed: 8
       delay: 0.2
     - projProto: ProjectileIceBlast
       angle: 360
       amount: 12
-      speed: 10
+      speed: 8
       delay: 0.2
     - projProto: ProjectileIceBlast
       angle: 60
       amount: 5
-      speed: 10
+      speed: 8
       delay: 0.2
     - projProto: ProjectileIceBlast
       angle: 360
       amount: 12
-      speed: 10
+      speed: 8

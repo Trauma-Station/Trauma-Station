@@ -71,16 +71,20 @@ public sealed partial class AggressorsSystem : EntitySystem
     private void OnDamageChanged(Entity<AggressiveComponent> ent, ref DamageChangedEvent args)
     {
         var aggro = args.Origin;
-
-        if (aggro == null
-            || !HasComp<ActorComponent>(aggro))
+        if (aggro == null || !HasComp<ActorComponent>(aggro))
             return;
 
         AddAggressor(ent, aggro.Value);
     }
 
     private void OnDeleted(Entity<AggressiveComponent> ent, ref EntityTerminatingEvent args)
-        => RemoveAllAggressors(ent);
+    {
+        // Prevent resolve failing
+        if (_timing.ApplyingState)
+            return;
+
+        RemoveAllAggressors(ent);
+    }
 
     private void OnStateChange(Entity<AggressiveComponent> ent, ref MobStateChangedEvent args)
         => RemoveAllAggressors(ent);

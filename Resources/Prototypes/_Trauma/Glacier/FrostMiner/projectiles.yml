@@ -1,3 +1,4 @@
+# todo: needs sprites
 - type: entity
   abstract: true
   id: ProjectileFrostMiner
@@ -30,7 +31,7 @@
     soundHit:
       path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
   - type: Sprite
-    sprite: _Trauma/BloodCult/Entities/Items/arcane_barrage.rsi # looks ok for this boss idc
+    sprite: _Trauma/BloodCult/Entities/Items/arcane_barrage.rsi
     state: bullet
   - type: TimedDespawn
     lifetime: 10

@@ -34,7 +34,8 @@ public sealed partial class PerformActionSelector : MegafaunaSelector
         var ev = args.System.GetPerformEvent(args.Entity, action.Value.Owner);
         if (!actions.TryPerformAction(args.Entity, ev))
         {
-            DebugTools.Assert($"{entMan.ToPrettyString(args.Entity)}'s AI failed to perform action {entMan.ToPrettyString(action.Value.Owner)} with ID {ActionId}!");
+            // Why would you debug assert ts???
+            // DebugTools.Assert($"{entMan.ToPrettyString(args.Entity)}'s AI failed to perform action {entMan.ToPrettyString(action.Value.Owner)} with ID {ActionId}!");
             return FailDelay;
         }
 
