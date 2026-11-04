@@ -16475,3 +16475,12 @@ Entries:
   id: 1778
   time: '2026-11-04T13:37:06.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5272
+- author: elNarehate
+  changes:
+  - type: Tweak
+    message: Sci can make flashes again, for shadow anomalies.
+  - type: Fix
+    message: Roboticist Envirogloves are now insulated
+  id: 1779
+  time: '2026-11-04T19:55:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5265
