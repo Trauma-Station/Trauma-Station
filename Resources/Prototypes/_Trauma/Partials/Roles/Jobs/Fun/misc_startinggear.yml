@@ -2,14 +2,16 @@
 
 - type: startingGear
   id: MobAghostGear
-  storage:
+  equipment:
     belt: ClothingBeltChiefEngineerFilled
+  storage:
     back:
+    - !Remove GasAnalyzer
+    - !Remove trayScanner
+    - !Remove Multitool
     - RemoteSignallerAdvanced
-    - JawsOfLife
-    - PowerDrill
-    - WelderIndustrialAdvanced
     - RCDExperimental
     - Throngler
     - WeaponPistolDebug
     - NetworkConfigurator
+    - HandheldHealthAnalyzer
