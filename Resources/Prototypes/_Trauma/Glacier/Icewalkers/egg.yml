@@ -1,0 +1,19 @@
+- type: entity
+  parent: BaseItem
+  id: IceWalkerEgg
+  name: ice walker egg
+  description: A man-sized yellow egg, spawned from some unfathomable creature. A humanoid silhouette lurks within.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Glacier/Icewalkers/icewalker_egg.rsi
+    state: large-egg
+  - type: GhostRole
+    name: ghost-role-information-ice-walker-name
+    description: ghost-role-information-ice-walker-description
+    rules: ghost-role-information-ice-walker-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+    raffle:
+      settings: default
+  - type: GhostRoleMobSpawner
+    prototype: MobIceWalker # Naked one

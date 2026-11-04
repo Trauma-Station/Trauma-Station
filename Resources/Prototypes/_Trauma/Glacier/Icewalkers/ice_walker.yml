@@ -1,0 +1,61 @@
+- type: entity
+  save: false
+  name: Urissst McAishh
+  parent: [ AppearanceIceWalker, MobReptilian ]
+  id: MobIceWalker
+  components:
+  - type: HumanoidProfile
+    species: IceWalker
+  - type: KnowledgeGrant
+    skills:
+      MeleeKnowledge: 26
+      CarvingKnowledge: 50
+      FabricationKnowledge: 50
+      WeaponsKnowledge: 75
+      ArmorKnowledge: 50
+  - type: LanguageKnowledge
+    languageId: Draconic
+  - type: LanguageSpeaker
+    speaks:      [ Draconic ]
+    understands: [ Draconic ]
+  - type: MeleeWeapon
+    soundHit:
+      collection: AlienClaw
+    angle: 30
+    animation: WeaponArcClaw
+    damage:
+      types:
+        Slash: 8
+  - type: TemperatureDamage
+    coldDamageThreshold: 0   # Some kind of ice... walkers?
+    heatDamageThreshold: 300 # Heat hurts
+    coldDamage:
+      types:
+        Cold: 0
+    heatDamage:
+      types:
+        Heat: 2
+  - type: MovementSpeedModifier
+    baseWalkSpeed : 0.95
+    baseSprintSpeed : 0.95
+  - type: PermanentStatusEffects
+    statusEffects:  [ StatusEffectClumsyAll ]
+
+- type: entity
+  parent: MobIceWalker
+  id: IceWalker
+  name: ice walker
+  suffix: Ghost Role
+  components:
+  - type: Loadout
+    prototypes: [ IceWalkerGear ]
+  - type: GhostRole
+    name: ghost-role-information-ash-walker-name
+    description: ghost-role-information-ash-walker-description
+    rules: ghost-role-information-ash-walker-rules
+    raffle:
+      settings: default
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: RandomMetadata
+    nameSegments: [ NamesReptilianMale ]

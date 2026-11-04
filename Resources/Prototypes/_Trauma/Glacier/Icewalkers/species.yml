@@ -1,0 +1,25 @@
+- type: species
+  id: IceWalker
+  name: species-name-icewalker
+  roundStart: false
+  prototype: MobIceWalker
+  defaultSkinTone: "#77501c"
+  dollPrototype: AppearanceIceWalker
+  skinColoration: Hues
+  maleFirstNames: NamesReptilianMale
+  femaleFirstNames: NamesReptilianFemale
+  naming: FirstDashFirst
+  knowledge: LizardWalkers
+  defaultSoundsBySex:
+  - MaleReptilian
+  - FemaleReptilian
+  - MaleReptilian
+  voices:
+  - MaleReptilian
+  - FemaleReptilian
+
+- type: startingGear
+  id: IceWalkerGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitGladiator
+    head: ClothingHeadHatGladiator

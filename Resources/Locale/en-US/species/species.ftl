@@ -24,6 +24,7 @@ species-name-skeleton = Skeleton
 species-name-vox = Vox
 #species-name-gingerbread = delicious baked good # Goob - no
 species-name-vulpkanin = Vulpkanin
+species-name-icewalker = Ice Walker
 
 ## Misc species things
 
