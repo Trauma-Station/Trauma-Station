@@ -181,7 +181,7 @@
         conditions:
         - !type:ReagentCondition
           reagent: Fungalin
-          min: 5
+          min: 6
         damage:
           types:
             Asphyxiation: 4
