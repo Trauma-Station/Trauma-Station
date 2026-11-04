@@ -4,6 +4,7 @@
   parent: BaseItem
   id: StabilizedBSCrystal
   name: stabilized bluespace crystal
+  desc:
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Materials/materials.rsi

@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.EntityEffects;
+using Content.Shared.Hands.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Trauma.Shared.InitPos;
 using Content.Trauma.Shared.Teleportation.Systems;
-using Content.Shared.EntityEffects;
-using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Hands.Components;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.Teleportation;
 
@@ -18,13 +17,13 @@ public sealed partial class InitPosTeleport : EntityEffectBase<InitPosTeleport>
     /// Spawns one way portal.
     /// </summary>
     [DataField]
-    public EntProtoId? SpawnPortal = default;
+    public EntProtoId? SpawnPortal;
 }
 
 public sealed partial class InitPosTeleportEffectSystem : EntityEffectSystem<HandsComponent, InitPosTeleport>
 {
-    [Dependency] private TeleportSystem _teleport = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
+    [Dependency] private TeleportSystem _teleport = default!;
 
     protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<InitPosTeleport> args)
     {

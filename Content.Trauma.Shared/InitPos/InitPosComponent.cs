@@ -5,11 +5,11 @@ using Robust.Shared.Map;
 namespace Content.Trauma.Shared.InitPos;
 
 /// <summary>
-/// Stores ent's init location and grid.
+/// Stores ent's init location. Used with InitPosTeleport/RandomTeleport EntityEffect.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class InitPosComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public EntityCoordinates Coordinates = default;
+    public EntityCoordinates Coordinates;
 }

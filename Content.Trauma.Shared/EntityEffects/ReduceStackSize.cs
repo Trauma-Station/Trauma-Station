@@ -23,11 +23,7 @@ public sealed partial class ReduceStackSizeSystem : EntityEffectSystem<PhysicalC
     {
         if (TryComp<StackComponent>(ent, out var stack))
         {
-            var amount = args.Effect.Amount;
-            if (stack.Count < args.Effect.Amount)
-                amount = stack.Count;
-
-            _stack.ReduceCount((ent.Owner, stack), amount);
+            _stack.ReduceCount((ent.Owner, stack), args.Effect.Amount);
             return;
         }
 

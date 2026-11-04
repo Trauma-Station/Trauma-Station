@@ -4,6 +4,9 @@ using Content.Shared.Coordinates;
 
 namespace Content.Trauma.Shared.InitPos;
 
+/// <summary>
+/// Stores ent's init location, map and grid included.
+/// </summary>
 public sealed partial class InitPosSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
@@ -12,5 +15,6 @@ public sealed partial class InitPosSystem : EntitySystem
     private void Startup(Entity<InitPosComponent> ent, ref ComponentStartup args)
     {
         ent.Comp.Coordinates = _transform.GetMoverCoordinates(ent.Owner);
+        Dirty(ent.Owner, ent.Comp);
     }
 }

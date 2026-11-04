@@ -4,7 +4,6 @@ using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Teleportation.Systems;
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Prototypes;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -26,7 +25,7 @@ public sealed partial class RandomTeleport : EntityEffectBase<RandomTeleport>
     /// Spawns one way portal.
     /// </summary>
     [DataField]
-    public EntProtoId? SpawnPortal = default;
+    public EntProtoId? SpawnPortal;
 }
 
 public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<TransformComponent, RandomTeleport>
@@ -35,9 +34,9 @@ public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<Tran
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<RandomTeleport> args)
     {
-        var newPos = _teleport.RandomTeleport(ent, args.Effect.Radius, args.Effect.TeleportAttempts, user: args.User);
+        var oldPos = ent.Comp.Coordinates;
 
-        var oldPos = Transform(ent).Coordinates; // no, it can't just use `ent.Comp.Coordinates` because it needs to store old, unpdatable position
+        var newPos = _teleport.RandomTeleport(ent, args.Effect.Radius, args.Effect.TeleportAttempts, user: args.User);
 
         if (args.Effect.SpawnPortal != default)
         {
