@@ -64,16 +64,8 @@ public sealed partial class StationPlanetSystem
         Log.Debug($"Spawning {pool.GridRuins.Count} GridRuins on {ToPrettyString(map)} planet.");
         SetupHugeRuins(pool.GridRuins, map, random, ref coords, ref usedSpace);
 
-        // Create a new list that excludes all already used spaces that intersect with big ruins.
-        // Sweet optimization (another lag machine).
-        var newCoords = coords.ToHashSet();
-        foreach (var usedBox in usedSpace)
-        {
-            var list = coords.Where(coord => !usedBox.Contains(coord)).ToHashSet();
-            newCoords = newCoords.Concat(list).ToHashSet();
-        }
-
-        coords = newCoords.ToList();
+        // Filter out coords from huge ruins, so they don't overlap with dungeon ruins
+        coords = coords.Where(coord => !usedSpace.Any(box => box.Contains(coord))).ToList();
 
         // Load dungeon ruins
         // TODO: make it actual dungeons instead of spawning markers
@@ -187,6 +179,7 @@ public sealed partial class StationPlanetSystem
         if (usedSpace.Any(used => used.Intersects(ruinBox)))
         {
             Log.Debug($"Ruin {ruin.ID} can't be placed on picked coordinates {coord.ToString()} on {ToPrettyString(map)} planet, skipping spawn.");
+            Del(spawned); // nuh uh
             return false;
         }
 
