@@ -57614,6 +57614,8 @@ entities:
     - type: Transform
       parent: 2
       pos: -30.5,19.5
+    - type: NavMapBeacon
+      text: Perma Brig
   - uid: 21432
     components:
     - type: MetaData
