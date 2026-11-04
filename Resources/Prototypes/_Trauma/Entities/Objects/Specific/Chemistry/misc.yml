@@ -4,7 +4,7 @@
   parent: BaseItem
   id: StabilizedBSCrystal
   name: stabilized bluespace crystal
-  desc:
+  description: A glowing bluespace crystal, not much is known about how they work. It looks very delicate.
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Materials/materials.rsi
@@ -20,14 +20,14 @@
   - type: EntityEffectOnUse
     effectsToUser:
     - !type:PlaySoundEffect
-        sound:
-          path: /Audio/Effects/teleport_departure.ogg
+      sound:
+        path: /Audio/Effects/teleport_departure.ogg
     - !type:Sparks
     - !type:InitPosTeleport
       spawnPortal: OneWayPortal3Seconds
     - !type:PlaySoundEffect
-        sound:
-          path: /Audio/Effects/teleport_arrival.ogg
+      sound:
+        path: /Audio/Effects/teleport_arrival.ogg
     - !type:Sparks
     effectsToUsed:
     - !type:DeleteEntity

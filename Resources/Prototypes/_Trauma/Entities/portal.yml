@@ -12,7 +12,7 @@
   - type: Physics
     bodyType: Static
   - type: Sprite
-    sprite: /Textures/Effects/portal.rsi
+    sprite: Effects/portal.rsi
     state: portal-artifact
     color: "#273189"
   - type: Fixtures
@@ -44,7 +44,7 @@
 - type: entity
   parent: OneWayPortal
   id: OneWayPortal3Seconds
-  name: bluespace rift
+  suffix: 3 seconds
   components:
   - type: TimedDespawn
     lifetime: 3
