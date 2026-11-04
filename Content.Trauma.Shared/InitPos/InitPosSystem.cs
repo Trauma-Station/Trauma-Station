@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Coordinates;
-
 namespace Content.Trauma.Shared.InitPos;
 
 /// <summary>
@@ -9,12 +7,11 @@ namespace Content.Trauma.Shared.InitPos;
 /// </summary>
 public sealed partial class InitPosSystem : EntitySystem
 {
-    [Dependency] private SharedTransformSystem _transform = default!;
-
     [SubscribeLocalEvent]
     private void Startup(Entity<InitPosComponent> ent, ref ComponentStartup args)
     {
-        ent.Comp.Coordinates = _transform.GetMoverCoordinates(ent.Owner);
+        ent.Comp.Coordinates = Transform(ent).Coordinates;
+        Log.Info($"{ent.Comp.Coordinates}");
         Dirty(ent.Owner, ent.Comp);
     }
 }

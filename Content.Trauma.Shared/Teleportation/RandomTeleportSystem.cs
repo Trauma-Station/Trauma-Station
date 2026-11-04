@@ -123,6 +123,7 @@ public sealed partial class RandomTeleportSystem : EntitySystem
         if (!foundValid) targetCoords = entityCoords.Offset(GetTeleportVector(rand, radius.Min, extraRadiusBase));
 
         var newPos = _xform.ToCoordinates(targetCoords);
+        Log.Info($"{newPos.EntityId}");
         _teleport.Teleport(uid, newPos, user, predicted, pulled);
         return newPos;
     }

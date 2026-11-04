@@ -3,8 +3,11 @@
 using Content.Shared.EntityEffects;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
+using Content.Shared.Random.Helpers;
 using Content.Trauma.Shared.InitPos;
 using Content.Trauma.Shared.Teleportation.Systems;
+using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Teleportation;
 
@@ -22,8 +25,10 @@ public sealed partial class InitPosTeleport : EntityEffectBase<InitPosTeleport>
 
 public sealed partial class InitPosTeleportEffectSystem : EntityEffectSystem<HandsComponent, InitPosTeleport>
 {
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private TeleportSystem _teleport = default!;
+    [Dependency] private RandomTeleportSystem _randomTeleport = default!;
 
     protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<InitPosTeleport> args)
     {
@@ -32,11 +37,16 @@ public sealed partial class InitPosTeleportEffectSystem : EntityEffectSystem<Han
         if (!TryComp<InitPosComponent>(handEntity, out var destination))
             return;
 
-        var newPos = destination.Coordinates;
-
         var oldPos = Transform(ent).Coordinates;
 
-        _teleport.Teleport(ent.Owner, newPos, user: ent.Owner); // it keeps breaking and i don't know why
+        var newPos = Transform(ent).Coordinates.WithPosition(destination.Coordinates.Position);
+
+        Log.Info($"{ent.Owner}");
+        Log.Info($"{args.User}");
+        Log.Info($"{oldPos}");
+        Log.Info($"{newPos}");
+        Log.Info($"{destination.Coordinates}");
+        _teleport.Teleport(ent.Owner, newPos, user: args.User); // it keeps breaking and i don't know why
 
         if (args.Effect.SpawnPortal != default)
         {
@@ -48,7 +58,7 @@ public sealed partial class InitPosTeleportEffectSystem : EntityEffectSystem<Han
                 return;
             }
 
-            comp.Destination = newPos;
+            comp.Destination = destination.Coordinates;
             Dirty(portal, comp);
         }
     }

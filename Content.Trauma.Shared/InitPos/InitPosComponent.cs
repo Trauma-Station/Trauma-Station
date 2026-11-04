@@ -5,7 +5,7 @@ using Robust.Shared.Map;
 namespace Content.Trauma.Shared.InitPos;
 
 /// <summary>
-/// Stores ent's init location. Used with InitPosTeleport/RandomTeleport EntityEffect.
+/// Stores ent's init location. Used with InitPosTeleport EntityEffect.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class InitPosComponent : Component
