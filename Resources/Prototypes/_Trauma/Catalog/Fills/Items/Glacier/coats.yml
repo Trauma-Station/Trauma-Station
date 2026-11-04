@@ -1,0 +1,9 @@
+- type: entity
+  parent: ClothingOuterCoatJensen
+  id: ClothingOuterCoatJensenLaser
+  suffix: Laser
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+        id: WeaponMakeshiftLaser

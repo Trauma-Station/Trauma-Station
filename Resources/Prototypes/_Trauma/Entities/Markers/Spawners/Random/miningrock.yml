@@ -14,10 +14,6 @@
     table: !type:NestedSelector
       tableId: RandomRockTable
       prob: 0.90
-  - type: Tag
-    tags:
-    - Wall
-    - Natural
 
 - type: entity
   parent: MarkerBase
@@ -75,10 +71,6 @@
         - id: WallRockBananium
         - id: WallRockArtifactFragment
         - id: WallRockDiamond
-  - type: Tag
-    tags:
-    - Wall
-    - Natural
 
 - type: entity
   parent: MarkerBase
@@ -113,10 +105,6 @@
         - id: WallRockBasaltArtifactFragment
         - id: WallRockBasaltBananium
         - id: WallRockBasaltDiamond
-  - type: Tag
-    tags:
-    - Wall
-    - Natural
 
 - type: entity
   parent: MarkerBase

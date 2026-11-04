@@ -1,0 +1,9 @@
+- type: entity
+  parent: CrateTrashCart
+  id: CrateTrashCartFilledExplosive
+  suffix: Explosive
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: WetFloorSignMineExplosive

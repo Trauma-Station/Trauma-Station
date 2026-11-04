@@ -1,0 +1,5 @@
+- type: entity
+  parent: SwordWood
+  id: WoodSabre
+  name: captain's sabre
+  description: A ceremonial weapon belonging to the captain of the station.

@@ -13,10 +13,6 @@
   - type: Icon
     sprite: _Trauma/Structures/Walls/asteroid_rock.rsi
     state: full
-  - type: Tag
-    tags:
-    - Wall
-    - Natural
   - type: MiningScannerViewable
   - type: Damageable
     damageContainer: StructuralInorganic

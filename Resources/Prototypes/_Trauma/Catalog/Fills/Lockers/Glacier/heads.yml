@@ -1,0 +1,17 @@
+- type: entity
+  parent: LockerCaptain
+  id: LockerCaptainOldFilled
+  suffix: Old
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillLockerCaptainOld
+
+- type: entityTable
+  id: FillLockerCaptainOld
+  table: !type:AllSelector
+    children:
+    - id: WoodSabre
+    - id: WeaponLaserGunAntique
+    - id: IDCardTideCaptain

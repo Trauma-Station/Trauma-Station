@@ -15,3 +15,5 @@
     - id: BoxEmbalmingFluid
     - id: BoxBottle
     - id: BoxBodyBag
+    - id: OrganSkeletonPersonHead
+    - id: BoxCandle
