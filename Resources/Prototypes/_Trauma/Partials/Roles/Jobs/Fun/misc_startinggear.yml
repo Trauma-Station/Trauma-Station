@@ -1,0 +1,13 @@
+- type: startingGear
+  id: MobAghostGear
+  storage:
+    belt: ClothingBeltChiefEngineerFilled
+    back:
+    - RemoteSignallerAdvanced
+    - JawsOfLife
+    - PowerDrill
+    - WelderIndustrialAdvanced
+    - RCDExperimental
+    - Throngler
+    - WeaponPistolDebug
+    - NetworkConfigurator
