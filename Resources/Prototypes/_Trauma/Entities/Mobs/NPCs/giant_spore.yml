@@ -49,14 +49,25 @@
     damage:
       types:
         Cellular: 0.25
+  - type: GhostRole
+    prob: 0.15
+    makeSentient: true
+    allowSpeech: true
+    allowMovement: true
+    name: ghost-role-information-giant-spore-name
+    description: ghost-role-information-giant-spore-desc
+    rules: ghost-role-information-freeagent-rules
+    mindRoles:
+    - MindRoleGhostRoleFreeAgent
+  - type: LanguageSpeaker
+    currentLanguage: RootSpeak
+    speaks:
+    - RootSpeak
+    understands:
+    - TauCetiBasic
+  - type: GhostTakeoverAvailable
   - type: Destructible
     thresholds:
-    - trigger:
-        !type:DamageTrigger
-        damage: 100
-      behaviors:
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 10
@@ -68,6 +79,10 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      10: Dead
 
 - type: entity
   id: GiantMushroomSpawner
