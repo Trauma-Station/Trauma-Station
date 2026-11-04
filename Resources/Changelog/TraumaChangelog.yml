@@ -16452,3 +16452,10 @@ Entries:
   id: 1775
   time: '2026-11-04T08:48:31.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5266
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Changed the Aghost inventory to have more items
+  id: 1776
+  time: '2026-11-04T10:17:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5268
