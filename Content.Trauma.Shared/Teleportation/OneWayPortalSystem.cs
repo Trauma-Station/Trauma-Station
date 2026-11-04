@@ -55,9 +55,7 @@ public sealed partial class OneWayPortalSystem : EntitySystem
 
         // if they came from another portal, just return and wait for them to exit the portal
         if (HasComp<PortalTimeoutComponent>(subject))
-        {
             return;
-        }
 
         _teleport.Teleport(uid: subject, coords: ent.Comp.Destination, soundIn: ent.Comp.TeleportSound, soundOut: ent.Comp.TeleportSound);
     }

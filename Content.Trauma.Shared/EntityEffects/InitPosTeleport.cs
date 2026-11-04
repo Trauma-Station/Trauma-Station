@@ -32,9 +32,11 @@ public sealed partial class InitPosTeleportEffectSystem : EntityEffectSystem<Han
         if (!TryComp<InitPosComponent>(handEntity, out var destination))
             return;
 
+        var newPos = destination.Coordinates;
+
         var oldPos = Transform(ent).Coordinates;
 
-        _teleport.Teleport(ent.Owner, destination.Coordinates, user: args.User);
+        _teleport.Teleport(ent.Owner, newPos, user: ent.Owner); // it keeps breaking and i don't know why
 
         if (args.Effect.SpawnPortal != default)
         {
@@ -46,7 +48,7 @@ public sealed partial class InitPosTeleportEffectSystem : EntityEffectSystem<Han
                 return;
             }
 
-            comp.Destination = destination.Coordinates;
+            comp.Destination = newPos;
             Dirty(portal, comp);
         }
     }
