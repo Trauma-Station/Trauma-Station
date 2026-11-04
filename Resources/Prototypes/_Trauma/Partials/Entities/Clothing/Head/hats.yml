@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: ClothingHeadHatSolidHeadband
+  components:
+  - type: KnowledgeGrantOnWear
+    conditions:
+    # Kept you waiting, huh?
+    - !type:NameContainsCondition
+      name: Snake
+    - !type:SpeciesCondition
+      species: Human
+    - !type:SexCondition
+      sex: Male
+    - !type:HasMarking
+      organ: Head
+      marking: FacePaintSplitter
+    - !type:GuidCondition
+      guid: "25e85685-4712-482c-b8d9-b52974f12303"
+    skills:
+      MartialArtCQC: 26
