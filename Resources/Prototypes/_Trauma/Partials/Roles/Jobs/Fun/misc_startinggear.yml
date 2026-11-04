@@ -10,7 +10,7 @@
     - !Remove trayScanner
     - !Remove Multitool
     - RemoteSignallerAdvanced
-    - RCDExperimental
+    - RCDChrono
     - Throngler
     - WeaponPistolDebug
     - NetworkConfigurator
