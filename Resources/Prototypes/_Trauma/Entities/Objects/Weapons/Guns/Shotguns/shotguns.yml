@@ -70,3 +70,11 @@
   components:
   - type: BallisticAmmoProvider
     proto: ShellShotgunBeanbag
+
+- type: entity
+  parent: WeaponShotgunDoubleBarreledEngraved
+  id: WeaponShotgunDoubleBarreledEngravedTranquilizer
+  suffix: Engraved, Tranquilizer
+  components:
+  - type: BallisticAmmoProvider
+    proto: ShellTranquilizer

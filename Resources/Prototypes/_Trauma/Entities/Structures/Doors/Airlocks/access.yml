@@ -311,6 +311,15 @@
     containers:
       board: [ DoorElectronicsZookeeper ]
 
+- type: entity
+  parent: HighSecDoor
+  id: HighSecZookeeperLocked
+  suffix: Zookeeper, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsZookeeper ]
+
 # Syndicate
 - type: entity
   parent: AirlockCommand
@@ -341,7 +350,7 @@
 
 - type: entity
   parent: HighSecDoor
-  id: HighSecDoorNukeopLocked
+  id: HighSecNukeopLocked
   suffix: Nukeop, Locked
   components:
   - type: ContainerFill
@@ -350,7 +359,7 @@
 
 - type: entity
   parent: HighSecDoor
-  id: HighSecDoorSyndicateAgentLocked
+  id: HighSecSyndicateAgentLocked
   suffix: Syndicate, Locked
   components:
   - type: ContainerFill
