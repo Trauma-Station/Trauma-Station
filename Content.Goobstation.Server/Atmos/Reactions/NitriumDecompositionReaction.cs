@@ -1,13 +1,15 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+using Content.Server.Atmos;
 using Content.Server.Atmos.EntitySystems;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Reactions;
 using JetBrains.Annotations;
 
-namespace Content.Server.Atmos.Reactions;
+namespace Content.Goobstation.Server.Atmos.Reactions;
 
 /// <summary>
-///     Assmos - /tg/ gases
-///     The decomposition of nitrium in the presence of oxygen at temperatures below 343K.
+/// The decomposition of nitrium in the presence of oxygen at temperatures below 343K.
 /// </summary>
 [UsedImplicitly]
 public sealed partial class NitriumDecompositionReaction : IGasReactionEffect
