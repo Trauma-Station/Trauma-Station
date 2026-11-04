@@ -16459,3 +16459,10 @@ Entries:
   id: 1776
   time: '2026-11-04T10:17:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5268
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed fungalin breaking air alarms.
+  id: 1777
+  time: '2026-11-04T10:20:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5267
