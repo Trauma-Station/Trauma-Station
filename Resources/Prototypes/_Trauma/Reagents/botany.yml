@@ -185,7 +185,7 @@
         damage:
           types:
             Asphyxiation: 4
-            
+
 - type: reagent
   id: CitricAcid
   name: reagent-name-citric-acid
