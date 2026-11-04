@@ -62,8 +62,8 @@ public sealed partial class AbductorSystem : SharedAbductorSystem
             MultiplyDelay = false,
             BreakOnHandChange = false,
             BreakOnDropItem = false,
-            BreakOnMove = true,
-            BreakOnDamage = true
+            BreakOnMove = false,
+            BreakOnDamage = false,
         };
         if (!_doAfter.TryStartDoAfter(doAfter))
         {
