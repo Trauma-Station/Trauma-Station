@@ -362,7 +362,7 @@ ComputerShipyard: null
 CryogenicSleepUnitSpawnerPrisoner: null
 # DefaultStationBeaconBoxing: null Trauma
 DefaultStationBeaconCameraServerRoom: null
-DefaultStationBeaconConferenceRoom: null Trauma
+# DefaultStationBeaconConferenceRoom: null Trauma
 DefaultStationBeaconCorpsman: null
 DefaultStationBeaconEngiOutpost: null
 DefaultStationBeaconExam: null
