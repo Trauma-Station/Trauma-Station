@@ -16336,3 +16336,133 @@ Entries:
   id: 1762
   time: '2026-11-01T20:09:55.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5174
+- author: Aviu
+  changes:
+  - type: Add
+    message: Blood cult can roll naturally.
+  id: 1763
+  time: '2026-11-02T02:22:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5214
+- author: Pi-tanium
+  changes:
+  - type: Tweak
+    message: Eggnog heals bones.
+  id: 1764
+  time: '2026-11-02T06:47:42.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5162
+- author: NoElkaTheGod
+  changes:
+  - type: Fix
+    message: Heretic armor hood now lets you use an air tank
+  id: 1765
+  time: '2026-11-02T17:21:48.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5235
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Empty scrolls can no longer be duped by glass chickens.
+  - type: Tweak
+    message: You can no longer consecrate NPC humanoid corpses, only players.
+  - type: Fix
+    message: Fixed some laser types not working for the artifact trigger.
+  id: 1766
+  time: '2026-11-03T08:08:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5238
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Changeling fake mindshield no longer uses the implant, it fakes it
+      innately.
+  id: 1767
+  time: '2026-11-03T08:33:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5239
+- author: Thinbug0
+  changes:
+  - type: Add
+    message: >-
+      Added a Giant Mushroom event, harmless yet disruptive mushrooms constantly
+      releasing spores.
+  id: 1768
+  time: '2026-11-03T08:36:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5084
+- author: yglop
+  changes:
+  - type: Add
+    message: Plastic tower caps mutation.
+  id: 1769
+  time: '2026-11-03T11:24:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5176
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Reworked how chem can make plastic, now it's a 2-stage process with a new
+      chemical Ethylene.
+  - type: Tweak
+    message: Ethylene plastic processing gives 5x the sheets per batch.
+  id: 1770
+  time: '2026-11-03T12:49:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5243
+- author: deltanedas
+  changes:
+  - type: Remove
+    message: Removed betty slop
+  id: 1771
+  time: '2026-11-03T15:14:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5246
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Reduced the stamina damage on stun prod from 100 to 60
+  - type: Fix
+    message: Fixed stun baton doing 80 stamina damage per hit now it only does 55 on M1
+  id: 1772
+  time: '2026-11-03T16:36:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5184
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Nerfed healing of ibuprofen to 3.33 brute/s from 6.66
+  id: 1773
+  time: '2026-11-03T17:27:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5249
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added 3 new thieving kits for thiefs to use with it including Tinkerer,
+      Escapist, Chemist
+  - type: Tweak
+    message: >-
+      Tweaked the contents of the following thieving kits: Breacher, Syndie,
+      Sleeper, and Communicator. All of them received buffs except for syndie
+      kit which got a minor tweak
+  id: 1774
+  time: '2026-11-03T20:15:52.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5175
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added Sentient Giant Spores that can rarely appear
+  - type: Add
+    message: >-
+      Added additional effects to inhaling fungalin, Keep an eye out for any
+      fungalin in the air
+  id: 1775
+  time: '2026-11-04T08:48:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5266
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Changed the Aghost inventory to have more items
+  id: 1776
+  time: '2026-11-04T10:17:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5268
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed fungalin breaking air alarms.
+  id: 1777
+  time: '2026-11-04T10:20:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5267

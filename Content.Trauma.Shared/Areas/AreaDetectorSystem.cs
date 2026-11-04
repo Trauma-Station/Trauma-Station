@@ -1,21 +1,18 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Robust.Shared.Timing;
+
 namespace Content.Trauma.Shared.Areas;
 
 public sealed partial class AreaDetectorSystem : EntitySystem
 {
     [Dependency] private AreaSystem _area = default!;
+    [Dependency] private IGameTiming _timing = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<AreaDetectorComponent, MoveEvent>(OnMove);
-    }
-
+    [SubscribeLocalEvent]
     private void OnMove(Entity<AreaDetectorComponent> ent, ref MoveEvent args)
     {
-        if (TerminatingOrDeleted(ent) || args.Entity.Comp1.MapUid == null)
+        if (TerminatingOrDeleted(ent) || _timing.ApplyingState || args.Entity.Comp1.MapUid == null)
             return;
 
         if (_area.GetArea(ent.Owner) is not { } area || TerminatingOrDeleted(area))

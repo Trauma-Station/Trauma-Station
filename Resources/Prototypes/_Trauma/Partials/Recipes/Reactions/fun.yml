@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: reaction
+  id: PlasticSheet
+  quantized: false # no longer needed since it doesn't spawn items
+  effects: !Clear []
+  products:
+    Ethylene: 10

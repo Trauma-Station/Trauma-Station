@@ -139,7 +139,6 @@
     children:
     # <Trauma>
     - id: BloodTrak
-    - id: Betty
     - id: BoxTapeRecorder
     # </Trauma>
     - id: ClothingEyesGlassesNoir

@@ -1,60 +1,10 @@
 - type: entity
+  abstract: true
   id: BaseMech
   save: false
-  abstract: true
   components:
-  # <Trauma>
-  - type: TileMovement
-  - type: RotationCooldown
-    delay: 2
-    sound:
-      path: /Audio/Mecha/mechmove03.ogg
-  - type: UnpoweredFlashlight # mech lights for all mechs, it's unpowered to match hardsuits
-  - type: PointLight
-    enabled: false
-    softness: 5
-    autoRot: true
-    lightMask: ConeSingle
-    radius: 7
-    energy: 3
-    netsync: false
-  - type: GenericVisualizer
-    visuals:
-      enum.PaperLabelVisuals.HasLabel:
-        enum.PaperLabelVisuals.Layer:
-          True: { visible: true }
-          False: { visible: false }
-      enum.PaperLabelVisuals.LabelType:
-        enum.PaperLabelVisuals.Layer:
-          Paper: { state: paper }
-          Bounty: { state: bounty }
-          CaptainsPaper: { state: captains_paper }
-          Invoice: { state: invoice }
-  - type: PaperLabel
-    labelSlot:
-      insertVerbText: Attach Label
-      ejectVerbText: Remove Label
-      whitelist:
-        components:
-        - Paper
-      blacklist:
-        tags:
-        - Book
-  - type: Insulated # giant metal thing is better at conducting electricity than you
-  - type: StaticPrice
-    price: 450
-  - type: Reactive
-    groups:
-      Acidic: [Touch]
-  # </Trauma>
   - type: MobMover
   - type: Mech
-    # <Trauma>
-    pilotBlacklist:
-      components:
-      - Zombie
-      - ZombieBlob
-    # </Trauma>
   - type: MechAir
   - type: AirFilter
     # everything except oxygen and nitrogen
@@ -67,10 +17,6 @@
     - NitrousOxide
     - Frezon
     #- Helium3 TODO: fusion
-    # <Goobstation> - healium not included for ADVANCED mech trolling
-    - BZ
-    - Nitrium
-    # </Goobstation>
     # remove everything except oxygen to maintain oxygen ratio
     overflowGases:
     - Nitrogen
@@ -82,12 +28,6 @@
     - NitrousOxide
     - Frezon
     #- Helium3 TODO: fusion
-    # <Goobstation>
-    - BZ
-    - Healium
-    - Nitrium
-    - Pluoxium
-    # </Goobstation>
   - type: AirIntake
   # for intake and filter to work
   - type: AtmosDevice
@@ -102,7 +42,6 @@
       enum.MechUiKey.Key:
         type: MechBoundUserInterface
   - type: MeleeWeapon
-    canWideSwing: false # Trauma - disabled until it doesnt look shit
     hidden: true
     attackRate: 0.75
     damage:
@@ -117,7 +56,7 @@
   - type: InteractionOutline
   - type: MovementSpeedModifier
     baseWalkSpeed: 1
-    baseSprintSpeed: 1 # Trauma - was 2
+    baseSprintSpeed: 2
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -145,11 +84,8 @@
       mech-pilot-slot: !type:ContainerSlot
       mech-equipment-container: !type:Container
       mech-battery-slot: !type:ContainerSlot
-      paper_label: !type:ContainerSlot # Goobstation
   - type: Damageable
-    damageModifierSet: LightArmor # Trauma - was Metallic
-  - type: Injurable
-    damageContainer: Silicon # Trauma - was Inorganic
+    damageModifierSet: Metallic
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Mecha/mechmove03.ogg
@@ -172,15 +108,10 @@
 
 - type: entity
   id: MechRipley
-  parent: [ BaseMech, IndustrialMech, BaseCargoContraband ] # Goobstation
+  parent: BaseMech
   name: Ripley APLU
   description: Versatile and lightly armored, the Ripley is useful for almost any heavy work scenario. The "APLU" stands for Autonomous Power Loading Unit.
   components:
-  # <Trauma>
-  - type: Construction
-    graph: Ripley
-    node: ripley
-  # </Trauma>
   - type: Sprite
     drawdepth: Mobs
     noRot: true
@@ -188,32 +119,23 @@
     layers:
     - map: [ "enum.MechVisualLayers.Base" ]
       state: ripley
-    # <Trauma>
-    - map: [ "enum.PaperLabelVisuals.Layer" ]
-      sprite: Structures/Storage/Crates/labels.rsi
-      state: paper
-    # </Trauma>
   - type: FootstepModifier
     footstepSoundCollection:
       path: /Audio/Mecha/sound_mecha_powerloader_step.ogg
   - type: Mech
-    # <Trauma>
-    entryDelay: 1.5 # faster to make it easier for delivery work
-    # </Trauma>
     baseState: ripley
     openState: ripley-open
     brokenState: ripley-broken
-    mechToPilotDamageMultiplier: 0.5 # Trauma - was 0.75
+    mechToPilotDamageMultiplier: 0.75
     pilotWhitelist:
       components:
         - HumanoidProfile
   - type: MeleeWeapon
     hidden: true
-    attackRate: 0.5 # Trauma - was 1, its not designed for combat
+    attackRate: 1
     damage:
       types:
-        Blunt: 25 # Goobstation - Make ripley punch hard
-        Structural: 30 # Goobstation - Make ripley punch hard
+        Blunt: 14 #intentionally shit so people realize that going into combat with the ripley is usually a bad idea.
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.25
     baseSprintSpeed: 3.6
@@ -228,8 +150,9 @@
       mech-battery-slot:
       - PowerCellHigh
 
+# TODO: have a whitelist for honker equipment
 - type: entity
-  parent: [ BaseMech, SpecialMech, BaseCivilianContraband ] # Goobstation
+  parent: BaseMech
   id: MechHonker
   name: H.O.N.K.
   description: "Produced by \"Tyranny of Honk, INC\", this exosuit is designed as heavy clown-support. Used to spread the fun and joy of life. HONK!"
@@ -246,15 +169,11 @@
       collection: FootstepClown
       params:
         variation: 0.17
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 2.5 #Goobedit
   - type: Mech
     baseState: honker
     openState: honker-open
     brokenState: honker-broken
-    mechToPilotDamageMultiplier: 0.2 # Trauma - was 0.5
-    airtight: true # Goobstation - Space Honk is real.
+    mechToPilotDamageMultiplier: 0.5
     pilotWhitelist:
       components:
       - HumanoidProfile
@@ -270,7 +189,7 @@
       - PowerCellHigh
 
 - type: entity
-  parent: [ BaseMech, SmallMech ] # Goobstation
+  parent: BaseMech
   id: MechHamtr
   name: HAMTR
   description: "An experimental mech which uses a brain–computer interface to connect directly to a hamsters brain."
@@ -289,7 +208,7 @@
     baseState: hamtr
     openState: hamtr-open
     brokenState: hamtr-broken
-    mechToPilotDamageMultiplier: 0 # Trauma - was 0.25, let hammy live
+    mechToPilotDamageMultiplier: 0.25
     maxEquipmentAmount: 2
     airtight: true
     pilotWhitelist:
@@ -301,10 +220,9 @@
     damage:
       types:
         Blunt: 10 #thwack
-        Structural: 2
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.4
-    baseSprintSpeed: 2.4 #Goobedit
+    baseSprintSpeed: 2.7
 
 - type: entity
   parent: MechHamtr
@@ -352,8 +270,7 @@
     openState: vim-open
     brokenState: vim-broken
     maxEquipmentAmount: 0
-    # keep mouse safe
-    mechToPilotDamageMultiplier: 0 # Trauma - was 0.1
+    mechToPilotDamageMultiplier: 0.1
     airtight: true
     pilotWhitelist:
       tags:
@@ -364,10 +281,9 @@
     damage:
       types:
         Blunt: 10 #thwack
-        Structural: 2
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.25
-    baseSprintSpeed: 2.25 #Goobedit
+    baseSprintSpeed: 3.6
   - type: Access
     tags:
     - Maintenance

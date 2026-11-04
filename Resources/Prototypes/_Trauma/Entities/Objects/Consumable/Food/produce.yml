@@ -424,3 +424,30 @@
     tags:
     - Wheat
     - SteelWheat
+
+- type: entity
+  parent: [ProduceBase, BaseSlicingRefinable]
+  id: PlasticLog
+  name: plastic-cap log
+  description: Plastic mushroom, not even micro this time. Ages 3 and up.
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Plastic: 500 # 5 sheets
+  - type: StaticPrice
+    price: 75
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Hydroponics/plasticcap.rsi
+  - type: Item
+    heldPrefix: produce
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 1
+  - type: Produce
+    plantId: PlasticcapPlants
+  - type: ToolRefinable
+    qualityNeeded: Sawing
+    refineResult:
+    - id: SheetPlastic1
+      amount: 5
