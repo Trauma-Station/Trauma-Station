@@ -1,0 +1,13 @@
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobWeldbot
+  name: Weldbot Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: weldbot
+      sprite: _EinsteinEngines/Mobs/Silicon/Bots/weldbot.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobWeldbot
