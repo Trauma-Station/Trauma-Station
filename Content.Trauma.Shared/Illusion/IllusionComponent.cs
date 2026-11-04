@@ -1,0 +1,11 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
+
+namespace Content.Trauma.Shared.Illusion;
+
+[RegisterComponent, NetworkedComponent]
+public sealed partial class IllusionComponent : Component
+{
+    [DataField]
+    public LocId DeathMessage = "illusion-comp-death-message";
+}

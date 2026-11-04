@@ -31,4 +31,7 @@ public sealed partial class TouchSpellComponent : Component
 
     [DataField]
     public bool BypassNullrod;
+
+    [DataField]
+    public bool DeleteOnInvoke = true;
 }

@@ -25,6 +25,10 @@ public sealed class GhostRoleTests : GameTest
           components:
           - type: MindContainer
           - type: GhostRole
+            # <Trauma> - these are required now
+            name: generic-unknown-title
+            description: generic-unknown-title
+            # </Trauma>
           - type: GhostTakeoverAvailable
           - type: MobState
 

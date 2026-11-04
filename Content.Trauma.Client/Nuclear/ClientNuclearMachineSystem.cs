@@ -11,6 +11,6 @@ public sealed partial class ClientNuclearMachineSystem : NuclearMachineSystem
     [SubscribeLocalEvent]
     private void OnExamined(Entity<NuclearMachineComponent> ent, ref ClientExaminedEvent args)
     {
-        Spawn(ent.Comp.ArrowPrototype, new EntityCoordinates(ent, 0, 0));
+        SpawnAttachedTo(ent.Comp.ArrowPrototype, new EntityCoordinates(ent, 0, 0));
     }
 }

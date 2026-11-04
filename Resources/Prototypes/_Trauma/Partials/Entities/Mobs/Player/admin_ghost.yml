@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: AdminObserver
+  components:
+  - type: SupermatterImmune
+  - type: Speech
+    speechVerb: HolierThanThou
+  - type: Eye
+    visMask:
+    - Ghost
+    - Normal
+    - CosmicCultMonument
+    - Abductor
+  - type: Emagged # so cargo orders aren't announced and can bypass alert levels
+    emagType: All

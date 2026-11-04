@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: shader
+  id: Pixelate
+  kind: source
+  path: "/Textures/_Trauma/Shaders/pixelate.swsl"
+  params:
+    pixelSize: 6.0 # Looks best for cards idk

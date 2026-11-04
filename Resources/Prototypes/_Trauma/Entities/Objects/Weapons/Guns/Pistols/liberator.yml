@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ BaseItem, BaseRevMajorContraband ]
+  parent: [ BaseItem, BaseRevMajorContraband, BasePistolWhip ]
   id: WeaponPistolLiberator
   name: Liberator
   description: A shitty little revolver that can only hold 6 rounds and has to be hand fed.

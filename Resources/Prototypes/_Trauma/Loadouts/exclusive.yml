@@ -153,6 +153,12 @@
   - !type:PlayerGUIDLoadoutEffect
     guid: 46ed7573-2b2c-475a-94c3-038ebab10bf1
 
+- type: loadoutEffectGroup
+  id: Elk77420
+  effects:
+  - !type:PlayerGUIDLoadoutEffect
+    guid: f21ebdd5-f2ca-48ea-ac3f-b2ecfcd6260e
+
 #Items (ADD TO ExclusiveItems OR IT WONT EXIST)
 - type: loadout
   id: CybersunFlippo
@@ -354,3 +360,12 @@
   storage:
     back:
     - PatreonDino
+
+- type: loadout
+  id: PatreonElk77420
+  effects:
+  - !type:GroupLoadoutEffect
+    proto: Elk77420
+  storage:
+    back:
+    - PatreonElk77420

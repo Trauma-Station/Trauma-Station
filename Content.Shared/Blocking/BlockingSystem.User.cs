@@ -43,6 +43,9 @@ public sealed partial class BlockingSystem
             return;
 
         // <Trauma>
+        if (args.Origin is not { } origin || args.Damage.HasFlag(DamageSpecifier.DamageFlags.NoParry))
+            return;
+
         var attemptEv = new BlockAttemptEvent(entity);
         RaiseLocalEvent(item, ref attemptEv);
         if (attemptEv.Cancelled)
@@ -73,7 +76,7 @@ public sealed partial class BlockingSystem
         args.Damage += blowthrough;
 
         if (blocking.IsRaised && damage.AnyPositive())
-            _audio.PlayPvs(blocking.BlockSound, entity);
+            _audio.PlayPredicted(blocking.BlockSound, entity, origin); // Trauma - PlayPvs -> PlayPredicted
     }
 
     [SubscribeLocalEvent]

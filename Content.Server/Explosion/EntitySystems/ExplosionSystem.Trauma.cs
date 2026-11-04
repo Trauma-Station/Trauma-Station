@@ -25,7 +25,7 @@ public sealed partial class ExplosionSystem
         Subs.CVar(_cfg, GoobCVars.ExplosionWoundMultiplier, x => WoundMultiplier = x, true);
     }
 
-    private void ModifyWoundSeverities(DamageSpecifier damage)
+    public void ModifyWoundSeverities(DamageSpecifier damage)
     {
         if (damage.PartDamageVariation == 0f)
             damage.PartDamageVariation = PartVariation;
@@ -37,8 +37,11 @@ public sealed partial class ExplosionSystem
 
     private void DamageBody(Entity<BodyComponent> ent, DamageSpecifier damage, string explosion)
     {
-        foreach (var part in _body.GetExternalOrgans(ent.AsNullable()))
+        var parts = _body.GetExternalOrgans(ent.AsNullable());
+        var multipliers = _damageableSystem.GetDamageVariationMultipliers(ent, damage.PartDamageVariation, parts.Count);
+        for (var i = 0; i < parts.Count; i++)
         {
+            var part = parts[i];
             var resistanceEv = new GetExplosionResistanceEvent(explosion);
             RaiseLocalEvent(part, ref resistanceEv);
             resistanceEv.DamageCoefficient = Math.Max(0, resistanceEv.DamageCoefficient);
@@ -47,6 +50,7 @@ public sealed partial class ExplosionSystem
                 ? damage * resistanceEv.DamageCoefficient
                 : damage;
 
+            partDamage *= multipliers[i];
             _damageableSystem.ChangeDamage(part.Owner, partDamage, ignoreResistances: true, ignoreGlobalModifiers: true);
         }
     }

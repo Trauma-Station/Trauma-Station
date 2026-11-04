@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: MobSkeletonCloset
+  components:
+  - type: KnowledgeGrant
+    skills:
+      ThrowingKnowledge: 51
+      MeleeKnowledge: 51
+      KnowledgeWeaponsBludgeon: 26
+      KnowledgeWeaponsShortBlade: 26
+      KnowledgeWeaponsLongBlade: 26
+      KnowledgeWeaponsPolearm: 26
+      KnowledgeWeaponsShield: 26
+      KnowledgeWeaponsTool: 26
+      ShootingKnowledge: 51
+      FirstAidKnowledge: 51
+      FabricationKnowledge: 88
+      WeaponsKnowledge: 88
+      ArmorKnowledge: 88
+      MetalworkingKnowledge: 88
+      CarvingKnowledge: 88
+      GunsmithingKnowledge: 88
+      MechanicsKnowledge: 88
+      TailoringKnowledge: 88

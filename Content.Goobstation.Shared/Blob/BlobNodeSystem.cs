@@ -3,8 +3,10 @@
 using Content.Goobstation.Shared.Blob.Components;
 using Content.Shared.Destructible;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Random.Helpers;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Goobstation.Shared.Blob;
@@ -66,11 +68,15 @@ public sealed partial class BlobNodeSystem : EntitySystem
         var coords = Transform(ent).Coordinates;
         _tiles.Clear();
         _lookup.GetEntitiesInRange(coords, ent.Comp.PulseRadius, _tiles);
+        _tiles.RemoveWhere(t => t.Comp.Core != core.Owner); // don't pulse other blobs' tiles
 
         // sorted so client and server update them in the order with the same RNG seed
         _tilesSorted.Clear();
         _tilesSorted.AddRange(_tiles);
         _tilesSorted.Sort((a, b) => GetNetEntity(a).CompareTo(GetNetEntity(b)));
+        var rand = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
+        rand.Shuffle(_tilesSorted); // have random tiles grow before preventing others rather than only the oldest ones growing
+
         var ev = new BlobNodePulseEvent(core, chem);
         foreach (var tile in _tilesSorted)
         {

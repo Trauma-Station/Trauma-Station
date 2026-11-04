@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  name: arcane barrage
   parent: BaseItem
   id: ArcaneBarrage
+  name: arcane barrage
   description: Pew Pew Pew.
   components:
   - type: Sprite
@@ -28,6 +28,7 @@
     selectedMode: FullAuto
     availableModes:
     - FullAuto
+    unaffectedBySkill: true
     clumsyProof: true
     resetOnHandSelected: false
     soundEmpty: null

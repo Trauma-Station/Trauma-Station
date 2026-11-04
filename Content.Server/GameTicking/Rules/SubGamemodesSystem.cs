@@ -19,6 +19,13 @@ public sealed partial class SubGamemodesSystem : GameRuleSystem<SubGamemodesComp
             if (GameTicker.IsIgnored(id))
                 continue;
 
+            // <Trauma> - being here is not ideal but entity spawn collection is shitcode
+            var proto = ProtoMan.Index(id);
+            if (!proto.TryComp<GameRuleComponent>(out var rule, Factory) ||
+                GameTicker.ReadyPlayerCountEffective() < rule.MinPlayers)
+                continue;
+            // </Trauma>
+
             Log.Info($"Starting gamerule {id} as a subgamemode of {ToPrettyString(ent.Owner):rule}");
             GameTicker.AddGameRule(id);
         }

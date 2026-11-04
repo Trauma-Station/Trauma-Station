@@ -25,6 +25,7 @@
         Cold: -0.05
         Shock: -0.05
         Caustic: -0.05
+        Holy: -0.01
   - type: Emag
     emagType: All
     successText: wraith-decay-object1
@@ -119,7 +120,7 @@
   - type: MobThresholds
     thresholds:
       0: Alive
-      150: Dead
+      200: Dead
     stateAlertDict:
       Alive: WraithHealth
       Dead: WraithDead

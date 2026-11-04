@@ -15,7 +15,7 @@ public sealed partial class CCVars
     ///     Rate of radiation system update in seconds.
     /// </summary>
     public static readonly CVarDef<float> RadiationGridcastUpdateRate =
-        CVarDef.Create("radiation.gridcast.update_rate", 1.0f, CVar.SERVERONLY);
+        CVarDef.Create("radiation.gridcast.update_rate", 1.0f, CVar.REPLICATED); // Trauma - was CVar.SERVERONLY
 
     /// <summary>
     ///     If both radiation source and receiver are placed on same grid, ignore grids between them.

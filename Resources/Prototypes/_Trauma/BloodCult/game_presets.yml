@@ -8,9 +8,11 @@
   showInVote: false
   description: blood-cult-description
   rules:
+  # No SubGamemodesRule because round ends when cultists die
   - BloodCult
-  - SubGamemodesRule
   - BasicStationEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
   - BasicRoundstartVariation
+  - BasicAntagEventScheduler
+  - ModerateAntagEventScheduler

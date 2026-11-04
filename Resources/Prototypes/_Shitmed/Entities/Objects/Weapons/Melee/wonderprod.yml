@@ -54,8 +54,8 @@
     multihitWhitelist:
       tags:
       - Wonderprod
-    conditions:
-    - !type:MultihitUserWhitelistEvent
+    userConditions:
+    - !type:WhitelistCondition
       whitelist:
         tags:
         - Abductor

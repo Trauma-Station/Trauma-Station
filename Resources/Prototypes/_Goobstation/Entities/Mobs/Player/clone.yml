@@ -5,4 +5,5 @@
   id: Illusion
   components:
   - NpcFactionMember
+  - BloodCultMember
   copyEquipment: WITHOUT_POCKET

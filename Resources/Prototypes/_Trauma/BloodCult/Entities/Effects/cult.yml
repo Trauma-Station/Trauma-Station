@@ -51,3 +51,10 @@
     - sprite: _Trauma/BloodCult/Effects/cult_in_out.rsi
       state: cult_out
       shader: unshaded
+
+- type: entity
+  id: PuddleDrainBeamEntity
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: TimedDespawn
+    lifetime: 1

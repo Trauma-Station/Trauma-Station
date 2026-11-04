@@ -38,52 +38,35 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
 
     private static readonly ProtoId<TagPrototype> ActionTag = "ShadowCloakAction";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ShadowCloakedComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<ShadowCloakedComponent, ComponentShutdown>(OnShutdown);
-        SubscribeLocalEvent<ShadowCloakedComponent, ModifyDoAfterDelayEvent>(OnGetDoAfterSpeed);
-        SubscribeLocalEvent<ShadowCloakedComponent, DamageDealtEvent>(OnDamageDealt);
-        SubscribeLocalEvent<ShadowCloakedComponent, TransformSpeakerNameEvent>(OnTransformName);
-        SubscribeLocalEvent<ShadowCloakedComponent, TryGetIdentityShortInfoEvent>(OnGetIdentity);
-        SubscribeLocalEvent<ShadowCloakedComponent, GetIdentityRepresentationEntityEvent>(OnGetIdentityEntity);
-        SubscribeLocalEvent<ShadowCloakedComponent, GetSpeechSoundEvent>(OnGetSpeechSound);
-        SubscribeLocalEvent<ShadowCloakedComponent, GetEmoteSoundsEvent>(OnGetEmoteSound);
-        SubscribeLocalEvent<ShadowCloakedComponent, GetBarkSourceEntityEvent>(OnGetBark);
-        SubscribeLocalEvent<ShadowCloakedComponent, GetVirtualItemBlockingEntityEvent>(OnGetBlockingEntity);
-        SubscribeLocalEvent<ShadowCloakedComponent, DownedEvent>(OnDowned);
-        SubscribeLocalEvent<ShadowCloakedComponent, StoodEvent>(OnStand);
-
-        SubscribeLocalEvent<ShadowCloakEntityComponent, EntParentChangedMessage>(OnEntParentChanged);
-        SubscribeLocalEvent<ShadowCloakEntityComponent, ComponentShutdown>(OnCloakShutdown);
-    }
-
+    [SubscribeLocalEvent]
     private void OnStand(Entity<ShadowCloakedComponent> ent, ref StoodEvent args)
     {
         if (GetShadowCloakEntity(ent) is { } cloak)
             _appearance.SetData(cloak, RotationVisuals.RotationState, RotationState.Vertical);
     }
 
+    [SubscribeLocalEvent]
     private void OnDowned(Entity<ShadowCloakedComponent> ent, ref DownedEvent args)
     {
         if (GetShadowCloakEntity(ent) is { } cloak)
             _appearance.SetData(cloak, RotationVisuals.RotationState, RotationState.Horizontal);
     }
 
+    [SubscribeLocalEvent]
     private void OnGetBlockingEntity(Entity<ShadowCloakedComponent> ent, ref GetVirtualItemBlockingEntityEvent args)
     {
         if (GetShadowCloakEntity(ent) is { } cloak)
             args.Uid = cloak;
     }
 
+    [SubscribeLocalEvent]
     private void OnGetBark(Entity<ShadowCloakedComponent> ent, ref GetBarkSourceEntityEvent args)
     {
         if (GetShadowCloakEntity(ent) is { } cloak)
             args.Ent = cloak;
     }
 
+    [SubscribeLocalEvent]
     private void OnGetEmoteSound(Entity<ShadowCloakedComponent> ent, ref GetEmoteSoundsEvent args)
     {
         if (args.Handled || GetShadowCloakEntity(ent) is not { } cloak)
@@ -93,6 +76,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
         args.EmoteSoundProtoId = cloak.Comp.EmoteSounds;
     }
 
+    [SubscribeLocalEvent]
     private void OnGetSpeechSound(Entity<ShadowCloakedComponent> ent, ref GetSpeechSoundEvent args)
     {
         if (args.Handled || GetShadowCloakEntity(ent) is not { } cloak)
@@ -102,18 +86,21 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
         args.SpeechSoundProtoId = cloak.Comp.SpeechSounds;
     }
 
+    [SubscribeLocalEvent]
     private void OnGetIdentityEntity(Entity<ShadowCloakedComponent> ent, ref GetIdentityRepresentationEntityEvent args)
     {
         if (GetShadowCloakEntity(ent) is { } cloak)
             args.Uid = cloak;
     }
 
+    [SubscribeLocalEvent]
     private void OnGetIdentity(Entity<ShadowCloakedComponent> ent, ref TryGetIdentityShortInfoEvent args)
     {
         if (GetShadowCloakEntity(ent) is { } cloak)
             args.Title = Name(cloak);
     }
 
+    [SubscribeLocalEvent]
     private void OnTransformName(Entity<ShadowCloakedComponent> ent, ref TransformSpeakerNameEvent args)
     {
         if (GetShadowCloakEntity(ent) is not { } cloak)
@@ -123,6 +110,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
         args.VoiceName = Name(cloak);
     }
 
+    [SubscribeLocalEvent]
     private void OnDamageDealt(Entity<ShadowCloakedComponent> ent, ref DamageDealtEvent args)
     {
         if (!args.Damage.AnyPositive())
@@ -137,8 +125,8 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
         if (cloak.Comp.SustainedDamage < cloak.Comp.DamageBeforeReveal)
             return;
 
-        var chance = Math.Clamp(cloak.Comp.SustainedDamage.Float() * cloak.Comp.RevealDamageMultiplier / 100f, 0f, 1f);
-        if (!SharedRandomExtensions.PredictedProb(Timing, chance, GetNetEntity(ent)))
+        var chance = Math.Clamp(cloak.Comp.SustainedDamage.Float() * cloak.Comp.RevealChanceMultiplier, 0f, 1f);
+        if (!SharedRandomExtensions.PredictedProb(Timing, chance, GetNetEntity(ent), GetNetEntity(cloak)))
             return;
 
         if (cloak.Comp.DebuffOnEarlyReveal)
@@ -151,6 +139,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
         RemoveShadowCloak(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnCloakShutdown(Entity<ShadowCloakEntityComponent> ent, ref ComponentShutdown args)
     {
         var parent = ent.Comp.User ?? Transform(ent).ParentUid;
@@ -159,6 +148,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
             PredictedQueueDel(ent.Owner);
     }
 
+    [SubscribeLocalEvent]
     private void OnGetDoAfterSpeed(Entity<ShadowCloakedComponent> ent, ref ModifyDoAfterDelayEvent args)
     {
         if (GetShadowCloakEntity(ent) is { } cloak)
@@ -168,6 +158,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
     /// <summary>
     /// Failsafe method in case shadow cloak entity unparents from heretic
     /// </summary>
+    [SubscribeLocalEvent]
     private void OnEntParentChanged(Entity<ShadowCloakEntityComponent> ent, ref EntParentChangedMessage args)
     {
         var userIsOldParent = ent.Comp.User == args.OldParent;
@@ -199,6 +190,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
         _transform.SetParent(ent, args.Transform, ent.Comp.User.Value);
     }
 
+    [SubscribeLocalEvent]
     private void OnShutdown(Entity<ShadowCloakedComponent> ent, ref ComponentShutdown args)
     {
         if (TerminatingOrDeleted(ent))
@@ -224,6 +216,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
         ResetAbilityCooldown(ent, revealCooldown);
     }
 
+    [SubscribeLocalEvent]
     private void OnStartup(Entity<ShadowCloakedComponent> ent, ref ComponentStartup args)
     {
         Startup(ent);

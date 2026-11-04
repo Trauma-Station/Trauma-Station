@@ -27,6 +27,7 @@ public struct CustomRichTextEntry
 
     private readonly Color _defaultColor;
     private readonly Type[]? _tagsAllowed;
+    private readonly Control _parent;
 
     private readonly IEntityManager _entManager;
 
@@ -77,6 +78,7 @@ public struct CustomRichTextEntry
         _entManager = entManager;
         _defaultColor = defaultColor ?? new(200, 200, 200);
         _tagsAllowed = tagsAllowed;
+        _parent = parent;
         Dictionary<int, Control>? tagControls = null;
 
         var nodeIndex = -1;
@@ -142,7 +144,7 @@ public struct CustomRichTextEntry
 
         int? breakLine;
         var wordWrap = new CustomWordWrap(maxSizeX);
-        var context = new MarkupDrawingContext();
+        var context = new MarkupDrawingContext(_parent);
         context.Font.Push(defaultFont);
         context.Color.Push(_defaultColor);
 

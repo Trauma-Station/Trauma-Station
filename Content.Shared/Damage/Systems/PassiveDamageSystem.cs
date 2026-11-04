@@ -1,4 +1,7 @@
-using Content.Medical.Common.Targeting; // Shitmed Change
+// <Trauma>
+using Robust.Shared.Containers;
+using Content.Medical.Common.Targeting;
+// </Trauma>
 using Content.Shared.Damage.Components;
 using Content.Shared.Mobs.Components;
 using Robust.Shared.Timing;
@@ -7,6 +10,7 @@ namespace Content.Shared.Damage.Systems;
 
 public sealed partial class PassiveDamageSystem : EntitySystem
 {
+    [Dependency] private SharedContainerSystem _container = default!; // Trauma
     [Dependency] private DamageableSystem _damageable = default!;
     [Dependency] private IGameTiming _timing = default!;
 
@@ -49,6 +53,11 @@ public sealed partial class PassiveDamageSystem : EntitySystem
             // Make sure they're up for a damage tick
             if (comp.NextDamage > curTime)
                 continue;
+
+            // <Trauma>
+            if (comp.PauseWhenStored && _container.TryGetContainingContainer(uid, out _)) // Prevents damage if PauseWhenContained bool is true and entity is inside a container
+                return;
+            // </Trauma>
 
             // Set the next time they can take damage
             comp.NextDamage = curTime + TimeSpan.FromSeconds(1f);

@@ -9,7 +9,6 @@ using Content.Trauma.Shared.Heretic.Components;
 using Content.Trauma.Shared.Heretic.Events;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Spawners;
 using Robust.Shared.Timing;
@@ -86,9 +85,6 @@ public abstract partial class SharedContinuousBeamSystem : EntitySystem
         if (gun.Comp.BeamTime > 0f)
             EnsureComp<TimedDespawnComponent>(endpoint).Lifetime = gun.Comp.BeamTime;
 
-        var now = Timing.CurTime;
-
-        gun.Comp.Data.CreationTime = now;
         _joint.CreateJoint(endpoint, gun, gun.Comp.Data);
 
         // Why server? Because audio system is broken there is no way to stop predicted audio on client apparently
@@ -101,7 +97,7 @@ public abstract partial class SharedContinuousBeamSystem : EntitySystem
         }
 
         gun.Comp.Endpoint = endpoint;
-        gun.Comp.BeamTimer = now + TimeSpan.FromSeconds(gun.Comp.BeamTime);
+        gun.Comp.BeamTimer = Timing.CurTime + TimeSpan.FromSeconds(gun.Comp.BeamTime);
         gun.Comp.Shooter = user;
         Dirty(gun);
 

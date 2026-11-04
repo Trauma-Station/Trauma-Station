@@ -3,7 +3,6 @@
 using Content.Client.Examine;
 using Content.Shared.Humanoid;
 using Content.Trauma.Common.Sprite;
-using Content.Trauma.Shared.Heretic.Components.PathSpecific.Lock;
 using Content.Trauma.Shared.Heretic.Components.Side;
 using Robust.Client.Player;
 using Robust.Shared.Enums;
@@ -120,7 +119,7 @@ public sealed partial class FearOverlay : Overlay
             if (uid == ent.Owner)
                 continue;
 
-            _spriteVis.UpdateVisibilityModifiers(uid, nameof(DigitalCamouflageComponent), 0f);
+            _spriteVis.UpdateVisibilityModifiers(uid, nameof(FearComponent), 0f);
             _hiddenEntities.Add((uid, sprite, xform));
         }
     }
@@ -129,7 +128,7 @@ public sealed partial class FearOverlay : Overlay
     {
         foreach (var ent in _hiddenEntities)
         {
-            _spriteVis.UpdateVisibilityModifiers(ent, nameof(DigitalCamouflageComponent), 1f);
+            _spriteVis.UpdateVisibilityModifiers(ent, nameof(FearComponent), 1f);
         }
 
         _hiddenEntities.Clear();

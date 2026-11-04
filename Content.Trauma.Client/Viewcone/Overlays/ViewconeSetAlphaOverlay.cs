@@ -176,7 +176,7 @@ public sealed partial class ViewconeSetAlphaOverlay : Overlay
             }
 
             // when things go out of view, they get a memory in their place
-            comp.Memory ??= _ent.SpawnEntity(MemoryEntity, xform.Coordinates);
+            comp.Memory ??= _ent.SpawnAtPosition(MemoryEntity, xform.Coordinates);
             var memory = comp.Memory.Value;
             if (!_ent.EnsureComponent<ViewconeOccludedComponent>(uid, out occluded))
             {

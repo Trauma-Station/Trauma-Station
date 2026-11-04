@@ -2,14 +2,15 @@
 
 using Content.Lavaland.Common.Weapons.Ranged;
 using Content.Shared.CombatMode;
+using Content.Shared.Damage;
 using Content.Shared.DoAfter;
 using Content.Shared.Examine;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Popups;
 using Content.Shared.Projectiles;
 using Content.Shared.Stunnable;
-using Content.Shared.Timing.Components;
 using Content.Shared.Timing.Systems;
+using Content.Shared.Weapons.Melee;
 using Content.Shared.Weapons.Ranged.Components;
 using Content.Shared.Weapons.Ranged.Systems;
 using Content.Shared.Whitelist;
@@ -29,6 +30,7 @@ namespace Content.Trauma.Shared.Heretic.Systems.Side;
 
 public sealed partial class LionhunterRifleSystem : EntitySystem
 {
+    [Dependency] private SharedMeleeWeaponSystem _melee = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedHereticSystem _heretic = default!;
@@ -52,15 +54,6 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<AimedRifleComponent, DoAfterAttemptEvent<AimedRifleDoAfterEvent>>(OnDoAfterAttempt);
-        SubscribeLocalEvent<AimedRifleComponent, AimedRifleDoAfterEvent>(OnDoAfter);
-
-        SubscribeLocalEvent<LionhunterRifleComponent, ExaminedEvent>(OnExamine);
-        SubscribeLocalEvent<LionhunterRifleComponent, AimedRifleAimAttemptEvent>(OnAimAttempt);
-
-        SubscribeLocalEvent<LionhunterRifleProjectileComponent, PreventCollideEvent>(OnPreventCollide);
-        SubscribeLocalEvent<LionhunterRifleProjectileComponent, ProjectileHitEvent>(OnHit);
-
         CommandBinds.Builder
             .Bind(EngineKeyFunctions.UseSecondary, new PointerInputCmdHandler(Aim))
             .Register<LionhunterRifleSystem>();
@@ -75,6 +68,7 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
         return false;
     }
 
+    [SubscribeLocalEvent]
     private void OnHit(Entity<LionhunterRifleProjectileComponent> ent, ref ProjectileHitEvent args)
     {
         if (ent.Comp.EmpowerTarget is not { } target || args.Target != target)
@@ -91,12 +85,14 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
         _teleport.TeleportSingle(shooter, Transform(target).Coordinates, shooter);
     }
 
+    [SubscribeLocalEvent]
     private void OnPreventCollide(Entity<LionhunterRifleProjectileComponent> ent, ref PreventCollideEvent args)
     {
         if (ent.Comp.EmpowerTarget is { } target && args.OtherEntity != target)
             args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnAimAttempt(Entity<LionhunterRifleComponent> ent, ref AimedRifleAimAttemptEvent args)
     {
         if (args.Cancelled || _heretic.IsHereticOrGhoul(args.User))
@@ -105,6 +101,7 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
         args.Cancelled = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnExamine(Entity<LionhunterRifleComponent> ent, ref ExaminedEvent args)
     {
         if (!_heretic.IsHereticOrGhoul(args.Examiner))
@@ -129,8 +126,12 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
 
         var uid = args.FiredProjectile;
 
-        if (!_lionhunterProjectileQuery.TryComp(uid, out var comp))
+        if (!_lionhunterProjectileQuery.TryComp(uid, out var comp) ||
+            !_projectileQuery.TryComp(uid, out var projectile))
             return;
+
+        projectile.Damage *= comp.EmpowerDamageMultiplier;
+        Dirty(uid, projectile);
 
         EntityManager.AddComponents(uid, comp.ComponentsOnEmpower);
 
@@ -151,6 +152,7 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
         Dirty(uid, homing);
     }
 
+    [SubscribeLocalEvent]
     private void OnDoAfter(Entity<AimedRifleComponent> ent, ref AimedRifleDoAfterEvent args)
     {
         if (ent.Comp.AimingAt is not { } target)
@@ -173,6 +175,7 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
         Dirty(ent);
     }
 
+    [SubscribeLocalEvent]
     private void OnDoAfterAttempt(Entity<AimedRifleComponent> ent,
         ref DoAfterAttemptEvent<AimedRifleDoAfterEvent> args)
     {
@@ -271,6 +274,7 @@ public sealed partial class LionhunterRifleSystem : EntitySystem
             _popup.PopupEntity(Loc.GetString("lionhunter-rifle-aim-message"), user, user);
             if (comp.ShowMark)
                 EnsureComp<AimedRifleMarkerComponent>(target);
+            _melee.ResetMeleeCooldown(ent.Value, user);
             return;
         }
 

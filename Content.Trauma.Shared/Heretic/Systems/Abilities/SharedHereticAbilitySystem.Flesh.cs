@@ -78,6 +78,7 @@ public abstract partial class SharedHereticAbilitySystem
             _ghoul.MakeOrgansFragile(target);
     }
 
+    [SubscribeLocalEvent]
     private void OnFleshSurgeryUse(Entity<FleshSurgeryComponent> ent, ref UseInHandEvent args)
     {
         if (!TryComp(ent, out TouchSpellComponent? touchSpell))
@@ -98,8 +99,7 @@ public abstract partial class SharedHereticAbilitySystem
 
         var cd = _grasp.CalculateAreaGraspCooldown((float) touchSpell.Cooldown.TotalSeconds,
             _lookupGhouls.Count,
-            ent.Comp.AreaHealRange,
-            1f);
+            ent.Comp.AreaHealRange);
         if (cd > ent.Comp.MaxAreaCooldown)
             cd = ent.Comp.MaxAreaCooldown;
 

@@ -11,22 +11,17 @@ using Content.Medical.Shared.Surgery.Steps;
 using Content.Medical.Shared.Surgery.Steps.Parts;
 using Content.Medical.Shared.Surgery.Tools;
 using Content.Medical.Shared.Traumas;
-using Content.Medical.Shared.Wounds;
-using Content.Shared.Humanoid;
-using Content.Shared.Humanoid.Markings;
 using Content.Shared.Bed.Sleep;
 using Content.Shared.Body;
 using Content.Shared.Buckle.Components;
 using Content.Shared.Chat;
 using Content.Shared.Damage;
-using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Prototypes;
 using Content.Shared.Damage.Systems;
 using Content.Shared.DoAfter;
 using Content.Shared.FixedPoint;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
-using Content.Shared.Item;
 using Content.Shared.Popups;
 using Content.Shared.StatusEffectNew;
 using Content.Trauma.Common.Body.Part;
@@ -49,6 +44,7 @@ public sealed partial class SurgerySystem
     [Dependency] private EntityQuery<SurgeryIgnoreClothingComponent> _ignoreQuery = default!;
     [Dependency] private EntityQuery<SurgeryStepComponent> _stepQuery = default!;
     [Dependency] private EntityQuery<SurgeryToolComponent> _toolQuery = default!;
+    [Dependency] private EntityQuery<InternalChildOrganComponent> _internalQuery = default!;
 
     private static readonly ProtoId<DamageGroupPrototype> Brute = "Brute";
     private static readonly ProtoId<DamageTypePrototype> Poison = "Poison";
@@ -399,40 +395,55 @@ public sealed partial class SurgerySystem
         switch (ent.Comp.TraumaType)
         {
             case TraumaType.OrganDamage:
-                foreach (var organ in _body.GetInternalOrgans(args.Body))
+                var result = false;
+
+                foreach (var organ in _part.GetPartOrgans(args.Part).Values)
                 {
-                    foreach (var modifier in organ.Comp.IntegrityModifiers)
+                    if (!_internalQuery.TryComp(organ, out var internalComp))
+                        continue;
+
+                    Entity<InternalChildOrganComponent?> organEnt = (organ, internalComp);
+
+                    foreach (var modifier in internalComp.IntegrityModifiers)
                     {
                         var delta = healAmount - modifier.Value;
-                        if (delta > 0)
+                        if (delta >= 0)
                         {
-                            healAmount -= modifier.Value;
-                            _trauma.TryRemoveOrganDamageModifier(
-                                organ.AsNullable(),
+                            if (!_trauma.TryRemoveOrganDamageModifier(
+                                organEnt,
                                 modifier.Key.Item2,
-                                modifier.Key.Item1);
+                                modifier.Key.Item1))
+                                continue;
+
+                            healAmount -= modifier.Value;
+                            result = true;
                         }
                         else
                         {
-                            _trauma.TryChangeOrganDamageModifier(
-                                organ.AsNullable(),
+                            if (!_trauma.TryChangeOrganDamageModifier(
+                                organEnt,
                                 -healAmount,
                                 modifier.Key.Item2,
-                                modifier.Key.Item1);
-                            break;
+                                modifier.Key.Item1))
+                                continue;
+                            // Healing capacity depleted, nothing we can do during this step anymore
+                            return;
                         }
                     }
                 }
 
+                // Unhealable organ damage?
+                if (!result)
+                    _trauma.RemoveTraumas(args.Part, TraumaType.OrganDamage);
                 break;
 
             case TraumaType.BoneDamage:
-                _trauma.DamageBone(args.Part, -healAmount);
+                if (!_trauma.DamageBone(args.Part, -healAmount)) // Unhealable bone damage?
+                    _trauma.RemoveTraumas(args.Part, TraumaType.BoneDamage);
                 break;
 
             case TraumaType.Dismemberment:
                 _trauma.RemoveTraumas(args.Part, TraumaType.Dismemberment);
-
                 break;
         }
     }

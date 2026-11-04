@@ -40,7 +40,7 @@
 - type: antagSmite
   id: Insurgent
   antag: Insurgent
-  rule: Insurgency
+  rule: InsurgencyRule
   ruleComp: InsurgencyRule
   icon:
     sprite: Clothing/Mask/gas.rsi

@@ -879,6 +879,12 @@
   ritualPrototypes:
   - RitualRustSowerGrenade
 
+- type: hereticKnowledge
+  id: SharpMedal
+  stage: 5
+  ritualPrototypes:
+  - RitualSharpMedal
+
 ## T3
 - type: hereticKnowledge
   id: MindGrasp
@@ -915,12 +921,6 @@
   event: !type:HereticKnowledgeEvent
     addedComponents:
     - type: ForestAdmonitions
-
-- type: hereticKnowledge
-  id: SharpMedal
-  stage: 7
-  ritualPrototypes:
-  - RitualSharpMedal
 
 - type: hereticKnowledge
   id: AshSpirit

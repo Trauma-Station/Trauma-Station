@@ -2,7 +2,7 @@
 
 using Content.Shared.EntityEffects;
 
-namespace Content.Trauma.Shared.EntityEffects.Effects;
+namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
 /// Effect that shoot lightnings(like from tesla) from the target entity

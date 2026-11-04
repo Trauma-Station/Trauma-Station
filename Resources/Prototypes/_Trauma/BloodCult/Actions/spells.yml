@@ -48,30 +48,17 @@
   parent: BaseBloodCultSpell
   id: ActionBloodCultStun
   name: Stun
-  description: Empowers your hand to stun and mute a victim on contact.
+  description: Empowers your hand to knock down and mute a victim on contact. Strike them with a cult weapon to complete the invocation, stunning them and extending the mute.
   components:
   - type: Sprite
     layers:
     - state: stun
-  - type: TargetAction
-    checkCanAccess: false
-    interactOnMiss: false
-    range: 3
-  - type: EntityTargetAction
-    canTargetSelf: false
-    whitelist:
-      components:
-      - Body
-    event: !type:EffectTargetActionEvent
-  - type: SpeakOnAction
-    sentence: blood-cult-action-stun
+  - type: InstantAction
+    event: !type:EffectInstantActionEvent
   - type: EffectAction
     effects:
-    - !type:ModifyStatusEffect
-      effectProto: StatusEffectMuted
-      time: 12
-    - !type:ModifyParalysis
-      time: 16
+    - !type:SpawnHeldItems
+      items: [ StunningAura ]
 
 - type: entity
   parent: BaseBloodCultSpell
@@ -209,5 +196,5 @@
     effects:
     - !type:SpawnHeldItems
       items: [ BloodRitesAura ]
-  - type: SpeakOnAction
-    sentence: blood-cult-action-blood-rites
+  - type: LimitedCharges
+    maxCharges: 5

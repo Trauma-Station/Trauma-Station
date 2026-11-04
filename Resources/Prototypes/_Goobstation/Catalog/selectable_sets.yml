@@ -29,8 +29,8 @@
   - WelderIndustrialAdvanced
   - ClothingEyesGlassesMeson
   - ClothingHandsGlovesColorYellow
-  - JawsOfLife
-  - RemoteSignaller
+  - SyndicateJawsOfLife
+  - RemoteSignallerAdvanced
   - Multitool
   - C4
   - C4
@@ -59,7 +59,7 @@
   - RadioJammer
   - TraitorCodePaper
   - Emag
-  - AccessBreaker
+  - SoapSyndie
   - MysteryLighterBox
   - CigPackSyndicate
   - Telecrystal50 # The thief cannot use them, but it may induce communication with traitors
@@ -75,6 +75,8 @@
   - ChemistryBottleNocturine
   - ChemistryBottleNocturine
   - HypopenBox
+  - SyringePistol
+  - Syringe
   - NitrousOxideTankFilled
 
 - type: selectableSet
@@ -89,6 +91,7 @@
   - CyberPen
   - BriefcaseThiefBribingBundleFilled
   - ClothingMaskGasVoiceChameleon
+  - BinaryImplanter
 
 - type: selectableSet
   id: ThiefSmugglerSet

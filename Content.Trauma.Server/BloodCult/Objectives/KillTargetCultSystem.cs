@@ -37,7 +37,7 @@ public sealed partial class KillTargetCultSystem : EntitySystem
             return;
 
         var rule = args.Rule;
-        foreach (var obj in EntityQueryEnumerator<KillTargetCultComponent>())
+        foreach (var obj in AllEntityQuery<KillTargetCultComponent>())
         {
             if (obj.Comp.Rule == rule)
                 _metaData.SetEntityName(obj.Owner, GetTitle(target, obj.Comp.Title));

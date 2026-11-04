@@ -9,27 +9,21 @@ namespace Content.Trauma.Client.JobListings;
 [GenerateTypedNameReferences]
 public sealed partial class SideJobControl : Control
 {
-    private IEntityManager _entity = default!;
-    private IGameTiming _timing = default!;
+    private IEntityManager _ent = default!;
     private SpriteSystem _sprite = default!;
 
     private NetEntity? _sideJob;
-    private bool _cancelAlreadyPressed = false;
-    private TimeSpan? _cancelPressTime;
-
-    private readonly TimeSpan _cancelSafetyDuration = TimeSpan.FromSeconds(1.0);
 
     public Action<NetEntity>? OnAccepted;
     public Action<NetEntity>? OnCancelled;
     public Action<NetEntity>? OnClaimed;
 
-    public SideJobControl(IEntityManager entity, IGameTiming timing, SpriteSystem sprite)
+    public SideJobControl(IEntityManager ent, SpriteSystem sprite)
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
 
-        _entity = entity;
-        _timing = timing;
+        _ent = ent;
         _sprite = sprite;
 
         AcceptButton.OnPressed += _ =>
@@ -44,7 +38,11 @@ public sealed partial class SideJobControl : Control
                 OnClaimed?.Invoke(job);
         };
 
-        CancelButton.OnPressed += OnCancelButtonPressed;
+        CancelButton.OnPressed += _ =>
+        {
+            if (_sideJob is { } job)
+                OnCancelled?.Invoke(job);
+        };
     }
 
     public void UpdateAsAvailable(SideJobInfo info)
@@ -62,37 +60,14 @@ public sealed partial class SideJobControl : Control
         Update(info);
         AcceptButton.Visible = false;
         CancelButton.Visible = true;
-        CancelButton.Text = Loc.GetString("job-listings-ui-cancel-button");
-        _cancelAlreadyPressed = false;
         ClaimButton.Visible = true;
         ProgressBar.Visible = true;
         ProgressLabel.Visible = true;
     }
 
-    private void OnCancelButtonPressed(BaseButton.ButtonEventArgs args)
+    public void DisableAcceptButton()
     {
-        if (_sideJob is null)
-            return;
-
-        if (!_cancelAlreadyPressed)
-        {
-            _cancelAlreadyPressed = true;
-            _cancelPressTime = _timing.CurTime;
-            CancelButton.Text = Loc.GetString("job-listings-ui-confirmation-button");
-            return;
-        }
-
-        OnCancelled?.Invoke(_sideJob.Value);
-    }
-
-    protected override void FrameUpdate(FrameEventArgs args)
-    {
-        base.FrameUpdate(args);
-        if (_cancelAlreadyPressed && _cancelPressTime is not null && _timing.CurTime >= _cancelPressTime.Value + _cancelSafetyDuration)
-        {
-            _cancelAlreadyPressed = false;
-            CancelButton.Text = Loc.GetString("job-listings-ui-cancel-button");
-        }
+        AcceptButton.Disabled = false;
     }
 
     private void Update(SideJobInfo info)
@@ -105,6 +80,8 @@ public sealed partial class SideJobControl : Control
         ClaimButton.Disabled = !canClaim;
         ProgressBar.Value = info.Progress;
         ProgressLabel.Text = Loc.GetString("job-listings-ui-progress", ("progress", info.Progress.ToString("P0")));
-        _sideJob = _entity.GetNetEntity(info.Entity);
+        _sideJob = _ent.GetNetEntity(info.Entity);
+        if (_ent.TryGetComponent<SideJobComponent>(info.Entity, out var jobComp))
+            CancelButton.Disabled = !jobComp.CanCancel;
     }
 }

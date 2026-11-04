@@ -1,30 +1,46 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: [ MobMouse, MobCombat ]
-  id: MobNukieMouse
-  name: nuclear operative mouse
-  description: A Nuclear Operative... MOUSE?!
-  suffix: Syndicate
+  abstract: true
+  id: BaseNukieAnimal
   components:
   - type: GhostRole
     makeSentient: true
     allowSpeech: true
     allowMovement: true
-    name: ghost-role-information-nukie-mouse-name
-    description: ghost-role-information-nukie-mouse-description
-  - type: RandomMetadata
-    nameSegments: [ NamesMouseDeathCommando ]
+    rules: ghost-role-information-syndicate-reinforcement-rules
+    mindRoles:
+    - MindRoleGhostRoleTeamAntagonist
+  - type: GhostTakeoverAvailable
+  # fake hardsuit
+  - type: Insulated
+  - type: Damageable
+    damageModifierSet: NukieSpider
+  - type: PointLight
+    radius: 3.0
+    energy: 2.3
+    offset: 0, -2
+    color: green
+  # evil
+  - type: ShowSyndicateIcons
   - type: NpcFactionMember
     factions:
     - Syndicate
-  - type: PointLight
-    radius: 1.5
-    energy: 2.3
-    offset: 0, -1
-    color: green
-  - type: Sprite
-    sprite: _Trauma/Mobs/Animals/Syndicate/nukiemouse.rsi
+  - type: IntrinsicRadioReceiver
+  - type: IntrinsicRadioTransmitter
+    channels:
+    - Syndicate
+  - type: ActiveRadio
+    channels:
+    - Syndicate
+  - type: MobPrice
+    price: 250
+
+- type: entity
+  abstract: true
+  parent: BaseNukieAnimal
+  id: BaseNukieAnimalSpaceproof # for mobs that would die in space otherwise
+  components:
   - type: Respirator
     minSaturation: 5.0
   - type: TemperatureDamage
@@ -33,7 +49,24 @@
   - type: PermanentStatusEffects
     statusEffects:
     - StatusEffectPressureImmunity
-  - type: Insulated
+
+- type: entity
+  parent: [ BaseNukieAnimalSpaceproof, MobMouse ]
+  id: MobNukieMouse
+  name: nuclear operative mouse
+  description: A Nuclear Operative... MOUSE?!
+  suffix: Syndicate
+  components:
+  - type: GhostRole
+    name: ghost-role-information-nukie-mouse-name
+    description: ghost-role-information-nukie-mouse-description
+  - type: RandomMetadata
+    nameSegments: [ NamesMouseDeathCommando ]
+  - type: PointLight
+    radius: 1.5
+    offset: 0, -1
+  - type: Sprite
+    sprite: _Trauma/Mobs/Animals/Syndicate/nukiemouse.rsi
   - type: MeleeWeapon
     soundHit:
       path: /Audio/Effects/bite.ogg
@@ -44,20 +77,9 @@
         Slash: 5
         Piercing: 5
         Structural: 15
-  - type: MobPrice
-    price: 250
-  - type: IntrinsicRadioReceiver
-  - type: IntrinsicRadioTransmitter
-    channels:
-    - Syndicate
-  - type: ActiveRadio
-    channels:
-    - Syndicate
   - type: Tag
     tags:
     - FootstepSound
-  - type: Damageable
-    damageModifierSet: NukieSpider
   - type: MobThresholds
     thresholds:
       0: Alive
@@ -65,33 +87,22 @@
       30: Dead
 
 - type: entity
-  parent: MobGiantSpiderAngry
+  parent: [ BaseNukieAnimalSpaceproof, MobGiantSpiderAngry ]
   id: MobNukieSpider
   name: nuclear operative tarantula
   description: A spider? A NUKIE SPIDER?!
   suffix: Syndicate
   components:
   - type: GhostRole
-    makeSentient: true
-    allowSpeech: true
-    allowMovement: true
     name: ghost-role-information-nukie-spider-name
     description: ghost-role-information-nukie-spider-description
-    rules: ghost-role-information-nukie-spider-rules
-    mindRoles:
-    - MindRoleGhostRoleTeamAntagonist
   - type: RandomMetadata
     nameFormat: name-format-nukie-operator
     nameSegments: [ NamesNukieSpider ]
   - type: NpcFactionMember
     factions:
     - Syndicate
-    - Xeno
-  - type: PointLight
-    radius: 3
-    energy: 2.3
-    offset: 0, -2
-    color: green
+    - Xeno # no spider war
   - type: Sprite
     drawdepth: Mobs
     sprite: _Trauma/Mobs/Animals/Syndicate/nukiespider.rsi
@@ -121,15 +132,6 @@
   - type: MovementSpeedModifier
     baseWalkSpeed: 3
     baseSprintSpeed: 4.9
-  - type: Respirator
-    minSaturation: 5.0
-  - type: TemperatureDamage
-    heatDamageThreshold: 423
-    coldDamageThreshold: 0
-  - type: PermanentStatusEffects
-    statusEffects:
-    - StatusEffectPressureImmunity
-  - type: Insulated
   - type: MeleeWeapon
     soundHit:
       path: /Audio/Effects/bite.ogg
@@ -146,15 +148,6 @@
   - type: MeleeChemicalInjector
     transferAmount: 0.5
     solution: melee
-  - type: MobPrice
-    price: 250
-  - type: IntrinsicRadioReceiver
-  - type: IntrinsicRadioTransmitter
-    channels:
-    - Syndicate
-  - type: ActiveRadio
-    channels:
-    - Syndicate
   - type: Access
     tags:
     - NuclearOperative
@@ -163,8 +156,6 @@
     tags:
     - FootstepSound
     - DoorBumpOpener
-  - type: Damageable
-    damageModifierSet: NukieSpider
 
 - type: entity
   parent: [ SolutionWeapon, SolutionTiny ]
@@ -183,12 +174,15 @@
         Quantity: 1
 
 - type: entity
-  parent: BaseMobCarp
+  parent: [ BaseNukieAnimal, BaseMobCarp ]
   id: MobNukieCarp
   name: nuclear operative carp
+  suffix: Syndicate # no shit?
   description: A blood-red carp trained in carp-to-carp combat.
-  suffix: Syndicate
   components:
+  - type: GhostRole
+    name: ghost-role-information-nukie-carp-name
+    description: ghost-role-information-nukie-carp-description
   - type: RandomMetadata
     nameFormat: name-format-nukie-operator
     nameSegments: [ NamesNukieCarp ]
@@ -201,14 +195,6 @@
     - map: [ "enum.DamageStateVisualLayers.BaseUnshaded" ]
       state: mouth
       shader: unshaded
-  - type: PointLight
-    radius: 3
-    energy: 2.3
-    offset: 0, -2
-    color: green
-  - type: NpcFactionMember
-    factions:
-    - Syndicate
   - type: Access
     tags:
     - NuclearOperative
@@ -219,7 +205,6 @@
     - DoorBumpOpener
   - type: ExplosionResistance
     damageCoefficient: 0.2
-  - type: Insulated
   - type: SolutionManager
     solutions:
     - SolutionVenomSyndicarp
@@ -251,7 +236,7 @@
         Quantity: 1
 
 - type: entity
-  parent: BaseMobBehonker
+  parent: [ BaseNukieAnimal, BaseMobBehonker ]
   id: MobNukieBehonker
   name: nuclear operative behonker
   description: Gorlex thought it would be funny to have a behonker. It was.
@@ -262,14 +247,6 @@
     nameSegments: [ NamesNukieBehonker ]
   - type: Sprite
     sprite: _Trauma/Mobs/Monsters/Demons/syndie_behonker.rsi
-  - type: PointLight
-    radius: 3
-    energy: 2.3
-    offset: 0, -2
-    color: green
-  - type: NpcFactionMember
-    factions:
-    - Syndicate
   - type: Access
     tags:
     - NuclearOperative
@@ -277,15 +254,6 @@
   - type: Tag
     tags:
     - DoorBumpOpener
-  - type: IntrinsicRadioReceiver
-  - type: IntrinsicRadioTransmitter
-    channels:
-    - Syndicate
-  - type: ActiveRadio
-    channels:
-    - Syndicate
-  - type: Damageable
-    damageModifierSet: NukieSpider
   - type: LanguageSpeaker
     speaks:
     - Universal

@@ -32,11 +32,13 @@ public abstract partial class CultRuneReviveSystem : EntitySystem
             return;
         }
 
-        var targets = _cult.GetTargetsNearRune(ent, ent.Comp.ReviveRange);
+        var targets = _cult.GetCultistsNearRune(ent, ent.Comp.ReviveRange);
         targets.RemoveWhere(uid =>
             !HasComp<DamageableComponent>(uid) ||
+            // ignore structures but still allows constructs
             !HasComp<MobThresholdsComponent>(uid) ||
             !HasComp<MobStateComponent>(uid) ||
+            // don't waste it on people still alive
             _mob.IsAlive(uid));
 
         if (targets.Count == 0)

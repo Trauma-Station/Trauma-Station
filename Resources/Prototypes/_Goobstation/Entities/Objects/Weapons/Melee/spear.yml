@@ -102,6 +102,7 @@
   - type: StaticPrice
     price: 5000
   - type: IllusionOnMeleeHit
+  - type: IllusionSpawner
     factionWhitelist:
     - Assistant
     components:
@@ -109,7 +110,3 @@
       attackMemoryLength: 10
     - type: GroupRetaliation
       range: 8
-    - type: NpcFactionMember
-      factions:
-      - Assistant
-      - Syndicate

@@ -14,6 +14,11 @@
     - state: soul_stone_glow
       map: [ "enum.SoulShardVisualState.Glow" ]
       visible: false
+  - type: CollectiveMind
+    canUseInCrit: true # this counts as dead...
+    defaultChannel: BloodCult
+    channels:
+    - BloodCult
   - type: LanguageSpeaker
     speaks:
     - Eldritch
@@ -21,6 +26,8 @@
     - Eldritch
     - TauCetiBasic
   - type: MindContainer
+  - type: NameIdentifier
+    group: AdjectivePrefix # TODO: make cult related dataset
   - type: Examiner
     skipChecks: true
   - type: PointLight

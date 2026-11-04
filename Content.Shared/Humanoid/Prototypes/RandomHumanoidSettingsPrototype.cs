@@ -35,5 +35,5 @@ public sealed partial class RandomHumanoidSettingsPrototype : IPrototype, IInher
     /// </summary>
     [DataField]
     [AlwaysPushInheritance]
-    public ComponentRegistry? Components { get; private set; }
+    public ComponentRegistry Components = new(); // Trauma - non-nullable, default to empty
 }

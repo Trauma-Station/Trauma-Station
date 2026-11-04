@@ -99,7 +99,8 @@ public static class ServerPackaging
         if (!skipBuild)
         {
             // <Trauma> - replaced copypaste with module helper method
-            await ModulePackaging.BuildModules("Server", configuration, logBuild, platform.TargetOs);
+            await ModulePackaging.BuildModules("Server", configuration, logBuild,
+                extraFlags: [ $"/p:TargetOs={platform.TargetOs}" ]);
             // </Trauma>
 
             await PublishClientServer(platform.Rid, platform.TargetOs, configuration);

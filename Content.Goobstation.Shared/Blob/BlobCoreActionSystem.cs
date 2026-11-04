@@ -63,7 +63,7 @@ public sealed partial class BlobCoreActionSystem : EntitySystem
         if (!_gridQuery.TryComp(gridUid, out var grid))
             return;
 
-        var fromTile = FindNearBlobTile(location, (gridUid.Value, grid));
+        var fromTile = FindNearBlobTile(location, (gridUid.Value, grid), core);
 
         #region OnTarget
         if (targetUid is { } target && !HasComp<BlobMobComponent>(target))
@@ -93,7 +93,7 @@ public sealed partial class BlobCoreActionSystem : EntitySystem
         if (_map.GetAnchoredEntities(gridUid.Value, grid, targetTile.GridIndices).Any(_tileQuery.HasComponent))
             return;
 
-        var node = _core.GetNearNode(location, core.Comp.TilesRadiusLimit);
+        var node = _core.GetNearNode(location, core, core.Comp.TilesRadiusLimit);
 
         if (fromTile != null && node == null)
             _popup.PopupCoordinates(Loc.GetString("blob-target-nearby-not-node"), location, observer, PopupType.Large);
@@ -130,7 +130,7 @@ public sealed partial class BlobCoreActionSystem : EntitySystem
         DirtyField(core, core.Comp, nameof(BlobCoreComponent.NextAction));
     }
 
-    private EntityUid? FindNearBlobTile(EntityCoordinates coords, Entity<MapGridComponent> grid)
+    private EntityUid? FindNearBlobTile(EntityCoordinates coords, Entity<MapGridComponent> grid, EntityUid core)
     {
         var mobTile = _map.GetTileRef(grid, grid, coords);
         var center = mobTile.GridIndices;
@@ -147,7 +147,7 @@ public sealed partial class BlobCoreActionSystem : EntitySystem
         {
             foreach (var ent in _map.GetAnchoredEntities(grid, grid, indices))
             {
-                if (_tileQuery.CompOrNull(ent)?.Core != null)
+                if (_tileQuery.CompOrNull(ent)?.Core == core)
                     return ent;
             }
         }

@@ -5,46 +5,47 @@ trait-category-languages = Languages
 
 trait-language-foreigner-light-name = Foreigner Light
 trait-language-foreigner-light-desc =
-    You understand the common language, Tau-Ceti Basic, but you can't quite speak it yet.
+    You understand the common language, Corporate Standard, but you can't quite speak it yet.
     You have a translator to help you with your basic understanding of the language, better keep it charged.
 
 trait-language-foreigner-name = Foreigner
 trait-language-foreigner-desc =
-    You can't understand the common language, Tau-Ceti Basic, and you require a translator at all times to talk.
+    You can't understand the common language, Corporate Standard, and you require a translator at all times to talk.
     You have a translator to help you with your understanding and speaking, make sure to keep it charged.
 
 trait-language-signlanguage-name = Sign Language
 trait-language-signlanguage-desc =
     The use of body language, hand signs, and other forms of dexterous movements to get your point across.
-    You can understand and use Tau-Ceti Basic Sign Language (TCB-SL).
+    You can understand and use Corporate Standard Sign Language.
     If you are mute for any reason, you can still communicate with sign language.
 
-trait-language-solcommon-name = Sol Common
+trait-language-solcommon-name = EarthGen
 trait-language-solcommon-desc =
-    With its roots in Mandarin Chinese - Common evolved as the official language of the Sol Alliance - with officials working to tie it together with a common tongue.
-    It's spoken by state officials - taught in schools - and spoken by those who either feel a sense of national pride in the Alliance or otherwise fell sway to the culture.
+    Founded by the World Prosperity Spheres in 2360, it was the original Human Unified Language before the adoption of Corporate Standard for trade.
+    All humans and those who live in human nations are at least familiar with this language, which has become synonymous with humanity. It has its
+    roots in English, Japanese, and Mandarin, giving it a distinct accent and structure.
 
 trait-language-tradeband-name = Tradeband
 trait-language-tradeband-desc =
     Descended from latin and romance languages of old Earth - Tradeband remains the main tongue of the upper class of humanity.
     The language sounds elegant and well structured to most ears. It remains in popular use with traders - diplomats - and those seeking to hold onto a piece of a romantic past.
 
-trait-language-freespeak-name = Freespeak
+trait-language-freespeak-name = Fringe-Gutter
 trait-language-freespeak-desc =
-    A language of renegades and frontiersmen descending from various languages from Earth like Hindi combined into a multi-rooted jumble that sounds incoherent or even barbarian to non-native speakers.
-    This language is the only common cultural identity for humans in the frontier. Speaking this language in itself boldly declares the speaker a free spirit.
-    Often called 'Gutter' by Alliance citizens.
+   The drowl and jumble of various stitched-together languages. The barbarian language finds like-minded company: renegades, frontiersmen, and explorers.
+   It is considered the language of those who live on the fringe, and anyone who speaks it proudly identifies with that crowd.
 
-trait-language-elyran-name = Elyran
+trait-language-elyran-name = Sunna Arabic
 trait-language-elyran-desc =
-    Elyran Standard is the official tongue of the Republic of Elyra.
-    Constructed using elements of Farsi - Arabic - and Turkish - influence from all three of these languages can be seen throughout its grammar and vocabulary.
+    Influenced by Farsi, Turkish, and Arabic, it is the official language of the Sunna Core. It is a prime symbol of unity and independence from their former master.
+    Traders and merchants sometimes use it, and hearing it on your travels is considered a sign of good luck.
 
-trait-language-novunederic-name = Novu-Nederic
+
+trait-language-novunederic-name = Terralingua
 trait-language-novunederic-desc =
-    Once the language of seafarers and merchants, now the voice of spacers, terraformers, and pioneers.
-    Spoken in the New-Netherlands, this direct and pragmatic trade language carries the sharp consonants and clipped vowels of its old-world roots.
-    Built on centuries of seafaring, land reclamation, and commerce, it thrives among those who shape entire worlds — just as their ancestors shaped the land from the sea.
+    Created by a select few Cetian philosophers, it was at first a lingua franca of Cetiburghow, allowing easy communication with other planetary communities.
+    After the establishment of the Terran Union, it has become the national language, and it is taught even in the furthest of her territories. It has a guttural
+    yet rich vowel structure and a melodic quality deliberately made distinct. Its speech has also been made as hard as possible for a non-human to replicate.
 
 trait-language-azaziba-name = Sinta'Azaziba
 trait-language-azaziba-desc =

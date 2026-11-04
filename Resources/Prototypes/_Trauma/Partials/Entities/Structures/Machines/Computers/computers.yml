@@ -26,3 +26,10 @@
   - type: AccessReader
     access: !Clear
     - [ "ChiefEngineer" ]
+
+- type: entity
+  id: ComputerStationTeleportersControl
+  components:
+  - type: AccessReader
+    access: !Clear
+    - [ "Research" ]

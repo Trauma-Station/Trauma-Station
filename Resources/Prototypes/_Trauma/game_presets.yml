@@ -17,7 +17,7 @@
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
   - SubGamemodesRule
-  - Insurgency
+  - InsurgencyRuleRandom
 
 - type: gamePreset
   id: Heretics
@@ -70,5 +70,5 @@
   - ModerateAntagEventScheduler
   - MeteorSwarmScheduler
   - SpaceTrafficControlEventScheduler
-  - SubGamemodesRuleNoSpy
-  - Spies
+  - SubGamemodesRule
+  - SpyRuleRoundstart

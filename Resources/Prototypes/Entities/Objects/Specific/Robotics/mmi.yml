@@ -4,19 +4,6 @@
   name: man-machine interface
   description: A machine able to facilitate communication between a biological brain and electronics, enabling crew to continue to provide value after work-related incidents.
   components:
-  # <Trauma>
-  - type: CollectiveMind
-    defaultChannel: Binary
-    channels:
-    - Binary
-  - type: LanguageSpeaker
-    speaks:
-    - TauCetiBasic
-    - RobotTalk
-    understands:
-    - TauCetiBasic
-    - RobotTalk
-  # </Trauma>
   - type: Sprite
     sprite: Objects/Specific/Robotics/mmi.rsi
     layers:
@@ -89,31 +76,6 @@
   name: positronic brain
   description: An artificial brain capable of spontaneous neural activity.
   components:
-    # <Trauma>
-    - type: InternalChildOrgan
-    - type: ChildOrgan
-      parents: [ Torso ] # ipc stores its brain in the torso not head
-    - type: Organ
-      category: IPCBrain
-    - type: LanguageSpeaker
-      speaks:
-      - TauCetiBasic # Added since posi brains should be able to talk to roboticists/scientists.
-      - RobotTalk
-      understands:
-      - TauCetiBasic # Added since posi brains should be able to understand TauCetiBasic (they can in a chassis)
-      - RobotTalk
-    - type: CollectiveMind
-      defaultChannel: Binary
-      channels:
-      - Binary
-    - type: IntellicardableMind
-    - type: OrganChipContainer
-      limit: 3
-    - type: ContainerContainer
-      containers:
-        knowledge: !type:Container
-        organ_chips: !type:Container
-    # </Trauma>
     - type: Sprite
       sprite: Objects/Specific/Robotics/mmi.rsi
       layers:

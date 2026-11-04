@@ -533,6 +533,7 @@
       - HereticBlade
       - CarvingKnife
       - HereticMagicItem
+      - EldritchPaper
   - type: HereticClothing
   - type: PressureProtection
   - type: VoidCloak

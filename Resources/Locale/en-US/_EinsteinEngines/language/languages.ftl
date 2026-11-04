@@ -4,57 +4,56 @@ language-Universal-description = What are you?
 language-Psychomantic-name = Psychomantic
 language-Psychomantic-description = Pure meaning, free from the tyranny of primative words and gestures.
 
-language-Bubblish-name = Bubblish
-language-Bubblish-description = The language of Slimes. Being a mixture of bubbling noises and pops it's very difficult to speak for humans without the use of mechanical aids.
+language-Bubblish-name = Oob'Mola'R-ien
+language-Bubblish-description = The strange bubbling and popping of the Oob'Mola, mimic human structure without any foundation. It is spoken by the remnants of the slime hivemind and the humanized descendants.
+
 
 language-RootSpeak-name = Rootspeak
 language-RootSpeak-description = The strange whistling-style language spoken by the Diona.
 
-language-Draconic-name = Sinta'Unathi
+language-Draconic-name = Imperial Dracon
 language-Draconic-description =
-    The common language of Moghes - composed of sibilant hisses and rattles. Spoken natively by Unathi.
+    The imperial language of Moghes - composed of sibilant hisses and rattles. It is surprisingly diverse, with many variations spread across the Moghegan worlds.
 
 language-Azaziba-name = Sinta'Azaziba
 language-Azaziba-description =
     A language of Moghes consisting of a combination of spoken word and gesticulation.
     While waning since Moghes entered the galactic stage - it enjoys popular use by Unathi that never fell to the Hegemony's cultural dominance.
 
-language-SolCommon-name = Sol common
+language-SolCommon-name = EarthGen
 language-SolCommon-description =
-    With its roots in Mandarin Chinese - Common evolved as the official language of the Sol Alliance - with officials working to tie it together with a common tongue.
-    It's spoken by state officials - taught in schools - and spoken by those who either feel a sense of national pride in the Alliance or otherwise fell sway to the culture.
+    Founded by the World Prosperity Spheres in 2360, it was the original Human Unified Language before the adoption of Corporate Standard for trade.
+    All humans and those who live in human nations are at least familiar with this language, which has become synonymous with humanity. It has its
+    roots in English, Japanese, and Mandarin, giving it a distinct accent and structure.
 
-language-NovuNederic-name = Novu-Nederic
+language-NovuNederic-name = Terralingua
 language-NovuNederic-description =
-    Once the language of seafarers and merchants, now the voice of spacers, terraformers, and pioneers - and great enjoyers of agriculture.
-    Spoken in the New-Netherlands, this direct and pragmatic trade language carries the sharp consonants and clipped vowels of its old-world roots.
-    Built on centuries of seafaring, land reclamation, and commerce, it thrives among those who shape entire worlds — just as their ancestors shaped the land from the sea.
+    Created by a select few Cetian philosophers, it was at first a lingua franca of Cetiburghow, allowing easy communication with other planetary communities.
+    After the establishment of the Terran Union, it has become the national language, and it is taught even in the furthest of her territories. It has a guttural
+    yet rich vowel structure and a melodic quality deliberately made distinct. Its speech has also been made as hard as possible for a non-human to replicate.
 
-language-TauCetiBasic-name = Tau-Ceti Basic
+language-TauCetiBasic-name = Corporate Standard
 language-TauCetiBasic-description =
-    A spiritual successor of Esperanto, established in 2404 in Tau Ceti by Ceti intellectuals.
-    Its unique, fully customized alphabet and structure allow it to be spoken even by most alien species.
-    It's the official language of Tau Ceti and has growing traction in diplomatic circles and Universalists across human space.
+    Created as a unifying language for the Corporate Territory of both NT and its UCSH, it is characterized by its quick, straight-to-the-point nature.
+    The language is incredibly strange to those who don't speak it, sounding robotic and stiff.
 
 language-Tradeband-name = Tradeband
 language-Tradeband-description =
     Descended from latin and romance languages of old Earth - Tradeband remains the main tongue of the upper class of humanity.
     The language sounds elegant and well structured to most ears. It remains in popular use with traders - diplomats - and those seeking to hold onto a piece of a romantic past.
 
-language-Freespeak-name = Freespeak
+language-Freespeak-name = Fringe-Gutter
 language-Freespeak-description =
-    A language of renegades and frontiersmen descending from various languages from Earth-- like Hindi,
-    combined into a multi-rooted jumble that sounds incoherent or even barbarian to non-native speakers.
-    This language is the only common cultural identity for humans in the frontier. Speaking this language in itself boldly declares the speaker a free spirit.
-    It is often called 'Gutter' by Alliance citizens.
+    The drowl and jumble of various stitched-together languages. The barbarian language finds like-minded company: renegades, frontiersmen, and explorers.
+    It is considered the language of those who live on the fringe, and anyone who speaks it proudly identifies with that crowd.
 
 language-Elyran-name = Elyran Standard
 language-Elyran-description =
     Elyran Standard is the official tongue of the Republic of Elyra. Constructed using elements of Farsi - Arabic - and Turkish.
     Influence from all three of these languages can be seen throughout its grammar and vocabulary.
 
-language-Moffic-name = Moffic
-language-Moffic-description = The language of the mothpeople borders on complete unintelligibility.
+language-Moffic-name = United Gudfic
+language-Moffic-description = The language formed over centuries of the mutated Mothpeople's nomadic journey. It borders on unintelligible squeals, buzzes, and chitters. It was the official language of the National Insectoid Nation, a fact alone that makes it repugnant to much of humanity.
 
 language-RobotTalk-name = RobotTalk
 language-RobotTalk-description = A language consisting of harsh binary chirps, whistles, hisses, and whines. Organic tongues cannot speak it without aid from special translators.

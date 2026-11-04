@@ -1,5 +1,5 @@
-names-wraith-dataset-1 = Onsen
-names-wraith-dataset-2 = Luminal
+names-wraith-dataset-1 = Claude
+names-wraith-dataset-2 = Opus
 names-wraith-dataset-3 = Xarou
 names-wraith-dataset-4 = Naelsh
 names-wraith-dataset-5 = Kourin

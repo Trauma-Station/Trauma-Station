@@ -1,7 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Linq;
-using Content.Client.Graphics;
 using Content.Trauma.Client.Heretic.SpriteOverlay;
 using Content.Trauma.Common.Sprite;
 using Content.Trauma.Shared.Heretic.Components;
@@ -21,6 +19,7 @@ public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
     [Dependency] private AppearanceSystem _appearance = default!;
     [Dependency] private SpriteSystem _sprite = default!;
     [Dependency] private CommonSpriteVisibilitySystem _spriteVis = default!;
+    [Dependency] private EntityQuery<SpriteComponent> _spriteQuery = default!;
 
     private TimeSpan _nextUpdate;
 
@@ -61,29 +60,28 @@ public sealed partial class ShadowCloakSystem : SharedShadowCloakSystem
         var query = EntityQueryEnumerator<ShadowCloakEntityComponent, SpriteComponent>();
         while (query.MoveNext(out var uid, out var cloak, out var sprite))
         {
-            if (cloak.User is not { } user || !Exists(user))
-                return;
+            if (cloak.User is not { } user || !Exists(user) || !_spriteQuery.TryComp(user, out var userSprite))
+                continue;
 
-            var toRemove = _sprite.GetPostShaders((uid, sprite)).Select(x => x.Id).ToList();
-            foreach (var shader in _sprite.GetPostShaders(user))
+            foreach (var shader in cloak.ShadersToCopy)
             {
-                // Don't raise shader event cause it is already being raised on user and shader instance is the same
-                var args = new SpriteComponent.PostShaderArgs(shader.Id, shader.Shader)
+                if (!_sprite.TryGetPostShader((user, userSprite), shader, out var entry))
                 {
-                    Before = shader.Before,
-                    After = shader.After,
-                };
-                _sprite.SetPostShader((uid, sprite), args);
-                toRemove.Remove(shader.Id);
-            }
+                    _sprite.RemovePostShader((uid, sprite), shader);
+                    continue;
+                }
 
-            foreach (var shader in toRemove)
-            {
-                // Don't remove outlines
-                if (ContentPostShaderIds.BeforeOutlines.Contains(shader))
+                if (_sprite.HasPostShader((uid, sprite), shader))
                     continue;
 
-                _sprite.RemovePostShader((uid, sprite), shader);
+                // Don't raise shader event cause it is already being raised on user and shader instance is the same
+                var args = new SpriteComponent.PostShaderArgs(shader, entry.Shader)
+                {
+                    Before = entry.Before,
+                    After = entry.After,
+                };
+
+                _sprite.SetPostShader((uid, sprite), args);
             }
         }
     }

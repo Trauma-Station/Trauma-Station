@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Nett" />
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
-    <PackageReference Include="SixLabors.ImageSharp" />
+    <PackageReference Include="TraumaStation.ImageSharp" /> <!-- Trauma - forked version -->
     <PackageReference Include="Pidgin" />
     <PackageReference Include="Robust.Shared.AuthLib" />
   </ItemGroup>

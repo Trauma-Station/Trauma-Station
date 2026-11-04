@@ -47,7 +47,7 @@
     - KnowledgePoint
     - SideKnowledgePoint
     balance:
-      SideKnowledgePoint: 1
+      SideKnowledgePoint: 2
 
 - type: entity
   parent: BaseMindRoleAntag

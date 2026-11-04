@@ -293,7 +293,7 @@ public abstract partial class BlobCoreSystem : EntitySystem
         var range = ProtoMan.Index(newTile).BlockRange;
         if (range > 0f)
         {
-            if (AnyTileInRange(newTile, coords, range))
+            if (AnyTileInRange(core, newTile, coords, range))
             {
                 _popup.PopupCoordinates("Too close to another tile of the same type!", coords, user, PopupType.Large);
                 return false;
@@ -329,7 +329,7 @@ public abstract partial class BlobCoreSystem : EntitySystem
 
         var coords = Transform(tile).Coordinates;
         var tileType = args.TileType;
-        var node = GetNearNode(coords);
+        var node = GetNearNode(coords, core);
 
         if (!CheckValidBlobTile(tile, node, args.RequireNode, args))
             return;
@@ -402,6 +402,7 @@ public abstract partial class BlobCoreSystem : EntitySystem
     /// <returns>Nearest blob node with it's component, null if wasn't founded.</returns>
     public Entity<BlobNodeComponent>? GetNearNode(
         EntityCoordinates coords,
+        EntityUid core,
         float radius = 3f)
     {
         var nearestDistance = float.MaxValue;
@@ -412,6 +413,9 @@ public abstract partial class BlobCoreSystem : EntitySystem
         _lookup.GetEntitiesInRange(coords, radius, _nodes, LookupFlags.Static);
         foreach (var node in _nodes)
         {
+            if (!TileQuery.TryComp(node, out var tile) || tile.Core != core)
+                continue;
+
             var tilePos = _transform.GetWorldPosition(node.Owner);
             var distance = Vector2.DistanceSquared(worldPos, tilePos);
             if (distance >= nearestDistance)
@@ -427,13 +431,13 @@ public abstract partial class BlobCoreSystem : EntitySystem
     /// <summary>
     /// Returns true if a given tile exists within a radius of a position.
     /// </summary>
-    public bool AnyTileInRange([ForbidLiteral] ProtoId<BlobTilePrototype> id, EntityCoordinates coords, float radius)
+    public bool AnyTileInRange(EntityUid core, [ForbidLiteral] ProtoId<BlobTilePrototype> id, EntityCoordinates coords, float radius)
     {
         _tiles.Clear();
         _lookup.GetEntitiesInRange(coords, radius, _tiles, LookupFlags.Static);
         foreach (var tile in _tiles)
         {
-            if (tile.Comp.Tile == id)
+            if (tile.Comp.Core == core && tile.Comp.Tile == id)
                 return true;
         }
 

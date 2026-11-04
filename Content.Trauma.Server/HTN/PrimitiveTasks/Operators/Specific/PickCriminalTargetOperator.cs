@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Content.Goobstation.Shared.Contraband;
@@ -10,6 +11,7 @@ using Content.Shared.Access.Systems;
 using Content.Shared.Coordinates;
 using Content.Shared.Cuffs.Components;
 using Content.Shared.Emag.Components;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Interaction;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -34,6 +36,7 @@ public sealed partial class PickCriminalTargetOperator : HTNOperator
     private SharedAudioSystem _audio = default!;
     private SharedContainerSystem _container = default!;
     private SharedContrabandDetectorSystem _contra = default!;
+    private SharedHandsSystem _hands = default!;
     private SharedIdCardSystem _card = default!;
     private SharedTransformSystem _transform = default!;
     private EntityQuery<CuffableComponent> _cuffableQuery = default!;
@@ -59,7 +62,7 @@ public sealed partial class PickCriminalTargetOperator : HTNOperator
     /// The criminal status the target has to be for it to be a target
     /// </summary>
     [DataField(required: true)]
-    public ProtoId<StatusIconPrototype> CriminalStatus;
+    public List<ProtoId<StatusIconPrototype>> CriminalStatuses = new();
 
     /// <summary>
     /// The sound to play when it finds a target
@@ -80,6 +83,7 @@ public sealed partial class PickCriminalTargetOperator : HTNOperator
         _container = sysManager.GetEntitySystem<SharedContainerSystem>();
         _contra = sysManager.GetEntitySystem<SharedContrabandDetectorSystem>();
         _card = sysManager.GetEntitySystem<SharedIdCardSystem>();
+        _hands = sysManager.GetEntitySystem<SharedHandsSystem>();
         _transform = sysManager.GetEntitySystem<SharedTransformSystem>();
 
         _cuffableQuery = _entMan.GetEntityQuery<CuffableComponent>();
@@ -161,11 +165,10 @@ public sealed partial class PickCriminalTargetOperator : HTNOperator
         if (_stealthQuery.HasComp(entity))
             return false;
 
-        bool isCriminal = (_criminalQuery.TryComp(entity, out var comp) || comp?.StatusIcon == CriminalStatus);
-        bool hasContra = _contra.FindContraband(entity, false).Count > 0;
-        bool isBadId = (!_card.TryFindIdCard(entity, out var idCard) || _cardQuery.HasComp(idCard)) && !(_tag.HasTag(entity, BotTag) && !_emagQuery.HasComp(entity));
+        bool isCriminal = _criminalQuery.TryComp(entity, out var comp) && comp != null && CriminalStatuses.Contains(comp.StatusIcon);
+        bool hasContra = _hands.EnumerateHeld((entity.Owner, null)).Any(item => _contra.IsContraband(item) && !_contra.CheckContrabandPermission(item, entity));
 
-        if (!isEmagged ^ (isCriminal || hasContra || isBadId))
+        if (!isEmagged ^ (isCriminal || hasContra))
             return false;
 
         // Is threat brought to order

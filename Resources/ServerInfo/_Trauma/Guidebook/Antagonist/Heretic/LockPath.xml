@@ -36,6 +36,10 @@
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp can unlock anything.</Box></ColorBox>
 
+    <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Mark of Lock</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Passive Ability</Box></ColorBox>
+    <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Your grasp will now apply the lock mark, making victim have no access temporarily.</Box></ColorBox>
+
     <ColorBox><Box HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">Key Keepers Burden</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Door, ID Card, Iron rod</Box></ColorBox>
     <ColorBox><Box HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5">Creates a Eldritch Card, allows you to link two doors to be portals for heretics, but randomly teleport heathens. It can also absorb access from id card by eating them.</Box></ColorBox>

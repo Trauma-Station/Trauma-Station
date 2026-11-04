@@ -49,9 +49,9 @@
     maxModules: 7
   - type: ModifyKnowledgeGrant
     skills:
-      MeleeKnowledge: 51
-      ShootingKnowledge: 50
-      WeaponsKnowledge: 51
+      MeleeKnowledge: 60
+      ShootingKnowledge: 60
+      WeaponsKnowledge: 60
 
 # Syndicate Medical borg
 - type: entity
@@ -59,7 +59,7 @@
   components:
   - type: ModifyKnowledgeGrant
     skills:
-      SurgeryKnowledge: 60
+      SurgeryKnowledge: 80
       FirstAidKnowledge: 60
       ChemistryKnowledge: 60
       MeleeKnowledge: 20
@@ -67,6 +67,10 @@
       WeaponsKnowledge: 20
   - type: BorgChassis
     maxModules: 7
+  - type: Sanitized
+  - type: SurgeryIgnoreClothing
+  - type: SurgerySpeedModifier
+    speedModifier: 1.5
 
 # Syndicate Saboteur borg
 - type: entity

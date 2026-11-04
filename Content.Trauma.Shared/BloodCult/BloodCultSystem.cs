@@ -6,6 +6,7 @@ using Content.Goobstation.Shared.Religion.Nullrod;
 using Content.Shared.ActionBlocker;
 using Content.Shared.Humanoid;
 using Content.Shared.Mind.Components;
+using Content.Shared.Mobs.Components;
 using Content.Shared.Roles;
 using Content.Trauma.Shared.BloodCult.Components;
 using Content.Trauma.Shared.BloodCult.Gamerule;
@@ -17,10 +18,10 @@ namespace Content.Trauma.Shared.BloodCult;
 
 public abstract partial class BloodCultSystem : EntitySystem
 {
+    [Dependency] protected SharedRoleSystem Role = default!;
     [Dependency] private ActionBlockerSystem _blocker = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedPvsOverrideSystem _pvsOverride = default!;
-    [Dependency] private SharedRoleSystem _role = default!;
     [Dependency] private EntityQuery<ActorComponent> _actorQuery = default!;
     [Dependency] private EntityQuery<BloodCultMemberComponent> _query = default!;
     [Dependency] private EntityQuery<BloodCultRuleComponent> _ruleQuery = default!;
@@ -28,10 +29,17 @@ public abstract partial class BloodCultSystem : EntitySystem
 
     private HashSet<Entity<BloodCultMemberComponent>> _cultists = new();
     private HashSet<Entity<HumanoidProfileComponent>> _targets = new();
+    private HashSet<Entity<MobStateComponent>> _mobs = new();
 
     [SubscribeLocalEvent]
     private void OnPlayerAttached(Entity<BloodCultMemberComponent> ent, ref PlayerAttachedEvent args)
     {
+        if (TerminatingOrDeleted(ent.Comp.Rule))
+        {
+            Log.Error($"{ToPrettyString(ent)} didn't have a valid rule set!");
+            return;
+        }
+
         _pvsOverride.AddSessionOverride(ent.Comp.Rule, args.Player);
     }
 
@@ -86,7 +94,7 @@ public abstract partial class BloodCultSystem : EntitySystem
     /// </summary>
     public Entity<BloodCultRuleComponent>? GetRule(EntityUid mob)
     {
-        if (_mcQuery.CompOrNull(mob)?.Mind is { } mind)
+        if (_mcQuery.CompOrNull(mob)?.Mind is { } mind && Exists(mind))
             return MindGetRule(mind);
 
         return _query.CompOrNull(mob)?.Rule is { } rule && _ruleQuery.TryComp(rule, out var ruleComp)
@@ -107,10 +115,10 @@ public abstract partial class BloodCultSystem : EntitySystem
         => MindGetRole(mind) != null;
 
     public Entity<BloodCultistRoleComponent>? GetRole(EntityUid uid)
-        => _mcQuery.CompOrNull(uid)?.Mind is {} mind ? MindGetRole(mind) : null;
+        => _mcQuery.CompOrNull(uid)?.Mind is {} mind && mind.Valid ? MindGetRole(mind) : null;
 
     public Entity<BloodCultistRoleComponent>? MindGetRole(EntityUid mind)
-        => _role.MindHasRole<BloodCultistRoleComponent>(mind, out var role)
+        => Role.MindHasRole<BloodCultistRoleComponent>(mind, out var role)
             ? (role.Value.Owner, role.Value.Comp2)
             : null;
 
@@ -136,6 +144,10 @@ public abstract partial class BloodCultSystem : EntitySystem
     public virtual bool Convert(EntityUid rule, EntityUid target)
         => false;
 
+    public virtual void Deconvert(EntityUid target)
+    {
+    }
+
     public virtual void ConvertConstruct(EntityUid rule, EntityUid target)
     {
     }
@@ -145,16 +157,26 @@ public abstract partial class BloodCultSystem : EntitySystem
     }
 
     /// <summary>
-    /// Gets all cultists/construct players near a rune.
+    /// Gets all cultists/construct players near a rune that are able to invoke a rune.
     /// The hashset returned is reused between calls, do not store it.
     /// </summary>
-    public HashSet<Entity<BloodCultMemberComponent>> GatherCultists(EntityUid rune, float range)
+    public HashSet<Entity<BloodCultMemberComponent>> GetRuneInvokers(EntityUid rune, float range)
+    {
+        var cultists = GetCultistsNearRune(rune, range);
+        // have to be awake and able to speak to invoke a rune
+        _cultists.RemoveWhere(uid => !_actorQuery.HasComp(uid) || !_blocker.CanConsciouslyPerformAction(uid) || !_blocker.CanSpeak(uid));
+        return _cultists;
+    }
+
+    /// <summary>
+    /// Gets all cultists/construct players near a rune including dead, ssd, etc.
+    /// The hashset returned is reused between calls, do not store it.
+    /// </summary>
+    public HashSet<Entity<BloodCultMemberComponent>> GetCultistsNearRune(EntityUid rune, float range)
     {
         var pos = Transform(rune).Coordinates;
         _cultists.Clear();
         _lookup.GetEntitiesInRange(pos, range, _cultists);
-        // have to be awake and able to speak to invoke a rune
-        _cultists.RemoveWhere(uid => !_actorQuery.HasComp(uid) || !_blocker.CanConsciouslyPerformAction(uid) || !_blocker.CanSpeak(uid));
         return _cultists;
     }
 
@@ -169,6 +191,17 @@ public abstract partial class BloodCultSystem : EntitySystem
         _targets.Clear();
         _lookup.GetEntitiesInRange(pos, range, _targets);
         return _targets;
+    }
+
+    /// <summary>
+    /// Gets all constructs near a rune.
+    /// </summary>
+    public HashSet<Entity<MobStateComponent>> GetMobsNearRune(EntityUid rune, float range)
+    {
+        var pos = Transform(rune).Coordinates;
+        _mobs.Clear();
+        _lookup.GetEntitiesInRange(pos, range, _mobs);
+        return _mobs;
     }
 
     /// <summary>
@@ -207,8 +240,7 @@ public abstract partial class BloodCultSystem : EntitySystem
             return;
 
         dest.Comp ??= EnsureComp<BloodCultMemberComponent>(dest);
-        dest.Comp.Rule = src.Comp.Rule;
-        Dirty(dest, dest.Comp);
+        SetCultRule(dest, src.Comp.Rule);
     }
 }
 

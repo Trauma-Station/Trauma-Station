@@ -1,7 +1,3 @@
-// <Trauma>
-using Content.Medical.Common.Damage;
-using Content.Medical.Common.Targeting;
-// </Trauma>
 using Content.Shared.CCVar;
 using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
@@ -398,8 +394,6 @@ public sealed partial class ExplosionSystem
         // ReSharper disable once CompareOfFloatsByEqualityOperator
         if (resistanceEv.DamageCoefficient != 1)
             damage *= resistanceEv.DamageCoefficient;
-
-        ModifyWoundSeverities(damage); // Trauma
 
         return damage;
     }
@@ -814,6 +808,8 @@ sealed class Explosion
                            * _damageable.UniversalExplosionDamageModifier
                            * _damageable.UniversalAllDamageModifier;
             _currentDamage = ExplosionType.DamagePerIntensity * modifier;
+
+            _system.ModifyWoundSeverities(_currentDamage); // Trauma
 
             // only throw if either the explosion is small, or if this is the outer ring of a large explosion.
             var doThrow = Area < _system.ThrowLimit || CurrentIteration > _tileSetIntensity.Count - 6;

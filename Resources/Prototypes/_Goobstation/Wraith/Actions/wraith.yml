@@ -92,7 +92,7 @@
   - type: Action
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wraith/wraithsoulsucc1.ogg
-    useDelay: 45
+    useDelay: 30
     itemIconStyle: BigAction
   - type: Sprite
     layers:
@@ -125,7 +125,7 @@
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wraith/wraithspook1.ogg
     itemIconStyle: BigAction
-    useDelay: 30
+    useDelay: 5
   - type: Sprite
     layers:
     - state: spook
@@ -145,7 +145,7 @@
   - type: Action
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wraith/wraithstaminadrain.ogg
-    useDelay: 60
+    useDelay: 25
     itemIconStyle: BigAction
   - type: Sprite
     layers:
@@ -168,7 +168,7 @@
   description: Command a few objects to hurl themselves at the target location.
   components:
   - type: Action
-    useDelay: 40
+    useDelay: 30
     itemIconStyle: BigAction
   - type: Sprite
     layers:
@@ -185,7 +185,7 @@
     wpConsume: 70
 
 - type: entity
-  parent: [ BaseWraithAction, ActionAnimateSpell ]
+  parent: BaseWraithAction
   id: ActionAnimateObject
   name: Animate object
   description: Animate an inanimate object to attack nearby humans.
@@ -193,12 +193,86 @@
   - type: Action
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wraith/wraithlivingobject.ogg
-    useDelay: 60
+    useDelay: 45
+    itemIconStyle: BigAction
   - type: Sprite
     layers:
     - state: anim_object
   - type: ActionWraithPoints
     wpConsume: 200
+  - type: ActionRequirements
+    conditions:
+      Target:
+      - !type:AnchoredCondition
+        inverted: true
+    failPopup: animate-object-event-anchored
+  - type: TargetAction
+    interactOnMiss: false
+  - type: EntityTargetAction
+    whitelist:
+      components:
+      - Animateable
+    blacklist:
+      components:
+      - MindContainer
+      - NukeDisk
+      - GravityGenerator
+      - AnomalyGenerator
+      - TegGenerator
+      - TegCirculator
+      - XenoArtifact
+      - MaterialReclaimer
+      - StationAlertLevelLock
+    event: !type:ChangeComponentsSpellEvent
+      toAdd:
+      - type: Animate
+      - type: MindContainer
+      - type: InputMover
+      - type: MobMover
+      - type: MovementSpeedModifier
+      - type: HTN
+        rootTask:
+          task: SimpleHostileCompound
+      - type: CombatMode
+      - type: MeleeWeapon
+        animation: WeaponArcPunch
+        wideAnimation: WeaponArcPunch
+        altDisarm: false
+        soundHit: /Audio/Weapons/smash.ogg
+        range: 1.2
+        angle: 0.0
+        damage:
+          types:
+            Blunt: 10
+      - type: NpcFactionMember
+        factions:
+        - Wraith
+      - type: NoSlip
+      - type: MovementAlwaysTouching
+      - type: CanMoveInAir
+      - type: Damageable
+        damageModifierSet: ManifestedSpirit
+      - type: Injurable
+        damageContainer: ManifestedSpirit
+      - type: Destructible
+        thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 100
+          behaviors:
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+          - !type:PlaySoundBehavior
+            sound:
+              collection: MetalBreak
+      - type: Hands
+      - type: CanEscapeInventory
+      - type: MobCollision
+      toRemove:
+      - RequireProjectileTarget
+      - BlockMovement
+      - Item
+      - MeleeRequiresWield
 
 - type: entity
   parent: BaseWraithAction
@@ -207,7 +281,7 @@
   description: Possess and control an everyday object. Freakout level high.
   components:
   - type: ActionWraithPoints
-    wpConsume: 666
+    wpConsume: 450
   - type: Action
     itemIconStyle: BigAction
     useDelay: 150
@@ -267,7 +341,7 @@
         thresholds:
         - trigger:
             !type:DamageTrigger
-            damage: 30
+            damage: 100
           behaviors:
           - !type:DoActsBehavior
             acts: ["Destruction"]
@@ -291,7 +365,7 @@
   parent: BaseWraithAction
   id: ActionWraithEvolve
   name: Evolve
-  description: Choose a form to evolve into once you have absorbed at least 3 souls.
+  description: Choose a form to evolve into.
   components:
   - type: Action
     useDelay: 0
@@ -343,7 +417,7 @@
   - type: Action
     sound: !type:SoundPathSpecifier
       path: /Audio/_Goobstation/Wraith/wraithportal.ogg
-    useDelay: 180
+    useDelay: 150
   - type: Sprite
     layers:
     - state: open_portal
@@ -359,7 +433,7 @@
   description: Attempt to breach the veil between worlds to allow a lesser void creature to enter this realm.
   components:
   - type: Action
-    useDelay: 150
+    useDelay: 120
   - type: Sprite
     layers:
     - state: summon_creature
@@ -538,7 +612,7 @@
   description: Attempt to breach the veil between worlds to allow a plague rat to enter this realm.
   components:
   - type: Action
-    useDelay: 150
+    useDelay: 240
   - type: Sprite
     layers:
     - state: summon_rats

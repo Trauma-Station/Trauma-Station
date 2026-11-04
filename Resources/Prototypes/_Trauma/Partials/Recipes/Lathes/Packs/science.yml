@@ -9,6 +9,9 @@
   - !Remove ProtolatheMachineCircuitboard
   - !Remove AutolatheMachineCircuitboard
   - !Remove CircuitImprinterMachineCircuitboard
+  # Moved to EngineeringBoardsStatic
+  - !Remove ExosuitFabricatorMachineCircuitboard
+  - !Remove BorgChargerCircuitboard
 
 ## Dynamic
 

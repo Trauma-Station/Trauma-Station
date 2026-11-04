@@ -21,7 +21,7 @@
   - type: Action
     sound: &ghostbreath
       path: /Audio/_Goobstation/Wraith/Mobs/ghostbreath.ogg
-    useDelay: 60
+    useDelay: 35
   - type: InstantAction
     event: !type:RallyEvent
 
@@ -36,7 +36,7 @@
     - state: skeleton
   - type: Action
     itemIconStyle: BigAction
-    useDelay: 30
+    useDelay: 20
     sound: *ghostbreath
   - type: TargetAction
     range: 2
@@ -58,7 +58,7 @@
     layers:
     - state: hook
   - type: Action
-    useDelay: 30
+    useDelay: 20
     sound:
       path: /Audio/_Goobstation/Misc/Hastur/tentacle_hit.ogg
     itemIconStyle: BigAction
@@ -81,7 +81,7 @@
     layers:
     - state: shuffle
   - type: Action
-    useDelay: 50
+    useDelay: 30
   - type: InstantAction
     event: !type:SpikerShuffleEvent
 
@@ -95,7 +95,7 @@
     layers:
     - state: lash
   - type: Action
-    useDelay: 50
+    useDelay: 30
     itemIconStyle: BigAction
   - type: TargetAction
     range: 2
@@ -115,7 +115,7 @@
     layers:
     - state: pounce
   - type: Action
-    useDelay: 40
+    useDelay: 20
   - type: InstantAction
     event: !type:RushdownEvent
 
@@ -129,7 +129,7 @@
     layers:
     - state: cloak
   - type: Action
-    useDelay: 40
+    useDelay: 25
   - type: InstantAction
     event: !type:CloakEvent
 
@@ -189,7 +189,7 @@
     - state: ratden
   - type: Action
     itemIconStyle: BigAction
-    useDelay: 40
+    useDelay: 30
   - type: TargetAction
     range: 2
   - type: WorldTargetAction
@@ -205,7 +205,7 @@
     layers:
     - state: ratrush
   - type: Action
-    useDelay: 40
+    useDelay: 25
   - type: InstantAction
     event: !type:RushdownEvent
 

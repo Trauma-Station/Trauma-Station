@@ -62,11 +62,13 @@
     - Nail
     - Trash
   - type: Multihit # You hit with the nail first and then with the hammer, makes sense right?
+    damageMultiplier: 1.8
+    maxFollowUpAttacks: 1
     multihitWhitelist:
       tags:
       - Hammer
-    conditions:
-    - !type:MultihitUserWhitelistEvent
+    userConditions:
+    - !type:WhitelistCondition
       whitelist:
         components:
         - EngineeringStaff

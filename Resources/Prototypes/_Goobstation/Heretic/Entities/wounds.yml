@@ -25,9 +25,9 @@
     - BoneDamage
     - VeinsDamage
     traumasChances:
-      Dismemberment: 0.5
-      OrganDamage: 0.5
-      BoneDamage: 0.5
+      Dismemberment: 0.2
+      OrganDamage: 0.1
+      BoneDamage: 0.1
       VeinsDamage: 0.5
   - type: BleedInflicter
     scalingSpeed: 4

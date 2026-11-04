@@ -54,4 +54,10 @@ public sealed partial class SideJobComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float CachedProgress;
+
+    /// <summary>
+    /// Whether this objective can be cancelled.
+    /// </summary>
+    [DataField]
+    public bool CanCancel = true;
 }

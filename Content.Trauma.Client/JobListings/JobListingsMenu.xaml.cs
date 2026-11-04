@@ -127,7 +127,7 @@ public sealed partial class JobListingsMenu : FancyWindow
 
     private SideJobControl CreateControl()
     {
-        var control = new SideJobControl(_entity, _timing, _sprite);
+        var control = new SideJobControl(_entity, _sprite);
         control.OnAccepted += job => OnAccepted?.Invoke(job);
         control.OnClaimed += job => OnClaimed?.Invoke(job);
         control.OnCancelled += job => OnCancelled?.Invoke(job);
@@ -165,7 +165,7 @@ public sealed partial class JobListingsMenu : FancyWindow
         {
             if (control is not SideJobControl sideJobControl)
                 continue;
-            sideJobControl.AcceptButton.Disabled = true;
+            sideJobControl.DisableAcceptButton();
         }
     }
 
