@@ -4,7 +4,7 @@ meta:
   engineVersion: 291.0.0
   forkId: ""
   forkVersion: ""
-  time: 11/04/2026 17:36:28
+  time: 11/04/2026 18:20:14
   entityCount: 21156
 maps:
 - 1
@@ -13768,9 +13768,6 @@ entities:
       lastSignals:
         DoorStatus: True
         DoorBoltStatus: False
-    - type: Door
-      state: Opening
-      secondsUntilStateChange: -82145.766
   - uid: 6482
     components:
     - type: MetaData
@@ -14873,9 +14870,6 @@ entities:
       lastSignals:
         DoorStatus: True
         DoorBoltStatus: False
-    - type: Door
-      state: Opening
-      secondsUntilStateChange: -40861.176
   - uid: 214
     components:
     - type: MetaData
@@ -53115,6 +53109,18 @@ entities:
     - type: Transform
       parent: 2
       pos: 10.854479,26.443447
+    - type: Solution
+      solution:
+        temperature: 293.15
+        maxVol: 30
+        reagents:
+        - ReagentId: Nicotine
+          data: []
+          Quantity: 10
+        - ReagentId: Lead
+          data: []
+          Quantity: 5
+        canReact: True
   - uid: 5991
     components:
     - type: Transform
@@ -54663,6 +54669,18 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: -32.5,13.5
+  - uid: 12230
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: 23.5,-8.5
+  - uid: 12568
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: 23.5,-7.5
   - uid: 12913
     components:
     - type: Transform
@@ -66678,7 +66696,7 @@ entities:
     - type: Transform
       parent: 2
       pos: -26.499529,29.459558
-  - uid: 20290
+  - uid: 12137
     components:
     - type: MetaData
       name: ???
@@ -66686,13 +66704,21 @@ entities:
       parent: 15063
     - type: Physics
       canCollide: False
-  - uid: 20842
+  - uid: 20290
     components:
     - type: MetaData
       name: ???
     - type: Transform
       parent: 2
-      pos: 43.495247,47.429375
+      pos: 43.5,47.5
+  - uid: 20842
+    components:
+    - type: MetaData
+      name: ???
+    - type: Transform
+      parent: 15063
+    - type: Physics
+      canCollide: False
 - proto: FoodMeatRotten
   entities:
   - uid: 11642
@@ -103347,6 +103373,13 @@ entities:
       pos: -67.5,15.5
     - type: Fixtures
       fixtures: {}
+- proto: PosterMapGlacier
+  entities:
+  - uid: 12141
+    components:
+    - type: Transform
+      parent: 2
+      pos: 29.5,30.5
 - proto: PosterMapMetaRight
   entities:
   - uid: 13744
@@ -113706,6 +113739,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -26.190138,3.5249994
+  - uid: 10237
+    components:
+    - type: Transform
+      parent: 2
+      pos: 43.207527,31.363115
   - uid: 13512
     components:
     - type: Transform
@@ -113733,6 +113771,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 28.586964,24.848446
+  - uid: 16253
+    components:
+    - type: Transform
+      parent: 2
+      pos: 43.75593,31.365133
 - proto: SalvageCanisterSpawner
   entities:
   - uid: 543
@@ -122574,6 +122617,8 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: 52.5,-26.5
+    - type: ApcPowerReceiver
+      powerDisabled: True
     - type: DisposalUnit
       nextFlush: 4517.8955121
       nextAllowedInsertSound: 4509.5288239
@@ -122619,14 +122664,17 @@ entities:
     - type: Transform
       parent: 2
       pos: 43.5,47.5
+    - type: ApcPowerReceiver
+      powerDisabled: True
     - type: DisposalUnit
-      nextFlush: 1426.331937
+      nextFlush: 282.3664142
       nextAllowedInsertSound: 3873.1961269
       container:
         ents:
+        - 20842
         - 13413
-        - 20290
         - 15798
+        - 12137
         showEnts: False
         occludes: True
     - type: ContainerContainer
@@ -122637,9 +122685,10 @@ entities:
           occludes: True
         DisposalUnitComponent: !type:Container
           ents:
+          - 20842
           - 13413
-          - 20290
           - 15798
+          - 12137
           showEnts: False
           occludes: True
         solutions: !type:Container

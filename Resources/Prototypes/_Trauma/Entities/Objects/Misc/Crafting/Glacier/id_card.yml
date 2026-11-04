@@ -1,5 +1,0 @@
-- type: entity
-  parent: IDCardTide
-  id: IDCardTideCaptain
-  description:
-  name: captain ID card
