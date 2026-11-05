@@ -27,7 +27,7 @@
 
 - type: entity
   abstract: true
-  parent: [BaseWeaponBatterySmallNoAmmoCounter, BasePistolWhip]
+  parent: [BasePistolWhip, BaseWeaponBatterySmallNoAmmoCounter]
   id: BaseWeaponBatterySmall
 
 - type: entity
