@@ -35,7 +35,7 @@ public sealed partial class CircuitEditorWindow
             Text = "Constants"
         });
         AddConstButton<BoolPickerWindow>("Bool");
-        AddConstButton<IntPickerWindow>("Integer");
+        AddConstButton<NumberPickerWindow>("Number");
         AddConstButton<StringPickerWindow>("String");
 
         foreach (var (cat, list) in gates)
@@ -50,7 +50,12 @@ public sealed partial class CircuitEditorWindow
                 var evil = gate; // dogshit language...
                 var button = new Button();
                 button.Text = gate.Name;
-                button.OnPressed += _ => OnAddGate?.Invoke(evil);
+                button.OnPressed += _ =>
+                {
+                    // make the new gate appear where you are scrolled for small windows, not the center of the "board"
+                    evil.Pos = GatesScroll.GetScrollValue() - (Center * 0.5f + ScrollBias);
+                    OnAddGate?.Invoke(evil);
+                };
                 CircuitGateControl.AddTooltip(button, gate);
                 NewGatesContainer.AddChild(button);
             }

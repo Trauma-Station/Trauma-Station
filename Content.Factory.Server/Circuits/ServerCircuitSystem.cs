@@ -12,7 +12,7 @@ namespace Content.Factory.Server.Circuits;
 /// <summary>
 /// Updates pulses for active circuits and handles their signals.
 /// </summary>
-public sealed partial class CircuitSystem : EntitySystem
+public sealed partial class ServerCircuitSystem : CircuitSystem
 {
     [Dependency] private DeviceLinkSystem _device = default!;
     [Dependency] private EntityQuery<CircuitComponent> _query = default!;
@@ -96,9 +96,9 @@ public sealed partial class CircuitSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnSignalIntReceived(Entity<CircuitHousingComponent> ent, ref SignalReceivedEvent<LogicIntPayload> args)
+    private void OnSignalReceived(Entity<CircuitHousingComponent> ent, ref SignalReceivedEvent<LogicNumberPayload> args)
     {
-        TrySetInput(ent, args.Port, new Integer(args.Data.Value));
+        TrySetInput(ent, args.Port, new Number(args.Data.Value));
     }
 
     [SubscribeLocalEvent]
@@ -216,9 +216,15 @@ public sealed partial class CircuitSystem : EntitySystem
                 var pulsePayload = new LogicStatePayload { State = SignalState.Momentary };
                 _device.InvokePort(housing.Value, port, ref pulsePayload);
                 break;
-            case Integer n:
-                var intPayload = new LogicIntPayload(n.Value);
-                _device.InvokePort(housing.Value, port, ref intPayload);
+            case Number n:
+                if (n.IsNaN)
+                {
+                    Log.Error($"Tried to send NaN to port {port} of {ToPrettyString(housing)}! Stack trace: {Environment.StackTrace}");
+                    return;
+                }
+
+                var numPayload = new LogicNumberPayload(n.Value);
+                _device.InvokePort(housing.Value, port, ref numPayload);
                 break;
             case string s:
                 var stringPayload = new LogicStringPayload(s);

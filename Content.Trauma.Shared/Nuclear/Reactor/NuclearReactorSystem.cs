@@ -128,12 +128,12 @@ public abstract partial class NuclearReactorSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnSignalReceived(Entity<NuclearReactorComponent> ent, ref SignalReceivedEvent<LogicIntPayload> args)
+    private void OnSignalReceived(Entity<NuclearReactorComponent> ent, ref SignalReceivedEvent<LogicNumberPayload> args)
     {
         if (args.Port != ent.Comp.ControlRodInsertionPort)
             return; // wrong port
 
-        var percent = (float) args.Data.Value;
+        var percent = args.Data.Value;
         SetTargetInsertion(ent, percent * 0.01f);
     }
 
@@ -290,7 +290,7 @@ public abstract partial class NuclearReactorSystem : EntitySystem
         ent.Comp.AvgInsertion = value;
         DirtyField(ent, ent.Comp, nameof(NuclearReactorComponent.AvgInsertion));
 
-        var payload = new LogicIntPayload(percent);
+        var payload = new LogicNumberPayload(percent);
         _device.InvokePort(ent.Owner, ent.Comp.ControlRodsAvgPort, ref payload);
     }
 
@@ -307,7 +307,7 @@ public abstract partial class NuclearReactorSystem : EntitySystem
             return;
 
         ent.Comp.LastSentTemp = floored;
-        var payload = new LogicIntPayload(floored);
+        var payload = new LogicNumberPayload(floored);
         _device.InvokePort(ent.Owner, ent.Comp.CasingTempPort, ref payload);
     }
 
@@ -319,7 +319,7 @@ public abstract partial class NuclearReactorSystem : EntitySystem
         ent.Comp.ThermalPower = power;
         DirtyField(ent, ent.Comp, nameof(NuclearReactorComponent.ThermalPower));
 
-        var payload = new LogicIntPayload(power);
+        var payload = new LogicNumberPayload(power);
         _device.InvokePort(ent.Owner, ent.Comp.ThermalPowerPort, ref payload);
     }
 
