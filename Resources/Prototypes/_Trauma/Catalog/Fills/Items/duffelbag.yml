@@ -1,0 +1,16 @@
+- type: entity
+  parent: [ ClothingBackpackDuffelBundle, BaseMinorContraband ]
+  id: ClothingBackpackDuffelChameleonEVABundle
+  name: chameleon EVA bundle
+  description: "Contains all the space proof disguise you need."
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingHeadHelmetEVAChameleon
+        - id: ClothingOuterHardsuitEVAChameleon
+        - id: ClothingMaskGas
+        - id: DoubleEmergencyOxygenTankFilled
+        - id: DoubleEmergencyNitrogenTankFilled
+        - id: DoubleEmergencyPlasmaTankFilled
