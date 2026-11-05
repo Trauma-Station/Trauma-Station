@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  abstract: true
   parent: BaseStockHit
   id: BaseWeaponBatteryNoAmmoCounter
-  abstract: true
   components:
   - type: EmitSoundOnPickup
     sound:
@@ -29,7 +29,6 @@
   abstract: true
   parent: [BaseWeaponBatterySmallNoAmmoCounter, BasePistolWhip]
   id: BaseWeaponBatterySmall
-
 
 - type: entity
   abstract: true
