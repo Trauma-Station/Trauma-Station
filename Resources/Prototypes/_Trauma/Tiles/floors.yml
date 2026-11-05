@@ -259,3 +259,63 @@
   thermalConductivity: 0.04
   heatCapacity: 10000
   weather: true
+
+- type: tile
+  parent: FloorCave
+  id: FloorCaveWeather
+  weather: true
+
+- type: tile
+  parent: FloorCaveDrought
+  id: FloorCaveDroughtWeather
+  weather: true
+
+- type: tile
+  parent: FloorWood
+  id: FloorWoodWeather
+  weather: true
+
+- type: tile
+  parent: FloorMetalDiamond
+  id: FloorMetalDiamondWeather
+  weather: true
+
+- type: tile
+  parent: FloorReinforced
+  id: FloorReinforcedWeather
+  weather: true
+
+- type: tile
+  parent: FloorReinforcedHardened
+  id: FloorReinforcedHardenedWeather
+  weather: true
+
+- type: tile
+  parent: FloorTechMaint3
+  id: FloorTechMaint3Weather
+  weather: true
+
+- type: tile
+  parent: FloorTechMaint2
+  id: FloorTechMaint2Weather
+  weather: true
+
+- type: tile
+  parent: FloorTechMaint
+  id: FloorTechMaintWeather
+  weather: true
+
+- type: tile
+  parent: FloorHull
+  id: FloorHullWeather
+  weather: true
+
+- type: tile
+  parent: FloorHullReinforced
+  id: FloorHullReinforcedWeather
+  weather: true
+
+- type: tile
+  parent: FloorWoodTile
+  id: FloorWoodTileWeather
+  weather: true

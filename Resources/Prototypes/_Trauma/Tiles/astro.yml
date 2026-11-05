@@ -6,3 +6,13 @@
   sprite: /Textures/Tiles/grassjungle.png
   itemDrop: FloorTileItemJungleAstroGrass
   variants: 1
+
+- type: tile
+  parent: FloorAstroIce
+  id: FloorAstroIceWeather
+  weather: true
+
+- type: tile
+  parent: FloorAstroSnow
+  id: FloorAstroSnowWeather
+  weather: true
