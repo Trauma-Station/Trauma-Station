@@ -68,33 +68,6 @@ public sealed partial class GoobCVars
         CVarDef.Create("control.default_walk", false, CVar.CLIENT | CVar.REPLICATED | CVar.ARCHIVE);
 
     /// <summary>
-    ///     Enable Dorm Notifier
-    /// </summary>
-    public static readonly CVarDef<bool> DormNotifier =
-        CVarDef.Create("dorm_notifier.enable", true, CVar.SERVER);
-
-    /// <summary>
-    ///     Check for dorm activity every X amount of ticks
-    ///     Default is 10.
-    /// </summary>
-    public static readonly CVarDef<int> DormNotifierFrequency =
-        CVarDef.Create("dorm_notifier.frequency", 10, CVar.SERVER);
-
-    /// <summary>
-    ///     Time given to be found to be engaging in dorm activity
-    ///     Default is 180.
-    /// </summary>
-    public static readonly CVarDef<int> DormNotifierPresenceTimeout =
-        CVarDef.Create("dorm_notifier.timeout", 180, CVar.SERVER, "Mark as condemned if present near a dorm marker for more than X amount of seconds.");
-
-    /// <summary>
-    ///     Time given to be found engaging in dorm activity if any of the sinners are nude
-    ///     Default if 60.
-    /// </summary>
-    public static readonly CVarDef<int> DormNotifierPresenceTimeoutNude =
-        CVarDef.Create("dorm_notifier.timeout_nude", 60, CVar.SERVER, "Mark as condemned if present near a dorm marker for more than X amount of seconds while being nude.");
-
-    /// <summary>
     ///     Broadcast to all players that a player has ragequit.
     /// </summary>
     public static readonly CVarDef<bool> PlayerRageQuitNotify =
