@@ -10,6 +10,10 @@ namespace Content.Trauma.Shared.InitPos;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class InitPosComponent : Component
 {
+    // should i just use MapCoordinates and implement Teleport method that'll be using it?
     [DataField, AutoNetworkedField]
     public EntityCoordinates Coordinates;
+
+    [DataField, AutoNetworkedField]
+    public MapId Map;
 }

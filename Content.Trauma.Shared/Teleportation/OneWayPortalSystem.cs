@@ -29,6 +29,7 @@ public sealed partial class OneWayPortalSystem : EntitySystem
             Priority = 11,
             Act = () =>
             {
+                // it may trow parent from itself error. I do not yet understand the conditions under whitch this happens
                 _teleport.Teleport(subject, ent.Comp.Destination);
             },
             Disabled = false,

@@ -3,13 +3,10 @@
 using Content.Shared.EntityEffects;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
-using Content.Shared.Random.Helpers;
 using Content.Trauma.Shared.InitPos;
-using Content.Trauma.Shared.Teleportation.Systems;
-using Robust.Shared.Random;
-using Robust.Shared.Timing;
+using Content.Trauma.Shared.Teleportation;
 
-namespace Content.Trauma.Shared.Teleportation;
+namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
 /// Teleports user of an item with InitPosComponent to items initial position.
@@ -25,10 +22,8 @@ public sealed partial class InitPosTeleport : EntityEffectBase<InitPosTeleport>
 
 public sealed partial class InitPosTeleportEffectSystem : EntityEffectSystem<HandsComponent, InitPosTeleport>
 {
-    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private TeleportSystem _teleport = default!;
-    [Dependency] private RandomTeleportSystem _randomTeleport = default!;
 
     protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<InitPosTeleport> args)
     {
@@ -39,14 +34,13 @@ public sealed partial class InitPosTeleportEffectSystem : EntityEffectSystem<Han
 
         var oldPos = Transform(ent).Coordinates;
 
+        // otherwise will trow try parent from discendant exception
         var newPos = Transform(ent).Coordinates.WithPosition(destination.Coordinates.Position);
+        //newPos.MapID = destination.Map;
+        // set transform.MapID maybe?? if so then ill have to reshittify portal system
+        // at this poit it'll be better to just spawn dummy ent at the creation point...
 
-        Log.Info($"{ent.Owner}");
-        Log.Info($"{args.User}");
-        Log.Info($"{oldPos}");
-        Log.Info($"{newPos}");
-        Log.Info($"{destination.Coordinates}");
-        _teleport.Teleport(ent.Owner, newPos, user: args.User); // it keeps breaking and i don't know why
+        _teleport.Teleport(ent.Owner, newPos, user: args.User);
 
         if (args.Effect.SpawnPortal != default)
         {
@@ -58,7 +52,7 @@ public sealed partial class InitPosTeleportEffectSystem : EntityEffectSystem<Han
                 return;
             }
 
-            comp.Destination = destination.Coordinates;
+            comp.Destination = newPos;
             Dirty(portal, comp);
         }
     }

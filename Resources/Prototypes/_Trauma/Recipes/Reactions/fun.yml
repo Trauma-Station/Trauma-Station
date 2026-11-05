@@ -44,12 +44,12 @@
   reactants:
     BluespaceMelange:
       amount: 30
-    Fresium:
-      amount: 5
-    PhosphoricAcid:
-      amount: 30
-  products:
-    PhosphoricAcid: 20
+    # Fresium:
+    #   amount: 5
+    # PhosphoricAcid:
+    #   amount: 30
+  # products:
+  #   PhosphoricAcid: 20
   effects:
-  - !type:SpawnEntity
+  - !type:SpawnStoreParentPos
     entity: StabilizedBSCrystal
