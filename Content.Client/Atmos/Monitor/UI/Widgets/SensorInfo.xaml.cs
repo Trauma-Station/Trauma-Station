@@ -51,6 +51,10 @@ public sealed partial class SensorInfo : BoxContainer
 
         foreach (var (gas, amount) in dataPayload.Gases)
         {
+            // <Trauma> - don't spam exceptions incase a gas doesn't have a threshold
+            if (!dataPayload.GasThresholds.TryGetValue(gas, out var threshold))
+                continue;
+            // </Trauma>
             var label = new RichTextLabel();
 
             var fractionGas = amount / dataPayload.TotalMoles;
@@ -60,13 +64,15 @@ public sealed partial class SensorInfo : BoxContainer
 
             label.SetMarkup(Loc.GetString("air-alarm-ui-gases-indicator",
                 ("gas", Loc.GetString(gasName)),
-                ("color", AirAlarmWindow.ColorForThreshold(fractionGas, dataPayload.GasThresholds[gas])),
+                ("color", AirAlarmWindow.ColorForThreshold(fractionGas, threshold)), // Trauma - use threshold from above
                 ("amount", $"{amount:0.####}"),
                 ("percentage", $"{(100 * fractionGas):0.##}")));
             GasContainer.AddChild(label);
             _gasLabels.Add(gas, label);
 
+            /* Trauma - moved to the top with TryGetValue
             var threshold = dataPayload.GasThresholds[gas];
+            */
             var gasThresholdControl = new ThresholdControl(Loc.GetString($"air-alarm-ui-thresholds-gas-title"), threshold, AtmosMonitorThresholdType.Gas, gas, 100);
             gasThresholdControl.Margin = new Thickness(20, 2, 2, 2);
             gasThresholdControl.ThresholdDataChanged += (type, alarmThreshold, arg3) =>

@@ -1,0 +1,134 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: BaseMech
+  save: false
+  components:
+  - type: TileMovement
+  - type: RotationCooldown
+    delay: 2
+    sound:
+      path: /Audio/Mecha/mechmove03.ogg
+  - type: UnpoweredFlashlight # mech lights for all mechs, it's unpowered to match hardsuits
+  - type: PointLight
+    enabled: false
+    softness: 5
+    autoRot: true
+    lightMask: ConeSingle
+    radius: 7
+    energy: 3
+    netsync: false
+  - type: GenericVisualizer
+    visuals:
+      enum.PaperLabelVisuals.HasLabel:
+        enum.PaperLabelVisuals.Layer:
+          True: { visible: true }
+          False: { visible: false }
+      enum.PaperLabelVisuals.LabelType:
+        enum.PaperLabelVisuals.Layer:
+          Paper: { state: paper }
+          Bounty: { state: bounty }
+          CaptainsPaper: { state: captains_paper }
+          Invoice: { state: invoice }
+  - type: PaperLabel
+    labelSlot:
+      insertVerbText: Attach Label
+      ejectVerbText: Remove Label
+      whitelist:
+        components:
+        - Paper
+      blacklist:
+        tags:
+        - Book
+  - type: Insulated # giant metal thing is better at conducting electricity than you
+  - type: StaticPrice
+    price: 450
+  - type: Reactive
+    groups:
+      Acidic: [Touch]
+  - type: Mech
+    pilotBlacklist:
+      components:
+      - Zombie
+      - ZombieBlob
+  - type: AirFilter
+    gases:
+    - BZ
+    - Nitrium
+    - Fungalin
+    overflowGases:
+    - BZ
+    - Healium
+    - Nitrium
+    - Pluoxium
+    - Fungalin
+  - type: MeleeWeapon
+    canWideSwing: false # disabled until it doesnt look shit
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 1 # was 2
+  - type: ContainerContainer
+    containers:
+      paper_label: !type:ContainerSlot
+  - type: Damageable
+    damageModifierSet: LightArmor
+  - type: Injurable
+    damageContainer: Silicon
+
+- type: entity
+  parent: !Clear [ BaseMech, IndustrialMech, BaseCargoContraband ]
+  id: MechRipley
+  components:
+  - type: Construction
+    graph: Ripley
+    node: ripley
+  - type: Sprite
+    layers:
+    - map: [ "enum.PaperLabelVisuals.Layer" ]
+      sprite: Structures/Storage/Crates/labels.rsi
+      state: paper
+  - type: Mech
+    entryDelay: 1.5 # faster to make it easier for delivery work
+    mechToPilotDamageMultiplier: 0.5 # was 0.75
+  - type: MeleeWeapon
+    attackRate: 0.5 # was 1, its not designed for combat
+    damage:
+      types:
+        Blunt: 25
+        Structural: 30
+
+- type: entity
+  parent: !Clear [ BaseMech, SpecialMech, BaseCivilianContraband ]
+  id: MechHonker
+  components:
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2
+    baseSprintSpeed: 2.5
+  - type: Mech
+    mechToPilotDamageMultiplier: 0.2 # was 0.5
+    airtight: true
+
+- type: entity
+  parent: !Clear [ BaseMech, SmallMech ]
+  id: MechHamtr
+  components:
+  - type: Mech
+    mechToPilotDamageMultiplier: 0 # was 0.25, let hammy live
+  - type: MeleeWeapon
+    damage:
+      types:
+        Structural: 2
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 2.4 # was 2.7
+
+- type: entity
+  id: MechVim
+  components:
+  - type: Mech
+    mechToPilotDamageMultiplier: 0 # was 0.1
+  - type: MeleeWeapon
+    damage:
+      types:
+        Structural: 2
+  - type: MovementSpeedModifier
+    baseSprintSpeed: 2.25 # was 3.6

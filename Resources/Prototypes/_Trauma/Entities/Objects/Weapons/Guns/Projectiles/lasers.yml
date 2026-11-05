@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: SidearmBulletBase
-  parent: BaseBullet
-  name: phaser bolt
   abstract: true
+  parent: BaseBullet
+  id: SidearmBulletBase
+  name: phaser bolt
   components:
   - type: Fixtures
     fixtures:
@@ -27,6 +27,7 @@
   - type: Reflective
     reflective:
     - Energy
+  - type: LaserProjectile
   - type: FlyBySound
     sound:
       collection: EnergyMiss
@@ -46,8 +47,8 @@
     blurTime: 3
 
 - type: entity
-  id: LaserSidearmBullet
   parent: SidearmBulletBase
+  id: LaserSidearmBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Projectile
@@ -91,8 +92,8 @@
         Heat: 6
 
 - type: entity
-  id: PulseGunBullet
   parent: SidearmBulletBase
+  id: PulseGunBullet
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite

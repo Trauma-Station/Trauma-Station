@@ -24,3 +24,9 @@
   components:
   - type: Plant
     growthStages: 3 # default 6 stages have no sprites for 4-6...
+
+- type: entity
+  id: TowercapPlants
+  components:
+  - type: PlantData
+    mutationPrototypes: [ PlasticcapPlants ]

@@ -6,4 +6,11 @@ namespace Content.Trauma.Shared.Ranching.Components;
 /// Prevents a food from being duped when eaten by a glass chicken.
 /// </summary>
 [RegisterComponent, NetworkedComponent]
-public sealed partial class GlassChickenBlacklistComponent : Component;
+public sealed partial class GlassChickenBlacklistComponent : Component
+{
+    /// <summary>
+    /// A prototype to replace the entity with, instead of giving nothing.
+    /// </summary>
+    [DataField]
+    public EntProtoId? Replacement;
+}

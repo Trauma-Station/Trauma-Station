@@ -1,0 +1,32 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseItem, BaseMinorContraband, BaseSetSelector ]
+  id: ToolboxThief
+  components:
+  - !Remove type: ActivatableUI
+  - !Remove type: UserInterface
+  - !Remove type: ThiefUndeterminedBackpack
+  - type: SetSelector
+    possibleSets:
+    - ThiefAnatomySet
+    - ThiefBreacherSet
+    - ThiefChameleonSet
+    - ThiefSyndieSet
+    - ThiefSleeperSet
+    - ThiefCommunicatorSet
+    - ThiefSmugglerSet
+    - ThiefChemistSet
+    - ThiefEscapistSet
+    - ThiefTinkererSet
+    maxSelectedSets: 2
+
+- type: entity
+  id: SatchelThief
+  components:
+  - !Remove type: ThiefUndeterminedBackpack
+  - type: SetSelector
+    spawnedStoragePrototype: ClothingBackpackSatchelSmugglerUnanchored
+    spawnedStorageContainer: storagebase
+    approveSound:
+      collection: storageRustle
