@@ -2,7 +2,6 @@
 
 using Lidgren.Network;
 
-
 namespace Content.Trauma.Common.LinkAccount;
 
 public sealed class RMCPatronListMsg : NetMessage
@@ -14,6 +13,7 @@ public sealed class RMCPatronListMsg : NetMessage
     public override void ReadFromBuffer(NetIncomingMessage buffer, IRobustSerializer serializer)
     {
         var count = buffer.ReadVariableInt32();
+        buffer.AssertAtLeastSize(count * NetMessageExt.MinSizeOfString * 2);
         Patrons = new List<SharedRMCPatron>(count);
         for (var i = 0; i < count; i++)
         {
