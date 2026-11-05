@@ -24,8 +24,6 @@ entities:
     components:
     - type: MetaData
       name: grid
-    - type: Transform
-      parent: invalid
       pos: -2.1722946,-0.70718694
     - type: MapGrid
       chunks:
