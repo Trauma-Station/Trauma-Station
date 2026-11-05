@@ -27,7 +27,6 @@
   - type: ChameleonClothing
     slot: [outerClothing]
     default: ClothingOuterHardsuitEVA
-  - type: ClothingSpeedModifier
 
 - type: entity
   parent: [ ClothingHeadHelmetEVA, BaseChameleon ]
