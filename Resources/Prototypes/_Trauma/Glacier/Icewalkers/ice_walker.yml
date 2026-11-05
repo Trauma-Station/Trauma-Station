@@ -26,9 +26,11 @@
     damage:
       types:
         Slash: 8
+  - type: NightVision
+    action: ActionToggleNightVision
+    lightingColor: white
   - type: TemperatureDamage
     coldDamageThreshold: 0   # Some kind of ice... walkers?
-    heatDamageThreshold: 300 # Heat hurts
     coldDamage:
       types:
         Cold: 0

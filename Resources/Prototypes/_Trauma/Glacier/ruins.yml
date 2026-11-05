@@ -2,12 +2,27 @@
 - type: lavalandRuinPool
   id: GlacierRuins
   gridRuins:
-    HunterCabin: 5
+    IcewalkerNest: 1
+    HunterCabin: 2
+    BuriedTruck: 5
   dungeonRuins:
     CommonRuin5x5: 40
+
+- type: lavalandGridRuin
+  id: IcewalkerNest
+  name: glacier-icewalker-nest
+  path: /Maps/_Trauma/Glacier/icewalker_nest.yml
+  priority: -1
+  patchToPlanet: false
 
 - type: lavalandGridRuin
   id: HunterCabin
   name: glacier-hunter-cabin
   path: /Maps/_Trauma/Glacier/hunter_cabin.yml
   priority: 1
+
+- type: lavalandGridRuin
+  id: BuriedTruck
+  name: glacier-buried-truck
+  path: /Maps/_Trauma/Glacier/buried_truck.yml
+  priority: 2
