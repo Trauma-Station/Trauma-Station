@@ -46,6 +46,9 @@ public sealed partial class MobPhasesSystem : EntitySystem
                 && !ai.CanSwitchBack)
                 continue;
 
+            if (phase == ai.CurrentPhase)
+                break;
+
             ent.Comp1.CurrentPhase = phase;
 
             var ev = new MobPhaseChangedEvent(ent.Comp1.CurrentPhase);

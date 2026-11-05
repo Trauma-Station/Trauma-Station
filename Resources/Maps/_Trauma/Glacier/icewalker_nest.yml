@@ -25,6 +25,8 @@ entities:
     components:
     - type: MetaData
       name: Icewalker Tribe
+    - type: IFF
+      flags: Hide
       pos: -0.484375,-0.546875
     - type: MapGrid
       chunks:

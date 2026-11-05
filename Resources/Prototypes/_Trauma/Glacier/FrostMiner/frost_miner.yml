@@ -4,6 +4,7 @@
   description: smth.
   components:
   # Basic stuff
+  - type: StatusEffectContainer
   - type: Physics
     bodyType: KinematicController
   - type: Fixtures
@@ -105,7 +106,6 @@
       2250:   4
   - type: BossMusic
     soundId: Leshy # todo
-  - type: TileMovement
   - type: SpawnLootOnDeath
     table: !type:AllSelector
       children:
@@ -133,13 +133,9 @@
         actionDelay: 1.5
       # Touhou
       4:
-      - !type:MovementSpeedModifier
-        walkSpeedModifier: 2.0
-        sprintSpeedModifier: 2.0
-        time: null
-        type: Set
-      - !type:MegafaunaActionDelay
-        actionDelay: 1.0
+      - !type:ModifyStatusEffect
+        effectProto: FrostMinerPhase4
+        time: 5
   - type: MegafaunaShutdownEffects
     effects:
     - !type:MovementSpeedModifier

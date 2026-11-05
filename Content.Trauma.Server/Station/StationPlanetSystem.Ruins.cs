@@ -38,6 +38,7 @@ public sealed partial class StationPlanetSystem
     [Dependency] private MetaDataSystem _metadata = default!;
 
     [Dependency] private EntityQuery<MapGridComponent> _mapGridQuery = default!;
+    [Dependency] private EntityQuery<FixturesComponent> _fixturesQuery = default!;
 
     private readonly List<(Vector2i, Tile)> _tiles = new();
 
@@ -185,7 +186,6 @@ public sealed partial class StationPlanetSystem
 
         usedSpace.Add(ruinBox);
         coords.Remove(coord);
-
         if (ruin.PatchToPlanet)
             PatchToPlanet(spawned, (map, _mapGridQuery.Comp(map)), coord);
         else
@@ -246,23 +246,13 @@ public sealed partial class StationPlanetSystem
     }
 
     /// <summary>
-    /// Tricky and sneaky method that patches some grid to a planet
-    /// by teleporting all entities and copying all tiles & decals.
-    /// Of course, it deletes the grid right after.
+    /// Delets the grid and spawns all it's entities/decals/tiles into a given position with an offset
     /// </summary>
-    private void PatchToPlanet(
-        Entity<MapGridComponent> grid,
-        Entity<MapGridComponent> map,
-        Vector2i offset,
-        HashSet<Vector2i>? reservedTiles = null)
+    /// <param name="grid">The grid to take the entities/decals/tiles from</param>
+    /// <param name="map">The map to put the entities/decals/tiles on</param>
+    /// <param name="offset">A given offset to adjust the position of entities/decals/tiles</param>
+    private void PatchToPlanet(Entity<MapGridComponent> grid, Entity<MapGridComponent> map, Vector2i offset)
     {
-        var box = grid.Comp.LocalAABB.Translated(offset);
-        var center = box.Center;
-        var roomTransform = Matrix3Helpers.CreateTranslation(center.X, center.Y);
-
-        var seed = _random.Next();
-        _random.SetSeed(seed);
-
         // Copy all tiles
         _tiles.Clear();
 
@@ -281,9 +271,8 @@ public sealed partial class StationPlanetSystem
         {
             var anchored = xform.Anchored;
             var newPos = new EntityCoordinates(map.Owner, xform.LocalPosition + offset);
-            _transform.SetParent(teleportEnt, map);
-            _transform.SetCoordinates(teleportEnt, newPos);
 
+            _transform.SetCoordinates(teleportEnt, newPos);
             if (anchored)
                 _transform.AnchorEntity(teleportEnt);
         }
@@ -291,36 +280,22 @@ public sealed partial class StationPlanetSystem
         // Spawn decals
         if (TryComp<DecalGridComponent>(grid.Owner, out var loadedDecals))
         {
-            // This is copied from dungeon code...
             EnsureComp<DecalGridComponent>(map);
-            foreach (var decal in _decals.GetDecalsIntersecting(grid.Owner, box, loadedDecals))
-            {
-                var position = Transform(decal).Coordinates.Position;
-                position = Vector2.Transform(position - center, roomTransform);
 
-                if (reservedTiles?.Contains(position.Floored()) == true)
-                    continue;
+            var localBounds = grid.Comp.LocalAABB;
+            foreach (var decal in _decals.GetDecalsIntersecting(grid.Owner, localBounds, loadedDecals))
+            {
+                var localPos = Transform(decal).Coordinates.Position;
+                var targetPos = localPos + offset;
 
                 var data = decal.Comp.Data;
-                var angle = data.Angle.Reduced();
-                var tilePos = position.Floored();
-
-                // Fallback because uhhhhhhhh yeah, a corner tile might look valid on the original
-                // but place 1 nanometre off grid and fail the add.
-                if (!_map.TryGetTileRef(grid, grid, tilePos, out var tileRef) || tileRef.Tile.IsEmpty)
-                {
-                    _map.SetTile(grid,
-                        grid,
-                        tilePos,
-                        _tile.GetVariantTile((ContentTileDefinition) _tiledef[DungeonSystem.FallbackTileId], _random));
-                }
 
                 _decals.TryAddDecal(
                     data.Id,
-                    new EntityCoordinates(grid, position),
+                    new EntityCoordinates(map.Owner, targetPos),
                     out _,
                     data.Color,
-                    angle,
+                    data.Angle,
                     data.ZIndex,
                     data.Cleanable);
             }
@@ -382,7 +357,7 @@ public sealed partial class StationPlanetSystem
         foreach (var uid in grids)
         {
             var xform = Transform(uid);
-            if (xform.MapID != mapId || !TryComp<FixturesComponent>(uid, out var fixtures) || xform.MapUid is not { } mapUid)
+            if (!_fixturesQuery.TryComp(uid, out var fixtures) || xform.MapUid is not { } mapUid)
                 continue;
 
             var aabbs = new Box2();
@@ -398,6 +373,14 @@ public sealed partial class StationPlanetSystem
 
             aabbs = aabbs.Enlarged(8f);
             boundary.Add(aabbs);
+        }
+
+        foreach (var box2 in boundary.ToList())
+        {
+            if (!box2.IsEmpty())
+                continue;
+
+            boundary.Remove(box2);
         }
 
         return boundary;

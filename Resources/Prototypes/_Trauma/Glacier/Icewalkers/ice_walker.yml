@@ -1,8 +1,9 @@
 - type: entity
   save: false
-  name: Urissst McAishh
   parent: [ AppearanceIceWalker, MobReptilian ]
   id: MobIceWalker
+  name: Urissst McAishh
+  description: A frozen lizard.
   components:
   - type: HumanoidProfile
     species: IceWalker

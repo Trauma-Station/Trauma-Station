@@ -1,0 +1,90 @@
+- type: entity
+  parent: MobStatusEffectBase
+  id: FrostMinerPhase4
+  components:
+  # Rotate a lot
+  - type: StatusEffectEffects
+    updateDelay: 0.1
+    effects:
+    - !type:Rotate
+      angle: 90
+      force: true
+      type: Adjust
+  # Godmode so salvs don't abuse this
+  - type: StatusEffectEffectsApply
+    effectsOnApply:
+    - !type:AddComponents
+      components:
+      - type: Godmode
+    - !type:RemoveComponents
+      components:
+      - type: HTN
+        rootTask:
+          task: SimpleHostileCompound
+      - type: NpcFactionMember
+        factions:
+        - SimpleHostile
+      - type: ActionGrant
+        actions:
+        - ActionFrostOrbsEasy
+        - ActionSnowballMachineGunEasy
+        - ActionIceShotgunEasy
+        - ActionFrostOrbsHard
+        - ActionSnowballMachineGunHard
+        - ActionIceShotgunHard
+    effectsOnRemoval:
+    # Good luck!
+    - !type:SpawnAttached
+      entity: FrostMinerPhase4Effect
+    - !type:MovementSpeedModifier
+      walkSpeedModifier: 2.0
+      sprintSpeedModifier: 2.0
+      time: null
+    - !type:MegafaunaActionDelay
+      actionDelay: 1.0
+    - !type:AddActions
+      actions:
+      - ActionFrostOrbsEasy
+      - ActionSnowballMachineGunEasy
+      - ActionIceShotgunEasy
+      - ActionFrostOrbsHard
+      - ActionSnowballMachineGunHard
+      - ActionIceShotgunHard
+    - !type:RemoveComponents
+      components:
+      - type: Godmode
+    - !type:AddComponents
+      components:
+      - type: HTN
+        rootTask:
+          task: SimpleHostileCompound
+      - type: NpcFactionMember
+        factions:
+        - SimpleHostile
+
+# Scale status effect
+- type: entity
+  parent: StatusEffectBase
+  id: FrostMinerPhase4Scale
+  components:
+  - type: StatusEffectEffects
+    updateDelay: 0.01
+    effects:
+    - !type:Scale
+      multiplier: 1.05, 1.05
+
+# I'm evil
+- type: entity
+  id: FrostMinerPhase4Effect
+  components:
+  - type: FadingTimedDespawn
+    lifetime: 0.8
+    fadeOutTime: 0.6
+  - type: Sprite
+    noRot: true
+    drawdepth: Effects
+    sprite: _Trauma/Glacier/Bosses/demonic_miner.rsi
+    state: demonic_miner_phase2
+  - type: PermanentStatusEffects
+    statusEffects:
+    - FrostMinerPhase4Scale

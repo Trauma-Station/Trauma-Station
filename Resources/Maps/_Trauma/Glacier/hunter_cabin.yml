@@ -4,8 +4,8 @@ meta:
   engineVersion: 291.0.0
   forkId: ""
   forkVersion: ""
-  time: 11/03/2026 02:55:27
-  entityCount: 117
+  time: 11/03/2026 23:49:55
+  entityCount: 125
 maps: []
 grids:
 - 1
@@ -32,7 +32,7 @@ entities:
       chunks:
         0,0:
           ind: 0,0
-          tiles: AAAAAAAAAAEAAAAAAwACAAAAAAAAAgAAAAAAAAMAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAA==
+          tiles: AAAAAAAAAAEAAAAAAwACAAAAAAAAAgAAAAAAAAMAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAQAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAA==
           version: 7
         0,-1:
           ind: 0,-1
@@ -101,6 +101,8 @@ entities:
             0,0:
             - FloorSnow
             - FloorSnow
+            3,3:
+            - FloorSnow
         -1,0:
           history:
             -1,0:
@@ -126,6 +128,7 @@ entities:
             id: WoodTrimThinCornerNe
             color: '#FFFFFFFF'
           decals:
+          - 2,-1
           - 6,-2
         - node:
             id: WoodTrimThinCornerSe
@@ -154,9 +157,13 @@ entities:
           decals:
           - 0,-1
         - node:
-            id: WoodTrimThinCornerNe
+            id: Remains
+            color: '#FFFFFFFF'
           decals:
           - 2,-1
+        - node:
+            id: WoodTrimThinCornerNe
+          decals:
           - 3,-2
         - node:
             id: WoodTrimThinCornerSe
@@ -167,14 +174,16 @@ entities:
           decals:
           - 3,-3
         - node:
-            id: WoodTrimThinLineN
+            id: bloodFloorMinor1
+            color: '#FFCCCCFF'
           decals:
-          - 1,-1
+          - 1.9588826,-1.0406826
         - node:
             id: bushsnowb1
             color: '#FFFFFFFF'
           decals:
           - -0.36102438,1.4300008
+          - 0.28103423,-2.6178765
           - 8.6744585,-4.681264
         - node:
             id: bushsnowb3
@@ -205,6 +214,7 @@ entities:
             id: grasssnow06
             color: '#FFFFFFFF'
           decals:
+          - 0.9892993,-3.1037817
           - 6.0942926,-6.3592086
         - node:
             id: grasssnowc1
@@ -217,10 +227,10 @@ entities:
           decals:
           - 9.495571,-4.0277615
         - node:
-            id: Remains
+            id: WoodTrimThinLineN
             color: '#FFFFFFFF'
           decals:
-          - 2.1274467,-1.0436413
+          - 1,-1
         - node:
             id: footprint
             color: '#D2D2D2FF'
@@ -228,6 +238,96 @@ entities:
           - 8.800154,-4.360155
           - 8.825197,-3.7680435
           - 9.079827,-4.0828586
+        - node:
+            id: bloodFloorMinor7
+            color: '#FFCCCCFF'
+          decals:
+          - 0.93399954,-1.3092011
+        - node:
+            id: Dirt
+            color: '#FFFFFFFF'
+          decals:
+          - 0,-1
+          - 3,-3
+          - 5,-2
+          - 6,-4
+        - node:
+            id: giblet2
+            color: '#FFFFFFFF'
+          decals:
+          - 1.068263,-1.9230967
+        - node:
+            id: giblet3
+            color: '#FFFFFFFF'
+          decals:
+          - 1.994019,-4.085375
+        - node:
+            id: giblet4
+            color: '#FFFFFFFF'
+          decals:
+          - 0.01595664,-1.2147416
+        - node:
+            id: giblet1
+            color: '#FFFFFFFF'
+          decals:
+          - 1.8074222,-2.9955735
+        - node:
+            id: BodySmear
+            color: '#FFFFFFFF'
+            angle: 0.6108652381980153 rad
+          decals:
+          - 8.090753,-5.50826
+        - node:
+            id: BodySmear
+            color: '#FFFFFFFF'
+            angle: -1.3089969389957472 rad
+          decals:
+          - 1.1601295,-3.7015648
+        - node:
+            id: Cyber
+            color: '#FFFFFFFF'
+            angle: -0.6283185307179586 rad
+          decals:
+          - 5.241431,-2.1061378
+        - node:
+            id: cyka
+            color: '#FFFFFFFF'
+            angle: 0.20943951023931956 rad
+          decals:
+          - 5.7411995,-3.733221
+        - node:
+            id: footprint
+            color: '#CACACAFF'
+            angle: 0.6108652381980153 rad
+          decals:
+          - 1.9393528,-5.20939
+          - 2.045834,-4.797353
+        - node:
+            id: Footprint
+            color: '#FFFFFFFF'
+            angle: 0.6108652381980153 rad
+          decals:
+          - 2.7343519,-2.307263
+          - 3.1371298,-2.4415221
+        - node:
+            id: dot
+            color: '#FFFFFFFF'
+          decals:
+          - 1.7594528,-2.6544852
+        - node:
+            id: dot
+            color: '#FFFFFFFF'
+            angle: 0.08726646259971647 rad
+          decals:
+          - 1.9444389,-2.867448
+        - node:
+            id: dot
+            color: '#FFFFFFFF'
+            angle: 0.03490658503988659 rad
+          decals:
+          - 0.5019784,-1.4452267
+          - 1.7761483,-2.8008935
+          - 2.0565357,-2.6369238
         - node:
             id: grasssnowb3
             color: '#FFFFFFFF'
@@ -278,6 +378,11 @@ entities:
             color: '#FFFFFFFF'
           decals:
           - 3.7625103,4.723592
+        - node:
+            id: bushsnowa2
+            color: '#FFFFFFFF'
+          decals:
+          - 2.0044425,2.0680096
         - node:
             id: bushsnowa1
             color: '#FFFFFFFF'
@@ -556,6 +661,25 @@ entities:
       parent: 1
       rot: 1.5707963267948966 rad
       pos: 0.5,-0.5
+- proto: ClothingBackpackSatchelSmuggler
+  entities:
+  - uid: 123
+    components:
+    - type: Transform
+      parent: 1
+      pos: 3.5,3.5
+    - type: Storage
+      storedItems:
+        124:
+          position: 3,0
+          _rotation: East
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          ents:
+          - 124
+          showEnts: False
+          occludes: True
 - proto: CMPlatformCornerWood
   entities:
   - uid: 45
@@ -587,6 +711,35 @@ entities:
     - type: Transform
       parent: 1
       pos: 9.5,-2.5
+      anchored: True
+    - type: Grave
+      activeShovelDigging: True
+    - type: EntityStorage
+      removedMasks: 20
+      open: True
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape: !type:PolygonShape
+            vertices:
+            - -0.4,-0.4
+            - 0.4,-0.4
+            - 0.4,0.29
+            - -0.4,0.29
+            radius: 0.01
+          restitution: 0
+          hard: True
+          friction: 0.4
+          density: 50
+          mask:
+          - Impassable
+          - HighImpassable
+          - LowImpassable
+          layer:
+          - BulletImpassable
+          - Opaque
+    - type: PlaceableSurface
+      isPlaceable: True
     - type: ContainerContainer
       containers:
         entity_storage: !type:Container
@@ -695,8 +848,20 @@ entities:
     - type: Transform
       parent: 1
       pos: 5.9147425,-3.248046
+- proto: MaterialBones1
+  entities:
+  - uid: 97
+    components:
+    - type: Transform
+      parent: 1
+      pos: 1.6938019,-0.61263525
 - proto: MaterialWoodPlank1
   entities:
+  - uid: 100
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.201314,-2.9980443
   - uid: 107
     components:
     - type: Transform
@@ -723,16 +888,45 @@ entities:
       pos: 5.5,1.5
 - proto: Paper
   entities:
+  - uid: 90
+    components:
+    - type: MetaData
+      name: faint note
+    - type: Transform
+      parent: 116
+    - type: Paper
+      content: >-
+        My twin brother is unwell...
+
+
+        he shot our dog yesterday...
+
+
+        I am burying my rifle between our decaying solar panels...
+
+
+        the last of our battery for the radio died...
+
+
+        he rambles like a mad man...
+
+
+        i don't trust him with his revolver...
+
+
+        god help us all...
+    - type: Physics
+      canCollide: False
   - uid: 102
     components:
     - type: MetaData
       name: faint note
-      desc: It is flimsy in your hands.
+      desc: The words are hard to make out.
     - type: Transform
       parent: 101
     - type: Paper
       content: >-
-        To my late brother Nicholas...
+        to my late brother...
 
 
         I am sorry
@@ -745,7 +939,7 @@ entities:
       desc: The words are barely readable.
     - type: Transform
       parent: 1
-      pos: 4.8653455,0.17520732
+      pos: 4.913789,0.29461896
     - type: Paper
       content: >-
         One bullet for our dog...
@@ -770,8 +964,7 @@ entities:
     components:
     - type: Transform
       parent: 1
-      rot: -1.5707963267948966 rad
-      pos: 3.432262,3.4262877
+      pos: 3.4877625,3.5729332
   - uid: 111
     components:
     - type: Transform
@@ -793,6 +986,18 @@ entities:
     - type: Transform
       parent: 1
       pos: 5.2813587,0.23530757
+    - type: Storage
+      storedItems:
+        90:
+          position: 0,0
+          _rotation: South
+    - type: ContainerContainer
+      containers:
+        storagebase: !type:Container
+          ents:
+          - 90
+          showEnts: False
+          occludes: True
 - proto: PosterBroken
   entities:
   - uid: 82
@@ -836,6 +1041,13 @@ entities:
       parent: 1
       rot: -1.5707963267948966 rad
       pos: 2.5,-1.5
+- proto: SalvageHumanCorpseSpawner
+  entities:
+  - uid: 121
+    components:
+    - type: Transform
+      parent: 1
+      pos: 5.5,0.5
 - proto: ShardGlass
   entities:
   - uid: 48
@@ -862,6 +1074,12 @@ entities:
       rot: -1.5707963267948966 rad
       pos: 5.2079763,-3.7594714
     - type: StepTriggerActive
+  - uid: 120
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.8444028,-3.9238157
+    - type: StepTriggerActive
 - proto: ShelfWood
   entities:
   - uid: 29
@@ -886,6 +1104,13 @@ entities:
           - 31
           showEnts: False
           occludes: True
+- proto: Shovel
+  entities:
+  - uid: 125
+    components:
+    - type: Transform
+      parent: 1
+      pos: 8.855244,-2.8238816
 - proto: SinkEmpty
   entities:
   - uid: 98
@@ -1052,13 +1277,21 @@ entities:
     - type: Transform
       parent: 1
       pos: 3.5,1.5
-- proto: WeaponSniperMosin
+- proto: WeaponRevolverPirateEmpty
   entities:
-  - uid: 97
+  - uid: 122
     components:
     - type: Transform
       parent: 1
-      pos: 4.9537034,0.49325764
+      pos: 5.0137944,0.49184906
+- proto: WeaponSniperMosin
+  entities:
+  - uid: 124
+    components:
+    - type: Transform
+      parent: 123
+    - type: Physics
+      canCollide: False
 - proto: WoodDoor
   entities:
   - uid: 24
@@ -1087,6 +1320,8 @@ entities:
       parent: 1
       rot: 1.5707963267948966 rad
       pos: 3.5,-4.5
+    - type: StepTriggerCleanup
+      stepTrigger: 120
   - uid: 43
     components:
     - type: Transform
