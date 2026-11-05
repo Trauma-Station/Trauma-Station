@@ -1,6 +1,6 @@
 - type: entity
-  parent: [ ClothingBackpackDuffelBundle, BaseMinorContraband ]
-  id: ClothingBackpackDuffelChameleonEVABundle
+  parent: [ ClothingBackpackDuffelSyndicateBundle ]
+  id: ClothingBackpackDuffelSyndicateChameleonEVABundle
   name: chameleon EVA bundle
   description: "Contains all the space proof disguise you need."
   components:

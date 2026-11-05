@@ -22,22 +22,16 @@
 - type: entity
   parent: [ ClothingOuterHardsuitEVA, BaseChameleon ]
   id: ClothingOuterHardsuitEVAChameleon
-  name: EVA suit
-  description: A lightweight space suit with the basic ability to protect the wearer from the vacuum of space.
   suffix: Chameleon
   components:
   - type: ChameleonClothing
     slot: [outerClothing]
     default: ClothingOuterHardsuitEVA
   - type: ClothingSpeedModifier
-    walkModifier: 0.9
-    sprintModifier: 0.9
 
 - type: entity
   parent: [ ClothingHeadHelmetEVA, BaseChameleon ]
   id: ClothingHeadHelmetEVAChameleon
-  name: EVA helmet
-  description: An old-but-gold helmet designed for extravehicular activites. Infamous for making security officers paranoid.
   suffix: Chameleon
   components:
   - type: ChameleonClothing
