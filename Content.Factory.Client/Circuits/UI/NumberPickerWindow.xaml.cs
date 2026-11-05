@@ -5,17 +5,17 @@ using Content.Factory.Shared.Circuits;
 namespace Content.Factory.Client.Circuits.UI;
 
 [GenerateTypedNameReferences]
-public sealed partial class IntPickerWindow : ConstPickerWindow
+public sealed partial class NumberPickerWindow : ConstPickerWindow
 {
-    public override object Value => new Integer(int.Parse(ValueEdit.Text));
+    public override object Value => new Number(float.Parse(ValueEdit.Text));
 
-    public IntPickerWindow()
+    public NumberPickerWindow()
     {
         RobustXamlLoader.Load(this);
 
         ValueEdit.OnTextChanged += args =>
         {
-            CreateButton.Disabled = !int.TryParse(args.Text, out _);
+            CreateButton.Disabled = !float.TryParse(args.Text, out var value) || Single.IsNaN(value);
         };
         CreateButton.OnPressed += _ => Create();
     }

@@ -16484,3 +16484,28 @@ Entries:
   id: 1779
   time: '2026-11-04T19:55:57.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5265
+- author: yglop
+  changes:
+  - type: Tweak
+    message: Holy melons will protect you from magic.
+  id: 1780
+  time: '2026-11-05T11:58:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5192
+- author: Giltsmith
+  changes:
+  - type: Tweak
+    message: Nerfed holoparasite variant damages.
+  id: 1781
+  time: '2026-11-05T12:05:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5288
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Circuits now support decimal numbers, not just integers.
+  - type: Add
+    message: Added trig functions and exponent gates for circuits.
+  - type: Tweak
+    message: The circuit editor now places new gates relative to your scroll position.
+  id: 1782
+  time: '2026-11-05T15:09:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5289

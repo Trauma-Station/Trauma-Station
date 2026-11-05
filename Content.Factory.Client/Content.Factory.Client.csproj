@@ -9,6 +9,8 @@
 	<Import Project="../MSBuild/Content.props" />
 
 	<ItemGroup>
+    	<PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
+
 		<ProjectReference Include="../Content.Client/Content.Client.csproj" />
 		<ProjectReference Include="../Content.Factory.Shared/Content.Factory.Shared.csproj" />
 	</ItemGroup>

@@ -51,7 +51,7 @@
     resistanceBypass: true
     damage:
       types:
-        Blunt: 24
+        Blunt: 16
         Structural: 100
 
 - type: entity
@@ -87,8 +87,8 @@
     attackRate: 1.6
     damage:
       types:
-        Blunt: 25
-        Poison: 15
+        Blunt: 12
+        Poison: 12
 
 - type: entity
   parent: BaseHoloParasite
@@ -125,7 +125,7 @@
     damageShare: 0.5
     distanceAllowed: 10
   - type: MeleeWeapon
-    attackRate: 2.5
+    attackRate: 2.3
     damage:
       types:
         Blunt: 12
@@ -161,7 +161,7 @@
     resistanceBypass: true
     damage:
       types:
-        Heat: 18
+        Heat: 14
         Structural: 20
 
 - type: entity
@@ -193,7 +193,7 @@
     attackRate: 1.4
     damage:
       types:
-        Cold: 30
+        Cold: 14
         Structural: 20
 
 - type: entity
@@ -227,5 +227,5 @@
     resistanceBypass: true
     damage:
       types:
-        Blunt: 18
+        Blunt: 14
         Structural: 20

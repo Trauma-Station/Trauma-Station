@@ -199,9 +199,9 @@ public abstract partial class TurbineSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnSignalReceived(Entity<TurbineComponent> ent, ref SignalReceivedEvent<LogicIntPayload> args)
+    private void OnSignalReceived(Entity<TurbineComponent> ent, ref SignalReceivedEvent<LogicNumberPayload> args)
     {
-        var value = (float) args.Data.Value;
+        var value = args.Data.Value;
         if (args.Port == ent.Comp.StatorLoadPort)
             SetStatorLoad(ent, value);
         else if (args.Port == ent.Comp.FlowRatePort)
@@ -308,13 +308,13 @@ public abstract partial class TurbineSystem : EntitySystem
         ent.Comp.RPM = rpm;
         DirtyField(ent, ent.Comp, nameof(TurbineComponent.RPM));
 
-        // update rpm on integer changes only, thats circuit resolution
+        // update rpm on integer changes only, don't need higher resolution
         int floored = (int) Math.Floor(rpm);
         if (ent.Comp.LastSentSpeed == floored)
             return;
 
         ent.Comp.LastSentSpeed = floored;
-        var payload = new LogicIntPayload(floored);
+        var payload = new LogicNumberPayload(floored);
         _device.InvokePort(ent.Owner, ent.Comp.SpeedPort, ref payload);
 
         // update high/low speed ports if they change
@@ -341,7 +341,7 @@ public abstract partial class TurbineSystem : EntitySystem
         ent.Comp.LastGen = gen;
         DirtyField(ent, ent.Comp, nameof(TurbineComponent.LastGen));
 
-        var payload = new LogicIntPayload(gen);
+        var payload = new LogicNumberPayload(gen);
         _device.InvokePort(ent.Owner, ent.Comp.PowerGenPort, ref payload);
     }
 
@@ -353,7 +353,7 @@ public abstract partial class TurbineSystem : EntitySystem
         ent.Comp.PowerSupply = supply;
         DirtyField(ent, ent.Comp, nameof(TurbineComponent.PowerSupply));
 
-        var payload = new LogicIntPayload(supply);
+        var payload = new LogicNumberPayload(supply);
         _device.InvokePort(ent.Owner, ent.Comp.PowerSupplyPort, ref payload);
     }
 

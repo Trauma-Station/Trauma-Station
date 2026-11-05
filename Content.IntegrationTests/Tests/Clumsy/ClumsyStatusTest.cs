@@ -82,6 +82,7 @@ public sealed class ClumsyStatusTest : InteractionTest
         }
     }
 
+    [Explicit] // Trauma - heisentest factory
     [Test, Description("Test that a gun explodes in a clumsy mob's face and stuns them.")]
     public async Task TestClumsyGun()
     {

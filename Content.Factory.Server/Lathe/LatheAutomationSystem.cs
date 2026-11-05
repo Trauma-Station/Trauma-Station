@@ -36,12 +36,13 @@ public sealed partial class LatheAutomationSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnSignalIntReceived(Entity<LatheAutomationComponent> ent, ref SignalReceivedEvent<LogicIntPayload> args)
+    private void OnSignalReceived(Entity<LatheAutomationComponent> ent, ref SignalReceivedEvent<LogicNumberPayload> args)
     {
-        if (args.Port != ent.Comp.QuantityPort || args.Data.Value < 1)
+        var quantity = (int) args.Data.Value;
+        if (args.Port != ent.Comp.QuantityPort || quantity < 1)
             return;
 
-        ent.Comp.Quantity = args.Data.Value;
+        ent.Comp.Quantity = quantity;
     }
 
     [SubscribeLocalEvent]

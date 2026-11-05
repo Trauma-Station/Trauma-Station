@@ -19,6 +19,7 @@ public sealed class LinkAccountStatusMsg : NetMessage
 
         buffer.ReadPadBits();
         var length = buffer.ReadVariableInt32();
+        buffer.AssertAtLeastSize(length);
         using var stream = new MemoryStream(length);
         buffer.ReadAlignedMemory(stream, length);
         Patron = serializer.Deserialize<SharedRMCPatronFull>(stream);
