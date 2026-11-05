@@ -19,9 +19,13 @@ public sealed partial class SpecialEggsSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnFullyAte(Entity<ChickenChestComponent> ent, ref FullyAteEvent args)
     {
-        if (_blacklistQuery.HasComp(args.Food) ||
+        // prevennt spawning anything if it is blacklisted and has no replacement
+        if (_blacklistQuery.TryComp(args.Food, out var blacklist) && blacklist.Replacement == null ||
             Prototype(args.Food)?.ID is not { } proto)
             return;
+
+        if (blacklist?.Replacement is { } replacement)
+            proto = replacement;
 
         // TODO: use cloning
         var coords = Transform(ent).Coordinates;

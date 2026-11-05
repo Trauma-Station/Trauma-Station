@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: AirSensorBase
+  abstract: true
+  components:
+  - type: AtmosMonitor
+    gasThresholdPrototypes:
+      BZ: danger
+      Healium: ignore
+      Nitrium: danger
+      Pluoxium: ignore
+      Fungalin: danger

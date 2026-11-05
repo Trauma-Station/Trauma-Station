@@ -1,29 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  abstract: true
-  parent: BasePaper
-  id: BaseEnchantingScroll
-  name: enchanted scroll
-  description: A scroll embuded with an enchantment. Could do any number of things.
-  components:
-  - type: Sprite
-    sprite: _Trauma/Objects/Specific/empty_scroll.rsi
-    layers:
-    - state: icon
-      shader: shaded
-    - state: writing
-      map: ["enum.EnchanterVisuals.Layer"]
-      shader: Enchant
-  - type: Item
-    size: Small
-  - type: Tag
-    tags: [] # no faxing it etc
-  - type: GuideHelp
-    guides:
-    - Enchanting
-
-- type: entity
   parent: BaseItem
   id: EnchantingScrollEmpty
   name: scroll
@@ -43,6 +20,8 @@
   - type: Tag
     tags:
     - EnchantingScroll
+  - type: GlassChickenBlacklist
+    replacement: ScrollFullRandom # trolled
   - type: Construction
     graph: EnchantedScroll
     node: finish

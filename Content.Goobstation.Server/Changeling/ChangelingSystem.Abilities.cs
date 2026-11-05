@@ -27,7 +27,6 @@ using Content.Shared.Gibbing;
 using Content.Shared.Humanoid;
 using Content.Shared.Hands.Components;
 using Content.Shared.IdentityManagement;
-using Content.Shared.Implants.Components;
 using Content.Shared.Mobs;
 using Content.Shared.Movement.Pulling.Components;
 using Content.Shared.Nutrition.Components;
@@ -261,26 +260,7 @@ public sealed partial class ChangelingSystem
             return;
         }
 
-        if (_mindShield.IsShielded(target))
-        {
-            _subdermalImplant.AddImplant(uid, comp.FakeMindShieldId);
-        }
-
         TryTransform(uid, comp);
-    }
-
-    private bool HasImplant(EntityUid uid, [ForbidLiteral] string id)
-    {
-        if (!TryComp<ImplantedComponent>(uid, out var implanted))
-            return false;
-
-        foreach (var implant in implanted.ImplantContainer.ContainedEntities)
-        {
-            if (Prototype(implant)?.ID == id)
-                return true;
-        }
-
-        return false;
     }
 
     private void OnAbsorbBiomatter(EntityUid uid, ChangelingIdentityComponent comp, ref AbsorbBiomatterEvent args)

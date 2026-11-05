@@ -19,8 +19,8 @@
   - type: StaminaDamageOnHit
     damage: 15 # now 55 total over time
     overtime: 5
-    lightAttackOvertimeDamageMultiplier: 4
-    lightAttackDamageMultiplier: 4
+    lightAttackOvertimeDamageMultiplier: 5
+    lightAttackDamageMultiplier: 2
   - !Remove type: StaminaDamageOnCollide
   - !Remove type: LandAtCursor
   - type: UseDelay
