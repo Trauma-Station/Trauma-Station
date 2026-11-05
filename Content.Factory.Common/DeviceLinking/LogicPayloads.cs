@@ -5,7 +5,10 @@ using Content.Shared.DeviceLinking;
 namespace Content.Factory.Common.DeviceLinking;
 
 [DataRecord]
-public partial record struct LogicIntPayload(int Value) : ISignalNetworkPayload;
+public partial record struct LogicNumberPayload(float Value) : ISignalNetworkPayload
+{
+    public LogicNumberPayload(int value) : this((float) value) {}
+}
 
 [DataRecord]
 public partial record struct LogicStringPayload(string Value) : ISignalNetworkPayload;
