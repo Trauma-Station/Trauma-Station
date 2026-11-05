@@ -16,7 +16,7 @@
   <ItemGroup>
     <PackageReference Include="NUnit" />
     <PackageReference Include="Moq" />
-    <PackageReference Include="TraumaStation.ImageSharp" /> <!-- Trauma - forked version -->
+    <PackageReference Include="SixLabors.ImageSharp" />
   </ItemGroup>
 
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />

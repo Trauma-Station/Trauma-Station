@@ -1541,20 +1541,6 @@
     tags:
     - PetWearable
     - CorgiWearable
-  - type: KnowledgeGrantOnWear # Trauma
-    conditions:
-    # Kept you waiting, huh?
-    - !type:NameContainsCondition
-      name: Snake
-    - !type:SpeciesCondition
-      species: Human
-    - !type:SexCondition
-      sex: Male
-    - !type:HasMarking
-      organ: Head
-      marking: FacePaintSplitter
-    skills:
-      MartialArtCQC: 26
 
 - type: entity
   parent: ClothingHeadBase

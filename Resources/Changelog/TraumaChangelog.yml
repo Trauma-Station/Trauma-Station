@@ -16466,3 +16466,21 @@ Entries:
   id: 1777
   time: '2026-11-04T10:20:17.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5267
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Nerfed forcemap, no more 6 of the same map in a row because an admin set
+      the map once.
+  id: 1778
+  time: '2026-11-04T13:37:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5272
+- author: elNarehate
+  changes:
+  - type: Tweak
+    message: Sci can make flashes again, for shadow anomalies.
+  - type: Fix
+    message: Roboticist Envirogloves are now insulated
+  id: 1779
+  time: '2026-11-04T19:55:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5265
