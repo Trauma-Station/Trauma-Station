@@ -16484,3 +16484,10 @@ Entries:
   id: 1779
   time: '2026-11-04T19:55:57.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5265
+- author: yglop
+  changes:
+  - type: Tweak
+    message: Holy melons will protect you from magic.
+  id: 1780
+  time: '2026-11-05T11:58:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5192
