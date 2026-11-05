@@ -45,17 +45,31 @@
   parent: MobIceWalker
   id: IceWalker
   name: ice walker
-  suffix: Ghost Role
   components:
   - type: Loadout
     prototypes: [ IceWalkerGear ]
-  - type: GhostRole
-    name: ghost-role-information-ash-walker-name
-    description: ghost-role-information-ash-walker-description
-    rules: ghost-role-information-ash-walker-rules
-    raffle:
-      settings: default
   - type: RandomHumanoidAppearance
     randomizeName: false
   - type: RandomMetadata
     nameSegments: [ NamesReptilianMale ]
+
+- type: entity
+  id: SpawnPointGhostIceWalker
+  name: ice walker spawn point
+  suffix: ice walker
+  parent: MarkerBase
+  components:
+  - type: GhostRole
+    name: ghost-role-information-ice-walker-name
+    description: ghost-role-information-ice-walker-description
+    rules: ghost-role-information-ice-walker-rules
+    raffle:
+      settings: default
+  - type: GhostRoleMobSpawner
+    prototype: IceWalker
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+    - sprite: _Trauma/Glacier/Icewalkers/icewalker_egg.rsi
+      state: large-egg
