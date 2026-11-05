@@ -144,8 +144,8 @@
   # <Trauma>
   cost:
     Telecrystal: 100 # was 20, 5x
-    discountCategory: null
   restockTime: 15m
+  discountCategory: null
   # </Trauma>
   categories:
   - UplinkDisruption
