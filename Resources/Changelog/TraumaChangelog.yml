@@ -16491,3 +16491,10 @@ Entries:
   id: 1780
   time: '2026-11-05T11:58:37.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5192
+- author: Giltsmith
+  changes:
+  - type: Tweak
+    message: Nerfed holoparasite variant damages.
+  id: 1781
+  time: '2026-11-05T12:05:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5288
