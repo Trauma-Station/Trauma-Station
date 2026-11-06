@@ -29,8 +29,8 @@
   - type: EntityEffectOnUse
     effectsToUser:
     - !type:PlaySoundEffect
-        sound:
-          path: /Audio/Effects/teleport_departure.ogg
+      sound:
+        path: /Audio/Effects/teleport_departure.ogg
     - !type:Sparks
     - !type:RandomTeleport
       radius:
@@ -38,8 +38,8 @@
         max: 5.0
       spawnPortal: BluespaceRiftPortal
     - !type:PlaySoundEffect
-        sound:
-          path: /Audio/Effects/teleport_arrival.ogg
+      sound:
+        path: /Audio/Effects/teleport_arrival.ogg
     - !type:Sparks
     effectsToUsed:
     - !type:ReduceStackSize

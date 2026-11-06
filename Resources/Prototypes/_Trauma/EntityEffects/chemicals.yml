@@ -19,8 +19,8 @@
       min: 1.5
       max: 3.0
   - !type:PlaySoundEffect
-      sound:
-        path: /Audio/Effects/teleport_arrival.ogg
+    sound:
+      path: /Audio/Effects/teleport_arrival.ogg
 
 - type: entityEffect
   id: BluespaceSalt
