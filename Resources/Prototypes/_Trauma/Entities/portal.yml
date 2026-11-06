@@ -1,50 +1,39 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: OneWayPortal
+  parent: ShadowPortal
+  id: BluespaceRiftPortal
   name: bluespace rift
   description: Looks unstable.
   components:
-  - type: Transform
-    anchored: True
-  - type: InteractionOutline
-  - type: Clickable
-  - type: Physics
-    bodyType: Static
+  - type: Portal
+    canTeleportToOtherMaps: True
+    randomTeleport: false
   - type: Sprite
-    sprite: Effects/portal.rsi
-    state: portal-artifact
     color: "#273189"
-  - type: Fixtures
-    fixtures:
-      portalFixture:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.25,-0.48,0.25,0.48"
-        mask:
-        - FullTileMask
-        - GhostImpassable
-        layer:
-        - WallLayer
-        hard: false
   - type: PointLight
     color: "#273189"
-    radius: 3
-    energy: 1
-    netsync: false
-  - type: AmbientSound
-    range: 6
-    volume: -3
-    sound:
-      path: /Audio/Ambience/anomaly_scary.ogg
-  - type: OneWayPortal
   - type: TimedDespawn
     lifetime: 10 # ToDo: decrease to 1
 
 - type: entity
-  parent: OneWayPortal
-  id: OneWayPortal3Seconds
+  parent: BluespaceRiftPortal
+  id: BluespaceRiftPortal3Seconds
   suffix: 3 seconds
   components:
   - type: TimedDespawn
     lifetime: 30 # ToDo: decrease to 3
+
+# dummy item to store destination pos. I belive it's better then hardcoding solution to this single system.
+- type: entity
+  id: BluespaceRiftPortalDestination
+  categories: [ HideSpawnMenu ]
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: True
+  - type: Physics # idk if i need it acually
+    bodyType: Static
+  - type: Visibility
+    layer: 8 # admin layer visibility

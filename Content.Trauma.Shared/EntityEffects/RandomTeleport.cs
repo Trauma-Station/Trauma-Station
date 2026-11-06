@@ -1,9 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Teleportation;
 using Content.Trauma.Shared.Teleportation.Systems;
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.EntityEffects;
+using Content.Shared.Teleportation.Components;
+using Content.Shared.Teleportation.Systems;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -25,12 +26,15 @@ public sealed partial class RandomTeleport : EntityEffectBase<RandomTeleport>
     /// Spawns one way portal.
     /// </summary>
     [DataField]
-    public EntProtoId? SpawnPortal;
+    public EntProtoId<PortalComponent>? SpawnPortal;
 }
 
 public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<TransformComponent, RandomTeleport>
 {
     [Dependency] private RandomTeleportSystem _teleport = default!;
+    [Dependency] private LinkedEntitySystem _link = default!;
+
+    private EntProtoId<PortalComponent> _portalDestination = "BluespaceRiftPortalDestination";
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<RandomTeleport> args)
     {
@@ -42,13 +46,9 @@ public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<Tran
         {
             var portal = PredictedSpawnAtPosition(args.Effect.SpawnPortal, oldPos);
 
-            if (!TryComp<OneWayPortalComponent>(portal, out var comp))
-            {
-                PredictedDel(portal);
-                return;
-            }
-            comp.Destination = newPos;
-            Dirty(portal, comp);
+            var destinationPortal = PredictedSpawnAtPosition(_portalDestination, newPos);
+
+            _link.OneWayLink(portal, destinationPortal, true);
         }
     }
 }

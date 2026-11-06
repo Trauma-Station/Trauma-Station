@@ -36,7 +36,7 @@
       radius:
         min: 2.0
         max: 5.0
-      spawnPortal: OneWayPortal
+      spawnPortal: BluespaceRiftPortal
     - !type:PlaySoundEffect
         sound:
           path: /Audio/Effects/teleport_arrival.ogg
