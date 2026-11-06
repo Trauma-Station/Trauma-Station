@@ -1,16 +1,16 @@
 meta:
   format: 7
-  category: Map
+  category: Grid
   engineVersion: 291.0.0
   forkId: ""
   forkVersion: ""
-  time: 11/02/2026 01:33:09
-  entityCount: 207
-maps:
-- 79
+  time: 11/06/2026 17:29:17
+  entityCount: 206
+maps: []
 grids:
 - 1
-orphans: []
+orphans:
+- 1
 nullspace: []
 tilemap:
   1: Space
@@ -27,7 +27,7 @@ entities:
     - type: MetaData
       name: grid
     - type: Transform
-      parent: 79
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -184,18 +184,6 @@ entities:
     - type: ExplosionAirtightGrid
     - type: ChunkContainer
       chunkEntities: []
-  - uid: 79
-    components:
-    - type: MetaData
-      name: Map Entity
-    - type: Transform
-    - type: Map
-      mapPaused: True
-    - type: GridTree
-    - type: Broadphase
-    - type: ChunkContainer
-      chunkEntities: []
-    - type: OccluderTree
 - proto: AirCanister
   entities:
   - uid: 2
