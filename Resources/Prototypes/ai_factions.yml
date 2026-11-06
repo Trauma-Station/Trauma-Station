@@ -41,6 +41,7 @@
   hostile:
   - Mouse
   - SimpleHostile
+  - Zombie
   - Xeno
   - AllHostile
   - Dragon
