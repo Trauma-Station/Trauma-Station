@@ -2,10 +2,11 @@
 
 - type: lavalandRuinPool
   id: GlacierRuins
+  maxDistance: 512
   gridRuins:
     IcewalkerNest: 1
-    HunterCabin: 20
-    BuriedTruck: 20
+    HunterCabin: 4
+    BuriedTruck: 7
   dungeonRuins:
     CommonRuin5x5: 40
 

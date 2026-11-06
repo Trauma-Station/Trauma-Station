@@ -1,0 +1,86 @@
+- type: entity
+  parent: BaseGroundVehicle
+  id: VehicleSnowmobile
+  name: Snowmobile
+  description: Let it snow.
+  components:
+  - type: Sprite
+    noRot: true
+    sprite: _Trauma/Objects/Vehicles/snow_mobile.rsi
+    state: snowmobile
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 0.5
+    baseSprintSpeed: 0.5
+  - type: Vehicle
+    overlayPrototype: VehicleSnowmobileOverlay
+    hornSound:
+      collection: BikeHorn
+      params:
+        variation: 0.125
+    renderOver: North, NorthEast, East, SouthEast, South, SouthWest, West, NorthWest
+  - type: ItemSlots
+    slots:
+      key_slot:
+        name: vehicle-slot-component-slot-name-keys
+        whitelist:
+          requireAll: true
+          tags:
+          - VehicleKey
+          - SnowmobileKeys
+        insertSound:
+          path: /Audio/Effects/Vehicle/vehiclestartup.ogg
+          params:
+            volume: -3
+  - type: UnpoweredFlashlight
+  - type: PointLight
+    enabled: false
+    lightMask: ConeSingle
+    autoRot: true
+    radius: 6.5
+    softness: 2
+    netsync: false
+  # why this? because glacier will have fuck ton of snow tiles,
+  # and not worth the performance of making them entities VS making only snowmobiles take the perf. cost
+  - type: ConditionMovementSpeed
+    conditions:
+      10.0,10.0:
+      - !type:NearbyTilesPercentCondition
+        ignoreAnchored: true
+        percent: 0.5 # Allows them on double lanes
+        tiles:
+        - FloorSnow
+        - FloorAstroSnow
+        - PlatingSnow
+        - FloorSnowDug
+        range: 2
+
+- type: entity
+  id: VehicleSnowmobileOverlay
+  name: snowmobile overlay
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Vehicles/snow_mobile.rsi
+    state: snowmobile_overlay
+    drawdepth: Overlays
+    noRot: true
+  - type: Tag
+    tags:
+    - HideContextMenu
+
+- type: entity
+  parent: BaseKey
+  id: VehicleKeySnowmobile
+  name: Snowmobile keys
+  description: Because key tastes better than bread.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Vehicles/snow_mobile.rsi
+    state: sno_keys
+  - type: Tag
+    tags:
+    - VehicleKey
+    - SnowmobileKeys
+
+- type: Tag
+  id: SnowmobileKeys
