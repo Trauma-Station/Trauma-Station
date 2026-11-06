@@ -7,3 +7,86 @@
   components:
   - type: AccessReader
     access: []
+
+- type: entity
+  parent: VendingMachineChefvend
+  id: VendingMachineChefvendUnlocked
+  suffix: Unlocked
+  components:
+  - type: AccessReader
+    access: []
+
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineBoxingDrobe
+  name: BoxingDrobe
+  description: Always short on stock.
+  components:
+  - type: VendingMachine
+    pack: BoxingDrobeInventory
+  - type: DatasetVocalizer
+    dataset: BoxingDrobeAds
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/VendingMachines/boxingdrobe.rsi
+    layers:
+    - state: off
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: normal-unshaded
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    access: [["Boxer"]]
+
+- type: entity
+  parent: VendingMachine # TODO: make not det
+  id: VendingMachineRepDrobe
+  name: RepDrobe
+  description: A machine for all your reporting needs, as long as you need clothes.
+  components:
+  - type: VendingMachine
+    pack: RepDrobeInventory
+  - type: DatasetVocalizer
+    dataset: DetDrobeAds
+  - type: Sprite
+    sprite: Structures/Machines/VendingMachines/detdrobe.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: WiresVisuals
+  - type: AccessReader
+    access: [["Reporter"]]
+
+- type: entity
+  parent: VendingMachine
+  id: VendingMachineCourierDrobe
+  name: CourierDrobe
+  description: Neither solar flares nor meteors nor plasma fire nor void of space stays these couriers from the swift completion of their appointed rounds.
+  components:
+  - type: VendingMachine
+    pack: CourierDrobeInventory
+    offState: off
+    brokenState: broken
+    normalState: normal-unshaded
+  - type: DatasetVocalizer
+    dataset: CourierDrobeAds
+  - type: SpeakOnUIClosed
+    pack: CourierDrobeGoodbyes
+  - type: Sprite
+    sprite: _Trauma/Structures/Machines/VendingMachines/courierdrobe.rsi
+    layers:
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.Base"]
+    - state: "off"
+      map: ["enum.VendingMachineVisualLayers.BaseUnshaded"]
+      shader: unshaded
+    - state: panel
+      map: ["enum.WiresVisualLayers.MaintenancePanel"]
+  - type: AccessReader
+    access: [["Mail"]]

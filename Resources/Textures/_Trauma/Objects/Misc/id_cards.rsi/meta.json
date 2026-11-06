@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Created by Armok for TraumaStation, idphonemerchant & idrancher made by John John, iddclass made by Reestock",
+  "copyright": "Created by Armok for TraumaStation, idphonemerchant & idrancher made by John John, iddclass made by Reestock, idcourier by Honeyed_Lemons_ from the impstation discord, idzookeeper taken and modified from /tg/station113 from https://github.com/tgstation/tgstation/blob/ce6beb8a4d61235d9a597a7126c407160ed674ea/icons/mob/huds/hud.dmi",
   "size": {
     "x": 32,
     "y": 32
@@ -21,6 +21,12 @@
     },
     {
       "name": "iddclass"
+    },
+    {
+      "name": "idcourier"
+    },
+    {
+      "name": "idzookeeper"
     }
   ]
 }

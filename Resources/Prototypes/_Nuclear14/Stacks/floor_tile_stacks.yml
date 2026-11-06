@@ -1,0 +1,39 @@
+- type: stack
+  id: FloorTileMetalGrate
+  name: stack-metal-grate-floor
+  spawn: FloorTileItemMetalGrate
+
+- type: stack
+  id: FloorTileMetalMS13
+  name: stack-metal-tile-floor
+  spawn: FloorTileItemMetalMS13
+
+- type: stack
+  id: FloorTileWoodMaple
+  name: stack-wood-floor-maple
+  spawn: FloorTileItemWoodMaple
+
+- type: stack
+  id: FloorTileMetalGreen
+  name: stack-metal-floor-green
+  spawn: FloorTileItemMetalGreen
+
+- type: stack
+  id: FloorTileMetalGreyDark
+  name: stack-metal-floor-grey-dark
+  spawn: FloorTileItemMetalGreyDark
+
+- type: stack
+  id: FloorTileMetalPurple
+  name: stack-metal-floor-purple
+  spawn: FloorTileItemMetalPurple
+
+- type: stack
+  id: FloorTileMetalTeal
+  name: stack-metal-floor-teal
+  spawn: FloorTileItemMetalTeal
+
+- type: stack
+  id: FloorTileMetalWhite
+  name: stack-metal-floor-white
+  spawn: FloorTileItemMetalWhite

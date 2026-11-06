@@ -1,0 +1,153 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: megafaunaSelector
+  id: Wendigo
+  selector: !type:AllMegafaunaSelector
+    children:
+    - id: PickTargetSimple
+    - id: WendigoActionsI  # Phase 1 Abilities
+    - id: WendigoActionsII # Phase 2 Abilities
+
+# Per Phase Ability Definitions
+- type: megafaunaSelector
+  id: WendigoActionsI
+  selector: !type:GroupMegafaunaSelector
+    children:
+    - id: ActionWendigoTeleport
+      weight: 0.2
+    - id: WendigoHeavyStomp
+      weight: 0.4
+    - id: ActionWendigoProjectileSpread
+      weight: 0.1
+    - id: ActionWendigoProjectileSpreadShotgun
+      weight: 0.3
+    conditions:
+    - !type:PhaseMegafaunaCondition
+      phases: [ 1 ]
+
+
+- type: megafaunaSelector
+  id: WendigoActionsII
+  selector: !type:GroupMegafaunaSelector
+    children:
+    - id: ActionWendigoTeleport
+      weight: 0.2
+    - id: WendigoHeavyStompII
+      weight: 0.4
+    - id: ActionWendigoProjectileSpreadII
+      weight: 0.1
+    - id: ActionWendigoProjectileSpreadShotgunII
+      weight: 0.3
+    conditions:
+    - !type:PhaseMegafaunaCondition
+      phases: [ 2 ]
+
+# Actions
+#
+# Note: shockwave scream is not accurate but it's gonna be ultra-shitcode to implement so, and I'm not getting paid, so wyci
+- type: megafaunaSelector
+  id: ActionWendigoTeleport
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 0.1,0.5
+      inverse: true
+    actionId: ActionWendigoTeleport
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionWendigoTeleport
+
+- type: megafaunaSelector
+  id: WendigoHeavyStomp
+  selector: !type:AllMegafaunaSelector
+    delay: 5
+    children:
+    - id: ActionWendigoHeavyStomp
+    - id: SmokeParticles
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionWendigoHeavyStomp
+
+- type: megafaunaSelector
+  id: WendigoHeavyStompII
+  selector: !type:AllMegafaunaSelector
+    delay: 5
+    children:
+    - id: ActionWendigoHeavyStompII
+    - id: SmokeParticles
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionWendigoHeavyStompII
+
+- type: megafaunaSelector
+  id: ActionWendigoHeavyStomp
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionWendigoHeavyStomp
+
+- type: megafaunaSelector
+  id: ActionWendigoHeavyStompII
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionWendigoHeavyStompII
+
+- type: megafaunaSelector
+  id: ActionWendigoProjectileSpread
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionWendigoProjectileSpread
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionWendigoProjectileSpread
+
+- type: megafaunaSelector
+  id: ActionWendigoProjectileSpreadII
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionWendigoProjectileSpreadII
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionWendigoProjectileSpreadII
+
+- type: megafaunaSelector
+  id: ActionWendigoProjectileSpreadShotgun
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionWendigoProjectileSpreadShotgun
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionWendigoProjectileSpreadShotgun
+
+- type: megafaunaSelector
+  id: ActionWendigoProjectileSpreadShotgunII
+  selector: !type:PerformActionSelector
+    delay: !type:AngerNumberSelector
+      range: 1.0,4.0
+      inverse: true
+    actionId: ActionWendigoProjectileSpreadShotgunII
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionWendigoProjectileSpreadShotgunII
+
+# Attack Indicators
+- type: megafaunaSelector
+  id: SmokeParticles
+  selector: !type:EntityEffectSelector
+    effects:
+    - !type:SpawnParticles
+      particleProto: SfGibMist
+      attached: true
+    - !type:PlaySoundEffect
+      sound:
+        path: /Audio/_Goobstation/Wraith/revshock.ogg
+        params:
+          volume: -1

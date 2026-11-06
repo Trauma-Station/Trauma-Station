@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  id: LockerRancherFilled
-  suffix: Filled
   parent: LockerBotanist
+  id: LockerRancherFilled
   name: rancher's locker
+  suffix: Filled
   components:
   - type: EntityTableContainerFill
     containers:
@@ -19,3 +19,24 @@
     - id: WhiteEgg
     - id: WhiteEgg
     - id: FoodContainerEgg
+
+- type: entity
+  parent: LockerClown
+  id: LockerClownFilled
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: FillLockerClown
+
+- type: entityTable
+  id: FillLockerClown
+  table: !type:AllSelector
+    children:
+    - id: LauncherCreamPie
+    - id: FoodPieBananaCream
+      amount: 3
+    - id: FoodBanana
+      amount: 2
+    - id: BananaSeeds

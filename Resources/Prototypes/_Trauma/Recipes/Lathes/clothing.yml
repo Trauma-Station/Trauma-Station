@@ -21,3 +21,50 @@
     Glass: 100
     Plasma: 500
     Gold: 500
+
+# Courier
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformCourier
+  result: ClothingUniformCourier
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformCourierLong
+  result: ClothingUniformCourierLong
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformSkirtCourier
+  result: ClothingUniformSkirtCourier
+
+- type: latheRecipe
+  parent: BaseCoatRecipe
+  id: ClothingOuterCourierDuster
+  result: ClothingOuterCourierDuster
+
+#Mail Carrier - Because for some reason they were missing.
+- type: latheRecipe
+  parent: BaseCoatRecipe
+  id: ClothingHeadMailCarrier
+  result: ClothingHeadMailCarrier
+
+- type: latheRecipe
+  parent: BaseCoatRecipe
+  id: ClothingOuterWinterCoatMail
+  result: ClothingOuterWinterCoatMail
+
+- type: latheRecipe
+  parent: BaseCoatRecipe
+  id: ClothingUniformSkirtMailCarrier
+  result: ClothingUniformSkirtMailCarrier
+
+- type: latheRecipe
+  parent: BaseCoatRecipe
+  id: ClothingUniformMailCarrier
+  result: ClothingUniformMailCarrier
+
+- type: latheRecipe
+  parent: BaseCoatRecipe
+  id: ClothingUniformMailCarrierLong
+  result: ClothingUniformMailCarrierLong

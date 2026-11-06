@@ -227,3 +227,66 @@
         Slash: 0.9
         Piercing: 0.9
         Heat: 0.9
+
+- type: entity
+  parent: ClothingHandsGlovesEnviroglovesBoxingBase
+  id: ClothingHandsGlovesEnviroglovesBoxingRed
+  name: red boxing envirogloves
+  description: Red envirogloves for competitive boxing. Plasmamen can punch too.
+  components:
+  - type: Sprite
+    sprite: Clothing/Hands/Gloves/Boxing/boxingred.rsi
+  - type: Clothing
+    sprite: Clothing/Hands/Gloves/Boxing/boxingred.rsi
+  - type: Fiber
+    fiberMaterial: fibers-leather
+    fiberColor: fibers-red
+  - type: FingerprintMask
+
+- type: entity
+  parent: ClothingHandsGlovesEnviroglovesBoxingBase
+  id: ClothingHandsGlovesEnviroglovesBoxingBlue
+  name: blue boxing envirogloves
+  description: Blue envirogloves for competitive boxing. Plasmamen can punch too.
+  components:
+  - type: Sprite
+    sprite: Clothing/Hands/Gloves/Boxing/boxingblue.rsi
+    state: icon
+  - type: Clothing
+    sprite: Clothing/Hands/Gloves/Boxing/boxingblue.rsi
+  - type: Fiber
+    fiberMaterial: fibers-leather
+    fiberColor: fibers-blue
+  - type: FingerprintMask
+
+- type: entity
+  parent: ClothingHandsGlovesEnviroglovesBoxingBase
+  id: ClothingHandsGlovesEnviroglovesBoxingGreen
+  name: green boxing envirogloves
+  description: Green envirogloves for competitive boxing. Plasmamen can punch too.
+  components:
+  - type: Sprite
+    sprite: Clothing/Hands/Gloves/Boxing/boxinggreen.rsi
+    state: icon
+  - type: Clothing
+    sprite: Clothing/Hands/Gloves/Boxing/boxinggreen.rsi
+  - type: Fiber
+    fiberMaterial: fibers-leather
+    fiberColor: fibers-green
+  - type: FingerprintMask
+
+- type: entity
+  parent: ClothingHandsGlovesEnviroglovesBoxingBase
+  id: ClothingHandsGlovesEnviroglovesBoxingYellow
+  name: yellow boxing envirogloves
+  description: Yellow envirogloves for competitive boxing. Plasmamen can punch too.
+  components:
+  - type: Sprite
+    sprite: Clothing/Hands/Gloves/Boxing/boxingyellow.rsi
+    state: icon
+  - type: Clothing
+    sprite: Clothing/Hands/Gloves/Boxing/boxingyellow.rsi
+  - type: Fiber
+    fiberMaterial: fibers-leather
+    fiberColor: fibers-yellow
+  - type: FingerprintMask

@@ -8,6 +8,17 @@
     - id: CargoMegaphone
     - id: ArmoryOverrideKeyComponents
 
+# Hardsuit table, used for suit storage as well
+- type: entityTable
+  id: FillQuartermasterHardsuit
+  table: !type:AllSelector
+    children:
+    - id: ClothingMaskGasExplorer
+    - id: ClothingOuterHardsuitLuxury
+    - id: JetpackBlueFilled
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled
+
 - type: entityTable
   id: LockerFillHeadOfPersonnelTrauma
   table: !type:AllSelector

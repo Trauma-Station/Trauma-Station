@@ -1,0 +1,158 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: MobDemonicFrostMiner
+  name: Demonic Frost Miner
+  description: smth.
+  components:
+  # Basic stuff
+  - type: StatusEffectContainer
+  - type: Physics
+    bodyType: KinematicController
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.35,-0.6,0.35,0.6"
+        density: 10000
+        mask:
+        - MobMask
+        layer:
+        - MobLayer
+  - type: Sprite
+    noRot: true
+    drawdepth: Mobs
+    sprite: _Trauma/Glacier/Bosses/demonic_miner.rsi
+    layers:
+    - state: demonic_miner
+      map: [ "enum.MobPhaseVisuals.Layer" ]
+  - type: MobPhaseVisuals
+    phases: [ 1, 4 ]
+  - type: GenericVisualizer
+    visuals:
+      enum.MobPhaseVisuals.Key:
+        enum.MobPhaseVisuals.Layer:
+          1: { state: demonic_miner }
+          4: { state: demonic_miner_phase2 }
+  - type: Clickable
+  - type: InteractionOutline
+  - type: InputMover
+  - type: Input
+    context: "human"
+  - type: LagCompensation
+  - type: MobMover
+  - type: Actions
+  - type: Appearance
+  - type: RotationVisuals
+    defaultRotation: 0
+    horizontalRotation: 0
+  - type: DoAfter
+  - type: Examiner
+  - type: Eye
+  - type: ContentEye
+  - type: RequireProjectileTarget
+    active: False
+  - type: CombatMode
+  - type: MobState
+  - type: Damageable
+    damageModifierSet: Hierophant
+  - type: Injurable
+    damageContainer: Inorganic
+  - type: NoSlip
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 3.5
+    baseSprintSpeed: 4.0
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      2625: Dead
+  - type: MeleeWeapon
+    attackRate: 4
+    soundHit:
+      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+    range: 1.5
+    animation: WeaponArcPunch
+    damage:
+      types:
+        Blunt: 10
+  - type: Tag
+    tags:
+    - CannotSuicide
+  # HTN chaser
+  - type: HTN
+    rootTask:
+      task: SimpleHostileCompound
+  - type: NpcFactionMember
+    factions:
+    - SimpleHostile
+  # Actual boss from here
+  - type: ActionGrant
+    actions:
+    - ActionFrostOrbsEasy
+    - ActionSnowballMachineGunEasy
+    - ActionIceShotgunEasy
+    - ActionFrostOrbsHard
+    - ActionSnowballMachineGunHard
+    - ActionIceShotgunHard
+  - type: Fauna
+  - type: Anger
+    totalHp: 4875 # Phase 4 means it "rejuvs", so we just add the whole HP instead of calling rejuv
+  - type: Aggressive
+    forgiveRange: 25
+  - type: MobPhases
+    phaseThresholds:
+      0:      1
+      1125:   2
+      1500:   3
+      2250:   4
+  - type: BossMusic
+    soundId: Leshy # todo
+  - type: SpawnLootOnDeath
+    table: !type:AllSelector
+      children:
+      - id: LeshySkull  # todo
+      - id: LeshyHorn   # todo
+      - id: LeshyBlood  # todo
+    deleteOnDeath: true
+  - type: MegafaunaPhasesEffects
+    phaseEffects:
+      # Moves faster, uses actions faster
+      2:
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 1.2
+        sprintSpeedModifier: 1.2
+        time: null
+      - !type:MegafaunaActionDelay
+        actionDelay: 2.0
+      # Same as before, but a little amplified
+      3:
+      - !type:MovementSpeedModifier
+        walkSpeedModifier: 1.5
+        sprintSpeedModifier: 1.5
+        time: null
+      - !type:MegafaunaActionDelay
+        actionDelay: 1.5
+      # Touhou
+      4:
+      - !type:ModifyStatusEffect
+        effectProto: FrostMinerPhase4
+        time: 5
+  - type: MegafaunaShutdownEffects
+    effects:
+    - !type:MovementSpeedModifier
+      walkSpeedModifier: 1.0
+      sprintSpeedModifier: 1.0
+      type: Set
+    - !type:MegafaunaActionDelay
+      actionDelay: 4
+  - type: MegafaunaAi
+    actionDelay: 4
+    selector:
+      id: DemonicFrostMiner
+  - type: AngerPlayerScaling
+    angerScale: 1.1
+    hpScale: 1.1
+  - type: MegafaunaAnchor
+  - type: MegafaunaGodmode
+  - type: MegafaunaRejuvenate

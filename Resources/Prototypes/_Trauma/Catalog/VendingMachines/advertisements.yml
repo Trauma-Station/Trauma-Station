@@ -5,3 +5,15 @@
   values:
     prefix: advertisement-mimic-
     count: 14
+
+- type: localizedDataset
+  id: BoxingDrobeAds
+  values:
+    prefix: advertisement-boxingdrobe-
+    count: 3
+
+- type: localizedDataset
+  id: CourierDrobeAds
+  values:
+    prefix: advertisement-courierdrobe-
+    count: 5

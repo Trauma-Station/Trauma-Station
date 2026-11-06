@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: bossMusic
+  id: Leshy
+  fade: true
+  fadeInTime: 5
+  fadeOutTime: 8
+  positionOnEnd: 0
+  sound:
+    path: /Audio/_Lavaland/Mobs/Bosses/hiero_bgm.ogg

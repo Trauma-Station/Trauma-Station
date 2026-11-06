@@ -1,0 +1,52 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: gameMap
+  id: Glacier
+  mapName: Glacier
+  mapPath: /Maps/_Trauma/glacier.yml
+  maxRandomOffset: 0
+  randomRotation: false
+  planets: [ ]          # Disables LL from loading
+  planetProto: Glacier  # Loads OUR planet defaults for this station
+  minPlayers: 15
+  maxPlayers: 70
+  stations:
+    Glacier:
+      stationProto: StandardNanotrasenStation
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: '{0} Glacier Station {1}'
+        nameGenerator:
+          !type:NanotrasenNameGenerator
+          prefixCreator: 'NY'
+      - type: StationEmergencyShuttle
+        emergencyShuttlePath: /Maps/Shuttles/emergency_box.yml
+      - type: StationJobs
+        availableJobs:
+          Captain: [ 1, 1 ]
+
+# First we ice, then we waste... Let's Ice Wastes!
+- type: planet
+  id: Glacier
+  biome: Glacier
+  ruinPool: GlacierRuins
+  atmosphere:
+    volume: 2500
+    temperature: 180 # -93, extreme cold
+    moles:           # 119kPa, 21% O2
+    - 42
+    - 158
+  biomeMarkerLayers:
+  - OreIron
+  - OreQuartz
+  - OreCoal
+  - OreGold
+  - OreSilver
+  - OreDiamond
+  - OreUranium
+  - OrePlasma
+  - OreArtifactFragment
+  effects:
+  - !type:ModifyStatusEffect
+    effectProto: WeatherSchedulerGlacier # Permanent snowstorms
+    time: null

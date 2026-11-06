@@ -34,3 +34,15 @@
       OrganDamage: 0.13
       BoneDamage: 0.13
       VeinsDamage: 0
+
+# Wrestling gear
+- type: entity
+  parent: ClothingEyesBase
+  id: ClothingEyesWrestlerMaskDomino
+  name: domino mask
+  description: No CGI here.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Eyes/Glasses/wrestlermaskdomino.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Eyes/Glasses/wrestlermaskdomino.rsi

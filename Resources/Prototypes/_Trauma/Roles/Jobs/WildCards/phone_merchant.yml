@@ -3,7 +3,7 @@
 - type: job
   id: PhoneMerchant
   name: job-name-phonemerchant
-  description: job-name-phonemerchant
+  description: job-description-phonemerchant
   playTimeTracker: JobPhoneMerchant
   startingGear: PhoneMerchantGear
   icon: "JobIconPhoneMerchant"

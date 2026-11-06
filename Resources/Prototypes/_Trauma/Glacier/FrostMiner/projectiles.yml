@@ -1,0 +1,81 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: ProjectileFrostMiner
+  components:
+  - type: PointLight
+    color: Blue
+    radius: 2.0
+    energy: 5.0
+  - type: Physics
+  - type: Fixtures
+    fixtures:
+      projectile:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.1,-0.1,0.1,0.1"
+        hard: false
+        mask:
+        - BulletImpassable
+
+- type: entity
+  id: ProjectileFrostMinerOrb
+  name: frost orb
+  parent: BaseBullet
+  components:
+  - type: Projectile
+    deleteOnCollide: false
+    damage:
+      types:
+        Heat: 20
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Items/arcane_barrage.rsi
+    state: bullet
+  - type: TimedDespawn
+    lifetime: 10
+  - type: SpawnOnDespawn
+    prototype: IceBlastsOnSpawn
+
+- type: entity
+  id: ProjectileIceBlast
+  name: ice blast
+  parent: BaseBullet
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 15
+    soundHit:
+      path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
+  - type: Sprite
+    sprite: _Trauma/BloodCult/Entities/Items/arcane_barrage.rsi # looks ok for this boss idc
+    state: bullet
+
+# Low damage ice blast
+- type: entity
+  parent: ProjectileIceBlast
+  id: ProjectileIceBlastLow
+  name: ice blast
+  components:
+  - type: Projectile
+    damage:
+      types:
+        Blunt: 5
+
+- type: entity
+  id: IceBlastsOnSpawn
+  name: huh?
+  components:
+  - type: TriggerOnSpawn
+  - type: EntityEffectOnTrigger
+    effects:
+    - !type:ShootProjectileAdvanced
+      projectile: ProjectileLeshyDeathBolt
+      amount: 5
+      speed: 15
+      spread: true
+      fullAngle: 360
+    - !type:Delete

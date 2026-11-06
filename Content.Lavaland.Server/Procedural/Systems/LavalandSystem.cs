@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using System.Linq;
 using Content.Lavaland.Server.Procedural.Components;
 using Content.Lavaland.Shared.CCVar;
 using Content.Lavaland.Shared.Procedural.Components;
@@ -62,8 +63,13 @@ public sealed partial class LavalandSystem : EntitySystem
 
     private void OnLoadingMaps(LoadingMapsEvent ev)
     {
+        // if there's no LL, don't load LL
+        var maps = ev.Maps;
+        if (maps.Any(game => game.Planets.Count == 0))
+            return;
+
         EnsurePreloaderMap();
-        foreach (var gameMap in ev.Maps)
+        foreach (var gameMap in maps)
         {
             foreach (var planetEntry in gameMap.Planets)
             {

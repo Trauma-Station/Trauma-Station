@@ -5,10 +5,18 @@
   guides:
   - Writing
   access:
+  - Boxer
+  - Clown
+  - Genetics
   - Journalism
   - Library
+  - Mail
+  - Mime
+  - Musician
+  - Paramedic
+  - Psychologist
   - Robotics
-  - Genetics
+  - Zookeeper
   special:
   - !type:OrganChipsSpecial
     chips:

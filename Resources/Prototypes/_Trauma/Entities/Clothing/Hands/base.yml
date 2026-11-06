@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: [ ClothingHandsGlovesBoxingBase, ClothingHandsGlovesEnviroglovesBase ]
+  id: ClothingHandsGlovesEnviroglovesBoxingBase
+  components:
+  - type: Tag
+    tags:
+    - Kangaroo
+    - ClothMade
+    - Recyclable
+    - WhitelistChameleon
+    - PlasmamanSafe

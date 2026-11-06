@@ -165,6 +165,23 @@
     Piercing: 10
     Heat: 5 # welder ops
 
+# Mountain Rock
+
+- type: damageModifierSet
+  id: MountainRock
+  coefficients:
+    Structural: 0.5
+    Blunt: 0.1
+    Slash: 0.05
+    Piercing: 0.2
+    Heat: 0.5
+  flatReductions:
+    Structural: 10
+    Blunt: 15
+    Slash: 40
+    Piercing: 15
+    Heat: 10
+
 # Reactive Armor
 
 - type: damageModifierSet

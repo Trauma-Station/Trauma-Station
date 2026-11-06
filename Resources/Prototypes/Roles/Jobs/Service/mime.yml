@@ -14,11 +14,6 @@
   - Theatre
   - Maintenance
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEducation
-  # </Trauma>
   - !type:AddComponentSpecial
     components:
     - type: MimePowers

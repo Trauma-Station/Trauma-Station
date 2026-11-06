@@ -182,3 +182,170 @@
   maxLimit: 1
   loadouts:
   - BlackEnvirogloves
+
+# Boxer
+- type: loadoutGroup
+  id: BoxerJumpsuit
+  name: loadout-group-boxer-jumpsuit
+  loadouts:
+  - BoxerShorts
+  - BoxerShortsWithTop
+  - WrestlerCostumeGreen
+  - WrestlerCostumeRed
+  - WrestlerCostumeBlue
+  - WrestlerCostumeYellow
+  - WrestlerCostumeSodaJerk
+
+- type: loadoutGroup
+  id: BoxerGloves
+  name: loadout-group-boxer-gloves
+  loadouts:
+  - RedBoxingGloves
+  - BlueBoxingGloves
+  - GreenBoxingGloves
+  - YellowBoxingGloves
+
+- type: loadoutGroup
+  id: BoxerMask # TODO: actually make masks so it doesnt break with envirohelms and so it's not slop
+  name: loadout-group-boxer-mask
+  minLimit: 0
+  loadouts:
+  - BoxerDominoMask
+  - WrestlingMaskLuchaRed
+  - WrestlingMaskLuchaBlue
+  - SodaJerkCap
+
+- type: loadoutGroup
+  id: BoxerEnvirohelm
+  name: loadout-group-boxer-envirohelm
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - BoxerEnvirohelm
+  - BoxerEnvirohelmGi
+  - BoxerEnvirohelmGladiator
+
+- type: loadoutGroup
+  id: BoxerEnvirosuit
+  name: loadout-group-boxer-envirosuit
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - BoxerEnvirosuit
+  - BoxerEnvirosuitGi
+  - BoxerEnvirosuitGladiator
+
+- type: loadoutGroup
+  id: BoxerEnvirogloves
+  name: loadout-group-boxer-envirogloves
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - RedBoxingEnvirogloves
+  - BlueBoxingEnvirogloves
+  - GreenBoxingEnvirogloves
+  - YellowBoxingEnvirogloves
+
+# Zookeeper
+
+- type: loadoutGroup
+  id: ZookeeperHead
+  name: loadout-group-zookeeper-head
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ZookeeperHead
+
+- type: loadoutGroup
+  id: ZookeeperJumpsuit
+  name: loadout-group-zookeeper-jumpsuit
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ZookeeperJumpsuit
+
+- type: loadoutGroup
+  id: ZookeeperEnvirohelm
+  name: loadout-group-zookeeper-envirohelm
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ZookeeperEnvirohelm
+
+- type: loadoutGroup
+  id: ZookeeperEnvirosuit
+  name: loadout-group-zookeeper-envirosuit
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ZookeeperEnvirosuit
+
+- type: loadoutGroup
+  id: ZookeeperEnvirogloves
+  name: loadout-group-zookeeper-envirogloves
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - ZookeeperEnvirogloves
+
+# Courier
+
+- type: loadoutGroup
+  id: CourierHead
+  name: loadout-group-courier-head
+  minLimit: 0
+  loadouts:
+  - CourierHead
+  - CourierHeadFlipped
+
+- type: loadoutGroup
+  id: CourierJumpsuit
+  name: loadout-group-courier-jumpsuit
+  loadouts:
+  - CourierJumpsuit
+  - CourierJumpskirt
+
+- type: loadoutGroup
+  id: CourierBackpack
+  name: loadout-group-courier-backpack
+  loadouts:
+  - MailCarrierMessenger
+  - CourierMessenger
+
+- type: loadoutGroup
+  id: CourierShoes
+  name: loadout-group-courier-shoes
+  loadouts:
+  - BrownShoes
+  - BlackShoes
+  - CargoWinterBoots
+
+- type: loadoutGroup
+  id: CourierPDA
+  name: loadout-group-courier-id
+  loadouts:
+  - CourierPDA
+
+- type: loadoutGroup
+  id: CourierEnvirohelm
+  name: loadout-group-courier-envirohelm
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - CourierEnvirohelm
+
+- type: loadoutGroup
+  id: CourierEnvirosuit
+  name: loadout-group-courier-envirosuit
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - CourierEnvirosuit
+
+- type: loadoutGroup
+  id: CourierEnvirogloves
+  name: loadout-group-cargo-technician-envirogloves
+  minLimit: 1
+  maxLimit: 1
+  loadouts:
+  - CourierEnvirogloves

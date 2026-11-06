@@ -5,3 +5,9 @@
   values:
     prefix: figurines-tweaking-
     count: 3
+
+- type: localizedDataset
+  id: FigurinesPrisoner
+  values:
+    prefix: figurines-prisoner-
+    count: 3

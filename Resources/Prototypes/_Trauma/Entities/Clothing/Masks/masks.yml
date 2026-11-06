@@ -74,3 +74,9 @@
         Slash: 0.8
         Piercing: 0.9
         Heat: 0.9
+
+- type: entity
+  parent: [ BaseCargoContraband, BaseRestrictedContraband, ClothingMaskGasSwat ]
+  id: ClothingMaskCourier
+  name: courier mask
+  description: You've made your last delivery kid. Sorry you got twisted up in this scene. From where you're kneeling it must seem like an 18-carat run of bad luck. Truth is... the game was rigged from the start.

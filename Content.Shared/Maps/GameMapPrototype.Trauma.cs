@@ -17,6 +17,12 @@ public sealed partial class GameMapPrototype
     public List<string> Planets = new() { "Lavaland" };
 
     /// <summary>
+    /// If it's a planet map, the PlanetPrototype of it
+    /// </summary>
+    [DataField]
+    public string? PlanetProto;
+
+    /// <summary>
     /// The map pool's <c>RequiredEntities</c> that this map gets to leave out and still pass tests.
     /// These should have a good reason to not be mapped.
     /// </summary>

@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: LockerBaseTrauma
+  id: LockerPsychologist
+  name: psychologist locker
+  components:
+  - type: Appearance
+  - type: EntityStorageVisuals
+    stateBaseClosed: psych
+    stateDoorOpen: psych_open
+    stateDoorClosed: psych_door
+  - type: AccessReader
+    access: [["Psychologist"]]
+
+- type: entity
+  parent: LockerPsychologist
+  id: LockerPsychologistFilled
+  suffix: Filled
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage: !type:NestedSelector
+        tableId: PsychologistLockerFill

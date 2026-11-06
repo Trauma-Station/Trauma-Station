@@ -23,3 +23,27 @@
   components:
   - type: NavMapBeacon
     defaultText: station-beacon-reactor
+
+- type: entity
+  parent: DefaultStationBeaconMedical
+  id: DefaultStationBeaconVirology
+  suffix: Virology
+  components:
+  - type: NavMapBeacon
+    defaultText: station-beacon-virology
+
+- type: entity
+  parent: DefaultStationBeaconSupply
+  id: DefaultStationBeaconMailroom
+  suffix: Mail
+  components:
+  - type: NavMapBeacon
+    defaultText: station-beacon-mail
+
+- type: entity
+  parent: DefaultStationBeaconService
+  id: DefaultStationBeaconBoxing
+  suffix: Boxing
+  components:
+  - type: NavMapBeacon
+    defaultText: station-beacon-boxing

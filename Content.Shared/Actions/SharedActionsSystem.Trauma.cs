@@ -1,6 +1,7 @@
 using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
 using Content.Shared.Database;
+using Content.Shared.DoAfter;
 using Content.Shared.Ghost.Components;
 using Robust.Shared.Network;
 using Robust.Shared.Utility;
@@ -26,6 +27,11 @@ public abstract partial class SharedActionsSystem
 
         if (!CanPerformAction((user, component), action, ev))
             return false;
+
+        if (TryComp<DoAfterArgsComponent>(action, out var actionDoAfterComp) && TryComp<DoAfterComponent>(user, out var performerDoAfterComp))
+        {
+            return TryStartActionDoAfter((action, actionDoAfterComp), (user, performerDoAfterComp), action.Comp.UseDelay, ev);
+        }
 
         // All checks passed. Perform the action!
         return PerformAction((user, component), action);

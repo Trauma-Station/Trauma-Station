@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: tile
+  parent: BaseFloorPlanet
+  id: FloorSnowHerringbone
+  name: tiles-snow-floor-herringbone
+  sprite: /Textures/_Trauma/Tiles/snowy_herringbone.png
+  footstepSounds:
+    collection: FootstepTile
+  isSubfloor: false

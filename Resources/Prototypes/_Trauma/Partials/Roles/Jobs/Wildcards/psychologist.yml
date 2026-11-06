@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: Psychologist
+  access:
+  - Psychologist
+  special:
+  - !type:OrganChipsSpecial
+    chips:
+    - SkillChipEducation
+    - SkillChipChemist

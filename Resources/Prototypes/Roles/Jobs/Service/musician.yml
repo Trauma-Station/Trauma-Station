@@ -11,11 +11,6 @@
   - Maintenance # TODO Remove maint access for all gimmick jobs once access work is completed
   - Theatre
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEducation
-  # </Trauma>
   - !type:GiveItemOnHolidaySpecial
     holiday: MikuDay
     prototype: BoxPerformer
@@ -27,9 +22,6 @@
     shoes: ClothingShoesBootsLaceup
     id: MusicianPDA
     ears: ClothingHeadsetService
-  storage:
-    back:
-    - InstrumentsBeacon # Trauma
 
 - type: chameleonOutfit
   id: MusicianChameleonOutfit

@@ -1,0 +1,164 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# todo: needs more sounds and particles for indications and it should be ready
+# todo: add a scream action to account for shockwave scream not existing in it's exact state (?)
+- type: entity
+  abstract: true
+  parent: BaseAction
+  id: BaseLeshyAction
+  components:
+  - type: Action
+    useDelay: 2
+    raiseOnAction: true
+    checkCanInteract: false
+  - type: EntityTargetAction
+    event: !type:HandleTargetActionEvent
+  - type: TargetAction
+    range: 30
+    interactOnMiss: false
+
+- type: entity
+  parent: BaseLeshyAction
+  id: ActionWendigoHeavyStomp
+  name: Heavy Stomp (Phase I)
+  description: You stomp the ground, sending out a shockwave that knocks people back.
+  components:
+  - type: Action
+    useDelay: 12
+  - type: DoAfterArgs
+    hidden: true
+    delay: 5
+  - type: ActionRequirements
+    effects:
+      Performer:
+      - !type:RelayNearby
+        compName: StatusEffects
+        range: 5
+        effect: !type:NestedEffect
+          proto: WendigoStomp
+      - !type:SpawnParticles
+        particleProto: VampireStomp
+
+- type: entity
+  parent: BaseLeshyAction
+  id: ActionWendigoTeleport
+  name: Teleport
+  description: You teleport to a random tile from your target.
+  components:
+  - type: Action
+    sound: !type:SoundPathSpecifier
+      path: /Audio/Magic/blink.ogg
+  - type: TargetAction
+    range: 2
+  - type: ActionRequirements
+    effects:
+      Performer:
+      - !type:RandomTeleport
+        radius:
+          min: 4.0
+          max: 4.0
+
+# Projectile Variants
+- type: entity
+  parent: BaseLeshyAction
+  id: ActionWendigoProjectileSpread
+  name: Projectile Spread (360)
+  components:
+  - type: Action
+    useDelay: 5
+  - type: ActionRequirements
+    effects:
+      Performer:
+      - !type:ShootProjectileAdvanced
+        projectile: ProjectileLeshyDeathBolt
+        amount: 10
+        speed: 10
+        spread: true
+        fullAngle: 360
+
+- type: entity
+  parent: ActionWendigoProjectileSpread
+  id: ActionWendigoProjectileSpreadShotgun
+  name: Projectile Spread (Shotgun)
+  components:
+  - type: ActionRequirements
+    effects:
+      Performer:
+      - !type:ShootProjectileAdvanced
+        projectile: ProjectileLeshyDeathBolt
+        amount: 10
+        spreadAngles:
+          min: 1
+          max: 2
+        speed: 15
+
+# Phase II abilities
+- type: entity
+  parent: ActionWendigoHeavyStomp
+  id: ActionWendigoHeavyStompII
+  name: Heavy Stomp (Phase II)
+  components:
+  - type: ActionRequirements
+    effects:
+      Performer:
+      - !type:RelayNearby
+        compName: StatusEffects
+        range: 10
+        effect: !type:NestedEffect
+          proto: WendigoStomp
+      - !type:SpawnParticles
+        particleProto: VampireStomp # doesn't matter
+
+- type: entity
+  parent: ActionWendigoProjectileSpread
+  id: ActionWendigoProjectileSpreadII
+  name: Projectile Spread (360, Phase II)
+  components:
+  - type: ActionRequirements
+    effects:
+      Performer:
+      - !type:ShootProjectileAdvanced
+        projectile: ProjectileLeshyDeathBolt
+        amount: 15
+        speed: 25
+        spread: true
+        fullAngle: 360
+
+- type: entity
+  parent: ActionWendigoProjectileSpread
+  id: ActionWendigoProjectileSpreadShotgunII
+  name: Projectile Spread (Shotgun, Phase II)
+  components:
+  - type: ActionRequirements
+    effects:
+      Performer:
+      - !type:ShootProjectileAdvanced
+        projectile: ProjectileLeshyDeathBolt
+        amount: 15
+        spreadAngles:
+          min: 1
+          max: 3
+        speed: 25
+
+# Polymorph to Polar Bear
+- type: entity
+  parent: BaseActionPolymorph
+  id: ActionPolymorphPolarBear
+  name: Polar Bear Polymorph
+  description: Polymorphs you into a Polar bear.
+  components:
+  - type: Sprite
+    sprite: Mobs/Animals/bear.rsi
+    state: bear
+  - type: InstantAction
+    event: !type:PolymorphActionEvent
+      protoId: PolarBearPolymorph
+
+- type: polymorph
+  id: PolarBearPolymorph
+  configuration:
+    entity: MobBearSpace
+    transferName: true
+    inventory: None
+    revertOnDeath: true
+    revertOnCrit: true

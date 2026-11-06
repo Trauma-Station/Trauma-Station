@@ -1,0 +1,89 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: NecropolisNest
+  parent: BaseStructure
+  name: necropolis nest
+  description: A huge structure. Several eggs shiver around it.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Sprite
+    noRot: true
+    sprite: _Trauma/Glacier/Icewalkers/nest.rsi
+    state: tendril
+    drawdepth: Mobs
+  - type: DragInsertContainer
+    containerId: nest-container
+    entryDelay: 2
+    useVerbs: false
+  - type: Nest
+    containerId: nest-container
+    conditions:
+    - !type:WhitelistCondition
+      whitelist:
+        components:
+        - Body
+    - !type:MobStateCondition
+      mobstate: Dead
+    effects:
+    - !type:SpawnEntity
+      entity: IceWalkerEgg
+    - !type:SpawnParticles
+      particleProto: SfGibMist
+    - !type:PlaySoundEffect
+      sound: /Audio/Effects/extinguish.ogg
+    targetEffects:
+    - !type:Gib
+  - type: ContainerContainer
+    containers:
+      nest-container: !type:ContainerSlot
+  - type: Damageable
+    damageContainer: Biological
+    damageModifierSet: Skeleton
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 500
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          LavalandCrateNecropolisRandom:
+            min: 1
+            max: 1
+  - type: Appearance
+  - type: InteractionOutline
+  - type: Clickable
+  - type: Physics
+    bodyType: Static
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.5,-0.5,0.5,0.5"
+        layer:
+        - WallLayer
+        mask:
+        - ItemMask
+        density: 1000
+        hard: false
+  - type: PassiveDamage
+    damage:
+      types:
+        Heat: -1
+        Shock: -1
+        Structural: -1
+      groups:
+        Brute: -3
+  - type: WarpPoint
+    follow: true
+    location: Necropolis Nest
+  - type: Drain
+    unitsPerSecond: 10
+    unitsDestroyedPerSecond: 10

@@ -1,0 +1,170 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: loadout
+  id: WrestlerCostumeGreen
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitWrestlerCostumeGreen
+
+- type: loadout
+  id: WrestlerCostumeRed
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitWrestlerCostumeRed
+
+- type: loadout
+  id: WrestlerCostumeYellow
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitWrestlerCostumeYellow
+
+- type: loadout
+  id: WrestlerCostumeBlue
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitWrestlerCostumeBlue
+
+- type: loadout
+  id: WrestlerCostumeSodaJerk
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitSodaJerk
+
+# Eye-mask (aka Domino Mask)
+- type: loadout
+  id: BoxerDominoMask
+  equipment:
+    eyes: ClothingEyesWrestlerMaskDomino
+
+# Lucha Libre Masks (which are technically hats but sssshhhhuuushshsuushsush nobody asked you)
+- type: loadout
+  id: WrestlingMaskLuchaRed
+  equipment:
+    head: ClothingHeadHatWrestlingMaskLuchaRed
+
+- type: loadout
+  id: WrestlingMaskLuchaBlue
+  equipment:
+    head: ClothingHeadHatWrestlingMaskLuchaBlue
+
+- type: loadout
+  id: SodaJerkCap
+  equipment:
+    head: ClothingHeadHatSodaJerkCap
+
+# Jumpsuit
+- type: loadout
+  id: BoxerShorts
+  equipment:
+    jumpsuit: UniformShortsRed
+
+- type: loadout
+  id: BoxerShortsWithTop
+  equipment:
+    jumpsuit: UniformShortsRedWithTop
+
+# Gloves
+- type: loadout
+  id: RedBoxingGloves
+  equipment:
+    gloves: ClothingHandsGlovesBoxingRed
+
+- type: loadout
+  id: BlueBoxingGloves
+  equipment:
+    gloves: ClothingHandsGlovesBoxingBlue
+
+- type: loadout
+  id: GreenBoxingGloves
+  equipment:
+    gloves: ClothingHandsGlovesBoxingGreen
+
+- type: loadout
+  id: YellowBoxingGloves
+  equipment:
+    gloves: ClothingHandsGlovesBoxingYellow
+
+- type: loadout
+  id: RedBoxingEnvirogloves
+  equipment:
+    gloves: ClothingHandsGlovesEnviroglovesBoxingRed
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman
+
+- type: loadout
+  id: BlueBoxingEnvirogloves
+  equipment:
+    gloves: ClothingHandsGlovesEnviroglovesBoxingBlue
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman
+
+- type: loadout
+  id: GreenBoxingEnvirogloves
+  equipment:
+    gloves: ClothingHandsGlovesEnviroglovesBoxingGreen
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman
+
+- type: loadout
+  id: YellowBoxingEnvirogloves
+  equipment:
+    gloves: ClothingHandsGlovesEnviroglovesBoxingYellow
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman
+
+- type: loadout
+  id: BoxerEnvirosuit
+  equipment:
+    jumpsuit: ClothingUniformEnvirosuitBoxing
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman
+
+- type: loadout
+  id: BoxerEnvirohelm
+  equipment:
+    head: ClothingHeadEnvirohelmBoxing
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman
+
+- type: loadout
+  id: BoxerEnvirosuitGi
+  equipment:
+    jumpsuit: ClothingUniformEnvirosuitMartialGi
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman
+
+- type: loadout
+  id: BoxerEnvirohelmGi
+  equipment:
+    head: ClothingHeadEnvirohelmMartialGi
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman
+
+- type: loadout
+  id: BoxerEnvirosuitGladiator
+  equipment:
+    jumpsuit: ClothingUniformEnvirosuitGladiator
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman
+
+- type: loadout
+  id: BoxerEnvirohelmGladiator
+  equipment:
+    head: ClothingHeadEnvirohelmGladiator
+  effects:
+  - !type:SpeciesLoadoutEffect
+    species:
+    - Plasmaman

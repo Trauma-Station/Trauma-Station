@@ -5,7 +5,7 @@
         "y": 32
     },
     "license": "CC-BY-SA-3.0",
-    "copyright": "Neon signs by Armok",
+    "copyright": "Neon signs by Armok, direction_court by leonardo_dabepis (Discord), disposals_proper by Conflee",
     "states": [
         {
             "name": "ai"
@@ -209,6 +209,10 @@
             "directions": 4
         },
         {
+            "name": "direction_court",
+            "directions": 4
+        },
+        {
             "name": "direction_cryo",
             "directions": 4
         },
@@ -231,6 +235,9 @@
         {
             "name": "direction_pods",
             "directions": 4
+        },
+        {
+            "name": "disposals_proper"
         },
         {
             "name": "dock"

@@ -13,6 +13,13 @@
     - Library
     - Robotics
     - Genetics
+    - Psychologist
+    - Boxer
+    - Clown
+    - Mail
+    - Mime
+    - Musician
+    - Zookeeper
 
 - type: entity
   id: AccessConfiguratorUniversal

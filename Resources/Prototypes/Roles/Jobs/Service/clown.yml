@@ -11,26 +11,11 @@
   - Theatre
   - Maintenance
   special:
-  # <Trauma>
-  - !type:OrganChipsSpecial
-    chips:
-    - SkillChipEducation
-    - SkillChipNonLethal
-    - SkillChipClown
-  - !type:ApplyStatusEffectSpecial
-    statusEffects:
-    - StatusEffectClumsyClown
-  # </Trauma>
   - !type:AddComponentSpecial
     components:
-    # <Trauma>
-    #- type: PermanentStatusEffects
-    #  statusEffects:
-    #  - StatusEffectClumsyClown
-    - type: SpeechFontOverride # ss13 parity
-      font: LDFComicSans
-    - type: Clown
-    # </Trauma>
+    - type: PermanentStatusEffects
+      statusEffects:
+      - StatusEffectClumsyClown
     - type: SleepEmitSound
       snore: /Audio/Voice/Misc/silly_snore.ogg
       interval: 10

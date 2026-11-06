@@ -117,6 +117,7 @@
     # <Trauma> - replaced all real gear with bones
     - id: MaterialBones1 # Remains of a longrotten brigmedic.
       amount: 5
+    - id: ToyFigurineBrigmedic
     # </Trauma>
     - id: ClothingUniformJumpskirtOfLife
       prob: 0.1

@@ -23,3 +23,75 @@
   components:
   - type: AccessReader
     access: [["Library"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsParamedic
+  suffix: Paramedic, Locked
+  components:
+  - type: AccessReader
+    access: [["Paramedic"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsPsychologist
+  suffix: Psychologist, Locked
+  components:
+  - type: AccessReader
+    access: [["Psychologist"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsBoxer
+  suffix: Boxer, Locked
+  components:
+  - type: AccessReader
+    access: [["Boxer"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsClown
+  suffix: Clown, Locked
+  components:
+  - type: AccessReader
+    access: [["Clown"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsMime
+  suffix: Mime, Locked
+  components:
+  - type: AccessReader
+    access: [["Mime"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsMusician
+  suffix: Musician, Locked
+  components:
+  - type: AccessReader
+    access: [["Musician"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsZookeeper
+  suffix: Zookeeper, Locked
+  components:
+  - type: AccessReader
+    access: [["Zookeeper"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsCourier
+  suffix: Courier, Locked
+  components:
+  - type: AccessReader
+    access: [["Mail"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsSecuritySalvage
+  suffix: Security/Salvage, Locked
+  components:
+  - type: AccessReader
+    access: [["Security"], ["Salvage"]]

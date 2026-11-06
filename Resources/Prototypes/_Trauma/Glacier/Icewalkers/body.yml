@@ -1,0 +1,40 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseSpeciesAppearance, AppearanceReptilian ]
+  id: AppearanceIceWalker
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: InitialBody
+    organs:
+      Torso: OrganReptilianTorso
+      Head: OrganReptilianHead
+      Tail: OrganReptilianTail
+      ArmLeft: OrganReptilianArmLeft
+      ArmRight: OrganReptilianArmRight
+      HandRight: OrganReptilianHandRight
+      HandLeft: OrganReptilianHandLeft
+      LegLeft: OrganReptilianLegLeft
+      LegRight: OrganReptilianLegRight
+      FootLeft: OrganReptilianFootLeft
+      FootRight: OrganReptilianFootRight
+      Brain: OrganReptilianBrain
+      Eyes: OrganReptilianEyes
+      Tongue: OrganReptilianTongue
+      Appendix: OrganReptilianAppendix
+      Ears: OrganReptilianEars
+      Lungs: OrganIceWalkerLungs
+      Heart: OrganReptilianHeart
+      Stomach: OrganReptilianStomach
+      Liver: OrganReptilianLiver
+      Kidneys: OrganReptilianKidneys
+
+- type: entity
+  parent: OrganReptilianLungs
+  id: OrganIceWalkerLungs
+  components:
+  - type: Sprite
+    sprite: _Shitmed/Mobs/Species/Abductor/organs.rsi
+  - type: OrganComponents
+    onAdd:
+    - type: BreathingImmunity

@@ -64,6 +64,8 @@
 - type: entity
   id: LockerClown
   components:
+  - type: AccessReader
+    access: [[ "Clown" ]]
   - type: AntiTamper
     broadcastChannel: Service # poor poor clown
 
@@ -74,6 +76,12 @@
     broadcastChannel: Syndicate # funny
 
 # Normal
+
+- type: entity
+  id: LockerMime
+  components:
+  - type: AccessReader
+    access: [[ "Mime" ]]
 
 - type: entity
   id: GunSafeBaseSecure

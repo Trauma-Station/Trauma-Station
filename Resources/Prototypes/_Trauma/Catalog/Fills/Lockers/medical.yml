@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entityTable
+  id: FillParamedicHardsuit
+  table: !type:AllSelector
+    children:
+    - id: ClothingMaskBreathMedical
+    - id: UndeterminedVoidsuitParamedic
+    - id: JetpackBlueFilled
+    - id: OxygenTankFilled
+    - id: NitrogenTankFilled
+
+- type: entityTable
+  id: PsychologistLockerFill
+  table: !type:AllSelector
+    children:
+    - id: BoxFolderWhite
+    - id: ClothingUniformJumpsuitPsychologist
+    - id: ClothingUniformJumpskirtPsychologist
+    - id: DrinkWhiskeyBottleFull
+    - id: ClothingHeadsetMedical
+    - id: RubberStampPsychologist
+    - id: PillCanisterSpaceDrugs
+    - id: CigPackMixed
+    - id: FoodBakedCannabisBrownieBatch

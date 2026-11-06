@@ -213,6 +213,7 @@ loadout-group-zookeeper-head = Zookeeper hat
 # Boxer
 loadout-group-boxer-envirohelm = Boxer envirohelm
 loadout-group-boxer-envirosuit = Boxer envirosuit
+loadout-group-boxer-envirogloves = Boxer envirogloves
 
 # Misc
 loadout-group-plasma-tank = Phoron tank

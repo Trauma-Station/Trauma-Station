@@ -5,3 +5,18 @@
   id: PlatingBurnt
   name: tiles-plating
   sprite: /Textures/_Trauma/Tiles/plating_burnt.png
+
+- type: tile
+  parent: Plating
+  id: PlatingWeather
+  weather: true
+
+- type: tile
+  parent: PlatingAsteroid
+  id: PlatingAsteroidWeather
+  weather: true
+
+- type: tile
+  parent: PlatingRCD
+  id: PlatingRCDWeather
+  weather: true

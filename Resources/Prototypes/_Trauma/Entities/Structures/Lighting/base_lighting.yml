@@ -1,0 +1,30 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: Poweredlight
+  id: PoweredLightColoredFrostyBlue
+  suffix: Frosty
+  components:
+  - type: PoweredLight
+    hasLampOnSpawn: ColoredLightTubeFrostyBlue
+  - type: PointLight
+    radius: 10
+    energy: 0.8
+    softness: 1
+    color: "#00FFFF"
+
+- type: entity
+  parent: PoweredLightPostSmallEmpty
+  id: PoweredLightPostSmallRed
+  name: post light
+  suffix: Red
+  components:
+  - type: PoweredLight
+    hasLampOnSpawn: ColoredLightTubeRed
+  - type: PointLight
+    enabled: true
+    radius: 10
+    energy: 0.9
+    softness: 1
+    offset: "0, -0.5"
+    color: "#FF6666"

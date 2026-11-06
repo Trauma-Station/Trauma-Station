@@ -3,6 +3,7 @@
 using Content.Lavaland.Shared.Megafauna.Components;
 using Content.Lavaland.Shared.Megafauna.Systems;
 using Content.Shared.Actions;
+using Content.Shared.DoAfter;
 
 namespace Content.Lavaland.Shared.Megafauna.Selectors;
 
@@ -26,10 +27,15 @@ public sealed partial class PerformActionSelector : MegafaunaSelector
             return FailDelay;
         }
 
+        // Middle in do-after action, so just stop and continue doing it
+        if (entMan.TryGetComponent<DoAfterComponent>(args.Entity, out var doafter) && doafter.DoAfters.Count > 0)
+            return FailDelay;
+
         var ev = args.System.GetPerformEvent(args.Entity, action.Value.Owner);
         if (!actions.TryPerformAction(args.Entity, ev))
         {
-            DebugTools.Assert($"{entMan.ToPrettyString(args.Entity)}'s AI failed to perform action {entMan.ToPrettyString(action.Value.Owner)} with ID {ActionId}!");
+            // Why would you debug assert ts???
+            // DebugTools.Assert($"{entMan.ToPrettyString(args.Entity)}'s AI failed to perform action {entMan.ToPrettyString(action.Value.Owner)} with ID {ActionId}!");
             return FailDelay;
         }
 
