@@ -17,7 +17,6 @@
     size: Tiny
     heldPrefix: bluespace_crystal
   - type: LinkedEntityContainer
-    entityToSpawn: ThronglerToy #BluespaceRiftPortalDestination
   - type: EntityEffectOnUse
     effectsToUser:
     - !type:PlaySoundEffect

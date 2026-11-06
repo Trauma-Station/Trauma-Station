@@ -34,17 +34,17 @@ public sealed partial class ToLinkedEntityTeleportEffectSystem : EntityEffectSys
 
         if (!TryComp<LinkedEntityContainerComponent>(handEntity, out var destination))
             return;
+        var targetEnt = GetEntity(destination.NetEnt);
 
         var oldPos = Transform(ent).Coordinates;
-
-        var newPos = Transform(destination.Uid).Coordinates; // why does clien tells me that this ent has no Transfom component
+        var newPos = Transform(targetEnt).Coordinates;
 
         _teleport.Teleport(ent.Owner, newPos, user: args.User);
 
         if (args.Effect.SpawnPortal != default)
         {
             var portal = PredictedSpawnAtPosition(args.Effect.SpawnPortal, oldPos);
-            _link.OneWayLink(portal, destination.Uid, true);
+            _link.OneWayLink(portal, targetEnt, true);
         }
     }
 }

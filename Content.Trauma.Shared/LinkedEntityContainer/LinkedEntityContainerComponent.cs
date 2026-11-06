@@ -10,8 +10,5 @@ public sealed partial class LinkedEntityContainerComponent : Component
 {
     // should i just use MapCoordinates and implement Teleport method that'll be using it?
     [DataField, AutoNetworkedField]
-    public EntityUid Uid;
-
-    [DataField(required: true)]
-    public EntProtoId EntityToSpawn;
+    public NetEntity NetEnt;
 }
