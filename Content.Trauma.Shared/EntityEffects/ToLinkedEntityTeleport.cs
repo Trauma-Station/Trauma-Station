@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.LinkedEntityContainer;
-using Content.Trauma.Shared.Teleportation;
 using Content.Shared.EntityEffects;
 using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Teleportation.Systems;
+using Content.Trauma.Shared.LinkedEntityContainer;
+using Content.Trauma.Shared.Teleportation;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -24,9 +24,9 @@ public sealed partial class ToLinkedEntityTeleport : EntityEffectBase<ToLinkedEn
 
 public sealed partial class ToLinkedEntityTeleportEffectSystem : EntityEffectSystem<HandsComponent, ToLinkedEntityTeleport>
 {
+    [Dependency] private LinkedEntitySystem _link = default!;
     [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private TeleportSystem _teleport = default!;
-    [Dependency] private LinkedEntitySystem _link = default!;
 
     protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<ToLinkedEntityTeleport> args)
     {

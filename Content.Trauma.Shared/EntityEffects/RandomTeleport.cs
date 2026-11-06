@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Trauma.Shared.Teleportation.Systems;
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.EntityEffects;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Teleportation.Systems;
+using Content.Trauma.Shared.Teleportation.Systems;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -31,8 +31,8 @@ public sealed partial class RandomTeleport : EntityEffectBase<RandomTeleport>
 
 public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<TransformComponent, RandomTeleport>
 {
-    [Dependency] private RandomTeleportSystem _teleport = default!;
     [Dependency] private LinkedEntitySystem _link = default!;
+    [Dependency] private RandomTeleportSystem _teleport = default!;
 
     private EntProtoId<PortalComponent> _portalDestination = "BluespaceRiftPortalDestination";
 
