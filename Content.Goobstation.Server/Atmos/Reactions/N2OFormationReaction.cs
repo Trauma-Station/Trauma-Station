@@ -10,8 +10,7 @@ using JetBrains.Annotations;
 namespace Content.Goobstation.Server.Atmos.Reactions;
 
 /// <summary>
-///     From /tg/ gases
-///     Forms of N2O from a 2:1 Nitrogen and Oxygen mix catalyzed with BZ. Exothermic reaction.
+/// Forms of N2O from a 2:1 Nitrogen and Oxygen mix catalyzed with BZ. Exothermic reaction.
 /// </summary>
 [UsedImplicitly]
 public sealed partial class N2OFormationReaction : IGasReactionEffect

@@ -361,6 +361,7 @@ public sealed partial class SupermatterComponent : Component
         [Gas.BZ] = (TransmitModifier: 0f, HeatPenalty: 5f, PowerMixRatio: 1f),
         [Gas.Healium] = (TransmitModifier: 2.4f, HeatPenalty: 4f, PowerMixRatio: 1f),
         [Gas.Pluoxium] = (TransmitModifier: 0f, HeatPenalty: -2.5f, PowerMixRatio: -1f),
+        [Gas.Fungalin] = (TransmitModifier: 2f, HeatPenalty: 3.5f, PowerMixRatio: 0.6f),
     };
 
     #endregion SM Gas

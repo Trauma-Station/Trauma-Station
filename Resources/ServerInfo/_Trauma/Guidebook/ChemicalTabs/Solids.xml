@@ -59,11 +59,15 @@ Gunpowder can be created by combining the following ingredients:
     <GuideEntityEmbed Entity="SheetPlastic" Caption="Plastic Sheets"/>
   </Box>
 
-10 Plastic Can be created by combining the following ingredients:
+Plastic can be made in a 2-stage process using Ethylene.
+
+First make ethylene with these ingredients:
 - 10 Oil
 - 6 Ash
 - 4 Sulfuric Acid
 - Heating the solution to 374K
+
+Then combine ethylene with oxygen and heat it to 453K, it will form 5 plastic sheets per batch.
 
 ## Regenerative Mesh
   <Box>

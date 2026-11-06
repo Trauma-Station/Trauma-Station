@@ -79,31 +79,37 @@ public sealed partial class CircuitComponent : Component
                 return false;
             case Pulse p:
                 return true;
-            case Integer n:
-                return n.Value != 0;
+            case Number n:
+                return n.Value != 0f;
             default:
                 return false;
         }
     }
 
     /// <summary>
-    /// <see cref="GetValue"/> then get an int for it.
-    /// Strings are not supported, bools map to 0/1.
+    /// <see cref="GetFloat"/> rounded to the nearest digit.
     /// </summary>
     public int GetInt(CircuitIndex i)
+        => (int) Math.Floor(GetFloat(i) + 0.5f);
+
+    /// <summary>
+    /// <see cref="GetValue"/> then get a float for it.
+    /// Strings are not supported, bools map to 0/1.
+    /// </summary>
+    public float GetFloat(CircuitIndex i)
     {
         switch (GetValue(i))
         {
             case True t:
-                return 1;
+                return 1f;
             case False f:
-                return 0;
+                return 0f;
             case Pulse p:
-                return 1;
-            case Integer n:
+                return 1f;
+            case Number n:
                 return n.Value;
             default:
-                return 0;
+                return 0f;
         }
     }
 

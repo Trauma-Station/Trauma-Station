@@ -41,6 +41,9 @@ public sealed partial class MapVoteOnRoundRestartSystem : EntitySystem
             args.New != GameRunLevel.PreRoundLobby)
             return;
 
+        // if map votes are enabled you probably didn't intend to force a map permanently
+        _cfg.SetCVar(CCVars.GameMap, string.Empty);
+
         // If the server has just started, delay the vote.
         if (_timing.CurTime < TimeSpan.FromMinutes(2))
         {

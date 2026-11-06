@@ -78,3 +78,9 @@ reagent-desc-unknown-reagent = An incredibly difficult chemical to come across, 
 
 reagent-name-leshy-blood = leshy blood
 reagent-desc-leshy-blood = Blood of the mythical being, Leshy.
+
+reagent-name-fungalin = fungalin
+reagent-desc-fungalin = A high concentration of spores capable of reproducing inside respiratory systems, Also increases the yield of plants while poisoning and draining their nutrients.
+
+reagent-name-ethylene = ethylene
+reagent-desc-ethylene = A highly flammable, colourless gas. Most commonly used in the production of LDPE plastics.

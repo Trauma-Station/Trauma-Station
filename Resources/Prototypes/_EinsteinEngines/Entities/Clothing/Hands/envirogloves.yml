@@ -160,6 +160,7 @@
   name: roboticist envirogloves
   description: Covers up those scandalous boney hands.
   components:
+  - type: Insulated
   - type: Sprite
     sprite: Clothing/Hands/Gloves/Color/color.rsi
     layers:

@@ -1,5 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+# TODO: make these all projectile lasers
+
 - type: entity
   parent: RedLightLaser
   id: SmallRedLaser
@@ -8,17 +10,17 @@
   components:
   - type: HitscanBasicVisuals
     muzzleFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: &sprite _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
       state: muzzle_beam_light
     travelFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: beam_light
     impactFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: impact_beam_light
 
 - type: entity
-  parent: BasicHitscan
+  parent: LaserHitscanBase
   id: SmallIonLaser
   name: small ion laser
   categories: [ HideSpawnMenu ]
@@ -29,17 +31,17 @@
         Ion: 10
   - type: HitscanBasicVisuals
     muzzleFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: muzzle_beam_light_ion
     travelFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: beam_light_ion
     impactFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: impact_beam_light_ion
 
 - type: entity
-  parent: BasicHitscan
+  parent: LaserHitscanBase
   id: SmallXrayLaser
   name: small x-ray laser
   categories: [ HideSpawnMenu ]
@@ -51,17 +53,17 @@
         Radiation: 4
   - type: HitscanBasicVisuals
     muzzleFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: muzzle_beam_light_xray
     travelFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: beam_light_xray
     impactFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: impact_beam_light_xray
 
 - type: entity
-  parent: BasicHitscan
+  parent: LaserHitscanBase
   id: SmallOverchargedLaser
   name: small overcharged laser
   categories: [ HideSpawnMenu ]
@@ -77,17 +79,17 @@
     - !type:Ignite
   - type: HitscanBasicVisuals
     muzzleFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: muzzle_beam_light_overcharged
     travelFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: beam_light_overcharged
     impactFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: impact_beam_light_overcharged
 
 - type: entity
-  parent: BasicHitscan
+  parent: LaserHitscanBase
   id: SmallPulseLaser
   name: small pulse laser
   categories: [ HideSpawnMenu ]
@@ -98,17 +100,17 @@
         Heat: 12
   - type: HitscanBasicVisuals
     muzzleFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: muzzle_beam_light_pulse
     travelFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: beam_light_pulse
     impactFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: impact_beam_light_pulse
 
 - type: entity
-  parent: BasicHitscan
+  parent: LaserHitscanBase
   id: MediumRedLaser
   name: medium red laser
   categories: [ HideSpawnMenu ]
@@ -119,17 +121,17 @@
         Heat: 10
   - type: HitscanBasicVisuals
     muzzleFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: muzzle_beam_light
     travelFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: beam_light
     impactFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: impact_beam_light
 
 - type: entity
-  parent: BasicHitscan
+  parent: LaserHitscanBase
   id: MediumIonLaser
   name: medium ion laser
   categories: [ HideSpawnMenu ]
@@ -140,17 +142,17 @@
         Ion: 14
   - type: HitscanBasicVisuals
     muzzleFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: muzzle_beam_light_ion
     travelFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: beam_light_ion
     impactFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: impact_beam_light_ion
 
 - type: entity
-  parent: BasicHitscan
+  parent: LaserHitscanBase
   id: MediumXrayLaser
   name: medium x-ray laser
   categories: [ HideSpawnMenu ]
@@ -162,17 +164,17 @@
         Radiation: 5
   - type: HitscanBasicVisuals
     muzzleFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: muzzle_beam_light_xray
     travelFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: beam_light_xray
     impactFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: impact_beam_light_xray
 
 - type: entity
-  parent: BasicHitscan
+  parent: LaserHitscanBase
   id: MediumOverchargedLaser
   name: medium overcharged laser
   categories: [ HideSpawnMenu ]
@@ -188,17 +190,17 @@
     - !type:Ignite
   - type: HitscanBasicVisuals
     muzzleFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: muzzle_beam_light_overcharged
     travelFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: beam_light_overcharged
     impactFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: impact_beam_light_overcharged
 
 - type: entity
-  parent: BasicHitscan
+  parent: LaserHitscanBase
   id: MediumPulseLaser
   name: medium pulse laser
   categories: [ HideSpawnMenu ]
@@ -209,13 +211,13 @@
         Heat: 17
   - type: HitscanBasicVisuals
     muzzleFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: muzzle_beam_light_pulse
     travelFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: beam_light_pulse
     impactFlash:
-      sprite: _Goobstation/Objects/Weapons/Guns/Projectiles/small_laser.rsi
+      sprite: *sprite
       state: impact_beam_light_pulse
 
 - type: entity

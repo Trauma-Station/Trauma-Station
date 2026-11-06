@@ -35,6 +35,8 @@ public sealed partial class CircuitEditorWindow : FancyWindow
     private static readonly Color LinkingColor = new(0.9f, 0.4f, 0.4f, 0.9f);
     private static readonly Color LinkedColor = new(0.9f, 0.9f, 0.4f, 0.9f);
     private static readonly Vector2 Center = new(500f, 500f);
+    // nfi why this makes it centered...
+    private static readonly Vector2 ScrollBias = new(30f, 30f);
 
     public CircuitEditorWindow()
     {
@@ -44,7 +46,7 @@ public sealed partial class CircuitEditorWindow : FancyWindow
         // center scroll after ui is ready
         UserInterfaceManager.DeferAction(() =>
         {
-            GatesScroll.SetScrollValue(new Vector2(280f, 280f)); // nfi why this makes it centered...
+            GatesScroll.SetScrollValue(Center * 0.5f + ScrollBias);
         });
         GatesPanel.PanelOverride = new StyleBoxTexture()
         {
@@ -115,7 +117,7 @@ public sealed partial class CircuitEditorWindow : FancyWindow
                 };
                 control.OnPinPressed += OnPinPressed;
                 control.OnRemove += () => OnRemoveGate?.Invoke(index);
-                LayoutContainer.SetPosition(control, Center + gate.Pos);
+                LayoutContainer.SetPosition(control, Center + gate.Pos - ScrollBias - control.DesiredSize * 0.5f);
                 GatesContainer.AddChild(control);
             }
         }

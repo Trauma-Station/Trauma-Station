@@ -61,7 +61,7 @@ public sealed partial class ServerTurbineSystem : TurbineSystem
         if (!_machine.GetPipes(uid, out var inlet, out var outlet))
             return;
 
-        if (comp.CurrentBlade == null || comp.CurrentStator == null)
+        if (comp.CurrentBlade == null || comp.CurrentStator == null && comp.RPM > 10)
             SetRuined(ent);
 
         UpdateAppearance(ent);
@@ -212,20 +212,6 @@ public sealed partial class ServerTurbineSystem : TurbineSystem
         }
     }
     #endregion
-
-    [SubscribeLocalEvent]
-    private void OnChangeFlowRate(Entity<TurbineComponent> ent, ref TurbineChangeFlowRateMessage args)
-    {
-        if (SetFlowRate(ent, args.FlowRate))
-            _machine.QueueLog(ent, args.Actor, args.Monitor);
-    }
-
-    [SubscribeLocalEvent]
-    private void OnChangeStatorLoad(Entity<TurbineComponent> ent, ref TurbineChangeStatorLoadMessage args)
-    {
-        if (SetStatorLoad(ent, args.StatorLoad))
-            _machine.QueueLog(ent, args.Actor, args.Monitor);
-    }
 
     [SubscribeLocalEvent]
     private void OnMachineLog(Entity<TurbineComponent> ent, ref NuclearMachineLogEvent args)

@@ -20,9 +20,9 @@ public sealed partial class LightAutomationSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnSignalIntReceived(Entity<PoweredLightComponent> ent, ref SignalReceivedEvent<LogicIntPayload> args)
+    private void OnSignalReceived(Entity<PoweredLightComponent> ent, ref SignalReceivedEvent<LogicNumberPayload> args)
     {
         if (args.Port == ent.Comp.ControlPort)
-            _light.SetState(ent.Owner, args.Data.Value != 0, ent.Comp);
+            _light.SetState(ent.Owner, args.Data.Value != 0f, ent.Comp);
     }
 }
