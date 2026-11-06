@@ -82,6 +82,7 @@ public sealed class ClumsyStatusTest : InteractionTest
         }
     }
 
+    [Explicit] // Trauma - heisentest factory
     [Test, Description("Test that a gun explodes in a clumsy mob's face and stuns them.")]
     public async Task TestClumsyGun()
     {
@@ -97,10 +98,14 @@ public sealed class ClumsyStatusTest : InteractionTest
 
         await SpawnTarget(TargetProto);
 
-        await PlaceInHands(GunProto);
+        var gun = await PlaceInHands(GunProto); // Trauma - store the gun to delete it afterwards
         await UseInHand(); // Chamber the gun
         await RunSeconds(1.5f); // Trauma - was 0.5s, pistols can pistol whip so its melee was preventing firing so soon after picking it up
         await AttemptShoot(Target);
+        // <Trauma>
+        await Delete(gun);
+        AssertDeleted(gun);
+        // </Trauma>
 
         Assert.That(_sStatusSystem.HasStatusEffect(SPlayer, SharedStunSystem.StunId), Is.True, "Clumsy mob wasn't stunned from shooting a gun.");
         foreach (var ev in GetEvents<SelfBeforeGunShotEvent>(SPlayer))

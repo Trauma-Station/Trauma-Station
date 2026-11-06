@@ -5,6 +5,8 @@ using Content.Factory.Shared.Filters;
 
 namespace Content.Factory.Shared.Circuits;
 
+#region Values
+
 /// <summary>
 /// Types of values a circuit gate can work with.
 /// </summary>
@@ -13,6 +15,7 @@ public enum GateValue : byte
 {
     Bool,
     Int,
+    Number,
     String,
     Any
 }
@@ -42,31 +45,44 @@ public sealed partial class Pulse
     public static readonly Pulse Instance = new();
 }
 
+/// <summary>
+/// Float wrapper used by circuits
+/// </summary>
 [DataRecord, Serializable, NetSerializable]
-public sealed partial class Integer
+public sealed partial class Number
 {
-    public Integer()
+    public Number()
     {
     }
 
-    public Integer(int value)
+    public Number(int value) : this((float) value)
+    {
+    }
+
+    public Number(float value)
     {
         Value = value;
     }
 
-    public int Value;
+    public float Value;
+
+    public bool IsNaN => Single.IsNaN(Value);
 
     public override string ToString()
         => Value.ToString();
 
     public override bool Equals(object? obj)
-        => obj is Integer i && i.Value == Value;
+        => obj is Number n && n.Value == Value;
 
     public override int GetHashCode()
         => Value.GetHashCode();
 
-    public static readonly Integer Zero = new();
+    public static readonly Number Zero = new();
 }
+
+#endregion
+
+#region Base CircuitGate
 
 /// <summary>
 /// Any kind of gate that can produce an output as part of a circuit in <see cref="CircuitData"/>.
@@ -89,7 +105,7 @@ public abstract partial class CircuitGate
         typeof(True),
         typeof(False),
         typeof(Pulse),
-        typeof(Integer),
+        typeof(Number),
         typeof(String)
     ];
 
@@ -130,7 +146,8 @@ public abstract partial class CircuitGate
             _output = null;
         _output ??= OutputType switch
         {
-            GateValue.Int => Integer.Zero,
+            GateValue.Int => Number.Zero,
+            GateValue.Number => Number.Zero,
             GateValue.String => string.Empty,
             _ => False.Instance
         };
@@ -183,7 +200,12 @@ public abstract partial class CircuitGate
 
     protected void SetOutput(int value)
     {
-        _output = new Integer(value);
+        SetOutput((float) value);
+    }
+
+    protected void SetOutput(float value)
+    {
+        _output = new Number(value);
     }
 
     protected void SetOutput(string value)
@@ -198,8 +220,8 @@ public abstract partial class CircuitGate
 
     protected void CopyOutputFromObject(object value)
     {
-        if (value is Integer integer)
-            _output = new Integer(integer.Value); // only datatype that needs to be deep copied is the int wrapper
+        if (value is Number n)
+            _output = new Number(n.Value); // only datatype that needs to be deep copied is the number wrapper
         else
             _output = value; // everything else has no data or can be passed as-is (string)
     }
@@ -233,6 +255,10 @@ public abstract partial class CircuitGate
     public static Vector2 ClampPosition(Vector2 pos)
         => Vector2.Clamp(pos, -MaxOffset, MaxOffset);
 }
+
+#endregion
+
+#region Misc
 
 /// <summary>
 /// A constant value source.
@@ -295,6 +321,10 @@ public sealed partial class CircuitIfElse : CircuitGate
     }
 }
 
+#endregion
+
+#region Boolean Logic
+
 /// <summary>
 /// A binary logic gate for a circuit.
 /// </summary>
@@ -350,6 +380,10 @@ public sealed partial class CircuitLogicGate : CircuitGate
         }
     }
 }
+
+#endregion
+
+#region Strings
 
 /// <summary>
 /// Unary gate that gets the length of a string.
@@ -477,8 +511,12 @@ public sealed partial class CircuitStrUpperGate : CircuitGate
     }
 }
 
+#endregion
+
+#region Maths
+
 /// <summary>
-/// Binary math gate, operating on 2 int inputs.
+/// Binary math gate, operating on 2 int or number inputs.
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class CircuitMathGate : CircuitGate
@@ -496,6 +534,7 @@ public sealed partial class CircuitMathGate : CircuitGate
         MathOp.Mul => "Prodcut of the inputs",
         MathOp.Div => "First input divided by the second input",
         MathOp.Rem => "Remainder of dividing the first input by the second input",
+        MathOp.Pow => "First input raised to the second input's power",
         MathOp.Bor => "Bitwise OR of the inputs",
         MathOp.Band => "Bitwise AND of the inputs",
         MathOp.Bxor => "Bitwise XOR of the inputs",
@@ -503,28 +542,31 @@ public sealed partial class CircuitMathGate : CircuitGate
         MathOp.Brs => "Shift the first input right by the second input bits",
         _ => string.Empty
     };
-    public override GateValue OutputType => GateValue.Int;
+    public override GateValue OutputType => GateValue.Number;
     public override int InputCount => 2;
 
     public override void Update(CircuitComponent comp)
     {
-        var a = comp.GetInt(Inputs[0]);
-        var b = comp.GetInt(Inputs[1]);
+        var a = comp.GetFloat(Inputs[0]);
+        var b = comp.GetFloat(Inputs[1]);
+        var ai = (int) Math.Round(a);
+        var bi = (int) Math.Round(b);
         SetOutput(Op switch
         {
             // arithmetic
             MathOp.Add => a + b,
             MathOp.Sub => a - b,
             MathOp.Mul => a * b,
-            MathOp.Div => a / b,
-            MathOp.Rem => a % b,
+            MathOp.Div => b != 0f ? a / b : 0f,
+            MathOp.Rem => b != 0f ? a % b : 0f,
+            MathOp.Pow => (a != 0f || b >= 0f) ? MathF.Pow(a, b) : 0f,
             // bitwise
-            MathOp.Bor => a | b,
-            MathOp.Band => a & b,
-            MathOp.Bxor => a ^ b,
-            MathOp.Bls => a << b,
-            MathOp.Brs => a >> b,
-            _ => 0
+            MathOp.Bor => (float) (ai | bi),
+            MathOp.Band => (float) (ai & bi),
+            MathOp.Bxor => (float) (ai ^ bi),
+            MathOp.Bls => (float) (ai << bi),
+            MathOp.Brs => (float) (ai >> bi),
+            _ => 0f
         });
     }
 
@@ -549,6 +591,7 @@ public enum MathOp : byte
     Mul,
     Div,
     Rem,
+    Pow,
     Bor,
     Band,
     Bxor,
@@ -557,7 +600,7 @@ public enum MathOp : byte
 }
 
 /// <summary>
-/// Binary comparison gate, operating on 2 int inputs.
+/// Binary comparison gate, operating on 2 number inputs.
 /// </summary>
 [Serializable, NetSerializable]
 public sealed partial class CircuitCompareGate : CircuitGate
@@ -575,11 +618,11 @@ public sealed partial class CircuitCompareGate : CircuitGate
         CompareOp.LessEqual => "<=",
         _ => "?"
     };
-    public override string Category => "Integers";
+    public override string Category => "Logic";
     public override string Desc => Op switch
     {
-        CompareOp.Equal => "True if the input integers are equal",
-        CompareOp.NotEqual => "True if the input integers are not equal",
+        CompareOp.Equal => "True if the input numbers are equal",
+        CompareOp.NotEqual => "True if the input numbers are not equal",
         CompareOp.Greater => "True if the first input is greater than the second input",
         CompareOp.GreaterEqual => "True if the first input is greather than or equal to the second input",
         CompareOp.Less => "True if the first input is less than the second input",
@@ -591,8 +634,8 @@ public sealed partial class CircuitCompareGate : CircuitGate
 
     public override void Update(CircuitComponent comp)
     {
-        var a = comp.GetInt(Inputs[0]);
-        var b = comp.GetInt(Inputs[1]);
+        var a = comp.GetFloat(Inputs[0]);
+        var b = comp.GetFloat(Inputs[1]);
         SetOutput(Op switch
         {
             CompareOp.Equal => a == b,
@@ -628,3 +671,77 @@ public enum CompareOp : byte
     Less,
     LessEqual
 }
+
+/// <summary>
+/// Unary trigonometry gate, operating on 1 float input.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed partial class CircuitTrigGate : CircuitGate
+{
+    [DataField]
+    public TrigOp Op = TrigOp.Sin;
+
+    public override string Name => Op switch
+    {
+        TrigOp.Sin => "SIN",
+        TrigOp.Cos => "COS",
+        TrigOp.Tan => "TAN",
+        TrigOp.ASin => "ASIN",
+        TrigOp.ACos => "ACOS",
+        TrigOp.ATan => "ATAN",
+        _ => "?"
+    };
+    public override string Category => "Trig";
+    public override string Desc => Op switch
+    {
+        TrigOp.Sin => "sin(angle) = opposite / hypotenuse",
+        TrigOp.Cos => "cos(angle) = opposite / hypotenuse",
+        TrigOp.Tan => "tan(angle) = opposite / adjacent",
+        TrigOp.ASin => "asin(opposite / hypotenuse) = angle",
+        TrigOp.ACos => "acos(opposite / hypotenuse) = angle",
+        TrigOp.ATan => "atan(opposite / adjacent) = angle", // atan2 can be done with a divide gate before it
+        _ => string.Empty
+    };
+    public override GateValue OutputType => GateValue.Number;
+    public override int InputCount => 1;
+
+    public override void Update(CircuitComponent comp)
+    {
+        var n = comp.GetFloat(Inputs[0]);
+        SetOutput(Op switch
+        {
+            TrigOp.Sin => MathF.Sin(n),
+            TrigOp.Cos => MathF.Cos(n),
+            TrigOp.Tan => MathF.Tan(n),
+            TrigOp.ASin => Single.Asin(n),
+            TrigOp.ACos => Single.Acos(n),
+            TrigOp.ATan => Single.Atan(n),
+            _ => 0f
+        });
+    }
+
+    public override void AddVariants(List<CircuitGate> gates)
+    {
+        var ops = (TrigOp[]) Enum.GetValues(typeof(TrigOp));
+        foreach (var op in ops)
+        {
+            gates.Add(new CircuitTrigGate()
+            {
+                Op = op
+            });
+        }
+    }
+}
+
+[Serializable, NetSerializable]
+public enum TrigOp : byte
+{
+    Sin,
+    Cos,
+    Tan,
+    ASin,
+    ACos,
+    ATan
+}
+
+#endregion

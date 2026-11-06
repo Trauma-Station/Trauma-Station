@@ -75,14 +75,10 @@ public sealed partial class GenericFieldGeneratorSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnAnchorChanged(Entity<GenericFieldGeneratorComponent> ent, ref AnchorStateChangedEvent args)
     {
-        if (!args.Anchored && !args.Detaching)
+        if (args.Anchored)
+            GridCheck(ent);
+        else if (!args.Detaching)
             RemoveConnections(ent);
-    }
-
-    [SubscribeLocalEvent]
-    private void OnReAnchor(Entity<GenericFieldGeneratorComponent> ent, ref ReAnchorEvent args)
-    {
-        GridCheck(ent);
     }
 
     [SubscribeLocalEvent]

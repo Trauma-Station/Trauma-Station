@@ -43,39 +43,27 @@
   id: ToolboxThief
   name: undetermined thieving toolbox
   description: This is where your favorite thief's supplies lie. Try to remember which ones.
-  parent: [ BaseItem, BaseSetSelector, BaseMinorContraband ] # Goobstation edit
+  parent: [ BaseItem, BaseMinorContraband ]
   components:
     - type: Sprite
       sprite: Objects/Tools/Toolboxes/toolbox_thief.rsi
       state: icon
-    # Goobstation - SetSelector rework - start
-    #  - type: ThiefUndeterminedBackpack
-    #    possibleSets:
-    #    # TODO Thief pinpointer needed
-    #    - ChemistrySet
-    #    - ToolsSet
-    #    - ChameleonSet # TODO Chameleon stump PR needed
-    #    - SyndieSet
-    #    - SleeperSet
-    #    - CommunicatorSet
-    #    - SmugglerSet
-    #  - type: ActivatableUI
-    #    key: enum.ThiefBackpackUIKey.Key
-    #  - type: UserInterface
-    #    interfaces:
-    #      enum.ThiefBackpackUIKey.Key:
-    #        type: ThiefBackpackBoundUserInterface
-    - type: SetSelector
+    - type: ThiefUndeterminedBackpack
       possibleSets:
-        - ThiefAnatomySet
-        - ThiefBreacherSet
-        - ThiefChameleonSet
-        - ThiefSyndieSet
-        - ThiefSleeperSet
-        - ThiefCommunicatorSet
-        - ThiefSmugglerSet
-      maxSelectedSets: 2
-# Goobstation - SetSelector rework - end
+      # TODO Thief pinpointer needed
+      - ChemistrySet
+      - ToolsSet
+      - ChameleonSet # TODO Chameleon stump PR needed
+      - SyndieSet
+      - SleeperSet
+      - CommunicatorSet
+      - SmugglerSet
+    - type: ActivatableUI
+      key: enum.ThiefBackpackUIKey.Key
+    - type: UserInterface
+      interfaces:
+        enum.ThiefBackpackUIKey.Key:
+          type: ThiefBackpackBoundUserInterface
 
 - type: entity
   id: SatchelThief
@@ -88,9 +76,5 @@
     state: folded
   - type: Item
     storedRotation: 90
-  - type: SetSelector # Goobstation
+  - type: ThiefUndeterminedBackpack
     spawnedStoragePrototype: ClothingBackpackSatchelSmugglerUnanchored
-    # Goobstation
-    spawnedStorageContainer: storagebase
-    approveSound:
-      collection: storageRustle

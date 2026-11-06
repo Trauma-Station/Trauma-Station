@@ -15,12 +15,6 @@
       Ammonia: stationAmmonia
       NitrousOxide: stationNO
       Frezon: danger
-      # <Goobstation>
-      BZ: danger
-      Healium: ignore # it's harmless unless you also breathe in nitrium, which is danger
-      Nitrium: danger
-      Pluoxium: ignore
-      # </Goobstation>
 
 - type: entity
   parent: [AirSensorVoxBase, AirSensor]
@@ -45,6 +39,13 @@
   - type: GasVentScrubber
     wideNet: true # Air alarm with auto mode overrides filters with hardcoded defaults so default to widenet
     filterGases:
+    # <Trauma>
+    - BZ
+    - Healium
+    - Nitrium
+    - Pluoxium # pluox is probably giga cancer to vox
+    - Fungalin
+    # </Trauma>
     - Oxygen # filter out oxygen as well as regular harmful gases
     - CarbonDioxide
     - Plasma
@@ -53,12 +54,6 @@
     - Ammonia
     - NitrousOxide
     - Frezon
-    # <Goobstation>
-    - BZ
-    - Healium
-    - Nitrium
-    - Pluoxium # pluox is probably giga cancer to vox
-    # </Goobstation>
 
 # use this to prevent overriding filters with hardcoded defaults
 - type: entity

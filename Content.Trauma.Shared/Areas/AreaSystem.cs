@@ -137,7 +137,10 @@ public sealed partial class AreaSystem : EntitySystem
     /// </summary>
     public EntProtoId? GetAreaPrototype(EntityUid area)
     {
-        return Prototype(area)?.ID;
+        if (!TryComp(area, out MetaDataComponent? meta))
+            return null;
+
+        return meta.EntityPrototype?.ID;
     }
 
     /// <summary>

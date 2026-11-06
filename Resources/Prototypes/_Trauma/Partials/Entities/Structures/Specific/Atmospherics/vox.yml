@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  parent: AirSensorBase
+  id: AirSensorVoxBase
+  components:
+  - type: AtmosMonitor
+    gasThresholdPrototypes:
+      BZ: danger
+      Healium: ignore # it's harmless unless you also breathe in nitrium, which is danger
+      Nitrium: danger
+      Pluoxium: ignore
+      Fungalin: danger

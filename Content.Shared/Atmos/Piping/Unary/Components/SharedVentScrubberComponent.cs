@@ -26,6 +26,7 @@ public sealed partial class GasVentScrubberData : BaseAtmosDeviceData
         Gas.BZ,
         Gas.Healium,
         Gas.Nitrium,
+        Gas.Fungalin,
         // </Trauma>
         Gas.CarbonDioxide,
         Gas.Plasma,
