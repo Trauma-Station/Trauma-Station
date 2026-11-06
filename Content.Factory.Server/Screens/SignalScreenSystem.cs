@@ -45,7 +45,7 @@ public sealed partial class SignalScreenSystem : EntitySystem
     }
 
     [SubscribeLocalEvent]
-    private void OnSignalIntReceived(Entity<SignalScreenComponent> ent, ref SignalReceivedEvent<LogicIntPayload> args)
+    private void OnSignalReceived(Entity<SignalScreenComponent> ent, ref SignalReceivedEvent<LogicNumberPayload> args)
     {
         if (args.Port != ent.Comp.TextPort)
             return;

@@ -15,7 +15,7 @@ public sealed partial class LogicDataSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<DeviceLinkSinkComponent, DeviceNetworkPacketEvent<SignalPayload<LogicIntPayload>>>(_device.OnSignalReceived);
+        SubscribeLocalEvent<DeviceLinkSinkComponent, DeviceNetworkPacketEvent<SignalPayload<LogicNumberPayload>>>(_device.OnSignalReceived);
         SubscribeLocalEvent<DeviceLinkSinkComponent, DeviceNetworkPacketEvent<SignalPayload<LogicStringPayload>>>(_device.OnSignalReceived);
     }
 }
