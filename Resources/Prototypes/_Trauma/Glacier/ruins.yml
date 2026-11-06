@@ -1,4 +1,5 @@
-# This couldn't have a more generic name, huh
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
 - type: lavalandRuinPool
   id: GlacierRuins
   gridRuins:
