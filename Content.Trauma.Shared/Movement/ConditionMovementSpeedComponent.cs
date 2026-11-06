@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.EntityConditions;
 
 namespace Content.Trauma.Shared.Movement;
@@ -20,4 +22,3 @@ public sealed partial class ConditionMovementSpeedComponent : Component
     [DataField]
     public bool Any;
 }
-
