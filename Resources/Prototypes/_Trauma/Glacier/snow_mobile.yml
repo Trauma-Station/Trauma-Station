@@ -45,7 +45,7 @@
   # and not worth the performance of making them entities VS making only snowmobiles take the perf. cost
   - type: ConditionMovementSpeed
     conditions:
-      10.0,10.0:
+      10.0,10.0: # first is walk, second is sprint
       - !type:NearbyTilesPercentCondition
         ignoreAnchored: true
         percent: 0.5 # Allows them on double lanes
@@ -55,6 +55,12 @@
         - PlatingSnow
         - FloorSnowDug
         range: 2
+  # So you can carry your loot, or for paramedics to carry bodies
+  - type: TowHitch
+    offset: 0,0.6
+    whitelist:
+      components:
+      - EntityStorage # todo add support for rollerbed, and add cargo trailer
 
 - type: entity
   id: VehicleSnowmobileOverlay
