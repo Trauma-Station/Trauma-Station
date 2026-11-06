@@ -1,10 +1,10 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 291.0.0
+  engineVersion: 295.0.0
   forkId: ""
   forkVersion: ""
-  time: 11/06/2026 17:30:49
+  time: 11/06/2026 19:30:16
   entityCount: 207
 maps: []
 grids:
@@ -26,6 +26,8 @@ entities:
     components:
     - type: MetaData
       name: grid
+    - type: Transform
+      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -638,7 +640,7 @@ entities:
       storage: 73
 - proto: ComputerComms
   entities:
-  - uid: 139
+  - uid: 206
     components:
     - type: Transform
       parent: 1
@@ -646,7 +648,7 @@ entities:
       pos: -0.5,9.5
 - proto: ComputerRadar
   entities:
-  - uid: 208
+  - uid: 139
     components:
     - type: Transform
       parent: 1
@@ -1074,6 +1076,12 @@ entities:
       pos: -1.5,5.5
 - proto: TableReinforced
   entities:
+  - uid: 79
+    components:
+    - type: Transform
+      parent: 1
+      rot: 1.5707963267948966 rad
+      pos: -0.5,10.5
   - uid: 80
     components:
     - type: Transform
@@ -1098,12 +1106,6 @@ entities:
       parent: 1
       rot: 3.141592653589793 rad
       pos: 1.5,5.5
-  - uid: 207
-    components:
-    - type: Transform
-      parent: 1
-      rot: 1.5707963267948966 rad
-      pos: -0.5,10.5
 - proto: Telecrystal25
   entities:
   - uid: 70
@@ -1234,7 +1236,7 @@ entities:
     components:
     - type: Transform
       parent: 1
-      pos: 1.4936334,10.572149
+      pos: 1.4787776,10.594915
 - proto: VendingMachineDonut
   entities:
   - uid: 157
@@ -1521,7 +1523,7 @@ entities:
       parent: 1
       rot: 3.141592653589793 rad
       pos: -0.5,10.5
-  - uid: 206
+  - uid: 207
     components:
     - type: Transform
       parent: 1
