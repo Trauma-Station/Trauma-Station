@@ -39,7 +39,7 @@
       path: /Audio/Ambience/anomaly_scary.ogg
   - type: OneWayPortal
   - type: TimedDespawn
-    lifetime: 1
+    lifetime: 10 # ToDo: decrease to 1
 
 - type: entity
   parent: OneWayPortal
@@ -47,4 +47,4 @@
   suffix: 3 seconds
   components:
   - type: TimedDespawn
-    lifetime: 3
+    lifetime: 30 # ToDo: decrease to 3

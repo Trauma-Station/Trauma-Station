@@ -6,7 +6,7 @@ using Robust.Shared.Map;
 namespace Content.Trauma.Shared.Teleportation;
 
 /// <summary>
-/// Stores items init location and gives it when InitPosTeleport/RandomTeleport EntityEffect calls.
+/// Stores location of RandomTeleport EntityEffect.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class OneWayPortalComponent : Component
