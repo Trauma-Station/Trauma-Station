@@ -26,8 +26,6 @@ entities:
     components:
     - type: MetaData
       name: grid
-    - type: Transform
-      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
