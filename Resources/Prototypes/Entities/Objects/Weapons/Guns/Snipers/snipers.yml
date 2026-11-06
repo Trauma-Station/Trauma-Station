@@ -64,8 +64,6 @@
     size: Large
     storedRotation: 45
   # </Trauma>
-
-  - type: Sprite
     sprite: Objects/Weapons/Guns/Snipers/bolt_gun_wood.rsi
     layers:
     - state: base
