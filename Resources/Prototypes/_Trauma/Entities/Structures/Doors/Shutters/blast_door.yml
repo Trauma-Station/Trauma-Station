@@ -34,16 +34,16 @@
 
 - type: entity
   parent: BlastDoor
-  id: BlastDoorUnlinkedEpistemics
-  suffix: Epistemics
+  id: BlastDoorUnlinkedScience
+  suffix: Science
   components:
   - type: AccessReader
     access: [["Command"], ["Research"]]
 
 - type: entity
   parent: BlastDoorOpen
-  id: BlastDoorUnlinkedEpistemicsOpen
-  suffix: Open, Epistemics
+  id: BlastDoorUnlinkedScienceOpen
+  suffix: Open, Science
   components:
   - type: AccessReader
     access: [["Command"], ["Research"]]
@@ -63,6 +63,22 @@
   components:
   - type: AccessReader
     access: [["Command"], ["Security"]]
+
+- type: entity
+  parent: BlastDoor
+  id: BlastDoorUnlinkedSecuritySalvager
+  suffix: Security, Salvager
+  components:
+  - type: AccessReader
+    access: [["Command"], ["Security"], ["Salvager"]]
+
+- type: entity
+  parent: BlastDoorOpen
+  id: BlastDoorUnlinkedSecuritySalvagerOpen
+  suffix: Open, Security, Salvager
+  components:
+  - type: AccessReader
+    access: [["Command"], ["Security"], ["Salvager"]]
 
 - type: entity
   parent: BlastDoor

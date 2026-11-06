@@ -30,6 +30,15 @@
   - type: Wires
     layoutId: AirlockCargo
 
+- type: entity
+  parent: HighSecDoor
+  id: HighSecSecuritySalvageLocked
+  suffix: Security, Salvager, Locked
+  components:
+  - type: ContainerFill
+    containers:
+      board: [ DoorElectronicsSecuritySalvage ]
+
 # Centcomm doors
 - type: entity
   parent: AirlockExternal

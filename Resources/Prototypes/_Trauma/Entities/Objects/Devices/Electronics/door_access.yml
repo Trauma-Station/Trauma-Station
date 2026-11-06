@@ -87,3 +87,11 @@
   components:
   - type: AccessReader
     access: [["Mail"]]
+
+- type: entity
+  parent: DoorElectronics
+  id: DoorElectronicsSecuritySalvage
+  suffix: Security/Salvage, Locked
+  components:
+  - type: AccessReader
+    access: [["Security"], ["Salvage"]]

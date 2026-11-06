@@ -501,8 +501,8 @@ ClothingHandsGlovesColorYellowUnsulated: null
 # <Trauma>
 # AirlockMusicianLocked: null
 # AirlockMimeLocked: null
+# DoorElectronicsParamedic: null
 # </Trauma>
-DoorElectronicsParamedic: null
 AirlockExternalGlassSalvageLocked: AirlockExternalGlassCargoLocked
 AirlockExternalGlassShuttleEscapeSub: AirlockExternalGlassCargoLocked
 # AirlockParamedicLocked: AirlockMedicalLocked Trauma
