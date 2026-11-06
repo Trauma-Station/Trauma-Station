@@ -16509,3 +16509,10 @@ Entries:
   id: 1782
   time: '2026-11-05T15:09:05.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5289
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Laser Pistols now have the correct melee damage
+  id: 1783
+  time: '2026-11-05T21:29:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5294
