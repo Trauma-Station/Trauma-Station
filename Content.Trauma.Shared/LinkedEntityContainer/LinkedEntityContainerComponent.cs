@@ -8,7 +8,11 @@ namespace Content.Trauma.Shared.LinkedEntityContainer;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class LinkedEntityContainerComponent : Component
 {
-    // should i just use MapCoordinates and implement Teleport method that'll be using it?
     [DataField, AutoNetworkedField]
     public NetEntity NetEnt;
+
+    /// <summary>
+    /// This flag ensures that only one instance of LinkedEntity will be spawned.
+    /// </summary>
+    public bool Spawned = false;
 }

@@ -5,6 +5,7 @@ using Content.Shared.EntityEffects;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Teleportation.Systems;
 using Content.Trauma.Shared.Teleportation.Systems;
+using Robust.Shared.Spawners;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -49,6 +50,12 @@ public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<Tran
             var destinationPortal = PredictedSpawnAtPosition(_portalDestination, newPos);
 
             _link.OneWayLink(portal, destinationPortal, true);
+
+            if (TryComp<TimedDespawnComponent>(portal, out var despawn))
+            {
+                var targetDespawn = EnsureComp<TimedDespawnComponent>(destinationPortal);
+                targetDespawn.Lifetime = despawn.Lifetime;
+            }
         }
     }
 }

@@ -14,14 +14,15 @@ public sealed partial class LinkedEntityContainerSystem : EntitySystem
     [SubscribeLocalEvent]
     private void Startup(Entity<LinkedEntityContainerComponent> ent, ref ComponentStartup args)
     {
-        if (ent.Comp.NetEnt != default &&
-            ent.Comp.NetEnt != NetEntity.Invalid &&
-            ent.Comp.NetEnt != NetEntity.First)
+        if (ent.Comp.Spawned) // for some fucking reason it spawns twice even with the flag
             return;
-
+        Log.Info($"startup: {ent.Comp.Spawned}");
         var newEnt = PredictedSpawnNextToOrDrop(_portalDestination, ent.Owner);
         ent.Comp.NetEnt = GetNetEntity(newEnt);
+        Log.Info($"startup: new ent spawned {ent.Comp.NetEnt.Id}");
+        ent.Comp.Spawned = true;
         Dirty(ent.Owner, ent.Comp);
+        Log.Info($"startup: {ent.Comp.Spawned}");
     }
 
     public void SpawnWithLinkedEntity(string? protoName, Entity<TransformComponent> parent)
@@ -31,6 +32,9 @@ public sealed partial class LinkedEntityContainerSystem : EntitySystem
 
         var newEnt = PredictedSpawnAtPosition(_portalDestination, parent.Comp.Coordinates);
         Comp.NetEnt = GetNetEntity(newEnt);
+        Log.Info($"spawn: new ent spawned {ent.Comp.NetEnt.Id}");
+        Comp.Spawned = true;
         Dirty(uid, Comp);
+        Log.Info($"spawn: {Comp.Spawned}");
     }
 }

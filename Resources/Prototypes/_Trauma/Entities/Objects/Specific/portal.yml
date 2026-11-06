@@ -4,7 +4,6 @@
   parent: ShadowPortal
   id: BluespaceRiftPortal
   name: bluespace rift
-  description: Looks unstable.
   components:
   - type: Portal
     canTeleportToOtherMaps: True
@@ -14,7 +13,7 @@
   - type: PointLight
     color: "#273189"
   - type: TimedDespawn
-    lifetime: 10 # ToDo: decrease to 1
+    lifetime: 1
 
 - type: entity
   parent: BluespaceRiftPortal
@@ -22,7 +21,7 @@
   suffix: 3 seconds
   components:
   - type: TimedDespawn
-    lifetime: 30 # ToDo: decrease to 3
+    lifetime: 3
 
 # dummy item to store destination pos. I belive it's better then hardcoding solution to this single system.
 - type: entity
