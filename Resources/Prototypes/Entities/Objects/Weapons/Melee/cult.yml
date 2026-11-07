@@ -13,9 +13,20 @@
   - type: MeleeWeapon
     wideAnimationRotation: -135
     attackRate: 1.5
+    heavyPartDamageMultiplier: 1
     damage:
       types:
         Slash: 12
+  - type: EmbeddableProjectile
+    sound: /Audio/Weapons/bladeslice.ogg
+    offset: -0.15,0.0
+  - type: DamageOtherOnHit
+    damage:
+      types:
+        Slash: 12
+  - type: ThrowingAngle
+    angle: 225
+  - type: LandAtCursor
   - type: Item
     size: Normal
   - type: Clothing
