@@ -5,15 +5,28 @@
   parent: BaseItem
   id: BaseReactorPart
   components:
-  - type: ReactorPart
   - type: Sprite
     sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_parts.rsi
     layers:
     - state: default_rod
-      map: ["enum.NuclearPropertiesVisuals.Layer"]
+      map: ["enum.NuclearPropertiesVisuals.Layer",]
+      shader: Emissive
   - type: Item
     size: Huge
   - type: MultiHandedItem
+  - type: ReactorPart
+  - type: AtmosExposed # removed while in a reactor
+  - type: Temperature
+  - type: InternalTemperature
+    conductance: 1000
+  # glows when hot so you can tell if it will evaporate you
+  - type: Appearance
+  - type: BlackBody
+  - type: PointLight
+    netsync: false # light is done clientside
+    enabled: false
+    castShadows: false
+    falloff: 4
   - type: GuideHelp
     guides:
     - NuclearReactor
