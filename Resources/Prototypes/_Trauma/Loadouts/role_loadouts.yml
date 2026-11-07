@@ -35,20 +35,20 @@
   - ExclusiveItems
 
 - type: roleLoadout
-  id: JobDClass
+  id: JobExpop
   groups:
   - GroupTankHarness
-  - DClassJumpsuit
-  - DClassBackpacks
-  - DClassNeck
-  - DClassFace
-  - DClassGloves
-  - DClassOuterClothing
-  - DClassShoes
+  - ExpopJumpsuit
+  - ExpopBackpacks
+  - ExpopNeck
+  - ExpopFace
+  - ExpopGloves
+  - ExpopOuterClothing
+  - ExpopShoes
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
-  - DClassEnvirohelm
-  - DClassEnvirosuit
-  - DClassEnvirogloves
+  - ExpopEnvirohelm
+  - ExpopEnvirosuit
+  - ExpopEnvirogloves
   - ExclusiveItems

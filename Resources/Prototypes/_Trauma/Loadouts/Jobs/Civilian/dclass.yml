@@ -21,73 +21,44 @@
     outerClothing: ClothingOuterWinterColorOrange
 
 - type: loadout
-  id: DClassElectropack
+  id: ExpopElectropack
   equipment:
     back: ClothingBackpackElectropack
 
-- type: loadoutEffectGroup
-  id: DClassBackpackFreedom
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobDClass
-      time: 20h
+- type: loadout
+  id: ExpopBackpack
 
 - type: loadout
-  id: DClassBackpack
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: DClassBackpackFreedom
-  equipment:
-    back: ClothingBackpack
+  id: ExpopSatchel
 
 - type: loadout
-  id: DClassSatchel
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: DClassBackpackFreedom
-  equipment:
-    back: ClothingBackpackSatchel
+  id: ExpopDuffel
 
 - type: loadout
-  id: DClassDuffel
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: DClassBackpackFreedom
-  equipment:
-    back: ClothingBackpackDuffel
-
-- type: loadout
-  id: DClassMessenger
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: DClassBackpackFreedom
-  equipment:
-    back: ClothingBackpackMessenger
+  id: ExpopMessenger
 
 # Greytide Time
 - type: loadoutEffectGroup
-  id: DClassGreyTider
+  id: ExpopGreyTider
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
-      role: JobDClass
+      role: JobExpop
       time: 20h
 
 # Face
 - type: loadout
-  id: DClassMask
+  id: ExpopMask
   effects:
   - !type:GroupLoadoutEffect
-    proto: DClassGreyTider
+    proto: ExpopGreyTider
   equipment:
     mask: ClothingMaskGas
 
 #Gloves
 - type: loadout
-  id: DClassGloves
+  id: ExpopGloves
   effects:
   - !type:GroupLoadoutEffect
     proto: DClassGreyTider
@@ -96,26 +67,26 @@
 
 # Head of Greytide (for grey mantle)
 - type: loadoutEffectGroup
-  id: DClassMasterGrey
+  id: ExpopMasterGrey
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
-      role: JobDClass
+      role: JobExpop
       time: 40h
 
 # Neck
 - type: loadout
-  id: DClassMantle
+  id: ExpopMantle
   effects:
   - !type:GroupLoadoutEffect
-    proto: DClassMasterGrey
+    proto: ExpopMasterGrey
   equipment:
     neck: ClothingNeckMantle
 
 # Plasmaman
 - type: loadout
-  id: DClassEnvirosuit
+  id: ExpopEnvirosuit
   equipment:
     jumpsuit: ClothingUniformEnvirosuitPrisoner
   effects:
@@ -124,7 +95,7 @@
     - Plasmaman
 
 - type: loadout
-  id: DClassEnvirohelm
+  id: ExpopEnvirohelm
   equipment:
     head: ClothingHeadEnvirohelmPrisoner
   effects:

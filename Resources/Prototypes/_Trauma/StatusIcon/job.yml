@@ -13,8 +13,8 @@
   id: JobIconDClass
   icon:
     sprite: /Textures/_Trauma/Interface/Misc/job_icons.rsi
-    state: DClass
-  jobName: job-name-d-class
+    state: ExPop
+  jobName: job-name-ex-pop
   isCrewJob: false
 
 - type: jobIcon

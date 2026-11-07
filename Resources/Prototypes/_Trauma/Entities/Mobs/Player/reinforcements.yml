@@ -270,7 +270,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitPrisoner
     shoes: ClothingShoesColorBlack
-    id: DClassIDCard
+    id: ExpopIDCard
 
 # Cargo
 

@@ -97,7 +97,7 @@
     # <Trauma>
     # For the purpose of any jobs that are sharing use of the passenger spawn.
     extraJobs:
-    - DClass
+    - ExPop
     # </Trauma>
     job_id: Passenger
   - type: Sprite

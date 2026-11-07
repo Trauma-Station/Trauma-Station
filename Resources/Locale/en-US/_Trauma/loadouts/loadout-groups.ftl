@@ -17,13 +17,13 @@ loadout-group-roboticist-envirohelm = Roboticist envirohelm
 loadout-group-roboticist-envirosuit = Roboticist envirosuit
 loadout-group-roboticist-envirogloves = Roboticist envirogloves
 
-# DClass
-loadout-group-dclass-jumpsuit = D-Class jumpsuit
-loadout-group-dclass-mask = Mask
-loadout-group-dclass-gloves = Gloves
-loadout-group-dclass-outerclothing = Outer clothing
-loadout-group-dclass-shoes = Shoes
-loadout-group-dclass-neck = Neck
-loadout-group-dclass-envirohelm = D-Class Envirohelm
-loadout-group-dclass-envirosuit = D-Class envirosuit
-loadout-group-dclass-envirogloves = D-Class envirogloves
+# Ex-Pop
+loadout-group-expop-jumpsuit = Ex-Pop jumpsuit
+loadout-group-expop-mask = Mask
+loadout-group-expop-gloves = Gloves
+loadout-group-expop-outerclothing = Outer clothing
+loadout-group-expop-shoes = Shoes
+loadout-group-expop-neck = Neck
+loadout-group-expop-envirohelm = Ex-Pop Envirohelm
+loadout-group-expop-envirosuit = Ex-Pop envirosuit
+loadout-group-expop-envirogloves = Ex-Pop envirogloves

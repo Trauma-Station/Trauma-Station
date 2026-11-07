@@ -335,19 +335,19 @@
 
 - type: entity
   parent: BaseReinforcementBeacon
-  id: ReinforcementBeaconDClass
+  id: ReinforcementBeaconExpop
   suffix: D-Class
   components:
   - type: DelayedGhostRole
-    name: ghost-role-information-reinforcement-DClass-name
-    description: ghost-role-information-DClass-description
+    name: ghost-role-information-reinforcement-Expop-name
+    description: ghost-role-information-Expop-description
     rules: ghost-role-information-freeagent-rules
     mindRoles:
     - MindRoleGhostRoleFreeAgent
   - type: GhostCharacterSpawner
     components:
     - type: Loadout
-      prototypes: [ ReinforcementBeaconDClass ]
+      prototypes: [ ReinforcementBeaconExpop ]
 
 # Cargo
 
