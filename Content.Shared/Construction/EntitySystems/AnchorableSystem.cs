@@ -249,7 +249,7 @@ public sealed partial class AnchorableSystem : EntitySystem
         if (!Valid(uid, userUid, usingUid, true, out var failMessage, out var actualDelay, anchorable, usingTool))
         {
             if (failMessage != null)
-                _popup.PopupEntity(Loc.GetString(failMessage), uid, userUid);
+                _popup.PopupEntity(failMessage, uid, userUid); // Trauma - removed Loc.GetString, it's already localized
             return;
         }
 

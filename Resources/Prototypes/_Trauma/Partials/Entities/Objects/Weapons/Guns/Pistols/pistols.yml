@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  parent: BasePistolWhip
+  parent: [ BaseItem, BasePistolWhip ]
   id: BaseWeaponPistol
   components:
   - type: WeaponClass

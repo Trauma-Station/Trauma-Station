@@ -45,7 +45,7 @@ public sealed partial class WhitelistManager : IPostInjectInit
     {
         if (!_whitelistStatus.TryGetValue(userId, out var whitelistStatus))
         {
-            _sawmill.Error("{Player} is either not connected, or the database failed to load their whitelist status. Stack trace:\\n{StackTrace}",
+            _sawmill.Warning("{Player} is either not connected, or the database failed to load their whitelist status. Stack trace:\\n{StackTrace}", // Trauma - changed to warning
                 userId,
                 Environment.StackTrace);
             return false;
