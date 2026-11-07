@@ -11,3 +11,6 @@
 
 - type: playTimeTracker
   id: JobDClass
+
+- type: playTimeTracker
+  id: JobBorgSecurity

@@ -1,0 +1,44 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: constructionGraph
+  id: SecCyborg
+  graph:
+  - node: start
+    entity: SecCyborgEndoskeleton
+    edges:
+    - to: cyborg
+      steps:
+      - assemblyId: generic
+        guideString: borg-construction-guide-string
+
+      - material: Cable
+        amount: 1
+        doAfter: 1
+        store: part-container
+
+      - tag: Stunbaton
+        name: construction-graph-tag-stun-baton
+        store: part-container
+        icon:
+          sprite: Objects/Weapons/Melee/stunbaton.rsi
+          state: stunbaton_off
+
+      - component: Flash
+        name: construction-graph-component-flash
+        store: part-container
+        icon:
+          sprite: Objects/Weapons/Melee/flash.rsi
+          state: flash
+
+      - component: Flash
+        name: construction-graph-component-second-flash
+        store: part-container
+        icon:
+          sprite: Objects/Weapons/Melee/flash.rsi
+          state: flash
+
+      - tool: Screwing
+        doAfter: 0.5
+
+  - node: cyborg
+    entity: BorgChassisSecurity

@@ -14,3 +14,23 @@
     state: icon
   - type: StaticPrice
     price: 50
+
+- type: entity
+  parent: HoloprojectorSecurity
+  id: HoloprojectorSecurityBorg
+  suffix: borg
+  name: holobarrier projector
+  description: A modified holographic barrier projector for use in security cyborgs. Automatically self-charges.
+  components:
+  - type: Sprite
+    sprite: Objects/Devices/Holoprojectors/security.rsi
+    state: icon
+  - type: HolosignProjector
+    chargeUse: 180
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: power-cell-slot-component-slot-name-default
+        startingItem: PowerCellMicroreactor
+        disableEject: true
+        swap: false

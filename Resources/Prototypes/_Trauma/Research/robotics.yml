@@ -8,7 +8,7 @@
     state: ed209
   discipline: Robotics
   tier: 1
-  cost: 20000
+  cost: 30000
   recipeUnlocks:
   - ED209Endoskeleton
   - EDShell
@@ -18,9 +18,9 @@
   - EDAiCoreElectronics
   - EDIFFElectronics
   - EDWeaponControlsElectronics
-  position: -9,1
+  position: -5,0
   technologyPrerequisites:
-  - Gygax
+  - SecurityBorg
 
 - type: technology
   id: BasicMechEquipment
@@ -239,3 +239,24 @@
   - AugmentUtilityPanelElectronics
   - AugmentBotanyPanelElectronics
   - AugmentSurgeryPanelElectronics
+
+- type: technology
+  id: SecurityBorg
+  name: research-technology-combat-bots
+  icon:
+    sprite: _Trauma/Mobs/Silicon/chassis.rsi
+    state: security_icon
+  discipline: Robotics
+  tier: 1
+  cost: 10000
+  recipeUnlocks:
+  - SecCyborgEndoskeleton
+  - LeftArmSecBorg
+  - RightArmSecBorg
+  - LeftLegSecBorg
+  - RightLegSecBorg
+  - LightHeadSecBorg
+  - TorsoSecBorg
+  position: -5,1
+  technologyPrerequisites:
+  - BasicRobotics

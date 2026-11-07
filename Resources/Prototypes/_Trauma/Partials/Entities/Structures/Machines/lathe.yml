@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: ExosuitFabricator
+  components:
+  - type: Lathe
+    dynamicPacks:
+    - SecBorgLimbs
+  - type: EmagLatheRecipes
+    emagDynamicPacks:
+    - ArmoryModules
+
+- type: entity
+  id: SecurityTechFab
+  components:
+  - type: Lathe
+    dynamicPacks:
+    - ArmoryModules

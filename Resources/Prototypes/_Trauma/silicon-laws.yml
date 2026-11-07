@@ -414,3 +414,34 @@
   - StrategySimulator4
   - StrategySimulator5
   obeysTo: laws-owner-crew
+
+# Security lawset
+- type: siliconLaw
+  id: Sec1
+  order: 1
+  lawString: law-sec-1
+
+- type: siliconLaw
+  id: Sec2
+  order: 2
+  lawString: law-sec-2
+
+- type: siliconLaw
+  id: Sec3
+  order: 3
+  lawString: law-sec-3
+
+- type: siliconLaw
+  id: Sec4
+  order: 4
+  lawString: law-sec-4
+
+- type: siliconLawset
+  id: SecurimovLawset
+  name: law-sec-name
+  laws:
+  - Sec1
+  - Sec2
+  - Sec3
+  - Sec4
+  obeysTo: laws-owner-crew
