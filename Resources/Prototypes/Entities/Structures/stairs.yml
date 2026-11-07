@@ -10,7 +10,7 @@
     flags:
     - Anchorable
   - type: Sprite
-    sprite: Structures/stairs.rsi
+    sprite: _Trauma/Structures/stairs.rsi #trauma
     state: stairs_steel
     drawdepth: FloorTiles
   - type: Transform
@@ -39,7 +39,7 @@
   suffix: Steel, stage
   components:
   - type: Sprite
-    sprite: Structures/stairs.rsi
+    sprite: _Trauma/Structures/stairs.rsi #trauma
     state: stairs_stage_steel
     drawdepth: FloorTiles
 
@@ -49,7 +49,7 @@
   suffix: White
   components:
   - type: Sprite
-    sprite: Structures/stairs.rsi
+    sprite: _Trauma/Structures/stairs.rsi #trauma
     state: stairs_white
     drawdepth: FloorTiles
 
@@ -59,7 +59,7 @@
   suffix: White, stage
   components:
   - type: Sprite
-    sprite: Structures/stairs.rsi
+    sprite: _Trauma/Structures/stairs.rsi #trauma
     state: stairs_stage_white
     drawdepth: FloorTiles
 
@@ -69,7 +69,7 @@
   suffix: Dark
   components:
   - type: Sprite
-    sprite: Structures/stairs.rsi
+    sprite: _Trauma/Structures/stairs.rsi #trauma
     state: stairs_dark
     drawdepth: FloorTiles
 
@@ -79,7 +79,7 @@
   suffix: Dark, stage
   components:
   - type: Sprite
-    sprite: Structures/stairs.rsi
+    sprite: _Trauma/Structures/stairs.rsi #trauma
     state: stairs_stage_dark
     drawdepth: FloorTiles
 
@@ -89,7 +89,7 @@
   suffix: Wood
   components:
   - type: Sprite
-    sprite: Structures/stairs.rsi
+    sprite: _Trauma/Structures/stairs.rsi #trauma
     state: stairs_wood
     drawdepth: FloorTiles
 
@@ -99,6 +99,6 @@
   suffix: Wood, stage
   components:
   - type: Sprite
-    sprite: Structures/stairs.rsi
+    sprite: _Trauma/Structures/stairs.rsi #trauma
     state: stairs_stage_wood
     drawdepth: FloorTiles
