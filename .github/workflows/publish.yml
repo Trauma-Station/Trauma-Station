@@ -33,6 +33,13 @@ jobs:
     - name: Install dependencies
       run: dotnet restore
 
+    - name: Wait for linter
+      uses: lewagon/wait-on-check-action@v1.9.1
+      with:
+        ref: ${{ github.ref }}
+        check-name: "YAML Linter" # same as the workflows jobs.build.name field
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Build Packaging
       run: dotnet build Content.Packaging --configuration Release --no-restore /m
 

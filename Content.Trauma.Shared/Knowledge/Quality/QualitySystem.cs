@@ -87,7 +87,7 @@ public sealed partial class QualitySystem : EntitySystem
     private void OnExplosionResistApplyQuality(Entity<ExplosionResistanceComponent> ent, ref ApplyQualityEvent args)
     {
         var modifier = args.Modifier(args.Proto.ExplosionResist);
-        ent.Comp.DamageCoefficient *= modifier;
+        ent.Comp.DamageCoefficient = Math.Min(ent.Comp.DamageCoefficient * modifier, 1f);
         Dirty(ent);
     }
 

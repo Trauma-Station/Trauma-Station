@@ -7,6 +7,7 @@ using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Examine;
 using Content.Shared.Humanoid;
 using Content.Shared.Interaction;
+using Content.Shared.Mind;
 using Content.Shared.Mind.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
@@ -73,7 +74,7 @@ public sealed partial class FuneralAddSystem : EntitySystem
         }
 
         // check target's soul moved on
-        if (mind.HasMind)
+        if (mind.Mind is { } mindId && Comp<MindComponent>(mindId).UserId != null)
         {
             _popup.PopupEntity("Can't consecrate because the soul is still present.", user, user, PopupType.SmallCaution);
             return;

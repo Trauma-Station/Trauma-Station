@@ -16441,3 +16441,107 @@ Entries:
   id: 1774
   time: '2026-11-03T20:15:52.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5175
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added Sentient Giant Spores that can rarely appear
+  - type: Add
+    message: >-
+      Added additional effects to inhaling fungalin, Keep an eye out for any
+      fungalin in the air
+  id: 1775
+  time: '2026-11-04T08:48:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5266
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Changed the Aghost inventory to have more items
+  id: 1776
+  time: '2026-11-04T10:17:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5268
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed fungalin breaking air alarms.
+  id: 1777
+  time: '2026-11-04T10:20:17.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5267
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: >-
+      Nerfed forcemap, no more 6 of the same map in a row because an admin set
+      the map once.
+  id: 1778
+  time: '2026-11-04T13:37:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5272
+- author: elNarehate
+  changes:
+  - type: Tweak
+    message: Sci can make flashes again, for shadow anomalies.
+  - type: Fix
+    message: Roboticist Envirogloves are now insulated
+  id: 1779
+  time: '2026-11-04T19:55:57.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5265
+- author: yglop
+  changes:
+  - type: Tweak
+    message: Holy melons will protect you from magic.
+  id: 1780
+  time: '2026-11-05T11:58:37.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5192
+- author: Giltsmith
+  changes:
+  - type: Tweak
+    message: Nerfed holoparasite variant damages.
+  id: 1781
+  time: '2026-11-05T12:05:20.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5288
+- author: deltanedas
+  changes:
+  - type: Add
+    message: Circuits now support decimal numbers, not just integers.
+  - type: Add
+    message: Added trig functions and exponent gates for circuits.
+  - type: Tweak
+    message: The circuit editor now places new gates relative to your scroll position.
+  id: 1782
+  time: '2026-11-05T15:09:05.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5289
+- author: Endothermix
+  changes:
+  - type: Fix
+    message: Laser Pistols now have the correct melee damage
+  id: 1783
+  time: '2026-11-05T21:29:08.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5294
+- author: elNarehate
+  changes:
+  - type: Fix
+    message: Blood vials and mosins no longer give NTR points.
+  - type: Fix
+    message: >-
+      Fixed low-quality scrap armor increasing the damage you received from
+      explosions.
+  - type: Fix
+    message: Surplus can no longer be discounted.
+  id: 1784
+  time: '2026-11-06T22:17:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5304
+- author: LordZirconium
+  changes:
+  - type: Remove
+    message: Removed IFF computers from spacepol shuttles.
+  id: 1785
+  time: '2026-11-07T08:34:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5291
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Removed abductor's teleport being canceled from damage/moving
+  - type: Tweak
+    message: Halved the prices on the Abductor Biofabricator
+  id: 1786
+  time: '2026-11-07T11:21:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5315
