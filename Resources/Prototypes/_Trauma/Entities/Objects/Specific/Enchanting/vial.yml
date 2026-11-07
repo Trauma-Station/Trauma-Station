@@ -6,6 +6,8 @@
   description: An empty vial, needs to be filled with blood.
   id: BloodVial
   components:
+  - type: ScannableForPoints
+    points: 0
   - type: Spillable
     solution: drink
   - type: StaticPrice
@@ -47,6 +49,8 @@
   description: A blood vial embuded with black magic, useful for a variety of things.
   id: BloodVialFull
   components:
+  - type: ScannableForPoints
+    points: 0
   - type: StaticPrice
     price: 100
   - type: PhysicalComposition

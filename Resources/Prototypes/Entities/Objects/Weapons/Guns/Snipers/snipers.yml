@@ -63,8 +63,6 @@
   - type: Item  # Goob edit
     size: Large
     storedRotation: 45
-  - type: ScannableForPoints # goob edit
-    points: 2
   # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Guns/Snipers/bolt_gun_wood.rsi

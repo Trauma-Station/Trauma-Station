@@ -16516,3 +16516,32 @@ Entries:
   id: 1783
   time: '2026-11-05T21:29:08.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5294
+- author: elNarehate
+  changes:
+  - type: Fix
+    message: Blood vials and mosins no longer give NTR points.
+  - type: Fix
+    message: >-
+      Fixed low-quality scrap armor increasing the damage you received from
+      explosions.
+  - type: Fix
+    message: Surplus can no longer be discounted.
+  id: 1784
+  time: '2026-11-06T22:17:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5304
+- author: LordZirconium
+  changes:
+  - type: Remove
+    message: Removed IFF computers from spacepol shuttles.
+  id: 1785
+  time: '2026-11-07T08:34:30.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5291
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Removed abductor's teleport being canceled from damage/moving
+  - type: Tweak
+    message: Halved the prices on the Abductor Biofabricator
+  id: 1786
+  time: '2026-11-07T11:21:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5315
