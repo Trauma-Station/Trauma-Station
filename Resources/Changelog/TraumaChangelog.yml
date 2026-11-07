@@ -16536,3 +16536,12 @@ Entries:
   id: 1785
   time: '2026-11-07T08:34:30.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5291
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Removed abductor's teleport being canceled from damage/moving
+  - type: Tweak
+    message: Halved the prices on the Abductor Biofabricator
+  id: 1786
+  time: '2026-11-07T11:21:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5315
