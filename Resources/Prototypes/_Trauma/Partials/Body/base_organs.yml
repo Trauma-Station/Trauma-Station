@@ -18,18 +18,6 @@
         damage: 400 # we'll assume the bones are all broken by now
       behaviors:
       - !type:GibBehavior
-  - type: AtmosExposed
-  - type: Temperature
-    thermalConductivity: 1
-    temperature: 293.15
-    heatCapacity: 15000
-  - type: TemperatureDamage
-  - type: Perishable
-    rotAfter: 120
-    molsPerSecondPerUnitMass: 0
-  - type: RotInto
-    entity: FoodRot
-    stage: 1
 
 - type: entity
   id: OrganBaseOrganic

@@ -3,18 +3,13 @@
   id: Moth
   onlyGroupWhitelisted: true
   limits:
-    # <Trauma>
-    enum.HumanoidVisualLayers.WingsBehind:
-      limit: 0
-      required: false
-    # </Trauma>
     enum.HumanoidVisualLayers.Hair:
       limit: 0
       required: false
     enum.HumanoidVisualLayers.FacialHair:
       limit: 0
       required: false
-    enum.HumanoidVisualLayers.Wings: # Trauma - ITS NOT A FUCKING TAIL
+    enum.HumanoidVisualLayers.Tail:
       limit: 1
       required: true
       default: [ MothWingsDefault ]
@@ -117,7 +112,6 @@
     organs:
       Torso: OrganMothTorso
       Head: OrganMothHead
-      Wings: OrganMothWings # Trauma
       ArmLeft: OrganMothArmLeft
       ArmRight: OrganMothArmRight
       HandRight: OrganMothHandRight
@@ -146,15 +140,6 @@
   id: MobMoth
   name: Urist McFluff
   components:
-  # <Trauma>
-  - type: LanguageSpeaker
-    speaks:
-    - TauCetiBasic
-    - Moffic
-    understands:
-    - TauCetiBasic
-    - Moffic
-  # </Trauma>
   - type: Damageable
     damageModifierSet: Moth
   - type: ZombieAccentOverride
@@ -172,27 +157,27 @@
     bloodReferenceSolution:
       reagents:
       - ReagentId: InsectBlood
-        Quantity: 300 # Trauma, was 600
-  #- type: DamageVisuals # Shitmed
-  #  damageOverlayGroups:
-  #    Brute:
-  #      sprite: _Shitmed/Mobs/Effects/brute_damage.rsi
-  #      color: "#808A51"
-  #    Burn:
-  #      sprite: _Shitmed/Mobs/Effects/burn_damage.rsi
+        Quantity: 600
+  - type: DamageVisuals
+   damageOverlayGroups:
+     Brute:
+       sprite: _Shitmed/Mobs/Effects/brute_damage.rsi
+       color: "#808A51"
+     Burn:
+       sprite: _Shitmed/Mobs/Effects/burn_damage.rsi
   - type: MothAccent
   - type: Vocal
     emoteSounds: UnisexMoth
   - type: BodyEmotes
     soundsId: MothBodyEmotes
-  #- type: MovementSpeedModifier # Trauma - moved to wings
-  #  baseWeightlessAcceleration: 1.5 # Move around more easily in space.
-  #  baseWeightlessFriction: 1
-  #  baseWeightlessModifier: 1
+  - type: MovementSpeedModifier
+    baseWeightlessAcceleration: 1.5 # Move around more easily in space.
+    baseWeightlessFriction: 1
+    baseWeightlessModifier: 1
   - type: Flammable
     damage:
       types:
-        Heat: 0.75 # Trauma, was 2.5 - 0.3x multiplier to compensate for limb damage
+        Heat: 2.5
   - type: TemperatureDamage # Moths hate the heat and thrive in the cold.
     heatDamageThreshold: 314.15
     coldDamageThreshold: 230
@@ -249,11 +234,11 @@
     sprite: Mobs/Species/Moth/parts.rsi
 
 - type: entity
-  parent: [ OrganBaseTorsoSexed, OrganBaseTorsoWinged, OrganMothExternal ] # Trauma - Winged torso
+  parent: [ OrganBaseTorsoSexed, OrganMothExternal ]
   id: OrganMothTorso
 
 - type: entity
-  parent: [ OrganBaseHeadBald, OrganMothExternal ] # Trauma - bald
+  parent: [OrganMothExternal ]
   id: OrganMothHead
   components:
   - type: VisualOrganMarkings

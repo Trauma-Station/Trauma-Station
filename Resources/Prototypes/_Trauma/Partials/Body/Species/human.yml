@@ -6,9 +6,6 @@
   - type: InternalChildOrgan
   - type: HumanOrgan
 
-# - type: entity
-#   id: OrganHumanBrain
-
 - type: entity
   id: OrganHumanEyes
   components:
@@ -17,14 +14,9 @@
 
 - type: entity
   id: OrganHumanTongue
+  components:
   - type: StaticPrice
-    price: 500
-
-# - type: entity
-#   id: OrganHumanAppendix
-
-# - type: entity
-#   id: OrganHumanEars
+    price: 1000
 
 - type: entity
   id: OrganHumanLungs

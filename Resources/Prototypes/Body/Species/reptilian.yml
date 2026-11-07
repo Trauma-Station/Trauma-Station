@@ -60,13 +60,6 @@
   - type: Inventory
     speciesId: reptilian
     femaleDisplacements:
-      # <Trauma>
-      shoes:
-        sizeMaps:
-          32:
-            sprite: _White/Mobs/Species/Reptilian/displacement.rsi
-            state: shoes
-      # <Trauma>
       jumpsuit:
         sizeMaps:
           32:
@@ -83,18 +76,6 @@
             sprite: Mobs/Species/Reptilian/displacement.rsi
             state: mask
     displacements:
-      # <Trauma>
-      shoes:
-        sizeMaps:
-          32:
-            sprite: _White/Mobs/Species/Reptilian/displacement.rsi
-            state: shoes
-      jumpsuit:
-        sizeMaps:
-          32:
-            sprite: _White/Mobs/Species/Reptilian/displacement.rsi
-            state: jumpsuit
-      # <Trauma>
       head:
         sizeMaps:
           32:
@@ -109,7 +90,6 @@
     organs:
       Torso: OrganReptilianTorso
       Head: OrganReptilianHead
-      Tail: OrganReptilianTail # Trauma
       ArmLeft: OrganReptilianArmLeft
       ArmRight: OrganReptilianArmRight
       HandRight: OrganReptilianHandRight
@@ -138,27 +118,12 @@
   id: MobReptilian
   name: Urist McScales
   components:
-  # <Trauma>
-  - type: LanguageSpeaker
-    speaks:
-    - TauCetiBasic
-    - Draconic
-    understands:
-    - TauCetiBasic
-    - Draconic
-  - type: Mutatable
-    dormant:
-    - MutationFireBreath
-    - MutationMonkified # return to kobold
-  # </Trauma>
   - type: Puller
-    #needsHands: false # Trauma - controlled by tail
+    needsHands: false
   - type: Butcherable
     spawned:
     - id: FoodMeatLizard
       amount: 5
-    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
-      amount: 3
   - type: LizardAccent
   - type: Speech
     speechSounds: Lizard
@@ -198,7 +163,7 @@
       301: 0.9
       295: 0.8
       285: 0.7
-  #- type: Wagging # Trauma - moved to tail onAdd
+  - type: Wagging
 
 - type: entity
   parent: OrganBaseOrganic
@@ -236,7 +201,7 @@
       group: Reptilian
 
 - type: entity
-  parent: [ OrganBaseTorsoSexed, OrganBaseTorsoTailed, OrganReptilianExternal ] # Shitmed - Tailed torso
+  parent: [ OrganBaseTorsoSexed, OrganReptilianExternal ]
   id: OrganReptilianTorso
   components:
   - type: VisualOrganMarkings
@@ -244,7 +209,7 @@
     - enum.HumanoidVisualLayers.Tail
 
 - type: entity
-  parent: [ OrganBaseHeadSexed, OrganBaseHeadBald, OrganReptilianExternal ] # Trauma - bald
+  parent: [ OrganBaseHeadSexed, OrganReptilianExternal ]
   id: OrganReptilianHead
   components:
   - type: VisualOrganMarkings
@@ -272,58 +237,18 @@
 - type: entity
   parent: [ OrganBaseLegLeft, OrganReptilianExternal ]
   id: OrganReptilianLegLeft
-  # <Trauma>
-  components:
-  - type: Sprite
-    sprite: _White/Mobs/Species/Reptilian/parts.rsi
-    state: l_leg_digi
-  - type: VisualOrgan
-    data:
-      sprite: _White/Mobs/Species/Reptilian/parts.rsi
-      state: l_leg_digi
-  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseLegRight, OrganReptilianExternal ]
   id: OrganReptilianLegRight
-  # <Trauma>
-  components:
-  - type: Sprite
-    sprite: _White/Mobs/Species/Reptilian/parts.rsi
-    state: r_leg_digi
-  - type: VisualOrgan
-    data:
-      sprite: _White/Mobs/Species/Reptilian/parts.rsi
-      state: r_leg_digi
-  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseFootLeft, OrganReptilianExternal ]
   id: OrganReptilianFootLeft
-  # <Trauma>
-  components:
-  - type: Sprite
-    sprite: _White/Mobs/Species/Reptilian/parts.rsi
-    state: l_foot_digi
-  - type: VisualOrgan
-    data:
-      sprite: _White/Mobs/Species/Reptilian/parts.rsi
-      state: l_foot_digi
-  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseFootRight, OrganReptilianExternal ]
   id: OrganReptilianFootRight
-  # <Trauma>
-  components:
-  - type: Sprite
-    sprite: _White/Mobs/Species/Reptilian/parts.rsi
-    state: r_foot_digi
-  - type: VisualOrgan
-    data:
-      sprite: _White/Mobs/Species/Reptilian/parts.rsi
-      state: r_foot_digi
-  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseBrain, OrganSpriteHumanInternal, OrganReptilianInternal ]

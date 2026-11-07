@@ -1,0 +1,145 @@
+
+
+- type: entity
+  id: AppearanceReptilian
+  components:
+  - type: Inventory
+    speciesId: reptilian
+    femaleDisplacements:
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _White/Mobs/Species/Reptilian/displacement.rsi
+            state: shoes
+    displacements:
+      shoes:
+        sizeMaps:
+          32:
+            sprite: _White/Mobs/Species/Reptilian/displacement.rsi
+            state: shoes
+      jumpsuit:
+        sizeMaps:
+          32:
+            sprite: _White/Mobs/Species/Reptilian/displacement.rsi
+            state: jumpsuit
+  - type: InitialBody
+    organs:
+      Tail: OrganReptilianTail
+
+- type: entity
+  id: MobReptilian
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Draconic
+    understands:
+    - TauCetiBasic
+    - Draconic
+  - type: Mutatable
+    dormant:
+    - MutationFireBreath
+    - MutationMonkified # return to kobold
+  - type: Puller
+    needsHands: true # controlled by tail
+  - type: Butcherable
+    spawned:
+    - id: MaterialBones1 # Bones on butchering humanoids
+      amount: 3
+  - !Remove type: Wagging #  moved to tail onAdd
+
+- type: entity
+  parent: !Clear [ OrganBaseTorsoSexed, OrganBaseTorsoTailed, OrganReptilianExternal ] # Tailed torso
+  id: OrganReptilianTorso
+
+- type: entity
+  parent: !Clear [ OrganBaseHeadSexed, OrganBaseHeadBald, OrganReptilianExternal ] # bald
+  id: OrganReptilianHead
+
+- type: entity
+  id: OrganReptilianLegLeft
+  components:
+  - type: Sprite
+    sprite: _White/Mobs/Species/Reptilian/parts.rsi
+    state: l_leg_digi
+  - type: VisualOrgan
+    data:
+      sprite: _White/Mobs/Species/Reptilian/parts.rsi
+      state: l_leg_digi
+
+- type: entity
+  id: OrganReptilianLegRight
+  components:
+  - type: Sprite
+    sprite: _White/Mobs/Species/Reptilian/parts.rsi
+    state: r_leg_digi
+  - type: VisualOrgan
+    data:
+      sprite: _White/Mobs/Species/Reptilian/parts.rsi
+      state: r_leg_digi
+
+- type: entity
+  parent: [ OrganBaseFootLeft, OrganReptilianExternal ]
+  id: OrganReptilianFootLeft
+  components:
+  - type: Sprite
+    sprite: _White/Mobs/Species/Reptilian/parts.rsi
+    state: l_foot_digi
+  - type: VisualOrgan
+    data:
+      sprite: _White/Mobs/Species/Reptilian/parts.rsi
+      state: l_foot_digi
+
+- type: entity
+  parent: [ OrganBaseFootRight, OrganReptilianExternal ]
+  id: OrganReptilianFootRight
+  components:
+  - type: Sprite
+    sprite: _White/Mobs/Species/Reptilian/parts.rsi
+    state: r_foot_digi
+  - type: VisualOrgan
+    data:
+      sprite: _White/Mobs/Species/Reptilian/parts.rsi
+      state: r_foot_digi
+
+- type: entity
+  id: OrganReptilianEyes
+  components:
+  - type: StaticPrice
+    price: 3000
+
+- type: entity
+  id: OrganReptilianTongue
+  components:
+  - type: StaticPrice
+    price: 1000
+
+- type: entity
+  id: OrganReptilianLungs
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganReptilianHeart
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganReptilianStomach
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganReptilianLiver
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganReptilianKidneys
+  components:
+  - type: StaticPrice
+    price: 2000
