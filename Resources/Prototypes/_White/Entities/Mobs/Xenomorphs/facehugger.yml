@@ -183,5 +183,5 @@
     canEmag: false
     canExamine: false
   - type: FaceHuggerLeap
-  - type: CanEscapeInventory  #trauma
-  baseResistTime: 2
+  - type: CanEscapeInventory
+    baseResistTime: 2
