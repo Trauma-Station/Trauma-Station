@@ -13,7 +13,6 @@
   - type: MeleeWeapon
     wideAnimationRotation: -135
     attackRate: 1.5
-    heavyPartDamageMultiplier: 1
     damage:
       types:
         Slash: 12

@@ -3,6 +3,8 @@
 - type: entity
   id: RitualDagger
   components:
+  - type: MeleeWeapon
+    heavyPartDamageMultiplier: 1
   - type: CultItem
   - type: RuneDrawer
   - type: ActivatableUI
