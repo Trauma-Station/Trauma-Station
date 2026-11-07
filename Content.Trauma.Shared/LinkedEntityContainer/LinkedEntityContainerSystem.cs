@@ -9,19 +9,25 @@ namespace Content.Trauma.Shared.LinkedEntityContainer;
 /// </summary>
 public sealed partial class LinkedEntityContainerSystem : EntitySystem
 {
+    [Dependency] private SharedTransformSystem _transform = default!;
+
     private EntProtoId<PortalComponent> _portalDestination = "ThronglerToy"; //"BluespaceRiftPortalDestination";
 
     [SubscribeLocalEvent]
     private void Startup(Entity<LinkedEntityContainerComponent> ent, ref ComponentStartup args)
     {
-        var xform = Transform(ent);
-
         var newEnt = PredictedSpawnNextToOrDrop(_portalDestination, ent.Owner);
-        // todo ensure Transform... i'll never escape this shitcode
+
+        // var newXform = Transform(newEnt);
+        // if (newXform.Coordinates.Position == Vector2.Zero || newXform.Coordinates.Position == Vector2Helpers.NaN)
+        //     _transform.SetCoordinates(newEnt, Transform(ent).Coordinates);
+        // Dirty(newEnt, newXform);
+
+        Log.Info($"newEnt {newEnt}");
 
         ent.Comp.NetEnt = GetNetEntity(newEnt);
-        Log.Info($"{newEnt}");
         Dirty(ent.Owner, ent.Comp);
+        Log.Info($"NetEnt {ent.Comp.NetEnt}");
     }
 
     public void SpawnWithLinkedEntity(string? protoName, Entity<TransformComponent> parent)
