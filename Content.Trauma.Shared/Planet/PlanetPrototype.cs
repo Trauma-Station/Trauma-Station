@@ -47,6 +47,9 @@ public sealed partial class PlanetPrototype : IPrototype
     [DataField(required: true)]
     public GasMixture Atmosphere = new();
 
+    /// <summary>
+    /// If the map has ruins to spawn.
+    /// </summary>
     [DataField]
     public ProtoId<LavalandRuinPoolPrototype>? RuinPool;
 

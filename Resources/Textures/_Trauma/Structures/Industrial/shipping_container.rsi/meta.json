@@ -1,0 +1,137 @@
+{
+    "version": 1,
+    "license": null,
+    "copyright": null,
+    "size": {
+        "x": 160,
+        "y": 64
+    },
+    "states": [
+        {
+            "name": "generic"
+        },
+        {
+            "name": "generic_teal"
+        },
+        {
+            "name": "generic_green"
+        },
+        {
+            "name": "generic_purple"
+        },
+        {
+            "name": "generic_red"
+        },
+        {
+            "name": "nanotrasen1"
+        },
+        {
+            "name": "nanotrasen2"
+        },
+        {
+            "name": "orion1"
+        },
+        {
+            "name": "orion2"
+        },
+        {
+            "name": "zavod1"
+        },
+        {
+            "name": "zavod2"
+        },
+        {
+            "name": "heph1"
+        },
+        {
+            "name": "heph2"
+        },
+        {
+            "name": "zeng1"
+        },
+        {
+            "name": "zeng2"
+        },
+        {
+            "name": "pmcg"
+        },
+        {
+            "name": "getmore"
+        },
+        {
+            "name": "idris"
+        },
+        {
+            "name": "scc"
+        },
+        {
+            "name": "einstein"
+        },
+        {
+            "name": "bishop"
+        },
+        {
+            "name": "dna"
+        },
+        {
+            "name": "polaris"
+        },
+        {
+            "name": "virgo"
+        },
+        {
+            "name": "elco"
+        },
+        {
+            "name": "gwok"
+        },
+        {
+            "name": "sol"
+        },
+        {
+            "name": "tcaf"
+        },
+        {
+            "name": "biesel"
+        },
+        {
+            "name": "xanu1"
+        },
+        {
+            "name": "xanu2"
+        },
+        {
+            "name": "air"
+        },
+        {
+            "name": "hydrogen"
+        },
+        {
+            "name": "phoron1"
+        },
+        {
+            "name": "phoron2"
+        },
+        {
+            "name": "generic_ref"
+        },
+        {
+            "name": "produce_ref"
+        },
+        {
+            "name": "iac_ref"
+        },
+        {
+            "name": "gwok_ref"
+        },
+        {
+            "name": "getmore_ref"
+        },
+        {
+            "name": "orion_ref"
+        },
+        {
+            "name": "container_office"
+        }
+    ]
+}

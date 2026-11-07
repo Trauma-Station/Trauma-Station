@@ -1,0 +1,39 @@
+- type: entity
+  abstract: true
+  parent: BaseStructure
+  id: BaseBunkBed
+  name: Bunk Beds
+  description: A stack of beds.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Urban/bunk_beds.rsi
+  - type: Clickable
+  - type: InteractionOutline
+
+- type: entity
+  parent: BaseBunkBed
+  id: ZBunkBed
+  components:
+  - type: Sprite
+    state: zbunkbed
+
+- type: entity
+  parent: BaseBunkBed
+  id: ZBunkBed2
+  components:
+  - type: Sprite
+    state: zbunkbed2
+
+- type: entity
+  parent: BaseBunkBed
+  id: ZBunkBed3
+  components:
+  - type: Sprite
+    state: zbunkbed3
+
+- type: entity
+  parent: BaseBunkBed
+  id: ZBunkBed4
+  components:
+  - type: Sprite
+    state: zbunkbed4

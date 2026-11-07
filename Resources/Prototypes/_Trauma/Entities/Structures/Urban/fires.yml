@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseBonfire
+  id: Campfire
+  name: campfire
+  description: What can be better than a late evening under the sky with guitar and friends?
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Urban/fires.rsi
+    layers:
+    - state: campfire_lit

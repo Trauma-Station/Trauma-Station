@@ -3,7 +3,6 @@
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
 using Content.Shared.EntityEffects;
-using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -21,15 +20,11 @@ public sealed partial class RemoveActions : EntityEffectBase<RemoveActions>
 
 public sealed partial class RemoveActionsEffectSystem : EntityEffectSystem<ActionsComponent, RemoveActions>
 {
-    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private SharedActionsSystem _actions = default!;
 
     protected override void Effect(Entity<ActionsComponent> ent, ref EntityEffectEvent<RemoveActions> args)
     {
         var user = ent.Owner;
-        if (_timing.ApplyingState)
-            return;
-
         foreach (var action in args.Effect.Actions)
         {
             if (!_actions.TryGetActionById(user, action, out var actionComp)

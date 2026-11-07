@@ -1,0 +1,314 @@
+- type: entity
+  abstract: true
+  parent: BaseStructure
+  id: BaseLargeContainer
+  name: large container
+  description: A large container.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Structures/Industrial/shipping_container.rsi
+  - type: InteractionOutline
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-2.4,-1,2.4,1"
+        density: 60
+        mask:
+        - MachineMask
+        layer:
+        - Impassable
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerAir
+  components:
+  - type: Sprite
+    state: air
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerBiesel
+  components:
+  - type: Sprite
+    state: biesel
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerBishop
+  components:
+  - type: Sprite
+    state: bishop
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerOffice
+  components:
+  - type: Sprite
+    state: container_office
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerDna
+  components:
+  - type: Sprite
+    state: dna
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerEinstein
+  components:
+  - type: Sprite
+    state: einstein
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerElco
+  components:
+  - type: Sprite
+    state: elco
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerGeneric
+  components:
+  - type: Sprite
+    state: generic
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerGenericGreen
+  components:
+  - type: Sprite
+    state: generic_green
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerGenericPurple
+  components:
+  - type: Sprite
+    state: generic_purple
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerGenericRed
+  components:
+  - type: Sprite
+    state: generic_red
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerGenericRef
+  components:
+  - type: Sprite
+    state: generic_ref
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerGenericTeal
+  components:
+  - type: Sprite
+    state: generic_teal
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerGetmore
+  components:
+  - type: Sprite
+    state: getmore
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerGetmoreRef
+  components:
+  - type: Sprite
+    state: getmore_ref
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerGwok
+  components:
+  - type: Sprite
+    state: gwok
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerGwokRef
+  components:
+  - type: Sprite
+    state: gwok_ref
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerHeph1
+  components:
+  - type: Sprite
+    state: heph1
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerHeph2
+  components:
+  - type: Sprite
+    state: heph2
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerHydrogen
+  components:
+  - type: Sprite
+    state: hydrogen
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerIacRef
+  components:
+  - type: Sprite
+    state: iac_ref
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerIdris
+  components:
+  - type: Sprite
+    state: idris
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerNanotrasen1
+  components:
+  - type: Sprite
+    state: nanotrasen1
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerNanotrasen2
+  components:
+  - type: Sprite
+    state: nanotrasen2
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerOrion1
+  components:
+  - type: Sprite
+    state: orion1
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerOrion2
+  components:
+  - type: Sprite
+    state: orion2
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerOrionRef
+  components:
+  - type: Sprite
+    state: orion_ref
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerPhoron1
+  components:
+  - type: Sprite
+    state: phoron1
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerPhoron2
+  components:
+  - type: Sprite
+    state: phoron2
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerPmcg
+  components:
+  - type: Sprite
+    state: pmcg
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerPolaris
+  components:
+  - type: Sprite
+    state: polaris
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerProduceRef
+  components:
+  - type: Sprite
+    state: produce_ref
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerScc
+  components:
+  - type: Sprite
+    state: scc
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerSol
+  components:
+  - type: Sprite
+    state: sol
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerTcaf
+  components:
+  - type: Sprite
+    state: tcaf
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerVirgo
+  components:
+  - type: Sprite
+    state: virgo
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerXanu1
+  components:
+  - type: Sprite
+    state: xanu1
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerXanu2
+  components:
+  - type: Sprite
+    state: xanu2
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerZavod1
+  components:
+  - type: Sprite
+    state: zavod1
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerZavod2
+  components:
+  - type: Sprite
+    state: zavod2
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerZeng1
+  components:
+  - type: Sprite
+    state: zeng1
+
+- type: entity
+  parent: BaseLargeContainer
+  id: LargeContainerZeng2
+  components:
+  - type: Sprite
+    state: zeng2
