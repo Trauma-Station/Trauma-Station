@@ -10,9 +10,4 @@ public sealed partial class LinkedEntityContainerComponent : Component
 {
     [DataField, AutoNetworkedField]
     public NetEntity NetEnt;
-
-    /// <summary>
-    /// This flag ensures that only one instance of LinkedEntity will be spawned.
-    /// </summary>
-    public bool Spawned = false;
 }

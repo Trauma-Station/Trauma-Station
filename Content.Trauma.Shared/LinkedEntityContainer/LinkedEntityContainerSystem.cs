@@ -14,27 +14,19 @@ public sealed partial class LinkedEntityContainerSystem : EntitySystem
     [SubscribeLocalEvent]
     private void Startup(Entity<LinkedEntityContainerComponent> ent, ref ComponentStartup args)
     {
-        if (ent.Comp.Spawned) // for some fucking reason it spawns twice even with the flag
-            return;
-        Log.Info($"startup: {ent.Comp.Spawned}");
+        var xform = Transform(ent);
+
         var newEnt = PredictedSpawnNextToOrDrop(_portalDestination, ent.Owner);
+        // todo ensure Transform... i'll never escape this shitcode
+
         ent.Comp.NetEnt = GetNetEntity(newEnt);
-        Log.Info($"startup: new ent spawned {ent.Comp.NetEnt.Id}");
-        ent.Comp.Spawned = true;
+        Log.Info($"{newEnt}");
         Dirty(ent.Owner, ent.Comp);
-        Log.Info($"startup: {ent.Comp.Spawned}");
     }
 
     public void SpawnWithLinkedEntity(string? protoName, Entity<TransformComponent> parent)
     {
         var uid = PredictedSpawnAtPosition(protoName, parent.Comp.Coordinates);
         var Comp = EnsureComp<LinkedEntityContainerComponent>(uid);
-
-        var newEnt = PredictedSpawnAtPosition(_portalDestination, parent.Comp.Coordinates);
-        Comp.NetEnt = GetNetEntity(newEnt);
-        Log.Info($"spawn: new ent spawned {ent.Comp.NetEnt.Id}");
-        Comp.Spawned = true;
-        Dirty(uid, Comp);
-        Log.Info($"spawn: {Comp.Spawned}");
     }
 }
