@@ -23,14 +23,6 @@ public sealed partial class BlackBodyVisualizerSystem : VisualizerSystem<BlackBo
     public const float SpeedOfLight = 299792458f; // m/s
     public const float Gamma = 1f / 2.2f;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<BlackBodyComponent, HeldVisualsUpdatedEvent>(OnHeldVisualsUpdated);
-        SubscribeLocalEvent<BlackBodyComponent, EquipmentVisualsUpdatedEvent>(OnEquipmentVisualsUpdated);
-    }
-
     protected override void OnAppearanceChange(EntityUid uid, BlackBodyComponent comp, ref AppearanceChangeEvent args)
     {
         if (!_spriteQuery.TryComp(uid, out var sprite) ||
@@ -66,11 +58,13 @@ public sealed partial class BlackBodyVisualizerSystem : VisualizerSystem<BlackBo
         _light.SetRadius(uid, radius, light);
     }
 
+    [SubscribeLocalEvent]
     private void OnHeldVisualsUpdated(Entity<BlackBodyComponent> ent, ref HeldVisualsUpdatedEvent args)
     {
         UpdateLayers(args.User, ent.Comp.Color, args.RevealedLayers);
     }
 
+    [SubscribeLocalEvent]
     private void OnEquipmentVisualsUpdated(Entity<BlackBodyComponent> ent, ref EquipmentVisualsUpdatedEvent args)
     {
         UpdateLayers(args.Equipee, ent.Comp.Color, args.RevealedLayers);

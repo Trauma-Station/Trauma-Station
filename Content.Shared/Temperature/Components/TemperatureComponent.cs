@@ -9,7 +9,7 @@ namespace Content.Shared.Temperature.Components;
 /// informing others of the current temperature.
 /// </summary>
 [RegisterComponent]
-[Access(typeof(SharedTemperatureSystem))]
+// Trauma - removed Access
 public sealed partial class TemperatureComponent : Component, IHeatContainer
 {
     /// <summary>
