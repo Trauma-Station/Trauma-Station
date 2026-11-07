@@ -198,16 +198,6 @@
   parent: [ AppearanceSpaceAnimal, MobSpaceBasic, BaseSlicingRefinable, BaseMobDestructible ] # Trauma - added AppearanceSpaceAnimal
   description: It's so glowing, it looks dangerous.
   components:
-    # <Trauma>
-  - type: InitialBody
-    organs:
-      Torso: OrganAnimalTorso
-      Heart: OrganCarpHeart
-      Lungs: OrganCarpLungs
-      Stomach: OrganSpiderStomach
-      Liver: OrganAnimalLiver
-      Kidneys: OrganAnimalKidneys
-  # </Trauma>
   # <Goob>
   - type: VentCrawler
   - type: Fauna
