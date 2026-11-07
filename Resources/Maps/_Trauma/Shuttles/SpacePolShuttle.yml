@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Grid
-  engineVersion: 283.0.0
+  engineVersion: 295.0.0
   forkId: ""
   forkVersion: ""
-  time: 07/23/2026 21:44:14
-  entityCount: 204
+  time: 11/06/2026 19:28:47
+  entityCount: 206
 maps: []
 grids:
 - 1
@@ -26,8 +26,6 @@ entities:
     components:
     - type: MetaData
       name: grid
-    - type: Transform
-      parent: invalid
     - type: MapGrid
       chunks:
         0,0:
@@ -81,25 +79,25 @@ entities:
           - -1,7
           - -1,9
           - -1,10
-          - 0,2
-          - 0,6
           - 0,1
+          - 0,2
           - 0,3
           - 0,4
-          - 0,7
           - 0,5
+          - 0,6
+          - 0,7
           - 0,8
-          - 0,10
           - 0,9
+          - 0,10
+          - 1,1
           - 1,2
           - 1,3
-          - 1,10
+          - 1,4
           - 1,5
           - 1,6
           - 1,7
-          - 1,1
           - 1,9
-          - 1,4
+          - 1,10
         - node:
             id: WarnLineN
             color: '#FFFFFFFF'
@@ -182,6 +180,8 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ExplosionAirtightGrid
+    - type: ChunkContainer
+      chunkEntities: []
 - proto: AirCanister
   entities:
   - uid: 2
@@ -638,18 +638,20 @@ entities:
       storage: 73
 - proto: ComputerComms
   entities:
-  - uid: 79
-    components:
-    - type: Transform
-      parent: 1
-      pos: -0.5,10.5
-- proto: ComputerIFFSyndicate
-  entities:
   - uid: 80
     components:
     - type: Transform
       parent: 1
-      pos: 1.5,10.5
+      rot: 1.5707963267948966 rad
+      pos: -0.5,9.5
+- proto: ComputerRadar
+  entities:
+  - uid: 198
+    components:
+    - type: Transform
+      parent: 1
+      rot: -1.5707963267948966 rad
+      pos: 1.5,9.5
 - proto: ComputerShuttle
   entities:
   - uid: 81
@@ -1056,12 +1058,12 @@ entities:
       pos: -1.5,5.5
 - proto: TableReinforced
   entities:
-  - uid: 139
+  - uid: 79
     components:
     - type: Transform
       parent: 1
       rot: 1.5707963267948966 rad
-      pos: 1.5,9.5
+      pos: 1.5,10.5
   - uid: 140
     components:
     - type: Transform
@@ -1080,6 +1082,12 @@ entities:
       parent: 1
       rot: 3.141592653589793 rad
       pos: 1.5,5.5
+  - uid: 202
+    components:
+    - type: Transform
+      parent: 1
+      rot: 1.5707963267948966 rad
+      pos: -0.5,10.5
 - proto: Telecrystal25
   entities:
   - uid: 70
@@ -1195,7 +1203,7 @@ entities:
     components:
     - type: Transform
       parent: 1
-      pos: 1.4594188,5.742228
+      pos: 1.4922829,10.598072
   - uid: 84
     components:
     - type: Transform
@@ -1481,12 +1489,18 @@ entities:
       bodyType: Static
 - proto: WeaponCapacitorRecharger
   entities:
-  - uid: 198
+  - uid: 139
     components:
     - type: Transform
       parent: 1
       rot: 3.141592653589793 rad
-      pos: 1.5,9.5
+      pos: 1.5,5.5
+  - uid: 206
+    components:
+    - type: Transform
+      parent: 1
+      rot: 3.141592653589793 rad
+      pos: -0.5,10.5
 - proto: WeaponPistolLiberator
   entities:
   - uid: 65
