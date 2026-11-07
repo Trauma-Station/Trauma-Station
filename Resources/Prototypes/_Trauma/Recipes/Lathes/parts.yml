@@ -5,14 +5,14 @@
   id: RandomOrganBase
   completetime: 5
   materials:
-    Biomass: 10
+    Biomass: 5
 
 - type: latheRecipe
   abstract: true
   id: RandomLimbBase
   completetime: 5
   materials:
-    Biomass: 4
+    Biomass: 2
 
 # Organs
 
@@ -45,7 +45,7 @@
   id: OrganRandomAbductorGland
   result: DubiousOrganSpawner
   materials:
-    Biomass: 20
+    Biomass: 10
   icon:
     sprite: _Shitmed/Mobs/Species/Misc/Dubious/organs.rsi
     state: emp
