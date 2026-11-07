@@ -1,0 +1,108 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BaseItem, BaseHighlyIllegalContraband ]
+  id: SamuraiEnergyPolearm
+  name: energy polearm
+  description: The honorable weapon of a space samurai. It takes the form of a sharp energy glaive, engineered to pierce armor well and allow superior reach, as well as the form of a heavy bō staff, able to knock foes down and push them back.
+  components:
+  - type: BindItemOnPickup
+  - type: WeaponClass
+    class: Polearm
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Melee/samurai_energy_polearm.rsi
+    size: Ginormous # Use your sheath.
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Melee/samurai_energy_polearm.rsi
+    state: glaive-icon
+  - type: DisarmMalus
+    malus: .50
+  - type: ItemSwitch
+    defaultState: glaive
+    state: "glaive"
+    showLabel: true
+    states:
+      # Energy Glaive Form
+      glaive: !type:ItemSwitchState
+        verb: glaive
+        sprite:
+          sprite: _Trauma/Objects/Weapons/Melee/samurai_energy_polearm.rsi
+          state: glaive-icon
+        components:
+        - type: Sharp
+        - type: Execution
+          doAfterDuration: 4.0
+        - type: MeleeWeapon
+          attackRate: 1.5
+          wideAnimationRotation: -135
+          range: 2.5
+          heavyStaminaCost: 5
+          damage:
+            types:
+              Slash: 10
+              Heat: 10
+            armorPenetration: 0.30
+          clickPartDamageMultiplier: 1.6
+          soundHit:
+            path: /Audio/Weapons/bladeslice.ogg
+        - type: ThrowingAngle
+          angle: 225
+        - type: EmbeddableProjectile
+          minimumSpeed: 2
+          removalTime: 2
+        - type: DamageOtherOnHit
+          damage:
+            types:
+              Piercing: 50
+            armorPenetration: 1
+        - type: Tool
+          qualities:
+          - Slicing
+          - Prying
+          useSound: !type:SoundPathSpecifier
+            path: /Audio/Weapons/bladeslice.ogg
+            params:
+              volume: -2
+        - type: Prying
+          speedModifier: 10
+          pryPowered: true
+          useSound: !type:SoundPathSpecifier
+            path: /Audio/Weapons/bladeslice.ogg
+            params:
+              volume: -2
+        - type: EnergyPolearm
+          mode: glaive
+      # Bo Staff Form
+      staff: !type:ItemSwitchState
+        verb: staff
+        sprite:
+          sprite: _Trauma/Objects/Weapons/Melee/samurai_energy_polearm.rsi
+          state: staff-icon
+        components:
+        - type: MeleeWeapon
+          attackRate: .5
+          wideAnimationRotation: -135
+          angle: 120
+          heavyStaminaCost: 5
+          damage:
+            types:
+              Blunt: 15
+          clickPartDamageMultiplier: 2
+          soundHit:
+            path: /Audio/_Trauma/Weapons/Melee/breaching_hammer/club.ogg
+        - type: ThrowingAngle
+          angle: 135
+        - type: DamageOtherOnHit
+          damage:
+            types:
+              Blunt: 20
+            armorPenetration: .20
+        - type: EnergyPolearm
+          mode: staff
+        - type: UseDelay
+          delays:
+            energyPolearm:
+              length: 2.5
+        - type: UseDelayBlockMelee
+          delays:
+          - energyPolearm

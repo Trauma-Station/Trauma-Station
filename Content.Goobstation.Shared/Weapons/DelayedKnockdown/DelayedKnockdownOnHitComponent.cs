@@ -18,5 +18,8 @@ public sealed partial class DelayedKnockdownOnHitComponent : Component
     public bool ApplyOnHeavyAttack;
 
     [DataField]
+    public bool ApplyOnLightAttack = true;
+
+    [DataField]
     public string UseDelay = "default";
 }

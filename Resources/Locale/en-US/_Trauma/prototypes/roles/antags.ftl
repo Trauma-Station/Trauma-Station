@@ -20,3 +20,6 @@ roles-antag-spy-objective = Steal things and complete your mission.
 spy-round-end-agent-name = spy
 
 never-shown = !
+
+roles-antag-space-samurai-name = Samurai
+roles-antag-space-samurai-objective = Sabotage the station in a blaze of honor and glory.

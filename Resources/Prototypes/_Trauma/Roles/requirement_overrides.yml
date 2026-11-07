@@ -191,6 +191,13 @@
       department: Security
       time: 2h
     - *biological_requirement
+    Samurai:
+    - !type:OverallPlaytimeRequirement
+      time: 5h
+    - !type:DepartmentTimeRequirement
+      department: Security
+      time: 2h
+    - *biological_requirement
     Wizard:
     - !type:OverallPlaytimeRequirement
       time: 5h

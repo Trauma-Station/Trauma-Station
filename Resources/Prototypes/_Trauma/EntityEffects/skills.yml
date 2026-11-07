@@ -106,3 +106,18 @@
   - !type:GrantSkills
     skills:
       MartialArtHellRip: 88
+
+- type: entityEffect
+  id: SamuraiSkills
+  effects:
+  - !type:GrantSkills
+    skills:
+      MeleeKnowledge: 88
+      ShootingKnowledge: 0
+      KnowledgeWeaponsPolearm: 88
+      KnowledgeWeaponsLongBlade: 88
+      KnowledgeWeaponsShortBlade: 88
+      KnowledgeWeaponsBludgeon: 88
+      ThrowingKnowledge: 88
+      FirstAidKnowledge: 88
+      LiteracyKnowledge: 88

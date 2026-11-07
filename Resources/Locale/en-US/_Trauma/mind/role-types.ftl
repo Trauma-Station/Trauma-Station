@@ -10,3 +10,5 @@ role-subtype-purified-construct = P. Construct
 
 role-type-animal-name = Animal
 role-type-animal-color = #51dd26
+
+role-subtype-samurai = Samurai

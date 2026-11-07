@@ -94,7 +94,8 @@ public sealed partial class DelayedKnockdownOnHitSystem : EntitySystem
 
         var (uid, comp) = ent;
 
-        if (!comp.ApplyOnHeavyAttack && args.WideSwing)
+        if (!comp.ApplyOnHeavyAttack && args.WideSwing ||
+            !comp.ApplyOnLightAttack && !args.WideSwing)
             return;
 
         if (TryComp(uid, out UseDelayComponent? delay))
