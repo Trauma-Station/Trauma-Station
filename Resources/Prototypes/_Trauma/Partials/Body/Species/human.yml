@@ -1,0 +1,57 @@
+
+
+- type: entity
+  id: OrganHumanInternal
+  components:
+  - type: InternalChildOrgan
+  - type: HumanOrgan
+
+# - type: entity
+#   id: OrganHumanBrain
+
+- type: entity
+  id: OrganHumanEyes
+  components:
+  - type: StaticPrice
+    price: 3000
+
+- type: entity
+  id: OrganHumanTongue
+  - type: StaticPrice
+    price: 500
+
+# - type: entity
+#   id: OrganHumanAppendix
+
+# - type: entity
+#   id: OrganHumanEars
+
+- type: entity
+  id: OrganHumanLungs
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganHumanHeart
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganHumanStomach
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganHumanLiver
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganHumanKidneys
+  components:
+  - type: StaticPrice
+    price: 2000
