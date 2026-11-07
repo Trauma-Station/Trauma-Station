@@ -16,7 +16,7 @@
   description: uplink-agent-id-card-desc
   productEntity: AgentIDCard
   cost:
-    Telecrystal: 15 # Trauma - was 3, 5x
+    Telecrystal: 12 # Trauma - was 3, nerfed a tad
   categories:
   - UplinkDeception
 

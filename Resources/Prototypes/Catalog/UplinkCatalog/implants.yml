@@ -132,7 +132,7 @@
   icon: { sprite: Objects/Devices/communication.rsi, state: radio } # Trauma - old-radio -> radio
   productEntity: UplinkImplanter
   cost:
-    Telecrystal: 5 # Trauma - was 1, 5x
+    Telecrystal: 10 # Trauma - was 1, 5x expensive, more of a need for pdas now a days
   categories:
   - UplinkImplants
   conditions:
