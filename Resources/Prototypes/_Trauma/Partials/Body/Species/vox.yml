@@ -1,0 +1,99 @@
+
+
+- type: entity
+  id: AppearanceVox
+  components:
+  - type: Inventory
+    displacements:
+      outerClothing:
+        sizeMaps:
+          32:
+            sprite: _Goobstation/Mobs/Species/Vox/displacement.rsi
+            state: outerClothing
+  - type: InitialBody
+    organs:
+      Tail: OrganVoxTail
+
+- type: entity
+  parent: !Clear
+  - AppearanceVox
+  - BaseSpeciesMobOrganicUnperishable
+  id: MobVox
+  components:
+  - type: Uncloneable
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - NewKinPidgin
+    understands:
+    - TauCetiBasic
+    - NewKinPidgin
+  - type: Speech
+    allowedEmotes: ['Click', 'Chitter', 'Bagawk'] # readd goob "bagawk"
+  - type: Butcherable
+    spawned:
+    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
+      amount: 2 # birds have light bones, thus 1 less than other species.
+  - type: PassiveDamage
+    # Augment normal health regen to be able to tank some Poison damage
+    # This allows Vox to take their mask off temporarily to eat something without needing a trip to medbay afterwards.
+    intervalHaltOnDamageTaken: 5s
+    allowedStates:
+    - Alive
+    damage:
+      types: !Clear
+        Poison: -0.2
+  - !Remove type: DamageVisuals
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: AmmoniaBlood
+        Quantity: 300 # was 600
+
+- type: entity
+  parent: !Clear [ OrganBaseTorsoTailed, OrganVoxExternal ] # Tailed torso
+  id: OrganVoxTorso
+
+- type: entity
+  id: OrganVoxEyes
+  components:
+  - type: ViewconeModifier
+    angleModifier: 1.1 # prey vision for tasty chicken...
+  - type: StaticPrice
+    price: 3000
+
+- type: entity
+  id: OrganVoxTongue
+  components:
+  - type: StaticPrice
+    price: 1000
+
+- type: entity
+  id: OrganVoxLungs
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganVoxHeart
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganVoxStomach
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganVoxLiver
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganVoxKidneys
+  components:
+  - type: StaticPrice
+    price: 2000

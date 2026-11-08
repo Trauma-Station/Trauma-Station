@@ -24,14 +24,19 @@
     spawned:
     - id: MaterialWoodPlank1 # "bones"
       amount: 3
+  - !Remove type: DamageVisuals
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Sap
+        Quantity: 300 # was 600
 
 - type: entity
   id: OrganDionaTorso
   components:
   - type: BodyPart
     # removed Heart, Kidneys and Liver slots its a plant
-    # cant use !Remove for slots from the base torso prototype :)
-    slots:
+    slots: !Clear
     # parts
     - Head
     - ArmLeft
@@ -42,3 +47,74 @@
     - Appendix
     - Lungs
     - Stomach
+
+- type: entity
+  parent: !Clear [ OrganBaseHeadBald, OrganDionaExternal ] # bald trees
+  id: OrganDionaHead
+
+- type: entity
+  id: OrganDionaEyes
+  components:
+  - type: StaticPrice
+    price: 3000
+
+- type: entity
+  id: OrganDionaLungs
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganDionaStomach
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: BaseNymphingOrgan
+  components:
+  - type: Nymph
+    blacklist:
+      components:
+      - ChangelingIdentity # was ChangelingTransform, that doesnt exist here
+
+- type: entity
+  id: OrganDionaNymphBrain
+  components:
+  - !Remove type: EntityTableContainerFill
+  - type: InitialBody # replaced container fill
+    organs:
+      Head: OrganDionaHead
+      Torso: OrganDionaTorso
+      Brain: OrganDionaBrain
+      Lungs: OrganAnimalLungs
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Heart: OrganAnimalHeart
+      Kidneys: OrganAnimalKidneys
+
+- type: entity
+  id: OrganDionaNymphStomach
+  components:
+  - !Remove type: EntityTableContainerFill
+  - type: InitialBody # replaced container fill
+    organs:
+      Torso: OrganDionaTorso
+      Lungs: OrganDionaLungs
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Heart: OrganAnimalHeart
+      Kidneys: OrganAnimalKidneys
+
+- type: entity
+  id: OrganDionaNymphLungs
+  components:
+  - !Remove type: EntityTableContainerFill
+  - type: InitialBody # replaced container fill
+    organs:
+      Torso: OrganDionaTorso
+      Lungs: OrganAnimalLungs
+      Stomach: OrganDionaStomach
+      Liver: OrganAnimalLiver
+      Heart: OrganAnimalHeart
+      Kidneys: OrganAnimalKidneys

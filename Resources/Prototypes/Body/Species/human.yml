@@ -94,29 +94,10 @@
   id: MobHuman
   name: Urist McHands
   components:
-  # <Trauma>
-  - type: Mutatable
-    dormant:
-    - MutationMonkified # return to monke
-  - type: Skinnable # skinwalkers
-    skinningDoAfterDuation: 8
-    whitelist:
-      components:
-      - KitchenSpikeHooked # have to be on a spike to skin people
-    skinnedSprite: _Trauma/Mobs/Species/Human/skinned.rsi
-    unskinnedSprite: Mobs/Species/Human/parts.rsi
-  - type: Bloodstream
-    bloodReferenceSolution:
-      reagents:
-      - ReagentId: Blood
-        Quantity: 300
-  # </Trauma>
   - type: Butcherable
     spawned:
     - id: FoodMeatHuman
       amount: 5
-    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
-      amount: 3
 
 - type: entity
   parent: OrganBaseOrganic

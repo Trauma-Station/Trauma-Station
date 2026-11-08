@@ -2,11 +2,6 @@
   parent: Undergarments
   id: Slime
   limits:
-    # <Trauma>
-    enum.HumanoidVisualLayers.Eyes:
-      limit: 1
-      required: false
-    # </Trauma>
     enum.HumanoidVisualLayers.Hair:
       limit: 1
       required: false
@@ -74,9 +69,6 @@
       LegRight: OrganSlimePersonLegRight
       FootLeft: OrganSlimePersonFootLeft
       FootRight: OrganSlimePersonFootRight
-      # <Trauma>
-      Tongue: OrganSlimePersonTongue
-      # </Trauma>
       Brain: OrganSlimePersonCore
       Eyes: OrganSlimePersonEyes
       Lungs: OrganSlimePersonLungs
@@ -90,15 +82,6 @@
   id: MobSlimePerson
   name: Urist McWobble
   components:
-  # <Trauma>
-  - type: LanguageSpeaker
-    speaks:
-    - TauCetiBasic
-    - Bubblish
-    understands:
-    - TauCetiBasic
-    - Bubblish
-  # </Trauma>
   - type: Storage
     clickInsert: false
     grid:
@@ -140,18 +123,18 @@
         Blunt: -0.05
         Piercing: -0.05
         Slash: -0.05
-  #- type: DamageVisuals # Shitmed
-  #  damageOverlayGroups:
-  #    Brute:
-  #      sprite: Mobs/Effects/brute_damage.rsi
-  #      color: "#2cf274"
-  #    Burn:
-  #      sprite: Mobs/Effects/burn_damage.rsi
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#2cf274"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
   - type: Bloodstream
     bloodReferenceSolution: # TODO Color slime blood based on their slime color or smth
       reagents:
       - ReagentId: Slime
-        Quantity: 300 # Trauma, was 600
+        Quantity: 600
   - type: Barotrauma
     damage:
       types:
@@ -196,14 +179,6 @@
   id: OrganSlimePerson
   abstract: true
   suffix: slime person
-  # <Shitmed>
-  components:
-  - type: Solution
-    solution:
-      reagents:
-      - ReagentId: Slime
-        Quantity: 15
-  # </Shitmed>
 
 - type: entity
   id: OrganSlimePersonMetabolizer
@@ -225,9 +200,6 @@
   id: OrganSlimePersonExternal
   abstract: true
   components:
-  # <Trauma>
-  - type: Boneless
-  # </Trauma>
   - type: Sprite
     sprite: Mobs/Species/Slime/parts.rsi
   - type: VisualOrgan
@@ -240,32 +212,10 @@
 - type: entity
   parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganSlimePersonExternal ]
   id: OrganSlimePersonTorso
-  # <Trauma>
-  components:
-  - type: BodyPart
-    slots:
-    # Parts
-    - Head
-    - ArmLeft
-    - ArmRight
-    - LegLeft
-    - LegRight
-    # Organs
-    - Brain
-    - Lungs
-  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseHead, OrganSlimePersonExternal ]
   id: OrganSlimePersonHead
-  # <Trauma>
-  components:
-  - type: BodyPart
-    slots: # no brain, torso has it
-    - Eyes
-    - Tongue
-    - Ears
-  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseArmLeft, OrganSlimePersonExternal ]
@@ -304,12 +254,6 @@
   id: OrganSlimePersonCore
   name: sentient slime core
   components:
-  # <Shitmed>
-  - type: Organ
-    category: Brain
-  - type: ChildOrgan
-    parents: [ Torso ] # allow it to be in torso instead of head
-  # </Shitmed>
   - type: SolutionManager
     solutions:
     - SolutionStomach
@@ -320,14 +264,12 @@
     stages: [ Digestion, Bloodstream, Metabolites ]
 
 - type: entity
-  parent: [ OrganBaseEyes, OrganSlimePersonInternal ] # Trauma - removed OrganSlimePersonExternal: dont want Woundable
+  parent: [ OrganBaseEyes, OrganSlimePersonInternal, OrganSlimePersonExternal ]
   id: OrganSlimePersonEyes
   components:
-  # <Trauma>
   - type: VisualOrganMarkings
     markingData:
       group: Slime
-  # <Trauma>
   - type: VisualOrgan
     data:
       sprite: Mobs/Customization/eyes.rsi
@@ -337,12 +279,5 @@
   id: OrganSlimePersonLungs
   name: gas sacs
   components:
-  # <Shitmed>
-  - type: Solution
-    solution:
-      reagents:
-      - ReagentId: Slime
-        Quantity: 15
-  # </Shitmed>
   - type: Lung
     alert: LowNitrogen

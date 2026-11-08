@@ -80,11 +80,6 @@
   - type: Inventory
     speciesId: vox
     displacements:
-      outerClothing: # Goob
-        sizeMaps:
-          32:
-            sprite: _Goobstation/Mobs/Species/Vox/displacement.rsi
-            state: outerClothing
       jumpsuit:
         sizeMaps:
           32:
@@ -140,7 +135,6 @@
     organs:
       Torso: OrganVoxTorso
       Head: OrganVoxHead
-      Tail: OrganVoxTail # Trauma
       ArmLeft: OrganVoxArmLeft
       ArmRight: OrganVoxArmRight
       HandRight: OrganVoxHandRight
@@ -165,26 +159,16 @@
 - type: entity
   parent:
   - AppearanceVox
-  - BaseSpeciesMobOrganicUnperishable # Trauma - vox don't rot
+  - BaseSpeciesMobOrganic
   id: MobVox
   name: Urist McVox
   components:
-  # <Trauma>
-  - type: Uncloneable
-  - type: LanguageSpeaker
-    speaks:
-    - TauCetiBasic
-    - NewKinPidgin
-    understands:
-    - TauCetiBasic
-    - NewKinPidgin
-  # </Trauma>
   - type: Damageable
     damageModifierSet: Vox
   - type: Speech
     speechVerb: Vox
     speechSounds: Vox
-    allowedEmotes: ['Click', 'Chitter', 'Bagawk'] # Trauma - readd goob "bagawk"
+    allowedEmotes: ['Click', 'Chitter', 'Hiss', 'Caw']
   - type: TypingIndicator
     proto: vox
   - type: CreamPied
@@ -197,8 +181,6 @@
     spawned:
     - id: FoodMeatChicken
       amount: 5
-    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
-      amount: 2 # birds have light bones, thus 1 less than other species.
   - type: Destructible
     thresholds:
     - trigger:
@@ -220,25 +202,23 @@
     - Alive
     damage:
       types:
-        # <Trauma> - no passive healing
-        #Heat: -0.07
-        #Blunt: -0.05
-        #Piercing: -0.05
-        #Slash: -0.05
-        # </Trauma>
+        Heat: -0.07
+        Blunt: -0.05
+        Piercing: -0.05
+        Slash: -0.05
         Poison: -0.2 # needs to be less than the PendingZombieComponent does or they never become zombies by the disease.
-  #- type: DamageVisuals # Shitmed
-  #  damageOverlayGroups:
-  #    Brute:
-  #    sprite: _Shitmed/Mobs/Effects/brute_damage.rsi
-  #    color: "#7a8bf2"
-  #  Burn:
-  #    sprite: _Shitmed/Mobs/Effects/burn_damage.rsi
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#7a8bf2"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
       - ReagentId: AmmoniaBlood
-        Quantity: 300 # Trauma, was 600
+        Quantity: 600
   - type: MeleeWeapon
     soundHit:
       collection: AlienClaw
@@ -290,7 +270,7 @@
     sprite: Mobs/Species/Vox/parts.rsi
 
 - type: entity
-  parent: [ OrganBaseTorsoTailed, OrganVoxExternal ] # Shitmed - Tailed torso
+  parent: [ OrganBaseTorso, OrganVoxExternal ]
   id: OrganVoxTorso
 
 - type: entity
@@ -351,11 +331,6 @@
 - type: entity
   parent: [ OrganVoxVisual, OrganBaseEyes, OrganVoxInternal ]
   id: OrganVoxEyes
-  # <Trauma>
-  components:
-  - type: ViewconeModifier
-    angleModifier: 1.1 # prey vision for tasty chicken...
-  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseTongue, OrganVoxInternal ]

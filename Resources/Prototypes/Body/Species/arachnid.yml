@@ -9,7 +9,7 @@
     enum.HumanoidVisualLayers.FacialHair:
       limit: 0
       required: false
-    enum.HumanoidVisualLayers.Wings: # Trauma - was Tail
+    enum.HumanoidVisualLayers.Tail:
       limit: 1
       required: true
       default: [ ArachnidAppendagesDefault ]
@@ -46,7 +46,6 @@
     organs:
       Torso: OrganArachnidTorso
       Head: OrganArachnidHead
-      Wings: OrganArachnidAppendages # Trauma
       ArmLeft: OrganArachnidArmLeft
       ArmRight: OrganArachnidArmRight
       HandRight: OrganArachnidHandRight
@@ -98,8 +97,6 @@
     spawned:
     - id: FoodMeatSpider
       amount: 5
-    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
-      amount: 3
   - type: Reactive
     reactions:
     - reagents: [Water]
@@ -116,7 +113,7 @@
     bloodReferenceSolution:
       reagents:
       - ReagentId: CopperBlood
-        Quantity: 300 # Trauma, was 600
+        Quantity: 600
   - type: MeleeWeapon
     animation: WeaponArcBite
     soundHit:
@@ -124,13 +121,13 @@
     damage:
       types:
         Piercing: 5
-  #- type: DamageVisuals # Shitmed
-  #  damageOverlayGroups:
-  #    Brute:
-  #      sprite: _Shitmed/Mobs/Effects/brute_damage.rsi
-  #      color: "#162581"
-  #    Burn:
-  #      sprite: _Shitmed/Mobs/Effects/burn_damage.rsi
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: _Shitmed/Mobs/Effects/brute_damage.rsi
+        color: "#162581"
+      Burn:
+        sprite: _Shitmed/Mobs/Effects/burn_damage.rsi
   - type: Speech
     speechVerb: Arachnid
     speechSounds: Arachnid
@@ -185,11 +182,11 @@
     sprite: Mobs/Species/Arachnid/parts.rsi
 
 - type: entity
-  parent: [ OrganBaseTorsoWinged, OrganArachnidExternal ] # Trauma - Winged torso (appendages count as wings for simplicity)
+  parent: [ OrganBaseTorso, OrganArachnidExternal ]
   id: OrganArachnidTorso
 
 - type: entity
-  parent: [ OrganBaseHeadBald, OrganArachnidExternal ] # Trauma - bald
+  parent: [ OrganBaseHead, OrganArachnidExternal ]
   id: OrganArachnidHead
 
 - type: entity
@@ -231,11 +228,6 @@
 - type: entity
   parent: [ OrganArachnidVisual, OrganBaseEyes, OrganArachnidInternal ]
   id: OrganArachnidEyes
-  # <Trauma>
-  components:
-  - type: ViewconeModifier
-    angleModifier: 1.25 # 8 eyes are better than 2
-  # </Trauma>
 
 - type: entity
   parent: [ OrganBaseTongue, OrganArachnidInternal ]

@@ -123,19 +123,6 @@
   id: MobDwarf
   name: Urist McHands the Dwarf
   components:
-  # <Trauma>
-  - type: Mutatable
-    dormant:
-    - MutationDwarfism # not activated by default it would be too silly
-    - MutationRockEater # non parity but peak
-  - type: ScaleVisuals # remove the scale as the mutation will do it instead
-    scale: 1, 1
-  - type: Bloodstream
-    bloodReferenceSolution:
-      reagents:
-      - ReagentId: Blood
-        Quantity: 300
-  # </Trauma>
   - type: Fixtures
     fixtures: # TODO: This needs a second fixture just for mob collisions.
       fix1:
@@ -193,12 +180,6 @@
   parent: [ OrganHumanTorso, OrganDwarfAppearance ]
   id: OrganDwarfTorso
   components:
-  # <Trauma>
-  # it doesnt use a base dwarf external prototype :)
-  - &woundable_visuals
-    type: WoundableVisuals
-    displacement: Dwarfism
-  # </Trauma>
   - type: VisualOrganMarkings
     markingsDisplacement:
       Chest:
@@ -241,9 +222,6 @@
   parent: [ OrganHumanHead, OrganDwarfAppearance ]
   id: OrganDwarfHead
   components:
-  # <Trauma>
-  - *woundable_visuals
-  # </Trauma>
   - type: VisualOrganMarkings
     markingsDisplacement:
       Head:
@@ -286,9 +264,6 @@
   parent: [ OrganHumanArmLeft, OrganDwarfAppearance ]
   id: OrganDwarfArmLeft
   components:
-  # <Trauma>
-  - *woundable_visuals
-  # </Trauma>
   - type: VisualOrganMarkings
     markingsDisplacement:
       LArm:
@@ -301,9 +276,6 @@
   parent: [ OrganHumanArmRight, OrganDwarfAppearance ]
   id: OrganDwarfArmRight
   components:
-  # <Trauma>
-  - *woundable_visuals
-  # </Trauma>
   - type: VisualOrganMarkings
     markingsDisplacement:
       RArm:
@@ -316,9 +288,6 @@
   parent: [ OrganHumanHandRight, OrganDwarfAppearance ]
   id: OrganDwarfHandRight
   components:
-  # <Trauma>
-  - *woundable_visuals
-  # </Trauma>
   - type: VisualOrganMarkings
     markingsDisplacement:
       RHand:
@@ -331,9 +300,6 @@
   parent: [ OrganHumanHandLeft, OrganDwarfAppearance ]
   id: OrganDwarfHandLeft
   components:
-  # <Trauma>
-  - *woundable_visuals
-  # </Trauma>
   - type: VisualOrganMarkings
     markingsDisplacement:
       LHand:
@@ -346,9 +312,6 @@
   parent: [ OrganHumanLegLeft, OrganDwarfAppearance ]
   id: OrganDwarfLegLeft
   components:
-  # <Trauma>
-  - *woundable_visuals
-  # </Trauma>
   - type: VisualOrganMarkings
     markingsDisplacement:
       LLeg:
@@ -361,9 +324,6 @@
   parent: [ OrganHumanLegRight, OrganDwarfAppearance ]
   id: OrganDwarfLegRight
   components:
-  # <Trauma>
-  - *woundable_visuals
-  # </Trauma>
   - type: VisualOrganMarkings
     markingsDisplacement:
       RLeg:
@@ -376,9 +336,6 @@
   parent: [ OrganHumanFootLeft, OrganDwarfAppearance ]
   id: OrganDwarfFootLeft
   components:
-  # <Trauma>
-  - *woundable_visuals
-  # </Trauma>
   - type: VisualOrganMarkings
     markingsDisplacement:
       LFoot:
@@ -391,9 +348,6 @@
   parent: [ OrganHumanFootRight, OrganDwarfAppearance ]
   id: OrganDwarfFootRight
   components:
-  # <Trauma>
-  - *woundable_visuals
-  # </Trauma>
   - type: VisualOrganMarkings
     markingsDisplacement:
       RFoot:

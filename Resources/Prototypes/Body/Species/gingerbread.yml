@@ -49,13 +49,13 @@
       amount: 5
   - type: Damageable
     damageModifierSet: Gingerbread
-  #- type: DamageVisuals # Shitmed
-  #  damageOverlayGroups:
-  #    Brute:
-  #      sprite: _Shitmed/Mobs/Effects/brute_damage.rsi
-  #      color: "#896e55"
-  #    Burn:
-  #      sprite: Shitmed/Mobs/Effects/burn_damage.rsi
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: _Shitmed/Mobs/Effects/brute_damage.rsi
+        color: "#896e55"
+      Burn:
+        sprite: Shitmed/Mobs/Effects/burn_damage.rsi
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
@@ -89,7 +89,6 @@
   id: OrganGingerbreadExternal
   abstract: true
   components:
-  - type: BodyPart # Shitmed
   - type: Sprite
     sprite: Mobs/Species/Gingerbread/parts.rsi
   - type: VisualOrgan

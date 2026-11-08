@@ -1,0 +1,66 @@
+
+
+- type: entity
+  parent: !Clear BaseSpeciesAppearanceOrganless # skeletons have no internal organs
+  id: AppearanceSkeletonPerson
+  components:
+  - type: AnimatedEmotesBlacklist
+    blacklist:
+    - Cry
+    - Blush
+    - Tongue
+
+- type: entity
+  id: MobSkeletonPerson
+  components:
+  - type: LanguageSpeaker # Einstein Engines - Language
+    speaks:
+    - TauCetiBasic
+    - Calcic
+    understands:
+    - TauCetiBasic
+    - Calcic
+  - type: SurgeryTarget
+    sepsisImmune: true
+  - type: Tag
+    tags:
+    - CanPilot
+    - FootstepSound
+    - DoorBumpOpener
+    - AnomalyHost
+    - Undead
+  - type: TypingIndicator
+    proto: skeleton
+  - type: FacehuggerImmune
+  - !Remove type: DamageVisuals
+  - !Remove type: Destructible
+  - type: Vocal
+    wilhelm: "/Audio/_Goobstation/Voice/badtothebone.ogg"
+    wilhelmProbability: 0.1
+  - type: Reactive
+    groups:
+      Acidic: [ Ingestion ]
+
+- type: entity
+  id: OrganSkeletonPerson
+  components:
+  - type: Inorganic
+
+- type: entity
+  id: OrganSkeletonPersonExternal
+  components:
+  - type: BodyPart
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTypeTrigger
+        damageType: Blunt
+        damage: 150 # ME FEMUR ACK ACK!
+      behaviors:
+      - !type:GibBehavior
+
+- type: entity
+  id: OrganSkeletonPersonHead
+  components:
+  - type: Construction
+    graph: SpiritCandle
+    node: start

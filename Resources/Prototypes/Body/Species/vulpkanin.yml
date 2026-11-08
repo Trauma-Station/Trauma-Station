@@ -70,7 +70,6 @@
     organs:
       Torso: OrganVulpkaninTorso
       Head: OrganVulpkaninHead
-      Tail: OrganVulpkaninTail # Trauma
       ArmLeft: OrganVulpkaninArmLeft
       ArmRight: OrganVulpkaninArmRight
       HandRight: OrganVulpkaninHandRight
@@ -147,13 +146,13 @@
   id: MobVulpkanin
   name: Urist McArfArf
   components:
-  #- type: DamageVisuals # Trauma - wound visuals used instead
-  #  damageOverlayGroups:
-  #    Brute:
-  #      sprite: Mobs/Effects/brute_damage.rsi
-  #      color: "#ccac1f"
-  #    Burn:
-  #      sprite: Mobs/Effects/burn_damage.rsi
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#ccac1f"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
   - type: MessyDrinker
     spillChance: 0.33
   - type: Speech
@@ -183,8 +182,8 @@
     heatDamage:
       types:
         Heat: 2.5 # Per second, scales with temperature & other constants
-  #- type: Wagging # Trauma - moved to tail
-  #  action: ActionToggleWaggingVulpkanin
+  - type: Wagging
+    action: ActionToggleWaggingVulpkanin
   - type: JumpAbility
     action: ActionVulpkaninGravityJump
     canCollide: true
@@ -198,8 +197,8 @@
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
-      - ReagentId: Blood # Trauma - no piss fetish please
-        Quantity: 300 # Trauma, was 600
+      - ReagentId: SulfurBlood
+        Quantity: 600
   - type: CreamPied
     sprite:
       sprite: Effects/creampie.rsi
@@ -210,11 +209,6 @@
   id: OrganVulpkanin
   abstract: true
   suffix: vulpkanin
-  # <Shitmed>
-  components:
-  - type: Injurable
-    damageContainer: Vulpkanin
-  # </Shitmed>
 
 - type: entity
   id: OrganVulpkaninMetabolizer
@@ -229,7 +223,7 @@
   abstract: true
   components:
   - type: Sprite
-    sprite: Mobs/Species/Human/organs.rsi # Trauma - no piss fetish organs
+    sprite: Mobs/Species/Vulpkanin/organs.rsi
 
 - type: entity
   id: OrganVulpkaninVisual
@@ -251,7 +245,7 @@
     sprite: Mobs/Species/Vulpkanin/parts.rsi
 
 - type: entity
-  parent: [ OrganBaseTorsoSexed, OrganBaseTorsoTailed, OrganVulpkaninExternal ] # Trauma - Tailed torso
+  parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganVulpkaninExternal ] # Trauma - Tailed torso
   id: OrganVulpkaninTorso
 
 - type: entity

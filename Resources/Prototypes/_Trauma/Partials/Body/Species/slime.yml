@@ -1,0 +1,101 @@
+
+
+- type: markingsGroup
+  id: Slime
+  limits:
+    enum.HumanoidVisualLayers.Eyes:
+      limit: 1
+      required: false
+
+- type: entity
+  id: AppearanceSlimePerson
+  components:
+  - type: InitialBody
+    organs:
+      Tongue: OrganSlimePersonTongue
+  - type: StaticPrice
+    price: 1000
+
+- type: entity
+  id: MobSlimePerson
+  components:
+  - type: LanguageSpeaker
+    speaks:
+    - TauCetiBasic
+    - Bubblish
+    understands:
+    - TauCetiBasic
+    - Bubblish
+  - !Remove type: DamageVisuals
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Slime
+        Quantity: 300 # was 600
+
+- type: entity
+  id: OrganSlimePerson
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Slime
+        Quantity: 15
+
+- type: entity
+  id: OrganSlimePersonExternal
+  components:
+  - type: Boneless
+
+- type: entity
+  id: OrganSlimePersonTorso
+  components:
+  - type: BodyPart
+    slots:
+    # Parts
+    - Head
+    - ArmLeft
+    - ArmRight
+    - LegLeft
+    - LegRight
+    # Organs
+    - Brain
+    - Lungs
+
+- type: entity
+  id: OrganSlimePersonHead
+  components:
+  - type: BodyPart
+    slots: # no brain, torso has it
+    - Eyes
+    - Tongue
+    - Ears
+
+- type: entity
+  id: OrganSlimePersonCore
+  components:
+  - type: Organ
+    category: Brain
+  - type: ChildOrgan
+    parents: [ Torso ] # allow it to be in torso instead of head
+
+- type: entity
+  parent: !Clear [ OrganBaseEyes, OrganSlimePersonInternal ] # removed OrganSlimePersonExternal: dont want Woundable
+  id: OrganSlimePersonEyes
+  components:
+  - type: VisualOrganMarkings
+    markingData:
+      group: Slime
+  - type: StaticPrice
+    price: 3000
+
+- type: entity
+  id: OrganSlimePersonLungs
+  components:
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Slime
+        Quantity: 15
+  - type: StaticPrice
+    price: 4000

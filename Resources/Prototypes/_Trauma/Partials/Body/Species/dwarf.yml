@@ -1,0 +1,94 @@
+
+
+- type: entity
+  id: MobDwarf
+  components:
+  - type: Mutatable
+    dormant:
+    - MutationDwarfism # not activated by default it would be too silly
+    - MutationRockEater # non parity but peak
+  - type: ScaleVisuals # remove the scale as the mutation will do it instead
+    scale: 1, 1
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Blood
+        Quantity: 300
+
+- type: entity
+  parent: [ OrganHumanTorso, OrganDwarfAppearance ]
+  id: OrganDwarfTorso
+  components:
+  # it doesnt use a base dwarf external prototype :)
+  - &woundable_visuals
+    type: WoundableVisuals
+    displacement: Dwarfism
+
+- type: entity
+  id: OrganDwarfHead
+  components:
+  - *woundable_visuals
+
+- type: entity
+  id: OrganDwarfArmLeft
+  components:
+  - *woundable_visuals
+
+- type: entity
+  id: OrganDwarfArmRight
+  components:
+  - *woundable_visuals
+
+- type: entity
+  id: OrganDwarfHandRight
+  components:
+  - *woundable_visuals
+
+- type: entity
+  id: OrganDwarfHandLeft
+  components:
+  - *woundable_visuals
+
+- type: entity
+  id: OrganDwarfLegLeft
+  components:
+  - *woundable_visuals
+
+- type: entity
+  id: OrganDwarfLegRight
+  components:
+  - *woundable_visuals
+
+- type: entity
+  id: OrganDwarfFootLeft
+  components:
+  - *woundable_visuals
+
+- type: entity
+  id: OrganDwarfFootRight
+  components:
+  - *woundable_visuals
+
+- type: entity
+  id: OrganDwarfEyes
+  components:
+  - type: StaticPrice
+    price: 3000
+
+- type: entity
+  id: OrganDwarfStomach
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganDwarfLiver
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganDwarfHeart
+  components:
+  - type: StaticPrice
+    price: 4000

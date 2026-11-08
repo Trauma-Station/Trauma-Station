@@ -1,0 +1,17 @@
+
+
+- type: entity
+  id: MobGingerbread
+  components:
+  - !Remove type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: _Shitmed/Mobs/Effects/brute_damage.rsi
+        color: "#896e55"
+      Burn:
+        sprite: Shitmed/Mobs/Effects/burn_damage.rsi
+
+- type: entity
+  id: OrganGingerbreadExternal
+  components:
+  - type: BodyPart

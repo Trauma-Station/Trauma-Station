@@ -40,18 +40,11 @@
       required: false
 
 - type: entity
-  parent: BaseSpeciesAppearanceOrganless # Trauma - skeletons have no internal organs
+  parent: BaseSpeciesAppearance
   id: AppearanceSkeletonPerson
   categories: [ HideSpawnMenu ]
   name: skeletonperson appearance
   components:
-  # <Trauma>
-  - type: AnimatedEmotesBlacklist
-    blacklist:
-    - Cry
-    - Blush
-    - Tongue
-  # </Trauma>
   - type: Inventory
     femaleDisplacements:
       jumpsuit:
@@ -82,44 +75,29 @@
   id: MobSkeletonPerson
   name: Urist McBones
   components:
-  # <Trauma>
-  - type: LanguageSpeaker # Einstein Engines - Language
-    speaks:
-    - TauCetiBasic
-    - Calcic
-    understands:
-    - TauCetiBasic
-    - Calcic
-  - type: SurgeryTarget
-    sepsisImmune: true
-  - type: Tag
-    tags:
-    - CanPilot
-    - FootstepSound
-    - DoorBumpOpener
-    - AnomalyHost
-    - Undead
-  - type: TypingIndicator
-    proto: skeleton
-  - type: FacehuggerImmune
-  # </Trauma>
   - type: Damageable
     damageModifierSet: Skeleton
   - type: Injurable
     damageContainer: BiologicalMetaphysical
-  #- type: DamageVisuals # Shitmed
-  #  damageOverlayGroups:
-  #    Brute:
-  #      sprite: _Shitmed/Mobs/Effects/brute_damage.rsi
-  #      color: "#555555AA"
-  #    Burn:
-  #      sprite: _Shitmed/Mobs/Effects/burn_damage.rsi
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: _Shitmed/Mobs/Effects/brute_damage.rsi
+        color: "#555555AA"
+      Burn:
+        sprite: _Shitmed/Mobs/Effects/burn_damage.rsi
   - type: MobThresholds
     thresholds:
       0: Alive
       100: Dead
   - type: TransferMindOnGib
-  # Trauma - removed Destructible
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:GibBehavior
   - type: SlowOnDamage
     speedModifierThresholds:
       60: 0.9
@@ -128,10 +106,6 @@
     speechVerb: Skeleton
   - type: ZombieImmune
   - type: Vocal
-    # <Trauma>
-    wilhelm: "/Audio/_Goobstation/Voice/badtothebone.ogg"
-    wilhelmProbability: 0.1
-    # </Trauma>
     emoteSounds: Skeleton
   - type: SkeletonAccent
   - type: Fixtures
@@ -150,7 +124,7 @@
     groups:
       Flammable: [ Touch ]
       Extinguish: [ Touch ]
-      Acidic: [ Touch, Ingestion ] # Trauma - added Ingestion
+      Acidic: [ Touch ]
     reactions:
     - reagents: [ Water, SpaceCleaner ]
       methods: [ Touch ]
@@ -223,26 +197,12 @@
   id: OrganSkeletonPerson
   abstract: true
   suffix: SkeletonPerson
-  # <Trauma>
-  components:
-  - type: Inorganic
-  # </Trauma>
 
 - type: entity
   parent: OrganSkeletonPerson
   id: OrganSkeletonPersonExternal
   abstract: true
   components:
-  # <Trauma>
-  - type: BodyPart
-  - type: Destructible
-    thresholds:
-    - trigger: !type:DamageTypeTrigger
-        damageType: Blunt
-        damage: 150 # ME FEMUR ACK ACK!
-      behaviors:
-      - !type:GibBehavior
-  # </Trauma>
   - type: Sprite
     sprite: Mobs/Species/Skeleton/parts.rsi
   - type: VisualOrgan
@@ -261,11 +221,6 @@
   parent: [ OrganBaseHead, OrganSkeletonPersonExternal ]
   id: OrganSkeletonPersonHead
   components:
-  # <Trauma>
-  - type: Construction
-    graph: SpiritCandle
-    node: start
-  # </Trauma>
   - type: Sprite
     state: skull_icon
 

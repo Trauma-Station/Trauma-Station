@@ -1,0 +1,107 @@
+- type: markingsGroup
+  parent: Undergarments
+  id: Arachnid
+  onlyGroupWhitelisted: true
+  limits: !Clear
+    enum.HumanoidVisualLayers.Hair:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.FacialHair:
+      limit: 0
+      required: false
+    enum.HumanoidVisualLayers.Wings: # was Tail
+      limit: 1
+      required: true
+      default: [ ArachnidAppendagesDefault ]
+    enum.HumanoidVisualLayers.Chest:
+      limit: 2
+      required: false
+    enum.HumanoidVisualLayers.HeadSide:
+      limit: 1
+      required: true
+      default: [ ArachnidCheliceraeDownwards ]
+    enum.HumanoidVisualLayers.LArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RArm:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.LLeg:
+      limit: 1
+      required: false
+    enum.HumanoidVisualLayers.RLeg:
+      limit: 1
+      required: false
+
+- type: entity
+  id: AppearanceArachnid
+  components:
+  - type: InitialBody
+    organs:
+      Wings: OrganArachnidAppendages
+
+- type: entity
+  id: MobArachnid
+  components:
+  - type: Butcherable
+    spawned:
+    - id: MaterialBones1 # Trauma - Bones on butchering humanoids
+      amount: 3
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: CopperBlood
+        Quantity: 300 # was
+  - !Remove type: DamageVisuals
+
+- type: entity
+  parent: !Clear [ OrganBaseTorsoWinged, OrganArachnidExternal ] # Winged torso (appendages count as wings for simplicity)
+  id: OrganArachnidTorso
+
+- type: entity
+  parent: [ OrganBaseHeadBald, OrganArachnidExternal ] # bald
+  id: OrganArachnidHead
+
+- type: entity
+  id: OrganArachnidEyes
+  components:
+  - type: ViewconeModifier
+    angleModifier: 1.25 # 8 eyes are better than 2
+  - type: StaticPrice
+    price: 3000
+
+- type: entity
+  id: OrganArachnidTongue
+  components:
+  - type: StaticPrice
+    price: 1000
+
+- type: entity
+  id: OrganArachnidLungs
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganArachnidHeart
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganArachnidStomach
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganArachnidLiver
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganArachnidKidneys
+  components:
+  - type: StaticPrice
+    price: 2000

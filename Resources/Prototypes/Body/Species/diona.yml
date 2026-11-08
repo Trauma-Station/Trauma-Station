@@ -87,15 +87,13 @@
         prototype: DionaThirst
   - type: Damageable
     damageModifierSet: Diona
-  # <Trauma>
-  #- type: DamageVisuals
-  #  damageOverlayGroups:
-  #    Brute:
-  #      sprite: Mobs/Effects/brute_damage.rsi
-  #      color: "#cd7314"
-  #    Burn:
-  #      sprite: Mobs/Effects/burn_damage.rsi
-  # </Trauma>
+  - type: DamageVisuals
+    damageOverlayGroups:
+      Brute:
+        sprite: Mobs/Effects/brute_damage.rsi
+        color: "#cd7314"
+      Burn:
+        sprite: Mobs/Effects/burn_damage.rsi
   - type: Butcherable
     spawned:
       - id: FoodMeatPlant
@@ -104,7 +102,7 @@
     bloodReferenceSolution:
       reagents:
       - ReagentId: Sap
-        Quantity: 300 # Trauma, was 600
+        Quantity: 600
   - type: Reactive
     groups:
       Flammable: [ Touch ]
@@ -217,7 +215,7 @@
   id: OrganDionaTorso
 
 - type: entity
-  parent: [ OrganBaseHeadBald, OrganDionaExternal ] # Trauma - bald trees
+  parent: [ OrganBaseHead, OrganDionaExternal ]
   id: OrganDionaHead
 
 - type: entity
@@ -288,7 +286,7 @@
   - type: Nymph
     blacklist:
       components:
-      - ChangelingIdentity # Trauma - was ChangelingTransform, that doesnt exist here
+      - ChangelingTransform
 
 - type: entity
   parent: [ OrganDionaBrain, BaseNymphingOrgan ]
@@ -321,18 +319,16 @@
   suffix: brain
   components:
   - type: IsDeadIC
-  - type: InitialBody # Shitmed - replaced container fill
-    organs:
-      # <Shitmed> - evil nymph surgery
-      Head: OrganDionaHead
-      Torso: OrganDionaTorso
-      # </Shitmed>
-      Brain: OrganDionaBrain
-      Lungs: OrganAnimalLungs
-      Stomach: OrganAnimalStomach
-      Liver: OrganAnimalLiver
-      Heart: OrganAnimalHeart
-      Kidneys: OrganAnimalKidneys
+  - type: EntityTableContainerFill
+    containers:
+      body_organs: !type:AllSelector
+        children:
+        - id: OrganDionaBrain
+        - id: OrganAnimalLungs
+        - id: OrganAnimalStomach
+        - id: OrganAnimalLiver
+        - id: OrganAnimalHeart
+        - id: OrganAnimalKidneys
 
 - type: entity
   parent: MobDionaNymph
@@ -340,11 +336,8 @@
   suffix: stomach
   components:
   - type: IsDeadIC
-  - type: InitialBody # Shitmed - replaced container fill
+  - type: EntityTableContainerFill
     organs:
-      # <Shitmed> - evil nymph surgery
-      Torso: OrganDionaTorso
-      # </Shitmed>
       Lungs: OrganDionaLungs
       Stomach: OrganAnimalStomach
       Liver: OrganAnimalLiver
@@ -357,11 +350,8 @@
   suffix: lungs
   components:
   - type: IsDeadIC
-  - type: InitialBody # Shitmed - replaced container fill
+  - type: EntityTableContainerFill
     organs:
-      # <Shitmed> - evil nymph surgery
-      Torso: OrganDionaTorso
-      # </Shitmed>
       Lungs: OrganAnimalLungs
       Stomach: OrganDionaStomach
       Liver: OrganAnimalLiver
