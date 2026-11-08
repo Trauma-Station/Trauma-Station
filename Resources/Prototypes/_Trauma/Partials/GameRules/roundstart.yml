@@ -1,0 +1,6 @@
+- type: entity
+  id: Revolutionary
+  components:
+  - type: MindshieldRemovingAntag # puts fake mindshields into headrevs that start with a real one
+  - type: GameRule
+    minPlayers: 30
