@@ -1,0 +1,1215 @@
+# Abductor
+
+- type: entity
+  parent: SalvageAbductorCorpse
+  id: MobRandomServiceAbductorCorpse
+  suffix: Dead, Service
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutService
+
+- type: entity
+  parent: SalvageAbductorCorpse
+  id: MobRandomEngineerAbductorCorpse
+  suffix: Dead, Engineer
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutEngineering
+
+- type: entity
+  parent: SalvageAbductorCorpse
+  id: MobRandomGearedAbductorCorpse
+  suffix: Dead, Geared
+  components:
+  - type: WeightedLoadout
+    weights:
+      AbductorGear: 1
+      AbductorGearPistol: 0.5
+      AbductorGearScientist: 0.8
+      AbductorGearAgent: 0.8
+
+- type: entity
+  parent: SalvageAbductorCorpse
+  id: MobRandomCargoAbductorCorpse
+  suffix: Dead, Cargo
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCargo
+
+- type: entity
+  parent: SalvageAbductorCorpse
+  id: MobRandomMedicAbductorCorpse
+  suffix: Dead, Medic
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMedical
+
+- type: entity
+  parent: SalvageAbductorCorpse
+  id: MobRandomScienceAbductorCorpse
+  suffix: Dead, Science
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutScience
+
+- type: entity
+  parent: SalvageAbductorCorpse
+  id: MobRandomSecurityAbductorCorpse
+  suffix: Dead, Security
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSecurity
+
+- type: entity
+  parent: SalvageAbductorCorpse
+  id: MobRandomCommandAbductorCorpse
+  suffix: Dead, Command
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCommand
+
+- type: entity
+  parent: SalvageAbductorCorpse
+  id: MobRandomCivilianAbductorCorpse
+  suffix: Dead, Civilian
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCivilian
+
+- type: entity
+  parent: SalvageAbductorCorpse
+  id: MobRandomMercenaryAbductorCorpse
+  suffix: Dead, Mercenary
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMercenary
+
+- type: entity
+  parent: SalvageAbductorCorpse
+  id: MobRandomPirateAbductorCorpse
+  suffix: Dead, Pirate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutPirate
+
+- type: entity
+  parent: SalvageAbductorCorpse
+  id: MobRandomSyndicateAbductorCorpse
+  suffix: Dead, Syndicate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSyndicate
+
+# Arachnid
+
+- type: entity
+  parent: SalvageArachnidCorpse
+  id: MobRandomServiceArachnidCorpse
+  suffix: Dead, Service
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutService
+
+- type: entity
+  parent: SalvageArachnidCorpse
+  id: MobRandomEngineerArachnidCorpse
+  suffix: Dead, Engineer
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutEngineering
+
+- type: entity
+  parent: SalvageArachnidCorpse
+  id: MobRandomCargoArachnidCorpse
+  suffix: Dead, Cargo
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCargo
+
+- type: entity
+  parent: SalvageArachnidCorpse
+  id: MobRandomMedicArachnidCorpse
+  suffix: Dead, Medic
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMedical
+
+- type: entity
+  parent: SalvageArachnidCorpse
+  id: MobRandomScienceArachnidCorpse
+  suffix: Dead, Science
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutScience
+
+- type: entity
+  parent: SalvageArachnidCorpse
+  id: MobRandomSecurityArachnidCorpse
+  suffix: Dead, Security
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSecurity
+
+- type: entity
+  parent: SalvageArachnidCorpse
+  id: MobRandomCommandArachnidCorpse
+  suffix: Dead, Command
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCommand
+
+- type: entity
+  parent: SalvageArachnidCorpse
+  id: MobRandomCivilianArachnidCorpse
+  suffix: Dead, Civilian
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCivilian
+
+- type: entity
+  parent: SalvageArachnidCorpse
+  id: MobRandomMercenaryArachnidCorpse
+  suffix: Dead, Mercenary
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMercenary
+
+- type: entity
+  parent: SalvageArachnidCorpse
+  id: MobRandomPirateArachnidCorpse
+  suffix: Dead, Pirate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutPirate
+
+- type: entity
+  parent: SalvageArachnidCorpse
+  id: MobRandomSyndicateArachnidCorpse
+  suffix: Dead, Syndicate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSyndicate
+
+# BananaMen
+
+- type: entity
+  parent: SalvageBananaMenCorpse
+  id: MobRandomServiceBananaMenCorpse
+  suffix: Dead, Service
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutService
+
+- type: entity
+  parent: SalvageBananaMenCorpse
+  id: MobRandomEngineerBananaMenCorpse
+  suffix: Dead, Engineer
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutEngineering
+
+- type: entity
+  parent: SalvageBananaMenCorpse
+  id: MobRandomCargoBananaMenCorpse
+  suffix: Dead, Cargo
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCargo
+
+- type: entity
+  parent: SalvageBananaMenCorpse
+  id: MobRandomMedicBananaMenCorpse
+  suffix: Dead, Medic
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMedical
+
+- type: entity
+  parent: SalvageBananaMenCorpse
+  id: MobRandomScienceBananaMenCorpse
+  suffix: Dead, Science
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutScience
+
+- type: entity
+  parent: SalvageBananaMenCorpse
+  id: MobRandomSecurityBananaMenCorpse
+  suffix: Dead, Security
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSecurity
+
+- type: entity
+  parent: SalvageBananaMenCorpse
+  id: MobRandomCommandBananaMenCorpse
+  suffix: Dead, Command
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCommand
+
+- type: entity
+  parent: SalvageBananaMenCorpse
+  id: MobRandomCivilianBananaMenCorpse
+  suffix: Dead, Civilian
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCivilian
+
+- type: entity
+  parent: SalvageBananaMenCorpse
+  id: MobRandomMercenaryBananaMenCorpse
+  suffix: Dead, Mercenary
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMercenary
+
+- type: entity
+  parent: SalvageBananaMenCorpse
+  id: MobRandomPirateBananaMenCorpse
+  suffix: Dead, Pirate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutPirate
+
+- type: entity
+  parent: SalvageBananaMenCorpse
+  id: MobRandomSyndicateBananaMenCorpse
+  suffix: Dead, Syndicate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSyndicate
+
+# Decapoid
+
+- type: entity
+  parent: SalvageDecapoidCorpse
+  id: MobRandomServiceDecapoidCorpse
+  suffix: Dead, Service
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutService
+
+- type: entity
+  parent: SalvageDecapoidCorpse
+  id: MobRandomEngineerDecapoidCorpse
+  suffix: Dead, Engineer
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutEngineering
+
+- type: entity
+  parent: SalvageDecapoidCorpse
+  id: MobRandomCargoDecapoidCorpse
+  suffix: Dead, Cargo
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCargo
+
+- type: entity
+  parent: SalvageDecapoidCorpse
+  id: MobRandomMedicDecapoidCorpse
+  suffix: Dead, Medic
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMedical
+
+- type: entity
+  parent: SalvageDecapoidCorpse
+  id: MobRandomScienceDecapoidCorpse
+  suffix: Dead, Science
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutScience
+
+- type: entity
+  parent: SalvageDecapoidCorpse
+  id: MobRandomSecurityDecapoidCorpse
+  suffix: Dead, Security
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSecurity
+
+- type: entity
+  parent: SalvageDecapoidCorpse
+  id: MobRandomCommandDecapoidCorpse
+  suffix: Dead, Command
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCommand
+
+- type: entity
+  parent: SalvageDecapoidCorpse
+  id: MobRandomCivilianDecapoidCorpse
+  suffix: Dead, Civilian
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCivilian
+
+- type: entity
+  parent: SalvageDecapoidCorpse
+  id: MobRandomMercenaryDecapoidCorpse
+  suffix: Dead, Mercenary
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMercenary
+
+- type: entity
+  parent: SalvageDecapoidCorpse
+  id: MobRandomPirateDecapoidCorpse
+  suffix: Dead, Pirate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutPirate
+
+- type: entity
+  parent: SalvageDecapoidCorpse
+  id: MobRandomSyndicateDecapoidCorpse
+  suffix: Dead, Syndicate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSyndicate
+
+# Diona
+
+- type: entity
+  parent: SalvageDionaCorpse
+  id: MobRandomServiceDionaCorpse
+  suffix: Dead, Service
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutService
+
+- type: entity
+  parent: SalvageDionaCorpse
+  id: MobRandomEngineerDionaCorpse
+  suffix: Dead, Engineer
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutEngineering
+
+- type: entity
+  parent: SalvageDionaCorpse
+  id: MobRandomCargoDionaCorpse
+  suffix: Dead, Cargo
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCargo
+
+- type: entity
+  parent: SalvageDionaCorpse
+  id: MobRandomMedicDionaCorpse
+  suffix: Dead, Medic
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMedical
+
+- type: entity
+  parent: SalvageDionaCorpse
+  id: MobRandomScienceDionaCorpse
+  suffix: Dead, Science
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutScience
+
+- type: entity
+  parent: SalvageDionaCorpse
+  id: MobRandomSecurityDionaCorpse
+  suffix: Dead, Security
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSecurity
+
+- type: entity
+  parent: SalvageDionaCorpse
+  id: MobRandomCommandDionaCorpse
+  suffix: Dead, Command
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCommand
+
+- type: entity
+  parent: SalvageDionaCorpse
+  id: MobRandomCivilianDionaCorpse
+  suffix: Dead, Civilian
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCivilian
+
+- type: entity
+  parent: SalvageDionaCorpse
+  id: MobRandomMercenaryDionaCorpse
+  suffix: Dead, Mercenary
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMercenary
+
+- type: entity
+  parent: SalvageDionaCorpse
+  id: MobRandomPirateDionaCorpse
+  suffix: Dead, Pirate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutPirate
+
+- type: entity
+  parent: SalvageDionaCorpse
+  id: MobRandomSyndicateDionaCorpse
+  suffix: Dead, Syndicate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSyndicate
+
+# Dwarf
+
+- type: entity
+  parent: SalvageDwarfCorpse
+  id: MobRandomServiceDwarfCorpse
+  suffix: Dead, Service
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutService
+
+- type: entity
+  parent: SalvageDwarfCorpse
+  id: MobRandomEngineerDwarfCorpse
+  suffix: Dead, Engineer
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutEngineering
+
+- type: entity
+  parent: SalvageDwarfCorpse
+  id: MobRandomCargoDwarfCorpse
+  suffix: Dead, Cargo
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCargo
+
+- type: entity
+  parent: SalvageDwarfCorpse
+  id: MobRandomMedicDwarfCorpse
+  suffix: Dead, Medic
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMedical
+
+- type: entity
+  parent: SalvageDwarfCorpse
+  id: MobRandomScienceDwarfCorpse
+  suffix: Dead, Science
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutScience
+
+- type: entity
+  parent: SalvageDwarfCorpse
+  id: MobRandomSecurityDwarfCorpse
+  suffix: Dead, Security
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSecurity
+
+- type: entity
+  parent: SalvageDwarfCorpse
+  id: MobRandomCommandDwarfCorpse
+  suffix: Dead, Command
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCommand
+
+- type: entity
+  parent: SalvageDwarfCorpse
+  id: MobRandomCivilianDwarfCorpse
+  suffix: Dead, Civilian
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCivilian
+
+- type: entity
+  parent: SalvageDwarfCorpse
+  id: MobRandomMercenaryDwarfCorpse
+  suffix: Dead, Mercenary
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMercenary
+
+- type: entity
+  parent: SalvageDwarfCorpse
+  id: MobRandomPirateDwarfCorpse
+  suffix: Dead, Pirate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutPirate
+
+- type: entity
+  parent: SalvageDwarfCorpse
+  id: MobRandomSyndicateDwarfCorpse
+  suffix: Dead, Syndicate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSyndicate
+
+# Human
+
+- type: entity
+  parent: SalvageHumanCorpse
+  id: MobRandomCivilianHumanCorpse
+  suffix: Dead, Civilian
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCivilian
+
+- type: entity
+  parent: SalvageHumanCorpse
+  id: MobRandomMercenaryHumanCorpse
+  suffix: Dead, Mercenary
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMercenary
+
+- type: entity
+  parent: SalvageHumanCorpse
+  id: MobRandomPirateHumanCorpse
+  suffix: Dead, Pirate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutPirate
+
+- type: entity
+  parent: SalvageHumanCorpse
+  id: MobRandomSyndicateHumanCorpse
+  suffix: Dead, Syndicate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSyndicate
+
+# IPC
+
+- type: entity
+  parent: SalvageIPCCorpse
+  id: MobRandomServiceIPCCorpse
+  suffix: Dead, Service
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutService
+
+- type: entity
+  parent: SalvageIPCCorpse
+  id: MobRandomEngineerIPCCorpse
+  suffix: Dead, Engineer
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutEngineering
+
+- type: entity
+  parent: SalvageIPCCorpse
+  id: MobRandomCargoIPCCorpse
+  suffix: Dead, Cargo
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCargo
+
+- type: entity
+  parent: SalvageIPCCorpse
+  id: MobRandomMedicIPCCorpse
+  suffix: Dead, Medic
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMedical
+
+- type: entity
+  parent: SalvageIPCCorpse
+  id: MobRandomScienceIPCCorpse
+  suffix: Dead, Science
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutScience
+
+- type: entity
+  parent: SalvageIPCCorpse
+  id: MobRandomSecurityIPCCorpse
+  suffix: Dead, Security
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSecurity
+
+- type: entity
+  parent: SalvageIPCCorpse
+  id: MobRandomCommandIPCCorpse
+  suffix: Dead, Command
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCommand
+
+- type: entity
+  parent: SalvageIPCCorpse
+  id: MobRandomCivilianIPCCorpse
+  suffix: Dead, Civilian
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCivilian
+
+- type: entity
+  parent: SalvageIPCCorpse
+  id: MobRandomMercenaryIPCCorpse
+  suffix: Dead, Mercenary
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMercenary
+
+- type: entity
+  parent: SalvageIPCCorpse
+  id: MobRandomPirateIPCCorpse
+  suffix: Dead, Pirate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutPirate
+
+- type: entity
+  parent: SalvageIPCCorpse
+  id: MobRandomSyndicateIPCCorpse
+  suffix: Dead, Syndicate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSyndicate
+
+# Moth
+
+- type: entity
+  parent: SalvageMothCorpse
+  id: MobRandomServiceMothCorpse
+  suffix: Dead, Service
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutService
+
+- type: entity
+  parent: SalvageMothCorpse
+  id: MobRandomEngineerMothCorpse
+  suffix: Dead, Engineer
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutEngineering
+
+- type: entity
+  parent: SalvageMothCorpse
+  id: MobRandomCargoMothCorpse
+  suffix: Dead, Cargo
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCargo
+
+- type: entity
+  parent: SalvageMothCorpse
+  id: MobRandomMedicMothCorpse
+  suffix: Dead, Medic
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMedical
+
+- type: entity
+  parent: SalvageMothCorpse
+  id: MobRandomScienceMothCorpse
+  suffix: Dead, Science
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutScience
+
+- type: entity
+  parent: SalvageMothCorpse
+  id: MobRandomSecurityMothCorpse
+  suffix: Dead, Security
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSecurity
+
+- type: entity
+  parent: SalvageMothCorpse
+  id: MobRandomCommandMothCorpse
+  suffix: Dead, Command
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCommand
+
+- type: entity
+  parent: SalvageMothCorpse
+  id: MobRandomCivilianMothCorpse
+  suffix: Dead, Civilian
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCivilian
+
+- type: entity
+  parent: SalvageMothCorpse
+  id: MobRandomMercenaryMothCorpse
+  suffix: Dead, Mercenary
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMercenary
+
+- type: entity
+  parent: SalvageMothCorpse
+  id: MobRandomPirateMothCorpse
+  suffix: Dead, Pirate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutPirate
+
+- type: entity
+  parent: SalvageMothCorpse
+  id: MobRandomSyndicateMothCorpse
+  suffix: Dead, Syndicate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSyndicate
+
+# Reptilian
+
+- type: entity
+  parent: SalvageReptilianCorpse
+  id: MobRandomServiceReptilianCorpse
+  suffix: Dead, Service
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutService
+
+- type: entity
+  parent: SalvageReptilianCorpse
+  id: MobRandomEngineerReptilianCorpse
+  suffix: Dead, Engineer
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutEngineering
+
+- type: entity
+  parent: SalvageReptilianCorpse
+  id: MobRandomCargoReptilianCorpse
+  suffix: Dead, Cargo
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCargo
+
+- type: entity
+  parent: SalvageReptilianCorpse
+  id: MobRandomMedicReptilianCorpse
+  suffix: Dead, Medic
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMedical
+
+- type: entity
+  parent: SalvageReptilianCorpse
+  id: MobRandomScienceReptilianCorpse
+  suffix: Dead, Science
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutScience
+
+- type: entity
+  parent: SalvageReptilianCorpse
+  id: MobRandomSecurityReptilianCorpse
+  suffix: Dead, Security
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSecurity
+
+- type: entity
+  parent: SalvageReptilianCorpse
+  id: MobRandomCommandReptilianCorpse
+  suffix: Dead, Command
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCommand
+
+- type: entity
+  parent: SalvageReptilianCorpse
+  id: MobRandomCivilianReptilianCorpse
+  suffix: Dead, Civilian
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCivilian
+
+- type: entity
+  parent: SalvageReptilianCorpse
+  id: MobRandomMercenaryReptilianCorpse
+  suffix: Dead, Mercenary
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMercenary
+
+- type: entity
+  parent: SalvageReptilianCorpse
+  id: MobRandomPirateReptilianCorpse
+  suffix: Dead, Pirate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutPirate
+
+- type: entity
+  parent: SalvageReptilianCorpse
+  id: MobRandomSyndicateReptilianCorpse
+  suffix: Dead, Syndicate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSyndicate
+
+# SkeletonPerson
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpse
+  id: MobRandomServiceSkeletonPersonCorpse
+  suffix: Dead, Service
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutService
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpse
+  id: MobRandomEngineerSkeletonPersonCorpse
+  suffix: Dead, Engineer
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutEngineering
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpse
+  id: MobRandomCargoSkeletonPersonCorpse
+  suffix: Dead, Cargo
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCargo
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpse
+  id: MobRandomMedicSkeletonPersonCorpse
+  suffix: Dead, Medic
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMedical
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpse
+  id: MobRandomScienceSkeletonPersonCorpse
+  suffix: Dead, Science
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutScience
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpse
+  id: MobRandomSecuritySkeletonPersonCorpse
+  suffix: Dead, Security
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSecurity
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpse
+  id: MobRandomCommandSkeletonPersonCorpse
+  suffix: Dead, Command
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCommand
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpse
+  id: MobRandomCivilianSkeletonPersonCorpse
+  suffix: Dead, Civilian
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCivilian
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpse
+  id: MobRandomMercenarySkeletonPersonCorpse
+  suffix: Dead, Mercenary
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMercenary
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpse
+  id: MobRandomPirateSkeletonPersonCorpse
+  suffix: Dead, Pirate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutPirate
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpse
+  id: MobRandomSyndicateSkeletonPersonCorpse
+  suffix: Dead, Syndicate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSyndicate
+
+# SlimePerson
+
+- type: entity
+  parent: SalvageSlimePersonCorpse
+  id: MobRandomServiceSlimePersonCorpse
+  suffix: Dead, Service
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutService
+
+- type: entity
+  parent: SalvageSlimePersonCorpse
+  id: MobRandomEngineerSlimePersonCorpse
+  suffix: Dead, Engineer
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutEngineering
+
+- type: entity
+  parent: SalvageSlimePersonCorpse
+  id: MobRandomCargoSlimePersonCorpse
+  suffix: Dead, Cargo
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCargo
+
+- type: entity
+  parent: SalvageSlimePersonCorpse
+  id: MobRandomMedicSlimePersonCorpse
+  suffix: Dead, Medic
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMedical
+
+- type: entity
+  parent: SalvageSlimePersonCorpse
+  id: MobRandomScienceSlimePersonCorpse
+  suffix: Dead, Science
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutScience
+
+- type: entity
+  parent: SalvageSlimePersonCorpse
+  id: MobRandomSecuritySlimePersonCorpse
+  suffix: Dead, Security
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSecurity
+
+- type: entity
+  parent: SalvageSlimePersonCorpse
+  id: MobRandomCommandSlimePersonCorpse
+  suffix: Dead, Command
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCommand
+
+- type: entity
+  parent: SalvageSlimePersonCorpse
+  id: MobRandomCivilianSlimePersonCorpse
+  suffix: Dead, Civilian
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCivilian
+
+- type: entity
+  parent: SalvageSlimePersonCorpse
+  id: MobRandomMercenarySlimePersonCorpse
+  suffix: Dead, Mercenary
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMercenary
+
+- type: entity
+  parent: SalvageSlimePersonCorpse
+  id: MobRandomPirateSlimePersonCorpse
+  suffix: Dead, Pirate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutPirate
+
+- type: entity
+  parent: SalvageSlimePersonCorpse
+  id: MobRandomSyndicateSlimePersonCorpse
+  suffix: Dead, Syndicate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSyndicate
+
+# Vox
+
+- type: entity
+  parent: SalvageVoxCorpse
+  id: MobRandomServiceVoxCorpse
+  suffix: Dead, Service
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutService
+
+- type: entity
+  parent: SalvageVoxCorpse
+  id: MobRandomEngineerVoxCorpse
+  suffix: Dead, Engineer
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutEngineering
+
+- type: entity
+  parent: SalvageVoxCorpse
+  id: MobRandomCargoVoxCorpse
+  suffix: Dead, Cargo
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCargo
+
+- type: entity
+  parent: SalvageVoxCorpse
+  id: MobRandomMedicVoxCorpse
+  suffix: Dead, Medic
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMedical
+
+- type: entity
+  parent: SalvageVoxCorpse
+  id: MobRandomScienceVoxCorpse
+  suffix: Dead, Science
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutScience
+
+- type: entity
+  parent: SalvageVoxCorpse
+  id: MobRandomSecurityVoxCorpse
+  suffix: Dead, Security
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSecurity
+
+- type: entity
+  parent: SalvageVoxCorpse
+  id: MobRandomCommandVoxCorpse
+  suffix: Dead, Command
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCommand
+
+- type: entity
+  parent: SalvageVoxCorpse
+  id: MobRandomCivilianVoxCorpse
+  suffix: Dead, Civilian
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCivilian
+
+- type: entity
+  parent: SalvageVoxCorpse
+  id: MobRandomMercenaryVoxCorpse
+  suffix: Dead, Mercenary
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMercenary
+
+- type: entity
+  parent: SalvageVoxCorpse
+  id: MobRandomPirateVoxCorpse
+  suffix: Dead, Pirate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutPirate
+
+- type: entity
+  parent: SalvageVoxCorpse
+  id: MobRandomSyndicateVoxCorpse
+  suffix: Dead, Syndicate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSyndicate
+
+# Vulpkanin
+
+- type: entity
+  parent: SalvageVulpkaninCorpse
+  id: MobRandomServiceVulpkaninCorpse
+  suffix: Dead, Service
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutService
+
+- type: entity
+  parent: SalvageVulpkaninCorpse
+  id: MobRandomEngineerVulpkaninCorpse
+  suffix: Dead, Engineer
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutEngineering
+
+- type: entity
+  parent: SalvageVulpkaninCorpse
+  id: MobRandomCargoVulpkaninCorpse
+  suffix: Dead, Cargo
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCargo
+
+- type: entity
+  parent: SalvageVulpkaninCorpse
+  id: MobRandomMedicVulpkaninCorpse
+  suffix: Dead, Medic
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMedical
+
+- type: entity
+  parent: SalvageVulpkaninCorpse
+  id: MobRandomScienceVulpkaninCorpse
+  suffix: Dead, Science
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutScience
+
+- type: entity
+  parent: SalvageVulpkaninCorpse
+  id: MobRandomSecurityVulpkaninCorpse
+  suffix: Dead, Security
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSecurity
+
+- type: entity
+  parent: SalvageVulpkaninCorpse
+  id: MobRandomCommandVulpkaninCorpse
+  suffix: Dead, Command
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCommand
+
+- type: entity
+  parent: SalvageVulpkaninCorpse
+  id: MobRandomCivilianVulpkaninCorpse
+  suffix: Dead, Civilian
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCivilian
+
+- type: entity
+  parent: SalvageVulpkaninCorpse
+  id: MobRandomMercenaryVulpkaninCorpse
+  suffix: Dead, Mercenary
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMercenary
+
+- type: entity
+  parent: SalvageVulpkaninCorpse
+  id: MobRandomPirateVulpkaninCorpse
+  suffix: Dead, Pirate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutPirate
+
+- type: entity
+  parent: SalvageVulpkaninCorpse
+  id: MobRandomSyndicateVulpkaninCorpse
+  suffix: Dead, Syndicate
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSyndicate

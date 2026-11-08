@@ -1,0 +1,27 @@
+- type: entity
+  id: RandomServiceCorpseSpawner
+  name: Random Service Human Corpse Spawner
+
+- type: entity
+  id: RandomEngineerCorpseSpawner
+  name: Random Engineer Human Corpse Spawner
+
+- type: entity
+  id: RandomCargoCorpseSpawner
+  name: Random Cargo Human Corpse Spawner
+
+- type: entity
+  id: RandomMedicCorpseSpawner
+  name: Random Medic Human Corpse Spawner
+
+- type: entity
+  id: RandomScienceCorpseSpawner
+  name: Random Science Human Corpse Spawner
+
+- type: entity
+  id: RandomSecurityCorpseSpawner
+  name: Random Security Human Corpse Spawner
+
+- type: entity
+  id: RandomCommandCorpseSpawner
+  name: Random Command Human Corpse Spawner

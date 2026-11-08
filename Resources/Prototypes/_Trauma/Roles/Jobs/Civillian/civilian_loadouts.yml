@@ -1,0 +1,200 @@
+- type: startingGear
+  id: PassengerBackpackBaseGear
+  equipment:
+    back: ClothingBackpack
+  storage:
+    back:
+    - FoodSnackBoritos
+    - BookRandomStory
+
+- type: startingGear
+  id: PassengerSatchelBaseGear
+  equipment:
+    back: ClothingBackpackSatchel
+  storage:
+    back:
+    - FoodSnackBoritos
+    - BookRandomStory
+
+- type: startingGear
+  id: CivilianToolboxBaseGear
+  inhand:
+  - WeaponMeleeToolboxRobust
+
+- type: startingGear
+  id: CivilianWhiskeyBaseGear
+  inhand:
+  - DrinkWhiskeyBottleFull
+
+- type: randomLoadout
+  id: RandomLoadoutCivilian
+  archetypes:
+    Arsonist:
+      weight: 0.8
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHelmetFire: 1}}
+        eyes: {chance: 0.2, items: {ClothingEyesGlassesCheapSunglasses: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitColorGrey: 3, ClothingUniformJumpsuitColorBlack: 1, ClothingUniformJumpsuitColorYellow: 1}}
+        outerClothing: {chance: 0.8, items: {ClothingOuterSuitAtmosFire: 1}}
+        back: {chance: 0.3, items: {ClothingBackpack: 1, ClothingBackpackDuffel: 1}}
+        shoes: {chance: 0.4, items: {ClothingShoesColorBlack: 1, ClothingShoesBootsWork: 1}}
+        belt: {items: {ClothingBeltUtility: 1}}
+        pocket1: {items: {Lighter: 1}}
+        pocket2: {chance: 0.4, items: {Welder: 1, CrowbarRed: 1, FlashlightLantern: 1}}
+        gloves: {chance: 0.7, items: {ClothingHandsGlovesColorYellowBudget: 1, ClothingHandsGlovesColorBlack: 1}}
+    Biker:
+      weight: 0.8
+      slots:
+        head: {items: {ClothingHeadBandSkull: 2, ClothingHeadBandBlack: 1, ClothingHeadBandRed: 1}}
+        eyes: {chance: 0.8, items: {ClothingEyesGlassesSunglasses: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitColorBlack: 1}}
+        outerClothing: {chance: 0.8, items: {ClothingOuterCoatGentle: 1}}
+        shoes: {items: {ClothingShoesBootsJackFilled: 1, ClothingShoesBootsJack: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltSuspendersBlack: 1}}
+        pocket1: {items: {SurvivalKnife: 1}}
+        pocket2: {chance: 0.4, items: {Lighter: 1, DrinkWhiskeyBottleFull: 1}}
+        gloves: {chance: 0.8, items: {ClothingHandsGlovesFingerless: 1}}
+    Boxer:
+      slots:
+        head: {chance: 0.15, items: {ClothingHeadPaperSack: 1}}
+        jumpsuit: {items: {ClothingUniformRandomShorts: 1}}
+        shoes: {chance: 0.6, items: {ClothingShoesColorBlack: 2, ClothingShoesColorWhite: 1, ClothingShoesColorRed: 1}}
+        pocket1: {chance: 0.2, items: {DrinkColaCan: 1}}
+        gloves: {items: {ClothingHandsGlovesBoxingBlue: 1, ClothingHandsGlovesBoxingRed: 1}}
+        ears: {chance: 0.3, items: {ClothingHeadsetService: 1}}
+    Cossack:
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatGreyFlatcap: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitCossack: 1}}
+        back: {chance: 0.7, items: {ClothingBackpack: 1, ClothingBackpackSatchelLeather: 1}}
+        shoes: {items: {ClothingShoesBootsSalvage: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltSuspendersBlack: 1}}
+        pocket1: {chance: 0.4, items: {SurvivalKnife: 1, DrinkWhiskeyBottleFull: 1}}
+        gloves: {chance: 0.3, items: {ClothingHandsGlovesLeather: 1}}
+    CowboyBrown:
+      slots:
+        head: {items: {ClothingHeadHatCowboyBrown: 1}}
+        eyes: {chance: 0.15, items: {ClothingEyesGlassesCheapSunglasses: 1}}
+        neck: {items: {ClothingNeckScarfStripedLightBlue: 1}}
+        jumpsuit: {items: {ClothingUniformRandomShirt: 1}}
+        shoes: {items: {ClothingShoesLeather: 2, ClothingShoesSnakeskinBoots: 1}}
+        belt: {chance: 0.4, items: {ClothingBeltSuspendersBlack: 1}}
+        pocket1: {items: {DrinkWhiskeyBottleFull: 1}}
+        pocket2: {chance: 0.3, items: {Lighter: 1, SurvivalKnife: 1}}
+        gloves: {chance: 0.5, items: {ClothingHandsGlovesLeather: 1}}
+    CowboyGunslinger:
+      weight: 0.4
+      slots:
+        head: {items: {ClothingHeadHatCowboyWhite: 1}}
+        eyes: {chance: 0.2, items: {ClothingEyesGlassesSunglasses: 1}}
+        jumpsuit: {items: {ClothingUniformRandomShirt: 1}}
+        shoes: {items: {ClothingShoesSnakeskinBoots: 1}}
+        belt: {items: {ClothingBeltSuspendersBlack: 1}}
+        pocket1: {items: {WeaponRevolverPython: 1}}
+        pocket2: {chance: 0.3, items: {WeaponRevolverPython: 1}}
+        gloves: {chance: 0.7, items: {ClothingHandsGlovesColorWhite: 1}}
+    CowboyPoncho:
+      weight: 0.3
+      slots:
+        head: {items: {ClothingHeadHatCowboyBrown: 2, ClothingHeadHatCowboyWhite: 1}}
+        neck: {chance: 0.3, items: {ClothingNeckScarfStripedLightBlue: 1}}
+        jumpsuit: {items: {ClothingUniformRandomShirt: 1}}
+        outerClothing: {items: {ClothingOuterPoncho: 1}}
+        shoes: {items: {ClothingShoesSnakeskinBoots: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltSuspendersBlack: 1}}
+        pocket1: {items: {WeaponRevolverPython: 1}}
+        pocket2: {chance: 0.5, items: {WeaponRevolverPython: 1}}
+        gloves: {chance: 0.3, items: {ClothingHandsGlovesLeather: 1}}
+    HighRoller:
+      weight: 0.5
+      slots:
+        head: {items: {ClothingHeadHatBeaverHat: 1}}
+        eyes: {chance: 0.3, items: {ClothingEyesGlassesSunglasses: 1}}
+        mask: {chance: 0.7, items: {CigarGold: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitLawyerPurple: 1}}
+        outerClothing: {items: {ClothingOuterCoatExpensive: 1}}
+        shoes: {items: {ClothingShoesSnakeskinBoots: 1}}
+        pocket1: {items: {SpaceCash500: 1}}
+        pocket2: {chance: 0.3, items: {Lighter: 1, LuxuryPen: 1}}
+        gloves: {chance: 0.7, items: {ClothingHandsGlovesColorWhite: 1}}
+    PassengerBackpack:
+      gear: PassengerBackpackBaseGear
+      slots:
+        head: {chance: 0.25, items: {ClothingHeadBandBlack: 1, ClothingHeadBandBlue: 1, ClothingHeadBandGreen: 1, ClothingHeadBandRed: 1, ClothingHeadHatGreyFlatcap: 1}}
+        eyes: {chance: 0.15, items: {ClothingEyesGlasses: 1, ClothingEyesGlassesCheapSunglasses: 1}}
+        neck: {chance: 0.1, items: {ClothingNeckScarfStripedLightBlue: 1, ClothingNeckScarfStripedGreen: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitColorGrey: 4, ClothingUniformJumpsuitColorBlack: 1, ClothingUniformJumpsuitColorYellow: 1, ClothingUniformJumpsuitColorPurple: 1, ClothingUniformJumpsuitColorTeal: 1, ClothingUniformRandomShirt: 2}}
+        shoes: {items: {ClothingShoesColorBlack: 4, ClothingShoesColorBrown: 1, ClothingShoesColorWhite: 1, ClothingShoesLeather: 1}}
+        pocket1: {chance: 0.3, items: {FoodSnackChips: 1, DrinkColaCan: 1, Lighter: 1}}
+        gloves: {chance: 0.1, items: {ClothingHandsGlovesColorBlack: 1}}
+        ears: &civilianHeadset {chance: 0.6, items: {ClothingHeadsetGrey: 1}}
+    PassengerSatchel:
+      gear: PassengerSatchelBaseGear
+      slots:
+        head: {chance: 0.25, items: {ClothingHeadBandBlack: 1, ClothingHeadBandBlue: 1, ClothingHeadBandGreen: 1, ClothingHeadBandRed: 1, ClothingHeadHatGreyFlatcap: 1}}
+        eyes: {chance: 0.15, items: {ClothingEyesGlasses: 1, ClothingEyesGlassesCheapSunglasses: 1}}
+        neck: {chance: 0.1, items: {ClothingNeckScarfStripedLightBlue: 1, ClothingNeckScarfStripedGreen: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitColorGrey: 4, ClothingUniformJumpsuitColorBlack: 1, ClothingUniformJumpsuitColorYellow: 1, ClothingUniformJumpsuitColorPurple: 1, ClothingUniformJumpsuitColorTeal: 1, ClothingUniformRandomShirt: 2}}
+        shoes: {items: {ClothingShoesColorBlack: 4, ClothingShoesColorBrown: 1, ClothingShoesColorWhite: 1, ClothingShoesLeather: 1}}
+        pocket1: {chance: 0.3, items: {FoodSnackChips: 1, DrinkColaCan: 1, Lighter: 1}}
+        gloves: {chance: 0.1, items: {ClothingHandsGlovesColorBlack: 1}}
+        ears: *civilianHeadset
+    Prisoner:
+      slots:
+        jumpsuit: {items: {ClothingUniformJumpsuitPrisoner: 1}}
+        shoes: {chance: 0.5, items: {ClothingShoesColorBlack: 1}}
+        pocket1: {items: {Zipties: 1}}
+        pocket2: {items: {CombatKnife: 1}}
+        gloves: {chance: 0.2, items: {ClothingHandsGlovesColorBlack: 1}}
+    Skub:
+      slots:
+        head: {chance: 0.7, items: {ClothingHeadHatSkub: 1}}
+        eyes: {chance: 0.2, items: {ClothingEyesGlassesCheapSunglasses: 1}}
+        jumpsuit: {items: {ClothingUniformRandomShirt: 1}}
+        outerClothing: {items: {ClothingOuterSkub: 1}}
+        back: {chance: 0.3, items: {ClothingBackpackDuffel: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 2, ClothingShoesColorBrown: 1}}
+        pocket1: {items: {Skub: 1}}
+        pocket2: {chance: 0.3, items: {FoodSnackChips: 1, DrinkColaCan: 1}}
+    Tourist:
+      slots:
+        head: {chance: 0.2, items: {ClothingHeadHatCowboyBrown: 1, ClothingHeadHatSombrero: 1}}
+        eyes: {items: {ClothingEyesGlassesCheapSunglasses: 1}}
+        jumpsuit: {items: {ClothingUniformRandomShirt: 1}}
+        back: {chance: 0.7, items: {ClothingBackpackDuffel: 1}}
+        shoes: {items: {ClothingShoesSandalsBrown: 1}}
+        pocket1: {items: {FoodSnackChips: 1}}
+        pocket2: {chance: 0.4, items: {DrinkColaCan: 1, BookRandomStory: 1}}
+        ears: *civilianHeadset
+    LimitedPassenger:
+      weight: 2
+      slots:
+        jumpsuit: {items: {ClothingUniformJumpsuitColorGrey: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 1}}
+    Drifter:
+      weight: 1
+      gear: CivilianWhiskeyBaseGear
+      slots:
+        head: {chance: 0.4, items: {ClothingHeadHatGreyFlatcap: 1, ClothingHeadBandBlack: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitColorGrey: 2, ClothingUniformRandomShirt: 1}}
+        outerClothing: {chance: 0.2, items: {ClothingOuterCoatGentle: 1}}
+        shoes: {chance: 0.5, items: {ClothingShoesColorBlack: 1, ClothingShoesColorBrown: 1}}
+        pocket1: {chance: 0.3, items: {Lighter: 1, FoodSnackChips: 1}}
+        gloves: {chance: 0.1, items: {ClothingHandsGlovesFingerless: 1}}
+        ears: {chance: 0.1, items: {ClothingHeadsetGrey: 1}}
+    DeathMatch:
+      weight: 0.2
+      gear: CivilianToolboxBaseGear
+      slots:
+        jumpsuit: {items: {ClothingUniformJumpsuitColorWhite: 1}}
+        shoes: {items: {ClothingShoesBootsJack: 1}}
+        gloves: {items: {ClothingHandsGlovesFingerless: 1}}
+        ears: {chance: 0.3, items: {ClothingHeadsetGrey: 1}}
+    AshWalker:
+      weight: 0.1
+      slots:
+        head: {chance: 0.6, items: {ClothingHeadHelmetBone: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitGladiator: 1}}
+        outerClothing: {chance: 0.6, items: {ClothingOuterArmorBone: 1}}
+        back: {chance: 0.8, items: {SpearBone: 1}}
+        shoes: {items: {ClothingShoesCult: 1}}

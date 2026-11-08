@@ -1,0 +1,174 @@
+- type: startingGear
+  id: CargoDrunkBaseGear
+  inhand:
+  - DrinkRumBottleFull
+
+- type: startingGear
+  id: CargoPizzaBaseGear
+  inhand:
+  - FoodBoxPizzaFilled
+  - KnifePlastic
+
+- type: startingGear
+  id: CargoBoritosBaseGear
+  inhand:
+  - FoodSnackBoritos
+
+- type: startingGear
+  id: SalvageShovelBaseGear
+  inhand:
+  - Shovel
+
+- type: startingGear
+  id: SalvagePKABaseGear
+  inhand:
+  - WeaponProtoKineticAccelerator
+
+- type: randomLoadout
+  id: RandomLoadoutCargo
+  archetypes:
+    CargoTech:
+      weight: 1.5
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatCargosoft: 1}}
+        eyes: {chance: 0.15, items: {ClothingEyesGlasses: 1, ClothingEyesGlassesCheapSunglasses: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitCargo: 1}}
+        outerClothing: {chance: 0.7, items: {ClothingOuterWinterCargo: 1}}
+        back: {chance: 0.7, items: {ClothingBackpackSatchelCargo: 2, ClothingBackpackDuffelCargo: 1}}
+        shoes: {items: {ClothingShoesBootsWinterCargo: 1, ClothingShoesColorBlack: 1, ClothingShoesColorBrown: 1}}
+        belt: {chance: 0.25, items: {ClothingBeltUtility: 1}}
+        pocket1: {chance: 0.5, items: {AppraisalTool: 1, FoodSnackChips: 1, DrinkColaCan: 1}}
+        pocket2: {chance: 0.2, items: {SurvivalKnife: 1, FlashlightLantern: 1}}
+        gloves: {chance: 0.3, items: {ClothingHandsGlovesColorBlack: 1, ClothingHandsGlovesLeather: 1}}
+        ears: &cargoHeadset {chance: 0.6, items: {ClothingHeadsetCargo: 1}}
+    CargoDrunk:
+      gear: CargoDrunkBaseGear
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatCargosoft: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitCargo: 1}}
+        outerClothing: {chance: 0.2, items: {ClothingOuterWinterCargo: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 1}}
+        pocket1: {items: {DrinkColaCan: 1}}
+        pocket2: {chance: 0.3, items: {Lighter: 1, FoodSnackChips: 1}}
+        ears: *cargoHeadset
+    CargoInsurgent:
+      weight: 0.6
+      slots:
+        head: {chance: 0.2, items: {ClothingHeadBandBlack: 1, ClothingHeadBandRed: 1}}
+        mask: {items: {ClothingMaskGas: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitCargo: 1}}
+        outerClothing: {chance: 0.2, items: {ClothingOuterVestHazard: 1}}
+        shoes: {chance: 0.5, items: {ClothingShoesColorBlack: 1}}
+        belt: {items: {ClothingBeltUtilityFilled: 1}}
+        pocket1: {items: {SurvivalKnife: 1}}
+        pocket2: {chance: 0.3, items: {CrowbarRed: 1, Welder: 1}}
+        gloves: {items: {ClothingHandsGlovesColorBlack: 1, ClothingHandsGlovesColorYellowBudget: 1}}
+        ears: {chance: 0.4, items: {ClothingHeadsetCargo: 1}}
+    CargoPizza:
+      gear: CargoPizzaBaseGear
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatCargosoft: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitCargo: 1}}
+        outerClothing: {chance: 0.5, items: {ClothingOuterWinterCargo: 1}}
+        back: {items: {ClothingBackpackDuffelCargo: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 1}}
+        pocket1: {items: {AppraisalTool: 1}}
+        pocket2: {chance: 0.3, items: {DrinkColaCan: 1, FoodSnackChips: 1}}
+        ears: {items: {ClothingHeadsetCargo: 1}}
+    CargoBoritos:
+      weight: 0.8
+      gear: CargoBoritosBaseGear
+      slots:
+        head: {chance: 0.7, items: {ClothingHeadHatCargosoft: 3, ClothingHeadHatCargosoftFlipped: 1}}
+        eyes: {chance: 0.1, items: {ClothingEyesGlasses: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitCargo: 1}}
+        back: {chance: 0.7, items: {ClothingBackpackCargo: 1, ClothingBackpackSatchelCargo: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 1}}
+        pocket1: {chance: 0.6, items: {AppraisalTool: 1}}
+        pocket2: {chance: 0.3, items: {DrinkColaCan: 1}}
+        ears: *cargoHeadset
+    CargoWinter:
+      weight: 0.7
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatCargosoft: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitCargo: 1}}
+        outerClothing: {items: {ClothingOuterWinterCargo: 1}}
+        back: {items: {ClothingBackpackDuffelCargo: 1}}
+        shoes: {items: {ClothingShoesBootsWinterCargo: 1}}
+        pocket1: {chance: 0.7, items: {AppraisalTool: 1}}
+        pocket2: {chance: 0.05, items: {SpaceCash500: 1}}
+        ears: *cargoHeadset
+    CargoMinimal:
+      weight: 1
+      slots:
+        head: {chance: 0.4, items: {ClothingHeadHatCargosoft: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitCargo: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 2, ClothingShoesColorBrown: 1}}
+        pocket1: {chance: 0.2, items: {FoodSnackChips: 1, DrinkColaCan: 1}}
+        ears: {chance: 0.2, items: {ClothingHeadsetCargo: 1}}
+    SalvageSpecialist:
+      slots:
+        head: {chance: 0.4, items: {ClothingHeadHatBrown: 1, ClothingHeadHatHardhatYellow: 1}}
+        eyes: {chance: 0.2, items: {ClothingEyesGlassesMeson: 1, ClothingEyesGlassesCheapSunglasses: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitSalvageSpecialist: 1}}
+        outerClothing: {chance: 0.2, items: {ClothingOuterVestHazard: 1}}
+        back: {items: {ClothingBackpackDuffelSalvage: 1, ClothingBackpackSalvage: 1}}
+        shoes: {items: {ClothingShoesBootsSalvage: 1}}
+        belt: {chance: 0.5, items: {ClothingBeltSalvageWebbing: 1}}
+        pocket1: {items: {SurvivalKnife: 3, HandheldGPSBasic: 1}}
+        pocket2: {chance: 0.15, items: {WeaponProtoKineticPistol: 1}}
+        gloves: {chance: 0.4, items: {ClothingHandsGlovesLeather: 1, ClothingHandsGlovesColorBlack: 1}}
+        ears: *cargoHeadset
+    SalvageShovel:
+      weight: 0.8
+      gear: SalvageShovelBaseGear
+      slots:
+        head: {chance: 0.4, items: {ClothingHeadHatBrown: 1, ClothingHeadHatHardhatYellow: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitSalvageSpecialist: 1}}
+        back: {items: {ClothingBackpackSalvage: 1}}
+        shoes: {items: {ClothingShoesBootsSalvage: 1}}
+        belt: {items: {ClothingBeltSalvageWebbing: 1}}
+        pocket1: {items: {HandheldGPSBasic: 1}}
+        pocket2: {chance: 0.4, items: {SurvivalKnife: 1, FlashlightLantern: 1}}
+        gloves: {chance: 0.4, items: {ClothingHandsGlovesLeather: 1}}
+        ears: *cargoHeadset
+    SalvagePKA:
+      weight: 0.3
+      gear: SalvagePKABaseGear
+      slots:
+        head: {chance: 0.4, items: {ClothingHeadHatBrown: 1, ClothingHeadHatHardhatYellow: 1}}
+        eyes: {chance: 0.3, items: {ClothingEyesGlassesMeson: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitSalvageSpecialist: 1}}
+        back: {items: {ClothingBackpackSalvage: 1}}
+        shoes: {items: {ClothingShoesBootsSalvage: 1}}
+        belt: {items: {ClothingBeltSalvageWebbing: 1}}
+        pocket1: {items: {HandheldGPSBasic: 1}}
+        pocket2: {chance: 0.4, items: {SurvivalKnife: 1}}
+        gloves: {chance: 0.4, items: {ClothingHandsGlovesLeather: 1}}
+        ears: {items: {ClothingHeadsetCargo: 1}}
+    SalvageFlatcap:
+      weight: 0.8
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatBrownFlatcap: 2, ClothingHeadHatCargosoftFlipped: 1}}
+        eyes: {chance: 0.15, items: {ClothingEyesGlassesMeson: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitSalvageSpecialist: 1}}
+        outerClothing: {chance: 0.5, items: {ClothingOuterWinterCargo: 1}}
+        back: {items: {ClothingBackpackDuffelSalvage: 1, ClothingBackpackSalvage: 1}}
+        shoes: {items: {ClothingShoesBootsSalvage: 1}}
+        belt: {chance: 0.6, items: {ClothingBeltSalvageWebbing: 1}}
+        pocket1: {chance: 0.7, items: {SurvivalKnife: 1}}
+        pocket2: {chance: 0.6, items: {HandheldGPSBasic: 1}}
+        gloves: {chance: 0.3, items: {ClothingHandsGlovesLeather: 1}}
+        ears: *cargoHeadset
+    SalvageSnack:
+      weight: 0.6
+      gear: CargoBoritosBaseGear
+      slots:
+        head: {chance: 0.5, items: {ClothingHeadHatCargosoftFlipped: 1, ClothingHeadHatHardhatYellow: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitSalvageSpecialist: 1}}
+        back: {items: {ClothingBackpackSalvage: 1}}
+        shoes: {items: {ClothingShoesBootsSalvage: 1}}
+        belt: {chance: 0.7, items: {ClothingBeltSalvageWebbing: 1}}
+        pocket1: {items: {SurvivalKnife: 1}}
+        pocket2: {items: {HandheldGPSBasic: 1}}
+        ears: *cargoHeadset
