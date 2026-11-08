@@ -49,5 +49,4 @@
     - shoes
     - hands
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHelmetCsij
+    clothingPrototype: ClothingHeadHelmetCsij

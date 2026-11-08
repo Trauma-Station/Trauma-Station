@@ -15,7 +15,7 @@
   name: Corporate modsuit control unit
   description: The main controller for a Corporate modsuit.
   components:
-  - type: ToggleableClothing
+  - type: MultiToggleableClothing
     clothingPrototypes:
       head: ClothingModsuitHelmetCorporate
       gloves: ClothingModsuitGauntletsCorporate

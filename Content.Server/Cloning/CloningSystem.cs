@@ -1,14 +1,9 @@
 // <Trauma>
-using Content.Goobstation.Common.Cloning;
-using Content.Goobstation.Shared.Clothing.Components;
-using Content.Goobstation.Shared.Clothing.Systems;
-using Content.Shared.Clothing.Components;
-using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Interaction.Components;
 using Content.Shared.Humanoid.Prototypes;
 using Content.Shared.Radio.Components;
 using Content.Shared.Radio.EntitySystems;
-using Robust.Shared.Utility;
+using Content.Trauma.Common.Cloning;
 // </Trauma>
 using Content.Shared.Administration.Logs;
 using Content.Shared.Body;
@@ -39,11 +34,6 @@ namespace Content.Server.Cloning;
 /// </summary>
 public sealed partial class CloningSystem : SharedCloningSystem
 {
-    // <Trauma>
-    [Dependency] private ToggleableClothingSystem _toggleable = default!;
-    // TODO: decouple this shitcode
-    [Dependency] private SealableClothingSystem _sealable = default!;
-    // </Trauma>
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private MetaDataSystem _metaData = default!;
     [Dependency] private EntityWhitelistSystem _whitelist = default!;
@@ -234,7 +224,7 @@ public sealed partial class CloningSystem : SharedCloningSystem
         {
             var cloneItem = CopyItem(item, coords, whitelist, blacklist, copyStorage); // Trauma - pass copyStorage
 
-            // Goob edit start
+            // <Trauma>
             if (cloneItem == null)
                 continue;
 
@@ -247,65 +237,9 @@ public sealed partial class CloningSystem : SharedCloningSystem
             if (makeUnremoveable)
                 EnsureComp<UnremoveableComponent>(cloneItem.Value);
 
-            if (internalContentsUnremoveable && TryComp(cloneItem.Value, out ContainerManagerComponent? manager))
-            {
-                foreach (var container in manager.Containers.Values)
-                {
-                    foreach (var contained in container.ContainedEntities)
-                    {
-                        if (!HasComp<AttachedClothingComponent>(contained))
-                            EnsureComp<UnremoveableComponent>(contained);
-                    }
-                }
-            }
-
-            if (!TryComp(item, out ToggleableClothingComponent? toggleable) || toggleable.ClothingUids.Count == 0 ||
-                !TryComp(cloneItem.Value, out ToggleableClothingComponent? clonedToggleable))
-                continue;
-
-            var allEquipped = true;
-            List<EntityUid> equipped = new();
-            foreach (var (clothing, toggleSlot) in toggleable.ClothingUids)
-            {
-                if (!_toggleable.IsToggled((item, toggleable), clothing))
-                {
-                    allEquipped = false;
-                    continue;
-                }
-
-                if (clonedToggleable.ClothingUids.FirstOrNull(kvp => kvp.Value == toggleSlot) is not
-                    { } newClothing)
-                {
-                    allEquipped = false;
-                    continue;
-                }
-
-                if (_toggleable.EquipClothing(clone.Owner,
-                        (cloneItem.Value, clonedToggleable),
-                        newClothing.Key,
-                        newClothing.Value,
-                        true))
-                    equipped.Add(newClothing.Key);
-            }
-
-            if (!allEquipped || !TryComp(item, out SealableClothingControlComponent? sealable) ||
-                !sealable.IsCurrentlySealed ||
-                !TryComp(cloneItem.Value, out SealableClothingControlComponent? clonedSealable))
-                continue;
-
-            var success = true;
-            foreach (var toSeal in equipped)
-            {
-                if (!_sealable.SealPart(toSeal, (cloneItem.Value, clonedSealable), true))
-                {
-                    success = false;
-                    break;
-                }
-            }
-
-            if (success)
-                _sealable.EndSealProcess((cloneItem.Value, clonedSealable), true);
-            // Goob edit end
+            var ev = new EquipmentCopiedEvent(item, original, clone, internalContentsUnremoveable);
+            RaiseLocalEvent(cloneItem.Value, ref ev);
+            // </Trauma>
         }
     }
 

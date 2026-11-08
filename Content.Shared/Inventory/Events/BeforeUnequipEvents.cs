@@ -1,6 +1,7 @@
 namespace Content.Shared.Inventory.Events;
 
-public abstract class BeforeUnequipEventBase(EntityUid user, EntityUid equipTarget, EntityUid equipment, SlotDefinition slotDefinition) : EntityEventArgs
+public abstract partial class BeforeUnequipEventBase(EntityUid user, EntityUid equipTarget, EntityUid equipment, SlotDefinition slotDefinition,
+    bool force = false) : CancellableEntityEventArgs // Trauma - made partial added force, EntityEventArgs -> CancellableEntityEventArgs
 {
     /// <summary>
     /// The entity performing the action.
@@ -39,12 +40,16 @@ public abstract class BeforeUnequipEventBase(EntityUid user, EntityUid equipTarg
 /// Raised directed on an equipee before something is unequipped from them.
 /// Note: This is only raised when enequipped using TryUnequip, not if the container is directly modified or the item is deleted.
 /// </summary>
-public sealed class BeforeUnequipEvent(EntityUid user, EntityUid equipTarget, EntityUid equipment, SlotDefinition slotDefinition)
-    : BeforeUnequipEventBase(user, equipTarget, equipment, slotDefinition);
+public sealed class BeforeUnequipEvent(EntityUid user, EntityUid equipTarget, EntityUid equipment, SlotDefinition slotDefinition,
+    bool force = false) // Trauma
+    : BeforeUnequipEventBase(user, equipTarget, equipment, slotDefinition,
+        force); // Trauma
 
 /// <summary>
 /// Raised directed on equipment before it is unequipped from an equipee.
 /// Note: This is only raised when enequipped using TryUnequip, not if the container is directly modified or the item is deleted.
 /// </summary>
-public sealed class BeforeGettingUnequippedEvent(EntityUid user, EntityUid equipTarget, EntityUid equipment, SlotDefinition slotDefinition)
-    : BeforeUnequipEventBase(user, equipTarget, equipment, slotDefinition);
+public sealed class BeforeGettingUnequippedEvent(EntityUid user, EntityUid equipTarget, EntityUid equipment, SlotDefinition slotDefinition,
+    bool force = false) // Trauma
+    : BeforeUnequipEventBase(user, equipTarget, equipment, slotDefinition,
+        force); // Trauma

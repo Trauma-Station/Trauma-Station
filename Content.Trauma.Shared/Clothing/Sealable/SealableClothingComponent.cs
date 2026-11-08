@@ -1,22 +1,19 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Clothing.Systems;
 using Robust.Shared.Audio;
 
-namespace Content.Goobstation.Shared.Clothing.Components;
+namespace Content.Trauma.Shared.Clothing.Sealable;
 
 /// <summary>
-///     Defines the clothing entity that can be sealed by <see cref="SealableClothingControlComponent"/>
+/// Defines the clothing entity that can be sealed by <see cref="SealableClothingControlComponent"/>
 /// </summary>
-[RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SealableClothingSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SealableClothingComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public bool IsSealed = false;
+    public bool IsSealed;
 
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan SealingTime = TimeSpan.FromSeconds(0.5);
 
     [DataField]

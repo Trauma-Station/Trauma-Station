@@ -244,6 +244,18 @@ public sealed partial class SimpleRadialMenu : RadialMenu
             button.HoverBackgroundColor = model.HoverBackgroundColor.Value;
         }
 
+        // <Trauma>
+        if (model.BorderColor is { } borderColor)
+        {
+            button.BorderColor = borderColor;
+        }
+
+        if (model.HoverBorderColor is { } hoverBorderColor)
+        {
+            button.HoverBorderColor = hoverBorderColor;
+        }
+        // </Trauma>
+
         return button;
     }
 
@@ -347,7 +359,7 @@ public sealed record RadialMenuTextureIconSpecifier(SpriteSpecifier Sprite) : Ra
 public sealed record RadialMenuEntityPrototypeIconSpecifier(EntProtoId ProtoId) : RadialMenuIconSpecifier;
 
 /// <summary> Container for common options for radial menu button. </summary>
-public abstract class RadialMenuOptionBase
+public abstract partial class RadialMenuOptionBase // Trauma - made partial
 {
     /// <summary>
     /// Tooltip to be displayed when button is hovered.
@@ -377,12 +389,6 @@ public abstract class RadialMenuOptionBase
     /// Specifier that describes icon to be used for radial menu button.
     /// </summary>
     public RadialMenuIconSpecifier? IconSpecifier { get; set; }
-
-    /// <summary>
-    /// Trauma - Color modulation for the icon.
-    /// Does nothing if <see cref="IconSpecifier"/> is null.
-    /// </summary>
-    public Color Color = Color.White;
 }
 
 /// <summary> Base type for model of radial menu button with some action on button pressed. </summary>

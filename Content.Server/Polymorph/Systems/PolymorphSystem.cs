@@ -1,5 +1,4 @@
 // <Trauma>
-using Content.Shared.Inventory;
 using Content.Shared.NameModifier.Components;
 using Content.Shared.Polymorph.Systems;
 using Content.Shared.Random.Helpers;
@@ -283,38 +282,22 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
 
         if (configuration.Inventory == PolymorphInventoryChange.Transfer)
         {
-            // Goob edit start
-            if (TryComp(uid, out InventoryComponent? inventory1))
+            // <Trauma>
+            TransferInventoryBehavior(uid, child);
+            /*
+            _inventory.TransferEntityInventories(uid, child);
+            foreach (var hand in _hands.EnumerateHeld(uid))
             {
-                if (TryComp(child, out InventoryComponent? inventory2))
-                {
-                    _inventory.TransferEntityInventories((uid, inventory1), (child, inventory2), false);
-                    foreach (var hand in _hands.EnumerateHeld(uid))
-                    {
-                        _hands.TryDrop(uid, hand, checkActionBlocker: false);
-                        _hands.TryPickupAnyHand(child, hand);
-                    }
-                }
-                else
-                {
-                    if (_inventory.TryGetContainerSlotEnumerator((uid, inventory1), out var enumerator))
-                    {
-                        while (enumerator.MoveNext(out var slot))
-                        {
-                            _inventory.TryUnequip(uid, slot.ID, true, true);
-                        }
-                    }
-
-                    foreach (var held in _hands.EnumerateHeld(uid))
-                    {
-                        _hands.TryDrop(uid, held);
-                    }
-                }
+                _hands.TryDrop(uid, hand, checkActionBlocker: false);
+                _hands.TryPickupAnyHand(child, hand);
             }
-            // Goob edit end
+            </Trauma> */
         }
         else if (configuration.Inventory == PolymorphInventoryChange.Drop)
         {
+            // <Trauma>
+            DropInventoryBehavior(uid);
+            /*
             if (_inventory.TryGetContainerSlotEnumerator(uid, out var enumerator))
             {
                 while (enumerator.MoveNext(out var slot))
@@ -327,6 +310,7 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
             {
                 _hands.TryDrop(uid, held);
             }
+            </Trauma> */
         }
 
         if (configuration.TransferName && TryComp(uid, out MetaDataComponent? targetMeta))
@@ -463,15 +447,22 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
 
         if (component.Configuration.Inventory == PolymorphInventoryChange.Transfer)
         {
+            // <Trauma>
+            TransferInventoryBehavior(uid, parent);
+            /*
             _inventory.TransferEntityInventories(uid, parent);
             foreach (var held in _hands.EnumerateHeld(uid))
             {
                 _hands.TryDrop(uid, held);
                 _hands.TryPickupAnyHand(parent, held, checkActionBlocker: false);
             }
+            </Trauma> */
         }
         else
         {
+            // <Trauma>
+            DropInventoryBehavior(uid);
+            /*
             if (_inventory.TryGetContainerSlotEnumerator(uid, out var enumerator))
             {
                 while (enumerator.MoveNext(out var slot))
@@ -484,6 +475,7 @@ public sealed partial class PolymorphSystem : SharedPolymorphSystem // Trauma - 
             {
                 _hands.TryDrop(uid, held);
             }
+            </Trauma> */
         }
 
         // <Trauma>

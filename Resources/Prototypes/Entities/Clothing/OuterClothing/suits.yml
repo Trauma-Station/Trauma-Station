@@ -158,8 +158,7 @@
     sprite: Clothing/OuterClothing/Suits/rad.rsi
   - type: GroupExamine
   - type: ToggleableClothing
-    clothingPrototypes: # Trauma - changed to dictionary for modsuits
-      head: ClothingHeadHatHoodRad
+    clothingPrototype: ClothingHeadHatHoodRad
     verbText: toggle-clothing-verb-hood
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
@@ -291,7 +290,7 @@
     sprite: Clothing/OuterClothing/Suits/monkey.rsi
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container {}
+      toggleable-clothing: !type:ContainerSlot {}
   - type: ProtectedFromStepTriggers
     slots: WITHOUT_POCKET
   - type: HideClothingLayerClothing # Goobstation
@@ -310,9 +309,8 @@
     size: Normal
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/iansuit.rsi
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
-      head: ClothingHeadHatHoodIan
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodIan
     verbText: toggle-clothing-verb-hood
   - type: Construction
     graph: ClothingOuterSuitIan
@@ -344,9 +342,8 @@
     sprite: Clothing/OuterClothing/Suits/carpsuit.rsi
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/carpsuit.rsi
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
-      head: ClothingHeadHatHoodCarp
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodCarp
     verbText: toggle-clothing-verb-hood
   - type: HideLayerClothing
     slots:
@@ -361,9 +358,8 @@
   - type: PressureProtection
     highPressureMultiplier: 0.6
     lowPressureMultiplier: 1000
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitCarp
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitCarp
   - type: HideClothingLayerClothing # Goobstation
     hiddenSlots:
     - jumpsuit

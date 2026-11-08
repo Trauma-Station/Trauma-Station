@@ -38,10 +38,10 @@
     reduction: 0.88
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container {}
+      toggleable-clothing: !type:ContainerSlot
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: LavalandEquipmentAncientArmorHood
+    clothingPrototype: LavalandEquipmentAncientArmorHood
+    slot: head
   - type: PressureArmorChange
   - type: PressureEfficiency
 

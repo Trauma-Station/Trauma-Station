@@ -1,69 +1,44 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Goobstation.Shared.Clothing.Systems;
-using Content.Shared.Inventory;
 using Robust.Shared.Audio;
 
-namespace Content.Goobstation.Shared.Clothing.Components;
+namespace Content.Trauma.Shared.Clothing.Sealable;
 
 /// <summary>
-///     Component used to designate contol of sealable clothing. It'll contain action to seal clothing.
+/// Component used to designate contol of sealable clothing. It'll contain action to seal clothing.
 /// </summary>
-[RegisterComponent]
-[NetworkedComponent, AutoGenerateComponentState]
-[Access(typeof(SealableClothingSystem))]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class SealableClothingControlComponent : Component
 {
     /// <summary>
-    ///     Action that used to start sealing
+    /// True if clothing in sealing/unsealing process, false if not
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntProtoId SealAction = "ActionClothingSeal";
-
-    [DataField, AutoNetworkedField]
-    public EntityUid? SealActionEntity;
-
-    /// <summary>
-    ///     Slot required for control to show action
-    /// </summary>
-    [DataField("requiredSlot"), AutoNetworkedField]
-    public SlotFlags RequiredControlSlot = SlotFlags.BACK;
-
-    /// <summary>
-    ///     True if clothing in sealing/unsealing process, false if not
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public bool IsInProcess = false;
+    [ViewVariables]
+    public bool IsInProcess => ProcessQueue.Count > 0;
 
     /// <summary>
     ///     True if clothing is currently sealed and need to start unsealing process. False if opposite.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool IsCurrentlySealed = false;
+    public bool IsCurrentlySealed;
 
     /// <summary>
-    ///     Queue of attached parts that should be sealed/unsealed
+    /// Queue of attached parts that should be sealed/unsealed
     /// </summary>
     [DataField, AutoNetworkedField]
     public Queue<NetEntity> ProcessQueue = new();
 
     /// <summary>
-    ///     Uid of entity that currently wear seal control
+    /// Doafter time for other players to start sealing via stripping menu
     /// </summary>
-    [DataField, AutoNetworkedField]
-    public EntityUid? WearerEntity;
-
-    /// <summary>
-    ///     Doafter time for other players to start sealing via stripping menu
-    /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField]
     public TimeSpan NonWearerSealingTime = TimeSpan.FromSeconds(2);
 
     /// <summary>
-    ///     if true; after ClothingControlSealCompleteEvent it will unToggle the control
+    /// if true; after ClothingControlSealCompleteEvent it will unToggle the control
     /// </summary>
     [DataField, AutoNetworkedField]
-    public bool UnequipAfterUnseal = false;
+    public bool UnequipAfterUnseal;
 
     #region Popups & Sounds
 
@@ -99,5 +74,6 @@ public sealed partial class SealableClothingControlComponent : Component
 
     [DataField]
     public SoundSpecifier GenericSuitWarning = new SoundPathSpecifier("/Audio/_Goobstation/Machines/MaxTempAlertCut.wav");
+
     #endregion
 }
