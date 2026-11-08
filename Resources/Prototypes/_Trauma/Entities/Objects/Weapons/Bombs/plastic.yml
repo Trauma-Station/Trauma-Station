@@ -1,0 +1,19 @@
+- type: entity
+  parent: C4
+  id: C4Live
+  suffix: Live, 10s
+  components:
+  - type: AutoStartTimer
+  - type: GhostRole
+    prob: 0
+
+- type: entity
+  parent: C4
+  id: C4Instant
+  suffix: Instant
+  components:
+  - type: AutoStartTimer
+  - type: TimerTrigger
+    delay: 0
+  - type: GhostRole
+    prob: 0
