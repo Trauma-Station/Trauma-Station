@@ -2,6 +2,7 @@
 
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
+using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
 
@@ -12,18 +13,31 @@ public sealed partial class BatonDrainSystem : EntitySystem
     [Dependency] private ItemToggleSystem _toggle = default!;
     [Dependency] private SharedBatterySystem _battery = default!;
 
-    public override void Update(float periodicInterval)
+    private const float DrawRate = 5f;
+
+    public override void Initialize()
     {
-        var query = EntityQueryEnumerator<ItemToggleRequiresChargeComponent, BatteryComponent>();
-        while (query.MoveNext(out var uid, out _, out var battery))
-        {
-            if (!_toggle.IsActivated(uid))
-                continue;
+        base.Initialize();
 
-            _battery.UseCharge((uid, battery), 5f * periodicInterval);
+        SubscribeLocalEvent<ItemToggleRequiresChargeComponent, RefreshChargeRateEvent>(OnRefreshChargeRate);
+        SubscribeLocalEvent<ItemToggleRequiresChargeComponent, ItemToggledEvent>(OnToggled);
+        SubscribeLocalEvent<ItemToggleRequiresChargeComponent, BatteryStateChangedEvent>(OnBatteryStateChanged);
+    }
 
-            if (_battery.GetCharge((uid, battery)) <= 0)
-                _toggle.TryDeactivate(uid);
-        }
+    private void OnRefreshChargeRate(Entity<ItemToggleRequiresChargeComponent> ent, ref RefreshChargeRateEvent args)
+    {
+        if (_toggle.IsActivated(ent.Owner))
+            args.NewChargeRate -= DrawRate;
+    }
+
+    private void OnToggled(Entity<ItemToggleRequiresChargeComponent> ent, ref ItemToggledEvent args)
+    {
+        _battery.RefreshChargeRate(ent.Owner);
+    }
+
+    private void OnBatteryStateChanged(Entity<ItemToggleRequiresChargeComponent> ent, ref BatteryStateChangedEvent args)
+    {
+        if (args.NewState == BatteryState.Empty)
+            _toggle.TryDeactivate(ent.Owner);
     }
 }
