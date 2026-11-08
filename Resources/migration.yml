@@ -186,6 +186,11 @@ WallXenoResinThick: WallResin
 CrateEngineeringSingularityCollector: null
 RadiationCollector: null
 RadiationCollectorFlatpack: null
+
+# 2026-11-08
+Drone: null
+SpawnMobDrone: null
+
 # </Trauma>
 
 AirlockBoxerGlassLocked: AirlockServiceGlassLocked
