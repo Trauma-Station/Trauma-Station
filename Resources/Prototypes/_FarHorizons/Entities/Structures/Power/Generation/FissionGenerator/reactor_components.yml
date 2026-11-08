@@ -17,6 +17,7 @@
   - type: ReactorPart
   - type: AtmosExposed # removed while in a reactor
   - type: Temperature
+    heatCapacity: 15000
   - type: InternalTemperature
     conductance: 1000
   # glows when hot so you can tell if it will evaporate you
