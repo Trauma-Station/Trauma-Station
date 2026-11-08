@@ -238,7 +238,7 @@
   id: OrganMothTorso
 
 - type: entity
-  parent: [OrganMothExternal ]
+  parent: [ OrganBaseHead, OrganMothExternal ]
   id: OrganMothHead
   components:
   - type: VisualOrganMarkings
