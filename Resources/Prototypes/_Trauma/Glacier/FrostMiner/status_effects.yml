@@ -12,9 +12,9 @@
       angle: 90
       force: true
       type: Adjust
-  # Godmode so salvs don't abuse this
   - type: StatusEffectEffectsApply
     effectsOnApply:
+    # Godmode so salvs don't abuse this
     - !type:AddComponents
       components:
       - type: Godmode

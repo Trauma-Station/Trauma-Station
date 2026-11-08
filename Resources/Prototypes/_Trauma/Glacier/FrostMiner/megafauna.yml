@@ -55,7 +55,7 @@
     - id: ActionIceShotgunHard
       weight: 0.2
 
-# Action | Easy
+# Actions | Easy
 - type: megafaunaSelector
   id: ActionFrostOrbsEasy
   selector: !type:PerformActionSelector

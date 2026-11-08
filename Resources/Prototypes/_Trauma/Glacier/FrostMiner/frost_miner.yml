@@ -156,3 +156,16 @@
   - type: MegafaunaAnchor
   - type: MegafaunaGodmode
   - type: MegafaunaRejuvenate
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobDemonicFrostMiner
+  name: Demonic Frost Miner Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: ai
+  - type: ConditionalSpawner
+    prototypes:
+    - MobDemonicFrostMiner

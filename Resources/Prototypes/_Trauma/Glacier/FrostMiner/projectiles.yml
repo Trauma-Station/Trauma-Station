@@ -2,59 +2,54 @@
 
 - type: entity
   abstract: true
+  parent: BaseBullet
   id: ProjectileFrostMiner
   components:
+  - type: Sprite
+    sprite: _Trauma/Glacier/Entities/projectiles.rsi
   - type: PointLight
     color: Blue
     radius: 2.0
     energy: 5.0
-  - type: Physics
-  - type: Fixtures
-    fixtures:
-      projectile:
-        shape:
-          !type:PhysShapeAabb
-          bounds: "-0.1,-0.1,0.1,0.1"
-        hard: false
-        mask:
-        - BulletImpassable
+  - type: Projectile
+    ignoreResistances: true
+    soundHit:
+      collection: GlassBreak
 
 - type: entity
+  parent: ProjectileFrostMiner
   id: ProjectileFrostMinerOrb
   name: frost orb
-  parent: BaseBullet
   components:
   - type: Projectile
     deleteOnCollide: false
     damage:
       types:
         Heat: 20
-    soundHit:
-      path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
   - type: Sprite
-    sprite: _Trauma/BloodCult/Entities/Items/arcane_barrage.rsi
-    state: bullet
+    layers:
+    - state: ice_1
+      shader: unshaded
   - type: TimedDespawn
     lifetime: 10
   - type: SpawnOnDespawn
     prototype: IceBlastsOnSpawn
 
 - type: entity
+  parent: ProjectileFrostMiner
   id: ProjectileIceBlast
   name: ice blast
-  parent: BaseBullet
   components:
   - type: Projectile
     damage:
       types:
         Blunt: 15
-    soundHit:
-      path: /Audio/Weapons/Guns/Hits/energy_meat1.ogg
   - type: Sprite
-    sprite: _Trauma/BloodCult/Entities/Items/arcane_barrage.rsi # looks ok for this boss idc
-    state: bullet
+    layers:
+    - state: ice_2
+      shader: unshaded
 
-# Low damage ice blast
+# Low damage Ice blast
 - type: entity
   parent: ProjectileIceBlast
   id: ProjectileIceBlastLow
@@ -65,6 +60,7 @@
       types:
         Blunt: 5
 
+# Larp
 - type: entity
   id: IceBlastsOnSpawn
   name: huh?

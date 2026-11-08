@@ -48,15 +48,18 @@
 
 - type: entity
   parent: MobIceWalker
+  id: BaseMobIceWalker
+  components:
+  - type: RandomHumanoidAppearance
+  - type: RandomMetadata
+    nameSegments: [ NamesReptilianMale ]
+
+- type: entity
+  parent: BaseMobIceWalker
   id: IceWalker
-  name: ice walker
   components:
   - type: Loadout
     prototypes: [ IceWalkerGear ]
-  - type: RandomHumanoidAppearance
-    randomizeName: false
-  - type: RandomMetadata
-    nameSegments: [ NamesReptilianMale ]
 
 - type: entity
   id: SpawnPointGhostIceWalker

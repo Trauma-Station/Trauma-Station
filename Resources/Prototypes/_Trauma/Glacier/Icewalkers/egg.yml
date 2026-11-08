@@ -18,4 +18,4 @@
     raffle:
       settings: default
   - type: GhostRoleMobSpawner
-    prototype: MobIceWalker # Naked one
+    prototype: BaseMobIceWalker # Naked one
