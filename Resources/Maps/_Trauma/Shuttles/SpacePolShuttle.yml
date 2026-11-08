@@ -609,8 +609,8 @@ entities:
           - 76
           showEnts: False
           occludes: True
-        toggleable-clothing: !type:Container
-          ents: []
+        toggleable-clothing: !type:ContainerSlot
+          ent: null
           showEnts: False
           occludes: True
     - type: Storage

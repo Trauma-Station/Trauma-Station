@@ -607,10 +607,10 @@ entities:
           - 75
           - 77
           - 76
-        toggleable-clothing: !type:Container
+        toggleable-clothing: !type:ContainerSlot
+          ent: null
           showEnts: False
           occludes: True
-          ents: []
     - type: Storage
       storedItems:
         75:
