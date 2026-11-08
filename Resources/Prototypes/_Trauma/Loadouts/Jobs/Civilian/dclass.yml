@@ -61,7 +61,7 @@
   id: ExpopGloves
   effects:
   - !type:GroupLoadoutEffect
-    proto: DClassGreyTider
+    proto: ExpopGreyTider
   equipment:
     gloves: ClothingHandsGlovesColorGray
 

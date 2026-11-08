@@ -39,4 +39,5 @@
   id: MiscIconGroup
   icons:
   - JobIconDClass
+  - JobIconExPop
   - JobIconSpacePol

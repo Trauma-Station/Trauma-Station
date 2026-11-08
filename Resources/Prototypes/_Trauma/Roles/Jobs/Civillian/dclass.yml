@@ -6,7 +6,7 @@
   description: job-description-expop
   playTimeTracker: JobExpop
   startingGear: ExpopGear
-  icon: "JobIconDClass"
+  icon: "JobIconExPop"
   supervisors: job-supervisors-everyone
   access:
   - Maintenance
