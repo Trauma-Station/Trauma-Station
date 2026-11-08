@@ -1,0 +1,247 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: startingGear
+  id: EngineerDuffelBaseGear
+  equipment:
+    back: ClothingBackpackDuffelEngineering
+  storage:
+    back:
+    - SheetSteel
+    - CableApcStack
+
+- type: startingGear
+  id: EngineerSeniorBaseGear
+  inhand:
+  - SheetGlass
+
+- type: startingGear
+  id: FirefighterBaseGear
+  inhand:
+  - FireExtinguisher
+
+- type: startingGear
+  id: TechAssistantBaseGear
+  equipment:
+    back: ClothingBackpackEngineering
+  storage:
+    back:
+    - CableApcStack
+
+- type: startingGear
+  id: EngineerTrayBaseGear
+  inhand:
+  - trayScanner
+  - CableApcStack
+
+- type: startingGear
+  id: TechSteelBaseGear
+  inhand:
+  - SheetSteel
+
+- type: randomLoadout
+  id: RandomLoadoutEngineering
+  archetypes:
+    AtmosTech:
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatHardhatYellow: 3, ClothingHeadHatCone: 1, ClothingHeadHatWelding: 1}}
+        eyes: {chance: 0.3, items: {ClothingEyesGlassesMeson: 1}}
+        neck: {items: {ClothingNeckScarfStripedLightBlue: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitAtmosCasual: 1}}
+        outerClothing: {items: {ClothingOuterWinterAtmos: 1}}
+        back: {chance: 0.4, items: {ClothingBackpackEngineering: 1, ClothingBackpackSatchelEngineering: 1}}
+        shoes: {items: {ClothingShoesColorWhite: 3, ClothingShoesBootsWork: 1}}
+        belt: {chance: 0.4, items: {ClothingBeltUtility: 1}}
+        pocket1: {items: {CrowbarRed: 1}}
+        pocket2: {items: {FlashlightLantern: 1}}
+        gloves: {chance: 0.4, items: {ClothingHandsGlovesColorYellowBudget: 1, ClothingHandsGlovesColorYellow: 1}}
+        ears: &engineeringHeadset {chance: 0.6, items: {ClothingHeadsetEngineering: 1}}
+    AtmosFire:
+      weight: 0.6
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHelmetFire: 1}}
+        eyes: {chance: 0.3, items: {ClothingEyesGlassesMeson: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitAtmos: 1}}
+        outerClothing: {chance: 0.8, items: {ClothingOuterSuitAtmosFire: 1}}
+        back: {chance: 0.4, items: {ClothingBackpackDuffelAtmospherics: 1, ClothingBackpackSatchelAtmospherics: 1}}
+        shoes: {items: {ClothingShoesColorWhite: 1}}
+        suitstorage: {chance: 0.3, items: {AirTankFilled: 1}}
+        pocket1: {chance: 0.6, items: {CrowbarRed: 1}}
+        gloves: {chance: 0.6, items: {ClothingHandsGlovesFingerlessInsulated: 1}}
+        ears: *engineeringHeadset
+    AtmosGas:
+      weight: 0.5
+      slots:
+        head: {chance: 0.3, items: {ClothingHeadHatHardhatYellow: 1}}
+        eyes: {chance: 0.4, items: {ClothingEyesGlassesMeson: 1}}
+        mask: {chance: 0.5, items: {ClothingMaskGasAtmos: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitAtmos: 1, ClothingUniformJumpsuitAtmosCasual: 1}}
+        outerClothing: {chance: 0.5, items: {ClothingOuterWinterAtmos: 1}}
+        back: {chance: 0.5, items: {ClothingBackpackSatchelAtmospherics: 1, ClothingBackpackDuffelAtmospherics: 1}}
+        shoes: {items: {ClothingShoesColorWhite: 1}}
+        belt: {chance: 0.2, items: {DoubleEmergencyOxygenTankFilled: 1, ClothingBeltUtilityEngineering: 1}}
+        pocket1: {chance: 0.5, items: {FlashlightLantern: 1, CrowbarRed: 1}}
+        gloves: {chance: 0.5, items: {ClothingHandsGlovesColorYellow: 1, ClothingHandsGlovesAtmosInsulated: 1}}
+        ears: *engineeringHeadset
+    EngineerDuffel:
+      weight: 0.8
+      gear: EngineerDuffelBaseGear
+      slots:
+        head: {items: {ClothingHeadHatHardhatYellowDark: 3, ClothingHeadHatHardhatYellow: 1, ClothingHeadHatWelding: 1}}
+        eyes: {items: {ClothingEyesGlassesMeson: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitEngineering: 1}}
+        outerClothing: {chance: 0.3, items: {ClothingOuterVestHazard: 1}}
+        shoes: {items: {ClothingShoesBootsWork: 1}}
+        belt: {items: {ClothingBeltUtility: 1}}
+        pocket1: {chance: 0.4, items: {Welder: 1, CrowbarRed: 1, FlashlightLantern: 1}}
+        gloves: {chance: 0.4, items: {ClothingHandsGlovesColorYellow: 1}}
+        ears: *engineeringHeadset
+    EngineerHazard:
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatCone: 2, ClothingHeadHatHardhatYellow: 1}}
+        eyes: {items: {ClothingEyesGlassesMeson: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitEngineeringHazard: 1}}
+        outerClothing: {items: {ClothingOuterVestHazard: 1}}
+        back: {chance: 0.4, items: {ClothingBackpackEngineering: 1, ClothingBackpackSatchelEngineering: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 2, ClothingShoesBootsWork: 1}}
+        belt: {items: {ClothingBeltUtility: 1}}
+        pocket1: {chance: 0.4, items: {Welder: 1, CrowbarRed: 1}}
+        gloves: {chance: 0.7, items: {ClothingHandsGlovesColorYellowBudget: 1}}
+        ears: *engineeringHeadset
+    EngineerSenior:
+      weight: 0.8
+      gear: EngineerSeniorBaseGear
+      slots:
+        head: {chance: 0.7, items: {ClothingHeadHatBeretEngineering: 1}}
+        eyes: {chance: 0.4, items: {ClothingEyesGlassesMeson: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitSeniorEngineer: 1}}
+        back: {items: {ClothingBackpackSatchelEngineering: 1}}
+        shoes: {items: {ClothingShoesBootsWork: 1}}
+        belt: {items: {ClothingBeltUtilityEngineering: 1}}
+        pocket1: {chance: 0.5, items: {Welder: 1, CrowbarRed: 1, FlashlightLantern: 1}}
+        gloves: {items: {ClothingHandsGlovesColorYellow: 1}}
+        ears: *engineeringHeadset
+    EngineerTray:
+      weight: 0.5
+      gear: EngineerTrayBaseGear
+      slots:
+        head: {chance: 0.7, items: {ClothingHeadHatHardhatYellow: 1}}
+        eyes: {items: {ClothingEyesGlassesMeson: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitEngineering: 1}}
+        outerClothing: {chance: 0.6, items: {ClothingOuterWinterEngi: 1, ClothingOuterVestHazard: 1}}
+        back: {chance: 0.5, items: {ClothingBackpackEngineering: 1}}
+        shoes: {items: {ClothingShoesBootsWork: 1}}
+        belt: {chance: 0.5, items: {ClothingBeltUtilityEngineering: 1}}
+        pocket1: {chance: 0.03, items: {RCD: 1}}
+        pocket2: {chance: 0.03, items: {RCDAmmo: 1}}
+        gloves: {chance: 0.5, items: {ClothingHandsGlovesColorYellow: 1}}
+        ears: *engineeringHeadset
+    EngineerWinter:
+      weight: 0.6
+      slots:
+        head: {chance: 0.6, items: {ClothingHeadHatHardhatYellow: 1}}
+        eyes: {chance: 0.4, items: {ClothingEyesGlassesMeson: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitEngineering: 1}}
+        outerClothing: {items: {ClothingOuterWinterEngi: 1}}
+        back: {chance: 0.5, items: {ClothingBackpackEngineering: 1, ClothingBackpackSatchelEngineering: 1}}
+        shoes: {items: {ClothingShoesBootsWork: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltUtility: 1}}
+        pocket1: {chance: 0.4, items: {Welder: 1, CrowbarRed: 1}}
+        gloves: {chance: 0.5, items: {ClothingHandsGlovesColorYellow: 1}}
+        ears: *engineeringHeadset
+    EngineerToolbelt:
+      slots:
+        head: {chance: 0.4, items: {ClothingHeadHatHardhatYellow: 1, ClothingHeadHatCone: 1, ClothingHeadHatWelding: 1}}
+        eyes: {chance: 0.3, items: {ClothingEyesGlassesMeson: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitEngineeringHazard: 1}}
+        outerClothing: {chance: 0.3, items: {ClothingOuterVestHazard: 1}}
+        shoes: {items: {ClothingShoesBootsWork: 2, ClothingShoesColorBlack: 1}}
+        belt: {items: {ClothingBeltUtilityEngineering: 1}}
+        pocket1: {chance: 0.3, items: {Welder: 1, CrowbarRed: 1}}
+        gloves: {chance: 0.5, items: {ClothingHandsGlovesColorYellowBudget: 1, ClothingHandsGlovesColorYellow: 1}}
+        ears: *engineeringHeadset
+    EngineerWelder:
+      slots:
+        head: {items: {ClothingHeadHatWelding: 1}}
+        eyes: {chance: 0.3, items: {ClothingEyesGlassesMeson: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitEngineering: 1}}
+        outerClothing: {chance: 0.3, items: {ClothingOuterVestHazard: 1}}
+        shoes: {items: {ClothingShoesBootsWork: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltUtility: 1}}
+        pocket1: {items: {Welder: 1}}
+        pocket2: {chance: 0.4, items: {CrowbarRed: 1, FlashlightLantern: 1}}
+        gloves: {chance: 0.8, items: {ClothingHandsGlovesColorYellowBudget: 1}}
+        ears: *engineeringHeadset
+    Firefighter:
+      gear: FirefighterBaseGear
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHelmetFire: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitAtmos: 1}}
+        outerClothing: {items: {ClothingOuterSuitAtmosFire: 1}}
+        back: {chance: 0.3, items: {ClothingBackpackEngineering: 1}}
+        shoes: {items: {ClothingShoesColorWhite: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltUtility: 1}}
+        pocket1: {chance: 0.4, items: {CrowbarRed: 1, FlashlightLantern: 1}}
+        gloves: {items: {ClothingHandsGlovesFingerlessInsulated: 1}}
+        ears: *engineeringHeadset
+    Roboticist:
+      slots:
+        eyes: {chance: 0.3, items: {ClothingEyesGlasses: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitRoboticist: 1}}
+        outerClothing: {items: {ClothingOuterCoatRoboOpened: 1}}
+        back: {chance: 0.3, items: {ClothingBackpackSatchelScience: 1, ClothingBackpackScience: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltUtility: 1}}
+        pocket1: {chance: 0.4, items: {Welder: 1, CrowbarRed: 1}}
+        gloves: {chance: 0.85, items: {ClothingHandsGlovesRobohands: 1, ClothingHandsGlovesLatex: 1}}
+        ears: {chance: 0.8, items: {ClothingHeadsetRobotics: 1}}
+    RoboticistDiag:
+      weight: 0.6
+      slots:
+        eyes: {chance: 0.3, items: {ClothingEyesHudDiagnostic: 1, ClothingEyesGlasses: 2}}
+        jumpsuit: {items: {ClothingUniformJumpsuitRoboticist: 1}}
+        outerClothing: {chance: 0.8, items: {ClothingOuterCoatRoboOpened: 1}}
+        back: {chance: 0.4, items: {ClothingBackpackScience: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltUtility: 1, ClothingBeltUtilityFilled: 1}}
+        pocket1: {chance: 0.4, items: {Welder: 1, CrowbarRed: 1, FlashlightLantern: 1}}
+        gloves: {chance: 0.8, items: {ClothingHandsGlovesRobohands: 1}}
+        ears: {chance: 0.6, items: {ClothingHeadsetRobotics: 1}}
+    TechAssistant:
+      gear: TechAssistantBaseGear
+      slots:
+        head: {items: {ClothingHeadHatWelding: 2, ClothingHeadHatHardhatYellow: 1}}
+        eyes: {chance: 0.2, items: {ClothingEyesGlassesMeson: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitColorYellow: 1}}
+        shoes: {items: {ClothingShoesBootsWork: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltUtility: 1}}
+        pocket1: {items: {Welder: 1}}
+        pocket2: {chance: 0.4, items: {CrowbarRed: 1, FlashlightLantern: 1}}
+        gloves: {chance: 0.7, items: {ClothingHandsGlovesColorYellowBudget: 1}}
+        ears: *engineeringHeadset
+    TechAssistantHazard:
+      weight: 0.7
+      gear: TechSteelBaseGear
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatCone: 1, ClothingHeadHatHardhatYellow: 1}}
+        eyes: {chance: 0.3, items: {ClothingEyesGlassesMeson: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitEngineeringHazard: 1}}
+        outerClothing: {chance: 0.6, items: {ClothingOuterVestHazard: 1}}
+        back: {chance: 0.5, items: {ClothingBackpackSatchelEngineering: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 1}}
+        belt: {chance: 0.5, items: {ClothingBeltUtility: 1}}
+        pocket1: {chance: 0.4, items: {GasAnalyzer: 1, LightReplacerFilled: 1}}
+        pocket2: {chance: 0.1, items: {HolofanProjector: 1}}
+        gloves: {chance: 0.6, items: {ClothingHandsGlovesColorYellowBudget: 1}}
+        ears: *engineeringHeadset
+    TechAssistantLight:
+      weight: 0.6
+      slots:
+        head: {chance: 0.7, items: {ClothingHeadHatWelding: 1}}
+        eyes: {chance: 0.4, items: {ClothingEyesGlassesMeson: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitColorYellow: 1}}
+        back: {chance: 0.6, items: {ClothingBackpackEngineering: 1}}
+        shoes: {items: {ClothingShoesBootsWork: 1}}
+        pocket1: {chance: 0.6, items: {LightReplacerFilled: 1}}
+        pocket2: {items: {Welder: 1}}
+        gloves: {chance: 0.7, items: {ClothingHandsGlovesColorYellowBudget: 1}}
+        ears: *engineeringHeadset

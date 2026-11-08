@@ -3,6 +3,7 @@
 using Content.Shared.EntityConditions;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory.Events;
+using Content.Trauma.Shared.Clothing.Components;
 
 namespace Content.Trauma.Shared.Clothing;
 
@@ -10,13 +11,7 @@ public sealed partial class ClothingConditionsSystem : EntitySystem
 {
     [Dependency] private SharedEntityConditionsSystem _conditions = default!;
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ClothingConditionsComponent, BeingEquippedAttemptEvent>(OnEquipAttempt);
-    }
-
+    [SubscribeLocalEvent]
     private void OnEquipAttempt(Entity<ClothingConditionsComponent> ent, ref BeingEquippedAttemptEvent args)
     {
         if (args.Cancelled)

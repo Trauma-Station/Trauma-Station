@@ -1,0 +1,102 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: startingGear
+  id: MercenaryDrunkBaseGear
+  inhand:
+  - DrinkWhiskeyBottleFull
+
+- type: randomLoadout
+  id: RandomLoadoutMercenary
+  archetypes:
+    MercenaryFull:
+      weight: 0.5
+      slots:
+        head: {chance: 0.6, items: {ClothingHeadHelmetMerc: 1}}
+        eyes: {chance: 0.5, items: {ClothingEyesGlassesMercenary: 1}}
+        mask: {chance: 0.7, items: {ClothingMaskGasMarc: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitMercenary: 1}}
+        outerClothing: {chance: 0.6, items: {ClothingOuterVestWebMerc: 1}}
+        back: {chance: 0.5, items: {ClothingBackpackMerc: 1}}
+        shoes: {items: {ClothingShoesBootsMercFilled: 1}}
+        belt: {chance: 0.5, items: {ClothingBeltMercWebbing: 1}}
+        pocket1: {chance: 0.6, items: {SurvivalKnife: 1}}
+        pocket2: {chance: 0.12, items: {WeaponPistolViper: 1}}
+        gloves: {chance: 0.5, items: {ClothingHandsMercGlovesCombat: 1}}
+        ears: {chance: 0.12, items: {ClothingHeadsetAltFreelancer: 1}}
+    MercenaryInsurgent:
+      weight: 0.8
+      slots:
+        head: {chance: 0.5, items: {ClothingHeadHelmetMerc: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitMercenary: 1}}
+        shoes: {items: {ClothingShoesBootsMercFilled: 1}}
+        belt: {chance: 0.5, items: {ClothingBeltMercWebbing: 1}}
+        pocket1: {chance: 0.2, items: {WeaponShotgunSawn: 1}}
+        gloves: {chance: 0.5, items: {ClothingHandsMercGlovesCombat: 1}}
+        ears: {chance: 0.12, items: {ClothingHeadsetAltFreelancer: 1}}
+    MercenaryScout:
+      weight: 1.2
+      slots:
+        head: {chance: 0.7, items: {ClothingHeadHelmetMerc: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitMercenary: 1}}
+        shoes: {items: {ClothingShoesBootsMercFilled: 1}}
+        belt: {chance: 0.5, items: {ClothingBeltMercWebbing: 1}}
+        pocket1: {chance: 0.6, items: {HandheldGPSBasic: 1}}
+        pocket2: {chance: 0.1, items: {WeaponPistolViper: 1}}
+        ears: {chance: 0.15, items: {ClothingHeadsetAltFreelancer: 1}}
+    MercenaryBlackmarketeer:
+      weight: 0.3
+      slots:
+        head: {chance: 0.7, items: {ClothingHeadHelmetMerc: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitMercenary: 1}}
+        outerClothing: {chance: 0.8, items: {ClothingOuterVestWebMerc: 1}}
+        back: {chance: 0.6, items: {ClothingBackpackMerc: 1}}
+        shoes: {items: {ClothingShoesBootsMercFilled: 1}}
+        belt: {chance: 0.6, items: {ClothingBeltMercWebbing: 1}}
+        pocket1: {chance: 0.03, items: {WeaponLaserSvalinn: 1}}
+        pocket2: {chance: 0.25, items: {RadioHandheld: 1}}
+        ears: {chance: 0.3, items: {ClothingHeadsetGrey: 1}}
+    MercenaryDrunk:
+      weight: 0.6
+      gear: MercenaryDrunkBaseGear
+      slots:
+        head: {chance: 0.3, items: {ClothingHeadHelmetMerc: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitMercenary: 1}}
+        shoes: {chance: 0.7, items: {ClothingShoesBootsMercFilled: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltMercWebbing: 1}}
+        pocket1: {chance: 0.4, items: {Lighter: 1, SurvivalKnife: 1}}
+        pocket2: {chance: 0.3, items: {FoodSnackChips: 1}}
+    MercenaryCossack:
+      weight: 0.4
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatGreyFlatcap: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitCossack: 1}}
+        back: {chance: 0.6, items: {ClothingBackpack: 1, ClothingBackpackSatchelLeather: 1}}
+        shoes: {items: {ClothingShoesBootsSalvage: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltMercWebbing: 1}}
+        pocket1: {chance: 0.4, items: {SurvivalKnife: 1}}
+        gloves: {chance: 0.2, items: {ClothingHandsGlovesLeather: 1}}
+        ears: {chance: 0.08, items: {ClothingHeadsetAltFreelancer: 1}}
+    MercenaryMedic:
+      weight: 0.4
+      slots:
+        head: {chance: 0.5, items: {ClothingHeadHelmetMerc: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitMercenary: 1}}
+        outerClothing: {chance: 0.4, items: {ClothingOuterVestWebMerc: 1}}
+        back: {chance: 0.5, items: {ClothingBackpackMerc: 1}}
+        shoes: {items: {ClothingShoesBootsMercFilled: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltMedical: 1, ClothingBeltMercWebbing: 1}}
+        pocket1: {chance: 0.6, items: {Gauze: 1, Brutepack: 1, Ointment: 1}}
+        pocket2: {chance: 0.4, items: {Gauze: 1, Brutepack: 1}}
+        gloves: {chance: 0.3, items: {ClothingHandsGlovesNitrile: 1, ClothingHandsMercGlovesCombat: 1}}
+        ears: {chance: 0.1, items: {ClothingHeadsetAltFreelancer: 1}}
+    MercenaryLooted:
+      weight: 3
+      slots:
+        head: {chance: 0.1, items: {ClothingHeadHelmetMerc: 1}}
+        mask: {chance: 0.15, items: {ClothingMaskGasMarc: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitMercenary: 1}}
+        shoes: {chance: 0.9, items: {ClothingShoesBootsMercFilled: 1}}
+        belt: {chance: 0.2, items: {ClothingBeltMercWebbing: 1}}
+        pocket1: {chance: 0.3, items: {SurvivalKnife: 1, HandheldGPSBasic: 1}}
+        gloves: {chance: 0.1, items: {ClothingHandsMercGlovesCombat: 1}}
+        ears: {chance: 0.04, items: {ClothingHeadsetAltFreelancer: 1}}

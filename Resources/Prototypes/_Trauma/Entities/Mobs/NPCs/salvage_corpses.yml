@@ -1,0 +1,138 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: MobAbductor
+  suffix: Dead
+  save: false
+  id: SalvageAbductorCorpse
+  name: &salvageCorpseName unidentified corpse
+  description: &salvageCorpseDescription I think they're dead.
+  components: &salvageCorpseComponents
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: DefaultBodyDamage
+    damage:
+      types:
+        Bloodloss: 49
+        Asphyxiation: 76
+        Slash: 56
+        Blunt: 19
+  - type: PartialAbsorbable
+
+- type: entity
+  parent: MobArachnid
+  suffix: Dead
+  save: false
+  id: SalvageArachnidCorpse
+  name: *salvageCorpseName
+  description: *salvageCorpseDescription
+  components: *salvageCorpseComponents
+
+- type: entity
+  parent: MobBananaMen
+  suffix: Dead
+  save: false
+  id: SalvageBananaMenCorpse
+  name: *salvageCorpseName
+  description: *salvageCorpseDescription
+  components: *salvageCorpseComponents
+
+- type: entity
+  parent: MobDecapoid
+  suffix: Dead
+  save: false
+  id: SalvageDecapoidCorpse
+  name: *salvageCorpseName
+  description: *salvageCorpseDescription
+  components: *salvageCorpseComponents
+
+- type: entity
+  parent: MobDiona
+  suffix: Dead
+  save: false
+  id: SalvageDionaCorpse
+  name: *salvageCorpseName
+  description: *salvageCorpseDescription
+  components: *salvageCorpseComponents
+
+- type: entity
+  parent: MobDwarf
+  suffix: Dead
+  save: false
+  id: SalvageDwarfCorpse
+  name: *salvageCorpseName
+  description: *salvageCorpseDescription
+  components: *salvageCorpseComponents
+
+- type: entity
+  parent: MobIPC
+  suffix: Dead
+  save: false
+  id: SalvageIPCCorpse
+  name: *salvageCorpseName
+  description: *salvageCorpseDescription
+  components:
+  - type: RandomHumanoidAppearance
+    randomizeName: false
+  - type: DefaultBodyDamage
+    damage:
+      types:
+        Blunt: 49
+        Slash: 76
+        Piercing: 56
+        Ion: 19
+  - type: PartialAbsorbable
+
+- type: entity
+  parent: MobMoth
+  suffix: Dead
+  save: false
+  id: SalvageMothCorpse
+  name: *salvageCorpseName
+  description: *salvageCorpseDescription
+  components: *salvageCorpseComponents
+
+- type: entity
+  parent: MobReptilian
+  suffix: Dead
+  save: false
+  id: SalvageReptilianCorpse
+  name: *salvageCorpseName
+  description: *salvageCorpseDescription
+  components: *salvageCorpseComponents
+
+- type: entity
+  parent: MobSkeletonPerson
+  suffix: Dead
+  save: false
+  id: SalvageSkeletonPersonCorpse
+  name: *salvageCorpseName
+  description: *salvageCorpseDescription
+  components: *salvageCorpseComponents
+
+- type: entity
+  parent: MobSlimePerson
+  suffix: Dead
+  save: false
+  id: SalvageSlimePersonCorpse
+  name: *salvageCorpseName
+  description: *salvageCorpseDescription
+  components: *salvageCorpseComponents
+
+- type: entity
+  parent: MobVox
+  suffix: Dead
+  save: false
+  id: SalvageVoxCorpse
+  name: *salvageCorpseName
+  description: *salvageCorpseDescription
+  components: *salvageCorpseComponents
+
+- type: entity
+  parent: MobVulpkanin
+  suffix: Dead
+  save: false
+  id: SalvageVulpkaninCorpse
+  name: *salvageCorpseName
+  description: *salvageCorpseDescription
+  components: *salvageCorpseComponents

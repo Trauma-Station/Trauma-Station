@@ -1,0 +1,51 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: MobRandomServiceCorpse
+  components:
+  - !Remove type: Loadout
+  - type: WeightedLoadout
+    loadout: RandomLoadoutService
+
+- type: entity
+  id: MobRandomEngineerCorpse
+  components:
+  - !Remove type: Loadout
+  - type: WeightedLoadout
+    loadout: RandomLoadoutEngineering
+
+- type: entity
+  id: MobRandomCargoCorpse
+  components:
+  - !Remove type: Loadout
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCargo
+
+
+- type: entity
+  id: MobRandomMedicCorpse
+  components:
+  - !Remove type: Loadout
+  - type: WeightedLoadout
+    loadout: RandomLoadoutMedical
+
+- type: entity
+  id: MobRandomScienceCorpse
+  components:
+  - !Remove type: Loadout
+  - type: WeightedLoadout
+    loadout: RandomLoadoutScience
+
+- type: entity
+  id: MobRandomSecurityCorpse
+  components:
+  - !Remove type: Loadout
+  - type: WeightedLoadout
+    loadout: RandomLoadoutSecurity
+
+- type: entity
+  id: MobRandomCommandCorpse
+  components:
+  - !Remove type: Loadout
+  - type: WeightedLoadout
+    loadout: RandomLoadoutCommand

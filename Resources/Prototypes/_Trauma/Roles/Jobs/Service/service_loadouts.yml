@@ -1,0 +1,557 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: startingGear
+  id: BartenderBaseGear
+  inhand:
+  - DrinkWineBottleFull
+
+- type: startingGear
+  id: BartenderVodkaBaseGear
+  inhand:
+  - DrinkVodkaBottleFull
+
+- type: startingGear
+  id: BotanistScytheBaseGear
+  inhand:
+  - HydroponicsToolScythe
+
+- type: startingGear
+  id: ChefRollingPinBaseGear
+  inhand:
+  - FoodCheese
+
+- type: startingGear
+  id: ChefWineBaseGear
+  inhand:
+  - DrinkWineBottleFull
+
+- type: startingGear
+  id: CuratorBaseGear
+  inhand:
+  - BoxFolderClipboardThreePapers
+
+- type: startingGear
+  id: JanitorBaseGear
+  inhand:
+  - MopItem
+  - Bucket
+
+- type: startingGear
+  id: LawyerBaseGear
+  inhand:
+  - BriefcaseBrownFilled
+
+- type: startingGear
+  id: LibrarianCaneBaseGear
+  inhand:
+  - Cane
+
+- type: startingGear
+  id: LibrarianSheathBaseGear
+  inhand:
+  - CaneSheathFilledLibrarian
+
+- type: startingGear
+  id: MariachiBaseGear
+  inhand:
+  - AcousticGuitarInstrument
+
+- type: startingGear
+  id: MimeBurgerBaseGear
+  inhand:
+  - FoodBurgerMime
+
+- type: startingGear
+  id: MusicianCelloBaseGear
+  inhand:
+  - CelloInstrument
+
+- type: startingGear
+  id: MusicianSaxBaseGear
+  inhand:
+  - SaxophoneInstrument
+
+- type: startingGear
+  id: MusicianTrumpetBaseGear
+  inhand:
+  - TrumpetInstrument
+
+- type: startingGear
+  id: MusicianViolinBaseGear
+  inhand:
+  - ViolinInstrument
+
+- type: startingGear
+  id: MusicianTromboneBaseGear
+  inhand:
+  - TromboneInstrument
+
+- type: startingGear
+  id: MusicianViolaBaseGear
+  inhand:
+  - ViolaInstrument
+
+- type: startingGear
+  id: MusicianClarinetBaseGear
+  inhand:
+  - ClarinetInstrument
+
+- type: startingGear
+  id: MusicianFrenchHornBaseGear
+  inhand:
+  - FrenchHornInstrument
+
+- type: startingGear
+  id: MusicianSynthBaseGear
+  inhand:
+  - SynthesizerInstrument
+
+- type: startingGear
+  id: MusicianBanjoBaseGear
+  inhand:
+  - BanjoInstrument
+
+- type: startingGear
+  id: MusicianElectricGuitarBaseGear
+  inhand:
+  - ElectricGuitarInstrument
+
+- type: startingGear
+  id: MusicianRockGuitarBaseGear
+  inhand:
+  - RockGuitarInstrument
+
+- type: randomLoadout
+  id: RandomLoadoutService
+  archetypes:
+    Bartender:
+      weight: 1.5
+      gear: BartenderBaseGear
+      slots:
+        head: {chance: 0.9, items: {ClothingHeadHatTophat: 2, ClothingHeadHatBowlerHat: 2, ClothingHeadHatFedoraBrown: 1}}
+        eyes: {chance: 0.15, items: {ClothingEyesGlassesCheapSunglasses: 1, ClothingEyesGlassesSunglasses: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitBartender: 1}}
+        outerClothing: {chance: 0.2, items: {ClothingOuterArmorBasicSlim: 1}}
+        suitstorage: {chance: 0.2, items: {WeaponShotgunDoubleBarreledRubber: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 3, ClothingShoesLeather: 2}}
+        belt: {chance: 0.25, items: {ClothingBeltSuspendersBlack: 1}}
+        pocket1: {chance: 0.6, items: {BarSpoon: 1}}
+        pocket2: {chance: 0.3, items: {DrinkColaCan: 1, FoodSnackChips: 1, Lighter: 1}}
+        ears: &serviceHeadset {chance: 0.6, items: {ClothingHeadsetService: 1}}
+        gloves: {chance: 0.2, items: {ClothingHandsGlovesColorWhite: 1}}
+    BartenderPurple:
+      weight: 0.8
+      gear: BartenderVodkaBaseGear
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatBowlerHat: 1, ClothingHeadHatTophat: 1}}
+        eyes: {chance: 0.2, items: {ClothingEyesHudBeer: 1, ClothingEyesGlassesCheapSunglasses: 2}}
+        neck: {chance: 0.6, items: {ClothingNeckTieSci: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitBartenderPurple: 1}}
+        outerClothing: {chance: 0.5, items: {ClothingOuterWinterBar: 1}}
+        back: {chance: 0.4, items: {ClothingBackpackSatchel: 1, ClothingBackpack: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 1}}
+        pocket1: {chance: 0.04, items: {WeaponShotgunSawn: 1}}
+        pocket2: {chance: 0.4, items: {DrinkTequilaBottleFull: 1, BarSpoon: 1}}
+        ears: *serviceHeadset
+    BotanistBucket:
+      slots:
+        head: {chance: 0.7, items: {Bucket: 2, ClothingHeadHatGreyFlatcap: 1, ClothingHeadSafari: 1}}
+        eyes: {chance: 0.15, items: {ClothingEyesGlassesCheapSunglasses: 1}}
+        neck: {chance: 0.15, items: {ClothingNeckScarfStripedGreen: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitHydroponics: 1}}
+        outerClothing: {chance: 0.3, items: {ClothingOuterApronBotanist: 1}}
+        back: {chance: 0.4, items: {ClothingBackpackHydroponics: 1, ClothingBackpackDuffelHydroponics: 1}}
+        shoes: {items: {ClothingShoesColorGreen: 3, ClothingShoesColorBrown: 1, ClothingShoesBootsWork: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltStorageWaistbag: 1, ClothingBeltUtility: 1, ClothingBeltPlantFilled: 1}}
+        pocket1: {chance: 0.9, items: {HydroponicsToolMiniHoe: 1}}
+        pocket2: {chance: 0.9, items: {HydroponicsToolSpade: 1}}
+        gloves: {chance: 0.5, items: {ClothingHandsGlovesLeather: 1}}
+        ears: *serviceHeadset
+    BotanistScythe:
+      gear: BotanistScytheBaseGear
+      slots:
+        head: {chance: 0.4, items: {ClothingHeadHatGreyFlatcap: 1, ClothingHeadSafari: 1}}
+        neck: {chance: 0.15, items: {ClothingNeckScarfStripedGreen: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitHydroponics: 1}}
+        outerClothing: {chance: 0.7, items: {ClothingOuterApronBotanist: 1}}
+        back: {items: {ClothingBackpackHydroponics: 1, ClothingBackpackDuffelHydroponics: 1}}
+        shoes: {items: {ClothingShoesColorGreen: 3, ClothingShoesColorBrown: 1, ClothingShoesBootsWork: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltStorageWaistbag: 1}}
+        pocket1: {chance: 0.4, items: {HydroponicsToolMiniHoe: 1, HydroponicsToolSpade: 1}}
+        gloves: {items: {ClothingHandsGlovesLeather: 1}}
+        ears: *serviceHeadset
+    ChaplainNun:
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatHoodNunHood: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitChaplain: 1}}
+        outerClothing: {items: {ClothingOuterNunRobe: 1}}
+        back: {chance: 0.25, items: {ClothingBackpackSatchel: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 1, ClothingShoesLeather: 1}}
+        belt: {items: {Bible: 1}}
+        pocket1: {chance: 0.3, items: {BookRandomStory: 1, BookSun: 1}}
+        gloves: {chance: 0.2, items: {ClothingHandsGlovesColorBlack: 1, ClothingHandsGlovesColorWhite: 1}}
+        ears: *serviceHeadset
+    ChaplainStole:
+      slots:
+        neck: {items: {ClothingNeckStoleChaplain: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitChaplain: 1}}
+        outerClothing: {items: {ClothingOuterHoodieChaplain: 1}}
+        back: {chance: 0.25, items: {ClothingBackpackSatchel: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 1, ClothingShoesLeather: 1}}
+        belt: {items: {Bible: 1}}
+        pocket1: {chance: 0.3, items: {BookRandomStory: 1, BookSun: 1}}
+        gloves: {chance: 0.2, items: {ClothingHandsGlovesColorBlack: 1}}
+        ears: *serviceHeadset
+    ChaplainPlague:
+      weight: 0.4
+      slots:
+        head: {items: {ClothingHeadHatPlaguedoctor: 1}}
+        mask: {items: {ClothingMaskPlague: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitChaplain: 1}}
+        outerClothing: {items: {ClothingOuterPlagueSuit: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 1}}
+        belt: {chance: 0.7, items: {Bible: 1}}
+        pocket1: {chance: 0.3, items: {PlushieSharkGrey: 1, PlushiePenguin: 1}}
+        pocket2: {chance: 0.3, items: {FoodSnackEnergy: 1, DrinkCoconutWaterCarton: 1}}
+        ears: *serviceHeadset
+    ChefCleaver:
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatChef: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitChef: 1}}
+        outerClothing: {items: {ClothingOuterJacketChef: 1}}
+        shoes: {items: {ClothingShoesChef: 3, ClothingShoesColorWhite: 1, ClothingShoesColorBlack: 1}}
+        belt: {chance: 0.2, items: {ClothingBeltSuspendersBlack: 1}}
+        pocket1: {items: {ButchCleaver: 1}}
+        pocket2: {chance: 0.5, items: {BookHowToCookForFortySpaceman: 1, FoodShakerPepper: 1, Fork: 1}}
+        gloves: {chance: 0.25, items: {ClothingHandsGlovesColorWhite: 1}}
+        ears: *serviceHeadset
+    ChefRollingPin:
+      gear: ChefRollingPinBaseGear
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatChef: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitChef: 1}}
+        outerClothing: {items: {ClothingOuterWinterChef: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 2, ClothingShoesChef: 1, ClothingShoesColorWhite: 1}}
+        pocket1: {items: {RollingPin: 1}}
+        pocket2: {chance: 0.4, items: {FoodShakerPepper: 1, Fork: 1, BookHowToCookForFortySpaceman: 1}}
+        gloves: {chance: 0.25, items: {ClothingHandsGlovesColorWhite: 1}}
+        ears: *serviceHeadset
+    ChefWine:
+      weight: 0.6
+      gear: ChefWineBaseGear
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatChef: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitChef: 1}}
+        outerClothing: {items: {ClothingOuterJacketChef: 1, ClothingOuterWinterChef: 1}}
+        back: {chance: 0.4, items: {ClothingBackpackSatchel: 1, ClothingBackpack: 1}}
+        shoes: {items: {ClothingShoesChef: 2, ClothingShoesColorBlack: 1}}
+        belt: {chance: 0.1, items: {ClothingBeltChefFilled: 1}}
+        pocket1: {chance: 0.7, items: {ButchCleaver: 1, RollingPin: 1}}
+        pocket2: {chance: 0.5, items: {BookHowToCookForFortySpaceman: 1}}
+        ears: *serviceHeadset
+    ClownBanana:
+      slots:
+        mask: {items: {ClothingMaskClownBanana: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitClownBanana: 1}}
+        back: {chance: 0.5, items: {ClothingBackpackClown: 1}}
+        shoes: {items: {ClothingShoesClownBanana: 1}}
+        pocket1: {items: {BikeHorn: 1}}
+        pocket2: {chance: 0.4, items: {ClownRecorder: 1, FoodSnackChips: 1}}
+        gloves: {chance: 0.3, items: {ClothingHandsGlovesColorWhite: 1}}
+        ears: {chance: 0.3, items: {ClothingHeadsetService: 1}}
+    ClownHorn:
+      slots:
+        mask: {items: {ClothingMaskClown: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitClown: 1}}
+        back: {items: {ClothingBackpackClown: 1}}
+        shoes: {chance: 0.7, items: {ClothingShoesClown: 1}}
+        pocket1: {items: {BikeHorn: 1}}
+        pocket2: {items: {ClownRecorder: 1}}
+        gloves: {chance: 0.3, items: {ClothingHandsGlovesColorWhite: 1}}
+        ears: {chance: 0.3, items: {ClothingHeadsetService: 1}}
+    ClownPriest:
+      weight: 0.3
+      slots:
+        mask: {items: {ClothingMaskClown: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitClown: 1}}
+        outerClothing: {items: {ClothingOuterClownPriest: 1}}
+        back: {chance: 0.7, items: {ClothingBackpackClown: 1}}
+        shoes: {items: {ClothingShoesClown: 1}}
+        pocket1: {items: {BikeHorn: 1}}
+        pocket2: {chance: 0.6, items: {ClownRecorder: 1}}
+        ears: {chance: 0.3, items: {ClothingHeadsetService: 1}}
+    Curator:
+      gear: CuratorBaseGear
+      slots:
+        head: {chance: 0.9, items: {ClothingHeadHatGreyFlatcap: 1, ClothingHeadHatFedoraBrown: 1}}
+        eyes: {items: {ClothingEyesGlasses: 3, ClothingEyesGlassesJamjar: 1}}
+        neck: {chance: 0.3, items: {ClothingNeckScarfStripedGreen: 1, ClothingNeckScarfStripedLightBlue: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitCurator: 1}}
+        back: {chance: 0.7, items: {ClothingBackpackSatchelLeather: 1}}
+        shoes: {items: {ClothingShoesBootsLaceup: 2, ClothingShoesLeather: 1}}
+        pocket1: {chance: 0.5, items: {BookRandomStory: 1, BookSun: 1}}
+        pocket2: {chance: 0.3, items: {LuxuryPen: 1, Lighter: 1}}
+        ears: *serviceHeadset
+    Gladiator:
+      weight: 0.5
+      slots:
+        head: {chance: 0.7, items: {ClothingHeadHatGladiator: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitGladiator: 1}}
+        back: {items: {SpearBone: 1}}
+        shoes: {chance: 0.4, items: {ClothingShoesSandalsBrown: 1, ClothingShoesCult: 1}}
+        pocket1: {chance: 0.3, items: {SurvivalKnife: 1}}
+        gloves: {chance: 0.3, items: {ClothingHandsGlovesFingerless: 1, ClothingHandsGlovesLeather: 1}}
+    Janitor:
+      gear: JanitorBaseGear
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadFishCap: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitJanitor: 1}}
+        back: {chance: 0.2, items: {ClothingBackpack: 1}}
+        shoes: {chance: 0.85, items: {ClothingShoesGaloshes: 1}}
+        belt: {chance: 0.2, items: {ClothingBeltJanitorFilled: 1}}
+        pocket1: {items: {KeyRingJanitor: 1}}
+        pocket2: {chance: 0.3, items: {FlashlightLantern: 1, FoodSnackChips: 1}}
+        gloves: {chance: 0.7, items: {ClothingHandsGlovesJanitor: 1}}
+        ears: *serviceHeadset
+    JanitorBio:
+      weight: 0.5
+      gear: JanitorBaseGear
+      slots:
+        head: {chance: 0.7, items: {ClothingHeadHatHoodBioJanitor: 1, ClothingHeadHatPurplesoft: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitJanitor: 1}}
+        outerClothing: {chance: 0.7, items: {ClothingOuterBioJanitor: 1, ClothingOuterWinterJani: 1}}
+        back: {chance: 0.4, items: {ClothingBackpack: 1, ClothingBackpackSatchel: 1}}
+        shoes: {items: {ClothingShoesGaloshes: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltJanitorFilled: 1}}
+        pocket1: {chance: 0.6, items: {KeyRingJanitor: 1}}
+        gloves: {chance: 0.8, items: {ClothingHandsGlovesJanitor: 1}}
+        ears: *serviceHeadset
+    Lawyer:
+      gear: LawyerBaseGear
+      slots:
+        head: {chance: 0.5, items: {ClothingHeadHatFedoraBrown: 1, ClothingHeadHatFedoraGrey: 1}}
+        neck: {items: {ClothingNeckLawyerbadge: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitLawyerBlack: 1, ClothingUniformJumpsuitLawyerBlue: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 1, ClothingShoesLeather: 1}}
+        pocket1: {items: {LuxuryPen: 1, SmokingPipeFilledTobacco: 1}}
+        pocket2: {chance: 0.3, items: {Lighter: 1, BookRandomStory: 1}}
+        eyes: {chance: 0.2, items: {ClothingEyesGlasses: 1, ClothingEyesGlassesSunglasses: 1}}
+        gloves: {chance: 0.15, items: {ClothingHandsGlovesColorBlack: 1, ClothingHandsGlovesColorWhite: 1}}
+        ears: {chance: 0.3, items: {ClothingHeadsetService: 1}}
+    LawyerFlashy:
+      weight: 0.5
+      gear: LawyerBaseGear
+      slots:
+        head: {chance: 0.6, items: {ClothingHeadHatCowboyBrown: 1, ClothingHeadHatCorpsoft: 1}}
+        neck: {items: {ClothingNeckLawyerbadge: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitLawyerRed: 1, ClothingUniformJumpsuitLawyerGood: 1}}
+        back: {chance: 0.4, items: {ClothingBackpackSatchelLeather: 1}}
+        shoes: {items: {ClothingShoesColorRed: 1, ClothingShoesLeather: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltStorageWaistbag: 1}}
+        pocket1: {chance: 0.6, items: {RubberStampLawyer: 1}}
+        pocket2: {chance: 0.5, items: {LuxuryPen: 1, SmokingPipeFilledTobacco: 1}}
+        ears: {chance: 0.3, items: {ClothingHeadsetService: 1}}
+    LibrarianCane:
+      gear: LibrarianCaneBaseGear
+      slots: &librarianSlots
+        head: {chance: 0.2, items: {ClothingHeadHatFedoraBrown: 1, ClothingHeadHatGreyFlatcap: 1}}
+        eyes: {items: {ClothingEyesGlassesJamjar: 2, ClothingEyesGlasses: 1}}
+        neck: {items: {ClothingNeckScarfStripedGreen: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitLibrarian: 1}}
+        back: {chance: 0.7, items: {ClothingBackpackSatchel: 2, ClothingBackpackSatchelLeather: 1}}
+        shoes: {items: {ClothingShoesBootsLaceup: 2, ClothingShoesLeather: 1}}
+        pocket1: {items: {BookSun: 1, BookRandomStory: 1, BookJanitorTale: 1}}
+        pocket2: {chance: 0.5, items: {BookRandomStory: 1}}
+        ears: *serviceHeadset
+    LibrarianSheath:
+      weight: 0.3
+      gear: LibrarianSheathBaseGear
+      slots: *librarianSlots
+    Mariachi:
+      gear: MariachiBaseGear
+      slots:
+        head: {items: {ClothingHeadHatSombrero: 1}}
+        eyes: {items: {ClothingEyesGlassesCheapSunglasses: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitColorTeal: 1}}
+        outerClothing: {chance: 0.5, items: {ClothingOuterPoncho: 1}}
+        shoes: {items: {ClothingShoesColorBrown: 2, ClothingShoesLeather: 1, ClothingShoesSnakeskinBoots: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltSuspendersBlack: 1}}
+        pocket1: {chance: 0.3, items: {DrinkWhiskeyBottleFull: 1, FoodSnackChips: 1}}
+        gloves: {chance: 0.2, items: {ClothingHandsGlovesLeather: 1}}
+    MimeBeret:
+      slots:
+        head: {items: {ClothingHeadHatBeretFrench: 1}}
+        mask: {items: {ClothingMaskMime: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitMime: 1}}
+        back: {items: {ClothingBackpackMime: 1}}
+        shoes: {items: {ClothingShoesColorWhite: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltSuspendersBlack: 1}}
+        pocket1: {chance: 0.4, items: {CrayonMime: 1}}
+        gloves: {chance: 0.7, items: {ClothingHandsGlovesColorWhite: 1}}
+        ears: *serviceHeadset
+    MimeSuspenders:
+      slots:
+        head: {items: {ClothingHeadBandBlack: 1}}
+        mask: {items: {ClothingMaskMime: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitMime: 1}}
+        back: {chance: 0.3, items: {ClothingBackpackMime: 1}}
+        shoes: {items: {ClothingShoesColorWhite: 1}}
+        belt: {items: {ClothingBeltSuspendersBlack: 1}}
+        pocket1: {items: {CrayonMime: 1}}
+        gloves: {items: {ClothingHandsGlovesColorWhite: 1}}
+        ears: {chance: 0.3, items: {ClothingHeadsetService: 1}}
+    MimeCat:
+      weight: 0.5
+      gear: MimeBurgerBaseGear
+      slots:
+        head: {items: {ClothingHeadHatAnimalCatBlack: 1}}
+        mask: {items: {ClothingMaskMime: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitMime: 1}}
+        outerClothing: {chance: 0.7, items: {ClothingOuterWinterMime: 1}}
+        back: {chance: 0.5, items: {ClothingBackpackMime: 1}}
+        shoes: {items: {ClothingShoesColorWhite: 1}}
+        pocket1: {chance: 0.7, items: {CrayonMime: 1}}
+        pocket2: {chance: 0.4, items: {RubberStampMime: 1}}
+        gloves: {items: {ClothingHandsGlovesColorWhite: 1}}
+        ears: *serviceHeadset
+    MusicianCello:
+      gear: MusicianCelloBaseGear
+      slots: &musicianSlots
+        head: {chance: 0.3, items: {ClothingHeadHatBowlerHat: 1, ClothingHeadHatFedoraGrey: 1, ClothingHeadHatBeretFrench: 1}}
+        eyes: {items: {ClothingEyesGlassesCheapSunglasses: 1}}
+        neck: {chance: 0.2, items: {ClothingNeckScarfStripedLightBlue: 1, ClothingNeckScarfStripedGreen: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitMusician: 1}}
+        shoes: {items: {ClothingShoesBootsLaceup: 2, ClothingShoesLeather: 1}}
+        pocket1: {chance: 0.3, items: {LuxuryPen: 1, Lighter: 1}}
+        gloves: {chance: 0.15, items: {ClothingHandsGlovesFingerless: 1}}
+        ears: {chance: 0.3, items: {ClothingHeadsetService: 1}}
+    MusicianTrumpet:
+      gear: MusicianTrumpetBaseGear
+      slots: *musicianSlots
+    MusicianTrombone:
+      weight: 0.7
+      gear: MusicianTromboneBaseGear
+      slots: *musicianSlots
+    MusicianViola:
+      weight: 0.7
+      gear: MusicianViolaBaseGear
+      slots: *musicianSlots
+    MusicianClarinet:
+      weight: 0.7
+      gear: MusicianClarinetBaseGear
+      slots: *musicianSlots
+    MusicianFrenchHorn:
+      weight: 0.7
+      gear: MusicianFrenchHornBaseGear
+      slots: *musicianSlots
+    MusicianSynth:
+      weight: 0.7
+      gear: MusicianSynthBaseGear
+      slots: *musicianSlots
+    MusicianViolin:
+      gear: MusicianViolinBaseGear
+      slots:
+        head: {chance: 0.3, items: {ClothingHeadHatBowlerHat: 1, ClothingHeadHatFedoraGrey: 1, ClothingHeadHatBeretFrench: 1}}
+        eyes: {items: {ClothingEyesGlassesCheapSunglasses: 1}}
+        neck: {chance: 0.2, items: {ClothingNeckScarfStripedLightBlue: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitMusician: 1}}
+        back: {chance: 0.5, items: {ClothingBackpackSatchelLeather: 1}}
+        shoes: {items: {ClothingShoesBootsLaceup: 2, ClothingShoesLeather: 1}}
+        pocket1: {chance: 0.3, items: {LuxuryPen: 1}}
+        ears: {chance: 0.3, items: {ClothingHeadsetService: 1}}
+    MusicianSax:
+      gear: MusicianSaxBaseGear
+      slots:
+        head: {items: {ClothingHeadRastaHat: 1}}
+        eyes: {items: {ClothingEyesGlassesCheapSunglasses: 1}}
+        jumpsuit: {items: {ClothingUniformRandomShirt: 1}}
+        shoes: {items: {ClothingShoesSandalsBrown: 2, ClothingShoesColorBrown: 1}}
+        pocket1: {items: {BluntRainbow: 1}}
+        pocket2: {chance: 0.3, items: {Lighter: 1, FoodSnackChips: 1}}
+        ears: {chance: 0.2, items: {ClothingHeadsetService: 1}}
+    MusicianRelaxed:
+      weight: 0.8
+      gear: MusicianBanjoBaseGear
+      slots: &musicianRelaxedSlots
+        head: {chance: 0.2, items: {ClothingHeadRastaHat: 1}}
+        eyes: {items: {ClothingEyesGlassesCheapSunglasses: 1}}
+        jumpsuit: {items: {ClothingUniformRandomShirt: 1}}
+        back: {chance: 0.6, items: {ClothingBackpackSatchel: 1, ClothingBackpack: 1, ClothingBackpackDuffel: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 2, ClothingShoesColorBrown: 1}}
+        pocket1: {chance: 0.7, items: {BluntRainbow: 1}}
+        pocket2: {chance: 0.4, items: {DrinkNukieCan: 1, FoodSnackCheesie: 1, FoodSnackPistachios: 1, DrinkEnergyDrinkCan: 1}}
+        ears: {chance: 0.2, items: {ClothingHeadsetService: 1}}
+    MusicianElectricGuitar:
+      weight: 0.8
+      gear: MusicianElectricGuitarBaseGear
+      slots: *musicianRelaxedSlots
+    MusicianRockGuitar:
+      weight: 0.8
+      gear: MusicianRockGuitarBaseGear
+      slots: *musicianRelaxedSlots
+    PlagueDoctor:
+      weight: 0.5
+      slots:
+        head: {items: {ClothingHeadHatPlaguedoctor: 1}}
+        mask: {items: {ClothingMaskPlague: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitChaplain: 1}}
+        outerClothing: {items: {ClothingOuterPlagueSuit: 1}}
+        back: {chance: 0.3, items: {ClothingBackpackSatchel: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 1}}
+        pocket1: {chance: 0.4, items: {Ointment: 1, Gauze: 1}}
+        gloves: {chance: 0.5, items: {ClothingHandsGlovesLatex: 1}}
+    Reporter:
+      slots:
+        head: {chance: 0.2, items: {ClothingHeadHatFedoraBrown: 1}}
+        eyes: {chance: 0.2, items: {ClothingEyesGlasses: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitReporter: 1, ClothingUniformJumpsuitJournalist: 1}}
+        back: {items: {ClothingBackpackSatchel: 1}}
+        shoes: {items: {ClothingShoesLeather: 2, ClothingShoesColorBrown: 1, ClothingShoesColorBlack: 1}}
+        pocket1: {items: {MicrophoneInstrument: 1}}
+        pocket2: {items: {BoxFolderClipboardThreePapers: 1}}
+        ears: *serviceHeadset
+    ServiceWorker:
+      slots:
+        head: {items: {ClothingHeadBandBlue: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitBartender: 1}}
+        outerClothing: {items: {ClothingOuterApronBar: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 1}}
+        pocket1: {items: {Fork: 1}}
+        pocket2: {items: {FoodShakerPepper: 1}}
+        gloves: {chance: 0.2, items: {ClothingHandsGlovesColorWhite: 1}}
+        ears: *serviceHeadset
+    ServiceWorkerBlack:
+      weight: 0.8
+      slots:
+        head: {items: {ClothingHeadBandBlack: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitColorBlack: 1}}
+        outerClothing: {items: {ClothingOuterApronBar: 1}}
+        back: {chance: 0.4, items: {ClothingBackpack: 1}}
+        shoes: {items: {ClothingShoesColorBlack: 1}}
+        pocket1: {items: {Fork: 1}}
+        pocket2: {items: {FoodShakerPepper: 1}}
+        ears: *serviceHeadset
+    Zookeeper:
+      slots:
+        head: {items: {ClothingHeadSafari: 1}}
+        eyes: {chance: 0.2, items: {ClothingEyesGlassesCheapSunglasses: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitSafari: 1}}
+        back: {chance: 0.7, items: {ClothingBackpackDuffel: 1}}
+        shoes: {items: {ClothingShoesBootsWork: 1}}
+        belt: {items: {ClothingBeltUtility: 1, ClothingBeltStorageWaistbag: 1}}
+        pocket1: {items: {PillCanisterDylovene: 1}}
+        pocket2: {chance: 0.2, items: {WeaponFlareGun: 1}}
+        gloves: {chance: 0.3, items: {ClothingHandsGlovesLeather: 1}}
+        ears: *serviceHeadset
+    ZookeeperRubber:
+      weight: 0.2
+      slots:
+        head: {items: {ClothingHeadSafari: 1}}
+        eyes: {chance: 0.2, items: {ClothingEyesGlassesCheapSunglasses: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitSafari: 1}}
+        back: {items: {WeaponShotgunDoubleBarreledRubber: 1}}
+        shoes: {items: {ClothingShoesBootsWork: 1}}
+        belt: {chance: 0.6, items: {ClothingBeltStorageWaistbag: 1, ClothingBeltUtility: 1}}
+        pocket1: {chance: 0.7, items: {WeaponFlareGun: 1}}
+        pocket2: {chance: 0.6, items: {PillCanisterDylovene: 1}}
+        ears: *serviceHeadset

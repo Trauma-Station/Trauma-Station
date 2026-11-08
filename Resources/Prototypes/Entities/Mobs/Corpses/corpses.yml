@@ -79,7 +79,6 @@
   - type: Loadout
     prototypes:
     - HoPGear
-    - MobRandomCommandCorpseCentComm # Goobstation Nerfed CentComm Space Salvage Gear
     - CaptainGear
     - HoSGear
     - ResearchDirectorGear

@@ -1,0 +1,202 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: startingGear
+  id: SecurityBatonBaseGear
+  inhand:
+  - PolymerBaton
+
+- type: startingGear
+  id: SecurityRiotBaseGear
+  inhand:
+  - PolymerBaton
+  - RiotShield
+
+- type: startingGear
+  id: SecurityKammererBaseGear
+  inhand:
+  - WeaponShotgunKammerer
+
+- type: startingGear
+  id: SecurityFlashlightBaseGear
+  inhand:
+  - FlashlightSeclite
+
+- type: randomLoadout
+  id: RandomLoadoutSecurity
+  archetypes:
+    Brigmedic:
+      weight: 0.8
+      slots:
+        head: {chance: 0.7, items: {ClothingHeadHatBeretBrigmedic: 1}}
+        eyes: {chance: 0.6, items: {ClothingEyesGlassesMedSec: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitBrigmedic: 1}}
+        shoes: {items: {ClothingShoesBootsJackFilled: 1}}
+        belt: {chance: 0.4, items: {ClothingBeltMedical: 1}}
+        gloves: {chance: 0.5, items: {ClothingHandsGlovesNitrile: 1}}
+        ears: {chance: 0.12, items: {ClothingHeadsetAltSecurityRegular: 1}}
+    BrigmedicEMT:
+      weight: 0.3
+      slots:
+        head: {chance: 0.6, items: {ClothingHeadHatBeretBrigmedic: 1}}
+        eyes: {chance: 0.5, items: {ClothingEyesGlassesMedSec: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitBrigmedic: 1}}
+        outerClothing: {chance: 0.4, items: {ClothingOuterCoatAMG: 1}}
+        back: {chance: 0.3, items: {ClothingBackpackSecurity: 1}}
+        shoes: {items: {ClothingShoesBootsJackFilled: 1}}
+        belt: {chance: 0.4, items: {ClothingBeltMedical: 7, ClothingBeltMedicalEMTFilled: 1}}
+        pocket1: {chance: 0.3, items: {ClothingMaskBreathMedicalSecurity: 1}}
+        pocket2: {chance: 0.3, items: {Gauze: 1, Brutepack: 1, Ointment: 1}}
+        gloves: {chance: 0.5, items: {ClothingHandsGlovesNitrile: 1}}
+        ears: {chance: 0.1, items: {ClothingHeadsetAltSecurityRegular: 1}}
+    DetectiveTrench:
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatFedoraGrey: 1}}
+        neck: {items: {ClothingNeckTieDet: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitDetective: 1}}
+        outerClothing: {items: {ClothingOuterCoatDetectiveLoadout: 1}}
+        shoes: {items: {ClothingShoesBootsJackFilled: 1}}
+        belt: {chance: 0.6, items: {ClothingBeltHolster: 4, ClothingBeltHolsterFilled: 1}}
+        pocket1: {chance: 0.4, items: {ForensicScanner: 1}}
+        ears: {chance: 0.12, items: {ClothingHeadsetAltSecurityRegular: 1}}
+    DetectiveVest:
+      slots:
+        head: {chance: 0.8, items: {ClothingHeadHatFedoraBrown: 1}}
+        neck: {items: {ClothingNeckTieDet: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitDetectiveGrey: 1}}
+        outerClothing: {items: {ClothingOuterVestDetective: 1}}
+        shoes: {items: {ClothingShoesBootsJackFilled: 1}}
+        pocket1: {chance: 0.4, items: {ForensicScanner: 1}}
+        pocket2: {chance: 0.4, items: {ForensicPad: 1}}
+        ears: {chance: 0.12, items: {ClothingHeadsetAltSecurityRegular: 1}}
+    DetectiveForensic:
+      gear: SecurityFlashlightBaseGear
+      weight: 0.6
+      slots:
+        head: {chance: 0.7, items: {ClothingHeadHatFedoraGrey: 1, ClothingHeadHatFedoraBrown: 1}}
+        eyes: {chance: 0.2, items: {ClothingEyesGlassesSecurity: 1}}
+        neck: {items: {ClothingNeckTieDet: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitDetectiveGrey: 1, ClothingUniformJumpsuitDetective: 1}}
+        outerClothing: {chance: 0.8, items: {ClothingOuterVestDetective: 1, ClothingOuterCoatDetectiveLoadout: 1}}
+        back: {chance: 0.3, items: {ClothingBackpackSatchelSecurity: 1}}
+        shoes: {items: {ClothingShoesBootsJackFilled: 1}}
+        belt: {chance: 0.3, items: {ClothingBeltHolster: 1}}
+        pocket1: {chance: 0.5, items: {ForensicScanner: 1}}
+        pocket2: {chance: 0.5, items: {ForensicPad: 1}}
+        gloves: {chance: 0.4, items: {ClothingHandsGlovesForensic: 1}}
+        ears: {chance: 0.1, items: {ClothingHeadsetAltSecurityRegular: 1}}
+    SecurityCadet:
+      slots:
+        head: { chance: 0.4, items: { ClothingHeadHelmetBasic: 1, ClothingHeadHelmetBasicAlt: 1 } }
+        eyes: { chance: 0.5, items: { ClothingEyesGlassesSecurity: 1 } }
+        jumpsuit: { items: { ClothingUniformJumpsuitSecGrey: 1, ClothingUniformJumpsuitSec: 1 } }
+        shoes: { items: { ClothingShoesBootsJackFilled: 1 } }
+        pocket1: { chance: 0.4, items: { Flash: 1 } }
+        ears: { chance: 0.15, items: { ClothingHeadsetAltSecurityRegular: 1 } }
+    SecurityCadetRed:
+      weight: 0.8
+      slots:
+        head: { chance: 0.2, items: { ClothingHeadHelmetBasic: 1, ClothingHeadHelmetBasicAlt: 1 } }
+        eyes: { chance: 0.2, items: { ClothingEyesHudSecurity: 1, ClothingEyesGlassesSecurity: 3 } }
+        jumpsuit: { items: { ClothingUniformJumpsuitColorRed: 1, ClothingUniformJumpsuitSec: 1 } }
+        back: { chance: 0.3, items: { ClothingBackpackSecurity: 1 } }
+        shoes: { items: { ClothingShoesBootsJack: 1 } }
+        pocket1: { chance: 0.25, items: { Flash: 1 } }
+        ears: { chance: 0.12, items: { ClothingHeadsetAltSecurityRegular: 1 } }
+    SecurityCadetWhistle:
+      weight: 0.8
+      gear: SecurityFlashlightBaseGear
+      slots:
+        head: { chance: 0.5, items: { ClothingHeadHelmetBasic: 1, ClothingHeadHelmetBasicAlt: 1, ClothingHeadHatCorpsoft: 1 } }
+        eyes: { chance: 0.3, items: { ClothingEyesGlassesSecurity: 1 } }
+        neck: { chance: 0.6, items: { SecurityWhistle: 1 } }
+        jumpsuit: { items: { ClothingUniformJumpsuitSecGrey: 1, ClothingUniformJumpsuitSec: 1 } }
+        outerClothing: { chance: 0.3, items: { ClothingOuterArmorBasicSlim: 1 } }
+        back: { chance: 0.4, items: { ClothingBackpackSatchelSecurity: 1 } }
+        shoes: { items: { ClothingShoesBootsJackFilled: 1 } }
+        mask: { chance: 0.15, items: { ClothingMaskGasSecurity: 1 } }
+        ears: { chance: 0.12, items: { ClothingHeadsetAltSecurityRegular: 1 } }
+    SecurityOfficer:
+      slots:
+        head: { chance: 0.4, items: { ClothingHeadHelmetBasic: 1, ClothingHeadHelmetBasicAlt: 1, ClothingHeadHatBeretSecurity: 1 } }
+        eyes: { chance: 0.3, items: { ClothingEyesGlassesSecurity: 1 } }
+        jumpsuit: { items: { ClothingUniformJumpsuitSec: 1 } }
+        outerClothing: { chance: 0.5, items: { ClothingOuterArmorBasic: 1, ClothingOuterArmorBasicSlim: 1 } }
+        back: { chance: 0.4, items: { ClothingBackpackSecurity: 1 } }
+        shoes: { items: { ClothingShoesBootsJackFilled: 1 } }
+        mask: { chance: 0.15, items: { ClothingMaskGasSecurity: 1 } }
+        pocket1: { chance: 0.12, items: { WeaponPistolMk58: 1 } }
+        pocket2: { chance: 0.2, items: { MagazinePistol: 1 } }
+        ears: { chance: 0.12, items: { ClothingHeadsetAltSecurityRegular: 1 } }
+    SecurityOfficerBaton:
+      weight: 0.5
+      gear: SecurityBatonBaseGear
+      slots:
+        head: { chance: 0.4, items: { ClothingHeadHelmetBasic: 1, ClothingHeadHelmetBasicAlt: 1, ClothingHeadHatBeretSecurity: 1 } }
+        eyes: { chance: 0.3, items: { ClothingEyesGlassesSecurity: 1 } }
+        jumpsuit: { items: { ClothingUniformJumpsuitSec: 1 } }
+        outerClothing: { chance: 0.5, items: { ClothingOuterArmorBasicSlim: 1, ClothingOuterArmorBasic: 1 } }
+        back: { chance: 0.4, items: { ClothingBackpackSecurity: 1 } }
+        shoes: { items: { ClothingShoesBootsJackFilled: 1 } }
+        belt: { chance: 0.04, items: { ClothingBeltSecurityFilled: 1 } }
+        pocket1: { chance: 0.2, items: { Flash: 1 } }
+        gloves: { chance: 0.3, items: { ClothingHandsGlovesSecurity: 1 } }
+        ears: { chance: 0.12, items: { ClothingHeadsetAltSecurityRegular: 1 } }
+    SecurityOfficerLaser:
+      weight: 0.2
+      slots:
+        head: { chance: 0.5, items: { ClothingHeadHelmetBasicAlt: 1, ClothingHeadHatBeretSecurity: 1 } }
+        eyes: { chance: 0.3, items: { ClothingEyesGlassesSecurity: 1 } }
+        jumpsuit: { items: { ClothingUniformJumpsuitSec: 1 } }
+        outerClothing: { chance: 0.6, items: { ClothingOuterArmorBasicSlim: 1 } }
+        back: { chance: 0.4, items: { ClothingBackpackSecurity: 1 } }
+        shoes: { items: { ClothingShoesBootsJackFilled: 1 } }
+        belt: { chance: 0.08, items: { ClothingBeltSecurityFilled: 1 } }
+        mask: { chance: 0.15, items: { ClothingMaskGasSecurity: 1 } }
+        pocket1: { chance: 0.15, items: { WeaponLaserSidearm: 1 } }
+        suitstorage: { chance: 0.02, items: { WeaponLaserCarbine: 1 } }
+        gloves: { chance: 0.3, items: { ClothingHandsGlovesSecurity: 1 } }
+        ears: { chance: 0.12, items: { ClothingHeadsetAltSecurityRegular: 1 } }
+    Warden:
+      weight: 0.7
+      slots:
+        head: { chance: 0.7, items: { ClothingHeadHatBeretWarden: 1, ClothingHeadHatBeretSecurity: 1 } }
+        neck: { items: { SecurityWhistle: 1 } }
+        jumpsuit: { items: { ClothingUniformJumpsuitWarden: 1 } }
+        outerClothing: { chance: 0.7, items: { ClothingOuterCoatWarden: 1 } }
+        shoes: { items: { ClothingShoesBootsJackFilled: 1 } }
+        pocket1: { chance: 0.12, items: { WeaponPistolMk58: 1 } }
+        ears: { chance: 0.12, items: { ClothingHeadsetAltSecurityRegular: 1 } }
+    WardenWinter:
+      weight: 0.5
+      slots:
+        head: {chance: 0.7, items: {ClothingHeadHatWarden: 1}}
+        eyes: {chance: 0.2, items: {ClothingEyesGlassesSecurity: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitWarden: 1}}
+        outerClothing: {chance: 0.8, items: {ClothingOuterWinterWarden: 1}}
+        back: {chance: 0.4, items: {ClothingBackpackSatchelSecurity: 1}}
+        shoes: {items: {ClothingShoesBootsJackFilled: 1}}
+        pocket1: {chance: 0.4, items: {Zipties: 1}}
+        pocket2: {chance: 0.05, items: {WeaponDisabler: 1}}
+        gloves: {chance: 0.3, items: {ClothingHandsGlovesCombat: 1}}
+        ears: {chance: 0.12, items: {ClothingHeadsetAltSecurityRegular: 1}}
+    WardenShotgun:
+      weight: 0.12
+      gear: SecurityKammererBaseGear
+      slots:
+        head: {chance: 0.7, items: {ClothingHeadHatBeretWarden: 1, ClothingHeadHatWarden: 1}}
+        neck: {chance: 0.7, items: {SecurityWhistle: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitWarden: 1}}
+        outerClothing: {chance: 0.7, items: {ClothingOuterCoatWarden: 1}}
+        shoes: {items: {ClothingShoesBootsCombatFilled: 1}}
+        pocket1: {chance: 0.4, items: {Zipties: 1}}
+        gloves: {chance: 0.4, items: {ClothingHandsGlovesCombat: 1}}
+        ears: {chance: 0.12, items: {ClothingHeadsetAltSecurityRegular: 1}}
+    SecurityLooted:
+      weight: 3
+      slots:
+        head: {chance: 0.1, items: {ClothingHeadHelmetBasic: 1, ClothingHeadHatCorpsoft: 1}}
+        neck: {chance: 0.1, items: {SecurityWhistle: 1}}
+        jumpsuit: {items: {ClothingUniformJumpsuitSec: 2, ClothingUniformJumpsuitSecGrey: 1, ClothingUniformJumpsuitColorRed: 1}}
+        shoes: {chance: 0.8, items: {ClothingShoesBootsJackFilled: 3, ClothingShoesBootsJack: 1}}
+        pocket1: {chance: 0.15, items: {Flash: 1, Zipties: 1, FoodSnackChips: 1}}
+        ears: {chance: 0.03, items: {ClothingHeadsetAltSecurityRegular: 1}}

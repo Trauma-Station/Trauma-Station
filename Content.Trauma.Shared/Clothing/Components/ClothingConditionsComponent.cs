@@ -2,7 +2,7 @@
 
 using Content.Shared.EntityConditions;
 
-namespace Content.Trauma.Shared.Clothing;
+namespace Content.Trauma.Shared.Clothing.Components;
 
 /// <summary>
 /// Checks entity conditions on the wearer before trying to equip some clothing.
