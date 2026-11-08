@@ -1,0 +1,28 @@
+- type: entity
+  parent: MarkerBase
+  id: SpawnC4Live
+  name: live c4 spawner
+  suffix: Live, 10s, 15%
+  components:
+  - type: Sprite
+    layers: &C4
+    - state: red
+    - sprite: Objects/Weapons/Bombs/c4.rsi
+      state: icon
+  - type: EntityTableSpawner
+    table:
+      id: C4Live
+      prob: 0.15
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnC4Instant
+  name: instant c4 spawner
+  suffix: Instant, 15%
+  components:
+  - type: Sprite
+    layers: *C4
+  - type: EntityTableSpawner
+    table:
+      id: C4Instant
+      prob: 0.15
