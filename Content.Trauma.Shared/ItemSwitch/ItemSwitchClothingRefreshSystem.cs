@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Goobstation.Shared.Clothing.Components;
 using Content.Medical.Shared.ItemSwitch;
 using Content.Shared.Inventory;
