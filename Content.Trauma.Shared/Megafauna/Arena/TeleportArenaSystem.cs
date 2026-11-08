@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.EntityEffects;
 using Content.Shared.Interaction;
 using Robust.Shared.EntitySerialization.Systems;
 
@@ -11,28 +12,36 @@ namespace Content.Trauma.Shared.Megafauna.Arena;
 /// </summary>
 public sealed partial class TeleportArenaSystem : EntitySystem
 {
+    [Dependency] private INetManager _net = default!;
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private MapLoaderSystem _loader = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
+    [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
     [Dependency] private EntityQuery<TeleportFromArenaComponent> _tpFromQuery = default!;
+    [Dependency] private EntityQuery<TeleportToArenaComponent> _tpToQuery = default!;
 
     private HashSet<Entity<TeleportFromArenaComponent>> _tpFrom = new();
 
     [SubscribeLocalEvent]
     private void OnMapInit(Entity<TeleportToArenaComponent> ent, ref MapInitEvent args)
     {
-        // Load the grid on a dummy map, and link all entities with teleport from arena comp. with us.
+        // Don't predict this lol, otherwise you will spawn fake maps
+        if (_net.IsClient)
+            return;
+
+        // Load the grid on a dummy map
         _map.CreateMap(out var mapId);
-        if (!_loader.TryLoadGrid(mapId, ent.Comp.ArenaPath, out var arena))
+        if (!_loader.TryLoadGrid(mapId, ent.Comp.ArenaPath, out var arena) || arena is not { } arenaGrid)
         {
             Log.Error($"Failed to load arena grid: {ent.Comp.ArenaPath}");
+            _map.DeleteMap(mapId);
             return;
         }
 
-        if (arena is not { } arenaGrid)
-            return;
+        ent.Comp.Arena = arena;
+        Dirty(ent);
 
         _tpFrom.Clear();
         _lookup.GetGridEntities(arenaGrid, _tpFrom);
@@ -48,8 +57,14 @@ public sealed partial class TeleportArenaSystem : EntitySystem
         if (ent.Comp.Arena is not { } arena)
             return;
 
+        var user = args.User;
         var xform = Transform(arena);
-        _transform.SetCoordinates(args.User, xform.Coordinates);
+
+        _transform.SetCoordinates(user, xform.Coordinates);
+        _transform.SetParent(user, arena); // don't set us parent of the map, but of the grid
+
+        if (ent.Comp.EffectsOnEnter is { } enterEffects)
+            _effects.ApplyEffects(user, enterEffects);
     }
 
     [SubscribeLocalEvent]
@@ -63,6 +78,9 @@ public sealed partial class TeleportArenaSystem : EntitySystem
 
         _transform.SetCoordinates(user, xform.Coordinates);
         _transform.AttachToGridOrMap(user);
+
+        if (GetExitEffects(linked) is { } exitEffects)
+            _effects.ApplyEffects(user, exitEffects);
     }
 
     /// <summary>
@@ -75,5 +93,18 @@ public sealed partial class TeleportArenaSystem : EntitySystem
 
         ent.Comp.Linked = target;
         Dirty(ent);
+    }
+
+    /// <summary>
+    /// Gets the exit effects of the entity.
+    /// This is called from the <see cref="TeleportFromArenaComponent"/> entity.
+    /// </summary>
+    /// <returns>Null if there's no exit effects</returns>
+    public EntityEffect[]? GetExitEffects(Entity<TeleportToArenaComponent?> ent)
+    {
+        if (!_tpToQuery.Resolve(ent.Owner, ref ent.Comp))
+            return null;
+
+        return ent.Comp.EffectsOnExit;
     }
 }
