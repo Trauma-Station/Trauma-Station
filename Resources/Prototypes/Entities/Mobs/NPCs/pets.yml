@@ -824,6 +824,9 @@
   - type: MeleeChemicalInjector
     transferAmount: 2
     solution: melee
+  - type: NPCRetaliation
+    attackMemoryLength: 10
+  - type: FactionException
   # </Trauma>
   - type: InteractionPopup
     successChance: 0.5 # spider is mean
