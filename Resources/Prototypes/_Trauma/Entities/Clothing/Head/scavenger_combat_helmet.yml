@@ -1,0 +1,72 @@
+- type: entity
+  parent: [ ClothingHeadEVAHelmetBase, BaseMajorContraband ]
+  id: ClothingHeadHelmetScavenger
+  name: scavenger combat helmet
+  description: A reinforced juggernaut helmet pieced together from salvaged industrial equipment and battlefield scrap. Its integrated thermal visor can detect heat signatures through darkness, walls, and cloaking devices, though the enhanced optics make sudden flashes far more punishing to the wearer.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Head/Helmets/scavenger_combat_helmet.rsi
+    state: icon
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Helmets/scavenger_combat_helmet.rsi
+    slots:
+    - HEAD
+    equippedPrefix: off
+    equipSound: /Audio/Mecha/mechmove03.ogg
+    unequipSound: /Audio/Mecha/mechmove03.ogg
+    equipDelay: 2
+    unequipDelay: 2
+  - type: ItemSwitchClothingRefresh
+    targetSlots: HEAD
+  - type: Item
+    sprite: _Trauma/Clothing/Head/Helmets/scavenger_combat_helmet.rsi
+    heldPrefix: off
+  - type: Armor
+    coverage:
+    - Head
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.4
+        Caustic: 0
+        Radiation: 0.2
+  - type: ExplosionResistance
+    damageCoefficient: 0.3
+  - type: FaceHuggerBlocker
+  - type: StaticPrice
+    price: 250
+  - type: ItemSwitch
+    needsPower: false
+    defaultState: off
+    state: "off"
+    showLabel: true
+    states:
+      off: !type:ItemSwitchState
+        verb: off
+        sprite:
+          sprite: _Trauma/Clothing/Head/Helmets/scavenger_combat_helmet.rsi
+          state: icon
+        components:
+        - type: Item
+          sprite: _Trauma/Clothing/Head/Helmets/scavenger_combat_helmet.rsi
+          heldPrefix: off
+        soundStateActivate:
+          path: /Audio/Machines/button.ogg
+
+      on: !type:ItemSwitchState
+        verb: on
+        sprite:
+          sprite: _Trauma/Clothing/Head/Helmets/scavenger_combat_helmet.rsi
+          state: icon-on
+        components:
+        - type: Item
+          sprite: _Trauma/Clothing/Head/Helmets/scavenger_combat_helmet.rsi
+          heldPrefix: on
+        - type: ClothingGrantComponent
+          component:
+          - type: ThermalVision
+            isEquipment: false
+            flashDurationMultiplier: 2
+        soundStateActivate:
+          path: /Audio/Machines/button.ogg

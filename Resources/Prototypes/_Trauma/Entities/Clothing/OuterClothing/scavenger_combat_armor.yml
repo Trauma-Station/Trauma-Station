@@ -1,0 +1,33 @@
+- type: entity
+  parent: [ ClothingOuterEVASuitBase, BaseMajorContraband ]
+  id: ClothingOuterHardsuitScavenger
+  name: scavenger combat armor
+  description: A rugged suit of scavenger combat armor assembled from industrial EVA gear and military surplus plating. Despite its crude appearance, it provides outstanding protection against bullets, blades, explosions, radiation, and corrosive hazards without sacrificing mobility.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/OuterClothing/Suits/scavenger_combat_armor.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/OuterClothing/Suits/scavenger_combat_armor.rsi
+  - type: Armor
+    coverage:
+    - Torso
+    - Arm
+    - Hand
+    - Leg
+    - Foot
+    modifiers:
+      coefficients:
+        Blunt: 0.4
+        Slash: 0.4
+        Piercing: 0.4
+        Heat: 0.6
+        Caustic: 0
+        Radiation: 0.2
+  - type: ExplosionResistance
+    damageCoefficient: 0.5
+  - type: StaminaResistance
+    damageCoefficient: 0.5
+  - type: Tag
+    tags:
+    - SuitEVA
+    - WhitelistChameleon
