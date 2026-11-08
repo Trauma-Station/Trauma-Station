@@ -16545,3 +16545,12 @@ Entries:
   id: 1786
   time: '2026-11-07T11:21:06.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5315
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Fuel rods now glow when hot like forged metals do.
+  - type: Fix
+    message: Fixed fuel rods heat exchanging with open air being inaccurate.
+  id: 1787
+  time: '2026-11-08T15:50:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5313
