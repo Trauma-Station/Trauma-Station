@@ -1,0 +1,35 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  abstract: true
+  id: LeshyArenaTeleporter
+  components:
+  - type: TeleportToArena
+    arenaPath: /Maps/_Trauma/Glacier/leshy_arena.yml
+
+- type: entity
+  abstract: true
+  id: FrostMinerArenaTeleporter
+  components:
+  - type: TeleportToArena
+    arenaPath: /Maps/_Trauma/Glacier/frost_miner_arena.yml
+
+- type: entity
+  parent: [ BaseStructure, LeshyArenaTeleporter ]
+  id: LeshySomething
+  name: test
+  description: test
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/chairs.rsi
+    state: chair
+
+- type: entity
+  parent: [ BaseStructure, FrostMinerArenaTeleporter ]
+  id: FrostMinerSomething
+  name: test
+  description: test
+  components:
+  - type: Sprite
+    sprite: Structures/Furniture/chairs.rsi
+    state: chair
