@@ -16575,3 +16575,10 @@ Entries:
   id: 1790
   time: '2026-11-09T18:48:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5340
+- author: TechnicFighter
+  changes:
+  - type: Remove
+    message: Removed silicon drones.
+  id: 1791
+  time: '2026-11-09T22:40:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5343
