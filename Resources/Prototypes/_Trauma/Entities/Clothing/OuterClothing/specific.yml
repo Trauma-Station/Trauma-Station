@@ -18,3 +18,21 @@
     showArmorOnExamine: true
   - type: StaminaResistance
     damageCoefficient: 0.5
+
+- type: entity
+  parent: [ ClothingOuterHardsuitEVA, BaseChameleon ]
+  id: ClothingOuterHardsuitEVAChameleon
+  suffix: Chameleon
+  components:
+  - type: ChameleonClothing
+    slot: [outerClothing]
+    default: ClothingOuterHardsuitEVA
+
+- type: entity
+  parent: [ ClothingHeadHelmetEVA, BaseChameleon ]
+  id: ClothingHeadHelmetEVAChameleon
+  suffix: Chameleon
+  components:
+  - type: ChameleonClothing
+    slot: [HEAD]
+    default: ClothingHeadHelmetEVA
