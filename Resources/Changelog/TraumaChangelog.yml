@@ -16568,3 +16568,10 @@ Entries:
   id: 1789
   time: '2026-11-09T17:13:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5275
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed blood cultists not being told their sacrifice target.
+  id: 1790
+  time: '2026-11-09T18:48:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5340
