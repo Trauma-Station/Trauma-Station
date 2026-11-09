@@ -16582,3 +16582,10 @@ Entries:
   id: 1791
   time: '2026-11-09T22:40:36.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5343
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed skill chips disappearing if you removed them with your hands full.
+  id: 1792
+  time: '2026-11-09T22:49:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5344
