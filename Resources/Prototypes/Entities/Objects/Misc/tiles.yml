@@ -7,9 +7,6 @@
   # <Trauma>
   - type: EmbeddableProjectile
     sound: /Audio/Weapons/star_hit.ogg
-  - type: Tag
-    tags:
-    - DroneUsable
   - type: ThrowableBlocked
     behavior: Damage
   - type: Extractable

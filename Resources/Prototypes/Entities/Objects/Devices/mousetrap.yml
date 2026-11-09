@@ -9,9 +9,6 @@
       materialComposition:
         Steel: 12
         Wood: 25
-    - type: Tag
-      tags:
-      - DroneUsable
     # </Trauma>
     - type: Sprite
       sprite: Objects/Devices/mousetrap.rsi

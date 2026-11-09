@@ -10,7 +10,6 @@
   - type: Tag
     tags:
       - AirAlarmElectronics
-      - DroneUsable # Goobstation
   - type: StaticPrice
     price: 61
 
@@ -28,6 +27,5 @@
   - type: Tag
     tags:
       - FireAlarmElectronics
-      - DroneUsable # Goobstation
   - type: StaticPrice
     price: 61
