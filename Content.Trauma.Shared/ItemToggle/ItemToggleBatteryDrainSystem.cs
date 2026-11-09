@@ -1,9 +1,15 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+
 using Content.Shared.Item.ItemToggle;
 using Content.Shared.Item.ItemToggle.Components;
 using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
 
+/// <summary>
+/// Drains the battery of toggled items with <see cref="ItemToggleRequiresChargeComponent"/>
+/// and turns them off when empty.
+/// </summary>
 namespace Content.Trauma.Shared.ItemToggle;
 
 public sealed partial class ItemToggleBatteryDrainSystem : EntitySystem
