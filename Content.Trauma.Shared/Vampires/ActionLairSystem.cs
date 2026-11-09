@@ -84,7 +84,7 @@ public abstract partial class ActionLairSystem : EntitySystem
         }
 
         if (!_doAfter.TryStartDoAfter(doAfterArgs))
-            PredictedQueueDel(vampiricRune);
+            QueueDel(vampiricRune);
     }
 
     [SubscribeLocalEvent]
@@ -93,7 +93,7 @@ public abstract partial class ActionLairSystem : EntitySystem
         var user = args.User;
         if (args.Cancelled || args.Target is not { } target)
         {
-            PredictedQueueDel(ent.Comp.Effect);
+            QueueDel(ent.Comp.Effect);
             return;
         }
 
