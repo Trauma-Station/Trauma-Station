@@ -22,6 +22,7 @@ public abstract partial class ActionLairSystem : EntitySystem
     [Dependency] private SharedActiveBloodLeecherSystem _leecher = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
+
     [Dependency] private EntityQuery<VampireLairComponent> _lairQuery = default!;
     [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
 
@@ -31,14 +32,7 @@ public abstract partial class ActionLairSystem : EntitySystem
     private static readonly EntProtoId BeamProto = "BloodBeam";
     private static readonly EntProtoId ActionTeleportLair = "ActionTeleportLair";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ActionLairComponent, ActionLairEvent>(OnAction);
-        SubscribeLocalEvent<ActionLairComponent, VampireLairDoAfterEvent>(OnDoAfter);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAction(Entity<ActionLairComponent> ent, ref ActionLairEvent args)
     {
         var target = args.Target;
@@ -93,6 +87,7 @@ public abstract partial class ActionLairSystem : EntitySystem
             PredictedQueueDel(vampiricRune);
     }
 
+    [SubscribeLocalEvent]
     private void OnDoAfter(Entity<ActionLairComponent> ent, ref VampireLairDoAfterEvent args)
     {
         var user = args.User;
