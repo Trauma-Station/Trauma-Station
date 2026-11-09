@@ -173,9 +173,6 @@
   - type: Construction
     graph: SolarPanel
     node: solarpanel
-  - type: Tag
-    tags:
-    - DroneUsable # Goobstation
   - type: SolarPanelReplacementMarker
 
 - type: entity

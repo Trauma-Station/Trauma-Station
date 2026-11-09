@@ -48,7 +48,3 @@
     maxCharges: 90
   - type: Sprite
     sprite: Objects/Tools/rpd.rsi
-  - type: Tag
-    tags:
-    # remove RCD tag to prevent revs trolling
-    - DroneUsable

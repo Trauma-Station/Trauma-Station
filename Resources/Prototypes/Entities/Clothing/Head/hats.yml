@@ -709,7 +709,6 @@
     tags:
     - ClothMade
     - WhitelistChameleon
-    - DroneUsable
     - Ushanka
 
 - type: entity
@@ -1287,7 +1286,6 @@
     - CorgiWearable
     - WhitelistChameleon
     - HamsterWearable
-    - DroneUsable # Goobstation
 
 - type: entity
   parent: ClothingHeadHatPartyRed

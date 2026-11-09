@@ -124,7 +124,6 @@
     tags:
     - Plastic
     - Sheet
-    - DroneUsable # Goobstation
     - ConstructionMaterial
   - type: PhysicalComposition
     materialComposition:
@@ -233,7 +232,6 @@
     - type: Tag
       tags:
       - Sheet
-      - DroneUsable # Goobstation
     - type: Material
     - type: PhysicalComposition
       materialComposition:

@@ -52,7 +52,6 @@
   - type: Tag
     tags:
     - PowerCell
-    - DroneUsable
     - Organ
 
 - type: entity

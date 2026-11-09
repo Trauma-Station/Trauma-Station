@@ -96,7 +96,6 @@
     - type: Tag # Trauma
       tags:
       - TechfabMachineBoard
-      - DroneUsable
 
 - type: entity
   id: AmmoTechFabCircuitboard
@@ -132,7 +131,6 @@
     - type: Tag # Trauma
       tags:
       - TechfabMachineBoard
-      - DroneUsable
 
 - type: entity
   id: CircuitImprinterMachineCircuitboard
@@ -692,7 +690,6 @@
       price: 15
     - type: Tag # Goobstation - augment construction
       tags:
-      - DroneUsable
       - AugmentRechargerBoard
       - RechargingBoard # Trauma
 
@@ -743,7 +740,6 @@
       price: 15
     - type: Tag # Goobstation - augment construction
       tags:
-      - DroneUsable
       - AugmentStationBoard
       - RechargingBoard # Trauma
 
@@ -769,7 +765,6 @@
       price: 15
     - type: Tag # Trauma
       tags:
-      - DroneUsable
       - AugmentStationBoard
       - RechargingBoard
 
@@ -794,7 +789,6 @@
       Gold: 25
   - type: Tag # Trauma
     tags:
-    - DroneUsable
     - AugmentStationBoard
     - RechargingBoard
 
@@ -1093,7 +1087,6 @@
         Cable: 2
     - type: Tag
       tags:
-      - DroneUsable # Goobstation
       - MicrowaveMachineBoard
 
 - type: entity
