@@ -27,7 +27,7 @@
   - !Remove type: DamageVisuals
   - type: Bloodstream
     bloodReferenceSolution:
-      reagents:
+      reagents: !Clear
       - ReagentId: Sap
         Quantity: 300 # was 600
 
@@ -47,10 +47,6 @@
     - Appendix
     - Lungs
     - Stomach
-
-- type: entity
-  parent: !Clear [ OrganBaseHeadBald, OrganDionaExternal ] # bald trees
-  id: OrganDionaHead
 
 - type: entity
   id: OrganDionaEyes

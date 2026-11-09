@@ -1,12 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-- type: markingsGroup
-  id: Slime
-  limits:
-    enum.HumanoidVisualLayers.Eyes:
-      limit: 1
-      required: false
-
 - type: entity
   id: AppearanceSlimePerson
   components:
@@ -29,7 +22,7 @@
   - !Remove type: DamageVisuals
   - type: Bloodstream
     bloodReferenceSolution:
-      reagents:
+      reagents: !Clear
       - ReagentId: Slime
         Quantity: 300 # was 600
 

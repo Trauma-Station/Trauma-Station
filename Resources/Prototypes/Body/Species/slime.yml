@@ -2,6 +2,11 @@
   parent: Undergarments
   id: Slime
   limits:
+    # <Trauma>
+    enum.HumanoidVisualLayers.Eyes:
+      limit: 1
+      required: false
+    # </Trauma>
     enum.HumanoidVisualLayers.Hair:
       limit: 1
       required: false

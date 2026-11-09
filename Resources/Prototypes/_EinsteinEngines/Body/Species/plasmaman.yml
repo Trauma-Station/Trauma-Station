@@ -329,10 +329,15 @@
   - type: VisualOrganMarkings
     markingData:
       group: Plasmaman
+  - type: StaticPrice
+    price: 3000
 
 - type: entity
   parent: [ OrganBaseTongue, OrganPlasmamanInternal ]
   id: OrganPlasmamanTongue
+  components:
+  - type: StaticPrice
+    price: 1000
 
 - type: entity
   parent: [ OrganBaseAppendix, OrganSpriteHumanInternal, OrganPlasmamanInternal ]
@@ -351,18 +356,29 @@
     - state: lungs # combined
   - type: Lung
     alert: LowPlasma
+  - type: StaticPrice
+    price: 4000
 
 - type: entity
   parent: [ OrganBaseHeart, OrganPlasmamanInternal, OrganPlasmamanMetabolizer ]
   id: OrganPlasmamanHeart
+  components:
+  - type: StaticPrice
+    price: 4000
 
 - type: entity
   parent: [ OrganBaseStomach, OrganPlasmamanInternal, OrganPlasmamanMetabolizer ]
   id: OrganPlasmamanStomach
+  components:
+  - type: StaticPrice
+    price: 2500
 
 - type: entity
   parent: [ OrganBaseLiver, OrganPlasmamanInternal, OrganPlasmamanMetabolizer ]
   id: OrganPlasmamanLiver
+  components:
+  - type: StaticPrice
+    price: 2500
 
 - type: entity
   parent: [ OrganBaseKidneys, OrganPlasmamanInternal, OrganPlasmamanMetabolizer ]
@@ -371,3 +387,5 @@
   - type: Sprite
     layers:
     - state: kidneys # combined
+  - type: StaticPrice
+    price: 2000

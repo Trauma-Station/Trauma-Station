@@ -14,7 +14,7 @@
   - !Remove type: Wagging # Trauma - moved to tail
   - type: Bloodstream
     bloodReferenceSolution:
-      reagents:
+      reagents: !Clear
       - ReagentId: Blood # no piss fetish please
         Quantity: 300 # was 600
 

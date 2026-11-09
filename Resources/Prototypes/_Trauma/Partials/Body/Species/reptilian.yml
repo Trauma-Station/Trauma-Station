@@ -53,10 +53,6 @@
   id: OrganReptilianTorso
 
 - type: entity
-  parent: !Clear [ OrganBaseHeadSexed, OrganBaseHeadBald, OrganReptilianExternal ] # bald
-  id: OrganReptilianHead
-
-- type: entity
   id: OrganReptilianLegLeft
   components:
   - type: Sprite

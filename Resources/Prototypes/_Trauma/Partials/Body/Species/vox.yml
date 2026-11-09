@@ -46,7 +46,7 @@
   - !Remove type: DamageVisuals
   - type: Bloodstream
     bloodReferenceSolution:
-      reagents:
+      reagents: !Clear
       - ReagentId: AmmoniaBlood
         Quantity: 300 # was 600
 

@@ -1,40 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-- type: markingsGroup
-  parent: Undergarments
-  id: Arachnid
-  onlyGroupWhitelisted: true
-  limits: !Clear
-    enum.HumanoidVisualLayers.Hair:
-      limit: 0
-      required: false
-    enum.HumanoidVisualLayers.FacialHair:
-      limit: 0
-      required: false
-    enum.HumanoidVisualLayers.Wings: # was Tail
-      limit: 1
-      required: true
-      default: [ ArachnidAppendagesDefault ]
-    enum.HumanoidVisualLayers.Chest:
-      limit: 2
-      required: false
-    enum.HumanoidVisualLayers.HeadSide:
-      limit: 1
-      required: true
-      default: [ ArachnidCheliceraeDownwards ]
-    enum.HumanoidVisualLayers.LArm:
-      limit: 1
-      required: false
-    enum.HumanoidVisualLayers.RArm:
-      limit: 1
-      required: false
-    enum.HumanoidVisualLayers.LLeg:
-      limit: 1
-      required: false
-    enum.HumanoidVisualLayers.RLeg:
-      limit: 1
-      required: false
-
 - type: entity
   id: AppearanceArachnid
   components:
@@ -51,18 +16,14 @@
       amount: 3
   - type: Bloodstream
     bloodReferenceSolution:
-      reagents:
+      reagents: !Clear
       - ReagentId: CopperBlood
-        Quantity: 300 # was
+        Quantity: 300 # was 600
   - !Remove type: DamageVisuals
 
 - type: entity
   parent: !Clear [ OrganBaseTorsoWinged, OrganArachnidExternal ] # Winged torso (appendages count as wings for simplicity)
   id: OrganArachnidTorso
-
-- type: entity
-  parent: [ OrganBaseHeadBald, OrganArachnidExternal ] # bald
-  id: OrganArachnidHead
 
 - type: entity
   id: OrganArachnidEyes
