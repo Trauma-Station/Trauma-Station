@@ -1,0 +1,10 @@
+- type: entity
+  parent: [ OrganBaseStomach, OrganMothInternal, OrganMothMetabolizer ]
+  id: OrganMothStomach
+  components:
+  - type: Stomach
+    specialDigestible:
+      tags:
+      - ClothMade
+      - Paper
+      - Pill

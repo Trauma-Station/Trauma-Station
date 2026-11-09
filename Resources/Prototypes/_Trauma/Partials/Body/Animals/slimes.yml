@@ -1,0 +1,11 @@
+- type: entity
+  id: BaseMobSlimes
+  abstract: true
+  components:
+  - type: BodyCache
+  - !Remove type: EntityTableContainerFill
+  - type: InitialBody # replaced container fill
+    organs:
+      Torso: OrganSlimesTorso
+      Stomach: OrganSlimePersonCore
+      Lungs: OrganSlimesLungs

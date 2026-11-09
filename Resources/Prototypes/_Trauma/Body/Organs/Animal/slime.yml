@@ -1,0 +1,7 @@
+- type: entity
+  parent: [ OrganBaseLungs, OrganSlimePersonInternal, OrganSlimePersonMetabolizer ]
+  id: OrganSlimesLungs
+  name: gas sacs
+  components:
+  - type: Lung
+    alert: LowNitrogen

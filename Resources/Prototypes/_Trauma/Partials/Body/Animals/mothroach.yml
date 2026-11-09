@@ -1,0 +1,15 @@
+- type: entity
+  parent: [ MobNightVision ]
+  id: BaseMobMothroach
+  abstract: true
+  components:
+  - type: BodyCache
+  - !Remove type: EntityTableContainerFill
+  - type: InitialBody # replaced container fill
+    organs:
+      Torso: OrganAnimalTorso
+      Lungs: OrganAnimalLungs
+      Heart: OrganAnimalHeart
+      Stomach: OrganMothroachStomach
+      Liver: OrganAnimalLiver
+      Kidneys: OrganAnimalKidneys

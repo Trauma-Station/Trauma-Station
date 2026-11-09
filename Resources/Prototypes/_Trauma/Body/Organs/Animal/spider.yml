@@ -9,13 +9,21 @@
   - type: InitialBody
     organs:
       Torso: OrganAnimalTorso
-      Lungs: OrganArachnidLungs
-      Heart: OrganArachnidHeart
+      Lungs: OrganSpiderLungs
+      Heart: OrganSpiderHeart
       Stomach: OrganSpiderStomach
-      Liver: OrganArachnidLiver
-      Kidneys: OrganArachnidKidneys
+      Liver: OrganSpiderLiver
+      Kidneys: OrganSpiderKidneys
       ArmLeft: OrganArachnidArmLeft
       HandLeft: OrganArachnidHandLeft
+
+- type: entity
+  parent: [ OrganBaseLungs, OrganArachnidInternal, OrganArachnidMetabolizer ]
+  id: OrganSpiderLungs
+
+- type: entity
+  parent: [ OrganBaseHeart, OrganArachnidInternal, OrganArachnidMetabolizer ]
+  id: OrganSpiderHeart
 
 - type: entity
   parent: OrganBloodsuckerStomach
@@ -23,3 +31,11 @@
   components:
   - type: Metabolizer
     updateInterval: 0.1
+
+- type: entity
+  parent: [ OrganBaseLiver, OrganSpriteHumanInternal, OrganArachnidInternal, OrganAnimalMetabolizer ]
+  id: OrganSpiderLiver
+
+- type: entity
+  parent: [ OrganBaseKidneys, OrganSpriteHumanInternal, OrganArachnidInternal, OrganAnimalMetabolizer ]
+  id: OrganSpiderKidneys
