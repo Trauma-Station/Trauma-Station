@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateChameleonEVABundle
+  name: chameleon EVA bundle
+  description: "Contains all the space proof disguises you need."
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: ClothingHeadHelmetEVAChameleon
+        - id: ClothingOuterHardsuitEVAChameleon
+        - id: ClothingMaskGas
+        - id: DoubleEmergencyOxygenTankFilled
+        - id: DoubleEmergencyNitrogenTankFilled
+        - id: DoubleEmergencyPlasmaTankFilled
