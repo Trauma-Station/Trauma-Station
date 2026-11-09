@@ -35,7 +35,6 @@ public abstract partial class SharedDevilContractSystem : EntitySystem
             "Condemned", // already sold it
             // robots
             "BorgChassis",
-            "Drone",
             "Silicon"
         ]
     };
