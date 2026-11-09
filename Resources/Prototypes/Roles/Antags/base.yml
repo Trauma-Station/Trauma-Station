@@ -31,11 +31,12 @@
   - Captain
   - HeadOfPersonnel
   - HeadOfSecurity
-  - ChiefMedicalOfficer
-  - ResearchDirector
-  - ChiefEngineer
-  - Quartermaster
-
+# <Trauma
+#  - ChiefMedicalOfficer
+#  - ResearchDirector
+#  - ChiefEngineer
+#  - Quartermaster
+# </Trauma>
 # Borgs
 - type: antagSpecifier
   abstract: true
