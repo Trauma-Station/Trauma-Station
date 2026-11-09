@@ -16554,3 +16554,10 @@ Entries:
   id: 1787
   time: '2026-11-08T15:50:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5313
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Revolutionaries now require 30 players to roll, up from 20
+  id: 1788
+  time: '2026-11-09T14:18:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5326
