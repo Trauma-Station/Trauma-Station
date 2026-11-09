@@ -68,3 +68,18 @@
       useSound:
         path: /Audio/Items/Culinary/chop.ogg
       changeSound: *ChangeMode
+  - type: Hemostat
+    speed: 0.6
+  - type: Retractor
+    speed: 0.45
+  - type: Cautery
+    speed: 0.7
+  - type: Tweezers
+    speed: 0.55
+  - type: Tending
+    speed: 0.65
+  - type: SurgeryTool
+    startSound:
+      path: /Audio/_Shitmed/Medical/Surgery/retractor1.ogg
+    endSound:
+      path: /Audio/_Shitmed/Medical/Surgery/hemostat1.ogg
