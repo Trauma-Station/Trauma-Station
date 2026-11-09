@@ -8,6 +8,7 @@ using Content.Shared.Database;
 using Content.Shared.DeviceLinking;
 using Content.Shared.DeviceLinking.Events;
 using Content.Shared.Popups;
+using Content.Shared.Temperature.Components;
 using Content.Factory.Common.DeviceLinking;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
@@ -30,6 +31,7 @@ public abstract partial class NuclearReactorSystem : EntitySystem
     [Dependency] private SharedUserInterfaceSystem _ui = default!;
     [Dependency] protected EntityQuery<NuclearPropertiesComponent> PropsQuery = default!;
     [Dependency] protected EntityQuery<ReactorPartComponent> PartQuery = default!;
+    [Dependency] private EntityQuery<TemperatureComponent> _tempQuery = default!;
 
     public override void Initialize()
     {
@@ -213,7 +215,7 @@ public abstract partial class NuclearReactorSystem : EntitySystem
 
             array[i] = new ReactorSlotBUIData
             {
-                Temperature = partComp.Temperature,
+                Temperature = _tempQuery.Comp(part).Temperature,
                 NeutronCount = neutrons,
                 NeutronRadioactivity = props.NeutronRadioactivity,
                 Radioactivity = props.Radioactivity,
