@@ -29,7 +29,7 @@
         length: 2.5
   - type: Item
     shape: !Clear
-    - 0,0,2,0
+    - 0,0,2,1
     storedRotation: 45
   - !Remove type: PreventForcedThrow # AHELP: clown slip me kill he
 
