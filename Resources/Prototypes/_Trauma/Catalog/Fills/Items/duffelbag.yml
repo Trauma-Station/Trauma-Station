@@ -4,7 +4,7 @@
   parent: ClothingBackpackDuffelSyndicateBundle
   id: ClothingBackpackDuffelSyndicateChameleonEVABundle
   name: chameleon EVA bundle
-  description: "Contains all the space proof disguise you need."
+  description: "Contains all the space proof disguises you need."
   components:
   - type: EntityTableContainerFill
     containers:
