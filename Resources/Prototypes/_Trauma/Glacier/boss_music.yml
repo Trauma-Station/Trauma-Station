@@ -8,3 +8,12 @@
   positionOnEnd: 0
   sound:
     path: /Audio/_Lavaland/Mobs/Bosses/hiero_bgm.ogg
+
+- type: bossMusic
+  id: DemonicFrostMiner
+  fade: true
+  fadeInTime: 5
+  fadeOutTime: 8
+  positionOnEnd: 0
+  sound:
+    path: /Audio/_Lavaland/Mobs/Bosses/hiero_bgm.ogg

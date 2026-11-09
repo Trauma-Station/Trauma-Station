@@ -37,3 +37,27 @@
       reagents:
       - ReagentId: LeshyBlood
         Quantity: 5
+
+- type: entity
+  parent: BaseItem
+  id: ResurrectionCrystal
+  name: Resurrection Crystal
+  description: Use in-hand to absorb. Once absorbed, you will teleport to a random safe tile in the station when you die. There's a cost, however...
+  components:
+  - type: Sprite
+    sprite: _Lavaland/Objects/Specific/Lavaland/loot.rsi
+    state: crystal
+  - type: EntityEffectOnUse
+    effects:
+    - !type:Delete
+      queued: true
+    userEffects:
+    - !type:PopupMessage
+      messages: [ resurrection-crystal-done ]
+      type: Local
+      method: PopupEntity
+      visualType: LargeCaution
+    - !type:AddComponents
+      components:
+      - type: ResurrectionCrystal
+        polymorph: CrystalShadowPolymorph # this is evil ngl

@@ -1,0 +1,12 @@
+- type: polymorph
+  id: CrystalShadowPolymorph
+  configuration:
+    entity: MobShadow
+    forced: true
+    transferName: true
+    transferHumanoidAppearance: false
+    allowRepeatedMorphs: true
+    revertOnCrit: false
+    revertOnDeath: false
+    transferDamage: false
+    inventory: Transfer

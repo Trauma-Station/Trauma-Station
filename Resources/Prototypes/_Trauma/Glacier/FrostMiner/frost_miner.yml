@@ -28,7 +28,6 @@
     - state: demonic_miner
       map: [ "enum.MobPhaseVisuals.Layer" ]
   - type: MobPhaseVisuals
-    phases: [ 1, 4 ]
   - type: GenericVisualizer
     visuals:
       enum.MobPhaseVisuals.Key:
@@ -70,7 +69,7 @@
   - type: MeleeWeapon
     attackRate: 4
     soundHit:
-      path: /Audio/Weapons/Xeno/alien_claw_flesh3.ogg
+      path: "/Audio/Items/drill_hit.ogg" # He is holding the demonic jackhammer so makes sense
     range: 1.5
     animation: WeaponArcPunch
     damage:
@@ -107,11 +106,11 @@
       1500:   3
       2250:   4
   - type: BossMusic
-    soundId: Leshy # todo
+    soundId: DemonicFrostMiner
   - type: SpawnLootOnDeath
     table: !type:AllSelector
       children:
-      - id: LeshySkull  # todo
+      - id: ResurrectionCrystal
       - id: LeshyHorn   # todo
       - id: LeshyBlood  # todo
     deleteOnDeath: true

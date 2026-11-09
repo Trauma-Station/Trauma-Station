@@ -10,9 +10,16 @@ namespace Content.Trauma.Shared.EntityEffectOnUse;
 [RegisterComponent, NetworkedComponent]
 public sealed partial class EntityEffectOnUseComponent : Component
 {
-    [DataField(required: true)]
-    public EntityEffect[] Effects = default!;
-
+    /// <summary>
+    /// Effects that will run on the item being used
+    /// </summary>
     [DataField]
-    public bool ApplyToUser = false;
+    public EntityEffect[]? Effects;
+
+    /// <summary>
+    /// Optionally, effects that will run on the user.
+    /// These effects run before the other effects.
+    /// </summary>
+    [DataField]
+    public EntityEffect[]? UserEffects;
 }

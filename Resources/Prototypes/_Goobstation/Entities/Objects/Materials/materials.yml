@@ -27,7 +27,7 @@
     materialComposition:
       BSCrystal: 100
   - type: EntityEffectOnUse
-    effects:
+    userEffects:
     - !type:PlaySoundEffect
         sound:
           path: /Audio/Effects/teleport_departure.ogg
@@ -40,7 +40,6 @@
         sound:
           path: /Audio/Effects/teleport_arrival.ogg
     - !type:Sparks
-    applyToUser: true
   - type: ReduceStackSizeOnUse
   # interferes with bluespace portals. does nothing inside containers etc for simplicity and not being annoying
   - type: PortalTransitEffects

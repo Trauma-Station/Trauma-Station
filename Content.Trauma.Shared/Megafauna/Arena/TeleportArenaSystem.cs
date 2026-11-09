@@ -97,9 +97,11 @@ public sealed partial class TeleportArenaSystem : EntitySystem
 
     /// <summary>
     /// Gets the exit effects of the entity.
-    /// This is called from the <see cref="TeleportFromArenaComponent"/> entity.
     /// </summary>
     /// <returns>Null if there's no exit effects</returns>
+    /// <remarks>
+    /// This is called from the <see cref="TeleportFromArenaComponent"/> entity.
+    /// </remarks>
     public EntityEffect[]? GetExitEffects(Entity<TeleportToArenaComponent?> ent)
     {
         if (!_tpToQuery.Resolve(ent.Owner, ref ent.Comp))
