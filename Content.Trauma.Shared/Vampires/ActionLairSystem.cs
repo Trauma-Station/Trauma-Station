@@ -3,7 +3,6 @@
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.DoAfter;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Light.Components;
 using Content.Shared.Popups;
 using Content.Trauma.Shared.Vampires.Haemomancer;
@@ -12,7 +11,7 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Shared.Vampires;
 
-public abstract partial class SharedActionLairSystem : EntitySystem
+public abstract partial class ActionLairSystem : EntitySystem
 {
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private ActionLairTeleportSystem _lair = default!;
@@ -109,14 +108,14 @@ public abstract partial class SharedActionLairSystem : EntitySystem
         if (!_lairQuery.TryComp(target, out var lair))
             return;
 
-        _meta.SetEntityName(target, $"The coffin of {Identity.Name(args.User, EntityManager)}");
         _meta.SetEntityDescription(target, "This coffin's owner may not actually have been dear to anyone, or even departed quite yet.");
 
         lair.Vampire = args.User;
         Dirty(target, lair);
 
         // Remove the action, only one lair can be created
-        if (_action.GetAction(ent.Owner) is not { } action|| action.Comp.AttachedEntity is not { } attached
+        if (_action.GetAction(ent.Owner) is not { } action
+            || action.Comp.AttachedEntity is not { } attached
             || _action.AddAction(attached, ActionTeleportLair) is not { } tpAction)
             return;
 
