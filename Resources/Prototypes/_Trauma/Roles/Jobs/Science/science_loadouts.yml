@@ -24,109 +24,135 @@
 
 - type: randomLoadout
   id: RandomLoadoutScience
-  archetypes:
-    Geneticist:
-      slots:
-        head: {chance: 0.25, items: {ClothingHeadBandGrey: 1}}
-        eyes: {chance: 0.5, items: {ClothingEyesGlasses: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitGenetics: 1}}
-        outerClothing: {items: {ClothingOuterCoatLabGene: 1}}
-        back: {chance: 0.5, items: {ClothingBackpackGenetics: 1, ClothingBackpackScience: 1, ClothingBackpackSatchelScience: 1}}
-        shoes: {items: {ClothingShoesColorBlue: 2, ClothingShoesColorWhite: 1}}
-        pocket1: {items: {HandheldGeneticsScanner: 1}}
-        pocket2: {chance: 0.3, items: {Ointment: 1, Gauze: 1}}
-        gloves: {chance: 0.7, items: {ClothingHandsGlovesNitrile: 1, ClothingHandsGlovesLatex: 1}}
-        ears: &scienceHeadset {chance: 0.6, items: {ClothingHeadsetScience: 1}}
-    ResearchAssistantCasual:
-      slots:
-        head: {chance: 0.15, items: {ClothingHeadHatPurplesoft: 1, ClothingHeadBandGrey: 1}}
-        eyes: {chance: 0.9, items: {ClothingEyesGlasses: 1}}
-        neck: {items: {ClothingNeckTieSci: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitCasualPurple: 1}}
-        back: {chance: 0.3, items: {ClothingBackpackScience: 1}}
-        shoes: {items: {ClothingShoesColorBlack: 2, ClothingShoesColorPurple: 1, ClothingShoesColorWhite: 1}}
-        pocket1: {chance: 0.4, items: {LuxuryPen: 1, BookRandomStory: 1, FoodSnackChips: 1}}
-        gloves: {chance: 0.15, items: {ClothingHandsGlovesNitrile: 1}}
-        ears: *scienceHeadset
-    ResearchAssistantSack:
-      gear: ResearchAssistantSackBaseGear
-      slots:
-        head: {items: {ClothingHeadPaperSack: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitColorPurple: 1}}
-        back: {items: {ClothingBackpackScience: 1}}
-        shoes: {items: {ClothingShoesColorBlack: 1}}
-        pocket1: {chance: 0.3, items: {FoodSnackChips: 1, DrinkColaCan: 1}}
-        gloves: {chance: 0.2, items: {ClothingHandsGlovesNitrile: 1}}
-        ears: *scienceHeadset
-    ResearchAssistantNetwork:
-      gear: ResearchAssistantNetworkBaseGear
-      slots:
-        head: {chance: 0.2, items: {ClothingHeadHatPurplesoft: 1, ClothingHeadBandGrey: 1}}
-        eyes: {chance: 0.6, items: {ClothingEyesGlasses: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitScientist: 1, ClothingUniformJumpsuitColorPurple: 1}}
-        outerClothing: {chance: 0.3, items: {ClothingOuterCoatLab: 1}}
-        back: {items: {ClothingBackpackScience: 1, ClothingBackpackSatchelScience: 1}}
-        shoes: {items: {ClothingShoesColorBlack: 1, ClothingShoesColorWhite: 1, ClothingShoesColorPurple: 1}}
-        pocket1: {chance: 0.3, items: {LuxuryPen: 1, BookRandomStory: 1}}
-        ears: *scienceHeadset
-    Scientist:
-      slots:
-        head: {chance: 0.2, items: {ClothingHeadHatPurplesoft: 1, ClothingHeadBandGrey: 1}}
-        eyes: {chance: 0.5, items: {ClothingEyesGlasses: 1}}
-        neck: {chance: 0.2, items: {ClothingNeckTieSci: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitScientist: 1}}
-        outerClothing: {chance: 0.4, items: {ClothingOuterCoatLab: 1}}
-        back: {items: {ClothingBackpackScience: 1, ClothingBackpackSatchelScience: 1}}
-        shoes: {items: {ClothingShoesColorWhite: 2, ClothingShoesColorPurple: 1}}
-        pocket1: {items: {NodeScanner: 1}}
-        pocket2: {chance: 0.3, items: {AnomalyScanner: 1, FlashlightLantern: 1}}
-        gloves: {chance: 0.2, items: {ClothingHandsGlovesNitrile: 1}}
-        ears: *scienceHeadset
-    ScientistAnomaly:
-      weight: 0.7
-      gear: ScientistAnomalyBaseGear
-      slots:
-        head: {items: {ClothingHeadHatPurplesoft: 1}}
-        eyes: {chance: 0.3, items: {ClothingEyesGlasses: 1}}
-        neck: {items: {ClothingNeckTieSci: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitScientist: 1}}
-        outerClothing: {chance: 0.25, items: {ClothingOuterCoatLab: 1}}
-        back: {items: {ClothingBackpackSatchelScience: 1}}
-        shoes: {items: {ClothingShoesBootsWinterSci: 1}}
-        pocket1: {chance: 0.3, items: {LuxuryPen: 1, FlashlightLantern: 1}}
-        gloves: {chance: 0.3, items: {ClothingHandsGlovesNitrile: 1}}
-        ears: *scienceHeadset
-    ScientistBeret:
-      slots:
-        head: {items: {ClothingHeadHatBeretRND: 1}}
-        eyes: {items: {ClothingEyesGlasses: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitScientistFormal: 1}}
-        outerClothing: {chance: 0.25, items: {ClothingOuterCoatLab: 1}}
-        back: {chance: 0.3, items: {ClothingBackpackSatchelScience: 1}}
-        shoes: {items: {ClothingShoesColorPurple: 1}}
-        pocket1: {chance: 0.3, items: {LuxuryPen: 1, BookRandomStory: 1}}
-        gloves: {chance: 0.2, items: {ClothingHandsGlovesNitrile: 1}}
-        ears: *scienceHeadset
-    ScientistCoffee:
-      gear: ScientistCoffeeBaseGear
-      slots:
-        head: {chance: 0.2, items: {ClothingHeadHatPurplesoft: 1}}
-        eyes: {chance: 0.8, items: {ClothingEyesGlasses: 1}}
-        neck: {chance: 0.3, items: {ClothingNeckTieSci: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitScientist: 1}}
-        outerClothing: {chance: 0.3, items: {ClothingOuterCoatLab: 1}}
-        back: {items: {ClothingBackpackSatchelScience: 1}}
-        shoes: {items: {ClothingShoesColorWhite: 1}}
-        pocket1: {chance: 0.3, items: {LuxuryPen: 1}}
-        gloves: {chance: 0.2, items: {ClothingHandsGlovesNitrile: 1}}
-        ears: *scienceHeadset
-    Roboticist:
-      slots:
-        eyes: {items: {ClothingEyesHudDiagnostic: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitRoboticist: 1}}
-        outerClothing: {items: {ClothingOuterCoatRoboOpened: 1}}
-        back: {items: {ClothingBackpackScience: 1, ClothingBackpackSatchelScience: 1}}
-        shoes: {items: {ClothingShoesColorBlack: 1}}
-        belt: {items: {ClothingBeltUtilityFilled: 1}}
-        gloves: {items: {ClothingHandsGlovesRobohands: 1}}
-        ears: {chance: 0.6, items: {ClothingHeadsetRobotics: 1}}
+  weights:
+    Geneticist: 1
+    ResearchAssistantCasual: 1
+    ResearchAssistantSack: 1
+    ResearchAssistantNetwork: 1
+    Scientist: 1
+    ScientistAnomaly: 0.7
+    ScientistBeret: 1
+    ScientistCoffee: 1
+    Roboticist: 1
+
+- type: loadoutArchetype
+  id: Geneticist
+  slots:
+    head: { chance: 0.25, items: { ClothingHeadBandGrey: 1 } }
+    eyes: { chance: 0.5, items: { ClothingEyesGlasses: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitGenetics: 1 } }
+    outerClothing: { items: { ClothingOuterCoatLabGene: 1 } }
+    back: { chance: 0.5, items: { ClothingBackpackGenetics: 1, ClothingBackpackScience: 1, ClothingBackpackSatchelScience: 1 } }
+    shoes: { items: { ClothingShoesColorBlue: 2, ClothingShoesColorWhite: 1 } }
+    pocket1: { items: { HandheldGeneticsScanner: 1 } }
+    pocket2: { chance: 0.3, items: { Ointment: 1, Gauze: 1 } }
+    gloves: { chance: 0.7, items: { ClothingHandsGlovesNitrile: 1, ClothingHandsGlovesLatex: 1 } }
+    ears: &scienceHeadset { chance: 0.6, items: { ClothingHeadsetScience: 1 } }
+
+- type: loadoutArchetype
+  id: ResearchAssistantCasual
+  slots:
+    head: { chance: 0.15, items: { ClothingHeadHatPurplesoft: 1, ClothingHeadBandGrey: 1 } }
+    eyes: { chance: 0.9, items: { ClothingEyesGlasses: 1 } }
+    neck: { items: { ClothingNeckTieSci: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitCasualPurple: 1 } }
+    back: { chance: 0.3, items: { ClothingBackpackScience: 1 } }
+    shoes: { items: { ClothingShoesColorBlack: 2, ClothingShoesColorPurple: 1, ClothingShoesColorWhite: 1 } }
+    pocket1: { chance: 0.4, items: { LuxuryPen: 1, BookRandomStory: 1, FoodSnackChips: 1 } }
+    gloves: { chance: 0.15, items: { ClothingHandsGlovesNitrile: 1 } }
+    ears: *scienceHeadset
+
+- type: loadoutArchetype
+  id: ResearchAssistantSack
+  gear: ResearchAssistantSackBaseGear
+  slots:
+    head: { items: { ClothingHeadPaperSack: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitColorPurple: 1 } }
+    back: { items: { ClothingBackpackScience: 1 } }
+    shoes: { items: { ClothingShoesColorBlack: 1 } }
+    pocket1: { chance: 0.3, items: { FoodSnackChips: 1, DrinkColaCan: 1 } }
+    gloves: { chance: 0.2, items: { ClothingHandsGlovesNitrile: 1 } }
+    ears: *scienceHeadset
+
+- type: loadoutArchetype
+  id: ResearchAssistantNetwork
+  gear: ResearchAssistantNetworkBaseGear
+  slots:
+    head: { chance: 0.2, items: { ClothingHeadHatPurplesoft: 1, ClothingHeadBandGrey: 1 } }
+    eyes: { chance: 0.6, items: { ClothingEyesGlasses: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitScientist: 1, ClothingUniformJumpsuitColorPurple: 1 } }
+    outerClothing: { chance: 0.3, items: { ClothingOuterCoatLab: 1 } }
+    back: { items: { ClothingBackpackScience: 1, ClothingBackpackSatchelScience: 1 } }
+    shoes: { items: { ClothingShoesColorBlack: 1, ClothingShoesColorWhite: 1, ClothingShoesColorPurple: 1 } }
+    pocket1: { chance: 0.3, items: { LuxuryPen: 1, BookRandomStory: 1 } }
+    ears: *scienceHeadset
+
+- type: loadoutArchetype
+  id: Scientist
+  slots:
+    head: { chance: 0.2, items: { ClothingHeadHatPurplesoft: 1, ClothingHeadBandGrey: 1 } }
+    eyes: { chance: 0.5, items: { ClothingEyesGlasses: 1 } }
+    neck: { chance: 0.2, items: { ClothingNeckTieSci: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitScientist: 1 } }
+    outerClothing: { chance: 0.4, items: { ClothingOuterCoatLab: 1 } }
+    back: { items: { ClothingBackpackScience: 1, ClothingBackpackSatchelScience: 1 } }
+    shoes: { items: { ClothingShoesColorWhite: 2, ClothingShoesColorPurple: 1 } }
+    pocket1: { items: { NodeScanner: 1 } }
+    pocket2: { chance: 0.3, items: { AnomalyScanner: 1, FlashlightLantern: 1 } }
+    gloves: { chance: 0.2, items: { ClothingHandsGlovesNitrile: 1 } }
+    ears: *scienceHeadset
+
+- type: loadoutArchetype
+  id: ScientistAnomaly
+  gear: ScientistAnomalyBaseGear
+  slots:
+    head: { items: { ClothingHeadHatPurplesoft: 1 } }
+    eyes: { chance: 0.3, items: { ClothingEyesGlasses: 1 } }
+    neck: { items: { ClothingNeckTieSci: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitScientist: 1 } }
+    outerClothing: { chance: 0.25, items: { ClothingOuterCoatLab: 1 } }
+    back: { items: { ClothingBackpackSatchelScience: 1 } }
+    shoes: { items: { ClothingShoesBootsWinterSci: 1 } }
+    pocket1: { chance: 0.3, items: { LuxuryPen: 1, FlashlightLantern: 1 } }
+    gloves: { chance: 0.3, items: { ClothingHandsGlovesNitrile: 1 } }
+    ears: *scienceHeadset
+
+- type: loadoutArchetype
+  id: ScientistBeret
+  slots:
+    head: { items: { ClothingHeadHatBeretRND: 1 } }
+    eyes: { items: { ClothingEyesGlasses: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitScientistFormal: 1 } }
+    outerClothing: { chance: 0.25, items: { ClothingOuterCoatLab: 1 } }
+    back: { chance: 0.3, items: { ClothingBackpackSatchelScience: 1 } }
+    shoes: { items: { ClothingShoesColorPurple: 1 } }
+    pocket1: { chance: 0.3, items: { LuxuryPen: 1, BookRandomStory: 1 } }
+    gloves: { chance: 0.2, items: { ClothingHandsGlovesNitrile: 1 } }
+    ears: *scienceHeadset
+
+- type: loadoutArchetype
+  id: ScientistCoffee
+  gear: ScientistCoffeeBaseGear
+  slots:
+    head: { chance: 0.2, items: { ClothingHeadHatPurplesoft: 1 } }
+    eyes: { chance: 0.8, items: { ClothingEyesGlasses: 1 } }
+    neck: { chance: 0.3, items: { ClothingNeckTieSci: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitScientist: 1 } }
+    outerClothing: { chance: 0.3, items: { ClothingOuterCoatLab: 1 } }
+    back: { items: { ClothingBackpackSatchelScience: 1 } }
+    shoes: { items: { ClothingShoesColorWhite: 1 } }
+    pocket1: { chance: 0.3, items: { LuxuryPen: 1 } }
+    gloves: { chance: 0.2, items: { ClothingHandsGlovesNitrile: 1 } }
+    ears: *scienceHeadset
+
+- type: loadoutArchetype
+  id: Roboticist
+  slots:
+    eyes: { items: { ClothingEyesHudDiagnostic: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitRoboticist: 1 } }
+    outerClothing: { items: { ClothingOuterCoatRoboOpened: 1 } }
+    back: { items: { ClothingBackpackScience: 1, ClothingBackpackSatchelScience: 1 } }
+    shoes: { items: { ClothingShoesColorBlack: 1 } }
+    belt: { items: { ClothingBeltUtilityFilled: 1 } }
+    gloves: { items: { ClothingHandsGlovesRobohands: 1 } }
+    ears: { chance: 0.6, items: { ClothingHeadsetRobotics: 1 } }

@@ -77,283 +77,342 @@
 
 - type: randomLoadout
   id: RandomLoadoutMedical
-  archetypes:
-    Chemist:
-      slots:
-        head: {chance: 0.15, items: {ClothingHeadBandGrey: 1, ClothingHeadBandGreen: 1}}
-        eyes: {items: {ClothingEyesGlassesChemical: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitChemistry: 1}}
-        outerClothing: {items: {ClothingOuterCoatLabChem: 1}}
-        back: {chance: 0.3, items: {ClothingBackpackMedical: 1, ClothingBackpackSatchelMedical: 1}}
-        shoes: {items: {ClothingShoesColorOrange: 3, ClothingShoesColorWhite: 1}}
-        belt: {chance: 0.2, items: {ClothingBeltMedical: 1}}
-        pocket1: {items: {PillCanisterRandom: 1}}
-        pocket2: {chance: 0.3, items: {ChemistryBottleLeporazine: 1, PillCanisterDylovene: 1}}
-        gloves: {chance: 0.6, items: {ClothingHandsGlovesLatex: 1, ClothingHandsGlovesNitrile: 1}}
-        ears: &medicalHeadset {chance: 0.6, items: {ClothingHeadsetMedical: 1}}
-    ChemistBag:
-      weight: 0.7
-      slots:
-        eyes: {items: {ClothingEyesGlassesChemical: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitChemistry: 1}}
-        outerClothing: {items: {ClothingOuterCoatLabChem: 1}}
-        back: {chance: 0.6, items: {ClothingBackpackChemistry: 1, ClothingBackpackSatchelChemistry: 1}}
-        shoes: {items: {ClothingShoesColorOrange: 1}}
-        belt: {chance: 0.5, items: {ChemBag: 1}}
-        pocket1: {items: {PillCanisterRandom: 1}}
-        pocket2: {items: {PillCanisterRandom: 1}}
-        gloves: {chance: 0.6, items: {ClothingHandsGlovesLatex: 1}}
-        ears: *medicalHeadset
-    ChemistWinter:
-      weight: 0.6
-      slots:
-        head: {chance: 0.4, items: {ClothingHeadHatPaper: 1}}
-        eyes: {items: {ClothingEyesGlassesChemical: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitChemistry: 1}}
-        outerClothing: {items: {ClothingOuterWinterChem: 1}}
-        back: {chance: 0.5, items: {ClothingBackpackSatchelChemistry: 1}}
-        shoes: {items: {ClothingShoesColorOrange: 1}}
-        belt: {chance: 0.3, items: {ClothingBeltMedical: 1}}
-        pocket1: {items: {PillCanisterRandom: 1}}
-        pocket2: {chance: 0.4, items: {PillCanisterRandom: 1}}
-        ears: *medicalHeadset
-    Dentist:
-      gear: DentistBaseGear
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatSurgcapBlue: 1, ClothingHeadHatSurgcapGreen: 1}}
-        eyes: {items: {ClothingEyesGlasses: 1}}
-        jumpsuit: {items: {UniformScrubsColorBlue: 1}}
-        shoes: {items: {ClothingShoesColorBlue: 2, ClothingShoesColorWhite: 1}}
-        pocket1: {chance: 0.3, items: {Ointment: 1, Gauze: 1}}
-        gloves: {items: {ClothingHandsGlovesLatex: 1, ClothingHandsGlovesNitrile: 1}}
-        ears: *medicalHeadset
-    DentistFull:
-      weight: 0.5
-      gear: DentistFullBaseGear
-      slots:
-        head: {chance: 0.8, items: {ClothingHeadHatSurgcapBlue: 1}}
-        eyes: {items: {ClothingEyesGlasses: 1}}
-        jumpsuit: {items: {UniformScrubsColorBlue: 1}}
-        shoes: {items: {ClothingShoesColorBlue: 1}}
-        belt: {chance: 0.5, items: {ClothingBeltStorageWaistbag: 1}}
-        pocket1: {chance: 0.5, items: {Scalpel: 1}}
-        pocket2: {chance: 0.5, items: {Gauze: 1}}
-        gloves: {items: {ClothingHandsGlovesLatex: 1}}
-        ears: *medicalHeadset
-    DoctorBlood:
-      gear: DoctorBeltBaseGear
-      slots:
-        head: {chance: 0.2, items: {ClothingHeadMirror: 1, ClothingHeadHatSurgcapGreen: 1}}
-        eyes: {chance: 0.2, items: {ClothingEyesGlasses: 1}}
-        neck: {items: {ClothingNeckStethoscope: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitMedicalDoctor: 1}}
-        outerClothing: {items: {ClothingOuterCoatLab: 1}}
-        shoes: {items: {ClothingShoesColorWhite: 3, ClothingShoesColorBlue: 1}}
-        pocket1: {chance: 0.4, items: {Ointment: 1, Gauze: 1, Brutepack: 1}}
-        gloves: {items: {ClothingHandsGlovesNitrile: 1}}
-        ears: *medicalHeadset
-    DoctorStethoscope:
-      gear: DoctorSatchelBaseGear
-      slots:
-        head: {chance: 0.2, items: {ClothingHeadMirror: 1, ClothingHeadHatSurgcapGreen: 1}}
-        eyes: {chance: 0.2, items: {ClothingEyesGlasses: 1}}
-        neck: {items: {ClothingNeckStethoscope: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitMedicalDoctor: 1}}
-        outerClothing: {items: {ClothingOuterCoatLab: 1}}
-        shoes: {items: {ClothingShoesColorWhite: 3, ClothingShoesColorBlue: 1}}
-        belt: {chance: 0.4, items: {ClothingBeltMedical: 1}}
-        pocket1: {chance: 0.4, items: {Ointment: 1, Gauze: 1}}
-        gloves: {items: {ClothingHandsGlovesNitrile: 1}}
-        ears: {items: {ClothingHeadsetMedical: 1}}
-    DoctorHud:
-      weight: 0.7
-      slots:
-        head: {chance: 0.5, items: {ClothingHeadHatCorpsoft: 1, ClothingHeadHatSurgcapGreen: 1}}
-        eyes: {chance: 0.4, items: {ClothingEyesHudMedical: 1, ClothingEyesGlasses: 2}}
-        neck: {items: {ClothingNeckStethoscope: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitMedicalDoctor: 1}}
-        outerClothing: {items: {ClothingOuterCoatLab: 1}}
-        back: {chance: 0.5, items: {ClothingBackpackMedical: 1}}
-        shoes: {items: {ClothingShoesColorWhite: 1}}
-        belt: {chance: 0.15, items: {ClothingBeltMedicalFilled: 1, ClothingBeltMedical: 4}}
-        pocket1: {chance: 0.15, items: {PillCanisterTricordrazine: 1, PillCanisterDermaline: 1}}
-        pocket2: {chance: 0.3, items: {Ointment: 1, Gauze: 1, Brutepack: 1}}
-        gloves: {items: {ClothingHandsGlovesNitrile: 1}}
-        ears: *medicalHeadset
-    DoctorWinter:
-      slots:
-        head: {items: {ClothingHeadHatBeretMedic: 1}}
-        eyes: {chance: 0.2, items: {ClothingEyesGlasses: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitMedicalDoctor: 1}}
-        outerClothing: {items: {ClothingOuterWinterMed: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackMedical: 1, ClothingBackpackSatchelMedical: 1}}
-        shoes: {items: {ClothingShoesBootsWinterMed: 1}}
-        belt: {chance: 0.3, items: {ClothingBeltMedical: 1}}
-        pocket1: {items: {ChemistryBottleLeporazine: 1}}
-        pocket2: {chance: 0.3, items: {Ointment: 1, Gauze: 1}}
-        gloves: {items: {ClothingHandsGlovesLatex: 1}}
-        ears: *medicalHeadset
-    MedicalIntern:
-      gear: MedicalInternBaseGear
-      slots:
-        head: {items: {ClothingHeadBandGreen: 1, ClothingHeadBandBlue: 1}}
-        eyes: {chance: 0.15, items: {ClothingEyesGlasses: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitColorWhite: 1}}
-        shoes: {items: {ClothingShoesColorWhite: 1}}
-        pocket1: {items: {Ointment: 1}}
-        pocket2: {chance: 0.3, items: {Gauze: 1, Brutepack: 1}}
-        gloves: {chance: 0.3, items: {ClothingHandsGlovesLatex: 1}}
-        ears: *medicalHeadset
-    ParamedicMeds:
-      gear: ParamedicMedsBaseGear
-      slots:
-        head: {chance: 0.8, items: {ClothingHeadHatParamedicsoft: 1}}
-        eyes: {chance: 0.2, items: {ClothingEyesGlassesCheapSunglasses: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitParamedic: 1}}
-        outerClothing: {chance: 0.5, items: {ClothingOuterCoatParamedicWB: 1}}
-        back: {chance: 0.3, items: {ClothingBackpackMedical: 1}}
-        shoes: {items: {ClothingShoesColorBlue: 2, ClothingShoesColorWhite: 1}}
-        pocket1: {chance: 0.4, items: {Ointment: 1, Gauze: 1, Brutepack: 1}}
-        gloves: {items: {ClothingHandsGlovesNitrile: 1}}
-        ears: *medicalHeadset
-    ParamedicCoat:
-      gear: ParamedicGauzeBaseGear
-      slots:
-        head: {chance: 0.8, items: {ClothingHeadHatParamedicsoftFlipped: 1}}
-        eyes: {chance: 0.2, items: {ClothingEyesGlassesCheapSunglasses: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitParamedic: 1}}
-        outerClothing: {items: {ClothingOuterCoatParamedicWB: 1}}
-        back: {chance: 0.3, items: {ClothingBackpackMedical: 1}}
-        shoes: {items: {ClothingShoesColorBlue: 2, ClothingShoesColorWhite: 1}}
-        pocket1: {chance: 0.4, items: {Ointment: 1, Brutepack: 1}}
-        gloves: {items: {ClothingHandsGlovesNitrile: 1}}
-        ears: {items: {ClothingHeadsetMedical: 1}}
-    ParamedicEMT:
-      weight: 0.5
-      gear: ParamedicGauzeBaseGear
-      slots:
-        head: {chance: 0.8, items: {ClothingHeadHatParamedicsoft: 1, ClothingHeadHatParamedicsoftFlipped: 1}}
-        eyes: {chance: 0.3, items: {ClothingEyesHudMedical: 1}}
-        neck: {chance: 0.5, items: {ClothingNeckStethoscope: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitParamedic: 1}}
-        outerClothing: {chance: 0.7, items: {ClothingOuterWinterPara: 1, ClothingOuterCoatParamedicWB: 1}}
-        back: {chance: 0.5, items: {ClothingBackpackDuffelGenetics: 1, ClothingBackpackMedical: 1}}
-        shoes: {items: {ClothingShoesSwat: 1, ClothingShoesColorBlue: 2}}
-        belt: {chance: 0.15, items: {ClothingBeltMedicalEMTFilled: 1}}
-        pocket1: {chance: 0.05, items: {CombatMedipen: 1}}
-        pocket2: {chance: 0.4, items: {Brutepack: 1, Ointment: 1}}
-        gloves: {items: {ClothingHandsGlovesNitrile: 1, ClothingHandsGlovesLatex: 1}}
-        ears: *medicalHeadset
-    Psychologist:
-      gear: PsychologistBaseGear
-      slots:
-        head: {chance: 0.6, items: {ClothingHeadHatAnimalCat: 1}}
-        eyes: {chance: 0.4, items: {ClothingEyesGlasses: 1, ClothingEyesGlassesJamjar: 1}}
-        neck: {chance: 0.2, items: {ClothingNeckScarfStripedGreen: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitPsychologist: 1}}
-        back: {chance: 0.2, items: {ClothingBackpackSatchel: 1}}
-        shoes: {items: {ClothingShoesLeather: 2, ClothingShoesColorBrown: 1}}
-        pocket1: {chance: 0.4, items: {LuxuryPen: 1, BookRandomStory: 1}}
-        ears: *medicalHeadset
-    PsychologistMagician:
-      weight: 0.5
-      gear: PsychologistCigarBaseGear
-      slots:
-        head: {chance: 0.8, items: {ClothingHeadHatMagician: 1}}
-        eyes: {chance: 0.2, items: {ClothingEyesHudMedical: 1}}
-        neck: {items: {ClothingNeckTieRed: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitPsychologist: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackSatchelLeather: 1}}
-        shoes: {items: {ClothingShoesLeather: 1}}
-        pocket1: {chance: 0.5, items: {WhoopieCushion: 1}}
-        pocket2: {chance: 0.1, items: {PillSpaceDrugs: 1}}
-        ears: *medicalHeadset
-    PsychologistFoam:
-      weight: 0.4
-      gear: PsychologistFoamBaseGear
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatAnimalCat: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitPsychologist: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackSatchelLeather: 1}}
-        shoes: {items: {ClothingShoesLeather: 1}}
-        pocket1: {chance: 0.6, items: {BulletFoam: 1}}
-        pocket2: {chance: 0.1, items: {PillSpaceDrugs: 1}}
-        ears: *medicalHeadset
-    ScrubsBlue:
-      slots:
-        head: {items: {ClothingHeadHatSurgcapBlue: 1}}
-        eyes: {chance: 0.2, items: {ClothingEyesGlasses: 1}}
-        jumpsuit: {items: {UniformScrubsColorBlue: 1}}
-        shoes: {items: {ClothingShoesColorBlue: 2, ClothingShoesColorWhite: 1}}
-        pocket1: {chance: 0.3, items: {Ointment: 1, Gauze: 1}}
-        gloves: {items: {ClothingHandsGlovesLatex: 1}}
-        ears: {chance: 0.4, items: {ClothingHeadsetMedical: 1}}
-    ScrubsGreen:
-      slots:
-        head: {items: {ClothingHeadHatSurgcapGreen: 1}}
-        eyes: {chance: 0.2, items: {ClothingEyesGlasses: 1}}
-        jumpsuit: {items: {UniformScrubsColorGreen: 1}}
-        shoes: {items: {ClothingShoesColorGreen: 2, ClothingShoesColorWhite: 1}}
-        pocket1: {chance: 0.3, items: {Ointment: 1, Gauze: 1}}
-        gloves: {items: {ClothingHandsGlovesLatex: 1}}
-        ears: {chance: 0.4, items: {ClothingHeadsetMedical: 1}}
-    ScrubsPurple:
-      slots:
-        head: {items: {ClothingHeadHatSurgcapPurple: 1}}
-        eyes: {chance: 0.2, items: {ClothingEyesGlasses: 1}}
-        jumpsuit: {items: {UniformScrubsColorPurple: 1}}
-        shoes: {items: {ClothingShoesColorRed: 2, ClothingShoesColorWhite: 1}}
-        pocket1: {chance: 0.3, items: {Ointment: 1, Gauze: 1}}
-        gloves: {items: {ClothingHandsGlovesLatex: 1}}
-        ears: *medicalHeadset
-    Surgeon:
-      weight: 0.8
-      slots:
-        head: {items: {ClothingHeadHatSurgcapGreen: 1}}
-        eyes: {chance: 0.2, items: {ClothingEyesGlasses: 1}}
-        jumpsuit: {items: {UniformScrubsColorGreen: 1}}
-        shoes: {items: {ClothingShoesColorGreen: 2, ClothingShoesColorWhite: 1}}
-        belt: {chance: 0.2, items: {ClothingBeltMedical: 1}}
-        pocket1: {chance: 0.7, items: {Scalpel: 1}}
-        pocket2: {items: {Cautery: 1}}
-        gloves: {items: {ClothingHandsGlovesLatex: 1}}
-        ears: *medicalHeadset
-    SurgeonAdvanced:
-      weight: 0.15
-      slots:
-        head: {items: {ClothingHeadHatSurgcapGreen: 1, ClothingHeadHatSurgcapPurple: 1, ClothingHeadHatSurgcapBlue: 1}}
-        eyes: {chance: 0.3, items: {ClothingEyesHudMedical: 1}}
-        jumpsuit: {items: {UniformScrubsColorGreen: 1, UniformScrubsColorPurple: 1, UniformScrubsColorBlue: 1}}
-        back: {chance: 0.5, items: {ClothingBackpackSatchelMedical: 1}}
-        shoes: {items: {ClothingShoesColorWhite: 1}}
-        belt: {chance: 0.3, items: {ClothingBeltMedical: 1}}
-        pocket1: {chance: 0.15, items: {ScalpelAdvanced: 1}}
-        pocket2: {chance: 0.2, items: {MedicatedSuture: 1, RegenerativeMesh: 1}}
-        gloves: {items: {ClothingHandsGlovesLatex: 1, ClothingHandsGlovesNitrile: 1}}
-        ears: *medicalHeadset
-    Virologist:
-      slots:
-        head: {items: {ClothingHeadHatHoodBioVirology: 1}}
-        mask: {items: {ClothingMaskSterile: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitVirology: 1}}
-        outerClothing: {items: {ClothingOuterBioVirology: 1}}
-        back: {chance: 0.3, items: {ClothingBackpackMedical: 1}}
-        shoes: {items: {ClothingShoesColorGreen: 1}}
-        belt: {chance: 0.2, items: {ClothingBeltMedical: 1}}
-        pocket1: {chance: 0.3, items: {PillCanisterDylovene: 1, Ointment: 1}}
-        gloves: {items: {ClothingHandsGlovesNitrile: 1}}
-        ears: *medicalHeadset
-    VirologistWinter:
-      weight: 0.6
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatBeretSeniorPhysician: 1, ClothingHeadMirror: 1}}
-        eyes: {chance: 0.3, items: {ClothingEyesHudMedical: 1, ClothingEyesHudViro: 1}}
-        neck: {items: {ClothingNeckStethoscope: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitVirology: 1}}
-        outerClothing: {items: {ClothingOuterWinterViro: 1, ClothingOuterCoatLabViro: 1}}
-        back: {chance: 0.5, items: {ClothingBackpackVirology: 1, ClothingBackpackSatchelVirology: 1}}
-        shoes: {items: {ClothingShoesColorGreen: 1}}
-        belt: {chance: 0.15, items: {ClothingBeltMedical: 1}}
-        pocket1: {chance: 0.3, items: {PillCanisterTricordrazine: 1, PillCanisterDylovene: 1}}
-        gloves: {items: {ClothingHandsGlovesNitrile: 1, ClothingHandsGlovesLatex: 1}}
-        ears: *medicalHeadset
+  weights:
+    Chemist: 1
+    ChemistBag: 0.7
+    ChemistWinter: 0.6
+    Dentist: 1
+    DentistFull: 0.5
+    DoctorBlood: 1
+    DoctorStethoscope: 1
+    DoctorHud: 0.7
+    DoctorWinter: 1
+    MedicalIntern: 1
+    ParamedicMeds: 1
+    ParamedicCoat: 1
+    ParamedicEMT: 0.5
+    Psychologist: 1
+    PsychologistMagician: 0.5
+    PsychologistFoam: 0.4
+    ScrubsBlue: 1
+    ScrubsGreen: 1
+    ScrubsPurple: 1
+    Surgeon: 0.8
+    SurgeonAdvanced: 0.15
+    Virologist: 1
+    VirologistWinter: 0.6
+
+- type: loadoutArchetype
+  id: Chemist
+  slots:
+    head: { chance: 0.15, items: { ClothingHeadBandGrey: 1, ClothingHeadBandGreen: 1 } }
+    eyes: { items: { ClothingEyesGlassesChemical: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitChemistry: 1 } }
+    outerClothing: { items: { ClothingOuterCoatLabChem: 1 } }
+    back: { chance: 0.3, items: { ClothingBackpackMedical: 1, ClothingBackpackSatchelMedical: 1 } }
+    shoes: { items: { ClothingShoesColorOrange: 3, ClothingShoesColorWhite: 1 } }
+    belt: { chance: 0.2, items: { ClothingBeltMedical: 1 } }
+    pocket1: { items: { PillCanisterRandom: 1 } }
+    pocket2: { chance: 0.3, items: { ChemistryBottleLeporazine: 1, PillCanisterDylovene: 1 } }
+    gloves: { chance: 0.6, items: { ClothingHandsGlovesLatex: 1, ClothingHandsGlovesNitrile: 1 } }
+    ears: &medicalHeadset { chance: 0.6, items: { ClothingHeadsetMedical: 1 } }
+
+- type: loadoutArchetype
+  id: ChemistBag
+  slots:
+    eyes: { items: { ClothingEyesGlassesChemical: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitChemistry: 1 } }
+    outerClothing: { items: { ClothingOuterCoatLabChem: 1 } }
+    back: { chance: 0.6, items: { ClothingBackpackChemistry: 1, ClothingBackpackSatchelChemistry: 1 } }
+    shoes: { items: { ClothingShoesColorOrange: 1 } }
+    belt: { chance: 0.5, items: { ChemBag: 1 } }
+    pocket1: { items: { PillCanisterRandom: 1 } }
+    pocket2: { items: { PillCanisterRandom: 1 } }
+    gloves: { chance: 0.6, items: { ClothingHandsGlovesLatex: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: ChemistWinter
+  slots:
+    head: { chance: 0.4, items: { ClothingHeadHatPaper: 1 } }
+    eyes: { items: { ClothingEyesGlassesChemical: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitChemistry: 1 } }
+    outerClothing: { items: { ClothingOuterWinterChem: 1 } }
+    back: { chance: 0.5, items: { ClothingBackpackSatchelChemistry: 1 } }
+    shoes: { items: { ClothingShoesColorOrange: 1 } }
+    belt: { chance: 0.3, items: { ClothingBeltMedical: 1 } }
+    pocket1: { items: { PillCanisterRandom: 1 } }
+    pocket2: { chance: 0.4, items: { PillCanisterRandom: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: Dentist
+  gear: DentistBaseGear
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatSurgcapBlue: 1, ClothingHeadHatSurgcapGreen: 1 } }
+    eyes: { items: { ClothingEyesGlasses: 1 } }
+    jumpsuit: { items: { UniformScrubsColorBlue: 1 } }
+    shoes: { items: { ClothingShoesColorBlue: 2, ClothingShoesColorWhite: 1 } }
+    pocket1: { chance: 0.3, items: { Ointment: 1, Gauze: 1 } }
+    gloves: { items: { ClothingHandsGlovesLatex: 1, ClothingHandsGlovesNitrile: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: DentistFull
+  gear: DentistFullBaseGear
+  slots:
+    head: { chance: 0.8, items: { ClothingHeadHatSurgcapBlue: 1 } }
+    eyes: { items: { ClothingEyesGlasses: 1 } }
+    jumpsuit: { items: { UniformScrubsColorBlue: 1 } }
+    shoes: { items: { ClothingShoesColorBlue: 1 } }
+    belt: { chance: 0.5, items: { ClothingBeltStorageWaistbag: 1 } }
+    pocket1: { chance: 0.5, items: { Scalpel: 1 } }
+    pocket2: { chance: 0.5, items: { Gauze: 1 } }
+    gloves: { items: { ClothingHandsGlovesLatex: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: DoctorBlood
+  gear: DoctorBeltBaseGear
+  slots:
+    head: { chance: 0.2, items: { ClothingHeadMirror: 1, ClothingHeadHatSurgcapGreen: 1 } }
+    eyes: { chance: 0.2, items: { ClothingEyesGlasses: 1 } }
+    neck: { items: { ClothingNeckStethoscope: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitMedicalDoctor: 1 } }
+    outerClothing: { items: { ClothingOuterCoatLab: 1 } }
+    shoes: { items: { ClothingShoesColorWhite: 3, ClothingShoesColorBlue: 1 } }
+    pocket1: { chance: 0.4, items: { Ointment: 1, Gauze: 1, Brutepack: 1 } }
+    gloves: { items: { ClothingHandsGlovesNitrile: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: DoctorStethoscope
+  gear: DoctorSatchelBaseGear
+  slots:
+    head: { chance: 0.2, items: { ClothingHeadMirror: 1, ClothingHeadHatSurgcapGreen: 1 } }
+    eyes: { chance: 0.2, items: { ClothingEyesGlasses: 1 } }
+    neck: { items: { ClothingNeckStethoscope: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitMedicalDoctor: 1 } }
+    outerClothing: { items: { ClothingOuterCoatLab: 1 } }
+    shoes: { items: { ClothingShoesColorWhite: 3, ClothingShoesColorBlue: 1 } }
+    belt: { chance: 0.4, items: { ClothingBeltMedical: 1 } }
+    pocket1: { chance: 0.4, items: { Ointment: 1, Gauze: 1 } }
+    gloves: { items: { ClothingHandsGlovesNitrile: 1 } }
+    ears: { items: { ClothingHeadsetMedical: 1 } }
+
+- type: loadoutArchetype
+  id: DoctorHud
+  slots:
+    head: { chance: 0.5, items: { ClothingHeadHatCorpsoft: 1, ClothingHeadHatSurgcapGreen: 1 } }
+    eyes: { chance: 0.4, items: { ClothingEyesHudMedical: 1, ClothingEyesGlasses: 2 } }
+    neck: { items: { ClothingNeckStethoscope: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitMedicalDoctor: 1 } }
+    outerClothing: { items: { ClothingOuterCoatLab: 1 } }
+    back: { chance: 0.5, items: { ClothingBackpackMedical: 1 } }
+    shoes: { items: { ClothingShoesColorWhite: 1 } }
+    belt: { chance: 0.15, items: { ClothingBeltMedicalFilled: 1, ClothingBeltMedical: 4 } }
+    pocket1: { chance: 0.15, items: { PillCanisterTricordrazine: 1, PillCanisterDermaline: 1 } }
+    pocket2: { chance: 0.3, items: { Ointment: 1, Gauze: 1, Brutepack: 1 } }
+    gloves: { items: { ClothingHandsGlovesNitrile: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: DoctorWinter
+  slots:
+    head: { items: { ClothingHeadHatBeretMedic: 1 } }
+    eyes: { chance: 0.2, items: { ClothingEyesGlasses: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitMedicalDoctor: 1 } }
+    outerClothing: { items: { ClothingOuterWinterMed: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackMedical: 1, ClothingBackpackSatchelMedical: 1 } }
+    shoes: { items: { ClothingShoesBootsWinterMed: 1 } }
+    belt: { chance: 0.3, items: { ClothingBeltMedical: 1 } }
+    pocket1: { items: { ChemistryBottleLeporazine: 1 } }
+    pocket2: { chance: 0.3, items: { Ointment: 1, Gauze: 1 } }
+    gloves: { items: { ClothingHandsGlovesLatex: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: MedicalIntern
+  gear: MedicalInternBaseGear
+  slots:
+    head: { items: { ClothingHeadBandGreen: 1, ClothingHeadBandBlue: 1 } }
+    eyes: { chance: 0.15, items: { ClothingEyesGlasses: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitColorWhite: 1 } }
+    shoes: { items: { ClothingShoesColorWhite: 1 } }
+    pocket1: { items: { Ointment: 1 } }
+    pocket2: { chance: 0.3, items: { Gauze: 1, Brutepack: 1 } }
+    gloves: { chance: 0.3, items: { ClothingHandsGlovesLatex: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: ParamedicMeds
+  gear: ParamedicMedsBaseGear
+  slots:
+    head: { chance: 0.8, items: { ClothingHeadHatParamedicsoft: 1 } }
+    eyes: { chance: 0.2, items: { ClothingEyesGlassesCheapSunglasses: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitParamedic: 1 } }
+    outerClothing: { chance: 0.5, items: { ClothingOuterCoatParamedicWB: 1 } }
+    back: { chance: 0.3, items: { ClothingBackpackMedical: 1 } }
+    shoes: { items: { ClothingShoesColorBlue: 2, ClothingShoesColorWhite: 1 } }
+    pocket1: { chance: 0.4, items: { Ointment: 1, Gauze: 1, Brutepack: 1 } }
+    gloves: { items: { ClothingHandsGlovesNitrile: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: ParamedicCoat
+  gear: ParamedicGauzeBaseGear
+  slots:
+    head: { chance: 0.8, items: { ClothingHeadHatParamedicsoftFlipped: 1 } }
+    eyes: { chance: 0.2, items: { ClothingEyesGlassesCheapSunglasses: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitParamedic: 1 } }
+    outerClothing: { items: { ClothingOuterCoatParamedicWB: 1 } }
+    back: { chance: 0.3, items: { ClothingBackpackMedical: 1 } }
+    shoes: { items: { ClothingShoesColorBlue: 2, ClothingShoesColorWhite: 1 } }
+    pocket1: { chance: 0.4, items: { Ointment: 1, Brutepack: 1 } }
+    gloves: { items: { ClothingHandsGlovesNitrile: 1 } }
+    ears: { items: { ClothingHeadsetMedical: 1 } }
+
+- type: loadoutArchetype
+  id: ParamedicEMT
+  gear: ParamedicGauzeBaseGear
+  slots:
+    head: { chance: 0.8, items: { ClothingHeadHatParamedicsoft: 1, ClothingHeadHatParamedicsoftFlipped: 1 } }
+    eyes: { chance: 0.3, items: { ClothingEyesHudMedical: 1 } }
+    neck: { chance: 0.5, items: { ClothingNeckStethoscope: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitParamedic: 1 } }
+    outerClothing: { chance: 0.7, items: { ClothingOuterWinterPara: 1, ClothingOuterCoatParamedicWB: 1 } }
+    back: { chance: 0.5, items: { ClothingBackpackDuffelGenetics: 1, ClothingBackpackMedical: 1 } }
+    shoes: { items: { ClothingShoesSwat: 1, ClothingShoesColorBlue: 2 } }
+    belt: { chance: 0.15, items: { ClothingBeltMedicalEMTFilled: 1 } }
+    pocket1: { chance: 0.05, items: { CombatMedipen: 1 } }
+    pocket2: { chance: 0.4, items: { Brutepack: 1, Ointment: 1 } }
+    gloves: { items: { ClothingHandsGlovesNitrile: 1, ClothingHandsGlovesLatex: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: Psychologist
+  gear: PsychologistBaseGear
+  slots:
+    head: { chance: 0.6, items: { ClothingHeadHatAnimalCat: 1 } }
+    eyes: { chance: 0.4, items: { ClothingEyesGlasses: 1, ClothingEyesGlassesJamjar: 1 } }
+    neck: { chance: 0.2, items: { ClothingNeckScarfStripedGreen: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitPsychologist: 1 } }
+    back: { chance: 0.2, items: { ClothingBackpackSatchel: 1 } }
+    shoes: { items: { ClothingShoesLeather: 2, ClothingShoesColorBrown: 1 } }
+    pocket1: { chance: 0.4, items: { LuxuryPen: 1, BookRandomStory: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: PsychologistMagician
+  gear: PsychologistCigarBaseGear
+  slots:
+    head: { chance: 0.8, items: { ClothingHeadHatMagician: 1 } }
+    eyes: { chance: 0.2, items: { ClothingEyesHudMedical: 1 } }
+    neck: { items: { ClothingNeckTieRed: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitPsychologist: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackSatchelLeather: 1 } }
+    shoes: { items: { ClothingShoesLeather: 1 } }
+    pocket1: { chance: 0.5, items: { WhoopieCushion: 1 } }
+    pocket2: { chance: 0.1, items: { PillSpaceDrugs: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: PsychologistFoam
+  gear: PsychologistFoamBaseGear
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatAnimalCat: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitPsychologist: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackSatchelLeather: 1 } }
+    shoes: { items: { ClothingShoesLeather: 1 } }
+    pocket1: { chance: 0.6, items: { BulletFoam: 1 } }
+    pocket2: { chance: 0.1, items: { PillSpaceDrugs: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: ScrubsBlue
+  slots:
+    head: { items: { ClothingHeadHatSurgcapBlue: 1 } }
+    eyes: { chance: 0.2, items: { ClothingEyesGlasses: 1 } }
+    jumpsuit: { items: { UniformScrubsColorBlue: 1 } }
+    shoes: { items: { ClothingShoesColorBlue: 2, ClothingShoesColorWhite: 1 } }
+    pocket1: { chance: 0.3, items: { Ointment: 1, Gauze: 1 } }
+    gloves: { items: { ClothingHandsGlovesLatex: 1 } }
+    ears: { chance: 0.4, items: { ClothingHeadsetMedical: 1 } }
+
+- type: loadoutArchetype
+  id: ScrubsGreen
+  slots:
+    head: { items: { ClothingHeadHatSurgcapGreen: 1 } }
+    eyes: { chance: 0.2, items: { ClothingEyesGlasses: 1 } }
+    jumpsuit: { items: { UniformScrubsColorGreen: 1 } }
+    shoes: { items: { ClothingShoesColorGreen: 2, ClothingShoesColorWhite: 1 } }
+    pocket1: { chance: 0.3, items: { Ointment: 1, Gauze: 1 } }
+    gloves: { items: { ClothingHandsGlovesLatex: 1 } }
+    ears: { chance: 0.4, items: { ClothingHeadsetMedical: 1 } }
+
+- type: loadoutArchetype
+  id: ScrubsPurple
+  slots:
+    head: { items: { ClothingHeadHatSurgcapPurple: 1 } }
+    eyes: { chance: 0.2, items: { ClothingEyesGlasses: 1 } }
+    jumpsuit: { items: { UniformScrubsColorPurple: 1 } }
+    shoes: { items: { ClothingShoesColorRed: 2, ClothingShoesColorWhite: 1 } }
+    pocket1: { chance: 0.3, items: { Ointment: 1, Gauze: 1 } }
+    gloves: { items: { ClothingHandsGlovesLatex: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: Surgeon
+  slots:
+    head: { items: { ClothingHeadHatSurgcapGreen: 1 } }
+    eyes: { chance: 0.2, items: { ClothingEyesGlasses: 1 } }
+    jumpsuit: { items: { UniformScrubsColorGreen: 1 } }
+    shoes: { items: { ClothingShoesColorGreen: 2, ClothingShoesColorWhite: 1 } }
+    belt: { chance: 0.2, items: { ClothingBeltMedical: 1 } }
+    pocket1: { chance: 0.7, items: { Scalpel: 1 } }
+    pocket2: { items: { Cautery: 1 } }
+    gloves: { items: { ClothingHandsGlovesLatex: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: SurgeonAdvanced
+  slots:
+    head: { items: { ClothingHeadHatSurgcapGreen: 1, ClothingHeadHatSurgcapPurple: 1, ClothingHeadHatSurgcapBlue: 1 } }
+    eyes: { chance: 0.3, items: { ClothingEyesHudMedical: 1 } }
+    jumpsuit: { items: { UniformScrubsColorGreen: 1, UniformScrubsColorPurple: 1, UniformScrubsColorBlue: 1 } }
+    back: { chance: 0.5, items: { ClothingBackpackSatchelMedical: 1 } }
+    shoes: { items: { ClothingShoesColorWhite: 1 } }
+    belt: { chance: 0.3, items: { ClothingBeltMedical: 1 } }
+    pocket1: { chance: 0.15, items: { ScalpelAdvanced: 1 } }
+    pocket2: { chance: 0.2, items: { MedicatedSuture: 1, RegenerativeMesh: 1 } }
+    gloves: { items: { ClothingHandsGlovesLatex: 1, ClothingHandsGlovesNitrile: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: Virologist
+  slots:
+    head: { items: { ClothingHeadHatHoodBioVirology: 1 } }
+    mask: { items: { ClothingMaskSterile: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitVirology: 1 } }
+    outerClothing: { items: { ClothingOuterBioVirology: 1 } }
+    back: { chance: 0.3, items: { ClothingBackpackMedical: 1 } }
+    shoes: { items: { ClothingShoesColorGreen: 1 } }
+    belt: { chance: 0.2, items: { ClothingBeltMedical: 1 } }
+    pocket1: { chance: 0.3, items: { PillCanisterDylovene: 1, Ointment: 1 } }
+    gloves: { items: { ClothingHandsGlovesNitrile: 1 } }
+    ears: *medicalHeadset
+
+- type: loadoutArchetype
+  id: VirologistWinter
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatBeretSeniorPhysician: 1, ClothingHeadMirror: 1 } }
+    eyes: { chance: 0.3, items: { ClothingEyesHudMedical: 1, ClothingEyesHudViro: 1 } }
+    neck: { items: { ClothingNeckStethoscope: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitVirology: 1 } }
+    outerClothing: { items: { ClothingOuterWinterViro: 1, ClothingOuterCoatLabViro: 1 } }
+    back: { chance: 0.5, items: { ClothingBackpackVirology: 1, ClothingBackpackSatchelVirology: 1 } }
+    shoes: { items: { ClothingShoesColorGreen: 1 } }
+    belt: { chance: 0.15, items: { ClothingBeltMedical: 1 } }
+    pocket1: { chance: 0.3, items: { PillCanisterTricordrazine: 1, PillCanisterDylovene: 1 } }
+    gloves: { items: { ClothingHandsGlovesNitrile: 1, ClothingHandsGlovesLatex: 1 } }
+    ears: *medicalHeadset

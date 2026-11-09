@@ -17,100 +17,118 @@
 
 - type: randomLoadout
   id: RandomLoadoutPirate
-  archetypes:
-    PirateCaptain:
-      weight: 0.5
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatPirate: 1, ClothingHeadHatPirateTricord: 1}}
-        neck: {items: {ClothingNeckCloakPirateCap: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitPirate: 1}}
-        outerClothing: {chance: 0.7, items: {ClothingOuterVestWeb: 1}}
-        shoes: {items: {ClothingShoesBootsLaceup: 1}}
-        pocket1: {chance: 0.2, items: {WeaponRevolverPirate: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetFreelance: 1}}
-    PirateCaptainScooner:
-      weight: 0.3
-      gear: PirateCutlassBaseGear
-      slots:
-        head: {chance: 0.8, items: {ClothingHeadHatPirate: 1}}
-        neck: {items: {ClothingNeckCloakPirateCap: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitPirate: 1}}
-        outerClothing: {chance: 0.7, items: {ClothingOuterVestWeb: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackSatchelLeather: 1}}
-        shoes: {items: {ClothingShoesBootsLaceup: 1}}
-        belt: {chance: 0.3, items: {ClothingBeltUtility: 1}}
-        pocket1: {chance: 0.15, items: {WeaponRevolverPirate: 1}}
-        pocket2: {chance: 0.3, items: {HandheldGPSBasic: 1}}
-        ears: {chance: 0.08, items: {ClothingHeadsetAltFreelancer: 1}}
-    PirateDeckhandCutlass:
-      weight: 0.6
-      gear: PirateCutlassBaseGear
-      slots:
-        head: {chance: 0.8, items: {ClothingHeadBandRed: 1, ClothingHeadHatPirateTricord: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitPirate: 1}}
-        shoes: {chance: 0.6, items: {ClothingShoesBootsLaceup: 1}}
-        belt: {chance: 0.4, items: {ClothingBeltUtility: 1}}
-        pocket1: {chance: 0.3, items: {HandheldGPSBasic: 1}}
-    PirateDeckhand:
-      weight: 1.5
-      slots:
-        head: {chance: 0.8, items: {ClothingHeadBandRed: 1, ClothingHeadHatPirateTricord: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitPirate: 1}}
-        shoes: {chance: 0.6, items: {ClothingShoesBootsLaceup: 1}}
-        belt: {chance: 0.4, items: {ClothingBeltUtility: 1}}
-        pocket1: {chance: 0.3, items: {HandheldGPSBasic: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetFreelance: 1}}
-    PirateDeckhandScooner:
-      weight: 0.5
-      gear: PirateCutlassBaseGear
-      slots:
-        head: {chance: 0.9, items: {ClothingHeadBandRed: 2, ClothingHeadBandBlack: 1, ClothingHeadHatPirateTricord: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitPirate: 1}}
-        outerClothing: {chance: 0.3, items: {ClothingOuterCoatGentle: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackSatchelLeather: 1}}
-        shoes: {items: {ClothingShoesBootsLaceup: 1}}
-        belt: {chance: 0.5, items: {ClothingBeltUtility: 1}}
-        pocket1: {chance: 0.15, items: {WeaponPistolFlintlock: 1}}
-        pocket2: {chance: 0.4, items: {HandheldGPSBasic: 1}}
-        ears: {chance: 0.12, items: {ClothingHeadsetFreelance: 1}}
-    PirateBlunderbuss:
-      weight: 0.1
-      gear: PirateBlunderbussBaseGear
-      slots:
-        head: {chance: 0.9, items: {ClothingHeadBandBlack: 1, ClothingHeadBandRed: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitPirate: 1}}
-        outerClothing: {chance: 0.3, items: {ClothingOuterCoatGentle: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackSatchelLeather: 1}}
-        shoes: {items: {ClothingShoesBootsLaceup: 1}}
-        belt: {chance: 0.4, items: {ClothingBeltUtility: 1}}
-        pocket1: {chance: 0.3, items: {HandheldGPSBasic: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetFreelance: 1}}
-    PirateGunner:
-      weight: 0.5
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatPirateTricord: 1, ClothingHeadBandRed: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitPirate: 1}}
-        outerClothing: {chance: 0.7, items: {ClothingOuterCoatGentle: 1}}
-        back: {chance: 0.5, items: {ClothingBackpackSatchelLeather: 1}}
-        shoes: {items: {ClothingShoesBootsLaceup: 1}}
-        pocket1: {chance: 0.25, items: {WeaponPistolFlintlock: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetFreelance: 1}}
-    PirateDrunk:
-      weight: 0.7
-      gear: PirateRumBaseGear
-      slots:
-        head: {chance: 0.6, items: {ClothingHeadBandRed: 1, ClothingHeadHatPirateTricord: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitPirate: 1}}
-        outerClothing: {chance: 0.2, items: {ClothingOuterCoatGentle: 1}}
-        shoes: {chance: 0.4, items: {ClothingShoesBootsLaceup: 1}}
-        belt: {chance: 0.2, items: {ClothingBeltUtility: 1}}
-        pocket1: {chance: 0.3, items: {Lighter: 1, SurvivalKnife: 1}}
-    PirateLooted:
-      weight: 3
-      slots:
-        head: {chance: 0.4, items: {ClothingHeadBandRed: 2, ClothingHeadBandBlack: 1, ClothingHeadHatPirateTricord: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitPirate: 1}}
-        shoes: {chance: 0.4, items: {ClothingShoesBootsLaceup: 1}}
-        belt: {chance: 0.15, items: {ClothingBeltUtility: 1}}
-        pocket1: {chance: 0.15, items: {HandheldGPSBasic: 1, FoodSnackChips: 1}}
-        ears: {chance: 0.03, items: {ClothingHeadsetFreelance: 1}}
+  weights:
+    PirateCaptain: 0.5
+    PirateCaptainScooner: 0.3
+    PirateDeckhandCutlass: 0.6
+    PirateDeckhand: 1.5
+    PirateDeckhandScooner: 0.5
+    PirateBlunderbuss: 0.1
+    PirateGunner: 0.5
+    PirateDrunk: 0.7
+    PirateLooted: 3
+
+- type: loadoutArchetype
+  id: PirateCaptain
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatPirate: 1, ClothingHeadHatPirateTricord: 1 } }
+    neck: { items: { ClothingNeckCloakPirateCap: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitPirate: 1 } }
+    outerClothing: { chance: 0.7, items: { ClothingOuterVestWeb: 1 } }
+    shoes: { items: { ClothingShoesBootsLaceup: 1 } }
+    pocket1: { chance: 0.2, items: { WeaponRevolverPirate: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetFreelance: 1 } }
+
+- type: loadoutArchetype
+  id: PirateCaptainScooner
+  gear: PirateCutlassBaseGear
+  slots:
+    head: { chance: 0.8, items: { ClothingHeadHatPirate: 1 } }
+    neck: { items: { ClothingNeckCloakPirateCap: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitPirate: 1 } }
+    outerClothing: { chance: 0.7, items: { ClothingOuterVestWeb: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackSatchelLeather: 1 } }
+    shoes: { items: { ClothingShoesBootsLaceup: 1 } }
+    belt: { chance: 0.3, items: { ClothingBeltUtility: 1 } }
+    pocket1: { chance: 0.15, items: { WeaponRevolverPirate: 1 } }
+    pocket2: { chance: 0.3, items: { HandheldGPSBasic: 1 } }
+    ears: { chance: 0.08, items: { ClothingHeadsetAltFreelancer: 1 } }
+
+- type: loadoutArchetype
+  id: PirateDeckhandCutlass
+  gear: PirateCutlassBaseGear
+  slots:
+    head: { chance: 0.8, items: { ClothingHeadBandRed: 1, ClothingHeadHatPirateTricord: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitPirate: 1 } }
+    shoes: { chance: 0.6, items: { ClothingShoesBootsLaceup: 1 } }
+    belt: { chance: 0.4, items: { ClothingBeltUtility: 1 } }
+    pocket1: { chance: 0.3, items: { HandheldGPSBasic: 1 } }
+
+- type: loadoutArchetype
+  id: PirateDeckhand
+  slots:
+    head: { chance: 0.8, items: { ClothingHeadBandRed: 1, ClothingHeadHatPirateTricord: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitPirate: 1 } }
+    shoes: { chance: 0.6, items: { ClothingShoesBootsLaceup: 1 } }
+    belt: { chance: 0.4, items: { ClothingBeltUtility: 1 } }
+    pocket1: { chance: 0.3, items: { HandheldGPSBasic: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetFreelance: 1 } }
+
+- type: loadoutArchetype
+  id: PirateDeckhandScooner
+  gear: PirateCutlassBaseGear
+  slots:
+    head: { chance: 0.9, items: { ClothingHeadBandRed: 2, ClothingHeadBandBlack: 1, ClothingHeadHatPirateTricord: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitPirate: 1 } }
+    outerClothing: { chance: 0.3, items: { ClothingOuterCoatGentle: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackSatchelLeather: 1 } }
+    shoes: { items: { ClothingShoesBootsLaceup: 1 } }
+    belt: { chance: 0.5, items: { ClothingBeltUtility: 1 } }
+    pocket1: { chance: 0.15, items: { WeaponPistolFlintlock: 1 } }
+    pocket2: { chance: 0.4, items: { HandheldGPSBasic: 1 } }
+    ears: { chance: 0.12, items: { ClothingHeadsetFreelance: 1 } }
+
+- type: loadoutArchetype
+  id: PirateBlunderbuss
+  gear: PirateBlunderbussBaseGear
+  slots:
+    head: { chance: 0.9, items: { ClothingHeadBandBlack: 1, ClothingHeadBandRed: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitPirate: 1 } }
+    outerClothing: { chance: 0.3, items: { ClothingOuterCoatGentle: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackSatchelLeather: 1 } }
+    shoes: { items: { ClothingShoesBootsLaceup: 1 } }
+    belt: { chance: 0.4, items: { ClothingBeltUtility: 1 } }
+    pocket1: { chance: 0.3, items: { HandheldGPSBasic: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetFreelance: 1 } }
+
+- type: loadoutArchetype
+  id: PirateGunner
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatPirateTricord: 1, ClothingHeadBandRed: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitPirate: 1 } }
+    outerClothing: { chance: 0.7, items: { ClothingOuterCoatGentle: 1 } }
+    back: { chance: 0.5, items: { ClothingBackpackSatchelLeather: 1 } }
+    shoes: { items: { ClothingShoesBootsLaceup: 1 } }
+    pocket1: { chance: 0.25, items: { WeaponPistolFlintlock: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetFreelance: 1 } }
+
+- type: loadoutArchetype
+  id: PirateDrunk
+  gear: PirateRumBaseGear
+  slots:
+    head: { chance: 0.6, items: { ClothingHeadBandRed: 1, ClothingHeadHatPirateTricord: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitPirate: 1 } }
+    outerClothing: { chance: 0.2, items: { ClothingOuterCoatGentle: 1 } }
+    shoes: { chance: 0.4, items: { ClothingShoesBootsLaceup: 1 } }
+    belt: { chance: 0.2, items: { ClothingBeltUtility: 1 } }
+    pocket1: { chance: 0.3, items: { Lighter: 1, SurvivalKnife: 1 } }
+
+- type: loadoutArchetype
+  id: PirateLooted
+  slots:
+    head: { chance: 0.4, items: { ClothingHeadBandRed: 2, ClothingHeadBandBlack: 1, ClothingHeadHatPirateTricord: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitPirate: 1 } }
+    shoes: { chance: 0.4, items: { ClothingShoesBootsLaceup: 1 } }
+    belt: { chance: 0.15, items: { ClothingBeltUtility: 1 } }
+    pocket1: { chance: 0.15, items: { HandheldGPSBasic: 1, FoodSnackChips: 1 } }
+    ears: { chance: 0.03, items: { ClothingHeadsetFreelance: 1 } }

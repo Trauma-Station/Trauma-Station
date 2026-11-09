@@ -1,25 +1,24 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Roles;
+using Content.Trauma.Shared.Clothing.Prototypes;
 
 namespace Content.Trauma.Shared.Clothing.Components;
 
 /// <summary>
-/// Like Loadout, but each starting gear has a weight
-/// One is picked at random and equipped on map init
+/// Component that initializes the entity with a random loadout.
 /// </summary>
-[RegisterComponent]
+[RegisterComponent, NetworkedComponent]
 public sealed partial class WeightedLoadoutComponent : Component
 {
     /// <summary>
-    /// Premade loadouts, one is picked by weight
+    /// Weighted dictionary of premade loadouts
     /// </summary>
     [DataField]
     public Dictionary<ProtoId<StartingGearPrototype>, float> Weights = new();
 
     /// <summary>
-    /// Optional randomized loadout, one archetype is picked and its slots are rolled
-    /// Runs after <see cref="Weights"/>, only filling slots that are still empty
+    /// Optional randomized loadout, one archetype is picked and its slots are filled.
     /// </summary>
     [DataField]
     public ProtoId<RandomLoadoutPrototype>? Loadout;

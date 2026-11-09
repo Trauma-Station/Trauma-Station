@@ -2,96 +2,115 @@
 
 - type: randomLoadout
   id: RandomLoadoutSyndicate
-  archetypes:
-    FootsoldierSwat:
-      slots:
-        head: {chance: 0.5, items: {ClothingHeadHelmetSwatSyndicate: 1}}
-        mask: {chance: 0.8, items: {ClothingMaskGasSyndicate: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitOperative: 1}}
-        outerClothing: {chance: 0.5, items: {ClothingOuterArmorBasic: 1}}
-        back: {chance: 0.4, items: {ClothingBackpack: 1}}
-        shoes: {items: {ClothingShoesBootsCombat: 1, ClothingShoesBootsCombatFilled: 1}}
-        belt: {chance: 0.3, items: {ClothingBeltMilitaryWebbing: 1}}
-        ears: {chance: 0.15, items: {ClothingHeadsetAltSyndicate: 1}}
-    FootsoldierViper:
-      weight: 0.6
-      slots:
-        head: {chance: 0.3, items: {ClothingHeadHelmetSwatSyndicate: 1}}
-        mask: {chance: 0.8, items: {ClothingMaskGasSyndicate: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitOperative: 1}}
-        shoes: {items: {ClothingShoesBootsCombatFilled: 1}}
-        pocket1: {chance: 0.2, items: {WeaponPistolViper: 1}}
-        ears: {chance: 0.15, items: {ClothingHeadsetAltSyndicate: 1}}
-    FootsoldierRuin:
-      weight: 0.5
-      slots:
-        head: {chance: 0.5, items: {ClothingHeadHelmetSwatSyndicate: 1}}
-        mask: {chance: 0.8, items: {ClothingMaskGasSyndicate: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitOperative: 1}}
-        outerClothing: {chance: 0.5, items: {ClothingOuterArmorBasic: 1}}
-        back: {chance: 0.5, items: {ClothingBackpackSyndicate: 1}}
-        shoes: {items: {ClothingShoesBootsCombat: 1}}
-        gloves: {chance: 0.2, items: {ClothingHandsGlovesCombat: 1}}
-    FootsoldierHud:
-      weight: 0.25
-      slots:
-        head: {chance: 0.6, items: {ClothingHeadHelmetSwatSyndicate: 1}}
-        eyes: {chance: 0.3, items: {ClothingEyesHudSyndicate: 1}}
-        mask: {chance: 0.6, items: {ClothingMaskGasSyndicate: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitOperative: 1}}
-        outerClothing: {chance: 0.7, items: {ClothingOuterArmorBasic: 1}}
-        back: {chance: 0.5, items: {ClothingBackpackSyndicate: 1}}
-        shoes: {items: {ClothingShoesBootsCombatFilled: 1}}
-        belt: {chance: 0.3, items: {ClothingBeltMilitaryWebbing: 1}}
-        gloves: {chance: 0.25, items: {ClothingHandsGlovesCombat: 1}}
-        ears: {chance: 0.15, items: {ClothingHeadsetAltSyndicate: 1}}
-    OperativeFormal:
-      weight: 0.8
-      slots:
-        jumpsuit: {items: {ClothingUniformJumpsuitSyndieFormal: 1}}
-        back: {chance: 0.5, items: {ClothingBackpackDuffelSyndicate: 1}}
-        shoes: {items: {ClothingShoesBootsCombatFilled: 1}}
-        pocket1: {chance: 0.1, items: {WeaponPistolViper: 1}}
-        gloves: {chance: 0.5, items: {ClothingHandsGlovesColorBlack: 1}}
-        ears: {chance: 0.12, items: {ClothingHeadsetAltSyndicate: 1}}
-    OperativeViper:
-      weight: 0.5
-      slots:
-        jumpsuit: {items: {ClothingUniformJumpsuitOperative: 1}}
-        outerClothing: {chance: 0.6, items: {ClothingOuterArmorBasic: 1}}
-        shoes: {items: {ClothingShoesBootsJackFilled: 1}}
-        belt: {chance: 0.5, items: {ClothingBeltMilitaryWebbing: 1}}
-        pocket1: {chance: 0.15, items: {WeaponPistolViper: 1}}
-        pocket2: {chance: 0.2, items: {MagazinePistolHighCapacity: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetAltSyndicate: 1}}
-    OperativeCivilian:
-      weight: 0.8
-      slots:
-        jumpsuit: {items: {ClothingUniformJumpsuitSyndieFormal: 1}}
-        back: {chance: 0.5, items: {ClothingBackpackDuffelSyndicate: 1}}
-        shoes: {items: {ClothingShoesBootsCombat: 1}}
-        gloves: {chance: 0.6, items: {ClothingHandsGlovesColorBlack: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetAltSyndicate: 1}}
-    TeamLeader:
-      weight: 0.1
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatOutlawHat: 1}}
-        eyes: {chance: 0.2, items: {ClothingEyesHudSyndicate: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitSyndieFormal: 1}}
-        outerClothing: {chance: 0.7, items: {ClothingOuterArmorBasicSlim: 1}}
-        back: {chance: 0.6, items: {ClothingBackpackSyndicate: 1}}
-        shoes: {items: {ClothingShoesBootsCombatFilled: 1}}
-        pocket1: {chance: 0.15, items: {WeaponPistolViper: 1}}
-        pocket2: {chance: 0.02, items: {EnergySword: 1}}
-        gloves: {chance: 0.5, items: {ClothingHandsGlovesCombat: 1}}
-        ears: {chance: 0.2, items: {ClothingHeadsetAltSyndicate: 1}}
-    SyndicateLooted:
-      weight: 3
-      slots:
-        head: {chance: 0.08, items: {ClothingHeadHelmetSwatSyndicate: 1}}
-        mask: {chance: 0.35, items: {ClothingMaskGasSyndicate: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitOperative: 3, ClothingUniformJumpsuitSyndieFormal: 1}}
-        shoes: {chance: 0.9, items: {ClothingShoesBootsCombat: 3, ClothingShoesBootsJackFilled: 1}}
-        pocket1: {chance: 0.1, items: {MagazinePistol: 1}}
-        gloves: {chance: 0.15, items: {ClothingHandsGlovesColorBlack: 1}}
-        ears: {chance: 0.04, items: {ClothingHeadsetAltSyndicate: 1}}
+  weights:
+    FootsoldierSwat: 1
+    FootsoldierViper: 0.6
+    FootsoldierRuin: 0.5
+    FootsoldierHud: 0.25
+    OperativeFormal: 0.8
+    OperativeViper: 0.5
+    OperativeCivilian: 0.8
+    TeamLeader: 0.1
+    SyndicateLooted: 3
+
+- type: loadoutArchetype
+  id: FootsoldierSwat
+  slots:
+    head: { chance: 0.5, items: { ClothingHeadHelmetSwatSyndicate: 1 } }
+    mask: { chance: 0.8, items: { ClothingMaskGasSyndicate: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitOperative: 1 } }
+    outerClothing: { chance: 0.5, items: { ClothingOuterArmorBasic: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpack: 1 } }
+    shoes: { items: { ClothingShoesBootsCombat: 1, ClothingShoesBootsCombatFilled: 1 } }
+    belt: { chance: 0.3, items: { ClothingBeltMilitaryWebbing: 1 } }
+    ears: { chance: 0.15, items: { ClothingHeadsetAltSyndicate: 1 } }
+
+- type: loadoutArchetype
+  id: FootsoldierViper
+  slots:
+    head: { chance: 0.3, items: { ClothingHeadHelmetSwatSyndicate: 1 } }
+    mask: { chance: 0.8, items: { ClothingMaskGasSyndicate: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitOperative: 1 } }
+    shoes: { items: { ClothingShoesBootsCombatFilled: 1 } }
+    pocket1: { chance: 0.2, items: { WeaponPistolViper: 1 } }
+    ears: { chance: 0.15, items: { ClothingHeadsetAltSyndicate: 1 } }
+
+- type: loadoutArchetype
+  id: FootsoldierRuin
+  slots:
+    head: { chance: 0.5, items: { ClothingHeadHelmetSwatSyndicate: 1 } }
+    mask: { chance: 0.8, items: { ClothingMaskGasSyndicate: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitOperative: 1 } }
+    outerClothing: { chance: 0.5, items: { ClothingOuterArmorBasic: 1 } }
+    back: { chance: 0.5, items: { ClothingBackpackSyndicate: 1 } }
+    shoes: { items: { ClothingShoesBootsCombat: 1 } }
+    gloves: { chance: 0.2, items: { ClothingHandsGlovesCombat: 1 } }
+
+- type: loadoutArchetype
+  id: FootsoldierHud
+  slots:
+    head: { chance: 0.6, items: { ClothingHeadHelmetSwatSyndicate: 1 } }
+    eyes: { chance: 0.3, items: { ClothingEyesHudSyndicate: 1 } }
+    mask: { chance: 0.6, items: { ClothingMaskGasSyndicate: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitOperative: 1 } }
+    outerClothing: { chance: 0.7, items: { ClothingOuterArmorBasic: 1 } }
+    back: { chance: 0.5, items: { ClothingBackpackSyndicate: 1 } }
+    shoes: { items: { ClothingShoesBootsCombatFilled: 1 } }
+    belt: { chance: 0.3, items: { ClothingBeltMilitaryWebbing: 1 } }
+    gloves: { chance: 0.25, items: { ClothingHandsGlovesCombat: 1 } }
+    ears: { chance: 0.15, items: { ClothingHeadsetAltSyndicate: 1 } }
+
+- type: loadoutArchetype
+  id: OperativeFormal
+  slots:
+    jumpsuit: { items: { ClothingUniformJumpsuitSyndieFormal: 1 } }
+    back: { chance: 0.5, items: { ClothingBackpackDuffelSyndicate: 1 } }
+    shoes: { items: { ClothingShoesBootsCombatFilled: 1 } }
+    pocket1: { chance: 0.1, items: { WeaponPistolViper: 1 } }
+    gloves: { chance: 0.5, items: { ClothingHandsGlovesColorBlack: 1 } }
+    ears: { chance: 0.12, items: { ClothingHeadsetAltSyndicate: 1 } }
+
+- type: loadoutArchetype
+  id: OperativeViper
+  slots:
+    jumpsuit: { items: { ClothingUniformJumpsuitOperative: 1 } }
+    outerClothing: { chance: 0.6, items: { ClothingOuterArmorBasic: 1 } }
+    shoes: { items: { ClothingShoesBootsJackFilled: 1 } }
+    belt: { chance: 0.5, items: { ClothingBeltMilitaryWebbing: 1 } }
+    pocket1: { chance: 0.15, items: { WeaponPistolViper: 1 } }
+    pocket2: { chance: 0.2, items: { MagazinePistolHighCapacity: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetAltSyndicate: 1 } }
+
+- type: loadoutArchetype
+  id: OperativeCivilian
+  slots:
+    jumpsuit: { items: { ClothingUniformJumpsuitSyndieFormal: 1 } }
+    back: { chance: 0.5, items: { ClothingBackpackDuffelSyndicate: 1 } }
+    shoes: { items: { ClothingShoesBootsCombat: 1 } }
+    gloves: { chance: 0.6, items: { ClothingHandsGlovesColorBlack: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetAltSyndicate: 1 } }
+
+- type: loadoutArchetype
+  id: TeamLeader
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatOutlawHat: 1 } }
+    eyes: { chance: 0.2, items: { ClothingEyesHudSyndicate: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitSyndieFormal: 1 } }
+    outerClothing: { chance: 0.7, items: { ClothingOuterArmorBasicSlim: 1 } }
+    back: { chance: 0.6, items: { ClothingBackpackSyndicate: 1 } }
+    shoes: { items: { ClothingShoesBootsCombatFilled: 1 } }
+    pocket1: { chance: 0.15, items: { WeaponPistolViper: 1 } }
+    pocket2: { chance: 0.02, items: { EnergySword: 1 } }
+    gloves: { chance: 0.5, items: { ClothingHandsGlovesCombat: 1 } }
+    ears: { chance: 0.2, items: { ClothingHeadsetAltSyndicate: 1 } }
+
+- type: loadoutArchetype
+  id: SyndicateLooted
+  slots:
+    head: { chance: 0.08, items: { ClothingHeadHelmetSwatSyndicate: 1 } }
+    mask: { chance: 0.35, items: { ClothingMaskGasSyndicate: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitOperative: 3, ClothingUniformJumpsuitSyndieFormal: 1 } }
+    shoes: { chance: 0.9, items: { ClothingShoesBootsCombat: 3, ClothingShoesBootsJackFilled: 1 } }
+    pocket1: { chance: 0.1, items: { MagazinePistol: 1 } }
+    gloves: { chance: 0.15, items: { ClothingHandsGlovesColorBlack: 1 } }
+    ears: { chance: 0.04, items: { ClothingHeadsetAltSyndicate: 1 } }

@@ -1,97 +1,83 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Content.Shared.Body;
 using Content.Shared.Clothing;
 using Content.Shared.Inventory;
+using Content.Shared.Random.Helpers;
 using Content.Shared.Station.Systems;
+using Content.Trauma.Common.Inventory;
 using Content.Trauma.Shared.Clothing.Components;
+using Content.Trauma.Shared.Clothing.Prototypes;
 using Robust.Shared.Random;
+using Robust.Shared.Timing;
 
 namespace Content.Trauma.Shared.Clothing;
 
 public sealed partial class WeightedLoadoutSystem : EntitySystem
 {
-    [Dependency] private IPrototypeManager _proto = default!;
-    [Dependency] private IRobustRandom _random = default!;
+    [Dependency] private IGameTiming _timing = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private LoadoutSystem _loadout = default!;
     [Dependency] private StationSpawningSystem _station = default!;
 
-    // Wait until the character has all their organs before we give them their loadout
-    [SubscribeLocalEvent(after: [typeof(InitialBodySystem)])]
-    private void OnMapInit(Entity<WeightedLoadoutComponent> ent, ref MapInitEvent args)
-    {
-        if (TryPickWeighted(ent.Comp.Weights, kv => kv.Value, out var gear))
-            _station.EquipStartingGear(ent, gear.Key);
-
-        if (ent.Comp.Loadout is { } id && TryPickWeighted(_proto.Index(id).Archetypes.Values, a => a.Weight, out var archetype))
-            ApplyArchetype(ent, archetype);
-
-        _loadout.GearEquipped(ent);
-    }
-
-    private static readonly string[] SlotOrder =
+    /// <summary>
+    /// An array of already sorted slots, for filling them up in order.
+    /// This is required because some slots may need to be filled up first before others.
+    /// </summary>
+    private static readonly ProtoId<InventorySlotPrototype>[] SlotOrder =
     {
         "head", "eyes", "neck", "mask", "jumpsuit", "outerClothing", "back",
         "shoes", "belt", "id", "pocket1", "pocket2", "ears", "gloves", "suitstorage"
     };
 
-    private void ApplyArchetype(EntityUid ent, LoadoutArchetype archetype)
+
+    [SubscribeLocalEvent(after: [typeof(InitialBodySystem)])]
+    private void OnMapInit(Entity<WeightedLoadoutComponent> ent, ref MapInitEvent args)
     {
-        if (archetype.Gear is { } gear)
-            _station.EquipStartingGear(ent, gear);
-
-        // dependent slots (pockets, belt, suitstorage) need their parent slot filled first
-        var ordered = archetype.Slots.OrderBy(kv =>
+        var random = SharedRandomExtensions.PredictedRandom(_timing, GetNetEntity(ent));
+        if (ent.Comp.Loadout is { } loadout && ProtoMan.Resolve(loadout, out var loadoutPrototype))
         {
-            var i = Array.IndexOf(SlotOrder, kv.Key);
-            return i < 0 ? int.MaxValue : i;
-        });
-
-        foreach (var (slot, pool) in ordered)
-        {
-            if (pool.Chance < 1f && !_random.Prob(pool.Chance))
-                continue;
-
-            if (_inventory.TryGetSlotEntity(ent, slot, out _))
-                continue;
-
-            if (!TryPickWeighted(pool.Items, kv => kv.Value, out var item))
-                continue;
-
-            _inventory.SpawnItemInSlot(ent, slot, item.Key, silent: true, force: true);
+            var archetype = loadoutPrototype.Pick(random);
+            ApplyArchetype(ent, archetype, random);
         }
+
+        // Picking without anything will throw...
+        if (ent.Comp.Weights.Count > 0)
+        {
+            var gear = random.Pick(ent.Comp.Weights);
+            _station.EquipStartingGear(ent, gear);
+        }
+
+        _loadout.GearEquipped(ent);
     }
 
-    private bool TryPickWeighted<T>(IEnumerable<T> options, Func<T, float> getWeight, [MaybeNullWhen(false)] out T picked)
+    /// <summary>
+    /// Applies the loadout archetype on the entity
+    /// </summary>
+    /// <param name="uid">The entity to apply it to</param>
+    /// <param name="proto">The loadout archetype</param>
+    /// <param name="random"><see cref="IRobustRandom"/></param>
+    private void ApplyArchetype(EntityUid uid, ProtoId<LoadoutArchetypePrototype> proto, IRobustRandom random)
     {
-        var total = 0f;
-        foreach (var option in options)
-        {
-            var w = getWeight(option);
-            if (w > 0f)
-                total += w;
-        }
+        if (!ProtoMan.Resolve(proto, out var archetype))
+            return;
 
-        picked = default;
-        if (total <= 0f)
-            return false;
+        if (archetype.Gear is { } gear)
+            _station.EquipStartingGear(uid, gear);
 
-        var roll = _random.NextFloat() * total;
-        foreach (var option in options)
+        var ordered = archetype.Slots.OrderBy(kv => Array.IndexOf(SlotOrder, kv.Key));
+        foreach (var (slot, pool) in ordered)
         {
-            var w = getWeight(option);
-            if (w <= 0f)
+            if (pool.Items.Count == 0 || !random.Prob(pool.Chance))
                 continue;
 
-            picked = option;
-            roll -= w;
-            if (roll < 0f)
-                return true;
-        }
+            // We only fill slots that aren't filled already.
+            if (_inventory.TryGetSlotEntity(uid, slot, out _))
+                continue;
 
-        return picked is not null; // float rounding fallback
+            var item = random.Pick(pool.Items);
+            _inventory.SpawnItemInSlot(uid, slot, item, silent: true, force: true);
+        }
     }
 }

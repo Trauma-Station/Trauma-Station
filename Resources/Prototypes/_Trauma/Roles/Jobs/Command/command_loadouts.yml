@@ -27,253 +27,314 @@
 
 - type: randomLoadout
   id: RandomLoadoutCommand
-  archetypes:
-    CaptainCarapace:
-      weight: 0.2
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatCaptain: 1}}
-        eyes: {chance: 0.15, items: {ClothingEyesGlassesCommand: 1}}
-        neck: {items: {ClothingNeckCloakCap: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitCaptain: 1}}
-        outerClothing: {chance: 0.15, items: {ClothingOuterArmorCaptainCarapace: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackCaptain: 1}}
-        shoes: {items: {ClothingShoesBootsLaceup: 1}}
-        belt: {chance: 0.03, items: {WeaponLaserSidearm: 1}}
-        pocket1: {chance: 0.04, items: {WeaponLaserSidearm: 1}}
-        gloves: {chance: 0.15, items: {ClothingHandsGlovesCaptain: 1}}
-        ears: {chance: 0.06, items: {ClothingHeadsetAltCommand: 1}}
-    CaptainCloak:
-      weight: 0.6
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatCaptain: 1}}
-        eyes: {chance: 0.4, items: {ClothingEyesGlassesSunglasses: 1}}
-        neck: {items: {ClothingNeckCloakCap: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitCaptain: 1}}
-        shoes: {items: {ClothingShoesBootsLaceup: 1}}
-        pocket1: {chance: 0.05, items: {WeaponLaserSidearm: 1}}
-        gloves: {chance: 0.15, items: {ClothingHandsGlovesCaptain: 1}}
-        ears: {chance: 0.08, items: {ClothingHeadsetAltCommand: 1}}
-    CaptainFormal:
-      weight: 0.6
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatCapcap: 1}}
-        neck: {items: {ClothingNeckMantleCap: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitCapFormal: 1}}
-        outerClothing: {chance: 0.8, items: {ClothingOuterWinterCap: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackSatchelCaptain: 1}}
-        shoes: {items: {ClothingShoesBootsLaceup: 1}}
-        ears: {chance: 0.08, items: {ClothingHeadsetAltCommand: 1}}
-    CaptainDrunk:
-      weight: 0.3
-      gear: CommandDrunkBaseGear
-      slots:
-        head: {chance: 0.4, items: {ClothingHeadHatCaptain: 1, ClothingHeadHatCapcap: 1}}
-        eyes: {chance: 0.3, items: {ClothingEyesGlassesSunglasses: 1}}
-        neck: {chance: 0.6, items: {ClothingNeckCloakCap: 1, ClothingNeckMantleCap: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitCaptain: 2, ClothingUniformJumpsuitCapFormal: 1}}
-        shoes: {items: {ClothingShoesBootsLaceup: 1}}
-        pocket1: {chance: 0.3, items: {Lighter: 1, CigarGold: 1}}
-        gloves: {chance: 0.1, items: {ClothingHandsGlovesCaptain: 1}}
-    ChiefEngineer:
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatBeretEngineering: 1}}
-        neck: {items: {ClothingNeckCloakCe: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitChiefEngineer: 1}}
-        outerClothing: {chance: 0.6, items: {ClothingOuterVestHazard: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackDuffelEngineering: 1}}
-        shoes: {items: {ClothingShoesColorWhite: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetAltEngineering: 1}}
-    ChiefEngineerTurtle:
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatBeretEngineering: 1}}
-        neck: {items: {ClothingNeckMantleCE: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitChiefEngineerTurtle: 1}}
-        outerClothing: {chance: 0.8, items: {ClothingOuterWinterCE: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackSatchelEngineering: 1}}
-        shoes: {items: {ClothingShoesColorWhite: 1}}
-        belt: {chance: 0.03, items: {ClothingBeltChiefEngineerFilled: 1}}
-        pocket1: {chance: 0.04, items: {WeaponLaserSidearm: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetAltEngineering: 1}}
-    ChiefEngineerWorking:
-      gear: CommandTrayScannerBaseGear
-      slots:
-        head: {chance: 0.5, items: {ClothingHeadHatBeretEngineering: 2, ClothingHeadHatHardhatYellow: 1}}
-        eyes: {chance: 0.4, items: {ClothingEyesGlassesMeson: 1}}
-        neck: {chance: 0.7, items: {ClothingNeckCloakCe: 1, ClothingNeckMantleCE: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitChiefEngineer: 2, ClothingUniformJumpsuitChiefEngineerTurtle: 1}}
-        outerClothing: {chance: 0.5, items: {ClothingOuterVestHazard: 1, ClothingOuterWinterCE: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackEngineering: 1, ClothingBackpackSatchelEngineering: 1, ClothingBackpackDuffelEngineering: 1}}
-        shoes: {items: {ClothingShoesColorWhite: 2, ClothingShoesBootsWork: 1}}
-        belt: {chance: 0.4, items: {ClothingBeltUtility: 1}}
-        pocket1: {chance: 0.5, items: {Welder: 1, CrowbarRed: 1, FlashlightLantern: 1}}
-        gloves: {chance: 0.3, items: {ClothingHandsGlovesColorYellow: 1}}
-        ears: {chance: 0.08, items: {ClothingHeadsetAltEngineering: 1}}
-    ChiefMedicalOfficer:
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadMirror: 1}}
-        neck: {items: {ClothingCloakCmo: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitCMO: 1}}
-        outerClothing: {chance: 0.8, items: {ClothingOuterCoatLabCmo: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackMedical: 1}}
-        shoes: {items: {ClothingShoesColorBrown: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetAltMedical: 1}}
-    ChiefMedicalOfficerTurtle:
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatBeretCmo: 1}}
-        neck: {items: {ClothingNeckMantleCMO: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitCMOTurtle: 1}}
-        outerClothing: {chance: 0.8, items: {ClothingOuterCoatLabCmo: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackSatchelMedical: 1}}
-        shoes: {items: {ClothingShoesColorBrown: 1}}
-        belt: {chance: 0.05, items: {ClothingBeltMedical: 1}}
-        gloves: {chance: 0.3, items: {ClothingHandsGlovesNitrile: 1, ClothingHandsGlovesLatex: 1}}
-        pocket1: {chance: 0.04, items: {WeaponLaserSidearm: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetAltMedical: 1}}
-    ChiefMedicalOfficerLab:
-      slots:
-        head: {chance: 0.5, items: {ClothingHeadMirror: 1, ClothingHeadHatBeretCmo: 1}}
-        eyes: {chance: 0.1, items: {ClothingEyesHudMedical: 1}}
-        neck: {chance: 0.7, items: {ClothingCloakCmo: 1, ClothingNeckMantleCMO: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitCMO: 2, ClothingUniformJumpsuitCMOTurtle: 1}}
-        outerClothing: {chance: 0.8, items: {ClothingOuterCoatLabCmo: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackMedical: 1, ClothingBackpackSatchelMedical: 1}}
-        shoes: {items: {ClothingShoesColorBrown: 1}}
-        belt: {chance: 0.2, items: {ClothingBeltMedical: 1}}
-        pocket1: {chance: 0.4, items: {Ointment: 1, Gauze: 1, Brutepack: 1}}
-        gloves: {chance: 0.4, items: {ClothingHandsGlovesLatex: 1, ClothingHandsGlovesNitrile: 1}}
-        ears: {chance: 0.08, items: {ClothingHeadsetAltMedical: 1}}
-    HeadOfPersonnel:
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatHopcap: 1}}
-        neck: {items: {ClothingNeckCloakHop: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitHoP: 1}}
-        outerClothing: {chance: 0.8, items: {ClothingOuterWinterHoP: 1}}
-        shoes: {items: {ClothingShoesLeather: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetAltCommand: 1}}
-    HeadOfPersonnelMantle:
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatHopcap: 1}}
-        neck: {items: {ClothingNeckMantleHOP: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitHoP: 1}}
-        outerClothing: {chance: 0.8, items: {ClothingOuterWinterHoP: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackSatchelLeather: 1}}
-        shoes: {items: {ClothingShoesLeather: 1}}
-        belt: {chance: 0.03, items: {WeaponLaserSidearm: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetAltCommand: 1}}
-    HeadOfPersonnelClerk:
-      gear: CommandClipboardBaseGear
-      slots:
-        head: {chance: 0.6, items: {ClothingHeadHatHopcap: 1}}
-        neck: {chance: 0.7, items: {ClothingNeckCloakHop: 1, ClothingNeckMantleHOP: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitHoP: 1}}
-        outerClothing: {chance: 0.6, items: {ClothingOuterWinterHoP: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackSatchelLeather: 1}}
-        shoes: {items: {ClothingShoesLeather: 1}}
-        pocket1: {chance: 0.5, items: {LuxuryPen: 1, BookRandomStory: 1}}
-        ears: {chance: 0.08, items: {ClothingHeadsetAltCommand: 1}}
-    HeadOfSecurity:
-      weight: 0.7
-      slots:
-        head: {chance: 0.6, items: {ClothingHeadHatHoshat: 1}}
-        neck: {items: {ClothingNeckCloakHos: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitHoSParadeMale: 1}}
-        outerClothing: {chance: 0.8, items: {ClothingOuterCoatHoSTrench: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackSatchelSecurity: 1}}
-        shoes: {items: {ClothingShoesBootsCowboyBlackFilled: 1}}
-        ears: {chance: 0.08, items: {ClothingHeadsetAltSecurity: 1}}
-    HeadOfSecurityFormal:
-      weight: 0.7
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatCowboyWhite: 1}}
-        neck: {items: {SecurityWhistle: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitHosFormal: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackSatchelLeather: 1}}
-        shoes: {items: {ClothingShoesBootsCowboyFancyFilled: 1}}
-        gloves: {chance: 0.4, items: {ClothingHandsGlovesColorWhite: 1}}
-        eyes: {chance: 0.15, items: {ClothingEyesGlassesSecurity: 1}}
-        belt: {chance: 0.03, items: {ClothingBeltSecurityFilled: 1}}
-        ears: {chance: 0.08, items: {ClothingHeadsetAltSecurity: 1}}
-    HeadOfSecurityArmed:
-      weight: 0.08
-      gear: CommandSmgBaseGear
-      slots:
-        head: {chance: 0.6, items: {ClothingHeadHatHoshat: 1}}
-        neck: {items: {ClothingNeckCloakHos: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitHoSParadeMale: 1}}
-        outerClothing: {chance: 0.8, items: {ClothingOuterCoatHoSTrench: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackSatchelSecurity: 1}}
-        shoes: {items: {ClothingShoesBootsCowboyBlackFilled: 1}}
-        ears: {chance: 0.08, items: {ClothingHeadsetAltSecurity: 1}}
-    Quartermaster:
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatQMsoft: 1}}
-        neck: {items: {ClothingNeckCloakQm: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitQMTurtleneck: 1}}
-        outerClothing: {chance: 0.8, items: {ClothingOuterWinterQM: 1}}
-        shoes: {items: {ClothingShoesColorBrown: 1}}
-        pocket1: {chance: 0.3, items: {AppraisalTool: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetAltCargo: 1}}
-    QuartermasterFormal:
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatBeretQM: 1}}
-        neck: {items: {ClothingNeckMantleQM: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitQMFormal: 1}}
-        outerClothing: {chance: 0.8, items: {ClothingOuterWinterQM: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackSatchelCargo: 1}}
-        shoes: {items: {ClothingShoesColorBrown: 1}}
-        pocket1: {chance: 0.3, items: {AppraisalTool: 1}}
-        pocket2: {chance: 0.04, items: {SpaceCash500: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetAltCargo: 1}}
-    QuartermasterBroke:
-      gear: CommandDrunkBaseGear
-      slots:
-        head: {chance: 0.6, items: {ClothingHeadHatQMsoft: 1, ClothingHeadHatBeretQM: 1}}
-        neck: {chance: 0.7, items: {ClothingNeckCloakQm: 1, ClothingNeckMantleQM: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitQMTurtleneck: 1, ClothingUniformJumpsuitQMFormal: 1}}
-        outerClothing: {chance: 0.6, items: {ClothingOuterWinterQM: 1}}
-        shoes: {items: {ClothingShoesColorBrown: 1}}
-        pocket1: {chance: 0.4, items: {AppraisalTool: 1, HandheldGPSBasic: 1}}
-        pocket2: {chance: 0.05, items: {SpaceCash500: 1}}
-        ears: {chance: 0.08, items: {ClothingHeadsetAltCargo: 1}}
-    ResearchDirector:
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatBeretRND: 1}}
-        neck: {items: {ClothingNeckCloakRd: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitResearchDirector: 1}}
-        outerClothing: {chance: 0.8, items: {ClothingOuterCoatRD: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackSatchelScience: 1}}
-        shoes: {items: {ClothingShoesColorBrown: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetAltScience: 1}}
-    ResearchDirectorMantle:
-      slots:
-        head: {chance: 0.7, items: {ClothingHeadHatBeretRND: 1}}
-        neck: {items: {ClothingNeckMantleRD: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitResearchDirector: 1}}
-        outerClothing: {chance: 0.8, items: {ClothingOuterCoatRD: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackScience: 1}}
-        shoes: {items: {ClothingShoesColorBrown: 1}}
-        gloves: {chance: 0.3, items: {ClothingHandsGlovesNitrile: 1, ClothingHandsGlovesLatex: 1}}
-        pocket1: {chance: 0.04, items: {WeaponLaserSidearm: 1}}
-        ears: {chance: 0.1, items: {ClothingHeadsetAltScience: 1}}
-    ResearchDirectorCoffee:
-      gear: CommandCoffeeBaseGear
-      slots:
-        head: {chance: 0.6, items: {ClothingHeadHatBeretRND: 1}}
-        eyes: {chance: 0.6, items: {ClothingEyesGlasses: 1}}
-        neck: {chance: 0.7, items: {ClothingNeckCloakRd: 1, ClothingNeckMantleRD: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitResearchDirector: 1}}
-        outerClothing: {chance: 0.7, items: {ClothingOuterCoatRD: 1}}
-        back: {chance: 0.4, items: {ClothingBackpackScience: 1, ClothingBackpackSatchelScience: 1}}
-        shoes: {items: {ClothingShoesColorBrown: 1}}
-        pocket1: {chance: 0.4, items: {LuxuryPen: 1, AnomalyScanner: 1}}
-        gloves: {chance: 0.3, items: {ClothingHandsGlovesNitrile: 1, ClothingHandsGlovesLatex: 1}}
-        ears: {chance: 0.08, items: {ClothingHeadsetAltScience: 1}}
-    CommandLooted:
-      weight: 1.5
-      slots:
-        head: {chance: 0.15, items: {ClothingHeadHatCaptain: 1, ClothingHeadHatHopcap: 1, ClothingHeadHatBeretRND: 1, ClothingHeadHatQMsoft: 1, ClothingHeadHatBeretEngineering: 1}}
-        neck: {chance: 0.3, items: {ClothingNeckCloakCap: 1, ClothingNeckCloakHop: 1, ClothingNeckCloakQm: 1, ClothingNeckCloakRd: 1, ClothingNeckCloakCe: 1, ClothingCloakCmo: 1, ClothingNeckCloakHos: 1}}
-        jumpsuit: {items: {ClothingUniformJumpsuitCaptain: 1, ClothingUniformJumpsuitHoP: 1, ClothingUniformJumpsuitChiefEngineer: 1, ClothingUniformJumpsuitCMO: 1, ClothingUniformJumpsuitHoSParadeMale: 1, ClothingUniformJumpsuitQMTurtleneck: 1, ClothingUniformJumpsuitResearchDirector: 1}}
-        shoes: {chance: 0.7, items: {ClothingShoesLeather: 1, ClothingShoesColorBrown: 1, ClothingShoesColorWhite: 1, ClothingShoesBootsLaceup: 1}}
-        pocket1: {chance: 0.2, items: {FoodSnackChips: 1, DrinkColaCan: 1, Lighter: 1}}
-        ears: {chance: 0.04, items: {ClothingHeadsetAltCommand: 1}}
+  weights:
+    CaptainCarapace: 0.2
+    CaptainCloak: 0.6
+    CaptainFormal: 0.6
+    CaptainDrunk: 0.3
+    ChiefEngineer: 1
+    ChiefEngineerTurtle: 1
+    ChiefEngineerWorking: 1
+    ChiefMedicalOfficer: 1
+    ChiefMedicalOfficerTurtle: 1
+    ChiefMedicalOfficerLab: 1
+    HeadOfPersonnel: 1
+    HeadOfPersonnelMantle: 1
+    HeadOfPersonnelClerk: 1
+    HeadOfSecurity: 0.7
+    HeadOfSecurityFormal: 0.7
+    HeadOfSecurityArmed: 0.08
+    Quartermaster: 1
+    QuartermasterFormal: 1
+    QuartermasterBroke: 1
+    ResearchDirector: 1
+    ResearchDirectorMantle: 1
+    ResearchDirectorCoffee: 1
+    CommandLooted: 1.5
+
+- type: loadoutArchetype
+  id: CaptainCarapace
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatCaptain: 1 } }
+    eyes: { chance: 0.15, items: { ClothingEyesGlassesCommand: 1 } }
+    neck: { items: { ClothingNeckCloakCap: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitCaptain: 1 } }
+    outerClothing: { chance: 0.15, items: { ClothingOuterArmorCaptainCarapace: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackCaptain: 1 } }
+    shoes: { items: { ClothingShoesBootsLaceup: 1 } }
+    belt: { chance: 0.03, items: { WeaponLaserSidearm: 1 } }
+    pocket1: { chance: 0.04, items: { WeaponLaserSidearm: 1 } }
+    gloves: { chance: 0.15, items: { ClothingHandsGlovesCaptain: 1 } }
+    ears: { chance: 0.06, items: { ClothingHeadsetAltCommand: 1 } }
+
+- type: loadoutArchetype
+  id: CaptainCloak
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatCaptain: 1 } }
+    eyes: { chance: 0.4, items: { ClothingEyesGlassesSunglasses: 1 } }
+    neck: { items: { ClothingNeckCloakCap: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitCaptain: 1 } }
+    shoes: { items: { ClothingShoesBootsLaceup: 1 } }
+    pocket1: { chance: 0.05, items: { WeaponLaserSidearm: 1 } }
+    gloves: { chance: 0.15, items: { ClothingHandsGlovesCaptain: 1 } }
+    ears: { chance: 0.08, items: { ClothingHeadsetAltCommand: 1 } }
+
+- type: loadoutArchetype
+  id: CaptainFormal
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatCapcap: 1 } }
+    neck: { items: { ClothingNeckMantleCap: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitCapFormal: 1 } }
+    outerClothing: { chance: 0.8, items: { ClothingOuterWinterCap: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackSatchelCaptain: 1 } }
+    shoes: { items: { ClothingShoesBootsLaceup: 1 } }
+    ears: { chance: 0.08, items: { ClothingHeadsetAltCommand: 1 } }
+
+- type: loadoutArchetype
+  id: CaptainDrunk
+  gear: CommandDrunkBaseGear
+  slots:
+    head: { chance: 0.4, items: { ClothingHeadHatCaptain: 1, ClothingHeadHatCapcap: 1 } }
+    eyes: { chance: 0.3, items: { ClothingEyesGlassesSunglasses: 1 } }
+    neck: { chance: 0.6, items: { ClothingNeckCloakCap: 1, ClothingNeckMantleCap: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitCaptain: 2, ClothingUniformJumpsuitCapFormal: 1 } }
+    shoes: { items: { ClothingShoesBootsLaceup: 1 } }
+    pocket1: { chance: 0.3, items: { Lighter: 1, CigarGold: 1 } }
+    gloves: { chance: 0.1, items: { ClothingHandsGlovesCaptain: 1 } }
+
+- type: loadoutArchetype
+  id: ChiefEngineer
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatBeretEngineering: 1 } }
+    neck: { items: { ClothingNeckCloakCe: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitChiefEngineer: 1 } }
+    outerClothing: { chance: 0.6, items: { ClothingOuterVestHazard: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackDuffelEngineering: 1 } }
+    shoes: { items: { ClothingShoesColorWhite: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetAltEngineering: 1 } }
+
+- type: loadoutArchetype
+  id: ChiefEngineerTurtle
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatBeretEngineering: 1 } }
+    neck: { items: { ClothingNeckMantleCE: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitChiefEngineerTurtle: 1 } }
+    outerClothing: { chance: 0.8, items: { ClothingOuterWinterCE: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackSatchelEngineering: 1 } }
+    shoes: { items: { ClothingShoesColorWhite: 1 } }
+    belt: { chance: 0.03, items: { ClothingBeltChiefEngineerFilled: 1 } }
+    pocket1: { chance: 0.04, items: { WeaponLaserSidearm: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetAltEngineering: 1 } }
+
+- type: loadoutArchetype
+  id: ChiefEngineerWorking
+  gear: CommandTrayScannerBaseGear
+  slots:
+    head: { chance: 0.5, items: { ClothingHeadHatBeretEngineering: 2, ClothingHeadHatHardhatYellow: 1 } }
+    eyes: { chance: 0.4, items: { ClothingEyesGlassesMeson: 1 } }
+    neck: { chance: 0.7, items: { ClothingNeckCloakCe: 1, ClothingNeckMantleCE: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitChiefEngineer: 2, ClothingUniformJumpsuitChiefEngineerTurtle: 1 } }
+    outerClothing: { chance: 0.5, items: { ClothingOuterVestHazard: 1, ClothingOuterWinterCE: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackEngineering: 1, ClothingBackpackSatchelEngineering: 1, ClothingBackpackDuffelEngineering: 1 } }
+    shoes: { items: { ClothingShoesColorWhite: 2, ClothingShoesBootsWork: 1 } }
+    belt: { chance: 0.4, items: { ClothingBeltUtility: 1 } }
+    pocket1: { chance: 0.5, items: { Welder: 1, CrowbarRed: 1, FlashlightLantern: 1 } }
+    gloves: { chance: 0.3, items: { ClothingHandsGlovesColorYellow: 1 } }
+    ears: { chance: 0.08, items: { ClothingHeadsetAltEngineering: 1 } }
+
+- type: loadoutArchetype
+  id: ChiefMedicalOfficer
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadMirror: 1 } }
+    neck: { items: { ClothingCloakCmo: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitCMO: 1 } }
+    outerClothing: { chance: 0.8, items: { ClothingOuterCoatLabCmo: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackMedical: 1 } }
+    shoes: { items: { ClothingShoesColorBrown: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetAltMedical: 1 } }
+
+- type: loadoutArchetype
+  id: ChiefMedicalOfficerTurtle
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatBeretCmo: 1 } }
+    neck: { items: { ClothingNeckMantleCMO: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitCMOTurtle: 1 } }
+    outerClothing: { chance: 0.8, items: { ClothingOuterCoatLabCmo: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackSatchelMedical: 1 } }
+    shoes: { items: { ClothingShoesColorBrown: 1 } }
+    belt: { chance: 0.05, items: { ClothingBeltMedical: 1 } }
+    gloves: { chance: 0.3, items: { ClothingHandsGlovesNitrile: 1, ClothingHandsGlovesLatex: 1 } }
+    pocket1: { chance: 0.04, items: { WeaponLaserSidearm: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetAltMedical: 1 } }
+
+- type: loadoutArchetype
+  id: ChiefMedicalOfficerLab
+  slots:
+    head: { chance: 0.5, items: { ClothingHeadMirror: 1, ClothingHeadHatBeretCmo: 1 } }
+    eyes: { chance: 0.1, items: { ClothingEyesHudMedical: 1 } }
+    neck: { chance: 0.7, items: { ClothingCloakCmo: 1, ClothingNeckMantleCMO: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitCMO: 2, ClothingUniformJumpsuitCMOTurtle: 1 } }
+    outerClothing: { chance: 0.8, items: { ClothingOuterCoatLabCmo: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackMedical: 1, ClothingBackpackSatchelMedical: 1 } }
+    shoes: { items: { ClothingShoesColorBrown: 1 } }
+    belt: { chance: 0.2, items: { ClothingBeltMedical: 1 } }
+    pocket1: { chance: 0.4, items: { Ointment: 1, Gauze: 1, Brutepack: 1 } }
+    gloves: { chance: 0.4, items: { ClothingHandsGlovesLatex: 1, ClothingHandsGlovesNitrile: 1 } }
+    ears: { chance: 0.08, items: { ClothingHeadsetAltMedical: 1 } }
+
+- type: loadoutArchetype
+  id: HeadOfPersonnel
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatHopcap: 1 } }
+    neck: { items: { ClothingNeckCloakHop: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitHoP: 1 } }
+    outerClothing: { chance: 0.8, items: { ClothingOuterWinterHoP: 1 } }
+    shoes: { items: { ClothingShoesLeather: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetAltCommand: 1 } }
+
+- type: loadoutArchetype
+  id: HeadOfPersonnelMantle
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatHopcap: 1 } }
+    neck: { items: { ClothingNeckMantleHOP: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitHoP: 1 } }
+    outerClothing: { chance: 0.8, items: { ClothingOuterWinterHoP: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackSatchelLeather: 1 } }
+    shoes: { items: { ClothingShoesLeather: 1 } }
+    belt: { chance: 0.03, items: { WeaponLaserSidearm: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetAltCommand: 1 } }
+
+- type: loadoutArchetype
+  id: HeadOfPersonnelClerk
+  gear: CommandClipboardBaseGear
+  slots:
+    head: { chance: 0.6, items: { ClothingHeadHatHopcap: 1 } }
+    neck: { chance: 0.7, items: { ClothingNeckCloakHop: 1, ClothingNeckMantleHOP: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitHoP: 1 } }
+    outerClothing: { chance: 0.6, items: { ClothingOuterWinterHoP: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackSatchelLeather: 1 } }
+    shoes: { items: { ClothingShoesLeather: 1 } }
+    pocket1: { chance: 0.5, items: { LuxuryPen: 1, BookRandomStory: 1 } }
+    ears: { chance: 0.08, items: { ClothingHeadsetAltCommand: 1 } }
+
+- type: loadoutArchetype
+  id: HeadOfSecurity
+  slots:
+    head: { chance: 0.6, items: { ClothingHeadHatHoshat: 1 } }
+    neck: { items: { ClothingNeckCloakHos: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitHoSParadeMale: 1 } }
+    outerClothing: { chance: 0.8, items: { ClothingOuterCoatHoSTrench: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackSatchelSecurity: 1 } }
+    shoes: { items: { ClothingShoesBootsCowboyBlackFilled: 1 } }
+    ears: { chance: 0.08, items: { ClothingHeadsetAltSecurity: 1 } }
+
+- type: loadoutArchetype
+  id: HeadOfSecurityFormal
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatCowboyWhite: 1 } }
+    neck: { items: { SecurityWhistle: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitHosFormal: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackSatchelLeather: 1 } }
+    shoes: { items: { ClothingShoesBootsCowboyFancyFilled: 1 } }
+    gloves: { chance: 0.4, items: { ClothingHandsGlovesColorWhite: 1 } }
+    eyes: { chance: 0.15, items: { ClothingEyesGlassesSecurity: 1 } }
+    belt: { chance: 0.03, items: { ClothingBeltSecurityFilled: 1 } }
+    ears: { chance: 0.08, items: { ClothingHeadsetAltSecurity: 1 } }
+
+- type: loadoutArchetype
+  id: HeadOfSecurityArmed
+  gear: CommandSmgBaseGear
+  slots:
+    head: { chance: 0.6, items: { ClothingHeadHatHoshat: 1 } }
+    neck: { items: { ClothingNeckCloakHos: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitHoSParadeMale: 1 } }
+    outerClothing: { chance: 0.8, items: { ClothingOuterCoatHoSTrench: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackSatchelSecurity: 1 } }
+    shoes: { items: { ClothingShoesBootsCowboyBlackFilled: 1 } }
+    ears: { chance: 0.08, items: { ClothingHeadsetAltSecurity: 1 } }
+
+- type: loadoutArchetype
+  id: Quartermaster
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatQMsoft: 1 } }
+    neck: { items: { ClothingNeckCloakQm: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitQMTurtleneck: 1 } }
+    outerClothing: { chance: 0.8, items: { ClothingOuterWinterQM: 1 } }
+    shoes: { items: { ClothingShoesColorBrown: 1 } }
+    pocket1: { chance: 0.3, items: { AppraisalTool: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetAltCargo: 1 } }
+
+- type: loadoutArchetype
+  id: QuartermasterFormal
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatBeretQM: 1 } }
+    neck: { items: { ClothingNeckMantleQM: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitQMFormal: 1 } }
+    outerClothing: { chance: 0.8, items: { ClothingOuterWinterQM: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackSatchelCargo: 1 } }
+    shoes: { items: { ClothingShoesColorBrown: 1 } }
+    pocket1: { chance: 0.3, items: { AppraisalTool: 1 } }
+    pocket2: { chance: 0.04, items: { SpaceCash500: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetAltCargo: 1 } }
+
+- type: loadoutArchetype
+  id: QuartermasterBroke
+  gear: CommandDrunkBaseGear
+  slots:
+    head: { chance: 0.6, items: { ClothingHeadHatQMsoft: 1, ClothingHeadHatBeretQM: 1 } }
+    neck: { chance: 0.7, items: { ClothingNeckCloakQm: 1, ClothingNeckMantleQM: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitQMTurtleneck: 1, ClothingUniformJumpsuitQMFormal: 1 } }
+    outerClothing: { chance: 0.6, items: { ClothingOuterWinterQM: 1 } }
+    shoes: { items: { ClothingShoesColorBrown: 1 } }
+    pocket1: { chance: 0.4, items: { AppraisalTool: 1, HandheldGPSBasic: 1 } }
+    pocket2: { chance: 0.05, items: { SpaceCash500: 1 } }
+    ears: { chance: 0.08, items: { ClothingHeadsetAltCargo: 1 } }
+
+- type: loadoutArchetype
+  id: ResearchDirector
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatBeretRND: 1 } }
+    neck: { items: { ClothingNeckCloakRd: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitResearchDirector: 1 } }
+    outerClothing: { chance: 0.8, items: { ClothingOuterCoatRD: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackSatchelScience: 1 } }
+    shoes: { items: { ClothingShoesColorBrown: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetAltScience: 1 } }
+
+- type: loadoutArchetype
+  id: ResearchDirectorMantle
+  slots:
+    head: { chance: 0.7, items: { ClothingHeadHatBeretRND: 1 } }
+    neck: { items: { ClothingNeckMantleRD: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitResearchDirector: 1 } }
+    outerClothing: { chance: 0.8, items: { ClothingOuterCoatRD: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackScience: 1 } }
+    shoes: { items: { ClothingShoesColorBrown: 1 } }
+    gloves: { chance: 0.3, items: { ClothingHandsGlovesNitrile: 1, ClothingHandsGlovesLatex: 1 } }
+    pocket1: { chance: 0.04, items: { WeaponLaserSidearm: 1 } }
+    ears: { chance: 0.1, items: { ClothingHeadsetAltScience: 1 } }
+
+- type: loadoutArchetype
+  id: ResearchDirectorCoffee
+  gear: CommandCoffeeBaseGear
+  slots:
+    head: { chance: 0.6, items: { ClothingHeadHatBeretRND: 1 } }
+    eyes: { chance: 0.6, items: { ClothingEyesGlasses: 1 } }
+    neck: { chance: 0.7, items: { ClothingNeckCloakRd: 1, ClothingNeckMantleRD: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitResearchDirector: 1 } }
+    outerClothing: { chance: 0.7, items: { ClothingOuterCoatRD: 1 } }
+    back: { chance: 0.4, items: { ClothingBackpackScience: 1, ClothingBackpackSatchelScience: 1 } }
+    shoes: { items: { ClothingShoesColorBrown: 1 } }
+    pocket1: { chance: 0.4, items: { LuxuryPen: 1, AnomalyScanner: 1 } }
+    gloves: { chance: 0.3, items: { ClothingHandsGlovesNitrile: 1, ClothingHandsGlovesLatex: 1 } }
+    ears: { chance: 0.08, items: { ClothingHeadsetAltScience: 1 } }
+
+- type: loadoutArchetype
+  id: CommandLooted
+  slots:
+    head: { chance: 0.15, items: { ClothingHeadHatCaptain: 1, ClothingHeadHatHopcap: 1, ClothingHeadHatBeretRND: 1, ClothingHeadHatQMsoft: 1, ClothingHeadHatBeretEngineering: 1 } }
+    neck: { chance: 0.3, items: { ClothingNeckCloakCap: 1, ClothingNeckCloakHop: 1, ClothingNeckCloakQm: 1, ClothingNeckCloakRd: 1, ClothingNeckCloakCe: 1, ClothingCloakCmo: 1, ClothingNeckCloakHos: 1 } }
+    jumpsuit: { items: { ClothingUniformJumpsuitCaptain: 1, ClothingUniformJumpsuitHoP: 1, ClothingUniformJumpsuitChiefEngineer: 1, ClothingUniformJumpsuitCMO: 1, ClothingUniformJumpsuitHoSParadeMale: 1, ClothingUniformJumpsuitQMTurtleneck: 1, ClothingUniformJumpsuitResearchDirector: 1 } }
+    shoes: { chance: 0.7, items: { ClothingShoesLeather: 1, ClothingShoesColorBrown: 1, ClothingShoesColorWhite: 1, ClothingShoesBootsLaceup: 1 } }
+    pocket1: { chance: 0.2, items: { FoodSnackChips: 1, DrinkColaCan: 1, Lighter: 1 } }
+    ears: { chance: 0.04, items: { ClothingHeadsetAltCommand: 1 } }
