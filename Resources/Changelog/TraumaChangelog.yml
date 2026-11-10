@@ -16596,3 +16596,10 @@ Entries:
   id: 1793
   time: '2026-11-10T00:24:06.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5345
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Reduced Justice's Empowered Mode base damage from 50 to 20
+  id: 1794
+  time: '2026-11-10T06:38:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5346
