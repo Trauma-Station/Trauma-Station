@@ -19,7 +19,6 @@
   - type: Tag
     tags:
     - TechfabMachineBoard
-    - DroneUsable
 
 - type: entity
   id: CargoTechFabCircuitboard
@@ -40,7 +39,6 @@
   - type: Tag
     tags:
     - TechfabMachineBoard
-    - DroneUsable
 
 - type: entity
   id: ScienceTechFabCircuitboard
@@ -61,7 +59,6 @@
   - type: Tag
     tags:
     - TechfabMachineBoard
-    - DroneUsable
 
 - type: entity
   id: ServiceTechFabCircuitboard
@@ -82,8 +79,6 @@
   - type: Tag
     tags:
     - TechfabMachineBoard
-    - DroneUsable
-
 - type: entity
   id: TeslaCoilCircuitboard
   parent: BaseMachineCircuitboard

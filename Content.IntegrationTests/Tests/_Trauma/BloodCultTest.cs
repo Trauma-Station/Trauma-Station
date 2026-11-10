@@ -10,6 +10,7 @@ using Content.Shared.Humanoid;
 using Content.Shared.Mind;
 using Content.Shared.Roles;
 using Content.Shared.Station.Components;
+using Content.Trauma.Server.BloodCult.Objectives;
 using Content.Trauma.Shared.BloodCult;
 using Content.Trauma.Shared.BloodCult.Constructs.SoulShard;
 using Content.Trauma.Shared.BloodCult.Gamerule;
@@ -34,6 +35,7 @@ public sealed class BloodCultTest : InteractionTest
     protected override string PlayerPrototype => Urist; // needs bloodstream and stuff
 
     [SidedDependency(Side.Server)] private AntagSelectionSystem _antag = default!;
+    [SidedDependency(Side.Server)] private BloodCultSystem _cult = default!;
     [SidedDependency(Side.Server)] private CultRuneSystem _rune = default!;
     [SidedDependency(Side.Server)] private GameTicker _ticker = default!;
     [SidedDependency(Side.Server)] private ServerStationSystem _station = default!;
@@ -49,12 +51,12 @@ public sealed class BloodCultTest : InteractionTest
         var dummies = await Server.AddDummySessions(2);
         await Server.WaitPost(() =>
         {
-            var helper = SpawnWithMind(dummies[0], coords);
+            var (helper, helperMind) = SpawnWithMind(dummies[0], coords);
 
             var (antag, rule) = StartRule();
 
             // spawned after starting the rule so its not picked to be sacrificed
-            var initiate = SpawnWithMind(dummies[1], coords);
+            var (initiate, initiateMind) = SpawnWithMind(dummies[1], coords);
 
             Assert.That(_antag.IsEntityValid(SPlayer, specifier), "Player entity somehow wasnt valid");
             Assert.That(_antag.IsSessionValid(ServerSession, antag, specifier), "Session wasnt valid for some reason");
@@ -70,7 +72,6 @@ public sealed class BloodCultTest : InteractionTest
             Assert.That(!SHasComp<BloodCultistComponent>(initiate), "Initiate player wrongly got cultist");
             Assert.That(SComp<BloodCultMemberComponent>(SPlayer).Rule, Is.EqualTo(antag.Owner));
 
-            Assert.That(_mind.GetMind(initiate), Is.Not.Null, "Initiate had no mind");
             Assert.That(initiate, Is.Not.EqualTo(rule.OfferingTarget), "Can't convert the sacrifice target!");
 
             // spawn the rune to convert with
@@ -84,8 +85,8 @@ public sealed class BloodCultTest : InteractionTest
 
             Assert.That(_antag.GetAntagIdentifiers(antag).Count(), Is.EqualTo(3), "Conversion didn't work");
 
-            SDel(_mind.GetMind(initiate));
-            SDel(_mind.GetMind(helper));
+            SDel(initiateMind);
+            SDel(helperMind);
             SDel(_mind.GetMind(SPlayer));
             SDel(rune);
             SDel(initiate);
@@ -117,18 +118,39 @@ public sealed class BloodCultTest : InteractionTest
     [Test]
     public async Task CultStartTest()
     {
+        try
+        {
         var coords = SEntMan.GetCoordinates(PlayerCoords);
 
-        await Server.WaitPost(() =>
+        var specifier = SProtoMan.Index(CultistSpecifier);
+
+        var dummy = await Server.AddDummySession();
+
+        await Server.WaitAssertion(() =>
         {
-            var mind = AssignMind(ServerSession, SPlayer);
+            AssignMind(ServerSession, SPlayer);
 
             var (antag, rule) = StartRule();
-            Assert.That(rule.OfferingTarget, Is.Not.Null, "Blood cult rule didn't pick an offering target");
+            Assert.That(rule.OfferingTarget, Is.EqualTo(SPlayer), "Blood cult rule didn't pick an offering target");
             Assert.That(rule.RitualAreas.Count, Is.EqualTo(rule.AreaCount), "Blood cult rule didn't start with enough ritual areas");
+
+            var (mob, mind) = SpawnWithMind(dummy, coords);
+            // force set it since the test playercount is too low for 3 cultists naturally
+            _antag.ForceMakeAntag(dummy, antag, specifier);
+
+            Assert.That(_antag.GetAntagIdentifiers(antag).Count, Is.EqualTo(1));
+            Assert.That(_cult.GetRule(mob)?.Owner, Is.EqualTo(rule.Owner), "Cultist did not get its cult rule set");
+            Assert.That(mind.Comp.Objectives.Count, Is.EqualTo(2), "Wrong number of objectives assigned to mind of {mind.Comp.CharacterName}");
+            var obj = FindObjectiveWith<KillTargetCultComponent>(mind.Comp);
+            Assert.That(SName(obj), Does.Contain(SName(SPlayer)), "Sacrifice objective does not include the target's name");
             SDel(mind);
             SDel(antag);
         });
+        }
+        catch (Exception e)
+        {
+            Assert.Fail($"FUCK {e}");
+        }
     }
 
     /// <summary>
@@ -154,7 +176,7 @@ public sealed class BloodCultTest : InteractionTest
             var mobs = new EntityUid[dummies.Length];
             for (var i = 0; i < dummies.Length; i++)
             {
-                var mob = SpawnWithMind(dummies[i], coords);
+                var (mob, _) = SpawnWithMind(dummies[i], coords);
                 // force set it since the test playercount is too low for 3 cultists naturally
                 _antag.ForceMakeAntag(dummies[i], antag, specifier);
                 Assert.That(SHasComp<BloodCultistComponent>(mob), $"Dummy {i} should be a cultist");
@@ -192,7 +214,7 @@ public sealed class BloodCultTest : InteractionTest
         });
     }
 
-    private EntityUid AssignMind(ICommonSession session, EntityUid mob)
+    private Entity<MindComponent> AssignMind(ICommonSession session, EntityUid mob)
     {
         var mind = _mind.CreateMind(session.UserId);
         _mind.TransferTo(mind, mob);
@@ -203,11 +225,23 @@ public sealed class BloodCultTest : InteractionTest
         return mind;
     }
 
-    private EntityUid SpawnWithMind(ICommonSession session, EntityCoordinates coords)
+    private (EntityUid, Entity<MindComponent>) SpawnWithMind(ICommonSession session, EntityCoordinates coords)
     {
         var mob = SSpawn(Urist, coords);
-        AssignMind(session, mob);
-        return mob;
+        var mind = AssignMind(session, mob);
+        return (mob, mind);
+    }
+
+    private EntityUid FindObjectiveWith<T>(MindComponent mind) where T: IComponent
+    {
+        var query = SEntMan.GetEntityQuery<T>();
+        foreach (var obj in mind.Objectives)
+        {
+            if (query.HasComp(obj))
+                return obj;
+        }
+
+        throw new Exception($"No objective with {typeof(T)} found for mind of {mind.CharacterName}");
     }
 
     private (Entity<AntagSelectionComponent>, BloodCultRuleComponent) StartRule()

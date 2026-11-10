@@ -38,7 +38,6 @@
   - type: Tag
     tags:
       - PowerCell
-      - DroneUsable # Goobstation
   - type: Riggable
   - type: Appearance
   - type: BatteryVisuals
@@ -95,7 +94,6 @@
   - type: Tag
     tags:
       - PotatoBattery
-      - DroneUsable # Goobstation
   - type: Construction
     graph: PowerCellPotato
     node: potatobattery
