@@ -99,5 +99,3 @@
       damage:
         types:
           Structural: 999 # ensures we destroy it
-
-
