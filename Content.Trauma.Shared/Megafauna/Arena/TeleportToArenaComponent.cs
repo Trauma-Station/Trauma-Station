@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.DoAfter;
 using Content.Shared.EntityEffects;
 
 namespace Content.Trauma.Shared.Megafauna.Arena;
@@ -28,6 +29,12 @@ public sealed partial class TeleportToArenaComponent : Component
     public EntityUid? Arena;
 
     /// <summary>
+    /// The delay to teleport to the arena.
+    /// </summary>
+    [DataField]
+    public TimeSpan Delay = TimeSpan.FromMinutes(1);
+
+    /// <summary>
     /// Effects to run on the user entering the arena
     /// </summary>
     [DataField]
@@ -39,3 +46,6 @@ public sealed partial class TeleportToArenaComponent : Component
     [DataField]
     public EntityEffect[]? EffectsOnExit;
 }
+
+[Serializable, NetSerializable]
+public sealed partial class TeleportToArenaDoAfterEvent : SimpleDoAfterEvent;

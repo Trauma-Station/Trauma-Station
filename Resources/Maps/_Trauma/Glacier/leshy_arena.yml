@@ -4,8 +4,8 @@ meta:
   engineVersion: 295.0.0
   forkId: ""
   forkVersion: ""
-  time: 11/08/2026 16:39:18
-  entityCount: 142
+  time: 11/10/2026 21:53:30
+  entityCount: 147
 maps: []
 grids:
 - 1
@@ -69,10 +69,10 @@ entities:
     - type: ImplicitRoof
     - type: GridPathfinding
     - type: Gravity
+      inherent: True
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
       enabled: True
-      inherent: true
     - type: DecalGrid
       chunkCollection:
         version: 3
@@ -255,33 +255,80 @@ entities:
       parent: 1
       rot: -1.5707963267948966 rad
       pos: -10.5,1.5
-- proto: SalvageHumanCorpseSpawner
+    - type: TeleportFromArena
+      delay: 5
+- proto: RandomCivilianHumanCorpseSpawner
+  entities:
+  - uid: 130
+    components:
+    - type: Transform
+      parent: 1
+      pos: 2.5,11.5
+- proto: RandomCommandDwarfCorpseSpawner
   entities:
   - uid: 126
     components:
     - type: Transform
       parent: 1
-      pos: -1.5,3.5
+      pos: -1.5,5.5
+- proto: RandomEngineerArachnidCorpseSpawner
+  entities:
   - uid: 127
     components:
     - type: Transform
       parent: 1
-      pos: 2.5,6.5
+      pos: 1.5,1.5
+- proto: RandomSyndicateSlimePersonCorpseSpawner
+  entities:
   - uid: 128
     components:
     - type: Transform
       parent: 1
-      pos: -1.5,8.5
-  - uid: 130
-    components:
-    - type: Transform
-      parent: 1
-      pos: 2.5,1.5
+      pos: -1.5,-2.5
+- proto: RMCStairsWood
+  entities:
   - uid: 131
     components:
     - type: Transform
       parent: 1
-      pos: -1.5,-1.5
+      rot: 3.141592653589793 rad
+      pos: -0.5,-5.5
+    - type: TeleportFromArena
+  - uid: 143
+    components:
+    - type: Transform
+      parent: 1
+      rot: 3.141592653589793 rad
+      pos: 0.5,-5.5
+    - type: TeleportFromArena
+  - uid: 144
+    components:
+    - type: Transform
+      parent: 1
+      rot: 3.141592653589793 rad
+      pos: -1.5,-5.5
+    - type: TeleportFromArena
+  - uid: 145
+    components:
+    - type: Transform
+      parent: 1
+      rot: 3.141592653589793 rad
+      pos: 1.5,-5.5
+    - type: TeleportFromArena
+- proto: RMCStairsWoodCorner
+  entities:
+  - uid: 146
+    components:
+    - type: Transform
+      parent: 1
+      rot: 3.141592653589793 rad
+      pos: -2.5,-5.5
+  - uid: 147
+    components:
+    - type: Transform
+      parent: 1
+      rot: 1.5707963267948966 rad
+      pos: 2.5,-5.5
 - proto: SpawnMobLeshy
   entities:
   - uid: 102

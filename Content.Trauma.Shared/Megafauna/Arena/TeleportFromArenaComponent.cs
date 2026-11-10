@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.DoAfter;
+
 namespace Content.Trauma.Shared.Megafauna.Arena;
 
 /// <summary>
@@ -14,4 +16,13 @@ public sealed partial class TeleportFromArenaComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid? Linked;
+
+    /// <summary>
+    /// The delay to teleport from the arena.
+    /// </summary>
+    [DataField]
+    public TimeSpan Delay = TimeSpan.FromMinutes(1);
 }
+
+[Serializable, NetSerializable]
+public sealed partial class TeleportFromArenaDoAfterEvent : SimpleDoAfterEvent;

@@ -4,7 +4,7 @@ meta:
   engineVersion: 295.0.0
   forkId: ""
   forkVersion: ""
-  time: 11/08/2026 00:13:55
+  time: 11/10/2026 21:49:08
   entityCount: 158
 maps: []
 grids:
@@ -71,10 +71,10 @@ entities:
     - type: ImplicitRoof
     - type: GridPathfinding
     - type: Gravity
+      inherent: True
       gravityShakeSound: !type:SoundPathSpecifier
         path: /Audio/Effects/alert.ogg
-      inherent: true
-      enabled: true
+      enabled: True
     - type: DecalGrid
       chunkCollection:
         version: 3
@@ -198,7 +198,6 @@ entities:
     - type: ExplosionAirtightGrid
     - type: GravityShake
       shakeTimes: 10
-      nextShake: 0
 - proto: AlwaysPoweredlightPink
   entities:
   - uid: 81
@@ -648,25 +647,34 @@ entities:
       parent: 1
       rot: 3.141592653589793 rad
       pos: 9.5,4.5
-- proto: RandomCommandCorpseSpawner
-  entities:
-  - uid: 79
-    components:
-    - type: Transform
-      parent: 1
-      pos: -6.5,-1.5
-  - uid: 80
-    components:
-    - type: Transform
-      parent: 1
-      pos: 6.5,-3.5
-- proto: RandomMedicCorpseSpawner
+- proto: RandomMercenaryReptilianCorpseSpawner
   entities:
   - uid: 78
     components:
     - type: Transform
       parent: 1
+      pos: -6.5,-1.5
+- proto: RandomScienceCorpseSpawner
+  entities:
+  - uid: 79
+    components:
+    - type: Transform
+      parent: 1
+      pos: -8.5,4.5
+- proto: RandomSecurityCorpseSpawner
+  entities:
+  - uid: 80
+    components:
+    - type: Transform
+      parent: 1
       pos: 5.5,4.5
+- proto: RandomSyndicateDwarfCorpseSpawner
+  entities:
+  - uid: 77
+    components:
+    - type: Transform
+      parent: 1
+      pos: 6.5,-3.5
 - proto: RMCStairsWood
   entities:
   - uid: 93
@@ -675,25 +683,21 @@ entities:
       parent: 1
       rot: 3.141592653589793 rad
       pos: -1.5,-6.5
+    - type: TeleportFromArena
   - uid: 94
     components:
     - type: Transform
       parent: 1
       rot: 3.141592653589793 rad
       pos: -0.5,-6.5
+    - type: TeleportFromArena
   - uid: 95
     components:
     - type: Transform
       parent: 1
       rot: 3.141592653589793 rad
       pos: 0.5,-6.5
-- proto: SalvageHumanCorpseSpawner
-  entities:
-  - uid: 77
-    components:
-    - type: Transform
-      parent: 1
-      pos: -8.5,4.5
+    - type: TeleportFromArena
 - proto: SpawnMobDemonicFrostMiner
   entities:
   - uid: 76

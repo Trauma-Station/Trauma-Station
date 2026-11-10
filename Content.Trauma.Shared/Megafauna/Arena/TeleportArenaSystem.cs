@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared.DoAfter;
 using Content.Shared.EntityEffects;
 using Content.Shared.Interaction;
 using Robust.Shared.EntitySerialization.Systems;
@@ -16,6 +17,7 @@ public sealed partial class TeleportArenaSystem : EntitySystem
     [Dependency] private SharedMapSystem _map = default!;
     [Dependency] private MapLoaderSystem _loader = default!;
     [Dependency] private EntityLookupSystem _lookup = default!;
+    [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedTransformSystem _transform = default!;
     [Dependency] private SharedEntityEffectsSystem _effects = default!;
 
@@ -54,14 +56,30 @@ public sealed partial class TeleportArenaSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnInteract(Entity<TeleportToArenaComponent> ent, ref InteractHandEvent args)
     {
-        if (ent.Comp.Arena is not { } arena)
+        var doAfterArgs = new DoAfterArgs(
+            EntityManager,
+            args.User,
+            ent.Comp.Delay,
+            new TeleportToArenaDoAfterEvent(),
+            args.Target)
+        {
+            BreakOnMove = true,
+        };
+
+        _doAfter.TryStartDoAfter(doAfterArgs);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnTeleportDoAfter(Entity<TeleportToArenaComponent> ent, ref TeleportToArenaDoAfterEvent args)
+    {
+        if (args.Cancelled || ent.Comp.Arena is not { } arena)
             return;
 
         var user = args.User;
         var xform = Transform(arena);
 
         _transform.SetCoordinates(user, xform.Coordinates);
-        _transform.SetParent(user, arena); // don't set us parent of the map, but of the grid
+        _transform.SetParent(user, arena); // set us parent of the grid, not the map
 
         if (ent.Comp.EffectsOnEnter is { } enterEffects)
             _effects.ApplyEffects(user, enterEffects);
@@ -70,7 +88,23 @@ public sealed partial class TeleportArenaSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnInteract(Entity<TeleportFromArenaComponent> ent, ref InteractHandEvent args)
     {
-        if (ent.Comp.Linked is not { } linked)
+        var doAfterArgs = new DoAfterArgs(
+            EntityManager,
+            args.User,
+            ent.Comp.Delay,
+            new TeleportFromArenaDoAfterEvent(),
+            args.Target)
+        {
+            BreakOnMove = true,
+        };
+
+        _doAfter.TryStartDoAfter(doAfterArgs);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnTeleportDoAfter(Entity<TeleportFromArenaComponent> ent, ref TeleportFromArenaDoAfterEvent args)
+    {
+        if (args.Cancelled || ent.Comp.Linked is not { } linked)
             return;
 
         var user = args.User;
