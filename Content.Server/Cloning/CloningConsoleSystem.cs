@@ -156,20 +156,24 @@ namespace Content.Server.Cloning
 
             if (!consoleComponent.CloningPodInRange || !consoleComponent.GeneticScannerInRange)
                 return;
-
+            Log.Info("0");
             var body = scannerComp.BodyContainer.ContainedEntity;
 
             if (body is null)
                 return;
-
-            if (!_mindSystem.TryGetMind(body.Value, out var mindId, out var mind))
-                return;
-
-            if (mind.UserId.HasValue == false || !_playerManager.ValidSessionId(mind.UserId.Value))
-                return;
-
-            if (_cloningPodSystem.TryCloning(cloningPodUid, body.Value, (mindId, mind), cloningPod, scannerComp.CloningFailChanceMultiplier))
+            Log.Info("1");
+            // <Trauma - allow automated cloning mindless>
+            // if (!_mindSystem.TryGetMind(body.Value, out var mindId, out var mind))
+            //     return;
+            //
+            // if (mind.UserId.HasValue == false || !_playerManager.ValidSessionId(mind.UserId.Value))
+            //     return;
+            //
+            //if (_cloningPodSystem.TryCloning(cloningPodUid, body.Value, (mindId, mind), cloningPod, scannerComp.CloningFailChanceMultiplier))
+            if (_cloningPodSystem.TryCloning(cloningPodUid, body.Value, cloningPod, scannerComp.CloningFailChanceMultiplier))
+            // </Trauma>
                 _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(uid)} successfully cloned {ToPrettyString(body.Value)}.");
+            Log.Info("2");
         }
 
         public void RecheckConnections(EntityUid console, EntityUid? cloningPod, EntityUid? scanner, CloningConsoleComponent? consoleComp = null)
@@ -193,7 +197,7 @@ namespace Content.Server.Cloning
         private CloningConsoleBoundUserInterfaceState GetUserInterfaceState(CloningConsoleComponent consoleComponent)
         {
             ClonerStatus clonerStatus = ClonerStatus.Ready;
-
+            Log.Info("fuck");
             // genetic scanner info
             string scanBodyInfo = Loc.GetString("generic-unknown");
             bool scannerConnected = false;

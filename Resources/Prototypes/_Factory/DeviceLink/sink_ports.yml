@@ -230,3 +230,10 @@
   id: Text
   name: signal-port-name-text
   description: signal-port-description-text
+
+# Cloning Computer
+
+- type: sinkPort
+  id: Clone
+  name: signal-port-name-clone
+  description: signal-port-description-clone
