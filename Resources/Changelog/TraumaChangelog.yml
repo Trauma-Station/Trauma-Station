@@ -16589,3 +16589,10 @@ Entries:
   id: 1792
   time: '2026-11-09T22:49:53.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5344
+- author: Luminal
+  changes:
+  - type: Remove
+    message: The identity of the vampire doesn't get transferred to their lair anymore.
+  id: 1793
+  time: '2026-11-10T00:24:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5345
