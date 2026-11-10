@@ -160,7 +160,7 @@ public sealed partial class CloningPodSystem : EntitySystem
 
     // <Trauma - allow cloning mindless>
     //public bool TryCloning(EntityUid uid, EntityUid bodyToClone, Entity<MindComponent> mindEnt, CloningPodComponent? clonePod, float failChanceModifier = 1)
-    public bool TryCloning(EntityUid uid, EntityUid bodyToClone, CloningPodComponent? clonePod, float failChanceModifier = 1)
+    public bool TryCloning(EntityUid uid, EntityUid bodyToClone, Entity<MindComponent>? mindEnt, CloningPodComponent? clonePod, float failChanceModifier = 1)
     // </Trauma>
     {
         if (!Resolve(uid, ref clonePod))
@@ -192,8 +192,10 @@ public sealed partial class CloningPodSystem : EntitySystem
 
         // Yes, we still need to track down the client because we need to open the Eui
         // <Trauma - allow automated cloning mindless>
-        // if (mind.UserId == null || !_playerManager.TryGetSessionById(mind.UserId.Value, out var client))
-        //     return false; // If we can't track down the client, we can't offer transfer. That'd be quite bad.
+        /*
+        if (mind.UserId == null || !_playerManager.TryGetSessionById(mind.UserId.Value, out var client))
+            return false; // If we can't track down the client, we can't offer transfer. That'd be quite bad.
+        */
         // </Trauma>
         if (!TryComp<PhysicsComponent>(bodyToClone, out var physics))
             return false;
