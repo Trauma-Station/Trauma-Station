@@ -11,23 +11,13 @@ public sealed partial class LinkedEntityContainerSystem : EntitySystem
 {
     [Dependency] private SharedTransformSystem _transform = default!;
 
-    private EntProtoId<PortalComponent> _portalDestination = "ThronglerToy"; //"BluespaceRiftPortalDestination";
+    private EntProtoId<PortalComponent> _portalDestination = "BluespaceRiftPortalDestination";
 
     [SubscribeLocalEvent]
-    private void Startup(Entity<LinkedEntityContainerComponent> ent, ref ComponentStartup args)
+    private void Startup(Entity<LinkedEntityContainerComponent> ent, ref MapInitEvent args)
     {
         var newEnt = PredictedSpawnNextToOrDrop(_portalDestination, ent.Owner);
-
-        // var newXform = Transform(newEnt);
-        // if (newXform.Coordinates.Position == Vector2.Zero || newXform.Coordinates.Position == Vector2Helpers.NaN)
-        //     _transform.SetCoordinates(newEnt, Transform(ent).Coordinates);
-        // Dirty(newEnt, newXform);
-
-        Log.Info($"newEnt {newEnt}");
-
-        ent.Comp.NetEnt = GetNetEntity(newEnt);
-        Dirty(ent.Owner, ent.Comp);
-        Log.Info($"NetEnt {ent.Comp.NetEnt}");
+        ent.Comp.Uid = newEnt;
     }
 
     public void SpawnWithLinkedEntity(string? protoName, Entity<TransformComponent> parent)

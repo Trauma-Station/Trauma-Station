@@ -9,5 +9,5 @@ namespace Content.Trauma.Shared.LinkedEntityContainer;
 public sealed partial class LinkedEntityContainerComponent : Component
 {
     [DataField, AutoNetworkedField]
-    public NetEntity NetEnt;
+    public EntityUid Uid;
 }

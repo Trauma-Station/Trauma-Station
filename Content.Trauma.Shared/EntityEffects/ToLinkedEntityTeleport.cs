@@ -31,18 +31,15 @@ public sealed partial class ToLinkedEntityTeleportEffectSystem : EntityEffectSys
 
     protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<ToLinkedEntityTeleport> args)
     {
-        Log.Info("start effect");
         var handEntity = _hands.GetActiveItemOrSelf((ent.Owner, ent.Comp));
 
-        if (!TryComp<LinkedEntityContainerComponent>(handEntity, out var destination))
+        if (!TryComp<LinkedEntityContainerComponent>(handEntity, out var destination) || !destination.Uid.IsValid())
             return;
-        var targetEnt = GetEntity(destination.NetEnt);
-        Log.Info($"NetEnt {destination.NetEnt}");
-        Log.Info($"targetEnt {targetEnt}");
+        var targetEnt = destination.Uid;
 
         var oldPos = Transform(ent).Coordinates;
         var newPos = Transform(targetEnt).Coordinates;
-        Log.Info($"newPos {newPos}");
+
         _teleport.Teleport(ent.Owner, newPos, user: args.User);
 
         if (args.Effect.SpawnPortal != default)
