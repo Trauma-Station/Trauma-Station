@@ -16,7 +16,6 @@
     tags:
     - Sheet
     - ConstructionMaterial
-    - DroneUsable
     - SheetGlass
 
 - type: entity

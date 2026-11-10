@@ -75,3 +75,14 @@
     Telecrystal: 30
   categories:
   - UplinkWearables
+
+- type: listing
+  id: UplinkChameleonEVABundle
+  name: uplink-chameleon-eva-suit-name
+  description: uplink-chameleon-eva-suit-desc
+  productEntity: ClothingBackpackDuffelSyndicateChameleonEVABundle
+  icon: { sprite: Clothing/OuterClothing/Suits/eva.rsi, state: icon }
+  cost:
+    Telecrystal: 10
+  categories:
+  - UplinkWearables

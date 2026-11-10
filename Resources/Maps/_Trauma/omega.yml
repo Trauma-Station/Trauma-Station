@@ -73972,7 +73972,7 @@ entities:
       pos: -12.5,15.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Drone bay
+      id: Bay
       setupAvailableNetworks:
       - SurveillanceCameraCommand
   - uid: 11401
@@ -74424,7 +74424,7 @@ entities:
       pos: -16.5,19.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Security and drones
+      id: Security
       setupAvailableNetworks:
       - SurveillanceCameraGeneral
   - uid: 11445

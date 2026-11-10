@@ -5,7 +5,4 @@
   id: CartridgeBazooka
 
 - type: Tag
-  id: DroneUsable
-
-- type: Tag
   id: Vaporizer

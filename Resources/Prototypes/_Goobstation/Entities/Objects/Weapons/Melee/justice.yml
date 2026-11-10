@@ -206,8 +206,8 @@
           animation: WeaponArcThrust
           damage:
             types:
-              Slash: 25
-              Heat: 25
+              Slash: 10
+              Heat: 10
           soundHit:
             path: /Audio/_Goobstation/Weapons/Effects/energy-short-sword-swing.ogg
         soundStateActivate:
