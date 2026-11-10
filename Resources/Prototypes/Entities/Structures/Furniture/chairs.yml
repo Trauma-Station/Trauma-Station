@@ -284,7 +284,6 @@
   - type: Tag
     tags:
     - Wooden
-    - Chair # Goob
   - type: StaticPrice
     price: 75
 

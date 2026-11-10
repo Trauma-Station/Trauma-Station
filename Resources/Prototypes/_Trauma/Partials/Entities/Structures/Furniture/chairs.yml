@@ -1,0 +1,10 @@
+
+
+- type: entity
+  id: ChairWood
+  components:
+  - type: Tag
+    tags:
+    - Chair
+  - type: StaticPrice
+    price: 0
