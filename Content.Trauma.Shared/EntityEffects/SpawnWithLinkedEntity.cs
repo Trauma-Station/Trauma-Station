@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.EntityEffects.Effects.EntitySpawning;
 using Content.Shared.EntityEffects;
+using Content.Shared.EntityEffects.Effects.EntitySpawning;
 using Content.Trauma.Shared.LinkedEntityContainer;
 
 namespace Content.Trauma.Shared.EntityEffects;
