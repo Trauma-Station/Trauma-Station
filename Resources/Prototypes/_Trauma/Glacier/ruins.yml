@@ -5,8 +5,10 @@
   maxDistance: 512
   gridRuins:
     IcewalkerNest: 1
-    HunterCabin: 4
-    BuriedTruck: 7
+    HunterCabin: 1
+    BuriedTruck: 1
+    RadioPost: 1
+    RussianOutpost: 1
   dungeonRuins:
     CommonRuin5x5: 40
 
@@ -15,6 +17,7 @@
   name: glacier-icewalker-nest
   path: /Maps/_Trauma/Glacier/icewalker_nest.yml
   priority: -1
+  patchToPlanet: false
 
 - type: lavalandGridRuin
   id: HunterCabin
@@ -27,3 +30,15 @@
   name: glacier-buried-truck
   path: /Maps/_Trauma/Glacier/buried_truck.yml
   priority: 2
+
+- type: lavalandGridRuin
+  id: RadioPost
+  name: glacier-radio-post
+  path: /Maps/_Trauma/Glacier/radio_post.yml
+  priority: 3
+
+- type: lavalandGridRuin
+  id: RussianOutpost
+  name: glacier-russian-outpost
+  path: /Maps/_Trauma/Glacier/russian_outpost.yml
+  priority: 4
