@@ -10,9 +10,6 @@
   - type: Sprite
     sprite: Objects/Misc/module.rsi
     state: generic
-  - type: Tag
-    tags:
-      - DroneUsable # Goobstation
   - type: PhysicalComposition #Goobstation - Recycle update
     materialComposition:
       Glass: 12

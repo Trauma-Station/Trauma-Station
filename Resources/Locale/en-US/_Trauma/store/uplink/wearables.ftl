@@ -26,3 +26,6 @@ uplink-clothing-chameleon-thieving-gloves-desc = Discreetly steal from pockets a
 
 uplink-holster-name = Shoulder Holster
 uplink-holster-desc = A deep shoulder holster capable of holding many types of ballistics.
+
+uplink-chameleon-eva-suit-name = Chameleon EVA Bundle
+uplink-chameleon-eva-suit-desc = Be prepared for any sort of low pressure situation. Can take the appearance of any suit or coat!

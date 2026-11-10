@@ -1,7 +1,0 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
-- type: nameIdentifierGroup
-  id: Drone
-  format: name-identifier-format-drone
-  minValue: 100
-  maxValue: 999

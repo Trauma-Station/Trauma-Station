@@ -121983,7 +121983,7 @@ entities:
       setupAvailableNetworks:
       - SurveillanceCameraEngineering
       nameSet: True
-      id: Drone room
+      id: Room
   - uid: 10655
     components:
     - type: Transform

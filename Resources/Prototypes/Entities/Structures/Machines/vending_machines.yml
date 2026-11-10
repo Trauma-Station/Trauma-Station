@@ -449,9 +449,6 @@
     radius: 2 # Goob
     energy: 1.6
     color: "#3db83b"
-  - type: Tag
-    tags:
-      - DroneUsable # Goobstation
 
 - type: entity
   parent: VendingMachine
@@ -481,9 +478,6 @@
     radius: 2 # Goob
     energy: 1.6
     color: "#3db83b"
-  - type: Tag
-    tags:
-    - DroneUsable # Goobstation
 
 - type: entity
   parent: VendingMachine
@@ -887,11 +881,6 @@
   name: Engi-Vend
   description: Spare tool vending. What? Did you expect some witty description?
   components:
-  # <Trauma>
-  - type: Tag
-    tags:
-    - DroneUsable
-  # </Trauma>
   - type: VendingMachine
     pack: EngiVendInventory
   - type: VendingMachineVisuals
@@ -1283,9 +1272,6 @@
     radius: 2
     energy: 1.6
     color: "#c73434"
-  - type: Tag
-    tags:
-    - DroneUsable # Goobstation
 
 - type: entity
   parent: VendingMachine
@@ -1377,9 +1363,6 @@
     radius: 2
     energy: 1.6
     color: "#d4ab33"
-  - type: Tag
-    tags:
-    - DroneUsable # Goobstation
 
 - type: entity
   parent: VendingMachine

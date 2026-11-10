@@ -12,6 +12,5 @@
   - type: Tag
     tags:
       - CameraElectronics
-      - DroneUsable
   - type: StaticPrice
     price: 65

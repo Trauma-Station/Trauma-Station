@@ -13,7 +13,6 @@
   - type: Material
   - type: Tag
     tags:
-    - DroneUsable # Trauma
     - RawMaterial
   - type: Extractable
     grindableSolutionName: composite
@@ -25,7 +24,6 @@
   components:
   - type: Tag
     tags:
-    - DroneUsable # Trauma
     - Sheet
     - ConstructionMaterial
   - type: StaticPrice

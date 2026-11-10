@@ -7,9 +7,6 @@
     sprite: _Trauma/Objects/Materials/Sheets/metal.rsi
   - type: Item
     sprite: _Trauma/Objects/Materials/Sheets/metal.rsi
-  - type: Tag
-    tags:
-    - DroneUsable
 
 - type: entity
   id: SheetSteel
@@ -22,7 +19,6 @@
     tags:
     - Sheet
     - Metal
-    - DroneUsable
     - ConstructionMaterial
     - Steel
 
