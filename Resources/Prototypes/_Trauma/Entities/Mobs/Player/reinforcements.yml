@@ -270,7 +270,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitPrisoner
     shoes: ClothingShoesColorBlack
-    id: ExPopIDCard
+    id: ExPopPDA
 
 # Cargo
 

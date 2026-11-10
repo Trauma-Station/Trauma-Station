@@ -21,7 +21,7 @@ ghost-role-information-reinforcement-sci-name = Station Reinforcement (Scientist
 ghost-role-information-reinforcement-roboticist-name = Station Reinforcement (Roboticist)
 ghost-role-information-reinforcement-geneticist-name = Station Reinforcement (Geneticist)
 ghost-role-information-reinforcement-research-assistant-name = Station Reinforcement (Research Assistant)
-ghost-role-information-reinforcement-ExPop-name = Ex-Pop Personnel
+ghost-role-information-reinforcement-expop-name = Ex-Pop Personnel
 
 ghost-role-information-reinforcement-cargo-name = Station Reinforcement (Cargo)
 ghost-role-information-reinforcement-salv-name = Station Reinforcement (Salvage)
@@ -45,4 +45,4 @@ ghost-role-information-reinforcement-service-worker-name = Station Reinforcement
 ghost-role-information-reinforcement-assistant-name = Station Reinforcement (Assistant)
 
 ghost-role-information-reinforcement-description = You're a reinforcement sent to a nanotrasen station.
-ghost-role-information-ExPop-description = The science team wants to use you for its experiments, comply or risk death.
+ghost-role-information-expop-description = The science team wants to use you for its experiments, comply or risk death.
