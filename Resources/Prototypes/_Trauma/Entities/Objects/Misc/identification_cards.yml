@@ -41,7 +41,7 @@
   - type: Access
   - type: IdCard
     jobTitle: job-name-ex-pop
-    jobIcon: JobIconExpop
+    jobIcon: JobIconExPop
     canMicrowave: false
   - type: Tag
     tags:
