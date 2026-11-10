@@ -29,7 +29,7 @@
     - TauCetiBasic
     - NewKinPidgin
   - type: Speech
-    allowedEmotes: ['Click', 'Chitter', 'Bagawk'] # readd goob "bagawk"
+    allowedEmotes: !Clear ['Click', 'Chitter', 'Bagawk'] # readd goob "bagawk"
   - type: Butcherable
     spawned:
     - id: MaterialBones1 # Trauma - Bones on butchering humanoids

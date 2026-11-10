@@ -70,14 +70,13 @@
   id: BaseNymphingOrgan
   components:
   - type: Nymph
-    blacklist:
+    blacklist: !Clear
       components:
       - ChangelingIdentity # was ChangelingTransform, that doesnt exist here
 
 - type: entity
   id: OrganDionaNymphBrain
   components:
-  - !Remove type: EntityTableContainerFill
   - type: InitialBody # replaced container fill
     organs:
       Head: OrganDionaHead
@@ -92,7 +91,6 @@
 - type: entity
   id: OrganDionaNymphStomach
   components:
-  - !Remove type: EntityTableContainerFill
   - type: InitialBody # replaced container fill
     organs:
       Torso: OrganDionaTorso
@@ -105,7 +103,6 @@
 - type: entity
   id: OrganDionaNymphLungs
   components:
-  - !Remove type: EntityTableContainerFill
   - type: InitialBody # replaced container fill
     organs:
       Torso: OrganDionaTorso

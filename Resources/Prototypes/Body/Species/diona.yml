@@ -319,16 +319,16 @@
   suffix: brain
   components:
   - type: IsDeadIC
-  - type: EntityTableContainerFill
-    containers:
-      body_organs: !type:AllSelector
-        children:
-        - id: OrganDionaBrain
-        - id: OrganAnimalLungs
-        - id: OrganAnimalStomach
-        - id: OrganAnimalLiver
-        - id: OrganAnimalHeart
-        - id: OrganAnimalKidneys
+  # - type: EntityTableContainerFill # Trauma - replaced with InitialBody
+  #   containers:
+  #     body_organs: !type:AllSelector
+  #       children:
+  #       - id: OrganDionaBrain
+  #       - id: OrganAnimalLungs
+  #       - id: OrganAnimalStomach
+  #       - id: OrganAnimalLiver
+  #       - id: OrganAnimalHeart
+  #       - id: OrganAnimalKidneys
 
 - type: entity
   parent: MobDionaNymph
@@ -336,13 +336,13 @@
   suffix: stomach
   components:
   - type: IsDeadIC
-  - type: EntityTableContainerFill
-    organs:
-      Lungs: OrganDionaLungs
-      Stomach: OrganAnimalStomach
-      Liver: OrganAnimalLiver
-      Heart: OrganAnimalHeart
-      Kidneys: OrganAnimalKidneys
+  # - type: EntityTableContainerFill # Trauma - replaced with InitialBody
+  #   organs:
+  #     Lungs: OrganDionaLungs
+  #     Stomach: OrganAnimalStomach
+  #     Liver: OrganAnimalLiver
+  #     Heart: OrganAnimalHeart
+  #     Kidneys: OrganAnimalKidneys
 
 - type: entity
   parent: MobDionaNymph
@@ -350,13 +350,13 @@
   suffix: lungs
   components:
   - type: IsDeadIC
-  - type: EntityTableContainerFill
-    organs:
-      Lungs: OrganAnimalLungs
-      Stomach: OrganDionaStomach
-      Liver: OrganAnimalLiver
-      Heart: OrganAnimalHeart
-      Kidneys: OrganAnimalKidneys
+  # - type: EntityTableContainerFill # Trauma - replaced with InitialBody
+  #   organs:
+  #     Lungs: OrganAnimalLungs
+  #     Stomach: OrganDionaStomach
+  #     Liver: OrganAnimalLiver
+  #     Heart: OrganAnimalHeart
+  #     Kidneys: OrganAnimalKidneys
 
 - type: entity
   parent: MobDiona

@@ -2,7 +2,7 @@
 
 - type: entity
   parent: [ OrganBaseStomach, OrganMothInternal, OrganMothMetabolizer ]
-  id: OrganMothStomach
+  id: OrganMothroachStomach
   components:
   - type: Stomach
     specialDigestible:

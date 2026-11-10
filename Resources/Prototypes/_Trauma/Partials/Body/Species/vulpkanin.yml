@@ -19,12 +19,6 @@
         Quantity: 300 # was 600
 
 - type: entity
-  id: OrganVulpkanin
-  components:
-  - type: Injurable
-    damageContainer: Vulpkanin
-
-- type: entity
   id: OrganVulpkaninInternal
   components:
   - type: Sprite
