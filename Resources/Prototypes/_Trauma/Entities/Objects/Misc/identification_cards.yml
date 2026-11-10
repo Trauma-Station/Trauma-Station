@@ -27,7 +27,7 @@
 
 - type: entity
   parent: IDCardStandard
-  id: ExpopIDCard
+  id: ExPopIDCard
   name: ex-pop ID card
   description: A Cheaply printed ID card for the lowest of low.
   components:

@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: job
-  id: Expop
+  id: ExPop
   name: job-name-ex-pop
   description: job-description-expop
-  playTimeTracker: JobExpop
-  startingGear: ExpopGear
+  playTimeTracker: JobExPop
+  startingGear: ExPopGear
   icon: "JobIconExPop"
   supervisors: job-supervisors-everyone
   access:
@@ -25,14 +25,14 @@
       - Assistant
 
 - type: startingGear
-  id: ExpopGear
+  id: ExPopGear
   equipment:
-    id: expopPDA
+    id: ExPopPDA
     ears: ClothingHeadsetGrey
 
 - type: chameleonOutfit
-  id: ExpopChameleonOutfit
-  job: Expop
+  id: ExPopChameleonOutfit
+  job: ExPop
   equipment:
     head: ClothingHeadHatWelding
     eyes: ClothingEyesGlassesCheapSunglasses
@@ -42,5 +42,5 @@
     outerClothing: ClothingOuterWinterColorOrange
     gloves: ClothingHandsGlovesColorGray
     shoes: ClothingShoesColorOrange
-    id: ExpopPDA
+    id: ExPopPDA
     back: ClothingBackpackElectropack

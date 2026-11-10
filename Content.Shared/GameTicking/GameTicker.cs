@@ -51,8 +51,8 @@ public abstract partial class GameTicker : EntitySystem
     // See ideally these would be pulled from the job definition or something.
     // But this is easier, and at least it isn't hardcoded.
     //TODO: Move these, they really belong in StationJobsSystem or a cvar.
-    // <Trauma> Sets overflow job to be Expop
-    public static readonly ProtoId<JobPrototype> FallbackOverflowJob = "Expop";
+    // <Trauma> Sets overflow job to be ExPop
+    public static readonly ProtoId<JobPrototype> FallbackOverflowJob = "ExPop";
 
     public const string FallbackOverflowJobName = "job-name-ex-pop";
     // </Trauma>

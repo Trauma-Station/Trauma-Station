@@ -142,7 +142,7 @@
 
 - type: entity
   parent: BasePDA
-  id: expopPDA
+  id: ExPopPDA
   name: Ex-Pop PDA
   description: Holding this generally revokes what few rights you would otherwise have.
   components:
@@ -157,7 +157,7 @@
       enum.PdaVisuals.PdaType: !type:String
         pda-expop
   - type: Pda
-    id: ExpopIDCard
+    id: ExPopIDCard
   - type: PdaBorderColor
     borderColor: "#eb7732"
     accentHColor: "#2e2e2e"

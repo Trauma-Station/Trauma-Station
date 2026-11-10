@@ -35,20 +35,20 @@
   - ExclusiveItems
 
 - type: roleLoadout
-  id: JobExpop
+  id: JobExPop
   groups:
   - GroupTankHarness
-  - ExpopJumpsuit
-  - ExpopBackpacks
-  - ExpopNeck
-  - ExpopFace
-  - ExpopGloves
-  - ExpopOuterClothing
-  - ExpopShoes
+  - ExPopJumpsuit
+  - ExPopBackpacks
+  - ExPopNeck
+  - ExPopFace
+  - ExPopGloves
+  - ExPopOuterClothing
+  - ExPopShoes
   - Survival
   - Trinkets
   - GroupSpeciesBreathTool
-  - ExpopEnvirohelm
-  - ExpopEnvirosuit
-  - ExpopEnvirogloves
+  - ExPopEnvirohelm
+  - ExPopEnvirosuit
+  - ExPopEnvirogloves
   - ExclusiveItems

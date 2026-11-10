@@ -21,72 +21,72 @@
     outerClothing: ClothingOuterWinterColorOrange
 
 - type: loadout
-  id: ExpopElectropack
+  id: ExPopElectropack
   equipment:
     back: ClothingBackpackElectropack
 
 - type: loadout
-  id: ExpopBackpack
+  id: ExPopBackpack
 
 - type: loadout
-  id: ExpopSatchel
+  id: ExPopSatchel
 
 - type: loadout
-  id: ExpopDuffel
+  id: ExPopDuffel
 
 - type: loadout
-  id: ExpopMessenger
+  id: ExPopMessenger
 
 # Greytide Time
 - type: loadoutEffectGroup
-  id: ExpopGreyTider
+  id: ExPopGreyTider
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
-      role: JobExpop
+      role: JobExPop
       time: 20h
 
 # Face
 - type: loadout
-  id: ExpopMask
+  id: ExPopMask
   effects:
   - !type:GroupLoadoutEffect
-    proto: ExpopGreyTider
+    proto: ExPopGreyTider
   equipment:
     mask: ClothingMaskGas
 
 #Gloves
 - type: loadout
-  id: ExpopGloves
+  id: ExPopGloves
   effects:
   - !type:GroupLoadoutEffect
-    proto: ExpopGreyTider
+    proto: ExPopGreyTider
   equipment:
     gloves: ClothingHandsGlovesColorGray
 
 # Head of Greytide (for grey mantle)
 - type: loadoutEffectGroup
-  id: ExpopMasterGrey
+  id: ExPopMasterGrey
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
-      role: JobExpop
+      role: JobExPop
       time: 40h
 
 # Neck
 - type: loadout
-  id: ExpopMantle
+  id: ExPopMantle
   effects:
   - !type:GroupLoadoutEffect
-    proto: ExpopMasterGrey
+    proto: ExPopMasterGrey
   equipment:
     neck: ClothingNeckMantle
 
 # Plasmaman
 - type: loadout
-  id: ExpopEnvirosuit
+  id: ExPopEnvirosuit
   equipment:
     jumpsuit: ClothingUniformEnvirosuitPrisoner
   effects:
@@ -95,7 +95,7 @@
     - Plasmaman
 
 - type: loadout
-  id: ExpopEnvirohelm
+  id: ExPopEnvirohelm
   equipment:
     head: ClothingHeadEnvirohelmPrisoner
   effects:

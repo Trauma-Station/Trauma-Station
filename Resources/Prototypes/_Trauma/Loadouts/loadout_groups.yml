@@ -106,53 +106,53 @@
 #D-Class
 #Jumpsuits
 - type: loadoutGroup
-  id: ExpopJumpsuit
+  id: ExPopJumpsuit
   name: loadout-group-expop-jumpsuit
   loadouts:
   - PrisonerJumpsuit
   - PrisonerJumpskirt
 
 - type: loadoutGroup
-  id: ExpopFace
+  id: ExPopFace
   name: loadout-group-expop-mask
   minLimit: 0
   loadouts:
-  - ExpopMask
+  - ExPopMask
 
 - type: loadoutGroup
-  id: ExpopGloves
+  id: ExPopGloves
   name: loadout-group-expop-gloves
   minLimit: 0
   loadouts:
-  - ExpopGloves
+  - ExPopGloves
 
 - type: loadoutGroup
-  id: ExpopBackpacks
+  id: ExPopBackpacks
   name: loadout-group-backpack
   loadouts:
-  - ExpopBackpack
-  - ExpopSatchel
-  - ExpopDuffel
-  - ExpopMessenger
-  - ExpopElectropack
+  - ExPopBackpack
+  - ExPopSatchel
+  - ExPopDuffel
+  - ExPopMessenger
+  - ExPopElectropack
 
 - type: loadoutGroup
-  id: ExpopNeck
+  id: ExPopNeck
   name: loadout-group-expop-neck
   minLimit: 0
   loadouts:
-  - ExpopMantle
+  - ExPopMantle
   - OldNeckWrap
 
 - type: loadoutGroup
-  id: ExpopOuterClothing
+  id: ExPopOuterClothing
   name: loadout-group-expop-outerclothing
   minLimit: 0
   loadouts:
   - OrangeWintercoat
 
 - type: loadoutGroup
-  id: ExpopShoes
+  id: ExPopShoes
   name: loadout-group-expop-shoes
   loadouts:
   - OrangeShoes
@@ -160,23 +160,23 @@
   - WinterBoots
 
 - type: loadoutGroup
-  id: ExpopEnvirohelm
+  id: ExPopEnvirohelm
   name: loadout-group-expop-envirohelm
   minLimit: 1
   maxLimit: 1
   loadouts:
-  - ExpopEnvirohelm
+  - ExPopEnvirohelm
 
 - type: loadoutGroup
-  id: ExpopEnvirosuit
+  id: ExPopEnvirosuit
   name: loadout-group-expop-envirosuit
   minLimit: 1
   maxLimit: 1
   loadouts:
-  - ExpopEnvirosuit
+  - ExPopEnvirosuit
 
 - type: loadoutGroup
-  id: ExpopEnvirogloves
+  id: ExPopEnvirogloves
   name: loadout-group-expop-envirogloves
   minLimit: 1
   maxLimit: 1
