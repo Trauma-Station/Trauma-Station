@@ -10,6 +10,7 @@ using Content.Shared.Power.EntitySystems;
 /// Drains the battery of toggled items with <see cref="ItemToggleRequiresChargeComponent"/>
 /// and turns them off when empty.
 /// </summary>
+
 namespace Content.Trauma.Shared.ItemToggle;
 
 public sealed partial class ItemToggleBatteryDrainSystem : EntitySystem
@@ -17,7 +18,15 @@ public sealed partial class ItemToggleBatteryDrainSystem : EntitySystem
     [Dependency] private ItemToggleSystem _toggle = default!;
     [Dependency] private SharedBatterySystem _battery = default!;
 
+    /// <summary>
+    /// Passive power draw in watts while the item is activated.
+    /// </summary>
+
     private const float DrawRate = 5f;
+
+    /// <summary>
+    /// Applies <see cref="DrawRate"/> as a negative charge rate while the item is on.
+    /// </summary>
 
     [SubscribeLocalEvent]
     private void OnRefreshChargeRate(Entity<ItemToggleRequiresChargeComponent> ent, ref RefreshChargeRateEvent args)
@@ -26,11 +35,20 @@ public sealed partial class ItemToggleBatteryDrainSystem : EntitySystem
             args.NewChargeRate -= DrawRate;
     }
 
+    /// <summary>
+    /// Recalculates the charge rate when the item is toggled so the drain starts/stops immediately.
+    /// </summary>
+
     [SubscribeLocalEvent]
     private void OnToggled(Entity<ItemToggleRequiresChargeComponent> ent, ref ItemToggledEvent args)
     {
         _battery.RefreshChargeRate(ent.Owner);
     }
+
+    /// <summary>
+    /// Turns the item off when its battery reaches <see cref="BatteryState.Empty"/>.
+    /// Needed because <see cref="ChargeChangedEvent"/> isn't reliably raised during passive rate drain.
+    /// </summary>
 
     [SubscribeLocalEvent]
     private void OnBatteryStateChanged(Entity<ItemToggleRequiresChargeComponent> ent, ref BatteryStateChangedEvent args)
