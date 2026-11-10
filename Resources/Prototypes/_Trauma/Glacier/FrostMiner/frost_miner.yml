@@ -78,13 +78,6 @@
   - type: Tag
     tags:
     - CannotSuicide
-  # HTN chaser
-  - type: HTN
-    rootTask:
-      task: SimpleHostileCompound
-  - type: NpcFactionMember
-    factions:
-    - SimpleHostile
   # Actual boss from here
   - type: ActionGrant
     actions:
@@ -111,9 +104,19 @@
     table: !type:AllSelector
       children:
       - id: ResurrectionCrystal
-      - id: LeshyHorn   # todo
-      - id: LeshyBlood  # todo
+      - id: DemonicJackhammer
+      - id: ClothingShoesDemonicIceBoots
     deleteOnDeath: true
+  - type: MegafaunaStartupEffects
+    effects:
+    - !type:AddComponents
+      components:
+      - type: HTN
+        rootTask:
+          task: SimpleHostileCompound
+      - type: NpcFactionMember
+        factions:
+        - SimpleHostile
   - type: MegafaunaPhasesEffects
     phaseEffects:
       # Moves faster, uses actions faster
@@ -145,6 +148,14 @@
       type: Set
     - !type:MegafaunaActionDelay
       actionDelay: 4
+    - !type:RemoveComponents
+      components:
+      - type: HTN
+        rootTask:
+          task: SimpleHostileCompound
+      - type: NpcFactionMember
+        factions:
+        - SimpleHostile
   - type: MegafaunaAi
     actionDelay: 4
     selector:

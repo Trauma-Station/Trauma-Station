@@ -13,6 +13,16 @@
   components:
   - type: TeleportToArena
     arenaPath: /Maps/_Trauma/Glacier/frost_miner_arena.yml
+    effectsOnEnter:
+    - !type:ModifyStatusEffect
+      effectProto: FrostMinerSpeedStatusEffect
+      time: null
+      type: Add
+    effectsOnExit:
+    - !type:ModifyStatusEffect
+      effectProto: FrostMinerSpeedStatusEffect
+      time: null
+      type: Remove
 
 - type: entity
   parent: [ BaseStructure, LeshyArenaTeleporter ]

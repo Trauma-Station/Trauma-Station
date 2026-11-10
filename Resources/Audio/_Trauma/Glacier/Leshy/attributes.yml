@@ -1,0 +1,9 @@
+- files: ["leshy_roar.ogg"]
+  license: Custom
+  copyright: "zerokingfull, converted to mono and ogg by Luminal"
+  source: "https://pixabay.com/sound-effects/horror-monster-roar-02-102957"
+
+  - files: ["leshy_bgm.ogg"]
+  license: "CC-BY-3.0"
+  copyright: "Kim Lightyear, converted to ogg by Luminal"
+  source: "https://opengameart.org/content/lullaby"

@@ -26,14 +26,6 @@
       - type: NpcFactionMember
         factions:
         - SimpleHostile
-      - type: ActionGrant
-        actions:
-        - ActionFrostOrbsEasy
-        - ActionSnowballMachineGunEasy
-        - ActionIceShotgunEasy
-        - ActionFrostOrbsHard
-        - ActionSnowballMachineGunHard
-        - ActionIceShotgunHard
     effectsOnRemoval:
     # Good luck!
     - !type:SpawnAttached
@@ -44,14 +36,6 @@
       time: null
     - !type:MegafaunaActionDelay
       actionDelay: 1.0
-    - !type:AddActions
-      actions:
-      - ActionFrostOrbsEasy
-      - ActionSnowballMachineGunEasy
-      - ActionIceShotgunEasy
-      - ActionFrostOrbsHard
-      - ActionSnowballMachineGunHard
-      - ActionIceShotgunHard
     - !type:RemoveComponents
       components:
       - type: Godmode
@@ -74,6 +58,15 @@
     effects:
     - !type:Scale
       multiplier: 1.05, 1.05
+
+# Status effect for players fighting the boss (added/removed by arena teleporter)
+- type: entity
+  parent: StatusEffectSpeed
+  id: FrostMinerSpeedStatusEffect
+  components:
+  - type: MovementModStatusEffect
+    sprintSpeedModifier: 1.8
+    walkSpeedModifier: 1.8
 
 # I'm evil
 - type: entity

@@ -3,17 +3,17 @@
 - type: bossMusic
   id: Leshy
   fade: true
-  fadeInTime: 5
-  fadeOutTime: 8
+  fadeInTime: 4
+  fadeOutTime: 4
   positionOnEnd: 0
   sound:
-    path: /Audio/_Lavaland/Mobs/Bosses/hiero_bgm.ogg
+    path: /Audio/_Trauma/Glacier/Leshy/leshy_bgm.ogg
 
 - type: bossMusic
   id: DemonicFrostMiner
   fade: true
-  fadeInTime: 5
-  fadeOutTime: 8
+  fadeInTime: 2
+  fadeOutTime: 4
   positionOnEnd: 0
   sound:
-    path: /Audio/_Lavaland/Mobs/Bosses/hiero_bgm.ogg
+    path: /Audio/_Trauma/Glacier/FrostMiner/frost_miner_bgm.ogg

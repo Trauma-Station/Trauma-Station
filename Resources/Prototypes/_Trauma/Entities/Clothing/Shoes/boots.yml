@@ -37,3 +37,34 @@
   - type: Construction
     defaultTarget: null
     node: finished
+
+- type: entity
+  parent: ClothingShoesBaseWinterBoots
+  id: ClothingShoesIceBoots
+  name: ice-hiking boots
+  description: Boots that have been modified for walking on snow.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Shoes/Boots/iceboots.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Shoes/Boots/iceboots.rsi
+
+- type: entity
+  parent: [ ClothingShoesIceBoots, BaseMagicalContraband ]
+  id: ClothingShoesDemonicIceBoots
+  name: cursed ice-hiking boots
+  description: Cursed boots that can't be removed once you put them on. As a reward, they grant you the ability to spread melting ice at your feet.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Clothing/Shoes/Boots/iceboots.rsi
+  - type: Clothing
+    sprite: _Trauma/Clothing/Shoes/Boots/iceboots.rsi
+  - type: NoSlip
+  - type: SelfUnremovableClothing
+  - type: ClothingEffects
+    equipEffects:
+    - !type:AddActions
+      actions: [ ActionIceTrail ]
+    unEquipEffects:
+    - !type:RemoveActions
+      actions: [ ActionIceTrail ]

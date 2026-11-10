@@ -61,3 +61,43 @@
       components:
       - type: ResurrectionCrystal
         polymorph: CrystalShadowPolymorph # this is evil ngl
+
+- type: entity
+  parent: [ MiningDrillDiamond, BaseMagicalContraband ]
+  id: DemonicJackhammer
+  name: Demonic Jackhammer
+  description: This jackhammer instantly dusts any rock that it comes into contact with. Has knockback, and heals you for every attack.
+  components:
+  # Knockback effects for normal targets
+  - type: MeleeThrowOnHit
+    distance: 3
+    speed: 2.5
+  # User healing on hit
+  - type: EffectsOnMeleeHit
+    userEffects:
+    - !type:HealthChange
+      damage:
+        types:
+          Blunt: -6
+          Slash: -6
+          Piercing: -6
+          Ballistic: -6
+          Heat: -6
+          Cold: -6
+          Shock: -6
+          Caustic: -6
+    # Instantly destroy rocks only, and spawn ash
+    targetConditions:
+    - !type:WhitelistCondition
+      whitelist:
+        components:
+        - MiningScannerViewable
+    targetEffects:
+    - !type:SpawnEntity
+      entity: Ash
+    - !type:HealthChange
+      damage:
+        types:
+          Structural: 999 # ensures we destroy it
+
+

@@ -69,7 +69,7 @@
   - type: EntityEffectOnTrigger
     effects:
     - !type:ShootProjectileAdvanced
-      projectile: ProjectileLeshyDeathBolt
+      projectile: ProjectileIceBlastLow
       amount: 5
       speed: 15
       spread: true

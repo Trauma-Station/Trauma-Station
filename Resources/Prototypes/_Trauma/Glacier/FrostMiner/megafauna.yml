@@ -63,9 +63,9 @@
       range: 1.0,4.0
       inverse: true
     actionId: ActionFrostOrbsEasy
-  conditions:
-  - !type:ActionAvailableCondition
-    actionId: ActionFrostOrbsEasy
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionFrostOrbsEasy
 
 - type: megafaunaSelector
   id: ActionSnowballMachineGunEasy
@@ -74,9 +74,9 @@
       range: 1.0,4.0
       inverse: true
     actionId: ActionSnowballMachineGunEasy
-  conditions:
-  - !type:ActionAvailableCondition
-    actionId: ActionSnowballMachineGunEasy
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionSnowballMachineGunEasy
 
 - type: megafaunaSelector
   id: ActionIceShotgunEasy
@@ -85,9 +85,9 @@
       range: 1.0,4.0
       inverse: true
     actionId: ActionIceShotgunEasy
-  conditions:
-  - !type:ActionAvailableCondition
-    actionId: ActionIceShotgunEasy
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionIceShotgunEasy
 
 # Actions | Hard
 - type: megafaunaSelector
@@ -97,9 +97,9 @@
       range: 1.0,4.0
       inverse: true
     actionId: ActionFrostOrbsHard
-  conditions:
-  - !type:ActionAvailableCondition
-    actionId: ActionFrostOrbsHard
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionFrostOrbsHard
 
 - type: megafaunaSelector
   id: ActionSnowballMachineGunHard
@@ -108,9 +108,9 @@
       range: 1.0,4.0
       inverse: true
     actionId: ActionSnowballMachineGunHard
-  conditions:
-  - !type:ActionAvailableCondition
-    actionId: ActionSnowballMachineGunHard
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionSnowballMachineGunHard
 
 - type: megafaunaSelector
   id: ActionIceShotgunHard
@@ -119,6 +119,6 @@
       range: 1.0,4.0
       inverse: true
     actionId: ActionIceShotgunHard
-  conditions:
-  - !type:ActionAvailableCondition
-    actionId: ActionIceShotgunHard
+    conditions:
+    - !type:ActionAvailableCondition
+      actionId: ActionIceShotgunHard
