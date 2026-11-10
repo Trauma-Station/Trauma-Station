@@ -196,3 +196,26 @@
       angle: 360
       amount: 12
       speed: 4
+
+# Ice Trail action for cursed hiking boots
+- type: entity
+  parent: BaseAction
+  id: ActionIceTrail
+  name: Ice Trail
+  description: If toggled, spawns an ice trail wherever you stand on. It melts after a few seconds.
+  components:
+  - type: Action
+    raiseOnAction: true
+  - type: InstantAction
+    event: !type:EffectToggleActionEvent
+  - type: ToggleEffectAction
+    onToggle:
+    - !type:ModifyStatusEffect
+      effectProto: IceTrailStatusEffect
+      time: null
+      type: Add
+    offToggle:
+    - !type:ModifyStatusEffect
+      effectProto: IceTrailStatusEffect
+      time: null
+      type: Remove

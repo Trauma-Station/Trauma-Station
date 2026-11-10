@@ -90,3 +90,23 @@
   - type: PermanentStatusEffects
     statusEffects:
     - FrostMinerPhase4Scale
+
+# I'm evil 2
+- type: entity
+  parent: StatusEffectBase
+  id: IceTrailStatusEffect
+  components:
+  - type: StatusEffectEffects
+    updateDelay: 0.1
+    effects:
+    - !type:SpawnSnappedToGrid
+      conditions:
+      - !type:AnyNearbyCondition # don't spawn on same tile
+        whitelist:
+          tags:
+          - DemonicIceCrust
+        inverted: true
+        compName: TileFrictionModifier
+        range: 0.5
+      entity: DemonicIceCrust
+      predicted: false

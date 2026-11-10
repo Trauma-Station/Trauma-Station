@@ -1,0 +1,19 @@
+- type: entity
+  parent: IceCrust
+  id: DemonicIceCrust
+  components:
+  - type: Slippery
+    staminaDamage: 10
+  - type: StepTrigger
+    intersectRatio: 0.2
+    triggerGroups:
+      types:
+      - SlipTile
+  - type: FadingTimedDespawn
+    lifetime: 6
+    fadeOutTime: 4.8
+  - type: Tag
+    tags: [ DemonicIceCrust ]
+
+- type: Tag
+  id: DemonicIceCrust
