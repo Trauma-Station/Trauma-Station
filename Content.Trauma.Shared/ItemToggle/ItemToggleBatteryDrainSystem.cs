@@ -6,12 +6,12 @@ using Content.Shared.Power;
 using Content.Shared.Power.Components;
 using Content.Shared.Power.EntitySystems;
 
+namespace Content.Trauma.Shared.ItemToggle;
+
 /// <summary>
 /// Drains the battery of toggled items with <see cref="ItemToggleRequiresChargeComponent"/>
 /// and turns them off when empty.
 /// </summary>
-
-namespace Content.Trauma.Shared.ItemToggle;
 
 public sealed partial class ItemToggleBatteryDrainSystem : EntitySystem
 {
