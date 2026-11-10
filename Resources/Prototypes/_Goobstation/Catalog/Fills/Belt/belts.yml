@@ -162,8 +162,9 @@
     - id: GrenadeFlashBang
     - id: WeaponDisabler
     - id: Zipties
-    - id: Zipties
-    - id: Zipties
+    # Trauma - removed zipties, bigger stunbaton no longer fits
+    #- id: Zipties
+    #- id: Zipties
 
 - type: entity
   id: ClothingBeltAssaultFilled
