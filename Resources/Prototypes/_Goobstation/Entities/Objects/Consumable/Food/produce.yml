@@ -64,7 +64,7 @@
     grindableSolutionName: food
     juiceSolution:
       reagents:
-      - ReagentId: BluespaceMelange
+      - ReagentId: Singulo
         Quantity: 5
   - type: Destructible
     thresholds:

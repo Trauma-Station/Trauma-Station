@@ -9,8 +9,6 @@ namespace Content.Trauma.Shared.LinkedEntityContainer;
 /// </summary>
 public sealed partial class LinkedEntityContainerSystem : EntitySystem
 {
-    [Dependency] private SharedTransformSystem _transform = default!;
-
     private EntProtoId<PortalComponent> _portalDestination = "BluespaceRiftPortalDestination";
 
     [SubscribeLocalEvent]
@@ -23,6 +21,6 @@ public sealed partial class LinkedEntityContainerSystem : EntitySystem
     public void SpawnWithLinkedEntity(string? protoName, Entity<TransformComponent> parent)
     {
         var uid = PredictedSpawnAtPosition(protoName, parent.Comp.Coordinates);
-        var Comp = EnsureComp<LinkedEntityContainerComponent>(uid);
+        EnsureComp<LinkedEntityContainerComponent>(uid);
     }
 }
