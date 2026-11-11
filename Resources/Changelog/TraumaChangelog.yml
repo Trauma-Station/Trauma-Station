@@ -16603,3 +16603,17 @@ Entries:
   id: 1794
   time: '2026-11-10T06:38:22.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5346
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to sell Nar'Sie with a pet carrier.
+  id: 1795
+  time: '2026-11-11T01:30:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5351
+- author: yglop
+  changes:
+  - type: Fix
+    message: Revolutionary machines can be destroyed.
+  id: 1796
+  time: '2026-11-11T13:44:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5353
