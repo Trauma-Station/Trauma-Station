@@ -3,8 +3,11 @@
 - type: entity
   id: ClothingHeadHatBeret
   components:
+  - type: PhysicalComposition
+    materialComposition:
+      Cloth: 25
   - type: StaticPrice
-    price: 0
+    price: 5
 
 - type: entity
   id: ClothingHeadHatSolidHeadband

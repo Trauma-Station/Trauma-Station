@@ -27,9 +27,6 @@
     - Recyclable
     - HamsterWearable
     - WhitelistChameleon
-  - type: PhysicalComposition #Goobstation - Recycle update
-    materialComposition:
-      Cloth: 25
 
 - type: entity
   parent: ClothingHeadHatBeret

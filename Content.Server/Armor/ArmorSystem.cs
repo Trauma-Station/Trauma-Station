@@ -1,3 +1,5 @@
+// <Trauma> - no more free money
+/*
 using Content.Shared.Armor;
 using Content.Shared.Cargo;
 using Content.Shared.Damage.Prototypes;
@@ -29,3 +31,5 @@ public sealed partial class ArmorSystem : SharedArmorSystem
         }
     }
 }
+*/
+// </Trauma>

@@ -174,8 +174,6 @@
   - type: Construction
     graph: Seat
     node: chairBrass
-  - type: CosmicCorruptible # DeltaV - Cosmic Cult
-    convertTo: CosmicChair
 
 - type: entity
   name: white office chair
@@ -205,10 +203,6 @@
   parent: ChairBase
   description: It looks comfy.
   components:
-  # <Trauma>
-  - type: CosmicCorruptible
-    convertTo: CosmicChair
-  # </Trauma>
   - type: Sprite
     state: comfy
   - type: Construction
@@ -232,10 +226,6 @@
   parent: ChairBase
   description: The pilot seat of a prestigious ship.
   components:
-  # <Trauma>
-  - type: CosmicCorruptible
-    convertTo: CosmicChair
-  # </Trauma>
   - type: Sprite
     state: shuttle
   - type: Construction

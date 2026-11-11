@@ -1,4 +1,28 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
 
+- type: entity
+  id: SeatBase
+  components:
+  - type: StaticPrice
+    price: 20
+
+- type: entity
+  id: ChairBrass
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicChair
+
+- type: entity
+  id: ComfyChair
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicChair
+
+- type: entity
+  id: ChairPilotSeat
+  components:
+  - type: CosmicCorruptible
+    convertTo: CosmicChair
 
 - type: entity
   id: ChairWood
@@ -7,4 +31,10 @@
     tags:
     - Chair
   - type: StaticPrice
-    price: 0
+    price: 20
+
+- type: entity
+  id: WoodenBench
+  components:
+  - type: StaticPrice
+    price: 40
