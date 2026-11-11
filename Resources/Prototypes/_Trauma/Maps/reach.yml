@@ -9,6 +9,7 @@
   ignoredRequiredEntities:
   - MachineMasterMaterialSilo # 1 department silo can probably cover the whole ship be real
   - SpawnPointExtraAiCore # no AI core
+  - NuclearFabricator # too small to need an engine
   jobWeights: Reach
   stations:
     Reach:
