@@ -16617,3 +16617,10 @@ Entries:
   id: 1796
   time: '2026-11-11T13:44:40.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5353
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Abductors can no longer 1 click stun with 2 wonderprods...
+  id: 1797
+  time: '2026-11-11T23:24:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5358
