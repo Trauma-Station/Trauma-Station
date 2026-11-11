@@ -34,6 +34,8 @@
         - MachineMask
         layer:
         - MachineLayer
+  - type: Injurable
+    damageContainer: StructuralInorganic
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
