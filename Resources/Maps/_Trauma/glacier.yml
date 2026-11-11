@@ -4,8 +4,8 @@ meta:
   engineVersion: 295.0.0
   forkId: ""
   forkVersion: ""
-  time: 11/08/2026 20:06:54
-  entityCount: 22378
+  time: 11/11/2026 20:00:27
+  entityCount: 22391
 maps:
 - 1
 grids:
@@ -106802,6 +106802,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -31.511663,24.64737
+- proto: PlushieHampter
+  entities:
+  - uid: 22390
+    components:
+    - type: Transform
+      parent: 2
+      pos: -51.47594,7.5262914
 - proto: PlushieLamp
   entities:
   - uid: 15473
@@ -106871,6 +106878,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -28.938854,33.740273
+  - uid: 22389
+    components:
+    - type: Transform
+      parent: 2
+      pos: -50.50602,8.540785
 - proto: PlushieRainbowLizard
   entities:
   - uid: 8530
@@ -106891,6 +106903,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 13.5122175,-31.912247
+  - uid: 22391
+    components:
+    - type: Transform
+      parent: 2
+      pos: -49.53107,7.4740887
 - proto: PlushieRGBee
   entities:
   - uid: 15485
@@ -121381,6 +121398,48 @@ entities:
     - type: Transform
       parent: 2
       pos: -16.5,17.5
+- proto: SpawnMobIceMothroach
+  entities:
+  - uid: 22379
+    components:
+    - type: Transform
+      parent: 2
+      pos: -2.5,-26.5
+  - uid: 22381
+    components:
+    - type: Transform
+      parent: 2
+      pos: 5.5,31.5
+  - uid: 22382
+    components:
+    - type: Transform
+      parent: 2
+      pos: 48.5,40.5
+  - uid: 22383
+    components:
+    - type: Transform
+      parent: 2
+      pos: 38.5,-14.5
+  - uid: 22384
+    components:
+    - type: Transform
+      parent: 2
+      pos: 55.5,-32.5
+  - uid: 22385
+    components:
+    - type: Transform
+      parent: 2
+      pos: 32.5,-45.5
+  - uid: 22386
+    components:
+    - type: Transform
+      parent: 2
+      pos: -24.5,-22.5
+  - uid: 22387
+    components:
+    - type: Transform
+      parent: 2
+      pos: -51.5,1.5
 - proto: SpawnMobKangarooWillow
   entities:
   - uid: 17896
@@ -121588,6 +121647,11 @@ entities:
     - type: Transform
       parent: 2
       pos: -21.5,-19.5
+  - uid: 22388
+    components:
+    - type: Transform
+      parent: 2
+      pos: -43.5,3.5
 - proto: SpawnMobPollyParrot
   entities:
   - uid: 17933
@@ -121725,6 +121789,13 @@ entities:
     - type: Transform
       parent: 2
       pos: 52.5,18.5
+- proto: SpawnMobWhiteGorilla
+  entities:
+  - uid: 22380
+    components:
+    - type: Transform
+      parent: 2
+      pos: 3.5,7.5
 - proto: SpawnMobYellowBellySnake
   entities:
   - uid: 17954

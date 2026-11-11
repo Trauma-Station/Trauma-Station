@@ -36,6 +36,7 @@
   parent: MarkerBase
   id: SpawnMobWhiteGorilla
   name: White Gorilla Spawner
+  suffix: Glacier Pet
   components:
   - type: Sprite
     layers:
