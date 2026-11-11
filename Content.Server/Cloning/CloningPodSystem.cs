@@ -158,11 +158,10 @@ public sealed partial class CloningPodSystem : EntitySystem
         args.PushMarkup(Loc.GetString("cloning-pod-biomass", ("number", _material.GetMaterialAmount(ent.Owner, ent.Comp.RequiredMaterial))));
     }
 
-    // <Trauma> - allow cloning mindless
-    //public bool TryCloning(EntityUid uid, EntityUid bodyToClone, Entity<MindComponent> mindEnt, CloningPodComponent? clonePod, float failChanceModifier = 1)
-    public bool TryCloning(EntityUid uid, EntityUid bodyToClone, CloningPodComponent? clonePod, float failChanceModifier = 1)
-    // </Trauma>
+    public bool TryCloning(EntityUid uid, EntityUid bodyToClone, Entity<MindComponent>? mindEnt, CloningPodComponent? clonePod, float failChanceModifier = 1) // <Trauma> - mindEnt wasnt nullable
     {
+        if (mindEnt == null) ; // <Trauma> - mindEnt wasnt nullable
+
         if (!Resolve(uid, ref clonePod))
             return false;
 
