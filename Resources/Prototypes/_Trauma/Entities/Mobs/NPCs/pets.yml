@@ -41,3 +41,41 @@
       reagents:
       - ReagentId: HeartbreakerToxin
         Quantity: 1
+
+      - !type:SpawnParticles
+        particleProto: VampireStomp
+
+- type: entity
+  parent: MobGorilla
+  id: MobWhiteGorilla
+  name: white gorilla
+  description: He's not a bad guy at heart. He just likes stirring the pot, and has occasional bouts of psychosis.
+  components:
+  - type: Sprite
+    drawdepth: Mobs
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: crawling
+      sprite: _Trauma/Mobs/Animals/Glacier/white_gorilla.rsi
+  - type: TemperatureDamage
+    coldDamageThreshold: 0
+    coldDamage:
+      types:
+        Cold: 0
+    heatDamage:
+      types:
+        Heat: 2
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 25
+        Cold: 10
+  - type: ToolRefinable
+    refineResult:
+    - id: FoodMeatFrostRaw
+      amount: 3
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      200: Critical
+      300: Dead

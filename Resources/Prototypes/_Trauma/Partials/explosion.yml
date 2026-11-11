@@ -41,6 +41,7 @@
   id: Cryo
   damagePerIntensity:
     types:
+      Cold: 10
       Blunt: 2
       Structural: 20
     woundTypeOverrides: *woundoverrides

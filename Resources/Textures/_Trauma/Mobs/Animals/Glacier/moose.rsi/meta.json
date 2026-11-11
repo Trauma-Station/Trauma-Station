@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "mr.fisher.(discord)",
+  "size": {
+    "x": 48,
+    "y": 48
+  },
+  "states": [
+    {
+      "name": "icon"
+    },
+    {
+      "name": "icon3"
+    },
+    {
+      "name": "moose",
+      "directions": 4
+    },
+    {
+      "name": "moose3",
+      "directions": 4
+    },
+    {
+      "name": "moose_dead"
+    }
+  ]
+}

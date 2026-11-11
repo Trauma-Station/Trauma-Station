@@ -1,0 +1,23 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Bear pelt by Alekshhh, recolor by mr.fisher.(discord)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+          "name": "bear-equipped-HELMET",
+          "directions": 4
+        },
+        {
+          "name": "bear-inhand-left",
+          "directions": 4
+        },
+        {
+          "name": "bear-inhand-right",
+          "directions": 4
+        }
+    ]
+}

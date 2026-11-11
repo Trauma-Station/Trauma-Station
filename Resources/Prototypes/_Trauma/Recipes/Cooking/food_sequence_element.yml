@@ -5,3 +5,23 @@
 - type: foodSequenceElement
   id: ItemFallback
   # TODO
+
+- type: foodSequenceElement
+  id: MeatFrost
+  name: food-sequence-content-frost
+  sprites:
+  - sprite: _Trauma/Objects/Consumable/Food/ice_meat.rsi
+    state: frost-cooked
+  tags:
+  - Cooked
+  - Meat
+
+- type: foodSequenceElement
+  id: MeatFrostBurger
+  name: food-sequence-burger-content-frost
+  sprites:
+  - sprite: _Trauma/Objects/Consumable/Food/ice_meat.rsi
+    state: frost-cooked
+  tags:
+  - Cooked
+  - Meat

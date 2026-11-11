@@ -29,3 +29,105 @@
       - state: corgi-inhand-left
       right:
       - state: corgi-inhand-right
+
+- type: entity
+  parent: FoodMeatRawBase
+  id: FoodMeatFrostRaw
+  name: raw frost meat
+  description: Difficult to get your hands on.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/ice_meat.rsi
+    state: frost
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 30
+      - ReagentId: Protein
+        Quantity: 20
+  - type: Construction
+    graph: FrostSteak
+    node: start
+    defaultTarget: frost steak
+  - type: RotInto
+    entity: FoodMeatFrostRotten
+    stage: 1
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: frost-inhand-left
+      right:
+      - state: frost-inhand-right
+
+- type: entity
+  parent: FoodMeatCookedBase
+  id: FoodMeatFrostCooked
+  name: frost steak
+  description: A cooked slab of meat. Tough, difficult to consume, but surprisingly tasty.
+  components:
+  - type: Tag
+    tags:
+    - Cooked
+    - Meat
+    - Steak
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/ice_meat.rsi
+    state: frost-cooked
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: Nutriment
+        Quantity: 20
+      - ReagentId: Protein
+        Quantity: 30
+  - type: Construction
+    graph: FrostSteak
+    node: frost steak
+  - type: FoodSequenceElement
+    entries:
+      Burger: MeatFrostBurger
+      Taco: MeatFrost
+  - type: RotInto
+    entity: FoodMeatFrostRotten
+    stage: 1
+  - type: Item
+    inhandVisuals:
+      left:
+      - state: frost-cooked-inhand-left
+      right:
+      - state: frost-cooked-inhand-right
+
+- type: entity
+  parent: FoodMeatBase
+  id: FoodMeatFrostRotten
+  name: rotten frost meat
+  description: Halfway to becoming fertilizer for your garden. Still remarkably tough though.
+  components:
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+    - Trash
+    - Recyclable
+  - type: Sprite
+    sprite: _Trauma/Objects/Consumable/Food/ice_meat.rsi
+    state: frost-rotten
+  - type: Solution
+    solution:
+      reagents:
+      - ReagentId: UncookedAnimalProteins
+        Quantity: 10
+      - ReagentId: GastroToxin
+        Quantity: 8
+      - ReagentId: Fresium
+        Quantity: 8
+      - ReagentId: Fat
+        Quantity: 4
+  - type: Item
+    storedOffset: -2,1
+    inhandVisuals:
+      left:
+      - state: frost-rotten-inhand-left
+      right:
+      - state: frost-rotten-inhand-right

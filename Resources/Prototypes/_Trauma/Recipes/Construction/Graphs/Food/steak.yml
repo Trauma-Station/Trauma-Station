@@ -1,0 +1,14 @@
+- type: constructionGraph
+  id: FrostSteak
+  start: start
+  graph:
+  - node: start
+    edges:
+    - to: frost steak
+      completed:
+      - !type:PlaySound
+        sound: /Audio/Effects/sizzle.ogg
+      steps:
+      - minTemperature: 345
+  - node: frost steak
+    entity: FoodMeatFrostCooked

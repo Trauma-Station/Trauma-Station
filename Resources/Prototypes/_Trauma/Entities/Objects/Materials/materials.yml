@@ -150,3 +150,25 @@
   suffix: Single
   components:
   - type: Stack
+
+- type: entity
+  parent: MaterialBase
+  id: MaterialHidePolarBear
+  name: polar bear hide
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Materials/materials.rsi
+    state: bearpelt
+  - type: Item
+    sprite: _Trauma/Clothing/Head/Misc/hides.rsi
+    heldPrefix: bear
+  - type: Clothing
+    sprite: _Trauma/Clothing/Head/Misc/hides.rsi
+    equippedPrefix: bear
+    slots:
+    - HEAD
+  - type: KnowledgeGrantOnWear
+    skills:
+      MartialArtSpaceBear: 26
+    experience:
+      MartialArtSpaceBear: 2
