@@ -26,6 +26,7 @@ public sealed partial class ItemToggleBatteryDrainSystem : EntitySystem
         if (_toggle.IsActivated(ent.Owner))
             args.NewChargeRate -= ent.Comp.DrawRate;
     }
+
     /// <summary>
     /// Recalculates the charge rate when the item is toggled so the drain starts/stops immediately.
     /// </summary>
@@ -34,6 +35,7 @@ public sealed partial class ItemToggleBatteryDrainSystem : EntitySystem
     {
         _battery.RefreshChargeRate(ent.Owner);
     }
+
     /// <summary>
     /// Turns the item off when its battery reaches <see cref="BatteryState.Empty"/>.
     /// Needed because <see cref="ChargeChangedEvent"/> isn't reliably raised during passive rate drain.
