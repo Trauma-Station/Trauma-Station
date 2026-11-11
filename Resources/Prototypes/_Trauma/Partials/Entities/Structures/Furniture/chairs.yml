@@ -4,7 +4,7 @@
   id: SeatBase
   components:
   - type: StaticPrice
-    price: 20
+    price: 35
 
 - type: entity
   id: ChairBrass
@@ -31,10 +31,4 @@
     tags:
     - Chair
   - type: StaticPrice
-    price: 20
-
-- type: entity
-  id: WoodenBench
-  components:
-  - type: StaticPrice
-    price: 40
+    price: 35
