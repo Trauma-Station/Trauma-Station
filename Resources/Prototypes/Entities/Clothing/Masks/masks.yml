@@ -465,20 +465,6 @@
   name: sterile mask
   description: A sterile mask designed to help prevent the spread of diseases.
   components:
-  # <Trauma>
-  - type: DiseaseProtection
-    # really strong protection
-    incoming:
-      powerModifiers:
-        Aerial: -0.6
-      chanceMultipliers:
-        Aerial: 0.4
-    outgoing:
-      powerModifiers:
-        Aerial: -0.6
-      chanceMultipliers:
-        Aerial: 0.4
-  # </Trauma>
   - type: Sprite
     sprite: Clothing/Mask/sterile.rsi
   - type: Clothing
