@@ -172,7 +172,7 @@ namespace Content.Server.Cloning
 
             if (_cloningPodSystem.TryCloning(cloningPodUid, body.Value, (mindId, mind), cloningPod, scannerComp.CloningFailChanceMultiplier))
             */
-            if (_cloningPodSystem.TryCloning(cloningPodUid, body.Value, cloningPod, scannerComp.CloningFailChanceMultiplier))
+            if (_cloningPodSystem.TryCloning(cloningPodUid, body.Value, clonePod: cloningPod, failChanceModifier: scannerComp.CloningFailChanceMultiplier))
             // </Trauma>
                 _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(uid)} successfully cloned {ToPrettyString(body.Value)}.");
         }
