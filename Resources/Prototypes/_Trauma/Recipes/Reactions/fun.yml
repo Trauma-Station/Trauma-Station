@@ -51,5 +51,5 @@
   products:
     PhosphoricAcid: 20
   effects:
-  - !type:SpawnWithLinkedEntity
+  - !type:SpawnEntity
     entity: StabilizedBSCrystal

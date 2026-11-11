@@ -18,19 +18,22 @@
     heldPrefix: bluespace_crystal
   - type: LinkedEntityContainer
   - type: EntityEffectOnUse
-    effectsToUser:
-    - !type:PlaySoundEffect
-      sound:
-        path: /Audio/Effects/teleport_departure.ogg
-    - !type:Sparks
-    - !type:ToLinkedEntityTeleport
-      spawnPortal: BluespaceRiftPortal3Seconds
-    - !type:PlaySoundEffect
-      sound:
-        path: /Audio/Effects/teleport_arrival.ogg
-    - !type:Sparks
     effectsToUsed:
-    - !type:DeleteEntity
+    - !type:SpawnLinkedEntity
+    - !type:ChangeEntityEffectOnUse
+      effectsToUser:
+      - !type:PlaySoundEffect
+        sound:
+          path: /Audio/Effects/teleport_departure.ogg
+      - !type:Sparks
+      - !type:ToLinkedEntityTeleport
+        spawnPortal: BluespaceRiftPortal3Seconds
+      - !type:PlaySoundEffect
+        sound:
+          path: /Audio/Effects/teleport_arrival.ogg
+      - !type:Sparks
+      effectsToUsed:
+      - !type:DeleteEntity
   # interferes with bluespace portals. does nothing inside containers etc for simplicity and not being annoying
   - type: PortalTransitEffects
     effects:

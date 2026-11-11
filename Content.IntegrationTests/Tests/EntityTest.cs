@@ -443,11 +443,6 @@ namespace Content.IntegrationTests.Tests
                     AddEntities(server.EntMan, serverEntities);
                     clientEntities.Clear();
                     AddEntities(client.EntMan, clientEntities);
-                    if (protoId == "StabilizedBSCrystal") // this ent spawns another ent linked to it
-                    {
-                        count += 1;
-                        clientCount += 1;
-                    }
                     // </Trauma>
                     EntityUid uid = default;
                     await server.WaitPost(() => uid = server.EntMan.SpawnEntity(protoId, coords));
