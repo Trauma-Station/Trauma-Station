@@ -37,12 +37,10 @@
 - type: entity
   id: ComputerCloningConsole
   components:
-  # - type: AutomationSlots
-  #   slots:
-  #   - !type:AutomatedPorts
-  #     sinks:
-  #     - Clone
   - type: DeviceNetworkRequiresPower
   - type: DeviceLinkSink
     ports:
     - Clone
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice

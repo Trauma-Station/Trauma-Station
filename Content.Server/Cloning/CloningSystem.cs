@@ -61,7 +61,6 @@ public sealed partial class CloningSystem : SharedCloningSystem
         ProtoId<CloningSettingsPrototype> settingsId,
         [NotNullWhen(true)] out EntityUid? clone)
     {
-        Log.Info("trycloning");
         clone = null;
         if (!ProtoMan.Resolve(settingsId, out var settings))
             return false; // invalid settings
