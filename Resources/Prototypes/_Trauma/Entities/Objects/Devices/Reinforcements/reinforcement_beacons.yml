@@ -336,6 +336,7 @@
 - type: entity
   parent: BaseReinforcementBeacon
   id: ReinforcementBeaconExPop
+  suffix: Ex-Pop
   components:
   - type: DelayedGhostRole
     name: ghost-role-information-reinforcement-expop-name
