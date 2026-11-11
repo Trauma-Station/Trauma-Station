@@ -23,6 +23,8 @@
         weight: 0.2
       - id: NinjaSpawn
         weight: 0.5 # even more antags!
+      - id: SamuraiSpawn
+        weight: 0.5 # even more antags version 2!
       - id: LoneOpsSpawn
         weight: 0.2
       - id: BlobMidround

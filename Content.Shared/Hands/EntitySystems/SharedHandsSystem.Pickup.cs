@@ -185,38 +185,39 @@ public abstract partial class SharedHandsSystem
     {
         if (!Resolve(uid, ref handsComp, false))
             return false;
-
+        Log.Warning("a");
         if (!ContainerSystem.TryGetContainer(uid, handId, out var handContainer))
             return false;
-
+        Log.Warning("a");
         if (handContainer.ContainedEntities.FirstOrNull() != null)
             return false;
-
+        Log.Warning("a");
         // Huh, seems kinda weird that this system passes item comp around
         // everywhere but it's never actually used besides being resolved.
         // I wouldn't be surprised if there's some API simplifications that
         // could be made with respect to that.
         if (!Resolve(entity, ref item, false))
             return false;
-
+        Log.Warning("a");
         if (TryComp(entity, out PhysicsComponent? physics) && physics.BodyType == BodyType.Static)
             return false;
-
+        Log.Warning("a");
         if (checkActionBlocker && !_actionBlocker.CanPickup(uid, entity, showPopup))
             return false;
-
+        Log.Warning("a");
         if (!CheckWhitelists((uid, handsComp), handId, entity))
             return false;
-
+        Log.Warning("a");
         if (ContainerSystem.TryGetContainingContainer((entity, null, null), out var container))
         {
             if (!ContainerSystem.CanRemove(entity, container))
                 return false;
-
+            Log.Warning("a");
             if (_inventory.TryGetSlotEntity(uid, container.ID, out var slotEnt) &&
                 slotEnt == entity &&
                 !_inventory.CanUnequip(uid, container.ID, out _))
                 return false;
+            Log.Warning("a");
         }
 
         // check can insert (including raising attempt events).

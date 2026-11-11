@@ -40,3 +40,15 @@
   - type: StationEvent
     earliestStart: 45
     minimumPlayers: 30
+
+- type: entity
+  id: SamuraiSpawn
+  components:
+  - type: GhostroleAlert
+  - type: AntagPlayerEffects
+    effects:
+    - !type:NestedEffect
+      proto: ChangelingSkills # W lazy
+  - type: StationEvent
+    weight: 1
+    maxOccurrences: 1

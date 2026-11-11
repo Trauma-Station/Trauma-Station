@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ UnsensoredClothingUniformBase, BaseHighlyIllegalContraband ]
+  id: ClothingUniformJumpsuitNinja
+  name: spider clan jumpsuit
+  description: Comfortable spider clan, for convenience when relaxing and when you need to practice.

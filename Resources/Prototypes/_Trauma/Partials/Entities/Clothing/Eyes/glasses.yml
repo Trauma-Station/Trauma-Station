@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: ClothingEyesVisorNinja
+  name: spider clan visor
+  description: An advanced visor protecting a spider clan operative's eyes from flashing lights.

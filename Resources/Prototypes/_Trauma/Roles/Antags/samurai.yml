@@ -1,0 +1,70 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: antag
+  id: Samurai
+  name: roles-antag-space-samurai-name
+  antagonist: true
+  setPreference: false
+  objective: roles-antag-space-samurai-objective
+  guides: [ SpaceNinja ]
+  tags:
+  - OffStation
+  - Midround
+
+- type: antagSpecifier
+  parent: RestrictedAntag
+  id: Samurai
+  spawnerPrototype: SpawnPointGhostSamurai
+  pickPlayer: false
+  startingGear: SamuraiGear
+  roleLoadout:
+  - RoleSurvivalSpaceNinja
+  briefing:
+    text: samurai-role-greeting
+    color: Green
+    sound: /Audio/Misc/ninja_greeting.ogg
+  components:
+  - type: Samurai
+  - type: NpcFactionMember
+    factions:
+    - Syndicate
+  - type: AutoImplant
+    implants:
+    - MacroBombImplant
+  - type: RandomMetadata
+    nameSegments:
+    - NamesNinjaTitle
+    - NamesNinja
+    nameFormat: name-format-ninja
+  mindRoles:
+  - MindRoleSamurai
+
+#Samurai Gear
+- type: startingGear
+  id: SamuraiGear
+  equipment:
+    jumpsuit: ClothingUniformJumpsuitNinja
+    back: ClothingBackpackSatchelNinja
+    head: ClothingHeadHardsuitSamuraiArmor
+    eyes: ClothingEyesVisorNinja
+    gloves: ClothingHandsGlovesSpaceNinja
+    outerClothing: ClothingOuterSamuraiArmor
+    shoes: ClothingShoesSpaceNinja
+    id: NinjaPDA
+    ears: ClothingHeadsetNinja
+    pocket1: SpiderCharge
+    pocket2: PinpointerStation
+  inhand:
+  - JetpackBlackFilled
+  - SamuraiEnergyPolearm
+  storage:
+    back:
+    - Crowbar
+    - Wrench
+    - Screwdriver
+    - Wirecutter
+    - Welder
+    - Multitool
+    - EmergencyMedipen
+    - Flare
+    - DrinkWaterBottleFull
