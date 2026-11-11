@@ -53,14 +53,25 @@ public sealed partial class KillTargetCultSystem : EntitySystem
     private string GetTitle(EntityUid target, LocId title)
     {
         var mind = Comp<MindComponent>(target);
-        var targetName = mind.CharacterName ?? Name(target);
+        var targetName = mind.CharacterName ?? Name(mind.OwnedEntity ?? target);
         var jobName = _job.MindTryGetJobName(target);
         return Loc.GetString(title, ("targetName", targetName), ("job", jobName));
     }
 
     private EntityUid? GetTargetMind(MindComponent mindComp)
-        => mindComp.OwnedEntity is {} mob && _cult.GetTarget(mob) is {} target
-            ? _mind.GetMind(target)
-            : null;
+    {
+        if (mindComp.OwnedEntity is not { } mob)
+        {
+            Log.Error($"Mind of {mindComp.CharacterName} has no OwnedEntity!");
+            return null;
+        }
 
+        if (_cult.GetTarget(mob) is not { } target)
+        {
+            Log.Error($"Supposed cultist {ToPrettyString(mob)} has no target!");
+            return null;
+        }
+
+        return _mind.GetMind(target);
+    }
 }

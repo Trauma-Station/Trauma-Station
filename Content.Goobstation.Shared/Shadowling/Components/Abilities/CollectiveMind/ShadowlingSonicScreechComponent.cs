@@ -34,7 +34,7 @@ public sealed partial class ShadowlingSonicScreechComponent : Component
     [DataField]
     public EntityWhitelist SiliconWhitelist = new()
     {
-        Components = ["Silicon", "BorgChassis", "Drone"]
+        Components = ["Silicon", "BorgChassis"]
     };
 
     /// <summary>

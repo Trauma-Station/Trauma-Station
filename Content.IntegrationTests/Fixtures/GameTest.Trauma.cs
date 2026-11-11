@@ -32,11 +32,23 @@ public abstract partial class GameTest
         CEntMan.DeleteEntity(uid);
     }
 
+    protected MetaDataComponent SMetaData(EntityUid uid)
+        => SEntMan.GetComponent<MetaDataComponent>(uid);
+
+    protected MetaDataComponent CMetaData(EntityUid uid)
+        => CEntMan.GetComponent<MetaDataComponent>(uid);
+
+    protected string SName(EntityUid uid)
+        => SMetaData(uid).EntityName;
+
+    protected string CName(EntityUid uid)
+        => CMetaData(uid).EntityName;
+
     protected EntityPrototype? SPrototype(EntityUid uid)
-        => SEntMan.GetComponentOrNull<MetaDataComponent>(uid)?.EntityPrototype;
+        => SMetaData(uid).EntityPrototype;
 
     protected EntityPrototype? CPrototype(EntityUid uid)
-        => CEntMan.GetComponentOrNull<MetaDataComponent>(uid)?.EntityPrototype;
+        => CMetaData(uid).EntityPrototype;
 
     protected bool SDeleted(EntityUid uid)
         => Deleted(SEntMan, uid);

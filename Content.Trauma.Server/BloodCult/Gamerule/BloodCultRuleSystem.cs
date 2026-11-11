@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Server.Antag;
 using Content.Server.Chat.Managers;
 using Content.Server.RoundEnd;
 using Content.Server.StationEvents.Components;
@@ -174,7 +175,7 @@ public sealed partial class BloodCultRuleSystem : GameRuleSystem<BloodCultRuleCo
         }
     }
 
-    [SubscribeLocalEvent]
+    [SubscribeLocalEvent(before: [typeof(AntagObjectivesSystem)])]
     private void OnAntagEntitySelected(Entity<BloodCultRuleComponent> rule, ref AfterAntagEntitySelectedEvent args)
     {
         var mob = args.EntityUid;

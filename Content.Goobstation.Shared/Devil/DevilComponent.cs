@@ -105,7 +105,6 @@ public sealed partial class DevilComponent : Component
             // clankers have no soul
             "Silicon",
             "BorgChassis",
-            "Drone",
             "PAI"
         ]
     };

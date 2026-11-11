@@ -16554,3 +16554,66 @@ Entries:
   id: 1787
   time: '2026-11-08T15:50:24.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5313
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Revolutionaries now require 30 players to roll, up from 20
+  id: 1788
+  time: '2026-11-09T14:18:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5326
+- author: mrfoxv
+  changes:
+  - type: Add
+    message: Added the Chameleon EVA Suit, purchasable for 10 TC
+  id: 1789
+  time: '2026-11-09T17:13:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5275
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed blood cultists not being told their sacrifice target.
+  id: 1790
+  time: '2026-11-09T18:48:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5340
+- author: TechnicFighter
+  changes:
+  - type: Remove
+    message: Removed silicon drones.
+  id: 1791
+  time: '2026-11-09T22:40:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5343
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed skill chips disappearing if you removed them with your hands full.
+  id: 1792
+  time: '2026-11-09T22:49:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5344
+- author: Luminal
+  changes:
+  - type: Remove
+    message: The identity of the vampire doesn't get transferred to their lair anymore.
+  id: 1793
+  time: '2026-11-10T00:24:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5345
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Reduced Justice's Empowered Mode base damage from 50 to 20
+  id: 1794
+  time: '2026-11-10T06:38:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5346
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to sell Nar'Sie with a pet carrier.
+  id: 1795
+  time: '2026-11-11T01:30:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5351
+- author: yglop
+  changes:
+  - type: Fix
+    message: Revolutionary machines can be destroyed.
+  id: 1796
+  time: '2026-11-11T13:44:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5353
