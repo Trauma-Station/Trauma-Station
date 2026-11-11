@@ -11,8 +11,6 @@
     - !Remove Multitool
     - RemoteSignallerAdvanced
     - RCDChrono
-    - Throngler
-    - WeaponPistolDebug
     - NetworkConfigurator
     - HandheldHealthAnalyzer
     - SprayPainterRecharging
