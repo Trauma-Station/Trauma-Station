@@ -7,7 +7,7 @@
     materialComposition:
       Cloth: 25
   - type: StaticPrice
-    price: 5
+    price: 7
 
 - type: entity
   id: ClothingHeadHatSolidHeadband
