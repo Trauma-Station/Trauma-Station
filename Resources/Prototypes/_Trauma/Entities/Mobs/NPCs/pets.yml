@@ -42,9 +42,6 @@
       - ReagentId: HeartbreakerToxin
         Quantity: 1
 
-      - !type:SpawnParticles
-        particleProto: VampireStomp
-
 - type: entity
   parent: MobGorilla
   id: MobWhiteGorilla
