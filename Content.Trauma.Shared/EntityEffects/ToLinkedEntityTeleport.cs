@@ -47,11 +47,8 @@ public sealed partial class ToLinkedEntityTeleportEffectSystem : EntityEffectSys
             var portal = PredictedSpawnAtPosition(args.Effect.SpawnPortal, oldPos);
             _link.OneWayLink(portal, targetEnt, true);
 
-            if (TryComp<TimedDespawnComponent>(portal, out var despawn))
-            {
-                var targetDespawn = EnsureComp<TimedDespawnComponent>(targetEnt);
-                targetDespawn.Lifetime = despawn.Lifetime;
-            }
+            var linkedComp = EnsureComp<LinkedEntityContainerComponent>(portal).Uid = destination.Uid;
+            Ditry(portal, linkedComp);
         }
     }
 }

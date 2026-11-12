@@ -4,6 +4,7 @@ using Content.Shared.Destructible.Thresholds;
 using Content.Shared.EntityEffects;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Teleportation.Systems;
+using Content.Trauma.Shared.LinkedEntityContainer;
 using Content.Trauma.Shared.Teleportation.Systems;
 using Robust.Shared.Spawners;
 
@@ -28,14 +29,18 @@ public sealed partial class RandomTeleport : EntityEffectBase<RandomTeleport>
     /// </summary>
     [DataField]
     public EntProtoId<PortalComponent>? SpawnPortal;
+
+    /// <summary>
+    /// Prototyte to spawn for portal destination.
+    /// </summary>
+    [DataField]
+    public EntProtoId<PortalComponent> PortalDestinationEnt = "BluespaceRiftPortalDestination";
 }
 
 public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<TransformComponent, RandomTeleport>
 {
     [Dependency] private LinkedEntitySystem _link = default!;
     [Dependency] private RandomTeleportSystem _teleport = default!;
-
-    private EntProtoId<PortalComponent> _portalDestination = "BluespaceRiftPortalDestination";
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<RandomTeleport> args)
     {
@@ -47,15 +52,12 @@ public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<Tran
         {
             var portal = PredictedSpawnAtPosition(args.Effect.SpawnPortal, oldPos);
 
-            var destinationPortal = PredictedSpawnAtPosition(_portalDestination, newPos);
+            var targetEnt = PredictedSpawnAtPosition(args.Effect.PortalDestinationEnt, newPos);
 
-            _link.OneWayLink(portal, destinationPortal, true);
+            _link.OneWayLink(portal, targetEnt, true);
 
-            if (TryComp<TimedDespawnComponent>(portal, out var despawn))
-            {
-                var targetDespawn = EnsureComp<TimedDespawnComponent>(destinationPortal);
-                targetDespawn.Lifetime = despawn.Lifetime;
-            }
+            var linkedComp = EnsureComp<LinkedEntityContainerComponent>(portal).Uid = targetEnt;
+            Ditry(portal, linkedComp);
         }
     }
 }
