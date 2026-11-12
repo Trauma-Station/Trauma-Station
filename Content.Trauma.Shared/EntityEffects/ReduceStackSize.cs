@@ -27,7 +27,7 @@ public sealed partial class ReduceStackSizeSystem : EntityEffectSystem<PhysicalC
             return;
         }
 
-        // It's consumed on use and it's not a stack so delete it
+        // It's consumed and it's not a stack so delete it
         PredictedQueueDel(ent);
     }
 }
