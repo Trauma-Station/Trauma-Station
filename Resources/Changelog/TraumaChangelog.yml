@@ -16624,3 +16624,10 @@ Entries:
   id: 1797
   time: '2026-11-11T23:24:45.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5358
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Wraith is now less common
+  id: 1798
+  time: '2026-11-12T12:57:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5359
