@@ -1,0 +1,28 @@
+- type: entity
+  parent: BaseStructure
+  id: PianoHaunted
+  name: piano
+  description: An old piano, with many stories to tell.
+  components:
+  - type: InteractionOutline
+  - type: SpamEmitSound
+    minInterval: 500
+    maxInterval: 800
+    positional: true
+    sound:
+      path: /Audio/_Trauma/Glacier/HauntedMansion/random_piano.ogg
+  - type: Sprite
+    sprite: Objects/Fun/Instruments/structureinstruments.rsi
+    state: piano
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 200
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: WoodDestroy
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+

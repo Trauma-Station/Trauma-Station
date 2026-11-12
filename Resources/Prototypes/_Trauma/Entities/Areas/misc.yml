@@ -1,0 +1,10 @@
+- type: entity
+  parent: BaseArea
+  id: AreaHauntedMansion
+  name: haunted mansion
+  components:
+  - type: Sprite
+    state: haunted_mansion
+  - type: Tag
+    tags:
+    - AreaHauntedMansion

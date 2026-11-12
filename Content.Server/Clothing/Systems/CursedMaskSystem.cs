@@ -29,7 +29,7 @@ public sealed partial class CursedMaskSystem : SharedCursedMaskSystem
     [Dependency] private PopupSystem _popup = default!;
 
     // We can't store this info on the component easily
-    private static readonly ProtoId<HTNCompoundPrototype> TakeoverRootTask = "SimpleHostileCompound";
+    private static readonly ProtoId<HTNCompoundPrototype> TakeoverRootTask = "SimpleHumanoidHostileCompound"; // Trauma - changed from simple hostile
 
     protected override void TryTakeover(Entity<CursedMaskComponent> ent, EntityUid wearer)
     {
@@ -88,6 +88,9 @@ public sealed partial class CursedMaskSystem : SharedCursedMaskSystem
             }
         }
 
-        RandomizeCursedMask(ent, args.Wearer);
+        // <Trauma> - Randomize
+        if (ent.Comp.Randomize)
+            RandomizeCursedMask(ent, args.Wearer);
+        // </Trauma>
     }
 }

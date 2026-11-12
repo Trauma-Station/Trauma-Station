@@ -8,7 +8,7 @@
     arenaPath: /Maps/_Trauma/Glacier/leshy_arena.yml
 
 - type: entity
-  abstract: true
+  parent: StairStageWood
   id: FrostMinerArenaTeleporter
   components:
   - type: TeleportToArena
@@ -23,20 +23,15 @@
       effectProto: FrostMinerSpeedStatusEffect
       time: null
       type: Remove
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 666666 # no trolling
 
 - type: entity
   parent: [ BaseStructure, LeshyArenaTeleporter ]
   id: LeshySomething
-  name: test
-  description: test
-  components:
-  - type: Sprite
-    sprite: Structures/Furniture/chairs.rsi
-    state: chair
-
-- type: entity
-  parent: [ BaseStructure, FrostMinerArenaTeleporter ]
-  id: FrostMinerSomething
   name: test
   description: test
   components:

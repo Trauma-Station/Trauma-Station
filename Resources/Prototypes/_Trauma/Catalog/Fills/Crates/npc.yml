@@ -42,3 +42,15 @@
       entity_storage:
         id: MobSnakeGrass
         amount: 3
+
+- type: entity
+  parent: CrateLivestock
+  id: CrateNPCAngryBee
+  name: crate of angry bees
+  description: A crate containing a swarm of eight angry bees.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      entity_storage:
+        id: MobAngryBee
+        amount: 16

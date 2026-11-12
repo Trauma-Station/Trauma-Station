@@ -34,18 +34,27 @@ public abstract partial class SharedCursedMaskSystem : EntitySystem
 
     private void OnClothingEquip(Entity<CursedMaskComponent> ent, ref ClothingGotEquippedEvent args)
     {
-        RandomizeCursedMask(ent, args.Wearer);
+        // <Trauma> - Randomize
+        if (ent.Comp.Randomize)
+            RandomizeCursedMask(ent, args.Wearer);
+        // </Trauma>
         TryTakeover(ent, args.Wearer);
     }
 
     protected virtual void OnClothingUnequip(Entity<CursedMaskComponent> ent, ref ClothingGotUnequippedEvent args)
     {
-        RandomizeCursedMask(ent, args.Wearer);
+        // <Trauma> - Randomize
+        if (ent.Comp.Randomize)
+            RandomizeCursedMask(ent, args.Wearer);
+        // </Trauma>
     }
 
     private void OnExamine(Entity<CursedMaskComponent> ent, ref ExaminedEvent args)
     {
-        args.PushMarkup(Loc.GetString($"cursed-mask-examine-{ent.Comp.CurrentState.ToString()}"));
+        // <Trauma> - Show Examine
+        if (ent.Comp.ShowExamine)
+            args.PushMarkup(Loc.GetString($"cursed-mask-examine-{ent.Comp.CurrentState.ToString()}"));
+        // </Trauma>
     }
 
     private void OnMovementSpeedModifier(Entity<CursedMaskComponent> ent, ref InventoryRelayedEvent<RefreshMovementSpeedModifiersEvent> args)

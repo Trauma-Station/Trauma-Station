@@ -64,6 +64,9 @@
   id: AreaDetective
 
 - type: Tag
+  id: AreaHauntedMansion
+
+- type: Tag
   id: AreaInterrogation
 
 - type: Tag

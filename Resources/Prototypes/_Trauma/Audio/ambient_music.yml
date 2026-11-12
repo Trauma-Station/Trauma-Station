@@ -161,6 +161,20 @@
   interruptable: true
   priority: 5
 
+- type: ambientMusic
+  id: HauntedMansion
+  sound:
+    params:
+      volume: -6
+    path: /Audio/_Trauma/Glacier/HauntedMansion/haunted_mansion.ogg
+  fadeIn: true
+  interruptable: true
+  conditions:
+  - !type:InsideAreaCondition
+    whitelist:
+      tags: [ AreaHauntedMansion ]
+  priority: 10
+
 # Collections
 
 - type: soundCollection

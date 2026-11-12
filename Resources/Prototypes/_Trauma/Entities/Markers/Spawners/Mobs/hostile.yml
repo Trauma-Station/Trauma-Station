@@ -212,3 +212,31 @@
   - type: ConditionalSpawner
     prototypes:
     - MobCobra
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobDemonButcher
+  name: Demon Butcher Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: alive
+      sprite: _Trauma/Mobs/Monsters/Demons/butcher.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MajorDemonButcher
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobNarsieIan
+  name: Narsie Ian Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - state: narsian
+      sprite: Mobs/Pets/corgi.rsi
+  - type: ConditionalSpawner
+    prototypes:
+    - MobCorgiNarsi
