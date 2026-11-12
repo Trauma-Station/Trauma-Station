@@ -4,8 +4,8 @@ meta:
   engineVersion: 291.0.0
   forkId: ""
   forkVersion: ""
-  time: 11/11/2026 20:12:55
-  entityCount: 23440
+  time: 11/12/2026 19:30:33
+  entityCount: 23449
 maps:
 - 1
 grids:
@@ -5719,15 +5719,15 @@ entities:
             Plasma: 6666.982
         - temperature: 293.15
           volume: 2500
+          moles:
+            Nitrogen: 6666.982
+        - temperature: 293.15
+          volume: 2500
           moles: {}
         - temperature: 293.15
           volume: 2500
           moles:
             Oxygen: 6666.982
-        - temperature: 293.15
-          volume: 2500
-          moles:
-            Nitrogen: 6666.982
         tiles:
           -4,0:
             0: 65520
@@ -7023,18 +7023,18 @@ entities:
             2: 34952
           6,-6:
             2: 61440
-            6: 224
+            4: 224
           6,-5:
             0: 112
             2: 2184
           6,-8:
             3: 224
-            4: 57344
-          6,-7:
-            4: 224
             5: 57344
+          6,-7:
+            5: 224
+            6: 57344
           6,-9:
-            4: 57568
+            5: 57568
           7,-5:
             2: 4080
           7,-8:
@@ -7123,7 +7123,7 @@ entities:
             2: 17907
           2,-10:
             2: 8766
-            4: 34816
+            5: 34816
           2,-13:
             2: 65535
           3,-12:
@@ -7132,7 +7132,7 @@ entities:
             2: 17520
           3,-10:
             2: 34959
-            4: 13056
+            5: 13056
           3,-13:
             2: 12835
           4,-10:
@@ -11424,7 +11424,7 @@ entities:
       pos: -1.5,18.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -38015.816
+      secondsUntilStateChange: -38224.477
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -11931,7 +11931,7 @@ entities:
       pos: 40.5,11.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -41761.64
+      secondsUntilStateChange: -41970.3
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -11966,7 +11966,7 @@ entities:
       pos: 41.5,8.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -38610.184
+      secondsUntilStateChange: -38818.844
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -15847,6 +15847,11 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: -15.5,-51.5
+  - uid: 17061
+    components:
+    - type: Transform
+      parent: 2
+      pos: -14.5,-53.5
   - uid: 23323
     components:
     - type: Transform
@@ -66069,7 +66074,7 @@ entities:
       pos: 12.5,-12.5
     - type: Door
       state: Closing
-      secondsUntilStateChange: -36978.15
+      secondsUntilStateChange: -37186.81
     - type: Firelock
       emergencyCloseCooldown: 1795.33154
   - uid: 10423
@@ -111746,11 +111751,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -10.5,-46.5
-  - uid: 17061
-    components:
-    - type: Transform
-      parent: 2
-      pos: -14.5,-53.5
   - uid: 17062
     components:
     - type: Transform
@@ -111771,6 +111771,11 @@ entities:
     - type: Transform
       parent: 2
       pos: 4.5,-12.5
+  - uid: 23448
+    components:
+    - type: Transform
+      parent: 2
+      pos: -14.5,-61.5
 - proto: RandomSnacks
   entities:
   - uid: 17066
@@ -117481,6 +117486,50 @@ entities:
     - type: Transform
       parent: 2
       pos: 4.5,28.5
+- proto: ShuttersRadiation
+  entities:
+  - uid: 23441
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: -13.5,-60.5
+  - uid: 23442
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: -13.5,-59.5
+  - uid: 23443
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: -13.5,-58.5
+  - uid: 23444
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: -13.5,-57.5
+  - uid: 23445
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: -13.5,-56.5
+  - uid: 23446
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: -13.5,-55.5
+  - uid: 23447
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: -13.5,-54.5
 - proto: ShuttersRadiationOpen
   entities:
   - uid: 18125
@@ -117864,6 +117913,34 @@ entities:
         - - Pressed
           - Toggle
         18122:
+        - - Pressed
+          - Toggle
+  - uid: 23449
+    components:
+    - type: Transform
+      parent: 2
+      pos: -14.5,-53.5
+    - type: DeviceLinkSource
+      linkedPorts:
+        23447:
+        - - Pressed
+          - Toggle
+        23446:
+        - - Pressed
+          - Toggle
+        23445:
+        - - Pressed
+          - Toggle
+        23444:
+        - - Pressed
+          - Toggle
+        23443:
+        - - Pressed
+          - Toggle
+        23442:
+        - - Pressed
+          - Toggle
+        23441:
         - - Pressed
           - Toggle
 - proto: SignalButtonDirectional
