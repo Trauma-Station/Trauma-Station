@@ -31,7 +31,7 @@ public sealed partial class ToLinkedEntityTeleportEffectSystem : EntityEffectSys
 
     protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<ToLinkedEntityTeleport> args)
     {
-        var handEntity = _hands.GetActiveItemOrSelf((ent.Owner, ent.Comp));
+        var handEntity = _hands.GetActiveItemOrSelf((ent.AsNullable()));
 
         if (!TryComp<LinkedEntityContainerComponent>(handEntity, out var destination) || !destination.Uid.IsValid())
             return;
