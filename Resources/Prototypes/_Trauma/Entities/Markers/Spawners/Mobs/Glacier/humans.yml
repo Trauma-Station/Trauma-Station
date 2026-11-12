@@ -1,0 +1,156 @@
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobAbductorNeosov
+  name: Neosov Abductor Spawner
+  components:
+  - type: Sprite
+    layers: &neosovSpawnerLayers
+    - state: green
+    - sprite: _Trauma/Objects/Weapons/Guns/Shotguns/pump_action_shotgun.rsi
+      state: icon
+  - type: ConditionalSpawner
+    prototypes:
+    - MobAbductorNeosov
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobArachnidNeosov
+  name: Neosov Arachnid Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobArachnidNeosov
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobBananaMenNeosov
+  name: Neosov Banana Men Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobBananaMenNeosov
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobDecapoidNeosov
+  name: Neosov Decapoid Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobDecapoidNeosov
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobDionaNeosov
+  name: Neosov Diona Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobDionaNeosov
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobDwarfNeosov
+  name: Neosov Dwarf Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobDwarfNeosov
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobHumanNeosov
+  name: Neosov Human Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobHumanNeosov
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobIPCNeosov
+  name: Neosov IPC Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobIPCNeosov
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobMothNeosov
+  name: Neosov Moth Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobMothNeosov
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobReptilianNeosov
+  name: Neosov Reptilian Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobReptilianNeosov
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobSkeletonPersonNeosov
+  name: Neosov Skeleton Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobSkeletonPersonNeosov
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobSlimePersonNeosov
+  name: Neosov Slime Person Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobSlimePersonNeosov
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobVoxNeosov
+  name: Neosov Vox Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobVoxNeosov
+
+- type: entity
+  parent: MarkerBase
+  id: SpawnMobVulpkaninNeosov
+  name: Neosov Vulpkanin Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobVulpkaninNeosov

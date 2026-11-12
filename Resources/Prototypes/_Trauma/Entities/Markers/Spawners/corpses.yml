@@ -1,6 +1,25 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomAbductorCorpseSpawner
+  name: Random Abductor Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceAbductorCorpse
+    - MobRandomEngineerAbductorCorpse
+    - MobRandomCargoAbductorCorpse
+    - MobRandomMedicAbductorCorpse
+    - MobRandomScienceAbductorCorpse
+    - MobRandomSecurityAbductorCorpse
+    - MobRandomCommandAbductorCorpse
+    - MobRandomCivilianAbductorCorpse
+    - MobRandomMercenaryAbductorCorpse
+    - MobRandomPirateAbductorCorpse
+    - MobRandomSyndicateAbductorCorpse
+
+- type: entity
   parent: MarkerBase
   id: SalvageAbductorCorpseSpawner
   name: Abductor Corpse Spawner
@@ -32,7 +51,7 @@
   name: Random Civilian Abductor Corpse Spawner
   components:
   - type: Sprite
-    layers: &captainSpawnerLayers
+    layers: &civilianSpawnerLayers
     - state: passenger
     - state: green
   - type: ConditionalSpawner
@@ -45,10 +64,2061 @@
   name: Random Command Abductor Corpse Spawner
   components:
   - type: Sprite
-    layers: *captainSpawnerLayers
+    layers: &captainSpawnerLayers
+    - state: captain
+    - state: green
   - type: ConditionalSpawner
     prototypes:
     - MobRandomCommandAbductorCorpse
+
+- type: entity
+  parent: SalvageAbductorCorpseSpawner
+  id: RandomEngineerAbductorCorpseSpawner
+  name: Random Engineer Abductor Corpse Spawner
+  components:
+  - type: Sprite
+    layers: &engineerSpawnerLayers
+    - state: engineer
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomEngineerAbductorCorpse
+
+- type: entity
+  parent: SalvageAbductorCorpseSpawner
+  id: RandomGearedAbductorCorpseSpawner
+  name: Random Geared Abductor Corpse Spawner
+  components:
+  - type: Sprite
+    layers:
+    - state: green
+    - sprite: _Shitmed/Objects/Weapons/Melee/wonderprod.rsi
+      state: stun-icon
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomGearedAbductorCorpse
+
+- type: entity
+  parent: SalvageAbductorCorpseSpawner
+  id: RandomMedicAbductorCorpseSpawner
+  name: Random Medic Abductor Corpse Spawner
+  components:
+  - type: Sprite
+    layers: &doctorSpawnerLayers
+    - state: doctor
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMedicAbductorCorpse
+
+- type: entity
+  parent: SalvageAbductorCorpseSpawner
+  id: RandomMercenaryAbductorCorpseSpawner
+  name: Random Mercenary Abductor Corpse Spawner
+  components:
+  - type: Sprite
+    layers: &mercSpawnerLayers
+    - state: green
+    - sprite: Clothing/Mask/merc.rsi
+      state: icon
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMercenaryAbductorCorpse
+
+- type: entity
+  parent: SalvageAbductorCorpseSpawner
+  id: RandomPirateAbductorCorpseSpawner
+  name: Random Pirate Abductor Corpse Spawner
+  components:
+  - type: Sprite
+    layers: &pirateSpawnerLayers
+    - state: green
+    - sprite: Structures/Wallmounts/flags.rsi
+      state: pirate_flag
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomPirateAbductorCorpse
+
+- type: entity
+  parent: SalvageAbductorCorpseSpawner
+  id: RandomScienceAbductorCorpseSpawner
+  name: Random Science Abductor Corpse Spawner
+  components:
+  - type: Sprite
+    layers: &scientistSpawnerLayers
+    - state: scientist
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomScienceAbductorCorpse
+
+- type: entity
+  parent: SalvageAbductorCorpseSpawner
+  id: RandomSecurityAbductorCorpseSpawner
+  name: Random Security Abductor Corpse Spawner
+  components:
+  - type: Sprite
+    layers: &securityOfficerSpawnerLayers
+    - state: security_officer
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSecurityAbductorCorpse
+
+- type: entity
+  parent: SalvageAbductorCorpseSpawner
+  id: RandomServiceAbductorCorpseSpawner
+  name: Random Service Abductor Corpse Spawner
+  components:
+  - type: Sprite
+    layers: &botanistSpawnerLayers
+    - state: botanist
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceAbductorCorpse
+
+- type: entity
+  parent: SalvageAbductorCorpseSpawner
+  id: RandomSyndicateAbductorCorpseSpawner
+  name: Random Syndicate Abductor Corpse Spawner
+  components:
+  - type: Sprite
+    layers: &syndicateSpawnerLayers
+    - state: green
+    - sprite: Clothing/Mask/gassyndicate.rsi
+      state: icon
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSyndicateAbductorCorpse
+
+# Arachnid
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomArachnidCorpseSpawner
+  name: Random Arachnid Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceArachnidCorpse
+    - MobRandomEngineerArachnidCorpse
+    - MobRandomCargoArachnidCorpse
+    - MobRandomMedicArachnidCorpse
+    - MobRandomScienceArachnidCorpse
+    - MobRandomSecurityArachnidCorpse
+    - MobRandomCommandArachnidCorpse
+    - MobRandomCivilianArachnidCorpse
+    - MobRandomMercenaryArachnidCorpse
+    - MobRandomPirateArachnidCorpse
+    - MobRandomSyndicateArachnidCorpse
+
+- type: entity
+  parent: MarkerBase
+  id: SalvageArachnidCorpseSpawner
+  name: Arachnid Corpse Spawner
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - SalvageArachnidCorpse
+
+- type: entity
+  parent: SalvageArachnidCorpseSpawner
+  id: RandomCargoArachnidCorpseSpawner
+  name: Random Cargo Arachnid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *cargoTechSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCargoArachnidCorpse
+
+- type: entity
+  parent: SalvageArachnidCorpseSpawner
+  id: RandomCivilianArachnidCorpseSpawner
+  name: Random Civilian Arachnid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *civilianSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCivilianArachnidCorpse
+
+- type: entity
+  parent: SalvageArachnidCorpseSpawner
+  id: RandomCommandArachnidCorpseSpawner
+  name: Random Command Arachnid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *captainSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCommandArachnidCorpse
+
+- type: entity
+  parent: SalvageArachnidCorpseSpawner
+  id: RandomEngineerArachnidCorpseSpawner
+  name: Random Engineer Arachnid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *engineerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomEngineerArachnidCorpse
+
+- type: entity
+  parent: SalvageArachnidCorpseSpawner
+  id: RandomMedicArachnidCorpseSpawner
+  name: Random Medic Arachnid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *doctorSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMedicArachnidCorpse
+
+- type: entity
+  parent: SalvageArachnidCorpseSpawner
+  id: RandomMercenaryArachnidCorpseSpawner
+  name: Random Mercenary Arachnid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *mercSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMercenaryArachnidCorpse
+
+- type: entity
+  parent: SalvageArachnidCorpseSpawner
+  id: RandomPirateArachnidCorpseSpawner
+  name: Random Pirate Arachnid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *pirateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomPirateArachnidCorpse
+
+- type: entity
+  parent: SalvageArachnidCorpseSpawner
+  id: RandomScienceArachnidCorpseSpawner
+  name: Random Science Arachnid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *scientistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomScienceArachnidCorpse
+
+- type: entity
+  parent: SalvageArachnidCorpseSpawner
+  id: RandomSecurityArachnidCorpseSpawner
+  name: Random Security Arachnid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *securityOfficerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSecurityArachnidCorpse
+
+- type: entity
+  parent: SalvageArachnidCorpseSpawner
+  id: RandomServiceArachnidCorpseSpawner
+  name: Random Service Arachnid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *botanistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceArachnidCorpse
+
+- type: entity
+  parent: SalvageArachnidCorpseSpawner
+  id: RandomSyndicateArachnidCorpseSpawner
+  name: Random Syndicate Arachnid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *syndicateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSyndicateArachnidCorpse
+
+# BananaMen
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomBananaMenCorpseSpawner
+  name: Random BananaMen Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceBananaMenCorpse
+    - MobRandomEngineerBananaMenCorpse
+    - MobRandomCargoBananaMenCorpse
+    - MobRandomMedicBananaMenCorpse
+    - MobRandomScienceBananaMenCorpse
+    - MobRandomSecurityBananaMenCorpse
+    - MobRandomCommandBananaMenCorpse
+    - MobRandomCivilianBananaMenCorpse
+    - MobRandomMercenaryBananaMenCorpse
+    - MobRandomPirateBananaMenCorpse
+    - MobRandomSyndicateBananaMenCorpse
+
+- type: entity
+  parent: MarkerBase
+  id: SalvageBananaMenCorpseSpawner
+  name: BananaMen Corpse Spawner
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - SalvageBananaMenCorpse
+
+- type: entity
+  parent: SalvageBananaMenCorpseSpawner
+  id: RandomCargoBananaMenCorpseSpawner
+  name: Random Cargo BananaMen Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *cargoTechSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCargoBananaMenCorpse
+
+- type: entity
+  parent: SalvageBananaMenCorpseSpawner
+  id: RandomCivilianBananaMenCorpseSpawner
+  name: Random Civilian BananaMen Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *civilianSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCivilianBananaMenCorpse
+
+- type: entity
+  parent: SalvageBananaMenCorpseSpawner
+  id: RandomCommandBananaMenCorpseSpawner
+  name: Random Command BananaMen Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *captainSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCommandBananaMenCorpse
+
+- type: entity
+  parent: SalvageBananaMenCorpseSpawner
+  id: RandomEngineerBananaMenCorpseSpawner
+  name: Random Engineer BananaMen Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *engineerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomEngineerBananaMenCorpse
+
+- type: entity
+  parent: SalvageBananaMenCorpseSpawner
+  id: RandomMedicBananaMenCorpseSpawner
+  name: Random Medic BananaMen Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *doctorSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMedicBananaMenCorpse
+
+- type: entity
+  parent: SalvageBananaMenCorpseSpawner
+  id: RandomMercenaryBananaMenCorpseSpawner
+  name: Random Mercenary BananaMen Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *mercSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMercenaryBananaMenCorpse
+
+- type: entity
+  parent: SalvageBananaMenCorpseSpawner
+  id: RandomPirateBananaMenCorpseSpawner
+  name: Random Pirate BananaMen Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *pirateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomPirateBananaMenCorpse
+
+- type: entity
+  parent: SalvageBananaMenCorpseSpawner
+  id: RandomScienceBananaMenCorpseSpawner
+  name: Random Science BananaMen Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *scientistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomScienceBananaMenCorpse
+
+- type: entity
+  parent: SalvageBananaMenCorpseSpawner
+  id: RandomSecurityBananaMenCorpseSpawner
+  name: Random Security BananaMen Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *securityOfficerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSecurityBananaMenCorpse
+
+- type: entity
+  parent: SalvageBananaMenCorpseSpawner
+  id: RandomServiceBananaMenCorpseSpawner
+  name: Random Service BananaMen Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *botanistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceBananaMenCorpse
+
+- type: entity
+  parent: SalvageBananaMenCorpseSpawner
+  id: RandomSyndicateBananaMenCorpseSpawner
+  name: Random Syndicate BananaMen Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *syndicateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSyndicateBananaMenCorpse
+
+# Decapoid
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomDecapoidCorpseSpawner
+  name: Random Decapoid Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceDecapoidCorpse
+    - MobRandomEngineerDecapoidCorpse
+    - MobRandomCargoDecapoidCorpse
+    - MobRandomMedicDecapoidCorpse
+    - MobRandomScienceDecapoidCorpse
+    - MobRandomSecurityDecapoidCorpse
+    - MobRandomCommandDecapoidCorpse
+    - MobRandomCivilianDecapoidCorpse
+    - MobRandomMercenaryDecapoidCorpse
+    - MobRandomPirateDecapoidCorpse
+    - MobRandomSyndicateDecapoidCorpse
+
+- type: entity
+  parent: MarkerBase
+  id: SalvageDecapoidCorpseSpawner
+  name: Decapoid Corpse Spawner
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - SalvageDecapoidCorpse
+
+- type: entity
+  parent: SalvageDecapoidCorpseSpawner
+  id: RandomCargoDecapoidCorpseSpawner
+  name: Random Cargo Decapoid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *cargoTechSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCargoDecapoidCorpse
+
+- type: entity
+  parent: SalvageDecapoidCorpseSpawner
+  id: RandomCivilianDecapoidCorpseSpawner
+  name: Random Civilian Decapoid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *civilianSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCivilianDecapoidCorpse
+
+- type: entity
+  parent: SalvageDecapoidCorpseSpawner
+  id: RandomCommandDecapoidCorpseSpawner
+  name: Random Command Decapoid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *captainSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCommandDecapoidCorpse
+
+- type: entity
+  parent: SalvageDecapoidCorpseSpawner
+  id: RandomEngineerDecapoidCorpseSpawner
+  name: Random Engineer Decapoid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *engineerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomEngineerDecapoidCorpse
+
+- type: entity
+  parent: SalvageDecapoidCorpseSpawner
+  id: RandomMedicDecapoidCorpseSpawner
+  name: Random Medic Decapoid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *doctorSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMedicDecapoidCorpse
+
+- type: entity
+  parent: SalvageDecapoidCorpseSpawner
+  id: RandomMercenaryDecapoidCorpseSpawner
+  name: Random Mercenary Decapoid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *mercSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMercenaryDecapoidCorpse
+
+- type: entity
+  parent: SalvageDecapoidCorpseSpawner
+  id: RandomPirateDecapoidCorpseSpawner
+  name: Random Pirate Decapoid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *pirateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomPirateDecapoidCorpse
+
+- type: entity
+  parent: SalvageDecapoidCorpseSpawner
+  id: RandomScienceDecapoidCorpseSpawner
+  name: Random Science Decapoid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *scientistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomScienceDecapoidCorpse
+
+- type: entity
+  parent: SalvageDecapoidCorpseSpawner
+  id: RandomSecurityDecapoidCorpseSpawner
+  name: Random Security Decapoid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *securityOfficerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSecurityDecapoidCorpse
+
+- type: entity
+  parent: SalvageDecapoidCorpseSpawner
+  id: RandomServiceDecapoidCorpseSpawner
+  name: Random Service Decapoid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *botanistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceDecapoidCorpse
+
+- type: entity
+  parent: SalvageDecapoidCorpseSpawner
+  id: RandomSyndicateDecapoidCorpseSpawner
+  name: Random Syndicate Decapoid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *syndicateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSyndicateDecapoidCorpse
+
+
+# Diona
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomDionaCorpseSpawner
+  name: Random Diona Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceDionaCorpse
+    - MobRandomEngineerDionaCorpse
+    - MobRandomCargoDionaCorpse
+    - MobRandomMedicDionaCorpse
+    - MobRandomScienceDionaCorpse
+    - MobRandomSecurityDionaCorpse
+    - MobRandomCommandDionaCorpse
+    - MobRandomCivilianDionaCorpse
+    - MobRandomMercenaryDionaCorpse
+    - MobRandomPirateDionaCorpse
+    - MobRandomSyndicateDionaCorpse
+
+- type: entity
+  parent: MarkerBase
+  id: SalvageDionaCorpseSpawner
+  name: Diona Corpse Spawner
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - SalvageDionaCorpse
+
+- type: entity
+  parent: SalvageDionaCorpseSpawner
+  id: RandomCargoDionaCorpseSpawner
+  name: Random Cargo Diona Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *cargoTechSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCargoDionaCorpse
+
+- type: entity
+  parent: SalvageDionaCorpseSpawner
+  id: RandomCivilianDionaCorpseSpawner
+  name: Random Civilian Diona Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *civilianSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCivilianDionaCorpse
+
+- type: entity
+  parent: SalvageDionaCorpseSpawner
+  id: RandomCommandDionaCorpseSpawner
+  name: Random Command Diona Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *captainSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCommandDionaCorpse
+
+- type: entity
+  parent: SalvageDionaCorpseSpawner
+  id: RandomEngineerDionaCorpseSpawner
+  name: Random Engineer Diona Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *engineerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomEngineerDionaCorpse
+
+- type: entity
+  parent: SalvageDionaCorpseSpawner
+  id: RandomMedicDionaCorpseSpawner
+  name: Random Medic Diona Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *doctorSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMedicDionaCorpse
+
+- type: entity
+  parent: SalvageDionaCorpseSpawner
+  id: RandomMercenaryDionaCorpseSpawner
+  name: Random Mercenary Diona Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *mercSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMercenaryDionaCorpse
+
+- type: entity
+  parent: SalvageDionaCorpseSpawner
+  id: RandomPirateDionaCorpseSpawner
+  name: Random Pirate Diona Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *pirateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomPirateDionaCorpse
+
+- type: entity
+  parent: SalvageDionaCorpseSpawner
+  id: RandomScienceDionaCorpseSpawner
+  name: Random Science Diona Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *scientistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomScienceDionaCorpse
+
+- type: entity
+  parent: SalvageDionaCorpseSpawner
+  id: RandomSecurityDionaCorpseSpawner
+  name: Random Security Diona Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *securityOfficerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSecurityDionaCorpse
+
+- type: entity
+  parent: SalvageDionaCorpseSpawner
+  id: RandomServiceDionaCorpseSpawner
+  name: Random Service Diona Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *botanistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceDionaCorpse
+
+- type: entity
+  parent: SalvageDionaCorpseSpawner
+  id: RandomSyndicateDionaCorpseSpawner
+  name: Random Syndicate Diona Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *syndicateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSyndicateDionaCorpse
+
+# Dwarf
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomDwarfCorpseSpawner
+  name: Random Dwarf Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceDwarfCorpse
+    - MobRandomEngineerDwarfCorpse
+    - MobRandomCargoDwarfCorpse
+    - MobRandomMedicDwarfCorpse
+    - MobRandomScienceDwarfCorpse
+    - MobRandomSecurityDwarfCorpse
+    - MobRandomCommandDwarfCorpse
+    - MobRandomCivilianDwarfCorpse
+    - MobRandomMercenaryDwarfCorpse
+    - MobRandomPirateDwarfCorpse
+    - MobRandomSyndicateDwarfCorpse
+
+- type: entity
+  parent: MarkerBase
+  id: SalvageDwarfCorpseSpawner
+  name: Dwarf Corpse Spawner
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - SalvageDwarfCorpse
+
+- type: entity
+  parent: SalvageDwarfCorpseSpawner
+  id: RandomCargoDwarfCorpseSpawner
+  name: Random Cargo Dwarf Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *cargoTechSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCargoDwarfCorpse
+
+- type: entity
+  parent: SalvageDwarfCorpseSpawner
+  id: RandomCivilianDwarfCorpseSpawner
+  name: Random Civilian Dwarf Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *civilianSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCivilianDwarfCorpse
+
+- type: entity
+  parent: SalvageDwarfCorpseSpawner
+  id: RandomCommandDwarfCorpseSpawner
+  name: Random Command Dwarf Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *captainSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCommandDwarfCorpse
+
+- type: entity
+  parent: SalvageDwarfCorpseSpawner
+  id: RandomEngineerDwarfCorpseSpawner
+  name: Random Engineer Dwarf Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *engineerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomEngineerDwarfCorpse
+
+- type: entity
+  parent: SalvageDwarfCorpseSpawner
+  id: RandomMedicDwarfCorpseSpawner
+  name: Random Medic Dwarf Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *doctorSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMedicDwarfCorpse
+
+- type: entity
+  parent: SalvageDwarfCorpseSpawner
+  id: RandomMercenaryDwarfCorpseSpawner
+  name: Random Mercenary Dwarf Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *mercSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMercenaryDwarfCorpse
+
+- type: entity
+  parent: SalvageDwarfCorpseSpawner
+  id: RandomPirateDwarfCorpseSpawner
+  name: Random Pirate Dwarf Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *pirateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomPirateDwarfCorpse
+
+- type: entity
+  parent: SalvageDwarfCorpseSpawner
+  id: RandomScienceDwarfCorpseSpawner
+  name: Random Science Dwarf Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *scientistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomScienceDwarfCorpse
+
+- type: entity
+  parent: SalvageDwarfCorpseSpawner
+  id: RandomSecurityDwarfCorpseSpawner
+  name: Random Security Dwarf Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *securityOfficerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSecurityDwarfCorpse
+
+- type: entity
+  parent: SalvageDwarfCorpseSpawner
+  id: RandomServiceDwarfCorpseSpawner
+  name: Random Service Dwarf Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *botanistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceDwarfCorpse
+
+- type: entity
+  parent: SalvageDwarfCorpseSpawner
+  id: RandomSyndicateDwarfCorpseSpawner
+  name: Random Syndicate Dwarf Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *syndicateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSyndicateDwarfCorpse
+
+# Human
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomHumanCorpseSpawner
+  name: Random Human Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceCorpse
+    - MobRandomEngineerCorpse
+    - MobRandomCargoCorpse
+    - MobRandomMedicCorpse
+    - MobRandomScienceCorpse
+    - MobRandomSecurityCorpse
+    - MobRandomCommandCorpse
+    - MobRandomCivilianHumanCorpse
+    - MobRandomMercenaryHumanCorpse
+    - MobRandomPirateHumanCorpse
+    - MobRandomSyndicateHumanCorpse
+
+- type: entity
+  parent: SalvageHumanCorpseSpawner
+  id: RandomCivilianHumanCorpseSpawner
+  name: Random Civilian Human Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *civilianSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCivilianHumanCorpse
+
+- type: entity
+  parent: SalvageHumanCorpseSpawner
+  id: RandomMercenaryHumanCorpseSpawner
+  name: Random Mercenary Human Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *mercSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMercenaryHumanCorpse
+
+- type: entity
+  parent: SalvageHumanCorpseSpawner
+  id: RandomPirateHumanCorpseSpawner
+  name: Random Pirate Human Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *pirateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomPirateHumanCorpse
+
+- type: entity
+  parent: SalvageHumanCorpseSpawner
+  id: RandomSyndicateHumanCorpseSpawner
+  name: Random Syndicate Human Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *syndicateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSyndicateHumanCorpse
+
+# IPC
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomIPCCorpseSpawner
+  name: Random IPC Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceIPCCorpse
+    - MobRandomEngineerIPCCorpse
+    - MobRandomCargoIPCCorpse
+    - MobRandomMedicIPCCorpse
+    - MobRandomScienceIPCCorpse
+    - MobRandomSecurityIPCCorpse
+    - MobRandomCommandIPCCorpse
+    - MobRandomCivilianIPCCorpse
+    - MobRandomMercenaryIPCCorpse
+    - MobRandomPirateIPCCorpse
+    - MobRandomSyndicateIPCCorpse
+
+- type: entity
+  parent: MarkerBase
+  id: SalvageIPCCorpseSpawner
+  name: IPC Corpse Spawner
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - SalvageIPCCorpse
+
+- type: entity
+  parent: SalvageIPCCorpseSpawner
+  id: RandomCargoIPCCorpseSpawner
+  name: Random Cargo IPC Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *cargoTechSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCargoIPCCorpse
+
+- type: entity
+  parent: SalvageIPCCorpseSpawner
+  id: RandomCivilianIPCCorpseSpawner
+  name: Random Civilian IPC Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *civilianSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCivilianIPCCorpse
+
+- type: entity
+  parent: SalvageIPCCorpseSpawner
+  id: RandomCommandIPCCorpseSpawner
+  name: Random Command IPC Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *captainSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCommandIPCCorpse
+
+- type: entity
+  parent: SalvageIPCCorpseSpawner
+  id: RandomEngineerIPCCorpseSpawner
+  name: Random Engineer IPC Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *engineerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomEngineerIPCCorpse
+
+- type: entity
+  parent: SalvageIPCCorpseSpawner
+  id: RandomMedicIPCCorpseSpawner
+  name: Random Medic IPC Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *doctorSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMedicIPCCorpse
+
+- type: entity
+  parent: SalvageIPCCorpseSpawner
+  id: RandomMercenaryIPCCorpseSpawner
+  name: Random Mercenary IPC Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *mercSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMercenaryIPCCorpse
+
+- type: entity
+  parent: SalvageIPCCorpseSpawner
+  id: RandomPirateIPCCorpseSpawner
+  name: Random Pirate IPC Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *pirateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomPirateIPCCorpse
+
+- type: entity
+  parent: SalvageIPCCorpseSpawner
+  id: RandomScienceIPCCorpseSpawner
+  name: Random Science IPC Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *scientistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomScienceIPCCorpse
+
+- type: entity
+  parent: SalvageIPCCorpseSpawner
+  id: RandomSecurityIPCCorpseSpawner
+  name: Random Security IPC Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *securityOfficerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSecurityIPCCorpse
+
+- type: entity
+  parent: SalvageIPCCorpseSpawner
+  id: RandomServiceIPCCorpseSpawner
+  name: Random Service IPC Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *botanistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceIPCCorpse
+
+- type: entity
+  parent: SalvageIPCCorpseSpawner
+  id: RandomSyndicateIPCCorpseSpawner
+  name: Random Syndicate IPC Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *syndicateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSyndicateIPCCorpse
+
+# Moth
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomMothCorpseSpawner
+  name: Random Moth Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceMothCorpse
+    - MobRandomEngineerMothCorpse
+    - MobRandomCargoMothCorpse
+    - MobRandomMedicMothCorpse
+    - MobRandomScienceMothCorpse
+    - MobRandomSecurityMothCorpse
+    - MobRandomCommandMothCorpse
+    - MobRandomCivilianMothCorpse
+    - MobRandomMercenaryMothCorpse
+    - MobRandomPirateMothCorpse
+    - MobRandomSyndicateMothCorpse
+
+- type: entity
+  parent: MarkerBase
+  id: SalvageMothCorpseSpawner
+  name: Moth Corpse Spawner
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - SalvageMothCorpse
+
+- type: entity
+  parent: SalvageMothCorpseSpawner
+  id: RandomCargoMothCorpseSpawner
+  name: Random Cargo Moth Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *cargoTechSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCargoMothCorpse
+
+- type: entity
+  parent: SalvageMothCorpseSpawner
+  id: RandomCivilianMothCorpseSpawner
+  name: Random Civilian Moth Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *civilianSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCivilianMothCorpse
+
+- type: entity
+  parent: SalvageMothCorpseSpawner
+  id: RandomCommandMothCorpseSpawner
+  name: Random Command Moth Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *captainSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCommandMothCorpse
+
+- type: entity
+  parent: SalvageMothCorpseSpawner
+  id: RandomEngineerMothCorpseSpawner
+  name: Random Engineer Moth Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *engineerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomEngineerMothCorpse
+
+- type: entity
+  parent: SalvageMothCorpseSpawner
+  id: RandomMedicMothCorpseSpawner
+  name: Random Medic Moth Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *doctorSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMedicMothCorpse
+
+- type: entity
+  parent: SalvageMothCorpseSpawner
+  id: RandomMercenaryMothCorpseSpawner
+  name: Random Mercenary Moth Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *mercSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMercenaryMothCorpse
+
+- type: entity
+  parent: SalvageMothCorpseSpawner
+  id: RandomPirateMothCorpseSpawner
+  name: Random Pirate Moth Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *pirateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomPirateMothCorpse
+
+- type: entity
+  parent: SalvageMothCorpseSpawner
+  id: RandomScienceMothCorpseSpawner
+  name: Random Science Moth Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *scientistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomScienceMothCorpse
+
+- type: entity
+  parent: SalvageMothCorpseSpawner
+  id: RandomSecurityMothCorpseSpawner
+  name: Random Security Moth Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *securityOfficerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSecurityMothCorpse
+
+- type: entity
+  parent: SalvageMothCorpseSpawner
+  id: RandomServiceMothCorpseSpawner
+  name: Random Service Moth Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *botanistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceMothCorpse
+
+- type: entity
+  parent: SalvageMothCorpseSpawner
+  id: RandomSyndicateMothCorpseSpawner
+  name: Random Syndicate Moth Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *syndicateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSyndicateMothCorpse
+
+# Reptilian
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomReptilianCorpseSpawner
+  name: Random Reptilian Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceReptilianCorpse
+    - MobRandomEngineerReptilianCorpse
+    - MobRandomCargoReptilianCorpse
+    - MobRandomMedicReptilianCorpse
+    - MobRandomScienceReptilianCorpse
+    - MobRandomSecurityReptilianCorpse
+    - MobRandomCommandReptilianCorpse
+    - MobRandomCivilianReptilianCorpse
+    - MobRandomMercenaryReptilianCorpse
+    - MobRandomPirateReptilianCorpse
+    - MobRandomSyndicateReptilianCorpse
+
+- type: entity
+  parent: MarkerBase
+  id: SalvageReptilianCorpseSpawner
+  name: Reptilian Corpse Spawner
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - SalvageReptilianCorpse
+
+- type: entity
+  parent: SalvageReptilianCorpseSpawner
+  id: RandomCargoReptilianCorpseSpawner
+  name: Random Cargo Reptilian Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *cargoTechSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCargoReptilianCorpse
+
+- type: entity
+  parent: SalvageReptilianCorpseSpawner
+  id: RandomCivilianReptilianCorpseSpawner
+  name: Random Civilian Reptilian Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *civilianSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCivilianReptilianCorpse
+
+- type: entity
+  parent: SalvageReptilianCorpseSpawner
+  id: RandomCommandReptilianCorpseSpawner
+  name: Random Command Reptilian Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *captainSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCommandReptilianCorpse
+
+- type: entity
+  parent: SalvageReptilianCorpseSpawner
+  id: RandomEngineerReptilianCorpseSpawner
+  name: Random Engineer Reptilian Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *engineerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomEngineerReptilianCorpse
+
+- type: entity
+  parent: SalvageReptilianCorpseSpawner
+  id: RandomMedicReptilianCorpseSpawner
+  name: Random Medic Reptilian Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *doctorSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMedicReptilianCorpse
+
+- type: entity
+  parent: SalvageReptilianCorpseSpawner
+  id: RandomMercenaryReptilianCorpseSpawner
+  name: Random Mercenary Reptilian Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *mercSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMercenaryReptilianCorpse
+
+- type: entity
+  parent: SalvageReptilianCorpseSpawner
+  id: RandomPirateReptilianCorpseSpawner
+  name: Random Pirate Reptilian Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *pirateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomPirateReptilianCorpse
+
+- type: entity
+  parent: SalvageReptilianCorpseSpawner
+  id: RandomScienceReptilianCorpseSpawner
+  name: Random Science Reptilian Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *scientistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomScienceReptilianCorpse
+
+- type: entity
+  parent: SalvageReptilianCorpseSpawner
+  id: RandomSecurityReptilianCorpseSpawner
+  name: Random Security Reptilian Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *securityOfficerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSecurityReptilianCorpse
+
+- type: entity
+  parent: SalvageReptilianCorpseSpawner
+  id: RandomServiceReptilianCorpseSpawner
+  name: Random Service Reptilian Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *botanistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceReptilianCorpse
+
+- type: entity
+  parent: SalvageReptilianCorpseSpawner
+  id: RandomSyndicateReptilianCorpseSpawner
+  name: Random Syndicate Reptilian Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *syndicateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSyndicateReptilianCorpse
+
+# SkeletonPerson
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomSkeletonPersonCorpseSpawner
+  name: Random SkeletonPerson Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceSkeletonPersonCorpse
+    - MobRandomEngineerSkeletonPersonCorpse
+    - MobRandomCargoSkeletonPersonCorpse
+    - MobRandomMedicSkeletonPersonCorpse
+    - MobRandomScienceSkeletonPersonCorpse
+    - MobRandomSecuritySkeletonPersonCorpse
+    - MobRandomCommandSkeletonPersonCorpse
+    - MobRandomCivilianSkeletonPersonCorpse
+    - MobRandomMercenarySkeletonPersonCorpse
+    - MobRandomPirateSkeletonPersonCorpse
+    - MobRandomSyndicateSkeletonPersonCorpse
+
+- type: entity
+  parent: MarkerBase
+  id: SalvageSkeletonPersonCorpseSpawner
+  name: SkeletonPerson Corpse Spawner
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - SalvageSkeletonPersonCorpse
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpseSpawner
+  id: RandomCargoSkeletonPersonCorpseSpawner
+  name: Random Cargo SkeletonPerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *cargoTechSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCargoSkeletonPersonCorpse
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpseSpawner
+  id: RandomCivilianSkeletonPersonCorpseSpawner
+  name: Random Civilian SkeletonPerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *civilianSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCivilianSkeletonPersonCorpse
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpseSpawner
+  id: RandomCommandSkeletonPersonCorpseSpawner
+  name: Random Command SkeletonPerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *captainSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCommandSkeletonPersonCorpse
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpseSpawner
+  id: RandomEngineerSkeletonPersonCorpseSpawner
+  name: Random Engineer SkeletonPerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *engineerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomEngineerSkeletonPersonCorpse
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpseSpawner
+  id: RandomMedicSkeletonPersonCorpseSpawner
+  name: Random Medic SkeletonPerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *doctorSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMedicSkeletonPersonCorpse
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpseSpawner
+  id: RandomMercenarySkeletonPersonCorpseSpawner
+  name: Random Mercenary SkeletonPerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *mercSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMercenarySkeletonPersonCorpse
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpseSpawner
+  id: RandomPirateSkeletonPersonCorpseSpawner
+  name: Random Pirate SkeletonPerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *pirateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomPirateSkeletonPersonCorpse
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpseSpawner
+  id: RandomScienceSkeletonPersonCorpseSpawner
+  name: Random Science SkeletonPerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *scientistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomScienceSkeletonPersonCorpse
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpseSpawner
+  id: RandomSecuritySkeletonPersonCorpseSpawner
+  name: Random Security SkeletonPerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *securityOfficerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSecuritySkeletonPersonCorpse
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpseSpawner
+  id: RandomServiceSkeletonPersonCorpseSpawner
+  name: Random Service SkeletonPerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *botanistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceSkeletonPersonCorpse
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpseSpawner
+  id: RandomSyndicateSkeletonPersonCorpseSpawner
+  name: Random Syndicate SkeletonPerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *syndicateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSyndicateSkeletonPersonCorpse
+
+# SlimePerson
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomSlimePersonCorpseSpawner
+  name: Random SlimePerson Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceSlimePersonCorpse
+    - MobRandomEngineerSlimePersonCorpse
+    - MobRandomCargoSlimePersonCorpse
+    - MobRandomMedicSlimePersonCorpse
+    - MobRandomScienceSlimePersonCorpse
+    - MobRandomSecuritySlimePersonCorpse
+    - MobRandomCommandSlimePersonCorpse
+    - MobRandomCivilianSlimePersonCorpse
+    - MobRandomMercenarySlimePersonCorpse
+    - MobRandomPirateSlimePersonCorpse
+    - MobRandomSyndicateSlimePersonCorpse
+
+- type: entity
+  parent: MarkerBase
+  id: SalvageSlimePersonCorpseSpawner
+  name: SlimePerson Corpse Spawner
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - SalvageSlimePersonCorpse
+
+- type: entity
+  parent: SalvageSlimePersonCorpseSpawner
+  id: RandomCargoSlimePersonCorpseSpawner
+  name: Random Cargo SlimePerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *cargoTechSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCargoSlimePersonCorpse
+
+- type: entity
+  parent: SalvageSlimePersonCorpseSpawner
+  id: RandomCivilianSlimePersonCorpseSpawner
+  name: Random Civilian SlimePerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *civilianSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCivilianSlimePersonCorpse
+
+- type: entity
+  parent: SalvageSlimePersonCorpseSpawner
+  id: RandomCommandSlimePersonCorpseSpawner
+  name: Random Command SlimePerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *captainSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCommandSlimePersonCorpse
+
+- type: entity
+  parent: SalvageSlimePersonCorpseSpawner
+  id: RandomEngineerSlimePersonCorpseSpawner
+  name: Random Engineer SlimePerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *engineerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomEngineerSlimePersonCorpse
+
+- type: entity
+  parent: SalvageSlimePersonCorpseSpawner
+  id: RandomMedicSlimePersonCorpseSpawner
+  name: Random Medic SlimePerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *doctorSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMedicSlimePersonCorpse
+
+- type: entity
+  parent: SalvageSlimePersonCorpseSpawner
+  id: RandomMercenarySlimePersonCorpseSpawner
+  name: Random Mercenary SlimePerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *mercSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMercenarySlimePersonCorpse
+
+- type: entity
+  parent: SalvageSlimePersonCorpseSpawner
+  id: RandomPirateSlimePersonCorpseSpawner
+  name: Random Pirate SlimePerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *pirateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomPirateSlimePersonCorpse
+
+- type: entity
+  parent: SalvageSlimePersonCorpseSpawner
+  id: RandomScienceSlimePersonCorpseSpawner
+  name: Random Science SlimePerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *scientistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomScienceSlimePersonCorpse
+
+- type: entity
+  parent: SalvageSlimePersonCorpseSpawner
+  id: RandomSecuritySlimePersonCorpseSpawner
+  name: Random Security SlimePerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *securityOfficerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSecuritySlimePersonCorpse
+
+- type: entity
+  parent: SalvageSlimePersonCorpseSpawner
+  id: RandomServiceSlimePersonCorpseSpawner
+  name: Random Service SlimePerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *botanistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceSlimePersonCorpse
+
+- type: entity
+  parent: SalvageSlimePersonCorpseSpawner
+  id: RandomSyndicateSlimePersonCorpseSpawner
+  name: Random Syndicate SlimePerson Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *syndicateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSyndicateSlimePersonCorpse
+
+# Vox
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomVoxCorpseSpawner
+  name: Random Vox Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceVoxCorpse
+    - MobRandomEngineerVoxCorpse
+    - MobRandomCargoVoxCorpse
+    - MobRandomMedicVoxCorpse
+    - MobRandomScienceVoxCorpse
+    - MobRandomSecurityVoxCorpse
+    - MobRandomCommandVoxCorpse
+    - MobRandomCivilianVoxCorpse
+    - MobRandomMercenaryVoxCorpse
+    - MobRandomPirateVoxCorpse
+    - MobRandomSyndicateVoxCorpse
+
+- type: entity
+  parent: MarkerBase
+  id: SalvageVoxCorpseSpawner
+  name: Vox Corpse Spawner
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - SalvageVoxCorpse
+
+- type: entity
+  parent: SalvageVoxCorpseSpawner
+  id: RandomCargoVoxCorpseSpawner
+  name: Random Cargo Vox Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *cargoTechSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCargoVoxCorpse
+
+- type: entity
+  parent: SalvageVoxCorpseSpawner
+  id: RandomCivilianVoxCorpseSpawner
+  name: Random Civilian Vox Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *civilianSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCivilianVoxCorpse
+
+- type: entity
+  parent: SalvageVoxCorpseSpawner
+  id: RandomCommandVoxCorpseSpawner
+  name: Random Command Vox Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *captainSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCommandVoxCorpse
+
+- type: entity
+  parent: SalvageVoxCorpseSpawner
+  id: RandomEngineerVoxCorpseSpawner
+  name: Random Engineer Vox Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *engineerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomEngineerVoxCorpse
+
+- type: entity
+  parent: SalvageVoxCorpseSpawner
+  id: RandomMedicVoxCorpseSpawner
+  name: Random Medic Vox Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *doctorSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMedicVoxCorpse
+
+- type: entity
+  parent: SalvageVoxCorpseSpawner
+  id: RandomMercenaryVoxCorpseSpawner
+  name: Random Mercenary Vox Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *mercSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMercenaryVoxCorpse
+
+- type: entity
+  parent: SalvageVoxCorpseSpawner
+  id: RandomPirateVoxCorpseSpawner
+  name: Random Pirate Vox Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *pirateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomPirateVoxCorpse
+
+- type: entity
+  parent: SalvageVoxCorpseSpawner
+  id: RandomScienceVoxCorpseSpawner
+  name: Random Science Vox Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *scientistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomScienceVoxCorpse
+
+- type: entity
+  parent: SalvageVoxCorpseSpawner
+  id: RandomSecurityVoxCorpseSpawner
+  name: Random Security Vox Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *securityOfficerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSecurityVoxCorpse
+
+- type: entity
+  parent: SalvageVoxCorpseSpawner
+  id: RandomServiceVoxCorpseSpawner
+  name: Random Service Vox Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *botanistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceVoxCorpse
+
+- type: entity
+  parent: SalvageVoxCorpseSpawner
+  id: RandomSyndicateVoxCorpseSpawner
+  name: Random Syndicate Vox Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *syndicateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSyndicateVoxCorpse
+
+# Vulpkanin
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomVulpkaninCorpseSpawner
+  name: Random Vulpkanin Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceVulpkaninCorpse
+    - MobRandomEngineerVulpkaninCorpse
+    - MobRandomCargoVulpkaninCorpse
+    - MobRandomMedicVulpkaninCorpse
+    - MobRandomScienceVulpkaninCorpse
+    - MobRandomSecurityVulpkaninCorpse
+    - MobRandomCommandVulpkaninCorpse
+    - MobRandomCivilianVulpkaninCorpse
+    - MobRandomMercenaryVulpkaninCorpse
+    - MobRandomPirateVulpkaninCorpse
+    - MobRandomSyndicateVulpkaninCorpse
+
+- type: entity
+  parent: MarkerBase
+  id: SalvageVulpkaninCorpseSpawner
+  name: Vulpkanin Corpse Spawner
+  components:
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+    - state: green
+  - type: ConditionalSpawner
+    prototypes:
+    - SalvageVulpkaninCorpse
+
+- type: entity
+  parent: SalvageVulpkaninCorpseSpawner
+  id: RandomCargoVulpkaninCorpseSpawner
+  name: Random Cargo Vulpkanin Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *cargoTechSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCargoVulpkaninCorpse
+
+- type: entity
+  parent: SalvageVulpkaninCorpseSpawner
+  id: RandomCivilianVulpkaninCorpseSpawner
+  name: Random Civilian Vulpkanin Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *civilianSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCivilianVulpkaninCorpse
+
+- type: entity
+  parent: SalvageVulpkaninCorpseSpawner
+  id: RandomCommandVulpkaninCorpseSpawner
+  name: Random Command Vulpkanin Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *captainSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCommandVulpkaninCorpse
+
+- type: entity
+  parent: SalvageVulpkaninCorpseSpawner
+  id: RandomEngineerVulpkaninCorpseSpawner
+  name: Random Engineer Vulpkanin Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *engineerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomEngineerVulpkaninCorpse
+
+- type: entity
+  parent: SalvageVulpkaninCorpseSpawner
+  id: RandomMedicVulpkaninCorpseSpawner
+  name: Random Medic Vulpkanin Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *doctorSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMedicVulpkaninCorpse
+
+- type: entity
+  parent: SalvageVulpkaninCorpseSpawner
+  id: RandomMercenaryVulpkaninCorpseSpawner
+  name: Random Mercenary Vulpkanin Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *mercSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMercenaryVulpkaninCorpse
+
+- type: entity
+  parent: SalvageVulpkaninCorpseSpawner
+  id: RandomPirateVulpkaninCorpseSpawner
+  name: Random Pirate Vulpkanin Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *pirateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomPirateVulpkaninCorpse
+
+- type: entity
+  parent: SalvageVulpkaninCorpseSpawner
+  id: RandomScienceVulpkaninCorpseSpawner
+  name: Random Science Vulpkanin Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *scientistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomScienceVulpkaninCorpse
+
+- type: entity
+  parent: SalvageVulpkaninCorpseSpawner
+  id: RandomSecurityVulpkaninCorpseSpawner
+  name: Random Security Vulpkanin Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *securityOfficerSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSecurityVulpkaninCorpse
+
+- type: entity
+  parent: SalvageVulpkaninCorpseSpawner
+  id: RandomServiceVulpkaninCorpseSpawner
+  name: Random Service Vulpkanin Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *botanistSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomServiceVulpkaninCorpse
+
+- type: entity
+  parent: SalvageVulpkaninCorpseSpawner
+  id: RandomSyndicateVulpkaninCorpseSpawner
+  name: Random Syndicate Vulpkanin Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *syndicateSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSyndicateVulpkaninCorpse
+
+# Random
 
 - type: entity
   parent: MarkerBase
@@ -232,1801 +2302,426 @@
     - MobRandomSyndicateVulpkaninCorpse
 
 - type: entity
-  parent: SalvageAbductorCorpseSpawner
-  id: RandomEngineerAbductorCorpseSpawner
-  name: Random Engineer Abductor Corpse Spawner
+  parent: SalvageRandomCorpseSpawner
+  id: SalvageRandomServiceCorpseSpawner
+  name: Random Service Corpse Spawner
   components:
-  - type: Sprite
-    layers: &engineerSpawnerLayers
-    - state: engineer
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomEngineerAbductorCorpse
-
-- type: entity
-  parent: SalvageAbductorCorpseSpawner
-  id: RandomGearedAbductorCorpseSpawner
-  name: Random Geared Abductor Corpse Spawner
-  components:
-  - type: Sprite
-    layers:
-    - state: green
-    - sprite: _Shitmed/Objects/Weapons/Melee/wonderprod.rsi
-      state: stun-icon
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomGearedAbductorCorpse
-
-- type: entity
-  parent: SalvageAbductorCorpseSpawner
-  id: RandomMedicAbductorCorpseSpawner
-  name: Random Medic Abductor Corpse Spawner
-  components:
-  - type: Sprite
-    layers: &doctorSpawnerLayers
-    - state: doctor
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMedicAbductorCorpse
-
-- type: entity
-  parent: SalvageAbductorCorpseSpawner
-  id: RandomMercenaryAbductorCorpseSpawner
-  name: Random Mercenary Abductor Corpse Spawner
-  components:
-  - type: Sprite
-    layers: &mercSpawnerLayers
-    - state: green
-    - sprite: Clothing/Mask/merc.rsi
-      state: icon
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMercenaryAbductorCorpse
-
-- type: entity
-  parent: SalvageAbductorCorpseSpawner
-  id: RandomPirateAbductorCorpseSpawner
-  name: Random Pirate Abductor Corpse Spawner
-  components:
-  - type: Sprite
-    layers: &pirateSpawnerLayers
-    - state: green
-    - sprite: Structures/Wallmounts/flags.rsi
-      state: pirate_flag
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomPirateAbductorCorpse
-
-- type: entity
-  parent: SalvageAbductorCorpseSpawner
-  id: RandomScienceAbductorCorpseSpawner
-  name: Random Science Abductor Corpse Spawner
-  components:
-  - type: Sprite
-    layers: &scientistSpawnerLayers
-    - state: scientist
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomScienceAbductorCorpse
-
-- type: entity
-  parent: SalvageAbductorCorpseSpawner
-  id: RandomSecurityAbductorCorpseSpawner
-  name: Random Security Abductor Corpse Spawner
-  components:
-  - type: Sprite
-    layers: &securityOfficerSpawnerLayers
-    - state: security_officer
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSecurityAbductorCorpse
-
-- type: entity
-  parent: SalvageAbductorCorpseSpawner
-  id: RandomServiceAbductorCorpseSpawner
-  name: Random Service Abductor Corpse Spawner
-  components:
-  - type: Sprite
-    layers: &botanistSpawnerLayers
-    - state: botanist
-    - state: green
   - type: ConditionalSpawner
     prototypes:
     - MobRandomServiceAbductorCorpse
-
-- type: entity
-  parent: SalvageAbductorCorpseSpawner
-  id: RandomSyndicateAbductorCorpseSpawner
-  name: Random Syndicate Abductor Corpse Spawner
-  components:
-  - type: Sprite
-    layers: &syndicateSpawnerLayers
-    - state: green
-    - sprite: Clothing/Mask/gassyndicate.rsi
-      state: icon
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSyndicateAbductorCorpse
-
-# Arachnid
-
-- type: entity
-  parent: MarkerBase
-  id: SalvageArachnidCorpseSpawner
-  name: Arachnid Corpse Spawner
-  components:
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - SalvageArachnidCorpse
-
-- type: entity
-  parent: SalvageArachnidCorpseSpawner
-  id: RandomCargoArachnidCorpseSpawner
-  name: Random Cargo Arachnid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *cargoTechSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCargoArachnidCorpse
-
-- type: entity
-  parent: SalvageArachnidCorpseSpawner
-  id: RandomCivilianArachnidCorpseSpawner
-  name: Random Civilian Arachnid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCivilianArachnidCorpse
-
-- type: entity
-  parent: SalvageArachnidCorpseSpawner
-  id: RandomCommandArachnidCorpseSpawner
-  name: Random Command Arachnid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCommandArachnidCorpse
-
-- type: entity
-  parent: SalvageArachnidCorpseSpawner
-  id: RandomEngineerArachnidCorpseSpawner
-  name: Random Engineer Arachnid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *engineerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomEngineerArachnidCorpse
-
-- type: entity
-  parent: SalvageArachnidCorpseSpawner
-  id: RandomMedicArachnidCorpseSpawner
-  name: Random Medic Arachnid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *doctorSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMedicArachnidCorpse
-
-- type: entity
-  parent: SalvageArachnidCorpseSpawner
-  id: RandomMercenaryArachnidCorpseSpawner
-  name: Random Mercenary Arachnid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *mercSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMercenaryArachnidCorpse
-
-- type: entity
-  parent: SalvageArachnidCorpseSpawner
-  id: RandomPirateArachnidCorpseSpawner
-  name: Random Pirate Arachnid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *pirateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomPirateArachnidCorpse
-
-- type: entity
-  parent: SalvageArachnidCorpseSpawner
-  id: RandomScienceArachnidCorpseSpawner
-  name: Random Science Arachnid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *scientistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomScienceArachnidCorpse
-
-- type: entity
-  parent: SalvageArachnidCorpseSpawner
-  id: RandomSecurityArachnidCorpseSpawner
-  name: Random Security Arachnid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *securityOfficerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSecurityArachnidCorpse
-
-- type: entity
-  parent: SalvageArachnidCorpseSpawner
-  id: RandomServiceArachnidCorpseSpawner
-  name: Random Service Arachnid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *botanistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
     - MobRandomServiceArachnidCorpse
-
-- type: entity
-  parent: SalvageArachnidCorpseSpawner
-  id: RandomSyndicateArachnidCorpseSpawner
-  name: Random Syndicate Arachnid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *syndicateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSyndicateArachnidCorpse
-
-# BananaMen
-
-- type: entity
-  parent: MarkerBase
-  id: SalvageBananaMenCorpseSpawner
-  name: BananaMen Corpse Spawner
-  components:
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - SalvageBananaMenCorpse
-
-- type: entity
-  parent: SalvageBananaMenCorpseSpawner
-  id: RandomCargoBananaMenCorpseSpawner
-  name: Random Cargo BananaMen Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *cargoTechSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCargoBananaMenCorpse
-
-- type: entity
-  parent: SalvageBananaMenCorpseSpawner
-  id: RandomCivilianBananaMenCorpseSpawner
-  name: Random Civilian BananaMen Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCivilianBananaMenCorpse
-
-- type: entity
-  parent: SalvageBananaMenCorpseSpawner
-  id: RandomCommandBananaMenCorpseSpawner
-  name: Random Command BananaMen Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCommandBananaMenCorpse
-
-- type: entity
-  parent: SalvageBananaMenCorpseSpawner
-  id: RandomEngineerBananaMenCorpseSpawner
-  name: Random Engineer BananaMen Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *engineerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomEngineerBananaMenCorpse
-
-- type: entity
-  parent: SalvageBananaMenCorpseSpawner
-  id: RandomMedicBananaMenCorpseSpawner
-  name: Random Medic BananaMen Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *doctorSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMedicBananaMenCorpse
-
-- type: entity
-  parent: SalvageBananaMenCorpseSpawner
-  id: RandomMercenaryBananaMenCorpseSpawner
-  name: Random Mercenary BananaMen Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *mercSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMercenaryBananaMenCorpse
-
-- type: entity
-  parent: SalvageBananaMenCorpseSpawner
-  id: RandomPirateBananaMenCorpseSpawner
-  name: Random Pirate BananaMen Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *pirateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomPirateBananaMenCorpse
-
-- type: entity
-  parent: SalvageBananaMenCorpseSpawner
-  id: RandomScienceBananaMenCorpseSpawner
-  name: Random Science BananaMen Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *scientistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomScienceBananaMenCorpse
-
-- type: entity
-  parent: SalvageBananaMenCorpseSpawner
-  id: RandomSecurityBananaMenCorpseSpawner
-  name: Random Security BananaMen Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *securityOfficerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSecurityBananaMenCorpse
-
-- type: entity
-  parent: SalvageBananaMenCorpseSpawner
-  id: RandomServiceBananaMenCorpseSpawner
-  name: Random Service BananaMen Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *botanistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
     - MobRandomServiceBananaMenCorpse
-
-- type: entity
-  parent: SalvageBananaMenCorpseSpawner
-  id: RandomSyndicateBananaMenCorpseSpawner
-  name: Random Syndicate BananaMen Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *syndicateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSyndicateBananaMenCorpse
-
-# Decapoid
-
-- type: entity
-  parent: MarkerBase
-  id: SalvageDecapoidCorpseSpawner
-  name: Decapoid Corpse Spawner
-  components:
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - SalvageDecapoidCorpse
-
-- type: entity
-  parent: SalvageDecapoidCorpseSpawner
-  id: RandomCargoDecapoidCorpseSpawner
-  name: Random Cargo Decapoid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *cargoTechSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCargoDecapoidCorpse
-
-- type: entity
-  parent: SalvageDecapoidCorpseSpawner
-  id: RandomCivilianDecapoidCorpseSpawner
-  name: Random Civilian Decapoid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCivilianDecapoidCorpse
-
-- type: entity
-  parent: SalvageDecapoidCorpseSpawner
-  id: RandomCommandDecapoidCorpseSpawner
-  name: Random Command Decapoid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCommandDecapoidCorpse
-
-- type: entity
-  parent: SalvageDecapoidCorpseSpawner
-  id: RandomEngineerDecapoidCorpseSpawner
-  name: Random Engineer Decapoid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *engineerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomEngineerDecapoidCorpse
-
-- type: entity
-  parent: SalvageDecapoidCorpseSpawner
-  id: RandomMedicDecapoidCorpseSpawner
-  name: Random Medic Decapoid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *doctorSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMedicDecapoidCorpse
-
-- type: entity
-  parent: SalvageDecapoidCorpseSpawner
-  id: RandomMercenaryDecapoidCorpseSpawner
-  name: Random Mercenary Decapoid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *mercSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMercenaryDecapoidCorpse
-
-- type: entity
-  parent: SalvageDecapoidCorpseSpawner
-  id: RandomPirateDecapoidCorpseSpawner
-  name: Random Pirate Decapoid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *pirateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomPirateDecapoidCorpse
-
-- type: entity
-  parent: SalvageDecapoidCorpseSpawner
-  id: RandomScienceDecapoidCorpseSpawner
-  name: Random Science Decapoid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *scientistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomScienceDecapoidCorpse
-
-- type: entity
-  parent: SalvageDecapoidCorpseSpawner
-  id: RandomSecurityDecapoidCorpseSpawner
-  name: Random Security Decapoid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *securityOfficerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSecurityDecapoidCorpse
-
-- type: entity
-  parent: SalvageDecapoidCorpseSpawner
-  id: RandomServiceDecapoidCorpseSpawner
-  name: Random Service Decapoid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *botanistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
     - MobRandomServiceDecapoidCorpse
-
-- type: entity
-  parent: SalvageDecapoidCorpseSpawner
-  id: RandomSyndicateDecapoidCorpseSpawner
-  name: Random Syndicate Decapoid Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *syndicateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSyndicateDecapoidCorpse
-
-
-# Diona
-
-- type: entity
-  parent: MarkerBase
-  id: SalvageDionaCorpseSpawner
-  name: Diona Corpse Spawner
-  components:
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - SalvageDionaCorpse
-
-- type: entity
-  parent: SalvageDionaCorpseSpawner
-  id: RandomCargoDionaCorpseSpawner
-  name: Random Cargo Diona Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *cargoTechSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCargoDionaCorpse
-
-- type: entity
-  parent: SalvageDionaCorpseSpawner
-  id: RandomCivilianDionaCorpseSpawner
-  name: Random Civilian Diona Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCivilianDionaCorpse
-
-- type: entity
-  parent: SalvageDionaCorpseSpawner
-  id: RandomCommandDionaCorpseSpawner
-  name: Random Command Diona Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCommandDionaCorpse
-
-- type: entity
-  parent: SalvageDionaCorpseSpawner
-  id: RandomEngineerDionaCorpseSpawner
-  name: Random Engineer Diona Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *engineerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomEngineerDionaCorpse
-
-- type: entity
-  parent: SalvageDionaCorpseSpawner
-  id: RandomMedicDionaCorpseSpawner
-  name: Random Medic Diona Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *doctorSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMedicDionaCorpse
-
-- type: entity
-  parent: SalvageDionaCorpseSpawner
-  id: RandomMercenaryDionaCorpseSpawner
-  name: Random Mercenary Diona Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *mercSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMercenaryDionaCorpse
-
-- type: entity
-  parent: SalvageDionaCorpseSpawner
-  id: RandomPirateDionaCorpseSpawner
-  name: Random Pirate Diona Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *pirateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomPirateDionaCorpse
-
-- type: entity
-  parent: SalvageDionaCorpseSpawner
-  id: RandomScienceDionaCorpseSpawner
-  name: Random Science Diona Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *scientistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomScienceDionaCorpse
-
-- type: entity
-  parent: SalvageDionaCorpseSpawner
-  id: RandomSecurityDionaCorpseSpawner
-  name: Random Security Diona Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *securityOfficerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSecurityDionaCorpse
-
-- type: entity
-  parent: SalvageDionaCorpseSpawner
-  id: RandomServiceDionaCorpseSpawner
-  name: Random Service Diona Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *botanistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
     - MobRandomServiceDionaCorpse
-
-- type: entity
-  parent: SalvageDionaCorpseSpawner
-  id: RandomSyndicateDionaCorpseSpawner
-  name: Random Syndicate Diona Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *syndicateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSyndicateDionaCorpse
-
-# Dwarf
-
-- type: entity
-  parent: MarkerBase
-  id: SalvageDwarfCorpseSpawner
-  name: Dwarf Corpse Spawner
-  components:
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - SalvageDwarfCorpse
-
-- type: entity
-  parent: SalvageDwarfCorpseSpawner
-  id: RandomCargoDwarfCorpseSpawner
-  name: Random Cargo Dwarf Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *cargoTechSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCargoDwarfCorpse
-
-- type: entity
-  parent: SalvageDwarfCorpseSpawner
-  id: RandomCivilianDwarfCorpseSpawner
-  name: Random Civilian Dwarf Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCivilianDwarfCorpse
-
-- type: entity
-  parent: SalvageDwarfCorpseSpawner
-  id: RandomCommandDwarfCorpseSpawner
-  name: Random Command Dwarf Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCommandDwarfCorpse
-
-- type: entity
-  parent: SalvageDwarfCorpseSpawner
-  id: RandomEngineerDwarfCorpseSpawner
-  name: Random Engineer Dwarf Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *engineerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomEngineerDwarfCorpse
-
-- type: entity
-  parent: SalvageDwarfCorpseSpawner
-  id: RandomMedicDwarfCorpseSpawner
-  name: Random Medic Dwarf Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *doctorSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMedicDwarfCorpse
-
-- type: entity
-  parent: SalvageDwarfCorpseSpawner
-  id: RandomMercenaryDwarfCorpseSpawner
-  name: Random Mercenary Dwarf Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *mercSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMercenaryDwarfCorpse
-
-- type: entity
-  parent: SalvageDwarfCorpseSpawner
-  id: RandomPirateDwarfCorpseSpawner
-  name: Random Pirate Dwarf Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *pirateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomPirateDwarfCorpse
-
-- type: entity
-  parent: SalvageDwarfCorpseSpawner
-  id: RandomScienceDwarfCorpseSpawner
-  name: Random Science Dwarf Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *scientistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomScienceDwarfCorpse
-
-- type: entity
-  parent: SalvageDwarfCorpseSpawner
-  id: RandomSecurityDwarfCorpseSpawner
-  name: Random Security Dwarf Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *securityOfficerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSecurityDwarfCorpse
-
-- type: entity
-  parent: SalvageDwarfCorpseSpawner
-  id: RandomServiceDwarfCorpseSpawner
-  name: Random Service Dwarf Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *botanistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
     - MobRandomServiceDwarfCorpse
-
-- type: entity
-  parent: SalvageDwarfCorpseSpawner
-  id: RandomSyndicateDwarfCorpseSpawner
-  name: Random Syndicate Dwarf Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *syndicateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSyndicateDwarfCorpse
-
-# Human
-
-- type: entity
-  parent: SalvageHumanCorpseSpawner
-  id: RandomCivilianHumanCorpseSpawner
-  name: Random Civilian Human Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCivilianHumanCorpse
-
-- type: entity
-  parent: SalvageHumanCorpseSpawner
-  id: RandomMercenaryHumanCorpseSpawner
-  name: Random Mercenary Human Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *mercSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMercenaryHumanCorpse
-
-- type: entity
-  parent: SalvageHumanCorpseSpawner
-  id: RandomPirateHumanCorpseSpawner
-  name: Random Pirate Human Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *pirateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomPirateHumanCorpse
-
-- type: entity
-  parent: SalvageHumanCorpseSpawner
-  id: RandomSyndicateHumanCorpseSpawner
-  name: Random Syndicate Human Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *syndicateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSyndicateHumanCorpse
-
-# IPC
-
-- type: entity
-  parent: MarkerBase
-  id: SalvageIPCCorpseSpawner
-  name: IPC Corpse Spawner
-  components:
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - SalvageIPCCorpse
-
-- type: entity
-  parent: SalvageIPCCorpseSpawner
-  id: RandomCargoIPCCorpseSpawner
-  name: Random Cargo IPC Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *cargoTechSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCargoIPCCorpse
-
-- type: entity
-  parent: SalvageIPCCorpseSpawner
-  id: RandomCivilianIPCCorpseSpawner
-  name: Random Civilian IPC Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCivilianIPCCorpse
-
-- type: entity
-  parent: SalvageIPCCorpseSpawner
-  id: RandomCommandIPCCorpseSpawner
-  name: Random Command IPC Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCommandIPCCorpse
-
-- type: entity
-  parent: SalvageIPCCorpseSpawner
-  id: RandomEngineerIPCCorpseSpawner
-  name: Random Engineer IPC Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *engineerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomEngineerIPCCorpse
-
-- type: entity
-  parent: SalvageIPCCorpseSpawner
-  id: RandomMedicIPCCorpseSpawner
-  name: Random Medic IPC Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *doctorSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMedicIPCCorpse
-
-- type: entity
-  parent: SalvageIPCCorpseSpawner
-  id: RandomMercenaryIPCCorpseSpawner
-  name: Random Mercenary IPC Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *mercSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMercenaryIPCCorpse
-
-- type: entity
-  parent: SalvageIPCCorpseSpawner
-  id: RandomPirateIPCCorpseSpawner
-  name: Random Pirate IPC Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *pirateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomPirateIPCCorpse
-
-- type: entity
-  parent: SalvageIPCCorpseSpawner
-  id: RandomScienceIPCCorpseSpawner
-  name: Random Science IPC Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *scientistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomScienceIPCCorpse
-
-- type: entity
-  parent: SalvageIPCCorpseSpawner
-  id: RandomSecurityIPCCorpseSpawner
-  name: Random Security IPC Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *securityOfficerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSecurityIPCCorpse
-
-- type: entity
-  parent: SalvageIPCCorpseSpawner
-  id: RandomServiceIPCCorpseSpawner
-  name: Random Service IPC Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *botanistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
+    - MobRandomServiceHumanCorpse
     - MobRandomServiceIPCCorpse
-
-- type: entity
-  parent: SalvageIPCCorpseSpawner
-  id: RandomSyndicateIPCCorpseSpawner
-  name: Random Syndicate IPC Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *syndicateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSyndicateIPCCorpse
-
-# Moth
-
-- type: entity
-  parent: MarkerBase
-  id: SalvageMothCorpseSpawner
-  name: Moth Corpse Spawner
-  components:
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - SalvageMothCorpse
-
-- type: entity
-  parent: SalvageMothCorpseSpawner
-  id: RandomCargoMothCorpseSpawner
-  name: Random Cargo Moth Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *cargoTechSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCargoMothCorpse
-
-- type: entity
-  parent: SalvageMothCorpseSpawner
-  id: RandomCivilianMothCorpseSpawner
-  name: Random Civilian Moth Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCivilianMothCorpse
-
-- type: entity
-  parent: SalvageMothCorpseSpawner
-  id: RandomCommandMothCorpseSpawner
-  name: Random Command Moth Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCommandMothCorpse
-
-- type: entity
-  parent: SalvageMothCorpseSpawner
-  id: RandomEngineerMothCorpseSpawner
-  name: Random Engineer Moth Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *engineerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomEngineerMothCorpse
-
-- type: entity
-  parent: SalvageMothCorpseSpawner
-  id: RandomMedicMothCorpseSpawner
-  name: Random Medic Moth Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *doctorSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMedicMothCorpse
-
-- type: entity
-  parent: SalvageMothCorpseSpawner
-  id: RandomMercenaryMothCorpseSpawner
-  name: Random Mercenary Moth Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *mercSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMercenaryMothCorpse
-
-- type: entity
-  parent: SalvageMothCorpseSpawner
-  id: RandomPirateMothCorpseSpawner
-  name: Random Pirate Moth Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *pirateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomPirateMothCorpse
-
-- type: entity
-  parent: SalvageMothCorpseSpawner
-  id: RandomScienceMothCorpseSpawner
-  name: Random Science Moth Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *scientistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomScienceMothCorpse
-
-- type: entity
-  parent: SalvageMothCorpseSpawner
-  id: RandomSecurityMothCorpseSpawner
-  name: Random Security Moth Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *securityOfficerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSecurityMothCorpse
-
-- type: entity
-  parent: SalvageMothCorpseSpawner
-  id: RandomServiceMothCorpseSpawner
-  name: Random Service Moth Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *botanistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
     - MobRandomServiceMothCorpse
-
-- type: entity
-  parent: SalvageMothCorpseSpawner
-  id: RandomSyndicateMothCorpseSpawner
-  name: Random Syndicate Moth Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *syndicateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSyndicateMothCorpse
-
-# Reptilian
-
-- type: entity
-  parent: MarkerBase
-  id: SalvageReptilianCorpseSpawner
-  name: Reptilian Corpse Spawner
-  components:
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - SalvageReptilianCorpse
-
-- type: entity
-  parent: SalvageReptilianCorpseSpawner
-  id: RandomCargoReptilianCorpseSpawner
-  name: Random Cargo Reptilian Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *cargoTechSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCargoReptilianCorpse
-
-- type: entity
-  parent: SalvageReptilianCorpseSpawner
-  id: RandomCivilianReptilianCorpseSpawner
-  name: Random Civilian Reptilian Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCivilianReptilianCorpse
-
-- type: entity
-  parent: SalvageReptilianCorpseSpawner
-  id: RandomCommandReptilianCorpseSpawner
-  name: Random Command Reptilian Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCommandReptilianCorpse
-
-- type: entity
-  parent: SalvageReptilianCorpseSpawner
-  id: RandomEngineerReptilianCorpseSpawner
-  name: Random Engineer Reptilian Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *engineerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomEngineerReptilianCorpse
-
-- type: entity
-  parent: SalvageReptilianCorpseSpawner
-  id: RandomMedicReptilianCorpseSpawner
-  name: Random Medic Reptilian Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *doctorSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMedicReptilianCorpse
-
-- type: entity
-  parent: SalvageReptilianCorpseSpawner
-  id: RandomMercenaryReptilianCorpseSpawner
-  name: Random Mercenary Reptilian Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *mercSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMercenaryReptilianCorpse
-
-- type: entity
-  parent: SalvageReptilianCorpseSpawner
-  id: RandomPirateReptilianCorpseSpawner
-  name: Random Pirate Reptilian Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *pirateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomPirateReptilianCorpse
-
-- type: entity
-  parent: SalvageReptilianCorpseSpawner
-  id: RandomScienceReptilianCorpseSpawner
-  name: Random Science Reptilian Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *scientistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomScienceReptilianCorpse
-
-- type: entity
-  parent: SalvageReptilianCorpseSpawner
-  id: RandomSecurityReptilianCorpseSpawner
-  name: Random Security Reptilian Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *securityOfficerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSecurityReptilianCorpse
-
-- type: entity
-  parent: SalvageReptilianCorpseSpawner
-  id: RandomServiceReptilianCorpseSpawner
-  name: Random Service Reptilian Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *botanistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
     - MobRandomServiceReptilianCorpse
-
-- type: entity
-  parent: SalvageReptilianCorpseSpawner
-  id: RandomSyndicateReptilianCorpseSpawner
-  name: Random Syndicate Reptilian Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *syndicateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSyndicateReptilianCorpse
-
-# SkeletonPerson
-
-- type: entity
-  parent: MarkerBase
-  id: SalvageSkeletonPersonCorpseSpawner
-  name: SkeletonPerson Corpse Spawner
-  components:
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - SalvageSkeletonPersonCorpse
-
-- type: entity
-  parent: SalvageSkeletonPersonCorpseSpawner
-  id: RandomCargoSkeletonPersonCorpseSpawner
-  name: Random Cargo SkeletonPerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *cargoTechSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCargoSkeletonPersonCorpse
-
-- type: entity
-  parent: SalvageSkeletonPersonCorpseSpawner
-  id: RandomCivilianSkeletonPersonCorpseSpawner
-  name: Random Civilian SkeletonPerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCivilianSkeletonPersonCorpse
-
-- type: entity
-  parent: SalvageSkeletonPersonCorpseSpawner
-  id: RandomCommandSkeletonPersonCorpseSpawner
-  name: Random Command SkeletonPerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCommandSkeletonPersonCorpse
-
-- type: entity
-  parent: SalvageSkeletonPersonCorpseSpawner
-  id: RandomEngineerSkeletonPersonCorpseSpawner
-  name: Random Engineer SkeletonPerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *engineerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomEngineerSkeletonPersonCorpse
-
-- type: entity
-  parent: SalvageSkeletonPersonCorpseSpawner
-  id: RandomMedicSkeletonPersonCorpseSpawner
-  name: Random Medic SkeletonPerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *doctorSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMedicSkeletonPersonCorpse
-
-- type: entity
-  parent: SalvageSkeletonPersonCorpseSpawner
-  id: RandomMercenarySkeletonPersonCorpseSpawner
-  name: Random Mercenary SkeletonPerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *mercSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMercenarySkeletonPersonCorpse
-
-- type: entity
-  parent: SalvageSkeletonPersonCorpseSpawner
-  id: RandomPirateSkeletonPersonCorpseSpawner
-  name: Random Pirate SkeletonPerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *pirateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomPirateSkeletonPersonCorpse
-
-- type: entity
-  parent: SalvageSkeletonPersonCorpseSpawner
-  id: RandomScienceSkeletonPersonCorpseSpawner
-  name: Random Science SkeletonPerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *scientistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomScienceSkeletonPersonCorpse
-
-- type: entity
-  parent: SalvageSkeletonPersonCorpseSpawner
-  id: RandomSecuritySkeletonPersonCorpseSpawner
-  name: Random Security SkeletonPerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *securityOfficerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSecuritySkeletonPersonCorpse
-
-- type: entity
-  parent: SalvageSkeletonPersonCorpseSpawner
-  id: RandomServiceSkeletonPersonCorpseSpawner
-  name: Random Service SkeletonPerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *botanistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
     - MobRandomServiceSkeletonPersonCorpse
-
-- type: entity
-  parent: SalvageSkeletonPersonCorpseSpawner
-  id: RandomSyndicateSkeletonPersonCorpseSpawner
-  name: Random Syndicate SkeletonPerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *syndicateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSyndicateSkeletonPersonCorpse
-
-# SlimePerson
-
-- type: entity
-  parent: MarkerBase
-  id: SalvageSlimePersonCorpseSpawner
-  name: SlimePerson Corpse Spawner
-  components:
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - SalvageSlimePersonCorpse
-
-- type: entity
-  parent: SalvageSlimePersonCorpseSpawner
-  id: RandomCargoSlimePersonCorpseSpawner
-  name: Random Cargo SlimePerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *cargoTechSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCargoSlimePersonCorpse
-
-- type: entity
-  parent: SalvageSlimePersonCorpseSpawner
-  id: RandomCivilianSlimePersonCorpseSpawner
-  name: Random Civilian SlimePerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCivilianSlimePersonCorpse
-
-- type: entity
-  parent: SalvageSlimePersonCorpseSpawner
-  id: RandomCommandSlimePersonCorpseSpawner
-  name: Random Command SlimePerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCommandSlimePersonCorpse
-
-- type: entity
-  parent: SalvageSlimePersonCorpseSpawner
-  id: RandomEngineerSlimePersonCorpseSpawner
-  name: Random Engineer SlimePerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *engineerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomEngineerSlimePersonCorpse
-
-- type: entity
-  parent: SalvageSlimePersonCorpseSpawner
-  id: RandomMedicSlimePersonCorpseSpawner
-  name: Random Medic SlimePerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *doctorSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMedicSlimePersonCorpse
-
-- type: entity
-  parent: SalvageSlimePersonCorpseSpawner
-  id: RandomMercenarySlimePersonCorpseSpawner
-  name: Random Mercenary SlimePerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *mercSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMercenarySlimePersonCorpse
-
-- type: entity
-  parent: SalvageSlimePersonCorpseSpawner
-  id: RandomPirateSlimePersonCorpseSpawner
-  name: Random Pirate SlimePerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *pirateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomPirateSlimePersonCorpse
-
-- type: entity
-  parent: SalvageSlimePersonCorpseSpawner
-  id: RandomScienceSlimePersonCorpseSpawner
-  name: Random Science SlimePerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *scientistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomScienceSlimePersonCorpse
-
-- type: entity
-  parent: SalvageSlimePersonCorpseSpawner
-  id: RandomSecuritySlimePersonCorpseSpawner
-  name: Random Security SlimePerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *securityOfficerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSecuritySlimePersonCorpse
-
-- type: entity
-  parent: SalvageSlimePersonCorpseSpawner
-  id: RandomServiceSlimePersonCorpseSpawner
-  name: Random Service SlimePerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *botanistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
     - MobRandomServiceSlimePersonCorpse
-
-- type: entity
-  parent: SalvageSlimePersonCorpseSpawner
-  id: RandomSyndicateSlimePersonCorpseSpawner
-  name: Random Syndicate SlimePerson Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *syndicateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSyndicateSlimePersonCorpse
-
-# Vox
-
-- type: entity
-  parent: MarkerBase
-  id: SalvageVoxCorpseSpawner
-  name: Vox Corpse Spawner
-  components:
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - SalvageVoxCorpse
-
-- type: entity
-  parent: SalvageVoxCorpseSpawner
-  id: RandomCargoVoxCorpseSpawner
-  name: Random Cargo Vox Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *cargoTechSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCargoVoxCorpse
-
-- type: entity
-  parent: SalvageVoxCorpseSpawner
-  id: RandomCivilianVoxCorpseSpawner
-  name: Random Civilian Vox Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCivilianVoxCorpse
-
-- type: entity
-  parent: SalvageVoxCorpseSpawner
-  id: RandomCommandVoxCorpseSpawner
-  name: Random Command Vox Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCommandVoxCorpse
-
-- type: entity
-  parent: SalvageVoxCorpseSpawner
-  id: RandomEngineerVoxCorpseSpawner
-  name: Random Engineer Vox Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *engineerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomEngineerVoxCorpse
-
-- type: entity
-  parent: SalvageVoxCorpseSpawner
-  id: RandomMedicVoxCorpseSpawner
-  name: Random Medic Vox Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *doctorSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMedicVoxCorpse
-
-- type: entity
-  parent: SalvageVoxCorpseSpawner
-  id: RandomMercenaryVoxCorpseSpawner
-  name: Random Mercenary Vox Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *mercSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMercenaryVoxCorpse
-
-- type: entity
-  parent: SalvageVoxCorpseSpawner
-  id: RandomPirateVoxCorpseSpawner
-  name: Random Pirate Vox Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *pirateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomPirateVoxCorpse
-
-- type: entity
-  parent: SalvageVoxCorpseSpawner
-  id: RandomScienceVoxCorpseSpawner
-  name: Random Science Vox Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *scientistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomScienceVoxCorpse
-
-- type: entity
-  parent: SalvageVoxCorpseSpawner
-  id: RandomSecurityVoxCorpseSpawner
-  name: Random Security Vox Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *securityOfficerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSecurityVoxCorpse
-
-- type: entity
-  parent: SalvageVoxCorpseSpawner
-  id: RandomServiceVoxCorpseSpawner
-  name: Random Service Vox Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *botanistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
     - MobRandomServiceVoxCorpse
-
-- type: entity
-  parent: SalvageVoxCorpseSpawner
-  id: RandomSyndicateVoxCorpseSpawner
-  name: Random Syndicate Vox Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *syndicateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSyndicateVoxCorpse
-
-# Vulpkanin
-
-- type: entity
-  parent: MarkerBase
-  id: SalvageVulpkaninCorpseSpawner
-  name: Vulpkanin Corpse Spawner
-  components:
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-    - state: green
-  - type: ConditionalSpawner
-    prototypes:
-    - SalvageVulpkaninCorpse
-
-- type: entity
-  parent: SalvageVulpkaninCorpseSpawner
-  id: RandomCargoVulpkaninCorpseSpawner
-  name: Random Cargo Vulpkanin Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *cargoTechSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCargoVulpkaninCorpse
-
-- type: entity
-  parent: SalvageVulpkaninCorpseSpawner
-  id: RandomCivilianVulpkaninCorpseSpawner
-  name: Random Civilian Vulpkanin Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCivilianVulpkaninCorpse
-
-- type: entity
-  parent: SalvageVulpkaninCorpseSpawner
-  id: RandomCommandVulpkaninCorpseSpawner
-  name: Random Command Vulpkanin Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *captainSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomCommandVulpkaninCorpse
-
-- type: entity
-  parent: SalvageVulpkaninCorpseSpawner
-  id: RandomEngineerVulpkaninCorpseSpawner
-  name: Random Engineer Vulpkanin Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *engineerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomEngineerVulpkaninCorpse
-
-- type: entity
-  parent: SalvageVulpkaninCorpseSpawner
-  id: RandomMedicVulpkaninCorpseSpawner
-  name: Random Medic Vulpkanin Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *doctorSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMedicVulpkaninCorpse
-
-- type: entity
-  parent: SalvageVulpkaninCorpseSpawner
-  id: RandomMercenaryVulpkaninCorpseSpawner
-  name: Random Mercenary Vulpkanin Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *mercSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomMercenaryVulpkaninCorpse
-
-- type: entity
-  parent: SalvageVulpkaninCorpseSpawner
-  id: RandomPirateVulpkaninCorpseSpawner
-  name: Random Pirate Vulpkanin Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *pirateSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomPirateVulpkaninCorpse
-
-- type: entity
-  parent: SalvageVulpkaninCorpseSpawner
-  id: RandomScienceVulpkaninCorpseSpawner
-  name: Random Science Vulpkanin Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *scientistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomScienceVulpkaninCorpse
-
-- type: entity
-  parent: SalvageVulpkaninCorpseSpawner
-  id: RandomSecurityVulpkaninCorpseSpawner
-  name: Random Security Vulpkanin Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *securityOfficerSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
-    - MobRandomSecurityVulpkaninCorpse
-
-- type: entity
-  parent: SalvageVulpkaninCorpseSpawner
-  id: RandomServiceVulpkaninCorpseSpawner
-  name: Random Service Vulpkanin Corpse Spawner
-  components:
-  - type: Sprite
-    layers: *botanistSpawnerLayers
-  - type: ConditionalSpawner
-    prototypes:
     - MobRandomServiceVulpkaninCorpse
 
 - type: entity
-  parent: SalvageVulpkaninCorpseSpawner
-  id: RandomSyndicateVulpkaninCorpseSpawner
-  name: Random Syndicate Vulpkanin Corpse Spawner
+  parent: SalvageRandomCorpseSpawner
+  id: SalvageRandomEngineerCorpseSpawner
+  name: Random Engineer Corpse Spawner
   components:
-  - type: Sprite
-    layers: *syndicateSpawnerLayers
   - type: ConditionalSpawner
     prototypes:
+    - MobRandomEngineerAbductorCorpse
+    - MobRandomEngineerArachnidCorpse
+    - MobRandomEngineerBananaMenCorpse
+    - MobRandomEngineerDecapoidCorpse
+    - MobRandomEngineerDionaCorpse
+    - MobRandomEngineerDwarfCorpse
+    - MobRandomEngineerHumanCorpse
+    - MobRandomEngineerIPCCorpse
+    - MobRandomEngineerMothCorpse
+    - MobRandomEngineerReptilianCorpse
+    - MobRandomEngineerSkeletonPersonCorpse
+    - MobRandomEngineerSlimePersonCorpse
+    - MobRandomEngineerVoxCorpse
+    - MobRandomEngineerVulpkaninCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: SalvageRandomCargoCorpseSpawner
+  name: Random Cargo Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCargoAbductorCorpse
+    - MobRandomCargoArachnidCorpse
+    - MobRandomCargoBananaMenCorpse
+    - MobRandomCargoDecapoidCorpse
+    - MobRandomCargoDionaCorpse
+    - MobRandomCargoDwarfCorpse
+    - MobRandomCargoHumanCorpse
+    - MobRandomCargoIPCCorpse
+    - MobRandomCargoMothCorpse
+    - MobRandomCargoReptilianCorpse
+    - MobRandomCargoSkeletonPersonCorpse
+    - MobRandomCargoSlimePersonCorpse
+    - MobRandomCargoVoxCorpse
+    - MobRandomCargoVulpkaninCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: SalvageRandomMedicCorpseSpawner
+  name: Random Medic Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMedicAbductorCorpse
+    - MobRandomMedicArachnidCorpse
+    - MobRandomMedicBananaMenCorpse
+    - MobRandomMedicDecapoidCorpse
+    - MobRandomMedicDionaCorpse
+    - MobRandomMedicDwarfCorpse
+    - MobRandomMedicHumanCorpse
+    - MobRandomMedicIPCCorpse
+    - MobRandomMedicMothCorpse
+    - MobRandomMedicReptilianCorpse
+    - MobRandomMedicSkeletonPersonCorpse
+    - MobRandomMedicSlimePersonCorpse
+    - MobRandomMedicVoxCorpse
+    - MobRandomMedicVulpkaninCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: SalvageRandomScienceCorpseSpawner
+  name: Random Science Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomScienceAbductorCorpse
+    - MobRandomScienceArachnidCorpse
+    - MobRandomScienceBananaMenCorpse
+    - MobRandomScienceDecapoidCorpse
+    - MobRandomScienceDionaCorpse
+    - MobRandomScienceDwarfCorpse
+    - MobRandomScienceHumanCorpse
+    - MobRandomScienceIPCCorpse
+    - MobRandomScienceMothCorpse
+    - MobRandomScienceReptilianCorpse
+    - MobRandomScienceSkeletonPersonCorpse
+    - MobRandomScienceSlimePersonCorpse
+    - MobRandomScienceVoxCorpse
+    - MobRandomScienceVulpkaninCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: SalvageRandomSecurityCorpseSpawner
+  name: Random Security Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSecurityAbductorCorpse
+    - MobRandomSecurityArachnidCorpse
+    - MobRandomSecurityBananaMenCorpse
+    - MobRandomSecurityDecapoidCorpse
+    - MobRandomSecurityDionaCorpse
+    - MobRandomSecurityDwarfCorpse
+    - MobRandomSecurityHumanCorpse
+    - MobRandomSecurityIPCCorpse
+    - MobRandomSecurityMothCorpse
+    - MobRandomSecurityReptilianCorpse
+    - MobRandomSecuritySkeletonPersonCorpse
+    - MobRandomSecuritySlimePersonCorpse
+    - MobRandomSecurityVoxCorpse
+    - MobRandomSecurityVulpkaninCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: SalvageRandomCommandCorpseSpawner
+  name: Random Command Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCommandAbductorCorpse
+    - MobRandomCommandArachnidCorpse
+    - MobRandomCommandBananaMenCorpse
+    - MobRandomCommandDecapoidCorpse
+    - MobRandomCommandDionaCorpse
+    - MobRandomCommandDwarfCorpse
+    - MobRandomCommandHumanCorpse
+    - MobRandomCommandIPCCorpse
+    - MobRandomCommandMothCorpse
+    - MobRandomCommandReptilianCorpse
+    - MobRandomCommandSkeletonPersonCorpse
+    - MobRandomCommandSlimePersonCorpse
+    - MobRandomCommandVoxCorpse
+    - MobRandomCommandVulpkaninCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: SalvageRandomCivilianCorpseSpawner
+  name: Random Civilian Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomCivilianAbductorCorpse
+    - MobRandomCivilianArachnidCorpse
+    - MobRandomCivilianBananaMenCorpse
+    - MobRandomCivilianDecapoidCorpse
+    - MobRandomCivilianDionaCorpse
+    - MobRandomCivilianDwarfCorpse
+    - MobRandomCivilianHumanCorpse
+    - MobRandomCivilianIPCCorpse
+    - MobRandomCivilianMothCorpse
+    - MobRandomCivilianReptilianCorpse
+    - MobRandomCivilianSkeletonPersonCorpse
+    - MobRandomCivilianSlimePersonCorpse
+    - MobRandomCivilianVoxCorpse
+    - MobRandomCivilianVulpkaninCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: SalvageRandomMercenaryCorpseSpawner
+  name: Random Mercenary Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomMercenaryAbductorCorpse
+    - MobRandomMercenaryArachnidCorpse
+    - MobRandomMercenaryBananaMenCorpse
+    - MobRandomMercenaryDecapoidCorpse
+    - MobRandomMercenaryDionaCorpse
+    - MobRandomMercenaryDwarfCorpse
+    - MobRandomMercenaryHumanCorpse
+    - MobRandomMercenaryIPCCorpse
+    - MobRandomMercenaryMothCorpse
+    - MobRandomMercenaryReptilianCorpse
+    - MobRandomMercenarySkeletonPersonCorpse
+    - MobRandomMercenarySlimePersonCorpse
+    - MobRandomMercenaryVoxCorpse
+    - MobRandomMercenaryVulpkaninCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: SalvageRandomPirateCorpseSpawner
+  name: Random Pirate Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomPirateAbductorCorpse
+    - MobRandomPirateArachnidCorpse
+    - MobRandomPirateBananaMenCorpse
+    - MobRandomPirateDecapoidCorpse
+    - MobRandomPirateDionaCorpse
+    - MobRandomPirateDwarfCorpse
+    - MobRandomPirateHumanCorpse
+    - MobRandomPirateIPCCorpse
+    - MobRandomPirateMothCorpse
+    - MobRandomPirateReptilianCorpse
+    - MobRandomPirateSkeletonPersonCorpse
+    - MobRandomPirateSlimePersonCorpse
+    - MobRandomPirateVoxCorpse
+    - MobRandomPirateVulpkaninCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: SalvageRandomSyndicateCorpseSpawner
+  name: Random Syndicate Corpse Spawner
+  components:
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomSyndicateAbductorCorpse
+    - MobRandomSyndicateArachnidCorpse
+    - MobRandomSyndicateBananaMenCorpse
+    - MobRandomSyndicateDecapoidCorpse
+    - MobRandomSyndicateDionaCorpse
+    - MobRandomSyndicateDwarfCorpse
+    - MobRandomSyndicateHumanCorpse
+    - MobRandomSyndicateIPCCorpse
+    - MobRandomSyndicateMothCorpse
+    - MobRandomSyndicateReptilianCorpse
+    - MobRandomSyndicateSkeletonPersonCorpse
+    - MobRandomSyndicateSlimePersonCorpse
+    - MobRandomSyndicateVoxCorpse
     - MobRandomSyndicateVulpkaninCorpse
+
+# Neosov
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomNeosovAbductorCorpseSpawner
+  name: Neosov Abductor Corpse Spawner
+  components:
+  - type: Sprite
+    layers: &neosovSpawnerLayers
+    - state: green
+    - sprite: _Trauma/Objects/Weapons/Guns/Shotguns/pump_action_shotgun.rsi
+      state: icon
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomNeosovAbductorCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomNeosovArachnidCorpseSpawner
+  name: Neosov Arachnid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomNeosovArachnidCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomNeosovBananaMenCorpseSpawner
+  name: Neosov BananaMen Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomNeosovBananaMenCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomNeosovDecapoidCorpseSpawner
+  name: Neosov Decapoid Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomNeosovDecapoidCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomNeosovDionaCorpseSpawner
+  name: Neosov Diona Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomNeosovDionaCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomNeosovDwarfCorpseSpawner
+  name: Neosov Dwarf Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomNeosovDwarfCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomNeosovHumanCorpseSpawner
+  name: Neosov Human Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomNeosovHumanCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomNeosovIPCCorpseSpawner
+  name: Neosov IPC Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomNeosovIPCCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomNeosovMothCorpseSpawner
+  name: Neosov Moth Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomNeosovMothCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomNeosovReptilianCorpseSpawner
+  name: Neosov Reptilian Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomNeosovReptilianCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomNeosovSkeletonPersonCorpseSpawner
+  name: Neosov Skeleton Person Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomNeosovSkeletonPersonCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomNeosovSlimePersonCorpseSpawner
+  name: Neosov Slime Person Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomNeosovSlimePersonCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomNeosovVoxCorpseSpawner
+  name: Neosov Vox Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomNeosovVoxCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: RandomNeosovVulpkaninCorpseSpawner
+  name: Neosov Vulpkanin Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomNeosovVulpkaninCorpse
+
+- type: entity
+  parent: SalvageRandomCorpseSpawner
+  id: SalvageRandomNeosovCorpseSpawner
+  name: Random Neosov Corpse Spawner
+  components:
+  - type: Sprite
+    layers: *neosovSpawnerLayers
+  - type: ConditionalSpawner
+    prototypes:
+    - MobRandomNeosovAbductorCorpse
+    - MobRandomNeosovArachnidCorpse
+    - MobRandomNeosovBananaMenCorpse
+    - MobRandomNeosovDecapoidCorpse
+    - MobRandomNeosovDionaCorpse
+    - MobRandomNeosovDwarfCorpse
+    - MobRandomNeosovHumanCorpse
+    - MobRandomNeosovIPCCorpse
+    - MobRandomNeosovMothCorpse
+    - MobRandomNeosovReptilianCorpse
+    - MobRandomNeosovSkeletonPersonCorpse
+    - MobRandomNeosovSlimePersonCorpse
+    - MobRandomNeosovVoxCorpse
+    - MobRandomNeosovVulpkaninCorpse

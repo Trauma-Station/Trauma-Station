@@ -78,3 +78,35 @@
   components:
   - type: BallisticAmmoProvider
     proto: ShellTranquilizer
+
+- type: entity
+  parent: [ BaseWeaponShotgun, BaseGunWieldable, BaseMajorContraband ]
+  id: WeaponShotgunPump
+  name: pump action shotgun
+  description: An actual shotgun, not just two pipes shoved together. Like the slam gun, this "reclaimed shotgun" is two-handed. Unlike the slam gun, it has an actual magazine capacity, instead of manually disassembling, reloading, and reassembling the gun.
+  components:
+  - type: Item
+    sprite: _Trauma/Objects/Weapons/Guns/Shotguns/pump_action_shotgun_64x.rsi
+  - type: Sprite
+    sprite: _Trauma/Objects/Weapons/Guns/Shotguns/pump_action_shotgun.rsi
+  - type: Clothing
+    sprite: _Trauma/Objects/Weapons/Guns/Shotguns/pump_action_shotgun.rsi
+  - type: GunRequiresWield
+  - type: Gun
+    fireRate: 1
+  - type: GunSpreadModifier
+    spread: 0.6
+  - type: Tag
+    tags:
+    - WeaponShotgunKammerer
+  - type: BallisticAmmoProvider
+    capacity: 4
+    autoCycle: false
+
+- type: entity
+  parent: WeaponShotgunPump
+  id: WeaponShotgunPumpEmpty
+  suffix: Empty
+  components:
+  - type: BallisticAmmoProvider
+    proto: null

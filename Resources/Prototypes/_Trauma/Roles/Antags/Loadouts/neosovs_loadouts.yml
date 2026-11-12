@@ -1,0 +1,1350 @@
+- type: randomLoadout
+  id: RandomLoadoutNeosov
+  weights:
+    NeosovScav: 2
+    NeosovRaider: 0.8
+    NeosovSniper: 0.4
+    NeosovBrawler: 0.8
+    NeosovCrusher: 0.4
+    NeosovHeavy: 0.3
+    NeosovSalvager: 0.4
+    NeosovRevolutionary: 0.4
+    NeosovLaser: 0.3
+    NeosovSyndicate: 0.3
+    NeosovSecurityDefector: 0.4
+    NeosovFieldMedic: 0.4
+    NeosovEngineer: 0.4
+    NeosovCourier: 0.3
+    NeosovExplorer: 0.4
+    NeosovDemolition: 0.2
+    NeosovPodWars: 0.1
+    NeosovGrabBag: 1.5
+    NeosovGrabBagHeavy: 0.5
+
+- type: loadoutArchetype
+  id: NeosovScav
+  slots:
+    head: { chance: 0.5, items: {
+      ClothingHeadHelmetScrap: 3,
+      ClothingHeadHelmetScavenger: 1,
+      ClothingHeadHatHardhatArmored: 1
+    } }
+    mask: { chance: 0.5, items: {
+      ClothingMaskBandGrey: 2,
+      ClothingMaskBandBrown: 2,
+      ClothingMaskBandBlack: 2,
+      ClothingMaskBandGreen: 1,
+      ClothingMaskNeckGaiter: 1,
+      ClothingMaskGasHalf: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitDisgusting: 2,
+      ClothingUniformJumpsuitAncient: 1,
+      ClothingUniformOveralls: 2,
+      ClothingUniformJumpsuitRancher: 1,
+      ClothingUniformJumpsuitFlannel: 2,
+      ClothingUniformJumpsuitLoungewear: 1,
+      ClothingUniformJumpsuitMilitaryColorGrey: 2,
+      ClothingUniformJumpsuitColorGrey: 2,
+      ClothingUniformJumpsuitColorBrown: 2,
+      ClothingUniformRandomShirt: 3,
+      ClothingUniformRandomShorts: 2
+    } }
+    outerClothing: { chance: 0.5, items: {
+      ClothingOuterArmorScrap: 3,
+      ClothingOuterVestWeb: 1,
+      ClothingOuterVestPress: 1
+    } }
+    back: { chance: 0.4, items: {
+      ClothingBackpack: 2,
+      ClothingBackpackSatchelLeather: 1
+    } }
+    shoes: { chance: 0.9, items: {
+      ClothingShoesBootsWork: 2,
+      ClothingShoesBootsJack: 2,
+      ClothingShoesBootsMerc: 1
+    } }
+    gloves: { chance: 0.45, items: {
+      ClothingHandsGlovesLeather: 2,
+      ClothingHandsGlovesColorBrown: 2,
+      ClothingHandsGlovesColorGray: 1,
+      ClothingHandsGlovesColorBlack: 1,
+      ClothingHandsGlovesColorLightBrown: 1,
+      ClothingHandsGlovesColorOrange: 0.5,
+      ClothingHandsGlovesColorGreen: 0.5
+    } }
+    belt: { chance: 0.3, items: {
+      ClothingBeltUtility: 1,
+      ClothingBeltBandolier: 1,
+      ClothingBeltShankerBelt: 1
+    } }
+    pocket1: { chance: 0.5, items: {
+      SurvivalKnife: 2,
+      KitchenKnife: 1
+    } }
+    pocket2: { chance: 0.15, items: {
+      WeaponRevolverPython: 1
+    } }
+    suitstorage: { chance: 0.6, items: {
+      BaseBallBat: 2,
+      BaseBallBatBarb: 1,
+      BaseBallBatNail: 2,
+      SwordScrap: 1,
+      SwordNail: 1,
+      WeaponShotgunHandmade: 1,
+      WeaponPistolFlintlock: 1,
+      WeaponMakeshiftLaser: 0.5
+    } }
+  hands:
+  - items:
+      BaseBallBat: 2
+      BaseBallBatBarb: 1
+      BaseBallBatNail: 2
+      SwordScrap: 1
+      SwordNail: 1
+      WeaponShotgunHandmade: 1
+      WeaponPistolFlintlock: 1
+      WeaponMakeshiftLaser: 0.5
+  - chance: 0.3
+    items:
+      SurvivalKnife: 1
+      KitchenKnife: 1
+
+- type: loadoutArchetype
+  id: NeosovRaider
+  slots:
+    head: { chance: 0.7, items: {
+      ClothingHeadHelmetBasic: 2,
+      ClothingHeadHelmetBasicAlt: 2,
+      ClothingHeadHelmetMerc: 2,
+      ClothingHeadHelmetRiot: 1,
+      ClothingHeadHelmetSwat: 1
+    } }
+    mask: { chance: 0.6, items: {
+      ClothingMaskGasMerc: 2,
+      ClothingMaskBandMerc: 2,
+      ClothingMaskBandBlack: 1,
+      ClothingMaskGas: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitMercenary: 3,
+      ClothingUniformJumpsuitMilitaryTurtleneckMercenary: 2,
+      ClothingUniformJumpsuitMilitaryTurtleneckBlueMercenary: 1,
+      ClothingUniformJumpsuitMilitaryColorBlack: 2,
+      ClothingUniformJumpsuitMilitaryColorDarkGreen: 2,
+      ClothingUniformJumpsuitMilitaryContractorTac: 2,
+      ClothingUniformJumpsuitTigerStripes: 1,
+      ClothingUniformJumpsuitOliveDrabs: 1
+    } }
+    outerClothing: { chance: 0.8, items: {
+      ClothingOuterArmorBasic: 3,
+      ClothingOuterArmorBulletproofBasicSlim: 2,
+      ClothingOuterVestWebMerc: 2,
+      ClothingOuterVestWebElite: 1,
+      ClothingOuterArmorRiot: 1,
+      ClothingOuterArmourDurathread: 1
+    } }
+    back: { chance: 0.5, items: {
+      ClothingBackpackMerc: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsMercFilled: 3,
+      ClothingShoesBootsCombatFilled: 2,
+      ClothingShoesBootsJackFilled: 1
+    } }
+    belt: { chance: 0.7, items: {
+      ClothingBeltMercWebbing: 3,
+      ClothingBeltMilitaryWebbing: 2,
+      ClothingBeltBandolier: 1,
+      ClothingBeltHolsterFilled: 1
+    } }
+    gloves: { chance: 0.6, items: {
+      ClothingHandsMercGlovesCombat: 2,
+      ClothingHandsGlovesColorBlack: 1,
+      ClothingHandsGlovesLeather: 1,
+      ClothingHandsGlovesColorGray: 1,
+      ClothingHandsGlovesColorGreen: 0.5
+    } }
+    suitstorage: { chance: 0.9, items: {
+      WeaponRifleAk: 3,
+      WeaponRifleFAL: 2,
+      WeaponRifleM90: 1,
+      WeaponSMGResistance: 2,
+      WeaponShotgunPump: 2,
+      WeaponShotgunDevastator: 0.3,
+      WeaponRifleLecter: 0.3,
+      WeaponLaserCarbine: 0.5,
+      WeaponLaserGunAssault: 0.3
+    } }
+    pocket1: { chance: 0.6, items: {
+      CombatKnife: 2,
+      KukriKnife: 1,
+      SurvivalKnife: 2
+    } }
+    pocket2: { chance: 0.3, items: {
+      WeaponPistolViper: 2,
+      WeaponPistolMk58: 1,
+      WeaponRevolverPython: 1,
+      WeaponRevolverPythonAP: 0.3
+    } }
+  hands:
+  - items:
+      WeaponRifleAk: 3
+      WeaponRifleFAL: 2
+      WeaponRifleM90: 1
+      WeaponSMGResistance: 2
+      WeaponShotgunPump: 2
+      WeaponShotgunDevastator: 0.3
+      WeaponRifleLecter: 0.3
+      WeaponLaserCarbine: 0.5
+      WeaponLaserGunAssault: 0.3
+
+- type: loadoutArchetype
+  id: NeosovSniper
+  slots:
+    head: { chance: 0.6, items: {
+      ClothingHeadHelmetBasic: 2,
+      ClothingHeadHelmetMerc: 1,
+      ClothingHeadHelmetScavenger: 1,
+      ClothingHeadHelmetSwat: 0.3
+    } }
+    mask: { chance: 0.7, items: {
+      ClothingMaskBandGreen: 2,
+      ClothingMaskBandBrown: 2,
+      ClothingMaskBandMerc: 1,
+      ClothingMaskNeckGaiter: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitTigerStripes: 3,
+      ClothingUniformJumpsuitOliveDrabs: 3,
+      ClothingUniformJumpsuitMilitaryColorDarkGreen: 2,
+      ClothingUniformJumpsuitMilitaryColorBrown: 2,
+      ClothingUniformJumpsuitSafari: 1
+    } }
+    outerClothing: { chance: 0.4, items: {
+      ClothingOuterVestWeb: 2,
+      ClothingOuterArmorBasic: 1
+    } }
+    back: { chance: 0.5, items: {
+      ClothingBackpackMerc: 1,
+      ClothingBackpack: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsMercFilled: 2,
+      ClothingShoesBootsJackFilled: 1
+    } }
+    gloves: { chance: 0.4, items: {
+      ClothingHandsGlovesLeather: 1,
+      ClothingHandsGlovesColorBrown: 1,
+      ClothingHandsGlovesColorGreen: 1,
+      ClothingHandsGlovesColorGray: 1,
+      ClothingHandsGlovesColorBlack: 1
+    } }
+    belt: { chance: 0.5, items: {
+      ClothingBeltMilitaryWebbing: 2,
+      ClothingBeltBandolier: 1
+    } }
+    suitstorage: { items: {
+      WeaponSniperMosin: 4,
+      WeaponRifleFAL: 1,
+      WeaponRifleM90: 1
+    } }
+    pocket1: { chance: 0.7, items: {
+      HandheldGPSBasic: 1,
+      SurvivalKnife: 1
+    } }
+    pocket2: { chance: 0.25, items: {
+      WeaponPistolViper: 1
+    } }
+  hands:
+  - items:
+      WeaponSniperMosin: 4
+      WeaponRifleFAL: 1
+      WeaponRifleM90: 1
+
+- type: loadoutArchetype
+  id: NeosovBrawler
+  slots:
+    head: { chance: 0.4, items: {
+      ClothingHeadHelmetRiot: 1,
+      ClothingHeadHelmetBasic: 2,
+      ClothingHeadHatHardhatArmored: 1,
+      ClothingHeadHelmetSwat: 0.5
+    } }
+    mask: { chance: 0.3, items: {
+      ClothingMaskBandBlack: 2,
+      ClothingMaskBandBrown: 1,
+      ClothingMaskNeckGaiterRed: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitColorBlack: 2,
+      ClothingUniformJumpsuitColorGrey: 2,
+      ClothingUniformJumpsuitMilitaryColorBlack: 2,
+      ClothingUniformJumpsuitMilitaryColorMaroon: 1,
+      ClothingUniformJumpsuitFlannel: 1,
+      ClothingUniformOveralls: 1,
+      ClothingUniformRandomShirt: 2
+    } }
+    outerClothing: { chance: 0.5, items: {
+      ClothingOuterArmorRiot: 1,
+      ClothingOuterArmorBasic: 2,
+      ClothingOuterArmorScrap: 2
+    } }
+    shoes: { items: {
+      ClothingShoesBootsWork: 2,
+      ClothingShoesBootsCombatFilled: 1,
+      ClothingShoesBootsJackFilled: 1
+    } }
+    gloves: { chance: 0.5, items: {
+      ClothingHandsGlovesLeather: 2,
+      ClothingHandsMercGlovesCombat: 1,
+      ClothingHandsGlovesColorBlack: 1,
+      ClothingHandsGlovesColorBrown: 1
+    } }
+    belt: { chance: 0.3, items: {
+      ClothingBeltShankerBelt: 1,
+      ClothingBeltUtility: 1
+    } }
+    suitstorage: { items: {
+      BaseBallBat: 2,
+      BaseBallBatBarb: 2,
+      BaseBallBatNail: 2,
+      FireAxe: 1,
+      FireAxeFlaming: 0.1,
+      Sledgehammer: 1,
+      ButchCleaver: 1,
+      SwordScrap: 1,
+      SwordNail: 1
+    } }
+    pocket1: { chance: 0.5, items: {
+      SurvivalKnife: 1,
+      KitchenKnife: 1,
+      CombatKnife: 1
+    } }
+  hands:
+  - items:
+      BaseBallBat: 2
+      BaseBallBatBarb: 2
+      BaseBallBatNail: 2
+      FireAxe: 1
+      FireAxeFlaming: 0.1
+      Sledgehammer: 1
+      ButchCleaver: 1
+      SwordScrap: 1
+      SwordNail: 1
+
+- type: loadoutArchetype
+  id: NeosovCrusher
+  slots:
+    head: { chance: 0.7, items: {
+      ClothingHeadHelmetScavenger: 2,
+      ClothingHeadHelmetScrap: 2,
+      ClothingHeadHelmetAncient: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitSalvageSpecialist: 3,
+      ClothingUniformJumpsuitMilitarySalvageSpecialist: 2,
+      ClothingUniformJumpsuitMilitaryColorBrown: 2,
+      ClothingUniformJumpsuitMilitaryColorLightBrown: 1,
+      ClothingUniformOveralls: 2
+    } }
+    outerClothing: { chance: 0.7, items: {
+      ClothingOuterArmorScrap: 2,
+      ClothingOuterVestWebDurathread: 1,
+      ClothingOuterArmorBasic: 1,
+      ClothingOuterVestPress: 1
+    } }
+    back: { chance: 0.4, items: {
+      ClothingBackpack: 1,
+      ClothingBackpackSatchelLeather: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsSalvage: 3,
+      ClothingShoesBootsWork: 1
+    } }
+    belt: { chance: 0.6, items: {
+      ClothingBeltSalvageWebbing: 1
+    } }
+    gloves: { chance: 0.5, items: {
+      ClothingHandsGlovesLeather: 2,
+      ClothingHandsGlovesColorBrown: 1,
+      ClothingHandsGlovesColorLightBrown: 1,
+      ClothingHandsGlovesColorGray: 1
+    } }
+    suitstorage: { items: {
+      WeaponCrusherDagger: 2,
+      WeaponCrusherGlaive: 1,
+      WeaponCrusherHalberd: 1,
+      WeaponCrusherHammer: 1
+    } }
+    pocket1: { chance: 0.4, items: {
+      SurvivalKnife: 1,
+      HandheldGPSBasic: 1
+    } }
+    pocket2: { chance: 0.2, items: {
+      WeaponRevolverPython: 1
+    } }
+  hands:
+  - items:
+      WeaponCrusherDagger: 2
+      WeaponCrusherGlaive: 1
+      WeaponCrusherHalberd: 1
+      WeaponCrusherHammer: 1
+
+- type: loadoutArchetype
+  id: NeosovHeavy
+  slots:
+    head: { chance: 0.6, items: {
+      ClothingHeadHelmetSwat: 2,
+      ClothingHeadHelmetMerc: 1,
+      ClothingHeadHelmetRiot: 1
+    } }
+    mask: { chance: 0.7, items: {
+      ClothingMaskGasMerc: 2,
+      ClothingMaskGasSwat: 1,
+      ClothingMaskGasSyndicate: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitMercenary: 3,
+      ClothingUniformJumpsuitMilitaryColorBlack: 2,
+      ClothingUniformJumpsuitMilitaryContractorTac: 2,
+      ClothingUniformJumpsuitTigerStripes: 1
+    } }
+    outerClothing: { items: {
+      ClothingOuterHardsuitCombatStandard: 2,
+      ClothingOuterHardsuitCombatRiot: 1,
+      ClothingOuterHardsuitCombatOfficer: 1,
+      ClothingOuterHardsuitCombatMedical: 0.5,
+      ClothingOuterVoidsuitSecurity: 1,
+      ClothingOuterHardsuitSpatio: 1
+    } }
+    back: { chance: 0.5, items: {
+      ClothingBackpackMerc: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsCombatFilled: 2,
+      ClothingShoesBootsMercFilled: 1
+    } }
+    belt: { chance: 0.6, items: {
+      ClothingBeltMilitaryWebbing: 2,
+      ClothingBeltMercWebbing: 2,
+      ClothingBeltBandolier: 1
+    } }
+    gloves: { chance: 0.6, items: {
+      ClothingHandsMercGlovesCombat: 2,
+      ClothingHandsGlovesColorBlack: 1,
+      ClothingHandsGlovesColorGray: 1
+    } }
+    suitstorage: { chance: 0.9, items: {
+      WeaponRifleAk: 2,
+      WeaponRifleFAL: 2,
+      WeaponRifleM90: 1,
+      WeaponSMGResistance: 1,
+      WeaponShotgunDevastator: 1,
+      WeaponLaserCarbine: 0.5,
+      WeaponLaserGunAssault: 0.5
+    } }
+    pocket1: { chance: 0.5, items: {
+      CombatKnife: 1,
+      KukriKnife: 1
+    } }
+    pocket2: { chance: 0.3, items: {
+      WeaponPistolMk58: 1,
+      WeaponPistolViper: 1,
+      WeaponRevolverPythonAP: 0.5
+    } }
+  hands:
+  - items:
+      WeaponRifleAk: 2
+      WeaponRifleFAL: 2
+      WeaponRifleM90: 1
+      WeaponSMGResistance: 1
+      WeaponShotgunDevastator: 1
+      WeaponLaserCarbine: 0.5
+      WeaponLaserGunAssault: 0.5
+
+- type: loadoutArchetype
+  id: NeosovSalvager
+  slots:
+    mask: { chance: 0.5, items: {
+      ClothingMaskGasExplorer: 2,
+      ClothingMaskBreath: 1,
+      ClothingMaskWeldingGas: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitSalvageSpecialist: 3,
+      ClothingUniformJumpsuitMilitarySalvageSpecialist: 2,
+      ClothingUniformJumpsuitCargo: 1,
+      ClothingUniformJumpsuitEngineeringHazard: 1,
+      ClothingUniformOveralls: 1
+    } }
+    outerClothing: { items: {
+      ClothingOuterHardsuitScavenger: 3,
+      ClothingOuterHardsuitSalvage: 2,
+      ClothingOuterHardsuitAncientEVA: 1,
+      ClothingOuterHardsuitSpatio: 1,
+      ClothingOuterHardsuitEngineering: 1
+    } }
+    back: { chance: 0.6, items: {
+      ClothingBackpack: 1,
+      ClothingBackpackSatchelLeather: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsSalvage: 3,
+      ClothingShoesBootsWork: 1
+    } }
+    gloves: { chance: 0.6, items: {
+      ClothingHandsGlovesLeather: 2,
+      ClothingHandsGlovesColorBrown: 1,
+      ClothingHandsGlovesColorLightBrown: 1,
+      ClothingHandsGlovesColorOrange: 1,
+      ClothingHandsGlovesColorGray: 1,
+      ClothingHandsGlovesColorBlack: 1
+    } }
+    belt: { chance: 0.6, items: {
+      ClothingBeltSalvageWebbing: 2,
+      ClothingBeltUtilityFilled: 1
+    } }
+    suitstorage: { chance: 0.8, items: {
+      WeaponCrusherDagger: 2,
+      WeaponCrusherGlaive: 1,
+      WeaponCrusherHammer: 1,
+      FireAxe: 1,
+      WeaponShotgunPump: 1,
+      WeaponLaserCarbine: 0.5,
+      WeaponMakeshiftLaser: 0.5,
+      WeaponLaserGunAntique: 0.3
+    } }
+    pocket1: { chance: 0.6, items: {
+      HandheldGPSBasic: 1,
+      SurvivalKnife: 1
+    } }
+    pocket2: { chance: 0.25, items: {
+      WeaponRevolverPython: 1,
+      WeaponRevolverPythonAP: 0.3
+    } }
+  hands:
+  - items:
+      WeaponCrusherDagger: 2
+      WeaponCrusherGlaive: 1
+      WeaponCrusherHammer: 1
+      FireAxe: 1
+      WeaponShotgunPump: 1
+      WeaponLaserCarbine: 0.5
+      WeaponMakeshiftLaser: 0.5
+      WeaponLaserGunAntique: 0.3
+
+- type: loadoutArchetype
+  id: NeosovRevolutionary
+  slots:
+    head: { chance: 0.7, items: {
+      ClothingHeadHelmetRev: 1
+    } }
+    mask: { chance: 0.7, items: {
+      ClothingMaskGasRev: 1,
+      ClothingMaskBandRev: 2
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitMilitaryTurtleneckRev: 4,
+      ClothingUniformJumpsuitMilitaryColorMaroon: 1,
+      ClothingUniformJumpsuitMilitaryColorRed: 1
+    } }
+    outerClothing: { chance: 0.8, items: {
+      ClothingOuterArmorRev: 3,
+      ClothingOuterVestReflectRev: 1
+    } }
+    back: { chance: 0.4, items: {
+      ClothingBackpackMerc: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsRev: 2,
+      ClothingShoesBootsRevSteel: 1
+    } }
+    belt: { chance: 0.7, items: {
+      ClothingBeltRevWebbing: 1
+    } }
+    gloves: { chance: 0.4, items: {
+      ClothingHandsMercGlovesCombat: 2,
+      ClothingHandsGlovesColorBlack: 1,
+      ClothingHandsGlovesColorGray: 1,
+      ClothingHandsGlovesColorBrown: 1
+    } }
+    suitstorage: { chance: 0.8, items: {
+      RevSword: 1,
+      WeaponRifleAk: 2,
+      WeaponSMGResistance: 2,
+      WeaponShotgunPump: 1,
+      WeaponLaserCarbine: 0.5
+    } }
+    pocket1: { chance: 0.7, items: {
+      RevKnife: 1
+    } }
+    pocket2: { chance: 0.3, items: {
+      WeaponRevolverDeckard: 1,
+      WeaponRevolverInspector: 1,
+      WeaponRevolverPython: 1
+    } }
+  hands:
+  - items:
+      RevSword: 1
+      WeaponRifleAk: 2
+      WeaponSMGResistance: 2
+      WeaponShotgunPump: 1
+      WeaponLaserCarbine: 0.5
+
+- type: loadoutArchetype
+  id: NeosovLaser
+  slots:
+    head: { chance: 0.6, items: {
+      ClothingHeadHelmetBasic: 1,
+      ClothingHeadHelmetBasicAlt: 1,
+      ClothingHeadHelmetSwat: 0.5
+    } }
+    mask: { chance: 0.4, items: {
+      ClothingMaskGasMerc: 1,
+      ClothingMaskBandMerc: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitMercenary: 2,
+      ClothingUniformJumpsuitMilitaryColorBlack: 2,
+      ClothingUniformJumpsuitMilitaryColorBlue: 1,
+      ClothingUniformJumpsuitMilitaryContractorTac: 2
+    } }
+    outerClothing: { chance: 0.8, items: {
+      ClothingOuterArmorReflective: 3,
+      ClothingOuterVestWebMerc: 1,
+      ClothingOuterArmorBasic: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsMercFilled: 1,
+      ClothingShoesBootsCombatFilled: 1
+    } }
+    gloves: { chance: 0.4, items: {
+      ClothingHandsMercGlovesCombat: 1,
+      ClothingHandsGlovesColorBlack: 1,
+      ClothingHandsGlovesColorGray: 1
+    } }
+    belt: { chance: 0.5, items: {
+      ClothingBeltMilitaryWebbing: 1,
+      ClothingBeltHolsterFilled: 1
+    } }
+    suitstorage: { items: {
+      WeaponLaserCarbine: 3,
+      WeaponLaserGunAssault: 2,
+      WeaponLaserGunAntique: 1,
+      WeaponMakeshiftLaser: 2,
+      WeaponLaserSvalinn: 0.4
+    } }
+  hands:
+  - items:
+      WeaponLaserCarbine: 3
+      WeaponLaserGunAssault: 2
+      WeaponLaserGunAntique: 1
+      WeaponMakeshiftLaser: 2
+      WeaponLaserSvalinn: 0.4
+
+- type: loadoutArchetype
+  id: NeosovSyndicate
+  slots:
+    head: { chance: 0.6, items: {
+      ClothingHeadHelmetSwatSyndicate: 1
+    } }
+    mask: { chance: 0.6, items: {
+      ClothingMaskGasSyndicate: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitOperative: 2,
+      ClothingUniformJumpsuitPyjamaSyndicateBlack: 2,
+      ClothingUniformJumpsuitPyjamaSyndicateRed: 1,
+      ClothingUniformJumpsuitPyjamaSyndicatePink: 1
+    } }
+    outerClothing: { chance: 0.6, items: {
+      ClothingOuterCoatSyndieCapArmored: 2,
+      ClothingOuterWinterCoatSyndieCapArmored: 1,
+      ClothingOuterArmorBulletproofBasicSlim: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsSyndieFilled: 3,
+      ClothingShoesBootsWinterSyndicate: 1,
+      ClothingShoesBootsMagSyndie: 0.2
+    } }
+    belt: { chance: 0.5, items: {
+      ClothingBeltMilitaryWebbing: 1,
+      ClothingBeltHolsterFilled: 1
+    } }
+    gloves: { chance: 0.4, items: {
+      ClothingHandsMercGlovesCombat: 2,
+      ClothingHandsGlovesColorBlack: 1,
+      ClothingHandsGlovesColorGray: 1
+    } }
+    suitstorage: { chance: 0.8, items: {
+      WeaponSMGResistance: 2,
+      WeaponRifleM90: 1,
+      WeaponShotgunPump: 1,
+      WeaponLauncherRocketDisposableThermobaric: 0.1,
+      WeaponLaserGunAssault: 0.4
+    } }
+    pocket1: { chance: 0.5, items: {
+      CombatKnife: 1
+    } }
+    pocket2: { chance: 0.5, items: {
+      WeaponPistolMk58: 1,
+      WeaponRevolverPythonAP: 0.4
+    } }
+  hands:
+  - items:
+      WeaponSMGResistance: 2
+      WeaponRifleM90: 1
+      WeaponShotgunPump: 1
+      WeaponLauncherRocketDisposableThermobaric: 0.2
+      WeaponLaserGunAssault: 0.4
+
+- type: loadoutArchetype
+  id: NeosovSecurityDefector
+  slots:
+    head: { chance: 0.6, items: {
+      ClothingHeadHelmetBasic: 2,
+      ClothingHeadHelmetRiot: 1,
+      ClothingHeadHelmetBasicAlt: 1,
+      ClothingHeadHelmetSwat: 1
+    } }
+    mask: { chance: 0.4, items: {
+      ClothingMaskGasSecurity: 2,
+      ClothingMaskBreathMedicalSecurity: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitSec: 3,
+      ClothingUniformJumpsuitSecGrey: 3,
+      ClothingUniformJumpsuitBrigmedic: 1
+    } }
+    outerClothing: { chance: 0.7, items: {
+      ClothingOuterArmorBasic: 2,
+      ClothingOuterArmorRiot: 1,
+      ClothingOuterArmourDurathread: 1,
+      ClothingOuterVestWebDurathread: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsCombatFilled: 2,
+      ClothingShoesBootsWinterSecFilled: 1
+    } }
+    gloves: { chance: 0.5, items: {
+      ClothingHandsMercGlovesCombat: 2,
+      ClothingHandsGlovesColorBlack: 1,
+      ClothingHandsGlovesColorGray: 1,
+      ClothingHandsGlovesColorBrown: 1
+    } }
+    belt: { chance: 0.7, items: {
+      ClothingBeltSecurityFilled: 2,
+      ClothingBeltSecurityWebbingFilled: 2,
+      ClothingBeltSecurity: 1
+    } }
+    suitstorage: { chance: 0.6, items: {
+      WeaponShotgunPump: 2,
+      WeaponSMGResistance: 1,
+      WeaponRifleFAL: 1,
+      WeaponLaserCarbine: 0.5
+    } }
+    pocket1: { chance: 0.5, items: {
+      CombatKnife: 1,
+      SurvivalKnife: 1
+    } }
+    pocket2: { chance: 0.4, items: {
+      WeaponPistolMk58: 2,
+      WeaponPistolViper: 1,
+      WeaponRevolverPython: 1,
+      WeaponRevolverPythonAP: 0.3
+    } }
+  hands:
+  - items:
+      WeaponShotgunPump: 2
+      WeaponSMGResistance: 1
+      WeaponRifleFAL: 1
+      WeaponLaserCarbine: 0.5
+
+- type: loadoutArchetype
+  id: NeosovFieldMedic
+  slots:
+    head: { chance: 0.4, items: {
+      ClothingHeadHelmetMerc: 1,
+      ClothingHeadHelmetBasic: 1
+    } }
+    mask: { chance: 0.4, items: {
+      ClothingMaskBreathMedicalSecurity: 1,
+      ClothingMaskBreath: 1,
+      ClothingMaskBandBlue: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitMilitaryMedicalDoctor: 2,
+      ClothingUniformJumpsuitMilitaryParamedic: 2,
+      ClothingUniformJumpsuitMedicalDoctor: 2,
+      ClothingUniformJumpsuitParamedic: 2,
+      ClothingUniformJumpsuitMilitaryTurtleneckMercenaryMedic: 2,
+      ClothingUniformJumpsuitMilitaryTurtleneckBlueMercenaryMedic: 1
+    } }
+    outerClothing: { chance: 0.5, items: {
+      ClothingOuterVestWebMerc: 2,
+      ClothingOuterArmorBasic: 1,
+      ClothingOuterHardsuitVoidParamed: 0.4,
+      ClothingOuterHardsuitCombatMedical: 0.3,
+      ClothingOuterVestPress: 2
+    } }
+    back: { chance: 0.6, items: {
+      ClothingBackpackMerc: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsMercFilled: 2,
+      ClothingShoesBootsWinterMed: 1
+    } }
+    belt: { chance: 0.8, items: {
+      ClothingBeltMedicalEMTFilled: 2,
+      ClothingBeltMedicalFilled: 2,
+      ClothingBeltMercWebbing: 1
+    } }
+    gloves: { chance: 0.6, items: {
+      ClothingHandsGlovesNitrile: 3,
+      ClothingHandsGlovesColorBlue: 1,
+      ClothingHandsGlovesColorGray: 1,
+      ClothingHandsGlovesColorBlack: 1
+    } }
+    pocket1: { chance: 0.7, items: {
+      Gauze: 1,
+      Brutepack: 1,
+      Ointment: 1
+    } }
+    pocket2: { chance: 0.4, items: {
+      WeaponPistolViper: 1,
+      SurvivalKnife: 1,
+      WeaponRevolverPython: 0.7,
+      WeaponRevolverPythonAP: 0.3
+    } }
+  hands:
+  - items:
+      WeaponPistolViper: 2
+      WeaponPistolMk58: 1
+      SurvivalKnife: 1
+      WeaponRevolverPython: 0.7
+      WeaponRevolverPythonAP: 0.3
+
+- type: loadoutArchetype
+  id: NeosovEngineer
+  slots:
+    head: { chance: 0.6, items: {
+      ClothingHeadHatHardhatArmored: 2,
+      ClothingHeadHelmetBombSuit: 0.2
+    } }
+    mask: { chance: 0.4, items: {
+      ClothingMaskWeldingGas: 2,
+      ClothingMaskGasAtmos: 1,
+      ClothingMaskBreath: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitEngineering: 2,
+      ClothingUniformJumpsuitEngineeringHazard: 2,
+      ClothingUniformJumpsuitAtmos: 1,
+      ClothingUniformJumpsuitAtmosCasual: 1,
+      ClothingUniformJumpsuitMilitaryEngineering: 2,
+      ClothingUniformJumpsuitMilitaryAtmospherics: 1,
+      ClothingUniformOveralls: 1
+    } }
+    outerClothing: { chance: 0.4, items: {
+      ClothingOuterHardsuitEngineering: 1,
+      ClothingOuterHardsuitAtmos: 1,
+      ClothingOuterVestWeb: 2,
+      ClothingOuterVestPress: 1
+    } }
+    back: { chance: 0.5, items: {
+      ClothingBackpack: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsWork: 3,
+      ClothingShoesBootsWinterEngi: 1
+    } }
+    gloves: { chance: 0.85, items: {
+      ClothingHandsGlovesColorYellow: 6,
+      ClothingHandsGlovesColorYellowBudget: 2,
+      ClothingHandsGlovesLeather: 1,
+      ClothingHandsGlovesColorOrange: 1,
+      ClothingHandsGlovesColorBrown: 1
+    } }
+    belt: { chance: 0.8, items: {
+      ClothingBeltUtilityFilled: 2,
+      ClothingBeltUtilityEngineering: 1,
+      ClothingBeltUtility: 1
+    } }
+    suitstorage: { chance: 0.4, items: {
+      Sledgehammer: 1,
+      FireAxe: 1,
+      WeaponShotgunPump: 1,
+      WeaponMakeshiftLaser: 0.5
+    } }
+    pocket1: { chance: 0.4, items: {
+      SurvivalKnife: 1
+    } }
+    pocket2: { chance: 0.25, items: {
+      WeaponRevolverPython: 1,
+      WeaponRevolverPythonAP: 0.3
+    } }
+  hands:
+  - items:
+      Sledgehammer: 1
+      FireAxe: 1
+      WeaponShotgunPump: 1
+      WeaponMakeshiftLaser: 0.5
+
+- type: loadoutArchetype
+  id: NeosovCourier
+  slots:
+    mask: { chance: 0.8, items: {
+      ClothingMaskCourier: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformCourier: 5,
+      ClothingUniformJumpsuitMilitaryColorBrown: 1,
+      ClothingUniformJumpsuitColorBrown: 1
+    } }
+    outerClothing: { chance: 0.4, items: {
+      ClothingOuterVestPress: 1
+    } }
+    back: { chance: 0.9, items: {
+      ClothingBackpackSatchelLeather: 2,
+      ClothingBackpack: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsJackFilled: 2,
+      ClothingShoesBootsWork: 1
+    } }
+    gloves: { chance: 0.3, items: {
+      ClothingHandsGlovesLeather: 1,
+      ClothingHandsGlovesColorBrown: 1,
+      ClothingHandsGlovesColorGray: 1,
+      ClothingHandsGlovesColorLightBrown: 1
+    } }
+    belt: { chance: 0.4, items: {
+      ClothingBeltUtility: 1,
+      ClothingBeltBandolier: 1
+    } }
+    pocket1: { chance: 0.5, items: {
+      HandheldGPSBasic: 1
+    } }
+    pocket2: { chance: 0.3, items: {
+      WeaponPistolViper: 1,
+      SurvivalKnife: 1,
+      WeaponRevolverPython: 0.7,
+      WeaponRevolverPythonAP: 0.3
+    } }
+  hands:
+  - items:
+      WeaponPistolViper: 2
+      WeaponPistolMk58: 1
+      SurvivalKnife: 1
+      WeaponRevolverPython: 0.7
+      WeaponRevolverPythonAP: 0.3
+
+- type: loadoutArchetype
+  id: NeosovExplorer
+  slots:
+    head: { chance: 0.3, items: {
+      ClothingHeadHelmetScavenger: 1,
+      ClothingHeadHatHardhatArmored: 1
+    } }
+    mask: { chance: 0.5, items: {
+      ClothingMaskGasExplorer: 3,
+      ClothingMaskBreath: 1,
+      ClothingMaskNeckGaiter: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitSafari: 3,
+      ClothingUniformJumpsuitMilitaryColorBrown: 2,
+      ClothingUniformJumpsuitMilitaryColorLightBrown: 2,
+      ClothingUniformJumpsuitFlannel: 1,
+      ClothingUniformJumpsuitColorLightBrown: 1
+    } }
+    outerClothing: { chance: 0.5, items: {
+      ClothingOuterVestWeb: 2,
+      ClothingOuterHardsuitSpatio: 0.3,
+      ClothingOuterHardsuitAncientEVA: 0.2,
+      ClothingOuterVestPress: 2
+    } }
+    back: { chance: 0.8, items: {
+      ClothingBackpack: 1,
+      ClothingBackpackSatchelLeather: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsSalvage: 2,
+      ClothingShoesBootsWork: 1,
+      ClothingShoesBootsCowboyBrownFilled: 1
+    } }
+    gloves: { chance: 0.5, items: {
+      ClothingHandsGlovesLeather: 2,
+      ClothingHandsGlovesColorBrown: 1,
+      ClothingHandsGlovesColorLightBrown: 1,
+      ClothingHandsGlovesColorGreen: 1,
+      ClothingHandsGlovesColorGray: 1
+    } }
+    belt: { chance: 0.5, items: {
+      ClothingBeltSalvageWebbing: 1,
+      ClothingBeltUtility: 1
+    } }
+    suitstorage: { chance: 0.5, items: {
+      WeaponShotgunPump: 2,
+      WeaponPistolFlintlock: 1,
+      WeaponRevolverDeckard: 1,
+      WeaponLaserGunAntique: 0.4,
+      WeaponRevolverPython: 1,
+      WeaponRevolverPythonAP: 0.4
+    } }
+    pocket1: { chance: 0.8, items: {
+      HandheldGPSBasic: 1,
+      SurvivalKnife: 1
+    } }
+  hands:
+  - items:
+      WeaponShotgunPump: 2
+      WeaponPistolFlintlock: 1
+      WeaponRevolverDeckard: 1
+      WeaponLaserGunAntique: 0.4
+      WeaponRevolverPython: 1
+      WeaponRevolverPythonAP: 0.4
+
+- type: loadoutArchetype
+  id: NeosovDemolition
+  slots:
+    head: { chance: 0.7, items: {
+      ClothingHeadHelmetBombSuit: 3,
+      ClothingHeadHelmetRiot: 1,
+      ClothingHeadHelmetSwat: 0.5
+    } }
+    mask: { chance: 0.4, items: {
+      ClothingMaskGasMerc: 1,
+      ClothingMaskGas: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitMercenary: 2,
+      ClothingUniformJumpsuitMilitaryColorBlack: 2,
+      ClothingUniformJumpsuitMilitaryColorDarkGreen: 1
+    } }
+    outerClothing: { chance: 0.7, items: {
+      ClothingOuterArmorRiot: 1,
+      ClothingOuterArmorBulletproofBasicSlim: 1,
+      ClothingOuterVestWebElite: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsCombatFilled: 1,
+      ClothingShoesBootsMercFilled: 1
+    } }
+    gloves: { chance: 0.5, items: {
+      ClothingHandsMercGlovesCombat: 2,
+      ClothingHandsGlovesColorBlack: 1,
+      ClothingHandsGlovesColorGray: 1,
+      ClothingHandsGlovesLeather: 1
+    } }
+    belt: { chance: 0.8, items: {
+      ClothingBeltBandolier: 2,
+      ClothingBeltMilitaryWebbing: 1
+    } }
+    suitstorage: { items: {
+      Sledgehammer: 2,
+      WeaponLauncherRocketDisposableThermobaric: 1,
+      WeaponShotgunDevastator: 1
+    } }
+    pocket1: { chance: 0.5, items: {
+      CombatKnife: 1
+    } }
+  hands:
+  - items:
+      Sledgehammer: 2
+      WeaponLauncherRocketDisposableThermobaric: 1
+      WeaponShotgunDevastator: 1
+
+- type: loadoutArchetype
+  id: NeosovPodWars
+  slots:
+    head: { chance: 0.9, items: {
+      ClothingHeadHelmetPodWars: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitMercenary: 1,
+      ClothingUniformJumpsuitMilitaryColorBlack: 1,
+      ClothingUniformJumpsuitColorBlack: 1
+    } }
+    outerClothing: { chance: 0.9, items: {
+      ClothingOuterArmorPodWars: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsCombatFilled: 1,
+      ClothingShoesBootsJackFilled: 1
+    } }
+    gloves: { chance: 0.4, items: {
+      ClothingHandsMercGlovesCombat: 1,
+      ClothingHandsGlovesColorBlack: 1,
+      ClothingHandsGlovesColorGray: 1
+    } }
+    belt: { chance: 0.4, items: {
+      ClothingBeltMilitaryWebbing: 1
+    } }
+    suitstorage: { chance: 0.7, items: {
+      WeaponRifleM90: 1,
+      WeaponRifleFAL: 1,
+      WeaponSMGResistance: 1,
+      WeaponLaserGunAssault: 0.5
+    } }
+    pocket1: { chance: 0.4, items: {
+      SurvivalKnife: 1
+    } }
+  hands:
+  - items:
+      WeaponRifleM90: 1
+      WeaponRifleFAL: 1
+      WeaponSMGResistance: 1
+      WeaponLaserGunAssault: 0.5
+
+- type: loadoutArchetype
+  id: NeosovGrabBag
+  slots:
+    head: { chance: 0.3, items: {
+      ClothingHeadHelmetScrap: 2,
+      ClothingHeadHelmetScavenger: 1,
+      ClothingHeadHelmetBasic: 1,
+      ClothingHeadHelmetMerc: 1,
+      ClothingHeadHelmetRev: 0.5,
+      ClothingHeadHelmetRiot: 0.5,
+      ClothingHeadHatHardhatArmored: 1,
+      ClothingHeadHelmetAncient: 0.3,
+      ClothingHeadHelmetSwat: 0.5
+    } }
+    mask: { chance: 0.3, items: {
+      ClothingMaskBandGrey: 1,
+      ClothingMaskBandBlack: 1,
+      ClothingMaskBandGreen: 1,
+      ClothingMaskBandMerc: 1,
+      ClothingMaskGasHalf: 1,
+      ClothingMaskGasMerc: 1,
+      ClothingMaskGasExplorer: 1,
+      ClothingMaskNeckGaiter: 1,
+      ClothingMaskPig: 0.1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitMercenary: 2,
+      ClothingUniformJumpsuitOliveDrabs: 1,
+      ClothingUniformJumpsuitTigerStripes: 1,
+      ClothingUniformJumpsuitMilitaryColorGrey: 2,
+      ClothingUniformJumpsuitMilitaryColorBlack: 2,
+      ClothingUniformJumpsuitColorGrey: 2,
+      ClothingUniformJumpsuitDisgusting: 1,
+      ClothingUniformOveralls: 1,
+      ClothingUniformJumpsuitFlannel: 1,
+      ClothingUniformJumpsuitSec: 0.5,
+      ClothingUniformJumpsuitEngineering: 0.5,
+      ClothingUniformJumpsuitMedicalDoctor: 0.5,
+      ClothingUniformJumpsuitScientist: 0.5,
+      ClothingUniformJumpsuitCargo: 0.5,
+      ClothingUniformJumpsuitOperative: 0.1,
+      ClothingUniformJumpsuitPrisoner: 0.2,
+      ClothingUniformRandomShirt: 3,
+      ClothingUniformRandomShorts: 2
+    } }
+    outerClothing: { chance: 0.3, items: {
+      ClothingOuterArmorScrap: 2,
+      ClothingOuterArmorBasic: 2,
+      ClothingOuterVestWeb: 2,
+      ClothingOuterVestWebMerc: 1,
+      ClothingOuterVestPress: 2,
+      ClothingOuterArmorRiot: 0.5,
+      ClothingOuterArmorRev: 0.5
+    } }
+    back: { chance: 0.4, items: {
+      ClothingBackpack: 2,
+      ClothingBackpackSatchelLeather: 1,
+      ClothingBackpackMerc: 1
+    } }
+    shoes: { chance: 0.8, items: {
+      ClothingShoesBootsWork: 2,
+      ClothingShoesBootsJack: 1,
+      ClothingShoesBootsMercFilled: 2,
+      ClothingShoesBootsCombatFilled: 1,
+      ClothingShoesBootsSalvage: 1,
+      ClothingShoesBootsCowboyBrownFilled: 0.3
+    } }
+    belt: { chance: 0.3, items: {
+      ClothingBeltMercWebbing: 1,
+      ClothingBeltBandolier: 1,
+      ClothingBeltUtility: 1,
+      ClothingBeltShankerBelt: 1,
+      ClothingBeltHolsterFilled: 1,
+      ClothingBeltMedicalFilled: 0.5,
+      ClothingBeltSecurityFilled: 0.5
+    } }
+    gloves: { chance: 0.3, items: {
+      ClothingHandsGlovesLeather: 2,
+      ClothingHandsMercGlovesCombat: 1,
+      ClothingHandsGlovesNitrile: 1,
+      ClothingHandsGlovesColorBrown: 1,
+      ClothingHandsGlovesColorGray: 1,
+      ClothingHandsGlovesColorBlack: 1,
+      ClothingHandsGlovesColorLightBrown: 1,
+      ClothingHandsGlovesColorGreen: 0.5
+    } }
+    suitstorage: { chance: 0.5, items: {
+      BaseBallBat: 2,
+      BaseBallBatBarb: 1,
+      BaseBallBatNail: 1,
+      FireAxe: 1,
+      Sledgehammer: 1,
+      SwordScrap: 1,
+      WeaponShotgunHandmade: 1,
+      WeaponPistolFlintlock: 1,
+      WeaponShotgunPump: 1,
+      WeaponRifleAk: 1,
+      WeaponRifleFAL: 0.5,
+      WeaponSniperMosin: 0.5,
+      WeaponSMGResistance: 0.5,
+      WeaponMakeshiftLaser: 0.5,
+      WeaponLaserCarbine: 0.3,
+      WeaponCrusherDagger: 0.5,
+      WeaponLaserGunAssault: 0.3,
+      WeaponLaserGunAntique: 0.3
+    } }
+    pocket1: { chance: 0.5, items: {
+      SurvivalKnife: 2,
+      KitchenKnife: 1,
+      CombatKnife: 1,
+      KukriKnife: 1,
+      RevKnife: 0.5,
+      HandheldGPSBasic: 1,
+      Lighter: 1,
+      Gauze: 1
+    } }
+    pocket2: { chance: 0.2, items: {
+      WeaponPistolViper: 2,
+      WeaponPistolMk58: 1,
+      WeaponRevolverDeckard: 1,
+      WeaponRevolverPirate: 1,
+      WeaponRevolverPython: 1,
+      FoodSnackChips: 1,
+      RadioHandheld: 1,
+      WeaponRevolverPythonAP: 0.5
+    } }
+  hands:
+  - items:
+      BaseBallBat: 2
+      BaseBallBatBarb: 1
+      BaseBallBatNail: 1
+      FireAxe: 1
+      Sledgehammer: 1
+      SwordScrap: 1
+      WeaponShotgunHandmade: 1
+      WeaponPistolFlintlock: 1
+      WeaponShotgunPump: 1
+      WeaponRifleAk: 1
+      WeaponRifleFAL: 0.5
+      WeaponSniperMosin: 0.5
+      WeaponSMGResistance: 0.5
+      WeaponMakeshiftLaser: 0.5
+      WeaponLaserCarbine: 0.3
+      WeaponCrusherDagger: 0.5
+      WeaponLaserGunAssault: 0.3
+      WeaponLaserGunAntique: 0.3
+
+- type: loadoutArchetype
+  id: NeosovGrabBagHeavy
+  slots:
+    head: { chance: 0.5, items: {
+      ClothingHeadHelmetSwat: 2,
+      ClothingHeadHelmetMerc: 1,
+      ClothingHeadHelmetRiot: 1
+    } }
+    mask: { chance: 0.5, items: {
+      ClothingMaskGasMerc: 2,
+      ClothingMaskGasSwat: 1,
+      ClothingMaskGasSecurity: 1,
+      ClothingMaskGasSyndicate: 0.5,
+      ClothingMaskBandMerc: 1
+    } }
+    jumpsuit: { items: {
+      ClothingUniformJumpsuitMercenary: 3,
+      ClothingUniformJumpsuitMilitaryColorBlack: 2,
+      ClothingUniformJumpsuitMilitaryContractorTac: 2,
+      ClothingUniformJumpsuitTigerStripes: 1,
+      ClothingUniformJumpsuitMilitaryTurtleneckMercenary: 1,
+      ClothingUniformJumpsuitSec: 0.5,
+      ClothingUniformJumpsuitOperative: 0.3
+    } }
+    outerClothing: { items: {
+      ClothingOuterHardsuitCombatStandard: 1,
+      ClothingOuterHardsuitCombatRiot: 0.5,
+      ClothingOuterHardsuitCombatOfficer: 0.5,
+      ClothingOuterHardsuitSalvage: 1,
+      ClothingOuterHardsuitScavenger: 1,
+      ClothingOuterHardsuitSpatio: 1,
+      ClothingOuterHardsuitEngineering: 0.5,
+      ClothingOuterHardsuitAtmos: 0.5,
+      ClothingOuterVoidsuitSecurity: 0.5,
+      GoobClothingOuterHardsuitSpirate: 0.3,
+      ClothingOuterArmorBasic: 2,
+      ClothingOuterArmorBulletproofBasicSlim: 1,
+      ClothingOuterArmorRiot: 1,
+      ClothingOuterVestWebElite: 1,
+      ClothingOuterArmourDurathread: 1
+    } }
+    back: { chance: 0.5, items: {
+      ClothingBackpackMerc: 1,
+      ClothingBackpack: 1
+    } }
+    shoes: { items: {
+      ClothingShoesBootsCombatFilled: 2,
+      ClothingShoesBootsMercFilled: 2,
+      ClothingShoesBootsSyndieFilled: 0.3
+    } }
+    belt: { chance: 0.6, items: {
+      ClothingBeltMilitaryWebbing: 2,
+      ClothingBeltMercWebbing: 2,
+      ClothingBeltBandolier: 1,
+      ClothingBeltSecurityWebbingFilled: 1
+    } }
+    gloves: { chance: 0.5, items: {
+      ClothingHandsMercGlovesCombat: 2,
+      ClothingHandsGlovesColorBlack: 1,
+      ClothingHandsGlovesColorGray: 1
+    } }
+    suitstorage: { chance: 0.9, items: {
+      WeaponRifleAk: 2,
+      WeaponRifleFAL: 2,
+      WeaponRifleM90: 1,
+      WeaponSMGResistance: 2,
+      WeaponShotgunPump: 1,
+      WeaponShotgunDevastator: 0.5,
+      WeaponLaserCarbine: 1,
+      WeaponLaserGunAssault: 0.5,
+      WeaponSniperMosin: 0.5,
+      WeaponLauncherRocketDisposableThermobaric: 0.2,
+      Sledgehammer: 0.5,
+      FireAxe: 0.5,
+      WeaponCrusherHalberd: 0.3
+    } }
+    pocket1: { chance: 0.6, items: {
+      CombatKnife: 2,
+      KukriKnife: 1,
+      RevKnife: 0.3
+    } }
+    pocket2: { chance: 0.4, items: {
+      WeaponPistolMk58: 2,
+      WeaponPistolViper: 1,
+      WeaponRevolverDeckard: 1,
+      WeaponRevolverPythonAP: 0.6,
+      WeaponRevolverPython: 1
+    } }
+  hands:
+  - items:
+      WeaponRifleAk: 2
+      WeaponRifleFAL: 2
+      WeaponRifleM90: 1
+      WeaponSMGResistance: 2
+      WeaponShotgunPump: 1
+      WeaponShotgunDevastator: 0.5
+      WeaponLaserCarbine: 1
+      WeaponLaserGunAssault: 0.5
+      WeaponSniperMosin: 0.5
+      WeaponLauncherRocketDisposableThermobaric: 0.2
+      Sledgehammer: 0.5
+      FireAxe: 0.5
+      WeaponCrusherHalberd: 0.3

@@ -1213,3 +1213,117 @@
   components:
   - type: WeightedLoadout
     loadout: RandomLoadoutSyndicate
+
+# Neosov
+
+- type: entity
+  parent: SalvageAbductorCorpse
+  id: MobRandomNeosovAbductorCorpse
+  suffix: Dead, Neosov
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: SalvageArachnidCorpse
+  id: MobRandomNeosovArachnidCorpse
+  suffix: Dead, Neosov
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: SalvageBananaMenCorpse
+  id: MobRandomNeosovBananaMenCorpse
+  suffix: Dead, Neosov
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: SalvageDecapoidCorpse
+  id: MobRandomNeosovDecapoidCorpse
+  suffix: Dead, Neosov
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: SalvageDionaCorpse
+  id: MobRandomNeosovDionaCorpse
+  suffix: Dead, Neosov
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: SalvageDwarfCorpse
+  id: MobRandomNeosovDwarfCorpse
+  suffix: Dead, Neosov
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: SalvageHumanCorpse
+  id: MobRandomNeosovHumanCorpse
+  suffix: Dead, Neosov
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: SalvageIPCCorpse
+  id: MobRandomNeosovIPCCorpse
+  suffix: Dead, Neosov
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: SalvageMothCorpse
+  id: MobRandomNeosovMothCorpse
+  suffix: Dead, Neosov
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: SalvageReptilianCorpse
+  id: MobRandomNeosovReptilianCorpse
+  suffix: Dead, Neosov
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: SalvageSkeletonPersonCorpse
+  id: MobRandomNeosovSkeletonPersonCorpse
+  suffix: Dead, Neosov
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: SalvageSlimePersonCorpse
+  id: MobRandomNeosovSlimePersonCorpse
+  suffix: Dead, Neosov
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: SalvageVoxCorpse
+  id: MobRandomNeosovVoxCorpse
+  suffix: Dead, Neosov
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: SalvageVulpkaninCorpse
+  id: MobRandomNeosovVulpkaninCorpse
+  suffix: Dead, Neosov
+  components:
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov

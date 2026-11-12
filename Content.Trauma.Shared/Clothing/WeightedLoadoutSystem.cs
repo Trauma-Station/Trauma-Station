@@ -3,6 +3,7 @@
 using System.Linq;
 using Content.Shared.Body;
 using Content.Shared.Clothing;
+using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Random.Helpers;
 using Content.Shared.Station.Systems;
@@ -19,6 +20,7 @@ public sealed partial class WeightedLoadoutSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private LoadoutSystem _loadout = default!;
+    [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private StationSpawningSystem _station = default!;
 
     /// <summary>
@@ -78,6 +80,15 @@ public sealed partial class WeightedLoadoutSystem : EntitySystem
 
             var item = random.Pick(pool.Items);
             _inventory.SpawnItemInSlot(uid, slot, item, silent: true, force: true);
+        }
+
+        foreach (var pool in archetype.Hands)
+        {
+            if (pool.Items.Count == 0 || !random.Prob(pool.Chance))
+                continue;
+
+            var item = PredictedSpawnAtPosition(random.Pick(pool.Items), Transform(uid).Coordinates);
+            _hands.PickupOrDrop(uid, item);
         }
     }
 }

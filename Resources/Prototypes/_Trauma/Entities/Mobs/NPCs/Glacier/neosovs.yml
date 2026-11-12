@@ -1,0 +1,195 @@
+- type: entity
+  parent: MobAbductor
+  id: MobAbductorNeosov
+  suffix: Random Loadout
+  components:
+  - type: RandomHumanoidAppearance
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: MobArachnid
+  id: MobArachnidNeosov
+  suffix: Random Loadout
+  components:
+  - type: RandomHumanoidAppearance
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: MobBananaMen
+  id: MobBananaMenNeosov
+  suffix: Random Loadout
+  components:
+  - type: RandomHumanoidAppearance
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: MobDecapoid
+  id: MobDecapoidNeosov
+  suffix: Random Loadout
+  components:
+  - type: RandomHumanoidAppearance
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: MobDiona
+  id: MobDionaNeosov
+  suffix: Random Loadout
+  components:
+  - type: RandomHumanoidAppearance
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: MobDwarf
+  id: MobDwarfNeosov
+  suffix: Random Loadout
+  components:
+  - type: RandomHumanoidAppearance
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: MobHuman
+  id: MobHumanNeosov
+  suffix: Random Loadout
+  components:
+  - type: RandomHumanoidAppearance
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: MobIPC
+  id: MobIPCNeosov
+  suffix: Random Loadout
+  components:
+  - type: RandomHumanoidAppearance
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: MobMoth
+  id: MobMothNeosov
+  suffix: Random Loadout
+  components:
+  - type: RandomHumanoidAppearance
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: MobReptilian
+  id: MobReptilianNeosov
+  suffix: Random Loadout
+  components:
+  - type: RandomHumanoidAppearance
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: MobSkeletonPerson
+  id: MobSkeletonPersonNeosov
+  suffix: Random Loadout
+  components:
+  - type: RandomHumanoidAppearance
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: MobSlimePerson
+  id: MobSlimePersonNeosov
+  suffix: Random Loadout
+  components:
+  - type: RandomHumanoidAppearance
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: MobVox
+  id: MobVoxNeosov
+  suffix: Random Loadout
+  components:
+  - type: RandomHumanoidAppearance
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov
+
+- type: entity
+  parent: MobVulpkanin
+  id: MobVulpkaninNeosov
+  suffix: Random Loadout
+  components:
+  - type: RandomHumanoidAppearance
+  - type: RandomMetadata
+    nameSegments:
+    - NamesFirst
+    - NamesLast
+    nameFormat: name-format-standard
+  - type: WeightedLoadout
+    loadout: RandomLoadoutNeosov

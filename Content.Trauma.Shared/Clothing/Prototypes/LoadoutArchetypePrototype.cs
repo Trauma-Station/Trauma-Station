@@ -25,6 +25,12 @@ public sealed partial class LoadoutArchetypePrototype : IPrototype
     /// </summary>
     [DataField]
     public Dictionary<ProtoId<InventorySlotPrototype>, LoadoutSlotPool> Slots = new();
+
+    /// <summary>
+    /// Loadout pools for items held in hands.
+    /// </summary>
+    [DataField]
+    public List<LoadoutSlotPool> Hands = new();
 }
 
 /// <summary>

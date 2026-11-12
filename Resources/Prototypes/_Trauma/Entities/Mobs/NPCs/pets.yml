@@ -45,7 +45,7 @@
 - type: entity
   parent: MobGorilla
   id: MobWhiteGorilla
-  name: white gorilla
+  name: White Gorilla
   description: He's not a bad guy at heart. He just likes stirring the pot, and has occasional bouts of psychosis.
   components:
   - type: Sprite
