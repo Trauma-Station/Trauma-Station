@@ -37,7 +37,7 @@
   description: Difficult to get your hands on.
   components:
   - type: Sprite
-    sprite: _Trauma/Objects/Consumable/Food/ice_meat.rsi
+    sprite: _Trauma/Objects/Consumable/Food/frost_meat.rsi
     state: frost
   - type: Solution
     solution:
@@ -72,7 +72,7 @@
     - Meat
     - Steak
   - type: Sprite
-    sprite: _Trauma/Objects/Consumable/Food/ice_meat.rsi
+    sprite: _Trauma/Objects/Consumable/Food/frost_meat.rsi
     state: frost-cooked
   - type: Solution
     solution:
@@ -111,7 +111,7 @@
     - Trash
     - Recyclable
   - type: Sprite
-    sprite: _Trauma/Objects/Consumable/Food/ice_meat.rsi
+    sprite: _Trauma/Objects/Consumable/Food/frost_meat.rsi
     state: frost-rotten
   - type: Solution
     solution:

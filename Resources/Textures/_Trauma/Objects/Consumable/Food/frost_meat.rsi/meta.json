@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-3.0",
+  "copyright": "mr.fisher.(discord)",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "frost"
+    },
+    {
+      "name": "frost-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "frost-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "frost-cooked"
+    },
+    {
+      "name": "frost-cooked-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "frost-cooked-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "frost-rotten-icon"
+    },
+    {
+      "name": "frost-rotten",
+      "delays": [
+        [
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1,
+          0.1
+        ]
+      ]
+    },
+    {
+      "name": "frost-rotten-inhand-right",
+      "directions": 4
+    },
+    {
+      "name": "frost-rotten-inhand-left",
+      "directions": 4
+    }
+  ]
+}
