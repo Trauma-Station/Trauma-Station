@@ -215,7 +215,7 @@
   id: OrganDionaTorso
 
 - type: entity
-  parent: [ OrganBaseHeadBald, OrganDionaExternal ] # bald trees
+  parent: [ OrganBaseHeadBald, OrganDionaExternal ] # Trauma - bald trees
   id: OrganDionaHead
 
 - type: entity
@@ -319,16 +319,18 @@
   suffix: brain
   components:
   - type: IsDeadIC
-  # - type: EntityTableContainerFill # Trauma - replaced with InitialBody
-  #   containers:
-  #     body_organs: !type:AllSelector
-  #       children:
-  #       - id: OrganDionaBrain
-  #       - id: OrganAnimalLungs
-  #       - id: OrganAnimalStomach
-  #       - id: OrganAnimalLiver
-  #       - id: OrganAnimalHeart
-  #       - id: OrganAnimalKidneys
+  - type: InitialBody # Shitmed - replaced container fill
+    organs:
+      # <Shitmed> - evil nymph surgery
+      Head: OrganDionaHead
+      Torso: OrganDionaTorso
+      # </Shitmed>
+      Brain: OrganDionaBrain
+      Lungs: OrganAnimalLungs
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Heart: OrganAnimalHeart
+      Kidneys: OrganAnimalKidneys
 
 - type: entity
   parent: MobDionaNymph
@@ -336,13 +338,16 @@
   suffix: stomach
   components:
   - type: IsDeadIC
-  # - type: EntityTableContainerFill # Trauma - replaced with InitialBody
-  #   organs:
-  #     Lungs: OrganDionaLungs
-  #     Stomach: OrganAnimalStomach
-  #     Liver: OrganAnimalLiver
-  #     Heart: OrganAnimalHeart
-  #     Kidneys: OrganAnimalKidneys
+  - type: InitialBody # Shitmed - replaced container fill
+    organs:
+      # <Shitmed> - evil nymph surgery
+      Torso: OrganDionaTorso
+      # </Shitmed>
+      Lungs: OrganDionaLungs
+      Stomach: OrganAnimalStomach
+      Liver: OrganAnimalLiver
+      Heart: OrganAnimalHeart
+      Kidneys: OrganAnimalKidneys
 
 - type: entity
   parent: MobDionaNymph
@@ -350,13 +355,16 @@
   suffix: lungs
   components:
   - type: IsDeadIC
-  # - type: EntityTableContainerFill # Trauma - replaced with InitialBody
-  #   organs:
-  #     Lungs: OrganAnimalLungs
-  #     Stomach: OrganDionaStomach
-  #     Liver: OrganAnimalLiver
-  #     Heart: OrganAnimalHeart
-  #     Kidneys: OrganAnimalKidneys
+  - type: InitialBody # Shitmed - replaced container fill
+    organs:
+      # <Shitmed> - evil nymph surgery
+      Torso: OrganDionaTorso
+      # </Shitmed>
+      Lungs: OrganAnimalLungs
+      Stomach: OrganDionaStomach
+      Liver: OrganAnimalLiver
+      Heart: OrganAnimalHeart
+      Kidneys: OrganAnimalKidneys
 
 - type: entity
   parent: MobDiona
