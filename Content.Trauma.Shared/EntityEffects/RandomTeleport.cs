@@ -56,7 +56,8 @@ public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<Tran
 
             _link.OneWayLink(portal, targetEnt, true);
 
-            var linkedComp = EnsureComp<LinkedEntityContainerComponent>(portal).Uid = targetEnt;
+            var linkedComp = EnsureComp<LinkedEntityContainerComponent>(portal);
+            linkedComp.Uid = targetEnt;
             Ditry(portal, linkedComp);
         }
     }

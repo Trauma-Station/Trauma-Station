@@ -47,7 +47,8 @@ public sealed partial class ToLinkedEntityTeleportEffectSystem : EntityEffectSys
             var portal = PredictedSpawnAtPosition(args.Effect.SpawnPortal, oldPos);
             _link.OneWayLink(portal, targetEnt, true);
 
-            var linkedComp = EnsureComp<LinkedEntityContainerComponent>(portal).Uid = destination.Uid;
+            var linkedComp = EnsureComp<LinkedEntityContainerComponent>(portal);
+            linkedComp.Uid = destination.Uid;
             Ditry(portal, linkedComp);
         }
     }
