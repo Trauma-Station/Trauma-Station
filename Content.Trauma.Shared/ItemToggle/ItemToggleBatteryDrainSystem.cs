@@ -24,6 +24,7 @@ public sealed partial class ItemToggleBatteryDrainSystem : EntitySystem
     private void OnRefreshChargeRate(Entity<ItemToggleBatteryDrainComponent> ent, ref RefreshChargeRateEvent args)
     {
         if (_toggle.IsActivated(ent.Owner))
+
             args.NewChargeRate -= ent.Comp.DrawRate;
     }
 
@@ -44,6 +45,7 @@ public sealed partial class ItemToggleBatteryDrainSystem : EntitySystem
     private void OnBatteryStateChanged(Entity<ItemToggleBatteryDrainComponent> ent, ref BatteryStateChangedEvent args)
     {
         if (args.NewState == BatteryState.Empty)
+
             _toggle.TryDeactivate(ent.Owner);
     }
 }
