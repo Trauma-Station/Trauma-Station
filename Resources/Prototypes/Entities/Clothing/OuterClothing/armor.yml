@@ -47,6 +47,12 @@
   parent: [ BaseSecurityContraband, ClothingOuterArmorBase ]
   id: ClothingOuterArmorBasic
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ClothingOuterVestWeb
+    alertValue: 1
+    conversionCategory: ArmorHigh
+  # </Trauma
   - type: Tag
     tags:
     - CorgiWearable
@@ -205,6 +211,10 @@
     knockdownTimeDelta: -3
   - type: StaminaResistance
     damageCoefficient: 0.5
+  - type: SyndicateConvertible
+    convertTo: ClothingOuterVestWebElite
+    alertValue: 1
+    conversionCategory: ArmorLow
   # </Trauma>
   - type: Sprite
     sprite: Clothing/OuterClothing/Vests/webvest.rsi
@@ -244,6 +254,10 @@
     knockdownTimeDelta: -3
   - type: StaminaResistance
     damageCoefficient: 0.5
+  - type: SyndicateConvertible
+    convertTo: ClothingOuterVestWeb
+    alertValue: 0
+    conversionCategory: ArmorLow
   # </Trauma>
   - type: Sprite
     sprite: Clothing/OuterClothing/Vests/elitevest.rsi

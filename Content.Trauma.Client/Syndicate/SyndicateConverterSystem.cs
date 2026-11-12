@@ -5,6 +5,4 @@ using Content.Trauma.Shared.Syndicate;
 namespace Content.Trauma.Client.Syndicate;
 
 /// <inheritdoc/>
-public sealed partial class SyndicateConverterSystem : SharedSyndicateConverterSystem
-{
-}
+public sealed partial class SyndicateConverterSystem : SharedSyndicateConverterSystem;

@@ -44,6 +44,12 @@
   name: emergency pressure suit
   description: This bulky, uninsulated pressure suit was clearly not meant for extended use in outer space, despite NanoTrasen's claims that it passes corporate regulations.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ClothingOuterEVASuitSyndicate
+    alertValue: 1
+    conversionCategory: ArmorHigh
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/OuterClothing/Suits/eva_emergency.rsi
   - type: Clothing

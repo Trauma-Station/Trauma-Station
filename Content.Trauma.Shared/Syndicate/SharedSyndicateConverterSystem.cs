@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Construction.Components;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Materials;
 using Content.Shared.Popups;
@@ -51,7 +50,10 @@ public abstract partial class SharedSyndicateConverterSystem : EntitySystem
     {
         cost = new();
         Dictionary<ProtoId<MaterialPrototype>, int> baseCost;
-        baseCost = item.Comp.MaterialCost;
+        if (item.Comp.MaterialCostOverride is not null)
+            baseCost = item.Comp.MaterialCostOverride;
+        else
+            baseCost = entity.Comp.ConversionCategoryList[item.Comp.ConversionCategory];
 
         foreach (var (mat, amount) in baseCost)
         {

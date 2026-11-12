@@ -4,6 +4,12 @@
   name: satchel
   description: A trendy looking satchel.
   components:
+  # <Trauma>
+    - type: SyndicateConvertible
+      convertTo: ClothingBackpackSatchelSmugglerUnanchored
+      alertValue: 1
+      conversionCategory: ArmorLow
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Back/Satchels/satchel.rsi
   - type: Storage

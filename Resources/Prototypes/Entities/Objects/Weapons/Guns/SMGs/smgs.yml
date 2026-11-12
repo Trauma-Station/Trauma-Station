@@ -199,6 +199,14 @@
   id: WeaponSubMachineGunDrozd
   description: A modern SMG manufactured by Nanotrasen’s Small Arms Division. It features an exceptional rate of fire in burst mode, useful for holding defensive angles or engaging hostiles at longer ranges. Feeds from .35 SMG magazines.
   components:
+    # <Trauma>
+    - type: SyndicateConvertible
+      convertTo: WeaponRifleM90
+      alertValue: 123
+      conversionTime: 123
+      materialCost:
+        Plasma: 123
+    # </Trauma>
     - type: Sprite
       sprite: Objects/Weapons/Guns/SMGs/drozd.rsi
       layers:

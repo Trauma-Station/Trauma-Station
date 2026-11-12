@@ -6,6 +6,12 @@
   id: BaseSoap
   name: soap
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: SoapOmega
+    alertValue: 0
+    conversionCategory: Fun
+  # </Trauma>
   - type: Tag
     tags:
     - Soap
@@ -241,6 +247,12 @@
   name: omega soap
   description: The most advanced soap known to mankind. Smells of bluespace.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: SlipocalypseClusterSoap
+    alertValue: 1
+    conversionCategory: Explosive
+  # </Trauma>
   - type: Sprite
     layers:
     - state: omega-4

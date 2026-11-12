@@ -4,6 +4,14 @@
   name: egg spider
   description: Is it a gemstone? Is it an egg? It looks expensive.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ReinforcementRadioSyndicateNukieSpider
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Misc/eggspider.rsi
     state: icon

@@ -68,6 +68,15 @@
   parent: BaseBorgModule
   abstract: true
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: BorgModuleMartyr
+    alertValue: 2
+    conversionTime: 30
+    materialCost:
+      Plasma: 3000
+      Gold: 1500
+  # </Trauma>
   - type: BorgModule
     borgFitTypes:
     - borg-type-salvage
@@ -96,6 +105,15 @@
   parent: BaseBorgModule
   abstract: true
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: BorgModuleMartyr
+    alertValue: 2
+    conversionTime: 30
+    materialCost:
+      Plasma: 3000
+      Gold: 1500
+  # </Trauma>
   - type: BorgModule
     borgFitTypes:
     - borg-type-engineer
@@ -126,6 +144,15 @@
   parent: BaseBorgModule
   abstract: true
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: BorgModuleMartyr
+    alertValue: 2
+    conversionTime: 30
+    materialCost:
+      Plasma: 3000
+      Gold: 1500
+  # </Trauma>
   - type: BorgModule
     borgFitTypes:
     - borg-type-janitor
@@ -156,6 +183,15 @@
   parent: BaseBorgModule
   abstract: true
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: BorgModuleMartyr
+    alertValue: 2
+    conversionTime: 30
+    materialCost:
+      Plasma: 3000
+      Gold: 1500
+  # </Trauma>
   - type: BorgModule
     borgFitTypes:
     - borg-type-medical
@@ -186,6 +222,15 @@
   parent: BaseBorgModule
   abstract: true
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: BorgModuleMartyr
+    alertValue: 2
+    conversionTime: 30
+    materialCost:
+      Plasma: 3000
+      Gold: 1500
+  # </Trauma>
   - type: BorgModule
     borgFitTypes:
     - borg-type-generic
@@ -216,6 +261,15 @@
   parent: BaseBorgModule
   abstract: true
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: BorgModuleMartyr
+    alertValue: 2
+    conversionTime: 30
+    materialCost:
+      Plasma: 3000
+      Gold: 1500
+  # </Trauma>
   - type: BorgModule
     borgFitTypes:
     - borg-type-service
@@ -1423,6 +1477,15 @@
   name: martyr cyborg module
   description: "A module that comes with an explosive you probably don't want to handle yourself."
   components:
+    # <Trauma>
+    - type: SyndicateConvertible
+      convertTo: BorgModuleSyndicateWeapon
+      alertValue: 2
+      conversionTime: 20
+      materialCost:
+        Plasma: 3000
+        Gold: 1500
+    # </Trauma>
     - type: Sprite
       layers:
         - state: syndicateborgbomb

@@ -591,6 +591,14 @@
   id: WeaponPistolCasul
   description: The first of two huge pistols, capable of firing regenerating silver bullets. Incapable of firing without its sister gun.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: WeaponPistolAnaconda
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: WeaponClass
     class: Pistol
   - type: Nullrod

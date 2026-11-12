@@ -6,6 +6,14 @@
   name: demonic soul fragment
   description: The soul of a demon, can be made into a magical ink by mixing it into a full blood vial.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: Telecrystal5
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: Sprite
     sprite: _Trauma/Objects/Enchanting/demonsoul.rsi
     state: icon

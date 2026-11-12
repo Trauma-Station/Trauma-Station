@@ -94,6 +94,12 @@
   - type: Construction # so you can click with knife and spray painter
     graph: SpesosCounterfeit
     node: start
+  - type: SyndicateConvertible
+    convertTo: SyndicateBusinessCard
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
   # </Trauma>
   - type: Sprite
     sprite: Objects/Misc/bureaucracy.rsi

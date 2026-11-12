@@ -20,3 +20,9 @@ uplink-super-surplus-bundle-desc = Contains 625 telecrystals worth of completely
 
 uplink-syndicate-segway-crate-name = Syndicate Segway
 uplink-syndicate-segway-crate-desc = Be an enemy of the corporation, in style!
+
+uplink-syndicate-technician-bundle-name = Syndicate Technician's Flatpacker Bundle
+uplink-syndicate-technian-bundle-desc = (Almost) everything you need to become a syndicate technician. Includes a modified flatpacker, materials and tools.
+
+uplink-syndicate-flatpacker-name = Syndicate Technician's Flatpacker Machine Board
+uplink-syndicate-technian-bundle-desc = A modified flatpacker machine board, lacks stealth features. Tools not included. 

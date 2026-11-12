@@ -98,7 +98,8 @@ public sealed partial class SyndicateConverterMenu : FancyWindow
             return;
         }
         else if (_syndicateConverter.TryGetConvertedPrototype((Entity<SyndicateConvertibleComponent>) currentItemEntity, out var prototype)
-            && _syndicateConverter.TryGetConversionCost(converterEntity, (Entity<SyndicateConvertibleComponent>) currentItemEntity, out var cost))
+            && _syndicateConverter.TryGetConversionCost(converterEntity, (Entity<SyndicateConvertibleComponent>) currentItemEntity, out var cost)
+            && prototype is not null)
         {
             var proto = _proto.Index<EntityPrototype>(prototype);
             ItemSprite.SetPrototype(prototype);

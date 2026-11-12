@@ -7,6 +7,12 @@
   name: hi-viz vest
   description: A high-visibility vest used in work zones.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ClothingOuterChameleonArmor
+    alertValue: 2
+    conversionCategory: ElectronicsHigh
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/OuterClothing/Vests/hazard.rsi
     layers:
@@ -45,6 +51,12 @@
   name: vest
   description: A thick vest with a rubbery, water-resistant shell.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ClothingOuterChameleonArmor
+    alertValue: 2
+    conversionCategory: ElectronicsHigh
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/OuterClothing/Vests/vest.rsi
   - type: Clothing

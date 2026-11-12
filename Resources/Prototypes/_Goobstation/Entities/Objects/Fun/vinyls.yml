@@ -7,6 +7,13 @@
   description: A vinyl disk containing music.
   parent: BaseItem
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: NukeDiskFake
+    alertValue: 1
+    conversionTime: 30
+    conversionCategory: ElectronicsLow
+  # </Trauma>
   - type: Vinyl
   - type: Sprite
     sprite: _Goobstation/Objects/Misc/RadioStation/vinyls.rsi

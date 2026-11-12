@@ -5,6 +5,12 @@
   description: A gadget which can open and bolt doors remotely.
   abstract: true
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: DoorRemoteSyndicate
+    alertValue: 1
+    conversionCategory: ElectronicsLow
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Devices/door_remote.rsi
   - type: Item

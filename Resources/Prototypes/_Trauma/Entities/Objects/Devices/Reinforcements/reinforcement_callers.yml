@@ -53,6 +53,14 @@
     - ScienceHoP
     - MedicalHoP
     - CargoHoP
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: BloodredCassette
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
 
 - type: storeCategory
   id: ReinforcementsHoS

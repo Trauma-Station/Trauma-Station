@@ -38,6 +38,12 @@
     graph: CleanerGrenadeGraph
     node: start
     deconstructionTarget: null
+  - type: SyndicateConvertible
+    convertTo: LubeGrenade
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
   # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Grenades/janitor.rsi

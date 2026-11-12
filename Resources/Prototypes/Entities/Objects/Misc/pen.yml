@@ -4,6 +4,12 @@
   id: Pen
   description: A dark ink pen.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: CyberPen
+    alertValue: 1
+    conversionCategory: ElectronicsLow
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Misc/pens.rsi
     state: pen
@@ -129,6 +135,12 @@
     heldPrefix: overpriced_pen
   - type: StaticPrice
     price: 500
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: EnergyDagger
+    alertValue: 2
+    conversionCategory: EnergyWeaponLow
+  # </Trauma>
 
 - type: entity
   name: CentComm pen

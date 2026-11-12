@@ -211,6 +211,14 @@
   name: dehydrated space carp
   description: Looks like a plush toy carp, but just add water and it becomes a real-life space carp!
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ReinforcementRadioSyndicateNukieCarp
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: Fixtures # BaseItem from PlushieCarp overrides fixtures, making carp not react to extinguishers
     fixtures:
       fix1:

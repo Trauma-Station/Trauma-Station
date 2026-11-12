@@ -117,3 +117,23 @@
     Telecrystal: 20
   categories:
   - UplinkDisruption
+
+- type: listing
+  id: UplinkSyndicateTechnicianBundle
+  name: uplink-syndicate-technician-bundle-name
+  description: uplink-syndicate-technician-bundle-desc
+  productEntity: ClothingBackpackDuffelSyndicateFilledSyndicateTechnician
+  cost:
+    Telecrystal: 90
+  categories:
+  - UplinkDisruption
+
+  - type: listing
+  id: UplinkSyndicateFlatpackerBundle
+  name: uplink-syndicate-flatpacker-name
+  description: uplink-syndicate-flatpacker-desc
+  productEntity: SyndicateFlatpackerMachineCircuitboard
+  cost:
+    Telecrystal: 30
+  categories:
+  - UplinkDisruption

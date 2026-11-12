@@ -39,6 +39,12 @@
     channels:
     - Binary
   - type: IntellicardableMind
+  - type: SyndicateConvertible
+    convertTo: SyndicatePersonalAI
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
   # </Trauma>
   - type: Instrument
     allowPercussion: false

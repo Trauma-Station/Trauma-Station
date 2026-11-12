@@ -52,6 +52,12 @@
   id: PassengerIDCard
   name: assistant ID card
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: SyndicateIDCard
+    alertValue: 2
+    conversionCategory: ElectronicsLow
+  # </Trauma>
   - type: Sprite
     layers:
     - state: default
@@ -124,6 +130,15 @@
   id: CaptainIDCard
   name: captain ID card
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: AccessBreaker
+    alertValue: 2
+    conversionTime: 30
+    materialCost:
+      Plasma: 3000
+      Gold: 1500
+  # </Trauma>
   - type: Sprite
     layers:
     - state: gold
@@ -717,6 +732,10 @@
   components:
   # <Trauma>
   - type: AntagCard
+  - type: SyndicateConvertible
+    convertTo: AgentIDCard
+    alertValue: 2
+    conversionCategory: ElectronicsLow
   # </Trauma>
   - type: Sprite
     layers:

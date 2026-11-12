@@ -19,6 +19,12 @@
   name: night vision goggles
   description: Now you can see in the dark!
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ClothingEyesNightVisionGogglesSyndie
+    alertValue: 1
+    conversionCategory: ElectronicsHigh
+   # </Trauma>
   - type: Sprite
     sprite: _White/Clothing/Eyes/Goggles/nightvision.rsi
   - type: Clothing
@@ -32,6 +38,10 @@
   name: syndicate night vision goggles
   description: A high-tech pair of night vision goggles. Has medical analysis technology.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: null
+  # </Trauma>
   - type: Sprite
     sprite: _White/Clothing/Eyes/Goggles/snightvision.rsi
   - type: Clothing

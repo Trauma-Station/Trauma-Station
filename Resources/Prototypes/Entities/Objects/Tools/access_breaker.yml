@@ -5,6 +5,15 @@
   name: authentication disruptor
   description: A hacked access configurator, specialized to unlock and erase access from digital locks.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: EmagUnlimited
+    alertValue: 3
+    conversionTime: 45
+    materialCost:
+      Plasma: 6000
+      Gold: 6000
+  # </Trauma>
   - type: Emag
     emagImmuneTag: AccessBreakerImmune
     emagType: Access
@@ -22,6 +31,15 @@
   id: AccessBreaker
   suffix: Limited
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: Emag
+    alertValue: 3
+    conversionTime: 45
+    materialCost:
+      Plasma: 3000
+      Gold: 3000
+  # </Trauma>
   - type: LimitedCharges
   - type: AutoRecharge
   - type: StaticPrice

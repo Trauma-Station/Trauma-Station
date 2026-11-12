@@ -6,6 +6,14 @@
   name: engineering techfab machine board
   description: A machine printed circuit board for a engineering techfab.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: SyndicateFlatpackerMachineCircuitboard
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: Sprite
     state: engineering
   - type: MachineBoard
@@ -27,6 +35,14 @@
   name: cargo techfab machine board
   description: A machine printed circuit board for a cargo techfab.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: SyndicateFlatpackerMachineCircuitboard
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: Sprite
     state: engineering
   - type: MachineBoard
@@ -48,6 +64,14 @@
   name: science techfab machine board
   description: A machine printed circuit board for a science techfab.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: SyndicateFlatpackerMachineCircuitboard
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: Sprite
     state: science
   - type: MachineBoard
@@ -69,6 +93,14 @@
   name: service techfab machine board
   description: A machine printed circuit board for a service techfab.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: SyndicateFlatpackerMachineCircuitboard
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: Sprite
     state: service
   - type: MachineBoard

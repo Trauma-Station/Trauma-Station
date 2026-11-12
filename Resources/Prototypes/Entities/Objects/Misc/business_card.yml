@@ -4,6 +4,10 @@
   parent: [ Paper, BaseSyndicateContraband ]
   description: A black card with the syndicate's logo. There's something written on the back.
   components:
+    # <Trauma>
+    - type: SyndicateConvertible
+      convertTo: null
+    # </Trauma>
     - type: Sprite
       sprite: Objects/Misc/bureaucracy.rsi
       layers:

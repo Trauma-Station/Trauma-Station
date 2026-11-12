@@ -47,6 +47,14 @@
   id: ClothingHeadsetAltCommand
   name: command over-ear headset
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: RadioJammer
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: ContainerFill
     containers:
       key_slots:

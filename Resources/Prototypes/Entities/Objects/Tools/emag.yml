@@ -5,6 +5,15 @@
   name: cryptographic sequencer
   description: The all-in-one hacking solution. Friend of any syndicate. The iconic EMAG.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: AccessBreakerUnlimited
+    alertValue: 2
+    conversionTime: 30
+    materialCost:
+      Plasma: 3000
+      Gold: 3000
+  # </Trauma>
   - type: Emag
   - type: Sprite
     sprite: Objects/Tools/emag.rsi
@@ -21,6 +30,15 @@
   id: Emag
   suffix: Limited
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: AccessBreaker
+    alertValue: 2
+    conversionTime: 30
+    materialCost:
+      Plasma: 1500
+      Gold: 1500
+  # </Trauma>
   - type: LimitedCharges
   - type: AutoRecharge
   - type: StaticPrice

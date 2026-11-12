@@ -64,6 +64,12 @@
   name: helmet
   description: Standard security gear. Protects the head from impacts.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ClothingHeadHelmetSwatSyndicate
+    alertValue: 1
+    conversionCategory: ArmorLow
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Helmets/security.rsi
   - type: Clothing
@@ -102,6 +108,13 @@
   - type: FlashSoundSuppression
   - type: ArmorPointBlank
     range: 1
+  - type: SyndicateConvertible
+    convertTo: ClothingHeadHelmetSwatSyndicate
+    alertValue: 0
+    conversionCategory: ArmorLow
+    materialCostOverride:
+      Durathread: 500
+      
   # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Helmets/swat.rsi

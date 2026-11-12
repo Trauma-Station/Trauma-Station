@@ -23,14 +23,19 @@ public sealed partial class SyndicateConvertibleComponent : Component
     public int AlertValue;
 
     /// <summary>
-    /// How long the conversion takes to complete.
+    /// OVERRIDE: How long the conversion takes to complete.
     /// </summary>
     [DataField]
-    public TimeSpan ConversionTime = TimeSpan.FromSeconds(15);
+    public TimeSpan? ConversionTimeOverride = null;
 
     /// <summary>
-    /// Materials needed to convert the item.
+    /// OVERRIDE: Materials needed to convert the item.
     /// </summary>
     [DataField]
-    public Dictionary<ProtoId<MaterialPrototype>, int> MaterialCost = new();
+    public Dictionary<ProtoId<MaterialPrototype>, int>? MaterialCostOverride = null;
+
+    /// <summary>
+    /// Conversion category, used for calculating materials
+    /// </summary>
+    public ProtoId<TagPrototype> ConversionCategory = new();
 }

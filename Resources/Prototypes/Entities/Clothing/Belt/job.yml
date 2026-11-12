@@ -90,6 +90,12 @@
   name: utility belt
   description: Can hold various things.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ClothingBeltMilitaryWebbing
+    alertValue: 1
+    conversionCategory: ArmorLow
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Belt/utility.rsi
   - type: Clothing

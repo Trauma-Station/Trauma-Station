@@ -421,6 +421,14 @@
   name: requisition digi-board
   description: A bulky electric clipboard, filled with shipping orders and financing details. With so many compromising documents, you ought to keep this safe.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: SpaceCash30000
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Misc/qm_clipboard.rsi
     layers:

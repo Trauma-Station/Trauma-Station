@@ -10,6 +10,12 @@
   # <Trauma>
   - type: CosmicTransmutable
     transmuteTo: PlushieCosmicCult
+  - type: SyndicateConvertible
+    convertTo: PlushieNuke
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
   # </Trauma>
   - type: EmitSoundOnUse
     sound: &BasePlushieSound
@@ -776,6 +782,14 @@
   name: carp plushie
   description: An adorable stuffed toy that resembles the monstrous space carp.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: DehydratedSpaceCarp
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Fun/Plushies/carp.rsi
     state: carpplush

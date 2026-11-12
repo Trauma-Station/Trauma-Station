@@ -43,6 +43,12 @@
   parent: [ClothingShoesBootsMagBase]
   id: ClothingShoesBootsMag
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ClothingShoesBootsMagSyndie
+    alertValue: 1
+    conversionCategory: ElectronicsLow
+  # </Trauma>
   - type: PhysicalComposition #Goobstation - Recycle update
     materialComposition:
       Steel: 250

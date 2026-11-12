@@ -172,6 +172,14 @@
   suffix: Sad Trombone
   parent: BaseImplantOnlyImplanter
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: 
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: Implanter
     implant: SadTromboneImplant
 

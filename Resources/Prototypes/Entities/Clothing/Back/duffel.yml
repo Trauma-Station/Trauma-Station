@@ -4,6 +4,12 @@
   name: duffel bag
   description: A large duffel bag for holding extra things.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ClothingBackpackDuffelSyndicate
+    alertValue: 1
+    conversionCategory: ArmorLow
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Back/Duffels/duffel.rsi
   - type: Storage
@@ -168,6 +174,10 @@
   name: syndicate duffel bag
   description: A large duffel bag for holding various traitor goods.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: null
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Back/Duffels/syndicate.rsi
   - type: ExplosionResistance

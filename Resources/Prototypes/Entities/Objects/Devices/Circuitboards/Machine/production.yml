@@ -83,6 +83,14 @@
   name: security techfab machine board
   description: A machine printed circuit board for a security techfab.
   components:
+    # <Trauma>
+    - type: SyndicateConvertible
+      convertTo: SyndicateFlatpackerMachineCircuitboard
+      alertValue: 123
+      conversionTime: 123
+      materialCost:
+        Plasma: 123
+    # </Trauma>
     - type: Sprite
       state: security
     - type: MachineBoard
@@ -104,6 +112,14 @@
   name: ammo techfab circuit board
   description: A machine printed circuit board for an ammo techfab.
   components:
+    # <Trauma>
+    - type: SyndicateConvertible
+      convertTo: SyndicateFlatpackerMachineCircuitboard
+      alertValue: 123
+      conversionTime: 123
+      materialCost:
+        Plasma: 123
+    # </Trauma>
     - type: Sprite
       state: security
     - type: MachineBoard
@@ -117,6 +133,14 @@
   name: medical techfab machine board
   description: A machine printed circuit board for a medical techfab.
   components:
+    # <Trauma>
+    - type: SyndicateConvertible
+      convertTo: SyndicateFlatpackerMachineCircuitboard
+      alertValue: 123
+      conversionTime: 123
+      materialCost:
+        Plasma: 123
+    # </Trauma>
     - type: Sprite
       state: medical
     - type: MachineBoard
@@ -1083,6 +1107,12 @@
   parent: BaseMachineCircuitboard
   name: microwave machine board
   components:
+    # <Trauma>
+    - type: SyndicateConvertible
+      convertTo: SyndicateMicrowaveMachineCircuitboard
+      alertValue: 1
+      conversionCategory: ElectronicsLow
+    # </Trauma>
     - type: Sprite
       state: service
     - type: MachineBoard

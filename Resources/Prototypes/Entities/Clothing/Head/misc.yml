@@ -4,6 +4,14 @@
   name: bunny ears
   description: Cute bunny ears.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ClothingHeadHatCatEars
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Head/Misc/bunny.rsi
   - type: Clothing

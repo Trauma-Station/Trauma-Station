@@ -222,6 +222,12 @@
   name: yellow shoes
   description: Stylish yellow shoes.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ClothingShoesChameleonNoSlips
+    alertValue: 1
+    conversionCategory: ElectronicsHigh
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/Shoes/color.rsi
     layers:

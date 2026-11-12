@@ -339,6 +339,10 @@
   - type: HideClothingLayerClothing
     hiddenSlots:
     - jumpsuit
+  - type: SyndicateConvertible
+    convertTo: ClothingOuterHardsuitCarp
+    alertValue: 3
+    conversionCategory: ArmorHigh
   # </Trauma>
   - type: Sprite
     sprite: Clothing/OuterClothing/Suits/carpsuit.rsi

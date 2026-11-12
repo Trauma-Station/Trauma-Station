@@ -249,6 +249,15 @@
   name: surveillance camera monitor board
   description: A computer printed circuit board for a surveillance camera monitor.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: CameraBug
+    alertValue: 1
+    conversionTime: 15
+    materialCost:
+      Plasma: 1500
+      Gold: 1500
+  # </Trauma>
   - type: Sprite
     state: cpu_security
   - type: ComputerBoard
@@ -264,6 +273,15 @@
   name: surveillance wireless camera monitor board
   description: A computer printed circuit board for a surveillance wireless camera monitor.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: CameraBug
+    alertValue: 1
+    conversionTime: 15
+    materialCost:
+      Plasma: 1500
+      Gold: 1500
+  # </Trauma>
   - type: Sprite
     state: cpu_service
   - type: ComputerBoard
@@ -403,6 +421,14 @@
   id: RadarConsoleCircuitboard
   name: mass scanner computer board
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ComputerIFFCircuitboard
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: Sprite
     state: cpu_supply
   - type: ComputerBoard
@@ -487,6 +513,14 @@
   name: IFF console board
   description: Allows you to control the IFF characteristics of this vessel.
   components:
+    # <Trauma>
+    - type: SyndicateConvertible
+      convertTo: ComputerIFFSyndicateCircuitboard
+      alertValue: 123
+      conversionTime: 123
+      materialCost:
+        Plasma: 123
+    # </Trauma>
     - type: Sprite
       state: cpu_command
     - type: ComputerBoard

@@ -3,6 +3,14 @@
   parent: BaseStorageItem
   abstract: true
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ToolboxSyndicate
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+    # </Trauma>
   - type: Sprite
     layers:
       - map: [ base ]
@@ -133,6 +141,14 @@
   id: ToolboxSyndicate
   description: A sinister looking toolbox filled with elite syndicate tools.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ToolboxElectricalTurret
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: Sprite
     sprite: Objects/Tools/Toolboxes/toolbox_syn.rsi
     state: icon

@@ -133,6 +133,10 @@
       params:
         variation: 0.250
         volume: -2
+  - type: SyndicateConvertible
+    convertTo: EnergySwordDouble
+    alertValue: 2
+    conversionCategory: EnergyWeaponHigh
   # </Trauma>
   - type: Sprite
     sprite: Objects/Weapons/Melee/e_sword.rsi
@@ -237,6 +241,10 @@
   # <Trauma>
   - type: Tool
     examinable: false # stealth item..? (shoutout for copy pasting everything)
+  - type: SyndicateConvertible
+    convertTo: EnergySword
+    alertValue: 2
+    conversionCategory: EnergyWeaponHigh
   # </Trauma>
   - type: ItemToggle
     soundActivate:

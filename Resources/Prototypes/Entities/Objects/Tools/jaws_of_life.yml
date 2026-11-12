@@ -86,20 +86,18 @@
   parent: JawsOfLifeBase
   id: JawsOfLife
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: SyndicateJawsOfLife
+    alertValue: 2
+    conversionCategory: MechanicalLow
+  # </Trauma>
   - type: PhysicalComposition #Goobstation - Recycle update
     materialComposition:
       Steel: 250
       Glass: 125
       Plasma: 75
       Gold: 12
-  # <Trauma>
-  - type: SyndicateConvertible
-    convertTo: SyndicateJawsOfLife
-    alertValue: 2
-    conversionTime: 30
-    materialCost:
-      Plasma: 3000
-  # </Trauma>
 
 - type: entity
   name: syndicate jaws of death

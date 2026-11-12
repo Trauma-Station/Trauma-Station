@@ -33,3 +33,17 @@
       GlassBeaker:
         amount: 2
         defaultPrototype: Beaker
+
+- type: entity
+  parent: BaseMachineCircuitboard
+  id: SyndicateFlatpackerMachineCircuitboard
+  name: Syndicate Technician's Flatpacker machine board
+  description: A machine printed circuit board for a Syndicate Technician's Flatpacker
+  components:
+  - type: Sprite
+    state: security
+  - type: MachineBoard
+    prototype: MachineSyndicateFlatpacker
+    stackRequirements:
+      Manipulator: 3
+      Steel: 1

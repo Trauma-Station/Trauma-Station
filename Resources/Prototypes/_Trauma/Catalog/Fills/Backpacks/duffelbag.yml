@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: ClothingBackpackDuffelSyndicateBundle
+  id: ClothingBackpackDuffelSyndicateFilledSyndicateTechnician
+  name: Syndicate Technician's bundle
+  description: Contains a modified flatpacker, bundled with a toolbox turret, a sidearm, tools and materials.
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: MachineSyndicateFlatpackerFlatpack
+        - id: ToolboxElectricalTurretFilled
+        - id: Wrench
+        - id: Welder
+        - id: Multitool
+        - id: SheetPlasma
+        - id: SheetGold
+        - id: MaterialDurathread
+        - id: WeaponPistolViper

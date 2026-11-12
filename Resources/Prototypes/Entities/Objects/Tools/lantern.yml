@@ -4,6 +4,12 @@
   id: Lantern
   description: The holy light guides the way.
   components:
+    # <Trauma>
+    - type: SyndicateConvertible
+      convertTo: LanternFlash
+      alertValue: 1
+      conversionCategory: ElectronicsLow
+    # </Trauma>
     - type: HandheldLight
       addPrefix: true
       blinkingBehaviourId: blinking
@@ -74,6 +80,10 @@
   id: LanternFlash
   suffix: Flash
   components:
+    # <Trauma>
+    - type: SyndicateConvertible
+      convertTo: null
+    # </Trauma>
     - type: Sprite
       sprite: Objects/Tools/lantern.rsi
       layers:

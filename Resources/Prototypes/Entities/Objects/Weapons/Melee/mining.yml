@@ -7,6 +7,12 @@
   # <Trauma>
   - type: WeaponClass
     class: Mining
+  - type: SyndicateConvertible
+    convertTo: NFEnergyPickaxe
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
   # </Trauma>
   - type: Tag
     tags:

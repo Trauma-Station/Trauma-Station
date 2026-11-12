@@ -2,8 +2,9 @@
 
 - type: entity
   id: MachineSyndicateFlatpacker
-  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible ]
+  parent: [ BaseMachinePowered, ConstructibleMachine, BaseConstructibleMachineDestructible, BaseSyndicateContraband ]
   name: Syndicate Technician's Flatpacker
+  suffix: Detected
   description: turns normal items into their syndicate versions or more dangerous versions at the cost of a longer flatpacking duration, power, a stack of plasma, and alerting the station.
   components:
   - type: Sprite
@@ -35,14 +36,13 @@
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
-        damage: 175
+        damage: 1000
       behaviors:
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
-  - type: SyndicateConverter
-  #- type: Machine
-  #//  board: SyndicateFlatpackerMachineCircuitboard
+  - type: Machine
+    board: SyndicateFlatpackerMachineCircuitboard
   - type: MaterialStorage
     whitelist:
       tags:
@@ -93,9 +93,73 @@
       machine_parts: !type:Container
       item_slot: !type:ContainerSlot
   - type: Construction
+    graph: SyndicateFlatpacker
+    node: machine
     containers:
     - machine_parts
     - machine_board
     - item_slot
-  - type: StaticPrice
-    price: 200000 # REVIEW/CHANGE BEFORE MERGING!!!!!!
+  - type: NavMapBeacon
+    color: "#ff0000"
+    text: syndicate crafting device
+    enabled: false
+  - type: SyndicateConverter
+    alertness: 10
+    basePowerLoad: 1500
+    activePowerLoad: 7500
+    conversionCategoryList:
+    - MechanicalLow:
+      Plasma: 1500
+      Plasteel: 1000
+    - MechanicalHigh:
+      Plasma: 2000
+      Plasteel: 150
+    - ElectronicsLow:
+      Plasma: 1500
+      Gold: 500
+      Uranium: 500
+    - ElectronicsHigh:
+      Plasma: 1500
+      Gold: 1500
+      Uranium: 1000
+    - EnergyWeaponLow:
+      Plasma: 1500
+      Plasteel: 500
+      Gold: 500
+      Uranium: 500
+    - EnergyWeaponHigh:
+      Plasma: 2000
+      Plasteel: 1000
+      Gold: 1000
+      Uranium: 10000
+      Gold: 1000
+    - KineticWeaponLow:
+    - KineticWeaponHigh:
+    - ArmorLow:
+    - ArmorHigh:
+    - Explosive:
+    - Medical:
+    - Fun:
+      Plasma: 500
+    - Exchange:
+      Plasma: 500
+    - Misc:
+      Plasma: 500
+
+- type: entity
+  id: MachineSyndicateFlatpackerUndetected
+  parent: MachineSyndicateFlatpacker
+  suffix: Undetected
+  description: turns normal items into their syndicate versions or more dangerous versions at the cost of a longer flatpacking duration, power, a stack of plasma, and alerting the station.
+  components:
+  - type: SyndicateConverter
+    alertness: 0
+
+- type: entity
+  parent: [ BaseFlatpack, BaseSyndicateContraband ]
+  id: MachineSyndicateFlatpackerFlatpack
+  name: syndicate technician's flatpacker flatpack
+  description: A flatpack used for constructing a syndicate technician's flatpacker.
+  components:
+  - type: Flatpack
+    entity: MachineSyndicateFlatpackerUndetected

@@ -46,6 +46,14 @@
   name: cassette player
   description: Regular old cassette player to enjoy your tunes on the go.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: BloodredCassette
+    alertValue: 123
+    conversionTime: 123
+    materialCost:
+      Plasma: 123
+  # </Trauma>
   - type: Sprite
     sprite: &regular _Goobstation/Objects/Fun/crew_cassette_player.rsi
   - type: Item

@@ -4,6 +4,15 @@
   name: access configurator
   description: Used to modify the access level requirements for airlocks and other lockable devices.
   components:
+    # <Trauma>
+    - type: SyndicateConvertible
+      convertTo: AccessConfiguratorSyndicate
+      alertValue: 1
+      conversionTime: 15
+      materialCost:
+        Plasma: 1500
+        Gold: 1500
+    # </Trauma>
     - type: EmitSoundOnLand
       sound:
         path: /Audio/Items/multitool_drop.ogg

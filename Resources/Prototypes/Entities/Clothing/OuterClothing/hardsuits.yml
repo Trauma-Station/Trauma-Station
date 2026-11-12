@@ -241,6 +241,12 @@
   name: security hardsuit
   description: A special suit that protects against hazardous, low pressure environments. Has an additional layer of armor.
   components:
+  # <Trauma>
+    - type: SyndicateConvertible
+      convertTo: ClothingOuterHardsuitSyndie
+      alertValue: 4
+      conversionCategory: ArmorHigh
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/security.rsi
   - type: Clothing
@@ -642,6 +648,12 @@
   name: blood-red hardsuit # Goob edit
   description: A heavily armored hardsuit designed for work in special operations. Property of Gorlex Marauders.
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ClothingOuterHardsuitSyndieElite
+    alertValue: 1
+    conversionCategory: ArmorLow
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/syndicate.rsi
   - type: Item
@@ -726,6 +738,12 @@
   name: syndicate elite hardsuit # Goob edit
   description: An elite version of the blood-red hardsuit, with improved mobility, fireproofing and heat-resistant armor. Property of Gorlex Marauders. # Trauma - align desc with resistances
   components:
+  # <Trauma>
+  - type: SyndicateConvertible
+    convertTo: ClothingOuterHardsuitSyndie
+    alertValue: 1
+    conversionCategory: ArmorLow
+  # </Trauma>
   - type: Sprite
     sprite: Clothing/OuterClothing/Hardsuits/syndieelite.rsi
   - type: Clothing
