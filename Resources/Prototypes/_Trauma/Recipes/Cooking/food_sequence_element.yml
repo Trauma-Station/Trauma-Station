@@ -10,7 +10,7 @@
   id: MeatFrost
   name: food-sequence-content-frost
   sprites:
-  - sprite: _Trauma/Objects/Consumable/Food/ice_meat.rsi
+  - sprite: _Trauma/Objects/Consumable/Food/frost_meat.rsi
     state: frost-cooked
   tags:
   - Cooked
@@ -20,7 +20,7 @@
   id: MeatFrostBurger
   name: food-sequence-burger-content-frost
   sprites:
-  - sprite: _Trauma/Objects/Consumable/Food/ice_meat.rsi
+  - sprite: _Trauma/Objects/Consumable/Food/frost_meat.rsi
     state: frost-cooked
   tags:
   - Cooked
