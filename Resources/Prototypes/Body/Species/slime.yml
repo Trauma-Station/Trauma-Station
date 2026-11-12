@@ -269,12 +269,9 @@
     stages: [ Digestion, Bloodstream, Metabolites ]
 
 - type: entity
-  parent: [ OrganBaseEyes, OrganSlimePersonInternal, OrganSlimePersonExternal ]
+  parent: [ OrganBaseEyes, OrganSlimePersonInternal ] # Trauma - removed OrganSlimePersonExternal: dont want Woundable
   id: OrganSlimePersonEyes
   components:
-  - type: VisualOrganMarkings
-    markingData:
-      group: Slime
   - type: VisualOrgan
     data:
       sprite: Mobs/Customization/eyes.rsi

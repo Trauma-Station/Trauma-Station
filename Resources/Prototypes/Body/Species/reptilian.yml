@@ -201,7 +201,7 @@
       group: Reptilian
 
 - type: entity
-  parent: [ OrganBaseTorsoSexed, OrganReptilianExternal ]
+  parent: [ OrganBaseTorsoSexed, OrganBaseTorsoTailed, OrganReptilianExternal ] # Shitmed - Tailed torso
   id: OrganReptilianTorso
   components:
   - type: VisualOrganMarkings

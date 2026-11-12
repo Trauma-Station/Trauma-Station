@@ -23,7 +23,3 @@
   components:
   - type: Sprite
     sprite: Mobs/Species/Human/organs.rsi # Trauma - no piss fetish organs
-
-- type: entity
-  parent: !Clear [ OrganBaseTorsoSexed, OrganBaseTorsoTailed, OrganVulpkaninExternal ] # Tailed torso
-  id: OrganVulpkaninTorso

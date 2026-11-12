@@ -159,6 +159,7 @@
 - type: entity
   parent:
   - AppearanceVox
+  - BaseSpeciesMobOrganicUnperishable # Trauma - vox don't rot
   - BaseSpeciesMobOrganic
   id: MobVox
   name: Urist McVox
@@ -270,7 +271,7 @@
     sprite: Mobs/Species/Vox/parts.rsi
 
 - type: entity
-  parent: [ OrganBaseTorso, OrganVoxExternal ]
+  parent: [ OrganBaseTorsoTailed, OrganVoxExternal ] # Shitmed - Tailed torso
   id: OrganVoxTorso
 
 - type: entity

@@ -73,7 +73,6 @@
     parents: [ Torso ] # allow it to be in torso instead of head
 
 - type: entity
-  parent: !Clear [ OrganBaseEyes, OrganSlimePersonInternal ] # removed OrganSlimePersonExternal: dont want Woundable
   id: OrganSlimePersonEyes
   components:
   - type: VisualOrganMarkings

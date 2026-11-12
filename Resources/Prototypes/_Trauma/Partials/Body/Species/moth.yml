@@ -30,10 +30,6 @@
         Heat: 0.75 # was 2.5 - 0.3x multiplier to compensate for limb damage
 
 - type: entity
-  parent: !Clear [ OrganBaseTorsoSexed, OrganBaseTorsoWinged, OrganMothExternal ] # Winged torso
-  id: OrganMothTorso
-
-- type: entity
   id: OrganMothEyes
   components:
   - type: StaticPrice

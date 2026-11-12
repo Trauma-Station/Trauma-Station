@@ -65,11 +65,3 @@
   components:
   - type: StaticPrice
     price: 2500
-
-- type: entity
-  id: BaseNymphingOrgan
-  components:
-  - type: Nymph
-    blacklist: !Clear
-      components:
-      - ChangelingIdentity # was ChangelingTransform, that doesnt exist here

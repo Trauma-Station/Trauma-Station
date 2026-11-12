@@ -49,10 +49,6 @@
   - !Remove type: Wagging #  moved to tail onAdd
 
 - type: entity
-  parent: !Clear [ OrganBaseTorsoSexed, OrganBaseTorsoTailed, OrganReptilianExternal ] # Tailed torso
-  id: OrganReptilianTorso
-
-- type: entity
   id: OrganReptilianLegLeft
   components:
   - type: Sprite
@@ -75,7 +71,6 @@
       state: r_leg_digi
 
 - type: entity
-  parent: [ OrganBaseFootLeft, OrganReptilianExternal ]
   id: OrganReptilianFootLeft
   components:
   - type: Sprite
@@ -87,7 +82,6 @@
       state: l_foot_digi
 
 - type: entity
-  parent: [ OrganBaseFootRight, OrganReptilianExternal ]
   id: OrganReptilianFootRight
   components:
   - type: Sprite

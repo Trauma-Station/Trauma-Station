@@ -15,9 +15,6 @@
       Tail: OrganVoxTail
 
 - type: entity
-  parent: !Clear
-  - AppearanceVox
-  - BaseSpeciesMobOrganicUnperishable
   id: MobVox
   components:
   - type: Uncloneable
@@ -49,10 +46,6 @@
       reagents: !Clear
       - ReagentId: AmmoniaBlood
         Quantity: 300 # was 600
-
-- type: entity
-  parent: !Clear [ OrganBaseTorsoTailed, OrganVoxExternal ] # Tailed torso
-  id: OrganVoxTorso
 
 - type: entity
   id: OrganVoxEyes

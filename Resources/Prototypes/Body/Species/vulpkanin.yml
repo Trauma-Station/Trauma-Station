@@ -245,7 +245,7 @@
     sprite: Mobs/Species/Vulpkanin/parts.rsi
 
 - type: entity
-  parent: [ OrganBaseTorsoSexed, OrganBaseTorso, OrganVulpkaninExternal ] # Trauma - Tailed torso
+  parent: [ OrganBaseTorsoSexed, OrganBaseTorsoTailed, OrganVulpkaninExternal ] # Trauma - Tailed torso
   id: OrganVulpkaninTorso
 
 - type: entity
