@@ -59,6 +59,7 @@
     sprite: _Trauma/Clothing/Shoes/Boots/iceboots.rsi
   - type: Clothing
     sprite: _Trauma/Clothing/Shoes/Boots/iceboots.rsi
+    stripDelay: 999999
   - type: NoSlip
   - type: SelfUnremovableClothing
   - type: ClothingEffects
