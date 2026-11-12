@@ -26,6 +26,6 @@ public sealed partial class CloningConsoleSignalSystem : EntitySystem
     private void OnSignalReceived(Entity<CloningConsoleComponent> ent, ref SignalReceivedEvent<LogicStatePayload> args)
     {
         if (args.Data.State != SignalState.Low || ent.Comp.CloningPod is not {} CloningPod || ent.Comp.GeneticScanner is not {} geneticScanner)
-            _cloningConsole.TryClone(ent.Owner, ent.Comp.CloningPod.Value, ent.Comp.GeneticScanner.Value, consoleComponent: ent.Comp);
+            _cloningConsole.TryClone(ent.Owner, CloningPod, geneticScanner, consoleComponent: ent.Comp);
     }
 }
