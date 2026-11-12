@@ -158,9 +158,9 @@ public sealed partial class CloningPodSystem : EntitySystem
         args.PushMarkup(Loc.GetString("cloning-pod-biomass", ("number", _material.GetMaterialAmount(ent.Owner, ent.Comp.RequiredMaterial))));
     }
 
-    public bool TryCloning(EntityUid uid, EntityUid bodyToClone, Entity<MindComponent>? mindEnt, CloningPodComponent? clonePod, float failChanceModifier = 1) // <Trauma> - mindEnt wasnt nullable
+    public bool TryCloning(EntityUid uid, EntityUid bodyToClone, Entity<MindComponent>? mindEnt, CloningPodComponent? clonePod, float failChanceModifier = 1) // Trauma - made mindEnt nullable
     {
-        if (mindEnt == null) ; // <Trauma> - mindEnt wasnt nullable
+        if (mindEnt == null) ; // Trauma - made mindEnt nullable
 
         if (!Resolve(uid, ref clonePod))
             return false;
@@ -213,6 +213,7 @@ public sealed partial class CloningPodSystem : EntitySystem
                 _chatSystem.TrySendInGameICMessage(clonePod.ConnectedConsole.Value, Loc.GetString("cloning-console-chat-error", ("units", cloningCost)), InGameICChatType.Speak, false);
             return false;
         }
+
         // end of biomass checks
 
         // genetic damage checks
