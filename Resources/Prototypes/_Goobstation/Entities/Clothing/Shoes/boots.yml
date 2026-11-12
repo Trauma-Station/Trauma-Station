@@ -135,7 +135,7 @@
     walkModifier: 0.7
     sprintModifier: 0.7
   - type: StaticPrice
-    price: 1
+    price: 5
 
 
 - type: entity
