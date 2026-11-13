@@ -34,7 +34,7 @@ public sealed partial class RandomTeleport : EntityEffectBase<RandomTeleport>
     /// Prototyte to spawn for portal destination.
     /// </summary>
     [DataField]
-    public EntProtoId<PortalComponent> PortalDestinationEnt = "BluespaceRiftPortalDestination";
+    public EntProtoId PortalDestinationEnt = "BluespaceRiftPortalDestination";
 }
 
 public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<TransformComponent, RandomTeleport>
