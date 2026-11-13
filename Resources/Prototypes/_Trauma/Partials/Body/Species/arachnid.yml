@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: OrganArachnidEyes
+  components:
+  - type: ViewconeModifier
+    angleModifier: 1.25 # 8 eyes are better than 2
+  - type: StaticPrice
+    price: 3000
+
+- type: entity
+  id: OrganArachnidTongue
+  components:
+  - type: StaticPrice
+    price: 1000
+
+- type: entity
+  id: OrganArachnidLungs
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganArachnidHeart
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganArachnidStomach
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganArachnidLiver
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganArachnidKidneys
+  components:
+  - type: StaticPrice
+    price: 2000

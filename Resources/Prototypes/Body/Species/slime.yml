@@ -323,11 +323,6 @@
   parent: [ OrganBaseEyes, OrganSlimePersonInternal ] # Trauma - removed OrganSlimePersonExternal: dont want Woundable
   id: OrganSlimePersonEyes
   components:
-  # <Trauma>
-  - type: VisualOrganMarkings
-    markingData:
-      group: Slime
-  # <Trauma>
   - type: VisualOrgan
     data:
       sprite: Mobs/Customization/eyes.rsi
@@ -337,12 +332,5 @@
   id: OrganSlimePersonLungs
   name: gas sacs
   components:
-  # <Shitmed>
-  - type: Solution
-    solution:
-      reagents:
-      - ReagentId: Slime
-        Quantity: 15
-  # </Shitmed>
   - type: Lung
     alert: LowNitrogen

@@ -1,0 +1,43 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: OrganHumanEyes
+  components:
+  - type: StaticPrice
+    price: 3000
+
+- type: entity
+  id: OrganHumanTongue
+  components:
+  - type: StaticPrice
+    price: 1000
+
+- type: entity
+  id: OrganHumanLungs
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganHumanHeart
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganHumanStomach
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganHumanLiver
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganHumanKidneys
+  components:
+  - type: StaticPrice
+    price: 2000

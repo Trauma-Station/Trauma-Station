@@ -246,8 +246,3 @@
 - type: entity
   parent: [ OrganBaseKidneys, OrganHumanInternal, OrganHumanMetabolizer ]
   id: OrganHumanKidneys
-  # <Trauma>
-  components:
-  - type: StaticPrice
-    price: 6000 # what a deal
-  # </Trauma>

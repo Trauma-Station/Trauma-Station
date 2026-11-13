@@ -42,3 +42,21 @@
     - Appendix
     - Lungs
     - Stomach
+
+- type: entity
+  id: OrganDionaEyes
+  components:
+  - type: StaticPrice
+    price: 3000
+
+- type: entity
+  id: OrganDionaLungs
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganDionaStomach
+  components:
+  - type: StaticPrice
+    price: 2500

@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: OrganVoxEyes
+  components:
+  - type: ViewconeModifier
+    angleModifier: 1.1 # prey vision for tasty chicken...
+  - type: StaticPrice
+    price: 3000
+
+- type: entity
+  id: OrganVoxTongue
+  components:
+  - type: StaticPrice
+    price: 1000
+
+- type: entity
+  id: OrganVoxLungs
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganVoxHeart
+  components:
+  - type: StaticPrice
+    price: 4000
+
+- type: entity
+  id: OrganVoxStomach
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganVoxLiver
+  components:
+  - type: StaticPrice
+    price: 2500
+
+- type: entity
+  id: OrganVoxKidneys
+  components:
+  - type: StaticPrice
+    price: 2000
