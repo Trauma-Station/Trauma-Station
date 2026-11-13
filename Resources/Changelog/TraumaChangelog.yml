@@ -16617,3 +16617,54 @@ Entries:
   id: 1796
   time: '2026-11-11T13:44:40.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5353
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Abductors can no longer 1 click stun with 2 wonderprods...
+  id: 1797
+  time: '2026-11-11T23:24:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5358
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Wraith is now less common
+  id: 1798
+  time: '2026-11-12T12:57:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5359
+- author: yglop
+  changes:
+  - type: Tweak
+    message: Armor value does not influence items price anymore.
+  - type: Fix
+    message: Reduced chairs inappropriate sale price.
+  id: 1799
+  time: '2026-11-12T13:01:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5349
+- author: LordZirconium
+  changes:
+  - type: Tweak
+    message: Made marathon station better
+  id: 1800
+  time: '2026-11-12T22:29:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5352
+- author: LordZirconium
+  changes:
+  - type: Fix
+    message: Fixed cluster station engineering department.
+  id: 1801
+  time: '2026-11-13T01:09:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5363
+- author: LordZirconium
+  changes:
+  - type: Add
+    message: Reactorslop added to Packed
+  id: 1802
+  time: '2026-11-13T11:45:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5364
+- author: VictorJob
+  changes:
+  - type: Tweak
+    message: Changed sprites for the inspector, holster, and evidence markers.
+  id: 1803
+  time: '2026-11-13T11:46:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5360
