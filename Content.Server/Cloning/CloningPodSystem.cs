@@ -158,17 +158,15 @@ public sealed partial class CloningPodSystem : EntitySystem
         args.PushMarkup(Loc.GetString("cloning-pod-biomass", ("number", _material.GetMaterialAmount(ent.Owner, ent.Comp.RequiredMaterial))));
     }
 
-    public bool TryCloning(EntityUid uid, EntityUid bodyToClone, Entity<MindComponent>? mindEnt, CloningPodComponent? clonePod, float failChanceModifier = 1) // Trauma - made mindEnt nullable
+    public bool TryCloning(EntityUid uid, EntityUid bodyToClone, Entity<MindComponent> mindEnt, CloningPodComponent? clonePod, float failChanceModifier = 1)
     {
-        if (mindEnt == null) ; // Trauma - made mindEnt nullable
-
         if (!Resolve(uid, ref clonePod))
             return false;
 
         if (HasComp<ActiveCloningPodComponent>(uid))
             return false;
 
-        // var mind = mindEnt.Comp; // Trauma - allow automated cloning mindless
+        var mind = mindEnt.Comp;
         // Goobstation - allowing cloning living people
         /*
         if (ClonesWaitingForMind.TryGetValue(mind, out var clone))
@@ -247,8 +245,7 @@ public sealed partial class CloningPodSystem : EntitySystem
 
         // <Trauma> - allow automated cloning mindless
         _containerSystem.Insert(mob.Value, clonePod.BodyContainer);
-        if (_mindSystem.TryGetMind(bodyToClone, out var mindId, out var mind) &&
-            mind.UserId != null &&
+        if (mind.UserId != null &&
             _playerManager.TryGetSessionById(mind.UserId.Value, out var client))
         {
             var cloneMindReturn = AddComp<BeingClonedComponent>(mob.Value);
@@ -256,7 +253,7 @@ public sealed partial class CloningPodSystem : EntitySystem
             cloneMindReturn.Parent = uid;
             cloneMindReturn.Original = bodyToClone; // Goobstation
             //ClonesWaitingForMind.Add(mind, mob.Value); // Goobstation: use mindId
-            _euiManager.OpenEui(new AcceptCloningEui(mindId, mind, this), client);
+            _euiManager.OpenEui(new AcceptCloningEui(mindEnt, mind, this), client);
         }
         // </Trauma>
 
