@@ -1,0 +1,10 @@
+- type: entity
+  id: ClothingBeltHolster
+  components:
+  - type: Appearance
+  - type: ItemMapper
+    mapLayers:
+      icon-filled:
+        whitelist:
+          tags:
+          - Sidearm
