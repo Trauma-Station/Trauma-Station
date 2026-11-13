@@ -62,22 +62,18 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
     {
         base.Update(frameTime);
 
+        if (_net.IsClient)
+            return; // no point to predict other players' diseases + often missing data
 
         if (_timing.CurTime < _lastUpdated + _updateInterval)
             return;
 
         _lastUpdated += _updateInterval;
 
-        if (!_timing.IsFirstTimePredicted)
-            return;
-
         var query = EntityQueryEnumerator<DiseaseCarrierComponent>();
         // add to a list so that we can EnsureComp disease carriers while we're looping over them without erroring
         _carriers.Clear();
-        while (query.MoveNext(out var uid, out var comp))
-        {
-            _carriers.Add((uid, comp));
-        }
+        _carriers.AddRange(query);
 
         foreach (var carrier in _carriers)
         {
