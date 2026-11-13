@@ -73,7 +73,10 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
         var query = EntityQueryEnumerator<DiseaseCarrierComponent>();
         // add to a list so that we can EnsureComp disease carriers while we're looping over them without erroring
         _carriers.Clear();
-        _carriers.AddRange(query);
+        foreach (var ent in query)
+        {
+            _carriers.Add(ent);
+        }
 
         foreach (var carrier in _carriers)
         {
