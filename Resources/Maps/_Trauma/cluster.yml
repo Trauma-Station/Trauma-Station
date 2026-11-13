@@ -7495,11 +7495,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 35.5,-10.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 3753
-      configurators:
-      - invalid
 - proto: AltarSpawner
   entities:
   - uid: 319
@@ -37018,12 +37013,6 @@ entities:
     - type: Transform
       parent: 2
       pos: 30.5,-17.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 1317
-      - 3753
-      configurators:
-      - invalid
   - uid: 5414
     components:
     - type: Transform
@@ -37599,12 +37588,6 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: 30.5,-11.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 3753
-      - 1317
-      configurators:
-      - invalid
   - uid: 5527
     components:
     - type: Transform
@@ -37994,12 +37977,6 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: 30.5,-10.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 3753
-      - 1317
-      configurators:
-      - invalid
   - uid: 5700
     components:
     - type: Transform
@@ -38026,12 +38003,6 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: 31.5,-2.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 3753
-      - 1317
-      configurators:
-      - invalid
 - proto: Fireplace
   entities:
   - uid: 5600
@@ -52555,11 +52526,6 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: 32.5,-11.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 3753
-      configurators:
-      - invalid
     - type: AtmosPipeColor
       color: '#0055CCFF'
   - uid: 13165
@@ -52589,11 +52555,6 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: 31.5,-11.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 3753
-      configurators:
-      - invalid
     - type: AtmosPipeColor
       color: '#990000FF'
   - uid: 7452
@@ -53434,11 +53395,6 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: 31.5,-4.5
-    - type: DeviceNetwork
-      deviceLists:
-      - 3753
-      configurators:
-      - invalid
     - type: AtmosPipeColor
       color: '#990000FF'
   - uid: 13166
