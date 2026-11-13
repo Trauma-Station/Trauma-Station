@@ -9,6 +9,7 @@
     BuriedTruck: 1
     RadioPost: 1
     RussianOutpost: 1
+    HauntedMansion: 1
   dungeonRuins:
     CommonRuin5x5: 40
 
@@ -42,3 +43,9 @@
   name: glacier-russian-outpost
   path: /Maps/_Trauma/Glacier/russian_outpost.yml
   priority: 4
+
+- type: lavalandGridRuin
+  id: HauntedMansion
+  name: glacier-haunted-mansion
+  path: /Maps/_Trauma/Glacier/haunted_mansion.yml
+  priority: 5
