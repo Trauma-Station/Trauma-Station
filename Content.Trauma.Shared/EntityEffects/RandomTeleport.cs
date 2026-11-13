@@ -2,6 +2,7 @@
 
 using Content.Shared.Destructible.Thresholds;
 using Content.Shared.EntityEffects;
+using Content.Shared.Teleportation.Components;
 using Content.Shared.Teleportation.Systems;
 using Content.Trauma.Shared.LinkedEntityContainer;
 using Content.Trauma.Shared.Teleportation.Systems;
