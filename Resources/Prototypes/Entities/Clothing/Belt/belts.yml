@@ -150,6 +150,15 @@
     size: Ginormous
     shape:
     - 0,0,4,1
+  # <Trauma>
+  - type: Appearance
+  - type: ItemMapper
+    mapLayers:
+      icon-filled:
+        whitelist:
+          tags:
+          - Sidearm
+  # </Trauma>
 
 - type: entity
   parent: [ClothingBeltHolster, BaseSyndicateContraband] # Goob - inherit from regular holster
