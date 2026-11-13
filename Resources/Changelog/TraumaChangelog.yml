@@ -16661,3 +16661,10 @@ Entries:
   id: 1802
   time: '2026-11-13T11:45:38.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5364
+- author: VictorJob
+  changes:
+  - type: Tweak
+    message: Changed sprites for the inspector, holster, and evidence markers.
+  id: 1803
+  time: '2026-11-13T11:46:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5360
