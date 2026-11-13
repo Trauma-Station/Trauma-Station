@@ -8,7 +8,7 @@ namespace Content.Trauma.Shared.LinkedEntityContainer;
 public sealed partial class LinkedEntityContainerSystem : EntitySystem
 {
     [SubscribeLocalEvent]
-    protected override void OnShutdown(Entity<LinkedEntityContainerComponent> ent, ref ComponentShutdown args)
+    protected void OnShutdown(Entity<LinkedEntityContainerComponent> ent, ref ComponentShutdown args)
     {
         PredictedDel(ent.Comp.Uid);
     }

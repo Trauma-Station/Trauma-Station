@@ -32,7 +32,5 @@
   components:
   - type: Transform
     anchored: true
-  - type: Physics # idk if i need it acually
-    bodyType: Static
   - type: Visibility
     layer: 8 # admin layer visibility, even tho there is no sprite...
