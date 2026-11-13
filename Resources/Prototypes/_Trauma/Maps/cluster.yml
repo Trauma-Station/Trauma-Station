@@ -54,7 +54,7 @@
             SecurityCadet: [ 2, 2 ]
             # Cargo
             Quartermaster: [ 1, 1 ]
-            SalvageSpecialist: [ -1, -1 ]
+            SalvageSpecialist: [ 2, 2 ]
             CargoTechnician: [ 2, 2 ]
             # Civilian
             Passenger: [ -1, -1 ]
