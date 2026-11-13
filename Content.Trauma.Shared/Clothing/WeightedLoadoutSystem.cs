@@ -3,9 +3,9 @@
 using System.Linq;
 using Content.Shared.Body;
 using Content.Shared.Clothing;
-using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Inventory;
 using Content.Shared.Random.Helpers;
+using Content.Shared.Roles;
 using Content.Shared.Station.Systems;
 using Content.Trauma.Common.Inventory;
 using Content.Trauma.Shared.Clothing.Components;
@@ -20,7 +20,6 @@ public sealed partial class WeightedLoadoutSystem : EntitySystem
     [Dependency] private IGameTiming _timing = default!;
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private LoadoutSystem _loadout = default!;
-    [Dependency] private SharedHandsSystem _hands = default!;
     [Dependency] private StationSpawningSystem _station = default!;
 
     /// <summary>
@@ -33,6 +32,15 @@ public sealed partial class WeightedLoadoutSystem : EntitySystem
         "shoes", "belt", "id", "pocket1", "pocket2", "ears", "gloves", "suitstorage"
     };
 
+    /// <summary>
+    /// Carries rolled inhand items so they can go through <see cref="StationSpawningSystem.EquipStartingGear"/>.
+    /// </summary>
+    private sealed class HandsLoadout : IEquipmentLoadout
+    {
+        public Dictionary<ProtoId<InventorySlotPrototype>, EntProtoId> Equipment { get; set; } = new();
+        public List<EntProtoId> Inhand { get; set; } = new();
+        public Dictionary<ProtoId<InventorySlotPrototype>, List<EntProtoId>> Storage { get; set; } = new();
+    }
 
     [SubscribeLocalEvent(after: [typeof(InitialBodySystem)])]
     private void OnMapInit(Entity<WeightedLoadoutComponent> ent, ref MapInitEvent args)
@@ -82,13 +90,19 @@ public sealed partial class WeightedLoadoutSystem : EntitySystem
             _inventory.SpawnItemInSlot(uid, slot, item, silent: true, force: true);
         }
 
-        foreach (var pool in archetype.Hands)
+        if (archetype.Hands.Count > 0)
         {
-            if (pool.Items.Count == 0 || !random.Prob(pool.Chance))
-                continue;
+            var hands = new HandsLoadout();
+            foreach (var pool in archetype.Hands)
+            {
+                if (pool.Items.Count == 0 || !random.Prob(pool.Chance))
+                    continue;
 
-            var item = PredictedSpawnAtPosition(random.Pick(pool.Items), Transform(uid).Coordinates);
-            _hands.PickupOrDrop(uid, item);
+                hands.Inhand.Add(random.Pick(pool.Items));
+            }
+
+            if (hands.Inhand.Count > 0)
+                _station.EquipStartingGear(uid, hands, raiseEvent: false);
         }
     }
 }
