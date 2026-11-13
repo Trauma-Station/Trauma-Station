@@ -245,7 +245,8 @@ public sealed partial class CloningPodSystem : EntitySystem
 
         // <Trauma> - allow automated cloning mindless
         _containerSystem.Insert(mob.Value, clonePod.BodyContainer);
-        if (mind.UserId != null &&
+        if (mind != null &&
+            mind.UserId != null &&
             _playerManager.TryGetSessionById(mind.UserId.Value, out var client))
         {
             var cloneMindReturn = AddComp<BeingClonedComponent>(mob.Value);
