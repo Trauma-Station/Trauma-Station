@@ -58,7 +58,7 @@ public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<Tran
 
             var linkedComp = EnsureComp<LinkedEntityContainerComponent>(portal);
             linkedComp.Uid = targetEnt;
-            Ditry(portal, linkedComp);
+            Dirty(portal, linkedComp);
         }
     }
 }

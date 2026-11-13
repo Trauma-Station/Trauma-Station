@@ -49,7 +49,7 @@ public sealed partial class ToLinkedEntityTeleportEffectSystem : EntityEffectSys
 
             var linkedComp = EnsureComp<LinkedEntityContainerComponent>(portal);
             linkedComp.Uid = destination.Uid;
-            Ditry(portal, linkedComp);
+            Dirty(portal, linkedComp);
         }
     }
 }
