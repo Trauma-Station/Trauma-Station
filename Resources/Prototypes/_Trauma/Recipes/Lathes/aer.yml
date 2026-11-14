@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: latheRecipe
+  id: AerSensorCircuitboard
+  result: AerSensorCircuitboard
+  completetime: 6
+  materials:
+    Steel: 100
+    Glass: 500
+
+- type: latheRecipe
+  id: AerScanner
+  result: AerScanner
+  completetime: 6
+  materials:
+    Plastic: 200
+    Glass: 150
