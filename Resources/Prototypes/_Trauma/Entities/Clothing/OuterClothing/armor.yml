@@ -160,8 +160,8 @@
     reduction: 1
   - type: HeldSpeedModifier
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHelmetRevFlame
+    clothingPrototype: ClothingHelmetRevFlame
+    slot: head
   - type: SelfExtinguisher
     cooldown: 1
     requiresIgniteFromGasImmune: false
@@ -169,7 +169,7 @@
       path: /Audio/_Trauma/Revs/flamethrower.ogg
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container
+      toggleable-clothing: !type:ContainerSlot
 
 - type: entity
   parent: ClothingOuterArmorTemplar

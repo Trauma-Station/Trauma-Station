@@ -23,14 +23,8 @@ public sealed partial class ClothingCoatingSystem : EntitySystem
             return;
 
         EntityManager.AddComponents(target, ent.Comp.Components, false);
-        if (TryComp<ToggleableClothingComponent>(target, out var toggleable))
-        {
-            // apply it to modsuit parts etc as well
-            foreach (var part in toggleable.ClothingUids.Keys)
-            {
-                EntityManager.AddComponents(part, ent.Comp.Components, false);
-            }
-        }
+        if (TryComp<ToggleableClothingComponent>(target, out var toggleable) && toggleable.ClothingUid is { } part)
+            EntityManager.AddComponents(part, ent.Comp.Components, false);
 
         var coated = EnsureComp<CoatedClothingComponent>(target);
         coated.CoatingNames.Add(ent.Comp.CoatingName);

@@ -2,7 +2,7 @@
 
 using Content.Shared.Alert;
 
-namespace Content.Goobstation.Shared.Clothing.Components;
+namespace Content.Trauma.Shared.Clothing.Sealable;
 
 [RegisterComponent]
 [NetworkedComponent, AutoGenerateComponentState]
@@ -24,7 +24,7 @@ public sealed partial class SealableClothingRequiresPowerComponent : Component
     public float MovementSpeedPenalty = 0.3f;
 
     [DataField, AutoNetworkedField]
-    public bool IsPowered = false;
+    public bool IsPowered;
 
     /// <summary>
     /// Alert to show for suit power.

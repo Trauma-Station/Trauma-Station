@@ -42,9 +42,8 @@
   - type: HeldSpeedModifier
   - type: StasisProtection
   - type: StasisBlinkProvider
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitChronolegioneer
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitChronolegioneer
   - type: ModifyDelayedKnockdown
     cancel: true
   - type: StaminaResistance
@@ -79,9 +78,8 @@
     walkModifier: 0.8
     sprintModifier: 0.8
   - type: HeldSpeedModifier
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitCybersunStealth
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHardsuitCybersunStealth
   - type: Tag
     tags:
     - Hardsuit
@@ -135,8 +133,7 @@
     sprintModifier: 0.5
   - type: HeldSpeedModifier
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitDreadnought
+    clothingPrototype: ClothingHeadHelmetHardsuitDreadnought
   - type: Tag
     tags:
     - Hardsuit
@@ -190,9 +187,8 @@
     sprintModifier: 0.85
     walkModifier: 0.85
   - type: HeldSpeedModifier
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
-      head: ClothingHeadHelmetVoidsuitSecurity
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetVoidsuitSecurity
   - type: ModifyDelayedKnockdown # Goobstation
     delayDelta: 2
     knockdownTimeDelta: -2
@@ -211,8 +207,7 @@
   - type: Clothing
     sprite: _Goobstation/Clothing/OuterClothing/Hardsuits/hos-expi.rsi
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitHeadOfSecurityExperimental
+    clothingPrototype: ClothingHeadHelmetHardsuitHeadOfSecurityExperimental
   - type: ClothingAutoInject
     reagents:
       Epinephrine: 10
@@ -258,8 +253,7 @@
     walkModifier: 0.95
   - type: HeldSpeedModifier
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitExperimentalNanorep
+    clothingPrototype: ClothingHeadHelmetHardsuitExperimentalNanorep
   - type: FireProtection
     reduction: 0.5
 
@@ -278,8 +272,7 @@
   - type: MedievalAccent
     relayAccent: true
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadSinguloth
+    clothingPrototype: ClothingHeadSinguloth
 
 # Vox raider hardsuit
 
@@ -294,8 +287,7 @@
   - type: Clothing
     sprite: _Goobstation/Clothing/OuterClothing/Hardsuits/vox-raiders-stealth.rsi
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitVoxRaiderStealth
+    clothingPrototype: ClothingHeadHelmetHardsuitVoxRaiderStealth
   - type: ClothingConditions
     reason: entity-condition-popup-not-vox-raider
     conditions:
@@ -315,5 +307,4 @@
   - type: Clothing
     sprite: _Goobstation/Clothing/OuterClothing/Hardsuits/detective.rsi
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHelmetHardsuitDetective
+    clothingPrototype: ClothingHeadHelmetHardsuitDetective

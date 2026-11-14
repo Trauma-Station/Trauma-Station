@@ -14,12 +14,17 @@ using Content.Trauma.Shared.Viewcone;
 using Content.Trauma.Shared.Waypointer.Events;
 using Content.Trauma.Shared.Weapons.SheathCounterattack;
 using Content.Trauma.Common.Projectiles;
+using Content.Trauma.Shared.Xenomorphs;
+using Content.Shared.Clothing.Components;
+using Content.Trauma.Common.Inventory;
+using Content.Shared.Clothing.EntitySystems;
 
 namespace Content.Trauma.Shared.Inventory;
 
 public sealed partial class TraumaInventorySystem : EntitySystem
 {
     [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private ToggleableClothingSystem _toggleable = default!;
 
     public override void Initialize()
     {
@@ -41,5 +46,28 @@ public sealed partial class TraumaInventorySystem : EntitySystem
         SubscribeLocalEvent<InventoryComponent, BeforeDamageChangedEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, SpeechFontOverrideEvent>(_inventory.RelayEvent);
         SubscribeLocalEvent<InventoryComponent, GotHitByProjectileEvent>(_inventory.RelayEvent);
+        SubscribeLocalEvent<InventoryComponent, FaceHuggerEquipAttemptEvent>(_inventory.RelayEvent);
+    }
+
+    [SubscribeLocalEvent]
+    private void OnAttachedTransfer(Entity<AttachedClothingComponent> ent, ref InventoryItemTransferEvent args)
+    {
+        args.Handled = true;
+    }
+
+    [SubscribeLocalEvent]
+    private void OnToggleableTransfer(Entity<ToggleableClothingComponent> ent, ref InventoryItemTransferEvent args)
+    {
+        if (ent.Comp.ClothingUid is not { } uid || ent.Comp.Container is not { } container ||
+            container.Contains(uid)) // If it's not toggled - transfer normally
+            return;
+
+        args.Handled = true;
+        _inventory.TryUnequip(args.Source, args.Slot, true, true, triggerHandContact: true);
+        if (!_inventory.TryEquip(args.Target, ent, args.Slot, true, true, triggerHandContact: true))
+            return;
+
+        // Otherwise toggle after transfer
+        _toggleable.ToggleClothing(args.Target, ent, ent.Comp);
     }
 }

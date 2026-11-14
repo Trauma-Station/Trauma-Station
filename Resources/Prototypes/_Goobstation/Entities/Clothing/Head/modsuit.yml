@@ -63,7 +63,6 @@
     - Snout
     - HeadTop
     - HeadSide
-  - type: FaceHuggerBlocker
 
 - type: entity
   abstract: true

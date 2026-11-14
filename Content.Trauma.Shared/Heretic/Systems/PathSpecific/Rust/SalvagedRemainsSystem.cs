@@ -24,11 +24,6 @@ public sealed partial class SalvagedRemainsSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<InventoryComponent, MoveEvent>(OnMove);
-
-        SubscribeLocalEvent<SalvagedRemainsComponent, ClothingGotEquippedEvent>(OnGotEquipped);
-        SubscribeLocalEvent<SalvagedRemainsComponent, ClothingGotUnequippedEvent>(OnGotUnequipped);
-
         Subs.SubscribeWithRelay<SalvagedRemainsComponent, CalculateTackleModifierEvent>(OnCalculateTackleModifier,
             baseEvent: false,
             held: false);
@@ -42,11 +37,13 @@ public sealed partial class SalvagedRemainsSystem : EntitySystem
         args.CanTackle = false;
     }
 
+    [SubscribeLocalEvent]
     private void OnGotUnequipped(Entity<SalvagedRemainsComponent> ent, ref ClothingGotUnequippedEvent args)
     {
         Toggle(ent, false, args.Wearer);
     }
 
+    [SubscribeLocalEvent]
     private void OnGotEquipped(Entity<SalvagedRemainsComponent> ent, ref ClothingGotEquippedEvent args)
     {
         if (!_heretic.IsHereticOrGhoul(args.Wearer))
@@ -55,6 +52,7 @@ public sealed partial class SalvagedRemainsSystem : EntitySystem
         Toggle(ent, _ability.IsOnRust(args.Wearer), args.Wearer);
     }
 
+    [SubscribeLocalEvent]
     private void OnMove(Entity<InventoryComponent> ent, ref MoveEvent args)
     {
         if (args.OldPosition == args.NewPosition)
@@ -71,12 +69,9 @@ public sealed partial class SalvagedRemainsSystem : EntitySystem
     {
         _toggle.TrySetActive(uid, state, user);
 
-        if (!_toggleableQuery.TryComp(uid, out var toggleable))
+        if (!_toggleableQuery.TryComp(uid, out var toggleable) || toggleable.ClothingUid is not { } clothingUid)
             return;
 
-        foreach (var clothingUid in toggleable.ClothingUids.Keys)
-        {
-            _toggle.TrySetActive(clothingUid, state, user);
-        }
+        _toggle.TrySetActive(clothingUid, state, user);
     }
 }

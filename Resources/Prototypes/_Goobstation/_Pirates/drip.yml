@@ -31,8 +31,7 @@
     walkModifier: 0.90
     sprintModifier: 0.90
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: GoobClothingHeadHelmetHardsuitSpirate
+    clothingPrototype: GoobClothingHeadHelmetHardsuitSpirate
 
 - type: entity
   parent: ClothingHeadHelmetBase

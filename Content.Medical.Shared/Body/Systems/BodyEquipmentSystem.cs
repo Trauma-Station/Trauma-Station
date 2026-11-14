@@ -16,7 +16,7 @@ public sealed partial class BodyEquipmentSystem : EntitySystem
     [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
 
-    private EntityQuery<InventoryComponent> _inventoryQuery;
+    [Dependency] private EntityQuery<InventoryComponent> _inventoryQuery = default!;
 
     // TODO SHITMED: make this a field on OrganCategoryPrototype or something??
     public static readonly Dictionary<BodyPartType, string[]> PartInventorySlots = new()
@@ -27,17 +27,7 @@ public sealed partial class BodyEquipmentSystem : EntitySystem
         { BodyPartType.Foot, [ "shoes" ] }
     };
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        _inventoryQuery = GetEntityQuery<InventoryComponent>();
-
-        SubscribeLocalEvent<BodyEquipmentComponent, IsEquippingTargetAttemptEvent>(OnEquippingTargetAttempt);
-        SubscribeLocalEvent<BodyEquipmentComponent, CheckEquipmentPartEvent>(OnCheckEquipmentPart);
-        SubscribeLocalEvent<BodyEquipmentComponent, OrganRemovedFromEvent>(OnOrganRemovedFrom);
-    }
-
+    [SubscribeLocalEvent]
     private void OnEquippingTargetAttempt(Entity<BodyEquipmentComponent> ent, ref IsEquippingTargetAttemptEvent args)
     {
         if (GetInventoryPart(args.Slot) is not {} part ||
@@ -51,20 +41,22 @@ public sealed partial class BodyEquipmentSystem : EntitySystem
         args.Cancel();
     }
 
-    private void OnCheckEquipmentPart(Entity<BodyEquipmentComponent> ent, ref CheckEquipmentPartEvent args)
+    [SubscribeLocalEvent]
+    private void OnCheckEquipmentPart(Entity<BodyEquipmentComponent> ent, ref CheckEquipmentMissingPartEvent args)
     {
-        // If there's no body part associated with the slot, just allow it
-        if (GetInventoryPart(args.Slot) is not {} part)
+        // If there's no body part associated with the slot, mark it as missing
+        if (GetInventoryPart(args.Slot) is not { } part)
         {
-            args.Handled = true;
+            args.Missing = true;
             return;
         }
 
-        // only allow if this body has the required part
-        if (HasBodyPart(ent, part))
-            args.Handled = true;
+        // If we don't have the part, mark it as missing
+        if (!HasBodyPart(ent, part))
+            args.Missing = true;
     }
 
+    [SubscribeLocalEvent]
     private void OnOrganRemovedFrom(Entity<BodyEquipmentComponent> ent, ref OrganRemovedFromEvent args)
     {
         DropPartItems(ent.Owner, args.Organ.Owner);

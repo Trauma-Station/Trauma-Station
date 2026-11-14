@@ -152,20 +152,12 @@
   parent: ClothingOuterJacketBase
   id: ClothingOuterJacketToggleableBase
   components:
-  # <Trauma>
-  - type: UserInterface
-    interfaces:
-      enum.ToggleClothingUiKey.Key:
-        type: ToggleableClothingBoundUserInterface
-      enum.StorageUiKey.Key:
-        type: StorageBoundUserInterface
   - type: ToggleableClothing
-    clothingPrototypes: # changed to dict for modsuits
-      head: ClothingHeadHatHoodWinterDefault
-  # </Trauma>
+    clothingPrototype: ClothingHeadHatHoodWinterDefault
+    slot: head
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container {}
+      toggleable-clothing: !type:ContainerSlot {}
       storagebase: !type:Container
         ents: []
 
@@ -245,14 +237,12 @@
         Heat: 0.90
         Radiation: 0.25
   - type: ToggleableClothing
+    slot: head
     verbText: toggle-clothing-verb-helmet
+    action: ActionToggleSuitPiece
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container {}
-  - type: UserInterface
-    interfaces:
-      enum.ToggleClothingUiKey.Key:
-        type: ToggleableClothingBoundUserInterface
+      toggleable-clothing: !type:ContainerSlot {}
   - type: GroupExamine
   - type: Tag
     tags:
@@ -266,12 +256,12 @@
   abstract: true
   components:
   - type: ToggleableClothing
-    #slot: head # Trauma - killed by modsuits
+    slot: head
     verbText: toggle-clothing-verb-helmet
-    #action: ActionToggleSuitPiece # Trauma
+    action: ActionToggleSuitPiece
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container {} # Trauma - removed Slot
+      toggleable-clothing: !type:ContainerSlot {}
 
 - type: entity
   abstract: true
@@ -279,19 +269,15 @@
   id: ClothingOuterBaseToggleable
   name: hoodie with hood
   components:
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
-      head: ClothingHeadHatHoodWinterDefault
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodWinterDefault
+    slot: head
     verbText: toggle-clothing-verb-hood
   - type: ContainerContainer
     containers:
-      toggleable-clothing: !type:Container {}
+      toggleable-clothing: !type:ContainerSlot {}
       storagebase: !type:Container
         ents: []
-  - type: UserInterface
-    interfaces:
-      enum.ToggleClothingUiKey.Key:
-        type: ToggleableClothingBoundUserInterface
 
 - type: entity
   abstract: true

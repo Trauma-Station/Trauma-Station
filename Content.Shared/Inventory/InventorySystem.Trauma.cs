@@ -2,7 +2,6 @@ using Content.Shared.Random;
 using Content.Trauma.Common.Inventory;
 using Robust.Shared.Map;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Timing;
 
 namespace Content.Shared.Inventory;
 
@@ -19,19 +18,8 @@ public partial class InventorySystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp) || Transform(ent).MapID == MapId.Nullspace)
             return;
 
-        foreach (var slot in ent.Comp.Slots)
-        {
-            if (slot.Name != slotName)
-                continue;
-
-            if (!TryGetSlotContainer(ent, slotName, out var container, out _, ent.Comp) ||
-                container.ContainedEntity is not { } item ||
-                !_containerSystem.Remove(item, container))
-                break;
-
-            _transform.AttachToGridOrMap(item);
-            _randomHelper.RandomOffset(item, 0.5f);
-            return;
-        }
+        if (TryUnequip(ent, slotName, out var item, silent: true, force: true, inventory: ent.Comp) &&
+            !_containerSystem.IsEntityInContainer(item.Value))
+            _randomHelper.RandomOffset(item.Value, 0.5f);
     }
 }

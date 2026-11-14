@@ -15,9 +15,6 @@ public sealed partial class FaceHuggerComponent : Component
     public ProtoId<OrganCategoryPrototype> InfectionTarget = "Torso";
 
     [DataField]
-    public DamageSpecifier DamageOnImpact = new();
-
-    [DataField]
     public DamageSpecifier DamageOnInfect = new();
 
     [DataField]
@@ -68,15 +65,6 @@ public sealed partial class FaceHuggerComponent : Component
 
     [DataField]
     public TimeSpan AttachAttemptDelay = TimeSpan.FromSeconds(5);
-
-    [DataField]
-    public DamageSpecifier MaskBlockDamage = new()
-    {
-        DamageDict = new()
-        {
-            ["Slash"] = 5
-        }
-    };
 
     [DataField]
     public SoundSpecifier MaskBlockSound = new SoundCollectionSpecifier("MetalThud");

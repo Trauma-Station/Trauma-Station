@@ -139,8 +139,7 @@
         Slash: 0.9
         Heat: 0.8
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodWinterCapFancy
+    clothingPrototype: ClothingHeadHatHoodWinterCapFancy
 
 # CentralCommand
 
@@ -354,9 +353,7 @@
   - type: Clothing
     sprite: _ShitChap/Clothing/OuterClothing/Misc/adept.rsi
   - type: ToggleableClothing
-    stripDelay: null
-    clothingPrototypes:
-      head: ClothingHeadHatHelmetAdept
+    clothingPrototype: ClothingHeadHatHelmetAdept
 
 - type: entity
   parent: ClothingOuterArmorTemplar
@@ -380,9 +377,7 @@
   - type: Clothing
     sprite: _ShitChap/Clothing/OuterClothing/Misc/monkrobe.rsi
   - type: ToggleableClothing
-    stripDelay: null
-    clothingPrototypes:
-      head: ClothingHeadHatHelmetMonk
+    clothingPrototype: ClothingHeadHatHelmetMonk
 
 - type: entity
   parent: ClothingOuterArmorTemplar

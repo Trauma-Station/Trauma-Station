@@ -25,3 +25,9 @@
   id: Special
   components:
   - !Remove MindShield # it's an implant...
+
+- type: cloningSettings
+  id: BaseEquipmentBlacklist
+  equipmentBlacklist:
+    components:
+    - MultiAttachedClothing

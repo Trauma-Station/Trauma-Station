@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Clothing;
+// </Trauma>
 using System.Diagnostics.CodeAnalysis;
 using Content.Shared.Armor;
 using Content.Shared.Clothing.Components;
@@ -212,6 +215,12 @@ public abstract partial class InventorySystem
         // in that case, we check accesibility for the owner-entity instead.
         if (TryComp(itemUid, out AttachedClothingComponent? attachedComp))
             itemUid = attachedComp.AttachedUid;
+
+        // <Trauma> - see above
+        if (TryComp(itemUid, out MultiAttachedClothingComponent? multiAttachedComp))
+            itemUid = multiAttachedComp.AttachedUid;
+        // </Trauma>
+
 
         // Can the actor reach the target?
         if (actor != target && !(_interactionSystem.InRangeUnobstructed(actor, target) && _containerSystem.IsInSameOrParentContainer(actor, target)))
@@ -492,11 +501,17 @@ public abstract partial class InventorySystem
         }
 
         // give other systems a chance do stuff before unequipping
-        var beforeGettingUnequippedEvent = new BeforeGettingUnequippedEvent(actor, target, removedItem.Value, slotDefinition);
-        var beforeUnequipEvent = new BeforeUnequipEvent(actor, target, removedItem.Value, slotDefinition);
-
+        // <Trauma> - made these events cancellable, passed force
+        var beforeGettingUnequippedEvent = new BeforeGettingUnequippedEvent(actor, target, removedItem.Value, slotDefinition, force);
         RaiseLocalEvent(removedItem.Value, beforeGettingUnequippedEvent);
+        if (beforeGettingUnequippedEvent.Cancelled)
+            return false;
+
+        var beforeUnequipEvent = new BeforeUnequipEvent(actor, target, removedItem.Value, slotDefinition, force);
         RaiseLocalEvent(target, beforeUnequipEvent);
+        if (beforeUnequipEvent.Cancelled)
+            return false;
+        // </Trauma>
 
         // actually unequip the item
         if (!_containerSystem.Remove(removedItem.Value, slotContainer, force: force, reparent: reparent))
@@ -623,7 +638,7 @@ public abstract partial class InventorySystem
         {
             // Give me liberty, give me death
             // TODO: Give me an API that can tell the difference between a virtual item and an electropak being removed.
-            if (!HasComp<AttachedClothingComponent>(item))
+            if (!HasComp<AttachedClothingComponent>(item) && !HasComp<MultiAttachedClothingComponent>(item)) // Trauma - multi attached
                 args.Giblets.Add(item);
         }
     }
