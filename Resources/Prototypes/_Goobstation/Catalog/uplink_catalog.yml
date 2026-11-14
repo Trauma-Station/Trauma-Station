@@ -16,7 +16,7 @@
   description: uplink-carpcaller-desc
   productEntity: CarpCaller
   cost:
-    Telecrystal: 40 # you can't really do much with it
+    Telecrystal: 35 # you can't really do much with it
   categories:
     -  UplinkDisruption
 
@@ -388,7 +388,7 @@
   icon: { sprite: /Textures/_Goobstation/Clothing/OuterClothing/Hardsuits/cybersunstealth.rsi, state: icon }
   productEntity: ClothingBackpackDuffelSyndicateStealthHardsuitBundle
   cost:
-    Telecrystal: 75
+    Telecrystal: 70
   categories:
   - UplinkWearables
 
