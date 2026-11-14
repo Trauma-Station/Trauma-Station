@@ -1,0 +1,36 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: ShadowPortal
+  id: BluespaceRiftPortal
+  name: bluespace rift
+  components:
+  - type: Portal
+    canTeleportToOtherMaps: true
+    randomTeleport: false
+  - type: Sprite
+    color: "#273189"
+  - type: PointLight
+    color: "#273189"
+  - type: TimedDespawn
+    lifetime: 1
+
+- type: entity
+  parent: BluespaceRiftPortal
+  id: BluespaceRiftPortal3Seconds
+  suffix: 3 seconds
+  components:
+  - type: TimedDespawn
+    lifetime: 3
+
+# dummy item to store destination pos. I belive it's better then hardcoding solution to this single system.
+- type: entity
+  id: BluespaceRiftPortalDestination
+  categories: [ HideSpawnMenu ]
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Transform
+    anchored: true
+  - type: Visibility
+    layer: 8 # admin layer visibility, even tho there is no sprite...
