@@ -20,9 +20,6 @@
   components:
   - type: Sprite
     sprite: _Goobstation/Objects/Misc/sandevistan.rsi
-  - type: OrganActions
-    actions:
-    - ActionToggleSandevistan
   - type: OrganComponents
     onAdd:
     - type: SandevistanUser

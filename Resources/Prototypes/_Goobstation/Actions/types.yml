@@ -147,7 +147,6 @@
     checkCanInteract: false
     useDelay: 3
     itemIconStyle: NoItem
-    raiseOnUser: true
   - type: InstantAction
     event: !type:ToggleSandevistanEvent
 
