@@ -1,5 +1,3 @@
-// <Trauma> - no more free money
-/*
 using Content.Shared.Armor;
 using Content.Shared.Cargo;
 using Content.Shared.Damage.Prototypes;
@@ -9,6 +7,7 @@ namespace Content.Server.Armor;
 /// <inheritdoc/>
 public sealed partial class ArmorSystem : SharedArmorSystem
 {
+    /* Trauma - no more free money
     public override void Initialize()
     {
         base.Initialize();
@@ -30,6 +29,5 @@ public sealed partial class ArmorSystem : SharedArmorSystem
             args.Price += component.PriceMultiplier * damageType.ArmorPriceFlat * modifier.Value;
         }
     }
+    */
 }
-*/
-// </Trauma>
