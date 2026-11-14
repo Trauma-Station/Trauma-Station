@@ -26,3 +26,8 @@
   materials:
     Cloth: 3000
     Steel: 500
+
+- type: latheRecipe
+  parent: BaseGoldBorgModuleRecipe
+  id: BorgModuleEnergyShotgun
+  result: BorgModuleEnergyShotgun

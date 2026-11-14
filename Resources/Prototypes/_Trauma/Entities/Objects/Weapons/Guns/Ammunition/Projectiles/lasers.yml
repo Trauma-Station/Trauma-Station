@@ -1,0 +1,22 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: BulletLaser
+  id: BulletLaserMini
+  components:
+  - type: Projectile
+    impactEffect: BulletImpactEffectOrangeDisabler
+    damage:
+      types:
+        Heat: 6
+
+- type: entity
+  parent: BulletLaser
+  id: BulletLaserSpreadMini
+  categories: [ HideSpawnMenu ]
+  name: lethal laser barrage
+  components:
+  - type: ProjectileSpread
+    proto: BulletLaserMini
+    count: 3
+    spread: 20

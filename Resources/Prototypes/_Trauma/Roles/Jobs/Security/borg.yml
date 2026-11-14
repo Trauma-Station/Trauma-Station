@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: job
+  id: BorgSecurity
+  name: job-name-borg-security
+  description: job-description-borg-security
+  playTimeTracker: JobBorgSecurity
+  setPreference: false
+  requirements:
+  - !type:RoleTimeRequirement
+    role: JobBorg
+    time: 5h # Requires experience with crewsimov and cyborg roleplay.
+  - !type:DepartmentTimeRequirement
+    department: Security
+    time: 4h # Requires detailed knowledge of corporate law.
+  icon: JobIconBorgSecurity # Unused
+  supervisors: job-supervisors-security
+  guides: [ Security, Cyborgs ]
+  jobEntity: BorgChassisSecurityFilled
+  applyTraits: true

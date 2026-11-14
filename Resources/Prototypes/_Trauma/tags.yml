@@ -81,6 +81,12 @@
   id: Bonfire # Heretic: ashen ritual ingredient
 
 - type: Tag
+  id: BorgModuleSecurity # Cyborg module category for security
+
+- type: Tag
+  id: BorgModuleArmory # Cyborg module category for armory weapons
+
+- type: Tag
   id: BowImprovised # Construction: AltarConvertOrange, given to improvised shortbow, used to get Iradomini nullrod's altar
 
 - type: Tag
@@ -333,6 +339,24 @@
 
 - type: Tag
   id: Scimitar # Used for scabbad whitelist
+
+- type: Tag
+  id: SecBorgHead # Used for sec borg construction
+
+- type: Tag
+  id: SecBorgLArm # Used for sec borg construction
+
+- type: Tag
+  id: SecBorgLLeg # Used for sec borg construction
+
+- type: Tag
+  id: SecBorgRArm # Used for sec borg construction
+
+- type: Tag
+  id: SecBorgRLeg # Used for sec borg construction
+
+- type: Tag
+  id: SecBorgTorso # Used for sec borg construction
 
 - type: Tag
   id: SharpMedal # Heretic - Sharp Medal item, used for blades boomerang throw logic

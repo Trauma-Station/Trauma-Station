@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC0-1.0",
-    "copyright": "icon-omnimed-surgery made by ghostlydragon8 (github)",
+    "copyright": "icon-omnimed-surgery made by ghostlydragon8 (github), icon-stun-baton, icon-sec-radio, and icon-truncheon by Reestock",
     "size": {
         "x": 32,
         "y": 32
@@ -9,6 +9,15 @@
     "states": [
         {
           "name": "icon-omnimed-surgery"
+        },
+        {
+          "name": "icon-stun-baton"
+        },
+        {
+          "name": "icon-sec-radio"
+        },
+        {
+          "name": "icon-truncheon"
         }
     ]
 }

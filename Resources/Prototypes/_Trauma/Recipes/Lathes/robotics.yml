@@ -12,3 +12,41 @@
     Plasma: 300
     Gold: 150
     Silver: 150
+
+# Security cyborg body
+- type: latheRecipe
+  parent: BaseRoboticsRecipe
+  id: SecCyborgEndoskeleton
+  result: SecCyborgEndoskeleton
+  materials:
+    Steel: 1500
+
+- type: latheRecipe
+  parent: BaseBorgLimbRecipe
+  id: LeftArmSecBorg
+  result: LeftArmSecBorg
+
+- type: latheRecipe
+  parent: BaseBorgLimbRecipe
+  id: RightArmSecBorg
+  result: RightArmSecBorg
+
+- type: latheRecipe
+  parent: BaseBorgLimbRecipe
+  id: LeftLegSecBorg
+  result: LeftLegSecBorg
+
+- type: latheRecipe
+  parent: BaseBorgLimbRecipe
+  id: RightLegSecBorg
+  result: RightLegSecBorg
+
+- type: latheRecipe
+  parent: BaseBorgLimbRecipe
+  id: LightHeadSecBorg
+  result: LightHeadSecBorg
+
+- type: latheRecipe
+  parent: BaseBorgLimbRecipe
+  id: TorsoSecBorg
+  result: TorsoSecBorg
