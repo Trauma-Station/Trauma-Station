@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: OrganAnimalLungs
+  components:
+  - type: StaticPrice
+    price: 30
+
+- type: entity
+  id: OrganAnimalHeart
+  components:
+  - type: StaticPrice
+    price: 30
+
+- type: entity
+  id: OrganAnimalStomach
+  components:
+  - type: StaticPrice
+    price: 30
+
+- type: entity
+  id: OrganAnimalLiver
+  components:
+  - type: StaticPrice
+    price: 30
+
+- type: entity
+  id: OrganAnimalKidneys
+  components:
+  - type: StaticPrice
+    price: 30
