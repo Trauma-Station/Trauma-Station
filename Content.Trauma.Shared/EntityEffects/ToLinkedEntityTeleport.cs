@@ -5,9 +5,9 @@ using Content.Shared.Hands.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Teleportation.Systems;
-using Content.Trauma.Shared.LinkedEntityContainer;
 using Content.Trauma.Shared.Teleportation;
 using Robust.Shared.Spawners;
+using Robust.Shared.Utility;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
@@ -33,25 +33,19 @@ public sealed partial class ToLinkedEntityTeleportEffectSystem : EntityEffectSys
     {
         var handEnt = _hands.GetActiveItemOrSelf((ent.AsNullable()));
 
-        if (!TryComp<LinkedEntityContainerComponent>(handEnt, out var linkedEntComp) || !linkedEntComp.Uid.IsValid())
+        if (!_link.GetLink(handEnt, out var linkedEnt) ||
+            !linkedEnt.Value.IsValid())
             return;
-        var targetEnt = linkedEntComp.Uid;
 
         var oldPos = Transform(ent).Coordinates;
-        var newPos = Transform(targetEnt).Coordinates;
+        var newPos = Transform(linkedEnt.Value).Coordinates;
 
         _teleport.Teleport(ent.Owner, newPos, user: args.User);
 
         if (args.Effect.SpawnPortal != default)
         {
             var portal = PredictedSpawnAtPosition(args.Effect.SpawnPortal, oldPos);
-            _link.OneWayLink(portal, targetEnt, true);
-
-            var linkedComp = EnsureComp<LinkedEntityContainerComponent>(portal);
-            linkedComp.Uid = linkedEntComp.Uid;
-            Dirty(portal, linkedComp);
-
-            RemComp(handEnt, linkedEntComp);
+            _link.TryLink(portal, linkedEnt.Value, true);
         }
     }
 }

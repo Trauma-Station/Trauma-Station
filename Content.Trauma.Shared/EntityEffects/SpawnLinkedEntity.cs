@@ -1,29 +1,31 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.EntityEffects;
-using Content.Trauma.Shared.LinkedEntityContainer;
+using Content.Shared.Teleportation.Components;
+using Content.Shared.Teleportation.Systems;
 
 namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
-/// Spawns linked entity. Used with `LinkedEntityContainer`.
+/// Spawns an ent that will be destination target for linked portal.
 /// </summary>
 public sealed partial class SpawnLinkedEntity : EntityEffectBase<SpawnLinkedEntity>
 {
     /// <summary>
-    /// Spawns one way portal.
+    /// Destination target ent for linked portal.
     /// </summary>
     [DataField]
     public EntProtoId LinkedEnt = "BluespaceRiftPortalDestination";
 }
 
-public sealed partial class SpawnLinkedEntityEffectSystem : EntityEffectSystem<LinkedEntityContainerComponent, SpawnLinkedEntity>
+public sealed partial class SpawnLinkedEntityEffectSystem : EntityEffectSystem<LinkedEntityComponent, SpawnLinkedEntity>
 {
-    protected override void Effect(Entity<LinkedEntityContainerComponent> ent, ref EntityEffectEvent<SpawnLinkedEntity> args)
+    [Dependency] private LinkedEntitySystem _link = default!;
+
+    protected override void Effect(Entity<LinkedEntityComponent> ent, ref EntityEffectEvent<SpawnLinkedEntity> args)
     {
         var coords = Transform(ent).Coordinates;
         var newEnt = PredictedSpawnAtPosition(args.Effect.LinkedEnt, coords);
-        ent.Comp.Uid = newEnt;
-        Dirty(ent);
+        _link.OneWayLink(ent, newEnt);
     }
 }

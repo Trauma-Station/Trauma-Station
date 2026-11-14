@@ -4,7 +4,6 @@ using Content.Shared.Destructible.Thresholds;
 using Content.Shared.EntityEffects;
 using Content.Shared.Teleportation.Components;
 using Content.Shared.Teleportation.Systems;
-using Content.Trauma.Shared.LinkedEntityContainer;
 using Content.Trauma.Shared.Teleportation.Systems;
 using Robust.Shared.Spawners;
 
@@ -54,11 +53,7 @@ public sealed partial class RandomTeleportEffectSystem : EntityEffectSystem<Tran
 
             var targetEnt = PredictedSpawnAtPosition(args.Effect.PortalDestinationEnt, newPos);
 
-            _link.OneWayLink(portal, targetEnt, true);
-
-            var linkedComp = EnsureComp<LinkedEntityContainerComponent>(portal);
-            linkedComp.Uid = targetEnt;
-            Dirty(portal, linkedComp);
+            _link.TryLink(portal, targetEnt, true);
         }
     }
 }
