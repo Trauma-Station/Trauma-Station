@@ -266,11 +266,11 @@
     ears: ClothingHeadsetScience
 
 - type: startingGear
-  id: ReinforcementBeaconDClass
+  id: ReinforcementBeaconExPop
   equipment:
     jumpsuit: ClothingUniformJumpsuitPrisoner
     shoes: ClothingShoesColorBlack
-    id: DClassIDCard
+    id: ExPopPDA
 
 # Cargo
 

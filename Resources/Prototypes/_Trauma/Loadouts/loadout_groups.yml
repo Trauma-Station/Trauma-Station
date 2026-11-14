@@ -106,78 +106,78 @@
 #D-Class
 #Jumpsuits
 - type: loadoutGroup
-  id: DClassJumpsuit
-  name: loadout-group-dclass-jumpsuit
+  id: ExPopJumpsuit
+  name: loadout-group-expop-jumpsuit
   loadouts:
   - PrisonerJumpsuit
   - PrisonerJumpskirt
 
 - type: loadoutGroup
-  id: DClassFace
-  name: loadout-group-dclass-mask
+  id: ExPopFace
+  name: loadout-group-expop-mask
   minLimit: 0
   loadouts:
-  - DClassMask
+  - ExPopMask
 
 - type: loadoutGroup
-  id: DClassGloves
-  name: loadout-group-dclass-gloves
+  id: ExPopGloves
+  name: loadout-group-expop-gloves
   minLimit: 0
   loadouts:
-  - DClassGloves
+  - ExPopGloves
 
 - type: loadoutGroup
-  id: DClassBackpacks
+  id: ExPopBackpacks
   name: loadout-group-backpack
   loadouts:
-  - DClassBackpack
-  - DClassSatchel
-  - DClassDuffel
-  - DClassMessenger
-  - DClassElectropack
+  - ExPopBackpack
+  - ExPopSatchel
+  - ExPopDuffel
+  - ExPopMessenger
+  - ExPopElectropack
 
 - type: loadoutGroup
-  id: DClassNeck
-  name: loadout-group-dclass-neck
+  id: ExPopNeck
+  name: loadout-group-expop-neck
   minLimit: 0
   loadouts:
-  - DClassMantle
+  - ExPopMantle
   - OldNeckWrap
 
 - type: loadoutGroup
-  id: DClassOuterClothing
-  name: loadout-group-dclass-outerclothing
+  id: ExPopOuterClothing
+  name: loadout-group-expop-outerclothing
   minLimit: 0
   loadouts:
   - OrangeWintercoat
 
 - type: loadoutGroup
-  id: DClassShoes
-  name: loadout-group-dclass-shoes
+  id: ExPopShoes
+  name: loadout-group-expop-shoes
   loadouts:
   - OrangeShoes
   - BlackShoes
   - WinterBoots
 
 - type: loadoutGroup
-  id: DClassEnvirohelm
-  name: loadout-group-dclass-envirohelm
+  id: ExPopEnvirohelm
+  name: loadout-group-expop-envirohelm
   minLimit: 1
   maxLimit: 1
   loadouts:
-  - DClassEnvirohelm
+  - ExPopEnvirohelm
 
 - type: loadoutGroup
-  id: DClassEnvirosuit
-  name: loadout-group-dclass-envirosuit
+  id: ExPopEnvirosuit
+  name: loadout-group-expop-envirosuit
   minLimit: 1
   maxLimit: 1
   loadouts:
-  - DClassEnvirosuit
+  - ExPopEnvirosuit
 
 - type: loadoutGroup
-  id: DClassEnvirogloves
-  name: loadout-group-dclass-envirogloves
+  id: ExPopEnvirogloves
+  name: loadout-group-expop-envirogloves
   minLimit: 1
   maxLimit: 1
   loadouts:

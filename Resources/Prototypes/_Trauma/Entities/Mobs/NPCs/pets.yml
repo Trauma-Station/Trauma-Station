@@ -24,7 +24,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitPrisoner
     mask: CigaretteSpent
-    id: DClassIDCard # fuck you
+    id: ExPopIDCard # fuck you
 
 - type: entity
   parent: [ SolutionWeapon, SolutionTiny ]

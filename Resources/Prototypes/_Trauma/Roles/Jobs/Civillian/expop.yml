@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: job
-  id: DClass
-  name: job-name-d-class
-  description: job-description-dclass
-  playTimeTracker: JobDClass
-  startingGear: DClassGear
-  icon: "JobIconDClass"
+  id: ExPop
+  name: job-name-ex-pop
+  description: job-description-expop
+  playTimeTracker: JobExPop
+  startingGear: ExPopGear
+  icon: "JobIconExPop"
   supervisors: job-supervisors-everyone
   access:
   - Maintenance
@@ -25,14 +25,14 @@
       - Assistant
 
 - type: startingGear
-  id: DClassGear
+  id: ExPopGear
   equipment:
-    id: DClassPDA
+    id: ExPopPDA
     ears: ClothingHeadsetGrey
 
 - type: chameleonOutfit
-  id: DClassChameleonOutfit
-  job: DClass
+  id: ExPopChameleonOutfit
+  job: ExPop
   equipment:
     head: ClothingHeadHatWelding
     eyes: ClothingEyesGlassesCheapSunglasses
@@ -42,5 +42,5 @@
     outerClothing: ClothingOuterWinterColorOrange
     gloves: ClothingHandsGlovesColorGray
     shoes: ClothingShoesColorOrange
-    id: DClassPDA
+    id: ExPopPDA
     back: ClothingBackpackElectropack

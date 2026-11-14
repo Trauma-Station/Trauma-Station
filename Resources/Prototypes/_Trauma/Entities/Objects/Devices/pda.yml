@@ -142,22 +142,22 @@
 
 - type: entity
   parent: BasePDA
-  id: DClassPDA
-  name: D-Class PDA
+  id: ExPopPDA
+  name: Ex-Pop PDA
   description: Holding this generally revokes what few rights you would otherwise have.
   components:
   - type: Sprite
     sprite: _Trauma/Objects/Devices/pda.rsi
-    state: pda-dclass
+    state: pda-expop
   - type: Icon
     sprite: _Trauma/Objects/Devices/pda.rsi
-    state: pda-dclass
+    state: pda-expop
   - type: Appearance
     appearanceDataInit:
       enum.PdaVisuals.PdaType: !type:String
-        pda-dclass
+        pda-expop
   - type: Pda
-    id: DClassIDCard
+    id: ExPopIDCard
   - type: PdaBorderColor
     borderColor: "#eb7732"
     accentHColor: "#2e2e2e"

@@ -9,7 +9,7 @@
   description: department-Civilian-description-trauma
   color: "#6C6A78" # assistant grey
   roles:
-  - DClass
+  - ExPop
   - RadioHost
   - PartyMaker
   - PhoneMerchant

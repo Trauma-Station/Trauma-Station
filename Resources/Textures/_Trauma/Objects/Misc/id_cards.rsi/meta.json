@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Created by Armok for TraumaStation, idphonemerchant & idrancher made by John John, iddclass made by Reestock",
+  "copyright": "Created by Armok for TraumaStation, idphonemerchant & idrancher made by John John, idexpop made by UnionsCap",
   "size": {
     "x": 32,
     "y": 32
@@ -20,7 +20,7 @@
       "name": "idrancher"
     },
     {
-      "name": "iddclass"
+      "name": "idexpop"
     }
   ]
 }

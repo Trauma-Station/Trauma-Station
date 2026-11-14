@@ -63,8 +63,8 @@ reinforcement-geneticist-desc = Hire a geneticist to research genetics and explo
 reinforcement-research-assistant-name = Hire Research Assistant
 reinforcement-research-assistant-desc = Hire a research assistant to support scientific operations. Minimum arrival time of three minutes.
 
-reinforcement-dclass-name = Purchase D-Class
-reinforcement-dclass-desc = Hire a disposable, taken from some backwater planet. Minimum arrival time of three minutes.
+reinforcement-expop-name = Purchase Ex-Pop
+reinforcement-expop-desc = Hire an expendable, taken from some backwater planet. Minimum arrival time of three minutes.
 
 reinforcement-cargo-name = Hire Cargo Technician
 reinforcement-cargo-desc = Hire a cargo technician to move crates and do bounties. Minimum arrival time of three minutes.
