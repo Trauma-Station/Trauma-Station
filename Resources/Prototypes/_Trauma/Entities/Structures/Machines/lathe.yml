@@ -147,6 +147,7 @@
     whitelist:
       tags:
       - Sheet
+      - SilverBar
   - type: Construction
     node: printing press
 
@@ -170,6 +171,7 @@
     whitelist:
       tags:
       - Sheet
+      - SilverBar
   - type: Transform
     noRot: false
   - type: Sprite
