@@ -6,7 +6,7 @@ using Content.Trauma.Shared.LinkedEntityContainer;
 namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
-/// Spawns linked entity. Used with `LinkedEntityContainerComponent`.
+/// Spawns linked entity. Used with `LinkedEntityContainer`.
 /// </summary>
 public sealed partial class SpawnLinkedEntity : EntityEffectBase<SpawnLinkedEntity>
 {

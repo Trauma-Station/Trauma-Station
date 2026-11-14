@@ -31,11 +31,11 @@ public sealed partial class ToLinkedEntityTeleportEffectSystem : EntityEffectSys
 
     protected override void Effect(Entity<HandsComponent> ent, ref EntityEffectEvent<ToLinkedEntityTeleport> args)
     {
-        var handEntity = _hands.GetActiveItemOrSelf((ent.AsNullable()));
+        var handEnt = _hands.GetActiveItemOrSelf((ent.AsNullable()));
 
-        if (!TryComp<LinkedEntityContainerComponent>(handEntity, out var destination) || !destination.Uid.IsValid())
+        if (!TryComp<LinkedEntityContainerComponent>(handEnt, out var linkedEntComp) || !linkedEntComp.Uid.IsValid())
             return;
-        var targetEnt = destination.Uid;
+        var targetEnt = linkedEntComp.Uid;
 
         var oldPos = Transform(ent).Coordinates;
         var newPos = Transform(targetEnt).Coordinates;
@@ -48,8 +48,10 @@ public sealed partial class ToLinkedEntityTeleportEffectSystem : EntityEffectSys
             _link.OneWayLink(portal, targetEnt, true);
 
             var linkedComp = EnsureComp<LinkedEntityContainerComponent>(portal);
-            linkedComp.Uid = destination.Uid;
+            linkedComp.Uid = linkedEntComp.Uid;
             Dirty(portal, linkedComp);
+
+            RemComp(handEnt, linkedEntComp);
         }
     }
 }

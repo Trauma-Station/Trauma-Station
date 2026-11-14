@@ -3,7 +3,7 @@
 namespace Content.Trauma.Shared.LinkedEntityContainer;
 
 /// <summary>
-/// Spawns an ent on startup and stores its uid. Used with ToLinkedEntityTeleport EntityEffect.
+/// Stores ent uid. Used with ToLinkedEntityTeleport and RandomTeleport EntityEffect.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class LinkedEntityContainerComponent : Component

@@ -3,7 +3,7 @@
 namespace Content.Trauma.Shared.LinkedEntityContainer;
 
 /// <summary>
-/// Despawns linked ent of `LinkedEntityContainerComponent` on shutdown.
+/// Despawns linked ent on shutdown.
 /// </summary>
 public sealed partial class LinkedEntityContainerSystem : EntitySystem
 {
