@@ -288,6 +288,14 @@
     prefab: null
 
 - type: entity
+  parent: NuclearReactorSmall
+  id: NuclearReactorEmptySmall
+  suffix: Empty
+  components:
+  - type: NuclearReactor
+    prefab: Empty
+
+- type: entity
   parent: NuclearReactorMelted
   id: NuclearReactorSmallMelted
   name: small nuclear reactor
