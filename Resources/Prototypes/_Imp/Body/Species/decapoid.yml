@@ -304,8 +304,6 @@
   - type: VisualOrganMarkings
     markingData:
       group: Decapoid
-  - type: StaticPrice
-    price: 3000
 
 - type: entity
   id: OrganDecapoidLungs
@@ -315,8 +313,6 @@
   components:
   - type: Metabolizer
     metabolizerTypes: [ Decapoid ]
-  - type: StaticPrice
-    price: 4000
 
 - type: entity
   id: OrganDecapoidStomach
@@ -332,9 +328,6 @@
 - type: entity
   id: OrganDecapoidTongue
   parent: [OrganBaseTongue, OrganDecapoid]
-  components:
-  - type: StaticPrice
-    price: 1000
 
 - type: entity
   id: OrganDecapoidAppendix
@@ -347,20 +340,11 @@
 - type: entity
   id: OrganDecapoidHeart
   parent: [OrganBaseHeart, OrganDecapoid]
-  components:
-  - type: StaticPrice
-    price: 4000
 
 - type: entity
   id: OrganDecapoidLiver
   parent: [OrganBaseLiver, OrganDecapoid]
-  components:
-  - type: StaticPrice
-    price: 2500
 
 - type: entity
   id: OrganDecapoidKidneys
   parent: [OrganBaseKidneys, OrganDecapoid]
-  components:
-  - type: StaticPrice
-    price: 2000

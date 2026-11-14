@@ -1,9 +1,0 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-
-- type: entity
-  parent: [ OrganBaseLungs, OrganSlimePersonInternal, OrganSlimePersonMetabolizer ]
-  id: OrganSlimesLungs
-  name: gas sacs
-  components:
-  - type: Lung
-    alert: LowNitrogen

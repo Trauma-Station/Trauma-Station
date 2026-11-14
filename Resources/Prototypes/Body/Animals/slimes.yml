@@ -8,4 +8,4 @@
     organs:
       Torso: OrganSlimesTorso # Shitmed
       Stomach: OrganSlimePersonCore
-      Lungs: OrganSlimesLungs # Truma - sellable playable species organs
+      Lungs: OrganSlimePersonLungs

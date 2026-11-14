@@ -10,6 +10,6 @@
       Torso: OrganAnimalTorso # Shitmed
       Lungs: OrganAnimalLungs
       Heart: OrganAnimalHeart
-      Stomach: OrganMothroachStomach # Trauma - sellable playable species organs
+      Stomach: OrganMothStomach
       Liver: OrganAnimalLiver
       Kidneys: OrganAnimalKidneys
