@@ -722,9 +722,9 @@
     convertTo: WallCosmicCult
   # </Trauma>
   - type: Sprite
-    sprite: Structures/Walls/solid_rust.rsi
+    sprite: _Trauma/Structures/Walls/solid_rust.rsi
   - type: Icon
-    sprite: Structures/Walls/solid_rust.rsi
+    sprite: _Trauma/Structures/Walls/solid_rust.rsi
     state: rgeneric
   - type: Construction
     graph: Girder
@@ -1035,7 +1035,6 @@
         Quantity: 28
       - ReagentId: Carbon
         Quantity: 2
-  # </Trauma>
   - type: Sprite
     sprite: _Trauma/Structures/Walls/solid.rsi # Trauma
   - type: WallReplacementMarker
@@ -1044,6 +1043,7 @@
     node: wall
   - type: Icon
     sprite: _Trauma/Structures/Walls/solid.rsi # Trauma
+  # </Trauma>
   - type: RCDDeconstructable
     cost: 6
     delay: 8
@@ -1100,11 +1100,12 @@
   - type: RustedWall
   - type: CosmicCorruptible
     convertTo: WallCosmicCult
-  # </Trauma>
+
   - type: Sprite
-    sprite: Structures/Walls/solid_rust.rsi
+    sprite: _Trauma/Structures/Walls/solid_rust.rsi
   - type: Icon
-    sprite: Structures/Walls/solid_rust.rsi
+    sprite: _Trauma/Structures/Walls/solid_rust.rsi
+  # </Trauma>
     state: full
   - type: Construction
     graph: Girder
