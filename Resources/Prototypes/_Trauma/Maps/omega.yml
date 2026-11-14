@@ -6,6 +6,8 @@
   mapPath: /Maps/_Trauma/omega.yml
   minPlayers: 0
   maxPlayers: 35
+  ignoredRequiredEntities:
+  - NuclearFabricator # no space for a reactor, would need a lot of remapping
   stations:
     Omega:
       stationProto: StandardNanotrasenStation

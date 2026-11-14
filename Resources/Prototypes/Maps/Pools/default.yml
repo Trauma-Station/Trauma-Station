@@ -9,6 +9,7 @@
   - SpawnPointExtraAiCore # for maps with AI (almost all of them) to work with triumvirate station trait
   - MachineMaterialSilo # for main departments
   - MachineMasterMaterialSilo # for cargo to easily distribute mats to department silos
+  - NuclearFabricator # needed to get more fuel, a reactor is implied
   maps:
   - Atlas
   - Amber

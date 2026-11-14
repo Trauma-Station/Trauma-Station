@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 290.0.0
+  engineVersion: 295.0.3
   forkId: ""
   forkVersion: ""
-  time: 09/25/2026 07:37:39
-  entityCount: 9298
+  time: 11/11/2026 23:47:09
+  entityCount: 9309
 maps:
 - 1
 grids:
@@ -254,7 +254,7 @@ entities:
         -4,-1:
           data: AAAAAAAAAAAAAAAdHR0dHQAAAAAAAAAAAAAAHR0dHR0AAAAAAAAAAAAAHR0dHR0dAAAAAAAAAAAAAB0dHR0dHQAAAAAAAAAAAAAdHR0dHR0AAAAAAAAAAAAAHR0dHR0dAAAhISEhISEAAB0dHR0dHQAAISEhISEhBwcdHR0dHR0AACEhISEhIQcHBwcHBwcHAAAhISEhISEHBwcHBwcHBwAAISEhISEhBwcdHR0dHR0cACEhISEhIQcHHR0dHR0dHAAAAAAAAAcHBx0dHR0dHRwAAAAAAAAHBwcdHR0dHR0cAAAAHBwcBwcHHR0dHR0dHAAAABwcHAcHBx0dHR0dHQ==
         -3,-1:
-          data: HR0+Pj4+Pj4+Pj4+PgcHBx0dPj4+Pj4+Pj4+Pj4+BwcdHR0+Pj4+Pj4+Pj4+PgcHHR0dPj4+Pj4+Pj4+Pj4HBx0dHT4+Pj4+Pj4+CgoKCgodHR0+Pj4+Pj4+PgoKCgoKHR0dPj4+Pj4+Pj4KCgoKCh0dHQcHBwcHBwcHBwcHCgoHBwcHBwcHBwcHBwcHBwoKBwcHBwcHBwcHBwcHBwcNDR0dHT8/CAgICAgICA0NDQ0dHR0/PwgICAgICAgNDQ0NHR0dPz8ICAgICAgIDQ0NDR0dHT8/CAgICAgICCEPDw8dHR0dHR0dISEhISEhDw8PHR0dHR0dHSEhISEhIQ8PDw==
+          data: HR0+Pj4+Pj4+Pj4+PgcHBx0dPj4+Pj4+Pj4+Pj4+BwcdHR0+Pj4+Pj4+Pj4+PgcHHR0dPj4+Pj4+Pj4+Pj4HBx0dHT4+Pj4+Pj4+CgoKCgodHR0+Pj4+Pj4+PgoKCgoKHR0dPj4+Pj4+Pj4KCgoKCh0dHQcHBwcHBwcHBwcHCgoHBwcHBwcHBwcHBwcHBwoKBwcHBwcICAgICAgIDQ0NDR0dHT8/CAgICAgICA0NDQ0dHR0/PwgICAgICAgNDQ0NHR0dPz8ICAgICAgIDQ0NDR0dHT8/CAgICAgICCEPDw8dHR0dHR0dISEhISEhDw8PHR0dHR0dHSEhISEhIQ8PDw==
         -5,0:
           data: AAAAAAAcHBwcHBwcHBwcHAAAAAAAHBwcHBwcHBwcHBwAAAAAABwcHBwcHBwcHBwcAAAAAAAcHBwcHBwcHBwcHAAAAAAAHBwcHBwcHBwcHBwAAAAAABwcHBwcHBwcHBwcAAAAAAAcHBwcHBwcHBwcHAAAAAAAHBwcHBwcHBwcHBwAAAAAABwcHBwcHBwcHBwcAAAAAAAcHBwcHBwcHBwcHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
         -5,-1:
@@ -2381,6 +2381,11 @@ entities:
         - temperature: 293.15
           volume: 2500
           moles: {}
+        - temperature: 293.14975
+          volume: 2500
+          moles:
+            Oxygen: 21.824879
+            Nitrogen: 82.10312
         - temperature: 293.15
           volume: 2500
           moles:
@@ -2997,7 +3002,8 @@ entities:
           -10,-5:
             0: 65485
           -10,0:
-            0: 65535
+            0: 65533
+            5: 2
           -12,-6:
             2: 12796
             0: 32768
@@ -3033,8 +3039,8 @@ entities:
             0: 305
           -13,0:
             0: 34952
-            5: 48
-            6: 12288
+            6: 48
+            7: 12288
           -12,1:
             1: 30576
           -13,1:
@@ -3113,8 +3119,8 @@ entities:
             2: 119
           -14,0:
             0: 13107
-            5: 128
-            6: 32768
+            6: 128
+            7: 32768
           -14,1:
             0: 33011
           -14,2:
@@ -4633,7 +4639,7 @@ entities:
       pos: 4.5,19.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -103273.086
+      secondsUntilStateChange: -104272.14
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -5052,6 +5058,14 @@ entities:
     - type: Transform
       parent: 2
       pos: -37.5,4.5
+    - type: AmeController
+      injecting: True
+    - type: ContainerContainer
+      containers:
+        fuelSlot: !type:ContainerSlot
+          ent: 3202
+          showEnts: False
+          occludes: True
 - proto: AmeJar
   entities:
   - uid: 248
@@ -5059,6 +5073,62 @@ entities:
     - type: Transform
       parent: 2
       pos: -37.47869,0.48262978
+  - uid: 3202
+    components:
+    - type: Transform
+      parent: 247
+    - type: Physics
+      canCollide: False
+- proto: AmeShielding
+  entities:
+  - uid: 8757
+    components:
+    - type: Transform
+      parent: 2
+      pos: -38.5,3.5
+  - uid: 8768
+    components:
+    - type: Transform
+      parent: 2
+      pos: -38.5,2.5
+  - uid: 9075
+    components:
+    - type: Transform
+      parent: 2
+      pos: -38.5,1.5
+  - uid: 9082
+    components:
+    - type: Transform
+      parent: 2
+      pos: -37.5,3.5
+  - uid: 9111
+    components:
+    - type: Transform
+      parent: 2
+      pos: -37.5,2.5
+    - type: PointLight
+      radius: 2
+      enabled: True
+  - uid: 9118
+    components:
+    - type: Transform
+      parent: 2
+      pos: -37.5,1.5
+  - uid: 9119
+    components:
+    - type: Transform
+      parent: 2
+      pos: -36.5,3.5
+  - uid: 9120
+    components:
+    - type: Transform
+      parent: 2
+      pos: -36.5,2.5
+  - uid: 9121
+    components:
+    - type: Transform
+      parent: 2
+      pos: -36.5,1.5
 - proto: AnomalyScanner
   entities:
   - uid: 249
@@ -6121,16 +6191,18 @@ entities:
     - type: Transform
       parent: 2
       pos: 7.5,19.5
-  - uid: 3202
-    components:
-    - type: Transform
-      parent: 2
-      pos: -38.5,-6.5
-  - uid: 7449
+- proto: BlastDoorRobotics
+  entities:
+  - uid: 3417
     components:
     - type: Transform
       parent: 2
       pos: -37.5,-6.5
+  - uid: 7449
+    components:
+    - type: Transform
+      parent: 2
+      pos: -38.5,-6.5
 - proto: BookshelfFilled
   entities:
   - uid: 429
@@ -6376,6 +6448,14 @@ entities:
       parent: 2
       rot: -1.5707963267948966 rad
       pos: -63.5,0.5
+- proto: ButtonFrameGrey
+  entities:
+  - uid: 9309
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: -36.5,-4.5
 - proto: CableApcExtension
   entities:
   - uid: 467
@@ -20817,7 +20897,7 @@ entities:
     components:
     - type: Transform
       parent: 2
-      pos: -43.857506,-19.312864
+      pos: -43.818245,-19.268997
 - proto: ClothingHeadHatMimesoft
   entities:
   - uid: 3283
@@ -21037,7 +21117,7 @@ entities:
     components:
     - type: Transform
       parent: 2
-      pos: -43.886566,-19.623947
+      pos: -43.86942,-19.585752
 - proto: ClothingOuterRobesJudge
   entities:
   - uid: 3314
@@ -21724,13 +21804,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -19.5,18.5
-- proto: CrateEngineeringAMEShielding
+- proto: CrateEngineeringAMEJar
   entities:
-  - uid: 3417
+  - uid: 9308
     components:
     - type: Transform
       parent: 2
-      pos: -38.5,0.5
+      pos: -36.5,4.5
 - proto: CrateEngineeringCableBulk
   entities:
   - uid: 3418
@@ -47379,10 +47459,10 @@ entities:
       pos: -36.5,-4.5
     - type: DeviceLinkSource
       linkedPorts:
-        7449:
+        3417:
         - - Pressed
           - Toggle
-        3202:
+        7449:
         - - Pressed
           - Toggle
   - uid: 7283

@@ -6,6 +6,8 @@
   mapPath: /Maps/_Trauma/atlas.yml
   minPlayers: 0
   maxPlayers: 20
+  ignoredRequiredEntities:
+  - NuclearFabricator # would need big remapping or removing teg realistically
   stations:
     Atlas:
       stationProto: StandardNanotrasenStation
