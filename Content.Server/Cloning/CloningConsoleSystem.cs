@@ -162,13 +162,20 @@ namespace Content.Server.Cloning
             if (body is null)
                 return;
 
-            if (!_mindSystem.TryGetMind(body.Value, out var mindId, out var mind))
-                return;
+            // <Trauma> - allow automated cloning mindless
+            var mindEnt = new Entity<MindComponent>();
+            if (_mindSystem.TryGetMind(body.Value, out var mindId, out var mind))
+                mindEnt = (mindId, mind);
+            /*
 
             if (mind.UserId.HasValue == false || !_playerManager.ValidSessionId(mind.UserId.Value))
                 return;
 
             if (_cloningPodSystem.TryCloning(cloningPodUid, body.Value, (mindId, mind), cloningPod, scannerComp.CloningFailChanceMultiplier))
+            */
+            // </Trauma>
+
+            if (_cloningPodSystem.TryCloning(cloningPodUid, body.Value, mindEnt, cloningPod, scannerComp.CloningFailChanceMultiplier)) // Trauma - mindEnt
                 _adminLogger.Add(LogType.Action, LogImpact.Medium, $"{ToPrettyString(uid)} successfully cloned {ToPrettyString(body.Value)}.");
         }
 

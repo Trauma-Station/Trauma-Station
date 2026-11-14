@@ -33,3 +33,14 @@
   - type: AccessReader
     access: !Clear
     - [ "Research" ]
+
+- type: entity
+  id: ComputerCloningConsole
+  components:
+  - type: DeviceNetworkRequiresPower
+  - type: DeviceLinkSink
+    ports:
+    - Clone
+  - type: DeviceNetwork
+    deviceNetId: Wireless
+    receiveFrequencyId: BasicDevice
