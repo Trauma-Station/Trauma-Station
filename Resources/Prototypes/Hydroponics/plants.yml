@@ -1389,12 +1389,6 @@
     highHeatTolerance: 308 # 35°C
   - type: PlantChemicals
     chemicals:
-      # <Trauma>
-      Fresium:
-        min: 1
-        max: 5
-        potencyDivisor: 20
-      # </Trauma>
       CapsaicinOil:
         min: 1
         max: 10
