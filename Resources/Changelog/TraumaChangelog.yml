@@ -16698,3 +16698,10 @@ Entries:
   id: 1807
   time: '2026-11-15T01:21:10.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5377
+- author: Wizard25671
+  changes:
+  - type: Fix
+    message: Fixed chili peppers containing fresium instead of chilly peppers
+  id: 1808
+  time: '2026-11-15T09:25:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5381
