@@ -1,0 +1,5 @@
+- type: entity
+  id: OrganRuminantStomach
+  components:
+  - type: StaticPrice
+    price: 30
