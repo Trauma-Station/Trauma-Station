@@ -16668,3 +16668,33 @@ Entries:
   id: 1803
   time: '2026-11-13T11:46:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5360
+- author: VictorJob
+  changes:
+  - type: Tweak
+    message: Changed sprites for the MK58 and pistol magazines
+  id: 1804
+  time: '2026-11-14T16:59:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5374
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed armor not doing anything.
+  id: 1805
+  time: '2026-11-14T16:59:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5375
+- author: LordZirconium
+  changes:
+  - type: Tweak
+    message: Added genetics to Omega station.
+  id: 1806
+  time: '2026-11-15T01:19:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5379
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Increased the base brute resistances on the alien lab coat to 30%
+  - type: Fix
+    message: Fixed alien lab coat not having ballistic resistance
+  id: 1807
+  time: '2026-11-15T01:21:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5377
