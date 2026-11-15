@@ -77,7 +77,7 @@
     maxPortalRadius: 30
     minPortalRadius: 15
 
-# Rock Anom
+# Rock Anomaly
 
 - type: entity
   id: AnomalyRockBase
@@ -188,7 +188,6 @@
       - WallSpawnAsteroidSilver
       - WallSpawnAsteroidSilverCrab
 
-
 - type: entity
   id: AnomalyRockGold
   components:
@@ -201,17 +200,17 @@
         maxRange: 5
       spawns:
       - MobSpawnCrabGold
-  - settings:
-      spawnOnShutdown: true
-      minAmount: 2
-      maxAmount: 6
-      minRange: 2
-      maxRange: 5
-    spawns:
-    - WallSpawnAsteroid
-    - WallSpawnAsteroid
-    - WallSpawnAsteroidGold
-    - WallSpawnAsteroidGoldCrab
+    - settings:
+        spawnOnShutdown: true
+        minAmount: 2
+        maxAmount: 6
+        minRange: 2
+        maxRange: 5
+      spawns:
+      - WallSpawnAsteroid
+      - WallSpawnAsteroid
+      - WallSpawnAsteroidGold
+      - WallSpawnAsteroidGoldCrab
 
 - type: entity
   id: AnomalyRockIron
@@ -225,17 +224,17 @@
         maxRange: 5
       spawns:
       - MobSpawnCrabIron
-  - settings:
-      spawnOnShutdown: true
-      minAmount: 2
-      maxAmount: 6
-      minRange: 2
-      maxRange: 5
-    spawns:
-    - WallSpawnAsteroid
-    - WallSpawnAsteroid
-    - WallSpawnAsteroidIron
-    - WallSpawnAsteroidIronCrab
+    - settings:
+        spawnOnShutdown: true
+        minAmount: 2
+        maxAmount: 6
+        minRange: 2
+        maxRange: 5
+      spawns:
+      - WallSpawnAsteroid
+      - WallSpawnAsteroid
+      - WallSpawnAsteroidIron
+      - WallSpawnAsteroidIronCrab
 
 - type: entity
   id: AnomalyRockCoal
@@ -249,17 +248,17 @@
         maxRange: 5
       spawns:
       - MobSpawnCrabCoal
-  - settings:
-      spawnOnShutdown: true
-      minAmount: 2
-      maxAmount: 6
-      minRange: 2
-      maxRange: 5
-    spawns:
-    - WallSpawnAsteroid
-    - WallSpawnAsteroid
-    - WallSpawnAsteroidCoal
-    - WallSpawnAsteroidCoalCrab
+    - settings:
+        spawnOnShutdown: true
+        minAmount: 2
+        maxAmount: 6
+        minRange: 2
+        maxRange: 5
+      spawns:
+      - WallSpawnAsteroid
+      - WallSpawnAsteroid
+      - WallSpawnAsteroidCoal
+      - WallSpawnAsteroidCoalCrab
 
 - type: entity
   id: AnomalyFlesh
