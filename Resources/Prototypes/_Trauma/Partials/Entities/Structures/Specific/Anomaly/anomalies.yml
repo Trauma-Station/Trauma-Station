@@ -6,7 +6,7 @@
   - type: Anomaly
     minPointsPerSecond: 15
     maxPointsPerSecond: 90
-    growingPointMultiplier: 2.2
+    growingPointMultiplier: 2
     minPulseLength: 90
     maxPulseLength: 200
 
