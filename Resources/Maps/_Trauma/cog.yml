@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 291.0.0
+  engineVersion: 295.0.3
   forkId: ""
   forkVersion: ""
-  time: 10/29/2026 19:10:52
-  entityCount: 32029
+  time: 11/15/2026 21:32:59
+  entityCount: 32021
 maps:
 - 1
 grids:
@@ -9332,6 +9332,10 @@ entities:
         - temperature: 293.15
           volume: 2500
           moles:
+            Nitrogen: 103.92799
+        - temperature: 293.15
+          volume: 2500
+          moles:
             Oxygen: 6666.982
         - temperature: 293.15
           volume: 2500
@@ -9341,10 +9345,6 @@ entities:
           volume: 2500
           moles:
             Plasma: 6666.982
-        - temperature: 293.15
-          volume: 2500
-          moles:
-            Nitrogen: 103.92799
         tiles:
           0,0:
             0: 26215
@@ -10224,7 +10224,7 @@ entities:
             0: 61133
           8,-8:
             0: 61747
-            7: 136
+            4: 136
           8,-7:
             0: 4095
           8,-6:
@@ -10244,11 +10244,11 @@ entities:
             0: 4369
             2: 50244
           6,-3:
-            4: 48
-            5: 12288
+            5: 48
+            6: 12288
             2: 34952
           6,-2:
-            6: 48
+            7: 48
             1: 12288
             2: 34952
           6,-1:
@@ -10388,16 +10388,16 @@ entities:
             0: 44943
           8,-9:
             0: 12799
-            7: 32768
+            4: 32768
           9,-8:
-            7: 375
+            4: 375
             0: 28672
           9,-7:
             0: 1919
           9,-6:
             0: 61182
           9,-9:
-            7: 28672
+            4: 28672
             0: 255
           9,-5:
             0: 3822
@@ -79055,11 +79055,6 @@ entities:
       pos: -25.5,63.5
 - proto: ClosetChefFilled
   entities:
-  - uid: 12905
-    components:
-    - type: Transform
-      parent: 2
-      pos: 7.5,58.5
   - uid: 12906
     components:
     - type: Transform
@@ -84185,6 +84180,13 @@ entities:
     - type: Transform
       parent: 2
       pos: 36.5,-5.5
+- proto: DefaultStationBeaconTheater
+  entities:
+  - uid: 10668
+    components:
+    - type: Transform
+      parent: 2
+      pos: 4.5,57.5
 - proto: DefaultStationBeaconToolRoom
   entities:
   - uid: 13728
@@ -85039,12 +85041,6 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: -12.5,-4.5
-  - uid: 13876
-    components:
-    - type: Transform
-      parent: 2
-      rot: -1.5707963267948966 rad
-      pos: -19.5,50.5
   - uid: 13877
     components:
     - type: Transform
@@ -90718,30 +90714,6 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: -35.5,58.5
-  - uid: 14852
-    components:
-    - type: Transform
-      parent: 2
-      rot: 3.141592653589793 rad
-      pos: -19.5,51.5
-  - uid: 14853
-    components:
-    - type: Transform
-      parent: 2
-      rot: 3.141592653589793 rad
-      pos: -19.5,52.5
-  - uid: 14854
-    components:
-    - type: Transform
-      parent: 2
-      rot: 3.141592653589793 rad
-      pos: -19.5,53.5
-  - uid: 14855
-    components:
-    - type: Transform
-      parent: 2
-      rot: 3.141592653589793 rad
-      pos: -19.5,54.5
   - uid: 14856
     components:
     - type: Transform
@@ -104398,40 +104370,6 @@ entities:
       pos: 20.5,-11.5
     - type: AtmosPipeColor
       color: '#990000FF'
-  - uid: 16833
-    components:
-    - type: Transform
-      parent: 2
-      pos: 10.5,24.5
-  - uid: 16834
-    components:
-    - type: Transform
-      parent: 2
-      rot: 3.141592653589793 rad
-      pos: 9.5,24.5
-  - uid: 16835
-    components:
-    - type: Transform
-      parent: 2
-      rot: 1.5707963267948966 rad
-      pos: 9.5,27.5
-  - uid: 16836
-    components:
-    - type: Transform
-      parent: 2
-      pos: 13.5,27.5
-  - uid: 16837
-    components:
-    - type: Transform
-      parent: 2
-      rot: -1.5707963267948966 rad
-      pos: 13.5,24.5
-  - uid: 16838
-    components:
-    - type: Transform
-      parent: 2
-      rot: 1.5707963267948966 rad
-      pos: 12.5,24.5
   - uid: 16839
     components:
     - type: Transform
@@ -124895,40 +124833,6 @@ entities:
       parent: 2
       rot: 3.141592653589793 rad
       pos: 12.5,19.5
-  - uid: 19487
-    components:
-    - type: Transform
-      parent: 2
-      pos: 9.5,25.5
-  - uid: 19488
-    components:
-    - type: Transform
-      parent: 2
-      pos: 9.5,26.5
-  - uid: 19489
-    components:
-    - type: Transform
-      parent: 2
-      rot: -1.5707963267948966 rad
-      pos: 10.5,27.5
-  - uid: 19490
-    components:
-    - type: Transform
-      parent: 2
-      rot: -1.5707963267948966 rad
-      pos: 12.5,27.5
-  - uid: 19491
-    components:
-    - type: Transform
-      parent: 2
-      rot: 3.141592653589793 rad
-      pos: 13.5,25.5
-  - uid: 19492
-    components:
-    - type: Transform
-      parent: 2
-      rot: 3.141592653589793 rad
-      pos: 13.5,26.5
   - uid: 19493
     components:
     - type: Transform
@@ -142819,12 +142723,6 @@ entities:
     - type: Transform
       parent: 2
       pos: -45.5,-19.5
-  - uid: 22258
-    components:
-    - type: Transform
-      parent: 2
-      rot: 1.5707963267948966 rad
-      pos: 11.5,27.5
   - uid: 22259
     components:
     - type: Transform
@@ -142837,6 +142735,62 @@ entities:
       parent: 2
       rot: 1.5707963267948966 rad
       pos: -46.5,-18.5
+- proto: HeatExchangerInline
+  entities:
+  - uid: 10662
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: 12.5,25.5
+  - uid: 10666
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: 10.5,25.5
+  - uid: 10667
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: 11.5,25.5
+- proto: HeatExchangerInlineBend
+  entities:
+  - uid: 10659
+    components:
+    - type: Transform
+      parent: 2
+      pos: 10.5,24.5
+  - uid: 10660
+    components:
+    - type: Transform
+      parent: 2
+      rot: -1.5707963267948966 rad
+      pos: 13.5,24.5
+  - uid: 10661
+    components:
+    - type: Transform
+      parent: 2
+      rot: 1.5707963267948966 rad
+      pos: 9.5,25.5
+  - uid: 10663
+    components:
+    - type: Transform
+      parent: 2
+      rot: 3.141592653589793 rad
+      pos: 9.5,24.5
+  - uid: 10664
+    components:
+    - type: Transform
+      parent: 2
+      rot: 1.5707963267948966 rad
+      pos: 12.5,24.5
+  - uid: 10665
+    components:
+    - type: Transform
+      parent: 2
+      pos: 13.5,25.5
 - proto: Hemostat
   entities:
   - uid: 22261
@@ -178086,6 +178040,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -27.5,-39.5
+- proto: VendingMachineHappyHonk
+  entities:
+  - uid: 10658
+    components:
+    - type: Transform
+      parent: 2
+      pos: 7.5,58.5
 - proto: VendingMachineHydrobe
   entities:
   - uid: 27911
