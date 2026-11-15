@@ -129,6 +129,8 @@
     guides:
     - NuclearReactor
     - Power
+  - type: StaticPrice
+    price: 5000
 
 - type: entity
   id: TurbineSmall
@@ -161,6 +163,8 @@
     outletPos: -1, -1
     outletRot: 0
     arrowPrototype: TurbineSmallFlowArrow
+  - type: StaticPrice
+    price: 2500
 
 # Arrow to indicate flow
 - type: entity

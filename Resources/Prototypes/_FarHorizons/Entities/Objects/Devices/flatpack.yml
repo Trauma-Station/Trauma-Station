@@ -65,6 +65,8 @@
     - state: large
   - type: Flatpack
     entity: NuclearReactorEmpty
+  - type: StaticPrice
+    price: 10000
 
 - type: entity
   parent: [BaseStructureFlatpack, BaseEngineeringContraband]
@@ -78,6 +80,8 @@
     - state: large
   - type: Flatpack
     entity: NuclearReactorEmptySmall
+  - type: StaticPrice
+    price: 5000
 
 - type: entity
   parent: [BaseStructureFlatpack, BaseEngineeringContraband]
@@ -91,6 +95,8 @@
     - state: large
   - type: Flatpack
     entity: Turbine
+  - type: StaticPrice
+    price: 5000
 
 - type: entity
   parent: [BaseStructureFlatpack, BaseEngineeringContraband]
@@ -104,3 +110,5 @@
     - state: large
   - type: Flatpack
     entity: TurbineSmall
+  - type: StaticPrice
+    price: 2500

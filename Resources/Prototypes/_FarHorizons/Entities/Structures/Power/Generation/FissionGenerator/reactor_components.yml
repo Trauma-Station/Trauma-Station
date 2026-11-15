@@ -74,6 +74,8 @@
   - type: SentienceTarget
     flavorKind: station-event-random-sentience-flavor-inanimate
     weight: 0.2
+  - type: StaticPrice
+    price: 750
 
 - type: entity
   parent: [ BaseReactorFuelRod, BaseNuclearPropertiesCerenkite ]
@@ -153,6 +155,8 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 250
+  - type: StaticPrice
+    price: 400
 
 - type: entity
   parent: [ BaseReactorReflector, BaseNuclearPropertiesBohrum ]
@@ -250,6 +254,8 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 250
+  - type: StaticPrice
+    price: 200
 
 - type: entity
   parent: [ BaseReactorGasChannel, BaseNuclearPropertiesSteel ]
@@ -378,6 +384,8 @@
   - type: PhysicalComposition
     materialComposition:
       Steel: 250
+  - type: StaticPrice
+    price: 100
 
 - type: entity
   parent: [ BaseReactorHeatExchanger, BaseNuclearPropertiesSteel ]
