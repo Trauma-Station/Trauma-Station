@@ -43,7 +43,7 @@ public sealed partial class AnomalyGeneratorComponent : Component
     /// The amount of material needed to generate a single anomaly
     /// </summary>
     [DataField]
-    public int MaterialPerAnomaly = 1000; // Trauma - Was 1500, now only costs 10 phoron
+    public int MaterialPerAnomaly = 1500; // half a stack of plasma
 
     /// <summary>
     /// The random anomaly spawner entity

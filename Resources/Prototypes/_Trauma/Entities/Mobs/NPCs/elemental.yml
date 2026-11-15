@@ -15,8 +15,6 @@
   - type: PointLight
     color: "#fcf7f9"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -35,8 +33,6 @@
   - type: PointLight
     color: "#fcf7f9"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -55,8 +51,6 @@
   - type: PointLight
     color: "#3a758c"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -75,8 +69,6 @@
   - type: PointLight
     color: "#b3f1ff"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -95,8 +87,6 @@
   - type: PointLight
     color: "#8e8e8e"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -115,8 +105,6 @@
   - type: PointLight
     color: "#D6CE7B"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -135,8 +123,6 @@
   - type: PointLight
     color: "#776291"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -155,8 +141,6 @@
   - type: PointLight
     color: "#2c4c3b"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -178,8 +162,6 @@
   - type: PointLight
     color: "#4a7a3a"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -198,8 +180,6 @@
   - type: PointLight
     color: "#819cb5"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -218,8 +198,6 @@
   - type: PointLight
     color: "#96424f"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -238,8 +216,6 @@
   - type: PointLight
     color: "#5C6274"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -258,8 +234,6 @@
   - type: PointLight
     color: "#FFC8C8"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -278,8 +252,6 @@
   - type: PointLight
     color: "#621800"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -298,8 +270,6 @@
   - type: PointLight
     color: "#94363a"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -320,8 +290,6 @@
   - type: PointLight
     color: "#ff5936"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -340,8 +308,6 @@
   - type: PointLight
     color: "#ffdf97"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -360,8 +326,6 @@
   - type: PointLight
     color: "#ff3636"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -380,8 +344,6 @@
   - type: PointLight
     color: "#520e30"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
@@ -400,8 +362,6 @@
   - type: PointLight
     color: "#ffd648"
   - type: Sprite
-    drawdepth: Mobs
-    sprite: Mobs/Aliens/elemental.rsi
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
