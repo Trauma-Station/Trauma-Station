@@ -16689,3 +16689,12 @@ Entries:
   id: 1806
   time: '2026-11-15T01:19:18.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5379
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Increased the base brute resistances on the alien lab coat to 30%
+  - type: Fix
+    message: Fixed alien lab coat not having ballistic resistance
+  id: 1807
+  time: '2026-11-15T01:21:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5377
