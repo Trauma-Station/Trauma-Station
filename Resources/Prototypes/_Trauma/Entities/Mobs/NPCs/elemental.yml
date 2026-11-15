@@ -158,7 +158,7 @@
         Quantity: 100
   - type: MeleeChemicalInjector
     solution: bloodstream
-    transferAmount: 2.5
+    transferAmount: 2
   - type: PointLight
     color: "#4a7a3a"
   - type: Sprite
@@ -259,21 +259,21 @@
 
 - type: entity
   parent: ReagentSlime
-  id: ReagentSlimeCrabon
-  suffix: Crabon
+  id: ReagentSlimeMold
+  suffix: Mold
   components:
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
-      - ReagentId: Crabon
+      - ReagentId: Mold
         Quantity: 100
   - type: PointLight
-    color: "#94363a"
+    color: "#8a9a5b"
   - type: Sprite
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
-      color: "#94363a"
+      color: "#8a9a5b"
 
 # "Helpful" Reagent Slimes
 
