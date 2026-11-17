@@ -339,7 +339,7 @@ public sealed partial class MultiToggleableClothingSystem : EntitySystem
             return;
 
         if (!TerminatingOrDeleted(args.EquipTarget) &&
-            _inventory.TryEquip(args.EquipTarget, stored, args.Slot, silent: true, force: true, triggerHandContact: true))
+            _inventory.TryEquip(args.EquipTarget, stored, args.Slot, silent: true, triggerHandContact: true))
             return;
 
         _transform.AttachToGridOrMap(stored);
