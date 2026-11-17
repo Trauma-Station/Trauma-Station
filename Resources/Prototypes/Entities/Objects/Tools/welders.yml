@@ -18,7 +18,6 @@
       collection: WelderOff
   - type: Tag
     tags:
-    - DroneUsable
     - WeldingTool
   # </Trauma>
   - type: Sprite
@@ -191,7 +190,6 @@
     price: 50
   - type: Tag # new tag for weldbot
     tags:
-    - DroneUsable
     - WelderExperimental
   # </Trauma>
   - type: Sprite

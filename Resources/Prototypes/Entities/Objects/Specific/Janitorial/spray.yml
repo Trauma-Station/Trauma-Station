@@ -109,7 +109,6 @@
   - type: Tag
     tags:
       - Spray
-      - DroneUsable # Goobstation
 
 - type: entity
   parent: MegaSprayBottle

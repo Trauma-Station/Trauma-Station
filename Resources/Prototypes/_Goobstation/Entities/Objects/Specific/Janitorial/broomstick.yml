@@ -40,7 +40,6 @@
   - type: Tag
     tags:
     - Mop
-    - DroneUsable # Goobstation
   - type: GuideHelp
     guides:
     - Janitorial

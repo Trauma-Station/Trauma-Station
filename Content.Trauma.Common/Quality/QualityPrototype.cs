@@ -58,5 +58,5 @@ public sealed partial class QualityPrototype : IPrototype
     public float MeleeDamage = 1.05f;
 
     [DataField]
-    public float Price = 1.5f;
+    public float Price = 1.05f; // it multiplies with every level
 }

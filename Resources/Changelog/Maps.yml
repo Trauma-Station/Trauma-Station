@@ -471,3 +471,23 @@ Entries:
   id: 50
   time: '2026-11-01T20:09:55.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5174
+- author: LordZirconium
+  changes:
+  - type: Add
+    message: 'Marathon: Added mats to science.'
+  - type: Add
+    message: 'Marathon: Added more mats to all departments.'
+  - type: Add
+    message: 'Marathon: Added a reactor setup.'
+  - type: Tweak
+    message: 'Marathon: Made the TEG setup better.'
+  id: 51
+  time: '2026-11-12T22:29:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5352
+- author: LordZirconium
+  changes:
+  - type: Fix
+    message: Fixed Packed turbine setup.
+  id: 52
+  time: '2026-11-13T23:58:07.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5367

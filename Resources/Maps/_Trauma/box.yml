@@ -143142,7 +143142,7 @@ entities:
       pos: -49.5,-6.5
     - type: SurveillanceCamera
       nameSet: True
-      id: Drone Storage
+      id: Storage
       setupAvailableNetworks:
       - SurveillanceCameraCommand
   - uid: 22452

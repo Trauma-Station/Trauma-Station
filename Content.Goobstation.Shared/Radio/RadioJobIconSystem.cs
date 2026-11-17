@@ -26,9 +26,8 @@ public sealed partial class RadioJobIconSystem : EntitySystem
         [
             "BorgChassis",
             "BorgBrain",
-            // pAIs and Drones don't have radio access, but they can still get picked up by an intercom.
+            // pAIs don't have radio access, but they can still get picked up by an intercom.
             "PAI",
-            "Drone"
         ]
     };
 

@@ -22,7 +22,7 @@ public sealed partial class HealNearOnPrayComponent : Component
     public EntityWhitelist HealBlacklist = new()
     {
         // no clankers
-        Components = ["Silicon", "BorgChassis", "Drone", "PAI"]
+        Components = ["Silicon", "BorgChassis", "PAI"]
     };
 
     /// <summary>

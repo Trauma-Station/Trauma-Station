@@ -3,7 +3,6 @@
 using Content.Shared.Actions;
 using Content.Shared.Body.Components;
 using Content.Shared.DoAfter;
-using Content.Shared.IdentityManagement;
 using Content.Shared.Light.Components;
 using Content.Shared.Popups;
 using Content.Trauma.Shared.Vampires.Haemomancer;
@@ -12,7 +11,7 @@ using Robust.Shared.Audio.Systems;
 
 namespace Content.Trauma.Shared.Vampires;
 
-public abstract partial class SharedActionLairSystem : EntitySystem
+public abstract partial class ActionLairSystem : EntitySystem
 {
     [Dependency] private MetaDataSystem _meta = default!;
     [Dependency] private ActionLairTeleportSystem _lair = default!;
@@ -23,6 +22,7 @@ public abstract partial class SharedActionLairSystem : EntitySystem
     [Dependency] private SharedActiveBloodLeecherSystem _leecher = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
+
     [Dependency] private EntityQuery<VampireLairComponent> _lairQuery = default!;
     [Dependency] private EntityQuery<BloodstreamComponent> _bloodQuery = default!;
 
@@ -32,14 +32,7 @@ public abstract partial class SharedActionLairSystem : EntitySystem
     private static readonly EntProtoId BeamProto = "BloodBeam";
     private static readonly EntProtoId ActionTeleportLair = "ActionTeleportLair";
 
-    public override void Initialize()
-    {
-        base.Initialize();
-
-        SubscribeLocalEvent<ActionLairComponent, ActionLairEvent>(OnAction);
-        SubscribeLocalEvent<ActionLairComponent, VampireLairDoAfterEvent>(OnDoAfter);
-    }
-
+    [SubscribeLocalEvent]
     private void OnAction(Entity<ActionLairComponent> ent, ref ActionLairEvent args)
     {
         var target = args.Target;
@@ -91,15 +84,16 @@ public abstract partial class SharedActionLairSystem : EntitySystem
         }
 
         if (!_doAfter.TryStartDoAfter(doAfterArgs))
-            PredictedQueueDel(vampiricRune);
+            QueueDel(vampiricRune);
     }
 
+    [SubscribeLocalEvent]
     private void OnDoAfter(Entity<ActionLairComponent> ent, ref VampireLairDoAfterEvent args)
     {
         var user = args.User;
         if (args.Cancelled || args.Target is not { } target)
         {
-            PredictedQueueDel(ent.Comp.Effect);
+            QueueDel(ent.Comp.Effect);
             return;
         }
 
@@ -109,14 +103,14 @@ public abstract partial class SharedActionLairSystem : EntitySystem
         if (!_lairQuery.TryComp(target, out var lair))
             return;
 
-        _meta.SetEntityName(target, $"The coffin of {Identity.Name(args.User, EntityManager)}");
         _meta.SetEntityDescription(target, "This coffin's owner may not actually have been dear to anyone, or even departed quite yet.");
 
         lair.Vampire = args.User;
         Dirty(target, lair);
 
         // Remove the action, only one lair can be created
-        if (_action.GetAction(ent.Owner) is not { } action|| action.Comp.AttachedEntity is not { } attached
+        if (_action.GetAction(ent.Owner) is not { } action
+            || action.Comp.AttachedEntity is not { } attached
             || _action.AddAction(attached, ActionTeleportLair) is not { } tpAction)
             return;
 

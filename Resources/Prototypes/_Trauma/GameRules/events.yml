@@ -23,7 +23,6 @@
     - id: MimeAssassinMidround
     - id: VoxRaidersMidround
     - id: TunnelClownMidround
-    - id: WraithMidround # Unchuddified version | no evolution | no absorbing corpses
     - id: LoneAbductorSpawn
     - id: ParadoxCloneSpawn
     - id: MorphMidroundRule
@@ -38,6 +37,7 @@
     - id: XenomorphsInfestation
     - id: ColossusSpawn
     - id: FugitiveSpawn
+    - id: WraithMidround
 
 - type: entity
   parent: BaseGameRule

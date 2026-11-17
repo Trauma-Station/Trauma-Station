@@ -112,7 +112,6 @@
       - ClothMade
       - Gauze
       - RawMaterial
-      - DroneUsable # Goobstation
       - ConstructionMaterial
   - type: Construction
     graph: WebObjects # not sure if I should either keep this here or just make another prototype. Will keep it here just in case.
@@ -183,7 +182,6 @@
     tags:
       - ClothMade
       - RawMaterial
-      - DroneUsable # Goobstation
       - ConstructionMaterial
   - type: Item
     heldPrefix: durathread
@@ -225,7 +223,6 @@
     tags:
     - Wooden
     - RawMaterial
-    - DroneUsable # Goobstation
     - WoodPlank # Goobstation
     - ConstructionMaterial
   - type: Solution
@@ -410,7 +407,6 @@
     tags:
       - ClothMade
       - RawMaterial
-      - DroneUsable # Goobstation
       - Boll
   - type: PhysicalComposition
     materialComposition:

@@ -27,18 +27,14 @@
 
 - type: entity
   abstract: true
-  parent: [BasePistolWhip, BaseWeaponBatterySmallNoAmmoCounter]
-  id: BaseWeaponBatterySmall
-
-- type: entity
-  abstract: true
-  parent: BasePistolWhip
+  parent:
+  - !Index:0 BasePistolWhip
   id: BaseWeaponPowerCellSmall
 
 - type: entity
+  abstract: true
   parent: BaseStockHit
   id: BaseWeaponPowerCell
-  abstract: true
   components:
   - type: Cautery
     speed: 0.9

@@ -167,6 +167,7 @@ public sealed partial class ServerNuclearReactorSystem : NuclearReactorSystem
         // Rod interactions
         var avgControlRodInsertion = 0f;
         var controlRods = 0;
+        var casingEnergy = 0f;
         foreach (var (i, part) in EnumerateParts(comp))
         {
             var props = PropsQuery.Comp(part);
@@ -180,7 +181,7 @@ public sealed partial class ServerNuclearReactorSystem : NuclearReactorSystem
 
             var pos = part.Comp.Position!.Value;
             GetGridNeighbors(comp, pos.X, pos.Y);
-            _part.ProcessHeat(part, ent, _neighbors);
+            casingEnergy += _part.ProcessHeat(part, ent, _neighbors);
 
             comp.FluxGrid[i] = _part.ProcessNeutrons((part, part.Comp, props), comp.FluxGrid[i], out var deltaE);
             energyChange += deltaE;
@@ -201,6 +202,9 @@ public sealed partial class ServerNuclearReactorSystem : NuclearReactorSystem
         if (controlRods > 0)
             avgControlRodInsertion /= controlRods;
         SetAvgInsertion(ent, avgControlRodInsertion);
+
+        if (casingEnergy != 0f)
+            SetTemperature(ent, ent.Comp.Temperature + casingEnergy / ent.Comp.ThermalMass);
 
         // Sound for the control rods moving, basically an audio cue that the reactor's doing something important
         if (controlRods > 0 && !MathHelper.CloseTo(comp.AvgInsertion, avgControlRodInsertion))

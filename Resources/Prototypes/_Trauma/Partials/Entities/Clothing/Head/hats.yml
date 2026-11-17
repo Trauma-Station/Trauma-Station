@@ -1,6 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  id: ClothingHeadHatBeret
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      Cloth: 25
+  - type: StaticPrice
+    price: 7
+
+- type: entity
   id: ClothingHeadHatSolidHeadband
   components:
   - type: KnowledgeGrantOnWear

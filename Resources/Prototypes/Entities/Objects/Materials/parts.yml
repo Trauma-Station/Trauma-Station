@@ -13,7 +13,6 @@
   - type: Tag
     tags:
     - ConstructionMaterial
-    - DroneUsable # Goobstation
     - PartBase # Goobstation
 
 - type: entity
@@ -65,7 +64,6 @@
   - type: Tag # Goobstation
     tags:
     - RodMetal
-    - DroneUsable
 
 - type: entity
   parent: PartRodMetal

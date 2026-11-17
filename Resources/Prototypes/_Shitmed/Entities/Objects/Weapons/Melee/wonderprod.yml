@@ -38,27 +38,10 @@
     damage: 60
     lightAttackDamageMultiplier: 2
     sound: /Audio/Weapons/Guns/Hits/taser_hit.ogg
-#  - type: RestrictMeleeByUserTag
-#    contains:
-#    - Abductor
-#    messages:
-#    - abductors-weapon-restricted-1
-#    - abductors-weapon-restricted-2
-#    - abductors-weapon-restricted-3
-#    - abductors-weapon-restricted-4
   - type: Tag
     tags:
     - Wonderprod
   - type: PacifismDangerousAttack
-  - type: Multihit
-    multihitWhitelist:
-      tags:
-      - Wonderprod
-    userConditions:
-    - !type:WhitelistCondition
-      whitelist:
-        tags:
-        - Abductor
   - type: DisarmMalus
   - type: ItemSwitch
     state: stun

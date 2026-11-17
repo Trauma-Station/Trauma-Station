@@ -10998,8 +10998,6 @@ entities:
   entities:
   - uid: 139
     components:
-    - type: MetaData
-      name: drone room
     - type: Transform
       parent: 2
       pos: 3.5,-45.5

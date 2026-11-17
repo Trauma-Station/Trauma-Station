@@ -5,7 +5,7 @@ using Content.Trauma.Shared.Vampires;
 
 namespace Content.Trauma.Server.Vampires;
 
-public sealed partial class ActionLairSystem : SharedActionLairSystem
+public sealed partial class ServerActionLairSystem : ActionLairSystem
 {
     [Dependency] private GhostSystem _ghost = default!;
 

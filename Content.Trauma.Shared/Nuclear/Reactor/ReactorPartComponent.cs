@@ -35,12 +35,6 @@ public sealed partial class ReactorPartComponent : Component
 
     #region Variables
     /// <summary>
-    /// Temperature of this part in Kelvin, defaults to room tmep.
-    /// </summary>
-    [DataField]
-    public float Temperature = Atmospherics.T20C;
-
-    /// <summary>
     /// How much does this part share heat with surrounding parts? Basically surface area in contact (m2).
     /// </summary>
     [DataField]

@@ -29,7 +29,6 @@
         type: LightReplacerMenuBoundUserInterface
   - type: Tag
     tags:
-    - DroneUsable # Trauma
     - LightReplacer
 
 - type: entity

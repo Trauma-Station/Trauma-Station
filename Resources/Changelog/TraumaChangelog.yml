@@ -16545,3 +16545,178 @@ Entries:
   id: 1786
   time: '2026-11-07T11:21:06.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5315
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Fuel rods now glow when hot like forged metals do.
+  - type: Fix
+    message: Fixed fuel rods heat exchanging with open air being inaccurate.
+  id: 1787
+  time: '2026-11-08T15:50:24.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5313
+- author: NoElkaTheGod
+  changes:
+  - type: Tweak
+    message: Revolutionaries now require 30 players to roll, up from 20
+  id: 1788
+  time: '2026-11-09T14:18:09.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5326
+- author: mrfoxv
+  changes:
+  - type: Add
+    message: Added the Chameleon EVA Suit, purchasable for 10 TC
+  id: 1789
+  time: '2026-11-09T17:13:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5275
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed blood cultists not being told their sacrifice target.
+  id: 1790
+  time: '2026-11-09T18:48:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5340
+- author: TechnicFighter
+  changes:
+  - type: Remove
+    message: Removed silicon drones.
+  id: 1791
+  time: '2026-11-09T22:40:36.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5343
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed skill chips disappearing if you removed them with your hands full.
+  id: 1792
+  time: '2026-11-09T22:49:53.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5344
+- author: Luminal
+  changes:
+  - type: Remove
+    message: The identity of the vampire doesn't get transferred to their lair anymore.
+  id: 1793
+  time: '2026-11-10T00:24:06.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5345
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Reduced Justice's Empowered Mode base damage from 50 to 20
+  id: 1794
+  time: '2026-11-10T06:38:22.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5346
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed being able to sell Nar'Sie with a pet carrier.
+  id: 1795
+  time: '2026-11-11T01:30:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5351
+- author: yglop
+  changes:
+  - type: Fix
+    message: Revolutionary machines can be destroyed.
+  id: 1796
+  time: '2026-11-11T13:44:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5353
+- author: deltanedas
+  changes:
+  - type: Tweak
+    message: Abductors can no longer 1 click stun with 2 wonderprods...
+  id: 1797
+  time: '2026-11-11T23:24:45.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5358
+- author: TechnicFighter
+  changes:
+  - type: Tweak
+    message: Wraith is now less common
+  id: 1798
+  time: '2026-11-12T12:57:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5359
+- author: yglop
+  changes:
+  - type: Tweak
+    message: Armor value does not influence items price anymore.
+  - type: Fix
+    message: Reduced chairs inappropriate sale price.
+  id: 1799
+  time: '2026-11-12T13:01:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5349
+- author: LordZirconium
+  changes:
+  - type: Tweak
+    message: Made marathon station better
+  id: 1800
+  time: '2026-11-12T22:29:32.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5352
+- author: LordZirconium
+  changes:
+  - type: Fix
+    message: Fixed cluster station engineering department.
+  id: 1801
+  time: '2026-11-13T01:09:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5363
+- author: LordZirconium
+  changes:
+  - type: Add
+    message: Reactorslop added to Packed
+  id: 1802
+  time: '2026-11-13T11:45:38.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5364
+- author: VictorJob
+  changes:
+  - type: Tweak
+    message: Changed sprites for the inspector, holster, and evidence markers.
+  id: 1803
+  time: '2026-11-13T11:46:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5360
+- author: VictorJob
+  changes:
+  - type: Tweak
+    message: Changed sprites for the MK58 and pistol magazines
+  id: 1804
+  time: '2026-11-14T16:59:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5374
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed armor not doing anything.
+  id: 1805
+  time: '2026-11-14T16:59:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5375
+- author: LordZirconium
+  changes:
+  - type: Tweak
+    message: Added genetics to Omega station.
+  id: 1806
+  time: '2026-11-15T01:19:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5379
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Increased the base brute resistances on the alien lab coat to 30%
+  - type: Fix
+    message: Fixed alien lab coat not having ballistic resistance
+  id: 1807
+  time: '2026-11-15T01:21:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5377
+- author: Wizard25671
+  changes:
+  - type: Fix
+    message: Fixed chili peppers containing fresium instead of chilly peppers
+  id: 1808
+  time: '2026-11-15T09:25:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5381
+- author: LordZirconium
+  changes:
+  - type: Tweak
+    message: Amber kitchen expanded.
+  - type: Tweak
+    message: Cluster genetics added.
+  - type: Tweak
+    message: Packed holopads added everywhere where needed.
+  - type: Add
+    message: >-
+      Added phoron supply lines that lead from atmos to reactor on Oasis,
+      Origin, Packed and Cog.
+  id: 1809
+  time: '2026-11-16T20:38:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5386

@@ -7,6 +7,7 @@ namespace Content.Server.Armor;
 /// <inheritdoc/>
 public sealed partial class ArmorSystem : SharedArmorSystem
 {
+    /* Trauma - no more free money
     public override void Initialize()
     {
         base.Initialize();
@@ -28,4 +29,5 @@ public sealed partial class ArmorSystem : SharedArmorSystem
             args.Price += component.PriceMultiplier * damageType.ArmorPriceFlat * modifier.Value;
         }
     }
+    */
 }
