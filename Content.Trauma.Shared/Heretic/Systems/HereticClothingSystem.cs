@@ -3,7 +3,6 @@
 using Content.Medical.Common.Targeting;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
@@ -24,7 +23,7 @@ public sealed partial class HereticClothingSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private DamageableSystem _dmg = default!;
     [Dependency] private MobStateSystem _mob = default!;
-    [Dependency] private InventorySystem _invenory = default!;
+    [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private EntityQuery<DamageableComponent> _damageQuery = default!;
     [Dependency] private EntityQuery<HereticBodyComponent> _hereticBodyQuery = default!;
 
@@ -55,7 +54,7 @@ public sealed partial class HereticClothingSystem : EntitySystem
 
             if (!_mob.IsAlive(parent) || !_damageQuery.TryComp(parent, out var dmg))
             {
-                _invenory.TryUnequip(parent, slot, silent: true, force: true, predicted: false, clothing: clothing);
+                _inventory.TryUnequip(parent, slot, silent: true, force: true, predicted: false, clothing: clothing);
                 continue;
             }
 

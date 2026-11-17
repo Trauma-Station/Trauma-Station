@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Medical.Common.Body;
-using Content.Medical.Common.Clothing;
 using Content.Shared.Body;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
@@ -39,21 +38,6 @@ public sealed partial class BodyEquipmentSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("equip-part-missing-error",
             ("target", ident), ("part", partName)), args.EquipTarget, args.User);
         args.Cancel();
-    }
-
-    [SubscribeLocalEvent]
-    private void OnCheckEquipmentPart(Entity<BodyEquipmentComponent> ent, ref CheckEquipmentMissingPartEvent args)
-    {
-        // If there's no body part associated with the slot, mark it as missing
-        if (GetInventoryPart(args.Slot) is not { } part)
-        {
-            args.Missing = true;
-            return;
-        }
-
-        // If we don't have the part, mark it as missing
-        if (!HasBodyPart(ent, part))
-            args.Missing = true;
     }
 
     [SubscribeLocalEvent]

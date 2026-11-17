@@ -8,7 +8,7 @@ using Content.Trauma.Shared.Clothing.MultiToggleable;
 
 namespace Content.Trauma.Client.Clothing;
 
-public sealed partial class MultiToggleableClothingBoundUserInterface(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
+public sealed partial class MultiToggleableClothingBUI(EntityUid owner, Enum uiKey) : BoundUserInterface(owner, uiKey)
 {
     private SimpleRadialMenu? _menu;
 

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
-using Content.Medical.Common.Clothing;
 using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
@@ -74,7 +73,7 @@ public sealed partial class MultiToggleableClothingSystem : EntitySystem
     {
         // Save currenty toggled clothing
         _toggledClothing.Clear();
-        GetToggledClothingAmount(ent.AsNullable(), source, _toggledClothing);
+        GetToggledClothing(ent.AsNullable(), _toggledClothing);
 
         // Transfer entities in attached clothing containers first so that they aren't left on old entity
         foreach (var (toggled, toggledSlot) in _toggledClothing)
@@ -112,7 +111,7 @@ public sealed partial class MultiToggleableClothingSystem : EntitySystem
             return;
 
         _toggledClothing.Clear();
-        GetToggledClothingAmount(args.OriginalItem, args.OriginalEnt, _toggledClothing);
+        GetToggledClothing(args.OriginalItem, _toggledClothing);
         foreach (var slot in _toggledClothing.Values)
         {
             var uid = ent.Comp.ClothingUids.First(x => x.Value == slot).Key;
@@ -340,7 +339,7 @@ public sealed partial class MultiToggleableClothingSystem : EntitySystem
             return;
 
         if (!TerminatingOrDeleted(args.EquipTarget) &&
-            _inventory.TryEquip(args.EquipTarget, stored, args.Slot, silent: true, triggerHandContact: true))
+            _inventory.TryEquip(args.EquipTarget, stored, args.Slot, silent: true, force: true, triggerHandContact: true))
             return;
 
         _transform.AttachToGridOrMap(stored);
@@ -461,7 +460,7 @@ public sealed partial class MultiToggleableClothingSystem : EntitySystem
             return false;
 
         if (!ent.Comp.Container.Contains(attachedUid))
-            HandleChildClothingSingleUnequip(attachedUid, wearer, user, slot);
+            HandleChildClothingSingleUnequip(wearer, user, slot);
         else
             HandleChildClothingSingleEquip(ent, attachedUid, wearer, user, slot);
 
@@ -479,7 +478,7 @@ public sealed partial class MultiToggleableClothingSystem : EntitySystem
         _parentSlots.Clear();
         _toggledClothing.Clear();
 
-        GetToggledClothingAmount(ent.AsNullable(), wearer, _toggledClothing);
+        GetToggledClothing(ent.AsNullable(), _toggledClothing);
 
         if (_toggledClothing.Count == 0)
         {
@@ -507,7 +506,7 @@ public sealed partial class MultiToggleableClothingSystem : EntitySystem
             {
                 foreach (var (clothing, slot) in _toggledClothing)
                 {
-                    UnequipClothing(wearer, user, clothing, slot);
+                    UnequipClothing(wearer, user, slot);
                 }
             });
         }
@@ -522,11 +521,11 @@ public sealed partial class MultiToggleableClothingSystem : EntitySystem
         HandleChildClothing(wearer, _parentSlots, () => EquipClothing(wearer, user, ent, clothing, slot));
     }
 
-    private void HandleChildClothingSingleUnequip(EntityUid clothing, EntityUid wearer, EntityUid user, ProtoId<InventorySlotPrototype> slot)
+    private void HandleChildClothingSingleUnequip(EntityUid wearer, EntityUid user, ProtoId<InventorySlotPrototype> slot)
     {
         _parentSlots.Clear();
         _parentSlots.Add(slot);
-        HandleChildClothing(wearer, _parentSlots, () => UnequipClothing(wearer, user, clothing, slot));
+        HandleChildClothing(wearer, _parentSlots, () => UnequipClothing(wearer, user, slot));
     }
 
     /// <summary>
@@ -573,17 +572,9 @@ public sealed partial class MultiToggleableClothingSystem : EntitySystem
         return !ev.Cancelled;
     }
 
-    private void UnequipClothing(EntityUid wearer, EntityUid user, EntityUid clothing, string slot)
+    private void UnequipClothing(EntityUid wearer, EntityUid user, string slot)
     {
-        if (!_inventory.TryUnequip(user, wearer, slot, force: true, triggerHandContact: true))
-            return;
-
-        // If attached have clothing in container - equip it
-        if (_multiAttachedQuery.CompOrNull(clothing)?.ClothingContainer?.ContainedEntity is not { } stored)
-            return;
-
-        if (!_inventory.TryEquip(user, wearer, stored, slot, silent: true, force: true, triggerHandContact: true))
-            _transform.AttachToGridOrMap(stored); // don't just keep it inside the attached piece if equipping fails
+        _inventory.TryUnequip(user, wearer, slot, force: true, triggerHandContact: true);
     }
 
     public bool EquipClothing(EntityUid wearer, EntityUid user, Entity<MultiToggleableClothingComponent> ent, EntityUid clothing, string slot, bool silent = false)
@@ -610,55 +601,20 @@ public sealed partial class MultiToggleableClothingSystem : EntitySystem
     }
 
     /// <summary>
-    /// Gets the amount of slots currently occupied by toggled clothing or that cannot equip any clothing
-    /// <paramref name="parentSlots"/> (if not null) will be filled with clothing uids that are actually toggled
+    /// Gets all currently toggled clothing and saves it in <paramref name="result"/>
     /// </summary>
-    public int GetToggledClothingAmount(Entity<MultiToggleableClothingComponent?> ent, EntityUid wearer,
-        Dictionary<EntityUid, ProtoId<InventorySlotPrototype>>? result = null)
+    public void GetToggledClothing(Entity<MultiToggleableClothingComponent?> ent, Dictionary<EntityUid, ProtoId<InventorySlotPrototype>> result)
     {
         if (!Resolve(ent, ref ent.Comp))
-            return 0;
+            return;
 
-        // If entity don't have any attached clothings it means none toggled
-        if (ent.Comp.ClothingUids.Count == 0)
-            return 0;
-
-        var toggledCount = 0;
         foreach (var (attached, slot) in ent.Comp.ClothingUids)
         {
-            if (!ent.Comp.Container.Contains(attached))
-                result?[attached] = slot;
-
-            // If it is equipped or cannot be equipped, increase the amount
-            if (!CheckEquipped(wearer, attached, slot))
+            if (ent.Comp.Container.Contains(attached))
                 continue;
 
-            toggledCount++;
+            result[attached] = slot;
         }
-
-        return toggledCount;
-    }
-
-    /// <summary>
-    /// Checks if an entity has a piece of clothing equipped, or if it cannot be equipped based on their body parts.
-    /// </summary>
-    /// <param name="equipment">The item to be equipped</param>
-    /// <param name="equipTarget">The entity attempting to wear the clothing</param>
-    /// <param name="slot">The slot the clothing is being equipped to</param>
-    /// <returns>True if the item could not be or is equipped to this slot</returns>
-    public bool CheckEquipped(EntityUid equipTarget, EntityUid toEquip, string slot)
-    {
-        // Does their species proto include the slot?
-        if (!_inventory.TryGetSlotContainer(equipTarget, slot, out var slotContainer, out _))
-            return true; // don't care then
-
-        var ev = new CheckEquipmentMissingPartEvent(slot);
-        RaiseLocalEvent(equipTarget, ref ev);
-        if (ev.Missing)
-            return true;
-
-        // Body part is not missing, return true if item is actually equipped
-        return slotContainer.ContainedEntity == toEquip;
     }
 
     private void RefreshUi(EntityUid toggleable)

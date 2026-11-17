@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Medical.Shared.Body;
 using Content.Shared.DoAfter;
 using Content.Shared.IdentityManagement;
 using Content.Shared.Inventory;
@@ -29,6 +30,8 @@ public sealed partial class SealableClothingSystem : EntitySystem
     [Dependency] private SharedDoAfterSystem _doAfter = default!;
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private MultiToggleableClothingSystem _toggleable = default!;
+    [Dependency] private InventorySystem _inventory = default!;
+    [Dependency] private BodyPartSystem _part = default!;
     [Dependency] private EntityQuery<MultiToggleableClothingComponent> _toggleableQuery = default!;
     [Dependency] private EntityQuery<MultiAttachedClothingComponent> _attachedQuery = default!;
     [Dependency] private EntityQuery<SealableClothingComponent> _sealableQuery = default!;
@@ -229,7 +232,7 @@ public sealed partial class SealableClothingSystem : EntitySystem
             return;
         }
 
-        var amount = _toggleable.GetToggledClothingAmount(ent.Owner, args.Wearer);
+        var amount = GetOccuipiedSlotsAmount(ent.Owner, args.Wearer);
 
         if (!ent.Comp.IsCurrentlySealed)
         {
@@ -285,8 +288,7 @@ public sealed partial class SealableClothingSystem : EntitySystem
         // fix; now able to unseal even if all parts not toggled
         // edge cases where a sealed part may be unequipped and you get stuck with a broke suit
         // but we still let the user manually unseal as a fallback to an impossible situation
-        _toggledClothing.Clear();
-        if (_toggleable.GetToggledClothingAmount((ent, ent.Comp2), wearer, _toggledClothing) != ent.Comp2.ClothingUids.Count)
+        if (GetOccuipiedSlotsAmount((ent, ent.Comp2), wearer) != ent.Comp2.ClothingUids.Count)
         {
             if (!ent.Comp1.IsCurrentlySealed)
             {
@@ -295,6 +297,9 @@ public sealed partial class SealableClothingSystem : EntitySystem
                 return false;
             }
         }
+
+        _toggledClothing.Clear();
+        _toggleable.GetToggledClothing((ent, ent.Comp2), _toggledClothing);
 
         foreach (var uid in _toggledClothing.Keys)
         {
@@ -388,15 +393,12 @@ public sealed partial class SealableClothingSystem : EntitySystem
         if (!_toggleableQuery.Resolve(ent, ref ent.Comp2) || ent.Comp2.ClothingUids.Count == 0)
             return false;
 
-        // if this system was more foolproof we could swap it around as we did
-        // but no so much shit can fuck up
-        // so just actually sanity check the parts when the process is done.
-        _toggledClothing.Clear();
-        var amount = _toggleable.GetToggledClothingAmount((ent, ent.Comp2), wearer, _toggledClothing);
-
         var allpartsSealed = true;
 
-        if (amount < ent.Comp2.ClothingUids.Count)
+        _toggledClothing.Clear();
+        _toggleable.GetToggledClothing((ent, ent.Comp2), _toggledClothing);
+
+        if (GetOccuipiedSlotsAmount((ent, ent.Comp2), wearer) < ent.Comp2.ClothingUids.Count)
             allpartsSealed = false;
         else
         {
@@ -455,7 +457,7 @@ public sealed partial class SealableClothingSystem : EntitySystem
         Dirty(ent);
 
         _toggledClothing.Clear();
-        _toggleable.GetToggledClothingAmount(ent.Owner, wearer, _toggledClothing);
+        _toggleable.GetToggledClothing(ent.Owner, _toggledClothing);
         foreach (var part in _toggledClothing.Keys)
         {
             if (!_sealableQuery.TryComp(part, out var partSeal))
@@ -515,5 +517,48 @@ public sealed partial class SealableClothingSystem : EntitySystem
             return;
 
         BreakSeal((attachedComp.AttachedUid, controlComp), Transform(attachedComp.AttachedUid).ParentUid);
+    }
+
+    private int GetOccuipiedSlotsAmount(Entity<MultiToggleableClothingComponent?> ent, EntityUid wearer)
+    {
+        if (!Resolve(ent, ref ent.Comp))
+            return 0;
+
+        if (ent.Comp.ClothingUids.Count == 0)
+            return 0;
+
+        var occuiped = 0;
+        foreach (var (attached, slot) in ent.Comp.ClothingUids)
+        {
+            if (CheckSlotOccupied(wearer, attached, slot))
+                occuiped++;
+        }
+
+        return occuiped;
+    }
+
+    /// <summary>
+    /// Checks if an entity has a piece of clothing equipped, or if it cannot be equipped based on their body parts.
+    /// </summary>
+    /// <param name="equipTarget">The entity attempting to wear the clothing</param>
+    /// <param name="equipment">The item to be equipped</param>
+    /// <param name="slot">The slot the clothing is being equipped to</param>
+    /// <returns>True if the item could not be or is equipped to this slot</returns>
+    public bool CheckSlotOccupied(EntityUid equipTarget, EntityUid equipment, string slot)
+    {
+        // Does their species proto include the slot?
+        if (!_inventory.TryGetSlotContainer(equipTarget, slot, out var slotContainer, out _))
+            return true; // don't care then
+
+        // If there's no body part associated with the slot, we cannot equip it
+        if (BodyEquipmentSystem.GetInventoryPart(slot) is not { } part)
+            return true;
+
+        // If we don't have the part, we cannot equip it
+        if (_part.FindBodyPart(equipTarget, part) == null)
+            return true;
+
+        // Body part is not missing, return true if item is actually equipped
+        return slotContainer.ContainedEntity == equipment;
     }
 }

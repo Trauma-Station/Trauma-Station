@@ -148,13 +148,8 @@
   parent: ClothingNeckBase
   id: ClothingNeckCloakGoliathCloak
   name: goliath cloak
-  description: A cloak made from the hide of resilient fauna from a distant planet. #Goobstation
+  description: A cloak made from the hide of resilient fauna from a distant planet, though its protective value has faded with its age.
   components:
-  # <Trauma>
-  - type: Construction
-    graph: GoliathCloak
-    node: cloak
-  # </Trauma>
   - type: Sprite
     sprite: Clothing/Neck/Cloaks/goliathcloak.rsi
   - type: ToggleableClothing
