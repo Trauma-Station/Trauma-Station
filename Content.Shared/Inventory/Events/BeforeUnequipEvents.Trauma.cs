@@ -3,7 +3,7 @@ namespace Content.Shared.Inventory.Events;
 public abstract partial class BeforeUnequipEventBase
 {
     /// <summary>
-    /// True, if item is being forcibly equipped
+    /// True, if item is being forcibly unequipped
     /// </summary>
-    public readonly bool Force = force;
+    public bool Force;
 }

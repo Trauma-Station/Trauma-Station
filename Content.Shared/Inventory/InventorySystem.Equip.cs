@@ -502,12 +502,12 @@ public abstract partial class InventorySystem
 
         // give other systems a chance do stuff before unequipping
         // <Trauma> - made these events cancellable, passed force
-        var beforeGettingUnequippedEvent = new BeforeGettingUnequippedEvent(actor, target, removedItem.Value, slotDefinition, force);
+        var beforeGettingUnequippedEvent = new BeforeGettingUnequippedEvent(actor, target, removedItem.Value, slotDefinition) { Force = force };
         RaiseLocalEvent(removedItem.Value, beforeGettingUnequippedEvent);
         if (beforeGettingUnequippedEvent.Cancelled)
             return false;
 
-        var beforeUnequipEvent = new BeforeUnequipEvent(actor, target, removedItem.Value, slotDefinition, force);
+        var beforeUnequipEvent = new BeforeUnequipEvent(actor, target, removedItem.Value, slotDefinition) { Force = force };
         RaiseLocalEvent(target, beforeUnequipEvent);
         if (beforeUnequipEvent.Cancelled)
             return false;

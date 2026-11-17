@@ -331,18 +331,14 @@ public sealed partial class MultiToggleableClothingSystem : EntitySystem
         if (_timing.ApplyingState)
             return;
 
+        if (ent.Comp.ClothingContainer.ContainedEntity is { } stored && !TerminatingOrDeleted(stored) &&
+            (TerminatingOrDeleted(args.EquipTarget) || !_container.Remove(stored, ent.Comp.ClothingContainer, force: true) ||
+            !_inventory.TryEquip(args.EquipTarget, stored, args.Slot, silent: true, triggerHandContact: true)))
+            _transform.AttachToGridOrMap(stored);
+
         if (ent.Comp.LifeStage < ComponentLifeStage.Stopping && !TerminatingOrDeleted(ent.Comp.AttachedUid) &&
             _multiToggleableQuery.TryComp(ent.Comp.AttachedUid, out var toggleComp))
             _container.Insert(ent.Owner, toggleComp.Container, force: true);
-
-        if (ent.Comp.ClothingContainer.ContainedEntity is not { } stored || TerminatingOrDeleted(stored))
-            return;
-
-        if (!TerminatingOrDeleted(args.EquipTarget) &&
-            _inventory.TryEquip(args.EquipTarget, stored, args.Slot, silent: true, force: true, triggerHandContact: true))
-            return;
-
-        _transform.AttachToGridOrMap(stored);
     }
 
     [SubscribeLocalEvent]
