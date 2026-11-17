@@ -44,6 +44,7 @@
             Virologist: [ 1, 1 ]
             # Science
             ResearchDirector: [ 1, 1 ]
+            Geneticist: [ 2, 2 ]
             Scientist: [ 3, 3 ]
             ResearchAssistant: [ 2, 2 ]
             # Security

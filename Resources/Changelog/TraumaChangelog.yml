@@ -16705,3 +16705,18 @@ Entries:
   id: 1808
   time: '2026-11-15T09:25:23.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5381
+- author: LordZirconium
+  changes:
+  - type: Tweak
+    message: Amber kitchen expanded.
+  - type: Tweak
+    message: Cluster genetics added.
+  - type: Tweak
+    message: Packed holopads added everywhere where needed.
+  - type: Add
+    message: >-
+      Added phoron supply lines that lead from atmos to reactor on Oasis,
+      Origin, Packed and Cog.
+  id: 1809
+  time: '2026-11-16T20:38:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5386
