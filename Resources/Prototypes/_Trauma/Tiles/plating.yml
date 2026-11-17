@@ -18,7 +18,7 @@
   footstepSounds:
     collection: FootstepHull
   itemDrop: FloorTileItemSteel
-  heatCapacity: 100000 # /tg/ has this set as "INFINITY." I don't know if that exists here so I've just added an extra 0
+  heatCapacity: 100000
   reinforced: true
   tileRipResistance: 100000
 
@@ -30,19 +30,12 @@
 
 - type: tile
   id: ChannelBeamReinforced
-  parent: BasePlating
+  parent: ChannelBeam
   name: tiles-beam-reinforced
   sprite: /Textures/_Trauma/Tiles/channelbeamreinforced.png
-  baseTurf: Space
-  isSubfloor: true
-  friction: 1.5 # same as normal plating
-  footstepSounds:
-    collection: FootstepHull
-  itemDrop: FloorTileItemSteel
-  heatCapacity: 100000 # /tg/ has this set as "INFINITY." I don't know if that exists here so I've just added an extra 0
+  deconstructTools: []
   reinforced: true
   indestructible: true
-  tileRipResistance: 100000
 
 - type: tile
   id: ChannelBeamReinforcedVertical

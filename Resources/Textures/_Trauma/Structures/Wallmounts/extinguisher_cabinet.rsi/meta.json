@@ -8,40 +8,31 @@
   },
   "states": [
     {
-        "name": "extinguisher_closed",
-        "directions": 4
+      "name": "extinguisher_closed"
     },
     {
-        "name": "extinguisher_empty",
-        "directions": 4
+      "name": "extinguisher_empty"
     },
     {
-        "name": "extinguisher_full",
-        "directions": 4
+      "name": "extinguisher_full"
     },
     {
-        "name": "extinguisher_mini",
-        "directions": 4
+      "name": "extinguisher_mini"
     },
     {
-        "name": "closed",
-        "directions": 4
+      "name": "closed"
     },
     {
-        "name": "extinguisher",
-        "directions": 4
+      "name": "extinguisher"
     },
     {
-        "name": "extinguisher-mini",
-        "directions": 4
+      "name": "extinguisher-mini"
     },
     {
-        "name": "frame",
-        "directions": 4
+      "name": "frame"
     },
     {
-        "name": "open",
-        "directions": 4
+      "name": "open"
     }
   ]
 }
