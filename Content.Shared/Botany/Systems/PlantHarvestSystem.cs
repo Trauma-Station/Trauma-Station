@@ -103,9 +103,9 @@ public sealed partial class PlantHarvestSystem : EntitySystem
 
         if (_dataQuery.TryComp(plant, out var plantData) && plantData.HarvestLogImpact != null)
             // <Trauma> - special string for self harvest which now calls this
-            _adminLogger.Add(LogType.Botany, plantData.HarvestLogImpact.Value, user == plant ?
-                $"Auto-harvested {Loc.GetString(plantData.Name):seed} at Pos:{Transform(plant).Coordinates}."
-                $"{ToPrettyString(user):player} harvested {Loc.GetString(plantData.Name):seed} at Pos:{Transform(user).Coordinates}.");
+            _adminLogger.Add(LogType.Botany, plantData.HarvestLogImpact.Value, user == plant
+                ? $"Auto-harvested {Loc.GetString(plantData.Name):seed} at Pos:{Transform(plant).Coordinates}."
+                : $"{ToPrettyString(user):player} harvested {Loc.GetString(plantData.Name):seed} at Pos:{Transform(user).Coordinates}.");
             // </Trauma>
 
         DoHarvest(plant, user);
