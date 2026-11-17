@@ -148,24 +148,21 @@
 
 - type: entity
   parent: ReagentSlime
-  id: ReagentSlimeBatrachoToxin
-  suffix: BatrachoToxin
+  id: ReagentSlimeCyanide
+  suffix: Cyanide
   components:
   - type: Bloodstream
     bloodReferenceSolution:
       reagents:
-      - ReagentId: BatrachoToxin
+      - ReagentId: Cyanide
         Quantity: 100
-  - type: MeleeChemicalInjector
-    solution: bloodstream
-    transferAmount: 2
   - type: PointLight
-    color: "#4a7a3a"
+    color: "#1abcff"
   - type: Sprite
     layers:
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
-      color: "#4a7a3a"
+      color: "#1abcff"
 
 - type: entity
   parent: ReagentSlime
@@ -274,6 +271,42 @@
     - map: [ "enum.DamageStateVisualLayers.Base" ]
       state: alive
       color: "#8a9a5b"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeRazorium
+  suffix: Razorium
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Razorium
+        Quantity: 100
+  - type: PointLight
+    color: "#e3fffb"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#e3fffb"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimePolytrinicAcid
+  suffix: PolytrinicAcid
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: PolytrinicAcid
+        Quantity: 100
+  - type: PointLight
+    color: "#a1000b"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#a1000b"
 
 # "Helpful" Reagent Slimes
 

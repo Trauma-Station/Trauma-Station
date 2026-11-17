@@ -53,10 +53,12 @@
         - id: ReagentSlimeBruizine
         - id: ReagentSlimeUltravasculine
         - id: ReagentSlimeMold
+        - id: ReagentSlimeRazorium
+        - id: ReagentSlimeCyanide
+        - id: ReagentSlimePolytrinicAcid
       - !type:GroupSelector
         weight: 10
         children:
         - id: ReagentSlimeCrackCocaine
-        - id: ReagentSlimeBatrachoToxin
         - id: ReagentSlimeProcenylLazide
         - id: ReagentSlimeOmnizine
