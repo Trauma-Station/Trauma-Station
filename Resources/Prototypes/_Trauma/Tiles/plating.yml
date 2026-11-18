@@ -5,3 +5,40 @@
   id: PlatingBurnt
   name: tiles-plating
   sprite: /Textures/_Trauma/Tiles/plating_burnt.png
+
+- type: tile
+  id: ChannelBeam
+  parent: BasePlating
+  name: tiles-beam
+  sprite: /Textures/_Trauma/Tiles/channelbeam.png
+  baseTurf: Space
+  isSubfloor: true
+  deconstructTools: [ Welding ]
+  friction: 1.5 # same as normal plating
+  footstepSounds:
+    collection: FootstepHull
+  itemDrop: FloorTileItemSteel
+  heatCapacity: 100000
+  reinforced: true
+  tileRipResistance: 100000
+
+- type: tile
+  id: ChannelBeamVertical
+  parent: ChannelBeam
+  name: tiles-beam-vertical
+  sprite: /Textures/_Trauma/Tiles/channelbeamvertical.png
+
+- type: tile
+  id: ChannelBeamReinforced
+  parent: ChannelBeam
+  name: tiles-beam-reinforced
+  sprite: /Textures/_Trauma/Tiles/channelbeamreinforced.png
+  deconstructTools: []
+  reinforced: true
+  indestructible: true
+
+- type: tile
+  id: ChannelBeamReinforcedVertical
+  parent: ChannelBeamReinforced
+  name: tiles-beam-reinforced-vertical
+  sprite: /Textures/_Trauma/Tiles/channelbeamreinforcedvertical.png

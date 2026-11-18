@@ -1,47 +1,38 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "Armok",
+  "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/8fcc9d8e7cc9a18e74060c5fc388425d6f0746cb/icons/obj/wallmounts.dmi",
   "size": {
     "x": 32,
     "y": 32
   },
   "states": [
     {
-        "name": "extinguisher_closed",
-        "directions": 4
+      "name": "extinguisher_closed"
     },
     {
-        "name": "extinguisher_empty",
-        "directions": 4
+      "name": "extinguisher_empty"
     },
     {
-        "name": "extinguisher_full",
-        "directions": 4
+      "name": "extinguisher_full"
     },
     {
-        "name": "extinguisher_mini",
-        "directions": 4
+      "name": "extinguisher_mini"
     },
     {
-        "name": "closed",
-        "directions": 4
+      "name": "closed"
     },
     {
-        "name": "extinguisher",
-        "directions": 4
+      "name": "extinguisher"
     },
     {
-        "name": "extinguisher-mini",
-        "directions": 4
+      "name": "extinguisher-mini"
     },
     {
-        "name": "frame",
-        "directions": 4
+      "name": "frame"
     },
     {
-        "name": "open",
-        "directions": 4
+      "name": "open"
     }
   ]
 }
