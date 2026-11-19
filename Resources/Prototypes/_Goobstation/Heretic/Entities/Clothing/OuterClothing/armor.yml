@@ -26,7 +26,7 @@
     lowPressureMultiplier: 1000
 
 - type: entity
-  parent: [ ArmorHeretic, ClothingOuterJacketBase, AllowSuitStorageClothing, BaseMagicalContraband ]
+  parent: [ ArmorHeretic, ClothingOuterBaseToggleable, AllowSuitStorageClothing, BaseMagicalContraband ]
   id: ClothingOuterArmorHeretic
   name: ominous armor
   description: A ragged, dusty set of robes. Strange eyes line the inside.
@@ -47,8 +47,7 @@
     - Tail
     - Wings
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodHeretic
+    clothingPrototype: ClothingHeadHatHoodHeretic
   - type: ModifyDelayedKnockdown
     delayDelta: 3
     knockdownTimeDelta: -3
@@ -61,10 +60,6 @@
     reduction: 0.25
   - type: HideHereticAura
   - type: HereticClothing
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
-      toggleable-clothing: !type:Container
 
 - type: entity
   abstract: true
@@ -98,8 +93,7 @@
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/rust_armor.rsi
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodHereticRust
+    clothingPrototype: ClothingHeadHatHoodHereticRust
   - type: FireProtection
     reduction: 0.38
   - type: SalvagedRemains
@@ -212,8 +206,7 @@
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/void_armor.rsi
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodHereticVoid
+    clothingPrototype: ClothingHeadHatHoodHereticVoid
   - type: FireProtection
     reduction: 0.5
   - type: HollowWeave
@@ -252,8 +245,7 @@
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/ashen_armor.rsi
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodHereticAsh
+    clothingPrototype: ClothingHeadHatHoodHereticAsh
   - type: FireProtection
     reduction: 1
   - type: PressureProtection
@@ -296,8 +288,7 @@
     unequipSound:
       collection: OrganInteraction
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodHereticFlesh
+    clothingPrototype: ClothingHeadHatHoodHereticFlesh
   - type: FireProtection
     reduction: 0
   - type: Storage
@@ -351,8 +342,7 @@
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/blade_armor.rsi
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodHereticBlade
+    clothingPrototype: ClothingHeadHatHoodHereticBlade
   - type: Insulated
   - type: FireProtection
     reduction: 0.63
@@ -391,8 +381,7 @@
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/cosmos_armor.rsi
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodHereticCosmos
+    clothingPrototype: ClothingHeadHatHoodHereticCosmos
   - type: MovementIgnoreGravityClothing
   - type: TemperatureProtection
     coefficient: 0.01
@@ -443,8 +432,7 @@
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/lock_armor.rsi
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodHereticLock
+    clothingPrototype: ClothingHeadHatHoodHereticLock
   - type: DigitalCamouflage
   - type: ClothingGrantComponent
     component:
@@ -480,7 +468,7 @@
     damageCoefficient: 0.7
 
 - type: entity
-  parent: [ ArmorHereticVoidCloak, ClothingOuterBaseMedium, ClothingOuterJacketBase, AllowSuitStorageClothing, BaseMagicalContraband ]
+  parent: [ ArmorHereticVoidCloak, ClothingOuterBaseToggleable, AllowSuitStorageClothing, BaseMagicalContraband ]
   id: ClothingOuterArmorCloakVoid
   name: void cloak
   description: Black like tar, reflecting no light. Runic symbols line the outside. With each flash you lose comprehension of what you are seeing.
@@ -504,8 +492,7 @@
     - Wings
   - type: ToggleableClothing
     stripDelay: null
-    clothingPrototypes:
-      head: ClothingHeadHatHoodVoidCloakHeretic
+    clothingPrototype: ClothingHeadHatHoodVoidCloakHeretic
   - type: ModifyDelayedKnockdown
     delayDelta: 2
     knockdownTimeDelta: -2
@@ -546,7 +533,3 @@
         base:
           True: { state: transparent-icon }
           False: { state: icon }
-  - type: ContainerContainer
-    containers:
-      storagebase: !type:Container
-      toggleable-clothing: !type:Container

@@ -1,6 +1,6 @@
 namespace Content.Shared.Inventory.Events;
 
-public abstract class BeforeUnequipEventBase(EntityUid user, EntityUid equipTarget, EntityUid equipment, SlotDefinition slotDefinition) : EntityEventArgs
+public abstract partial class BeforeUnequipEventBase(EntityUid user, EntityUid equipTarget, EntityUid equipment, SlotDefinition slotDefinition) : CancellableEntityEventArgs // Trauma - made partial, EntityEventArgs -> CancellableEntityEventArgs
 {
     /// <summary>
     /// The entity performing the action.
