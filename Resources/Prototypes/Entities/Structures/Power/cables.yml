@@ -238,7 +238,7 @@
     - trigger:
         !type:DamageTypeTrigger
         damageType: Structural
-        damage: 45 # Trauma - was 120 originally, didn't chain explode due to nerfed damage, was changed to 100, and then was changed to 45, because explosive breaching hammers are PEAK.
+        damage: 45 # Trauma - was 120 originally, then was changed to 45, because explosive breaching hammers are peak.
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]

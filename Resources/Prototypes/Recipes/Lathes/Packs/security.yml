@@ -69,12 +69,6 @@
   - CombatKnife
   - RiotShield
 
-- type: latheRecipePack
-  id: SecurityPreciseDemolitionStatic
-  recipes:
-  - CableDetStack1
-  - EmptyDetonator
-
 ## Dynamic recipes
 
 - type: latheRecipePack
@@ -102,6 +96,8 @@
 - type: latheRecipePack
   id: SecurityExplosives
   recipes:
+  - CableDetStack1
+  - EmptyDetonator
   - ShrapnelPayload # Trauma - was ExplosivePayload
   - GrenadeBlast
   - GrenadeEMP

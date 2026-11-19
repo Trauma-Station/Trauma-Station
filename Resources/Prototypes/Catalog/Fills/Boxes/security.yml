@@ -146,25 +146,21 @@
     - state: forensic
 
 - type: entity
-  parent: [ BoxCardboard, BaseSecurityEngineeringContraband ]
+  parent: BoxCardboard
   id: BoxDetonator
-  name: precise demolition box
-  description: A box with 2 detonators, 2 triggers, a remote signaller and 2 full coils of explosive cord.
+  name: detonator box
+  description: A box of explosive detonators and triggers.
   components:
-  - type: Storage
-    grid:
-    - 0,0,3,2
-  - type: EntityTableContainerFill
-    containers:
-      storagebase: !type:AllSelector
-        children:
-        - id: RemoteSignaller
-        - id: EmptyDetonator
-          amount: 2
-        - id: SignalTrigger
-          amount: 2
-        - id: CableDetStack
-          amount: 2
+  - type: Item
+    shape:
+    - 0,0,1,1
+  - type: StorageFill
+    contents:
+    - id: EmptyDetonator
+      amount: 3
+    - id: TimerTrigger
+      amount: 2
+    - id: VoiceTrigger
   - type: Sprite
     layers:
     - state: box_security

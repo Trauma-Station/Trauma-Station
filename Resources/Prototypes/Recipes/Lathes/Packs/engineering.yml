@@ -24,15 +24,6 @@
   - ClothingHeadHatCone
 
 - type: latheRecipePack
-  id: EngineeringExplosivesStatic
-  recipes:
-  - CableDetStack1
-  - EmptyDetonator
-  - TimerTrigger
-  - SignalTrigger
-  - VoiceTrigger
-
-- type: latheRecipePack
   id: AtmosStatic
   recipes:
   - AirTank
