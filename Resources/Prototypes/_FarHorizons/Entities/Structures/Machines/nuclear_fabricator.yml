@@ -37,7 +37,6 @@
     - GasTurbineStators
     dynamicPacks:
     - ReactorFuelRods
-    - ReactorReflectors
     - ReactorGasChannels
     - ReactorHeatExchangers
   - type: ContainerContainer

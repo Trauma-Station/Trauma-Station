@@ -34,12 +34,6 @@
   - SilverReactorGasChannel
   - PlasteelReactorGasChannel
   - PlasmaGlassReactorGasChannel
-  - BrassGasTurbineBlade
-  - DiamondGasTurbineBlade
-  - GoldGasTurbineBlade
-  - PlasteelGasTurbineBlade
-  - SilverGasTurbineStator
-  - GoldGasTurbineStator
 
 - type: latheRecipePack
   id: ReactorFuelRods
@@ -56,3 +50,17 @@
   id: ReactorHeatExchangers
   recipes:
   - DiamondReactorHeatExchanger
+
+- type: latheRecipePack
+  id: GasTurbineBlades
+  recipes:
+  - BrassGasTurbineBlade
+  - DiamondGasTurbineBlade
+  - GoldGasTurbineBlade
+  - PlasteelGasTurbineBlade
+
+- type: latheRecipePack
+  id: GasTurbineStators
+  recipes:
+  - SilverGasTurbineStator
+  - GoldGasTurbineStator
