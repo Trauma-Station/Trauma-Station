@@ -171,9 +171,9 @@ public sealed class StunBatonTests : InteractionTest
 
         using (Assert.EnterMultipleScope())
         {
+            Assert.That(batonIntialCharge, Is.GreaterThan(0), "Stun baton had no charge.");
             // Trauma - batons passively drain while toggled, allow small tolerance
-            Assert.That(batonIntialCharge, Is.EqualTo(batteryComp.MaxCharge).Within(1f), "Stun baton had no charge.");
-            Assert.That(batonIntialCharge, Is.EqualTo(batteryComp.MaxCharge), "Stun baton was not fully charged when spawned.");
+            Assert.That(batonIntialCharge, Is.EqualTo(batteryComp.MaxCharge).Within(1f), "Stun baton was not fully charged when spawned.");
         }
 
         // Missing melee attack.
