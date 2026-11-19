@@ -22,6 +22,10 @@
   - HandheldStationMap
   - ClothingHeadHatWelding
   - ClothingHeadHatCone
+
+- type: latheRecipePack
+  id: EngineeringExplosivesStatic
+  recipes:
   - CableDetStack1
   - EmptyDetonator
   - TimerTrigger

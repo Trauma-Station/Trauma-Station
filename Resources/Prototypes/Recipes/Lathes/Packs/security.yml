@@ -68,6 +68,10 @@
   - Stunbaton
   - CombatKnife
   - RiotShield
+
+- type: latheRecipePack
+  id: SecurityPreciseDemolitionStatic
+  recipes:
   - CableDetStack1
   - EmptyDetonator
 

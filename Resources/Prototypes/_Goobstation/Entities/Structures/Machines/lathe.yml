@@ -40,6 +40,7 @@
     - NailgunStatic
     - NailsStatic
     - ReactorPartsBasic
+    - EngineeringExplosivesStatic
     dynamicPacks:
     - ConstructionBagOfHolding
     - AdvancedTools
@@ -128,6 +129,7 @@
     - SalvageExplosivesStatic # Seismic charges - they're pretty cheap in salvage vendor anyway so why not
     emagDynamicPacks:
     - SecurityExplosives
+    - SecurityPreciseDemolitionStatic
   - type: MaterialStorage
     whitelist:
       tags:
