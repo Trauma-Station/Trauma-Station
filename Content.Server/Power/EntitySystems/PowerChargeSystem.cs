@@ -57,7 +57,7 @@ public sealed partial class PowerChargeSystem : EntitySystem
             args.Cancel();
     }
 
-    private void OnComponentShutdown(EntityUid uid, PowerChargeComponent component, ComponentShutdown args)
+    private void OnComponentShutdown(EntityUid uid, PowerChargeComponent component, ref ComponentShutdown args)
     {
         if (!component.Active)
             return;
