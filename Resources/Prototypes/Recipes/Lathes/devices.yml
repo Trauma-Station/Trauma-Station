@@ -246,9 +246,8 @@
   - Weapons
   completetime: 2
   materials:
-    Plastic: 50
+    Plastic: 25
     Plasma: 25
-    Gold: 20
 
 - type: latheRecipe
   id: EmptyDetonator

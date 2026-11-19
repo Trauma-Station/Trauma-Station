@@ -1,6 +1,6 @@
 # Explosive cable below
 - type: entity
-  parent: [ CableStack, BaseSecurityContraband ]
+  parent: [ CableStack, BaseSecurityEngineeringContraband ]
   id: CableDetStack
   name: explosive cord
   suffix: Full
@@ -41,8 +41,8 @@
     thresholds:
     - trigger:
         !type:DamageTypeTrigger
-        damageType: Structural # as close as we can get to only letting explosives trigger it.
-        damage: 120
+        damageType: Structural
+        damage: 45 # Trauma - was 120 originally, didn't chain explode due to nerfed damage, was changed to 100, and then was changed to 45, because explosive breaching hammers are PEAK.
       behaviors:
       - !type:DoActsBehavior
         acts: ["Destruction"]
@@ -54,6 +54,7 @@
     totalIntensity: 60
     intensitySlope: 5
     maxIntensity: 30
+    tileBreakScale: 100
     canCreateVacuum: false
   - type: Tag
     tags:

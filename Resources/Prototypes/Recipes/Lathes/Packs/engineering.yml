@@ -22,6 +22,11 @@
   - HandheldStationMap
   - ClothingHeadHatWelding
   - ClothingHeadHatCone
+  - CableDetStack1
+  - EmptyDetonator
+  - TimerTrigger
+  - SignalTrigger
+  - VoiceTrigger
 
 - type: latheRecipePack
   id: AtmosStatic

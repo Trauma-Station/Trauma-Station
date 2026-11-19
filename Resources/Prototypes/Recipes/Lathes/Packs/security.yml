@@ -68,6 +68,8 @@
   - Stunbaton
   - CombatKnife
   - RiotShield
+  - CableDetStack1
+  - EmptyDetonator
 
 ## Dynamic recipes
 
@@ -96,8 +98,6 @@
 - type: latheRecipePack
   id: SecurityExplosives
   recipes:
-  - CableDetStack1
-  - EmptyDetonator
   - ShrapnelPayload # Trauma - was ExplosivePayload
   - GrenadeBlast
   - GrenadeEMP
