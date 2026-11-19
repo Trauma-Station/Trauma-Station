@@ -186,7 +186,6 @@
     - ScienceExplosives
     # </Trauma>
     - SecurityWeaponsStatic
-    - SecurityPreciseDemolitionStatic
     - SecurityAmmoStatic
     # - SyndicateAmmoStatic # Trauma
   - type: BlueprintReceiver
@@ -273,10 +272,13 @@
     - TraumaScienceClothing
     # </Trauma>
   - type: EmagLatheRecipes
+    emagStaticPacks:
+    # <Trauma>
+    - SecurityPreciseDemolitionStatic
+    # </Trauma>
     emagDynamicPacks:
     - SecurityAmmo
     - SecurityExplosives
-    - SecurityPreciseDemolitionStatic
     #- SecurityEquipment # Goobstation
     - SecurityWeapons
     # Goobstation Packs
@@ -495,6 +497,9 @@
     unlitIdleState: unlit
     unlitRunningState: unlit-building
     staticPacks:
+    # </Trauma>
+    - SecurityPreciseDemolitionStatic
+    # </Trauma>
     - SecurityEquipmentStatic
     - SecurityPracticeStatic
     - SecurityAmmoStatic
@@ -508,7 +513,6 @@
     - PowerCellsStatic
     - ScienceExplosives
     - GrenadeTriggersStatic
-    - SecurityPreciseDemolitionStatic
     dynamicPacks:
     - SalvageSecurityBoards
     - SalvageSecurityWeapons

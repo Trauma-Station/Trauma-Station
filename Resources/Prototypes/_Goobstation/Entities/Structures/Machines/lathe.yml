@@ -127,9 +127,11 @@
   - type: EmagLatheRecipes
     emagStaticPacks:
     - SalvageExplosivesStatic # Seismic charges - they're pretty cheap in salvage vendor anyway so why not
+    # </Trauma>
+    - SecurityPreciseDemolitionStatic
+    # </Trauma>
     emagDynamicPacks:
     - SecurityExplosives
-    - SecurityPreciseDemolitionStatic
   - type: MaterialStorage
     whitelist:
       tags:
@@ -214,6 +216,10 @@
     - Translators
     - TranslatorImplanters
   - type: EmagLatheRecipes
+    emagStaticPacks:
+    # </Trauma>
+    - SecurityPreciseDemolitionStatic
+    # </Trauma>
     emagDynamicPacks:
     - MechBoardsSecurity
     - MechBoardsCargo
