@@ -16727,3 +16727,12 @@ Entries:
   id: 1810
   time: '2026-11-18T06:54:01.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5390
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed modsuits not transferring on polymorph.
+  - type: Fix
+    message: Fixed sound spam on client related to modsuit seals.
+  id: 1811
+  time: '2026-11-19T12:40:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5323
