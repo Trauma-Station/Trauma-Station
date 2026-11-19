@@ -149,7 +149,7 @@
   parent: [ BoxCardboard, BaseSecurityEngineeringContraband ]
   id: BoxDetonator
   name: precise demolition box
-  description: A box with 2 detonators, 2 triggers and a full coil of explosive cord.
+  description: A box with 2 detonators, 2 triggers, a remote signaller and 2 full coils of explosive cord.
   components:
   - type: Storage
     grid:
