@@ -33,6 +33,7 @@
     unlitRunningState: unlit-building
     staticPacks:
     - ReactorPartsBasic
+    - ReactorPartsAdvanced
     - GasTurbineBlades
     - GasTurbineStators
     dynamicPacks:

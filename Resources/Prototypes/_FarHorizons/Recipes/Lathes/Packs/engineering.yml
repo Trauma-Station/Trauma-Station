@@ -20,6 +20,10 @@
   - GlassReactorHeatExchanger
   - SteelGasTurbineBlade
   - SteelGasTurbineStator
+
+- type: latheRecipePack
+  id: ReactorPartsAdvanced
+  recipes:
   - UraniumReactorFuelRod
   - PlasmaReactorFuelRod
   - UraniumGlassReactorFuelRod
