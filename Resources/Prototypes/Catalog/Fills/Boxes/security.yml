@@ -154,13 +154,15 @@
   - type: Item
     shape:
     - 0,0,1,1
-  - type: StorageFill
-    contents:
-    - id: EmptyDetonator
-      amount: 3
-    - id: TimerTrigger
-      amount: 2
-    - id: VoiceTrigger
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: EmptyDetonator
+          amount: 3
+        - id: TimerTrigger
+          amount: 2
+        - id: VoiceTrigger
   - type: Sprite
     layers:
     - state: box_security
