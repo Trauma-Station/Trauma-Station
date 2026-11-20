@@ -26,7 +26,7 @@
         children:
         - id: ChemistryBottleFormaldehyde
           amount: 2
-        - id: Bible
+        - id: BibleMundane
         - id: Syringe
         - id: BoxBodyBag
           amount: 10

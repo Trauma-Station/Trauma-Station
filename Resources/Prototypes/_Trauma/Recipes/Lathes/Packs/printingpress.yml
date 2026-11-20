@@ -12,6 +12,7 @@
   recipes:
   - BookFabricationPrinted
   - BookSurvivalPrinted
+  - BookBibleMundane
 
 - type: latheRecipePack
   id: PrintingPressBlueprints
