@@ -16804,3 +16804,12 @@ Entries:
   id: 1815
   time: '2026-11-20T20:04:26.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5380
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed self harvesting plants bypassing the produce cap.
+  - type: Tweak
+    message: Ligneous plants can no longer harvest themselves, remove ligneous first.
+  id: 1816
+  time: '2026-11-20T20:16:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5393
