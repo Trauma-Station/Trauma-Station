@@ -102,7 +102,7 @@ public sealed partial class GunExecutionSystem : EntitySystem
             Data = data
         };
         RaiseLocalEvent(ent, ref ev);
-        PredictedQueueDel(ent);
+        QueueDel(ent);
         args.Handled = true; // hitscan entity does nothing with projectile hit events
     }
 
@@ -136,7 +136,7 @@ public sealed partial class GunExecutionSystem : EntitySystem
         // done with the cartridge, now for caseless ammo
         if (ent.Comp.DeleteOnSpawn)
         {
-            PredictedQueueDel(ent);
+            QueueDel(ent);
             return;
         }
 

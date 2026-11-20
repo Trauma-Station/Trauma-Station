@@ -68,7 +68,7 @@ public sealed partial class UpgradeKitSystem : EntitySystem
 
         // do the upgrading now
         EntityManager.AddComponents(target, ent.Comp.Components);
-        PredictedQueueDel(ent);
+        QueueDel(ent);
     }
 
     /// <summary>

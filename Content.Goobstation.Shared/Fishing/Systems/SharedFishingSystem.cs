@@ -248,7 +248,7 @@ public abstract partial class SharedFishingSystem : EntitySystem
 
         RemComp<ActiveFishingRodComponent>(ent);
 
-        PredictedQueueDel(ent.Comp.FishingLure);
+        QueueDel(ent.Comp.FishingLure);
 
         if (_fisherQuery.TryComp(fisher, out var fisherComp))
         {

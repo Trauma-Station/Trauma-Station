@@ -46,7 +46,7 @@ public sealed partial class FloorCleanerSystem : EntitySystem
             if (!decal.Comp.Data.Cleanable)
                 continue;
 
-            PredictedDel(decal.Owner);
+            Del(decal.Owner);
             cleaned = true;
         }
 

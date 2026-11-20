@@ -168,7 +168,7 @@ public sealed partial class SurgerySystem : EntitySystem
             if (_stackQuery.TryComp(tool, out var stack))
                 _stack.TryUse((tool, stack), 1);
             else
-                PredictedQueueDel(tool);
+                QueueDel(tool);
         }
     }
 

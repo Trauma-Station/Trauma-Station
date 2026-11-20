@@ -22,7 +22,7 @@ public abstract partial class SharedMindSystem
 
         foreach (var obj in mind.Comp.Objectives)
         {
-            PredictedQueueDel(obj);
+            QueueDel(obj);
         }
         mind.Comp.Objectives.Clear();
         Dirty(mind, mind.Comp);

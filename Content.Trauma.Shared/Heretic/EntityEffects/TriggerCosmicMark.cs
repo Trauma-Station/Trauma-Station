@@ -27,6 +27,6 @@ public sealed partial class TriggerCosmicMarkEffectSystem : EntityEffectSystem<H
         var newCoords = Transform(dest).Coordinates;
         _teleport.Teleport(ent.Owner, newCoords, user: args.User);
         PredictedSpawnAtPosition(ent.Comp.CosmicCloud, newCoords);
-        PredictedDel(ent.Comp.CosmicDiamondUid.Value); // Just in case
+        Del(ent.Comp.CosmicDiamondUid.Value); // Just in case
     }
 }

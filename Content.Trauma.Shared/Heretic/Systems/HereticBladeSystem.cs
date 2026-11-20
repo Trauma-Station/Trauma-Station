@@ -324,7 +324,7 @@ public sealed partial class HereticBladeSystem : EntitySystem
 
     private void ShatterBlade(Entity<HereticBladeComponent> ent, EntityUid user)
     {
-        PredictedQueueDel(ent);
+        QueueDel(ent);
         _audio.PlayPredicted(ent.Comp.ShatterSound, user, user);
     }
 

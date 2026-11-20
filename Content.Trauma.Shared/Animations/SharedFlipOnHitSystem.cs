@@ -63,7 +63,7 @@ public abstract partial class SharedFlipOnHitSystem : EntitySystem
 
         foreach (var effect in effects)
         {
-            PredictedQueueDel(effect);
+            QueueDel(effect);
         }
     }
 

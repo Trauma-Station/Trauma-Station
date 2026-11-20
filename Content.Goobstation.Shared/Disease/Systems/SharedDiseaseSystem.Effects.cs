@@ -275,7 +275,7 @@ public partial class SharedDiseaseSystem
         if (!Resolve(ent, ref ent.Comp) || !_container.Remove(effect, ent.Comp.Effects))
             return false;
 
-        PredictedQueueDel(effect);
+        QueueDel(effect);
         return true;
     }
 
@@ -322,7 +322,7 @@ public partial class SharedDiseaseSystem
         if (TryAddEffect(ent, effectUid, out effect))
             return true;
 
-        PredictedDel(effectUid);
+        Del(effectUid);
         return false;
     }
 

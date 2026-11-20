@@ -39,7 +39,7 @@ public partial class SharedDiseaseSystem
         if (DoInfectionAttempt(target, ent, power, chance, spreadType, false))
             return ent;
 
-        PredictedDel(ent);
+        Del(ent);
         return null;
     }
 
@@ -89,7 +89,7 @@ public partial class SharedDiseaseSystem
 
         bool success = TryInfect(target, infectDisease);
         if (!success && newDisease != null)
-            PredictedDel(newDisease);
+            Del(newDisease);
 
         return success;
     }

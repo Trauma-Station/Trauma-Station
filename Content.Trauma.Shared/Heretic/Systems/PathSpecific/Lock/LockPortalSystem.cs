@@ -86,8 +86,8 @@ public sealed partial class LockPortalSystem : EntitySystem
 
     private void ClearPortals(Entity<LockPortalComponent> ent)
     {
-        PredictedQueueDel(ent.Comp.LinkedPortal);
-        PredictedQueueDel(ent);
+        QueueDel(ent.Comp.LinkedPortal);
+        QueueDel(ent);
     }
 
 
@@ -173,7 +173,7 @@ public sealed partial class LockPortalSystem : EntitySystem
             if ((body.CollisionLayer & BlockerTeleportMask) == 0)
                 continue;
 
-            PredictedQueueDel(blocker);
+            QueueDel(blocker);
         }
 
         if (addTimeout)

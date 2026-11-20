@@ -11,6 +11,6 @@ public sealed class KillAiEffectSystem : EntityEffectSystem<StationAiHolderCompo
 {
     protected override void Effect(Entity<StationAiHolderComponent> entity, ref EntityEffectEvent<KillAi> args)
     {
-        PredictedQueueDel(entity.Comp.Slot.ContainerSlot?.ContainedEntity);
+        QueueDel(entity.Comp.Slot.ContainerSlot?.ContainedEntity);
     }
 }

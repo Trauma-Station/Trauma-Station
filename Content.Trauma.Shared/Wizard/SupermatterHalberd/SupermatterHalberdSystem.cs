@@ -38,7 +38,7 @@ public sealed partial class SupermatterHalberdSystem : EntitySystem
 
         var ray = GetEntity(args.RayEffect);
         if (ray != null)
-            PredictedQueueDel(ray);
+            QueueDel(ray);
 
         if (args.Cancelled)
             return;
@@ -51,7 +51,7 @@ public sealed partial class SupermatterHalberdSystem : EntitySystem
 
         var coords = Transform(args.Target.Value).Coordinates;
         _audio.PlayPredicted(comp.ExecuteSound, uid, args.User);
-        PredictedDel(args.Target);
+        Del(args.Target);
         PredictedSpawnAtPosition(comp.AshProto, coords);
         PredictedSpawnAtPosition(comp.ExecuteEffect, coords);
     }
@@ -93,7 +93,7 @@ public sealed partial class SupermatterHalberdSystem : EntitySystem
             return;
 
         if (rayEffect != null)
-            PredictedQueueDel(rayEffect.Value);
+            QueueDel(rayEffect.Value);
     }
 }
 

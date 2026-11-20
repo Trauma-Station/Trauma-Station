@@ -40,7 +40,7 @@ public sealed partial class ThunderstrikeSystem : EntitySystem
         if (_player.TryGetSessionByEntity(ent, out var sesh))
             _jumpscare.Jumpscare(Sprite, sesh);
 
-        PredictedQueueDel(ent);
+        QueueDel(ent);
         PredictedSpawnAtPosition(Ash, ent.Comp.Coordinates);
         _popup.PopupEntity(Loc.GetString("admin-smite-turned-ash-other", ("entity", ent)), ent, PopupType.LargeCaution);
     }

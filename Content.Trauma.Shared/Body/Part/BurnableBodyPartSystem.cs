@@ -35,6 +35,6 @@ public sealed partial class BurnableWingsSystem : EntitySystem
                 _body.InsertOrgan(body, newWings);
         }
 
-        PredictedQueueDel(ent);
+        QueueDel(ent);
     }
 }
