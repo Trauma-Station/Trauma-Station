@@ -494,7 +494,7 @@ public sealed partial class InjectorSystem : EntitySystem
         if (usedEv.Cancelled)
         {
             if (usedEv.OverrideMessage is {} msg)
-                _popup.PopupPredicted(msg, user, user);
+                _popup.PopupEntity(msg, user, user);
             return true;
         }
         // </Trauma>
@@ -682,7 +682,7 @@ public sealed partial class InjectorSystem : EntitySystem
         if (ProtoMan.Resolve(injector.Comp.ActiveModeProtoId, out var activeMode))
         {
             if (activeMode.DrawPopupTarget != null && target.Owner != user)
-                _popup.PopupClient(Loc.GetString(activeMode.DrawPopupTarget), target, target);
+                _popup.PopupEntity(Loc.GetString(activeMode.DrawPopupTarget), target, target);
 
             _audio.PlayPredicted(activeMode.DrawSound, target, user);
         }

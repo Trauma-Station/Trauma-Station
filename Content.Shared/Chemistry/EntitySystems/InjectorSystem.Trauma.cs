@@ -57,7 +57,7 @@ public sealed partial class InjectorSystem
         {
             if (injector.Comp.IgnoreMobs)
             {
-                _popup.PopupClient(Loc.GetString("injector-component-ignore-mobs"), target, args.User);
+                _popup.PopupEntity(Loc.GetString("injector-component-ignore-mobs"), target, args.User);
                 return;
             }
 

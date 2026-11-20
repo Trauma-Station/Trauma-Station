@@ -238,7 +238,7 @@ public partial class TraumaSystem
             return traumaList;
 
         // Trauma chance is higher based on part integrity damage delta
-        var multiplier = MathF.Log(MathHelper.E + 0.1f * severity.Float());
+        var multiplier = MathF.Log(MathF.E + 0.1f * severity.Float());
 
         var target = (part, part.Comp);
         if (wound.Comp.AllowedTraumas.Contains(TraumaType.BoneDamage) &&
