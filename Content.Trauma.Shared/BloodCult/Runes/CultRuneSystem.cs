@@ -168,7 +168,7 @@ public sealed partial class CultRuneSystem : EntitySystem
 
         _audio.PlayPredicted(ent.Comp.EndDrawingSound, user, user);
 
-        PredictedDel(ent.Owner);
+        Del(ent.Owner);
     }
 
     public bool TrySpawnRune(EntityUid user, EntityCoordinates pos, BloodRunePrototype rune)
@@ -205,7 +205,7 @@ public sealed partial class CultRuneSystem : EntitySystem
     public void EraseRune(EntityUid rune, EntityUid user)
     {
         _popup.PopupEntity(Loc.GetString("cult-rune-erased"), rune, user);
-        PredictedQueueDel(rune);
+        QueueDel(rune);
     }
 
     [SubscribeLocalEvent]

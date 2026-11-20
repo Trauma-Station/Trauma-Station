@@ -96,7 +96,7 @@ public abstract partial class SharedStarGazerSystem : EntitySystem
         if (args.Cancelled || args.Handled || gun.ShootCoordinates is not { } coords || !coords.IsValid(EntityManager))
         {
             if (TryGetEntity(args.OrbEffect, out var orb) && Exists(orb.Value))
-                PredictedQueueDel(orb.Value);
+                QueueDel(orb.Value);
 
             RemCompDeferred(uid, comp);
             return;
@@ -132,7 +132,7 @@ public abstract partial class SharedStarGazerSystem : EntitySystem
 
         if (!_doAfter.TryStartDoAfter(doArgs))
         {
-            PredictedQueueDel(orbEffect);
+            QueueDel(orbEffect);
             return;
         }
 

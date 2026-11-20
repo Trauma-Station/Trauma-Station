@@ -118,7 +118,7 @@ public sealed partial class PlantAnalyzerSystem : EntitySystem
         }
 
         GetGeneFromInteger(ent, target);
-        PredictedQueueDel(target);
+        QueueDel(target);
 
         _popup.PopupEntity($"Extracted and isolated gene from {Name(target)}", ent, user);
         _audio.PlayPredicted(ent.Comp.ExtractEndSound, ent, user);

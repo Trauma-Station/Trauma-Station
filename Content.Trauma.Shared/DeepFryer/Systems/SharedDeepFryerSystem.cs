@@ -160,7 +160,7 @@ public abstract partial class SharedDeepFryerSystem : EntitySystem
             if (HasComp<DeepFriedComponent>(storedObject) && !HasComp<MindContainerComponent>(storedObject)) // any twice deep-fried items get... OverCooked..? say that again
             {
                 Spawn(ent.Comp.AshedItemToSpawn, ent.Owner.ToCoordinates());
-                PredictedDel(storedObject);
+                Del(storedObject);
                 continue;
             }
 

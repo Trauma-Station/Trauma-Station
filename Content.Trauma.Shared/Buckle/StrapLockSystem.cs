@@ -320,7 +320,7 @@ public sealed partial class StrapLockSystem : EntitySystem
 
         foreach (var item in ent.Comp.VirtualItems)
         {
-            PredictedQueueDel(item);
+            QueueDel(item);
         }
 
         ent.Comp.VirtualItems.Clear();

@@ -36,7 +36,7 @@ public sealed partial class NullrodTransformSystem : EntitySystem
         PredictedSpawnAtPosition(component.RodProto, args.ClickLocation.SnapToGrid(EntityManager));
 
         // Remove the nullrod
-        PredictedQueueDel(args.Used);
+        QueueDel(args.Used);
         args.Handled = true;
     }
 }

@@ -84,7 +84,7 @@ public sealed partial class TentacleHookSystem : EntitySystem
     {
         if (!HasComp<BodyComponent>(args.Target))
         {
-            PredictedDel(ent.Owner);
+            Del(ent.Owner);
             return;
         }
 
@@ -101,7 +101,7 @@ public sealed partial class TentacleHookSystem : EntitySystem
 
     private void OnJointRemoved(Entity<TentacleHookProjectileComponent> ent, ref JointRemovedEvent args)
     {
-        PredictedQueueDel(ent.Owner);
+        QueueDel(ent.Owner);
     }
 
     private void OnDespawn(Entity<TentacleHookProjectileComponent> ent, ref TimedDespawnEvent args)

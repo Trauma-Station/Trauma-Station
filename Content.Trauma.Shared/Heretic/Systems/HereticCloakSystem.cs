@@ -35,7 +35,7 @@ public sealed partial class HereticCloakSystem : EntitySystem
             if (effect.Comp1.LoseFocusMessage is { } message)
                 _popup.PopupEntity(Loc.GetString(message), ent, ent);
             if (effect.Comp1.RequiresFocus)
-                PredictedQueueDel(effect.Owner);
+                QueueDel(effect.Owner);
         }
     }
 

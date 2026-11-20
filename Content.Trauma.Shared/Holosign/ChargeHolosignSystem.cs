@@ -66,7 +66,7 @@ public sealed partial class ChargeHolosignSystem : EntitySystem
             if (TerminatingOrDeleted(signUid))
                 continue;
 
-            PredictedQueueDel(signUid);
+            QueueDel(signUid);
             added++;
         }
 
@@ -100,7 +100,7 @@ public sealed partial class ChargeHolosignSystem : EntitySystem
             return false;
         }
 
-        PredictedQueueDel(sign);
+        QueueDel(sign);
         ent.Comp1.Signs.Remove(sign);
         Dirty(ent, ent.Comp1);
 

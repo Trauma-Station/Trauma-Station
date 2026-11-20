@@ -27,7 +27,7 @@ public sealed partial class PocketDimensionSystem : EntitySystem
     private void OnShutdown(Entity<PocketDimensionComponent> ent, ref ComponentShutdown args)
     {
         if (ent.Comp.PocketDimensionMap is { } map && Exists(map))
-            PredictedQueueDel(map);
+            QueueDel(map);
     }
 
     [SubscribeLocalEvent]

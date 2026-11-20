@@ -47,7 +47,7 @@ public abstract partial class SharedChangelingSystem
         if (!TryComp(dartgun, out AmmoSelectorComponent? ammoSelector))
         {
             Log.Error($"Changeling dartgun {ToPrettyString(dartgun)} of {ToPrettyString(uid)} was missing AmmoSelectorComponent!");
-            PredictedDel(dartgun);
+            Del(dartgun);
             PlayMeatySound(uid, comp, predicted: true);
             return;
         }
@@ -72,7 +72,7 @@ public abstract partial class SharedChangelingSystem
             Popup.PopupEntity(Loc.GetString("changeling-dartgun-no-stings"), uid, uid);
             comp.Equipment.Remove(DartGunPrototype);
             Dirty(uid, comp);
-            PredictedDel(dartgun.Value);
+            Del(dartgun.Value);
             return;
         }
 

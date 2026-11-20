@@ -23,7 +23,7 @@ public sealed class DeleteOnDropAttemptSystem : EntitySystem
 
     private void OnDroppedItem(Entity<DeleteOnDropAttemptComponent> ent, ref ItemDropAttemptEvent args)
     {
-        PredictedQueueDel(ent);
+        QueueDel(ent);
         args.Cancelled = true;
     }
 }

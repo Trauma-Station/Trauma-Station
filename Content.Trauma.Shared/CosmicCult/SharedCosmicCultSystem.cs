@@ -115,7 +115,7 @@ public abstract partial class SharedCosmicCultSystem : EntitySystem
             if (_net.IsServer) // Predicted spawn looks bad with animations
                 PredictedSpawnAtPosition(ent.Comp.ShatterVFX, Transform(ent).Coordinates);
 
-            PredictedQueueDel(ent);
+            QueueDel(ent);
         }
     }
 

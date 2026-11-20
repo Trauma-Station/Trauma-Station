@@ -61,7 +61,7 @@ public sealed partial class EmptyScrollSystem : EntitySystem
         LocId msg = "empty-scroll-prayer-" + (answered ? "answered" : "failed");
         _popup.PopupCoordinates(Loc.GetString(msg), coords, target, answered ? PopupType.Large : PopupType.Medium);
 
-        PredictedQueueDel(ent);
+        QueueDel(ent);
     }
 
     private void OnPrototypesReloaded(PrototypesReloadedEventArgs args)

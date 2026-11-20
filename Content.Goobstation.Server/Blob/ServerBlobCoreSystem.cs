@@ -104,7 +104,7 @@ public sealed partial class ServerBlobCoreSystem : BlobCoreSystem
 
     private void CreateKillBlobCoreJob(Entity<BlobCoreComponent> core)
     {
-        PredictedQueueDel(core.Comp.Observer);
+        QueueDel(core.Comp.Observer);
 
         var station = _station.GetOwningStation(core);
         var job = new KillBlobCore(this, station, core, KillCoreJobTime);

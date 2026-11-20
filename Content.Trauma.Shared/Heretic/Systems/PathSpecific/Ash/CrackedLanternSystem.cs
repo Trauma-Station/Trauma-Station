@@ -202,7 +202,7 @@ public sealed partial class CrackedLanternSystem : EntitySystem
                 return;
             }
 
-            PredictedQueueDel(ent.Comp.Summoned.Value);
+            QueueDel(ent.Comp.Summoned.Value);
             ent.Comp.Summoned = null;
         }
 

@@ -25,8 +25,8 @@ public sealed class DeleteEffectSystem : EntityEffectSystem<MetaDataComponent, D
 
         var meta = ent.AsNullable();
         if (args.Effect.Queued)
-            PredictedQueueDel(meta);
+            QueueDel(meta);
         else
-            PredictedDel(meta);
+            Del(meta);
     }
 }
