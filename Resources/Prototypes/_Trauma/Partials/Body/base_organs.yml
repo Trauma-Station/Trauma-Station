@@ -256,12 +256,16 @@
       Normal: 9
       Damaged: 6
       Destroyed: 0
+  - type: StaticPrice
+    price: 3000
 
 - type: entity
   id: OrganBaseTongue
   components:
   - type: ChildOrgan
     parents: [ Head ]
+  - type: StaticPrice
+    price: 1000
 
 - type: entity
   id: OrganBaseAppendix
@@ -281,6 +285,8 @@
   components:
   - type: ChildOrgan
     parents: [ Torso ]
+  - type: StaticPrice
+    price: 4000
 
 - type: entity
   id: OrganBaseHeart
@@ -288,12 +294,16 @@
   - type: ChildOrgan
     parents: [ Torso ]
   - type: Heart
+  - type: StaticPrice
+    price: 4000
 
 - type: entity
   id: OrganBaseStomach
   components:
   - type: ChildOrgan
     parents: [ Torso ]
+  - type: StaticPrice
+    price: 2500
 
 - type: entity
   id: OrganBaseLiver
@@ -301,12 +311,16 @@
   - type: ChildOrgan
     parents: [ Torso ]
   - type: Liver
+  - type: StaticPrice
+    price: 2500
 
 - type: entity
   id: OrganBaseKidneys
   components:
   - type: ChildOrgan
     parents: [ Torso ]
+  - type: StaticPrice
+    price: 2000
 
 - type: entity
   parent: OrganBase

@@ -28,8 +28,8 @@
       FootLeft: OrganMonkeyFootLeft
       FootRight: OrganMonkeyFootRight
       Brain: OrganHumanBrain
-      Eyes: OrganHumanEyes
-      Tongue: OrganHumanTongue
+      Eyes: OrganMonkeyEyes
+      Tongue: OrganMonkeyTongue
       Ears: OrganHumanEars
       Lungs: OrganAnimalLungs
       Heart: OrganAnimalHeart
@@ -106,3 +106,22 @@
 - type: entity
   parent: [ OrganBaseFootRight, OrganMonkeyExternal ]
   id: OrganMonkeyFootRight
+
+## Organs
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganHumanInternal, OrganHumanExternal ]
+  id: OrganMonkeyEyes
+  components:
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Customization/eyes.rsi
+  - type: StaticPrice
+    price: 30
+
+- type: entity
+  parent: [ OrganBaseTongue, OrganHumanInternal ]
+  id: OrganMonkeyTongue
+  components:
+  - type: StaticPrice
+    price: 30

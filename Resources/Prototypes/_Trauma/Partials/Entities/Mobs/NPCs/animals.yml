@@ -7,3 +7,24 @@
     thresholds: !Clear
       0: Alive
       30: Dead
+
+- type: entity
+  id: MobMothroach
+  components:
+  - type: VentCrawler
+  - type: FaxSlip
+    slipChance: 0.3
+  - type: DashAction
+    actionProto: ActionDashMoth
+  - type: LanguageSpeaker
+    speaks:
+    - Moffic
+    understands:
+    - Moffic
+    - TauCetiBasic
+  - type: EatToGrow
+    growth: 0.05
+    maxGrowth: 2
+  - type: Item
+    size: Small # was Normal, let it fit in chest cavity
+  - !Remove type: ReplacementAccent
