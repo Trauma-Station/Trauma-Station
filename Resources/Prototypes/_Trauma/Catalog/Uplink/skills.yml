@@ -200,7 +200,7 @@
 
 - type: listing
   id: UplinkSkillChipMagicalKnowledge
-  name: uplink-skill-chip-magic-knowledge-name 
+  name: uplink-skill-chip-magic-knowledge-name
   description: uplink-skill-chip-magic-knowledge-desc
   productEntity: SkillChipMagicalKnowledge
   cost:
@@ -208,4 +208,3 @@
   discountCategory: null
   categories:
   - UplinkSkills
-
