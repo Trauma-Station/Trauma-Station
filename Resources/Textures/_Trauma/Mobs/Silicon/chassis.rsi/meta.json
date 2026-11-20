@@ -1,0 +1,30 @@
+{
+    "version": 1,
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/commit/faf6db214927874c19b8fa8585d26b5d40de1acc/icons/mob/silicon/robots.dmi",
+    "states": [
+        {
+            "name": "security_icon"
+        },
+        {
+            "name": "security",
+            "directions": 4
+        },
+        {
+            "name": "security_e",
+            "directions": 4
+        },
+        {
+            "name": "security_e_r",
+            "directions": 4
+        },
+        {
+            "name": "security_l",
+            "directions": 4
+        }
+    ]
+}

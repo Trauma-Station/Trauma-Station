@@ -1,7 +1,7 @@
 {
   "version": 1,
   "license": "CC-BY-SA-3.0",
-  "copyright": "moxie_is_moxie, omnimed-surgery-module made by ghostlydragon8 (github)",
+  "copyright": "moxie_is_moxie, omnimed-surgery-module made by ghostlydragon8 (github), security modules edited by Reestock from https://github.com/space-wizards/space-station-14/commit/2f923d88e4aa624f55dd7f4f7a2a57e5ff8d22c2#diff-7f38b1f2b265485d696076b74fc7fdb2bd84eca0b849f46e7c7c2bac279127bd for energy shotgun, https://github.com/space-wizards/space-station-14/commit/27becd89868568190f0e036e59a08ea48636112f#diff-f742c1df00304b99bcf978485b470a11799d14f77cdee70ff0d72106b2c13839 for truncheon, https://github.com/space-wizards/space-station-14/commit/d0550290e705296c67ff4849f176f56475c6f281#diff-3b9db4f9f571666deeadf5b2aaaed6977c71ba1a9951d220e90e08a5a391d0d0 for security radio, https://github.com/space-wizards/space-station-14/commit/8668c78f43cd18d2c675f51febca2a2a52f3d0d2#diff-dea792d47158a59c743889d105b20653cb0adc5232e534ecf01c9943ebb36420 for stun baton, https://github.com/space-wizards/space-station-14/commit/43dc0be57c78e792f6a5e571b91ab76df26427de#diff-0294bf0578b9a2f579820a640c4631ac0337b28a7705845f74823ec5919e0e3a for laser rifle",
   "size": {
     "x": 32,
     "y": 32
@@ -33,6 +33,21 @@
     },
     {
       "name": "omnimed-surgery-module"
+    },
+    {
+      "name": "stun_baton"
+    },
+    {
+      "name": "sec_radio"
+    },
+    {
+      "name": "laser_rifle"
+    },
+    {
+      "name": "truncheon"
+    },
+    {
+      "name": "energy_shotgun"
     }
   ]
 }
