@@ -23,12 +23,12 @@
 # Nuclear Reactor
 
 - type: cargoProduct
-  id: NuclearReactorFlatpack
+  id: SmallNuclearReactorFlatpack
   icon:
     sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/cargo_icons.rsi
-    state: reactor
-  product: NuclearReactorFlatpack
-  cost: 15000
+    state: smallreactor
+  product: SmallNuclearReactorFlatpack
+  cost: 7500
   category: cargoproduct-category-name-engineering
   group: market
 
@@ -39,6 +39,26 @@
     state: turbine
   product: GasTurbineFlatpack
   cost: 10000
+  category: cargoproduct-category-name-engineering
+  group: market
+
+- type: cargoProduct
+  id: SmallGasTurbineFlatpack
+  icon:
+    sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/cargo_icons.rsi
+    state: smallturbine
+  product: SmallGasTurbineFlatpack
+  cost: 5000
+  category: cargoproduct-category-name-engineering
+  group: market
+
+- type: cargoProduct
+  id: UraniumFuelRods
+  icon:
+    sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_parts.rsi
+    state: default_rod
+  product: CrateUraniumFuelRod
+  cost: 6000
   category: cargoproduct-category-name-engineering
   group: market
 
@@ -78,6 +98,6 @@
     sprite: _FarHorizons/Structures/Power/Generation/FissionGenerator/reactor_parts.rsi
     state: default_rod
   product: CrateSteelHeatExhanger
-  cost: 1000
+  cost: 500
   category: cargoproduct-category-name-engineering
   group: market

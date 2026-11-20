@@ -22,37 +22,37 @@
   - SteelGasTurbineStator
 
 - type: latheRecipePack
-  id: ReactorFuelRods
+  id: ReactorPartsAdvanced
   recipes:
   - UraniumReactorFuelRod
-  - PlutoniumReactorFuelRod
-  - BananiumReactorFuelRod
   - PlasmaReactorFuelRod
   - UraniumGlassReactorFuelRod
-
-- type: latheRecipePack
-  id: ReactorReflectors
-  recipes:
   - GraphiteReactorReflector
   - GoldReactorReflector
   - SilverReactorReflector
-
-- type: latheRecipePack
-  id: ReactorGasChannels
-  recipes:
+  - GoldReactorHeatExchanger
+  - SilverReactorHeatExchanger
+  - PlasteelReactorHeatExchanger
+  - PlasmaGlassReactorHeatExchanger
   - GoldReactorGasChannel
   - SilverReactorGasChannel
   - PlasteelReactorGasChannel
   - PlasmaGlassReactorGasChannel
+
+- type: latheRecipePack
+  id: ReactorFuelRods
+  recipes:
+  - PlutoniumReactorFuelRod
+  - BananiumReactorFuelRod
+
+- type: latheRecipePack
+  id: ReactorGasChannels
+  recipes:
   - DiamondReactorGasChannel
 
 - type: latheRecipePack
   id: ReactorHeatExchangers
   recipes:
-  - GoldReactorHeatExchanger
-  - SilverReactorHeatExchanger
-  - PlasteelReactorHeatExchanger
-  - PlasmaGlassReactorHeatExchanger
   - DiamondReactorHeatExchanger
 
 - type: latheRecipePack
