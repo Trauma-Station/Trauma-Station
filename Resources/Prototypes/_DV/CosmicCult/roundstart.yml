@@ -8,7 +8,7 @@
   - type: LoadMapRule
     mapPath: /Maps/_DV/Nonstations/cosmicvoid.yml
   - type: GameRule
-    minPlayers: 20
+    minPlayers: 35
   - type: AntagObjectives
     objectives:
     - CosmicFinalityObjective
