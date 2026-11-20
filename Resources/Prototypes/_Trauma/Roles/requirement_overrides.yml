@@ -81,7 +81,7 @@
       department: Service
       time: 5h
       inverted: true
-    #Assistant made into a learner role, D-Class the new assistant role
+    #Assistant made into a learner role, Ex-Pop the new assistant role
     Passenger:
     - !type:DepartmentTimeRequirement
       department: Civilian
