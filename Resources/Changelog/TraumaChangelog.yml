@@ -16743,3 +16743,20 @@ Entries:
   id: 1812
   time: '2026-11-20T13:50:25.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5401
+- author: elNarehate
+  changes:
+  - type: Add
+    message: Facehuggers can now escape inventories and detach from faces.
+  - type: Tweak
+    message: Stun batons now drain power while turned on.
+  - type: Tweak
+    message: Morphs can now withstand space and lethal gases.
+  - type: Tweak
+    message: >-
+      Blood cult knives are now throwable and no longer deal damage on wide
+      attacks.
+  - type: Fix
+    message: Space spiders now have a spider stomach.
+  id: 1813
+  time: '2026-11-20T13:51:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5321
