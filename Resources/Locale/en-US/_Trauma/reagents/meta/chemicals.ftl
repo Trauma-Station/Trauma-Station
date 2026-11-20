@@ -81,3 +81,12 @@ reagent-desc-fungalin = A high concentration of spores capable of reproducing in
 
 reagent-name-ethylene = ethylene
 reagent-desc-ethylene = A highly flammable, colourless gas. Most commonly used in the production of LDPE plastics.
+
+reagent-name-citric-acid = citric acid
+reagent-desc-citric-acid = It occurs naturally in citrus fruits. Often used for rust removal.
+
+reagent-name-bluespace-melange = bluespace melange
+reagent-desc-bluespace-melange = A weak drug that creates the impression that its user is teleporting—through, actually the reality itself is shifting around them.
+
+reagent-name-bluespace-salt = bluespace salt
+reagent-desc-bluespace-salt = A potent drug that creates the impression that its user is teleporting—through, actually the reality itself is shifting around them.

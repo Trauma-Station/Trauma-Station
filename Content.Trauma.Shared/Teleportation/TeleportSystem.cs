@@ -120,11 +120,14 @@ public sealed partial class TeleportSystem : EntitySystem
     public bool Teleport(EntityUid uid, EntityCoordinates coords, SoundSpecifier? soundIn, SoundSpecifier? soundOut, EntityUid? user = null, bool predicted = true, bool pulled = false)
     {
         var oldCoords = Transform(uid).Coordinates;
+
         if (predicted)
             _audio.PlayPredicted(soundOut, oldCoords, user);
         else
             _audio.PlayPvs(soundOut, oldCoords);
+
         var succ = Teleport(uid, coords, user, predicted, pulled);
+
         if (predicted)
             _audio.PlayPredicted(soundIn, coords, user);
         else
