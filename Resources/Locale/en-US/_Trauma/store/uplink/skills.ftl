@@ -47,7 +47,7 @@ uplink-skill-chip-weapons-smg-name = APTR-Chip (SMG Training)
 uplink-skill-chip-weapons-smg-desc = A skill chip that makes the user proficent with SMGs.
 
 uplink-skill-chip-magic-knowledge-name = IVYL-Chip (Magical Knowledge)
-uplink-skill-chip-magic-knowledge-desc = A skill chip that teaches you the secrets of demonology.
+uplink-skill-chip-magic-knowledge-desc = A skill chip that teaches all the secrets of demonology.
 
 uplink-skill-chip-gorlex-name = IVYL-Chip (Gorlex)
-uplink-skill-chip-gorlex-desc = An advanced skill chip made for only the best of the best.
+uplink-skill-chip-gorlex-desc = An advanced skill chip that makes the user proficent with all the ranged and melee weapons.
