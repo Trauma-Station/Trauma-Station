@@ -177,3 +177,5 @@
     canEmag: false
     canExamine: false
   - type: FaceHuggerLeap
+  - type: CanEscapeInventory
+    baseResistTime: 2
