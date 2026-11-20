@@ -16760,3 +16760,18 @@ Entries:
   id: 1813
   time: '2026-11-20T13:51:40.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5321
+- author: LordZirconium
+  changes:
+  - type: Add
+    message: Small reactor flatpack is now available for purchase at cargo.
+  - type: Add
+    message: Small turbine flatpack is now available for purchase at cargo.
+  - type: Add
+    message: Uranium fuel rod crates are now available for purchase at cargo.
+  - type: Tweak
+    message: Most nuclear reactor rods you need are now roundstart.
+  - type: Remove
+    message: Big reactors are now roundstart only, can't buy them anymore.
+  id: 1814
+  time: '2026-11-20T20:02:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5378
