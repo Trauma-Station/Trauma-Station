@@ -1,0 +1,64 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: ReagentSlime
+  components:
+  - type: Bloodstream
+    bloodRefreshAmount: 3
+  - type: Reactive
+    reactions:
+    - reagents: [ Water ]
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Caustic: 2.5
+
+- type: entity
+  id: ReagentSlimeSpawner
+  components:
+  - type: EntityTableSpawner
+    table: !type:GroupSelector
+      children: !Clear
+      - !type:GroupSelector
+        weight: 90
+        children:
+        - id: ReagentSlime
+        - id: ReagentSlimeBeer
+        - id: ReagentSlimePax
+        - id: ReagentSlimeNocturine
+        - id: ReagentSlimeTHC
+        - id: ReagentSlimeBicaridine
+        - id: ReagentSlimeToxin
+        - id: ReagentSlimeNapalm
+        - id: ReagentSlimeMuteToxin
+        - id: ReagentSlimeNorepinephricAcid
+        - id: ReagentSlimeEphedrine
+        - id: ReagentSlimeRobustHarvest
+        - id: ReagentSlimeFrezon
+        - id: ReagentSlimeFresium
+        - id: ReagentSlimeGenecide
+        - id: ReagentSlimeAmatoxin
+        - id: ReagentSlimeAluite
+        - id: ReagentSlimeArtifexium
+        - id: ReagentSlimeFresium
+        - id: ReagentSlimeTilenol
+        - id: ReagentSlimeUnstableCompound
+        - id: ReagentSlimeAnacea
+        - id: ReagentSlimeHemorrhinol
+        - id: ReagentSlimeLead
+        - id: ReagentSlimeChlorineTrifluoride
+        - id: ReagentSlimeBurnite
+        - id: ReagentSlimeBruizine
+        - id: ReagentSlimeUltravasculine
+        - id: ReagentSlimeMold
+        - id: ReagentSlimeRazorium
+        - id: ReagentSlimeCyanide
+        - id: ReagentSlimePolytrinicAcid
+      - !type:GroupSelector
+        weight: 10
+        children:
+        - id: ReagentSlimeCrackCocaine
+        - id: ReagentSlimeProcenylLazide
+        - id: ReagentSlimeOmnizine
