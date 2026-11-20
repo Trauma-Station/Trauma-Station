@@ -16775,3 +16775,32 @@ Entries:
   id: 1814
   time: '2026-11-20T20:02:31.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5378
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added 17 new reagent slime variants
+  - type: Add
+    message: Added an additional effect when decaying a rock anomaly
+  - type: Tweak
+    message: Heavily tweaked liquid anomaly and buffed its super critical effect
+  - type: Tweak
+    message: Tweaked bluespace anomalies effect so it has a bigger radius overall
+  - type: Tweak
+    message: Tweaked flesh anomalies to pulse faster overall
+  - type: Tweak
+    message: Made all anomalies have a higher minimum/maximum point output
+  - type: Tweak
+    message: Made anomalies produce more points when they are growing
+  - type: Tweak
+    message: Made anomalies pulse faster overall for their minimum and maximum
+  - type: Tweak
+    message: Reagent slimes now take 2x less damage from water
+  - type: Tweak
+    message: Omnizine Slimes and Crack Cocaine Slimes are now much less common
+  - type: Tweak
+    message: Anomaly generator now only needs 10 phoron instead of 15
+  - type: Tweak
+    message: Reagent slimes now regenerate blood faster if they are alive
+  id: 1815
+  time: '2026-11-20T20:04:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5380
