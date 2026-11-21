@@ -57,7 +57,7 @@
   - tasks:
     - !type:HTNPrimitiveTask
       preconditions:
-      - !type:SatiationPrecondition
+      - !type:BaseSatiationPrecondition
         satiationType: Hunger
         above: Okay
       operator: !type:UtilityOperator
@@ -91,7 +91,7 @@
   - tasks:
     - !type:HTNPrimitiveTask
       preconditions:
-      - !type:SatiationPrecondition
+      - !type:BaseSatiationPrecondition
         satiationType: Hunger
         above: Okay
       operator: !type:UtilityOperator
