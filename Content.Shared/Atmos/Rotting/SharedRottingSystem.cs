@@ -116,6 +116,8 @@ public abstract partial class SharedRottingSystem : EntitySystem
         if (TryComp<MobStateComponent>(uid, out var mobState) && !_mobState.IsDead(uid, mobState))
             return false;
 
+        // ToDo: add atmos check here
+
         if (_container.TryGetOuterContainer(uid, Transform(uid), out var container) &&
             HasComp<AntiRottingContainerComponent>(container.Owner))
         {
