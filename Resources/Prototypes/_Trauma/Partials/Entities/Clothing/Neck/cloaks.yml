@@ -1,0 +1,9 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: ClothingNeckCloakGoliathCloak
+  description: A cloak made from the hide of resilient fauna from a distant planet.
+  components:
+  - type: Construction
+    graph: GoliathCloak
+    node: cloak

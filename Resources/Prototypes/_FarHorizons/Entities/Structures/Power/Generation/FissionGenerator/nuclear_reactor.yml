@@ -164,6 +164,8 @@
     blacklist:
       tags:
       - GhostOnlyWarp
+  - type: StaticPrice
+    price: 10000
 
 - type: entity
   parent: NuclearReactorCrew
@@ -278,6 +280,8 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalBreak
+  - type: StaticPrice
+    price: 5000
 
 - type: entity
   parent: NuclearReactorSmall
@@ -286,6 +290,14 @@
   components:
   - type: NuclearReactor
     prefab: null
+
+- type: entity
+  parent: NuclearReactorSmall
+  id: NuclearReactorEmptySmall
+  suffix: Empty
+  components:
+  - type: NuclearReactor
+    prefab: Empty
 
 - type: entity
   parent: NuclearReactorMelted

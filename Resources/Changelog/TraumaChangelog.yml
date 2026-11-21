@@ -16668,3 +16668,148 @@ Entries:
   id: 1803
   time: '2026-11-13T11:46:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5360
+- author: VictorJob
+  changes:
+  - type: Tweak
+    message: Changed sprites for the MK58 and pistol magazines
+  id: 1804
+  time: '2026-11-14T16:59:12.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5374
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed armor not doing anything.
+  id: 1805
+  time: '2026-11-14T16:59:19.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5375
+- author: LordZirconium
+  changes:
+  - type: Tweak
+    message: Added genetics to Omega station.
+  id: 1806
+  time: '2026-11-15T01:19:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5379
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Increased the base brute resistances on the alien lab coat to 30%
+  - type: Fix
+    message: Fixed alien lab coat not having ballistic resistance
+  id: 1807
+  time: '2026-11-15T01:21:10.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5377
+- author: Wizard25671
+  changes:
+  - type: Fix
+    message: Fixed chili peppers containing fresium instead of chilly peppers
+  id: 1808
+  time: '2026-11-15T09:25:23.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5381
+- author: LordZirconium
+  changes:
+  - type: Tweak
+    message: Amber kitchen expanded.
+  - type: Tweak
+    message: Cluster genetics added.
+  - type: Tweak
+    message: Packed holopads added everywhere where needed.
+  - type: Add
+    message: >-
+      Added phoron supply lines that lead from atmos to reactor on Oasis,
+      Origin, Packed and Cog.
+  id: 1809
+  time: '2026-11-16T20:38:02.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5386
+- author: LordZirconium
+  changes:
+  - type: Tweak
+    message: Extinguisher closets are now way more visible.
+  id: 1810
+  time: '2026-11-18T06:54:01.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5390
+- author: Aviu
+  changes:
+  - type: Fix
+    message: Fixed modsuits not transferring on polymorph.
+  - type: Fix
+    message: Fixed sound spam on client related to modsuit seals.
+  id: 1811
+  time: '2026-11-19T12:40:34.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5323
+- author: Wizard25671
+  changes:
+  - type: Tweak
+    message: Increased the minimum players needed for cosmic cult from 20 to 35
+  id: 1812
+  time: '2026-11-20T13:50:25.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5401
+- author: elNarehate
+  changes:
+  - type: Add
+    message: Facehuggers can now escape inventories and detach from faces.
+  - type: Tweak
+    message: Stun batons now drain power while turned on.
+  - type: Tweak
+    message: Morphs can now withstand space and lethal gases.
+  - type: Tweak
+    message: >-
+      Blood cult knives are now throwable and no longer deal damage on wide
+      attacks.
+  - type: Fix
+    message: Space spiders now have a spider stomach.
+  id: 1813
+  time: '2026-11-20T13:51:40.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5321
+- author: LordZirconium
+  changes:
+  - type: Add
+    message: Small reactor flatpack is now available for purchase at cargo.
+  - type: Add
+    message: Small turbine flatpack is now available for purchase at cargo.
+  - type: Add
+    message: Uranium fuel rod crates are now available for purchase at cargo.
+  - type: Tweak
+    message: Most nuclear reactor rods you need are now roundstart.
+  - type: Remove
+    message: Big reactors are now roundstart only, can't buy them anymore.
+  id: 1814
+  time: '2026-11-20T20:02:31.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5378
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added 17 new reagent slime variants
+  - type: Add
+    message: Added an additional effect when decaying a rock anomaly
+  - type: Tweak
+    message: Heavily tweaked liquid anomaly and buffed its super critical effect
+  - type: Tweak
+    message: Tweaked bluespace anomalies effect so it has a bigger radius overall
+  - type: Tweak
+    message: Tweaked flesh anomalies to pulse faster overall
+  - type: Tweak
+    message: Made all anomalies have a higher minimum/maximum point output
+  - type: Tweak
+    message: Made anomalies produce more points when they are growing
+  - type: Tweak
+    message: Made anomalies pulse faster overall for their minimum and maximum
+  - type: Tweak
+    message: Reagent slimes now take 2x less damage from water
+  - type: Tweak
+    message: Omnizine Slimes and Crack Cocaine Slimes are now much less common
+  - type: Tweak
+    message: Anomaly generator now only needs 10 phoron instead of 15
+  - type: Tweak
+    message: Reagent slimes now regenerate blood faster if they are alive
+  id: 1815
+  time: '2026-11-20T20:04:26.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5380
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: Fixed self harvesting plants bypassing the produce cap.
+  - type: Tweak
+    message: Ligneous plants can no longer harvest themselves, remove ligneous first.
+  id: 1816
+  time: '2026-11-20T20:16:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5393

@@ -30,3 +30,13 @@
   components:
   - type: PlantData
     mutationPrototypes: [ PlasticcapPlants ]
+
+- type: entity
+  id: ChillyPlants
+  components:
+  - type: PlantChemicals
+    chemicals:
+      Fresium:
+        min: 1
+        max: 5
+        potencyDivisor: 20

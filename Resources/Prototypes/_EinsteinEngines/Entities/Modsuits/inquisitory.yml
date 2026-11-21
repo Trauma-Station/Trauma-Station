@@ -14,7 +14,7 @@
   name: Inquisitory modsuit control unit
   description: The main controller for a Inquisitory modsuit.
   components:
-  - type: ToggleableClothing
+  - type: MultiToggleableClothing
     clothingPrototypes:
       head: ClothingModsuitHelmetInquisitory
       gloves: ClothingModsuitGauntletsInquisitory

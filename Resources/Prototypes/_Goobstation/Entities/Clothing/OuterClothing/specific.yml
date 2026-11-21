@@ -23,9 +23,8 @@
     walkModifier: 0.9
     sprintModifier: 0.9
   - type: HeldSpeedModifier
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
-      head: ClothingHeadHelmetHEV
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHelmetHEV
   - type: ClothingGrantComponent
     component: # same as CE suit
       - type: SupermatterImmune
@@ -131,9 +130,8 @@
     state: icon
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/eldritch_armor.rsi
-  - type: ToggleableClothing # Goobstation - Modsuits change
-    clothingPrototypes:
-      head: ClothingHeadHatHoodHereticCostume
+  - type: ToggleableClothing
+    clothingPrototype: ClothingHeadHatHoodHereticCostume
   - type: Tag
     tags:
       - HereticCostume
@@ -149,8 +147,7 @@
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/void_armor.rsi
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodHereticVoidCostume
+    clothingPrototype: ClothingHeadHatHoodHereticVoidCostume
 
 - type: entity
   parent: ClothingOuterArmorHereticCostume
@@ -163,8 +160,7 @@
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/ashen_armor.rsi
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodHereticAshCostume
+    clothingPrototype: ClothingHeadHatHoodHereticAshCostume
 
 - type: entity
   parent: ClothingOuterArmorHereticCostume
@@ -177,8 +173,7 @@
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/flesh_armor.rsi
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodHereticFleshCostume
+    clothingPrototype: ClothingHeadHatHoodHereticFleshCostume
 
 - type: entity
   parent: ClothingOuterArmorHereticCostume
@@ -191,5 +186,4 @@
   - type: Clothing
     sprite: _Goobstation/Heretic/Clothing/OuterClothing/blade_armor.rsi
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodHereticBladeCostume
+    clothingPrototype: ClothingHeadHatHoodHereticBladeCostume

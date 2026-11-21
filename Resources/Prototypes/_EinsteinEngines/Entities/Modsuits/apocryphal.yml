@@ -9,7 +9,7 @@
   components:
   - type: Sprite
     sprite: _EinsteinEngines/Clothing/NanoTrasen/Modsuits/apocryphal.rsi
-  - type: ToggleableClothing
+  - type: MultiToggleableClothing
     clothingPrototypes:
       head: ClothingModsuitHelmetApocryphal
       gloves: ClothingModsuitGauntletsApocryphal

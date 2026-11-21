@@ -3,7 +3,6 @@
 using Content.Medical.Common.Targeting;
 using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
-using Content.Shared.Clothing.EntitySystems;
 using Content.Shared.Damage.Components;
 using Content.Shared.Damage.Systems;
 using Content.Shared.Inventory;
@@ -24,7 +23,9 @@ public sealed partial class HereticClothingSystem : EntitySystem
     [Dependency] private SharedPopupSystem _popup = default!;
     [Dependency] private DamageableSystem _dmg = default!;
     [Dependency] private MobStateSystem _mob = default!;
+    [Dependency] private InventorySystem _inventory = default!;
     [Dependency] private EntityQuery<DamageableComponent> _damageQuery = default!;
+    [Dependency] private EntityQuery<HereticBodyComponent> _hereticBodyQuery = default!;
 
     public override void Update(float frameTime)
     {
@@ -43,31 +44,25 @@ public sealed partial class HereticClothingSystem : EntitySystem
 
             comp.NextUpdate = now + comp.UpdateDelay;
 
-            if (clothing.InSlotFlag is null or SlotFlags.POCKET)
+            if (clothing.InSlotFlag is null or SlotFlags.POCKET || clothing.InSlot is not { } slot)
                 continue;
 
             var parent = xform.ParentUid;
 
-            if (_heretic.IsHereticOrGhoul(parent))
+            if (_hereticBodyQuery.HasComp(parent) || _heretic.IsHereticOrGhoul(parent))
                 continue;
 
             if (!_mob.IsAlive(parent) || !_damageQuery.TryComp(parent, out var dmg))
+            {
+                _inventory.TryUnequip(parent, slot, silent: true, force: true, predicted: false, clothing: clothing);
                 continue;
+            }
 
             _dmg.ChangeDamage((parent, dmg), comp.DamageOverTime, ignoreResistances: true, interruptsDoAfters: false, targetPart: TargetBodyPart.Vital);
 
             if (_random.Prob(comp.DamagePopupProb))
                 Popup("heretic-clothing-component-wear", uid, parent);
         }
-    }
-
-    [SubscribeLocalEvent]
-    private void OnToggleAttempt(Entity<HereticClothingComponent> ent, ref ToggleClothingAttemptEvent args)
-    {
-        if (_heretic.IsHereticOrGhoul(Transform(ent).ParentUid))
-            return;
-
-        args.Cancel();
     }
 
     [SubscribeLocalEvent]

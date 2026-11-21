@@ -5,6 +5,8 @@
   - BracingDurabilityWeak
   id: Stunprod
   components:
+  - type: ItemToggleBatteryDrain
+    drawRate: 5
   - type: DelayedKnockdownOnHit
     useDelay: stunbaton
   - type: UseDelayBlockMelee

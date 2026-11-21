@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Clothing;
+// </Trauma>
 using System.Globalization;
 using Content.Server.Chat.Managers;
 using Content.Server.Ghost;
@@ -313,7 +316,7 @@ public sealed partial class CryostorageSystem : SharedCryostorageSystem
         var enumerator = _inventory.GetSlotEnumerator(uid);
         while (enumerator.NextItem(out var item, out var slotDef))
         {
-            if (HasComp<AttachedClothingComponent>(item))
+            if (HasComp<AttachedClothingComponent>(item) || HasComp<MultiAttachedClothingComponent>(item)) // Trauma - multiattached
                 continue;
 
             data.ItemSlots.Add((slotDef.Name, slotDef.DisplayName, Name(item)));

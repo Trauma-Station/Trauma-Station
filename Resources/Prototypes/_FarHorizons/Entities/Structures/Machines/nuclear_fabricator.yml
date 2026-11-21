@@ -33,11 +33,11 @@
     unlitRunningState: unlit-building
     staticPacks:
     - ReactorPartsBasic
+    - ReactorPartsAdvanced
     - GasTurbineBlades
     - GasTurbineStators
     dynamicPacks:
     - ReactorFuelRods
-    - ReactorReflectors
     - ReactorGasChannels
     - ReactorHeatExchangers
   - type: ContainerContainer

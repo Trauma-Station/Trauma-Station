@@ -2,7 +2,7 @@
 
 - type: cargoBounty
   id: BountyNuclearFuel
-  reward: 12000
+  reward: 4000
   description: bounty-description-nuclear-fuel
   entries:
   - name: bounty-item-nuclear-fuel

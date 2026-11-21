@@ -1,0 +1,401 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+# Toxic Reagent Slimes
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeCocaine
+  suffix: Cocaine
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Cocaine
+        Quantity: 100
+  - type: PointLight
+    color: "#fcf7f9"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#fcf7f9"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeCrackCocaine
+  suffix: CrackCocaine
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: CrackCocaine
+        Quantity: 100
+  - type: PointLight
+    color: "#fcf7f9"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#fcf7f9"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeFrezon
+  suffix: Frezon
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Frezon
+        Quantity: 100
+  - type: PointLight
+    color: "#3a758c"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#3a758c"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeFresium
+  suffix: Fresium
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Fresium
+        Quantity: 100
+  - type: PointLight
+    color: "#b3f1ff"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#b3f1ff"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeAluite
+  suffix: Aluite
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Aluite
+        Quantity: 100
+  - type: PointLight
+    color: "#8e8e8e"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#8e8e8e"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeAmatoxin
+  suffix: Amatoxin
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Amatoxin
+        Quantity: 100
+  - type: PointLight
+    color: "#D6CE7B"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#D6CE7B"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeArtifexium
+  suffix: Artifexium
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Artifexium
+        Quantity: 100
+  - type: PointLight
+    color: "#776291"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#776291"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeUnstableCompound
+  suffix: UnstableCompound
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: UnstableCompound
+        Quantity: 100
+  - type: PointLight
+    color: "#2c4c3b"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#2c4c3b"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeCyanide
+  suffix: Cyanide
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Cyanide
+        Quantity: 100
+  - type: PointLight
+    color: "#1abcff"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#1abcff"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeAnacea
+  suffix: Anacea
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Anacea
+        Quantity: 100
+  - type: PointLight
+    color: "#819cb5"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#819cb5"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeHemorrhinol
+  suffix: Hemorrhinol
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Hemorrhinol
+        Quantity: 100
+  - type: PointLight
+    color: "#96424f"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#96424f"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeLead
+  suffix: Lead
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Lead
+        Quantity: 100
+  - type: PointLight
+    color: "#5C6274"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#5C6274"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeChlorineTrifluoride
+  suffix: ChlorineTrifluoride
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: ChlorineTrifluoride
+        Quantity: 100
+  - type: PointLight
+    color: "#FFC8C8"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#FFC8C8"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeBurnite
+  suffix: Burnite
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Burnite
+        Quantity: 100
+  - type: PointLight
+    color: "#621800"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#621800"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeMold
+  suffix: Mold
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Mold
+        Quantity: 100
+  - type: PointLight
+    color: "#8a9a5b"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#8a9a5b"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeRazorium
+  suffix: Razorium
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Razorium
+        Quantity: 100
+  - type: PointLight
+    color: "#e3fffb"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#e3fffb"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimePolytrinicAcid
+  suffix: PolytrinicAcid
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: PolytrinicAcid
+        Quantity: 100
+  - type: PointLight
+    color: "#a1000b"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#a1000b"
+
+# "Helpful" Reagent Slimes
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeGenecide
+  suffix: Genecide
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Genecide
+        Quantity: 100
+  - type: PointLight
+    color: "#ff5936"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#ff5936"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeProcenylLazide
+  suffix: ProcenylLazide
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: ProcenylLazide
+        Quantity: 100
+  - type: PointLight
+    color: "#ffdf97"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#ffdf97"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeBruizine
+  suffix: Bruizine
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Bruizine
+        Quantity: 100
+  - type: PointLight
+    color: "#ff3636"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#ff3636"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeUltravasculine
+  suffix: Ultravasculine
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Ultravasculine
+        Quantity: 100
+  - type: PointLight
+    color: "#520e30"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#520e30"
+
+- type: entity
+  parent: ReagentSlime
+  id: ReagentSlimeTilenol
+  suffix: Tilenol
+  components:
+  - type: Bloodstream
+    bloodReferenceSolution:
+      reagents:
+      - ReagentId: Tilenol
+        Quantity: 100
+  - type: PointLight
+    color: "#ffd648"
+  - type: Sprite
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: alive
+      color: "#ffd648"

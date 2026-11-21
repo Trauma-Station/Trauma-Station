@@ -2,7 +2,7 @@
 
 - type: entity
   abstract: true
-  parent: [ SimpleMobBase, MobNightVision, BaseSlicingRefinable ]
+  parent: [ AppearanceSpaceAnimal, SimpleMobBase, MobNightVision, BaseSlicingRefinable ]
   id: MobMorphBase
   name: morph
   description: A revolting, pulsating pile of flesh.

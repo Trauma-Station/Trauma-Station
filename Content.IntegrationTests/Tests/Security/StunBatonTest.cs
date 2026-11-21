@@ -172,7 +172,8 @@ public sealed class StunBatonTests : InteractionTest
         using (Assert.EnterMultipleScope())
         {
             Assert.That(batonIntialCharge, Is.GreaterThan(0), "Stun baton had no charge.");
-            Assert.That(batonIntialCharge, Is.EqualTo(batteryComp.MaxCharge), "Stun baton was not fully charged when spawned.");
+            // Trauma - batons passively drain while toggled, allow small tolerance
+            Assert.That(batonIntialCharge, Is.EqualTo(batteryComp.MaxCharge).Within(1f), "Stun baton was not fully charged when spawned.");
         }
 
         // Missing melee attack.
@@ -181,6 +182,7 @@ public sealed class StunBatonTests : InteractionTest
         await AttemptLightAttackMiss();
 
         var batonNewCharge = _battery.GetCharge(sBaton).Charge;
-        Assert.That(batonNewCharge, Is.EqualTo(batonIntialCharge), "Stun baton lost charge when missing an attack.");
+        // Trauma - batons passively drain 5W while toggled; a real hit would cost 40
+        Assert.That(batonNewCharge, Is.EqualTo(batonIntialCharge).Within(15f), "Stun baton lost charge when missing an attack.");
     }
 }
