@@ -17,7 +17,8 @@ public sealed partial class MaintsSpawnRule : StationEventSystem<MaintsSpawnRule
     [SubscribeLocalEvent]
     private void OnSelectLocation(Entity<MaintsSpawnRuleComponent> ent, ref AntagSelectLocationEvent args)
     {
-        var comp = Comp<GameRuleComponent>(args.GameRule);
+        if (!TryComp<GameRuleComponent>(args.GameRule, out var comp))
+            return; // gamerule already ending
 
         if (Station.GetRandomStationGrids() is not { } stationGrids)
         {
