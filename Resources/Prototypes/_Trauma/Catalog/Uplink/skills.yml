@@ -186,3 +186,25 @@
   discountCategory: null
   categories:
   - UplinkSkills
+
+- type: listing
+  id: UplinkSkillChipNukie
+  name: uplink-skill-chip-gorlex-name
+  description: uplink-skill-chip-gorlex-desc
+  productEntity: SkillChipNukie
+  cost:
+    Telecrystal: 10
+  discountCategory: null
+  categories:
+  - UplinkSkills
+
+- type: listing
+  id: UplinkSkillChipMagicalKnowledge
+  name: uplink-skill-chip-magic-knowledge-name
+  description: uplink-skill-chip-magic-knowledge-desc
+  productEntity: SkillChipMagicalKnowledge
+  cost:
+    Telecrystal: 20
+  discountCategory: null
+  categories:
+  - UplinkSkills

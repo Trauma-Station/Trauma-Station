@@ -1,9 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BaseSkillChipAPTR
+  parent: BaseSkillChipIVYL
   id: SkillChipNukie
-  name: MRAM-Chip (gorlex)
+  name: IVYL-Chip (Gorlex)
+  description: A highly advanced skill chip used by Nuclear operatives.
   components:
   # TODO: evil sprite
   - type: Cybernetics
@@ -132,3 +133,14 @@
       KnowledgeWeaponsBludgeon: 10
       KnowledgeWeaponsShortBlade: 10
       KnowledgeWeaponsRifle: 30
+
+- type: entity
+  parent: BaseSkillChipIVYL
+  id: SkillChipMagicalKnowledge
+  name: IVYL-Chip (Magical Knowledge)
+  components:
+  - type: Cybernetics
+    disableChance: 1
+  - type: KnowledgeGrantOnWear
+    skills:
+      MagicalLiteracyKnowledge: 100
