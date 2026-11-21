@@ -56,12 +56,11 @@
     totalIntensity: 2.5
     intensitySlope: 100
     maxIntensity: 2.5
-    tileBreakScale: 100
     canCreateVacuum: false
   - type: ExplodeOnTrigger
   - type: Sticky
-    stickDelay: 0.25
-    unstickDelay: 1
+    stickDelay: 2
+    unstickDelay: 2
     stickPopupStart: comp-sticky-start-stick-bomb
     stickPopupSuccess: comp-sticky-success-stick-bomb
     unstickPopupStart: comp-sticky-start-unstick-bomb

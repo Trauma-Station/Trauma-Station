@@ -272,10 +272,6 @@
     - TraumaScienceClothing
     # </Trauma>
   - type: EmagLatheRecipes
-    emagStaticPacks:
-    # <Trauma>
-    - SecurityPreciseDemolitionStatic
-    # </Trauma>
     emagDynamicPacks:
     - SecurityAmmo
     - SecurityExplosives
@@ -497,9 +493,6 @@
     unlitIdleState: unlit
     unlitRunningState: unlit-building
     staticPacks:
-    # </Trauma>
-    - SecurityPreciseDemolitionStatic
-    # </Trauma>
     - SecurityEquipmentStatic
     - SecurityPracticeStatic
     - SecurityAmmoStatic
