@@ -40,6 +40,7 @@
     - NailgunStatic
     - NailsStatic
     - ReactorPartsBasic
+    - EngineeringExplosivesStatic
     dynamicPacks:
     - ConstructionBagOfHolding
     - AdvancedTools
@@ -126,6 +127,7 @@
   - type: EmagLatheRecipes
     emagStaticPacks:
     - SalvageExplosivesStatic # Seismic charges - they're pretty cheap in salvage vendor anyway so why not
+    - SecurityPreciseDemolitionStatic
     emagDynamicPacks:
     - SecurityExplosives
   - type: MaterialStorage
@@ -212,6 +214,8 @@
     - Translators
     - TranslatorImplanters
   - type: EmagLatheRecipes
+    emagStaticPacks:
+    - SecurityPreciseDemolitionStatic
     emagDynamicPacks:
     - MechBoardsSecurity
     - MechBoardsCargo
