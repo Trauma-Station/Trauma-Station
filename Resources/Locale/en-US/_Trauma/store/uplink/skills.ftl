@@ -50,4 +50,4 @@ uplink-skill-chip-magic-knowledge-name = IVYL-Chip (Magical Knowledge)
 uplink-skill-chip-magic-knowledge-desc = A skill chip that teaches all the secrets of demonology, making the user a master in summoning demons.
 
 uplink-skill-chip-gorlex-name = IVYL-Chip (Gorlex)
-uplink-skill-chip-gorlex-desc = An advanced skill chip that makes the user proficent with all the ranged and melee weapons.
+uplink-skill-chip-gorlex-desc = An advanced skill chip that makes the user proficient with all the ranged and melee weapons.
