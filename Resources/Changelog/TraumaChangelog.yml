@@ -16853,3 +16853,22 @@ Entries:
   id: 1820
   time: '2026-11-22T18:09:58.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5410
+- author: LordZirconium
+  changes:
+  - type: Tweak
+    message: >-
+      Explosive cord is now roundstart, no tech, and is only 0.25 plastic and
+      0.25 phoron per piece!
+  - type: Tweak
+    message: >-
+      Engi and sec techfabs gets explosive cord, detonators and triggers
+      roundstart.
+  - type: Tweak
+    message: Explosive cord and detonator caps are Sec & Engi contraband now.
+  - type: Add
+    message: >-
+      Explosive cord can now be detonated by hitting it with the giant sec
+      hammer.
+  id: 1821
+  time: '2026-11-22T22:01:18.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5396
