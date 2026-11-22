@@ -9,6 +9,7 @@
 
 - type: latheRecipe
   id: CableDetStack1
-  materials: !Clear
+  materials:
     Plastic: 25
     Plasma: 25
+    Gold: !Remove
