@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: gameMap
+  id: TestMap
+  mapName: Test Station
+  mapPath: /Maps/_Trauma/Test/test-map.yml
+  minPlayers: 0
+  stations:
+    TestMap:
+      stationProto: TestStation
+      components:
+      - type: StationEventEligible
+      - type: StationNameSetup
+        mapNameTemplate: Test Station
+      - type: StationJobs
+        availableJobs:
+          DClass: [ -1, -1 ]
+          Passenger: [ -1, -1 ]
