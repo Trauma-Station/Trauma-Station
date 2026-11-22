@@ -7,7 +7,7 @@ using Content.Trauma.Shared.BloodCult.Runes;
 namespace Content.Trauma.Shared.EntityEffects;
 
 /// <summary>
-/// Effect that spawns ent snapped to grid and gives it cult rule.
+/// Effect that spawns a blood cult rune for a cult member.
 /// </summary>
 public sealed partial class SpawnCultRune : EntityEffectBase<SpawnCultRune>
 {
@@ -21,11 +21,7 @@ public sealed partial class SpawnCultRuneEntityEffectSystem : EntityEffectSystem
 
     protected override void Effect(Entity<TransformComponent> ent, ref EntityEffectEvent<SpawnCultRune> args)
     {
-        if (!ProtoMan.TryIndex(args.Effect.Rune, out var rune))
-            return;
-
         var pos = ent.Comp.Coordinates.SnapToGrid(EntityManager);
-
-        _rune.TrySpawnRune(ent.Owner, pos, rune);
+        _rune.TrySpawnRune(ent.Owner, pos, args.Effect.Rune);
     }
 }
