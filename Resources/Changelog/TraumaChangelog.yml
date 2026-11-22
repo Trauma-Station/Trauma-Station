@@ -16830,3 +16830,12 @@ Entries:
   id: 1817
   time: '2026-11-22T03:55:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5400
+- author: LordZirconium
+  changes:
+  - type: Add
+    message: >-
+      Reactor phoron supply pipelines added to Meta, Marathon, Leonid, Fland,
+      Kettle, Box and Bagel.
+  id: 1818
+  time: '2026-11-22T15:14:35.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5409
