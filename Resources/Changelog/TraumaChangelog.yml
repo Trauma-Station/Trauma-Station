@@ -16846,3 +16846,10 @@ Entries:
   id: 1819
   time: '2026-11-22T15:15:46.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5406
+- author: Endothermix
+  changes:
+  - type: Tweak
+    message: Energy shotgun's firerate and ammo capacity reduced.
+  id: 1820
+  time: '2026-11-22T18:09:58.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5410
