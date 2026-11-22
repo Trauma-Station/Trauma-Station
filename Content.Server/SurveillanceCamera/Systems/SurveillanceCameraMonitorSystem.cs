@@ -32,7 +32,6 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
         base.Initialize();
         SubscribeLocalEvent<SurveillanceCameraMonitorComponent, SurveillanceCameraDeactivateEvent>(OnSurveillanceCameraDeactivate);
         SubscribeLocalEvent<SurveillanceCameraMonitorComponent, PowerChangedEvent>(OnPowerChanged);
-        SubscribeLocalEvent<SurveillanceCameraMonitorComponent, ComponentShutdown>(OnShutdown);
         // SubscribeLocalEvent<SurveillanceCameraMonitorComponent, ComponentStartup>(OnComponentStartup); // Trauma
         SubscribeLocalEvent<SurveillanceCameraMonitorComponent, AfterActivatableUIOpenEvent>(OnToggleInterface);
         Subs.BuiEvents<SurveillanceCameraMonitorComponent>(SurveillanceCameraMonitorUiKey.Key, subs =>
@@ -245,7 +244,8 @@ public sealed partial class SurveillanceCameraMonitorSystem : EntitySystem
         }
     }
 
-    private void OnShutdown(EntityUid uid, SurveillanceCameraMonitorComponent component, ComponentShutdown args)
+    [SubscribeLocalEvent]
+    private void OnShutdown(EntityUid uid, SurveillanceCameraMonitorComponent component, ref ComponentShutdown args)
     {
         RemoveActiveCamera(uid, component);
     }

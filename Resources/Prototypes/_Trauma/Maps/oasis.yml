@@ -22,13 +22,14 @@
             NanotrasenRepresentative: [ 1, 1 ]
             # Silicon
             StationAi: [ 1, 1 ]
-            Borg: [ 2, 2 ]
+            Borg: [ 3, 3 ]
             # Service
             HeadOfPersonnel: [ 1, 1 ]
             Bartender: [ 2, 2 ]
             Botanist: [ 2, 3 ]
             Chef: [ 2, 2 ]
             ServiceWorker: [ 2, 2 ]
+            Rancher: [ 2, 2 ]
             # Engineering
             ChiefEngineer: [ 1, 1 ]
             AtmosphericTechnician: [ 3, 3 ]
@@ -67,7 +68,7 @@
             RadioHost: [ 1, 1 ]
             Clown: [ 1, 1 ]
             Mime: [ 1, 1 ]
-            Musician: [ 1, 1 ]
+            Musician: [ 3, 3 ]
             Lawyer: [ 3, 3 ]
             DClass: [ -1, -1 ]
         - type: StationBlobConfig

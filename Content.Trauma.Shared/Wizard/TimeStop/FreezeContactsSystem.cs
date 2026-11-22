@@ -39,25 +39,16 @@ public sealed partial class FreezeContactsSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<FreezeContactsComponent, StartCollideEvent>(OnEntityEnter);
-        SubscribeLocalEvent<FreezeContactsComponent, EndCollideEvent>(OnEntityExit);
-
         SubscribeLocalEvent<FrozenComponent, UseAttemptEvent>(OnAttempt);
         SubscribeLocalEvent<FrozenComponent, PickupAttemptEvent>(OnAttempt);
         SubscribeLocalEvent<FrozenComponent, ThrowAttemptEvent>(OnAttempt);
-        SubscribeLocalEvent<FrozenComponent, InteractionAttemptEvent>(OnInteractAttempt);
-        SubscribeLocalEvent<FrozenComponent, ComponentStartup>(MoveUpdate);
-        SubscribeLocalEvent<FrozenComponent, ComponentShutdown>(MoveUpdate);
-        SubscribeLocalEvent<FrozenComponent, ComponentInit>(OnInit);
-        SubscribeLocalEvent<FrozenComponent, ComponentRemove>(OnRemove);
-        SubscribeLocalEvent<FrozenComponent, UpdateCanMoveEvent>(OnUpdateCanMove);
-        SubscribeLocalEvent<FrozenComponent, PullAttemptEvent>(OnPullAttempt);
         SubscribeLocalEvent<FrozenComponent, AttackAttemptEvent>(OnAttempt);
         SubscribeLocalEvent<FrozenComponent, ChangeDirectionAttemptEvent>(OnAttempt);
         SubscribeLocalEvent<FrozenComponent, EmoteAttemptEvent>(OnAttempt);
         SubscribeLocalEvent<FrozenComponent, SpeakAttemptEvent>(OnAttempt);
     }
 
+    [SubscribeLocalEvent]
     private void OnRemove(Entity<FrozenComponent> ent, ref ComponentRemove args)
     {
         var (uid, comp) = ent;
@@ -93,6 +84,7 @@ public sealed partial class FreezeContactsSystem : EntitySystem
         Dirty(uid, thrownItem);
     }
 
+    [SubscribeLocalEvent]
     private void OnInit(Entity<FrozenComponent> ent, ref ComponentInit args)
     {
         var (uid, comp) = ent;
@@ -112,11 +104,19 @@ public sealed partial class FreezeContactsSystem : EntitySystem
         RemComp<CollisionWakeComponent>(uid);
     }
 
-    private void MoveUpdate(EntityUid uid, FrozenComponent component, EntityEventArgs args)
+    [SubscribeLocalEvent]
+    private void OnStartup(Entity<FrozenComponent> ent, ref ComponentStartup args)
     {
-        _blocker.UpdateCanMove(uid);
+        _blocker.UpdateCanMove(ent);
     }
 
+    [SubscribeLocalEvent]
+    private void OnShutdown(Entity<FrozenComponent> ent, ref ComponentShutdown args)
+    {
+        _blocker.UpdateCanMove(ent);
+    }
+
+    [SubscribeLocalEvent]
     private void OnInteractAttempt(Entity<FrozenComponent> ent, ref InteractionAttemptEvent args)
     {
         args.Cancelled = true;
@@ -127,15 +127,16 @@ public sealed partial class FreezeContactsSystem : EntitySystem
         args.Cancel();
     }
 
-    private void OnPullAttempt(EntityUid uid, FrozenComponent component, PullAttemptEvent args)
+    [SubscribeLocalEvent]
+    private void OnPullAttempt(Entity<FrozenComponent> ent, ref PullAttemptEvent args)
     {
-        if (args.PullerUid == uid)
-            args.Cancelled = true;
+        args.Cancelled |= args.PullerUid == ent.Owner;
     }
 
-    private void OnUpdateCanMove(EntityUid uid, FrozenComponent component, UpdateCanMoveEvent args)
+    [SubscribeLocalEvent]
+    private void OnUpdateCanMove(Entity<FrozenComponent> ent, ref UpdateCanMoveEvent args)
     {
-        if (component.LifeStage > ComponentLifeStage.Running)
+        if (ent.Comp.LifeStage > ComponentLifeStage.Running)
             return;
 
         args.Cancel();
@@ -161,14 +162,16 @@ public sealed partial class FreezeContactsSystem : EntitySystem
             _physics.SetAngularVelocity(ent, 0f, false, fix, physics);
             _physics.SetLinearVelocity(ent, Vector2.Zero, true, false, fix, physics);
 
+            // TODO: holy shitcode
             frozen.FreezeTime -= frameTime;
         }
     }
 
-    private void OnEntityExit(EntityUid uid, FreezeContactsComponent component, ref EndCollideEvent args)
+    [SubscribeLocalEvent]
+    private void OnEndCollide(Entity<FreezeContactsComponent> ent, ref EndCollideEvent args)
     {
         if (_net.IsClient)
-            return;
+            return; // TODO: Investigate if this is actually needed
 
         if (!ShouldCollideWith(args.OtherFixture, args.OtherFixtureId))
             return;
@@ -178,13 +181,15 @@ public sealed partial class FreezeContactsSystem : EntitySystem
         if (!TryComp<PhysicsComponent>(otherUid, out var body))
             return;
 
+        var (uid, comp) = ent;
         if (_physics.GetContactingEntities(otherUid, body).Where(ent => ent != uid).Any(ent => _query.HasComponent(ent)))
             return;
 
         RemCompDeferred<FrozenComponent>(otherUid);
     }
 
-    private void OnEntityEnter(EntityUid uid, FreezeContactsComponent component, ref StartCollideEvent args)
+    [SubscribeLocalEvent]
+    private void OnStartCollide(EntityUid uid, FreezeContactsComponent component, ref StartCollideEvent args)
     {
         if (!ShouldCollideWith(args.OtherFixture, args.OtherFixtureId))
             return;
