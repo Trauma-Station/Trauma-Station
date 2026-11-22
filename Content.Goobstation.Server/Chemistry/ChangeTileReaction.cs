@@ -14,7 +14,7 @@ namespace Content.Goobstation.Server.Chemistry;
 public sealed partial class ChangeTileReaction : ITileReaction
 {
     [DataField]
-    public FixedPoint2 ChangeTileCost { get; private set; } = 4.5f;
+    public FixedPoint2 ChangeTileCost { get; private set; } = 1.0f;
 
     [DataField]
     public string NewTileId = "PlatingRust";

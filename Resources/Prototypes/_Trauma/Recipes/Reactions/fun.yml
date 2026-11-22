@@ -37,3 +37,19 @@
       amount: 1
   products:
     Crabon: 8
+
+- type: reaction
+  id: StabilizedBSCrystal
+  minTemp: 623
+  reactants:
+    BluespaceMelange:
+      amount: 30
+    SodiumCarbonate:
+      amount: 5
+    PhosphoricAcid:
+      amount: 30
+  products:
+    PhosphoricAcid: 20
+  effects:
+  - !type:SpawnEntity
+    entity: StabilizedBSCrystal
