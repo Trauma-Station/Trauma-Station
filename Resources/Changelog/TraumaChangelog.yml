@@ -16872,3 +16872,12 @@ Entries:
   id: 1821
   time: '2026-11-22T22:01:18.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5396
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed not being able to summon Nar'Sie with it saying target is still
+      alive.
+  id: 1822
+  time: '2026-11-22T23:02:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5413
