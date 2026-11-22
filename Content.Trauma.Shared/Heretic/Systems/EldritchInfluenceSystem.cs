@@ -160,6 +160,6 @@ public sealed partial class EldritchInfluenceSystem : EntitySystem
                 : SharedHereticSystem.OneKnowledgePoint);
 
         PredictedSpawnAtPosition(RealityShiftIntermediate, Transform(args.Target.Value).Coordinates);
-        PredictedQueueDel(args.Target);
+        QueueDel(args.Target);
     }
 }

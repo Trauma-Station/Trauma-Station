@@ -20,7 +20,7 @@ public sealed partial class BloodCultDispelSystem : EntitySystem
             return;
 
         _popup.PopupEntity(ent.Comp.Text, user, user);
-        PredictedQueueDel(ent);
+        QueueDel(ent);
         args.Handled = true;
     }
 }

@@ -75,7 +75,7 @@ public abstract partial class SharedChangelingSystem : EntitySystem
         equipment = null;
         if (comp.Equipment.TryGetValue(proto.Id, out var netItem))
         {
-            PredictedQueueDel(GetEntity(netItem));
+            QueueDel(GetEntity(netItem));
             // assuming that it exists
             comp.Equipment.Remove(proto.Id);
             Dirty(uid, comp);
@@ -86,7 +86,7 @@ public abstract partial class SharedChangelingSystem : EntitySystem
         if (!Hands.TryForcePickupAnyHand(uid, item))
         {
             Popup.PopupEntity(Loc.GetString("changeling-fail-hands"), uid, uid);
-            PredictedDel(item);
+            Del(item);
             return false;
         }
 
@@ -102,7 +102,7 @@ public abstract partial class SharedChangelingSystem : EntitySystem
         {
             // Unequip armor
             foreach (var armor in active)
-                PredictedQueueDel(GetEntity(armor));
+                QueueDel(GetEntity(armor));
 
             Audio.PlayPredicted(comp.ArmourStripSound, uid, uid);
 
@@ -120,9 +120,9 @@ public abstract partial class SharedChangelingSystem : EntitySystem
             var armor = PredictedSpawnAtPosition(proto, coords);
             if (!_inventory.TryEquip(uid, armor, slot, force: true))
             {
-                PredictedDel(armor);
+                Del(armor);
                 foreach (var delArmor in newArmor)
-                    PredictedDel(GetEntity(delArmor));
+                    Del(GetEntity(delArmor));
 
                 return false;
             }

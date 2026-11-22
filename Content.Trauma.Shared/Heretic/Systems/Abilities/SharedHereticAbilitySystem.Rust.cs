@@ -279,7 +279,7 @@ public abstract partial class SharedHereticAbilitySystem
             if (surfaceStrength > (rustStrengthOverride ?? heretic?.PathStage ?? -1))
                 return false;
 
-            PredictedDel(target);
+            Del(target);
             return true;
         }
 
@@ -297,7 +297,7 @@ public abstract partial class SharedHereticAbilitySystem
             var rotation = xform.LocalRotation;
             var coords = xform.Coordinates;
 
-            PredictedDel(target);
+            Del(target);
 
             targetEntity =
                 PredictedSpawnAttachedTo(transformation, coords, rotation: rotation);

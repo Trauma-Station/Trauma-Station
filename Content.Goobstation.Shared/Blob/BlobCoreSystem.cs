@@ -199,7 +199,7 @@ public abstract partial class BlobCoreSystem : EntitySystem
             if (!TileQuery.Resolve(old, ref old.Comp) || old.Comp.Core != core.Owner)
                 return null;
 
-            PredictedQueueDel(old);
+            QueueDel(old);
         }
 
         var proto = ProtoMan.Index(id);

@@ -108,7 +108,7 @@ public sealed partial class AutoSurgeonSystem : EntitySystem
                 if (_body.GetCategory(newPart) is not {} category || !_part.HasOrganSlot(parent, category))
                 {
                     // you are missing its slot sorry chud
-                    PredictedDel(newPart);
+                    Del(newPart);
                     continue;
                 }
 

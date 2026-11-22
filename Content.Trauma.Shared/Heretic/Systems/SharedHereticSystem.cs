@@ -207,7 +207,7 @@ public abstract partial class SharedHereticSystem : EntitySystem
                 ent.Comp.ChosenRitual = null;
 
             Container.Remove(ritual, ent.Comp.RitualContainer);
-            PredictedQueueDel(ritual);
+            QueueDel(ritual);
         }
 
         Dirty(ent);

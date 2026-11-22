@@ -246,7 +246,7 @@ public abstract partial class SharedVehicleSystem : EntitySystem
 
         if (vehicleComp.ActiveOverlay is {} overlay)
         {
-            PredictedQueueDel(overlay);
+            QueueDel(overlay);
             vehicleComp.ActiveOverlay = null;
         }
         RemComp<RelayInputMoverComponent>(driver);

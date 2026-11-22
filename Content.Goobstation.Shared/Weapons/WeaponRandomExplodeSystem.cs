@@ -40,7 +40,7 @@ public sealed partial class WeaponRandomExplodeSystem : EntitySystem
             totalIntensity: intensity,
             slope: 5,
             maxTileIntensity: 10);
-        PredictedQueueDel(uid);
+        QueueDel(uid);
         args.Cancel();
     }
 }

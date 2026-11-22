@@ -37,6 +37,6 @@ public sealed partial class RadialItemSelectorSystem : EntitySystem
             PredictedSpawnAtPosition(selected, coords);
 
         _ui.CloseUi(ent.Owner, RadialSelectorUiKey.Key, args.Actor);
-        PredictedDel(ent.Owner);
+        Del(ent.Owner);
     }
 }

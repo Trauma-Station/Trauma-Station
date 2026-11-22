@@ -103,7 +103,7 @@ public partial class XenobiologySystem
         }
 
         _container.EmptyContainer(ent.Comp.Stomach);
-        PredictedQueueDel(ent);
+        QueueDel(ent);
     }
 
     /// <summary>

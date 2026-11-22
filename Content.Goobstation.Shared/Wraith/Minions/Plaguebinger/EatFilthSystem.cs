@@ -70,7 +70,7 @@ public sealed partial class EatFilthSystem : EntitySystem
         var ev = new AteFilthEvent(ent.Comp.FilthConsumed);
         RaiseLocalEvent(ent.Owner, ref ev);
 
-        PredictedQueueDel(args.Target);
+        QueueDel(args.Target);
 
         _popup.PopupEntity(Loc.GetString("wraith-plaguerat-eat-you-finish", ("target", args.Target)), ent.Owner, ent.Owner);
     }

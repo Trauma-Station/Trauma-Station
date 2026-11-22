@@ -170,7 +170,7 @@ public sealed partial class TouchSpellSystem : EntitySystem
             predicted);
 
         if (ent.Comp.DeleteOnInvoke && cooldownOverride != TimeSpan.Zero)
-            PredictedQueueDel(ent);
+            QueueDel(ent);
     }
 
     public void InvokeTouchSpell(EntityUid user,
@@ -210,7 +210,7 @@ public sealed partial class TouchSpellSystem : EntitySystem
     {
         if (FindTouchSpell(ent, args.TouchSpellWhitelist) is { } spell)
         {
-            PredictedQueueDel(spell);
+            QueueDel(spell);
             return null;
         }
 
@@ -231,7 +231,7 @@ public sealed partial class TouchSpellSystem : EntitySystem
         if (_hands.TryPickup(ent, touch, emptyHand, animate: false))
             return touch;
 
-        PredictedQueueDel(touch);
+        QueueDel(touch);
         return null;
     }
 }

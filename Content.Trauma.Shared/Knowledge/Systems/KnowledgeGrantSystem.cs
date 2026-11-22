@@ -104,7 +104,7 @@ public sealed partial class KnowledgeGrantSystem : EntitySystem
             }
             if (ent.Comp.SingleUse)
             {
-                PredictedQueueDel(ent);
+                QueueDel(ent);
                 PredictedSpawnNextToOrDrop(ent.Comp.Ash, user);
             }
             return;

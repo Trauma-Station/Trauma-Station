@@ -258,7 +258,7 @@ public sealed partial class BodyPartSystem
         DebugTools.Assert(_body.GetCategory(organ) == slot, $"Organ {ToPrettyString(organ)} for {ToPrettyString(body)}'s initial {slot} organ had the wrong category!");
         if (!InsertOrgan(part, organ))
         {
-            PredictedDel(organ);
+            Del(organ);
             return false; // some system prevented inserting it
         }
 
@@ -301,14 +301,14 @@ public sealed partial class BodyPartSystem
         if (_body.GetCategory(organ) is not {} category)
         {
             Log.Error($"Tried to insert invalid organ {ToPrettyString(organ)} into {ToPrettyString(part)}!");
-            PredictedDel(organ);
+            Del(organ);
             return false;
         }
 
         if (!part.Comp.Slots.Contains(category))
         {
             Log.Error($"Tried to insert organ {ToPrettyString(organ)} into {ToPrettyString(part)} which has no {category} slot!");
-            PredictedDel(organ);
+            Del(organ);
             return false;
         }
 
@@ -316,7 +316,7 @@ public sealed partial class BodyPartSystem
         {
             // not an error as the slot may just be occupied etc
             Log.Warning($"Failed to insert organ {ToPrettyString(organ)} into {ToPrettyString(part)}'s {category} slot.");
-            PredictedDel(organ);
+            Del(organ);
             return false;
         }
 

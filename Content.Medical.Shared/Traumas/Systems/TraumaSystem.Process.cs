@@ -501,7 +501,7 @@ public partial class TraumaSystem
         var ev = new TraumaBeingRemovedEvent(trauma);
         RaiseLocalEvent(trauma.Comp.Wound, ref ev);
 
-        PredictedDel(trauma.Owner);
+        Del(trauma.Owner);
     }
 
     #endregion

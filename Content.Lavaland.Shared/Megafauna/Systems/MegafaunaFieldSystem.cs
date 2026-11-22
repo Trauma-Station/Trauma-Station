@@ -63,7 +63,7 @@ public sealed partial class MegafaunaFieldSystem : EntitySystem
 
         var walls = ent.Comp.Walls.Where(x => !TerminatingOrDeleted(x));
         foreach (var wall in walls)
-            PredictedQueueDel(wall);
+            QueueDel(wall);
 
         ent.Comp.Enabled = false;
     }

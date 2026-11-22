@@ -497,7 +497,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
         MutationRemoved((ent, ent.Comp), mutation, user, automatic, predicted);
         MutateDna(ent);
 
-        PredictedQueueDel(mutation);
+        QueueDel(mutation);
         return true;
     }
 
@@ -533,7 +533,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
         {
             if (_query.TryComp(mutation, out var mutationComp))
                 MutationRemoved((ent, ent.Comp), (mutation, mutationComp), user, automatic, predicted);
-            PredictedQueueDel(mutation);
+            QueueDel(mutation);
         }
         ent.Comp.Mutations.Clear();
         DirtyField(ent, ent.Comp, nameof(MutatableComponent.Mutations));
@@ -707,7 +707,7 @@ public sealed partial class MutationSystem : CommonMutationSystem
 
         foreach (var id in _removing)
         {
-            PredictedQueueDel(ent.Comp.Mutations[id]);
+            QueueDel(ent.Comp.Mutations[id]);
             ent.Comp.Mutations.Remove(id);
         }
 
