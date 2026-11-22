@@ -16813,3 +16813,20 @@ Entries:
   id: 1816
   time: '2026-11-20T20:16:54.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5393
+- author: LordZirconium
+  changes:
+  - type: Tweak
+    message: Oasis kitchen is actually good now.
+  - type: Tweak
+    message: Oasis bar is in SW corner of oasis center now.
+  - type: Tweak
+    message: Oasis botany is bigger, better and ranchier than ever before.
+  - type: Tweak
+    message: Oasis center is now a stage for musicians, executions and whatever else!
+  - type: Add
+    message: Added 2 request computers to oasis science.
+  - type: Fix
+    message: Oasis cargo will no longer have the arrivals shuttle dock to it.
+  id: 1817
+  time: '2026-11-22T03:55:54.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5400
