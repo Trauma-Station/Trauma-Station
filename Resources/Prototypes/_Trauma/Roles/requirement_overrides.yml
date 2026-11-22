@@ -27,10 +27,10 @@
       time: 2h
     Quartermaster:
     - !type:RoleTimeRequirement
-      role: SalvageSpecialist
+      role: JobSalvageSpecialist
       time: 2h
     - !type:RoleTimeRequirement
-      role: CargoTechnician
+      role: JobCargoTechnician
       time: 2h
     HeadOfPersonnel:
     - !type:DepartmentTimeRequirement
@@ -38,40 +38,40 @@
       time: 2h
     ChiefEngineer:
     - !type:RoleTimeRequirement
-      role: StationEngineer
+      role: JobStationEngineer
       time: 2h
     - !type:RoleTimeRequirement
-      role: AtmosphericTechnician
+      role: JobAtmosphericTechnician
       time: 2h
     - !type:RoleTimeRequirement
-      role: Roboticist
+      role: JobRoboticist
       time: 2h
     ChiefMedicalOfficer:
     - !type:RoleTimeRequirement
-      role: MedicalDoctor
+      role: JobMedicalDoctor
       time: 2h
     - !type:RoleTimeRequirement
-      role: Paramedic
+      role: JobParamedic
       time: 2h
     - !type:RoleTimeRequirement
-      role: Chemist
+      role: JobChemist
       time: 2h
     ResearchDirector:
     - !type:RoleTimeRequirement
-      role: Scientist
+      role: JobScientist
       time: 2h
     - !type:RoleTimeRequirement
-      role: Geneticist
+      role: JobGeneticist
       time: 2h
     HeadOfSecurity:
     - !type:RoleTimeRequirement
-      role: SecurityOfficer
+      role: JobSecurityOfficer
       time: 2h
     - !type:RoleTimeRequirement
-      role: Detective
+      role: JobDetective
       time: 2h
     - !type:RoleTimeRequirement
-      role: Warden
+      role: JobWarden
       time: 2h
     #Intern
     SecurityCadet:
