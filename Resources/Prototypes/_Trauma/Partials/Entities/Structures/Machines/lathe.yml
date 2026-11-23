@@ -16,3 +16,17 @@
   - type: Lathe
     dynamicPacks:
     - ArmoryModules
+
+- type: entity
+  id: Protolathe
+  components:
+  - type: EmagLatheRecipes
+    emagStaticPacks:
+    - SecurityPreciseDemolitionStatic
+
+- type: entity
+  id: SecurityTechFab
+  components:
+  - type: Lathe
+    staticPacks:
+    - SecurityPreciseDemolitionStatic

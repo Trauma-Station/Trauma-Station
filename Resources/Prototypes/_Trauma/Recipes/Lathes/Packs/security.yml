@@ -29,3 +29,9 @@
   id: ArmoryModules
   recipes:
   - BorgModuleEnergyShotgun
+
+- type: latheRecipePack
+  id: SecurityPreciseDemolitionStatic
+  recipes:
+  - CableDetStack1
+  - EmptyDetonator
