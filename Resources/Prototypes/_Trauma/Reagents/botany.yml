@@ -73,13 +73,20 @@
   physicalDesc: reagent-physical-desc-sickly
   flavor: bitter
   color: Black
+  metabolisms:
+    Bloodstream:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 5 # It's made from amatoxin
   plantMetabolism:
   - !type:PlantAdjustHealth
     amount: -5
   - !type:PlantAdjustToxins
-    amount: 15
+    amount: 20
   - !type:PlantAdjustPotency
-    amount: 1
+    amount: 2
 
 - type: reagent
   id: Stellarium
