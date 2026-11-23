@@ -16881,3 +16881,12 @@ Entries:
   id: 1822
   time: '2026-11-22T23:02:14.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5413
+- author: LordZirconium
+  changes:
+  - type: Tweak
+    message: Amber TEG situation improved.
+  - type: Add
+    message: Small nuclear reactor setup added to Amber
+  id: 1823
+  time: '2026-11-23T01:28:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5414
