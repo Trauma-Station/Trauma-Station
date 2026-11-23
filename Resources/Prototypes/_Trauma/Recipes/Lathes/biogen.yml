@@ -12,6 +12,18 @@
     Biomass: 15
 
 - type: latheRecipe
+  abstract: true
+  id: BioGenAdvancedBottleBase
+  categories: [ Chemicals ]
+  icon:
+    sprite: Objects/Specific/Chemistry/bottle.rsi
+    state: bottle-1
+  completetime: 1
+  materials:
+    Biomass: 45
+    Plasma: 50
+
+- type: latheRecipe
   parent: BioGenBottleBase
   id: BioGenDylo
   resultReagents:
@@ -48,3 +60,24 @@
   completetime: 10
   materials:
     Biomass: 30
+
+- type: latheRecipe
+  parent: BioGenAdvancedBottleBase
+  id: BioGenCompound
+  resultReagents:
+    UnstableCompound: 10
+
+- type: latheRecipe
+  parent: BioGenAdvancedBottleBase
+  id: BioGenReaper
+  resultReagents:
+    ReaperDelight: 10
+  materials:
+    Biomass: 80
+    Plasma: 100
+
+- type: latheRecipe
+  parent: BioGenAdvancedBottleBase
+  id: BioGenStellarium
+  resultReagents:
+    Stellarium: 10

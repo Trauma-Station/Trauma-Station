@@ -4,39 +4,15 @@
   - quantity: 5
     weight: 0.5
     reagents:
-    # <Trauma>
-    - Stimulants
-    - Nocturine
-    - JuiceThatMakesYouHew
-    - Aluite
-    - AmmoniatedMercury
-    - Rororium
-    - BlackPowder
-    - PolytrinicAcid
-    # </Trauma>
     - Omnizine
     - Plasma
     - Fresium
     - HeartbreakerToxin
-    # - Honk # Trauma
+    - Honk
     - BuzzochloricBees
   - quantity: 5 # Evil chems
     weight: 1
     reagents:
-    # <Trauma>
-    - Genecide
-    - Fentanyl
-    - Anacea
-    - Hemorrhinol
-    - Tirizene
-    - Hercuri
-    - GreyMatter
-    - Atropine
-    - Herignis
-    - Lipozine
-    - Fluorosurfactant
-    - Microplastics
-    # </Trauma>
     - Heparin
     - Toxin
     - Napalm
@@ -50,19 +26,6 @@
   - quantity: 5 # Medical chems
     weight: 2
     reagents:
-    # <Trauma>
-    - Ibuprofen
-    - Tilenol
-    - Morphine
-    - Multiver
-    - Bozaide
-    - Musiver
-    - Tramadol
-    - Tirimol
-    - Probital
-    - Mold
-    - Cement
-    # </Trauma>
     - Bicaridine
     - Dermaline
     - Ephedrine
@@ -128,9 +91,6 @@
   - quantity: 10 # Basic Farming Table
     weight: 5
     reagents:
-    # <Trauma>
-    - Nutriment
-    # <Trauma>
     - Vitamin
     - Fiber
     - Water
@@ -159,7 +119,7 @@
     - CogChamp
     - Laughter
   - quantity: 5
-    weight: 1 # Trauma - was 0.02, it isnt even hard to make
+    weight: 0.02
     reagents:
       - Cognizine
 
