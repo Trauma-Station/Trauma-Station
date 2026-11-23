@@ -16890,3 +16890,20 @@ Entries:
   id: 1823
   time: '2026-11-23T01:28:47.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5414
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added advanced botanical chemicals to the biogenerator, They are much more
+      expensive compared to other chemicals and require phoron
+  - type: Tweak
+    message: Added sugar to the base botany mutation pool
+  - type: Tweak
+    message: Made mutagenic fertilizer affected by L4Z
+  - type: Tweak
+    message: >-
+      Made Reaper's Delight more effective at increasing potency but it is more
+      damaging to plants
+  id: 1824
+  time: '2026-11-23T21:43:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5416
