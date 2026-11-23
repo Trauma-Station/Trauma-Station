@@ -5,7 +5,7 @@ meta:
   forkId: ""
   forkVersion: ""
   time: 11/23/2026 08:35:42
-  entityCount: 2712
+  entityCount: 2713
 maps:
 - 1695
 grids:
@@ -5539,6 +5539,8 @@ entities:
     - type: Transform
       parent: 3
       pos: 4.5,16.5
+    - type: MetaData
+      name: OldStation
   - uid: 611
     components:
     - type: Transform
@@ -12530,7 +12532,13 @@ entities:
       parent: 3
       pos: 27.448639,15.684779
     - type: ContainerContainer
-      containers: {}
+      containers:
+        PDA-id: !type:ContainerSlot {}
+        PDA-pen: !type:ContainerSlot {}
+        PDA-pai: !type:ContainerSlot {}
+        Cartridge-Slot: !type:ContainerSlot {}
+        preinstalled-program-container: !type:Container
+        removable-program-container: !type:Container
     missingComponents:
     - Pda
     - ItemSlots
@@ -16264,4 +16272,11 @@ entities:
       parent: 3
       rot: 3.141592653589793 rad
       pos: 41.591343,21.454426
+- proto: WarpPoint
+  entities:
+  - uid: 2713
+    components:
+    - type: Transform
+      pos: 0.5,13.5
+      parent: 3
 ...

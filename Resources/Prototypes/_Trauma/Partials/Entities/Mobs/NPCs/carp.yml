@@ -20,6 +20,8 @@
     understands:
     - TauCetiBasic
     - Carptongue
+  - type: NPCRetaliation
+
 
 - type: entity
   id: MobCarpMagic

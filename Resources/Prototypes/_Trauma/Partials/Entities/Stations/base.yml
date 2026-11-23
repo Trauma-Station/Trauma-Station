@@ -15,8 +15,8 @@
   components:
     - type: GridSpawn
       groups:
-        oldstation: !type:GridSpawnGroup #force this to always spawn so ghost roles are always accessible
-          minimumDistance: 1900 #unlikely to work
+        oldstation: !type:GridSpawnGroup
+          minimumDistance: 1900
           maximumDistance: 2400
           stationGrid: false
           nameGrid: true

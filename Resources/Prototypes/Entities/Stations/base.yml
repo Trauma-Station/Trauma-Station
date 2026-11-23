@@ -47,13 +47,6 @@
       path: /Maps/_Trauma/Shuttles/cargo.yml # Trauma
     - type: GridSpawn
       groups:
-        oldstation: !type:GridSpawnGroup #force this to always spawn so ghost roles are always accessible
-          minimumDistance: 1900 #unlikely to work
-          maximumDistance: 2400
-          stationGrid: false
-          nameGrid: true
-          paths:
-          - /Maps/_Funkystation/Ruins/oldstation.yml
         # <Trauma>
         mining: !type:GridSpawnGroup
           paths:
