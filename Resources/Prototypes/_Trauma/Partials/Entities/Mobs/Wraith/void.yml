@@ -1,0 +1,21 @@
+- type: entity
+  id: MobVoidSpiker
+  components:
+  - type: InitialBody
+    organs:
+      Heart: OrganCarpHeart
+      Lungs: OrganCarpLungs
+  - type: TemperatureDamage
+  coldDamage: !Clear
+    types: {}
+
+- type: entity
+  id: MobVoidHound
+  components:
+  - type: InitialBody
+    organs:
+      Heart: OrganCarpHeart
+      Lungs: OrganCarpLungs
+  - type: TemperatureDamage
+  coldDamage: !Clear
+    types: {}

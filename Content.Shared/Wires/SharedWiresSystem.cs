@@ -106,6 +106,11 @@ public abstract partial class SharedWiresSystem : EntitySystem
         if (!IsPanelOpen(ent.Owner))
             return;
 
+        // <Trauma> - don't show the verb if there's no wires UI to open (e.g. mechs)
+        if (!UI.HasUi(ent.Owner, WiresUiKey.Key))
+            return;
+        // </Trauma>
+
         var actor = args.User;
         var verb = new AlternativeVerb
         {

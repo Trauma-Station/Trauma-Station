@@ -1,0 +1,11 @@
+- type: entity
+  id: ProjectileWabbajack
+  components:
+  - type: WhitelistTriggerCondition
+    userWhitelist:
+      components:
+      - Body
+      - BorgChassis
+      - Silicon
+      tags:
+      - Bot

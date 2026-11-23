@@ -1,0 +1,9 @@
+- type: entity
+  id: RatvarianSpear
+  components:
+  - type: Wieldable
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Piercing: 5
+        Holy: 5
