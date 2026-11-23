@@ -1,0 +1,56 @@
+﻿- type: weightedRandomFillSolution
+  id: RandomPickBotanyGeneralReagent
+  fills:
+  - quantity: 5
+    weight: 0.5
+    reagents:
+    - Stimulants
+    - Nocturine
+    - JuiceThatMakesYouHew
+    - Aluite
+    - AmmoniatedMercury
+    - Rororium
+    - BlackPowder
+    - PolytrinicAcid
+    - !Remove Honk
+  - quantity: 5
+    weight: 1
+    reagents:
+    - Genecide
+    - Fentanyl
+    - Anacea
+    - Hemorrhinol
+    - Tirizene
+    - Hercuri
+    - GreyMatter
+    - Atropine
+    - Herignis
+    - Lipozine
+    - Fluorosurfactant
+    - Microplastics
+  - quantity: 5
+    weight: 2
+    reagents:
+    - Ibuprofen
+    - Tilenol
+    - Morphine
+    - Multiver
+    - Bozaide
+    - Musiver
+    - Tramadol
+    - Tirimol
+    - Probital
+    - Mold
+    - Cement
+  - quantity: 12
+    weight: 5
+    reagents:
+    - Sugar
+
+- type: weightedRandomFillSolution
+  id: RandomPickBotanyFarmingReagent
+  fills:
+  - quantity: 10
+    weight: 5
+    reagents:
+    - Nutriment

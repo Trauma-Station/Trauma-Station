@@ -1,0 +1,14 @@
+﻿- type: randomPlantMutationList
+  id: RandomPlantMutations
+  ignoreMutationMod: false
+  mutations:
+    - name: ChangeChemicals
+      baseOdds: 0.072
+      persists: false
+      effect: !type:PlantMutateChemicals
+        randomChemTables: !Clear
+        - RandomPickBotanyGeneralReagent
+
+- type: randomPlantMutationList
+  id: FarmingPlantMutations
+  ignoreMutationMod: false
