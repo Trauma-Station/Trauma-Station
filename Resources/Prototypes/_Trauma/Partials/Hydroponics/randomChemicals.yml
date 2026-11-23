@@ -118,41 +118,41 @@
     - Lithium
     - Sugar
 
-  - type: weightedRandomFillSolution
-    id: RandomPickBotanyFarmingReagent
-    fills: !Clear
-    - quantity: 10
-      weight: 5
-      reagents:
-      - Nutriment
-      - Vitamin
-      - Fiber
-      - Water
-      - Sugar
-      - Cream
-      - Ice
-      - Protein
-      - Flour
-      - Soysauce
-      - TableSalt
-      - Enzyme
-      - Vinegar
-      - Ethanol
-      - Wine
-      - Mayo
-      - IceCream
-      - Sap
-    - quantity: 5
-      weight: 1
-      reagents:
-      - SpaceDrugs
-      - Kelotane
-      - Inaprovaline
-      - Lipozine
-      - JuiceThatMakesYouWeh
-      - CogChamp
-      - Laughter
-    - quantity: 5
-      weight: 1
-      reagents:
-      - Cognizine
+- type: weightedRandomFillSolution
+  id: RandomPickBotanyFarmingReagent
+  fills: !Clear
+  - quantity: 10
+    weight: 5
+    reagents:
+    - Nutriment
+    - Vitamin
+    - Fiber
+    - Water
+    - Sugar
+    - Cream
+    - Ice
+    - Protein
+    - Flour
+    - Soysauce
+    - TableSalt
+    - Enzyme
+    - Vinegar
+    - Ethanol
+    - Wine
+    - Mayo
+    - IceCream
+    - Sap
+  - quantity: 5
+    weight: 1
+    reagents:
+    - SpaceDrugs
+    - Kelotane
+    - Inaprovaline
+    - Lipozine
+    - JuiceThatMakesYouWeh
+    - CogChamp
+    - Laughter
+  - quantity: 5
+    weight: 1
+    reagents:
+    - Cognizine
