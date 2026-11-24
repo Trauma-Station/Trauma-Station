@@ -16914,3 +16914,22 @@ Entries:
   id: 1825
   time: '2026-11-24T09:35:47.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5402
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added conveyor belts and liquid pumps to the service techfab
+  - type: Remove
+    message: >-
+      Removed the Liquid Pump research it is now available roundstart in most
+      techfabs
+  - type: Tweak
+    message: >-
+      Liquid Pumps no longer require parts to assemble now all you need is the
+      machine frame
+  - type: Tweak
+    message: >-
+      Increased the maximum volume on the industrial reagent grinder and
+      portable chemical mixer
+  id: 1826
+  time: '2026-11-24T12:41:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5373
