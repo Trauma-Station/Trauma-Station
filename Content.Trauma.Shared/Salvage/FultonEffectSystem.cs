@@ -50,7 +50,7 @@ public sealed partial class FultonEffectSystem : EntitySystem
         _alerts.ClearAlert(ent.Owner, Alert);
         _status.TryRemoveStatusEffect(ent, StatusEffect);
 
-        PredictedDel(ent.Comp.Effect);
+        Del(ent.Comp.Effect);
         ent.Comp.Effect = EntityUid.Invalid;
     }
 

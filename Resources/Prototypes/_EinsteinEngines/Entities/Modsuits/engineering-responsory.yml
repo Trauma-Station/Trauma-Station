@@ -14,7 +14,7 @@
   name: Engineering Responsory modsuit control unit
   description: The main controller for a Engineering Responsory modsuit.
   components:
-  - type: ToggleableClothing
+  - type: MultiToggleableClothing
     clothingPrototypes:
       head: ClothingModsuitHelmetResponsoryEngineering
       gloves: ClothingModsuitGauntletsResponsoryEngineering

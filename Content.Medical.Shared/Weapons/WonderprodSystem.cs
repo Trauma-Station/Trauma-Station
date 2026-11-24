@@ -83,7 +83,7 @@ public sealed partial class WonderprodSystem : EntitySystem
         var handcuffs = PredictedSpawnNextToOrDrop(ent.Comp.HandcuffPrototype, args.User);
 
         if (!_cuffs.TryAddNewCuffs(target, user, handcuffs, cuffable))
-            PredictedDel(handcuffs);
+            Del(handcuffs);
     }
 
     private void OnInjectOnMeleeHit(Entity<InjectOnHitComponent> ent, ref MeleeHitEvent args)

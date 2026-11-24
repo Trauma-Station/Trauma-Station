@@ -12,6 +12,12 @@
         },
         {
             "name": "turbine"
+        },
+        {
+            "name": "smallreactor"
+        },
+        {
+            "name": "smallturbine"
         }
     ]
 }

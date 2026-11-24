@@ -81,10 +81,9 @@ public sealed partial class PlantHarvestSystem : EntitySystem
         if (ent.Comp.HarvestRepeat != HarvestType.SelfHarvest)
             return;
 
-        if (_dataQuery.TryComp(ent.Owner, out var plantData) && plantData.HarvestLogImpact != null)
-            _adminLogger.Add(LogType.Botany, plantData.HarvestLogImpact.Value, $"Auto-harvested {Loc.GetString(plantData.Name):seed} at Pos:{Transform(ent).Coordinates}.");
-
-        DoHarvest(ent.Owner, user);
+        // <Trauma> - reuse harvest code so it uses the attempt event, rather than copy pasting half of it
+        TryHandleHarvest(ent.Owner, user);
+        // </Trauma>
     }
 
     /// <summary>
@@ -103,7 +102,12 @@ public sealed partial class PlantHarvestSystem : EntitySystem
             return true;
 
         if (_dataQuery.TryComp(plant, out var plantData) && plantData.HarvestLogImpact != null)
-            _adminLogger.Add(LogType.Botany, plantData.HarvestLogImpact.Value, $"{ToPrettyString(user):player} harvested {Loc.GetString(plantData.Name):seed} at Pos:{Transform(user).Coordinates}.");
+            // <Trauma> - special string for self harvest which now calls this
+            if (user == plant)
+                _adminLogger.Add(LogType.Botany, plantData.HarvestLogImpact.Value, $"Auto-harvested {Loc.GetString(plantData.Name):seed} at Pos:{Transform(plant).Coordinates}.");
+            else
+                _adminLogger.Add(LogType.Botany, plantData.HarvestLogImpact.Value, $"{ToPrettyString(user):player} harvested {Loc.GetString(plantData.Name):seed} at Pos:{Transform(user).Coordinates}.");
+            // </Trauma>
 
         DoHarvest(plant, user);
         return true;

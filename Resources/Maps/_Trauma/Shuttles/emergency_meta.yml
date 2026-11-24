@@ -2675,9 +2675,6 @@ entities:
     - type: Physics
       canCollide: False
     - type: AttachedClothing
-    - type: ContainerContainer
-      containers:
-        replaced-clothing: !type:ContainerSlot {}
   - uid: 487
     components:
     - type: Transform

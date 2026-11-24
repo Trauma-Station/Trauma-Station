@@ -145,7 +145,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
         var parent = ent.Comp.User ?? Transform(ent).ParentUid;
 
         if (!RemoveShadowCloak(parent))
-            PredictedQueueDel(ent.Owner);
+            QueueDel(ent.Owner);
     }
 
     [SubscribeLocalEvent]
@@ -180,7 +180,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
         // If old parent isn't shadow cloaked either or it is being deleted - delete us
         if (TerminatingOrDeleted(args.OldParent) || !HasComp<ShadowCloakedComponent>(args.OldParent))
         {
-            PredictedQueueDel(ent.Owner);
+            QueueDel(ent.Owner);
             return;
         }
 
@@ -208,7 +208,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
                 continue;
 
             revealCooldown = cloak.RevealCooldown;
-            PredictedQueueDel(child);
+            QueueDel(child);
         }
 
         _modifier.RefreshMovementSpeedModifiers(ent.Owner);
@@ -296,7 +296,7 @@ public abstract partial class SharedShadowCloakSystem : EntitySystem
         foreach (var effect in effects)
         {
             result = true;
-            PredictedQueueDel(effect.Owner);
+            QueueDel(effect.Owner);
         }
 
         return result;

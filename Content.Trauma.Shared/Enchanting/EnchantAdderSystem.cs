@@ -58,7 +58,7 @@ public sealed partial class EnchantAdderSystem : EntitySystem
 
         var msg = $"You inscribe the {name} with magical ink...";
         _popup.PopupEntity(msg, target, user);
-        PredictedQueueDel(ent);
+        QueueDel(ent);
 
         _meta.SetEntityName(target, ent.Comp.Name);
         _meta.SetEntityDescription(target, ent.Comp.Desc);

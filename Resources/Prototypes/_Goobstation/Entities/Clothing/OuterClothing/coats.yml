@@ -22,8 +22,7 @@
   - type: Clothing
     sprite: _Goobstation/Clothing/OuterClothing/Misc/mercer_jacket.rsi
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodZeusHood
+    clothingPrototype: ClothingHeadHatHoodZeusHood
 
 - type: entity
   parent: ClothingOuterStorageBase

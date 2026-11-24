@@ -29,7 +29,7 @@ public sealed partial class ModifyMarkingsStatusEffectSystem : EntitySystem
 
             ToggleMarkings(ent, (effect, markingStatus), false);
             markingStatus.CachedMarkings.Clear();
-            PredictedQueueDel(effect);
+            QueueDel(effect);
         }
     }
 

@@ -174,7 +174,7 @@ public sealed partial class ProtectiveBladeSystem : EntitySystem
                 continue;
 
             args.Cancelled = true;
-            PredictedDel(blade);
+            Del(blade);
             break;
         }
     }
@@ -203,7 +203,7 @@ public sealed partial class ProtectiveBladeSystem : EntitySystem
 
             args.Direction = dir.Value;
             args.Reflected = true;
-            PredictedQueueDel(blade);
+            QueueDel(blade);
             break;
         }
     }
@@ -214,7 +214,7 @@ public sealed partial class ProtectiveBladeSystem : EntitySystem
         if (args.Cancelled || ent.Owner == args.User || !args.CanRiposte || !RefreshBlades(ent) || _sacraments.ShouldBlockDamage(ent.Owner, args.User))
             return;
 
-        PredictedQueueDel(ent.Comp.Blades[0]);
+        QueueDel(ent.Comp.Blades[0]);
 
         _audio.PlayPredicted(BladeBlockSound, ent, args.User);
 
@@ -228,7 +228,7 @@ public sealed partial class ProtectiveBladeSystem : EntitySystem
             args.Damage.GetTotal() < 5 || !RefreshBlades(ent) || _sacraments.ShouldBlockDamage(ent.Owner, args.Origin))
             return;
 
-        PredictedQueueDel(ent.Comp.Blades[0]);
+        QueueDel(ent.Comp.Blades[0]);
 
         _audio.PlayPredicted(BladeBlockSound, ent, args.Origin);
 
@@ -267,7 +267,7 @@ public sealed partial class ProtectiveBladeSystem : EntitySystem
         if (targetEntity != EntityUid.Invalid)
             _gun.SetTarget(proj, targetEntity, out _);
 
-        PredictedQueueDel(blade);
+        QueueDel(blade);
 
         _status.TryUpdateStatusEffectDuration(origin, origin.Comp.BlockShootStatus, out _, origin.Comp.BladeShootDelay);
         return true;

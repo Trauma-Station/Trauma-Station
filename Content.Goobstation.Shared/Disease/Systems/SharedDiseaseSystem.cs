@@ -328,7 +328,7 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
         if (!Resolve(ent, ref ent.Comp) || !_container.Remove(disease, ent.Comp.Diseases))
             return false;
 
-        PredictedQueueDel(disease);
+        QueueDel(disease);
         return true;
     }
 
@@ -397,7 +397,7 @@ public abstract partial class SharedDiseaseSystem : EntitySystem
         var spawned = PredictedSpawnAtPosition(diseaseId, new EntityCoordinates(ent, Vector2.Zero));
         if (!TryInfect(ent, spawned, force))
         {
-            PredictedDel(spawned);
+            Del(spawned);
             return false;
         }
         disease = spawned;

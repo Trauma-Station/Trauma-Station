@@ -8,6 +8,8 @@
     class: NonLethal
   - type: DelayedKnockdownOnHit
     useDelay: stunbaton
+  - type: ItemToggleBatteryDrain
+    drawRate: 5
   - type: UseDelayBlockMelee
     delays:
     - stunbaton

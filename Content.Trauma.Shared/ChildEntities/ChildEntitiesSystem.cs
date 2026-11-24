@@ -41,7 +41,7 @@ public sealed class ChildEntitiesSystem : EntitySystem
             if (TerminatingOrDeleted(child))
                 continue;
 
-            PredictedQueueDel(child);
+            QueueDel(child);
         }
     }
 }

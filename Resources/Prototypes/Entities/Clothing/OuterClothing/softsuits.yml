@@ -52,8 +52,7 @@
     walkModifier: 0.7
     sprintModifier: 0.7
   - type: ToggleableClothing
-    clothingPrototypes: # Trauma - changed to dict for modsuits
-      head: ClothingHeadHelmetEVALarge
+    clothingPrototype: ClothingHeadHelmetEVALarge
   - type: Tag
     tags:
     - SuitEVA
@@ -133,8 +132,7 @@
   - type: StealTarget
     stealGroup: ClothingOuterHardsuitVoidParamed
   - type: ToggleableClothing
-    clothingPrototypes: # Trauma - changed to dict for modsuits
-      head: ClothingHeadHelmetVoidParamed
+    clothingPrototype: ClothingHeadHelmetVoidParamed
   # <Trauma> - wasnt cherry picked
   #- type: ItemToggleExaminableStatus
   #- type: ItemToggle

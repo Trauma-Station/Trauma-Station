@@ -1,3 +1,6 @@
+// <Trauma>
+using Content.Trauma.Common.Inventory;
+// </Trauma>
 using Content.Shared.Explosion;
 using Content.Shared.Inventory;
 
@@ -23,24 +26,29 @@ namespace Content.Server.Inventory
             }
         }
 
-        public void TransferEntityInventories(Entity<InventoryComponent?> source, Entity<InventoryComponent?> target, bool force = true) // Goob edit
+        public void TransferEntityInventories(Entity<InventoryComponent?> source, Entity<InventoryComponent?> target)
         {
             if (!Resolve(source.Owner, ref source.Comp, false) || !Resolve(target.Owner, ref target.Comp, false)) // Trauma - don't log missing
                 return;
 
             var enumerator = new InventorySlotEnumerator(source.Comp);
-            // Goob edit start
-            List<(EntityUid, SlotDefinition)> items = new();
+            // <Trauma>
+            _toTransfer.Clear();
             while (enumerator.NextItem(out var item, out var slot))
             {
-                items.Add((item, slot));
+                _toTransfer[item] = slot;
             }
-            foreach (var (item, slot) in items)
+            foreach (var (item, slot) in _toTransfer)
             {
-                TryUnequip(source, slot.Name, true, force, inventory: source.Comp, triggerHandContact: true);
-                TryEquip(target, item, slot.Name , true, force, inventory: target.Comp, triggerHandContact: true);
+                var ev = new InventoryItemTransferEvent(source, target, slot.Name);
+                RaiseLocalEvent(item, ref ev);
+                if (ev.Handled)
+                    continue;
+
+                TryUnequip(source, slot.Name, true, true, inventory: source.Comp, triggerHandContact: true);
+                TryEquip(target, item, slot.Name, true, true, inventory: target.Comp, triggerHandContact: true);
             }
-            // Goob edit end
+            // </Trauma>
         }
     }
 }

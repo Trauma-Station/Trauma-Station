@@ -30,11 +30,11 @@ public sealed class DelayedItemSystem : EntitySystem
             return;
 
         PredictedSpawnNextToOrDrop(ent.Comp.Item, ent);
-        PredictedQueueDel(ent);
+        QueueDel(ent);
     }
 
     private void Destroy<T>(Entity<DelayedItemComponent> ent, ref T args) where T : notnull
     {
-        PredictedQueueDel(ent.Owner);
+        QueueDel(ent.Owner);
     }
 }

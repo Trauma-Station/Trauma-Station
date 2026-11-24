@@ -35,6 +35,6 @@ public sealed partial class SwapOnProjectileHitSystem : EntitySystem
             comp.Effect);
 
         if (comp.DeleteProjectileOnSwap)
-            PredictedDel(uid);
+            Del(uid);
     }
 }

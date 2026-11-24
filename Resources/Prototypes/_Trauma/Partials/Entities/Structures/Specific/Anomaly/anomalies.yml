@@ -1,9 +1,42 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  id: BaseAnomaly
+  components:
+  - type: Anomaly
+    minPointsPerSecond: 15
+    maxPointsPerSecond: 90
+    growingPointMultiplier: 2
+    minPulseLength: 90
+    maxPulseLength: 200
+
+- type: entity
   id: AnomalyLiquid
   components:
+  - type: Solution
+    id: anomaly
+    solution:
+      maxVol: 3000
+  - type: EntitySpawnAnomaly
+    entries: !Clear
+    - settings:
+        spawnOnSuperCritical: true
+        minAmount: 5
+        maxAmount: 10
+        minRange: 3
+        maxRange: 12
+      spawns:
+      - ReagentSlimeSpawner
+  - type: PuddleCreateAnomaly
+    maxPuddleSize: 300
+    superCriticalPuddleSize: 2000
+  - type: InjectionAnomaly
+    solution: anomaly
+    injectRadius: 6
+    maxSolutionInjection: 30
+    superCriticalInjectRadius: 15
   - type: ReagentProducerAnomaly
+    maxReagentProducing: 4
     dangerousChemicals:
     - Cyanide
     - Genecide
@@ -15,6 +48,9 @@
     - ChloralHydrate
     - Allicin
     - Phenol
+    - Burnite
+    - Amatoxin
+    - Fresium
     usefulChemicals:
     - Probital
     - Tirimol
@@ -33,3 +69,201 @@
     - Copium
     - Nostalgia
     - Profanol
+
+- type: entity
+  id: AnomalyBluespace
+  components:
+  - type: BluespaceAnomaly
+    maxShuffleRadius: 15 # How far it can teleport you from scaling with stability
+    maxPortalRadius: 30
+    minPortalRadius: 15
+
+# Rock Anomaly
+
+- type: entity
+  id: AnomalyRockBase
+  components:
+  - type: TileSpawnAnomaly
+    entries:
+    - settings:
+        spawnOnShutdown: true
+        minAmount: 5
+        maxAmount: 15
+        minRange: 2
+        maxRange: 5
+      floor: FloorAsteroidTile
+
+- type: entity
+  id: AnomalyRockUranium
+  components:
+  - type: EntitySpawnAnomaly
+    entries:
+    - settings:
+        spawnOnShutdown: true
+        maxAmount: 2
+        minAmount: 1
+        maxRange: 7
+      spawns:
+      - MobSpawnCrabUranium
+    - settings:
+        spawnOnShutdown: true
+        minAmount: 2
+        maxAmount: 6
+        minRange: 2
+        maxRange: 5
+      spawns:
+      - WallSpawnAsteroid
+      - WallSpawnAsteroid
+      - WallSpawnAsteroidUranium
+      - WallSpawnAsteroidUraniumCrab
+
+- type: entity
+  id: AnomalyRockBananium
+  components:
+  - type: EntitySpawnAnomaly
+    entries:
+    - settings:
+        spawnOnShutdown: true
+        maxAmount: 8 # funny
+        minAmount: 4
+        maxRange: 4
+      spawns:
+      - MobSpawnCrabBananium
+    - settings:
+        spawnOnShutdown: true
+        minAmount: 2
+        maxAmount: 6
+        minRange: 2
+        maxRange: 5
+      spawns:
+      - WallSpawnAsteroid
+      - WallSpawnAsteroid
+      - WallSpawnAsteroidBananium
+      - WallSpawnAsteroidBananiumCrab
+
+- type: entity
+  id: AnomalyRockQuartz
+  components:
+  - type: EntitySpawnAnomaly
+    entries:
+    - settings:
+        spawnOnShutdown: true
+        maxAmount: 2
+        minAmount: 1
+        maxRange: 5
+      spawns:
+      - MobSpawnCrabQuartz
+    - settings:
+        spawnOnShutdown: true
+        minAmount: 2
+        maxAmount: 6
+        minRange: 2
+        maxRange: 5
+      spawns:
+      - WallSpawnAsteroid
+      - WallSpawnAsteroid
+      - WallSpawnAsteroidQuartz
+      - WallSpawnAsteroidQuartzCrab
+
+- type: entity
+  id: AnomalyRockSilver
+  components:
+  - type: EntitySpawnAnomaly
+    entries:
+    - settings:
+        spawnOnShutdown: true
+        maxAmount: 2
+        minAmount: 1
+        maxRange: 5
+      spawns:
+      - MobSpawnCrabSilver
+    - settings:
+        spawnOnShutdown: true
+        minAmount: 2
+        maxAmount: 6
+        minRange: 2
+        maxRange: 5
+      spawns:
+      - WallSpawnAsteroid
+      - WallSpawnAsteroid
+      - WallSpawnAsteroidSilver
+      - WallSpawnAsteroidSilverCrab
+
+- type: entity
+  id: AnomalyRockGold
+  components:
+  - type: EntitySpawnAnomaly
+    entries:
+    - settings:
+        spawnOnShutdown: true
+        maxAmount: 2
+        minAmount: 1
+        maxRange: 5
+      spawns:
+      - MobSpawnCrabGold
+    - settings:
+        spawnOnShutdown: true
+        minAmount: 2
+        maxAmount: 6
+        minRange: 2
+        maxRange: 5
+      spawns:
+      - WallSpawnAsteroid
+      - WallSpawnAsteroid
+      - WallSpawnAsteroidGold
+      - WallSpawnAsteroidGoldCrab
+
+- type: entity
+  id: AnomalyRockIron
+  components:
+  - type: EntitySpawnAnomaly
+    entries:
+    - settings:
+        spawnOnShutdown: true
+        maxAmount: 2
+        minAmount: 1
+        maxRange: 5
+      spawns:
+      - MobSpawnCrabIron
+    - settings:
+        spawnOnShutdown: true
+        minAmount: 2
+        maxAmount: 6
+        minRange: 2
+        maxRange: 5
+      spawns:
+      - WallSpawnAsteroid
+      - WallSpawnAsteroid
+      - WallSpawnAsteroidIron
+      - WallSpawnAsteroidIronCrab
+
+- type: entity
+  id: AnomalyRockCoal
+  components:
+  - type: EntitySpawnAnomaly
+    entries:
+    - settings:
+        spawnOnShutdown: true
+        maxAmount: 2
+        minAmount: 1
+        maxRange: 5
+      spawns:
+      - MobSpawnCrabCoal
+    - settings:
+        spawnOnShutdown: true
+        minAmount: 2
+        maxAmount: 6
+        minRange: 2
+        maxRange: 5
+      spawns:
+      - WallSpawnAsteroid
+      - WallSpawnAsteroid
+      - WallSpawnAsteroidCoal
+      - WallSpawnAsteroidCoalCrab
+
+- type: entity
+  id: AnomalyFlesh
+  components:
+  - type: Anomaly
+    minPulseLength: 120
+    maxPulseLength: 240

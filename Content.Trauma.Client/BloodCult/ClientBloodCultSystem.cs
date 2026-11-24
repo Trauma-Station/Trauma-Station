@@ -41,9 +41,12 @@ public sealed partial class ClientBloodCultSystem : BloodCultSystem
     }
 
     [SubscribeLocalEvent]
-    private void OnPentagramRemoved(EntityUid uid, PentagramComponent component, ComponentRemove args)
+    private void OnPentagramRemoved(Entity<PentagramComponent> ent, ref ComponentRemove args)
     {
-        _sprite.RemoveLayer(uid, PentagramKey.Key);
+        if (TerminatingOrDeleted(ent))
+            return;
+
+        _sprite.RemoveLayer(ent.Owner, PentagramKey.Key);
     }
 
     [SubscribeLocalEvent]

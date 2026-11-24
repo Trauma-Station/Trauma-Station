@@ -37,7 +37,7 @@ public sealed partial class LegsParalyzedSystem : EntitySystem
         // <Trauma>
     }
 
-    private void OnShutdown(EntityUid uid, LegsParalyzedComponent component, ComponentShutdown args)
+    private void OnShutdown(EntityUid uid, LegsParalyzedComponent component, ref ComponentShutdown args)
     {
         // <Trauma>
         // _standingSystem.Stand(uid);

@@ -50,7 +50,7 @@ public sealed partial class IntellicardExtrasSystem : EntitySystem
         if (TryComp<MindContainerComponent>(cardBrain, out var cardMind) && !cardMind.HasMind)
         {
             _popup.PopupEntity(Loc.GetString("intellicard-extras-contained-missing"), user, user, PopupType.MediumCaution);
-            PredictedQueueDel(cardBrain);
+            QueueDel(cardBrain);
             args.Handled = true;
             return;
         }
@@ -123,7 +123,7 @@ public sealed partial class IntellicardExtrasSystem : EntitySystem
                 _mind.UnVisit(cardMind);
             }
 
-            PredictedQueueDel(cardBrain); // free up the empty brain
+            QueueDel(cardBrain); // free up the empty brain
 
             _audio.PlayPredicted(cardAiHolder.Slot.InsertSound, ent, user);
 

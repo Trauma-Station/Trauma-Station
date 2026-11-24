@@ -129,7 +129,7 @@ public sealed partial class ConstructShellSystem : EntitySystem
             _cult.CopyMember(args.Actor, construct);
         _mind.TransferTo(mindId, construct, mind: mind);
         // TODO: unvisit or something??? set this as original entity??
-        PredictedDel(ent.Owner);
+        Del(ent.Owner);
     }
 
     [SubscribeLocalEvent]

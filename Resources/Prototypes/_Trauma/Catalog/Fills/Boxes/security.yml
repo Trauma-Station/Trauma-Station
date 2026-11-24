@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  parent: [ BoxCardboard, BaseSecurityEngineeringContraband ]
+  id: BoxDemolition
+  name: precise demolition box
+  description: A box with 2 detonators, 2 triggers, a remote signaller and 2 full coils of explosive cord.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,3,2
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: RemoteSignaller
+        - id: EmptyDetonator
+          amount: 2
+        - id: SignalTrigger
+          amount: 2
+        - id: CableDetStack
+          amount: 2
+  - type: Sprite
+    layers:
+    - state: box_security
+    - state: trigger
+
+- type: entity
+  parent: [ BoxCardboard, BaseSecurityEngineeringContraband ]
+  id: BoxExplosiveCord
+  name: explosive cord box
+  description: A box with 4 full coils of explosive cord, enough for most of your destructive needs.
+  components:
+  - type: Storage
+    grid:
+    - 0,0,3,1
+  - type: EntityTableContainerFill
+    containers:
+      storagebase:
+       id: CableDetStack
+       amount: 4
+  - type: Sprite
+    layers:
+    - state: box_security
+    - state: writing

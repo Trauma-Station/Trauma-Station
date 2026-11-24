@@ -196,7 +196,7 @@ public abstract partial class SharedDevilContractSystem : EntitySystem
 
         PredictedSpawnAtPosition(devil.Comp.FireEffectProto, coordinates);
         _audio.PlayPredicted(devil.Comp.FwooshPath, coordinates, devil, new AudioParams(-2f, 1f, SharedAudioSystem.DefaultSoundRange, 1f, false, 0f));
-        PredictedQueueDel(contract);
+        QueueDel(contract);
     }
 
     private void HandleVictimSign(Entity<DevilContractComponent> contract, EntityUid signer)

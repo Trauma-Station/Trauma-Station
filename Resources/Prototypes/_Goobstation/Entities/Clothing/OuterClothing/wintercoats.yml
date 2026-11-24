@@ -22,8 +22,7 @@
   - type: Clothing
     sprite: _Goobstation/Clothing/OuterClothing/Wintercoats/secvestcoat.rsi
   - type: ToggleableClothing
-    clothingPrototypes:
-      head: ClothingHeadHatHoodWinterSec
+    clothingPrototype: ClothingHeadHatHoodWinterSec
   - type: StaticPrice
     price: 220
   - type: Armor

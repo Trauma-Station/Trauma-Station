@@ -129,7 +129,7 @@ public abstract partial class SharedCosmicColossusSystem : EntitySystem
                     _container.EmptyContainer(comp.Container);
                 _audio.PlayPredicted(comp.DissolveSfx, Transform(ent).Coordinates, ent);
                 PredictedSpawnAtPosition(comp.DissolveVfx, Transform(ent).Coordinates);
-                PredictedQueueDel(ent);
+                QueueDel(ent);
             }
         }
     }

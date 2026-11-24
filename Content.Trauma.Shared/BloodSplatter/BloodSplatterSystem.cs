@@ -41,7 +41,7 @@ public sealed partial class BloodSplatterSystem : EntitySystem
         SpawnDecal(ent, ent.Comp.Color, ent.Comp.Decal);
 
         if (ent.Comp.DeleteEntity)
-            PredictedQueueDel(ent);
+            QueueDel(ent);
     }
 
     private void OnBrainGib(Entity<BrainSplattererComponent> ent, ref BeingGibbedEvent args)

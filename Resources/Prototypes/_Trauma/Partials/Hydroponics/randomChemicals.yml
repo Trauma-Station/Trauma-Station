@@ -1,0 +1,158 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: weightedRandomFillSolution
+  id: RandomPickBotanyGeneralReagent
+  fills: !Clear # Had to clear so it didn't make additional pools
+  - quantity: 5
+    weight: 0.5
+    reagents:
+    - Stimulants
+    - Nocturine
+    - JuiceThatMakesYouHew
+    - Aluite
+    - AmmoniatedMercury
+    - Rororium
+    - BlackPowder
+    - PolytrinicAcid
+    - Omnizine
+    - Plasma
+    - Fresium
+    - HeartbreakerToxin
+    - BuzzochloricBees
+  - quantity: 5
+    weight: 1
+    reagents:
+    - Genecide
+    - Fentanyl
+    - Anacea
+    - Hemorrhinol
+    - Tirizene
+    - Hercuri
+    - GreyMatter
+    - Atropine
+    - Herignis
+    - Lipozine
+    - Fluorosurfactant
+    - Microplastics
+    - Heparin
+    - Toxin
+    - Napalm
+    - ChlorineTrifluoride
+    - TearGas
+    - Lipolicide
+    - Benzene
+    - Phenol
+    - Bleach
+    - Pax
+  - quantity: 5
+    weight: 2
+    reagents:
+    - Ibuprofen
+    - Tilenol
+    - Morphine
+    - Multiver
+    - Bozaide
+    - Musiver
+    - Tramadol
+    - Tirimol
+    - Probital
+    - Mold
+    - Cement
+    - Bicaridine
+    - Dermaline
+    - Ephedrine
+    - Tricordrazine
+    - Saline
+    - Cryoxadone
+    - DoctorsDelight
+    - Hyronalin
+    - Dylovene
+  - quantity: 10
+    weight: 2
+    reagents:
+    - Ammonia
+    - Acetone
+    - Ash
+    - Oil
+    - Slime
+    - WeldingFuel
+    - CarpoToxin
+    - Histamine
+    - SulfuricAcid
+    - Fersilicite
+    - EZNutrient
+  - quantity: 10
+    weight: 2
+    reagents:
+    - SpaceLube
+    - SpaceGlue
+    - THC
+    - Ipecac
+    - Licoxide
+    - Theobromine
+    - Allicin
+    - NorepinephricAcid
+    - Cryptobiolin
+    - Ethylredoxrazine
+    - Blood
+    - Desoxyephedrine
+    - ChloralHydrate
+  - quantity: 12
+    weight: 5
+    reagents:
+    - Potassium
+    - Fluorine
+    - Aluminium
+    - Chlorine
+    - Mercury
+    - Carbon
+    - Iron
+    - Radium
+    - Phosphorus
+    - Gold
+    - Uranium
+    - Silver
+    - Nitrogen
+    - Copper
+    - Sulfur
+    - Lithium
+    - Sugar
+
+- type: weightedRandomFillSolution
+  id: RandomPickBotanyFarmingReagent
+  fills: !Clear
+  - quantity: 10
+    weight: 5
+    reagents:
+    - Nutriment
+    - Vitamin
+    - Fiber
+    - Water
+    - Sugar
+    - Cream
+    - Ice
+    - Protein
+    - Flour
+    - Soysauce
+    - TableSalt
+    - Enzyme
+    - Vinegar
+    - Ethanol
+    - Wine
+    - Mayo
+    - IceCream
+    - Sap
+  - quantity: 5
+    weight: 1
+    reagents:
+    - SpaceDrugs
+    - Kelotane
+    - Inaprovaline
+    - Lipozine
+    - JuiceThatMakesYouWeh
+    - CogChamp
+    - Laughter
+  - quantity: 5
+    weight: 1
+    reagents:
+    - Cognizine

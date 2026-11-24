@@ -84,7 +84,7 @@ public sealed partial class MasterSiloSystem : EntitySystem
         var multiplier = _stackQuery.CompOrNull(item)?.Count ?? 1;
 
         // now add material to all the silos
-        PredictedQueueDel(item);
+        QueueDel(item);
         var count = _silos.Count;
         foreach (var (material, volume) in composition.MaterialComposition)
         {

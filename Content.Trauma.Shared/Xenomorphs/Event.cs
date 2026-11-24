@@ -4,6 +4,7 @@ using Content.Shared.FixedPoint;
 using Content.Trauma.Shared.Xenomorphs.Caste;
 using Content.Shared.Actions;
 using Content.Shared.DoAfter;
+using Content.Shared.Inventory;
 
 namespace Content.Trauma.Shared.Xenomorphs;
 
@@ -67,3 +68,12 @@ public record struct BeforeXenomorphEvolutionEvent(ProtoId<XenomorphCastePrototy
 
 [ByRefEvent]
 public record struct PlasmaAmountChangeEvent(FixedPoint2 Amount);
+
+/// <summary>
+/// Raised on target when facehugger leaps on them. Some equipment can block it, saves it as <paramref name="Blocker"/>
+/// </summary>
+[ByRefEvent]
+public record struct FaceHuggerEquipAttemptEvent(EntityUid? Blocker = null) : IInventoryRelayEvent
+{
+    public readonly SlotFlags TargetSlots => SlotFlags.HEAD | SlotFlags.MASK;
+}

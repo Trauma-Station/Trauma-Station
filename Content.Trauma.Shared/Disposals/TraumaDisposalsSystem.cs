@@ -33,7 +33,7 @@ public sealed partial class TraumaDisposalsSystem : EntitySystem
         args.Handled = true;
         tube.Speed += ent.Comp.Amount;
 
-        PredictedQueueDel(ent);
+        QueueDel(ent);
     }
 
     [SubscribeLocalEvent]

@@ -58,8 +58,8 @@ public sealed partial class BlobNodeSystem : EntitySystem
             tile.Tile != NodeTile) // ignore core it will delete stuff itself
             return;
 
-        PredictedQueueDel(ent.Comp.BlobFactory);
-        PredictedQueueDel(ent.Comp.BlobResource);
+        QueueDel(ent.Comp.BlobFactory);
+        QueueDel(ent.Comp.BlobResource);
     }
 
     private void Pulse(Entity<BlobNodeComponent> ent, Entity<BlobCoreComponent> core)
@@ -105,7 +105,7 @@ public sealed partial class BlobNodeSystem : EntitySystem
             if (_tileQuery.CompOrNull(ent)?.Core is not { } core ||
                 !_coreQuery.TryComp(core, out var coreComp))
             {
-                PredictedQueueDel(ent);
+                QueueDel(ent);
                 continue;
             }
 

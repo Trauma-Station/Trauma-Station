@@ -140,7 +140,7 @@ public sealed partial class ShadowGrappleSystem : EntitySystem
                 continue;
 
             PredictedSpawnAtPosition(Ash, Transform(target).Coordinates);
-            PredictedQueueDel(slotEnt);
+            QueueDel(slotEnt);
         }
     }
 
