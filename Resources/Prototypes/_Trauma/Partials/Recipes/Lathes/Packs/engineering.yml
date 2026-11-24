@@ -22,6 +22,7 @@
   - CondenserMachineCircuitBoard
   - ExosuitFabricatorMachineCircuitboard
   - BorgChargerCircuitboard
+  - PlumbingPumpCircuitboard
 
 ## Dynamic
 
@@ -35,5 +36,4 @@
 - type: latheRecipePack
   id: EngineeringBoards
   recipes:
-  - PlumbingPumpCircuitboard
   - TelecomTransmitterCircuitboard
