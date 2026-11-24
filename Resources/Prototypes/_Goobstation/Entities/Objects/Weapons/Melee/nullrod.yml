@@ -761,3 +761,11 @@
   - type: SolutionTransfer
     maxTransferAmount: 2
   - type: ThrowableBlocked
+  # <Trauma>
+  - type: Wieldable
+  - type: IncreaseDamageOnWield
+    damage:
+      types:
+        Piercing: 5
+        Holy: 5
+  # <\Trauma>

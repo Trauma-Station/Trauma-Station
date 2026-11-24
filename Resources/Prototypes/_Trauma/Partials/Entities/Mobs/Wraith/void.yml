@@ -14,7 +14,7 @@
       Liver: OrganAnimalLiver
       Kidneys: OrganAnimalKidneys
   - type: TemperatureDamage
-  coldDamage: !Clear
+    coldDamage: !Clear
     types: {}
 
 - type: entity
@@ -29,5 +29,5 @@
       Liver: OrganAnimalLiver
       Kidneys: OrganAnimalKidneys
   - type: TemperatureDamage
-  coldDamage: !Clear
+    coldDamage: !Clear
     types: {}
