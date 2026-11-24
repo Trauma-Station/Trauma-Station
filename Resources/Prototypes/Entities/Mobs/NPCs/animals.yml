@@ -3173,7 +3173,6 @@
     needsHands: false
   - type: Inventory
     templateId: xenomorph
-  - type: ComplexInteraction
   # <Trauma>
 
 - type: entity
