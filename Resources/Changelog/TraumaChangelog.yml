@@ -16907,3 +16907,10 @@ Entries:
   id: 1824
   time: '2026-11-23T21:43:33.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5416
+- author: mrfoxv
+  changes:
+  - type: Add
+    message: Added Gorlex and Demonology skill chips to the uplink
+  id: 1825
+  time: '2026-11-24T09:35:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5402
