@@ -16872,3 +16872,64 @@ Entries:
   id: 1821
   time: '2026-11-22T22:01:18.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5396
+- author: deltanedas
+  changes:
+  - type: Fix
+    message: >-
+      Fixed not being able to summon Nar'Sie with it saying target is still
+      alive.
+  id: 1822
+  time: '2026-11-22T23:02:14.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5413
+- author: LordZirconium
+  changes:
+  - type: Tweak
+    message: Amber TEG situation improved.
+  - type: Add
+    message: Small nuclear reactor setup added to Amber
+  id: 1823
+  time: '2026-11-23T01:28:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5414
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: >-
+      Added advanced botanical chemicals to the biogenerator, They are much more
+      expensive compared to other chemicals and require phoron
+  - type: Tweak
+    message: Added sugar to the base botany mutation pool
+  - type: Tweak
+    message: Made mutagenic fertilizer affected by L4Z
+  - type: Tweak
+    message: >-
+      Made Reaper's Delight more effective at increasing potency but it is more
+      damaging to plants
+  id: 1824
+  time: '2026-11-23T21:43:33.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5416
+- author: mrfoxv
+  changes:
+  - type: Add
+    message: Added Gorlex and Demonology skill chips to the uplink
+  id: 1825
+  time: '2026-11-24T09:35:47.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5402
+- author: Wizard25671
+  changes:
+  - type: Add
+    message: Added conveyor belts and liquid pumps to the service techfab
+  - type: Remove
+    message: >-
+      Removed the Liquid Pump research it is now available roundstart in most
+      techfabs
+  - type: Tweak
+    message: >-
+      Liquid Pumps no longer require parts to assemble now all you need is the
+      machine frame
+  - type: Tweak
+    message: >-
+      Increased the maximum volume on the industrial reagent grinder and
+      portable chemical mixer
+  id: 1826
+  time: '2026-11-24T12:41:27.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5373

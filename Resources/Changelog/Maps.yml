@@ -491,3 +491,10 @@ Entries:
   id: 52
   time: '2026-11-13T23:58:07.0000000+00:00'
   url: https://github.com/Trauma-Station/Trauma-Station/pull/5367
+- author: elNarehate
+  changes:
+  - type: Fix
+    message: Leonid's Genetic APC is now connected.
+  id: 53
+  time: '2026-11-23T23:10:11.0000000+00:00'
+  url: https://github.com/Trauma-Station/Trauma-Station/pull/5421
