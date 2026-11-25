@@ -82,7 +82,7 @@ public sealed partial class CosmicTransmuteSystem : EntitySystem
         var tgtPos = Transform(target).Coordinates;
         var result = PredictedSpawnAtPosition(proto.ID, tgtPos);
         _pull.TryStartPull(ent, result);
-        PredictedQueueDel(target);
+        QueueDel(target);
         return true;
     }
 
@@ -108,7 +108,7 @@ public sealed partial class CosmicTransmuteSystem : EntitySystem
         var result = PredictedSpawnAtPosition(proto.ID, Transform(ent).Coordinates);
         _hand.TryDrop(ent.Owner);
         _hand.TryForcePickupAnyHand(ent.Owner, result);
-        PredictedQueueDel(target);
+        QueueDel(target);
         return true;
     }
 }

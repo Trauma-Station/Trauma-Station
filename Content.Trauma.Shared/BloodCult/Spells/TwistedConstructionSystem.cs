@@ -58,7 +58,7 @@ public sealed partial class TwistedConstructionSystem : EntitySystem
             _mind.TransferTo(mindId, replacement, mind: mind);
 
         RemComp(target, target.Comp); // prevent multiple doafters on the same tick duping
-        PredictedQueueDel(target);
+        QueueDel(target);
 
         _cult.SetCultRule(replacement, rule);
     }

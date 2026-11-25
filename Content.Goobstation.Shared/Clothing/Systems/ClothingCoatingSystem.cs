@@ -31,7 +31,7 @@ public sealed partial class ClothingCoatingSystem : EntitySystem
         _popup.PopupEntity(Loc.GetString("clothing-coating-success", ("target", target), ("source", ent)), target);
         Dirty(target, coated);
 
-        PredictedQueueDel(ent);
+        QueueDel(ent);
         args.Handled = true;
     }
 

@@ -23,6 +23,6 @@ public sealed partial class PuddleSpawnerSystem : EntitySystem
             return; // spawn menu etc dont care
 
         _puddle.TrySpillAt(xform.Coordinates, ent.Comp.Solution, out _);
-        PredictedQueueDel(ent);
+        QueueDel(ent);
     }
 }

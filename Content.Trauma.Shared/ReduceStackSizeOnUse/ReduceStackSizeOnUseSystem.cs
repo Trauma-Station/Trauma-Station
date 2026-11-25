@@ -24,6 +24,6 @@ public sealed partial class ReduceStackSizeOnUseSystem : EntitySystem
         }
 
         // It's consumed on use and it's not a stack so delete it
-        PredictedQueueDel(ent);
+        QueueDel(ent);
     }
 }

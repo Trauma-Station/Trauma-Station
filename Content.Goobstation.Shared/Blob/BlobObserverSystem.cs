@@ -110,7 +110,7 @@ public abstract partial class BlobObserverSystem : EntitySystem
             return;
         }
 
-        PredictedQueueDel(tile);
+        QueueDel(tile);
         var coreTile = ProtoMan.Index(CoreTile);
         var newCore = PredictedSpawnAtPosition(coreTile.Entity, args.Target);
 

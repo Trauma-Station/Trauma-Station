@@ -67,10 +67,7 @@ public sealed partial class KillTargetCultSystem : EntitySystem
         }
 
         if (_cult.GetTarget(mob) is not { } target)
-        {
-            Log.Error($"Supposed cultist {ToPrettyString(mob)} has no target!");
             return null;
-        }
 
         return _mind.GetMind(target);
     }

@@ -41,7 +41,7 @@ public sealed partial class ForceEquipClothingEffectSystem : EntityEffectSystem<
         var silent = args.Effect.Silent;
         if (!_inventory.TryEquip(ent, item, slot, silent, force: true, predicted: true, ent.Comp))
         {
-            PredictedDel(item);
+            Del(item);
             return;
         }
 

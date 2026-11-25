@@ -6,3 +6,10 @@
     Steel: 50
     Plastic: 50
     Silver: 25
+
+- type: latheRecipe
+  id: CableDetStack1
+  materials:
+    Plastic: 25
+    Plasma: 25
+    Gold: !Remove

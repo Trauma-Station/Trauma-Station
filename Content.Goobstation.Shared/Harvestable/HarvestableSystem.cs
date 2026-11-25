@@ -65,6 +65,6 @@ public sealed partial class HarvestableSystem : EntitySystem
             _handSystem.TryPickup(harvester, item, activeHand, false);
         }
 
-        PredictedDel(ent.Owner);
+        Del(ent.Owner);
     }
 }

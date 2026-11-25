@@ -41,7 +41,7 @@ public sealed partial class EntityShapeSystem : EntitySystem
 
             if (counterComp.Counter == counterComp.MaxCounter)
             {
-                PredictedQueueDel(uid);
+                QueueDel(uid);
                 continue;
             }
 

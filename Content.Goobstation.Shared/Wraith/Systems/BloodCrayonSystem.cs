@@ -47,7 +47,7 @@ public sealed partial class BloodCrayonSystem : EntitySystem
         else
         {
             _hands.RemoveHand(ent.Owner, ent.Comp.HandName);
-            PredictedQueueDel(ent.Comp.BloodCrayon);
+            QueueDel(ent.Comp.BloodCrayon);
             ent.Comp.BloodCrayon = null;
         }
         Dirty(ent);

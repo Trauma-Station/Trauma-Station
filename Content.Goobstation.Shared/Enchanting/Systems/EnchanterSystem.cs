@@ -140,7 +140,7 @@ public sealed partial class EnchanterSystem : EntitySystem
         if (!TryComp<StackComponent>(ent, out var stack) || !_stack.TryUse((ent, stack), 1))
         {
             ent.Comp.Enchants = new(); // prevent double enchanting by malf client
-            PredictedQueueDel(ent);
+            QueueDel(ent);
         }
         return true;
     }

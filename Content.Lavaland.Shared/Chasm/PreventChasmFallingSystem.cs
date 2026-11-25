@@ -59,7 +59,7 @@ public sealed partial class PreventChasmFallingSystem : EntitySystem
             _transform.AttachToGridOrMap(args.Entity, Transform(args.Entity));
             _audio.PlayLocal(comp.TeleportSound, args.Entity, null);
             if (args.Entity != uid && comp.DeleteOnUse)
-                PredictedQueueDel(uid);
+                QueueDel(uid);
             else if (useDelay != null)
                 _delay.TryResetDelay((uid, useDelay));
 

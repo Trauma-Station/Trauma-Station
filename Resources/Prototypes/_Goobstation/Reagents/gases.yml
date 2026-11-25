@@ -45,7 +45,7 @@
         visualType: Medium
         messages: [ "effect-sleepy" ]
         probability: 0.1
-      - !type:MovespeedModifier
+      - !type:NitriumMovespeedModifier
         conditions:
         - !type:ReagentCondition
           reagent: BZ
@@ -108,7 +108,7 @@
         visualType: Medium
         messages: [ "effect-sleepy" ]
         probability: 0.1
-      - !type:MovespeedModifier
+      - !type:NitriumMovespeedModifier
         conditions:
         - !type:ReagentCondition
           reagent: BZ

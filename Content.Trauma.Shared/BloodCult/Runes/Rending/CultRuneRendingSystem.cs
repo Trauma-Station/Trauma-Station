@@ -2,8 +2,6 @@
 
 using Content.Shared.Chat;
 using Content.Shared.DoAfter;
-using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Popups;
 using Content.Trauma.Shared.Areas;
 using Content.Trauma.Shared.BloodCult;
@@ -19,7 +17,6 @@ public sealed partial class CultRuneRendingSystem : EntitySystem
 {
     [Dependency] private AreaSystem _area = default!;
     [Dependency] private BloodCultSystem _cult = default!;
-    [Dependency] private MobStateSystem _mobState = default!;
     [Dependency] private SharedAppearanceSystem _appearance = default!;
     [Dependency] private SharedAudioSystem _audio = default!;
     [Dependency] private SharedChatSystem _chat = default!;
@@ -42,11 +39,9 @@ public sealed partial class CultRuneRendingSystem : EntitySystem
     private void OnRendingRuneInvoked(Entity<CultRuneRendingComponent> rune, ref RuneInvokeEvent args)
     {
         var user = args.User;
-        if (_cult.GetTarget(rune) is not {} target ||
-            !TryComp<MobStateComponent>(target, out var mob) ||
-            _mobState.IsAlive(target, mob))
+        if (!_cult.TargetKilled(rune))
         {
-            _popup.PopupEntity(Loc.GetString("cult-rending-target-alive"), user, user);
+            args.Popup = "You need to sacrifice the cult's target first!";
             return;
         }
 
@@ -65,6 +60,7 @@ public sealed partial class CultRuneRendingSystem : EntitySystem
         if (!_doAfter.TryStartDoAfter(argsDoAfterEvent))
         {
             Log.Error($"Failed to start doafter for {ToPrettyString(rune)}!");
+            args.Popup = "Cancelled the invocation!";
             return;
         }
 

@@ -74,7 +74,7 @@ public abstract partial class JobListingsSystem : EntitySystem
             !sideJobComp.CanCancel)
             return false;
 
-        PredictedDel(sideJob);
+        Del(sideJob);
         return true;
     }
 
@@ -107,7 +107,7 @@ public abstract partial class JobListingsSystem : EntitySystem
         GainReputation(jobBoard, sideJobComp.ReputationGain);
         jobBoard.Comp.JobsCompleted += 1;
         DirtyField(jobBoard.AsNullable(), nameof(JobListingsComponent.JobsCompleted));
-        PredictedDel(sideJob);
+        Del(sideJob);
         return true;
     }
 

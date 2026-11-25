@@ -482,7 +482,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         var ev = new KnowledgeRemovedEvent(ent, holder);
         RaiseLocalEvent(unit, ref ev);
 
-        PredictedQueueDel(unit);
+        QueueDel(unit);
 
         SkillPopup(Loc.GetString("knowledge-unit-forgotten-popup", ("knowledge", Name(unit))), holder);
         return target;
@@ -589,7 +589,7 @@ public abstract partial class SharedKnowledgeSystem : CommonKnowledgeSystem
         {
             foreach (var entity in container.ContainedEntities)
             {
-                PredictedQueueDel(entity);
+                QueueDel(entity);
             }
         }
     }

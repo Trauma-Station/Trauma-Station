@@ -371,7 +371,7 @@ public sealed partial class DurabilitySystem : EntitySystem
             _effects.ApplyEffects(ent, effects, user: args.Attacker);
         if (!ent.Comp.DeleteOnDestroyed)
             return;
-        PredictedQueueDel(ent.Owner);
+        QueueDel(ent.Owner);
 
         // TODO: remove this and make any weapon hit reset user's innate melee NextAttack
         if (TryComp<MeleeWeaponComponent>(args.Attacker, out var userMelee))
@@ -455,7 +455,7 @@ public sealed partial class DurabilitySystem : EntitySystem
         if (TryComp<StackComponent>(args.Used, out var stack))
             _stack.ReduceCount((args.Used.Value, stack), 1);
         else
-            PredictedQueueDel(args.Used);
+            QueueDel(args.Used);
 
         args.Handled = true;
     }

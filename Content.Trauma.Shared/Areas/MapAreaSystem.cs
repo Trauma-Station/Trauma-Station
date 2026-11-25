@@ -234,7 +234,7 @@ public sealed partial class MapAreaSystem : EntitySystem
         if (area.Comp.GridUid is { } grid)
             AddToChunk(grid, area.Comp.LocalPosition, area);
         else if (area.Comp.MapID != MapId.Nullspace) // ignore entity spawn menu's nullspace entities
-            PredictedDel(area.Owner); // no areas in space
+            Del(area.Owner); // no areas in space
     }
 
     private void AddToChunk(EntityUid grid, Vector2 pos, EntityUid area)

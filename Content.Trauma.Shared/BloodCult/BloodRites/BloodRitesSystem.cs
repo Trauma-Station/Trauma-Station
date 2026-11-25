@@ -124,7 +124,7 @@ public sealed partial class BloodRitesSystem : EntitySystem
         Dirty(rites);
         Dirty(ent);
         if (ent.Comp.StoredBlood <= FixedPoint2.Zero)
-            PredictedQueueDel(ent);
+            QueueDel(ent);
         else
             BeamEffect(rites, ent, true);
         args.Handled = true;
@@ -218,7 +218,7 @@ public sealed partial class BloodRitesSystem : EntitySystem
 
         var remaining = rites.Comp.StoredBlood;
 
-        PredictedDel(rites.Owner);
+        Del(rites.Owner);
 
         var user = args.Actor;
         var item = PredictedSpawnNextToOrDrop(args.SelectedProto, user);

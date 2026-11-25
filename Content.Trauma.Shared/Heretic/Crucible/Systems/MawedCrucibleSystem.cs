@@ -151,7 +151,7 @@ public sealed partial class MawedCrucibleSystem : EntitySystem
         args.Handled = true;
         UpdateMass(ent, ent.Comp.CurrentMass + 1);
         _audio.PlayPredicted(ent.Comp.MassGainSound, ent, args.User);
-        PredictedQueueDel(args.Used);
+        QueueDel(args.Used);
     }
 
     private void ToggleAnchor(Entity<TransformComponent> ent, ref InteractUsingEvent args)

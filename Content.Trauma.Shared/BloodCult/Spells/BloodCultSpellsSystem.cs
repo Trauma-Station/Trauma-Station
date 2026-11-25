@@ -205,7 +205,7 @@ public sealed partial class BloodCultSpellsSystem : EntitySystem
         var cuffs = PredictedSpawnAtPosition(ev.ShacklesProto, Transform(ev.Target).Coordinates);
         if (!_cuffable.TryAddNewCuffs(ev.Target, ev.Performer, cuffs))
         {
-            PredictedDel(cuffs);
+            Del(cuffs);
             return;
         }
 

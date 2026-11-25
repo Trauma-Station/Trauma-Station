@@ -120,7 +120,7 @@ public abstract partial class SharedContinuousBeamSystem : EntitySystem
     {
         _joint.ClearBeamJoints((uid, joint), gun.Data.Id);
         if (Exists(gun.Endpoint))
-            PredictedQueueDel(gun.Endpoint.Value);
+            QueueDel(gun.Endpoint.Value);
         gun.Endpoint = null;
         Dirty(uid, gun);
     }

@@ -45,7 +45,7 @@ public sealed partial class WoundSystem
             return;
 
         wound.Comp.HoldingWoundable = EntityUid.Invalid;
-        PredictedQueueDel(wound);
+        QueueDel(wound);
     }
 
     [SubscribeLocalEvent]
@@ -498,7 +498,7 @@ public sealed partial class WoundSystem
                 return false;
         }
 
-        PredictedDel(wound);
+        Del(wound);
         return true;
     }
 

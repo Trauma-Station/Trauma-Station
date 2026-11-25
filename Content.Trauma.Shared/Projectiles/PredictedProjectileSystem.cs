@@ -204,7 +204,7 @@ public sealed partial class PredictedProjectileSystem : EntitySystem
             }
 
             if (comp.DeleteOnCollide && comp.ProjectileSpent)
-                PredictedQueueDel(uid);
+                QueueDel(uid);
 
             if (comp.ImpactEffect != null && TryComp(uid, out TransformComponent? xform) && _timing.IsFirstTimePredicted)
             {

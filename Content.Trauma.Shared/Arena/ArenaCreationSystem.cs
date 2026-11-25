@@ -132,7 +132,7 @@ public sealed partial class ArenaCreationSystem : EntitySystem
 
         foreach (var arena in toDelete)
         {
-            PredictedQueueDel(arena);
+            QueueDel(arena);
         }
     }
     #endregion

@@ -24,3 +24,9 @@
   id: TraumaSecurityEquipmentStatic
   recipes:
   - ClothingOuterStraightjacket
+
+- type: latheRecipePack
+  id: SecurityPreciseDemolitionStatic
+  recipes:
+  - CableDetStack1
+  - EmptyDetonator
