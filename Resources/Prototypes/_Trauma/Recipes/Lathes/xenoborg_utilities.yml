@@ -1,0 +1,43 @@
+﻿- type: latheRecipe
+  id: XenoborgDetCable
+  result: CableDetStack1
+  categories:
+  - Weapons
+  completetime: 0.5
+  materials:
+    Steel: 10
+    XenoborgCrystal: 10
+
+- type: latheRecipe
+  id: BaseXenoborgUtilityRecipe
+  categories:
+  - Weapons
+  completetime: 2
+  materials:
+    Steel: 50
+    XenoborgCrystal: 50
+
+- type: latheRecipe
+  parent: BaseXenoborgUtilityRecipe
+  id: XenoborgEmptyDetonator
+  result: EmptyDetonator
+
+- type: latheRecipe
+  parent: BaseXenoborgUtilityRecipe
+  id: XenoborgSilentTimerTrigger
+  result: SilentTimerTrigger
+
+- type: latheRecipe
+  parent: BaseXenoborgUtilityRecipe
+  id: XenoborgTimerTrigger
+  result: TimerTrigger
+
+- type: latheRecipe
+  parent: BaseXenoborgUtilityRecipe
+  id: XenoborgSignalTrigger
+  result: SignalTrigger
+
+- type: latheRecipe
+  parent: BaseXenoborgUtilityRecipe
+  id: XenoborgVoiceTrigger
+  result: VoiceTrigger

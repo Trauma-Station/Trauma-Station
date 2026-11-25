@@ -1,7 +1,11 @@
 ## Static
 
 - type: latheRecipePack
-  parent: EngineeringPreciseDemolitionStatic
   id: XenoborgPreciseDemolitionStatic
   recipes:
-  - SilentTimerTrigger
+  - XenoborgSilentTimerTrigger
+  - XenoborgTimerTrigger
+  - XenoborgVoiceTrigger
+  - XenoborgSignalTrigger
+  - XenoborgDetCable
+  - XenoborgEmptyDetonator
