@@ -1,11 +1,11 @@
 # Charlie Station / Ancient ID Cards
 
 - type: entity
+  abstract: true
   parent: Clothing
   id: IDCardAncient
   name: A perfectly retrograde identification card
   description: A perfectly retrograde identification card. Looks like it could use some flavor.
-  abstract: true
   components:
   - type: Sprite
     sprite: _Funkystation/Objects/Misc/id_cards.rsi
