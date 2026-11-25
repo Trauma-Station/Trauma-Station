@@ -33,6 +33,9 @@
     containers:
       borg_module:
       - XenoborgModuleJammer
+  - type: ModifyKnowledgeGrant
+    skills:
+      MeleeKnowledge: 51
 
 - type: entity
   id: XenoborgHeavyPrinted
