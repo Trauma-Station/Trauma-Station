@@ -16,6 +16,9 @@
       borg_module:
       - !Remove XenoborgModuleSword
       - XenoborgModuleSaw
+  - type: ModifyKnowledgeGrant
+    skills:
+      KnowledgeWeaponsEnergy: 51
 
 - type: entity
   id: XenoborgStealth
@@ -35,7 +38,7 @@
       - XenoborgModuleJammer
   - type: ModifyKnowledgeGrant
     skills:
-      MeleeKnowledge: 51
+      KnowledgeWeaponsShortBlade: 51
 
 - type: entity
   id: XenoborgHeavyPrinted
