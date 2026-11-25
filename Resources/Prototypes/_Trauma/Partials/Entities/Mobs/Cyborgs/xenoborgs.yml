@@ -1,0 +1,58 @@
+﻿- type: entity
+  id: XenoborgHeavy
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - !Remove XenoborgModuleJammer
+
+- type: entity
+  id: XenoborgScout
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - !Remove XenoborgModuleSword
+      - XenoborgModuleSaw
+
+- type: entity
+  id: XenoborgStealth
+  components:
+  - type: BorgChassis
+    maxModules: 6
+  - type: MovementSpeedModifier # Trauma - faster, but slower than scout
+    baseWalkSpeed: 2.5
+    baseSprintSpeed: 5.5
+  - type: MobThresholds # weaker
+    thresholds:
+      0: Alive
+      100: Critical
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - XenoborgModuleJammer
+
+- type: entity
+  id: XenoborgHeavyPrinted
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - !Remove XenoborgModuleJammer
+
+- type: entity
+  id: XenoborgScoutPrinted
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - !Remove XenoborgModuleSword
+      - XenoborgModuleSaw
+
+- type: entity
+  id: XenoborgStealthPrinted
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - XenoborgModuleJammer

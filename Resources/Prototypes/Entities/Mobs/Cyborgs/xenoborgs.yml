@@ -169,6 +169,7 @@
       - XenoborgModuleBasic
       - XenoborgModuleTool
       - XenoborgModuleLaser
+      - XenoborgModuleJammer
   - type: ItemSlots
     slots:
       cell_slot:
@@ -236,7 +237,7 @@
       borg_module:
       - XenoborgModuleBasic
       - XenoborgModuleTool
-      - XenoborgModuleSaw
+      - XenoborgModuleSword
       - XenoborgModuleSpaceMovement
   - type: ItemSlots
     slots:
@@ -285,21 +286,14 @@
     footstepSoundCollection:
       collection: FootstepHoverXenoborg
   - type: BorgChassis
-    maxModules: 6
+    maxModules: 5
     hasMindState: xenoborg_stealth_e
     noMindState: xenoborg_stealth_e_r
     moduleWhitelist:
       tags:
       - XenoborgModuleGeneric
       - XenoborgModuleStealth
-  - type: MovementSpeedModifier # Trauma - faster, but slower than scout
-    baseWalkSpeed : 2.5
-    baseSprintSpeed : 5.5
   - type: MovementAlwaysTouching # it flies in space with tiny thrusters
-  - type: MobThresholds # weaker
-    thresholds:
-      0: Alive
-      100: Critical
   # - type: SpamEmitSound # longer interval to make the creppy sound
   #   minInterval: 50
   #   maxInterval: 150
@@ -313,7 +307,6 @@
       - XenoborgModuleHypo
       - XenoborgModuleChameleonProjector
       - XenoborgModuleCloakDevice
-      - XenoborgModuleJammer
   - type: ItemSlots
     slots:
       cell_slot:
@@ -372,6 +365,7 @@
       - XenoborgModuleBasic
       - XenoborgModuleTool
       - XenoborgModuleLaser
+      - XenoborgModuleJammer
   - type: ItemSlots
     slots:
       cell_slot:
@@ -390,7 +384,7 @@
       borg_module:
       - XenoborgModuleBasic
       - XenoborgModuleTool
-      - XenoborgModuleSaw
+      - XenoborgModuleSword
       - XenoborgModuleSpaceMovement
   - type: ItemSlots
     slots:
@@ -413,7 +407,6 @@
       - XenoborgModuleHypo
       - XenoborgModuleChameleonProjector
       - XenoborgModuleCloakDevice
-      - XenoborgModuleJammer
   - type: ItemSlots
     slots:
       cell_slot:

@@ -49,7 +49,6 @@
     - XenoborgMachines
     - EmptyXenoborgs
     - XenoborgUpgradeModules
-    - XenoborgPreciseDemolitionStatic
   - type: MaterialStorage
     whitelist:
       tags:

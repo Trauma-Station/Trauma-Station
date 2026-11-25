@@ -43,9 +43,6 @@
           Unprimed: { state: complete }
   - type: StaticPrice
     price: 25
-  - type: Tag
-    tags:
-    - Detonator
 
 - type: entity
   parent: EmptyDetonator

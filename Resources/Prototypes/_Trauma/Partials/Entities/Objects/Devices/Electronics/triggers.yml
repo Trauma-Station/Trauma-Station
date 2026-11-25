@@ -1,0 +1,20 @@
+﻿- type: entity
+  id: TimerTrigger
+  components:
+  - type: Tag
+    tags:
+    - Trigger
+
+- type: entity
+  id: SignalTrigger
+  components:
+  - type: Tag
+    tags:
+    - Trigger
+
+- type: entity
+  id: VoiceTrigger
+  components:
+  - type: Tag
+    tags:
+    - Trigger

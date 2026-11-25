@@ -1,0 +1,6 @@
+﻿- type: entity
+  id: MothershipCore
+  components:
+  - type: Lathe
+    staticPacks:
+    - XenoborgPreciseDemolitionStatic
