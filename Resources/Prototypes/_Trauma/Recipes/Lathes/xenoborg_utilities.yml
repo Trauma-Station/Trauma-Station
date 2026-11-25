@@ -7,39 +7,35 @@
   - Weapons
   completetime: 0.5
   materials:
-    Steel: 10
+    Steel: 20
     XenoborgCrystal: 10
 
 - type: latheRecipe
-  id: BaseXenoborgUtilityRecipe
+  id: XenoborgEmptyDetonator
+  result: EmptyDetonator
   categories:
   - Weapons
   completetime: 2
   materials:
-    Steel: 50
+    Steel: 100
     XenoborgCrystal: 50
 
 - type: latheRecipe
-  parent: BaseXenoborgUtilityRecipe
-  id: XenoborgEmptyDetonator
-  result: EmptyDetonator
-
-- type: latheRecipe
-  parent: BaseXenoborgUtilityRecipe
+  parent: XenoborgEmptyDetonator
   id: XenoborgSilentTimerTrigger
   result: SilentTimerTrigger
 
 - type: latheRecipe
-  parent: BaseXenoborgUtilityRecipe
+  parent: XenoborgEmptyDetonator
   id: XenoborgTimerTrigger
   result: TimerTrigger
 
 - type: latheRecipe
-  parent: BaseXenoborgUtilityRecipe
+  parent: XenoborgEmptyDetonator
   id: XenoborgSignalTrigger
   result: SignalTrigger
 
 - type: latheRecipe
-  parent: BaseXenoborgUtilityRecipe
+  parent: XenoborgEmptyDetonator
   id: XenoborgVoiceTrigger
   result: VoiceTrigger
