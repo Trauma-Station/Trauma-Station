@@ -16279,4 +16279,5 @@ entities:
     - type: Transform
       pos: 0.5,13.5
       parent: 3
-...
+    - type: WarpPoint
+      location: old station
