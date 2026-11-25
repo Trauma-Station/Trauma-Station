@@ -1633,11 +1633,19 @@
           tags:
           - ConstructionMaterial
     - hand:
-        emptyRepresentative: CableApcStack10
+        emptyRepresentative: BorgModuleAnyCablePlaceholder
         emptyLabel: borg-slot-cables-empty
         whitelist:
           tags:
           - CableCoil
+          - CableDet # Trauma - explosive cord major
+    - hand:
+        emptyRepresentative: VoiceTrigger
+        emptyLabel: borg-slot-detonator-empty
+        whitelist:
+          tags:
+          - Detonator
+          - Trigger
     - hand:
         emptyRepresentative: FloorTileItemXenoborg # Trauma - fat chud
         emptyLabel: borg-slot-tiles-empty
@@ -1799,14 +1807,14 @@
     - XenoborgModulePrimaryWeapon
 
 - type: entity
-  parent: [ BaseXenoborgModuleHeavy, BaseProviderBorgModule, BaseXenoborgContraband ]
+  parent: [ BaseXenoborgModuleStealth, BaseProviderBorgModule, BaseXenoborgContraband ]
   id: XenoborgModuleJammer
   name: jammer xenoborg module
   description: Module with a communication jammer.
   components:
   - type: Sprite
     layers:
-    - state: xenoborg_heavy
+    - state: xenoborg_stealth
     - state: icon-xenoborg-jammer
   - type: ItemBorgModule
     hands:
@@ -2024,22 +2032,22 @@
 
 - type: entity
   parent: [ BaseXenoborgModuleScout, BaseProviderBorgModule, BaseXenoborgContraband ]
-  id: XenoborgModuleSword
-  name: knife xenoborg module
-  description: Module with a kukri knife.
+  id: XenoborgModuleSaw
+  name: saw xenoborg module
+  description: Module with an electric saw.
   components:
   - type: Sprite
     layers:
     - state: xenoborg_scout
-    - state: icon-xenoborg-sword
+    - state: icon-xenoborg-saw
   - type: BorgModuleWhitelist
     moduleBlacklist: *primaryWeapon
   - type: ItemBorgModule
     hands:
-    - item: KukriKnife
+    - item: SawElectric
     - item: JetpackXenoborg
   - type: BorgModuleIcon
-    icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-sword-module }
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-saw-module }
   - type: Tag
     tags:
     - XenoborgModuleScout
@@ -2054,7 +2062,7 @@
   - type: Sprite
     layers:
     - state: xenoborg_scout
-    - state: icon-xenoborg-sword2
+    - state: icon-xenoborg-sword
   - type: BorgModuleWhitelist
     moduleBlacklist: *primaryWeapon
   - type: ItemBorgModule
@@ -2062,7 +2070,7 @@
     - item: EnergyDaggerLoudBlue
     - item: JetpackXenoborg
   - type: BorgModuleIcon
-    icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-sword2-module }
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-sword-module }
   - type: Tag
     tags:
     - XenoborgModuleScout
@@ -2077,7 +2085,7 @@
   - type: Sprite
     layers:
     - state: xenoborg_scout
-    - state: icon-xenoborg-sword2
+    - state: icon-xenoborg-sword
   - type: BorgModuleWhitelist
     moduleBlacklist: *primaryWeapon
   - type: ItemBorgModule
@@ -2094,8 +2102,8 @@
 - type: entity
   parent: [ BaseXenoborgModuleStealth, BaseProviderBorgModule, BaseXenoborgContraband ]
   id: XenoborgModuleHypo
-  name: nocturine hypo xenoborg module
-  description: Module with a self-refilling nocturine hypospray.
+  name: dartgun xenoborg module
+  description: Module with a self-refilling dartgun and a combat knife.
   components:
   - type: Sprite
     layers:
@@ -2106,6 +2114,7 @@
   - type: ItemBorgModule
     hands:
     - item: DartGunXenoborg # Trauma replaced hypo
+    - item: CombatKnife # Trauma - added melee
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-hypo-module }
   - type: Tag

@@ -1,0 +1,7 @@
+## Static
+
+- type: latheRecipePack
+  parent: EngineeringPreciseDemolitionStatic
+  id: XenoborgPreciseDemolitionStatic
+  recipes:
+  - SilentTimerTrigger

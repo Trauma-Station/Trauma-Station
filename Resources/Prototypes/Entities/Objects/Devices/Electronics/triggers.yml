@@ -40,6 +40,9 @@
     materialComposition:
       Steel: 75
       Plastic: 25
+  - type: Tag
+    tags:
+    - Trigger
 
 - type: entity
   parent: TimerTrigger
@@ -55,6 +58,7 @@
   - type: Tag
     tags:
     - SignalTrigger
+    - Trigger
   - type: PayloadTrigger
     components:
     - type: DeviceNetwork
@@ -93,6 +97,7 @@
   - type: Tag
     tags:
     - VoiceTrigger
+    - Trigger
   - type: PayloadTrigger
     components:
     - type: TriggerOnVoice

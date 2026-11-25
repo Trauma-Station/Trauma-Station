@@ -210,3 +210,11 @@
           - Organ
   - type: BorgModuleIcon
     icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: omnimed-surgery-module }
+
+- type: entity
+  id: BorgModuleAnyCablePlaceholder
+  parent: BaseItem
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Tools/Cables/other.rsi
+    state: all-cables

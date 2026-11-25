@@ -58,6 +58,7 @@
   - type: Tag
     tags:
     - Payload
+    - CableDet
   # - type: Sticky #While cool, this doesn't actually work because the structure prevents the explosion from the cable reaching the stickied wire.
     # stickDelay: 5
     # unstickDelay: 5

@@ -95,6 +95,9 @@
   id: BalloonMelon
 
 - type: Tag
+  id: CableDet # Storage whitelist: XenoborgModuleConstruction
+
+- type: Tag
   id: CartridgeGaussgun # Ammo whitelist: BaseMagazineGaussgun
 
 - type: Tag
@@ -131,6 +134,9 @@
 
 - type: Tag
   id: DemonEssense
+
+- type: Tag
+  id: Detonator # ExCable detonators
 
 - type: Tag
   id: DrillHead # for drills durability repair whitelist
@@ -389,6 +395,9 @@
 
 - type: Tag
   id: ThrowingKnife # Storage whitelist: ClothingBeltKnifeRig
+
+- type: Tag
+  id: Trigger # Signal, Timer and Voice triggers
 
 - type: Tag
   id: TraumaFire # Reagent: ChlorineTrifluoride fire reaction, prevents multiple fires on the same tile

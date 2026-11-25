@@ -122,6 +122,9 @@
   components:
   - type: Sprite
     state: timer-silent
+  - type: Tag
+    tags:
+    - Trigger
   - type: PayloadTrigger
     components:
     - *use
