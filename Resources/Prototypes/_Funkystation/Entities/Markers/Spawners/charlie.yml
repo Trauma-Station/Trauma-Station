@@ -105,10 +105,10 @@
 
 - type: entity
   abstract: true
-  categories: [ Spawner ]
   parent: MarkerBase
   id: SpawnPointGhostCryoPodSleeperBase
   name: old cryopod sleeper
+  categories: [ Spawner ]
   components:
   - type: GhostRole
     name: roles-ghost-cryopod-sleeper-name
