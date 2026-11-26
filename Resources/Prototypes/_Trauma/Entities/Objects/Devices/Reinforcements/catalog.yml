@@ -360,22 +360,6 @@
   resetRestockOnPurchase: true
   restockAfterPurchase: 60
 
-- type: listing
-  id: ReinforcementBeaconDClass
-  name: reinforcement-dclass-name
-  description: reinforcement-dclass-desc
-  productEntity: ReinforcementBeaconDClass
-  icon:
-    sprite: Markers/jobs.rsi
-    state: prisoner
-  cost:
-    Spesos: 250
-  categories:
-  - ScienceHoP
-  restockTime: 0
-  resetRestockOnPurchase: true
-  restockAfterPurchase: 60
-
 # Cargo
 
 - type: listing
@@ -662,6 +646,22 @@
   icon:
     sprite: Markers/jobs.rsi
     state: passenger
+  cost:
+    Spesos: 250
+  categories:
+  - ServiceHoP
+  restockTime: 0
+  resetRestockOnPurchase: true
+  restockAfterPurchase: 60
+
+- type: listing
+  id: ReinforcementBeaconExPop
+  name: reinforcement-expop-name
+  description: reinforcement-expop-desc
+  productEntity: ReinforcementBeaconExPop
+  icon:
+    sprite: Markers/jobs.rsi
+    state: prisoner
   cost:
     Spesos: 250
   categories:

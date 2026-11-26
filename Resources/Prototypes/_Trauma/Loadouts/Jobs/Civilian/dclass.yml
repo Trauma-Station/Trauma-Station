@@ -21,101 +21,72 @@
     outerClothing: ClothingOuterWinterColorOrange
 
 - type: loadout
-  id: DClassElectropack
+  id: ExPopElectropack
   equipment:
     back: ClothingBackpackElectropack
 
-- type: loadoutEffectGroup
-  id: DClassBackpackFreedom
-  effects:
-  - !type:JobRequirementLoadoutEffect
-    requirement:
-      !type:RoleTimeRequirement
-      role: JobDClass
-      time: 20h
+- type: loadout
+  id: ExPopBackpack
 
 - type: loadout
-  id: DClassBackpack
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: DClassBackpackFreedom
-  equipment:
-    back: ClothingBackpack
+  id: ExPopSatchel
 
 - type: loadout
-  id: DClassSatchel
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: DClassBackpackFreedom
-  equipment:
-    back: ClothingBackpackSatchel
+  id: ExPopDuffel
 
 - type: loadout
-  id: DClassDuffel
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: DClassBackpackFreedom
-  equipment:
-    back: ClothingBackpackDuffel
-
-- type: loadout
-  id: DClassMessenger
-  effects:
-  - !type:GroupLoadoutEffect
-    proto: DClassBackpackFreedom
-  equipment:
-    back: ClothingBackpackMessenger
+  id: ExPopMessenger
 
 # Greytide Time
 - type: loadoutEffectGroup
-  id: DClassGreyTider
+  id: ExPopGreyTider
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
-      role: JobDClass
+      role: JobExPop
       time: 20h
 
 # Face
 - type: loadout
-  id: DClassMask
+  id: ExPopMask
   effects:
   - !type:GroupLoadoutEffect
-    proto: DClassGreyTider
+    proto: ExPopGreyTider
   equipment:
     mask: ClothingMaskGas
 
 #Gloves
 - type: loadout
-  id: DClassGloves
+  id: ExPopGloves
   effects:
   - !type:GroupLoadoutEffect
-    proto: DClassGreyTider
+    proto: ExPopGreyTider
   equipment:
     gloves: ClothingHandsGlovesColorGray
 
 # Head of Greytide (for grey mantle)
 - type: loadoutEffectGroup
-  id: DClassMasterGrey
+  id: ExPopMasterGrey
   effects:
   - !type:JobRequirementLoadoutEffect
     requirement:
       !type:RoleTimeRequirement
-      role: JobDClass
+      role: JobExPop
       time: 40h
 
 # Neck
 - type: loadout
-  id: DClassMantle
+  id: ExPopMantle
   effects:
   - !type:GroupLoadoutEffect
-    proto: DClassMasterGrey
+    proto: ExPopMasterGrey
   equipment:
     neck: ClothingNeckMantle
 
 # Plasmaman
 - type: loadout
-  id: DClassEnvirosuit
+  id: ExPopEnvirosuit
   equipment:
     jumpsuit: ClothingUniformEnvirosuitPrisoner
   effects:
@@ -124,7 +95,7 @@
     - Plasmaman
 
 - type: loadout
-  id: DClassEnvirohelm
+  id: ExPopEnvirohelm
   equipment:
     head: ClothingHeadEnvirohelmPrisoner
   effects:

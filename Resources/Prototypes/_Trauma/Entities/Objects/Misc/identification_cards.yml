@@ -27,21 +27,21 @@
 
 - type: entity
   parent: IDCardStandard
-  id: DClassIDCard
-  name: d-class ID card
+  id: ExPopIDCard
+  name: ex-pop ID card
   description: A Cheaply printed ID card for the lowest of low.
   components:
   - type: Sprite
     layers:
     - state: orange
-    - state: iddclass
+    - state: idexpop
       sprite: _Trauma/Objects/Misc/id_cards.rsi
   - type: Item
     heldPrefix: orange
   - type: Access
   - type: IdCard
-    jobTitle: job-name-d-class
-    jobIcon: JobIconDClass
+    jobTitle: job-name-ex-pop
+    jobIcon: JobIconExPop
     canMicrowave: false
   - type: Tag
     tags:
