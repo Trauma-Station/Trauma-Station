@@ -52,6 +52,16 @@
           bounds: "-0.5,-0.5,0.5,0.5"
         layer:
         - MidImpassable
+  - type: EntityEffectContacts
+    id: barb_bleed
+    conditions:
+    - !type:WhitelistCondition
+      whitelist:
+        components:
+        - Bloodstream
+    effects:
+    - !type:ModifyBleed
+      amount: 1
   - type: Construction
     graph: BarbedWire
     deconstructionTarget: null
