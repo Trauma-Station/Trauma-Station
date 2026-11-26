@@ -188,9 +188,12 @@ public sealed partial class CloningPodSystem : EntitySystem
         */
 
         // Yes, we still need to track down the client because we need to open the Eui
+        // <Trauma> - allow automated cloning mindless
+        /*
         if (mind.UserId == null || !_playerManager.TryGetSessionById(mind.UserId.Value, out var client))
             return false; // If we can't track down the client, we can't offer transfer. That'd be quite bad.
-
+        */
+        // </Trauma>
         if (!TryComp<PhysicsComponent>(bodyToClone, out var physics))
             return false;
 
@@ -233,20 +236,27 @@ public sealed partial class CloningPodSystem : EntitySystem
         }
         // end of genetic damage checks
 
-        if (!_cloning.TryCloning(bodyToClone, _transformSystem.GetMapCoordinates(bodyToClone), SettingsId, out var mob)) // spawn a new body
+        if (!_cloning.TryCloning(bodyToClone, _transformSystem.GetMapCoordinates(uid), SettingsId, out var mob)) // spawn a new body // Trauma - was _transformSystem.GetMapCoordinates(bodyToClone), which is stupid
         {
             if (clonePod.ConnectedConsole != null)
                 _chatSystem.TrySendInGameICMessage(clonePod.ConnectedConsole.Value, Loc.GetString("cloning-console-uncloneable-trait-error"), InGameICChatType.Speak, false);
             return false;
         }
 
-        var cloneMindReturn = AddComp<BeingClonedComponent>(mob.Value);
-        cloneMindReturn.Mind = mind;
-        cloneMindReturn.Parent = uid;
-        cloneMindReturn.Original = bodyToClone; // Goobstation
+        // <Trauma> - allow automated cloning mindless
         _containerSystem.Insert(mob.Value, clonePod.BodyContainer);
-        //ClonesWaitingForMind.Add(mind, mob.Value); // Goobstation: use mindId
-        _euiManager.OpenEui(new AcceptCloningEui(mindEnt, mind, this), client);
+        if (mind != null &&
+            mind.UserId != null &&
+            _playerManager.TryGetSessionById(mind.UserId.Value, out var client))
+        {
+            var cloneMindReturn = AddComp<BeingClonedComponent>(mob.Value);
+            cloneMindReturn.Mind = mind;
+            cloneMindReturn.Parent = uid;
+            cloneMindReturn.Original = bodyToClone; // Goobstation
+            //ClonesWaitingForMind.Add(mind, mob.Value); // Goobstation: use mindId
+            _euiManager.OpenEui(new AcceptCloningEui(mindEnt, mind, this), client);
+        }
+        // </Trauma>
 
         UpdateStatus(uid, CloningPodStatus.NoMind, clonePod);
         AddComp<ActiveCloningPodComponent>(uid);
