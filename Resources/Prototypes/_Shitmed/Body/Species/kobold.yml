@@ -39,8 +39,8 @@
       FootLeft: OrganKoboldFootLeft
       FootRight: OrganKoboldFootRight
       Brain: OrganReptilianBrain
-      Eyes: OrganReptilianEyes
-      Tongue: OrganReptilianTongue
+      Eyes: OrganKoboldEyes
+      Tongue: OrganKoboldTongue
       Ears: OrganReptilianEars
       Lungs: OrganAnimalLungs
       Heart: OrganAnimalHeart
@@ -121,3 +121,22 @@
 - type: entity
   parent: [ OrganBaseFootRight, OrganKoboldExternal ]
   id: OrganKoboldFootRight
+
+## Organs
+
+- type: entity
+  parent: [ OrganBaseEyes, OrganReptilianInternal, OrganReptilianExternal ]
+  id: OrganKoboldEyes
+  components:
+  - type: VisualOrgan
+    data:
+      sprite: Mobs/Customization/eyes.rsi
+  - type: StaticPrice
+    price: 30
+
+- type: entity
+  parent: [ OrganBaseTongue, OrganReptilianInternal ]
+  id: OrganKoboldTongue
+  components:
+  - type: StaticPrice
+    price: 30
