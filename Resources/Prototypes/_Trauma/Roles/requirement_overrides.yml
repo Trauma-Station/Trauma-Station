@@ -26,32 +26,53 @@
       role: JobChiefEngineer
       time: 2h
     Quartermaster:
-    - !type:DepartmentTimeRequirement
-      department: Cargo
-      time: 5h
+    - !type:RoleTimeRequirement
+      role: JobSalvageSpecialist
+      time: 2h
+    - !type:RoleTimeRequirement
+      role: JobCargoTechnician
+      time: 2h
     HeadOfPersonnel:
     - !type:DepartmentTimeRequirement
-      department: Civilian
+      department: Command # "Head of service" my ass
       time: 2h
-    - !type:DepartmentTimeRequirement
-      department: Service
-      time: 5h
     ChiefEngineer:
-    - !type:DepartmentTimeRequirement
-      department: Engineering
-      time: 5h
+    - !type:RoleTimeRequirement
+      role: JobStationEngineer
+      time: 2h
+    - !type:RoleTimeRequirement
+      role: JobAtmosphericTechnician
+      time: 2h
+    - !type:RoleTimeRequirement
+      role: JobRoboticist
+      time: 2h
     ChiefMedicalOfficer:
-    - !type:DepartmentTimeRequirement
-      department: Medical
-      time: 5h
+    - !type:RoleTimeRequirement
+      role: JobMedicalDoctor
+      time: 2h
+    - !type:RoleTimeRequirement
+      role: JobParamedic
+      time: 2h
+    - !type:RoleTimeRequirement
+      role: JobChemist
+      time: 2h
     ResearchDirector:
-    - !type:DepartmentTimeRequirement
-      department: Science
-      time: 5h
+    - !type:RoleTimeRequirement
+      role: JobScientist
+      time: 2h
+    - !type:RoleTimeRequirement
+      role: JobGeneticist
+      time: 2h
     HeadOfSecurity:
-    - !type:DepartmentTimeRequirement
-      department: Security
-      time: 5h
+    - !type:RoleTimeRequirement
+      role: JobSecurityOfficer
+      time: 2h
+    - !type:RoleTimeRequirement
+      role: JobDetective
+      time: 2h
+    - !type:RoleTimeRequirement
+      role: JobWarden
+      time: 2h
     #Intern
     SecurityCadet:
     - !type:DepartmentTimeRequirement
