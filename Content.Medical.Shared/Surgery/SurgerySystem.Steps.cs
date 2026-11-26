@@ -5,6 +5,7 @@ using Content.Medical.Common.Surgery;
 using Content.Medical.Common.Surgery.Tools;
 using Content.Medical.Common.Traumas;
 using Content.Medical.Shared.Body;
+using Content.Medical.Shared.OrganRot;
 using Content.Medical.Shared.Surgery.Conditions;
 using Content.Medical.Shared.Surgery.Effects.Step;
 using Content.Medical.Shared.Surgery.Steps;
@@ -335,6 +336,10 @@ public sealed partial class SurgerySystem
         var ev = new SurgeryStepDamageChangeEvent(args.User, args.Body, args.Part, ent);
             RaiseLocalEvent(ent, ref ev);
             args.Complete = true;
+
+        Log.Info($"args.Tool {args.Tool}"); // organ uid!
+        // organ is within the body so it not supposed to rot
+        RemComp<OrganRotComponent>(args.Tool);
     }
 
     private void OnAddOrganCheck(Entity<SurgeryAddOrganStepComponent> ent, ref SurgeryStepCompleteCheckEvent args)
