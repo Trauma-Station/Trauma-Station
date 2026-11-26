@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 295.0.3
+  engineVersion: 297.0.0
   forkId: ""
   forkVersion: ""
-  time: 11/20/2026 09:48:53
-  entityCount: 30475
+  time: 11/25/2026 20:06:36
+  entityCount: 30476
 maps:
 - 1
 grids:
@@ -13257,7 +13257,7 @@ entities:
       pos: 6.5,-68.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -49585.203
+      secondsUntilStateChange: -49737.035
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -13610,7 +13610,7 @@ entities:
       pos: -44.5,-30.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -110948.945
+      secondsUntilStateChange: -111100.78
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -14354,7 +14354,7 @@ entities:
       pos: 18.5,-46.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -114657.95
+      secondsUntilStateChange: -114809.79
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -94165,7 +94165,7 @@ entities:
       pos: 2.5,17.5
     - type: Door
       state: Closing
-      secondsUntilStateChange: -18413.629
+      secondsUntilStateChange: -18565.46
     - type: Firelock
       emergencyCloseCooldown: 6973.9596947
     - type: DeviceNetwork
@@ -94555,7 +94555,7 @@ entities:
       pos: -16.5,-1.5
     - type: Door
       state: Closing
-      secondsUntilStateChange: -17347.596
+      secondsUntilStateChange: -17499.428
     - type: Firelock
       emergencyCloseCooldown: 8039.991962
     - type: DeviceNetwork
@@ -94653,7 +94653,7 @@ entities:
       pos: -1.5,11.5
     - type: Door
       state: Closing
-      secondsUntilStateChange: -18367.295
+      secondsUntilStateChange: -18519.127
     - type: Firelock
       emergencyCloseCooldown: 7020.2929817
     - type: DeviceNetwork
@@ -95264,7 +95264,7 @@ entities:
       pos: 29.5,-0.5
     - type: Door
       state: Closing
-      secondsUntilStateChange: -29632.521
+      secondsUntilStateChange: -29784.354
     - type: Firelock
       emergencyCloseCooldown: 11370.0219653
     - type: DeviceNetwork
@@ -160540,6 +160540,13 @@ entities:
     - type: Transform
       parent: 2
       pos: -57.5,-27.5
+- proto: SpawnPointObserver
+  entities:
+  - uid: 30476
+    components:
+    - type: Transform
+      parent: 2
+      pos: 0.5,-1.5
 - proto: SpawnPointParamedic
   entities:
   - uid: 19260
