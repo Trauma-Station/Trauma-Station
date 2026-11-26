@@ -17,7 +17,7 @@
   productEntity: SyndicateShuttleConsoleCircuitboard
   icon: { sprite: Objects/Misc/module.rsi, state: cpu_syndicate }
   cost:
-    Telecrystal: 10
+    Telecrystal: 5
   categories:
   - UplinkDisruption
 
@@ -28,7 +28,7 @@
   productEntity: CrateSyndicateShuttleBundle
   icon: { sprite: Structures/Shuttles/thruster.rsi, state: base }
   cost:
-    Telecrystal: 10
+    Telecrystal: 15
   categories:
   - UplinkDisruption
 
@@ -49,7 +49,7 @@
   description: uplink-shuttle-iff-desc
   productEntity: ComputerIFFSyndicateCircuitboard
   cost:
-    Telecrystal: 15
+    Telecrystal: 20
   categories:
   - UplinkDisruption
 
