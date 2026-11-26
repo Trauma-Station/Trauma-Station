@@ -22,7 +22,6 @@
     - Carptongue
   - type: NPCRetaliation
 
-
 - type: entity
   id: MobCarpMagic
   components:

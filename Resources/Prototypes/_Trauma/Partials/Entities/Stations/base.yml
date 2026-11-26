@@ -13,12 +13,12 @@
 - type: entity
   id: BaseStationShuttles
   components:
-    - type: GridSpawn
-      groups:
-        oldstation: !type:GridSpawnGroup
-          minimumDistance: 1900
-          maximumDistance: 2400
-          stationGrid: false
-          nameGrid: true
-          paths:
-          - /Maps/_Funkystation/Ruins/oldstation.yml
+  - type: GridSpawn
+    groups:
+      oldstation: !type:GridSpawnGroup
+        minimumDistance: 1900
+        maximumDistance: 2400
+        stationGrid: false
+        nameGrid: true
+        paths:
+        - /Maps/_Funkystation/Ruins/oldstation.yml

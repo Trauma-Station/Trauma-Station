@@ -103,123 +103,64 @@
 
 # Ghost role markers
 
-
 - type: entity
+  abstract: true
   categories: [ Spawner ]
   parent: MarkerBase
-  id: SpawnPointGhostCryoPodSleeperSci
+  id: SpawnPointGhostCryoPodSleeperBase
   name: old cryopod sleeper
+  components:
+  - type: GhostRole
+    name: roles-ghost-cryopod-sleeper-name
+    description: roles-ghost-cryopod-sleeper-objective
+    rules: ghost-role-information-nonantagonist-rules
+    raffle:
+      settings: default
+  - type: Loadout
+    roleLoadout: [ RoleSurvivalStandard ]
+  - type: Sprite
+    sprite: Markers/jobs.rsi
+    layers:
+      - state: green
+      - sprite: Structures/Wallmounts/signs.rsi
+        state: something-old2
+
+- type: entity
+  parent: SpawnPointGhostCryoPodSleeperBase
+  id: SpawnPointGhostCryoPodSleeperSci
   suffix: Science
   components:
-  - type: GhostRole
-    name: roles-ghost-cryopod-sleeper-name
-    description: roles-ghost-cryopod-sleeper-objective
-    rules: ghost-role-information-nonantagonist-rules
-    raffle:
-      settings: default
   - type: GhostRoleMobSpawner
     prototype: MobHumanCryoSleeperSci
-  - type: Loadout
-    roleLoadout: [ RoleSurvivalStandard ]
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-      - state: green
-      - sprite: Structures/Wallmounts/signs.rsi
-        state: something-old2
 
 - type: entity
-  categories: [ Spawner ]
-  parent: MarkerBase
+  parent: SpawnPointGhostCryoPodSleeperBase
   id: SpawnPointGhostCryoPodSleeperEng
-  name: old cryopod sleeper
   suffix: Engineer
   components:
-  - type: GhostRole
-    name: roles-ghost-cryopod-sleeper-name
-    description: roles-ghost-cryopod-sleeper-objective
-    rules: ghost-role-information-nonantagonist-rules
-    raffle:
-      settings: default
   - type: GhostRoleMobSpawner
     prototype: MobHumanCryoSleeperEngineer
-  - type: Loadout
-    roleLoadout: [ RoleSurvivalStandard ]
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-      - state: green
-      - sprite: Structures/Wallmounts/signs.rsi
-        state: something-old2
 
 - type: entity
-  categories: [ Spawner ]
-  parent: MarkerBase
+  parent: SpawnPointGhostCryoPodSleeperBase
   id: SpawnPointGhostCryoPodSleeperSec
-  name: old cryopod sleeper
   suffix: Security Officer
   components:
-  - type: GhostRole
-    name: roles-ghost-cryopod-sleeper-name
-    description: roles-ghost-cryopod-sleeper-objective
-    rules: ghost-role-information-nonantagonist-rules
-    raffle:
-      settings: default
   - type: GhostRoleMobSpawner
     prototype: MobHumanCryoSleeperSecurity
-  - type: Loadout
-    roleLoadout: [ RoleSurvivalStandard ]
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-      - state: green
-      - sprite: Structures/Wallmounts/signs.rsi
-        state: something-old2
 
 - type: entity
-  categories: [ Spawner ]
-  parent: MarkerBase
+  parent: SpawnPointGhostCryoPodSleeperBase
   id: SpawnPointGhostCryoPodSleeperDoc
-  name: old cryopod sleeper
   suffix: Doctor
   components:
-  - type: GhostRole
-    name: roles-ghost-cryopod-sleeper-name
-    description: roles-ghost-cryopod-sleeper-objective
-    rules: ghost-role-information-nonantagonist-rules
-    raffle:
-      settings: default
   - type: GhostRoleMobSpawner
     prototype: MobHumanCryoSleeperDoctor
-  - type: Loadout
-    roleLoadout: [ RoleSurvivalStandard ]
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-      - state: green
-      - sprite: Structures/Wallmounts/signs.rsi
-        state: something-old2
 
 - type: entity
-  categories: [ Spawner ]
-  parent: MarkerBase
+  parent: SpawnPointGhostCryoPodSleeperBase
   id: SpawnPointGhostCryoPodSleeperRep
-  name: old cryopod sleeper
   suffix: Representative
   components:
-  - type: GhostRole
-    name: roles-ghost-cryopod-sleeper-name
-    description: roles-ghost-cryopod-sleeper-objective
-    rules: ghost-role-information-nonantagonist-rules
-    raffle:
-      settings: default
   - type: GhostRoleMobSpawner
     prototype: MobHumanCryoSleeperRepresentative
-  - type: Loadout
-    roleLoadout: [ RoleSurvivalStandard ]
-  - type: Sprite
-    sprite: Markers/jobs.rsi
-    layers:
-      - state: green
-      - sprite: Structures/Wallmounts/signs.rsi
-        state: something-old2
