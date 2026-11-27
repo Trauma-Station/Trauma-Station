@@ -1,33 +1,53 @@
 {
     "version": 1,
     "size": {
-        "x": 8,
+        "x": 27,
         "y": 8
     },
     "license": "CC-BY-SA-3.0",
-    "copyright": "Taken from /tg/station at commit https://github.com/tgstation/tgstation/commit/20ae083f140ac5b4da7e8bc40f95349001b6c086, edited by teapug",
+    "copyright": "Taken from /tg/station at commit https://github.com/tgstation/tgstation/commit/20ae083f140ac5b4da7e8bc40f95349001b6c086, edited by teapug. Resprite by VictorJob",
     "states": [
         {
             "name": "Fine"
         },
         {
-            "name": "Dead"
+            "name": "Dead",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
         },
         {
             "name": "Critical",
             "delays": [
                 [
-                    0.125,
-                    0.125,
-                    0.125,
-                    0.125,
-                    0.125,
-                    0.125
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
                 ]
             ]
         },
         {
-            "name": "Rotting"
+            "name": "Rotting",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1,
+                    0.1
+                ]
+            ]
         }
     ]
 }
