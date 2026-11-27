@@ -130,4 +130,4 @@
     - ActionViewLaws
   - type: NpcFactionMember
     factions:
-    - Passive
+    - NanoTrasen

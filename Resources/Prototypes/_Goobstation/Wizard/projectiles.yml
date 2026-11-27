@@ -301,6 +301,12 @@
     userWhitelist:
       components:
       - Body
+      # <Trauma>
+      - BorgChassis
+      - Silicon
+      tags:
+      - Bot
+      # <\Trauma>
   - type: Reflective
     reflective: Magic
   - type: Ammo

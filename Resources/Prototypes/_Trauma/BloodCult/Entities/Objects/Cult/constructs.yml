@@ -367,3 +367,9 @@
   - type: MovementSpeedModifier
     baseSprintSpeed: 5
     baseWalkSpeed: 5
+  - type: LanguageSpeaker
+    speaks:
+    - Eldritch
+    understands:
+    - Eldritch
+    - TauCetiBasic
