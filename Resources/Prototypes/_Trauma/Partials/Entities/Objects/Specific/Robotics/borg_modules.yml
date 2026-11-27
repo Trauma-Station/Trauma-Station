@@ -35,3 +35,21 @@
           - Detonator
           components:
           - PayloadTrigger
+
+- type: entity
+  parent: [ BaseXenoborgModuleStealth, BaseProviderBorgModule, BaseXenoborgContraband ]
+  id: XenoborgModuleJammer
+  components:
+  - type: Sprite
+    layers:
+    - state: xenoborg_stealth
+    - state: icon-xenoborg-jammer
+
+- type: entity
+  parent: [ BaseXenoborgModuleStealth, BaseXenoborgContraband ]
+  id: XenoborgModuleZap
+  components:
+  - type: Sprite
+    layers:
+    - state: xenoborg_stealth
+    - state: icon-xenoborg-zap

@@ -1800,14 +1800,14 @@
     - XenoborgModulePrimaryWeapon
 
 - type: entity
-  parent: [ BaseXenoborgModuleStealth, BaseProviderBorgModule, BaseXenoborgContraband ]
+  parent: [ BaseXenoborgModuleHeavy, BaseProviderBorgModule, BaseXenoborgContraband ]
   id: XenoborgModuleJammer
   name: jammer xenoborg module
   description: Module with a communication jammer.
   components:
   - type: Sprite
     layers:
-    - state: xenoborg_stealth
+    - state: xenoborg_heavy
     - state: icon-xenoborg-jammer
   - type: ItemBorgModule
     hands:
