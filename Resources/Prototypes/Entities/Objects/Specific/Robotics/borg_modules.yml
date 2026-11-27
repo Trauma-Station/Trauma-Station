@@ -1527,6 +1527,11 @@
         whitelist:
           tags:
           - XenoborgCrystal
+          # <Trauma> - mirror XenoborgMaterialBag's whitelist so you can use it properly
+          - Head
+          components:
+          - Brain
+          # </Trauma>
     - hand:
         emptyRepresentative: BorgModuleConstructionMaterialPlaceholder
         emptyLabel: borg-slot-construction-empty

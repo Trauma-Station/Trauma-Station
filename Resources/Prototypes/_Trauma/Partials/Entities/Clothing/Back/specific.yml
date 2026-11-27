@@ -18,6 +18,12 @@
 - type: entity
   id: XenoborgMaterialBag
   components:
+  - type: Storage
+    whitelist:
+      tags:
+      - Head
+      components:
+      - Brain
   - type: ItemToggle
     soundActivate: &sound
       collection: sparks
