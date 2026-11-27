@@ -7,7 +7,7 @@
   components:
   - type: Sprite
     sprite: &sprite _Funkystation/Clothing/Uniforms/Jumpsuit/Syndicate/botanist.rsi
-  - type: Clothingsprite:
+  - type: Clothing
     sprite: *sprite
 
 - type: entity
