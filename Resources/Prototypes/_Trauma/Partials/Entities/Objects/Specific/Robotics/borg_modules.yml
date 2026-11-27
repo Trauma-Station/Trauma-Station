@@ -37,7 +37,7 @@
           - PayloadTrigger
 
 - type: entity
-  parent: [ BaseXenoborgModuleStealth, BaseProviderBorgModule, BaseXenoborgContraband ]
+  parent: !Clear [ BaseXenoborgModuleStealth, BaseProviderBorgModule, BaseXenoborgContraband ]
   id: XenoborgModuleJammer
   components:
   - type: Sprite
@@ -46,7 +46,7 @@
     - state: icon-xenoborg-jammer
 
 - type: entity
-  parent: [ BaseXenoborgModuleStealth, BaseXenoborgContraband ]
+  parent: !Clear [ BaseXenoborgModuleStealth, BaseXenoborgContraband ]
   id: XenoborgModuleZap
   components:
   - type: Sprite
