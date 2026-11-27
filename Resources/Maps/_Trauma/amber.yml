@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 295.0.3
+  engineVersion: 297.0.0
   forkId: ""
   forkVersion: ""
-  time: 11/23/2026 00:51:13
-  entityCount: 23769
+  time: 11/25/2026 21:33:31
+  entityCount: 23771
 maps:
 - 1
 grids:
@@ -19328,7 +19328,7 @@ entities:
       pos: -25.5,-25.5
     - type: Door
       state: Opening
-      secondsUntilStateChange: -40313.004
+      secondsUntilStateChange: -40424.797
     - type: DeviceLinkSource
       lastSignals:
         DoorStatus: True
@@ -56895,6 +56895,16 @@ entities:
     - type: Transform
       parent: 2
       pos: 13.5,-12.5
+  - uid: 23770
+    components:
+    - type: Transform
+      parent: 2
+      pos: -11.5,-33.5
+  - uid: 23771
+    components:
+    - type: Transform
+      parent: 2
+      pos: -12.5,-33.5
 - proto: CableMVStack
   entities:
   - uid: 7754
