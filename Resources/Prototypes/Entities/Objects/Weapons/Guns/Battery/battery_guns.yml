@@ -994,7 +994,7 @@
   - type: Clothing
     sprite: Objects/Weapons/Guns/Battery/energy_shotgun.rsi
   - type: Gun
-    fireRate: 1.25 # Trauma, was 2
+    fireRate: 2
     soundGunshot:
       path: /Audio/Weapons/Guns/Gunshots/laser_cannon.ogg
   - type: BatteryAmmoProvider

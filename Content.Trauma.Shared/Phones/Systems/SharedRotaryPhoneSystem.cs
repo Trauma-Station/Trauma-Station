@@ -131,7 +131,7 @@ public abstract partial class SharedRotaryPhoneSystem : EntitySystem
         if (ent.Comp.ConnectedPhone == null)
             return;
 
-        PredictedDel(ent.Comp.ConnectedPhone);
+        Del(ent.Comp.ConnectedPhone);
         RemComp<JointVisualsComponent>(ent.Owner);
         RemComp<JointComponent>(ent.Owner);
         Dirty(ent);

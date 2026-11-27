@@ -66,7 +66,7 @@ public abstract partial class SharedHereticAbilitySystem
             PredictedSpawnAtPosition(ent.Comp.Effect, newCoords);
             PullVictims(user, newCoords, strength);
 
-            PredictedQueueDel(ent.Comp.Projectile);
+            QueueDel(ent.Comp.Projectile);
 
             ent.Comp.Projectile = EntityUid.Invalid;
             Dirty(ent);

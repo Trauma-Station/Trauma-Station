@@ -380,21 +380,21 @@ public sealed partial class OrganChipSystem : EntitySystem
             if (!_containerQuery.TryComp(organ, out var container))
             {
                 Log.Error($"Tried to add chip {id} to {ToPrettyString(mob)}'s {category} organ {ToPrettyString(organ)} which was missing OrganChipContainer!");
-                PredictedDel(chip);
+                Del(chip);
                 return;
             }
 
             if (!_container.Insert(chip, container.Container))
             {
                 Log.Error($"Failed to insert chip {id} to {ToPrettyString(mob)}'s {ToPrettyString(organ)} chip container!");
-                PredictedDel(chip);
+                Del(chip);
             }
             return; // inserted
         }
 
         var organs = string.Join(", ", comp.Parents);
         Log.Error($"Tried to add chip {id} to {ToPrettyString(mob)} but it had no organs from {organs}!");
-        PredictedDel(chip);
+        Del(chip);
     }
 }
 

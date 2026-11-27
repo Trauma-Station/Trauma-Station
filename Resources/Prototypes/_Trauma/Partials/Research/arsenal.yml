@@ -57,6 +57,8 @@
   - !Remove SignalTrigger # these are roundstart now
   - !Remove VoiceTrigger
   - !Remove TimerTrigger
+  - !Remove CableDetStack1
+  - !Remove EmptyDetonator
   - !Remove FlashPayload
   - !Remove ExplosivePayload # replaced by shrapnel
   - !Remove ChemicalPayload

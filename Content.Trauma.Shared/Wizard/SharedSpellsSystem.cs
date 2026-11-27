@@ -1226,7 +1226,7 @@ public abstract partial class SharedSpellsSystem : CommonSpellsSystem
         if (Hands.TryPickup(user, item, hand, false))
             return item;
 
-        PredictedQueueDel(item);
+        QueueDel(item);
         Actions.SetCooldown(action, TimeSpan.FromSeconds(0.5));
         return null;
     }

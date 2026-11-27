@@ -79,7 +79,7 @@ public sealed partial class WandskySystem : EntitySystem
             _popup.PopupEntity("Waypoint removed!", args.Performer, args.Performer, PopupType.Medium);
 
             ent.Comp.Waypoints.Remove(waypoint);
-            PredictedQueueDel(waypoint);
+            QueueDel(waypoint);
             Dirty(ent);
             return;
         }
@@ -105,7 +105,7 @@ public sealed partial class WandskySystem : EntitySystem
 
         foreach (var waypoint in waypoints)
         {
-            PredictedQueueDel(waypoint);
+            QueueDel(waypoint);
         }
         ent.Comp.Waypoints.Clear();
         Dirty(ent);

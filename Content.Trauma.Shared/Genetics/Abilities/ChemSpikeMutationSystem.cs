@@ -37,7 +37,7 @@ public sealed partial class ChemSpikeMutationSystem : EntitySystem
 
     private void OnShutdown(Entity<ChemSpikeMutationComponent> ent, ref ComponentShutdown args)
     {
-        PredictedQueueDel(ent.Comp.ActionEntity);
+        QueueDel(ent.Comp.ActionEntity);
     }
 
     private void OnTransfer(Entity<ChemTransferActionComponent> ent, ref ChemTransferActionEvent args)

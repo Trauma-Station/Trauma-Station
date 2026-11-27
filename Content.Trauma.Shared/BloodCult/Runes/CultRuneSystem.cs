@@ -148,7 +148,7 @@ public sealed partial class CultRuneSystem : EntitySystem
     [SubscribeLocalEvent]
     private void OnDrawRune(Entity<CultRuneDrawingComponent> ent, ref DrawRuneDoAfterEvent args)
     {
-        if (!ProtoMan.TryIndex(ent.Comp.Rune, out var rune))
+        if (!ProtoMan.Resolve(ent.Comp.Rune, out var rune))
             return;
 
         if (args.Cancelled)
@@ -163,25 +163,29 @@ public sealed partial class CultRuneSystem : EntitySystem
         var user = args.User;
         var pos = Transform(ent).Coordinates;
 
-        if (!TrySpawnRune(user, pos, rune))
+        if (TrySpawnRune(user, pos, rune) == null)
             return;
 
         _audio.PlayPredicted(ent.Comp.EndDrawingSound, user, user);
 
-        PredictedDel(ent.Owner);
+        Del(ent.Owner);
     }
 
-    public bool TrySpawnRune(EntityUid user, EntityCoordinates pos, BloodRunePrototype rune)
+    public EntityUid? TrySpawnRune(EntityUid user, EntityCoordinates pos, [ForbidLiteral] ProtoId<BloodRunePrototype> id)
+        => ProtoMan.Resolve(id, out var rune) ? TrySpawnRune(user, pos, rune) : null;
+
+    public EntityUid? TrySpawnRune(EntityUid user, EntityCoordinates pos, BloodRunePrototype rune)
     {
         if (_cult.GetRule(user) is not { } rule)
-            return false;
+            return null;
+
         var uid = PredictedSpawnAtPosition(rune.Prototype, pos);
 
         var ev = new RunePlacedEvent(user, rune, rule);
         RaiseLocalEvent(uid, ref ev);
 
         _cult.SetCultRule(uid, rule);
-        return true;
+        return uid;
     }
 
     [SubscribeLocalEvent]
@@ -205,7 +209,7 @@ public sealed partial class CultRuneSystem : EntitySystem
     public void EraseRune(EntityUid rune, EntityUid user)
     {
         _popup.PopupEntity(Loc.GetString("cult-rune-erased"), rune, user);
-        PredictedQueueDel(rune);
+        QueueDel(rune);
     }
 
     [SubscribeLocalEvent]

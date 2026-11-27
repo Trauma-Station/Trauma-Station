@@ -37,7 +37,7 @@ public abstract partial class SharedHereticAbilitySystem
         {
             foreach (var effect in effects)
             {
-                PredictedQueueDel(effect.Owner);
+                QueueDel(effect.Owner);
             }
 
             args.Handled = true;

@@ -32,7 +32,7 @@ public sealed partial class DeleteOnLightExposureSystem : EntitySystem
             if (now < comp.Update)
                 continue;
 
-            PredictedQueueDel(uid);
+            QueueDel(uid);
         }
     }
 

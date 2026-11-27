@@ -18,25 +18,25 @@ public sealed partial class PlantsTest : GameTest
         var failed = new List<string>();
         var plantName = CEntMan.ComponentFactory.CompName<PlantComponent>();
         var spriteName = CEntMan.ComponentFactory.CompName<SpriteComponent>();
-        foreach (var id in GameDataScrounger.EntitiesWithComponent(plantName))
+
+        void Test(EntityUid uid, string id)
         {
-            var proto = CProtoMan.Index<EntityPrototype>(id);
-            if (!proto.TryComp<SpriteComponent>(spriteName, out var sprite))
+            if (!CTryComp<SpriteComponent>(uid, out var sprite))
             {
                 failed.Add($"{id} is missing SpriteComponent");
-                continue;
+                return;
             }
 
-            if (!proto.TryComp<PlantComponent>(plantName, out var plant))
+            if (!CTryComp<PlantComponent>(uid, out var plant))
             {
                 failed.Add("Scrounger is broken");
-                continue;
+                return;
             }
 
             if (sprite.BaseRSI is not { } rsi)
             {
                 failed.Add($"{id} SpriteComponent is missing its sprite field!");
-                continue;
+                return;
             }
 
             var stages = plant.GrowthStages;
@@ -47,6 +47,17 @@ public sealed partial class PlantsTest : GameTest
                     failed.Add($"{id} sprite ({rsi.Path}) is missing {state}!");
             }
         }
+
+        await Client.WaitPost(() =>
+        {
+            foreach (var id in GameDataScrounger.EntitiesWithComponent(plantName))
+            {
+                // have to spawn it because Sprite.BaseRSI only gets set by ComponentAdd handler
+                var uid = CSpawn(id);
+                Test(uid, id);
+                CDel(uid);
+            }
+        });
 
         if (failed.Count > 0)
             Assert.Fail(string.Join("\n", failed));

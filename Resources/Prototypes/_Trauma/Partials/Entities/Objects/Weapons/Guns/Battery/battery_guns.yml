@@ -42,3 +42,9 @@
     endSound:
       path: /Audio/Weapons/Guns/Gunshots/laser.ogg
   - type: AlwaysHot
+
+- type: entity
+  id: WeaponEnergyShotgun
+  components:
+  - type: Gun
+    fireRate: 1

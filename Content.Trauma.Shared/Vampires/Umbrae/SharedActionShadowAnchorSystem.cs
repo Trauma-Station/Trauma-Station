@@ -48,7 +48,7 @@ public abstract partial class SharedActionShadowAnchorSystem : EntitySystem
             }
 
             if (Exists(anchorEnt))
-                PredictedQueueDel(anchorEnt);
+                QueueDel(anchorEnt);
 
             anchor.Anchor = null;
             anchor.Casted = false;
@@ -70,7 +70,7 @@ public abstract partial class SharedActionShadowAnchorSystem : EntitySystem
             ent.Comp.Casted = false;
 
             // Remove anything related to the anchor, since we used our recast.
-            PredictedQueueDel(anchorEnt);
+            QueueDel(anchorEnt);
             RemCompDeferred<ActiveActionShadowAnchorComponent>(ent.Owner);
 
             ent.Comp.Anchor = null;

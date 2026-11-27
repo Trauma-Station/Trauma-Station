@@ -315,7 +315,7 @@ public abstract partial class SharedEldritchIdCardSystem : EntitySystem
         DirtyField(ent.Owner, ent.Comp, nameof(EldritchIdCardComponent.Configs));
 
         _audio.PlayPredicted(ent.Comp.EatSound, Transform(idCard.Owner).Coordinates, user);
-        PredictedDel(idCard.Owner);
+        Del(idCard.Owner);
     }
 
     protected virtual void UpdateSprite(Entity<EldritchIdCardComponent> ent) { }

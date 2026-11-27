@@ -37,7 +37,7 @@ public sealed partial class UnremoveableOrganSystem : EntitySystem
         if (!TerminatingOrDeleted(ent) && !HasComp<ChildOrganComponent>(ent))
         {
             Log.Warning($"{ToPrettyString(ent)} was deleted instead of the body, {ToPrettyString(args.Target)}!");
-            PredictedQueueDel(args.Target);
+            QueueDel(args.Target);
         }
 
         Log.Warning($"{ToPrettyString(ent)} somehow got removed from {ToPrettyString(args.Target)}!");

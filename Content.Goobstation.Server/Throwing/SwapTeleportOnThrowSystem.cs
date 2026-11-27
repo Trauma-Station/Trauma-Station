@@ -41,6 +41,6 @@ public sealed partial class SwapTeleportOnThrowSystem : EntitySystem
         _audio.PlayPvs(ent.Comp.OriginSound, throwerPos);
         _audio.PlayPvs(ent.Comp.TargetSound, targetPos);
 
-        PredictedQueueDel(ent);
+        QueueDel(ent);
     }
 }

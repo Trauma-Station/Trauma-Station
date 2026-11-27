@@ -18,7 +18,7 @@ public sealed partial class ActionBloodBarrierSystem : EntitySystem
         // If the target is a point, clear the hashset.
         if (args.Entity is { } targetedEntity && ent.Comp.Points.Contains(targetedEntity))
         {
-            PredictedQueueDel(targetedEntity);
+            QueueDel(targetedEntity);
             ent.Comp.Points.Clear();
             Dirty(ent);
             return;
@@ -37,7 +37,7 @@ public sealed partial class ActionBloodBarrierSystem : EntitySystem
             if (Vector2.Distance(pointACoords.Position, coords.Position) > ent.Comp.Distance)
             {
                 // clear the previous point so user doesn't run away and forgets to clear it
-                PredictedQueueDel(ent.Comp.Points[0]);
+                QueueDel(ent.Comp.Points[0]);
                 ent.Comp.Points.Clear();
                 Dirty(ent);
                 return;
@@ -58,7 +58,7 @@ public sealed partial class ActionBloodBarrierSystem : EntitySystem
             // Clear both points
             foreach (var pointToDelete in ent.Comp.Points)
             {
-                PredictedQueueDel(pointToDelete);
+                QueueDel(pointToDelete);
             }
             ent.Comp.Points.Clear();
             Dirty(ent);

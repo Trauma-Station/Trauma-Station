@@ -115,7 +115,7 @@ public sealed partial class NuclearCentrifugeSystem : EntitySystem
         Dirty(ent, active);
 
         props.SpentFuel = 0; // bye bye
-        PredictedQueueDel(item);
+        QueueDel(item);
     }
 
     [SubscribeLocalEvent]

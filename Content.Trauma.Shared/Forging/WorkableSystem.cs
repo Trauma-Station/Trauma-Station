@@ -73,7 +73,7 @@ public sealed partial class WorkableSystem : EntitySystem
             var ev = new MetalWroughtEvent(result, user);
             RaiseLocalEvent(ent, ref ev);
         }
-        PredictedQueueDel(ent);
+        QueueDel(ent);
 
         ent.Comp.Amount = 0; // incase damage is changed multiple times in the same tick
     }

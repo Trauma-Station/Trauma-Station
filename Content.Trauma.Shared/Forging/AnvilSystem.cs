@@ -54,7 +54,7 @@ public sealed partial class AnvilSystem : EntitySystem
         var deleted = 0;
         foreach (var ingot in _ingots)
         {
-            PredictedDel(ingot.Owner);
+            Del(ingot.Owner);
             if (++deleted == cost)
                 break;
         }

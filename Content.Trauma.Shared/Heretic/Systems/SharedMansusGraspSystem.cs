@@ -206,7 +206,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
 
         if (!TryComp(ent, out TouchSpellComponent? touchSpell) || args.Handled)
         {
-            PredictedQueueDel(ent.Owner);
+            QueueDel(ent.Owner);
             return;
         }
 
@@ -239,7 +239,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
         effect.Size = range;
         effect.SpawnTime = _timing.CurTime;
         Dirty(spawned, effect);
-        PredictedQueueDel(ent.Owner);
+        QueueDel(ent.Owner);
     }
 
     [SubscribeLocalEvent]
@@ -467,7 +467,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
             {
                 args.Handled = true;
                 // todo: add more fluff
-                PredictedQueueDel(target);
+                QueueDel(target);
                 return;
             }
             else if (_container.IsEntityInContainer(target))
@@ -502,7 +502,7 @@ public abstract partial class SharedMansusGraspSystem : EntitySystem
     private void OnRitualRuneDoAfter(DrawRitualRuneDoAfterEvent ev)
     {
         // delete the animation rune regardless
-        PredictedQueueDel(GetEntity(ev.RitualRune));
+        QueueDel(GetEntity(ev.RitualRune));
 
         if (!ev.Cancelled)
             _transform.AttachToGridOrMap(PredictedSpawnAtPosition(RitualRune, GetCoordinates(ev.Coords)));

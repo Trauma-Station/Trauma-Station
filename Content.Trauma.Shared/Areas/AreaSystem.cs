@@ -44,7 +44,7 @@ public sealed partial class AreaSystem : EntitySystem
     {
         // delete areas that get unanchored by explosions or other more cursed things
         if (!args.Anchored && !args.Detaching)
-            PredictedQueueDel(ent);
+            QueueDel(ent);
     }
 
     [SubscribeLocalEvent]

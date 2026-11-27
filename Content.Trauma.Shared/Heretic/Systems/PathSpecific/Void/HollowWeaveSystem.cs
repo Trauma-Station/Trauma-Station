@@ -63,7 +63,7 @@ public sealed partial class HollowWeaveSystem : EntitySystem
 
         foreach (var effect in effects)
         {
-            PredictedQueueDel(effect);
+            QueueDel(effect);
         }
     }
 
