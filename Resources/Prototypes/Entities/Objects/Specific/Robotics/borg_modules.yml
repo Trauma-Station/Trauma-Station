@@ -1523,7 +1523,7 @@
     hands:
     - hand:
         emptyRepresentative: MaterialXenoborgCrystal
-        emptyLabel: borg-slot-xenoborg-crystal-empty
+        emptyLabel: borg-slot-xenoborg-primary-empty # Trauma - changed label to display brain and head as well.
         whitelist:
           tags:
           - XenoborgCrystal
@@ -1643,7 +1643,7 @@
         whitelist:
           tags:
           - CableCoil
-          - CableDet
+          - CableDet # Trauma - added to allow engi xenoborgs to place explosive cord.
     - hand:
         emptyRepresentative: FloorTileItemXenoborg # Trauma - fat chud
         emptyLabel: borg-slot-tiles-empty
@@ -2060,7 +2060,7 @@
   - type: Sprite
     layers:
     - state: xenoborg_scout
-    - state: icon-xenoborg-sword
+    - state: icon-xenoborg-sword2
   - type: BorgModuleWhitelist
     moduleBlacklist: *primaryWeapon
   - type: ItemBorgModule
@@ -2068,7 +2068,7 @@
     - item: EnergyDaggerLoudBlue
     - item: JetpackXenoborg
   - type: BorgModuleIcon
-    icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-sword-module }
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-sword2-module }
   - type: Tag
     tags:
     - XenoborgModuleScout
@@ -2083,7 +2083,7 @@
   - type: Sprite
     layers:
     - state: xenoborg_scout
-    - state: icon-xenoborg-sword
+    - state: icon-xenoborg-sword2
   - type: BorgModuleWhitelist
     moduleBlacklist: *primaryWeapon
   - type: ItemBorgModule
