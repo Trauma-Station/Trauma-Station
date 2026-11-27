@@ -133,7 +133,6 @@
   - type: Clothing
     sprite: *hcr
 
-
 # Charlie Station Ancient Uniforms (sprites by mingebag / meijunkie)
 
 - type: entity
