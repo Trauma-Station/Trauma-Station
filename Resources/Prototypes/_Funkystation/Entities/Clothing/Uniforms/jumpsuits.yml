@@ -1,4 +1,3 @@
-# Syndicate Civilian (sprites by meijunkie)
 - type: entity
   parent: [ClothingUniformBase, BaseSyndicateContraband]
   id: ClothingUniformJumpsuitBotanistSyndicate
@@ -53,8 +52,6 @@
     sprite: &syndicate_sci _Funkystation/Clothing/Uniforms/Jumpsuit/Syndicate/scientist-white.rsi
   - type: Clothing
     sprite: *syndicate_sci
-
-# Syndicate Command (sprites by meijunkie)
 
 - type: entity
   parent: [ClothingUniformBase, BaseSyndicateContraband]
@@ -178,8 +175,6 @@
     sprite: &sec _Funkystation/Clothing/Uniforms/Jumpsuit/ancient_sec.rsi
   - type: Clothing
     sprite: *sec
-
-# using the nanotrasen jumpsuit sprite since theres no reason to make ANOTHER sprite
 
 - type: entity
   parent: [UnsensoredClothingUniformBase]
