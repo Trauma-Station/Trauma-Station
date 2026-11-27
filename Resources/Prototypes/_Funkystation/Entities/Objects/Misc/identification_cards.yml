@@ -8,11 +8,11 @@
   description: A perfectly retrograde identification card. Looks like it could use some flavor.
   components:
   - type: Sprite
-    sprite: _Funkystation/Objects/Misc/id_cards.rsi
+    sprite: &id_cards _Funkystation/Objects/Misc/id_cards.rsi
   - type: Clothing
     slots:
     - idcard
-    sprite: _Funkystation/Objects/Misc/id_cards.rsi
+    sprite: *id_cards
   - type: Item
     size: Small
     heldPrefix: default
