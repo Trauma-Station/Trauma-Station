@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC0-1.0",
-    "copyright": "icon-omnimed-surgery made by ghostlydragon8 (github)",
+    "copyright": "icon-omnimed-surgery made by ghostlydragon8 (github), Xenoborg modules sprites by Samuka-C (github)",
     "size": {
         "x": 32,
         "y": 32
@@ -9,6 +9,44 @@
     "states": [
         {
           "name": "icon-omnimed-surgery"
+        },
+        {
+          "name": "icon-xenoborg-saw"
+        },
+        {
+            "name": "xenoborg_scout"
+        },
+        {
+            "name": "base-icon-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "base-icon-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "base-module-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "base-module-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "base-part-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "base-part-inhand-right",
+            "directions": 4
+        },
+        {
+            "name": "base-stripes-inhand-left",
+            "directions": 4
+        },
+        {
+            "name": "base-stripes-inhand-right",
+            "directions": 4
         }
     ]
 }

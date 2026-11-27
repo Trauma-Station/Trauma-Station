@@ -136,7 +136,7 @@
   id: DemonEssense
 
 - type: Tag
-  id: Detonator # ExCable detonators
+  id: Detonator # Detonator caps, [wired] and [empty], whitelisted in XenoborgModuleConstruction detonator/trigger slot.
 
 - type: Tag
   id: DrillHead # for drills durability repair whitelist
@@ -395,9 +395,6 @@
 
 - type: Tag
   id: ThrowingKnife # Storage whitelist: ClothingBeltKnifeRig
-
-- type: Tag
-  id: Trigger # Signal, Timer and Voice triggers
 
 - type: Tag
   id: TraumaFire # Reagent: ChlorineTrifluoride fire reaction, prevents multiple fires on the same tile

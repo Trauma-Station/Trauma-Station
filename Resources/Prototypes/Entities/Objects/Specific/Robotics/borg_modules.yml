@@ -1633,19 +1633,12 @@
           tags:
           - ConstructionMaterial
     - hand:
-        emptyRepresentative: BorgModuleAnyCablePlaceholder
+        emptyRepresentative: BorgModuleAnyCablePlaceholder # Trauma - explosive cordenning
         emptyLabel: borg-slot-cables-empty
         whitelist:
           tags:
           - CableCoil
-          - CableDet # Trauma - explosive cord major
-    - hand:
-        emptyRepresentative: VoiceTrigger
-        emptyLabel: borg-slot-detonator-empty
-        whitelist:
-          tags:
-          - Detonator
-          - Trigger
+          - CableDet
     - hand:
         emptyRepresentative: FloorTileItemXenoborg # Trauma - fat chud
         emptyLabel: borg-slot-tiles-empty
@@ -2032,22 +2025,22 @@
 
 - type: entity
   parent: [ BaseXenoborgModuleScout, BaseProviderBorgModule, BaseXenoborgContraband ]
-  id: XenoborgModuleSaw
-  name: saw xenoborg module
-  description: Module with an electric saw.
+  id: XenoborgModuleSword
+  name: knife xenoborg module
+  description: Module with a kukri knife.
   components:
   - type: Sprite
     layers:
     - state: xenoborg_scout
-    - state: icon-xenoborg-saw
+    - state: icon-xenoborg-sword
   - type: BorgModuleWhitelist
     moduleBlacklist: *primaryWeapon
   - type: ItemBorgModule
     hands:
-    - item: SawElectric
+    - item: KukriKnife
     - item: JetpackXenoborg
   - type: BorgModuleIcon
-    icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-saw-module }
+    icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-sword-module }
   - type: Tag
     tags:
     - XenoborgModuleScout
@@ -2102,8 +2095,8 @@
 - type: entity
   parent: [ BaseXenoborgModuleStealth, BaseProviderBorgModule, BaseXenoborgContraband ]
   id: XenoborgModuleHypo
-  name: dartgun xenoborg module
-  description: Module with a self-refilling dartgun and a combat knife.
+  name: nocturine hypo xenoborg module
+  description: Module with a self-refilling nocturine hypospray.
   components:
   - type: Sprite
     layers:
@@ -2114,7 +2107,6 @@
   - type: ItemBorgModule
     hands:
     - item: DartGunXenoborg # Trauma replaced hypo
-    - item: CombatKnife # Trauma - added melee
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: xenoborg-hypo-module }
   - type: Tag

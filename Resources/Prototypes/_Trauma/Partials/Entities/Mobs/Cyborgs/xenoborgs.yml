@@ -25,10 +25,10 @@
   components:
   - type: BorgChassis
     maxModules: 6
-  - type: MovementSpeedModifier # Trauma - faster, but slower than scout
+  - type: MovementSpeedModifier
     baseWalkSpeed: 2.5
     baseSprintSpeed: 5.5
-  - type: MobThresholds # weaker
+  - type: MobThresholds
     thresholds:
       0: Alive
       100: Critical
