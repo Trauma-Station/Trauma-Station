@@ -50,9 +50,9 @@
   description: Far ahead of Nanotrasen in research. Even farther ahead in style.
   components:
   - type: Sprite
-    sprite: &scientist-white _Funkystation/Clothing/Uniforms/Jumpsuit/Syndicate/scientist-white.rsi
+    sprite: &syndicate_sci _Funkystation/Clothing/Uniforms/Jumpsuit/Syndicate/scientist-white.rsi
   - type: Clothing
-    sprite: *scientist-white
+    sprite: *syndicate_sci
 
 # Syndicate Command (sprites by meijunkie)
 
@@ -142,9 +142,9 @@
   description: An ancient jumpsuit fit for an ancient doctor.
   components:
   - type: Sprite
-    sprite: &ancient_doc _Funkystation/Clothing/Uniforms/Jumpsuit/ancient_doc.rsi
+    sprite: &doc _Funkystation/Clothing/Uniforms/Jumpsuit/ancient_doc.rsi
   - type: Clothing
-    sprite: *ancient_doc
+    sprite: *doc
 
 - type: entity
   parent: [UnsensoredClothingUniformBase]
@@ -153,9 +153,9 @@
   description: An ancient jumpsuit fit for an ancient scientist.
   components:
   - type: Sprite
-    sprite: &ancient_sci _Funkystation/Clothing/Uniforms/Jumpsuit/ancient_sci.rsi
+    sprite: &sci _Funkystation/Clothing/Uniforms/Jumpsuit/ancient_sci.rsi
   - type: Clothing
-    sprite: *ancient_sci
+    sprite: *sci
 
 - type: entity
   parent: [UnsensoredClothingUniformBase]
@@ -164,9 +164,9 @@
   description: An ancient jumpsuit fit for an ancient engineer.
   components:
   - type: Sprite
-    sprite: &ancient_eng _Funkystation/Clothing/Uniforms/Jumpsuit/ancient_eng.rsi
+    sprite: &eng _Funkystation/Clothing/Uniforms/Jumpsuit/ancient_eng.rsi
   - type: Clothing
-    sprite: *ancient_eng
+    sprite: *eng
 
 - type: entity
   parent: [UnsensoredClothingUniformBase]
@@ -175,9 +175,9 @@
   description: An ancient jumpsuit fit for an ancient security officer.
   components:
   - type: Sprite
-    sprite: &ancient_sec _Funkystation/Clothing/Uniforms/Jumpsuit/ancient_sec.rsi
+    sprite: &sec _Funkystation/Clothing/Uniforms/Jumpsuit/ancient_sec.rsi
   - type: Clothing
-    sprite: *ancient_sec
+    sprite: *sec
 
 # using the nanotrasen jumpsuit sprite since theres no reason to make ANOTHER sprite
 
@@ -188,6 +188,6 @@
   description: An ancient jumpsuit fit for an ancient nanotrasen representative.
   components:
   - type: Sprite
-    sprite: &nanotrasen _Funkystation/Clothing/Uniforms/Jumpsuit/nanotrasen.rsi
+    sprite: &nanotrasen Clothing/Uniforms/Jumpsuit/nanotrasen.rsi
   - type: Clothing
     sprite: *nanotrasen
