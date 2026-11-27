@@ -33,3 +33,11 @@
   - type: AccessReader
     access: !Clear
     - [ "Research" ]
+
+- type: entity
+  id: BaseComputer
+  components:
+  - type: ActivatableUiUserWhitelist
+    whitelist:
+      components:
+      - Hands
