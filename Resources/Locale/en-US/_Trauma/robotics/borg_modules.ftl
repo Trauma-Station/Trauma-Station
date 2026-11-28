@@ -6,4 +6,4 @@ borg-slot-organ-empty = Organ / limb slot
 
 borg-slot-detonator-empty = Detonator / Trigger slot
 
-borg-slot-xenoborg-crystal-empty = Crystals/Brains/Heads
+borg-slot-xenoborg-primary-empty = Crystals/Brains/Heads
