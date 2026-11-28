@@ -1,0 +1,66 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: entity
+  id: XenoborgHeavy
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - !Remove XenoborgModuleJammer
+
+- type: entity
+  id: XenoborgScout
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - !Remove XenoborgModuleSword
+      - XenoborgModuleSaw
+  - type: ModifyKnowledgeGrant
+    skills:
+      KnowledgeWeaponsEnergy: 51
+
+- type: entity
+  id: XenoborgStealth
+  components:
+  - type: BorgChassis
+    maxModules: 6
+  - type: MovementSpeedModifier
+    baseWalkSpeed: 2.5
+    baseSprintSpeed: 5.5
+  - type: MobThresholds
+    thresholds:
+      0: Alive
+      100: Critical
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - XenoborgModuleJammer
+  - type: ModifyKnowledgeGrant
+    skills:
+      KnowledgeWeaponsShortBlade: 51
+
+- type: entity
+  id: XenoborgHeavyPrinted
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - !Remove XenoborgModuleJammer
+
+- type: entity
+  id: XenoborgScoutPrinted
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - !Remove XenoborgModuleSword
+      - XenoborgModuleSaw
+
+- type: entity
+  id: XenoborgStealthPrinted
+  components:
+  - type: ContainerFill
+    containers:
+      borg_module:
+      - XenoborgModuleJammer

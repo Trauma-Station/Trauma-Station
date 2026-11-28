@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+- type: latheRecipe
+  id: XenoborgDetCable
+  result: CableDetStack1
+  categories:
+  - Weapons
+  completetime: 0.5
+  materials:
+    Steel: 20
+    XenoborgCrystal: 10
+
+- type: latheRecipe
+  id: XenoborgEmptyDetonator
+  result: EmptyDetonator
+  categories:
+  - Weapons
+  completetime: 2
+  materials:
+    Steel: 100
+    XenoborgCrystal: 50
+
+- type: latheRecipe
+  parent: XenoborgEmptyDetonator
+  id: XenoborgSilentTimerTrigger
+  result: SilentTimerTrigger
+
+- type: latheRecipe
+  parent: XenoborgEmptyDetonator
+  id: XenoborgTimerTrigger
+  result: TimerTrigger
+
+- type: latheRecipe
+  parent: XenoborgEmptyDetonator
+  id: XenoborgSignalTrigger
+  result: SignalTrigger
+
+- type: latheRecipe
+  parent: XenoborgEmptyDetonator
+  id: XenoborgVoiceTrigger
+  result: VoiceTrigger

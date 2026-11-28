@@ -12,3 +12,44 @@
         whitelist:
           tags:
           - BodyBag
+
+- type: entity
+  id: XenoborgModuleHypo
+  name: dartgun xenoborg module
+  description: Module with a self-refilling dartgun and a combat knife.
+  components:
+  - type: ItemBorgModule
+    hands:
+    - item: CombatKnife
+
+- type: entity
+  id: XenoborgModuleConstruction
+  components:
+  - type: ItemBorgModule
+    hands:
+    - hand:
+        emptyRepresentative: VoiceTrigger
+        emptyLabel: borg-slot-detonator-empty
+        whitelist:
+          tags:
+          - Detonator
+          components:
+          - PayloadTrigger
+
+- type: entity
+  parent: !Clear [ BaseXenoborgModuleStealth, BaseProviderBorgModule, BaseXenoborgContraband ]
+  id: XenoborgModuleJammer
+  components:
+  - type: Sprite
+    layers:
+    - state: xenoborg_stealth
+    - state: icon-xenoborg-jammer
+
+- type: entity
+  parent: !Clear [ BaseXenoborgModuleStealth, BaseXenoborgContraband ]
+  id: XenoborgModuleZap
+  components:
+  - type: Sprite
+    layers:
+    - state: xenoborg_stealth
+    - state: icon-xenoborg-zap

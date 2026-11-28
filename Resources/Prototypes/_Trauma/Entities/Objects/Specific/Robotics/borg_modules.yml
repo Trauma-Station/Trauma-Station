@@ -210,3 +210,37 @@
           - Organ
   - type: BorgModuleIcon
     icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: omnimed-surgery-module }
+
+- type: entity
+  parent: BaseItem
+  id: BorgModuleAnyCablePlaceholder
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Tools/Cables/other.rsi
+    state: all-cables
+
+- type: entity
+  parent: [ BaseXenoborgModuleScout, BaseProviderBorgModule, BaseXenoborgContraband ]
+  id: XenoborgModuleSaw
+  name: saw xenoborg module
+  description: Module with an electric saw.
+  components:
+  - type: Sprite
+    sprite: _Trauma/Objects/Specific/Robotics/borgmodule.rsi
+    layers:
+    - state: xenoborg_scout
+    - state: icon-xenoborg-saw
+  - type: BorgModuleWhitelist
+    moduleBlacklist:
+      tags:
+      - XenoborgModulePrimaryWeapon
+  - type: ItemBorgModule
+    hands:
+    - item: SawElectric
+    - item: JetpackXenoborg
+  - type: BorgModuleIcon
+    icon: { sprite: _Trauma/Interface/Actions/actions_borg.rsi, state: xenoborg-saw-module }
+  - type: Tag
+    tags:
+    - XenoborgModuleScout
+    - XenoborgModulePrimaryWeapon

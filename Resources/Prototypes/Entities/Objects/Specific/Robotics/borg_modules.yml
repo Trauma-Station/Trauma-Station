@@ -1523,10 +1523,15 @@
     hands:
     - hand:
         emptyRepresentative: MaterialXenoborgCrystal
-        emptyLabel: borg-slot-xenoborg-crystal-empty
+        emptyLabel: borg-slot-xenoborg-primary-empty # Trauma - changed label to display brain and head as well.
         whitelist:
           tags:
           - XenoborgCrystal
+          # <Trauma> - mirror XenoborgMaterialBag's whitelist so you can use it properly
+          - Head
+          components:
+          - Brain
+          # </Trauma>
     - hand:
         emptyRepresentative: BorgModuleConstructionMaterialPlaceholder
         emptyLabel: borg-slot-construction-empty
@@ -1633,11 +1638,12 @@
           tags:
           - ConstructionMaterial
     - hand:
-        emptyRepresentative: CableApcStack10
+        emptyRepresentative: BorgModuleAnyCablePlaceholder # Trauma - explosive cordenning
         emptyLabel: borg-slot-cables-empty
         whitelist:
           tags:
           - CableCoil
+          - CableDet # Trauma - added to allow engi xenoborgs to place explosive cord.
     - hand:
         emptyRepresentative: FloorTileItemXenoborg # Trauma - fat chud
         emptyLabel: borg-slot-tiles-empty

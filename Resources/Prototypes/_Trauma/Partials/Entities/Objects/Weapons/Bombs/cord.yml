@@ -5,3 +5,20 @@
   components:
   - type: Explosive
     tileBreakScale: 100 # 100% chance to break floors and lattices
+  - type: Tag
+    tags:
+    - CableDet
+
+- type: entity
+  id: CableDetStack10
+  components:
+  - type: Tag
+    tags:
+    - CableDet
+
+- type: entity
+  id: CableDetStack1
+  components:
+  - type: Tag
+    tags:
+    - CableDet

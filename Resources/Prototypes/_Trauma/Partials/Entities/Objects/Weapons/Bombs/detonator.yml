@@ -1,6 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
+  id: EmptyDetonator
+  components:
+  - type: Tag
+    tags:
+    - Detonator
+
+- type: entity
   id: WiredDetonator
   components:
   - type: Explosive
